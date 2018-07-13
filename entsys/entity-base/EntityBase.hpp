@@ -5,14 +5,14 @@
 #define INEXOR_ENTSYS_ENTITY_NODE_BASE_CLASS
 
 
-class CEntityNodeBase {
+class CEntityBase {
 
     private:
         // TODO: basic node data here
 
     public:
-        CEntityNodeBase();
-        ~CEntityNodeBase();
+        CEntityBase();
+        ~CEntityBase();
 
 };
 
