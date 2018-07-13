@@ -6,16 +6,18 @@
 
 #include "EntitySystemErrorCodes.hpp"
 #include "EntitySystemEntityType.hpp"
+#include "EntityManager.hpp"
 
 namespace inexor {
 namespace entsys {
 
 // Entity system singleton implementation
-class CEntitySystem
+class CEntitySystem : public CEntityManager
 {
     public:
         CEntitySystem();
         ~CEntitySystem();
+
 };
 
 };
