@@ -4,6 +4,8 @@
 #ifndef INEXOR_ENTSYS_MAIN_HEADER
 #define INEXOR_ENTSYS_MAIN_HEADER
 
+#include "EntitySystemErrorCodes.hpp"
+
 namespace inexor {
 namespace entsys {
 
@@ -15,7 +17,7 @@ class CEntitySystem
         ~CEntitySystem();
 };
 
-}
-}
+};
+};
 
 #endif // INEXOR_ENTSYS_MAIN_HEADER

@@ -4,7 +4,8 @@
 #include <iostream>
 using namespace std;
 
-#include "entity-system\EntitySystem.hpp"
+// entity system
+#include "entsys\EntitySystem.hpp"
 
 int main()
 {
