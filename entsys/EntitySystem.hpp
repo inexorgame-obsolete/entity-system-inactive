@@ -5,6 +5,7 @@
 #define INEXOR_ENTSYS_MAIN_HEADER
 
 #include "EntitySystemErrorCodes.hpp"
+#include "EntitySystemEntityType.hpp"
 
 namespace inexor {
 namespace entsys {
