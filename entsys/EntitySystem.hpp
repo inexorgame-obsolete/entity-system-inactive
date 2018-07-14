@@ -4,7 +4,7 @@
 #ifndef INEXOR_ENTSYS_MAIN_HEADER
 #define INEXOR_ENTSYS_MAIN_HEADER
 
-#include "errorhandling/EntitySystemErrorCodes.hpp"
+#include "errorhandling/EntitySystemErrorCodesEnumeration.hpp"
 #include "manager/EntityManager.hpp"
 
 namespace inexor {
@@ -13,13 +13,15 @@ namespace entsys {
 // Entity system singleton implementation
 class CEntitySystem : public CEntityManager
 {
-    public:
+    private:
+        // singleton implementation:
+        // private constructor to prevent double instancing
         CEntitySystem();
-        ~CEntitySystem();
+        static CEntitySystem* entsys_singleton_instance;
 
-        // TODO
-        void load();
-        void save();
+    public:
+        ~CEntitySystem();
+        static CEntitySystem* instance();
 
 };
 
