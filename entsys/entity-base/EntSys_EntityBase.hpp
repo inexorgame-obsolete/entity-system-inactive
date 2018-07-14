@@ -4,15 +4,29 @@
 #ifndef INEXOR_ENTSYS_ENTITY_NODE_BASE_CLASS
 #define INEXOR_ENTSYS_ENTITY_NODE_BASE_CLASS
 
+#include <string>
+
+namespace inexor {
+namespace entsys {
+
 class CEntityBase {
 
     private:
-        // TODO: basic node data here
+
+        // entity data model
+        // every entity has at least 
+        // the following attributes (members)
+        float pos_x;
+        float pos_y;
+        float pos_z;
 
     public:
-        CEntityBase();
+        CEntityBase(float,float,float);
         ~CEntityBase();
 
+};
+
+};
 };
 
 #endif // INEXOR_ENTSYS_ENTITY_NODE_BASE_CLASS

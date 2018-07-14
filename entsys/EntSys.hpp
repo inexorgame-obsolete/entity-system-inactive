@@ -21,7 +21,7 @@ class CEntitySystem : public CEntityManager
 
     public:
         ~CEntitySystem();
-        static CEntitySystem* instance();
+        static CEntitySystem* create_instance();
 
 };
 

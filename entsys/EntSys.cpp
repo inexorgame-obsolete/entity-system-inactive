@@ -14,7 +14,7 @@ namespace entsys {
     CEntitySystem* CEntitySystem::entsys_singleton_instance = 0;
 
     // singleton implementation
-    CEntitySystem* CEntitySystem::instance()
+    CEntitySystem* CEntitySystem::create_instance()
     {
         // if no instance exists create one
         if(nullptr == entsys_singleton_instance)

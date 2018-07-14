@@ -9,12 +9,19 @@ namespace entsys {
 
     CEntityManager::~CEntityManager()
     {
+        // remove all entities
+        entities.clear();
     }
     
-
-    ENTSYS_RESULT_CODE CEntityManager::add_entity()
+    bool CEntityManager::validate_entity(CEntityBase newent)
     {
         // TODO: implement
+        return false;
+    }
+
+    ENTSYS_RESULT_CODE CEntityManager::add_entity(CEntityBase newent)
+    {
+        entities.push_back(newent);
         return ENTSYS_RESULT_ERROR;
     }
 
