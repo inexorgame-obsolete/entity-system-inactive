@@ -1,7 +1,12 @@
 # Introduction
-The development of a new entity system is essential for the future of Inexor.
-Many new features and refactoring projects are waiting for this to be done and can't be continued without it!
-Entities are things in the game world that fulfill a certain purpose:
+The development of a new entity system is an essential key for the future of Inexor!
+It is the foundation for many new features like the new particle system,
+the new sound system or the visual scripting enviroment. It also plays a central role in code refactoring.
+All those tasks can't be started until a new entity system has been developed!
+In order to accelerate Inexor's development we must resolve this blocking of follow-up projects as fast as possible!
+
+## What is an entity ?
+An entity is a thing in the game world that fulfills a certain purpose:
 
 * pickups
 * particles
@@ -14,10 +19,9 @@ Entities are things in the game world that fulfill a certain purpose:
 * map models
 * ..
 
-Entities have a variety of purposes: some affect gameplay, others play a role in graphics or sound and so on.
-Please take a moment to realize that everything in the game is an entity.
+Please take a moment to realize that *everything* in the game is an entity.
 
-# Goals
+# What are the implementation metrics ?
 * fast
 * simple
 * flexible
