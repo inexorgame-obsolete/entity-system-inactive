@@ -1,8 +1,8 @@
 // Inexor entity system prototype
 // (c)2018 Inexor
 
-#ifndef INEXOR_ENTSYS_ENTITY_MANAGER
-#define INEXOR_ENTSYS_ENTITY_MANAGER
+#ifndef INEXOR_ENTSYS_ENTITY_MANAGER_HEADER
+#define INEXOR_ENTSYS_ENTITY_MANAGER_HEADER
 
 #include "../relations/EntSys_EntityRelationManager.hpp"
 #include "../attributes/EntSys_EntityAttributeManager.hpp"
@@ -17,21 +17,18 @@ class CEntityManager : public CEntityAttributeManager,
                        public CEntityRelationManager
 {
     protected:
-        void add_entity();
-        void remove_entity();
-        void remove_all_entities();
+        ENTSYS_RESULT_CODE add_entity();
+        ENTSYS_RESULT_CODE remove_entity();
+        ENTSYS_RESULT_CODE remove_all_entities();
 
     public:
         CEntityManager();
         ~CEntityManager();
 
-        INEXOR_ENTSYS_RESULT_CODE add_ent();
-        INEXOR_ENTSYS_RESULT_CODE modify_ent();
-        INEXOR_ENTSYS_RESULT_CODE remove_ent();
 };
 
 };
 };
 
 
-#endif // INEXOR_ENTSYS_ENTITY_MANAGER
+#endif // INEXOR_ENTSYS_ENTITY_MANAGER_HEADER

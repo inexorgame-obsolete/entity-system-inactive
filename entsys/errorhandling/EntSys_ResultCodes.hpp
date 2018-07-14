@@ -8,9 +8,9 @@ namespace inexor {
 namespace entsys {
 
 // entity system error codes
-enum INEXOR_ENTSYS_RESULT_CODE {
-    INEXOR_ENTSYS_ERROR = -1,
-    INEXOR_ENTSYS_SUCCESS = 1,
+enum ENTSYS_RESULT_CODE {
+    ENTSYS_RESULT_ERROR = -1,
+    ENTSYS_RESULT_SUCCESS = 1,
 
 };
 

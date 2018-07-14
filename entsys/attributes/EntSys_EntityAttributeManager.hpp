@@ -15,10 +15,10 @@ class CEntityAttributeManager
         void validate_attribute();
 
     protected:
-        INEXOR_ENTSYS_RESULT_CODE add_attribute();
-        INEXOR_ENTSYS_RESULT_CODE modify_attribute();
-        INEXOR_ENTSYS_RESULT_CODE set_attribute_value();
-        INEXOR_ENTSYS_RESULT_CODE remove_attribute();
+        ENTSYS_RESULT_CODE add_attribute();
+        ENTSYS_RESULT_CODE modify_attribute();
+        ENTSYS_RESULT_CODE set_attribute_value();
+        ENTSYS_RESULT_CODE remove_attribute();
 
     public:
         CEntityAttributeManager();
