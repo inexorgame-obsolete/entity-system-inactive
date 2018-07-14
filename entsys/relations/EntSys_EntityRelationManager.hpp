@@ -9,17 +9,17 @@
 namespace inexor {
 namespace entsys {
 
-class CEntityRelationManager
-{
-    protected:
-        ENTSYS_RESULT_CODE add_relation();
-        ENTSYS_RESULT_CODE modify_relation();
-        ENTSYS_RESULT_CODE remove_relation();
+    class CEntityRelationManager
+    {
+        public:
 
-    public:
-        CEntityRelationManager();
-        ~CEntityRelationManager();
-};
+            CEntityRelationManager();
+            ~CEntityRelationManager();
+        
+            ENTSYS_RESULT_CODE add_relation();
+            ENTSYS_RESULT_CODE modify_relation();
+            ENTSYS_RESULT_CODE remove_relation();
+    };
 
 };
 };

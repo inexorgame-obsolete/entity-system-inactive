@@ -9,23 +9,19 @@
 namespace inexor {
 namespace entsys {
 
-class CEntityAttributeManager
-{
-    private:
-        void validate_attribute();
+    class CEntityAttributeManager
+    {
+        public:
 
-    protected:
-        ENTSYS_RESULT_CODE add_attribute();
-        ENTSYS_RESULT_CODE modify_attribute();
-        ENTSYS_RESULT_CODE set_attribute_value();
-        ENTSYS_RESULT_CODE remove_attribute();
+            CEntityAttributeManager();
+            ~CEntityAttributeManager();
+            
+            ENTSYS_RESULT_CODE add_attribute();
+            ENTSYS_RESULT_CODE modify_attribute();
+            ENTSYS_RESULT_CODE set_attribute_value();
+            ENTSYS_RESULT_CODE remove_attribute();
 
-    public:
-        CEntityAttributeManager();
-        ~CEntityAttributeManager();
-
-
-};
+    };
 
 };
 };

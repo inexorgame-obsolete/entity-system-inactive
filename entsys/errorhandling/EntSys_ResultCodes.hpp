@@ -7,12 +7,12 @@
 namespace inexor {
 namespace entsys {
 
-// entity system error codes
-enum ENTSYS_RESULT_CODE {
-    ENTSYS_RESULT_ERROR = -1,
-    ENTSYS_RESULT_SUCCESS = 1,
+    // entity system error codes
+    enum ENTSYS_RESULT_CODE {
+        ENTSYS_RESULT_ERROR = -1,
+        ENTSYS_RESULT_SUCCESS = 1,
 
-};
+    };
 
 };
 };

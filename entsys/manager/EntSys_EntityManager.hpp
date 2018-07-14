@@ -14,27 +14,29 @@
 namespace inexor {
 namespace entsys {
 
-// The entity manager class is responsible
-// for adding, modifying and removing entites.
-class CEntityManager : public CEntityAttributeManager,
-                       public CEntityRelationManager
-{
-    private:
-        std::vector<CEntityBase> entities;
-        bool validate_entity(CEntityBase);
+    // The entity manager class is responsible
+    // for adding, modifying and removing entites.
+    class CEntityManager : public CEntityAttributeManager,
+                           public CEntityRelationManager
+    {
+        private:
+
+            std::vector<CEntityBase> entities;
+            bool validate_entity(CEntityBase);
         
-    public:
-        ENTSYS_RESULT_CODE add_entity(CEntityBase);
+        public:
 
-        // TODO: how to access entites ?
-        // by search parameters ? name ? UUID ?
-        ENTSYS_RESULT_CODE remove_entity();
-        ENTSYS_RESULT_CODE remove_all_entities();
+            CEntityManager();
+            ~CEntityManager();
 
-        CEntityManager();
-        ~CEntityManager();
+            ENTSYS_RESULT_CODE add_entity(CEntityBase);
 
-};
+            // TODO: how to access entites ?
+            // by search parameters ? name ? UUID ?
+            ENTSYS_RESULT_CODE remove_entity();
+            ENTSYS_RESULT_CODE remove_all_entities();
+
+    };
 
 };
 };

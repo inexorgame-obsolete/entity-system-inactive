@@ -9,22 +9,23 @@
 namespace inexor {
 namespace entsys {
 
-class CEntityBase {
+    class CEntityBase {
 
-    private:
+        private:
 
-        // entity data model
-        // every entity has at least 
-        // the following attributes (members)
-        float pos_x;
-        float pos_y;
-        float pos_z;
+            // entity data model
+            // every entity has at least 
+            // the following attributes (members)
+            float pos_x;
+            float pos_y;
+            float pos_z;
 
-    public:
-        CEntityBase(float,float,float);
-        ~CEntityBase();
+        public:
 
-};
+            CEntityBase(float,float,float);
+            ~CEntityBase();
+
+    };
 
 };
 };

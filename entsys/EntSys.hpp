@@ -10,20 +10,22 @@
 namespace inexor {
 namespace entsys {
 
-// Entity system singleton implementation
-class CEntitySystem : public CEntityManager
-{
-    private:
-        // singleton implementation:
-        // private constructor to prevent double instancing
-        CEntitySystem();
-        static CEntitySystem* entsys_singleton_instance;
+    // Entity system singleton implementation
+    class CEntitySystem : public CEntityManager
+    {
+        private:
 
-    public:
-        ~CEntitySystem();
-        static CEntitySystem* create_instance();
+            // singleton implementation:
+            // private constructor to prevent double instancing
+            CEntitySystem();
+            static CEntitySystem* entsys_singleton_instance;
 
-};
+        public:
+
+            ~CEntitySystem();
+            static CEntitySystem* create_instance();
+
+    };
 
 };
 };
