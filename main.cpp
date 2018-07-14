@@ -6,11 +6,17 @@ using namespace std;
 
 // entity system
 #include "entsys\EntSys.hpp"
+using namespace inexor;
 
-inexor::entsys::CEntitySystem* sys = nullptr;
+// create singleton instance
+// a singleton class can only be instanced once!
+entsys::CEntitySystem* sys = nullptr;
 
 int main()
 {
-    sys = inexor::entsys::CEntitySystem::instance();
+    // initialize singleton instance
+    sys = entsys::CEntitySystem::create_instance();
+    entsys::CEntityBase new_entity(0.0f, 0.0f, 0.0f);    
+    sys->add_entity(new_entity);
     return 0;
 }

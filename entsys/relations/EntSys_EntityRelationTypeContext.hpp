@@ -5,6 +5,7 @@
 #define INEXOR_ENTSYS_ENTITY_RELATION_TYPE_BASE_CONNECTION
 
 #include <vector>
+#include <memory>
 
 #include "../entity-base/EntSys_EntityBase.hpp"
 
@@ -17,8 +18,9 @@ namespace entsys {
     {
         private:
 
-            std::vector<CEntityBase*> from;
-            std::vector<CEntityBase*> to;
+            // TODO: IMPORTANT: is this usage correct?
+            std::vector<std::shared_ptr<CEntityBase>> from;
+            std::vector<std::shared_ptr<CEntityBase>> to;
 
             // TODO: implement data structure 
             // for storing entity relation contexts            

@@ -4,13 +4,21 @@
 #ifndef INEXOR_ENTSYS_RELATION_MANAGER_HEADER
 #define INEXOR_ENTSYS_RELATION_MANAGER_HEADER
 
+#include <vector>
+
 #include "../errorhandling/EntSys_ResultCodes.hpp"
+#include "../relations/EntSys_EntityRelationTypeBase.hpp"
 
 namespace inexor {
 namespace entsys {
 
     class CEntityRelationManager
     {
+        private:
+
+            // TODO: rewrite. This base class is not inherited
+            std::vector<CEntityRelationTypeBase> relation;
+
         public:
 
             CEntityRelationManager();
