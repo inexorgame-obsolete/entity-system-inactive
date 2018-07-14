@@ -4,8 +4,9 @@
 #ifndef INEXOR_ENTSYS_ENTITY_MANAGER
 #define INEXOR_ENTSYS_ENTITY_MANAGER
 
-#include "../relations/EntityRelationManager.hpp"
-#include "../attributes/EntityAttributeManager.hpp"
+#include "../relations/EntSys_EntityRelationManager.hpp"
+#include "../attributes/EntSys_EntityAttributeManager.hpp"
+#include "../errorhandling/EntSys_ResultCodes.hpp"
 
 namespace inexor {
 namespace entsys {
@@ -24,6 +25,9 @@ class CEntityManager : public CEntityAttributeManager,
         CEntityManager();
         ~CEntityManager();
 
+        INEXOR_ENTSYS_RESULT_CODE add_ent();
+        INEXOR_ENTSYS_RESULT_CODE modify_ent();
+        INEXOR_ENTSYS_RESULT_CODE remove_ent();
 };
 
 };

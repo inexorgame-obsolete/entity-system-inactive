@@ -1,4 +1,4 @@
-#include "EntitySystem.hpp"
+#include "EntSys.hpp"
 
 namespace inexor {
 namespace entsys {

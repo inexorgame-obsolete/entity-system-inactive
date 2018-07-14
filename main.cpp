@@ -5,7 +5,7 @@
 using namespace std;
 
 // entity system
-#include "entsys\EntitySystem.hpp"
+#include "entsys\EntSys.hpp"
 
 inexor::entsys::CEntitySystem* sys = nullptr;
 

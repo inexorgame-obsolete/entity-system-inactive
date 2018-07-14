@@ -4,7 +4,6 @@
 #ifndef INEXOR_ENTSYS_ENTITY_NODE_BASE_CLASS
 #define INEXOR_ENTSYS_ENTITY_NODE_BASE_CLASS
 
-
 class CEntityBase {
 
     private:

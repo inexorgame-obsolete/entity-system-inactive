@@ -1,4 +1,4 @@
-#include "EntityAttributeManager.hpp"
+#include "EntSys_EntityAttributeManager.hpp"
 
 namespace inexor {
 namespace entsys {

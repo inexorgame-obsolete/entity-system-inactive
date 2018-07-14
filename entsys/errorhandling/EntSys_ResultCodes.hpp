@@ -1,14 +1,14 @@
 // Inexor entity system prototype
 // (c)2018 Inexor
 
-#ifndef INEXOR_ENTSYS_ERROR_CODES_HEADER
-#define INEXOR_ENTSYS_ERROR_CODES_HEADER
+#ifndef INEXOR_ENTSYS_RESULT_CODES_HEADER
+#define INEXOR_ENTSYS_RESULT_CODES_HEADER
 
 namespace inexor {
 namespace entsys {
 
 // entity system error codes
-enum INEXOR_ENTSYS_ERROR_CODE {
+enum INEXOR_ENTSYS_RESULT_CODE {
     INEXOR_ENTSYS_ERROR = -1,
     INEXOR_ENTSYS_SUCCESS = 1,
 
@@ -17,4 +17,4 @@ enum INEXOR_ENTSYS_ERROR_CODE {
 };
 };
 
-#endif // INEXOR_ENTSYS_ERROR_CODES
+#endif // INEXOR_ENTSYS_RESULT_CODES_HEADER
