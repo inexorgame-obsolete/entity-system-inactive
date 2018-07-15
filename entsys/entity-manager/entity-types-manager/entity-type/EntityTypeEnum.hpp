@@ -7,7 +7,8 @@
 namespace inexor {
 namespace entsys {
 
-    enum INEXOR_ENTSYS_ENTTYPE {
+    enum INEXOR_ENTSYS_ENTTYPE
+    {
         INEXOR_ENTSYS_TYPE_INVALID = -1,
         INEXOR_ENTSYS_TYPE_UNDEFINED = 0,
     };

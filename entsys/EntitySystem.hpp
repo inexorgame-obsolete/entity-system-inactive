@@ -1,17 +1,17 @@
 // Inexor entity system prototype
 // (c)2018 Inexor
 
-#ifndef INEXOR_ENTSYS_MAIN_HEADER
-#define INEXOR_ENTSYS_MAIN_HEADER
+#ifndef INEXOR_ENTSYS_CLASS_MAIN_HEADER
+#define INEXOR_ENTSYS_CLASS_MAIN_HEADER
 
-#include "errorhandling/EntSys_ResultCodeEnum.hpp"
-#include "manager/EntSys_EntityManagerClass.hpp"
+#include "entity-manager/EntityManager.hpp"
 
 namespace inexor {
 namespace entsys {
 
-    // Entity system singleton implementation
-    class CEntitySystem : public CEntityManager
+    /// \class CEntitySystem
+    /// \brief Singleton implementation of an entity system prototype class for Inexor.
+    class CEntitySystem : public CEntityManager // TODO ,public CEntityEditor, public CEntityRenderer
     {
         private:
 
@@ -30,4 +30,4 @@ namespace entsys {
 };
 };
 
-#endif // INEXOR_ENTSYS_MAIN_HEADER
+#endif // INEXOR_ENTSYS_CLASS_MAIN_HEADER
