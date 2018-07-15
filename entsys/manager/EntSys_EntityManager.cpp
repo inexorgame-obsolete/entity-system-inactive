@@ -12,14 +12,7 @@ namespace entsys {
 
     CEntityManager::~CEntityManager()
     {
-        // remove all entities
-        entities.clear();
-    }
-    
-    bool CEntityManager::validate_entity(CEntityBase newent)
-    {
-        // TODO: implement
-        return false;
+        remove_all_entities();
     }
 
     ENTSYS_RESULT_CODE CEntityManager::add_entity(CEntityBase newent)
@@ -28,16 +21,20 @@ namespace entsys {
         return ENTSYS_RESULT_ERROR;
     }
 
+    size_t CEntityManager::entity_count()
+    {
+        return entities.size();
+    }
+
     ENTSYS_RESULT_CODE CEntityManager::remove_entity()
     {
         // TODO: implement
         return ENTSYS_RESULT_ERROR;
     }
 
-    ENTSYS_RESULT_CODE CEntityManager::remove_all_entities()
+    void CEntityManager::remove_all_entities()
     {
-        // TODO: implement
-        return ENTSYS_RESULT_ERROR;
+        entities.clear();
     }
 
 };

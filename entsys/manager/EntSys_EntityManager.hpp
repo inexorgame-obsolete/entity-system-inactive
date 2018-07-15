@@ -22,7 +22,6 @@ namespace entsys {
         private:
 
             std::vector<CEntityBase> entities;
-            bool validate_entity(CEntityBase);
         
         public:
 
@@ -31,10 +30,13 @@ namespace entsys {
 
             ENTSYS_RESULT_CODE add_entity(CEntityBase);
 
+            size_t entity_count();
+
             // TODO: how to access entites ?
             // by search parameters ? name ? UUID ?
             ENTSYS_RESULT_CODE remove_entity();
-            ENTSYS_RESULT_CODE remove_all_entities();
+
+            void remove_all_entities();
 
     };
 
