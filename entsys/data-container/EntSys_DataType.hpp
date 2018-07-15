@@ -1,0 +1,27 @@
+// Inexor entity system prototype
+// (c)2018 Inexor
+
+#ifndef INEXOR_ENTSYS_DATA_TYPE_ENUMERATION_HEADER
+#define INEXOR_ENTSYS_DATA_TYPE_ENUMERATION_HEADER
+
+namespace inexor {
+namespace entsys {
+
+    enum INEXOR_ENTSYS_DATA_TYPE 
+    {
+        INEXOR_ENTSYS_DATA_TYPE_INVALID = -1,
+        INEXOR_ENTSYS_DATA_TYPE_INT,
+        INEXOR_ENTSYS_DATA_TYPE_FLOAT,
+        INEXOR_ENTSYS_DATA_TYPE_CHARACTER,
+        INEXOR_ENTSYS_DATA_TYPE_STRING,
+        INEXOR_ENTSYS_DATA_TYPE_DOUBLE,
+        INEXOR_ENTSYS_DATA_TYPE_BOOL,
+
+        // TODO: vec3, vec2..
+
+    };
+
+};
+};
+
+#endif // INEXOR_ENTSYS_DATA_TYPE_ENUMERATION_HEADER
