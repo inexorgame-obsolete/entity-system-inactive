@@ -7,7 +7,7 @@
 #include <vector>
 #include <string>
 
-#include "EntSys_EntityRelationTypeContext.hpp"
+#include "EntSys_EntityRelationTypeContextClass.hpp"
 
 namespace inexor {
 namespace entsys {

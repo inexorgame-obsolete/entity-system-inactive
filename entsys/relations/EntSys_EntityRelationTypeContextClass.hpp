@@ -7,7 +7,7 @@
 #include <vector>
 #include <memory>
 
-#include "../entity-base/EntSys_EntityBase.hpp"
+#include "../entity-base/EntSys_EntityBaseClass.hpp"
 
 namespace inexor {
 namespace entsys {

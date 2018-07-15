@@ -6,8 +6,8 @@
 
 #include <string>
 
-#include "../errorhandling/EntSys_ResultCodes.hpp"
-#include "../data-container/EntSys_DataAndDataTypeContainer.hpp"
+#include "../errorhandling/EntSys_ResultCodeEnum.hpp"
+#include "../data-container/EntSys_DataAndDataTypeContainerStructure.hpp"
 
 namespace inexor {
 namespace entsys {

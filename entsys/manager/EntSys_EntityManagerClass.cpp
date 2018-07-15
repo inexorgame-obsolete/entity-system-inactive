@@ -1,7 +1,7 @@
 // Inexor entity system prototype
 // (c)2018 Inexor
 
-#include "EntSys_EntityManager.hpp"
+#include "EntSys_EntityManagerClass.hpp"
 
 namespace inexor {
 namespace entsys {

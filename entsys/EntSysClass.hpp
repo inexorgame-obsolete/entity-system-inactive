@@ -4,8 +4,8 @@
 #ifndef INEXOR_ENTSYS_MAIN_HEADER
 #define INEXOR_ENTSYS_MAIN_HEADER
 
-#include "errorhandling/EntSys_ResultCodes.hpp"
-#include "manager/EntSys_EntityManager.hpp"
+#include "errorhandling/EntSys_ResultCodeEnum.hpp"
+#include "manager/EntSys_EntityManagerClass.hpp"
 
 namespace inexor {
 namespace entsys {

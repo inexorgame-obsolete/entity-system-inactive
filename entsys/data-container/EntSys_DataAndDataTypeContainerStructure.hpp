@@ -5,10 +5,9 @@
 #define INEXOR_ENTSYS_DATA_AND_DATA_TYPE_CONTAINER_HEADER
 
 #include <string>
-
 #include <cstdint>
 
-#include "../data-container/EntSys_DataType.hpp"
+#include "../data-container/EntSys_DataTypeStructure.hpp"
 
 namespace inexor {
 namespace entsys {

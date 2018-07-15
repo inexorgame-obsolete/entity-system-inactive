@@ -4,7 +4,7 @@
 #ifndef INEXOR_ENTSYS_ENTITY_ATTRIBUTE_MANAGER_HEADER
 #define INEXOR_ENTSYS_ENTITY_ATTRIBUTE_MANAGER_HEADER
 
-#include "../errorhandling/EntSys_ResultCodes.hpp"
+#include "../errorhandling/EntSys_ResultCodeEnum.hpp"
 
 namespace inexor {
 namespace entsys {

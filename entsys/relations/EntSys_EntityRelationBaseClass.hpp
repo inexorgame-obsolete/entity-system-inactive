@@ -12,8 +12,6 @@ namespace entsys {
     class CEntityRelationBase
     {
         private:
-            
-            // TODO
 
         public:
 

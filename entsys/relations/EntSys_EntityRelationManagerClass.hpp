@@ -6,8 +6,8 @@
 
 #include <vector>
 
-#include "../errorhandling/EntSys_ResultCodes.hpp"
-#include "../relations/EntSys_EntityRelationTypeBase.hpp"
+#include "../errorhandling/EntSys_ResultCodeEnum.hpp"
+#include "../relations/EntSys_EntityRelationTypeBaseClass.hpp"
 
 namespace inexor {
 namespace entsys {
