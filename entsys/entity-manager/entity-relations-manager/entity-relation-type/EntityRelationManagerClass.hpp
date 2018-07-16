@@ -5,27 +5,22 @@
 #define INEXOR_ENTSYS_RELATION_MANAGER_HEADER
 
 #include <vector>
-
-#include "../errorhandling/EntSys_ResultCodeEnum.hpp"
-#include "../relations/EntSys_EntityRelationTypeBaseClass.hpp"
+#include "../../../return-codes/ReturnCodeEnum.hpp"
+#include "../entity-relation-type/EntityRelationTypeBaseClass.hpp"
 
 namespace inexor {
 namespace entsys {
 
     /// \class CEntityRelationManager
     /// \brief The entiy relation manager is responsible for adding, modifying or removing relationships between entities.
-    /// \author IAmNotHanni
-    class CEntityRelationManager
+    class EntityRelationManager
     {
         private:
-
-            // TODO: rewrite. This base class is not inherited
-            std::vector<CEntityRelationTypeBase> relation;
+            std::vector<EntityRelationTypeBase> relation;
 
         public:
-
-            CEntityRelationManager();
-            ~CEntityRelationManager();
+            EntityRelationManager();
+            ~EntityRelationManager();
         
             ENTSYS_RESULT_CODE add_relation();
             ENTSYS_RESULT_CODE modify_relation();

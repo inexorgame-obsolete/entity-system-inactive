@@ -5,25 +5,20 @@
 #define INEXOR_ENTSYS_DATA_CONTAINER_HEADER
 
 #include <string>
-
-#include "../errorhandling/EntSys_ResultCodeEnum.hpp"
-#include "../data-container/EntSys_DataAndDataTypeContainerStructure.hpp"
+#include "../../../../return-codes/ReturnCodeEnum.hpp"
+#include "../data-container/DataAndDataTypeContainerStructure.hpp"
 
 namespace inexor {
 namespace entsys {
 
-    class CDataContainer {
-
+    class DataContainer
+    {
         private:
-
-            SDataAndDataTypeContainer container_data;
+            DataAndDataTypeContainer container_data;
 
         public:
-
-            CDataContainer();
-            ~CDataContainer();
-
-            // TODO: set and get methods
+            DataContainer();
+            ~DataContainer();
 
     };
 

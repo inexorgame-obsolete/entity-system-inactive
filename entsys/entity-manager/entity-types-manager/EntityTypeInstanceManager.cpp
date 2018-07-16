@@ -6,11 +6,11 @@
 namespace inexor {
 namespace entsys {
     
-    CEntityTypeInstanceManager::CEntityTypeInstanceManager()
+    EntityTypeInstanceManager::EntityTypeInstanceManager()
     {
     }
 
-    CEntityTypeInstanceManager::~CEntityTypeInstanceManager()
+    EntityTypeInstanceManager::~EntityTypeInstanceManager()
     {
     }
 

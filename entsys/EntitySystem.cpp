@@ -6,22 +6,22 @@
 namespace inexor {
 namespace entsys {
 
-    CEntitySystem::CEntitySystem()
+    EntitySystem::EntitySystem()
     {
     }
 
-    CEntitySystem::~CEntitySystem()
+    EntitySystem::~EntitySystem()
     {
     }
 
-    CEntitySystem* CEntitySystem::entsys_singleton_instance = 0;
+    EntitySystem* EntitySystem::entsys_singleton_instance = 0;
 
     // singleton implementation
-    CEntitySystem* CEntitySystem::create_instance()
+    EntitySystem* EntitySystem::create_entity_system()
     {
         // if no instance exists create one
         if(nullptr == entsys_singleton_instance)
-            entsys_singleton_instance = new CEntitySystem();
+            entsys_singleton_instance = new EntitySystem();
         return entsys_singleton_instance;
     }
 

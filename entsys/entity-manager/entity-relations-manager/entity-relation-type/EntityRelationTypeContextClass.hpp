@@ -7,28 +7,27 @@
 #include <vector>
 #include <memory>
 
-#include "../entity-base/EntSys_EntityBaseClass.hpp"
+#include "../../entity-types-manager/entity-type/base/EntityTypeBase.hpp"
 
 namespace inexor {
 namespace entsys {
 
-    // abstract class
-    // no instance form this class can be made
-    class CEntityRelationContext
+    // TODO: make this an abstract class
+    class EntityRelationContext
     {
         private:
 
             // TODO: IMPORTANT: is this usage correct?
-            std::vector<std::shared_ptr<CEntityBase>> from;
-            std::vector<std::shared_ptr<CEntityBase>> to;
+            std::vector<std::shared_ptr<EntityTypeBase>> from;
+            std::vector<std::shared_ptr<EntityTypeBase>> to;
 
             // TODO: implement data structure 
             // for storing entity relation contexts            
 
         public:
 
-            CEntityRelationContext();
-            ~CEntityRelationContext();
+            EntityRelationContext();
+            ~EntityRelationContext();
     };
 
 };

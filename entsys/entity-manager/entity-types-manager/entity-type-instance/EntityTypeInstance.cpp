@@ -1,13 +1,16 @@
+// Inexor entity system prototype
+// (c)2018 Inexor
+
 #include "EntityTypeInstance.hpp"
 
 namespace inexor {
 namespace entsys {
 
-    CEntityTypeInstance::CEntityTypeInstance()
+    EntityTypeInstance::EntityTypeInstance()
     {
     }
 
-    CEntityTypeInstance::~CEntityTypeInstance()
+    EntityTypeInstance::~EntityTypeInstance()
     {
     }
 

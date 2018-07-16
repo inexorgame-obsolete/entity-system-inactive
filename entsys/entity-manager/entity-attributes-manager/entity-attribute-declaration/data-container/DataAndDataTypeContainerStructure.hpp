@@ -6,8 +6,7 @@
 
 #include <string>
 #include <cstdint>
-
-#include "../data-container/EntSys_DataTypeStructure.hpp"
+#include "../data-container/DataTypeStructure.hpp"
 
 namespace inexor {
 namespace entsys {
@@ -20,7 +19,7 @@ namespace entsys {
     // but keep in mind that this has many advantages
     // over std::any (C++17) or union classes since
     // we store both data and data type safely.
-    struct SMultipleDataTypeContainer
+    struct MultipleDataTypeContainer
     {
         // characters and string
         std::string string_data;
@@ -33,9 +32,9 @@ namespace entsys {
         // TODO: add (function) pointers
     };
 
-    struct SDataAndDataTypeContainer
+    struct DataAndDataTypeContainer
     {
-        SMultipleDataTypeContainer data;
+        MultipleDataTypeContainer data;
         INEXOR_ENTSYS_DATA_TYPE type;
     };
 

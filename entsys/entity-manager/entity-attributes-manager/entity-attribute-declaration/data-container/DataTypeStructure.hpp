@@ -16,9 +16,7 @@ namespace entsys {
         INEXOR_ENTSYS_DATA_TYPE_STRING,
         INEXOR_ENTSYS_DATA_TYPE_DOUBLE,
         INEXOR_ENTSYS_DATA_TYPE_BOOL,
-
         // TODO: vec3, vec2..
-
     };
 
 };

@@ -9,14 +9,13 @@
 namespace inexor {
 namespace entsys {
 
-    class CEntityRelationBase
+    class EntityRelationBase
     {
         private:
 
         public:
-
-            CEntityRelationBase();
-            ~CEntityRelationBase();
+            EntityRelationBase();
+            ~EntityRelationBase();
     };
 
 };

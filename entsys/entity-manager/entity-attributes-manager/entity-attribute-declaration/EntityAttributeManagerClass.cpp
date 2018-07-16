@@ -1,16 +1,16 @@
 // Inexor entity system prototype
 // (c)2018 Inexor
 
-#include "EntSys_EntityAttributeManagerClass.hpp"
+#include "EntityAttributeManagerClass.hpp"
 
 namespace inexor {
 namespace entsys {
 
-    CEntityAttributeManager::CEntityAttributeManager()
+    EntityAttributeManager::EntityAttributeManager()
     {
     }
 
-    CEntityAttributeManager::~CEntityAttributeManager()
+    EntityAttributeManager::~EntityAttributeManager()
     {
     }
 

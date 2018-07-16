@@ -12,14 +12,12 @@ namespace entsys {
     class EntityTypeBase {
 
         private:
-
             // entity data model
             // every entity has at least 
             // the following attributes (members)
             float x,y,z;
 
         public:
-
             EntityTypeBase(float,float,float);
             ~EntityTypeBase();
 

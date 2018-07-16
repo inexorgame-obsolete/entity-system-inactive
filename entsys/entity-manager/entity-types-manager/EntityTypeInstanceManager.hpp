@@ -5,7 +5,6 @@
 #define INEXOR_ENTSYS_ENTITY_TYPE_INSTANCE_MANAGER_CLASS_HEADER
 
 #include <vector>
-
 #include "entity-type-instance\EntityTypeInstance.hpp"
 
 namespace inexor {
@@ -13,14 +12,14 @@ namespace entsys {
 
     /// \class CEntityTypeInstanceManager
     /// \brief TODO
-    class CEntityTypeInstanceManager
+    class EntityTypeInstanceManager
     {
         private:            
-            std::vector<CEntityTypeInstance> entity_instances;
+            std::vector<EntityTypeInstance> entity_instances;
             
         public:
-            CEntityTypeInstanceManager();
-            ~CEntityTypeInstanceManager();
+            EntityTypeInstanceManager();
+            ~EntityTypeInstanceManager();
                         
     };
 

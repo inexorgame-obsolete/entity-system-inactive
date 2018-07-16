@@ -1,16 +1,16 @@
 // Inexor entity system prototype
 // (c)2018 Inexor
 
-#include "EntSys_EntityRelationTypeBaseClass.hpp"
+#include "EntityRelationTypeBaseClass.hpp"
 
 namespace inexor {
 namespace entsys {
 
-    CEntityRelationTypeBase::CEntityRelationTypeBase()
+    EntityRelationTypeBase::EntityRelationTypeBase()
     {
     }
 
-    CEntityRelationTypeBase::~CEntityRelationTypeBase()
+    EntityRelationTypeBase::~EntityRelationTypeBase()
     {
     }
 

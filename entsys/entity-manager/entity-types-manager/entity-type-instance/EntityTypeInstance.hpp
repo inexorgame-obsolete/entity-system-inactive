@@ -11,14 +11,14 @@ namespace entsys {
 
     /// \class CEntityTypeInstance
     /// \brief TODO
-    class CEntityTypeInstance
+    class EntityTypeInstance
     {
         private:
              INEXOR_ENTSYS_ENTTYPE entity_type;
              
         public:
-            CEntityTypeInstance();
-            ~CEntityTypeInstance();
+            EntityTypeInstance();
+            ~EntityTypeInstance();
     };
 
 };

@@ -11,19 +11,19 @@ namespace entsys {
 
     /// \class CEntitySystem
     /// \brief Singleton implementation of an entity system prototype class for Inexor.
-    class CEntitySystem : public CEntityManager // TODO ,public CEntityEditor, public CEntityRenderer
+    class EntitySystem : public EntityManager // TODO ,public EntityEditor, public EntityRenderer
     {
         private:
 
             // singleton implementation:
             // private constructor to prevent double instancing
-            CEntitySystem();
-            static CEntitySystem* entsys_singleton_instance;
+            EntitySystem();
+            static EntitySystem* entsys_singleton_instance;
 
         public:
 
-            ~CEntitySystem();
-            static CEntitySystem* create_instance();
+            ~EntitySystem();
+            static EntitySystem* create_entity_system();
 
     };
 

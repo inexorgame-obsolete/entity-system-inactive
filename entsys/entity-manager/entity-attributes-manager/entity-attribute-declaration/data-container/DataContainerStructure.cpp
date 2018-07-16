@@ -6,11 +6,11 @@
 namespace inexor {
 namespace entsys {
     
-    CDataContainer::CDataContainer()
+    DataContainer::DataContainer()
     {
     }
 
-    CDataContainer::~CDataContainer()
+    DataContainer::~DataContainer()
     {
     }
 

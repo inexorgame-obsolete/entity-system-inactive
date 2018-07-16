@@ -4,17 +4,16 @@
 #ifndef INEXOR_ENTSYS_ENTITY_ATTRIBUTE_MANAGER_HEADER
 #define INEXOR_ENTSYS_ENTITY_ATTRIBUTE_MANAGER_HEADER
 
-#include "../errorhandling/EntSys_ResultCodeEnum.hpp"
+#include "../../../return-codes/ReturnCodeEnum.hpp"
 
 namespace inexor {
 namespace entsys {
 
-    class CEntityAttributeManager
+    class EntityAttributeManager
     {
         public:
-
-            CEntityAttributeManager();
-            ~CEntityAttributeManager();
+            EntityAttributeManager();
+            ~EntityAttributeManager();
             
             ENTSYS_RESULT_CODE add_attribute();
             ENTSYS_RESULT_CODE modify_attribute();
