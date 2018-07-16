@@ -15,7 +15,7 @@ namespace entsys {
     {
         private:
              INEXOR_ENTSYS_ENTTYPE entity_type;
-
+             
         public:
             CEntityTypeInstance();
             ~CEntityTypeInstance();

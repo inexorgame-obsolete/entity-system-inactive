@@ -1,8 +1,8 @@
 // Inexor entity system prototype
 // (c)2018 Inexor
 
-#ifndef INEXOR_ENTSYS_ENTTYPE_HEADER
-#define INEXOR_ENTSYS_ENTTYPE_HEADER
+#ifndef INEXOR_ENTSYS_ENTTYPE_ENUMERATION_HEADER
+#define INEXOR_ENTSYS_ENTTYPE_ENUMERATION_HEADER
 
 namespace inexor {
 namespace entsys {
@@ -16,4 +16,4 @@ namespace entsys {
 };
 };
 
-#endif // INEXOR_ENTSYS_ENTITY_TYPE_HEADER
+#endif // INEXOR_ENTSYS_ENTTYPE_ENUMERATION_HEADER

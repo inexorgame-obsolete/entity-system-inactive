@@ -1,19 +1,19 @@
 // Inexor entity system prototype
 // (c)2018 Inexor
 
-#include "EntSys_EntityBaseClass.hpp"
+#include "EntityTypeBase.hpp"
 
 namespace inexor {
 namespace entsys {
     
-    CEntityBase::CEntityBase(float x, float y, float z)
+    EntityTypeBase::EntityTypeBase(float pos_x, float pos_y, float pos_z)
     {
-        pos_x = x;
-        pos_y = y;
-        pos_z = z;
+        x = pos_x;
+        y = pos_y;
+        z = pos_z;
     }
 
-    CEntityBase::~CEntityBase()
+    EntityTypeBase::~EntityTypeBase()
     {
     }
 

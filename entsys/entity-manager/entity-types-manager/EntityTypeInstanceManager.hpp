@@ -21,6 +21,7 @@ namespace entsys {
         public:
             CEntityTypeInstanceManager();
             ~CEntityTypeInstanceManager();
+                        
     };
 
 };

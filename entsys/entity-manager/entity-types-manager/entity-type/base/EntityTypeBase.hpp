@@ -1,33 +1,31 @@
 // Inexor entity system prototype
 // (c)2018 Inexor
 
-#ifndef INEXOR_ENTSYS_ENTITY_NODE_BASE_CLASS
-#define INEXOR_ENTSYS_ENTITY_NODE_BASE_CLASS
+#ifndef INEXOR_ENTSYS_ENTITY_TYPE_BASE_CLASS_HEADER
+#define INEXOR_ENTSYS_ENTITY_TYPE_BASE_CLASS_HEADER
 
 #include <string>
 
 namespace inexor {
 namespace entsys {
 
-    class CEntityBase {
+    class EntityTypeBase {
 
         private:
 
             // entity data model
             // every entity has at least 
             // the following attributes (members)
-            float pos_x;
-            float pos_y;
-            float pos_z;
+            float x,y,z;
 
         public:
 
-            CEntityBase(float,float,float);
-            ~CEntityBase();
+            EntityTypeBase(float,float,float);
+            ~EntityTypeBase();
 
     };
 
 };
 };
 
-#endif // INEXOR_ENTSYS_ENTITY_NODE_BASE_CLASS
+#endif // INEXOR_ENTSYS_ENTITY_TYPE_BASE_CLASS_HEADER
