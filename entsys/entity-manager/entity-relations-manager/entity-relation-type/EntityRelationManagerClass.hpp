@@ -1,8 +1,8 @@
 // Inexor entity system prototype
 // (c)2018 Inexor
 
-#ifndef INEXOR_ENTSYS_RELATION_MANAGER_HEADER
-#define INEXOR_ENTSYS_RELATION_MANAGER_HEADER
+#ifndef INEXOR_ENTSYS_RELATION_MANAGER_CLASS_HEADER
+#define INEXOR_ENTSYS_RELATION_MANAGER_CLASS_HEADER
 
 #include <vector>
 #include "../../../return-codes/ReturnCodeEnum.hpp"
@@ -22,12 +22,12 @@ namespace entsys {
             EntityRelationManager();
             ~EntityRelationManager();
         
-            ENTSYS_RESULT_CODE add_relation();
-            ENTSYS_RESULT_CODE modify_relation();
-            ENTSYS_RESULT_CODE remove_relation();
+            ENTSYS_RETURN_CODE add_relation();
+            ENTSYS_RETURN_CODE modify_relation();
+            ENTSYS_RETURN_CODE remove_relation();
     };
 
 };
 };
 
-#endif // INEXOR_ENTSYS_RELATION_MANAGER_HEADER
+#endif // INEXOR_ENTSYS_RELATION_MANAGER_CLASS_HEADER

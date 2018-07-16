@@ -15,22 +15,22 @@ namespace entsys {
     }
 
     
-    ENTSYS_RESULT_CODE EntityRelationManager::add_relation()
+    ENTSYS_RETURN_CODE EntityRelationManager::add_relation()
     {
         // TODO: implement
-        return ENTSYS_RESULT_ERROR;
+        return ENTSYS_RETURN_ERROR;
     }
 
-    ENTSYS_RESULT_CODE EntityRelationManager::modify_relation()
+    ENTSYS_RETURN_CODE EntityRelationManager::modify_relation()
     {
         // TODO: implement
-        return ENTSYS_RESULT_ERROR;
+        return ENTSYS_RETURN_ERROR;
     }
 
-    ENTSYS_RESULT_CODE EntityRelationManager::remove_relation()
+    ENTSYS_RETURN_CODE EntityRelationManager::remove_relation()
     {
         // TODO: implement
-        return ENTSYS_RESULT_ERROR;
+        return ENTSYS_RETURN_ERROR;
     }
 
 };

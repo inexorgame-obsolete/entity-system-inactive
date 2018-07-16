@@ -7,6 +7,10 @@
 #include <vector>
 #include "entity-types-manager\EntityTypeInstanceManager.hpp"
 #include "entity-types-manager\EntityTypeManager.hpp"
+#include "entity-attributes-manager\EntityAttributeTypeManager.hpp"
+#include "entity-attributes-manager\EntityAttributeTypeInstanceManager.hpp"
+#include "entity-relations-manager\EntityRelationTypeManager.hpp"
+#include "entity-relations-manager\EntityRelationTypeInstanceManager.hpp"
 
 namespace inexor {
 namespace entsys {
@@ -15,10 +19,10 @@ namespace entsys {
     /// \brief The entity manager class is responsible for adding, modifying and removing entites.
     class EntityManager : public EntityTypeManager,
                           public EntityTypeInstanceManager,
-                          //public EntityAttributeTypeManager,
-                          //public EntityAttributeTypeInstanceManager,
-                          //public EntityRelationTypeManager,
-                          //public EntityRelationTypeInstanceManager
+                          public EntityAttributeTypeManager,
+                          public EntityAttributeTypeInstanceManager,
+                          public EntityRelationTypeManager,
+                          public EntityRelationTypeInstanceManager
     {
         public:
             EntityManager();

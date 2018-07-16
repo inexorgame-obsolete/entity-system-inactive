@@ -1,8 +1,8 @@
 // Inexor entity system prototype
 // (c)2018 Inexor
 
-#ifndef INEXOR_ENTSYS_RELATION_TYPE_BASE_HEADER
-#define INEXOR_ENTSYS_RELATION_TYPE_BASE_HEADER
+#ifndef INEXOR_ENTSYS_RELATION_TYPE_BASE_CLASS_HEADER
+#define INEXOR_ENTSYS_RELATION_TYPE_BASE_CLASS_HEADER
 
 #include <vector>
 #include <string>
@@ -27,4 +27,4 @@ namespace entsys {
 };
 };
 
-#endif // INEXOR_ENTSYS_RELATION_TYPE_BASE_HEADER
+#endif // INEXOR_ENTSYS_RELATION_TYPE_BASE_CLASS_HEADER
