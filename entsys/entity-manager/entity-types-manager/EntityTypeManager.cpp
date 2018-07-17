@@ -19,11 +19,8 @@ namespace entsys {
     const ENTSYS_RETURN_CODE EntityTypeManager::validate_new_entity_type(const EntityTypeBase& newtype) const
     {
         // Look this entity type name up in the unordered map.
-        std::string name = newtype.get_entity_type_name();
-        std::unordered_map<std::string, EntityTypeBase>::const_iterator validation = entity_types.find(name);
-
         // If we reached the end of the unordered_map before it has been found it does not exist yet.
-        if(validation == entity_types.end()) return ENTSYS_RETURN_NEW_ENTITY_TYPE_VALID;
+        if(entity_types.find(newtype.get_entity_type_name()) == entity_types.end()) return ENTSYS_RETURN_NEW_ENTITY_TYPE_VALID;
         else return ENTSYS_RETURN_ENTITY_TYPE_ALREADY_EXISTS;
 
         // TODO: additional validation here!
@@ -33,8 +30,6 @@ namespace entsys {
     }
 
 
-    /// This method adds new types of entites.
-    /// Entity type instances can only be created from existing valid entity types by the entity instance manager.
     const ENTSYS_RETURN_CODE EntityTypeManager::create_entity_type(const EntityTypeBase& newtype)
     {
         // Before we can add a new entity type to the entity system it must be validated!
@@ -43,9 +38,8 @@ namespace entsys {
         // Add the new entity type in case it is valid.
         if(ENTSYS_RETURN_NEW_ENTITY_TYPE_VALID == validation_result)
         {
-            std::string name_of_enttype = newtype.get_entity_type_name();
             // add to unordered map
-            entity_types.insert(std::unordered_map<std::string, EntityTypeBase>::value_type(name_of_enttype, newtype));
+            entity_types.insert(ENTSYS_ENTMAP_TYPE(newtype.get_entity_type_name(), newtype));
             //entity_types[name] = newtype;
             return ENTSYS_RETURN_SUCCESS;
         }
@@ -55,17 +49,16 @@ namespace entsys {
     }
 
 
-    const size_t EntityTypeManager::get_entity_type_cound()
+    const size_t EntityTypeManager::get_entity_type_cound() const
     {
         return entity_types.size();
     }
 
+
     const ENTSYS_RETURN_CODE EntityTypeManager::get_entity_type_class(std::string& entity_type_name, EntityTypeBase& entity_type_reference) const
     {
-        // Check if a key/value pair for this entity type exists
-        std::unordered_map<std::string, EntityTypeBase>::const_iterator search_entity_type = entity_types.find(entity_type_name);
-
         // If we reached the end of the unordered_map before it has been found it does not exist yet.
+        ENTSYS_ENTITY_TYPE_LOOKUP search_entity_type = entity_types.find(entity_type_name);
         if(search_entity_type == entity_types.end()) return ENTSYS_RETURN_ERROR_ENTITY_TYPE_UNAVAILABLE;
 
         // Fill out requested entity type (call by reference).
@@ -74,6 +67,15 @@ namespace entsys {
         // Everything worked fine!
         return ENTSYS_RETURN_SUCCESS;
     }
+    
+
+    const bool EntityTypeManager::does_entity_type_exist(std::string& entity_type_to_look_up) const
+    {
+        // Check if a key/value pair for this entity type exists
+        ENTSYS_ENTITY_TYPE_LOOKUP search_entity_type = entity_types.find(entity_type_to_look_up);
+        return (search_entity_type == entity_types.end()) ? true : false;
+    }
+
 
 };
 };
