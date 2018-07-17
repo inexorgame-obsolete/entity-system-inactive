@@ -27,6 +27,36 @@ namespace entsys {
         string_data = std::string("");
     }
 
+    DataContainer::DataContainer(const std::int64_t int_val)
+    {
+        container_data_type = ENTSYS_DATA_TYPE_INT;
+        int_data = int_val;
+    }
+
+    DataContainer::DataContainer(const double double_val)
+    {
+        container_data_type = ENTSYS_DATA_TYPE_DOUBLE;
+        double_data = double_val;
+    }
+
+    DataContainer::DataContainer(const float float_val)
+    {
+        container_data_type = ENTSYS_DATA_TYPE_FLOAT;
+        float_data = float_val;
+    }
+
+    DataContainer::DataContainer(const bool bool_val)
+    {
+        container_data_type = ENTSYS_DATA_TYPE_BOOL;
+        boolean_data = bool_val;
+    }
+
+    DataContainer::DataContainer(const std::string string_val)
+    {
+        container_data_type = ENTSYS_DATA_TYPE_STRING;
+        string_data = string_val;
+    }
+
     DataContainer::~DataContainer()
     {
     }
@@ -93,6 +123,11 @@ namespace entsys {
         if(ENTSYS_DATA_TYPE_STRING == container_data_type) return string_data;
         // else // TODO: Memory type mismaching! what to do now?
         return 0;
+    }
+
+    const ENTSYS_DATA_TYPE DataContainer::get_data_type() const
+    {
+        return container_data_type;
     }
 
 };

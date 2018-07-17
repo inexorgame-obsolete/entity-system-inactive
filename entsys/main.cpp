@@ -16,6 +16,21 @@ EntitySystem* sys = EntitySystem::create_entity_system();
 
 int main()
 {
+    // DATA CONTAINER TESTS
+    DataContainer dump(ENTSYS_DATA_TYPE_STRING);
+    dump.set(std::string("Hello world. I am a string in a very flexible data container class!"));
+
+    DataContainer dump2(12.0f);
+    DataContainer dump3(1212.0);
+    // This does work
+    dump3.set(3245.0);
+
+    DataContainer dump4(true);
+    // This does NOT work!
+    dump4.set("Hello World.. This does not work sadly! It's a bool val not a string!");
+
+    DataContainer dump5(123131523143);
+
     // ENTITY TYPE TESTS
 
     EntityTypeBase spawnpoint(std::string("spawnpoint"));
@@ -44,6 +59,7 @@ int main()
         sys->create_entity_type(i_am_duplicate);
         cout << "numer of entity types available: " << sys->get_entity_type_cound() << endl;
     }
+
 
     
     // ENTITY ATTRIBUTE TESTS

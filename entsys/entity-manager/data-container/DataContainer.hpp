@@ -31,7 +31,15 @@ namespace entsys {
 
         public:
             DataContainer();
+
+            // Overloaded constructors for fast initialization.
             DataContainer(ENTSYS_DATA_TYPE);
+            DataContainer(std::int64_t);
+            DataContainer(double);
+            DataContainer(float);
+            DataContainer(bool);
+            DataContainer(std::string);
+
             ~DataContainer();
 
             void set(std::int64_t);
@@ -45,6 +53,8 @@ namespace entsys {
             const float get_floatval() const;
             const bool get_boolval() const;
             const std::string get_stringval() const;
+
+            const ENTSYS_DATA_TYPE get_data_type() const;
 
     };
 
