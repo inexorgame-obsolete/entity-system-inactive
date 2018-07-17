@@ -19,7 +19,7 @@ namespace entsys {
             // TODO: write copy constructor(s)!
             EntityTypeBase(std::string);
             // TODO: remove this ?
-            EntityTypeBase();
+            //EntityTypeBase();
             ~EntityTypeBase();
 
             const std::string& get_entity_type_name() const;

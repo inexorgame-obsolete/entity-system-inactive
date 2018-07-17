@@ -36,7 +36,10 @@ namespace entsys {
         {
             std::string name = newtype.get_entity_type_name();
             // add to unordered map
-            entity_types[name] = newtype;
+            entity_types.insert(std::unordered_map<std::string, EntityTypeBase>::value_type (newtype.get_entity_type_name(), newtype));
+            // TODO: Why does this not work?
+            // no matching constructor found?
+            //entity_types[name] = newtype;
             return ENTSYS_RETURN_SUCCESS;
         }
         return ENTSYS_RETURN_ERROR;

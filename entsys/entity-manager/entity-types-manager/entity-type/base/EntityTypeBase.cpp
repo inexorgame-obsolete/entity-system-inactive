@@ -11,10 +11,10 @@ namespace entsys {
         name = ent_type_name;
     }
 
-    EntityTypeBase::EntityTypeBase()
-    {
-    }
-
+    //EntityTypeBase::EntityTypeBase()
+    //{
+    //}
+    
     EntityTypeBase::~EntityTypeBase()
     {
     }
