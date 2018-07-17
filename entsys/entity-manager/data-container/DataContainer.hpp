@@ -13,33 +13,31 @@
 
 namespace inexor {
 namespace entsys {
-
-    /// 
-    struct MultipleDataTypeContainer
-    {
-        MultipleDataTypeContainer();
-
-        // characters and string
-        std::string string_data;
-
-        // numbers
-        std::int64_t int_data;
-
-        // TODO: add double and long double if neccesary
-        // TODO: add vec3, vec2...
-        // TODO: add (function) pointers
-    };
         
     /// A flexible, multiple purpose data container.
     class DataContainer
     {
         private:
-            INEXOR_ENTSYS_DATA_TYPE container_data_type;
-            MultipleDataTypeContainer container_data;
-        
+            ENTSYS_DATA_TYPE container_data_type;
+
+            std::int64_t int_data;
+            double double_data;
+            float float_data;
+            bool boolean_data;
+            std::string string_data;
+
+        protected:
+            void reset_memory();
+
         public:
-            DataContainer();
+            DataContainer(ENTSYS_DATA_TYPE);
             ~DataContainer();
+
+            void set(std::int64_t);
+            void set(double);
+            void set(float);
+            void set(bool);
+            void set(std::string);
 
     };
 

@@ -15,8 +15,8 @@ namespace entsys {
     class EntityAttributeTypeBase
     {
         protected:
-            std::string entity_attribute_type_name;
-            DataContainer entity_attribute_data;
+            std::string entity_attribute_type_name = std::string("");
+            DataContainer entity_attribute_data = ENTSYS_DATA_TYPE_INVALID;
 
         public:
             EntityAttributeTypeBase();
