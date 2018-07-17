@@ -9,17 +9,20 @@
 namespace inexor {
 namespace entsys {
 
-    class EntityTypeBase {
-
+    class EntityTypeBase
+    {
         private:
-            // entity data model
-            // every entity has at least 
-            // the following attributes (members)
-            float x,y,z;
+            // Every entity has at least the following attributes.
+            std::string name;
 
         public:
-            EntityTypeBase(float,float,float);
+            // TODO: write copy constructor(s)!
+            EntityTypeBase(std::string);
+            // TODO: remove this ?
+            EntityTypeBase();
             ~EntityTypeBase();
+
+            const std::string& get_entity_type_name() const;
 
     };
 

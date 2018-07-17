@@ -5,8 +5,8 @@
 #define INEXOR_ENTSYS_ENTITY_MANAGER_CLASS_HEADER
 
 #include <vector>
-#include "entity-types-manager\EntityTypeInstanceManager.hpp"
 #include "entity-types-manager\EntityTypeManager.hpp"
+#include "entity-types-manager\EntityTypeInstanceManager.hpp"
 #include "entity-attributes-manager\EntityAttributeTypeManager.hpp"
 #include "entity-attributes-manager\EntityAttributeTypeInstanceManager.hpp"
 #include "entity-relations-manager\EntityRelationTypeManager.hpp"

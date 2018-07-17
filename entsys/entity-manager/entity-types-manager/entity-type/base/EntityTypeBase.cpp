@@ -6,15 +6,22 @@
 namespace inexor {
 namespace entsys {
     
-    EntityTypeBase::EntityTypeBase(float pos_x, float pos_y, float pos_z)
+    EntityTypeBase::EntityTypeBase(std::string ent_type_name)
     {
-        x = pos_x;
-        y = pos_y;
-        z = pos_z;
+        name = ent_type_name;
+    }
+
+    EntityTypeBase::EntityTypeBase()
+    {
     }
 
     EntityTypeBase::~EntityTypeBase()
     {
+    }
+
+    const std::string& EntityTypeBase::get_entity_type_name() const
+    {
+        return name;
     }
 
 };

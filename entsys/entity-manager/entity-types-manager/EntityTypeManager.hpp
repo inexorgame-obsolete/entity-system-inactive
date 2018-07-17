@@ -8,17 +8,10 @@
 #include <string>
 #include <unordered_map>
 #include "../../return-codes/ReturnCodeEnum.hpp"
+#include "entity-type\base\EntityTypeBase.hpp"
 
 namespace inexor {
 namespace entsys {
-
-    /// \brief Structure for describing entity types.
-    struct EntityType
-    {
-        std::string name;
-        // TODO: add UUID here!
-        // Which entity attributes or relations should be build in here?
-    };
 
     /// \class EntityTypeManager
     /// \brief A manager class for types of entities.
@@ -26,14 +19,14 @@ namespace entsys {
     {
         private:
             // TODO: discuss this
-            std::unordered_map<std::string, EntityType> entity_types;
-            ENTSYS_RETURN_CODE validate_new_entity_type(EntityType);
+            std::unordered_map<std::string, EntityTypeBase> entity_types;
+            ENTSYS_RETURN_CODE validate_new_entity_type(EntityTypeBase);
 
         public:
             EntityTypeManager();
             ~EntityTypeManager();
 
-            ENTSYS_RETURN_CODE create_entity_type(EntityType);
+            ENTSYS_RETURN_CODE create_entity_type(EntityTypeBase);
     };
 
 };
