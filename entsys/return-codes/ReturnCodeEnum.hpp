@@ -10,10 +10,16 @@ namespace entsys {
     // entity system error codes
     enum ENTSYS_RETURN_CODE
     {
-        ENTSYS_RETURN_ERROR = -1,
+        // error codes here
+        ENTSYS_RETURN_ERROR = -1000,
+        ENTSYS_RETURN_ENTITY_TYPE_ALREADY_EXISTS,
+        ENTSYS_RETURN_ERROR_ENTITY_TYPE_UNAVAILABLE,
+
+        // success codes here
         ENTSYS_RETURN_SUCCESS = 1,
         ENTSYS_RETURN_NEW_ENTITY_TYPE_VALID,
-        ENTSYS_RETURN_ENTITY_TYPE_ALREADY_EXISTS,
+        //ENTSYS_RETURN_ENTITY_TYPE_AVAILABLE,
+        // TODO: should positive return codes be implemented or is ENTSYS_RETURN_SUCCESS enough?
     };
 
 };

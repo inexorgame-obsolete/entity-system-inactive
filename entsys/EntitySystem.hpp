@@ -11,7 +11,7 @@ namespace entsys {
 
     /// \class CEntitySystem
     /// \brief Singleton implementation of an entity system prototype class for Inexor.
-    class EntitySystem : public EntityManager // TODO ,public EntityEditor, public EntityRenderer
+    class EntitySystem : public EntityManager // TODO: add components here (renderer, editor..)
     {
         private:
             // singleton implementation: private constructor to prevent multiple instancing.

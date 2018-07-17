@@ -10,11 +10,14 @@ namespace entsys {
     {
     }
 
+
     EntitySystem::~EntitySystem()
     {
     }
 
+
     EntitySystem* EntitySystem::entsys_singleton_instance = 0;
+
 
     // singleton implementation
     EntitySystem* EntitySystem::create_entity_system()
@@ -24,7 +27,6 @@ namespace entsys {
             entsys_singleton_instance = new EntitySystem();
         return entsys_singleton_instance;
     }
-
 
 };
 };

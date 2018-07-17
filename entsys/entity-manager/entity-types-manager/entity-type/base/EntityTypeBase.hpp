@@ -9,17 +9,17 @@
 namespace inexor {
 namespace entsys {
 
+    /// \class EntityTypeBase
+    /// \brief A base class for entity types.
     class EntityTypeBase
     {
-        private:
+        protected:
             // Every entity has at least the following attributes.
-            std::string name;
+            std::string entity_type_name;
 
         public:
-            // TODO: write copy constructor(s)!
+            EntityTypeBase();
             EntityTypeBase(std::string);
-            // TODO: remove this ?
-            //EntityTypeBase();
             ~EntityTypeBase();
 
             const std::string& get_entity_type_name() const;

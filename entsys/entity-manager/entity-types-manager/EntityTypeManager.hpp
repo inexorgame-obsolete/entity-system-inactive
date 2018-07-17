@@ -21,14 +21,19 @@ namespace entsys {
             std::unordered_map<std::string, EntityTypeBase> entity_types;
 
         protected:
-            ENTSYS_RETURN_CODE validate_new_entity_type(const EntityTypeBase&) const;
+            const ENTSYS_RETURN_CODE validate_new_entity_type(const EntityTypeBase&) const;
 
         public:
             EntityTypeManager();
             ~EntityTypeManager();
 
-            ENTSYS_RETURN_CODE create_entity_type(const EntityTypeBase&);
+            // set methods
+            const ENTSYS_RETURN_CODE create_entity_type(const EntityTypeBase&);
+
+            // get methods
             const size_t get_entity_type_cound();
+            const ENTSYS_RETURN_CODE get_entity_type_class(std::string&, EntityTypeBase&) const;
+
             // TODO: delete_entity_type() requires all instances of this entity type to be deleted as well!
     };
 
