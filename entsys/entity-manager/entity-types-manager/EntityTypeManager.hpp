@@ -18,15 +18,18 @@ namespace entsys {
     class EntityTypeManager 
     {
         private:
-            // TODO: discuss this
             std::unordered_map<std::string, EntityTypeBase> entity_types;
-            ENTSYS_RETURN_CODE validate_new_entity_type(EntityTypeBase);
+
+        protected:
+            ENTSYS_RETURN_CODE validate_new_entity_type(const EntityTypeBase&) const;
 
         public:
             EntityTypeManager();
             ~EntityTypeManager();
 
-            ENTSYS_RETURN_CODE create_entity_type(EntityTypeBase);
+            ENTSYS_RETURN_CODE create_entity_type(const EntityTypeBase&);
+            const size_t get_entity_type_cound();
+            // TODO: delete_entity_type() requires all instances of this entity type to be deleted as well!
     };
 
 };
