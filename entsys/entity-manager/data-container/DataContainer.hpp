@@ -30,6 +30,7 @@ namespace entsys {
             void reset_memory();
 
         public:
+            DataContainer();
             DataContainer(ENTSYS_DATA_TYPE);
             ~DataContainer();
 
@@ -38,6 +39,12 @@ namespace entsys {
             void set(float);
             void set(bool);
             void set(std::string);
+            
+            const std::int64_t get_intval() const;
+            const double get_doubleval() const;
+            const float get_floatval() const;
+            const bool get_boolval() const;
+            const std::string get_stringval() const;
 
     };
 

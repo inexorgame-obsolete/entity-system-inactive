@@ -13,32 +13,28 @@
 namespace inexor {
 namespace entsys {
 
-    /// Let's use a type definition to shorten this iterator.
-    typedef std::unordered_map<std::string, EntityTypeBase>::const_iterator ENTSYS_ENTITY_TYPE_LOOKUP;
-    
-    /// Let's use a type definition to shorten this value type.
-    typedef std::unordered_map<std::string, EntityTypeBase>::value_type ENTSYS_ENTMAP_TYPE;
+    /// Type definitions to shorten source code parts.
+    typedef std::unordered_map<std::string, EntityTypeBase> ENTSYS_ENTITY_TYPE_MAP;
+    typedef ENTSYS_ENTITY_TYPE_MAP::const_iterator          ENTSYS_ENTITY_TYPE_LOOKUP;
+    typedef ENTSYS_ENTITY_TYPE_MAP::value_type              ENTSYS_ENTMAP_TYPE;
 
     /// \class EntityTypeManager
     /// \brief A manager class for types of entities.
     class EntityTypeManager 
     {
         private:
-
             /// This is the core data container in which all existing entity types will be stored by name (std::string).
-            std::unordered_map<std::string, EntityTypeBase> entity_types;
+            ENTSYS_ENTITY_TYPE_MAP entity_types;
 
         protected:
-
             /// This method validates new entity types which want to be taken into the system.
             const ENTSYS_RETURN_CODE validate_new_entity_type(const EntityTypeBase&) const;
             
         public:
-
             EntityTypeManager();
             ~EntityTypeManager();
 
-            // TODO: Do all these methods really have to be of const type and const methods?
+            // TODO: DISCUSS: Do all these methods really have to be of const type and const methods?
 
             /// This method adds new types of entites.
             /// Entity type instances can only be created from existing valid entity types by the entity instance manager.

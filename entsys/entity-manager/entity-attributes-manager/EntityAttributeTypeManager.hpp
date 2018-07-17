@@ -11,6 +11,8 @@
 namespace inexor {
 namespace entsys {
         
+    /// 
+    /// 
     class EntityAttributeTypeManager
     {
         protected:

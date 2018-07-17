@@ -6,6 +6,12 @@
 namespace inexor {
 namespace entsys {
 
+    DataContainer::DataContainer()
+    {
+        container_data_type = ENTSYS_DATA_TYPE_INVALID;
+        reset_memory();
+    }
+
     DataContainer::DataContainer(ENTSYS_DATA_TYPE data_type)
     {
         container_data_type = data_type;
@@ -53,6 +59,41 @@ namespace entsys {
         if(ENTSYS_DATA_TYPE_STRING == container_data_type) string_data = string_val;
         // else // TODO: Memory type mismaching! what to do now?
     }
-    
+
+    const std::int64_t DataContainer::get_intval() const
+    {
+        if(ENTSYS_DATA_TYPE_INT == container_data_type) return int_data;
+        // else // TODO: Memory type mismaching! what to do now?
+        return 0;
+    }
+
+    const double DataContainer::get_doubleval() const
+    {
+        if(ENTSYS_DATA_TYPE_DOUBLE == container_data_type) return double_data;
+        // else // TODO: Memory type mismaching! what to do now?
+        return 0;
+    }
+
+    const float DataContainer::get_floatval() const
+    {
+        if(ENTSYS_DATA_TYPE_FLOAT == container_data_type) return float_data;
+        // else // TODO: Memory type mismaching! what to do now?
+        return 0;
+    }
+
+    const bool DataContainer::get_boolval() const
+    {
+        if(ENTSYS_DATA_TYPE_BOOL == container_data_type) return boolean_data;
+        // else // TODO: Memory type mismaching! what to do now?
+        return 0;
+    }
+
+    const std::string DataContainer::get_stringval() const
+    {
+        if(ENTSYS_DATA_TYPE_STRING == container_data_type) return string_data;
+        // else // TODO: Memory type mismaching! what to do now?
+        return 0;
+    }
+
 };
 };
