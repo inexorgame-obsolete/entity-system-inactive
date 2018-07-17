@@ -5,8 +5,9 @@
 #define INEXOR_ENTSYS_RELATION_MANAGER_CLASS_HEADER
 
 #include <vector>
-#include "../../../return-codes/ReturnCodeEnum.hpp"
-#include "../entity-relation-type/EntityRelationTypeBaseClass.hpp"
+#include "../../../return-codes/ReturnCodes.hpp"
+// TODO: fix this
+//#include "../entity-relation-type/EntityRelationTypeBase.hpp"
 
 namespace inexor {
 namespace entsys {
@@ -16,7 +17,7 @@ namespace entsys {
     class EntityRelationManager
     {
         private:
-            std::vector<EntityRelationTypeBase> relation;
+            //std::vector<EntityRelationTypeBase> relation;
 
         public:
             EntityRelationManager();

@@ -4,7 +4,7 @@
 #ifndef INEXOR_ENTSYS_ENTITY_ATTRIBUTE_MANAGER_CLASS_HEADER
 #define INEXOR_ENTSYS_ENTITY_ATTRIBUTE_MANAGER_CLASS_HEADER
 
-#include "../../../return-codes/ReturnCodeEnum.hpp"
+#include "../../../return-codes/ReturnCodes.hpp"
 
 namespace inexor {
 namespace entsys {

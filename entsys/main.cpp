@@ -37,14 +37,19 @@ int main()
         cout << "I could look up entity type 'spawnpoint' successfully!" << endl;
     }
 
-    // create 1 million entities
+    // create 1 million entity types
     for(size_t i=0; i<1000000; i++)
     {
         EntityTypeBase i_am_duplicate(std::string(std::to_string(i)));
         sys->create_entity_type(i_am_duplicate);
+        cout << "numer of entity types available: " << sys->get_entity_type_cound() << endl;
     }
 
-    cout << "numer of entity types available: " << sys->get_entity_type_cound() << endl;
+    
+    // ENTITY ATTRIBUTE TESTS
+
+
+
 
     return 0;
 }

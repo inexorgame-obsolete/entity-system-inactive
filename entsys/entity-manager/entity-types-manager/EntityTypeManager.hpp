@@ -7,7 +7,7 @@
 #include <vector>
 #include <string>
 #include <unordered_map>
-#include "../../return-codes/ReturnCodeEnum.hpp"
+#include "../../return-codes/ReturnCodes.hpp"
 #include "entity-type\base\EntityTypeBase.hpp"
 
 namespace inexor {
