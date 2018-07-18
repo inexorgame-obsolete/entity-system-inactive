@@ -40,6 +40,7 @@ namespace entsys {
         {
             // add to unordered map
             entity_types.insert(ENTSYS_ENTMAP_TYPE(newtype.get_entity_type_name(), newtype));
+            // TODO: Why is this not working?
             //entity_types[name] = newtype;
             return ENTSYS_RETURN_SUCCESS;
         }
