@@ -69,40 +69,70 @@ namespace entsys {
 
     // Set methods.
 
-    void DataContainer::set(const std::int64_t int64_val)
+    const DataContainer DataContainer::set(const std::int64_t int64_val)
     {
-        if(ENTSYS_DATA_TYPE_BIG_INT == get_data_type()) int64_data = int64_val;
+        if(ENTSYS_DATA_TYPE_BIG_INT == get_data_type())
+        {
+            int64_data = int64_val;
+            return DataContainer(get_bigintval());
+        }
         // else // TODO: Memory type mismaching! what to do now?
+        return DataContainer(0);
     }
 
-    void DataContainer::set(const int int_val)
+    const DataContainer DataContainer::set(const int int_val)
     {
-        if(ENTSYS_DATA_TYPE_INT == get_data_type()) integer_data = int_val;
+        if(ENTSYS_DATA_TYPE_INT == get_data_type())
+        {
+            integer_data = int_val;
+            return DataContainer(get_intval());
+        }
         // else // TODO: Memory type mismaching! what to do now?
+        return DataContainer(0);
     }
 
-    void DataContainer::set(const double double_val)
+    const DataContainer DataContainer::set(const double double_val)
     {
-        if(ENTSYS_DATA_TYPE_DOUBLE == get_data_type()) double_data = double_val;
+        if(ENTSYS_DATA_TYPE_DOUBLE == get_data_type())
+        {
+            double_data = double_val;
+            return DataContainer(get_doubleval());
+        }
         // else // TODO: Memory type mismaching! what to do now?
+        return DataContainer(0);
     }
 
-    void DataContainer::set(const float float_val)
+    const DataContainer DataContainer::set(const float float_val)
     {
-        if(ENTSYS_DATA_TYPE_FLOAT == get_data_type()) float_data = float_val;
+        if(ENTSYS_DATA_TYPE_FLOAT == get_data_type())
+        {
+            float_data = float_val;
+            return DataContainer(get_floatval());
+        }
         // else // TODO: Memory type mismaching! what to do now?
+        return DataContainer(0);
     }
 
-    void DataContainer::set(const bool bool_val)
+    const DataContainer DataContainer::set(const bool bool_val)
     {
-        if(ENTSYS_DATA_TYPE_BOOL == get_data_type()) boolean_data = bool_val;
+        if(ENTSYS_DATA_TYPE_BOOL == get_data_type())
+        {
+            boolean_data = bool_val;
+            return DataContainer(get_boolval());
+        }
         // else // TODO: Memory type mismaching! what to do now?
+        return DataContainer(false);
     }
 
-    void DataContainer::set(const std::string string_val)
+    const DataContainer DataContainer::set(const std::string string_val)
     {
-        if(ENTSYS_DATA_TYPE_STRING == get_data_type()) string_data = string_val;
+        if(ENTSYS_DATA_TYPE_STRING == get_data_type())
+        {
+            string_data = string_val;
+            return DataContainer(get_stringval());
+        }
         // else // TODO: Memory type mismaching! what to do now?
+        return DataContainer(std::string(""));
     }
 
 
@@ -266,6 +296,38 @@ namespace entsys {
         return div(divisor);
     }
 
+
+    // Overloaded set operators.
+
+    DataContainer DataContainer::operator=(const int& new_int_val)
+    {
+        return set(new_int_val);
+    }
+    
+    DataContainer DataContainer::operator=(const double& new_double_val)
+    {
+        return set(new_double_val);
+    }
+
+    DataContainer DataContainer::operator=(const float& new_float_val)
+    {
+        return set(new_float_val);
+    }
+
+    DataContainer DataContainer::operator=(const bool& new_bool_val)
+    {
+        return set(new_bool_val);
+    }
+
+    DataContainer DataContainer::operator=(const std::int64_t& new_bigint_val)
+    {
+        return set(new_bigint_val);
+    }
+
+    DataContainer DataContainer::operator=(const std::string& new_string_val)
+    {
+        return set(new_string_val);
+    }
 
     // Get methods.
 

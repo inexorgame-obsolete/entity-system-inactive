@@ -42,13 +42,21 @@ namespace entsys {
 
             ~DataContainer();
 
+            // Overloaded set operators.
+            DataContainer operator=(const int&);
+            DataContainer operator=(const double&);
+            DataContainer operator=(const float&);
+            DataContainer operator=(const bool&);
+            DataContainer operator=(const std::int64_t&);
+            DataContainer operator=(const std::string&);
+
             // Set methods.
-            void set(const std::int64_t);
-            void set(const double);
-            void set(const float);
-            void set(const bool);
-            void set(const int);
-            void set(const std::string);
+            const DataContainer set(const std::int64_t);
+            const DataContainer set(const double);
+            const DataContainer set(const float);
+            const DataContainer set(const bool);
+            const DataContainer set(const int);
+            const DataContainer set(const std::string);
             
             // TODO: DISCUSS: Do all methods have to be of const type?
 
@@ -59,10 +67,10 @@ namespace entsys {
             const DataContainer div(const DataContainer&);
 
             // Overloaded operators.
-            DataContainer operator+(const DataContainer&);
-            DataContainer operator-(const DataContainer&);
-            DataContainer operator*(const DataContainer&);
-            DataContainer operator/(const DataContainer&);
+            inline DataContainer operator+(const DataContainer&);
+            inline DataContainer operator-(const DataContainer&);
+            inline DataContainer operator*(const DataContainer&);
+            inline DataContainer operator/(const DataContainer&);
 
             // Get methods.
             const std::int64_t get_bigintval() const;
