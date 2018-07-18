@@ -1,6 +1,9 @@
 // Inexor entity system prototype
 // (c)2018 Inexor
 
+#ifndef INEXOR_ENTSYS_TESTING_FRAMEWORK_HEADER
+#define INEXOR_ENTSYS_TESTING_FRAMEWORK_HEADER
+
 #include <iostream>
 using namespace std;
 
@@ -8,45 +11,57 @@ using namespace std;
 #include <ctime>
 #include <ratio>
 #include <chrono>
+using namespace std::chrono;
 
-// Data container
 #include "../data-container/DataContainer.hpp"
+
+
+// Points in time.
+high_resolution_clock::time_point t1;
+
+// Start test: remember start time in milliseconds
+void start_test()
+{
+    t1 = high_resolution_clock::now();
+}
+
+// End test: remember end time in milliseconds
+void end_test()
+{
+    // Calculate time difference in milliseconds.
+    high_resolution_clock::time_point t2 = high_resolution_clock::now();
+    duration<double, std::milli> time_span = t2 - t1;
+    // Print out how many milliseconds have passed during this test.
+    std::cout << "Time passed: " << time_span.count() << " milliseconds." << endl  << endl;
+}
+
+
 
 // Testing multiple purpose data container.
 void Test_EntitySystemDataContainers()
 {
-    using namespace std::chrono;
-    high_resolution_clock::time_point t1 = high_resolution_clock::now();
-
     // TESTS HERE
-    inexor::entsys::DataContainer dump(100.0f);
 
+    start_test();
+    inexor::entsys::DataContainer dump(0);
     cout << "Performing 100.000 WRITE operations on DataContainer of type int." << endl;
-    for(int i=0; i<100000; i++)
-    {
+    for(int i=0; i<100000; i++) {
         dump = i;
-        //cout << dump.get_intval() << endl;
     }
+    end_test();
 
-    high_resolution_clock::time_point t2 = high_resolution_clock::now();
-    duration<double, std::milli> time_span = t2 - t1;
 
-    std::cout << "It took me " << time_span.count() << " milliseconds." << endl;
-        
-    t1 = high_resolution_clock::now();
-
-    cout << "Performing 1.000.000 READ operations on DataContainer of type int." << endl;
-    for(int i=0; i<1000000; i++)
-    {
+    start_test();
+    cout << "Performing 100.000 READ operations on DataContainer of type int." << endl;
+    for(int i=0; i<1000000; i++) {
         int x = dump.get_intval();
-        //cout << dump.get_intval() << endl;
     }
+    end_test();
     
-    t2 = high_resolution_clock::now();
-    time_span = t2 - t1;
 
-    std::cout << "It took me " << time_span.count() << " milliseconds." << endl;
-
-    std::cout << std::endl;
+    start_test();
+    end_test();
 
 }
+
+#endif // INEXOR_ENTSYS_TESTING_FRAMEWORK_HEADER

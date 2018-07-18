@@ -75,10 +75,10 @@ namespace entsys {
             const DataContainer div(const DataContainer&);
 
             // Overloaded operators.
-            inline DataContainer operator+(const DataContainer&);
-            inline DataContainer operator-(const DataContainer&);
-            inline DataContainer operator*(const DataContainer&);
-            inline DataContainer operator/(const DataContainer&);
+            DataContainer operator+(const DataContainer&);
+            DataContainer operator-(const DataContainer&);
+            DataContainer operator*(const DataContainer&);
+            DataContainer operator/(const DataContainer&);
 
             // Get methods.
             const std::int64_t get_bigintval() const;
