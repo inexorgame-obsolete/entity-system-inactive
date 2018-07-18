@@ -14,7 +14,8 @@ namespace entsys {
 
     void DataContainer::reset_memory()
     {
-        int_data = 0;
+        int64_data = 0;
+        integer_data = 0;
         float_data = 0.0f;
         double_data = 0.0;
         boolean_data = false;
@@ -26,8 +27,8 @@ namespace entsys {
 
     DataContainer::DataContainer(const std::int64_t int_val)
     {
-        data_container_data_type = ENTSYS_DATA_TYPE_INT;
-        int_data = int_val;
+        data_container_data_type = ENTSYS_DATA_TYPE_BIG_INT;
+        int64_data = int_val;
     }
 
     DataContainer::DataContainer(const double double_val)
@@ -54,6 +55,12 @@ namespace entsys {
         string_data = string_val;
     }
 
+    DataContainer::DataContainer(const int int_val)
+    {
+        data_container_data_type = ENTSYS_DATA_TYPE_INT;
+        integer_data = int_val;
+    }
+
     DataContainer::~DataContainer()
     {
         reset_memory();
@@ -62,31 +69,37 @@ namespace entsys {
 
     // Set methods.
 
-    void DataContainer::set(std::int64_t int_val)
+    void DataContainer::set(const std::int64_t int64_val)
     {
-        if(ENTSYS_DATA_TYPE_INT == get_data_type()) int_data = int_val;
+        if(ENTSYS_DATA_TYPE_BIG_INT == get_data_type()) int64_data = int64_val;
         // else // TODO: Memory type mismaching! what to do now?
     }
 
-    void DataContainer::set(double double_val)
+    void DataContainer::set(const int int_val)
+    {
+        if(ENTSYS_DATA_TYPE_INT == get_data_type()) integer_data = int_val;
+        // else // TODO: Memory type mismaching! what to do now?
+    }
+
+    void DataContainer::set(const double double_val)
     {
         if(ENTSYS_DATA_TYPE_DOUBLE == get_data_type()) double_data = double_val;
         // else // TODO: Memory type mismaching! what to do now?
     }
 
-    void DataContainer::set(float float_val)
+    void DataContainer::set(const float float_val)
     {
         if(ENTSYS_DATA_TYPE_FLOAT == get_data_type()) float_data = float_val;
         // else // TODO: Memory type mismaching! what to do now?
     }
 
-    void DataContainer::set(bool bool_val)
+    void DataContainer::set(const bool bool_val)
     {
         if(ENTSYS_DATA_TYPE_BOOL == get_data_type()) boolean_data = bool_val;
         // else // TODO: Memory type mismaching! what to do now?
     }
 
-    void DataContainer::set(std::string string_val)
+    void DataContainer::set(const std::string string_val)
     {
         if(ENTSYS_DATA_TYPE_STRING == get_data_type()) string_data = string_val;
         // else // TODO: Memory type mismaching! what to do now?
@@ -100,6 +113,7 @@ namespace entsys {
         switch(get_data_type())
         {
             case ENTSYS_DATA_TYPE_INT:
+            case ENTSYS_DATA_TYPE_BIG_INT:
             case ENTSYS_DATA_TYPE_FLOAT:
             case ENTSYS_DATA_TYPE_DOUBLE:
             {
@@ -113,7 +127,7 @@ namespace entsys {
 
     // Math operations.
     
-    DataContainer DataContainer::add(const DataContainer& addend)
+    const DataContainer DataContainer::add(const DataContainer& addend)
     {
         if(data_container_is_numeric())
         {
@@ -121,7 +135,7 @@ namespace entsys {
             {
                 case ENTSYS_DATA_TYPE_INT:
                 {
-                    int_data += addend.get_intval();
+                    integer_data += addend.get_intval();
                     return DataContainer(get_intval());
                     break;
                 }
@@ -142,7 +156,7 @@ namespace entsys {
         return DataContainer(std::int64_t(0));
     }
 
-    DataContainer DataContainer::sub(const DataContainer& minuend)
+    const DataContainer DataContainer::sub(const DataContainer& minuend)
     {
         if(data_container_is_numeric())
         {
@@ -150,7 +164,7 @@ namespace entsys {
             {
                 case ENTSYS_DATA_TYPE_INT:
                 {
-                    int_data -= minuend.get_intval();
+                    integer_data -= minuend.get_intval();
                     return DataContainer(get_intval());
                     break;
                 }
@@ -171,7 +185,7 @@ namespace entsys {
         return DataContainer(std::int64_t(0));
     }
 
-    DataContainer DataContainer::mul(const DataContainer& coeffizient)
+    const DataContainer DataContainer::mul(const DataContainer& coeffizient)
     {
         if(data_container_is_numeric())
         {
@@ -179,7 +193,7 @@ namespace entsys {
             {
                 case ENTSYS_DATA_TYPE_INT:
                 {
-                    int_data *= coeffizient.get_intval();
+                    integer_data *= coeffizient.get_intval();
                     return DataContainer(get_intval());
                     break;
                 }
@@ -200,7 +214,7 @@ namespace entsys {
         return DataContainer(std::int64_t(0));
     }
 
-    DataContainer DataContainer::div(const DataContainer& divisor)
+    const DataContainer DataContainer::div(const DataContainer& divisor)
     {
         if(data_container_is_numeric())
         {
@@ -208,7 +222,7 @@ namespace entsys {
             {
                 case ENTSYS_DATA_TYPE_INT:
                 {
-                    int_data /= divisor.get_intval();
+                    integer_data /= divisor.get_intval();
                     return DataContainer(get_intval());
                     break;
                 }
@@ -255,9 +269,16 @@ namespace entsys {
 
     // Get methods.
 
-    const std::int64_t DataContainer::get_intval() const
+    const int DataContainer::get_intval() const
     {
-        if(ENTSYS_DATA_TYPE_INT == get_data_type()) return int_data;
+        if(ENTSYS_DATA_TYPE_INT == get_data_type()) return integer_data;
+        // else // TODO: Memory type mismaching! what to do now?
+        return 0;
+    }
+
+    const std::int64_t DataContainer::get_bigintval() const
+    {
+        if(ENTSYS_DATA_TYPE_BIG_INT == get_data_type()) return int64_data;
         // else // TODO: Memory type mismaching! what to do now?
         return 0;
     }
