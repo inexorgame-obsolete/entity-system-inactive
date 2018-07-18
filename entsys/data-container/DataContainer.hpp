@@ -15,6 +15,11 @@ namespace entsys {
     class DataContainer
     {
         private:
+
+            // TODO: GOOD IDEA: instead of accessing maps by value every time
+            // a write operation occurs, why not store a pointer to the value pair
+            // of the map in the write operation?
+            // This could speed the entity system very much!
             ENTSYS_DATA_TYPE data_container_data_type;
 
             std::string string_data;
@@ -38,17 +43,33 @@ namespace entsys {
 
             // Overloaded constructors for fast initialization.
             DataContainer(ENTSYS_DATA_TYPE);
-            DataContainer(const std::int64_t);             // Automatic test available!
-            DataContainer(const double);                   // Automatic test available!
-            DataContainer(const float);                    // Automatic test available!
-            DataContainer(const bool);                     // Automatic test available!
-            DataContainer(const int);                      // Automatic test available!
-            DataContainer(const std::string);              // Automatic test available!
+            DataContainer(const std::int64_t);              // Automatic test available!
+            DataContainer(const double);                    // Automatic test available!
+            DataContainer(const float);                     // Automatic test available!
+            DataContainer(const bool);                      // Automatic test available!
+            DataContainer(const int);                       // Automatic test available!
+            DataContainer(const std::string);               // Automatic test available!
 
             ~DataContainer();
 
             // TODO: DISCUSS: If we left out type checking during set operations we 
             // could save up quite some time. However this could lead to entity system errors!
+
+            // TODO: DISCUSS: Do all methods have to be of const type?
+
+            // Set methods.
+            const DataContainer set(const std::int64_t);    // Automatic test available!
+            const DataContainer set(const double);          // Automatic test available!
+            const DataContainer set(const float);           // Automatic test available!
+            const DataContainer set(const bool);            // Automatic test available!
+            const DataContainer set(const int);             // Automatic test available!
+            const DataContainer set(const std::string);     // Automatic test available!
+
+            // Overloaded operators.
+            DataContainer operator+(const DataContainer&);
+            DataContainer operator-(const DataContainer&);
+            DataContainer operator*(const DataContainer&);
+            DataContainer operator/(const DataContainer&);
 
             // Overloaded set operators.
             DataContainer operator=(const int&);            // Automatic test available!
@@ -57,28 +78,15 @@ namespace entsys {
             DataContainer operator=(const bool&);           // Automatic test available!
             DataContainer operator=(const std::int64_t&);   // Automatic test available!
             DataContainer operator=(const std::string&);    // Automatic test available!
+                           
+            // TODO: Make them protected and
+            // overload the operators +=, -=, *=, /=..
 
-            // TODO: DISCUSS: Do all methods have to be of const type?
-
-            // Set methods.
-            const DataContainer set(const std::int64_t);
-            const DataContainer set(const double);
-            const DataContainer set(const float);
-            const DataContainer set(const bool);
-            const DataContainer set(const int);
-            const DataContainer set(const std::string);
-            
             // Math operations.
-            const DataContainer add(const DataContainer&);
-            const DataContainer sub(const DataContainer&);
-            const DataContainer mul(const DataContainer&);
-            const DataContainer div(const DataContainer&);
-
-            // Overloaded operators.
-            DataContainer operator+(const DataContainer&);
-            DataContainer operator-(const DataContainer&);
-            DataContainer operator*(const DataContainer&);
-            DataContainer operator/(const DataContainer&);
+            const DataContainer add(const DataContainer&);  // Automatic test available!
+            const DataContainer sub(const DataContainer&);  // Automatic test available!
+            const DataContainer mul(const DataContainer&);  // Automatic test available!
+            const DataContainer div(const DataContainer&);  // Automatic test available!
 
             // Get methods.
             const std::int64_t get_bigintval() const;

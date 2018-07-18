@@ -9,9 +9,12 @@
 namespace inexor {
 namespace entsys {
 
-    /// \class CEntitySystem
-    /// \brief Singleton implementation of an entity system prototype class for Inexor.
-    class EntitySystem : public EntityManager // TODO: add components here (renderer, editor..)
+    // TODO: EntityEditor, EntityEditorRenderer, EntityGameSceneRenderer,
+    // EntitySync, EntityErrorHandling, EntityImporter, EntityExporter
+
+    /// \class EntitySystem
+    /// \brief Singleton implementation of an entity system prototype class for Inexor
+    class EntitySystem : public EntityManager
     {
         private:
             // singleton implementation: private constructor to prevent multiple instancing.

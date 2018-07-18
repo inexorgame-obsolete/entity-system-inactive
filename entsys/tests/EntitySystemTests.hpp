@@ -109,7 +109,33 @@ void Test_EntitySystemDataContainers()
         dc_string = std::to_string(i);
     }
     end_test();
-    
+
+    // add, sub, mul, div
+    // TODO: Why is this constructor call for add, sub, mul, div 
+    // methods even working btw?
+
+    start_test();
+    cout << "Call DataContainer::add(int) 1000 times:" << endl;
+    for(int i=0; i<1000; i+=1) dc_int.add(1);
+    end_test();
+
+    start_test();
+    dc_int.set(1000);
+    cout << "Call DataContainer::sub(int) 1000 times:" << endl;
+    for(int i=0; i<1000; i+=1) dc_int.sub(1);
+    end_test();
+
+    start_test();
+    dc_int.set(2);
+    cout << "Call DataContainer::mul(int) 1000 times:" << endl;
+    for(int i=0; i<1000; i+=1) dc_int.mul(2);
+    end_test();
+
+    start_test();
+    cout << "Call DataContainer::mul(int) 1000 times:" << endl;
+    for(int i=0; i<1000; i+=1) dc_int.div(2);
+    end_test();
+
     start_test();
     int test_int = 0;
     cout << "Call DataContainer::get_intval() 1 million times:" << endl;
