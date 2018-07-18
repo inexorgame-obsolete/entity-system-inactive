@@ -25,6 +25,12 @@ namespace entsys {
 
     // Constructors.
 
+    DataContainer::DataContainer()
+    {
+        data_container_data_type = ENTSYS_DATA_TYPE_UNSPECIFIED;
+        reset_memory();
+    }
+
     DataContainer::DataContainer(const std::int64_t int_val)
     {
         data_container_data_type = ENTSYS_DATA_TYPE_BIG_INT;
@@ -328,6 +334,7 @@ namespace entsys {
     {
         return set(new_string_val);
     }
+
 
     // Get methods.
 

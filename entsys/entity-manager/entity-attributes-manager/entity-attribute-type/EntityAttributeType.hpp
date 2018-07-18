@@ -6,21 +6,21 @@
 
 #include <string>
 #include <vector>
-#include "../../../../data-container/DataContainer.hpp"
+#include "../../../data-container/DataContainer.hpp"
 
 namespace inexor {
 namespace entsys {
 
     /// A base class for types of attributes of entites.
-    class EntityAttributeTypeBase
+    class EntityAttributeType
     {
         protected:
-            std::string entity_attribute_type_name = std::string("");
-            DataContainer entity_attribute_data = ENTSYS_DATA_TYPE_INVALID;
+            std::string entity_attribute_type_name;
+            DataContainer entity_attribute_data;
 
         public:
-            EntityAttributeTypeBase();
-            ~EntityAttributeTypeBase();
+            EntityAttributeType();
+            ~EntityAttributeType();
 
     };
 

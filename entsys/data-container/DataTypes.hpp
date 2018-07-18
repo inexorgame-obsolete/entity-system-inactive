@@ -10,7 +10,8 @@ namespace entsys {
     /// 
     enum ENTSYS_DATA_TYPE 
     {
-        ENTSYS_DATA_TYPE_INVALID,
+        ENTSYS_DATA_TYPE_INVALID = -1,
+        ENTSYS_DATA_TYPE_UNSPECIFIED,
         ENTSYS_DATA_TYPE_INT,
         ENTSYS_DATA_TYPE_BIG_INT,
         ENTSYS_DATA_TYPE_FLOAT,

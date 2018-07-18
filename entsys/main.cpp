@@ -20,7 +20,7 @@ EntitySystem* sys = EntitySystem::create_entity_system();
 int main()
 {
     // DATA CONTAINER TESTS
-    Test_EntitySystemDataContaners();
+    Test_EntitySystemDataContainers();
 
     // ENTITY TYPE TESTS
 

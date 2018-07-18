@@ -24,7 +24,7 @@ namespace entsys {
     {
         private:
             /// This is the core data container in which all existing entity types will be stored by name (std::string).
-            ENTSYS_ENTITY_TYPE_MAP entity_types;
+            ENTSYS_ENTITY_TYPE_MAP map_of_entity_types;
 
         protected:
             /// This method validates new entity types which want to be taken into the system.

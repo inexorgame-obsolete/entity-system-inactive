@@ -18,8 +18,9 @@ namespace entsys {
             ENTSYS_DATA_TYPE data_container_data_type;
 
             std::string string_data;
+            // Don't forget that the actual memory size of
+            // every variable depends on the operating system!
             std::int64_t int64_data;
-
             int integer_data;
             double double_data;
             float float_data;
@@ -30,6 +31,10 @@ namespace entsys {
             bool data_container_is_numeric();
 
         public:
+
+            // We need this not overloaded constructor since sometimes
+            // the data type of the container is not known yet.
+            DataContainer();
 
             // Overloaded constructors for fast initialization.
             DataContainer(ENTSYS_DATA_TYPE);
@@ -42,6 +47,9 @@ namespace entsys {
 
             ~DataContainer();
 
+            // TODO: DISCUSS: If we left out type checking during set operations we 
+            // could save up quite some time. However this could lead to entity system errors!
+
             // Overloaded set operators.
             DataContainer operator=(const int&);
             DataContainer operator=(const double&);
@@ -49,6 +57,8 @@ namespace entsys {
             DataContainer operator=(const bool&);
             DataContainer operator=(const std::int64_t&);
             DataContainer operator=(const std::string&);
+
+            // TODO: DISCUSS: Do all methods have to be of const type?
 
             // Set methods.
             const DataContainer set(const std::int64_t);
@@ -58,8 +68,6 @@ namespace entsys {
             const DataContainer set(const int);
             const DataContainer set(const std::string);
             
-            // TODO: DISCUSS: Do all methods have to be of const type?
-
             // Math operations.
             const DataContainer add(const DataContainer&);
             const DataContainer sub(const DataContainer&);
