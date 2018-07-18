@@ -12,6 +12,7 @@ namespace entsys {
         reset_memory();
     }
 
+    // TODO: Write tests for this.
     void DataContainer::reset_memory()
     {
         int64_data = 0;

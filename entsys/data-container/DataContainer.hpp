@@ -27,7 +27,7 @@ namespace entsys {
             bool boolean_data;
 
         protected:
-            void reset_memory();
+            void reset_memory();                           // Automatic test available!
             bool data_container_is_numeric();
 
         public:
@@ -38,12 +38,12 @@ namespace entsys {
 
             // Overloaded constructors for fast initialization.
             DataContainer(ENTSYS_DATA_TYPE);
-            DataContainer(const std::int64_t);
-            DataContainer(const double);
-            DataContainer(const float);
-            DataContainer(const bool);
-            DataContainer(const int);
-            DataContainer(const std::string);
+            DataContainer(const std::int64_t);             // Automatic test available!
+            DataContainer(const double);                   // Automatic test available!
+            DataContainer(const float);                    // Automatic test available!
+            DataContainer(const bool);                     // Automatic test available!
+            DataContainer(const int);                      // Automatic test available!
+            DataContainer(const std::string);              // Automatic test available!
 
             ~DataContainer();
 
@@ -51,12 +51,12 @@ namespace entsys {
             // could save up quite some time. However this could lead to entity system errors!
 
             // Overloaded set operators.
-            DataContainer operator=(const int&);
-            DataContainer operator=(const double&);
-            DataContainer operator=(const float&);
-            DataContainer operator=(const bool&);
-            DataContainer operator=(const std::int64_t&);
-            DataContainer operator=(const std::string&);
+            DataContainer operator=(const int&);            // Automatic test available!
+            DataContainer operator=(const double&);         // Automatic test available!
+            DataContainer operator=(const float&);          // Automatic test available!
+            DataContainer operator=(const bool&);           // Automatic test available!
+            DataContainer operator=(const std::int64_t&);   // Automatic test available!
+            DataContainer operator=(const std::string&);    // Automatic test available!
 
             // TODO: DISCUSS: Do all methods have to be of const type?
 
@@ -85,9 +85,13 @@ namespace entsys {
             const double get_doubleval() const;
             const float get_floatval() const;
             const bool get_boolval() const;
+            
+            // Automatic test available
             const int get_intval() const;
+            
             const std::string get_stringval() const;
 
+            // Automatic test available
             const ENTSYS_DATA_TYPE get_data_type() const;
 
     };
