@@ -6,7 +6,7 @@
 namespace inexor {
 namespace entsys {
 
-    DataContainer::DataContainer(ENTSYS_DATA_TYPE data_type)
+    DataContainer::DataContainer(const ENTSYS_DATA_TYPE& data_type)
     {
         data_container_data_type = data_type;
         reset_memory();
@@ -32,37 +32,37 @@ namespace entsys {
         reset_memory();
     }
 
-    DataContainer::DataContainer(const std::int64_t int_val)
+    DataContainer::DataContainer(const std::int64_t& int_val)
     {
         data_container_data_type = ENTSYS_DATA_TYPE_BIG_INT;
         int64_data = int_val;
     }
 
-    DataContainer::DataContainer(const double double_val)
+    DataContainer::DataContainer(const double& double_val)
     {
         data_container_data_type = ENTSYS_DATA_TYPE_DOUBLE;
         double_data = double_val;
     }
 
-    DataContainer::DataContainer(const float float_val)
+    DataContainer::DataContainer(const float& float_val)
     {
         data_container_data_type = ENTSYS_DATA_TYPE_FLOAT;
         float_data = float_val;
     }
 
-    DataContainer::DataContainer(const bool bool_val)
+    DataContainer::DataContainer(const bool& bool_val)
     {
         data_container_data_type = ENTSYS_DATA_TYPE_BOOL;
         boolean_data = bool_val;
     }
 
-    DataContainer::DataContainer(const std::string string_val)
+    DataContainer::DataContainer(const std::string& string_val)
     {
         data_container_data_type = ENTSYS_DATA_TYPE_STRING;
         string_data = string_val;
     }
 
-    DataContainer::DataContainer(const int int_val)
+    DataContainer::DataContainer(const int& int_val)
     {
         data_container_data_type = ENTSYS_DATA_TYPE_INT;
         integer_data = int_val;
@@ -73,6 +73,12 @@ namespace entsys {
         reset_memory();
     }
 
+    
+    const ENTSYS_RETURN_CODE DataContainer::set_data_type(const ENTSYS_DATA_TYPE& data_type)
+    {
+        data_container_data_type = data_type;
+        return ENTSYS_RETURN_SUCCESS;
+    }
 
     // Set methods.
 
@@ -283,22 +289,22 @@ namespace entsys {
     
     // Overloaded operators.
 
-    DataContainer DataContainer::operator+(const DataContainer& addend)
+    const DataContainer DataContainer::operator+(const DataContainer& addend)
     {
         return add(addend);
     }
     
-    DataContainer DataContainer::operator-(const DataContainer& minuend)
+    const DataContainer DataContainer::operator-(const DataContainer& minuend)
     {
         return sub(minuend);
     }
 
-    DataContainer DataContainer::operator*(const DataContainer& coeffizient)
+    const DataContainer DataContainer::operator*(const DataContainer& coeffizient)
     {
         return mul(coeffizient);
     }
 
-    DataContainer DataContainer::operator/(const DataContainer& divisor)
+    const DataContainer DataContainer::operator/(const DataContainer& divisor)
     {
         return div(divisor);
     }
@@ -306,32 +312,32 @@ namespace entsys {
 
     // Overloaded set operators.
 
-    DataContainer DataContainer::operator=(const int& new_int_val)
+    const DataContainer DataContainer::operator=(const int& new_int_val)
     {
         return set(new_int_val);
     }
     
-    DataContainer DataContainer::operator=(const double& new_double_val)
+    const DataContainer DataContainer::operator=(const double& new_double_val)
     {
         return set(new_double_val);
     }
 
-    DataContainer DataContainer::operator=(const float& new_float_val)
+    const DataContainer DataContainer::operator=(const float& new_float_val)
     {
         return set(new_float_val);
     }
 
-    DataContainer DataContainer::operator=(const bool& new_bool_val)
+    const DataContainer DataContainer::operator=(const bool& new_bool_val)
     {
         return set(new_bool_val);
     }
 
-    DataContainer DataContainer::operator=(const std::int64_t& new_bigint_val)
+    const DataContainer DataContainer::operator=(const std::int64_t& new_bigint_val)
     {
         return set(new_bigint_val);
     }
 
-    DataContainer DataContainer::operator=(const std::string& new_string_val)
+    const DataContainer DataContainer::operator=(const std::string& new_string_val)
     {
         return set(new_string_val);
     }

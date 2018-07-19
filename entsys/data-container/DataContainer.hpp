@@ -7,6 +7,7 @@
 #include <string>
 #include <cstdint>
 #include "DataTypes.hpp"
+#include "../return-codes/ReturnCodes.hpp"
 
 namespace inexor {
 namespace entsys {
@@ -42,15 +43,18 @@ namespace entsys {
             DataContainer();
 
             // Overloaded constructors for fast initialization.
-            DataContainer(ENTSYS_DATA_TYPE);
-            DataContainer(const std::int64_t);              // Automatic test available!
-            DataContainer(const double);                    // Automatic test available!
-            DataContainer(const float);                     // Automatic test available!
-            DataContainer(const bool);                      // Automatic test available!
-            DataContainer(const int);                       // Automatic test available!
-            DataContainer(const std::string);               // Automatic test available!
+            DataContainer(const ENTSYS_DATA_TYPE&);
+            DataContainer(const std::int64_t&);             // Automatic test available!
+            DataContainer(const double&);                   // Automatic test available!
+            DataContainer(const float&);                    // Automatic test available!
+            DataContainer(const bool&);                     // Automatic test available!
+            DataContainer(const int&);                      // Automatic test available!
+            DataContainer(const std::string&);              // Automatic test available!
 
             ~DataContainer();
+
+            // Set data type.
+            const ENTSYS_RETURN_CODE set_data_type(const ENTSYS_DATA_TYPE&);
 
             // TODO: DISCUSS: If we left out type checking during set operations we 
             // could save up quite some time. However this could lead to entity system errors!
@@ -66,19 +70,21 @@ namespace entsys {
             const DataContainer set(const std::string);     // Automatic test available!
 
             // Overloaded operators.
-            DataContainer operator+(const DataContainer&);
-            DataContainer operator-(const DataContainer&);
-            DataContainer operator*(const DataContainer&);
-            DataContainer operator/(const DataContainer&);
+            const DataContainer operator+(const DataContainer&);
+            const DataContainer operator-(const DataContainer&);
+            const DataContainer operator*(const DataContainer&);
+            const DataContainer operator/(const DataContainer&);
 
             // Overloaded set operators.
-            DataContainer operator=(const int&);            // Automatic test available!
-            DataContainer operator=(const double&);         // Automatic test available!
-            DataContainer operator=(const float&);          // Automatic test available!
-            DataContainer operator=(const bool&);           // Automatic test available!
-            DataContainer operator=(const std::int64_t&);   // Automatic test available!
-            DataContainer operator=(const std::string&);    // Automatic test available!
-                           
+            const DataContainer operator=(const int&);            // Automatic test available!
+            const DataContainer operator=(const double&);         // Automatic test available!
+            const DataContainer operator=(const float&);          // Automatic test available!
+            const DataContainer operator=(const bool&);           // Automatic test available!
+            const DataContainer operator=(const std::int64_t&);   // Automatic test available!
+            const DataContainer operator=(const std::string&);    // Automatic test available!
+
+            DataContainer operator=(const ENTSYS_DATA_TYPE&) = delete;                                                
+
             // TODO: Make them protected and
             // overload the operators +=, -=, *=, /=..
 

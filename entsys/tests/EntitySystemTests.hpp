@@ -13,8 +13,10 @@ using namespace std;
 #include <chrono>
 using namespace std::chrono;
 
-#include "../data-container/DataContainer.hpp"
 
+// Components which have to be tested:
+#include "../data-container/DataContainer.hpp"
+#include "../entity-manager/entity-attributes-manager/entity-attribute-type/EntityAttributeType.hpp"
 
 namespace inexor {
 namespace entsys {
@@ -43,25 +45,13 @@ void end_test()
 // Testing multiple purpose data container.
 void Test_EntitySystemDataContainers()
 {
-    // TESTS HERE
-
-    // Initialisation
-    // Debug constructor calls here.
     DataContainer dc_int(0);
     DataContainer dc_bigint(std::int64_t(0));
     DataContainer dc_string(std::string(""));
     DataContainer dc_bool(false);
     DataContainer dc_float(0.0f);
     DataContainer dc_double(0.0);
-
-    cout << "Inexor entity system prototype automated software testing." << endl;
     
-
-    // Testing DataContainer of type Integer (signed int)
-    // ==================================================================
-
-    // Smaller tests: 1000 calls
-
     start_test();
     cout << "Call DataContainer::operator=(int) 1000 times:" << endl;
     for(int i=0; i<1000; i++) {
@@ -150,12 +140,38 @@ void Test_EntitySystemDataContainers()
     start_test();
     cout << "Call DataContainer::operator=(int) 1 million times" << endl;
     end_test();
-
-    // Testing DataContainer of type Big Integer (std::int64_t)
-    // ==================================================================
-
 }
 
+
+void Test_EntityAttributeTypes()
+{
+    EntityAttributeType attr1;
+
+    cout << "Setting attribute name" << endl;
+    start_test();
+    attr1.set_name(std::string("color"));
+    end_test();
+
+    std::string finished_yet = std::string("false");
+
+    if(attr1.is_finished()) finished_yet = std::string("true");
+    cout << "Are we finished yet?: " << finished_yet.c_str() << endl;
+
+    cout << "Setting attribute data type" << endl;
+    start_test();
+    attr1.set_data_type(ENTSYS_DATA_TYPE_FLOAT);
+    end_test();
+
+    if(attr1.is_finished()) finished_yet = std::string("true");
+    cout << "Are we finished yet?: " << finished_yet.c_str() << endl;
+
+    attr1.finish();
+
+    if(attr1.is_finished()) finished_yet = std::string("true");
+    cout << "Are we finished yet?: " << finished_yet.c_str() << endl;
+
+
+}
 
 };
 };

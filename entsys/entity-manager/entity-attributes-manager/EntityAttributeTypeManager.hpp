@@ -31,7 +31,7 @@ namespace entsys {
             /// This method adds new types of attributes of entities.
             /// Entity attribute type instances can only be created from existing valid 
             /// entity attribute types by the entity attribute instance manager.
-            const ENTSYS_RETURN_CODE create_entity_attribute_type(const EntityAttributeType&);
+            const ENTSYS_RETURN_CODE add_entity_attribute_type(const EntityAttributeType&);
 
             /// This method returns the number of existing types of entity attributes available in the entity system.
             const size_t get_entity_attribute_type_cound() const;

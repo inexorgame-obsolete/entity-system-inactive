@@ -22,11 +22,12 @@ int main()
     // DATA CONTAINER TESTS
     Test_EntitySystemDataContainers();
 
+    // ENTITY ATTRIBUTE TESTS
+    Test_EntityAttributeTypes();
+
     // ENTITY TYPE TESTS
     // TODO...
 
-    // ENTITY ATTRIBUTE TESTS
-    // TODO...
-
+    cin.get();
     return 0;
 }

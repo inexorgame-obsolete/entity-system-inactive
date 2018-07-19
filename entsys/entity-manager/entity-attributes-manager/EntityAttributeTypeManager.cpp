@@ -19,7 +19,7 @@ namespace entsys {
         return map_of_entity_attribute_types.size();
     }
 
-    const ENTSYS_RETURN_CODE EntityAttributeTypeManager::create_entity_attribute_type(const EntityAttributeType&)
+    const ENTSYS_RETURN_CODE EntityAttributeTypeManager::add_entity_attribute_type(const EntityAttributeType&)
     {
         // TODO
         return ENTSYS_RETURN_ERROR;

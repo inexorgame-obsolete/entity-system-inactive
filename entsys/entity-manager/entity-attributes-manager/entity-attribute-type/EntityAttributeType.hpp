@@ -29,6 +29,8 @@ namespace entsys {
             // Data type of this container is ENTSYS_DATA_TYPE_UNSPECIFIED.
             DataContainer entity_attribute_data;
 
+            // TODO: Should an entity attribute type be limited to only on data container?
+            // Currently yes, because every entity attribute type acts as the key for the key/value pair.
 
         public:
             EntityAttributeType();
@@ -37,15 +39,17 @@ namespace entsys {
             // TODO: DISCUSS: Do all these methods have to me of const type?
 
             // Set the name of the entity attribute type.
-            const ENTSYS_RETURN_CODE set_attrib_name(const std::string&);
+            const ENTSYS_RETURN_CODE set_name(const std::string&);
 
             // Set the data type of the entity attribute type.
-            const ENTSYS_RETURN_CODE set_attrib_datatype(const ENTSYS_DATA_TYPE&);
+            const ENTSYS_RETURN_CODE set_data_type(const ENTSYS_DATA_TYPE&);
 
             // Validate the entity attribute type.
             const ENTSYS_RETURN_CODE finish();
 
             const ENTSYS_DATA_TYPE get_data_type() const;
+            const std::string get_name() const;
+            const bool is_finished() const;
 
             // TODO: DISCUSS: Should there be a way to change this data afterwards?
             // This whould mean that every instance of this entity attribute type would 
