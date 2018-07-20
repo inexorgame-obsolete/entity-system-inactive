@@ -34,6 +34,8 @@ namespace entsys {
 
         public:
             EntityAttributeType();
+            // TODO: Add overloaded constructors.
+
             ~EntityAttributeType();
 
             // TODO: DISCUSS: Do all these methods have to me of const type?
@@ -45,7 +47,7 @@ namespace entsys {
             const ENTSYS_RETURN_CODE set_data_type(const ENTSYS_DATA_TYPE&);
 
             // Validate the entity attribute type.
-            const ENTSYS_RETURN_CODE finish();
+            const ENTSYS_RETURN_CODE finish_entity_attribute_type();
 
             const ENTSYS_DATA_TYPE get_data_type() const;
             const std::string get_name() const;

@@ -20,7 +20,7 @@ namespace entsys {
     {
         // Look this entity type name up in the unordered map.
         // If we reached the end of the unordered_map before it has been found it does not exist yet.
-        if(map_of_entity_types.find(newtype.get_entity_type_name()) == map_of_entity_types.end()) return ENTSYS_RETURN_NEW_ENTITY_TYPE_VALID;
+        if(map_of_entity_types.find(newtype.get_name()) == map_of_entity_types.end()) return ENTSYS_RETURN_NEW_ENTITY_TYPE_VALID;
         else return ENTSYS_RETURN_ENTITY_TYPE_ALREADY_EXISTS;
 
         // TODO: additional validation here!
@@ -39,10 +39,7 @@ namespace entsys {
         if(ENTSYS_RETURN_NEW_ENTITY_TYPE_VALID == validation_result)
         {
             // add to unordered map
-            map_of_entity_types.insert(ENTSYS_ENTMAP_TYPE(newtype.get_entity_type_name(), newtype));
-
-            // TODO: FOX: Why is this not working?
-            //entity_types[name] = newtype;
+            map_of_entity_types[newtype.get_name()] = newtype;
             return ENTSYS_RETURN_SUCCESS;
         }
 

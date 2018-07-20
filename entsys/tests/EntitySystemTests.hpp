@@ -13,10 +13,13 @@ using namespace std;
 #include <chrono>
 using namespace std::chrono;
 
-
 // Components which have to be tested:
 #include "../data-container/DataContainer.hpp"
 #include "../entity-manager/entity-attributes-manager/entity-attribute-type/EntityAttributeType.hpp"
+#include "../entity-manager/entity-types-manager/entity-type/base/EntityTypeBase.hpp"
+
+// TODO: Does this work?
+extern EntitySystem* sys;
 
 namespace inexor {
 namespace entsys {
@@ -142,7 +145,7 @@ void Test_EntitySystemDataContainers()
     end_test();
 }
 
-
+// Testing creation of entity attribute types
 void Test_EntityAttributeTypes()
 {
     EntityAttributeType attr1;
@@ -165,13 +168,49 @@ void Test_EntityAttributeTypes()
     if(attr1.is_finished()) finished_yet = std::string("true");
     cout << "Are we finished yet?: " << finished_yet.c_str() << endl;
 
-    attr1.finish();
+    attr1.finish_entity_attribute_type();
 
     if(attr1.is_finished()) finished_yet = std::string("true");
     cout << "Are we finished yet?: " << finished_yet.c_str() << endl;
-
-
 }
+
+
+void Test_EntityTypes()
+{
+    // Lets create 3 attributes first.
+    EntityAttributeType weight;
+    weight.set_data_type(ENTSYS_DATA_TYPE_FLOAT);
+    weight.set_name("weight");
+    weight.finish_entity_attribute_type();
+
+    // Error: Try changing type afterwards?
+    weight.set_data_type(ENTSYS_DATA_TYPE_STRING);
+    
+    // TODO: Implement real RBG color codes?
+    EntityAttributeType color;
+    color.set_data_type(ENTSYS_DATA_TYPE_STRING);
+    color.set_name("color");
+    color.finish_entity_attribute_type();
+
+    EntityAttributeType IQ;
+    IQ.set_data_type(ENTSYS_DATA_TYPE_INT);
+    IQ.set_name("IntelligenceQuotient");
+    IQ.finish_entity_attribute_type();
+
+    // TODO: Implement entity attribute type manager.
+    // TODO: Add those entity attribute types to the entity attribute type manager.
+
+    EntityTypeBase IntelligentRobot;
+    IntelligentRobot.set_name("ROBOT");
+    IntelligentRobot.install_attribute_type(IQ);
+    IntelligentRobot.install_attribute_type(color);
+    IntelligentRobot.install_attribute_type(weight);
+    IntelligentRobot.finish_entity_type();
+
+    // Ready for creating instances now?
+    // TODO: 1.) Create instances of intelligent robots and 2.) take over world.
+}
+
 
 };
 };

@@ -26,7 +26,7 @@ int main()
     Test_EntityAttributeTypes();
 
     // ENTITY TYPE TESTS
-    // TODO...
+    Test_EntityTypes();
 
     cin.get();
     return 0;

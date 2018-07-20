@@ -31,7 +31,7 @@ namespace entsys {
     {
         // Overwrite the data container's type of this entity attribute type
         // only of it's type has not been overwritten (specified) yet and only accept valid data types.
-        if(ENTSYS_DATA_TYPE_UNSPECIFIED != type && ENTSYS_DATA_TYPE_UNSPECIFIED == entity_attribute_data.get_data_type())
+        if(ENTSYS_DATA_TYPE_UNSPECIFIED != type && !finished)
         {
             entity_attribute_data.set_data_type(type);
             return ENTSYS_RETURN_SUCCESS;
@@ -40,7 +40,7 @@ namespace entsys {
     }
     
     
-    const ENTSYS_RETURN_CODE EntityAttributeType::finish()
+    const ENTSYS_RETURN_CODE EntityAttributeType::finish_entity_attribute_type()
     {
         if(entity_attribute_data.get_data_type() != ENTSYS_DATA_TYPE_UNSPECIFIED && entity_attribute_type_name.length() > 0)
         {
@@ -61,6 +61,7 @@ namespace entsys {
     {
         return entity_attribute_type_name;
     }
+
 
     const bool EntityAttributeType::is_finished() const
     {
