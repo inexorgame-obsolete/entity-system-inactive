@@ -12,7 +12,7 @@ namespace entsys {
         reset_memory();
     }
 
-    // TODO: Write tests for this.
+
     void DataContainer::reset_memory()
     {
         int64_data = 0;
@@ -70,7 +70,6 @@ namespace entsys {
 
     DataContainer::~DataContainer()
     {
-        reset_memory();
     }
 
     
@@ -151,7 +150,7 @@ namespace entsys {
 
     // Only numeric data containers can execute math operations!
     // Check is this data container's type is numeric
-    bool DataContainer::data_container_is_numeric()
+    bool DataContainer::data_container_type_is_numeric()
     {
         switch(get_data_type())
         {
@@ -172,7 +171,7 @@ namespace entsys {
     
     const DataContainer DataContainer::add(const DataContainer& addend)
     {
-        if(data_container_is_numeric())
+        if(data_container_type_is_numeric())
         {
             switch(get_data_type())
             {
@@ -201,7 +200,7 @@ namespace entsys {
 
     const DataContainer DataContainer::sub(const DataContainer& minuend)
     {
-        if(data_container_is_numeric())
+        if(data_container_type_is_numeric())
         {
             switch(get_data_type())
             {
@@ -230,7 +229,7 @@ namespace entsys {
 
     const DataContainer DataContainer::mul(const DataContainer& coeffizient)
     {
-        if(data_container_is_numeric())
+        if(data_container_type_is_numeric())
         {
             switch(get_data_type())
             {
@@ -259,7 +258,7 @@ namespace entsys {
 
     const DataContainer DataContainer::div(const DataContainer& divisor)
     {
-        if(data_container_is_numeric())
+        if(data_container_type_is_numeric())
         {
             switch(get_data_type())
             {

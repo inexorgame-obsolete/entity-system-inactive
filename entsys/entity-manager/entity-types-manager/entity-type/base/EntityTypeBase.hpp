@@ -12,14 +12,13 @@
 namespace inexor {
 namespace entsys {
 
-    /// Type definitions to shorten source code parts.
+    // Make later definitions shorter by using type definitions.
     typedef std::unordered_map<std::string, EntityAttributeType> ENTSYS_ENTITY_ATTRIBUTE_TYPE_MAP;
 
-    /// \class EntityTypeBase
-    /// \brief A base class for entity types.
     class EntityTypeBase
     {
         private:
+
             // TODO: DISCUSS: This this a good design pattern?
             // or should we let the entity attribute type instance manager
             // decide which instances of entity attribute types exist?
@@ -36,8 +35,10 @@ namespace entsys {
             // TODO: Attributes here?
 
         public:
+
             EntityTypeBase();
             EntityTypeBase(const std::string&);
+
             ~EntityTypeBase();
 
             const ENTSYS_RETURN_CODE set_name(const std::string&);

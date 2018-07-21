@@ -12,14 +12,14 @@
 namespace inexor {
 namespace entsys {
     
-    /// Let's use these type definitions to shorten declarations.
+    // By using these type definitions we can make later definitions shorter.
     typedef std::unordered_map<std::string, EntityAttributeType> ENTSYS_ENTITY_ATTRIBUTE_TYPE_MAP;
     typedef ENTSYS_ENTITY_ATTRIBUTE_TYPE_MAP::const_iterator     ENTSYS_ENTITY_ATTRIBUTE_TYPE_LOOKUP;
 
-    /// 
     class EntityAttributeTypeManager
     {
         private:
+
             // In this unordered map all available types of entity attributes will be stored.
             ENTSYS_ENTITY_ATTRIBUTE_TYPE_MAP map_of_entity_attribute_types;
 
@@ -30,11 +30,13 @@ namespace entsys {
             const ENTSYS_RETURN_CODE does_entity_attribute_type_exist(std::string&) const;
             
         protected:
+
             // Make this protected so this class can only 
-            // be instanced as an inherited base class.
+            // be instanced by inheritance as base class.
             EntityAttributeTypeManager();
 
         public:
+
             ~EntityAttributeTypeManager();
 
             // This method adds new types of attributes of entities.

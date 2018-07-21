@@ -12,7 +12,7 @@
 namespace inexor {
 namespace entsys {
 
-    /// A base class for types of attributes of entites.
+    // A base class for types of attributes of entites.
     class EntityAttributeType
     {
         // TODO: May change this to protected?
@@ -20,9 +20,10 @@ namespace entsys {
 
             // Once all the data has been set this entity attribute type
             // will be finished using the finish method.
-            bool finished = false;
+            bool finished;
             
-            std::string entity_attribute_type_name = std::string("");
+            // The name of the type of attribute of the entity.
+            std::string entity_attribute_type_name;
 
             // The data of this attribute type is not specified yet
             // This is why we use the standard constructor here
@@ -33,6 +34,7 @@ namespace entsys {
             // Currently yes, because every entity attribute type acts as the key for the key/value pair.
 
         public:
+
             EntityAttributeType();
             // TODO: Add overloaded constructors.
 
@@ -40,7 +42,7 @@ namespace entsys {
 
             // TODO: DISCUSS: Do all these methods have to me of const type?
 
-            // Set the name of the entity attribute type.
+            // Set the name of the type of attribute of an entity.
             const ENTSYS_RETURN_CODE set_name(const std::string&);
 
             // Set the data type of the entity attribute type.

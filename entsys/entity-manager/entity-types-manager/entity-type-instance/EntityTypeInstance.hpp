@@ -9,8 +9,6 @@
 namespace inexor {
 namespace entsys {
 
-    /// \class CEntityTypeInstance
-    /// \brief TODO
     class EntityTypeInstance
     {
         private:

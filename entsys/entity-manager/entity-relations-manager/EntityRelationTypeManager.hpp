@@ -10,6 +10,7 @@ namespace entsys {
     class EntityRelationTypeManager
     {
         public:
+
             EntityRelationTypeManager();
             ~EntityRelationTypeManager();
     };

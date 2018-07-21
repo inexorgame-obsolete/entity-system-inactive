@@ -12,8 +12,8 @@
 namespace inexor {
 namespace entsys {
 
-    /// \class CEntityRelationManager
-    /// \brief The entiy relation manager is responsible for adding, modifying or removing relationships between entities.
+    // The entiy relation manager is responsible for adding,
+    // modifying or removing relationships between entities.
     class EntityRelationManager
     {
         private:

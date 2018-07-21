@@ -1,8 +1,8 @@
 // Inexor entity system prototype
 // (c)2018 Inexor
 
-#ifndef INEXOR_ENTSYS_DATA_AND_DATA_TYPE_CONTAINER_HEADER
-#define INEXOR_ENTSYS_DATA_AND_DATA_TYPE_CONTAINER_HEADER
+#ifndef INEXOR_ENTSYS_DATA_CONTAINER_CLASS_HEADER
+#define INEXOR_ENTSYS_DATA_CONTAINER_CLASS_HEADER
 
 #include <string>
 #include <cstdint>
@@ -12,29 +12,34 @@
 namespace inexor {
 namespace entsys {
         
-    /// A flexible, multiple purpose data container.
+    // A flexible, multiple purpose data container.
+    // TODO: Instead of accessing maps by value every time a write operation occurs, why not store a pointer to the value pair
+    // of the map in the write operation? This could speed the entity system very much!
     class DataContainer
     {
         private:
 
-            // TODO: GOOD IDEA: instead of accessing maps by value every time
-            // a write operation occurs, why not store a pointer to the value pair
-            // of the map in the write operation?
-            // This could speed the entity system very much!
             ENTSYS_DATA_TYPE data_container_data_type;
 
             std::string string_data;
-            // Don't forget that the actual memory size of
-            // every variable depends on the operating system!
             std::int64_t int64_data;
             int integer_data;
             double double_data;
             float float_data;
             bool boolean_data;
 
+            // TODO: Add more data types here
+            // TODO: Implement real RBG color codes?
+            // TODO: Add vec3 support by supporting GLM:
+            // https://glm.g-truc.net/0.9.9/index.html
+
         protected:
-            void reset_memory();                           // Automatic test available!
-            bool data_container_is_numeric();
+
+            // Reset the memory of all members.
+            void reset_memory();
+
+            // Math operations can only be applied to numeric data containers.
+            bool data_container_type_is_numeric();
 
         public:
 
@@ -42,18 +47,18 @@ namespace entsys {
             // the data type of the container is not known yet.
             DataContainer();
 
-            // Overloaded constructors for fast initialization.
+            // Overloaded constructors.
             DataContainer(const ENTSYS_DATA_TYPE&);
-            DataContainer(const std::int64_t&);             // Automatic test available!
-            DataContainer(const double&);                   // Automatic test available!
-            DataContainer(const float&);                    // Automatic test available!
-            DataContainer(const bool&);                     // Automatic test available!
-            DataContainer(const int&);                      // Automatic test available!
-            DataContainer(const std::string&);              // Automatic test available!
+            DataContainer(const std::int64_t&);
+            DataContainer(const double&);
+            DataContainer(const float&);
+            DataContainer(const bool&);
+            DataContainer(const int&);
+            DataContainer(const std::string&);
 
             ~DataContainer();
 
-            // Set data type.
+            // Set the data type of the container.
             const ENTSYS_RETURN_CODE set_data_type(const ENTSYS_DATA_TYPE&);
 
             // TODO: DISCUSS: If we left out type checking during set operations we 
@@ -62,50 +67,49 @@ namespace entsys {
             // TODO: DISCUSS: Do all methods have to be of const type?
 
             // Set methods.
-            const DataContainer set(const std::int64_t);    // Automatic test available!
-            const DataContainer set(const double);          // Automatic test available!
-            const DataContainer set(const float);           // Automatic test available!
-            const DataContainer set(const bool);            // Automatic test available!
-            const DataContainer set(const int);             // Automatic test available!
-            const DataContainer set(const std::string);     // Automatic test available!
+            const DataContainer set(const std::int64_t);
+            const DataContainer set(const double);
+            const DataContainer set(const float);
+            const DataContainer set(const bool);
+            const DataContainer set(const int);
+            const DataContainer set(const std::string);
 
-            // Overloaded operators.
+            // Operators.
             const DataContainer operator+(const DataContainer&);
             const DataContainer operator-(const DataContainer&);
             const DataContainer operator*(const DataContainer&);
             const DataContainer operator/(const DataContainer&);
 
-            // Overloaded set operators.
-            const DataContainer operator=(const int&);            // Automatic test available!
-            const DataContainer operator=(const double&);         // Automatic test available!
-            const DataContainer operator=(const float&);          // Automatic test available!
-            const DataContainer operator=(const bool&);           // Automatic test available!
-            const DataContainer operator=(const std::int64_t&);   // Automatic test available!
-            const DataContainer operator=(const std::string&);    // Automatic test available!
+            // Assign operators.
+            const DataContainer operator=(const int&);
+            const DataContainer operator=(const double&);
+            const DataContainer operator=(const float&);
+            const DataContainer operator=(const bool&);
+            const DataContainer operator=(const std::int64_t&);
+            const DataContainer operator=(const std::string&);
 
+            // Since ENTSYS_DATA_TYPE could be casted to operator=(int)
+            // we want to delete this explicitely.
+            // TODO: Find a better way to prevent this?
             DataContainer operator=(const ENTSYS_DATA_TYPE&) = delete;                                                
 
-            // TODO: Make them protected and
-            // overload the operators +=, -=, *=, /=..
+            // TODO: Make them protected ?
+            // TODO: Overload the operators +=, -=, *=, /=..
 
             // Math operations.
-            const DataContainer add(const DataContainer&);  // Automatic test available!
-            const DataContainer sub(const DataContainer&);  // Automatic test available!
-            const DataContainer mul(const DataContainer&);  // Automatic test available!
-            const DataContainer div(const DataContainer&);  // Automatic test available!
+            const DataContainer add(const DataContainer&);
+            const DataContainer sub(const DataContainer&);
+            const DataContainer mul(const DataContainer&);
+            const DataContainer div(const DataContainer&);
 
             // Get methods.
             const std::int64_t get_bigintval() const;
+            const std::string get_stringval() const;
             const double get_doubleval() const;
             const float get_floatval() const;
             const bool get_boolval() const;
-            
-            // Automatic test available
             const int get_intval() const;
-            
-            const std::string get_stringval() const;
 
-            // Automatic test available
             const ENTSYS_DATA_TYPE get_data_type() const;
 
     };
@@ -113,4 +117,4 @@ namespace entsys {
 };
 };
 
-#endif // INEXOR_ENTSYS_DATA_AND_DATA_TYPE_CONTAINER_HEADER
+#endif // INEXOR_ENTSYS_DATA_CONTAINER_CLASS_HEADER

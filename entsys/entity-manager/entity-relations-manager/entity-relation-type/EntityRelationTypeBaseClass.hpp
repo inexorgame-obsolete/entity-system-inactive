@@ -11,8 +11,7 @@
 namespace inexor {
 namespace entsys {
 
-    /// \class CEntityRelationTypeBase
-    /// \brief This is the base class for the description of relations between entities.
+    // This is the base class for the description of relations between entities.
     class EntityRelationTypeBase
     {
         private:

@@ -8,6 +8,8 @@ namespace entsys {
 
     EntityAttributeType::EntityAttributeType()
     {
+        finished = false;
+        entity_attribute_type_name = std::string("");
     }
 
 

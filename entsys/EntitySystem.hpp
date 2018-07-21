@@ -17,11 +17,13 @@ namespace entsys {
     class EntitySystem : public EntityManager
     {
         private:
+
             // singleton implementation: private constructor to prevent multiple instancing.
             EntitySystem();
             static EntitySystem* entsys_singleton_instance;
 
         public:
+
             ~EntitySystem();
             static EntitySystem* create_entity_system();
 

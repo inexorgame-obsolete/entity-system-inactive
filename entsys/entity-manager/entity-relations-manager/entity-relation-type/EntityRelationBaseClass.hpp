@@ -14,6 +14,7 @@ namespace entsys {
         private:
 
         public:
+
             EntityRelationBase();
             ~EntityRelationBase();
     };
