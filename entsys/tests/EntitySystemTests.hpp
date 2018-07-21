@@ -195,6 +195,7 @@ void Test_EntityTypes()
     start_test();
     color.set_data_type(ENTSYS_DATA_TYPE_STRING);
     color.set_name("color");
+    // TODO: Remove finish method?
     color.finish_entity_attribute_type();
     end_test();
 

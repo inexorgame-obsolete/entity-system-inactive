@@ -20,6 +20,7 @@ namespace entsys {
     {
         // Look this entity type name up in the unordered map.
         // If we reached the end of the unordered_map before it has been found it does not exist yet.
+        // TODO: Change this so it uses the does_entity_type_exist() method.
         if(map_of_entity_types.find(newtype.get_name()) == map_of_entity_types.end()) return ENTSYS_RETURN_NEW_ENTITY_TYPE_VALID;
         else return ENTSYS_RETURN_ENTITY_TYPE_ALREADY_EXISTS;
 
