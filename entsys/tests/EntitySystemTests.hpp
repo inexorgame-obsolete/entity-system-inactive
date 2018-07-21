@@ -13,16 +13,13 @@ using namespace std;
 #include <chrono>
 using namespace std::chrono;
 
-// Components which have to be tested:
-#include "../data-container/DataContainer.hpp"
-#include "../entity-manager/entity-attributes-manager/entity-attribute-type/EntityAttributeType.hpp"
-#include "../entity-manager/entity-types-manager/entity-type/base/EntityTypeBase.hpp"
+#include "../EntitySystem.hpp"
 
-// TODO: Does this work?
-extern EntitySystem* sys;
+extern inexor::entsys::EntitySystem* entity_system;
 
 namespace inexor {
 namespace entsys {
+    
 
 // Points in time.
 high_resolution_clock::time_point t1;
@@ -42,8 +39,6 @@ void end_test()
     // Print out how many milliseconds have passed during this test.
     std::cout << "Time passed: " << time_span.count() << " milliseconds." << endl  << endl;
 }
-
-
 
 // Testing multiple purpose data container.
 void Test_EntitySystemDataContainers()
@@ -179,26 +174,43 @@ void Test_EntityTypes()
 {
     // Lets create 3 attributes first.
     EntityAttributeType weight;
+    // TODO: Implement real RBG color codes?
+    EntityAttributeType color;
+    EntityAttributeType IQ;
+ 
+    cout << "Creating entity attribute type 'weight'" << endl;
+    start_test();
     weight.set_data_type(ENTSYS_DATA_TYPE_FLOAT);
     weight.set_name("weight");
     weight.finish_entity_attribute_type();
+    end_test();
 
     // Error: Try changing type afterwards?
+    cout << "Trying to cause error by overwriting data type" << endl;
+    start_test();
     weight.set_data_type(ENTSYS_DATA_TYPE_STRING);
-    
-    // TODO: Implement real RBG color codes?
-    EntityAttributeType color;
+    end_test();
+
+    cout << "Creating entity attribute type 'color'" << endl;
+    start_test();
     color.set_data_type(ENTSYS_DATA_TYPE_STRING);
     color.set_name("color");
     color.finish_entity_attribute_type();
+    end_test();
 
-    EntityAttributeType IQ;
+    cout << "Creating entity attribute type 'IQ'" << endl;
+    start_test();
     IQ.set_data_type(ENTSYS_DATA_TYPE_INT);
     IQ.set_name("IntelligenceQuotient");
     IQ.finish_entity_attribute_type();
+    end_test();
 
     // TODO: Implement entity attribute type manager.
     // TODO: Add those entity attribute types to the entity attribute type manager.
+    entity_system->add_entity_attribute_type(weight);
+    entity_system->add_entity_attribute_type(color);
+    entity_system->add_entity_attribute_type(IQ);
+
 
     EntityTypeBase IntelligentRobot;
     IntelligentRobot.set_name("ROBOT");

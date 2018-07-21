@@ -10,7 +10,7 @@ namespace inexor {
 namespace entsys {
 
     // TODO: EntityEditor, EntityEditorRenderer, EntityGameSceneRenderer,
-    // EntitySync, EntityErrorHandling, EntityImporter, EntityExporter
+    // EntitySync, EntityErrorHandling, EntityImporter, EntityExporter.
 
     /// \class EntitySystem
     /// \brief Singleton implementation of an entity system prototype class for Inexor
@@ -27,6 +27,8 @@ namespace entsys {
 
     };
 
+    // Don't create the instance of the entity system in a header file like this.
+    // It will cause a linker error because of multiple definitions!
 };
 };
 

@@ -9,13 +9,11 @@ using namespace std;
 using namespace inexor;
 using namespace entsys;
 
+// Create singleton instance of the entity system.
+EntitySystem* entity_system = EntitySystem::create_entity_system();
+
 // TESTS
 #include "tests/EntitySystemTests.hpp"
-
-// create singleton instance
-// a singleton class can only be instanced once!
-// TODO: why does placing this in EntitySystem.hpp cause a linker error?
-EntitySystem* sys = EntitySystem::create_entity_system();
 
 int main()
 {
