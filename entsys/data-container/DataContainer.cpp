@@ -353,44 +353,32 @@ namespace entsys {
 
     const int DataContainer::get_intval() const
     {
-        if(ENTSYS_DATA_TYPE_INT == get_data_type()) return integer_data;
-        // else // TODO: Memory type mismaching! what to do now?
-        return 0;
+        return integer_data;
     }
 
     const std::int64_t DataContainer::get_bigintval() const
     {
-        if(ENTSYS_DATA_TYPE_BIG_INT == get_data_type()) return int64_data;
-        // else // TODO: Memory type mismaching! what to do now?
-        return 0;
+        return int64_data;
     }
 
     const double DataContainer::get_doubleval() const
     {
-        if(ENTSYS_DATA_TYPE_DOUBLE == get_data_type()) return double_data;
-        // else // TODO: Memory type mismaching! what to do now?
-        return 0;
+        return double_data;
     }
 
     const float DataContainer::get_floatval() const
     {
-        if(ENTSYS_DATA_TYPE_FLOAT == get_data_type()) return float_data;
-        // else // TODO: Memory type mismaching! what to do now?
-        return 0;
+        return float_data;
     }
 
     const bool DataContainer::get_boolval() const
     {
-        if(ENTSYS_DATA_TYPE_BOOL == get_data_type()) return boolean_data;
-        // else // TODO: Memory type mismaching! what to do now?
-        return 0;
+        return boolean_data;
     }
 
     const std::string DataContainer::get_stringval() const
     {
-        if(ENTSYS_DATA_TYPE_STRING == get_data_type()) return string_data;
-        // else // TODO: Memory type mismaching! what to do now?
-        return 0;
+        return string_data;
     }
 
 
