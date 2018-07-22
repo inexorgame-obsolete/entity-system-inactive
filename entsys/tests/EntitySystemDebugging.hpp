@@ -8,6 +8,6 @@
 using namespace std;
 
 // Used for conditional compilation.
-#define ENTSYS_DEBUG 0
+#define ENTSYS_DEBUG 1
 
 #endif // INEXOR_ENTSYS_DEBUGGER_HEADER

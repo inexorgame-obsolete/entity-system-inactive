@@ -8,6 +8,8 @@
 #include <cstdint>
 #include "DataTypes.hpp"
 #include "../return-codes/ReturnCodes.hpp"
+#include "../tests/EntitySystemDebugging.hpp"
+
 
 namespace inexor {
 namespace entsys {
