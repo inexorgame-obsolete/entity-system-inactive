@@ -23,6 +23,12 @@ namespace entsys {
         set_data_type(attr_type_data_type);
     }
 
+    
+    const ENTSYS_RETURN_CODE EntityAttributeType::validate()
+    {
+        return ENTSYS_RETURN_ERROR;
+    }
+
 
     EntityAttributeType::EntityAttributeType(const std::string& attr_type_name, const ENTSYS_DATA_TYPE& attr_type_data_type)
     {
@@ -59,10 +65,12 @@ namespace entsys {
         return entity_attribute_data.get_data_type();
     }
     
+
     const std::string EntityAttributeType::get_name() const
     {
         return entity_attribute_type_name;
     }
+
 
 };
 };

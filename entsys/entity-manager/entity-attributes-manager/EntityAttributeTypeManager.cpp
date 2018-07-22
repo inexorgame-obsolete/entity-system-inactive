@@ -6,6 +6,7 @@
 namespace inexor {
 namespace entsys {
 
+
     EntityAttributeTypeManager::EntityAttributeTypeManager()
     {
     }
@@ -29,6 +30,7 @@ namespace entsys {
         return ENTSYS_RETURN_ERROR;
     }
 
+
     const ENTSYS_RETURN_CODE EntityAttributeTypeManager::add_entity_attribute_type(const EntityAttributeType& new_ent_attr_type)
     {
         // Add to map!
@@ -36,6 +38,7 @@ namespace entsys {
         map_of_entity_attribute_types[new_ent_attr_type.get_name()] = new_ent_attr_type;
         return ENTSYS_RETURN_SUCCESS;
     }
+
 
 };
 };

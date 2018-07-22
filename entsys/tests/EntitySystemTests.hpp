@@ -13,7 +13,7 @@ extern inexor::entsys::EntitySystem* entity_system;
 namespace inexor {
 namespace entsys {
     
-    // Testing multiple purpose data container.
+
     void Test_EntitySystemDataContainers()
     {
         DataContainer dc_int(0);
@@ -113,7 +113,7 @@ namespace entsys {
         end_test();
     }
 
-    // Testing creation of entity attribute types.
+
     void Test_EntityAttributeTypes()
     {
         EntityAttributeType attr1;
@@ -130,7 +130,7 @@ namespace entsys {
         
     }
 
-    // Testing entity types.
+
     void Test_EntityTypes()
     {
         // Lets create 3 attributes first.
@@ -167,7 +167,6 @@ namespace entsys {
         entity_system->add_entity_attribute_type(weight);
         entity_system->add_entity_attribute_type(color);
         entity_system->add_entity_attribute_type(IQ);
-
 
         EntityTypeBase IntelligentRobot;
         IntelligentRobot.set_name("ROBOT");

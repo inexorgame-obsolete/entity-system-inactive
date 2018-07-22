@@ -6,6 +6,8 @@
 
 #include <string>
 #include <vector>
+
+#include "../../../validation/DataValidation.hpp"
 #include "../../../tests/EntitySystemDebugging.hpp"
 #include "../../../data-container/DataContainer.hpp"
 #include "../../../return-codes/ReturnCodes.hpp"
@@ -14,8 +16,9 @@
 namespace inexor {
 namespace entsys {
 
+
     // A base class for types of attributes of entites.
-    class EntityAttributeType
+    class EntityAttributeType : public DataValidation
     {
         // TODO: May change this to protected?
         private:
@@ -40,13 +43,14 @@ namespace entsys {
 
             // TODO: DISCUSS: Do all these methods have to me of const type?
 
-            // Set the name of the type of attribute of an entity.
+            const ENTSYS_RETURN_CODE validate();
+
             const ENTSYS_RETURN_CODE set_name(const std::string&);
 
-            // Set the data type of the entity attribute type.
             const ENTSYS_RETURN_CODE set_data_type(const ENTSYS_DATA_TYPE&);
 
             const ENTSYS_DATA_TYPE get_data_type() const;
+
             const std::string get_name() const;
 
             // TODO: DISCUSS: Should there be a way to change this data afterwards?

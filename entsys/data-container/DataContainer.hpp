@@ -23,6 +23,8 @@ namespace entsys {
 
             ENTSYS_DATA_TYPE data_container_data_type;
 
+            // TODO: Implement template class for data storage.
+
             std::string string_data = std::string("");
             std::int64_t int64_data = 0;
             int integer_data = 0;
