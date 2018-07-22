@@ -9,10 +9,6 @@ namespace entsys {
 
     void DataContainer::reset_memory()
     {
-        #if ENTSYS_DEBUG
-            cout << "DataContainer::reset_memory();" << endl;
-        #endif
-
         int64_data = 0;
         integer_data = 0;
         float_data = 0.0f;
@@ -24,10 +20,6 @@ namespace entsys {
 
     DataContainer::DataContainer(const ENTSYS_DATA_TYPE& data_type)
     {
-        #if ENTSYS_DEBUG
-            cout << "DataContainer::DataContainer(" << data_type << ");" << endl;
-        #endif
-
         data_container_data_type = data_type;
         reset_memory();
     }
@@ -35,20 +27,12 @@ namespace entsys {
 
     DataContainer::DataContainer()
     {
-        #if ENTSYS_DEBUG
-            cout << "DataContainer::DataContainer();" << endl;
-        #endif
-
         reset_memory();
     }
 
 
     DataContainer::DataContainer(const std::int64_t& int_val)
     {
-        #if ENTSYS_DEBUG
-            cout << "DataContainer::DataContainer(" << int_val << ");" << endl;
-        #endif
-
         data_container_data_type = ENTSYS_DATA_TYPE_BIG_INT;
         int64_data = int_val;
     }
@@ -56,10 +40,6 @@ namespace entsys {
 
     DataContainer::DataContainer(const double& double_val)
     {
-        #if ENTSYS_DEBUG
-            cout << "DataContainer::DataContainer(" << double_val << ");" << endl;
-        #endif
-
         data_container_data_type = ENTSYS_DATA_TYPE_DOUBLE;
         double_data = double_val;
     }
@@ -67,10 +47,6 @@ namespace entsys {
 
     DataContainer::DataContainer(const float& float_val)
     {
-        #if ENTSYS_DEBUG
-            cout << "DataContainer::DataContainer(" << float_val << ");" << endl;
-        #endif
-
         data_container_data_type = ENTSYS_DATA_TYPE_FLOAT;
         float_data = float_val;
     }
@@ -78,10 +54,6 @@ namespace entsys {
 
     DataContainer::DataContainer(const bool& bool_val)
     {
-        #if ENTSYS_DEBUG
-            cout << "DataContainer::DataContainer(" << bool_val << ");" << endl;
-        #endif
-
         data_container_data_type = ENTSYS_DATA_TYPE_BOOL;
         boolean_data = bool_val;
     }
@@ -89,10 +61,6 @@ namespace entsys {
 
     DataContainer::DataContainer(const std::string& string_val)
     {
-        #if ENTSYS_DEBUG
-            cout << "DataContainer::DataContainer(" << string_val << ");" << endl;
-        #endif
-
         data_container_data_type = ENTSYS_DATA_TYPE_STRING;
         string_data = string_val;
     }
@@ -100,10 +68,6 @@ namespace entsys {
 
     DataContainer::DataContainer(const int& int_val)
     {
-        #if ENTSYS_DEBUG
-            cout << "DataContainer::DataContainer(" << int_val << ");" << endl;
-        #endif
-
         data_container_data_type = ENTSYS_DATA_TYPE_INT;
         integer_data = int_val;
     }
@@ -111,31 +75,18 @@ namespace entsys {
 
     DataContainer::~DataContainer()
     {
-        #if ENTSYS_DEBUG
-            cout << "DataContainer::~DataContainer();" << endl;
-        #endif
     }
 
     
     const ENTSYS_RETURN_CODE DataContainer::set_data_type(const ENTSYS_DATA_TYPE& data_type)
     {
-        #if ENTSYS_DEBUG
-            cout << "DataContainer::set_data_type(" << data_type << ");" << endl;
-        #endif
-
         data_container_data_type = data_type;
         return ENTSYS_RETURN_SUCCESS;
     }
 
 
-    // Set methods.
-
     const DataContainer DataContainer::set(const std::int64_t int64_val)
     {
-        #if ENTSYS_DEBUG
-            cout << "DataContainer::set(" << int64_val << ");" << endl;
-        #endif
-
         if(ENTSYS_DATA_TYPE_BIG_INT == get_data_type())
         {
             int64_data = int64_val;
@@ -147,10 +98,6 @@ namespace entsys {
 
     const DataContainer DataContainer::set(const int int_val)
     {
-        #if ENTSYS_DEBUG
-            cout << "DataContainer::set(" << int_val << ");" << endl;
-        #endif
-
         if(ENTSYS_DATA_TYPE_INT == get_data_type())
         {
             integer_data = int_val;
@@ -162,10 +109,6 @@ namespace entsys {
 
     const DataContainer DataContainer::set(const double double_val)
     {
-        #if ENTSYS_DEBUG
-            cout << "DataContainer::set(" << double_val << ");" << endl;
-        #endif
-
         if(ENTSYS_DATA_TYPE_DOUBLE == get_data_type())
         {
             double_data = double_val;
@@ -177,10 +120,6 @@ namespace entsys {
 
     const DataContainer DataContainer::set(const float float_val)
     {
-        #if ENTSYS_DEBUG
-            cout << "DataContainer::set(" << float_val << ");" << endl;
-        #endif
-
         if(ENTSYS_DATA_TYPE_FLOAT == get_data_type())
         {
             float_data = float_val;
@@ -192,10 +131,6 @@ namespace entsys {
 
     const DataContainer DataContainer::set(const bool bool_val)
     {
-        #if ENTSYS_DEBUG
-            cout << "DataContainer::set(" << bool_val << ");" << endl;
-        #endif
-
         if(ENTSYS_DATA_TYPE_BOOL == get_data_type())
         {
             boolean_data = bool_val;
@@ -207,10 +142,6 @@ namespace entsys {
 
     const DataContainer DataContainer::set(const std::string string_val)
     {
-        #if ENTSYS_DEBUG
-            cout << "DataContainer::set(" << string_val << ");" << endl;
-        #endif
-
         if(ENTSYS_DATA_TYPE_STRING == get_data_type())
         {
             string_data = string_val;
@@ -225,10 +156,6 @@ namespace entsys {
     // Check is this data container's type is numeric
     bool DataContainer::data_container_type_is_numeric()
     {
-        #if ENTSYS_DEBUG
-            cout << "DataContainer::data_container_type_is_numeric();" << endl;
-        #endif
-
         switch(get_data_type())
         {
             case ENTSYS_DATA_TYPE_INT:
@@ -244,14 +171,8 @@ namespace entsys {
     }
 
 
-    // Math operations.
-    
     const DataContainer DataContainer::add(const DataContainer& addend)
     {
-        #if ENTSYS_DEBUG
-            cout << "DataContainer::add(type:" << addend.get_data_type() << ");" << endl;
-        #endif
-
         if(data_container_type_is_numeric())
         {
             switch(get_data_type())
@@ -279,12 +200,9 @@ namespace entsys {
         return DataContainer(std::int64_t(0));
     }
 
+
     const DataContainer DataContainer::sub(const DataContainer& minuend)
     {
-        #if ENTSYS_DEBUG
-            cout << "DataContainer::add(type:" << minuend.get_data_type() << ");" << endl;
-        #endif
-
         if(data_container_type_is_numeric())
         {
             switch(get_data_type())
@@ -312,12 +230,9 @@ namespace entsys {
         return DataContainer(std::int64_t(0));
     }
 
+
     const DataContainer DataContainer::mul(const DataContainer& coeffizient)
     {
-        #if ENTSYS_DEBUG
-            cout << "DataContainer::add(type:" << coeffizient.get_data_type() << ");" << endl;
-        #endif
-
         if(data_container_type_is_numeric())
         {
             switch(get_data_type())
@@ -345,12 +260,9 @@ namespace entsys {
         return DataContainer(std::int64_t(0));
     }
 
+
     const DataContainer DataContainer::div(const DataContainer& divisor)
     {
-        #if ENTSYS_DEBUG
-            cout << "DataContainer::add(type:" << divisor.get_data_type() << ");" << endl;
-        #endif
-
         if(data_container_type_is_numeric())
         {
             switch(get_data_type())
@@ -378,111 +290,69 @@ namespace entsys {
         return DataContainer(std::int64_t(0));
     }
 
-    
-    // Overloaded operators.
 
     const DataContainer DataContainer::operator+(const DataContainer& addend)
     {
-        #if ENTSYS_DEBUG
-            cout << "DataContainer::operator+(type:" << addend.get_data_type() << ");" << endl;
-        #endif
-
         return add(addend);
     }
+
     
     const DataContainer DataContainer::operator-(const DataContainer& minuend)
     {
-        #if ENTSYS_DEBUG
-            cout << "DataContainer::operator-(type:" << minuend.get_data_type() << ");" << endl;
-        #endif
-
         return sub(minuend);
     }
 
+
     const DataContainer DataContainer::operator*(const DataContainer& coeffizient)
     {
-        #if ENTSYS_DEBUG
-            cout << "DataContainer::operator*(type:" << coeffizient.get_data_type() << ");" << endl;
-        #endif
-
         return mul(coeffizient);
     }
 
+
     const DataContainer DataContainer::operator/(const DataContainer& divisor)
     {
-        #if ENTSYS_DEBUG
-            cout << "DataContainer::operator/(type:" << divisor.get_data_type() << ");" << endl;
-        #endif
-
         return div(divisor);
     }
 
 
-    // Overloaded set operators.
-
     const DataContainer DataContainer::operator=(const int& new_int_val)
     {
-        #if ENTSYS_DEBUG
-            cout << "DataContainer::operator=(type:" << new_int_val << ");" << endl;
-        #endif
-
         return set(new_int_val);
     }
     
+    
     const DataContainer DataContainer::operator=(const double& new_double_val)
     {
-        #if ENTSYS_DEBUG
-            cout << "DataContainer::operator=(type:" << new_double_val << ");" << endl;
-        #endif
-
         return set(new_double_val);
     }
 
+
     const DataContainer DataContainer::operator=(const float& new_float_val)
     {
-        #if ENTSYS_DEBUG
-            cout << "DataContainer::operator=(type:" << new_float_val << ");" << endl;
-        #endif
-
         return set(new_float_val);
     }
 
+
     const DataContainer DataContainer::operator=(const bool& new_bool_val)
     {
-        #if ENTSYS_DEBUG
-            cout << "DataContainer::operator=(type:" << new_bool_val << ");" << endl;
-        #endif
-
         return set(new_bool_val);
     }
 
+
     const DataContainer DataContainer::operator=(const std::int64_t& new_bigint_val)
     {
-        #if ENTSYS_DEBUG
-            cout << "DataContainer::operator=(type:" << new_bigint_val << ");" << endl;
-        #endif
-
         return set(new_bigint_val);
     }
 
+
     const DataContainer DataContainer::operator=(const std::string& new_string_val)
     {
-        #if ENTSYS_DEBUG
-            cout << "DataContainer::operator=(type:" << new_string_val << ");" << endl;
-        #endif
-
         return set(new_string_val);
     }
 
 
-    // Get methods.
-
     const int DataContainer::get_intval() const
     {
-        #if ENTSYS_DEBUG
-            cout << "DataContainer::get_intval(); -> " << integer_data << endl;
-        #endif
-
         if(ENTSYS_DATA_TYPE_INT == get_data_type()) return integer_data;
         // else // TODO: Memory type mismaching! what to do now?
         return 0;
@@ -490,10 +360,6 @@ namespace entsys {
 
     const std::int64_t DataContainer::get_bigintval() const
     {
-        #if ENTSYS_DEBUG
-            cout << "DataContainer::get_bigintval(); -> " << int64_data << endl;
-        #endif
-
         if(ENTSYS_DATA_TYPE_BIG_INT == get_data_type()) return int64_data;
         // else // TODO: Memory type mismaching! what to do now?
         return 0;
@@ -501,10 +367,6 @@ namespace entsys {
 
     const double DataContainer::get_doubleval() const
     {
-        #if ENTSYS_DEBUG
-            cout << "DataContainer::get_doubleval(); -> " << double_data << endl;
-        #endif
-
         if(ENTSYS_DATA_TYPE_DOUBLE == get_data_type()) return double_data;
         // else // TODO: Memory type mismaching! what to do now?
         return 0;
@@ -512,10 +374,6 @@ namespace entsys {
 
     const float DataContainer::get_floatval() const
     {
-        #if ENTSYS_DEBUG
-            cout << "DataContainer::get_floatval(); -> " << float_data << endl;
-        #endif
-
         if(ENTSYS_DATA_TYPE_FLOAT == get_data_type()) return float_data;
         // else // TODO: Memory type mismaching! what to do now?
         return 0;
@@ -523,10 +381,6 @@ namespace entsys {
 
     const bool DataContainer::get_boolval() const
     {
-        #if ENTSYS_DEBUG
-            cout << "DataContainer::get_boolval(); -> " << boolean_data << endl;
-        #endif
-
         if(ENTSYS_DATA_TYPE_BOOL == get_data_type()) return boolean_data;
         // else // TODO: Memory type mismaching! what to do now?
         return 0;
@@ -534,10 +388,6 @@ namespace entsys {
 
     const std::string DataContainer::get_stringval() const
     {
-        #if ENTSYS_DEBUG
-            cout << "DataContainer::get_stringval(); -> " << string_data << endl;
-        #endif
-
         if(ENTSYS_DATA_TYPE_STRING == get_data_type()) return string_data;
         // else // TODO: Memory type mismaching! what to do now?
         return 0;
@@ -546,10 +396,6 @@ namespace entsys {
 
     const ENTSYS_DATA_TYPE DataContainer::get_data_type() const
     {
-        #if ENTSYS_DEBUG
-            cout << "DataContainer::get_data_type(); -> " << data_container_data_type << endl;
-        #endif
-
         return data_container_data_type;
     }
 

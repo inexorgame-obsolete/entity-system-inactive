@@ -16,6 +16,13 @@ namespace entsys {
     }
 
 
+    const ENTSYS_RETURN_CODE EntityTypeManager::validate()
+    {
+        // TODO
+        return ENTSYS_RETURN_SUCCESS;
+    }
+
+
     const ENTSYS_RETURN_CODE EntityTypeManager::validate_new_entity_type(const EntityTypeBase& newtype) const
     {
         // Look this entity type name up in the unordered map.

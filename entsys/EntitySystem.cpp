@@ -22,10 +22,6 @@ namespace entsys {
         // Initialise instance if not already done.
         if(nullptr == entsys_singleton_instance)
         {
-            #if ENTSYS_DEBUG
-                cout << "Initialising entity system singleton instance." << endl;
-            #endif
-
             // TODO: DISCUSS: Do we need to free this afterwards ?
             entsys_singleton_instance = new EntitySystem();
         }

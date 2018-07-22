@@ -7,7 +7,9 @@
 #include <vector>
 #include <string>
 #include <unordered_map>
-#include "../../return-codes/ReturnCodes.hpp"
+
+#include "../../validation/DataValidation.hpp"
+
 #include "entity-type\base\EntityTypeBase.hpp"
 
 
@@ -19,8 +21,9 @@ namespace entsys {
     typedef ENTSYS_ENTITY_TYPE_MAP::const_iterator          ENTSYS_ENTITY_TYPE_LOOKUP;
     typedef ENTSYS_ENTITY_TYPE_MAP::value_type              ENTSYS_ENTMAP_TYPE;
 
+
     // A manager class for types of entities.
-    class EntityTypeManager 
+    class EntityTypeManager : public DataValidation
     {
         private:
 
@@ -32,11 +35,15 @@ namespace entsys {
 
             // Validation method for new types of entities.
             const ENTSYS_RETURN_CODE validate_new_entity_type(const EntityTypeBase&) const;
-            
+
         public:
 
             EntityTypeManager();
+
             ~EntityTypeManager();
+
+            const ENTSYS_RETURN_CODE validate();
+
 
             // TODO: DISCUSS: Do all these methods really have to be of const type and const methods?
 

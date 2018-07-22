@@ -3,29 +3,28 @@
 
 #include "EntityTypeBase.hpp"
 
+
 namespace inexor {
 namespace entsys {
     
+
     EntityTypeBase::EntityTypeBase(const std::string& ent_type_name)
     {
         entity_type_name = ent_type_name;
     }
     
-
     EntityTypeBase::EntityTypeBase()
     {
     }
-
-
+    
     EntityTypeBase::~EntityTypeBase()
     {
     }
-
+    
     const std::string& EntityTypeBase::get_name() const
     {
         return entity_type_name;
     }
-
 
     const ENTSYS_RETURN_CODE EntityTypeBase::set_name(const std::string& name)
     {
@@ -36,7 +35,6 @@ namespace entsys {
         }
         return ENTSYS_RETURN_NAME_INVALID;
     }
-
     
     const ENTSYS_RETURN_CODE EntityTypeBase::install_attribute_type(const EntityAttributeType& ent_attr_type)
     {
