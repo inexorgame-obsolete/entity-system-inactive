@@ -46,7 +46,7 @@ namespace entsys {
             // TODO: DISCUSS: This this a good design pattern?
             // or should we let the entity attribute type instance manager
             // decide which instances of entity attribute types exist?
-            const ENTSYS_RETURN_CODE install_attribute_type(const EntityAttributeType&);
+            const ENTSYS_RETURN_CODE add(const EntityAttributeType&);
             
     };
 

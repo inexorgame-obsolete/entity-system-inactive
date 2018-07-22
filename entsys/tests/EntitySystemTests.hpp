@@ -164,15 +164,15 @@ namespace entsys {
 
         // TODO: Implement entity attribute type manager.
         // TODO: Add those entity attribute types to the entity attribute type manager.
-        entity_system->add_entity_attribute_type(weight);
-        entity_system->add_entity_attribute_type(color);
-        entity_system->add_entity_attribute_type(IQ);
+        entity_system->add(weight);
+        entity_system->add(color);
+        entity_system->add(IQ);
 
         EntityTypeBase IntelligentRobot;
         IntelligentRobot.set_name("ROBOT");
-        IntelligentRobot.install_attribute_type(IQ);
-        IntelligentRobot.install_attribute_type(color);
-        IntelligentRobot.install_attribute_type(weight);
+        IntelligentRobot.add(IQ);
+        IntelligentRobot.add(color);
+        IntelligentRobot.add(weight);
 
         // Ready for creating instances now?
         // TODO: 1.) Create instances of intelligent robots and 2.) take over world.

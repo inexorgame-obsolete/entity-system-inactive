@@ -3,6 +3,7 @@
 
 #include "EntityAttributeTypeManager.hpp"
 
+
 namespace inexor {
 namespace entsys {
 
@@ -17,13 +18,13 @@ namespace entsys {
     }
 
 
-    const size_t EntityAttributeTypeManager::get_entity_attribute_type_count() const
+    const size_t EntityAttributeTypeManager::count() const
     {
         return map_of_entity_attribute_types.size();
     }
 
 
-    const ENTSYS_RETURN_CODE EntityAttributeTypeManager::does_entity_attribute_type_exist(std::string& entity_attribute_type_to_look_up) const
+    const ENTSYS_RETURN_CODE EntityAttributeTypeManager::search(std::string& entity_attribute_type_to_look_up) const
     {
         ENTSYS_ENTITY_ATTRIBUTE_TYPE_LOOKUP search_entity_attribute_type = map_of_entity_attribute_types.find(entity_attribute_type_to_look_up);
         if(search_entity_attribute_type == map_of_entity_attribute_types.end()) return ENTSYS_RETURN_ERROR_ENTITY_TYPE_UNAVAILABLE;
@@ -31,7 +32,7 @@ namespace entsys {
     }
 
 
-    const ENTSYS_RETURN_CODE EntityAttributeTypeManager::add_entity_attribute_type(const EntityAttributeType& new_ent_attr_type)
+    const ENTSYS_RETURN_CODE EntityAttributeTypeManager::add(const EntityAttributeType& new_ent_attr_type)
     {
         // Add to map!
         // TODO: Prevent overwriting already existing entity attribute types!
