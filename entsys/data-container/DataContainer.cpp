@@ -87,68 +87,43 @@ namespace entsys {
 
     const DataContainer DataContainer::set(const std::int64_t int64_val)
     {
-        if(ENTSYS_DATA_TYPE_BIG_INT == get_data_type())
-        {
-            int64_data = int64_val;
-            return DataContainer(get_bigintval());
-        }
-        // else // TODO: Memory type mismaching! what to do now?
-        return DataContainer(0);
+        int64_data = int64_val;
+        return DataContainer(int64_data);
     }
+
 
     const DataContainer DataContainer::set(const int int_val)
     {
-        if(ENTSYS_DATA_TYPE_INT == get_data_type())
-        {
-            integer_data = int_val;
-            return DataContainer(get_intval());
-        }
-        // else // TODO: Memory type mismaching! what to do now?
-        return DataContainer(0);
+        integer_data = int_val;
+        return DataContainer(integer_data);
     }
+
 
     const DataContainer DataContainer::set(const double double_val)
     {
-        if(ENTSYS_DATA_TYPE_DOUBLE == get_data_type())
-        {
-            double_data = double_val;
-            return DataContainer(get_doubleval());
-        }
-        // else // TODO: Memory type mismaching! what to do now?
-        return DataContainer(0);
+        double_data = double_val;
+        return DataContainer(double_data);
     }
+
 
     const DataContainer DataContainer::set(const float float_val)
     {
-        if(ENTSYS_DATA_TYPE_FLOAT == get_data_type())
-        {
-            float_data = float_val;
-            return DataContainer(get_floatval());
-        }
-        // else // TODO: Memory type mismaching! what to do now?
-        return DataContainer(0);
+        float_data = float_val;
+        return DataContainer(float_data);
     }
+
 
     const DataContainer DataContainer::set(const bool bool_val)
     {
-        if(ENTSYS_DATA_TYPE_BOOL == get_data_type())
-        {
-            boolean_data = bool_val;
-            return DataContainer(get_boolval());
-        }
-        // else // TODO: Memory type mismaching! what to do now?
-        return DataContainer(false);
+        boolean_data = bool_val;
+        return DataContainer(boolean_data);
     }
+
 
     const DataContainer DataContainer::set(const std::string string_val)
     {
-        if(ENTSYS_DATA_TYPE_STRING == get_data_type())
-        {
-            string_data = string_val;
-            return DataContainer(get_stringval());
-        }
-        // else // TODO: Memory type mismaching! what to do now?
-        return DataContainer(std::string(""));
+        string_data = string_val;
+        return DataContainer(string_data);
     }
 
 
@@ -356,25 +331,30 @@ namespace entsys {
         return integer_data;
     }
 
+
     const std::int64_t DataContainer::get_bigintval() const
     {
         return int64_data;
     }
+
 
     const double DataContainer::get_doubleval() const
     {
         return double_data;
     }
 
+
     const float DataContainer::get_floatval() const
     {
         return float_data;
     }
 
+
     const bool DataContainer::get_boolval() const
     {
         return boolean_data;
     }
+
 
     const std::string DataContainer::get_stringval() const
     {

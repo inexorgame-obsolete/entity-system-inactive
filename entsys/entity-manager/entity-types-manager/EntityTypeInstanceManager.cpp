@@ -6,13 +6,16 @@
 namespace inexor {
 namespace entsys {
     
+
     EntityTypeInstanceManager::EntityTypeInstanceManager()
     {
     }
 
+
     EntityTypeInstanceManager::~EntityTypeInstanceManager()
     {
     }
+
 
 };
 };

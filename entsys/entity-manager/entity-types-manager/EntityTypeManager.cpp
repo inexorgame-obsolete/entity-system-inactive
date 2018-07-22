@@ -6,6 +6,7 @@
 namespace inexor {
 namespace entsys {
     
+
     EntityTypeManager::EntityTypeManager()
     {
     }
