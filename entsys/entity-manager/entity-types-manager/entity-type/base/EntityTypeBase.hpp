@@ -27,8 +27,7 @@ namespace entsys {
         protected:
             
             // Every entity has at least the following attributes.
-            std::string entity_type_name;
-            bool finished;
+            std::string entity_type_name = std::string("");
 
             // Additional data here which act as attributes as well but are hard coded.
 
@@ -48,12 +47,7 @@ namespace entsys {
             // or should we let the entity attribute type instance manager
             // decide which instances of entity attribute types exist?
             const ENTSYS_RETURN_CODE install_attribute_type(const EntityAttributeType&);
-
-            // TODO: Remove/Replace finished method!
-            const bool is_finished() const;
-            const ENTSYS_RETURN_CODE finish_entity_type();
-
-
+            
     };
 
 };

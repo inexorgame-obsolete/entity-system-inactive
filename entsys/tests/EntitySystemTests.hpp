@@ -123,23 +123,11 @@ namespace entsys {
         attr1.set_name(std::string("color"));
         end_test();
 
-        std::string finished_yet = std::string("false");
-
-        if(attr1.is_finished()) finished_yet = std::string("true");
-        cout << "Are we finished yet?: " << finished_yet.c_str() << endl;
-
         cout << "Setting attribute data type" << endl;
         start_test();
         attr1.set_data_type(ENTSYS_DATA_TYPE_FLOAT);
         end_test();
-
-        if(attr1.is_finished()) finished_yet = std::string("true");
-        cout << "Are we finished yet?: " << finished_yet.c_str() << endl;
-
-        attr1.finish_entity_attribute_type();
-
-        if(attr1.is_finished()) finished_yet = std::string("true");
-        cout << "Are we finished yet?: " << finished_yet.c_str() << endl;
+        
     }
 
     // Testing entity types.
@@ -154,7 +142,6 @@ namespace entsys {
         start_test();
         weight.set_data_type(ENTSYS_DATA_TYPE_FLOAT);
         weight.set_name("weight");
-        weight.finish_entity_attribute_type();
         end_test();
 
         // Error: Try changing type afterwards?
@@ -167,15 +154,12 @@ namespace entsys {
         start_test();
         color.set_data_type(ENTSYS_DATA_TYPE_STRING);
         color.set_name("color");
-        // TODO: Remove finish method?
-        color.finish_entity_attribute_type();
         end_test();
 
         cout << "Creating entity attribute type 'IQ'" << endl;
         start_test();
         IQ.set_data_type(ENTSYS_DATA_TYPE_INT);
         IQ.set_name("IntelligenceQuotient");
-        IQ.finish_entity_attribute_type();
         end_test();
 
         // TODO: Implement entity attribute type manager.
@@ -190,7 +174,6 @@ namespace entsys {
         IntelligentRobot.install_attribute_type(IQ);
         IntelligentRobot.install_attribute_type(color);
         IntelligentRobot.install_attribute_type(weight);
-        IntelligentRobot.finish_entity_type();
 
         // Ready for creating instances now?
         // TODO: 1.) Create instances of intelligent robots and 2.) take over world.

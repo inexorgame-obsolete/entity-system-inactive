@@ -6,12 +6,6 @@
 namespace inexor {
 namespace entsys {
 
-    DataContainer::DataContainer(const ENTSYS_DATA_TYPE& data_type)
-    {
-        data_container_data_type = data_type;
-        reset_memory();
-    }
-
 
     void DataContainer::reset_memory()
     {
@@ -24,13 +18,18 @@ namespace entsys {
     }
 
 
-    // Constructors.
+    DataContainer::DataContainer(const ENTSYS_DATA_TYPE& data_type)
+    {
+        data_container_data_type = data_type;
+        reset_memory();
+    }
+
 
     DataContainer::DataContainer()
     {
-        data_container_data_type = ENTSYS_DATA_TYPE_UNSPECIFIED;
         reset_memory();
     }
+
 
     DataContainer::DataContainer(const std::int64_t& int_val)
     {
@@ -38,11 +37,13 @@ namespace entsys {
         int64_data = int_val;
     }
 
+
     DataContainer::DataContainer(const double& double_val)
     {
         data_container_data_type = ENTSYS_DATA_TYPE_DOUBLE;
         double_data = double_val;
     }
+
 
     DataContainer::DataContainer(const float& float_val)
     {
@@ -50,11 +51,13 @@ namespace entsys {
         float_data = float_val;
     }
 
+
     DataContainer::DataContainer(const bool& bool_val)
     {
         data_container_data_type = ENTSYS_DATA_TYPE_BOOL;
         boolean_data = bool_val;
     }
+
 
     DataContainer::DataContainer(const std::string& string_val)
     {
@@ -62,11 +65,13 @@ namespace entsys {
         string_data = string_val;
     }
 
+
     DataContainer::DataContainer(const int& int_val)
     {
         data_container_data_type = ENTSYS_DATA_TYPE_INT;
         integer_data = int_val;
     }
+
 
     DataContainer::~DataContainer()
     {
@@ -78,6 +83,7 @@ namespace entsys {
         data_container_data_type = data_type;
         return ENTSYS_RETURN_SUCCESS;
     }
+
 
     // Set methods.
 

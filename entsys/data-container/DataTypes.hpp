@@ -10,7 +10,6 @@ namespace entsys {
     // Data container memory type enumeration.
     enum ENTSYS_DATA_TYPE 
     {
-        ENTSYS_DATA_TYPE_UNSPECIFIED,
         ENTSYS_DATA_TYPE_INT,
         ENTSYS_DATA_TYPE_BIG_INT,
         ENTSYS_DATA_TYPE_FLOAT,

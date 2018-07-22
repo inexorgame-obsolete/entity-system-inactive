@@ -16,12 +16,6 @@ namespace entsys {
     }
 
 
-    const bool EntityAttributeTypeManager::validate_new_entity_attribute_type(const EntityAttributeType& new_ent_attr_type) const
-    {
-        return new_ent_attr_type.is_finished();
-    }
-
-
     const size_t EntityAttributeTypeManager::get_entity_attribute_type_count() const
     {
         return map_of_entity_attribute_types.size();
@@ -37,14 +31,10 @@ namespace entsys {
 
     const ENTSYS_RETURN_CODE EntityAttributeTypeManager::add_entity_attribute_type(const EntityAttributeType& new_ent_attr_type)
     {
-        if(validate_new_entity_attribute_type(new_ent_attr_type))
-        {
-            // Add to map!
-            // TODO: Prevent overwriting already existing entity attribute types!
-            map_of_entity_attribute_types[new_ent_attr_type.get_name()] = new_ent_attr_type;
-            return ENTSYS_RETURN_SUCCESS;
-        }
-        return ENTSYS_RETURN_ERROR;
+        // Add to map!
+        // TODO: Prevent overwriting already existing entity attribute types!
+        map_of_entity_attribute_types[new_ent_attr_type.get_name()] = new_ent_attr_type;
+        return ENTSYS_RETURN_SUCCESS;
     }
 
 };

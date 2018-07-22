@@ -22,10 +22,7 @@ namespace entsys {
 
             // In this unordered map all available types of entity attributes will be stored.
             ENTSYS_ENTITY_ATTRIBUTE_TYPE_MAP map_of_entity_attribute_types;
-
-            // Validation method for new entity attribute types.
-            const bool validate_new_entity_attribute_type(const EntityAttributeType&) const;
-
+            
             // TODO: Debug!
             const ENTSYS_RETURN_CODE does_entity_attribute_type_exist(std::string&) const;
             
