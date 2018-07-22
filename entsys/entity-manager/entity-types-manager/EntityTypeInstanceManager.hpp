@@ -7,19 +7,30 @@
 #include <vector>
 #include "entity-type-instance\EntityTypeInstance.hpp"
 
+
 namespace inexor {
 namespace entsys {
 
-    /// \class CEntityTypeInstanceManager
-    /// \brief TODO
+
     class EntityTypeInstanceManager
     {
         private:            
-            std::vector<EntityTypeInstance> entity_instances;
             
-        public:
+            // TODO: DISCUSS: Is this data type the best for this?
+            std::vector<EntityTypeInstance> entity_type_instances;
+            
+        protected:
+            
+            // Make this protected so this class can only 
+            // be instanced by inheritance as base class.
             EntityTypeInstanceManager();
+
             ~EntityTypeInstanceManager();
+
+        public:
+
+            // Create an instance of an entity type.
+            const EntityTypeInstance create_entity_type_instance(const std::string&);
                         
     };
 

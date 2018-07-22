@@ -29,7 +29,7 @@ namespace entsys {
         // Look this entity type name up in the unordered map.
         // If we reached the end of the unordered_map before it has been found it does not exist yet.
         // TODO: Change this so it uses the does_entity_type_exist() method.
-        if(map_of_entity_types.find(newtype.get_name()) == map_of_entity_types.end()) return ENTSYS_RETURN_NEW_ENTITY_TYPE_VALID;
+        if(map_of_entity_types.find(newtype.get_entity_type_name()) == map_of_entity_types.end()) return ENTSYS_RETURN_NEW_ENTITY_TYPE_VALID;
         else return ENTSYS_RETURN_ENTITY_TYPE_ALREADY_EXISTS;
 
         // TODO: additional validation here!
@@ -39,7 +39,7 @@ namespace entsys {
     }
 
 
-    const ENTSYS_RETURN_CODE EntityTypeManager::create_entity_type(const EntityTypeBase& newtype)
+    const ENTSYS_RETURN_CODE EntityTypeManager::add_entity_type(const EntityTypeBase& newtype)
     {
         // Before we can add a new entity type to the entity system it must be validated!
         ENTSYS_RETURN_CODE validation_result = validate_new_entity_type(newtype);
@@ -48,7 +48,7 @@ namespace entsys {
         if(ENTSYS_RETURN_NEW_ENTITY_TYPE_VALID == validation_result)
         {
             // add to unordered map
-            map_of_entity_types[newtype.get_name()] = newtype;
+            map_of_entity_types[newtype.get_entity_type_name()] = newtype;
             return ENTSYS_RETURN_SUCCESS;
         }
 
@@ -57,13 +57,13 @@ namespace entsys {
     }
 
 
-    const size_t EntityTypeManager::get_entity_type_cound() const
+    const size_t EntityTypeManager::count_entity_types() const
     {
         return map_of_entity_types.size();
     }
 
 
-    const ENTSYS_RETURN_CODE EntityTypeManager::get_entity_type_class(std::string& entity_type_name, EntityTypeBase& entity_type_reference) const
+    const ENTSYS_RETURN_CODE EntityTypeManager::get_entity_type_class(const std::string& entity_type_name, EntityTypeBase& entity_type_reference) const
     {
         // If we reached the end of the unordered_map before it has been found it does not exist yet.
         ENTSYS_ENTITY_TYPE_LOOKUP search_entity_type = map_of_entity_types.find(entity_type_name);
@@ -77,7 +77,7 @@ namespace entsys {
     }
     
 
-    const bool EntityTypeManager::does_entity_type_exist(std::string& entity_type_to_look_up) const
+    const bool EntityTypeManager::search_entity_type(const std::string& entity_type_to_look_up) const
     {
         // Check if a key/value pair for this entity type exists
         ENTSYS_ENTITY_TYPE_LOOKUP search_entity_type = map_of_entity_types.find(entity_type_to_look_up);

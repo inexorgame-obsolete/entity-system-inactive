@@ -49,16 +49,16 @@ namespace entsys {
 
             // This method adds new types of entites.
             // Entity type instances can only be created from existing valid entity types by the entity instance manager.
-            const ENTSYS_RETURN_CODE create_entity_type(const EntityTypeBase&);
+            const ENTSYS_RETURN_CODE add_entity_type(const EntityTypeBase&);
 
             // This method returns the number of existing entity types available in the entity system.
-            const size_t get_entity_type_cound() const;
+            const size_t count_entity_types() const;
             
             // This method look up if an entity type of a certain name does already exist.
-            const bool does_entity_type_exist(std::string&) const;
+            const bool search_entity_type(const std::string&) const;
 
             // This method returns the entity type class (call by reference) of an entity type class name.
-            const ENTSYS_RETURN_CODE get_entity_type_class(std::string&, EntityTypeBase&) const;
+            const ENTSYS_RETURN_CODE get_entity_type_class(const std::string&, EntityTypeBase&) const;
 
             // TODO: delete_entity_type() requires all instances of this entity type to be deleted as well!
     };

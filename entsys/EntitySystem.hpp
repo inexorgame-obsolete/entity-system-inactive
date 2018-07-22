@@ -32,6 +32,7 @@ namespace entsys {
             static EntitySystem* create_entity_system();
 
     };
+    
 
     // Don't create the instance of the entity system in a header file.
     // It could cause a linker error because of multiple definitions!

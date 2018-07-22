@@ -40,13 +40,13 @@ namespace entsys {
 
             ~EntityTypeBase();
 
-            const ENTSYS_RETURN_CODE set_name(const std::string&);
-            const std::string& get_name() const;
+            const ENTSYS_RETURN_CODE set_entity_type_name(const std::string&);
+            const std::string& get_entity_type_name() const;
 
             // TODO: DISCUSS: This this a good design pattern?
             // or should we let the entity attribute type instance manager
             // decide which instances of entity attribute types exist?
-            const ENTSYS_RETURN_CODE add(const EntityAttributeType&);
+            const ENTSYS_RETURN_CODE link_entity_attribute_type(const EntityAttributeType&);
             
     };
 

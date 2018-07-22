@@ -6,9 +6,11 @@
 namespace inexor {
 namespace entsys {
 
+
     DataValidation::DataValidation()
     {
     }
+
 
     DataValidation::~DataValidation()
     {
@@ -19,6 +21,7 @@ namespace entsys {
     {
         return data_is_valid;
     }
+
 
 };
 };

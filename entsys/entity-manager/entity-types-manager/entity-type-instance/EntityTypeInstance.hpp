@@ -4,6 +4,9 @@
 #ifndef INEXOR_ENTSYS_ENTITY_TYPE_INSTANCE_CLASS_HEADER
 #define INEXOR_ENTSYS_ENTITY_TYPE_INSTANCE_CLASS_HEADER
 
+#include <string>
+#include "../../entity-types-manager/entity-type/base/EntityTypeBase.hpp"
+
 
 namespace inexor {
 namespace entsys {
@@ -12,9 +15,14 @@ namespace entsys {
     {
         private:
 
+            EntityTypeBase type_of_entity;
              
         public:
+
             EntityTypeInstance();
+
+            EntityTypeInstance(const std::string&);
+
             ~EntityTypeInstance();
     };
 

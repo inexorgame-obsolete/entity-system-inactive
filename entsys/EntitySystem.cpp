@@ -6,14 +6,17 @@
 namespace inexor {
 namespace entsys {
 
+
     EntitySystem::EntitySystem()
     {
     }
+
 
     EntitySystem::~EntitySystem()
     {
     }
 
+    
     EntitySystem* EntitySystem::entsys_singleton_instance = nullptr;
 
     // Singleton implementation
@@ -27,6 +30,7 @@ namespace entsys {
         }
         return entsys_singleton_instance;
     }
+
 
 };
 };

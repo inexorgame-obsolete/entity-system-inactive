@@ -133,7 +133,6 @@ namespace entsys {
 
     void Test_EntityTypes()
     {
-        // Lets create 3 attributes first.
         EntityAttributeType weight;
         EntityAttributeType color;
         EntityAttributeType IQ;
@@ -144,7 +143,6 @@ namespace entsys {
         weight.set_name("weight");
         end_test();
 
-        // Error: Try changing type afterwards?
         cout << "Trying to cause error by overwriting data type" << endl;
         start_test();
         weight.set_data_type(ENTSYS_DATA_TYPE_STRING);
@@ -169,13 +167,17 @@ namespace entsys {
         entity_system->add(IQ);
 
         EntityTypeBase IntelligentRobot;
-        IntelligentRobot.set_name("ROBOT");
-        IntelligentRobot.add(IQ);
-        IntelligentRobot.add(color);
-        IntelligentRobot.add(weight);
+        IntelligentRobot.set_entity_type_name("ROBOT");
+        IntelligentRobot.link_entity_attribute_type(IQ);
+        IntelligentRobot.link_entity_attribute_type(color);
+        IntelligentRobot.link_entity_attribute_type(weight);
 
-        // Ready for creating instances now?
-        // TODO: 1.) Create instances of intelligent robots and 2.) take over world.
+        // Register this type
+        entity_system->add_entity_type(IntelligentRobot);
+
+        EntityTypeInstance robot1;
+        robot1 = entity_system->create_entity_type_instance("ROBOT");
+        
     }
 
 };
