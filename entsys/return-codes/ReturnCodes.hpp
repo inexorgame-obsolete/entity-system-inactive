@@ -21,8 +21,7 @@ namespace entsys {
         ENTSYS_RETURN_SUCCESS = 1,
         ENTSYS_RETURN_NEW_ENTITY_TYPE_VALID,
 
-        // TODO: should positive return codes be implemented 
-        // or is ENTSYS_RETURN_SUCCESS enough ?
+        // TODO: DISCUSS: Should positive return codes be implemented or is ENTSYS_RETURN_SUCCESS enough ?
     };
 
 };

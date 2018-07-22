@@ -49,6 +49,7 @@ namespace entsys {
             // decide which instances of entity attribute types exist?
             const ENTSYS_RETURN_CODE install_attribute_type(const EntityAttributeType&);
 
+            // TODO: Remove/Replace finished method!
             const bool is_finished() const;
             const ENTSYS_RETURN_CODE finish_entity_type();
 

@@ -10,6 +10,7 @@
 #include "../../return-codes/ReturnCodes.hpp"
 #include "entity-type\base\EntityTypeBase.hpp"
 
+
 namespace inexor {
 namespace entsys {
 
