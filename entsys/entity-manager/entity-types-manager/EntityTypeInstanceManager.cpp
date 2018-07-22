@@ -24,6 +24,13 @@ namespace entsys {
         return new_inst;
     }
 
+    const EntityTypeInstance EntityTypeInstanceManager::create_entity_type_instance(const EntityTypeBase& type)
+    {
+        EntityTypeInstance new_inst(type.get_entity_type_name());
+        entity_type_instances.push_back(new_inst);
+        return new_inst;
+    }
+
 
 };
 };

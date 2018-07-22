@@ -177,7 +177,25 @@ namespace entsys {
 
         EntityTypeInstance robot1;
         robot1 = entity_system->create_entity_type_instance("ROBOT");
-        
+
+        EntityTypeInstance robots[100];
+
+        start_test();
+        cout << "Creating 100 robots. Preparing to take over the world!" << endl;
+        for(size_t i=0; i<100; i++)
+        {
+            robots[i] = entity_system->create_entity_type_instance("ROBOT");
+        }
+        end_test();
+
+        EntityTypeInstance robots2[244];
+
+        start_test();
+        for(size_t i=0; i<244; i++)
+        {
+            robots2[i] = entity_system->create_entity_type_instance(IntelligentRobot);
+        }
+        end_test();
     }
 
 };

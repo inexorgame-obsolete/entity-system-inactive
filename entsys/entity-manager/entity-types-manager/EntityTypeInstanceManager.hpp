@@ -31,7 +31,9 @@ namespace entsys {
 
             // Create an instance of an entity type.
             const EntityTypeInstance create_entity_type_instance(const std::string&);
-                        
+
+            const EntityTypeInstance create_entity_type_instance(const EntityTypeBase&);
+
     };
 
 };

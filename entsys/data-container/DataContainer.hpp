@@ -4,16 +4,21 @@
 #ifndef INEXOR_ENTSYS_DATA_CONTAINER_CLASS_HEADER
 #define INEXOR_ENTSYS_DATA_CONTAINER_CLASS_HEADER
 
+// Multithreading safety
+
+
 #include <string>
 #include <cstdint>
+
 #include "DataTypes.hpp"
+
 #include "../return-codes/ReturnCodes.hpp"
 #include "../tests/EntitySystemDebugging.hpp"
 
 
 namespace inexor {
 namespace entsys {
-        
+
     // A flexible, multiple purpose data container.
     // TODO: Instead of accessing maps by value every time a write operation occurs, why not store a pointer to the value pair
     // of the map in the write operation? This could speed the entity system very much!
@@ -23,7 +28,7 @@ namespace entsys {
 
             ENTSYS_DATA_TYPE data_container_data_type;
 
-            // TODO: Implement template class for data storage.
+            // TODO: Implement template class for data storage + thread safety
 
             std::string string_data = std::string("");
             std::int64_t int64_data = 0;
