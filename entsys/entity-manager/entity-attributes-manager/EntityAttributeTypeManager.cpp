@@ -18,7 +18,7 @@ namespace entsys {
     }
 
 
-    size_t EntityAttributeTypeManager::count() const
+    unsigned int EntityAttributeTypeManager::count() const
     {
         return map_of_entity_attribute_types.size();
     }

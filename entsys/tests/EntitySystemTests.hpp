@@ -172,8 +172,7 @@ namespace entsys {
         start_test();
         cout << "Creating 98 more robots. Preparing to take over the world (in debug mode)!" << endl;
 
-        // TODO: Replace size_t with unsigned int!
-        for(size_t i=LOOPBEGIN; i<100; i++) 
+        for(unsigned int i=LOOPBEGIN; i<100; i++) 
         {
             // We could use entity_system->create_entity_type_instance("ROBOT"); as well!
             

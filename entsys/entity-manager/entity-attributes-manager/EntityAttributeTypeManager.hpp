@@ -39,7 +39,7 @@ namespace entsys {
             ENTSYS_RETURN_CODE create_entity_attribute_type(const EntityAttributeType&);
                         
             // This method returns the number of existing types of entity attributes available in the entity system.
-            size_t count() const;
+            unsigned int count() const;
     };
 
 };

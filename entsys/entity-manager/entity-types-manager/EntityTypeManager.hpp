@@ -53,7 +53,7 @@ namespace entsys {
             ENTSYS_RETURN_CODE create_entity_type(const EntityType&);
 
             // This method returns the number of existing entity types available in the entity system.
-            size_t count_entity_types() const;
+            unsigned int count_entity_types() const;
             
             // This method look up if an entity type of a certain name does already exist.
             bool search_entity_type(const std::string&) const;

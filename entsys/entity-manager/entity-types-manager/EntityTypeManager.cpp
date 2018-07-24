@@ -57,7 +57,7 @@ namespace entsys {
     }
 
 
-    size_t EntityTypeManager::count_entity_types() const
+    unsigned int EntityTypeManager::count_entity_types() const
     {
         return map_of_entity_types.size();
     }
