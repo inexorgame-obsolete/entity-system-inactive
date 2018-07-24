@@ -3,16 +3,20 @@
 
 #include "EntityManager.hpp"
 
+
 namespace inexor {
 namespace entsys {
+
 
     EntityManager::EntityManager()
     {
     }
 
+
     EntityManager::~EntityManager()
     {
     }
+
 
 };
 };

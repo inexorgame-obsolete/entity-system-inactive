@@ -4,14 +4,17 @@
 #ifndef INEXOR_ENTSYS_ENTITY_RELATION_TYPE_MANAGER_CLASS_HEADER
 #define INEXOR_ENTSYS_ENTITY_RELATION_TYPE_MANAGER_CLASS_HEADER
 
+
 namespace inexor {
 namespace entsys {
 
+
     class EntityRelationTypeManager
     {
-        public:
+        protected:
 
             EntityRelationTypeManager();
+
             ~EntityRelationTypeManager();
     };
 

@@ -18,10 +18,12 @@ namespace entsys {
     
     high_resolution_clock::time_point t1;
 
+
     void start_test()
     {
         t1 = high_resolution_clock::now();
     }
+
 
     void end_test()
     {
@@ -33,6 +35,7 @@ namespace entsys {
         std::cout << "Time passed: " << time_span.count() << " milliseconds." << endl  << endl;
     }
     
+
 };
 };
 

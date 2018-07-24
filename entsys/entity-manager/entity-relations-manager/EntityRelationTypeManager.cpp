@@ -6,13 +6,16 @@
 namespace inexor {
 namespace entsys {
 
+
     EntityRelationTypeManager::EntityRelationTypeManager()
     {
     }
 
+
     EntityRelationTypeManager::~EntityRelationTypeManager()
     {
     }
+
 
 };
 };

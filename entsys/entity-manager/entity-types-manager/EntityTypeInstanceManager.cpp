@@ -17,18 +17,26 @@ namespace entsys {
     }
 
 
-    const EntityTypeInstance EntityTypeInstanceManager::create_entity_type_instance(const std::string& type_name)
+    EntityTypeInstance EntityTypeInstanceManager::create_entity_type_instance(const std::string& type_name)
     {
         EntityTypeInstance new_inst(type_name);
         entity_type_instances.push_back(new_inst);
         return new_inst;
     }
 
-    const EntityTypeInstance EntityTypeInstanceManager::create_entity_type_instance(const EntityTypeBase& type)
+
+    EntityTypeInstance EntityTypeInstanceManager::create_entity_type_instance(const EntityType& type)
     {
         EntityTypeInstance new_inst(type.get_entity_type_name());
         entity_type_instances.push_back(new_inst);
         return new_inst;
+    }
+
+
+    ENTSYS_RETURN_CODE EntityTypeInstanceManager::set_attribute_data(const EntityTypeInstance& ent_inst, const EntityAttributeType& attr_type, const std::string& attr_val)
+    {
+        // TODO: Set attribute data here!
+        return ENTSYS_RETURN_ERROR;
     }
 
 

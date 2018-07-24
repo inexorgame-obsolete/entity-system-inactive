@@ -3,6 +3,7 @@
 
 #include "DataContainer.hpp"
 
+
 namespace inexor {
 namespace entsys {
 
@@ -75,60 +76,59 @@ namespace entsys {
 
     DataContainer::~DataContainer()
     {
+        // TODO: Implement destructor.
     }
 
     
-    const ENTSYS_RETURN_CODE DataContainer::set_data_type(const ENTSYS_DATA_TYPE& data_type)
+    ENTSYS_RETURN_CODE DataContainer::set_data_type(const ENTSYS_DATA_TYPE& data_type)
     {
         data_container_data_type = data_type;
         return ENTSYS_RETURN_SUCCESS;
     }
 
 
-    const DataContainer DataContainer::set(const std::int64_t int64_val)
+    DataContainer DataContainer::set(const std::int64_t& int64_val)
     {
         int64_data = int64_val;
         return DataContainer(int64_data);
     }
 
 
-    const DataContainer DataContainer::set(const int int_val)
+    DataContainer DataContainer::set(const int& int_val)
     {
         integer_data = int_val;
         return DataContainer(integer_data);
     }
 
 
-    const DataContainer DataContainer::set(const double double_val)
+    DataContainer DataContainer::set(const double& double_val)
     {
         double_data = double_val;
         return DataContainer(double_data);
     }
 
 
-    const DataContainer DataContainer::set(const float float_val)
+    DataContainer DataContainer::set(const float& float_val)
     {
         float_data = float_val;
         return DataContainer(float_data);
     }
 
 
-    const DataContainer DataContainer::set(const bool bool_val)
+    DataContainer DataContainer::set(const bool& bool_val)
     {
         boolean_data = bool_val;
         return DataContainer(boolean_data);
     }
 
 
-    const DataContainer DataContainer::set(const std::string string_val)
+    DataContainer DataContainer::set(const std::string& string_val)
     {
         string_data = string_val;
         return DataContainer(string_data);
     }
 
 
-    // Only numeric data containers can execute math operations!
-    // Check is this data container's type is numeric
     bool DataContainer::data_container_type_is_numeric()
     {
         switch(get_data_type())
@@ -146,7 +146,7 @@ namespace entsys {
     }
 
 
-    const DataContainer DataContainer::add(const DataContainer& addend)
+    DataContainer DataContainer::add(const DataContainer& addend)
     {
         if(data_container_type_is_numeric())
         {
@@ -172,11 +172,12 @@ namespace entsys {
                 }
             }
         }
+        // TODO: DISCUSS: Is this a good idea ?
         return DataContainer(std::int64_t(0));
     }
 
 
-    const DataContainer DataContainer::sub(const DataContainer& minuend)
+    DataContainer DataContainer::sub(const DataContainer& minuend)
     {
         if(data_container_type_is_numeric())
         {
@@ -206,7 +207,7 @@ namespace entsys {
     }
 
 
-    const DataContainer DataContainer::mul(const DataContainer& coeffizient)
+    DataContainer DataContainer::mul(const DataContainer& coeffizient)
     {
         if(data_container_type_is_numeric())
         {
@@ -236,7 +237,7 @@ namespace entsys {
     }
 
 
-    const DataContainer DataContainer::div(const DataContainer& divisor)
+    DataContainer DataContainer::div(const DataContainer& divisor)
     {
         if(data_container_type_is_numeric())
         {
@@ -266,103 +267,103 @@ namespace entsys {
     }
 
 
-    const DataContainer DataContainer::operator+(const DataContainer& addend)
+    DataContainer DataContainer::operator+(const DataContainer& addend)
     {
         return add(addend);
     }
 
     
-    const DataContainer DataContainer::operator-(const DataContainer& minuend)
+    DataContainer DataContainer::operator-(const DataContainer& minuend)
     {
         return sub(minuend);
     }
 
 
-    const DataContainer DataContainer::operator*(const DataContainer& coeffizient)
+    DataContainer DataContainer::operator*(const DataContainer& coeffizient)
     {
         return mul(coeffizient);
     }
 
 
-    const DataContainer DataContainer::operator/(const DataContainer& divisor)
+    DataContainer DataContainer::operator/(const DataContainer& divisor)
     {
         return div(divisor);
     }
 
 
-    const DataContainer DataContainer::operator=(const int& new_int_val)
+    DataContainer DataContainer::operator=(const int& new_int_val)
     {
         return set(new_int_val);
     }
     
     
-    const DataContainer DataContainer::operator=(const double& new_double_val)
+    DataContainer DataContainer::operator=(const double& new_double_val)
     {
         return set(new_double_val);
     }
 
 
-    const DataContainer DataContainer::operator=(const float& new_float_val)
+    DataContainer DataContainer::operator=(const float& new_float_val)
     {
         return set(new_float_val);
     }
 
 
-    const DataContainer DataContainer::operator=(const bool& new_bool_val)
+    DataContainer DataContainer::operator=(const bool& new_bool_val)
     {
         return set(new_bool_val);
     }
 
 
-    const DataContainer DataContainer::operator=(const std::int64_t& new_bigint_val)
+    DataContainer DataContainer::operator=(const std::int64_t& new_bigint_val)
     {
         return set(new_bigint_val);
     }
 
 
-    const DataContainer DataContainer::operator=(const std::string& new_string_val)
+    DataContainer DataContainer::operator=(const std::string& new_string_val)
     {
         return set(new_string_val);
     }
 
 
-    const int DataContainer::get_intval() const
+    int DataContainer::get_intval() const
     {
         return integer_data;
     }
 
 
-    const std::int64_t DataContainer::get_bigintval() const
+    std::int64_t DataContainer::get_bigintval() const
     {
         return int64_data;
     }
 
 
-    const double DataContainer::get_doubleval() const
+    double DataContainer::get_doubleval() const
     {
         return double_data;
     }
 
 
-    const float DataContainer::get_floatval() const
+    float DataContainer::get_floatval() const
     {
         return float_data;
     }
 
 
-    const bool DataContainer::get_boolval() const
+    bool DataContainer::get_boolval() const
     {
         return boolean_data;
     }
 
 
-    const std::string DataContainer::get_stringval() const
+    std::string DataContainer::get_stringval() const
     {
         return string_data;
     }
 
 
-    const ENTSYS_DATA_TYPE DataContainer::get_data_type() const
+    ENTSYS_DATA_TYPE DataContainer::get_data_type() const
     {
         return data_container_data_type;
     }

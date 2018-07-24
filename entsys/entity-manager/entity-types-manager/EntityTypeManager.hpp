@@ -10,14 +10,14 @@
 
 #include "../../validation/DataValidation.hpp"
 
-#include "entity-type\base\EntityTypeBase.hpp"
+#include "entity-type\EntityType.hpp"
 
 
 namespace inexor {
 namespace entsys {
 
     // Use type definitions to make further definitions shorter.
-    typedef std::unordered_map<std::string, EntityTypeBase> ENTSYS_ENTITY_TYPE_MAP;
+    typedef std::unordered_map<std::string, EntityType> ENTSYS_ENTITY_TYPE_MAP;
     typedef ENTSYS_ENTITY_TYPE_MAP::const_iterator          ENTSYS_ENTITY_TYPE_LOOKUP;
     typedef ENTSYS_ENTITY_TYPE_MAP::value_type              ENTSYS_ENTMAP_TYPE;
 
@@ -34,7 +34,7 @@ namespace entsys {
         protected:
 
             // Validation method for new types of entities.
-            const ENTSYS_RETURN_CODE validate_new_entity_type(const EntityTypeBase&) const;
+            ENTSYS_RETURN_CODE validate_new_entity_type(const EntityType&) const;
 
         public:
 
@@ -42,23 +42,25 @@ namespace entsys {
 
             ~EntityTypeManager();
 
-            const ENTSYS_RETURN_CODE validate();
+            ENTSYS_RETURN_CODE validate();
 
 
             // TODO: DISCUSS: Do all these methods really have to be of const type and const methods?
 
             // This method adds new types of entites.
             // Entity type instances can only be created from existing valid entity types by the entity instance manager.
-            const ENTSYS_RETURN_CODE add_entity_type(const EntityTypeBase&);
+            ENTSYS_RETURN_CODE create_entity_type(const EntityType&);
 
             // This method returns the number of existing entity types available in the entity system.
-            const size_t count_entity_types() const;
+            size_t count_entity_types() const;
             
             // This method look up if an entity type of a certain name does already exist.
-            const bool search_entity_type(const std::string&) const;
+            bool search_entity_type(const std::string&) const;
 
             // This method returns the entity type class (call by reference) of an entity type class name.
-            const ENTSYS_RETURN_CODE get_entity_type_class(const std::string&, EntityTypeBase&) const;
+            ENTSYS_RETURN_CODE get_entity_type(const std::string&, EntityType&) const;
+
+            EntityType get_entity_type(const std::string&) const;
 
             // TODO: delete_entity_type() requires all instances of this entity type to be deleted as well!
     };

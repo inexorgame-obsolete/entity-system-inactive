@@ -4,6 +4,7 @@
 #ifndef INEXOR_ENTSYS_RESULT_CODE_ENUM_HEADER
 #define INEXOR_ENTSYS_RESULT_CODE_ENUM_HEADER
 
+
 namespace inexor {
 namespace entsys {
 
@@ -20,7 +21,8 @@ namespace entsys {
         ENTSYS_RETURN_SUCCESS = 1,
         ENTSYS_RETURN_NEW_ENTITY_TYPE_VALID,
 
-        // TODO: DISCUSS: Should positive return codes be implemented or is ENTSYS_RETURN_SUCCESS enough ?
+        // TODO: DISCUSS: Should positive return codes 
+        // be implemented or is ENTSYS_RETURN_SUCCESS enough ?
     };
 
 };

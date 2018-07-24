@@ -10,6 +10,7 @@ extern inexor::entsys::EntitySystem* entity_system;
 // Start and end tests with the profiler.
 #include "../tests/EntitySystemProfiler.hpp"
 
+
 namespace inexor {
 namespace entsys {
     
@@ -136,6 +137,10 @@ namespace entsys {
         EntityAttributeType weight;
         EntityAttributeType color;
         EntityAttributeType IQ;
+
+        EntityType IntelligentRobot;
+        
+        EntityTypeInstance robots[100];
  
         cout << "Creating entity attribute type 'weight'" << endl;
         start_test();
@@ -148,10 +153,10 @@ namespace entsys {
         weight.set_data_type(ENTSYS_DATA_TYPE_STRING);
         end_test();
 
-        cout << "Creating entity attribute type 'color'" << endl;
+        cout << "Creating entity attribute type 'mindcontrol_mode'" << endl;
         start_test();
         color.set_data_type(ENTSYS_DATA_TYPE_STRING);
-        color.set_name("color");
+        color.set_name("mindcontrol_mode");
         end_test();
 
         cout << "Creating entity attribute type 'IQ'" << endl;
@@ -160,42 +165,43 @@ namespace entsys {
         IQ.set_name("IntelligenceQuotient");
         end_test();
 
-        // TODO: Implement entity attribute type manager.
-        // TODO: Add those entity attribute types to the entity attribute type manager.
-        entity_system->add(weight);
-        entity_system->add(color);
-        entity_system->add(IQ);
+        // Step 1: Create entity attribute types.
+        entity_system->create_entity_attribute_type(weight);
+        entity_system->create_entity_attribute_type(color);
+        entity_system->create_entity_attribute_type(IQ);
 
-        EntityTypeBase IntelligentRobot;
+        // Step 2: Link entity attribute types to entity types.
         IntelligentRobot.set_entity_type_name("ROBOT");
-        IntelligentRobot.link_entity_attribute_type(IQ);
-        IntelligentRobot.link_entity_attribute_type(color);
-        IntelligentRobot.link_entity_attribute_type(weight);
+        entity_system->link_attribute_type_to_entity_type(IntelligentRobot, IQ);
+        entity_system->link_attribute_type_to_entity_type(IntelligentRobot, color);
+        entity_system->link_attribute_type_to_entity_type(IntelligentRobot, weight);
 
-        // Register this type
-        entity_system->add_entity_type(IntelligentRobot);
-
-        EntityTypeInstance robot1;
-        robot1 = entity_system->create_entity_type_instance("ROBOT");
-
-        EntityTypeInstance robots[100];
+        // Step 3: Create entity type.
+        entity_system->create_entity_type(IntelligentRobot);
+        
+        // Step 4: Create instances of entity types.
+        // Please not that there are 2 ways of initialising entity type instances:
+        robots[0] = entity_system->create_entity_type_instance("ROBOT");
+        robots[1] = entity_system->create_entity_type_instance(entity_system->get_entity_type("ROBOT"));
+        
+        #define LOOPBEGIN 2 // !
 
         start_test();
-        cout << "Creating 100 robots. Preparing to take over the world!" << endl;
-        for(size_t i=0; i<100; i++)
+        cout << "Creating 98 more robots. Preparing to take over the world (in debug mode)!" << endl;
+
+        for(size_t i=LOOPBEGIN; i<100; i++) 
         {
-            robots[i] = entity_system->create_entity_type_instance("ROBOT");
+            // We could use entity_system->create_entity_type_instance("ROBOT"); as well!
+            robots[i] = entity_system->create_entity_type_instance(IntelligentRobot);
+
+            // TODO: How to write to data container ?
+            //entity_system->set_attribute_data(robots[i], IQ, "232");
+            //robots[i].set_attribute_data(weight, 1000.0f);
+            //robots[i].set_attribute_data(IQ, "232");
+            //robots[i].set_attribute_data(color, 12);
         }
         end_test();
 
-        EntityTypeInstance robots2[244];
-
-        start_test();
-        for(size_t i=0; i<244; i++)
-        {
-            robots2[i] = entity_system->create_entity_type_instance(IntelligentRobot);
-        }
-        end_test();
     }
 
 };

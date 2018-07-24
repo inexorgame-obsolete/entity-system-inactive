@@ -4,20 +4,14 @@
 #ifndef INEXOR_ENTSYS_ENTITY_ATTRIBUTE_TYPE_MANAGER_CLASS_HEADER
 #define INEXOR_ENTSYS_ENTITY_ATTRIBUTE_TYPE_MANAGER_CLASS_HEADER
 
-#include <string>
-#include <unordered_map>
-
 #include "entity-attribute-type\EntityAttributeType.hpp"
+#include "../entity-types-manager/entity-type/EntityType.hpp"
 #include "../../return-codes/ReturnCodes.hpp"
 
 
 namespace inexor {
 namespace entsys {
     
-    // By using these type definitions we can make later definitions shorter.
-    typedef std::unordered_map<std::string, EntityAttributeType> ENTSYS_ENTITY_ATTRIBUTE_TYPE_MAP;
-    typedef ENTSYS_ENTITY_ATTRIBUTE_TYPE_MAP::const_iterator     ENTSYS_ENTITY_ATTRIBUTE_TYPE_LOOKUP;
-
 
     class EntityAttributeTypeManager
     {
@@ -27,7 +21,7 @@ namespace entsys {
             ENTSYS_ENTITY_ATTRIBUTE_TYPE_MAP map_of_entity_attribute_types;
             
             // TODO: Debug!
-            const ENTSYS_RETURN_CODE search(std::string&) const;
+            ENTSYS_RETURN_CODE search_entity_attribute_type(std::string&) const;
             
         protected:
 
@@ -35,17 +29,19 @@ namespace entsys {
             // be instanced by inheritance as base class.
             EntityAttributeTypeManager();
 
-        public:
-
             ~EntityAttributeTypeManager();
+
+        public:
 
             // This method adds new types of attributes of entities.
             // Entity attribute type instances can only be created from existing valid 
             // entity attribute types by the entity attribute instance manager.
-            const ENTSYS_RETURN_CODE add(const EntityAttributeType&);
+            ENTSYS_RETURN_CODE create_entity_attribute_type(const EntityAttributeType&);
+                        
+            ENTSYS_RETURN_CODE link_attribute_type_to_entity_type(const EntityType&, const EntityAttributeType&) const;
 
             // This method returns the number of existing types of entity attributes available in the entity system.
-            const size_t count() const;
+            size_t count() const;
     };
 
 };

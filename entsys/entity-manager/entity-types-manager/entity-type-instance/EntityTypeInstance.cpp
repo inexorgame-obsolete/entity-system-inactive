@@ -4,8 +4,8 @@
 #include "EntityTypeInstance.hpp"
 #include "../../../EntitySystem.hpp"
 
+extern inexor::entsys::EntitySystem* entity_system;
 
-extern inexor::entsys::EntitySystem * entity_system;
 
 namespace inexor {
 namespace entsys {
@@ -23,7 +23,17 @@ namespace entsys {
 
     EntityTypeInstance::EntityTypeInstance(const std::string& type_name)
     {
-        entity_system->get_entity_type_class(type_name, type_of_entity);
+        // TODO: Does this constructor call of an inherited class even work?
+        EntityType(entity_system->get_entity_type(type_name));
+    }
+
+
+    ENTSYS_RETURN_CODE EntityTypeInstance::set_attribute_data(const EntityAttributeType& ent_attr_type, const std::string& data)
+    {
+        // TOOD: Debug!
+        //map_of_entity_attribute_types[ent_attr_type.get_name()].set_data(data);
+        // TODO: Resolve!
+        return ENTSYS_RETURN_ERROR;
     }
 
 

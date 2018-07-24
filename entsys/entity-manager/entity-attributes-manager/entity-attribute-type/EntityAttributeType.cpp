@@ -24,7 +24,7 @@ namespace entsys {
     }
 
     
-    const ENTSYS_RETURN_CODE EntityAttributeType::validate()
+    ENTSYS_RETURN_CODE EntityAttributeType::validate()
     {
         return ENTSYS_RETURN_ERROR;
     }
@@ -42,7 +42,7 @@ namespace entsys {
     }
 
 
-    const ENTSYS_RETURN_CODE EntityAttributeType::set_name(const std::string& name)
+    ENTSYS_RETURN_CODE EntityAttributeType::set_name(const std::string& name)
     {
         if(name.length() > 0)
         {
@@ -52,21 +52,30 @@ namespace entsys {
         return ENTSYS_RETURN_ERROR;
     }
 
+    
+    ENTSYS_RETURN_CODE EntityAttributeType::set_data(const std::string& data)
+    {
+        // TODO: Debug!
+        // TODO: Remove overhead!
+        entity_attribute_data.set(data);
+        return ENTSYS_RETURN_ERROR;
+    }
 
-    const ENTSYS_RETURN_CODE EntityAttributeType::set_data_type(const ENTSYS_DATA_TYPE& type)
+
+    ENTSYS_RETURN_CODE EntityAttributeType::set_data_type(const ENTSYS_DATA_TYPE& type)
     {
         entity_attribute_data.set_data_type(type);
         return ENTSYS_RETURN_SUCCESS;
     }
     
 
-    const ENTSYS_DATA_TYPE EntityAttributeType::get_data_type() const
+    ENTSYS_DATA_TYPE EntityAttributeType::get_data_type() const
     {
         return entity_attribute_data.get_data_type();
     }
     
 
-    const std::string EntityAttributeType::get_name() const
+    std::string EntityAttributeType::get_name() const
     {
         return entity_attribute_type_name;
     }

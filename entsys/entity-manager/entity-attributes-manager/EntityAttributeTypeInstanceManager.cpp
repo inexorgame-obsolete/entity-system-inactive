@@ -3,16 +3,20 @@
 
 #include "EntityAttributeTypeInstanceManager.hpp"
 
+
 namespace inexor {
 namespace entsys {
+
 
     EntityAttributeTypeInstanceManager::EntityAttributeTypeInstanceManager()
     {
     }
 
+
     EntityAttributeTypeInstanceManager::~EntityAttributeTypeInstanceManager()
     {
     }
+
 
 };
 };

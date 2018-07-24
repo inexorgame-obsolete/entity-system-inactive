@@ -18,6 +18,8 @@ namespace entsys {
             
             // TODO: DISCUSS: Is this data type the best for this?
             std::vector<EntityTypeInstance> entity_type_instances;
+
+            // TODO: Replace this with an unordered_map<std::string (name), EntityTypeInstance> instances !
             
         protected:
             
@@ -30,9 +32,11 @@ namespace entsys {
         public:
 
             // Create an instance of an entity type.
-            const EntityTypeInstance create_entity_type_instance(const std::string&);
+            EntityTypeInstance create_entity_type_instance(const std::string&);
 
-            const EntityTypeInstance create_entity_type_instance(const EntityTypeBase&);
+            EntityTypeInstance create_entity_type_instance(const EntityType&);
+
+            ENTSYS_RETURN_CODE set_attribute_data(const EntityTypeInstance&, const EntityAttributeType&, const std::string&);
 
     };
 

@@ -15,6 +15,7 @@ EntitySystem* entity_system = EntitySystem::create_entity_system();
 
 int main(int argc, char* argv[])
 {
+    // Add automatic tests here:
     Test_EntitySystemDataContainers();
     Test_EntityAttributeTypes();
     Test_EntityTypes();

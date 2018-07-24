@@ -6,6 +6,7 @@
 
 #include "../return-codes/ReturnCodes.hpp"
 
+
 namespace inexor {
 namespace entsys {
 
@@ -31,7 +32,7 @@ namespace entsys {
 
             // Every class which inherits from DataValidation needs
             // to have an implementation of this method!
-            virtual const ENTSYS_RETURN_CODE validate() = 0;
+            virtual ENTSYS_RETURN_CODE validate() = 0;
 
     };
 
