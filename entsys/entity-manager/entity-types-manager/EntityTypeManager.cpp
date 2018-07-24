@@ -97,10 +97,7 @@ namespace entsys {
     
     ENTSYS_RETURN_CODE EntityTypeManager::link_attribute_type_to_entity_type(const EntityType& ent_type, const EntityAttributeType& ent_attr_type)
     {
-        // TODO: Debug!
         map_of_entity_types[ent_type.get_entity_type_name()].link_entity_attribute_type(ent_attr_type);
-
-        // TODO: Resolve!
         return ENTSYS_RETURN_ERROR;
     }
 

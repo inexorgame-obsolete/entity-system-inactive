@@ -35,9 +35,7 @@ namespace entsys {
         public:
 
             EntityType();
-
             EntityType(const std::string&);
-
             ~EntityType();
 
             ENTSYS_RETURN_CODE set_entity_type_name(const std::string&);
@@ -52,7 +50,7 @@ namespace entsys {
             ENTSYS_RETURN_CODE set_attribute_data(const EntityAttributeType&, const std::string&);
             // TODO: Overload method for setting other data types!
 
-
+            std::string read_attribute_data(const EntityAttributeType&);
 
     };
 

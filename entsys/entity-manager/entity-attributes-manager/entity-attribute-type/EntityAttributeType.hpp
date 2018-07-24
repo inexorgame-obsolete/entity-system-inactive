@@ -44,17 +44,15 @@ namespace entsys {
 
             // TODO: DISCUSS: Do all these methods have to me of const type?
 
-
             ENTSYS_RETURN_CODE validate();
 
-            ENTSYS_RETURN_CODE set_name(const std::string&);
-
             ENTSYS_RETURN_CODE set_data_type(const ENTSYS_DATA_TYPE&);
-
-            ENTSYS_RETURN_CODE set_data(const std::string&);
-
             ENTSYS_DATA_TYPE get_data_type() const;
 
+            ENTSYS_RETURN_CODE set_data(const std::string&);
+            std::string get_data() const;
+
+            ENTSYS_RETURN_CODE set_name(const std::string&);
             std::string get_name() const;
 
             // TODO: DISCUSS: Should there be a way to change this data afterwards?

@@ -24,13 +24,6 @@ namespace entsys {
     }
     
 
-    std::string EntityType::get_entity_type_name() const
-    {
-        // TODO: Change this definition?
-        return std::string(entity_type_name);
-    }
-
-
     ENTSYS_RETURN_CODE EntityType::set_entity_type_name(const std::string& name)
     {
         if(name.length() > 0)
@@ -41,7 +34,13 @@ namespace entsys {
         return ENTSYS_RETURN_NAME_INVALID;
     }
     
-    
+
+    std::string EntityType::get_entity_type_name() const
+    {
+        return entity_type_name;
+    }
+
+
     ENTSYS_RETURN_CODE EntityType::link_entity_attribute_type(const EntityAttributeType& ent_attr_type)
     {
         // TODO: Debug!
@@ -58,6 +57,12 @@ namespace entsys {
         map_of_entity_attribute_types[ent_attr_type.get_name()].set_data(data);
         return ENTSYS_RETURN_SUCCESS;
     }
+
+    std::string EntityType::read_attribute_data(const EntityAttributeType& ent_attr_type)
+    {
+        return map_of_entity_attribute_types[ent_attr_type.get_name()].get_data();
+    }
+
 
 };
 };

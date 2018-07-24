@@ -134,56 +134,62 @@ namespace entsys {
 
     void Test_EntityTypes()
     {
-        EntityAttributeType IQ;
-        cout << "Creating entity attribute type 'IQ'" << endl;
+        EntityType armor_pickup;
+        cout << "Creating entity type 'armor pickup'" << endl;
+       
         start_test();
-        IQ.set_data_type(ENTSYS_DATA_TYPE_INT);
-        IQ.set_name("IntelligenceQuotient");
+        armor_pickup.set_entity_type_name("ARMOR");
+        entity_system->create_entity_type(armor_pickup);
         end_test();
 
-        // Step 1: Create entity attribute types.
-        // TODO: Validate input!
-        entity_system->create_entity_attribute_type(IQ);
+        EntityAttributeType material;
 
-        EntityType IntelligentRobot;
-    
-        // Create entity type.
-        IntelligentRobot.set_entity_type_name("ROBOT");
-        // TODO: Validate input!
-        entity_system->create_entity_type(IntelligentRobot);
+        cout << "Creating entity attribute type 'armor material'" << endl;   
+        start_test();
+        material.set_data_type(ENTSYS_DATA_TYPE_STRING);
+        material.set_name("armor material");
+        end_test();
 
-        // Link entity attribute type to entity type.
-        // TODO: Validate input!
-        entity_system->link_attribute_type_to_entity_type(IntelligentRobot, IQ);
+        cout << "Linking entity attribute type 'armor thickness' to entity type 'armor pickup'" << endl;
+        start_test();
+        entity_system->link_attribute_type_to_entity_type(armor_pickup, material);
+        end_test();
 
-        // Create instances of entity types.
-        EntityTypeInstance robots[100];
+        cout << "Creating entity type" << endl;
+        start_test();
+        entity_system->create_entity_type(armor_pickup);
+        end_test();
 
-        // Initialise instances of entity types and their linked entity attribute data.
 
-        // Entity type instance initialisation via entity type name call.
-        robots[0] = entity_system->create_entity_type_instance("ROBOT");
+        EntityTypeInstance shield[3];
 
-        // Entity type instance initialisation via entity type name call 2.
-        robots[1] = entity_system->create_entity_type_instance(entity_system->get_entity_type("ROBOT"));
+        // There are 3 ways of initialisation available:
+
+        cout << "entity_system->create_entity_type_instance() 3x" << endl;
+        start_test();
+        shield[0] = entity_system->create_entity_type_instance("ARMOR");
+        shield[1] = entity_system->create_entity_type_instance(armor_pickup);
+        shield[2] = entity_system->create_entity_type_instance(entity_system->get_entity_type("ARMOR"));
+        end_test();
         
-        #define LOOPBEGIN 2 // !
-
+        cout << "Calling EntityTypeInstance::set_attribute_data() 3x" << endl;
         start_test();
-        cout << "Creating 98 more robots. Preparing to take over the world (in debug mode)!" << endl;
-
-        for(unsigned int i=LOOPBEGIN; i<100; i++) 
-        {
-            // We could use entity_system->create_entity_type_instance("ROBOT"); as well!
-            
-            // This is ok because we look up the entity type's name.
-            robots[i] = entity_system->create_entity_type_instance(IntelligentRobot);
-                        
-            // TODO: How to write to data container ?
-            robots[i].set_attribute_data(IQ, std::to_string(100*i));
-        }
+        shield[0].set_attribute_data(material, "copper");
+        shield[1].set_attribute_data(material, "steel");
+        shield[2].set_attribute_data(material, "nickel");
         end_test();
 
+        cout << "Reading entity attribute instances" << endl;
+        start_test();
+        cout << shield[0].read_attribute_data(material) << endl;
+        cout << shield[1].read_attribute_data(material) << endl;
+        cout << shield[2].read_attribute_data(material) << endl;
+        end_test();
+    }
+
+
+    void TestEntityTypes_and_EntityTypeAttributes()
+    {
     }
 
 };

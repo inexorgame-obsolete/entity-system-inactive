@@ -79,6 +79,10 @@ namespace entsys {
         return entity_attribute_type_name;
     }
 
+    std::string EntityAttributeType::get_data() const
+    {
+        return entity_attribute_data.get_stringval();
+    }
 
 };
 };
