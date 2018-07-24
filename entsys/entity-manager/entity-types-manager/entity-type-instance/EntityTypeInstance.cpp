@@ -23,7 +23,6 @@ namespace entsys {
 
     EntityTypeInstance::EntityTypeInstance(const std::string& type_name)
     {
-        // TODO: Does this constructor call of an inherited class even work?
         EntityType(entity_system->get_entity_type(type_name));
     }
 

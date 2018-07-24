@@ -9,7 +9,6 @@ namespace inexor {
 namespace entsys {
 
 
-    // 
     class EntityRelationTypeInstanceManager
     {
         protected:
@@ -17,6 +16,7 @@ namespace entsys {
             EntityRelationTypeInstanceManager();
             
             ~EntityRelationTypeInstanceManager();
+
     };
 
 };

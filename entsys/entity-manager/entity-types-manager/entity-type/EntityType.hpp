@@ -22,15 +22,13 @@ namespace entsys {
         protected:
                         
             // Every entity has at least the following attributes.
-            std::string entity_type_name = std::string("");
+            std::string entity_type_name = std::string("INVALID!");
 
             // TODO: DISCUSS: This this a good design pattern?
             // or should we let the entity attribute type instance manager
             // decide which instances of entity attribute types exist?
             ENTSYS_ENTITY_ATTRIBUTE_TYPE_MAP map_of_entity_attribute_types;
-
-            // Additional data here which act as attributes as well but are hard coded.
-
+            
 
         public:
 
@@ -39,7 +37,6 @@ namespace entsys {
             ~EntityType();
 
             ENTSYS_RETURN_CODE set_entity_type_name(const std::string&);
-
             std::string get_entity_type_name() const;
 
             // TODO: DISCUSS: This this a good design pattern?

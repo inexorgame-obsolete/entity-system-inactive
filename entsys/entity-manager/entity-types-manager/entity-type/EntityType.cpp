@@ -43,7 +43,6 @@ namespace entsys {
 
     ENTSYS_RETURN_CODE EntityType::link_entity_attribute_type(const EntityAttributeType& ent_attr_type)
     {
-        // TODO: Debug!
         // TODO: Validate map access!
         map_of_entity_attribute_types[ent_attr_type.get_name()] = ent_attr_type;
         return ENTSYS_RETURN_SUCCESS;
@@ -52,11 +51,11 @@ namespace entsys {
     
     ENTSYS_RETURN_CODE EntityType::set_attribute_data(const EntityAttributeType& ent_attr_type, const std::string& data)
     {
-        // TODO: Debug!
         // TODO: Validate map access!
         map_of_entity_attribute_types[ent_attr_type.get_name()].set_data(data);
         return ENTSYS_RETURN_SUCCESS;
     }
+
 
     std::string EntityType::read_attribute_data(const EntityAttributeType& ent_attr_type)
     {

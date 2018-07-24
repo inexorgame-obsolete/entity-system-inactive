@@ -26,6 +26,7 @@
 namespace inexor {
 namespace entsys {
 
+
     // The entity manager class is responsible for adding, modifying and removing entity types,
     // entity attributes, entity relations and instances of these.
     class EntityManager : public EntityTypeManager,

@@ -8,27 +8,14 @@ namespace inexor {
 namespace entsys {
 
 
-    void DataContainer::reset_memory()
-    {
-        int64_data = 0;
-        integer_data = 0;
-        float_data = 0.0f;
-        double_data = 0.0;
-        boolean_data = false;
-        string_data = std::string("");
-    }
-
-
     DataContainer::DataContainer(const ENTSYS_DATA_TYPE& data_type)
     {
         data_container_data_type = data_type;
-        reset_memory();
     }
 
 
     DataContainer::DataContainer()
     {
-        reset_memory();
     }
 
 
@@ -84,6 +71,12 @@ namespace entsys {
     {
         data_container_data_type = data_type;
         return ENTSYS_RETURN_SUCCESS;
+    }
+
+
+    ENTSYS_DATA_TYPE DataContainer::get_data_type() const
+    {
+        return data_container_data_type;
     }
 
 
@@ -173,7 +166,7 @@ namespace entsys {
             }
         }
         // TODO: DISCUSS: Is this a good idea ?
-        return DataContainer(std::int64_t(0));
+        return DataContainer(0);
     }
 
 
@@ -203,7 +196,7 @@ namespace entsys {
                 }
             }
         }
-        return DataContainer(std::int64_t(0));
+        return DataContainer(0);
     }
 
 
@@ -233,7 +226,7 @@ namespace entsys {
                 }
             }
         }
-        return DataContainer(std::int64_t(0));
+        return DataContainer(0);
     }
 
 
@@ -263,7 +256,7 @@ namespace entsys {
                 }
             }
         }
-        return DataContainer(std::int64_t(0));
+        return DataContainer(0);
     }
 
 
@@ -362,11 +355,6 @@ namespace entsys {
         return string_data;
     }
 
-
-    ENTSYS_DATA_TYPE DataContainer::get_data_type() const
-    {
-        return data_container_data_type;
-    }
 
 };
 };

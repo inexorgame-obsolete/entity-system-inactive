@@ -9,6 +9,7 @@ namespace entsys {
     
     EntityAttributeType::EntityAttributeType()
     {
+
     }
 
 
@@ -23,13 +24,7 @@ namespace entsys {
         set_data_type(attr_type_data_type);
     }
 
-    
-    ENTSYS_RETURN_CODE EntityAttributeType::validate()
-    {
-        return ENTSYS_RETURN_ERROR;
-    }
-
-
+   
     EntityAttributeType::EntityAttributeType(const std::string& attr_type_name, const ENTSYS_DATA_TYPE& attr_type_data_type)
     {
         set_name(attr_type_name);
@@ -55,7 +50,6 @@ namespace entsys {
     
     ENTSYS_RETURN_CODE EntityAttributeType::set_data(const std::string& data)
     {
-        // TODO: Debug!
         entity_attribute_data.set(data);
         return ENTSYS_RETURN_ERROR;
     }
@@ -79,10 +73,19 @@ namespace entsys {
         return entity_attribute_type_name;
     }
 
+
     std::string EntityAttributeType::get_data() const
     {
         return entity_attribute_data.get_stringval();
     }
+
+
+    ENTSYS_RETURN_CODE EntityAttributeType::validate()
+    {
+        // TODO: Implement validation method!
+        return ENTSYS_RETURN_ERROR;
+    }
+
 
 };
 };

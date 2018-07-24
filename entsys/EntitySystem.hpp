@@ -21,7 +21,6 @@ namespace entsys {
 
             EntitySystem();
 
-            // The singleton implementation of the entity system.
             static EntitySystem* entsys_singleton_instance;
 
         public:
@@ -32,10 +31,6 @@ namespace entsys {
             static EntitySystem* create_entity_system();
 
     };
-    
-
-    // Don't create the instance of the entity system in a header file.
-    // It could cause a linker error because of multiple definitions!
 
 };
 };

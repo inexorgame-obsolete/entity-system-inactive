@@ -53,9 +53,6 @@ namespace entsys {
 
         protected:
 
-            // Reset the memory of all members.
-            void reset_memory();
-
             // Only numeric data containers can execute math operations!
             // Check is this data container's type is numeric
             bool data_container_type_is_numeric();

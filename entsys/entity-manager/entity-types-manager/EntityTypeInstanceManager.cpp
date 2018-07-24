@@ -32,12 +32,14 @@ namespace entsys {
         return new_inst;
     }
 
-
+    /*
+    // TODO: Remove this?
     ENTSYS_RETURN_CODE EntityTypeInstanceManager::set_attribute_data(const EntityTypeInstance& ent_inst, const EntityAttributeType& attr_type, const std::string& attr_val)
     {
         // TODO: Set attribute data here!
         return ENTSYS_RETURN_ERROR;
     }
+    */
 
 
 };

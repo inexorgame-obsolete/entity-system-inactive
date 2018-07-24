@@ -18,10 +18,8 @@ namespace inexor {
 namespace entsys {
     
 
-    // A base class for types of attributes of entites.
     class EntityAttributeType : public DataValidation
     {
-        // TODO: May change this to protected?
         protected:
 
             // The name of the type of attribute of the entity.
@@ -41,9 +39,7 @@ namespace entsys {
             EntityAttributeType(const std::string&, const ENTSYS_DATA_TYPE&);
 
             ~EntityAttributeType();
-
-            // TODO: DISCUSS: Do all these methods have to me of const type?
-
+            
             ENTSYS_RETURN_CODE validate();
 
             ENTSYS_RETURN_CODE set_data_type(const ENTSYS_DATA_TYPE&);
@@ -59,7 +55,6 @@ namespace entsys {
             // This whould mean that every instance of this entity attribute type would 
             // be affected by this! Currently there is no intention to do so.
     };
-
     
     // By using these type definitions we can make later definitions shorter.
     typedef std::unordered_map<std::string, EntityAttributeType> ENTSYS_ENTITY_ATTRIBUTE_TYPE_MAP;

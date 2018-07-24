@@ -36,7 +36,7 @@ namespace entsys {
 
             EntityTypeInstance create_entity_type_instance(const EntityType&);
 
-            ENTSYS_RETURN_CODE set_attribute_data(const EntityTypeInstance&, const EntityAttributeType&, const std::string&);
+            //ENTSYS_RETURN_CODE set_attribute_data(const EntityTypeInstance&, const EntityAttributeType&, const std::string&);
 
     };
 

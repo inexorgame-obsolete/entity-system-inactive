@@ -72,10 +72,6 @@ namespace entsys {
         }
         end_test();
 
-        // add, sub, mul, div
-        // TODO: Why is this constructor call for add, sub, mul, div 
-        // methods even working btw?
-
         start_test();
         cout << "Call DataContainer::add(int) 1000 times:" << endl;
         for(int i=0; i<1000; i+=1) dc_int.add(1);
@@ -121,20 +117,45 @@ namespace entsys {
 
         cout << "Setting attribute name" << endl;
         start_test();
-        attr1.set_name(std::string("color"));
+        attr1.set_name("weight");
         end_test();
 
         cout << "Setting attribute data type" << endl;
         start_test();
         attr1.set_data_type(ENTSYS_DATA_TYPE_FLOAT);
-        end_test();
-        
+        end_test();        
     }
 
 
     void Test_EntityTypes()
     {
+        EntityType weapon1;
+        
+        cout << "Creating entity type 'rocket launcher ammo'" << endl;
+        start_test();
+        weapon1.set_entity_type_name("ROCKETLAUNCHER");
+        end_test();
+        
+        entity_system->create_entity_type(weapon1);    
+    }
+
+
+    void TestEntityTypes_and_EntityTypeAttributes()
+    {
         EntityType armor_pickup;
+        EntityAttributeType material;
+        cout << "Creating entity attribute type 'armor material'" << endl;   
+
+        start_test();
+        material.set_data_type(ENTSYS_DATA_TYPE_STRING);
+        material.set_name("armor material");
+        end_test();
+
+        cout << "entity_system->link_attribute_type_to_entity_type(armor_pickup, material)" << endl;
+        start_test();
+        entity_system->link_attribute_type_to_entity_type(armor_pickup, material);
+        end_test();
+
         cout << "Creating entity type 'armor pickup'" << endl;
        
         start_test();
@@ -142,54 +163,35 @@ namespace entsys {
         entity_system->create_entity_type(armor_pickup);
         end_test();
 
-        EntityAttributeType material;
-
-        cout << "Creating entity attribute type 'armor material'" << endl;   
-        start_test();
-        material.set_data_type(ENTSYS_DATA_TYPE_STRING);
-        material.set_name("armor material");
-        end_test();
-
-        cout << "Linking entity attribute type 'armor thickness' to entity type 'armor pickup'" << endl;
-        start_test();
-        entity_system->link_attribute_type_to_entity_type(armor_pickup, material);
-        end_test();
-
         cout << "Creating entity type" << endl;
         start_test();
         entity_system->create_entity_type(armor_pickup);
         end_test();
-
-
+        
         EntityTypeInstance shield[3];
 
         // There are 3 ways of initialisation available:
 
-        cout << "entity_system->create_entity_type_instance() 3x" << endl;
+        cout << "entity_system->create_entity_type_instance(armor_pickup) (3x)" << endl;
         start_test();
         shield[0] = entity_system->create_entity_type_instance("ARMOR");
         shield[1] = entity_system->create_entity_type_instance(armor_pickup);
         shield[2] = entity_system->create_entity_type_instance(entity_system->get_entity_type("ARMOR"));
         end_test();
         
-        cout << "Calling EntityTypeInstance::set_attribute_data() 3x" << endl;
+        cout << "EntityTypeInstance::set_attribute_data(..) 3x" << endl;
         start_test();
         shield[0].set_attribute_data(material, "copper");
         shield[1].set_attribute_data(material, "steel");
         shield[2].set_attribute_data(material, "nickel");
         end_test();
 
-        cout << "Reading entity attribute instances" << endl;
+        cout << "EntityTypeInstance::read_attribute_data(material) (3x)" << endl;
         start_test();
         cout << shield[0].read_attribute_data(material) << endl;
         cout << shield[1].read_attribute_data(material) << endl;
         cout << shield[2].read_attribute_data(material) << endl;
         end_test();
-    }
-
-
-    void TestEntityTypes_and_EntityTypeAttributes()
-    {
     }
 
 };

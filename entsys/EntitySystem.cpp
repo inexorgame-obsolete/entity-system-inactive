@@ -3,6 +3,7 @@
 
 #include "EntitySystem.hpp"
 
+
 namespace inexor {
 namespace entsys {
 
@@ -16,10 +17,7 @@ namespace entsys {
     {
     }
 
-    
-    EntitySystem* EntitySystem::entsys_singleton_instance = nullptr;
 
-    // Singleton implementation
     EntitySystem* EntitySystem::create_entity_system()
     {
         // Initialise instance if not already done.
@@ -31,6 +29,8 @@ namespace entsys {
         return entsys_singleton_instance;
     }
 
+
+    EntitySystem* EntitySystem::entsys_singleton_instance = nullptr;
 
 };
 };

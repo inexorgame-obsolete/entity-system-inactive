@@ -16,7 +16,13 @@ namespace entsys {
     EntityAttributeTypeInstanceManager::~EntityAttributeTypeInstanceManager()
     {
     }
+   
 
+    ENTSYS_RETURN_CODE EntityAttributeTypeInstanceManager::create_entity_attribute_type_instance()
+    {
+        // TODO: Implement!
+        return ENTSYS_RETURN_ERROR;
+    }
 
 };
 };

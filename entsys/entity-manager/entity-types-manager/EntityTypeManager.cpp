@@ -52,7 +52,6 @@ namespace entsys {
             return ENTSYS_RETURN_SUCCESS;
         }
 
-        // something went wrong otherwise
         return validation_result;
     }
 
@@ -81,7 +80,7 @@ namespace entsys {
     {
         // If we reached the end of the unordered_map before it has been found it does not exist yet.
         ENTSYS_ENTITY_TYPE_LOOKUP search = map_of_entity_types.find(entity_type_name);
-        if(search == map_of_entity_types.end()) return EntityType("invalid");
+        if(search == map_of_entity_types.end()) return EntityType("INVALID!");
 
         return search->second;
     }

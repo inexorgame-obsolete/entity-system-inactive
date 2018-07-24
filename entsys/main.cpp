@@ -19,6 +19,7 @@ int main(int argc, char* argv[])
     Test_EntitySystemDataContainers();
     Test_EntityAttributeTypes();
     Test_EntityTypes();
+    TestEntityTypes_and_EntityTypeAttributes();
 
     cin.get();
     return 0;

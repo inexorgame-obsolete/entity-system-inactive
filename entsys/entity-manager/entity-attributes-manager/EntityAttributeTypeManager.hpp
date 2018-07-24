@@ -20,9 +20,6 @@ namespace entsys {
             // In this unordered map all available types of entity attributes will be stored.
             ENTSYS_ENTITY_ATTRIBUTE_TYPE_MAP map_of_entity_attribute_types;
             
-            // TODO: Debug!
-            ENTSYS_RETURN_CODE search_entity_attribute_type(std::string&) const;
-            
         protected:
 
             // Make this protected so this class can only 
@@ -30,6 +27,9 @@ namespace entsys {
             EntityAttributeTypeManager();
 
             ~EntityAttributeTypeManager();
+
+            // Check if an entity attribute type does already exist.
+            ENTSYS_RETURN_CODE search_entity_attribute_type(std::string&) const;
 
         public:
 
