@@ -134,31 +134,7 @@ namespace entsys {
 
     void Test_EntityTypes()
     {
-        EntityAttributeType weight;
-        EntityAttributeType color;
         EntityAttributeType IQ;
-
-        EntityType IntelligentRobot;
-        
-        EntityTypeInstance robots[100];
- 
-        cout << "Creating entity attribute type 'weight'" << endl;
-        start_test();
-        weight.set_data_type(ENTSYS_DATA_TYPE_FLOAT);
-        weight.set_name("weight");
-        end_test();
-
-        cout << "Trying to cause error by overwriting data type" << endl;
-        start_test();
-        weight.set_data_type(ENTSYS_DATA_TYPE_STRING);
-        end_test();
-
-        cout << "Creating entity attribute type 'mindcontrol_mode'" << endl;
-        start_test();
-        color.set_data_type(ENTSYS_DATA_TYPE_STRING);
-        color.set_name("mindcontrol_mode");
-        end_test();
-
         cout << "Creating entity attribute type 'IQ'" << endl;
         start_test();
         IQ.set_data_type(ENTSYS_DATA_TYPE_INT);
@@ -166,42 +142,58 @@ namespace entsys {
         end_test();
 
         // Step 1: Create entity attribute types.
-        entity_system->create_entity_attribute_type(weight);
-        entity_system->create_entity_attribute_type(color);
+        // TODO: Validate input!
         entity_system->create_entity_attribute_type(IQ);
 
-        // Step 2: Link entity attribute types to entity types.
+        EntityType IntelligentRobot;
+    
+        // Create entity type.
         IntelligentRobot.set_entity_type_name("ROBOT");
-        entity_system->link_attribute_type_to_entity_type(IntelligentRobot, IQ);
-        entity_system->link_attribute_type_to_entity_type(IntelligentRobot, color);
-        entity_system->link_attribute_type_to_entity_type(IntelligentRobot, weight);
-
-        // Step 3: Create entity type.
+        // TODO: Validate input!
         entity_system->create_entity_type(IntelligentRobot);
-        
-        // Step 4: Create instances of entity types.
-        // Please not that there are 2 ways of initialising entity type instances:
+
+        // Link entity attribute type to entity type.
+        // TODO: Validate input!
+        entity_system->link_attribute_type_to_entity_type(IntelligentRobot, IQ);
+
+        // Create instances of entity types.
+        EntityTypeInstance robots[100];
+
+        // Initialise instances of entity types and their linked entity attribute data.
+
+        // Entity type instance initialisation via entity type name call.
         robots[0] = entity_system->create_entity_type_instance("ROBOT");
+
+        /*
+        // Entity type instance initialisation via entity type name call 2.
         robots[1] = entity_system->create_entity_type_instance(entity_system->get_entity_type("ROBOT"));
-        
+
+
         #define LOOPBEGIN 2 // !
 
         start_test();
         cout << "Creating 98 more robots. Preparing to take over the world (in debug mode)!" << endl;
 
+        // TODO: Replace size_t with unsigned int!
         for(size_t i=LOOPBEGIN; i<100; i++) 
         {
             // We could use entity_system->create_entity_type_instance("ROBOT"); as well!
+            
+            // This is ok because we look up the entity type's name.
             robots[i] = entity_system->create_entity_type_instance(IntelligentRobot);
 
+            
             // TODO: How to write to data container ?
+
+
+            // TODO: Remove these comments:
             //entity_system->set_attribute_data(robots[i], IQ, "232");
             //robots[i].set_attribute_data(weight, 1000.0f);
             //robots[i].set_attribute_data(IQ, "232");
             //robots[i].set_attribute_data(color, 12);
         }
         end_test();
-
+        */
     }
 
 };

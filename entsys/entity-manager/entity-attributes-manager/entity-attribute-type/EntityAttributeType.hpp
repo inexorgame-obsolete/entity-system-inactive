@@ -44,6 +44,7 @@ namespace entsys {
 
             // TODO: DISCUSS: Do all these methods have to me of const type?
 
+
             ENTSYS_RETURN_CODE validate();
 
             ENTSYS_RETURN_CODE set_name(const std::string&);

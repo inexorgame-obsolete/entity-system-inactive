@@ -66,11 +66,11 @@ namespace entsys {
     ENTSYS_RETURN_CODE EntityTypeManager::get_entity_type(const std::string& entity_type_name, EntityType& entity_type_reference) const
     {
         // If we reached the end of the unordered_map before it has been found it does not exist yet.
-        ENTSYS_ENTITY_TYPE_LOOKUP search_entity_type = map_of_entity_types.find(entity_type_name);
-        if(search_entity_type == map_of_entity_types.end()) return ENTSYS_RETURN_ERROR_ENTITY_TYPE_UNAVAILABLE;
+        ENTSYS_ENTITY_TYPE_LOOKUP search = map_of_entity_types.find(entity_type_name);
+        if(search == map_of_entity_types.end()) return ENTSYS_RETURN_ERROR_ENTITY_TYPE_UNAVAILABLE;
 
         // Fill out requested entity type (call by reference).
-        entity_type_reference = search_entity_type->second;
+        entity_type_reference = search->second;
 
         // Everything worked fine!
         return ENTSYS_RETURN_SUCCESS;
@@ -80,10 +80,10 @@ namespace entsys {
     EntityType EntityTypeManager::get_entity_type(const std::string& entity_type_name) const
     {
         // If we reached the end of the unordered_map before it has been found it does not exist yet.
-        ENTSYS_ENTITY_TYPE_LOOKUP search_entity_type = map_of_entity_types.find(entity_type_name);
-        if(search_entity_type == map_of_entity_types.end()) return EntityType("invalid");
+        ENTSYS_ENTITY_TYPE_LOOKUP search = map_of_entity_types.find(entity_type_name);
+        if(search == map_of_entity_types.end()) return EntityType("invalid");
 
-        return search_entity_type->second;
+        return search->second;
     }
 
     
@@ -94,6 +94,15 @@ namespace entsys {
         return (search_entity_type == map_of_entity_types.end()) ? true : false;
     }
 
+    
+    ENTSYS_RETURN_CODE EntityTypeManager::link_attribute_type_to_entity_type(const EntityType& ent_type, const EntityAttributeType& ent_attr_type)
+    {
+        // TODO: Debug!
+        map_of_entity_types[ent_type.get_entity_type_name()].link_entity_attribute_type(ent_attr_type);
+
+        // TODO: Resolve!
+        return ENTSYS_RETURN_ERROR;
+    }
 
 };
 };

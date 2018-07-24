@@ -6,7 +6,7 @@
 namespace inexor {
 namespace entsys {
 
-
+    
     EntityAttributeType::EntityAttributeType()
     {
     }

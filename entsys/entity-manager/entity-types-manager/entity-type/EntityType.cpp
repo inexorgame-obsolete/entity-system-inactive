@@ -41,10 +41,14 @@ namespace entsys {
         return ENTSYS_RETURN_NAME_INVALID;
     }
     
-
+    
     ENTSYS_RETURN_CODE EntityType::link_entity_attribute_type(const EntityAttributeType& ent_attr_type)
     {
-        return ENTSYS_RETURN_SUCCESS;
+        // TODO: Debug!
+        map_of_entity_attribute_types[ent_attr_type.get_name()] = ent_attr_type;
+
+        // TODO: Resolve!
+        return ENTSYS_RETURN_ERROR;
     }
 
 };

@@ -38,8 +38,6 @@ namespace entsys {
             // entity attribute types by the entity attribute instance manager.
             ENTSYS_RETURN_CODE create_entity_attribute_type(const EntityAttributeType&);
                         
-            ENTSYS_RETURN_CODE link_attribute_type_to_entity_type(const EntityType&, const EntityAttributeType&) const;
-
             // This method returns the number of existing types of entity attributes available in the entity system.
             size_t count() const;
     };
