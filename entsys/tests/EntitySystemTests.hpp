@@ -164,11 +164,9 @@ namespace entsys {
         // Entity type instance initialisation via entity type name call.
         robots[0] = entity_system->create_entity_type_instance("ROBOT");
 
-        /*
         // Entity type instance initialisation via entity type name call 2.
         robots[1] = entity_system->create_entity_type_instance(entity_system->get_entity_type("ROBOT"));
-
-
+        
         #define LOOPBEGIN 2 // !
 
         start_test();
@@ -181,19 +179,12 @@ namespace entsys {
             
             // This is ok because we look up the entity type's name.
             robots[i] = entity_system->create_entity_type_instance(IntelligentRobot);
-
-            
+                        
             // TODO: How to write to data container ?
-
-
-            // TODO: Remove these comments:
-            //entity_system->set_attribute_data(robots[i], IQ, "232");
-            //robots[i].set_attribute_data(weight, 1000.0f);
-            //robots[i].set_attribute_data(IQ, "232");
-            //robots[i].set_attribute_data(color, 12);
+            robots[i].set_attribute_data(IQ, std::to_string(100*i));
         }
         end_test();
-        */
+
     }
 
 };

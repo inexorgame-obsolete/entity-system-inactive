@@ -28,14 +28,5 @@ namespace entsys {
     }
 
 
-    ENTSYS_RETURN_CODE EntityTypeInstance::set_attribute_data(const EntityAttributeType& ent_attr_type, const std::string& data)
-    {
-        // TOOD: Debug!
-        //map_of_entity_attribute_types[ent_attr_type.get_name()].set_data(data);
-        // TODO: Resolve!
-        return ENTSYS_RETURN_ERROR;
-    }
-
-
 };
 };

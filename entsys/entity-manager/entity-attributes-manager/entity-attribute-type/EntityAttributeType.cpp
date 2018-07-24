@@ -56,7 +56,6 @@ namespace entsys {
     ENTSYS_RETURN_CODE EntityAttributeType::set_data(const std::string& data)
     {
         // TODO: Debug!
-        // TODO: Remove overhead!
         entity_attribute_data.set(data);
         return ENTSYS_RETURN_ERROR;
     }

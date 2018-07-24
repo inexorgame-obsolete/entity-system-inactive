@@ -22,9 +22,7 @@ namespace entsys {
             ~EntityTypeInstance();
 
             // TODO: Only instances should be abled to write to attributes ?
-
-            ENTSYS_RETURN_CODE set_attribute_data(const EntityAttributeType&, const std::string&);
-            // TODO: Overload method for setting other data types!
+            
     };
 
 };

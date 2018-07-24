@@ -49,6 +49,10 @@ namespace entsys {
             // decide which instances of entity attribute types exist?
             ENTSYS_RETURN_CODE link_entity_attribute_type(const EntityAttributeType&);
 
+            ENTSYS_RETURN_CODE set_attribute_data(const EntityAttributeType&, const std::string&);
+            // TODO: Overload method for setting other data types!
+
+
 
     };
 
