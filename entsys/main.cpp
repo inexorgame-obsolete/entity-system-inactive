@@ -18,10 +18,10 @@ int main(int argc, char* argv[])
     // Print minimum and maximum memory values.
     Print_MinimumMaximumMemoryValues();
 
-    // Test by making false API calls.
+    // Test by making false API calls:
     Test_DataContainer_CorrectUsage();
 
-    // Test by making correct API calls.
+    // Test by making correct API calls:
     // Test_DataContainer_ErrorUsage();
 
     cin.get();

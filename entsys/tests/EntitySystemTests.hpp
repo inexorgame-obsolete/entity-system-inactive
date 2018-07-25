@@ -18,38 +18,7 @@ extern inexor::entity_system::EntitySystem* entsys;
 namespace inexor {
 namespace entity_system {
 
-    // Minimum and maximum values.
-    void Print_MinimumMaximumMemoryValues()
-    {
-        Change_Output_Console_Color(CCOLOR_PURPLE);
-        cout << endl << endl << "Printing system specific minimum and maximum values of memory types." << endl;
 
-        Change_Output_Console_Color(CCOLOR_GREEN);
-
-        cout << "-----------------------------------------------------------------------" << endl;
-        cout << "DATA TYPE" << "\t\t" << "MINIMUM" << "\t\t\t" << "MAXIMUM" << endl; 
-        cout << "-----------------------------------------------------------------------" << endl;
-        cout << "char\t\t\t"                 << CHAR_MIN  << "\t\t\t" << CHAR_MAX         << endl;
-        cout << "signed char\t\t"            << SCHAR_MIN << "\t\t\t" << SCHAR_MAX        << endl;
-        cout << "unsigned char\t\t"          << 0         << "\t\t\t" << UCHAR_MAX        << endl;
-        cout << "wchar_t\t\t\t"              << SCHAR_MIN << "\t\t\t" << WCHAR_MAX        << endl;
-        cout << "char16_t\t\t"               << 0         << "\t\t\t" << UINT_LEAST16_MAX << endl;
-        cout << "char32_t\t\t"               << 0         << "\t\t\t" << UINT_LEAST32_MAX << endl;
-        cout << "short\t\t\t"                << SHRT_MIN  << "\t\t\t" << SHRT_MAX         << endl;
-        cout << "unsigned short\t\t"         << 0         << "\t\t\t" << USHRT_MAX        << endl;
-        cout << "int\t\t\t"                  << INT_MIN   << "\t\t"   << INT_MAX          << endl;
-        cout << "unsigned int\t\t"           << 0         << "\t\t\t" << UINT_MAX         << endl;
-        cout << "long\t\t\t"                 << LONG_MIN  << "\t\t"   << LONG_MAX         << endl;
-        cout << "unsigned long\t\t"          << 0         << "\t\t\t" << ULONG_MAX        << endl;
-        cout << "long long\t\t"              << LLONG_MIN << "\t"     << LLONG_MAX        << endl;
-        cout << "unsigned long long\t"       << 0         << "\t\t\t" << ULLONG_MAX       << endl;
-        cout << "float\t\t\t"                << FLT_MIN   << "\t\t"   << FLT_MAX          << endl;
-        cout << "double\t\t\t"               << DBL_MIN   << "\t\t"   << DBL_MAX          << endl;
-        cout << "long double\t\t"            << LDBL_MIN  << "\t\t"   << LDBL_MAX         << endl;
-        cout << "-----------------------------------------------------------------------" << endl;
-    }
-
-    
     // Test DataContainer by making false API calls.
     void Test_DataContainer_ErrorUsage()
     {
@@ -78,9 +47,6 @@ namespace entity_system {
         DataContainer BoolCont(true);
         DataContainer IntCont(1234);
         DataContainer StringCont("This is an example string");        
-        
-        // This defined how often a test will be repeated.
-        #define ENTSYS_TEST_REPETITION 100000
         
         Change_Output_Console_Color(CCOLOR_PURPLE);
         cout << endl << endl << "Testing DataContainer::set methods for 6 different data types." << endl;
