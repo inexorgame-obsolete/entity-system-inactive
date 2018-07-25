@@ -199,42 +199,6 @@ namespace entity_system {
         return set(new_string_val);
     }
 
-
-    int DataContainer::get_intval() const
-    {
-        return integer_data;
-    }
-
-
-    std::int64_t DataContainer::get_bigintval() const
-    {
-        return int64_data;
-    }
-
-
-    double DataContainer::get_doubleval() const
-    {
-        return double_data;
-    }
-
-
-    float DataContainer::get_floatval() const
-    {
-        return float_data;
-    }
-
-
-    bool DataContainer::get_boolval() const
-    {
-        return boolean_data;
-    }
-
-
-    std::string DataContainer::get_stringval() const
-    {
-        return string_data;
-    }
-
-
+    
 };
 };

@@ -102,12 +102,6 @@ namespace entity_system {
             // Get methods.
             ENTSYS_DATA_TYPE get_data_type() const;
 
-            std::int64_t get_bigintval() const;
-            std::string get_stringval() const;
-            double get_doubleval() const;
-            float get_floatval() const;
-            bool get_boolval() const;
-            int get_intval() const;
 
     };
 
