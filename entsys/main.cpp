@@ -15,6 +15,9 @@ EntitySystem* entsys = EntitySystem::create_entity_system();
 
 int main(int argc, char* argv[])
 {   
+    // Print minimum and maximum memory values.
+    Print_MinimumMaximumMemoryValues();
+
     // Windows specific only
     #ifdef WIN32
         HANDLE hConsole = GetStdHandle(STD_OUTPUT_HANDLE);
@@ -25,10 +28,7 @@ int main(int argc, char* argv[])
     ErrorTest_DataContainer();
 
     // Test by making correct API calls.
-    Test_EntityTypes();
-    Test_EntityAttributeTypes();
-    Test_EntitySystemDataContainers();
-    TestEntityTypes_and_EntityTypeAttributes();
+    // TODO
 
     cin.get();
     return 0;
