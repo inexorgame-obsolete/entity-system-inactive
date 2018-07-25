@@ -6,7 +6,7 @@
 
 
 namespace inexor {
-namespace entsys {
+namespace entity_system {
 
 
     class EntityRelationTypeInstanceManager

@@ -5,7 +5,7 @@
 
 
 namespace inexor {
-namespace entsys {
+namespace entity_system {
     
 
     EntityType::EntityType(const std::string& ent_type_name)

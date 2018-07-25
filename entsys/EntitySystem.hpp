@@ -9,7 +9,7 @@
 
 
 namespace inexor {
-namespace entsys {
+namespace entity_system {
 
     // TODO: EntityEditor, EntityEditorRenderer, EntityGameSceneRenderer,
     // EntitySync, EntityErrorHandling, EntityImporter, EntityExporter.

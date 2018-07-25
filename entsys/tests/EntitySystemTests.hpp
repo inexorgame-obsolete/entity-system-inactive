@@ -5,14 +5,14 @@
 #define INEXOR_ENTSYS_TESTING_FRAMEWORK_HEADER
 
 #include "../EntitySystem.hpp"
-extern inexor::entsys::EntitySystem* entity_system;
+extern inexor::entity_system::EntitySystem* entsys;
 
 // Start and end tests with the profiler.
 #include "../tests/EntitySystemProfiler.hpp"
 
 
 namespace inexor {
-namespace entsys {
+namespace entity_system {
     
 
     void Test_EntitySystemDataContainers()
@@ -136,7 +136,7 @@ namespace entsys {
         weapon1.set_entity_type_name("ROCKETLAUNCHER");
         end_test();
         
-        entity_system->create_entity_type(weapon1);    
+        entsys->create_entity_type(weapon1);    
     }
 
 
@@ -151,32 +151,32 @@ namespace entsys {
         material.set_name("armor material");
         end_test();
 
-        cout << "entity_system->link_attribute_type_to_entity_type(armor_pickup, material)" << endl;
+        cout << "entsys->link_attribute_type_to_entity_type(armor_pickup, material)" << endl;
         start_test();
-        entity_system->link_attribute_type_to_entity_type(armor_pickup, material);
+        entsys->link_attribute_type_to_entity_type(armor_pickup, material);
         end_test();
 
         cout << "Creating entity type 'armor pickup'" << endl;
        
         start_test();
         armor_pickup.set_entity_type_name("ARMOR");
-        entity_system->create_entity_type(armor_pickup);
+        entsys->create_entity_type(armor_pickup);
         end_test();
 
         cout << "Creating entity type" << endl;
         start_test();
-        entity_system->create_entity_type(armor_pickup);
+        entsys->create_entity_type(armor_pickup);
         end_test();
         
         EntityTypeInstance shield[3];
 
         // There are 3 ways of initialisation available:
 
-        cout << "entity_system->create_entity_type_instance(armor_pickup) (3x)" << endl;
+        cout << "entsys->create_entity_type_instance(armor_pickup) (3x)" << endl;
         start_test();
-        shield[0] = entity_system->create_entity_type_instance("ARMOR");
-        shield[1] = entity_system->create_entity_type_instance(armor_pickup);
-        shield[2] = entity_system->create_entity_type_instance(entity_system->get_entity_type("ARMOR"));
+        shield[0] = entsys->create_entity_type_instance("ARMOR");
+        shield[1] = entsys->create_entity_type_instance(armor_pickup);
+        shield[2] = entsys->create_entity_type_instance(entsys->get_entity_type("ARMOR"));
         end_test();
         
         cout << "EntityTypeInstance::set_attribute_data(..) 3x" << endl;

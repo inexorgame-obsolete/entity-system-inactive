@@ -14,8 +14,9 @@ using namespace std::chrono;
 
 
 namespace inexor {
-namespace entsys {
+namespace entity_system {
     
+
     high_resolution_clock::time_point t1;
 
 

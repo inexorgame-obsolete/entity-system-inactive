@@ -5,7 +5,7 @@
 
 
 namespace inexor {
-namespace entsys {
+namespace entity_system {
     
 
     EntityTypeManager::EntityTypeManager()
@@ -27,7 +27,6 @@ namespace entsys {
 
     ENTSYS_RETURN_CODE EntityTypeManager::validate_new_entity_type(const EntityType& newtype) const
     {
-        // Look this entity type name up in the unordered map.
         // If we reached the end of the unordered_map before it has been found it does not exist yet.
         // TODO: Change this so it uses the does_entity_type_exist() method.
         if(map_of_entity_types.find(newtype.get_entity_type_name()) == map_of_entity_types.end()) return ENTSYS_RETURN_NEW_ENTITY_TYPE_VALID;
@@ -85,20 +84,12 @@ namespace entsys {
         return search->second;
     }
 
-    
-    bool EntityTypeManager::search_entity_type(const std::string& entity_type_to_look_up) const
-    {
-        // Check if a key/value pair for this entity type exists
-        ENTSYS_ENTITY_TYPE_LOOKUP search_entity_type = map_of_entity_types.find(entity_type_to_look_up);
-        return (search_entity_type == map_of_entity_types.end()) ? true : false;
-    }
 
-    
     ENTSYS_RETURN_CODE EntityTypeManager::link_attribute_type_to_entity_type(const EntityType& ent_type, const EntityAttributeType& ent_attr_type)
     {
-        map_of_entity_types[ent_type.get_entity_type_name()].link_entity_attribute_type(ent_attr_type);
-        return ENTSYS_RETURN_ERROR;
+        return map_of_entity_types[ent_type.get_entity_type_name()].link_entity_attribute_type(ent_attr_type);
     }
+
 
 };
 };

@@ -4,7 +4,7 @@
 #include "EntityAttributeType.hpp"
 
 namespace inexor {
-namespace entsys {
+namespace entity_system {
 
     
     EntityAttributeType::EntityAttributeType()

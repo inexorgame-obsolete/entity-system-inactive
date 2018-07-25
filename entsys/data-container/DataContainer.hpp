@@ -16,7 +16,7 @@
 
 
 namespace inexor {
-namespace entsys {
+namespace entity_system {
 
 
     // TODO: Instead of accessing maps by value every time a write operation occurs, 

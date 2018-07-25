@@ -5,7 +5,7 @@
 
 
 namespace inexor {
-namespace entsys {
+namespace entity_system {
 
 
     DataContainer::DataContainer(const ENTSYS_DATA_TYPE& data_type)

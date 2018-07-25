@@ -4,11 +4,11 @@
 #include "EntityTypeInstance.hpp"
 #include "../../../EntitySystem.hpp"
 
-extern inexor::entsys::EntitySystem* entity_system;
+extern inexor::entity_system::EntitySystem* entsys;
 
 
 namespace inexor {
-namespace entsys {
+namespace entity_system {
 
 
     EntityTypeInstance::EntityTypeInstance()
@@ -23,7 +23,7 @@ namespace entsys {
 
     EntityTypeInstance::EntityTypeInstance(const std::string& type_name)
     {
-        EntityType(entity_system->get_entity_type(type_name));
+        EntityType(entsys->get_entity_type(type_name));
     }
 
 

@@ -24,7 +24,7 @@
 
 
 namespace inexor {
-namespace entsys {
+namespace entity_system {
 
 
     // The entity manager class is responsible for adding, modifying and removing entity types,
@@ -45,6 +45,7 @@ namespace entsys {
 
             ~EntityManager();
 
+            
     };
 
 };

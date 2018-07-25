@@ -4,7 +4,7 @@
 #include "EntityRelationTypeManager.hpp"
 
 namespace inexor {
-namespace entsys {
+namespace entity_system {
 
 
     EntityRelationTypeManager::EntityRelationTypeManager()

@@ -5,7 +5,7 @@
 
 
 namespace inexor {
-namespace entsys {
+namespace entity_system {
 
 
     EntityAttributeTypeManager::EntityAttributeTypeManager()

@@ -6,7 +6,7 @@
 
 
 namespace inexor {
-namespace entsys {
+namespace entity_system {
 
     // Entity system error codes.
     enum ENTSYS_RETURN_CODE

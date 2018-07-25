@@ -5,7 +5,7 @@
 #define INEXOR_ENTSYS_DATA_TYPE_ENUMERATION_HEADER
 
 namespace inexor {
-namespace entsys {
+namespace entity_system {
 
     // Data container memory type enumeration.
     enum ENTSYS_DATA_TYPE 

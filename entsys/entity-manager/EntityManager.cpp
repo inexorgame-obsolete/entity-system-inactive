@@ -5,7 +5,7 @@
 
 
 namespace inexor {
-namespace entsys {
+namespace entity_system {
 
 
     EntityManager::EntityManager()
@@ -17,6 +17,6 @@ namespace entsys {
     {
     }
 
-
+    
 };
 };

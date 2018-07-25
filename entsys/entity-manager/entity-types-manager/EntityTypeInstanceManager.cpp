@@ -4,7 +4,7 @@
 #include "EntityTypeInstanceManager.hpp"
 
 namespace inexor {
-namespace entsys {
+namespace entity_system {
     
 
     EntityTypeInstanceManager::EntityTypeInstanceManager()
