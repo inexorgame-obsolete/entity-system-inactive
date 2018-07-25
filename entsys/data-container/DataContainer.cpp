@@ -139,148 +139,28 @@ namespace entity_system {
     }
 
 
-    DataContainer DataContainer::add(const DataContainer& addend)
-    {
-        if(data_container_type_is_numeric())
-        {
-            switch(get_data_type())
-            {
-                case ENTSYS_DATA_TYPE_INT:
-                {
-                    integer_data += addend.get_intval();
-                    return DataContainer(get_intval());
-                    break;
-                }
-                case ENTSYS_DATA_TYPE_FLOAT:
-                {
-                    float_data += addend.get_floatval();
-                    return DataContainer(get_floatval());
-                    break;
-                }
-                case ENTSYS_DATA_TYPE_DOUBLE:
-                {
-                    double_data += addend.get_doubleval();
-                    return DataContainer(get_doubleval());
-                    break;
-                }
-            }
-        }
-        // TODO: DISCUSS: Is this a good idea ?
-        return DataContainer(0);
-    }
-
-
-    DataContainer DataContainer::sub(const DataContainer& minuend)
-    {
-        if(data_container_type_is_numeric())
-        {
-            switch(get_data_type())
-            {
-                case ENTSYS_DATA_TYPE_INT:
-                {
-                    integer_data -= minuend.get_intval();
-                    return DataContainer(get_intval());
-                    break;
-                }
-                case ENTSYS_DATA_TYPE_FLOAT:
-                {
-                    float_data -= minuend.get_floatval();
-                    return DataContainer(get_floatval());
-                    break;
-                }
-                case ENTSYS_DATA_TYPE_DOUBLE:
-                {
-                    double_data -= minuend.get_doubleval();
-                    return DataContainer(get_doubleval());
-                    break;
-                }
-            }
-        }
-        return DataContainer(0);
-    }
-
-
-    DataContainer DataContainer::mul(const DataContainer& coeffizient)
-    {
-        if(data_container_type_is_numeric())
-        {
-            switch(get_data_type())
-            {
-                case ENTSYS_DATA_TYPE_INT:
-                {
-                    integer_data *= coeffizient.get_intval();
-                    return DataContainer(get_intval());
-                    break;
-                }
-                case ENTSYS_DATA_TYPE_FLOAT:
-                {
-                    float_data *= coeffizient.get_floatval();
-                    return DataContainer(get_floatval());
-                    break;
-                }
-                case ENTSYS_DATA_TYPE_DOUBLE:
-                {
-                    double_data *= coeffizient.get_doubleval();
-                    return DataContainer(get_doubleval());
-                    break;
-                }
-            }
-        }
-        return DataContainer(0);
-    }
-
-
-    DataContainer DataContainer::div(const DataContainer& divisor)
-    {
-        if(data_container_type_is_numeric())
-        {
-            switch(get_data_type())
-            {
-                case ENTSYS_DATA_TYPE_INT:
-                {
-                    integer_data /= divisor.get_intval();
-                    return DataContainer(get_intval());
-                    break;
-                }
-                case ENTSYS_DATA_TYPE_FLOAT:
-                {
-                    float_data /= divisor.get_floatval();
-                    return DataContainer(get_floatval());
-                    break;
-                }
-                case ENTSYS_DATA_TYPE_DOUBLE:
-                {
-                    double_data /= divisor.get_doubleval();
-                    return DataContainer(get_doubleval());
-                    break;
-                }
-            }
-        }
-        return DataContainer(0);
-    }
-
 
     DataContainer DataContainer::operator+(const DataContainer& addend)
     {
-        return add(addend);
+        // TODO: implement!
     }
 
     
     DataContainer DataContainer::operator-(const DataContainer& minuend)
     {
-        return sub(minuend);
+        // TODO: implement!
     }
 
 
     DataContainer DataContainer::operator*(const DataContainer& coeffizient)
     {
-        return mul(coeffizient);
+        // TODO: implement!
     }
 
 
     DataContainer DataContainer::operator/(const DataContainer& divisor)
     {
-        return div(divisor);
+        // TODO: implement!
     }
 
 

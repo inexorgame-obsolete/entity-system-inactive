@@ -99,20 +99,6 @@ namespace entity_system {
             DataContainer operator=(const std::int64_t&);
             DataContainer operator=(const std::string&);
 
-            // Since ENTSYS_DATA_TYPE could be casted to operator=(int)
-            // we want to delete this explicitely.
-            // TODO: Find a better way to prevent this?
-            DataContainer operator=(const ENTSYS_DATA_TYPE&) = delete;                                                
-
-            // TODO: Make them protected ?
-            // TODO: Overload the operators +=, -=, *=, /=..
-
-            // Math operations.
-            DataContainer add(const DataContainer&);
-            DataContainer sub(const DataContainer&);
-            DataContainer mul(const DataContainer&);
-            DataContainer div(const DataContainer&);
-
             // Get methods.
             ENTSYS_DATA_TYPE get_data_type() const;
 
