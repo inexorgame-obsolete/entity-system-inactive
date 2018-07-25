@@ -59,7 +59,9 @@ namespace entity_system {
 
     std::string EntityType::read_attribute_data(const EntityAttributeType& ent_attr_type)
     {
-        return map_of_entity_attribute_types[ent_attr_type.get_name()].get_data();
+        std::string retval;
+        map_of_entity_attribute_types[ent_attr_type.get_name()].get(retval);
+        return retval;
     }
 
 

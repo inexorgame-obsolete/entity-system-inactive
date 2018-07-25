@@ -50,12 +50,7 @@ namespace entity_system {
 
             // TODO: Add vec3 support by supporting GLM:
             // https://glm.g-truc.net/0.9.9/index.html
-
-        protected:
-
-            // Only numeric data containers can execute math operations!
-            // Check is this data container's type is numeric
-            bool data_container_type_is_numeric();
+            
 
         public:
 
@@ -84,13 +79,7 @@ namespace entity_system {
             DataContainer set(const float&);
             DataContainer set(const bool&);
             DataContainer set(const int&);
-
-            // Operators.
-            DataContainer operator+(const DataContainer&);
-            DataContainer operator-(const DataContainer&);
-            DataContainer operator*(const DataContainer&);
-            DataContainer operator/(const DataContainer&);
-
+            
             // Assign operators.
             DataContainer operator=(const int&);
             DataContainer operator=(const double&);
@@ -99,9 +88,15 @@ namespace entity_system {
             DataContainer operator=(const std::int64_t&);
             DataContainer operator=(const std::string&);
 
-            // Get methods.
             ENTSYS_DATA_TYPE get_data_type() const;
 
+            // Get methods: call by reference.
+            void get(std::int64_t&) const;
+            void get(std::string&) const;
+            void get(double&) const;
+            void get(float&) const;
+            void get(bool&) const;
+            void get(int&) const;
 
     };
 

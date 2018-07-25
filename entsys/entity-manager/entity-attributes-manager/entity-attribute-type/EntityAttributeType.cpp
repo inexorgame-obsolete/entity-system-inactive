@@ -3,6 +3,7 @@
 
 #include "EntityAttributeType.hpp"
 
+
 namespace inexor {
 namespace entity_system {
 
@@ -74,9 +75,9 @@ namespace entity_system {
     }
 
 
-    std::string EntityAttributeType::get_data() const
+    void EntityAttributeType::get(std::string& refval) const
     {
-        return entity_attribute_data.get_stringval();
+        entity_attribute_data.get(refval);
     }
 
 

@@ -46,7 +46,7 @@ namespace entity_system {
             ENTSYS_DATA_TYPE get_data_type() const;
 
             ENTSYS_RETURN_CODE set_data(const std::string&);
-            std::string get_data() const;
+            void get(std::string&) const;
 
             ENTSYS_RETURN_CODE set_name(const std::string&);
             std::string get_name() const;

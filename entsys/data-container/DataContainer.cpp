@@ -122,48 +122,6 @@ namespace entity_system {
     }
 
 
-    bool DataContainer::data_container_type_is_numeric()
-    {
-        switch(get_data_type())
-        {
-            case ENTSYS_DATA_TYPE_INT:
-            case ENTSYS_DATA_TYPE_BIG_INT:
-            case ENTSYS_DATA_TYPE_FLOAT:
-            case ENTSYS_DATA_TYPE_DOUBLE:
-            {
-                return true;
-                break;
-            }
-        }
-        return false;
-    }
-
-
-
-    DataContainer DataContainer::operator+(const DataContainer& addend)
-    {
-        // TODO: implement!
-    }
-
-    
-    DataContainer DataContainer::operator-(const DataContainer& minuend)
-    {
-        // TODO: implement!
-    }
-
-
-    DataContainer DataContainer::operator*(const DataContainer& coeffizient)
-    {
-        // TODO: implement!
-    }
-
-
-    DataContainer DataContainer::operator/(const DataContainer& divisor)
-    {
-        // TODO: implement!
-    }
-
-
     DataContainer DataContainer::operator=(const int& new_int_val)
     {
         return set(new_int_val);
@@ -199,6 +157,42 @@ namespace entity_system {
         return set(new_string_val);
     }
 
+
+
+    void DataContainer::get(std::int64_t& int64_val) const
+    {
+        int64_val = int64_data;
+    }
+
+
+    void DataContainer::get(std::string& string_val) const
+    {
+        string_val = string_data;
+    }
+
+
+    void DataContainer::get(double& double_val) const
+    {
+        double_val = double_data;
+    }
+
+
+    void DataContainer::get(float& float_val) const
+    {
+        float_val = float_data;
+    }
+
+
+    void DataContainer::get(bool& bool_val) const
+    {
+        bool_val = boolean_data;
+    }
+
+
+    void DataContainer::get(int& int_val) const
+    {
+        int_val = integer_data;
+    }
     
 };
 };
