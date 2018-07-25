@@ -20,18 +20,31 @@ using namespace std::chrono;
 namespace inexor {
 namespace entity_system {
     
-    
-    // Windows specific only
-    #ifdef WIN32
-        HANDLE hConsole = GetStdHandle(STD_OUTPUT_HANDLE);
-    #endif
+    // Define color code macros for 
+    // changing the output console's color.
+    #define CCOLOR_GREEN  10
+    #define CCOLOR_BLUE   9
+    #define CCOLOR_PURPLE 13
+
+    void Change_Output_Console_Color(int k)
+    {
+        // Windows specific only!
+        #ifdef WIN32
+            SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE), k);
+        #endif
+    }
+
+
 
     high_resolution_clock::time_point t1;
+    unsigned int test_repititions = 1;
     std::string test_message = "";
 
-    void start_test(std::string msg)
+
+    void start_test(std::string msg, unsigned int repetitions = 1)
     {
         t1 = high_resolution_clock::now();
+        test_repititions = repetitions;
         test_message = msg;
     }
 
@@ -42,25 +55,43 @@ namespace entity_system {
         high_resolution_clock::time_point t2 = high_resolution_clock::now();
         duration<double, std::milli> time_span = t2 - t1;
 
-        #ifdef WIN32
-            SetConsoleTextAttribute(hConsole, 11); // light blue
-        #endif
+        // Calculate the average time passed for one function call.
+        double average_time_per_call = time_span.count() / test_repititions;
+
+        Change_Output_Console_Color(CCOLOR_GREEN);
 
         // Print out how many milliseconds have passed during this test.
-        std::cout << time_span.count() << " ms \t";
+        cout << time_span.count() << " ms \t";
         
-        #ifdef WIN32
-            SetConsoleTextAttribute(hConsole, 10); // green
-        #endif
+        Change_Output_Console_Color(CCOLOR_GREEN);
 
-        // Print test message
-        cout << test_message << endl;
+        // Print out number of test repititions.
+        cout << test_repititions << "x\t\t";
+         
+        Change_Output_Console_Color(CCOLOR_GREEN);
 
-        #ifdef WIN32
-            SetConsoleTextAttribute(hConsole, 13); // purple
-        #endif
+        cout << average_time_per_call << " ms\t";
+
+        // Print out test message
+        cout << "\t\t" << test_message << endl;
+
+        Change_Output_Console_Color(CCOLOR_PURPLE);
+
+        cout << endl;
     }
+
     
+    // Every test series starts with 
+    // this table header as console output.
+    void Print_TestResultTableHeader()
+    {
+        Change_Output_Console_Color(CCOLOR_GREEN);
+        
+        cout << "---------------------------------------------------------------------------------------------------" << endl;
+        cout << "Time passed" << "\t" << "Repetitions" << "\t" << "Average Time passed/call" << "\t" << "Function call" << endl;
+        cout << "---------------------------------------------------------------------------------------------------" << endl;
+    }
+
 
 };
 };

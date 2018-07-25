@@ -18,17 +18,11 @@ int main(int argc, char* argv[])
     // Print minimum and maximum memory values.
     Print_MinimumMaximumMemoryValues();
 
-    // Windows specific only
-    #ifdef WIN32
-        HANDLE hConsole = GetStdHandle(STD_OUTPUT_HANDLE);
-        SetConsoleTextAttribute(hConsole, 13); // purple
-    #endif
-
     // Test by making false API calls.
-    ErrorTest_DataContainer();
+    Test_DataContainer_CorrectUsage();
 
     // Test by making correct API calls.
-    // TODO
+    // Test_DataContainer_ErrorUsage();
 
     cin.get();
     return 0;
