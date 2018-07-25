@@ -14,11 +14,20 @@ EntitySystem* entsys = EntitySystem::create_entity_system();
 
 
 int main(int argc, char* argv[])
-{
-    // Add automatic tests here:
-    Test_EntitySystemDataContainers();
-    Test_EntityAttributeTypes();
+{   
+    // Windows specific only
+    #ifdef WIN32
+        HANDLE hConsole = GetStdHandle(STD_OUTPUT_HANDLE);
+        SetConsoleTextAttribute(hConsole, 13); // purple
+    #endif
+
+    // Test by making false API calls.
+    ErrorTest_DataContainer();
+
+    // Test by making correct API calls.
     Test_EntityTypes();
+    Test_EntityAttributeTypes();
+    Test_EntitySystemDataContainers();
     TestEntityTypes_and_EntityTypeAttributes();
 
     cin.get();
