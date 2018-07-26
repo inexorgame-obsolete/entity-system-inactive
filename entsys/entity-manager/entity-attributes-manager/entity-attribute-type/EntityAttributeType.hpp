@@ -42,14 +42,14 @@ namespace entity_system {
             
             ENTSYS_RETURN_CODE validate();
 
-            ENTSYS_RETURN_CODE set_data_type(const ENTSYS_DATA_TYPE&);
-            ENTSYS_DATA_TYPE get_data_type() const;
+            ENTSYS_RETURN_CODE set_entity_attribute_data_type(const ENTSYS_DATA_TYPE&);
+            ENTSYS_DATA_TYPE get_entity_attribute_data_type() const;
 
-            ENTSYS_RETURN_CODE set_data(const std::string&);
-            void get(std::string&) const;
+            ENTSYS_RETURN_CODE set_entity_attribute_data(const std::string&);
+            void get_entity_attribute_data(std::string&) const;
 
-            ENTSYS_RETURN_CODE set_name(const std::string&);
-            std::string get_name() const;
+            ENTSYS_RETURN_CODE set_entity_attribute_type_name(const std::string&);
+            std::string get_entity_attribute_type_name() const;
 
             // TODO: DISCUSS: Should there be a way to change this data afterwards?
             // This whould mean that every instance of this entity attribute type would 

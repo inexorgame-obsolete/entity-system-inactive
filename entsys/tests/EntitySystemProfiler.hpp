@@ -47,6 +47,12 @@ namespace entity_system {
     }
 
 
+    // Print separator line.
+    void Print_Separator()
+    {
+        cout << "--------------------------------------------------------------------------------------------------------------------------------" << endl;
+    }
+
     // Print the headline of a series of tests with another output color.
     void Print_TestHeadline(std::string msg)
     {
@@ -62,9 +68,9 @@ namespace entity_system {
         cout << endl << endl << "Printing system specific minimum and maximum values of memory types." << endl;
 
         Change_Output_Console_Color(CCOLOR_GREEN);
-        cout << "-----------------------------------------------------------------------" << endl;
+        Print_Separator();
         cout << "DATA TYPE" << "\t\t" << "MINIMUM" << "\t\t\t" << "MAXIMUM" << endl; 
-        cout << "-----------------------------------------------------------------------" << endl;
+        Print_Separator();
         cout << "char\t\t\t"                 << CHAR_MIN  << "\t\t\t" << CHAR_MAX         << endl;
         cout << "signed char\t\t"            << SCHAR_MIN << "\t\t\t" << SCHAR_MAX        << endl;
         cout << "unsigned char\t\t"          << 0         << "\t\t\t" << UCHAR_MAX        << endl;
@@ -82,7 +88,7 @@ namespace entity_system {
         cout << "float\t\t\t"                << FLT_MIN   << "\t\t"   << FLT_MAX          << endl;
         cout << "double\t\t\t"               << DBL_MIN   << "\t\t"   << DBL_MAX          << endl;
         cout << "long double\t\t"            << LDBL_MIN  << "\t\t"   << LDBL_MAX         << endl;
-        cout << "-----------------------------------------------------------------------" << endl;
+        Print_Separator();
     }
 
 
@@ -128,9 +134,9 @@ namespace entity_system {
     void Print_TestResultTableHeader()
     {
         Change_Output_Console_Color(CCOLOR_GREEN);
-        cout << "---------------------------------------------------------------------------------------------------" << endl;
+        Print_Separator();
         cout << "Time passed" << "\t" << "Repetitions" << "\t" << "Average Time passed/call" << "\t" << "Function call" << endl;
-        cout << "---------------------------------------------------------------------------------------------------" << endl;
+        Print_Separator();
     }
 
 

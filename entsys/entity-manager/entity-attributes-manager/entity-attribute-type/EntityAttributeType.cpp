@@ -16,20 +16,20 @@ namespace entity_system {
 
     EntityAttributeType::EntityAttributeType(const std::string& attr_type_name)
     {
-        set_name(attr_type_name);
+        set_entity_attribute_type_name(attr_type_name);
     }
 
 
     EntityAttributeType::EntityAttributeType(const ENTSYS_DATA_TYPE& attr_type_data_type)
     {
-        set_data_type(attr_type_data_type);
+        set_entity_attribute_data_type(attr_type_data_type);
     }
 
    
     EntityAttributeType::EntityAttributeType(const std::string& attr_type_name, const ENTSYS_DATA_TYPE& attr_type_data_type)
     {
-        set_name(attr_type_name);
-        set_data_type(attr_type_data_type);
+        set_entity_attribute_type_name(attr_type_name);
+        set_entity_attribute_data_type(attr_type_data_type);
     }
 
 
@@ -38,7 +38,7 @@ namespace entity_system {
     }
 
 
-    ENTSYS_RETURN_CODE EntityAttributeType::set_name(const std::string& name)
+    ENTSYS_RETURN_CODE EntityAttributeType::set_entity_attribute_type_name(const std::string& name)
     {
         if(name.length() > 0)
         {
@@ -49,33 +49,33 @@ namespace entity_system {
     }
 
     
-    ENTSYS_RETURN_CODE EntityAttributeType::set_data(const std::string& data)
+    ENTSYS_RETURN_CODE EntityAttributeType::set_entity_attribute_data(const std::string& data)
     {
         entity_attribute_data.set(data);
         return ENTSYS_RETURN_ERROR;
     }
 
 
-    ENTSYS_RETURN_CODE EntityAttributeType::set_data_type(const ENTSYS_DATA_TYPE& type)
+    ENTSYS_RETURN_CODE EntityAttributeType::set_entity_attribute_data_type(const ENTSYS_DATA_TYPE& type)
     {
         entity_attribute_data.set_data_type(type);
         return ENTSYS_RETURN_SUCCESS;
     }
     
 
-    ENTSYS_DATA_TYPE EntityAttributeType::get_data_type() const
+    ENTSYS_DATA_TYPE EntityAttributeType::get_entity_attribute_data_type() const
     {
         return entity_attribute_data.get_data_type();
     }
     
 
-    std::string EntityAttributeType::get_name() const
+    std::string EntityAttributeType::get_entity_attribute_type_name() const
     {
         return entity_attribute_type_name;
     }
 
 
-    void EntityAttributeType::get(std::string& refval) const
+    void EntityAttributeType::get_entity_attribute_data(std::string& refval) const
     {
         entity_attribute_data.get(refval);
     }

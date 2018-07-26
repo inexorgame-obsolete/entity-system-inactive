@@ -37,7 +37,7 @@ namespace entity_system {
     {
         // TODO: Prevent overwriting already existing entity attribute types!
         // TODO: Validate input!
-        map_of_entity_attribute_types[new_ent_attr_type.get_name()] = new_ent_attr_type;
+        map_of_entity_attribute_types[new_ent_attr_type.get_entity_attribute_type_name()] = new_ent_attr_type;
         return ENTSYS_RETURN_SUCCESS;
     }
 

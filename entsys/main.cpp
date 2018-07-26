@@ -20,6 +20,9 @@ int main(int argc, char* argv[])
 
     // Test by making false API calls:
     Test_DataContainer_CorrectUsage();
+    Test_EntityType_CorrectUsage();
+    Test_CreateEntityType_CorrectUsage();
+    Test_CreateEntityAttributeType_CorrectUsage();
 
     // Test by making correct API calls:
 

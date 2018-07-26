@@ -44,7 +44,7 @@ namespace entity_system {
     ENTSYS_RETURN_CODE EntityType::link_entity_attribute_type(const EntityAttributeType& ent_attr_type)
     {
         // TODO: Validate map access!
-        map_of_entity_attribute_types[ent_attr_type.get_name()] = ent_attr_type;
+        map_of_entity_attribute_types[ent_attr_type.get_entity_attribute_type_name()] = ent_attr_type;
         return ENTSYS_RETURN_SUCCESS;
     }
 
@@ -52,7 +52,7 @@ namespace entity_system {
     ENTSYS_RETURN_CODE EntityType::set_attribute_data(const EntityAttributeType& ent_attr_type, const std::string& data)
     {
         // TODO: Validate map access!
-        map_of_entity_attribute_types[ent_attr_type.get_name()].set_data(data);
+        map_of_entity_attribute_types[ent_attr_type.get_entity_attribute_type_name()].set_entity_attribute_data(data);
         return ENTSYS_RETURN_SUCCESS;
     }
 
@@ -60,7 +60,7 @@ namespace entity_system {
     std::string EntityType::read_attribute_data(const EntityAttributeType& ent_attr_type)
     {
         std::string retval;
-        map_of_entity_attribute_types[ent_attr_type.get_name()].get(retval);
+        map_of_entity_attribute_types[ent_attr_type.get_entity_attribute_type_name()].get_entity_attribute_data(retval);
         return retval;
     }
 
