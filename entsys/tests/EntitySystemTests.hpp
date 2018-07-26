@@ -28,11 +28,10 @@ namespace entity_system {
     // Test DataContainer by making correct API calls.
     void Test_DataContainer_CorrectUsage()
     {
-        // Test constructors.
         // Undefined type and undefined memory value.
         DataContainer undefinedCont;
 
-        // Defined type and undefined memory value.
+        // Defined type but undefined memory value.
         DataContainer undefined_dc_int(ENTSYS_DATA_TYPE_INT);
         DataContainer undefined_dc_bigint(ENTSYS_DATA_TYPE_BIG_INT);
         DataContainer undefined_dc_float(ENTSYS_DATA_TYPE_FLOAT);
@@ -48,8 +47,9 @@ namespace entity_system {
         DataContainer IntCont(1234);
         DataContainer StringCont("This is an example string");        
         
-        Change_Output_Console_Color(CCOLOR_PURPLE);
-        cout << endl << endl << "Testing DataContainer::set methods for 6 different data types." << endl;
+        // ---------------------------------------------------------------------------------
+
+        Print_TestHeadline("Testing DataContainer::set methods for 6 different data types.");
         Print_TestResultTableHeader();
 
         start_test("DataContainer::set(std::int64_t)", ENTSYS_TEST_REPETITION);
@@ -89,9 +89,9 @@ namespace entity_system {
         }
         end_test();
 
-
-        Change_Output_Console_Color(CCOLOR_PURPLE);
-        cout << endl << endl << "Testing DataContainer::get methods for 6 different data types." << endl;
+        // ---------------------------------------------------------------------------------
+        
+        Print_TestHeadline("Testing DataContainer::get methods for 6 different data types.");
         Print_TestResultTableHeader();
 
         int give_me_big_integer = 0;
@@ -136,6 +136,80 @@ namespace entity_system {
         }
         end_test();
 
+        // ---------------------------------------------------------------------------------
+
+        Print_TestHeadline("Testing DataContainer::set_data_type() method.");
+        Print_TestResultTableHeader();
+
+        // Iterate through all types when changing the data container's data type.
+        ENTSYS_DATA_TYPE DataContainerDataTypeArray[] = {
+            ENTSYS_DATA_TYPE_INT,
+            ENTSYS_DATA_TYPE_BIG_INT,
+            ENTSYS_DATA_TYPE_FLOAT,
+            ENTSYS_DATA_TYPE_STRING,
+            ENTSYS_DATA_TYPE_DOUBLE,
+            ENTSYS_DATA_TYPE_BOOL
+        };
+
+        start_test("DataContainer::set_data_type(const ENTSYS_DATA_TYPE&)", ENTSYS_TEST_REPETITION);
+        for(unsigned int i=0; i<ENTSYS_TEST_REPETITION; i++) {
+            // Make sure not to read outside of the array.
+            undefinedCont.set_data_type(DataContainerDataTypeArray[i % 6]);
+        }
+        end_test();
+
+        // ---------------------------------------------------------------------------------
+
+        Print_TestHeadline("Testing DataContainer::get_data_type() method.");
+        Print_TestResultTableHeader();
+
+        ENTSYS_DATA_TYPE containerDataType;
+        start_test("DataContainer::get_data_type()", ENTSYS_TEST_REPETITION);
+        for(unsigned int i=0; i<ENTSYS_TEST_REPETITION; i++) {
+            containerDataType = IntCont.get_data_type();
+        }
+        end_test();
+
+        // ---------------------------------------------------------------------------------
+                
+        Print_TestHeadline("Testing DataContainer::operator=() for 6 data types.");
+        Print_TestResultTableHeader();
+
+        start_test("DataContainer::operator=(std::int64_t&)", ENTSYS_TEST_REPETITION);
+        for(std::int64_t i=0; i<ENTSYS_TEST_REPETITION; i++) {
+            BigIntCont = i;
+        }
+        end_test();
+
+        start_test("DataContainer::operator=(double&)", ENTSYS_TEST_REPETITION);
+        for(double i=0; i<ENTSYS_TEST_REPETITION; i+=1.0) {
+            DoubleCont = i;
+        }
+        end_test();
+
+        start_test("DataContainer::operator=(float&)", ENTSYS_TEST_REPETITION);
+        for(float i=0.0f; i<ENTSYS_TEST_REPETITION; i+=1.0f) {
+            FloatCont = i;
+        }
+        end_test();
+
+        start_test("DataContainer::operator=(bool&)", ENTSYS_TEST_REPETITION);
+        for(unsigned int i=0; i<ENTSYS_TEST_REPETITION; i++) {
+            BoolCont = (0==i%2) ? true : false;
+        }
+        end_test();
+
+        start_test("DataContainer::operator=(int&)", ENTSYS_TEST_REPETITION);
+        for(int i=0; i<ENTSYS_TEST_REPETITION; i++) {
+            IntCont = i;
+        }
+        end_test();
+
+        start_test("DataContainer::operator=(std::string&)", ENTSYS_TEST_REPETITION);
+        for(unsigned int i=0; i<ENTSYS_TEST_REPETITION; i++) {
+            StringCont = std::to_string(i);
+        }
+        end_test();
     }
 
 };

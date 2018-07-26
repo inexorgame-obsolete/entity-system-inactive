@@ -54,18 +54,18 @@ namespace entity_system {
 
         public:
 
-            // We need this not overloaded constructor since sometimes
+            // We need this standard constructor since sometimes
             // the data type of the container is not known yet.
             DataContainer();
 
             // Overloaded constructors.
             DataContainer(const ENTSYS_DATA_TYPE&);
             DataContainer(const std::int64_t&);
+            DataContainer(const std::string&);
             DataContainer(const double&);
             DataContainer(const float&);
             DataContainer(const bool&);
             DataContainer(const int&);
-            DataContainer(const std::string&);
 
             ~DataContainer();
 

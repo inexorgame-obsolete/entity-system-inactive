@@ -12,7 +12,7 @@ using namespace std;
 #include <chrono>
 using namespace std::chrono;
 
-// This defined how often a test will be repeated.
+// This defines how often a test will be repeated.
 #define ENTSYS_TEST_REPETITION 100000
     
 // Define color code macros for 
@@ -46,7 +46,15 @@ namespace entity_system {
         #endif
     }
 
-    
+
+    // Print the headline of a series of tests with another output color.
+    void Print_TestHeadline(std::string msg)
+    {
+        Change_Output_Console_Color(CCOLOR_PURPLE);
+        cout << endl << endl << msg << endl;
+    }
+
+
     // Print minimum and maximum memory values.
     void Print_MinimumMaximumMemoryValues()
     {
