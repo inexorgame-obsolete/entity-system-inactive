@@ -8,6 +8,7 @@
 namespace inexor {
 namespace entity_system {
 
+
     // Entity system error codes.
     enum ENTSYS_RETURN_CODE
     {
@@ -24,6 +25,7 @@ namespace entity_system {
         // TODO: DISCUSS: Should positive return codes 
         // be implemented or is ENTSYS_RETURN_SUCCESS enough ?
     };
+
 
 };
 };

@@ -3,6 +3,7 @@
 
 #include "EntityRelationTypeInstanceManager.hpp"
 
+
 namespace inexor {
 namespace entity_system {
 

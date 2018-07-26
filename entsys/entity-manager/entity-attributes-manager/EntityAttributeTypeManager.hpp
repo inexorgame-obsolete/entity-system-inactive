@@ -13,6 +13,7 @@ namespace inexor {
 namespace entity_system {
     
 
+    // 
     class EntityAttributeTypeManager
     {
         private:

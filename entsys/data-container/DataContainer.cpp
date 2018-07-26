@@ -156,8 +156,7 @@ namespace entity_system {
         return set(new_string_val);
     }
 
-
-
+    
     void DataContainer::get(std::int64_t& int64_val) const
     {
         int64_val = int64_data;

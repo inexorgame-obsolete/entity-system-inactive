@@ -11,6 +11,7 @@
 namespace inexor {
 namespace entity_system {
 
+
     // TODO: EntityEditor, EntityEditorRenderer, EntityGameSceneRenderer,
     // EntitySync, EntityErrorHandling, EntityImporter, EntityExporter.
 

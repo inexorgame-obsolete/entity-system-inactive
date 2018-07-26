@@ -32,5 +32,6 @@ namespace entity_system {
 
     EntitySystem* EntitySystem::entsys_singleton_instance = nullptr;
 
+
 };
 };

@@ -11,6 +11,7 @@
 namespace inexor {
 namespace entity_system {
 
+
     class EntityTypeInstance : public EntityType
     {
         public:

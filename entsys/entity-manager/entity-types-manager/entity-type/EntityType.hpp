@@ -13,10 +13,12 @@
 namespace inexor {
 namespace entity_system {
 
+
     // Make later definitions shorter by using type definitions.
     typedef std::unordered_map<std::string, EntityAttributeType> ENTSYS_ENTITY_ATTRIBUTE_TYPE_MAP;
 
 
+    // 
     class EntityType
     {
         protected:

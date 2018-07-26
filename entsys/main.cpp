@@ -22,7 +22,6 @@ int main(int argc, char* argv[])
     Test_DataContainer_CorrectUsage();
 
     // Test by making correct API calls:
-    // Test_DataContainer_ErrorUsage();
 
     cin.get();
     return 0;

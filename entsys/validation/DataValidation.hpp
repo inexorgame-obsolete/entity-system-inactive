@@ -10,6 +10,7 @@
 namespace inexor {
 namespace entity_system {
 
+
     // This server as a base class for data validation in classes.
     class DataValidation
     {

@@ -18,12 +18,6 @@ extern inexor::entity_system::EntitySystem* entsys;
 namespace inexor {
 namespace entity_system {
 
-
-    // Test DataContainer by making false API calls.
-    void Test_DataContainer_ErrorUsage()
-    {
-        // TODO
-    }
     
     // Test DataContainer by making correct API calls.
     void Test_DataContainer_CorrectUsage()

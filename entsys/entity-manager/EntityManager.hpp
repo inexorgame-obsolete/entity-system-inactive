@@ -7,7 +7,6 @@
 #include <vector>
 
 // Entity system debugging.
-
 #include "../../entsys/tests/EntitySystemDebugging.hpp"
 
 // Entity types and instances of those.

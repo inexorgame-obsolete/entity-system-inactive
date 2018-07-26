@@ -33,10 +33,7 @@ namespace entity_system {
 
             // Create an instance of an entity type.
             EntityTypeInstance create_entity_type_instance(const std::string&);
-
             EntityTypeInstance create_entity_type_instance(const EntityType&);
-
-            //ENTSYS_RETURN_CODE set_attribute_data(const EntityTypeInstance&, const EntityAttributeType&, const std::string&);
 
     };
 
