@@ -21,9 +21,8 @@ int main(int argc, char* argv[])
     // Test by making correct API calls:
 	// It's interesting to test performance of these two data container classes.
 	Test_DataContainer_CorrectUsage();
-	Test_Experimental_DataContainer_CorrectUsage();
 
-	Test_EntityType_CorrectUsage();
+	//Test_EntityType_CorrectUsage();
 	Test_CreateEntityType_CorrectUsage();
 	Test_CreateEntityAttributeType_CorrectUsage();
 

@@ -51,7 +51,7 @@ namespace entity_system {
         DataContainer StringCont("This is an example string");        
         
         // ---------------------------------------------------------------------------------
-
+		
         Print_TestHeadline("Testing DataContainer::set methods for 6 different data types.");
         Print_TestResultTableHeader();
 
@@ -96,7 +96,7 @@ namespace entity_system {
         
         Print_TestHeadline("Testing DataContainer::get methods for 6 different data types.");
         Print_TestResultTableHeader();
-
+		
         int give_me_big_integer = 0;
         start_test("DataContainer::get(std::int64_t&)", ENTSYS_TEST_REPETITION);
         for(std::int64_t i=0; i<ENTSYS_TEST_REPETITION; i++) {
@@ -140,7 +140,7 @@ namespace entity_system {
         end_test();
 
         // ---------------------------------------------------------------------------------
-
+		
         Print_TestHeadline("Testing DataContainer::set_data_type() method.");
         Print_TestResultTableHeader();
 
@@ -285,164 +285,6 @@ namespace entity_system {
         end_test();
     }
 
-
-	// 
-	void Test_Experimental_DataContainer_CorrectUsage()
-	{
-		// Undefined type and undefined memory value.
-		ExperimentalDataContainer undefinedCont;
-
-		// Defined type but undefined memory value.
-		ExperimentalDataContainer undefined_dc_int(ENTSYS_DATA_TYPE_INT);
-		ExperimentalDataContainer undefined_dc_bigint(ENTSYS_DATA_TYPE_BIG_INT);
-		ExperimentalDataContainer undefined_dc_float(ENTSYS_DATA_TYPE_FLOAT);
-		ExperimentalDataContainer undefined_dc_string(ENTSYS_DATA_TYPE_STRING);
-		ExperimentalDataContainer undefined_dc_double(ENTSYS_DATA_TYPE_DOUBLE);
-		ExperimentalDataContainer undefined_dc_bool(ENTSYS_DATA_TYPE_BOOL);
-
-		// Defined type and defined memory value.
-		//ExperimentalDataContainer BigIntCont(std::int64_t(32842471123));
-		ExperimentalDataContainer DoubleCont(2345423.0);
-		ExperimentalDataContainer FloatCont(2323.0f);
-		ExperimentalDataContainer BoolCont(true);
-		ExperimentalDataContainer IntCont(1234);
-		ExperimentalDataContainer StringCont("This is an example string");
-
-		// ---------------------------------------------------------------------------------
-
-		Print_TestHeadline("Testing ExperimentalDataContainer::set methods for 5 different data types.");
-		Print_TestResultTableHeader();
-
-		start_test("ExperimentalDataContainer::set(double)", ENTSYS_TEST_REPETITION);
-		for (double i = 0; i<ENTSYS_TEST_REPETITION; i += 1.0) {
-			DoubleCont.set(i);
-		}
-		end_test();
-
-		start_test("ExperimentalDataContainer::set(float)", ENTSYS_TEST_REPETITION);
-		for (float i = 0.0f; i<ENTSYS_TEST_REPETITION; i += 1.0f) {
-			FloatCont.set(i);
-		}
-		end_test();
-
-		start_test("ExperimentalDataContainer::set(bool)", ENTSYS_TEST_REPETITION);
-		for (unsigned int i = 0; i<ENTSYS_TEST_REPETITION; i++) {
-			BoolCont.set((0 == i % 2) ? true : false);
-		}
-		end_test();
-
-		start_test("ExperimentalDataContainer::set(int)", ENTSYS_TEST_REPETITION);
-		for (int i = 0; i<ENTSYS_TEST_REPETITION; i++) {
-			IntCont.set(i);
-		}
-		end_test();
-
-		start_test("ExperimentalDataContainer::set(std::string)", ENTSYS_TEST_REPETITION);
-		for (unsigned int i = 0; i<ENTSYS_TEST_REPETITION; i++) {
-			std::string strval = std::to_string(i);
-			StringCont.set(strval);
-		}
-		end_test();
-
-		// ---------------------------------------------------------------------------------
-
-		Print_TestHeadline("Testing ExperimentalDataContainer::get methods for 5 different data types.");
-		Print_TestResultTableHeader();
-
-		double give_me_double = 0.0;
-		start_test("ExperimentalDataContainer::get(double&)", ENTSYS_TEST_REPETITION);
-		for (double i = 0; i<ENTSYS_TEST_REPETITION; i += 1.0) {
-			DoubleCont.get(give_me_double);
-		}
-		end_test();
-
-		float give_me_float = 0.0f;
-		start_test("ExperimentalDataContainer::get(float&)", ENTSYS_TEST_REPETITION);
-		for (float i = 0.0f; i<ENTSYS_TEST_REPETITION; i += 1.0f) {
-			FloatCont.get(give_me_float);
-		}
-		end_test();
-
-		bool give_me_bool = false;
-		start_test("ExperimentalDataContainer::get(bool&)", ENTSYS_TEST_REPETITION);
-		for (unsigned int i = 0; i<ENTSYS_TEST_REPETITION; i++) {
-			BoolCont.get(give_me_bool);
-		}
-		end_test();
-
-		int give_me_int = 0;
-		start_test("ExperimentalDataContainer::get(int&)", ENTSYS_TEST_REPETITION);
-		for (int i = 0; i<ENTSYS_TEST_REPETITION; i++) {
-			IntCont.get(give_me_int);
-		}
-		end_test();
-
-		std::string give_me_str;
-		start_test("ExperimentalDataContainer::get(std::string&)", ENTSYS_TEST_REPETITION);
-		for (unsigned int i = 0; i<ENTSYS_TEST_REPETITION; i++) {
-			StringCont.get(give_me_str);
-		}
-		end_test();
-
-		// ---------------------------------------------------------------------------------
-
-		Print_TestHeadline("Testing ExperimentalDataContainer::set_data_type() method.");
-		Print_TestResultTableHeader();
-
-		start_test("DataContainer::set_data_type(const ENTSYS_DATA_TYPE&)", ENTSYS_TEST_REPETITION);
-		for (unsigned int i = 0; i<ENTSYS_TEST_REPETITION; i++) {
-			// Make sure not to read outside of the array.
-			undefinedCont.set_data_type(DataContainerDataTypeArray[i % 6]);
-		}
-		end_test();
-
-		// ---------------------------------------------------------------------------------
-
-		Print_TestHeadline("Testing ExperimentalDataContainer::get_data_type() method.");
-		Print_TestResultTableHeader();
-
-		ENTSYS_DATA_TYPE containerDataType;
-		start_test("ExperimentalDataContainer::get_data_type()", ENTSYS_TEST_REPETITION);
-		for (unsigned int i = 0; i<ENTSYS_TEST_REPETITION; i++) {
-			containerDataType = IntCont.get_data_type();
-		}
-		end_test();
-
-		// ---------------------------------------------------------------------------------
-
-		Print_TestHeadline("Testing ExperimentalDataContainer::operator=() for 5 data types.");
-		Print_TestResultTableHeader();
-
-		start_test("ExperimentalDataContainer::operator=(double&)", ENTSYS_TEST_REPETITION);
-		for (double i = 0; i<ENTSYS_TEST_REPETITION; i += 1.0) {
-			DoubleCont = i;
-		}
-		end_test();
-
-		start_test("ExperimentalDataContainer::operator=(float&)", ENTSYS_TEST_REPETITION);
-		for (float i = 0.0f; i<ENTSYS_TEST_REPETITION; i += 1.0f) {
-			FloatCont = i;
-		}
-		end_test();
-
-		start_test("ExperimentalDataContainer::operator=(bool&)", ENTSYS_TEST_REPETITION);
-		for (unsigned int i = 0; i<ENTSYS_TEST_REPETITION; i++) {
-			BoolCont = (0 == i % 2) ? true : false;
-		}
-		end_test();
-
-		start_test("ExperimentalDataContainer::operator=(int&)", ENTSYS_TEST_REPETITION);
-		for (int i = 0; i<ENTSYS_TEST_REPETITION; i++) {
-			IntCont = i;
-		}
-		end_test();
-
-		start_test("ExperimentalDataContainer::operator=(std::string&)", ENTSYS_TEST_REPETITION);
-		for (unsigned int i = 0; i<ENTSYS_TEST_REPETITION; i++) {
-			StringCont = std::to_string(i);
-		}
-		end_test();
-	}
 
 };
 };
