@@ -8,7 +8,6 @@
 
 #include <string>
 #include <cstdint>
-#include <variant>
 
 #include "DataTypes.hpp"
 
