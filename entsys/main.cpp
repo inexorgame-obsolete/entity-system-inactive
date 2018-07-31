@@ -1,9 +1,6 @@
 // Inexor entity system prototype
 // (c)2018 Inexor
 
-#include <iostream>
-using namespace std;
-
 #include "EntitySystem.hpp"
 #include "tests/EntitySystemTests.hpp"
 using namespace inexor;
@@ -26,6 +23,6 @@ int main(int argc, char* argv[])
 
     // Test by making correct API calls:
 
-    cin.get();
+    std::cin.get();
     return 0;
 }

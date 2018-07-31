@@ -9,10 +9,8 @@
 #include <limits>
 
 #include "../EntitySystem.hpp"
-extern inexor::entity_system::EntitySystem* entsys;
-
-// Start and end tests with the profiler.
 #include "../tests/EntitySystemProfiler.hpp"
+extern inexor::entity_system::EntitySystem* entsys;
 
 
 namespace inexor {

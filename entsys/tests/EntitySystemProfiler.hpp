@@ -5,7 +5,6 @@
 #define INEXOR_ENTSYS_PERFORMANCE_PROFILER_HEADER
 
 #include <iostream>
-using namespace std;
 
 #include <ctime>
 #include <ratio>
@@ -50,12 +49,14 @@ namespace entity_system {
     // Print separator line.
     void Print_Separator()
     {
+		using namespace std;
         cout << "--------------------------------------------------------------------------------------------------------------------------------" << endl;
     }
 
     // Print the headline of a series of tests with another output color.
     void Print_TestHeadline(std::string msg)
     {
+		using namespace std;
         Change_Output_Console_Color(CCOLOR_PURPLE);
         cout << endl << endl << msg << endl;
     }
@@ -64,6 +65,7 @@ namespace entity_system {
     // Print minimum and maximum memory values.
     void Print_MinimumMaximumMemoryValues()
     {
+		using namespace std;
         Change_Output_Console_Color(CCOLOR_PURPLE);
         cout << endl << endl << "Printing system specific minimum and maximum values of memory types." << endl;
 
@@ -104,6 +106,8 @@ namespace entity_system {
     // End an automatic test.
     void end_test()
     {
+		using namespace std;
+
         // Calculate time difference in milliseconds.
         high_resolution_clock::time_point t2 = high_resolution_clock::now();
         duration<double, std::milli> time_span = t2 - t1;
@@ -133,6 +137,8 @@ namespace entity_system {
     // Every test series starts with this table header as console output.
     void Print_TestResultTableHeader()
     {
+		using namespace std;
+
         Change_Output_Console_Color(CCOLOR_GREEN);
         Print_Separator();
         cout << "Time passed" << "\t" << "Repetitions" << "\t" << "Average Time passed/call" << "\t" << "Function call" << endl;

@@ -8,6 +8,7 @@
 
 #include <string>
 #include <cstdint>
+#include <variant>
 
 #include "DataTypes.hpp"
 
@@ -25,6 +26,8 @@ namespace entity_system {
 
     // TODO: DISCUSS: If we left out type checking during set operations we 
     // could save up quite some time. However this could lead to entity system errors!
+	// EDIT: We can resolve this by using exception.
+
 
     // A flexible, multiple purpose data container.
     class DataContainer
@@ -34,8 +37,6 @@ namespace entity_system {
             ENTSYS_DATA_TYPE data_container_data_type;
 
             // TODO: Implement template class for data storage + thread safety
-
-            // TODO: DISCUSS: Make this an union ?
 
             std::string string_data = std::string("");
             std::int64_t int64_data = 0;
