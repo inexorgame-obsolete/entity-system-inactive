@@ -38,10 +38,15 @@ namespace entity_system {
             // TODO: Implement template class for data storage + thread safety
 
             std::string string_data = std::string("");
+
             std::int64_t int64_data = 0;
+
             int integer_data = 0;
+
             double double_data = 0.0;
+
             float float_data = 0.0f;
+
             bool boolean_data = false;
 
             // TODO: Add more data types here

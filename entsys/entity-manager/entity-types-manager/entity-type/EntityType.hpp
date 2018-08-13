@@ -8,23 +8,19 @@
 #include <unordered_map>
 #include "../../../return-codes/ReturnCodes.hpp"
 #include "../../entity-attributes-manager/entity-attribute-type/EntityAttributeType.hpp"
+#include "../../../typedefs/TypeDefinitions.hpp"
 
 
 namespace inexor {
 namespace entity_system {
 
-
-    // Make later definitions shorter by using type definitions.
-    typedef std::unordered_map<std::string, EntityAttributeType> ENTSYS_ENTITY_ATTRIBUTE_TYPE_MAP;
-
-
-    // 
-    class EntityType
+	
+	class EntityType
     {
         protected:
                         
             // Every entity has at least the following attributes.
-            std::string entity_type_name = std::string("INVALID!");
+            std::string entity_type_name = std::string("");
 
             // TODO: DISCUSS: This this a good design pattern?
             // or should we let the entity attribute type instance manager
@@ -35,10 +31,13 @@ namespace entity_system {
         public:
 
             EntityType();
+
             EntityType(const std::string&);
+
             ~EntityType();
 
             ENTSYS_RETURN_CODE set_entity_type_name(const std::string&);
+
             std::string get_entity_type_name() const;
 
             // TODO: DISCUSS: This this a good design pattern?

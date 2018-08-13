@@ -8,8 +8,6 @@
 #include <string>
 #include <unordered_map>
 
-#include "../../validation/DataValidation.hpp"
-
 #include "entity-type\EntityType.hpp"
 
 
@@ -24,7 +22,7 @@ namespace entity_system {
 
 
     // A manager class for types of entities.
-    class EntityTypeManager : public DataValidation
+    class EntityTypeManager
     {
         protected:
 

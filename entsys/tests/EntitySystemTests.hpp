@@ -18,7 +18,8 @@ namespace entity_system {
 
 
     // Iterate through all types when changing the data container's data type.
-    ENTSYS_DATA_TYPE DataContainerDataTypeArray[] = {
+    ENTSYS_DATA_TYPE DataContainerDataTypeArray[] =
+	{
         ENTSYS_DATA_TYPE_INT,
         ENTSYS_DATA_TYPE_BIG_INT,
         ENTSYS_DATA_TYPE_FLOAT,

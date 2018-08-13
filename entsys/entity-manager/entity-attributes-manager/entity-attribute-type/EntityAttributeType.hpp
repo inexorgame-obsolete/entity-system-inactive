@@ -8,7 +8,6 @@
 #include <vector>
 #include <unordered_map>
 
-#include "../../../validation/DataValidation.hpp"
 #include "../../../tests/EntitySystemDebugging.hpp"
 #include "../../../data-container/DataContainer.hpp"
 #include "../../../return-codes/ReturnCodes.hpp"
@@ -18,7 +17,7 @@ namespace inexor {
 namespace entity_system {
     
 
-    class EntityAttributeType : public DataValidation
+    class EntityAttributeType
     {
         protected:
 
@@ -56,10 +55,6 @@ namespace entity_system {
             // be affected by this! Currently there is no intention to do so.
     };
     
-
-    // By using these type definitions we can make later definitions shorter.
-    typedef std::unordered_map<std::string, EntityAttributeType> ENTSYS_ENTITY_ATTRIBUTE_TYPE_MAP;
-    typedef ENTSYS_ENTITY_ATTRIBUTE_TYPE_MAP::const_iterator ENTSYS_ENTITY_ATTRIBUTE_TYPE_LOOKUP;
 
 };
 };
