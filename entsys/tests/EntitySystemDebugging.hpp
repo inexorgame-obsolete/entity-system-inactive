@@ -4,8 +4,6 @@
 #ifndef INEXOR_ENTSYS_DEBUGGER_HEADER
 #define INEXOR_ENTSYS_DEBUGGER_HEADER
 
-
-// Used for conditional compilation.
-//#define ENTSYS_DEBUG 0
+// TODO: implement!
 
 #endif // INEXOR_ENTSYS_DEBUGGER_HEADER

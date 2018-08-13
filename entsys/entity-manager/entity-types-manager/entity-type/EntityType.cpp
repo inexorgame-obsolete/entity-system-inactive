@@ -8,62 +8,17 @@ namespace inexor {
 namespace entity_system {
     
 
-    EntityType::EntityType(const std::string& ent_type_name)
-    {
-        entity_type_name = ent_type_name;
-    }
-    
-
     EntityType::EntityType()
     {
+		// TODO: implement!
     }
     
 
     EntityType::~EntityType()
     {
+		// TODO: implement!
     }
     
-
-    ENTSYS_RETURN_CODE EntityType::set_entity_type_name(const std::string& name)
-    {
-        if(name.length() > 0)
-        {
-            entity_type_name = name;
-            return ENTSYS_RETURN_SUCCESS;
-        }
-        return ENTSYS_RETURN_NAME_INVALID;
-    }
-    
-
-    std::string EntityType::get_entity_type_name() const
-    {
-        return entity_type_name;
-    }
-
-
-    ENTSYS_RETURN_CODE EntityType::link_entity_attribute_type(const EntityAttributeType& ent_attr_type)
-    {
-        // TODO: Validate map access!
-        map_of_entity_attribute_types[ent_attr_type.get_entity_attribute_type_name()] = ent_attr_type;
-        return ENTSYS_RETURN_SUCCESS;
-    }
-
-    
-    ENTSYS_RETURN_CODE EntityType::set_attribute_data(const EntityAttributeType& ent_attr_type, const std::string& data)
-    {
-        // TODO: Validate map access!
-        map_of_entity_attribute_types[ent_attr_type.get_entity_attribute_type_name()].set_entity_attribute_data(data);
-        return ENTSYS_RETURN_SUCCESS;
-    }
-
-
-    std::string EntityType::read_attribute_data(const EntityAttributeType& ent_attr_type)
-    {
-        std::string retval;
-        map_of_entity_attribute_types[ent_attr_type.get_entity_attribute_type_name()].get_entity_attribute_data(retval);
-        return retval;
-    }
-
 
 };
 };

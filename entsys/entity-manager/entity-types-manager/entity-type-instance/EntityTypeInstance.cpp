@@ -21,11 +21,5 @@ namespace entity_system {
     }
 
 
-    EntityTypeInstance::EntityTypeInstance(const std::string& type_name)
-    {
-        EntityType(entsys->get_entity_type(type_name));
-    }
-
-
 };
 };

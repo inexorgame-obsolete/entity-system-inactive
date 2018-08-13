@@ -33,34 +33,36 @@ namespace entity_system {
     {
         private:
 
+			// 
             ENTSYS_DATA_TYPE data_container_data_type;
 
-            // TODO: Implement template class for data storage + thread safety
-
+			// 
             std::string string_data = std::string("");
 
+			// 
             std::int64_t int64_data = 0;
 
+			// 
             int integer_data = 0;
 
+			// 
             double double_data = 0.0;
 
+			// 
             float float_data = 0.0f;
 
+			// 
             bool boolean_data = false;
 
             // TODO: Add more data types here
-            
             // TODO: Implement real RBG color codes?
-
             // TODO: Add vec3 support by supporting GLM:
             // https://glm.g-truc.net/0.9.9/index.html
             
 
         public:
 
-            // We need this standard constructor since sometimes
-            // the data type of the container is not known yet.
+			// 
             DataContainer();
 
             // Overloaded constructors.
@@ -72,6 +74,7 @@ namespace entity_system {
             DataContainer(const bool&);
             DataContainer(const int&);
 
+			// 
             ~DataContainer();
 
             // Set the data type of the container.
@@ -93,9 +96,10 @@ namespace entity_system {
             DataContainer operator=(const std::int64_t&);
             DataContainer operator=(const std::string&);
 
+			// 
             ENTSYS_DATA_TYPE get_data_type() const;
 
-            // Get methods: call by reference.
+			// 
             void get(std::int64_t&) const;
             void get(std::string&) const;
             void get(double&) const;

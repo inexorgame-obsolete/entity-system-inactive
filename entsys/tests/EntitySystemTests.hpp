@@ -75,7 +75,7 @@ namespace entity_system {
         end_test();
 
         start_test("DataContainer::set(bool)", ENTSYS_TEST_REPETITION);
-        for(unsigned int i=0; i<ENTSYS_TEST_REPETITION; i++) {
+        for(std::size_t i=0; i<ENTSYS_TEST_REPETITION; i++) {
             BoolCont.set( (0==i%2) ? true : false );
         }
         end_test();
@@ -87,7 +87,7 @@ namespace entity_system {
         end_test();
 
         start_test("DataContainer::set(std::string)", ENTSYS_TEST_REPETITION);
-        for(unsigned int i=0; i<ENTSYS_TEST_REPETITION; i++) {
+        for(std::size_t i=0; i<ENTSYS_TEST_REPETITION; i++) {
             std::string strval = std::to_string(i);
             StringCont.set(strval);
         }
@@ -121,7 +121,7 @@ namespace entity_system {
 
         bool give_me_bool = false;
         start_test("DataContainer::get(bool&)", ENTSYS_TEST_REPETITION);
-        for(unsigned int i=0; i<ENTSYS_TEST_REPETITION; i++) {
+        for(std::size_t i=0; i<ENTSYS_TEST_REPETITION; i++) {
             BoolCont.get(give_me_bool);
         }
         end_test();
@@ -135,7 +135,7 @@ namespace entity_system {
 
         std::string give_me_str;
         start_test("DataContainer::get(std::string&)", ENTSYS_TEST_REPETITION);
-        for(unsigned int i=0; i<ENTSYS_TEST_REPETITION; i++) {
+        for(std::size_t i=0; i<ENTSYS_TEST_REPETITION; i++) {
             StringCont.get(give_me_str);
         }
         end_test();
@@ -146,7 +146,7 @@ namespace entity_system {
         Print_TestResultTableHeader();
 
         start_test("DataContainer::set_data_type(const ENTSYS_DATA_TYPE&)", ENTSYS_TEST_REPETITION);
-        for(unsigned int i=0; i<ENTSYS_TEST_REPETITION; i++) {
+        for(std::size_t i=0; i<ENTSYS_TEST_REPETITION; i++) {
             // Make sure not to read outside of the array.
             undefinedCont.set_data_type(DataContainerDataTypeArray[i % 6]);
         }
@@ -159,7 +159,7 @@ namespace entity_system {
 
         ENTSYS_DATA_TYPE containerDataType;
         start_test("DataContainer::get_data_type()", ENTSYS_TEST_REPETITION);
-        for(unsigned int i=0; i<ENTSYS_TEST_REPETITION; i++) {
+        for(std::size_t i=0; i<ENTSYS_TEST_REPETITION; i++) {
             containerDataType = IntCont.get_data_type();
         }
         end_test();
@@ -188,7 +188,7 @@ namespace entity_system {
         end_test();
 
         start_test("DataContainer::operator=(bool&)", ENTSYS_TEST_REPETITION);
-        for(unsigned int i=0; i<ENTSYS_TEST_REPETITION; i++) {
+        for(std::size_t i=0; i<ENTSYS_TEST_REPETITION; i++) {
             BoolCont = (0==i%2) ? true : false;
         }
         end_test();
@@ -200,92 +200,11 @@ namespace entity_system {
         end_test();
 
         start_test("DataContainer::operator=(std::string&)", ENTSYS_TEST_REPETITION);
-        for(unsigned int i=0; i<ENTSYS_TEST_REPETITION; i++) {
+        for(std::size_t i=0; i<ENTSYS_TEST_REPETITION; i++) {
             StringCont = std::to_string(i);
         }
         end_test();
     }
-
-
-    // Test EntityType class by making correct API calls.
-    void Test_EntityType_CorrectUsage()
-    {
-        EntityType weaponEntity;
-
-        Print_TestHeadline("Testing EntityType::set_entity_type_name method");
-        Print_TestResultTableHeader();
-
-        start_test("EntityType::set_entity_type_name(std::string&)", ENTSYS_TEST_REPETITION);
-        for(unsigned int i=0; i<ENTSYS_TEST_REPETITION; i++) {
-            weaponEntity.set_entity_type_name("ROCKETLAUNCHER");
-        }
-        end_test();
-        
-        // ---------------------------------------------------------------------------------
-
-        Print_TestHeadline("Testing EntityType::get_entity_type_name method");
-        Print_TestResultTableHeader();
-
-        std::string give_me_enttype_name;
-        start_test("EntityType::get_entity_type_name()", ENTSYS_TEST_REPETITION);
-        for(unsigned int i=0; i<ENTSYS_TEST_REPETITION; i++) {
-            give_me_enttype_name = weaponEntity.get_entity_type_name();
-        }
-        end_test();
-    }
-
-
-    // Test EntityType creation by making correct API calls.
-    void Test_CreateEntityType_CorrectUsage()
-    {
-        EntityType healthPickup;
-        
-        Print_TestHeadline("Testing EntityType::set_entity_type_name method");
-        Print_TestResultTableHeader();
-
-        start_test("EntityType::set_entity_type_name(std::string&)", ENTSYS_TEST_REPETITION);
-        for(unsigned int i=0; i<ENTSYS_TEST_REPETITION; i++) {
-            healthPickup.set_entity_type_name("HEALTHPICKUP");
-        }
-        end_test();
-                
-        // ---------------------------------------------------------------------------------
-
-        Print_TestHeadline("Testing EntityTypeManager::create_entity_type method");
-        Print_TestResultTableHeader();
-
-        start_test("EntityTypeManager::create_entity_type(EntityType&)");
-        entsys->create_entity_type(healthPickup);
-        end_test();
-    }
-
-
-    // Test EntityAttributeType creation by making correct API calls.
-    void Test_CreateEntityAttributeType_CorrectUsage()
-    {
-        EntityAttributeType weight;
-
-        Print_TestHeadline("Testing EntityAttributeType::set_entity_attribute_type_name method");
-        Print_TestResultTableHeader();
-
-        start_test("EntityAttributeType::set_entity_attribute_type_name(std::string&)", ENTSYS_TEST_REPETITION);
-        for(unsigned int i=0; i<ENTSYS_TEST_REPETITION; i++) {
-            weight.set_entity_attribute_type_name("mass");
-        }
-        end_test();
-
-        // ---------------------------------------------------------------------------------
-
-        Print_TestHeadline("Testing EntityAttributeType::set_entity_attribute_data_type method");
-        Print_TestResultTableHeader();
-
-        start_test("EntityAttributeType::set_entity_attribute_data_type(ENTSYS_DATA_TYPE&)", ENTSYS_TEST_REPETITION);
-        for(unsigned int i=0; i<ENTSYS_TEST_REPETITION; i++) {
-            weight.set_entity_attribute_data_type(DataContainerDataTypeArray[i % 6]);
-        }
-        end_test();
-    }
-
 
 };
 };

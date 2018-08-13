@@ -4,6 +4,8 @@
 #ifndef INEXOR_ENTSYS_MAIN_CLASS_HEADER
 #define INEXOR_ENTSYS_MAIN_CLASS_HEADER
 
+#include <memory>
+
 #include "../entsys/tests/EntitySystemDebugging.hpp"
 #include "entity-manager/EntityManager.hpp"
 
@@ -20,12 +22,15 @@ namespace entity_system {
     {
         private:
 
+			// 
             EntitySystem();
 
+			// 
             static EntitySystem* entsys_singleton_instance;
 
         public:
 
+			// 
             ~EntitySystem();
 
             // Create an instance of the entity system.

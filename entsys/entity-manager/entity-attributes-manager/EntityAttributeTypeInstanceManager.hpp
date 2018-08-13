@@ -11,20 +11,24 @@ namespace inexor {
 namespace entity_system {
 
 
+	// 
     class EntityAttributeTypeInstanceManager
     {
-        protected:
+		private:
+
+			// TODO: add data here!
+	
+		protected:
             
-            // Make this protected so this class can only 
-            // be instanced by inheritance as base class.
+			// 
             EntityAttributeTypeInstanceManager();
             
+			// 
             ~EntityAttributeTypeInstanceManager();
 
         public:
 
-            // TODO: Implement!
-            ENTSYS_RETURN_CODE create_entity_attribute_type_instance();
+			// TODO: add methods here!
 
     };
 

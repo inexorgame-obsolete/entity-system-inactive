@@ -14,34 +14,26 @@ namespace inexor {
 namespace entity_system {
     
 
+	// 
     class EntityAttributeTypeManager
     {
         private:
 
-            // In this unordered map all available types of entity attributes will be stored.
-            ENTSYS_ENTITY_ATTRIBUTE_TYPE_MAP map_of_entity_attribute_types;
+			// TODO: add data/methods here!
             
         protected:
 
-            // Make this protected so this class can only 
-            // be instanced by inheritance as base class.
-            EntityAttributeTypeManager();
+			// 
+			EntityAttributeTypeManager();
 
+			// 
             ~EntityAttributeTypeManager();
-
-            // Check if an entity attribute type does already exist.
-            ENTSYS_RETURN_CODE search_entity_attribute_type(std::string&) const;
 
         public:
 
-            // This method adds new types of attributes of entities.
-            // Entity attribute type instances can only be created from existing valid 
-            // entity attribute types by the entity attribute instance manager.
-            ENTSYS_RETURN_CODE create_entity_attribute_type(const EntityAttributeType&);
-                        
-            // This method returns the number of existing types of entity attributes available in the entity system.
-            unsigned int count() const;
-    };
+			// TODO: add data/methods here!
+
+	};
 
 };
 };

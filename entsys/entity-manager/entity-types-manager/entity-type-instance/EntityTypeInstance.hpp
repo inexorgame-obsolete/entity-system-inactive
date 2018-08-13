@@ -12,17 +12,21 @@ namespace inexor {
 namespace entity_system {
 
 
-    class EntityTypeInstance : public EntityType
+	// 
+    class EntityTypeInstance
     {
+		protected:
+
+			// TODO: add data here!
+
         public:
 
+			// 
             EntityTypeInstance();
 
-            EntityTypeInstance(const std::string&);
-
+			// 
             ~EntityTypeInstance();
 
-            // TODO: Only instances should be abled to write to attributes ?
             
     };
 

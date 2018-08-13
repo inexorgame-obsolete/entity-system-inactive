@@ -38,12 +38,18 @@ namespace entity_system {
 
         protected:
         
-            // Make this protected so this class can only 
-            // be instanced by inheritance as base class.
+			//
             EntityManager();
 
+			//
             ~EntityManager();
 
+		public:
+			
+			// TODO: implement!
+
+			// 
+            ENTSYS_RETURN_CODE link_attribute_type_to_entity_type(const EntityType&, const EntityAttributeType&);
             
     };
 
