@@ -4,7 +4,8 @@
 #ifndef INEXOR_ENTSYS_MAIN_CLASS_HEADER
 #define INEXOR_ENTSYS_MAIN_CLASS_HEADER
 
-#include <memory>
+#include <iostream>
+#include <mutex>
 
 #include "../entsys/tests/EntitySystemDebugging.hpp"
 #include "entity-manager/EntityManager.hpp"
@@ -17,26 +18,33 @@ namespace entity_system {
     // TODO: EntityEditor, EntityEditorRenderer, EntityGameSceneRenderer,
     // EntitySync, EntityErrorHandling, EntityImporter, EntityExporter.
 
+	
     // Singleton implementation of an entity system prototype class for Inexor
-    class EntitySystem : public EntityManager
-    {
-        private:
+	class EntitySystem : public EntityManager
+	{
+		private:
 
 			// 
-            EntitySystem();
+			EntitySystem(const EntitySystem&) = delete;
 
 			// 
-            static EntitySystem* entsys_singleton_instance;
-
-        public:
+			EntitySystem & operator=(const EntitySystem&) = delete;
 
 			// 
-            ~EntitySystem();
+			static std::unique_ptr<EntitySystem> instance;
 
-            // Create an instance of the entity system.
-            static EntitySystem* create_entity_system();
+			// 
+			static std::once_flag onceFlag;
 
-    };
+		public:
+
+			// 
+			EntitySystem() = default;
+
+			// 
+			static EntitySystem& Instance();
+	};
+
 
 };
 };

@@ -10,7 +10,6 @@
 
 #include "../EntitySystem.hpp"
 #include "../tests/EntitySystemProfiler.hpp"
-extern inexor::entity_system::EntitySystem* entsys;
 
 
 namespace inexor {
