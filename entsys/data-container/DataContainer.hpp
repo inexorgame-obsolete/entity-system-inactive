@@ -78,7 +78,7 @@ namespace entity_system {
             ~DataContainer();
 
             // Set the data type of the container.
-            ENTSYS_RETURN_CODE set_data_type(const ENTSYS_DATA_TYPE&);
+            ENTSYS_RESULT set_data_type(const ENTSYS_DATA_TYPE&);
             
             // Set methods.
             DataContainer set(const std::int64_t&);

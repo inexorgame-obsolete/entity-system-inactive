@@ -48,8 +48,6 @@ namespace entity_system {
 			
 			// TODO: implement!
 
-			// 
-            ENTSYS_RETURN_CODE link_attribute_type_to_entity_type(const EntityType&, const EntityAttributeType&);
             
     };
 

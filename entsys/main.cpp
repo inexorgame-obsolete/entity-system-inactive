@@ -14,6 +14,7 @@ std::once_flag EntitySystem::onceFlag;
 // Create one instance of the entity system.
 EntitySystem& entsys = EntitySystem::Instance();
 
+
 int main(int argc, char* argv[])
 {   
     Print_MinimumMaximumMemoryValues();

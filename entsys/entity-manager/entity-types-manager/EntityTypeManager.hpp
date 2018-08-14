@@ -20,11 +20,15 @@ namespace entity_system {
 	// 
     class EntityTypeManager
     {
-        protected:
+        private:
 
-			// TODO: add data here!
+			// In this unordered map all available types 
+			// of entites of the entity system will be stored.
+			std::unordered_map<std::string, std::shared_ptr<EntityType>> map_of_entity_types;
 
-        public:
+		protected:
+
+			// TODO: is this placement correct?
 
 			// 
             EntityTypeManager();
@@ -32,6 +36,13 @@ namespace entity_system {
 			// 
             ~EntityTypeManager();
 
+        public:
+
+			// create a new entity type and register it to the entity system.
+			ENTSYS_RESULT create_entity_type(const std::shared_ptr<EntityType>&);
+
+			// Search through the map of available types of entities.
+			bool does_entity_type_exist(const std::string&);
 
     };
 

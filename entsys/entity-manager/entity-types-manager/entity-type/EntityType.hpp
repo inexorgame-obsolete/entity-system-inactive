@@ -9,6 +9,8 @@
 
 #include "../../../return-codes/ReturnCodes.hpp"
 #include "../../../typedefs/TypeDefinitions.hpp"
+#include "../../../data-validation/DataValidation.hpp"
+
 #include "../../entity-attributes-manager/entity-attribute-type/EntityAttributeType.hpp"
 
 
@@ -17,21 +19,39 @@ namespace entity_system {
 
 	
 	// A base class for types of entities.
-	class EntityType
+	// This class needs to implement a data validation method!
+	class EntityType : public DataValidation
     {
+		private:
+
+			// Every entity type has a name.
+			std::string name_of_entity_type;
+
+			// TODO: add UUID ?
+
         protected:
                         
-			// TODO: add data/methods here!
+			// TODO: Add methods/members!
             
         public:
 
-			// 
-            EntityType();
+			// Make this the default constructor so 
+			// the name of an entity type must be set!
+            EntityType(const std::string&);
+
+			// Remove the default constructor!
+			EntityType() = delete;
 
 			// 
             ~EntityType();
 
+			// TODO: should get methods return const types?
 
+			// Returns the name of the entity type;
+			std::string get_entity_type_name() const;
+
+			// Implement data validation method as required by base class inheritance!
+			virtual ENTSYS_DATA_VALIDATION_RESULT validate() override;
     };
 
 };

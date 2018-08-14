@@ -9,14 +9,14 @@ namespace inexor {
 namespace entity_system {
 
 
-	// 
-	enum ENTSYS_RETURN_CODE
+	// Return codes for entity system.
+	enum ENTSYS_RESULT
     {
-        ENTSYS_RETURN_ERROR = -1000,
-        ENTSYS_RETURN_ERROR_ENTITY_TYPE_ALREADY_EXISTS,
-        ENTSYS_RETURN_ERROR_ENTITY_TYPE_NOT_FOUND,
-        ENTSYS_RETURN_ERROR_INVALID_NAME,
-        ENTSYS_RETURN_SUCCESS = 1,
+		// Error codes here:
+        ENTSYS_ERROR = -10000,
+
+		// Success codes here:
+        ENTSYS_SUCCESS = 1,
     };
 
 

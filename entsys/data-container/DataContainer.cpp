@@ -66,10 +66,10 @@ namespace entity_system {
     }
 
     
-    ENTSYS_RETURN_CODE DataContainer::set_data_type(const ENTSYS_DATA_TYPE& data_type)
+    ENTSYS_RESULT DataContainer::set_data_type(const ENTSYS_DATA_TYPE& data_type)
     {
         data_container_data_type = data_type;
-        return ENTSYS_RETURN_SUCCESS;
+        return ENTSYS_SUCCESS;
     }
 
 
