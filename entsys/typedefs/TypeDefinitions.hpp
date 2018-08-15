@@ -14,10 +14,9 @@
 namespace inexor {
 namespace entity_system {
 	
-
     // By using these type definitions we can make later definitions shorter.
     
-
+	//#define ENTSYS_ENTITY_TYPE(x,y) std::shared_ptr<EntityType> x = std::make_shared<EntityType>(std::string(y));
 
 };
 };

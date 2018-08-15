@@ -11,6 +11,9 @@
 #include "../EntitySystem.hpp"
 #include "../tests/EntitySystemProfiler.hpp"
 
+// Look for definition of entsys in other files.
+extern inexor::entity_system::EntitySystem& entsys;
+
 
 namespace inexor {
 namespace entity_system {
@@ -204,6 +207,30 @@ namespace entity_system {
         }
         end_test();
     }
+
+
+	// 
+	void Test_CreateEntityType_CorrectUsage()
+	{	
+		// Create a new entity type called "playerspawn"
+		std::shared_ptr<EntityType> playerspawn = std::make_shared<EntityType>(std::string("playerspawn"));
+		// Register new entity type to the entity system.
+		entsys.create_entity_type(playerspawn);
+	}
+
+
+	// 
+	void Test_CreateEntityType_IncorrectUsage()
+	{
+		// Create a new entity type called "playerspawn"
+		std::shared_ptr<EntityType> soundsource1 = std::make_shared<EntityType>(std::string("soundsource"));
+		std::shared_ptr<EntityType> soundsource2 = std::make_shared<EntityType>(std::string("soundsource"));
+
+		// Register new entity type to the entity system.
+		entsys.create_entity_type(soundsource1);
+		// ERROR: new entity type does already exist!
+		entsys.create_entity_type(soundsource2);
+	}
 
 };
 };

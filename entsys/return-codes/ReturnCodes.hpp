@@ -14,6 +14,8 @@ namespace entity_system {
     {
 		// Error codes here:
         ENTSYS_ERROR = -10000,
+		ENTSYS_ERROR_DATA_INVALID,
+		ENTSYS_ERROR_DATA_DUPLICATE,
 
 		// Success codes here:
         ENTSYS_SUCCESS = 1,

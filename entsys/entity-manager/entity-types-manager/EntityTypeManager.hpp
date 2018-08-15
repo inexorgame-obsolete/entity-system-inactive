@@ -11,6 +11,7 @@
 
 #include "entity-type\EntityType.hpp"
 #include "../../typedefs/TypeDefinitions.hpp"
+#include "../../error-handling/ErrorHandling.hpp"
 
 
 namespace inexor {
@@ -18,7 +19,7 @@ namespace entity_system {
 
 
 	// 
-    class EntityTypeManager
+    class EntityTypeManager : public EntitySystemErrorHandler
     {
         private:
 
@@ -37,6 +38,9 @@ namespace entity_system {
             ~EntityTypeManager();
 
         public:
+
+			// Returns the number of available types of entities.
+			std::size_t entity_types_count() const;
 
 			// create a new entity type and register it to the entity system.
 			ENTSYS_RESULT create_entity_type(const std::shared_ptr<EntityType>&);

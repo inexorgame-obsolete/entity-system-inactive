@@ -23,7 +23,8 @@ namespace entity_system {
 	bool EntityTypeManager::does_entity_type_exist(const std::string& param_entity_type_name)
 	{
 		// Loop through map of entity types.
-		return (map_of_entity_types.end() == map_of_entity_types.find(param_entity_type_name.c_str()));
+		// Returns false is entity type does not already exist.
+		return ! (map_of_entity_types.end() == map_of_entity_types.find(param_entity_type_name.c_str()) );
 	}
 
 	
@@ -31,7 +32,8 @@ namespace entity_system {
 	{
 		if(ENTSYS_DATA_VALID != param_new_entity_type->validate())
 		{
-			return ENTSYS_ERROR;
+			error_message("error: data of new entity type is invalid!");
+			return ENTSYS_ERROR_DATA_INVALID;
 		}
 		
 		// Get the name of the new entity type
@@ -43,8 +45,19 @@ namespace entity_system {
 			// Add to map of entity type which are available in the entity system!
 			map_of_entity_types[new_ent_type_name] = param_new_entity_type;
 		}
+		else
+		{
+			error_message("error: new entity type already exists!");
+			return ENTSYS_ERROR_DATA_DUPLICATE;
+		}
 
 		return ENTSYS_SUCCESS;
+	}
+
+
+	std::size_t EntityTypeManager::entity_types_count() const
+	{
+		return map_of_entity_types.size();
 	}
 
 
