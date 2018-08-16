@@ -19,19 +19,7 @@ namespace inexor {
 namespace entity_system {
 
 
-    // Iterate through all types when changing the data container's data type.
-    ENTSYS_DATA_TYPE DataContainerDataTypeArray[] =
-	{
-        ENTSYS_DATA_TYPE_INT,
-        ENTSYS_DATA_TYPE_BIG_INT,
-        ENTSYS_DATA_TYPE_FLOAT,
-        ENTSYS_DATA_TYPE_STRING,
-        ENTSYS_DATA_TYPE_DOUBLE,
-        ENTSYS_DATA_TYPE_BOOL
-    };
-    
-
-    // Test DataContainer by making correct API calls.
+	// 
     void Test_DataContainer_CorrectUsage()
     {
         // Undefined type and undefined memory value.
@@ -150,7 +138,7 @@ namespace entity_system {
         start_test("DataContainer::set_data_type(const ENTSYS_DATA_TYPE&)", ENTSYS_TEST_REPETITION);
         for(std::size_t i=0; i<ENTSYS_TEST_REPETITION; i++) {
             // Make sure not to read outside of the array.
-            undefinedCont.set_data_type(DataContainerDataTypeArray[i % 6]);
+            undefinedCont.set_data_type(ENTSYS_DATA_TYPE_INT);
         }
         end_test();
 
@@ -212,8 +200,10 @@ namespace entity_system {
 	// 
 	void Test_CreateEntityType_CorrectUsage()
 	{
-		start_test("Creating and deleting entity of type 'player spawn'.", ENTSYS_TEST_REPETITION);
+		Print_TestHeadline("Creating and deleting entity of type 'player spawn'.");
 		Print_TestResultTableHeader();
+
+		start_test("EntityTypeManager:: create_entity_type, delete_entity_type", ENTSYS_TEST_REPETITION);
 
 		for(std::size_t i=0; i<ENTSYS_TEST_REPETITION; i++)
 		{
@@ -233,8 +223,10 @@ namespace entity_system {
 	// 
 	void Test_CreateEntityType_IncorrectUsage()
 	{
-		start_test("Creating and deleting entity of type 'sound source'.", ENTSYS_TEST_REPETITION);
+		Print_TestHeadline("Creating and deleting entity of type 'sound source'.");
 		Print_TestResultTableHeader();
+		
+		start_test("EntityTypeManager:: create_entity_type, delete_entity_type", ENTSYS_TEST_REPETITION);
 
 		for(std::size_t i=0; i<ENTSYS_TEST_REPETITION; i++)
 		{
@@ -255,27 +247,59 @@ namespace entity_system {
 	}
 
 
-	//
-	void Test_DoesEntityTypeAlreadyExists_CorrectUsage()
+	// 
+	void Test_DoesEntityTypeExist_CorrectUsage()
 	{
-		start_test("Creating entity of type 'ctf flag'.");
+		Print_TestHeadline("Creating, querying and deleting entity of type 'flagbase'.");
 		Print_TestResultTableHeader();
 
-		// Create a new entity type called "flagpost"
-		std::shared_ptr<EntityType> ctf_flag = std::make_shared<EntityType>(std::string("flagbase"));
+		start_test("EntityTypeManager:: create_entity_type, does_entity_type_exist'.", ENTSYS_TEST_REPETITION);
+		
+		for(std::size_t i=0; i<ENTSYS_TEST_REPETITION; i++)
+		{
+			// Create a new entity type called "flagpost".
+			std::shared_ptr<EntityType> ctf_flag = std::make_shared<EntityType>(std::string("flagbase"));
 
-		// Register new entity type to the entity system.
-		entsys.create_entity_type(ctf_flag);
+			// Register new entity type to the entity system.
+			entsys.create_entity_type(ctf_flag);
 
-		// Look up if these types of entities do exist.
-		bool ctf_flag_available = entsys.does_entity_type_exist("flagbase");
-		bool capture_base_available = entsys.does_entity_type_exist("capturebase");
-
-		if(ctf_flag_available) cout << "Entity type 'ctf flag' is available." << endl;
-		if(!capture_base_available) cout << "Entity type '' is not available." << endl;
+			// Look up if these types of entities do exist.
+			bool ctf_flag_available = entsys.does_entity_type_exist("flagbase");
+			bool capture_base_available = entsys.does_entity_type_exist("capturebase");
+		}
 
 		end_test();
+		
+		// Delete entity type after the test has finished.
+		entsys.delete_entity_type("flagbase");
 	}
+
+
+	//
+	void Test_EntityTypesCount_CorrectUsage()
+	{
+		Print_TestHeadline("Querying number of available entity types.");
+		Print_TestResultTableHeader();
+
+		// Create a new entity type called "pistol".
+		std::shared_ptr<EntityType> weapon1 = std::make_shared<EntityType>(std::string("pistol"));
+
+		// Register new entity type to the entity system.
+		entsys.create_entity_type(weapon1);
+
+		start_test("EntityTypeManager::get_entity_types_count", ENTSYS_TEST_REPETITION);
+		
+		for(std::size_t i=0; i<ENTSYS_TEST_REPETITION; i++)
+		{
+			std::size_t tmp = entsys.get_entity_types_count();
+		}
+
+		end_test();
+
+		// Delete entity type after the test has finished.
+		entsys.delete_entity_type("pistol");
+	}
+
 };
 };
 

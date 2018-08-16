@@ -29,8 +29,6 @@ namespace entity_system {
 
 		protected:
 
-			// TODO: is this placement correct?
-
 			// 
             EntityTypeManager();
 
@@ -46,10 +44,11 @@ namespace entity_system {
 			ENTSYS_RESULT create_entity_type(const std::shared_ptr<EntityType>&);
 
 			// Returns the number of available types of entities.
-			std::size_t entity_types_count() const;
+			std::size_t get_entity_types_count() const;
 
 			// Deletes an entity type from the entity system.
 			ENTSYS_RESULT delete_entity_type(const std::string&);
+
 
     };
 

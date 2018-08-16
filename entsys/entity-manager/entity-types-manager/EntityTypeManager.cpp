@@ -54,7 +54,7 @@ namespace entity_system {
 	}
 
 
-	std::size_t EntityTypeManager::entity_types_count() const
+	std::size_t EntityTypeManager::get_entity_types_count() const
 	{
 		return map_of_entity_types.size();
 	}

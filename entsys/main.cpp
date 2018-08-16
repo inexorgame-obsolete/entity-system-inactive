@@ -22,7 +22,8 @@ int main(int argc, char* argv[])
 	// Automatic tests
 	Test_DataContainer_CorrectUsage();
 	Test_CreateEntityType_CorrectUsage();
-	Test_DoesEntityTypeAlreadyExists_CorrectUsage();
+	Test_DoesEntityTypeExist_CorrectUsage();
+	Test_EntityTypesCount_CorrectUsage();
 
 	Test_CreateEntityType_IncorrectUsage();
 
