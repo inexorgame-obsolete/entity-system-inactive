@@ -19,8 +19,10 @@ int main(int argc, char* argv[])
 {   
     Print_MinimumMaximumMemoryValues();
 
+	// Automatic tests
 	Test_DataContainer_CorrectUsage();
 	Test_CreateEntityType_CorrectUsage();
+	Test_DoesEntityTypeAlreadyExists_CorrectUsage();
 
 	Test_CreateEntityType_IncorrectUsage();
 

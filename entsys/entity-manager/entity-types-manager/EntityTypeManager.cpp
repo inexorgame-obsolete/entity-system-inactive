@@ -22,9 +22,8 @@ namespace entity_system {
 
 	bool EntityTypeManager::does_entity_type_exist(const std::string& param_entity_type_name)
 	{
-		// Loop through map of entity types.
 		// Returns false is entity type does not already exist.
-		return ! (map_of_entity_types.end() == map_of_entity_types.find(param_entity_type_name.c_str()) );
+		return !(map_of_entity_types.end() == map_of_entity_types.find(param_entity_type_name.c_str()));
 	}
 
 	
@@ -36,13 +35,13 @@ namespace entity_system {
 			return ENTSYS_ERROR_DATA_INVALID;
 		}
 		
-		// Get the name of the new entity type
+		// Get the name of the new entity type.
 		std::string new_ent_type_name = param_new_entity_type->get_entity_type_name();
 
-		// TODO: Check if entity type with this name does already exist!
+		// Check if entity type with this name does already exist.
 		if(false == does_entity_type_exist(new_ent_type_name))
 		{
-			// Add to map of entity type which are available in the entity system!
+			// Add to map of entity types.
 			map_of_entity_types[new_ent_type_name] = param_new_entity_type;
 		}
 		else
@@ -58,6 +57,15 @@ namespace entity_system {
 	std::size_t EntityTypeManager::entity_types_count() const
 	{
 		return map_of_entity_types.size();
+	}
+
+
+	ENTSYS_RESULT EntityTypeManager::delete_entity_type(const std::string& param_entity_type_name)
+	{
+		// TODO: [CRITICAL] Remove all instances of this entity type before removing the entity type itself!
+		// TODO: Should we check if his entity type even exists?
+		map_of_entity_types.erase(param_entity_type_name);
+		return ENTSYS_SUCCESS;
 	}
 
 

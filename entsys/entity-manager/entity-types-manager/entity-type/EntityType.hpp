@@ -24,7 +24,7 @@ namespace entity_system {
     {
 		private:
 
-			// Every entity type has a name.
+			// Every entity type must have a unique name.
 			std::string name_of_entity_type;
 
 			// TODO: add UUID ?

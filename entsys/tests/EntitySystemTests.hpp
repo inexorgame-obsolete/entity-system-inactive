@@ -211,27 +211,71 @@ namespace entity_system {
 
 	// 
 	void Test_CreateEntityType_CorrectUsage()
-	{	
-		// Create a new entity type called "playerspawn"
-		std::shared_ptr<EntityType> playerspawn = std::make_shared<EntityType>(std::string("playerspawn"));
-		// Register new entity type to the entity system.
-		entsys.create_entity_type(playerspawn);
+	{
+		start_test("Creating and deleting entity of type 'player spawn'.", ENTSYS_TEST_REPETITION);
+		Print_TestResultTableHeader();
+
+		for(std::size_t i=0; i<ENTSYS_TEST_REPETITION; i++)
+		{
+			// Create a new entity type called "playerspawn".
+			std::shared_ptr<EntityType> playerspawn = std::make_shared<EntityType>(std::string("playerspawn"));
+
+			// Register new entity type to the entity system.
+			entsys.create_entity_type(playerspawn);
+
+			// Remove entity type from the entity system again.
+			entsys.delete_entity_type("playerspawn");
+		}
+		end_test();
 	}
 
 
 	// 
 	void Test_CreateEntityType_IncorrectUsage()
 	{
-		// Create a new entity type called "playerspawn"
-		std::shared_ptr<EntityType> soundsource1 = std::make_shared<EntityType>(std::string("soundsource"));
-		std::shared_ptr<EntityType> soundsource2 = std::make_shared<EntityType>(std::string("soundsource"));
+		start_test("Creating and deleting entity of type 'sound source'.", ENTSYS_TEST_REPETITION);
+		Print_TestResultTableHeader();
 
-		// Register new entity type to the entity system.
-		entsys.create_entity_type(soundsource1);
-		// ERROR: new entity type does already exist!
-		entsys.create_entity_type(soundsource2);
+		for(std::size_t i=0; i<ENTSYS_TEST_REPETITION; i++)
+		{
+			// Create a new entity type called "playerspawn"
+			std::shared_ptr<EntityType> soundsource1 = std::make_shared<EntityType>(std::string("soundsource"));
+			std::shared_ptr<EntityType> soundsource2 = std::make_shared<EntityType>(std::string("soundsource"));
+
+			// Register new entity type to the entity system.
+			entsys.create_entity_type(soundsource1);
+
+			// ERROR: new entity type does already exist!
+			entsys.create_entity_type(soundsource2);
+
+			// Remove entity type from the entity system again.
+			entsys.delete_entity_type("soundsource");
+		}
+		end_test();
 	}
 
+
+	//
+	void Test_DoesEntityTypeAlreadyExists_CorrectUsage()
+	{
+		start_test("Creating entity of type 'ctf flag'.");
+		Print_TestResultTableHeader();
+
+		// Create a new entity type called "flagpost"
+		std::shared_ptr<EntityType> ctf_flag = std::make_shared<EntityType>(std::string("flagbase"));
+
+		// Register new entity type to the entity system.
+		entsys.create_entity_type(ctf_flag);
+
+		// Look up if these types of entities do exist.
+		bool ctf_flag_available = entsys.does_entity_type_exist("flagbase");
+		bool capture_base_available = entsys.does_entity_type_exist("capturebase");
+
+		if(ctf_flag_available) cout << "Entity type 'ctf flag' is available." << endl;
+		if(!capture_base_available) cout << "Entity type '' is not available." << endl;
+
+		end_test();
+	}
 };
 };
 

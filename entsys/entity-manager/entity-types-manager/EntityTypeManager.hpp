@@ -39,14 +39,17 @@ namespace entity_system {
 
         public:
 
-			// Returns the number of available types of entities.
-			std::size_t entity_types_count() const;
+			// Search through the map of available types of entities.
+			bool does_entity_type_exist(const std::string&);
 
 			// create a new entity type and register it to the entity system.
 			ENTSYS_RESULT create_entity_type(const std::shared_ptr<EntityType>&);
 
-			// Search through the map of available types of entities.
-			bool does_entity_type_exist(const std::string&);
+			// Returns the number of available types of entities.
+			std::size_t entity_types_count() const;
+
+			// Deletes an entity type from the entity system.
+			ENTSYS_RESULT delete_entity_type(const std::string&);
 
     };
 
