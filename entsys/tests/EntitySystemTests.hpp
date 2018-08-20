@@ -300,6 +300,29 @@ namespace entity_system {
 		entsys.delete_entity_type("pistol");
 	}
 
+
+	// 
+	void Test_LinkEntityAttributeTypeToEntityType_CorrectUsage()
+	{
+		Print_TestHeadline("Initialising entity types and link entity attribute types.");
+		Print_TestResultTableHeader();
+	
+		// Create a new entity type called "rocketlauncher".
+		std::shared_ptr<EntityType> weapon2 = std::make_shared<EntityType>(std::string("rocketlauncher"));
+
+		// Create attribute types for "rocketlauncher".
+		std::shared_ptr<EntityAttributeType> attr1 = std::make_shared<EntityAttributeType>(std::string("damage"));
+		std::shared_ptr<EntityAttributeType> attr2 = std::make_shared<EntityAttributeType>(std::string("weight"));
+		std::shared_ptr<EntityAttributeType> attr3 = std::make_shared<EntityAttributeType>(std::string("color"));
+		std::shared_ptr<EntityAttributeType> attr4 = std::make_shared<EntityAttributeType>(std::string("reloadtime"));
+
+		// THIS is highly experimental!
+		entsys.create_entity_type_with_attributes(weapon2, 4, attr1, attr2, attr3, attr4);
+
+		// Delete entity type after the test has finished.
+		entsys.delete_entity_type("rocketlauncher");
+	}
+
 };
 };
 

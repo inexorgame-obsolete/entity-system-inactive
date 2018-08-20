@@ -59,7 +59,7 @@ namespace entity_system {
 	public:
 
 			// TODO: Rename this method?
-			ENTSYS_RESULT create_entity_type_with_attributes(const std::string&, std::size_t, ...);
+			ENTSYS_RESULT create_entity_type_with_attributes(const std::shared_ptr<EntityType>&, std::size_t, ...);
 
 
     };

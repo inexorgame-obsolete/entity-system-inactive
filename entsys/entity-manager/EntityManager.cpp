@@ -27,13 +27,10 @@ namespace entity_system {
 	}
 	
 	
-    ENTSYS_RESULT EntityManager::create_entity_type_with_attributes(const std::string& param_new_entity_type_name,
+    ENTSYS_RESULT EntityManager::create_entity_type_with_attributes(const std::shared_ptr<EntityType>& param_new_entity_type,
 		                                                            std::size_t argument_count,
 		                                                            ...)
 	{
-		// Initialise a new entity type.
-		std::shared_ptr<EntityType> temp_new_entity_type = std::make_shared<EntityType>(param_new_entity_type_name);
-
 		// All linked entity attribute types will be stored in this vector.
 		std::vector<std::shared_ptr<EntityAttributeType>> temp_new_linked_attribute_types;
 		
@@ -54,11 +51,11 @@ namespace entity_system {
 		// TODO: Validate!
 
 		// Process data!
-		create_entity_type(temp_new_entity_type);
+		create_entity_type(param_new_entity_type);
 
 		for(std::size_t i=0; i<argument_count; i++)
 		{
-			link_entity_attribute_type_to_entity_type(temp_new_entity_type, temp_new_linked_attribute_types[i]);
+			link_entity_attribute_type_to_entity_type(param_new_entity_type, temp_new_linked_attribute_types[i]);
 		}
 
 		return ENTSYS_SUCCESS;
