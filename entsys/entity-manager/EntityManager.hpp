@@ -50,6 +50,7 @@ namespace entity_system {
             ~EntityManager();
 
 			ENTSYS_RESULT add_attribute_type_to_entity_type(const std::shared_ptr<EntityType>&, const std::shared_ptr<EntityAttributeType>&);
+			
 			// TODO: Implement!
 			//ENTSYS_RESULT add_attribute_type_to_entity_type(const std::string&, const std::string&);
 			//ENTSYS_RESULT add_attribute_type_to_entity_type(const std::shared_ptr<EntityType>&, const std::string&);
@@ -58,7 +59,7 @@ namespace entity_system {
 	public:
 
 			// TODO: Rename this method?
-			//ENTSYS_RESULT create_entity_type_with_attributes(const std::string&, ...);
+			ENTSYS_RESULT create_entity_type_with_attributes(const std::string&, std::size_t, ...);
 
 
     };

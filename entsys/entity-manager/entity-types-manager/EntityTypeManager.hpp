@@ -57,7 +57,7 @@ namespace entity_system {
             bool is_entity_attribute_type_linked_to_entity_type(const std::shared_ptr<EntityAttributeType>&, const std::shared_ptr<EntityType>&);
 
 			// Links an entity attribute type to an entity type.
-			ENTSYS_RESULT link_entity_attribute_type_to_entity_type(const std::shared_ptr<EntityAttributeType>&, const std::shared_ptr<EntityType>&);
+			ENTSYS_RESULT link_entity_attribute_type_to_entity_type(const std::shared_ptr<EntityType>&, const std::shared_ptr<EntityAttributeType>&);
 
     };
 

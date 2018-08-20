@@ -92,8 +92,8 @@ namespace entity_system {
 	}
 
 
-	ENTSYS_RESULT EntityTypeManager::link_entity_attribute_type_to_entity_type(const std::shared_ptr<EntityAttributeType>& param_entity_attribute_type,
-		                                                                       const std::shared_ptr<EntityType>& param_entity_type)
+	ENTSYS_RESULT EntityTypeManager::link_entity_attribute_type_to_entity_type(const std::shared_ptr<EntityType>& param_entity_type,
+                                                                               const std::shared_ptr<EntityAttributeType>& param_entity_attribute_type)
 	{
 		// TODO: Do we need this wrapper ?
 		return param_entity_type->link_entity_attribute_type_to_entity_type(param_entity_attribute_type);

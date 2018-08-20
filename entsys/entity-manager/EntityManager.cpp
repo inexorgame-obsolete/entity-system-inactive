@@ -23,25 +23,47 @@ namespace entity_system {
 	ENTSYS_RESULT EntityManager::add_attribute_type_to_entity_type(const std::shared_ptr<EntityType>& param_entity_type,
 		                                                           const std::shared_ptr<EntityAttributeType>& param_entity_attribute_type)
 	{
-		return link_entity_attribute_type_to_entity_type(param_entity_attribute_type, param_entity_type);
+		return link_entity_attribute_type_to_entity_type(param_entity_type, param_entity_attribute_type);
 	}
-
-
 	
-	/*
-    ENTSYS_RESULT EntityManager::create_entity_type_with_attributes(const std::string& param_new_entity_type_name, ...)
+	
+    ENTSYS_RESULT EntityManager::create_entity_type_with_attributes(const std::string& param_new_entity_type_name,
+		                                                            std::size_t argument_count,
+		                                                            ...)
 	{
+		// Initialise a new entity type.
 		std::shared_ptr<EntityType> temp_new_entity_type = std::make_shared<EntityType>(param_new_entity_type_name);
 
-		// TODO: This is highly experimental!
+		// All linked entity attribute types will be stored in this vector.
+		std::vector<std::shared_ptr<EntityAttributeType>> temp_new_linked_attribute_types;
 		
-		va_list args;
+		// Start variable argument list
+		va_list variable_argument_list;
+		va_start(variable_argument_list, argument_count);
 
-		va_end(args);
-		
+		// Parse parameters
+		for(std::size_t i=0; i<argument_count; i++)
+		{
+			temp_new_linked_attribute_types.push_back(va_arg(variable_argument_list, std::shared_ptr<EntityAttributeType>));
+		}
+
+		// End variable argument list
+		va_end(variable_argument_list);
+
+		// Validate data
+		// TODO: Validate!
+
+		// Process data!
+		create_entity_type(temp_new_entity_type);
+
+		for(std::size_t i=0; i<argument_count; i++)
+		{
+			link_entity_attribute_type_to_entity_type(temp_new_entity_type, temp_new_linked_attribute_types[i]);
+		}
+
 		return ENTSYS_SUCCESS;
 	}
-	*/
+
 
 };
 };
