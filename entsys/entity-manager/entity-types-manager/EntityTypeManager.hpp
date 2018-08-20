@@ -24,7 +24,7 @@ namespace entity_system {
         private:
 
 			// In this unordered map all available types 
-			// of entites of the entity system will be stored.
+			// of entites in the entity system will be stored.
 			std::unordered_map<std::string, std::shared_ptr<EntityType>> map_of_entity_types;
 
 		protected:
@@ -40,7 +40,7 @@ namespace entity_system {
 			// Search through the map of available types of entities.
 			bool does_entity_type_exist(const std::string&);
 
-			// create a new entity type and register it to the entity system.
+			// Create a new entity type and store it in the entity system.
 			ENTSYS_RESULT create_entity_type(const std::shared_ptr<EntityType>&);
 
 			// Returns the number of available types of entities.
@@ -48,7 +48,7 @@ namespace entity_system {
 
 			// Deletes an entity type from the entity system.
 			ENTSYS_RESULT delete_entity_type(const std::string&);
-
+			ENTSYS_RESULT delete_entity_type(const std::shared_ptr<EntityType>&);
 
     };
 

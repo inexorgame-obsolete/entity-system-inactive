@@ -62,12 +62,19 @@ namespace entity_system {
 
 	ENTSYS_RESULT EntityTypeManager::delete_entity_type(const std::string& param_entity_type_name)
 	{
-		// TODO: [CRITICAL] Remove all instances of this entity type before removing the entity type itself!
-		// TODO: Should we check if his entity type even exists?
+		// TODO: [CRITICAL] Remove all instances of this
+		// entity type before removing the entity type itself!
 		map_of_entity_types.erase(param_entity_type_name);
 		return ENTSYS_SUCCESS;
 	}
 
+	
+	ENTSYS_RESULT EntityTypeManager::delete_entity_type(const std::shared_ptr<EntityType>& param_entity_type_name)
+	{
+		// TODO: [CRITICAL] Remove all instances of this
+		// entity type before removing the entity type itself!
+		return delete_entity_type(param_entity_type_name->get_entity_type_name());
+	}
 
 };
 };

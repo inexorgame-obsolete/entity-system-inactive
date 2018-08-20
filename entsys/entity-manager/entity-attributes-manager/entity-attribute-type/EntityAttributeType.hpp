@@ -11,6 +11,7 @@
 #include "../../../tests/EntitySystemDebugging.hpp"
 #include "../../../data-container/DataContainer.hpp"
 #include "../../../return-codes/ReturnCodes.hpp"
+#include "../../../data-validation/DataValidation.hpp"
 
 
 namespace inexor {
@@ -18,11 +19,11 @@ namespace entity_system {
     
 
 	// 
-    class EntityAttributeType
+    class EntityAttributeType : public DataValidation
     {
         protected:
 
-			// TODO: add data/methods here!
+			std::string entity_attribute_type_name;
 
 		protected:
 
@@ -31,12 +32,16 @@ namespace entity_system {
         public:
 
 			// 
-            EntityAttributeType();
+            EntityAttributeType(const std::string&);
 
 			// 
             ~EntityAttributeType();
 
+			// Returns the name of the entity attribute type.
+			std::string get_entity_attribute_type_name() const;
 
+			// Implement data validation method as required by base class inheritance!
+			virtual ENTSYS_DATA_VALIDATION_RESULT validate() override;
     };
     
 
