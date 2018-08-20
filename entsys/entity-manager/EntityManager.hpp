@@ -6,6 +6,9 @@
 
 #include <vector>
 
+// Variadic functions (variable parameter lists for initialisation)
+#include <cstdarg>
+
 // Entity system debugging.
 #include "../../entsys/tests/EntitySystemDebugging.hpp"
 
@@ -36,7 +39,9 @@ namespace entity_system {
                           public EntityRelationTypeInstanceManager
     {
 
-        protected:
+		private:
+
+		protected:
         
 			//
             EntityManager();
@@ -44,11 +49,18 @@ namespace entity_system {
 			//
             ~EntityManager();
 
-		public:
-			
-			// TODO: implement!
+			ENTSYS_RESULT add_attribute_type_to_entity_type(const std::shared_ptr<EntityType>&, const std::shared_ptr<EntityAttributeType>&);
+			// TODO: Implement!
+			//ENTSYS_RESULT add_attribute_type_to_entity_type(const std::string&, const std::string&);
+			//ENTSYS_RESULT add_attribute_type_to_entity_type(const std::shared_ptr<EntityType>&, const std::string&);
+			//ENTSYS_RESULT add_attribute_type_to_entity_type(const std::string&, const std::shared_ptr<EntityAttributeType>&);
 
-            
+	public:
+
+			// TODO: Rename this method?
+			//ENTSYS_RESULT create_entity_type_with_attributes(const std::string&, ...);
+
+
     };
 
 };

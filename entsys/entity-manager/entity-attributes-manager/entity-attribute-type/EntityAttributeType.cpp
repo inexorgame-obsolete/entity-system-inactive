@@ -20,7 +20,6 @@ namespace entity_system {
     }
 
 	
-	// Implement data validation method as required by base class inheritance!
 	ENTSYS_DATA_VALIDATION_RESULT EntityAttributeType::validate()
 	{
 		return ENTSYS_DATA_VALID;

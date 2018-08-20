@@ -31,6 +31,9 @@ namespace entity_system {
 
         public:
 
+			// Remove the default constructor!
+			EntityAttributeType() = delete;
+
 			// 
             EntityAttributeType(const std::string&);
 
@@ -42,6 +45,7 @@ namespace entity_system {
 
 			// Implement data validation method as required by base class inheritance!
 			virtual ENTSYS_DATA_VALIDATION_RESULT validate() override;
+
     };
     
 

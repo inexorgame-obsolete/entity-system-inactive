@@ -50,6 +50,15 @@ namespace entity_system {
 			ENTSYS_RESULT delete_entity_type(const std::string&);
 			ENTSYS_RESULT delete_entity_type(const std::shared_ptr<EntityType>&);
 
+			
+			// Checks if an entity attribute type
+			// is already linked to an entity type.
+			bool is_entity_attribute_type_linked_to_entity_type(const std::string&, const std::string&);
+            bool is_entity_attribute_type_linked_to_entity_type(const std::shared_ptr<EntityAttributeType>&, const std::shared_ptr<EntityType>&);
+
+			// Links an entity attribute type to an entity type.
+			ENTSYS_RESULT link_entity_attribute_type_to_entity_type(const std::shared_ptr<EntityAttributeType>&, const std::shared_ptr<EntityType>&);
+
     };
 
 };
