@@ -5,6 +5,6 @@
 #define INEXOR_ENTSYS_DEBUGGER_HEADER
 
 // We are in debug mode!
-//#define INEXOR_DEBUG
+#define INEXOR_DEBUG
 
 #endif // INEXOR_ENTSYS_DEBUGGER_HEADER

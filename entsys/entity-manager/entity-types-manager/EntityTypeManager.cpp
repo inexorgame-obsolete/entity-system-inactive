@@ -77,28 +77,5 @@ namespace entity_system {
 	}
 
 
-	bool EntityTypeManager::is_entity_attribute_type_linked_to_entity_type(const std::string& param_entity_attribute_type_name,
-		                                                                   const std::string& param_entity_type_name)
-	{
-		return map_of_entity_types[param_entity_type_name]->is_entity_attribute_type_linked(param_entity_attribute_type_name);
-	}
-
-
-	bool EntityTypeManager::is_entity_attribute_type_linked_to_entity_type(const std::shared_ptr<EntityAttributeType>& param_entity_attribute_type,
-		                                                                   const std::shared_ptr<EntityType>& param_entity_type)
-	{
-		return is_entity_attribute_type_linked_to_entity_type(param_entity_attribute_type->get_entity_attribute_type_name(),
-			                                                  param_entity_type->get_entity_type_name());
-	}
-
-
-	ENTSYS_RESULT EntityTypeManager::link_entity_attribute_type_to_entity_type(const std::shared_ptr<EntityType>& param_entity_type,
-                                                                               const std::shared_ptr<EntityAttributeType>& param_entity_attribute_type)
-	{
-		// TODO: Do we need this wrapper ?
-		return param_entity_type->link_entity_attribute_type_to_entity_type(param_entity_attribute_type);
-	}
-
-
 };
 };

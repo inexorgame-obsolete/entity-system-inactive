@@ -317,10 +317,12 @@ namespace entity_system {
 		std::shared_ptr<EntityAttributeType> attr4 = std::make_shared<EntityAttributeType>("reloadtime");
 
 		// Create a vector of shared pointers to entity attribute types
-		std::vector<std::shared_ptr<EntityAttributeType>> weapon2_attributes = {attr1, attr2, attr3, attr4};
+		const std::vector<std::shared_ptr<EntityAttributeType>> weapon2_attributes = {attr1, attr2, attr3, attr4};
+		std::vector<std::shared_ptr<EntityAttributeType>> weapon2_attributes2 = {attr1, attr2, attr3, attr4};
 
 		// Link entity attribute types to entity type.
 		entsys.create_entity_type_with_attributes(weapon2, weapon2_attributes);
+		entsys.create_entity_type_with_attributes(weapon2, weapon2_attributes2);
 
 		// Delete entity type after the test has finished.
 		entsys.delete_entity_type("rocketlauncher");
