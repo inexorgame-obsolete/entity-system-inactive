@@ -308,16 +308,19 @@ namespace entity_system {
 		Print_TestResultTableHeader();
 	
 		// Create a new entity type called "rocketlauncher".
-		std::shared_ptr<EntityType> weapon2 = std::make_shared<EntityType>(std::string("rocketlauncher"));
+		std::shared_ptr<EntityType> weapon2 = std::make_shared<EntityType>("rocketlauncher");
 
 		// Create attribute types for "rocketlauncher".
-		std::shared_ptr<EntityAttributeType> attr1 = std::make_shared<EntityAttributeType>(std::string("damage"));
-		std::shared_ptr<EntityAttributeType> attr2 = std::make_shared<EntityAttributeType>(std::string("weight"));
-		std::shared_ptr<EntityAttributeType> attr3 = std::make_shared<EntityAttributeType>(std::string("color"));
-		std::shared_ptr<EntityAttributeType> attr4 = std::make_shared<EntityAttributeType>(std::string("reloadtime"));
+		std::shared_ptr<EntityAttributeType> attr1 = std::make_shared<EntityAttributeType>("damage");
+		std::shared_ptr<EntityAttributeType> attr2 = std::make_shared<EntityAttributeType>("weight");
+		std::shared_ptr<EntityAttributeType> attr3 = std::make_shared<EntityAttributeType>("color");
+		std::shared_ptr<EntityAttributeType> attr4 = std::make_shared<EntityAttributeType>("reloadtime");
 
-		// THIS is highly experimental!
-		entsys.create_entity_type_with_attributes(weapon2, 4, attr1, attr2, attr3, attr4);
+		// Create a vector of shared pointers to entity attribute types
+		std::vector<std::shared_ptr<EntityAttributeType>> weapon2_attributes = {attr1, attr2, attr3, attr4};
+
+		// Link entity attribute types to entity type.
+		entsys.create_entity_type_with_attributes(weapon2, weapon2_attributes);
 
 		// Delete entity type after the test has finished.
 		entsys.delete_entity_type("rocketlauncher");
