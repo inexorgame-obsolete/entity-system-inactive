@@ -10,9 +10,7 @@
 #include <unordered_map>
 
 #include "entity-attribute-type\EntityAttributeType.hpp"
-//#include "../entity-types-manager/entity-type/EntityType.hpp"
-//#include "../../return-codes/ReturnCodes.hpp"
-//#include "../../typedefs/TypeDefinitions.hpp"
+#include "../../data-validation/DataValidationResults.hpp"
 
 
 namespace inexor {
@@ -30,10 +28,8 @@ namespace entity_system {
 
         protected:
 
-			// 
 			EntityAttributeTypeManager();
 
-			// 
             ~EntityAttributeTypeManager();
 
         public:
@@ -49,6 +45,9 @@ namespace entity_system {
 			// Deletes an entity attribute type from the entity system.
 			ENTSYS_RESULT delete_entity_attribute_type(const std::string&);
 			ENTSYS_RESULT delete_entity_attribute_type(const std::shared_ptr<EntityAttributeType>&);
+
+			// Validates entity attribute types
+			ENTSYS_DATA_VALIDATION_RESULT validate_attribute_types(const std::vector<std::shared_ptr<EntityAttributeType>>&);
 
 	};
 

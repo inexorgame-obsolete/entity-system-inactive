@@ -321,6 +321,8 @@ namespace entity_system {
 		std::vector<std::shared_ptr<EntityAttributeType>> weapon2_attributes2 = {attr1, attr2, attr3, attr4};
 
 		// Link entity attribute types to entity type.
+
+		// TODO: Rename to "setup_..." ?
 		entsys.create_entity_type_with_attributes(weapon2, weapon2_attributes);
 		entsys.create_entity_type_with_attributes(weapon2, weapon2_attributes2);
 

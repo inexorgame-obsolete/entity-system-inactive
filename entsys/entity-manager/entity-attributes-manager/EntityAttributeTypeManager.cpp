@@ -59,5 +59,19 @@ namespace entity_system {
 	}
 
 
+	ENTSYS_DATA_VALIDATION_RESULT validate_attribute_types(const std::vector<std::shared_ptr<EntityAttributeType>>& param_entity_attribute_types)
+	{
+		ENTSYS_DATA_VALIDATION_RESULT temp_data_validation;
+
+		// Loop through all linked entity attribut types and validate their data.
+		for(std::size_t i=0; i<param_entity_attribute_types.size(); i++)
+		{		
+			temp_data_validation = param_entity_attribute_types[i]->validate();
+			if(ENTSYS_DATA_VALID != temp_data_validation) return temp_data_validation;
+		}
+		return ENTSYS_DATA_VALID;
+	}
+
+
 };
 };
