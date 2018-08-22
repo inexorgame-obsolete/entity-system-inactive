@@ -4,4 +4,4 @@
 #pragma once
 
 // We are in debug mode!
-#define INEXOR_DEBUG
+//#define INEXOR_DEBUG

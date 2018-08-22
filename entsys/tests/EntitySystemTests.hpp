@@ -7,6 +7,10 @@
 #include <cstdint>
 #include <limits>
 
+// Multithreading
+#include <thread>
+#include <mutex>
+
 #include "../EntitySystem.hpp"
 #include "../tests/EntitySystemProfiler.hpp"
 
@@ -327,6 +331,45 @@ namespace entity_system {
 
 		// Delete entity type after the test has finished.
 		entsys.delete_entity_type("rocketlauncher");
+	}
+
+	// Global variable
+	DataContainer g_ThreadSafeDataContainer(ENTSYS_DATA_TYPE_INT);
+
+	std::mutex cout_write_mutex;
+
+	// Do not call this directly
+	// Only call this when creating a thread with it.
+	void Dummy_Test_Multithreading()
+	{
+		for(std::size_t i=0; i<1000000; i++)
+		{
+			// Initialise 
+			time_t t;
+			srand((unsigned) time(&t));
+
+			int random_number = rand();
+			g_ThreadSafeDataContainer.set_threadsafe(random_number);
+
+			int output_number = 0;
+			g_ThreadSafeDataContainer.get(output_number);
+
+			std::lock_guard<std::mutex> locker(cout_write_mutex);
+			cout << "Thread id: " << std::this_thread::get_id() << " set data container to " << output_number << endl;
+		}
+	}
+
+
+	// Test Multithreading with C++ standard library and DataContainer class.
+	void Test_DataContainer_Multithreading_CorrectUsage()
+	{
+		// Start 2 threads which write on the same data container.
+		std::thread entsys_thread_1(Dummy_Test_Multithreading);
+		std::thread entsys_thread_2(Dummy_Test_Multithreading);
+		
+		// Join the threads back to the main thread again.
+		entsys_thread_1.join();
+		entsys_thread_2.join();
 	}
 
 };

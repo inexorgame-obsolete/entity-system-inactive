@@ -3,10 +3,12 @@
 
 #pragma once
 
-// TODO: Add multithreading safety.
-
 #include <string>
 #include <cstdint>
+
+// Multithreading
+#include <thread>
+#include <mutex>
 
 #include "DataTypes.hpp"
 
@@ -61,7 +63,6 @@ namespace entity_system {
 
         public:
 
-			// 
             DataContainer();
 
             // Overloaded constructors.
@@ -73,8 +74,11 @@ namespace entity_system {
             DataContainer(const bool&);
             DataContainer(const int&);
 
-			// 
             ~DataContainer();
+
+			// This mutex is used for the
+			// implementation of multithreading safety.
+			std::mutex data_container_mutex;
 
             // Set the data type of the container.
             ENTSYS_RESULT set_data_type(const ENTSYS_DATA_TYPE&);
@@ -86,7 +90,15 @@ namespace entity_system {
             DataContainer set(const float&);
             DataContainer set(const bool&);
             DataContainer set(const int&);
-            
+
+			// Thread-safe set methods.
+			DataContainer set_threadsafe(const std::int64_t&);
+            DataContainer set_threadsafe(const std::string&);
+            DataContainer set_threadsafe(const double&);
+            DataContainer set_threadsafe(const float&);
+            DataContainer set_threadsafe(const bool&);
+            DataContainer set_threadsafe(const int&);
+
             // Assign operators.
             DataContainer operator=(const int&);
             DataContainer operator=(const double&);

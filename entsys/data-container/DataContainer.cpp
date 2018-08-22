@@ -21,42 +21,60 @@ namespace entity_system {
 
     DataContainer::DataContainer(const std::int64_t& int_val)
     {
-        data_container_data_type = ENTSYS_DATA_TYPE_BIG_INT;
+		// Thread safe set method
+		std::lock_guard<std::mutex> lock(data_container_mutex);
+
+		data_container_data_type = ENTSYS_DATA_TYPE_BIG_INT;
         int64_data = int_val;
     }
 
 
     DataContainer::DataContainer(const double& double_val)
     {
-        data_container_data_type = ENTSYS_DATA_TYPE_DOUBLE;
+		// Thread safe set method
+		std::lock_guard<std::mutex> lock(data_container_mutex);
+
+		data_container_data_type = ENTSYS_DATA_TYPE_DOUBLE;
         double_data = double_val;
     }
 
 
     DataContainer::DataContainer(const float& float_val)
     {
-        data_container_data_type = ENTSYS_DATA_TYPE_FLOAT;
+		// Thread safe set method
+		std::lock_guard<std::mutex> lock(data_container_mutex);
+
+		data_container_data_type = ENTSYS_DATA_TYPE_FLOAT;
         float_data = float_val;
     }
 
 
     DataContainer::DataContainer(const bool& bool_val)
     {
-        data_container_data_type = ENTSYS_DATA_TYPE_BOOL;
+		// Thread safe set method
+		std::lock_guard<std::mutex> lock(data_container_mutex);
+
+		data_container_data_type = ENTSYS_DATA_TYPE_BOOL;
         boolean_data = bool_val;
     }
 
 
     DataContainer::DataContainer(const std::string& string_val)
     {
-        data_container_data_type = ENTSYS_DATA_TYPE_STRING;
+		// Thread safe set method
+		std::lock_guard<std::mutex> lock(data_container_mutex);
+
+		data_container_data_type = ENTSYS_DATA_TYPE_STRING;
         string_data = string_val;
     }
 
 
     DataContainer::DataContainer(const int& int_val)
     {
-        data_container_data_type = ENTSYS_DATA_TYPE_INT;
+		// Thread safe set method
+		std::lock_guard<std::mutex> lock(data_container_mutex);
+
+		data_container_data_type = ENTSYS_DATA_TYPE_INT;
         integer_data = int_val;
     }
 
@@ -77,7 +95,7 @@ namespace entity_system {
     {
         return data_container_data_type;
     }
-
+	
 
     DataContainer DataContainer::set(const std::int64_t& int64_val)
     {
@@ -102,58 +120,106 @@ namespace entity_system {
 
     DataContainer DataContainer::set(const float& float_val)
     {
-        float_data = float_val;
+		float_data = float_val;
         return DataContainer(float_data);
     }
 
 
     DataContainer DataContainer::set(const bool& bool_val)
     {
-        boolean_data = bool_val;
+		boolean_data = bool_val;
         return DataContainer(boolean_data);
     }
 
 
     DataContainer DataContainer::set(const std::string& string_val)
     {
-        string_data = string_val;
+		string_data = string_val;
         return DataContainer(string_data);
+    }
+
+
+    DataContainer DataContainer::set_threadsafe(const std::int64_t& int64_val)
+    {
+		// Thread safe set method
+		std::lock_guard<std::mutex> lock(data_container_mutex);
+		return set(int64_val);
+    }
+
+
+    DataContainer DataContainer::set_threadsafe(const int& int_val)
+    {
+		// Thread safe set method
+		std::lock_guard<std::mutex> lock(data_container_mutex);
+		return set(int_val);
+    }
+
+
+    DataContainer DataContainer::set_threadsafe(const double& double_val)
+    {
+		// Thread safe set method
+		std::lock_guard<std::mutex> lock(data_container_mutex);
+		return set(double_val);
+    }
+
+
+    DataContainer DataContainer::set_threadsafe(const float& float_val)
+    {
+		// Thread safe set method
+		std::lock_guard<std::mutex> lock(data_container_mutex);
+		return set(float_val);
+    }
+
+
+    DataContainer DataContainer::set_threadsafe(const bool& bool_val)
+    {
+		// Thread safe set method
+		std::lock_guard<std::mutex> lock(data_container_mutex);
+		return set(bool_val);
+    }
+
+
+    DataContainer DataContainer::set_threadsafe(const std::string& string_val)
+    {
+		// Thread safe set method
+		std::lock_guard<std::mutex> lock(data_container_mutex);
+		return set(string_val);
     }
 
 
     DataContainer DataContainer::operator=(const int& new_int_val)
     {
-        return set(new_int_val);
+        return set_threadsafe(new_int_val);
     }
     
     
     DataContainer DataContainer::operator=(const double& new_double_val)
     {
-        return set(new_double_val);
+        return set_threadsafe(new_double_val);
     }
 
 
     DataContainer DataContainer::operator=(const float& new_float_val)
     {
-        return set(new_float_val);
+        return set_threadsafe(new_float_val);
     }
 
 
     DataContainer DataContainer::operator=(const bool& new_bool_val)
     {
-        return set(new_bool_val);
+        return set_threadsafe(new_bool_val);
     }
 
 
     DataContainer DataContainer::operator=(const std::int64_t& new_bigint_val)
     {
-        return set(new_bigint_val);
+        return set_threadsafe(new_bigint_val);
     }
 
 
     DataContainer DataContainer::operator=(const std::string& new_string_val)
     {
-        return set(new_string_val);
+        return set_threadsafe(new_string_val);
     }
 
     

@@ -28,6 +28,12 @@ int main(int argc, char* argv[])
 
 	Test_CreateEntityType_IncorrectUsage();
 
+	std::cout << "Press any key to start multithreading tests" << std::endl;
+	std::cin.get();    
+
+	// Test multithreading safety!
+	Test_DataContainer_Multithreading_CorrectUsage();
+
     std::cin.get();
     return 0;
 }
