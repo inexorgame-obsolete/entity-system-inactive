@@ -1,8 +1,7 @@
 // Inexor entity system prototype
 // (c)2018 Inexor
 
-#ifndef INEXOR_ENTSYS_PERFORMANCE_PROFILER_HEADER
-#define INEXOR_ENTSYS_PERFORMANCE_PROFILER_HEADER
+#pragma once
 
 #include <ctime>
 #include <ratio>
@@ -142,5 +141,3 @@ namespace entity_system {
 
 };
 };
-
-#endif // INEXOR_ENTSYS_PERFORMANCE_PROFILER_HEADER

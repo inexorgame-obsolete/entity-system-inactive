@@ -1,8 +1,7 @@
 // Inexor entity system prototype
 // (c)2018 Inexor
 
-#ifndef INEXOR_ENTSYS_ERROR_HANDLING_HEADER
-#define INEXOR_ENTSYS_ERROR_HANDLING_HEADER
+#pragma once
 
 #include <string>
 #include <iostream>
@@ -33,5 +32,3 @@ namespace entity_system {
 
 };
 };
-
-#endif // INEXOR_ENTSYS_ERROR_HANDLING_HEADER

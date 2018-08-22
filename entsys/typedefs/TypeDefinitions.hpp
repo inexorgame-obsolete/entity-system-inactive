@@ -1,8 +1,7 @@
 // Inexor entity system prototype
 // (c)2018 Inexor
 
-#ifndef INEXOR_ENTSYS_TYPE_DEFINITIONS_HEADER
-#define INEXOR_ENTSYS_TYPE_DEFINITIONS_HEADER
+#pragma once
 
 #include <memory>
 #include <unordered_map>
@@ -20,5 +19,3 @@ namespace entity_system {
 
 };
 };
-
-#endif // INEXOR_ENTSYS_TYPE_DEFINITIONS_HEADER

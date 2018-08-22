@@ -1,9 +1,7 @@
 // Inexor entity system prototype
 // (c)2018 Inexor
 
-#ifndef INEXOR_ENTSYS_DATA_TYPE_ENUMERATION_HEADER
-#define INEXOR_ENTSYS_DATA_TYPE_ENUMERATION_HEADER
-
+#pragma once
 
 namespace inexor {
 namespace entity_system {
@@ -25,5 +23,3 @@ namespace entity_system {
 
 };
 };
-
-#endif // INEXOR_ENTSYS_DATA_TYPE_ENUMERATION_HEADER

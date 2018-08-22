@@ -1,8 +1,7 @@
 // Inexor entity system prototype
 // (c)2018 Inexor
 
-#ifndef INEXOR_ENTSYS_ENTITY_TYPE_INSTANCE_MANAGER_CLASS_HEADER
-#define INEXOR_ENTSYS_ENTITY_TYPE_INSTANCE_MANAGER_CLASS_HEADER
+#pragma once
 
 #include <vector>
 #include "entity-type-instance\EntityTypeInstance.hpp"
@@ -37,5 +36,3 @@ namespace entity_system {
 
 };
 };
-
-#endif // INEXOR_ENTSYS_ENTITY_TYPE_INSTANCE_MANAGER_CLASS_HEADER
