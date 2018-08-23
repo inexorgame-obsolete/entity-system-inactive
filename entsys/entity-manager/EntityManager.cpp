@@ -20,6 +20,13 @@ namespace entity_system {
     }
 
 	
+	void EntityManager::reset_entity_system()
+	{
+		delete_all_entity_types_and_entity_type_instances();
+		// TODO: add more methods here..
+	}
+
+
 	ENTSYS_RESULT EntityManager::create_entity_type_with_attributes(const std::shared_ptr<EntityType>& param_new_entity_type,
 				                                                    const std::vector<std::shared_ptr<EntityAttributeType>>& param_entity_attribute_types)
 	{

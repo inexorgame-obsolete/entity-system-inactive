@@ -31,6 +31,8 @@ namespace entity_system {
 
             ~EntityTypeManager();
 
+			void delete_all_entity_types_and_entity_type_instances();
+
         public:
 
 			// Search through the map of available types of entities.

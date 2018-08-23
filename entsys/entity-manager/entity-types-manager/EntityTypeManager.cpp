@@ -77,5 +77,11 @@ namespace entity_system {
 	}
 
 
+	void EntityTypeManager::delete_all_entity_types_and_entity_type_instances()
+	{
+		map_of_entity_types.clear();
+	}
+
+
 };
 };
