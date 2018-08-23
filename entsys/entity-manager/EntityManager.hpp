@@ -8,9 +8,6 @@
 // Variadic functions (variable parameter lists for initialisation)
 #include <cstdarg>
 
-// Entity system debugging.
-#include "../../entsys/tests/EntitySystemDebugging.hpp"
-
 // Entity types and instances of those.
 #include "entity-types-manager\EntityTypeManager.hpp"
 #include "entity-types-manager\EntityTypeInstanceManager.hpp"
@@ -39,12 +36,13 @@ namespace entity_system {
     {
 
 		protected:
-        
-            EntityManager();
+			
+		    EntityManager();
 
             ~EntityManager();
 
-	public:
+		public:
+
 
 			// Delete all entity types, entity attribute types, entity relation types
 			// and instances of them.
