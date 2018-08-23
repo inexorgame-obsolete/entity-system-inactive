@@ -18,10 +18,8 @@ namespace entity_system {
     {
         protected:
 
-			// 
             DataValidation();
 
-			// 
             ~DataValidation();
 
         public:

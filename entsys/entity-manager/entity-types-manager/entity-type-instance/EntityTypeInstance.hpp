@@ -20,10 +20,8 @@ namespace entity_system {
 
         public:
 
-			// 
             EntityTypeInstance();
 
-			// 
             ~EntityTypeInstance();
 
             

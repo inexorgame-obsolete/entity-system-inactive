@@ -46,7 +46,6 @@ namespace entity_system {
 			// the name of an entity type must be set!
             EntityType(const std::string&);
 
-			// 
             ~EntityType();
 			
 			// Returns the name of the entity type;

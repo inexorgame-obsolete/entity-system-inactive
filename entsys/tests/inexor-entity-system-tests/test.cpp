@@ -4,8 +4,13 @@
 
 #include "gtest/gtest.h"
 
-// Example test
-TEST(TestCaseName, TestName) {
-  EXPECT_EQ(1, 1);
-  EXPECT_TRUE(true);
+using namespace inexor::entity_system;
+
+// Inexor entity system DataContainer class
+#include "../../data-container/DataContainer.hpp"
+
+TEST(DataContainerTest, ENTSYS_DATA_TYPE_INT)
+{
+	DataContainer IntContainer(ENTSYS_DATA_TYPE_INT);
+
 }

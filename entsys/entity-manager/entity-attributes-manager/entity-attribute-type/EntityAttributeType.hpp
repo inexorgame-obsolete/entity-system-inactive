@@ -33,10 +33,8 @@ namespace entity_system {
 			// Remove the default constructor!
 			EntityAttributeType() = delete;
 
-			// 
             EntityAttributeType(const std::string&);
 
-			// 
             ~EntityAttributeType();
 
 			// Returns the name of the entity attribute type.

@@ -16,7 +16,7 @@ namespace inexor {
 namespace entity_system {
 
 
-	// 
+	// A manager class for types of entities
     class EntityTypeManager : public EntitySystemErrorHandler
     {
         private:
@@ -27,10 +27,8 @@ namespace entity_system {
 
 		protected:
 
-			// 
             EntityTypeManager();
 
-			// 
             ~EntityTypeManager();
 
         public:

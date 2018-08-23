@@ -20,50 +20,47 @@ namespace inexor {
 namespace entity_system {
 
 
-    // TODO: Instead of accessing maps by value every time a write operation occurs, 
+	// TODO: Instead of accessing maps by value every time a write operation occurs, 
     // why not store a pointer to the value pair of the map in the write operation?
     // This could speed the entity system very much!
-
-    // TODO: DISCUSS: If we left out type checking during set operations we 
-    // could save up quite some time. However this could lead to entity system errors!
-	// EDIT: We can resolve this by using exception.
-
 
     // A flexible, multiple purpose data container.
     class DataContainer
     {
         private:
 
-			// 
             ENTSYS_DATA_TYPE data_container_data_type;
 
-			// 
             std::string string_data = std::string("");
 
-			// 
             std::int64_t int64_data = 0;
 
-			// 
             int integer_data = 0;
 
-			// 
             double double_data = 0.0;
 
-			// 
             float float_data = 0.0f;
 
-			// 
             bool boolean_data = false;
+			
+		
+		protected:
 
-            // TODO: Add more data types here
-            // TODO: Implement real RBG color codes?
-            // TODO: Add vec3 support by supporting GLM:
-            // https://glm.g-truc.net/0.9.9/index.html
-            
+            // Thread-safe set methods.
+            const int& set(const int&);
+            const bool& set(const bool&);
+            const float& set(const float&);
+            const double& set(const double&);
+            const std::string& set(const std::string&);
+            const std::int64_t& set(const std::int64_t&);
+
 
         public:
 
-            DataContainer();
+			// Multithreading safety mutex.
+			std::mutex data_container_mutex;
+
+			DataContainer();
 
             // Overloaded constructors.
             DataContainer(const ENTSYS_DATA_TYPE&);
@@ -76,49 +73,30 @@ namespace entity_system {
 
             ~DataContainer();
 
-			// This mutex is used for the
-			// implementation of multithreading safety.
-			std::mutex data_container_mutex;
+			// Assign operators.
+			// Do these have to be of const type ?
+            const int& operator=(const int&);
+            const bool& operator=(const bool&);
+            const float& operator=(const float&);
+            const double& operator=(const double&);
+            const std::string& operator=(const std::string&);
+            const std::int64_t& operator=(const std::int64_t&);
 
-            // Set the data type of the container.
+			// Set the data type of the container.
             ENTSYS_RESULT set_data_type(const ENTSYS_DATA_TYPE&);
-            
-            // Set methods.
-            DataContainer set(const std::int64_t&);
-            DataContainer set(const std::string&);
-            DataContainer set(const double&);
-            DataContainer set(const float&);
-            DataContainer set(const bool&);
-            DataContainer set(const int&);
 
-			// Thread-safe set methods.
-			DataContainer set_threadsafe(const std::int64_t&);
-            DataContainer set_threadsafe(const std::string&);
-            DataContainer set_threadsafe(const double&);
-            DataContainer set_threadsafe(const float&);
-            DataContainer set_threadsafe(const bool&);
-            DataContainer set_threadsafe(const int&);
-
-            // Assign operators.
-            DataContainer operator=(const int&);
-            DataContainer operator=(const double&);
-            DataContainer operator=(const float&);
-            DataContainer operator=(const bool&);
-            DataContainer operator=(const std::int64_t&);
-            DataContainer operator=(const std::string&);
-
-			// 
+			// Returns the current data type of the data container.
             ENTSYS_DATA_TYPE get_data_type() const;
 
-			// 
-            void get(std::int64_t&) const;
-            void get(std::string&) const;
-            void get(double&) const;
-            void get(float&) const;
-            void get(bool&) const;
-            void get(int&) const;
+			// Get methods.
+			const int get_int() const;
+			const bool get_bool() const;
+			const float get_float() const;
+			const double get_double() const;
+			const std::string get_string() const;
+			const std::int64_t get_int64() const;
 
-    };
+	};
 
 };
 };

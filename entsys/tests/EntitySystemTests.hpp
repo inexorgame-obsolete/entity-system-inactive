@@ -21,6 +21,7 @@ extern inexor::entity_system::EntitySystem& entsys;
 namespace inexor {
 namespace entity_system {
 
+	/*
 
 	// 
     void Test_DataContainer_CorrectUsage()
@@ -371,6 +372,8 @@ namespace entity_system {
 		entsys_thread_1.join();
 		entsys_thread_2.join();
 	}
+
+	*/
 
 };
 };

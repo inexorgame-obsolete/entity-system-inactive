@@ -16,7 +16,8 @@ EntitySystem& entsys = EntitySystem::Instance();
 
 
 int main(int argc, char* argv[])
-{   
+{
+	/*
     Print_MinimumMaximumMemoryValues();
 
 	// Automatic tests
@@ -33,6 +34,7 @@ int main(int argc, char* argv[])
 
 	// Test multithreading safety!
 	Test_DataContainer_Multithreading_CorrectUsage();
+	*/
 
     std::cin.get();
     return 0;
