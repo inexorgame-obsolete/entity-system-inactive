@@ -12,4 +12,8 @@
 // Tests for multi-purpose data container class.
 #include "test-components/DataContainerTests.hpp"
 
-// TODO: Add tests here
+int main(int argc, char* argv[])
+{
+	::testing::InitGoogleTest(&argc, argv);
+	return RUN_ALL_TESTS();
+}
