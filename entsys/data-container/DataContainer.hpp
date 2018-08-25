@@ -27,7 +27,7 @@ namespace entity_system {
     {
         private:
 
-            ENTSYS_DATA_TYPE data_container_data_type;
+            ENTSYS_DATA_TYPE data_container_data_type = ENTSYS_DATA_TYPE_UNDEFINED;
 
             std::string string_data = std::string("");
 

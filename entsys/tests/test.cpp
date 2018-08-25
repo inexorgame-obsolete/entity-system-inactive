@@ -7,7 +7,7 @@
 #include <memory>
 #include <gtest/gtest.h>
 
-// Tests for multi-purpose data container class.
+#include "../EntitySystem.hpp"
 #include "test-components/DataContainerTests.hpp"
 
 

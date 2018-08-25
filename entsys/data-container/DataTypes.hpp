@@ -10,6 +10,7 @@ namespace entity_system {
     // Data container memory type enumeration.
     enum ENTSYS_DATA_TYPE 
     {
+		ENTSYS_DATA_TYPE_UNDEFINED = 0,
         ENTSYS_DATA_TYPE_INT,
         ENTSYS_DATA_TYPE_BIG_INT,
         ENTSYS_DATA_TYPE_FLOAT,
