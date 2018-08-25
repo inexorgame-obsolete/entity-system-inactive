@@ -7,10 +7,9 @@
 #include <memory>
 #include <gtest/gtest.h>
 
-#include "../EntitySystem.hpp"
-
 // Tests for multi-purpose data container class.
 #include "test-components/DataContainerTests.hpp"
+
 
 int main(int argc, char* argv[])
 {
