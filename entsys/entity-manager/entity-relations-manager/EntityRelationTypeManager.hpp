@@ -17,5 +17,6 @@ namespace entity_system {
             ~EntityRelationTypeManager();
     };
 
+
 };
 };

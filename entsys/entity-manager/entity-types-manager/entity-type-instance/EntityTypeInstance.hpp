@@ -11,20 +11,14 @@ namespace inexor {
 namespace entity_system {
 
 
-	// 
     class EntityTypeInstance
     {
-		protected:
-
-			// TODO: add data here!
-
         public:
 
             EntityTypeInstance();
 
             ~EntityTypeInstance();
 
-            
     };
 
 };

@@ -12,12 +12,10 @@ namespace inexor {
 namespace entity_system {
 
 
-	// 
 	class EntitySystemErrorHandler
 	{
 		protected:
 
-			// 
 			void error_message(const std::string&);
 
 		public:

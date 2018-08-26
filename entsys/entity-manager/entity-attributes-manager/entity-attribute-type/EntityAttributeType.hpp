@@ -16,16 +16,11 @@ namespace inexor {
 namespace entity_system {
     
 
-	// 
     class EntityAttributeType : public DataValidation
     {
         protected:
 
 			std::string entity_attribute_type_name;
-
-		protected:
-
-			// TODO: add data/methods here!
 
         public:
 

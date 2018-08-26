@@ -8,7 +8,9 @@
 #include <gtest/gtest.h>
 
 #include "../EntitySystem.hpp"
+
 #include "test-components/DataContainerTests.hpp"
+
 
 
 int main(int argc, char* argv[])

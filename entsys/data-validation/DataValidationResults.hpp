@@ -1,9 +1,7 @@
 // Inexor entity system prototype
 // (c)2018 Inexor
 
-#ifndef INEXOR_ENTSYS_DATA_VALIDATION_RESULT_CODE_ENUM_HEADER
-#define INEXOR_ENTSYS_DATA_VALIDATION_RESULT_CODE_ENUM_HEADER
-
+#pragma once
 
 namespace inexor {
 namespace entity_system {
@@ -21,6 +19,3 @@ namespace entity_system {
 
 };
 };
-
-
-#endif // INEXOR_ENTSYS_DATA_VALIDATION_RESULT_CODE_ENUM_HEADER

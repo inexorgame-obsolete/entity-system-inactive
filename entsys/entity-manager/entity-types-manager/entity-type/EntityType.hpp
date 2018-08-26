@@ -5,8 +5,6 @@
 
 #include <string>
 #include <unordered_map>
-
-// std::strcmp
 #include <cstring>
 
 #include "../../../return-codes/ReturnCodes.hpp"
@@ -34,8 +32,6 @@ namespace entity_system {
 			std::vector<std::shared_ptr<EntityAttributeType>> vector_of_linked_entity_attribute_types;
 
 			// TODO: add UUID ?
-
-        protected:
                         
         public:
 
@@ -54,14 +50,12 @@ namespace entity_system {
 			// Implement data validation method as required by base class inheritance!
 			virtual ENTSYS_DATA_VALIDATION_RESULT validate() override;
 
-
 			// Checks if an entity attribute type
 			// is already linked to an entity type.
 			bool is_entity_attribute_type_linked(const std::string&);
             
 			// Links an entity attribute type to an entity type.
 			ENTSYS_RESULT link_entity_attribute_type_to_entity_type(const std::shared_ptr<EntityAttributeType>&);
-
 
     };
 

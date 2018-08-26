@@ -17,6 +17,7 @@ namespace entity_system {
 
     DataContainer::DataContainer()
     {
+		// TODO: Implement!
     }
 
 
@@ -76,6 +77,7 @@ namespace entity_system {
 
     DataContainer::~DataContainer()
     {
+		// TODO: Implement!
     }
 
     

@@ -5,9 +5,6 @@
 
 #include <vector>
 
-// Variadic functions (variable parameter lists for initialisation)
-#include <cstdarg>
-
 // Entity types and instances of those.
 #include "entity-types-manager\EntityTypeManager.hpp"
 #include "entity-types-manager\EntityTypeInstanceManager.hpp"

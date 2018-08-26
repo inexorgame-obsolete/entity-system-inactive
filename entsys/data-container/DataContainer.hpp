@@ -5,8 +5,6 @@
 
 #include <string>
 #include <cstdint>
-
-// Multithreading
 #include <thread>
 #include <mutex>
 
@@ -71,6 +69,7 @@ namespace entity_system {
 
             ~DataContainer();
 
+
 			// Assign operators.
 			// Do these have to be of const type ?
             const int& operator=(const int&);
@@ -95,6 +94,7 @@ namespace entity_system {
 			const std::int64_t get_int64() const;
 
 	};
+
 
 };
 };

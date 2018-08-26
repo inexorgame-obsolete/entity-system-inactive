@@ -11,12 +11,10 @@ namespace inexor {
 namespace entity_system {
 
 
-	// 
     class EntityTypeInstanceManager
     {
         private:            
             
-			// 
             std::vector<std::shared_ptr<EntityTypeInstance>> entity_type_instances;
             
         protected:
@@ -27,10 +25,10 @@ namespace entity_system {
 
         public:
 
-			// 
 			std::shared_ptr<EntityTypeInstance> create_entity_type_instance(const std::string&);
 
     };
+
 
 };
 };

@@ -29,8 +29,7 @@ namespace entity_system {
 	ENTSYS_DATA_VALIDATION_RESULT EntityType::validate()
 	{
 		if(entity_type_name.empty()) return ENTSYS_DATA_INVALID_ENTITY_TYPE_NAME_UNDEFINED;
-		// TODO: Add more neccesary data validation here
-
+		// TODO: Add more neccesary data validation here.
 		return ENTSYS_DATA_VALID;
 	}
 

@@ -2,9 +2,7 @@
 // (c)2018 Inexor
 
 #include "EntitySystem.hpp"
-
-using namespace inexor;
-using namespace entity_system;
+using namespace inexor::entity_system;
 
 // Thread-safe C++11 implementation of a singleton pattern for the entity system.
 std::unique_ptr<EntitySystem> EntitySystem::instance;

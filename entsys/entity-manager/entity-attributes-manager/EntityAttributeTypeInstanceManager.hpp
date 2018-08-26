@@ -10,24 +10,16 @@ namespace inexor {
 namespace entity_system {
 
 
-	// 
     class EntityAttributeTypeInstanceManager
-    {
-		private:
-
-			// TODO: add data here!
-	
+    {	
 		protected:
             
             EntityAttributeTypeInstanceManager();
             
             ~EntityAttributeTypeInstanceManager();
 
-        public:
-
-			// TODO: add methods here!
-
     };
+
 
 };
 };
