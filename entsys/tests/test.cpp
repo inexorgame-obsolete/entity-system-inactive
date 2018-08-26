@@ -10,7 +10,7 @@
 #include "../EntitySystem.hpp"
 
 #include "test-components/DataContainerTests.hpp"
-
+#include "test-components/EntityTypeManagerTests.hpp"
 
 
 int main(int argc, char* argv[])

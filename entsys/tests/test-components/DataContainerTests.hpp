@@ -1,3 +1,7 @@
+// Inexor entity system prototype
+// Automatic software tests using Google Test
+// (c)2018 Inexor
+
 #pragma once
 
 #include "../data-container/DataContainer.cpp"

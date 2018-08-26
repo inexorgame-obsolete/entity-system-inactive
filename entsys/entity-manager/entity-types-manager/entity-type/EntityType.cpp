@@ -16,7 +16,7 @@ namespace entity_system {
 
     EntityType::~EntityType()
     {
-		// TODO: implement!
+		// TODO: Implement!
     }
     
 
