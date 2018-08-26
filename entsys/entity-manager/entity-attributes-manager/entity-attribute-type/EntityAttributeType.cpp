@@ -16,13 +16,15 @@ namespace entity_system {
 
     EntityAttributeType::~EntityAttributeType()
     {
-		// TODO: implement!
+		// TODO: Implement!
     }
 
 	
 	ENTSYS_DATA_VALIDATION_RESULT EntityAttributeType::validate()
 	{
-		return ENTSYS_DATA_VALID;
+		// TODO: Implement!
+		// TODO: Validate DataContainer ?
+		return ENTSYS_DATA_INVALID;
 	}
 
 	

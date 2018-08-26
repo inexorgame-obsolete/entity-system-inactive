@@ -5,7 +5,6 @@
 
 #include <string>
 #include <unordered_map>
-#include <cstring>
 
 #include "../../../return-codes/ReturnCodes.hpp"
 #include "../../../typedefs/TypeDefinitions.hpp"
@@ -30,9 +29,12 @@ namespace entity_system {
 			// Every entity type can have linked
 			// entity attribute types which will be stored here.
 			std::vector<std::shared_ptr<EntityAttributeType>> vector_of_linked_entity_attribute_types;
+			                        
+			// PLEASE NOTE
+			// Fixed entity attributes will be implemented
+			// by creating an advanced entity type
+			// which inherits from this base class.
 
-			// TODO: add UUID ?
-                        
         public:
 
 			// Remove the default constructor!
@@ -45,17 +47,24 @@ namespace entity_system {
             ~EntityType();
 			
 			// Returns the name of the entity type;
-			std::string get_entity_type_name() const;
+			std::string get_type_name() const;
 
-			// Implement data validation method as required by base class inheritance!
-			virtual ENTSYS_DATA_VALIDATION_RESULT validate() override;
+			// Returns the number of linked entity attribute types.
+			std::size_t get_linked_attributes_count() const;
 
 			// Checks if an entity attribute type
 			// is already linked to an entity type.
-			bool is_entity_attribute_type_linked(const std::string&);
-            
+			bool has_attribute_type(const std::string&);
+			bool has_attribute_type(const std::shared_ptr<EntityAttributeType>&);
+        
 			// Links an entity attribute type to an entity type.
-			ENTSYS_RESULT link_entity_attribute_type_to_entity_type(const std::shared_ptr<EntityAttributeType>&);
+			ENTSYS_RESULT link_attribute_type(const std::shared_ptr<EntityAttributeType>&);
+	
+			// Deletes all linked types of attributes.
+			void reset_linked_attribute_types();
+
+			// Implement data validation method as required by base class inheritance!
+			virtual ENTSYS_DATA_VALIDATION_RESULT validate() override;
 
     };
 

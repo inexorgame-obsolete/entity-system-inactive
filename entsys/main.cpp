@@ -4,7 +4,8 @@
 #include "EntitySystem.hpp"
 using namespace inexor::entity_system;
 
-// Thread-safe C++11 implementation of a singleton pattern for the entity system.
+// Thread-safe C++11 implementation of
+// a singleton class pattern for the entity system.
 std::unique_ptr<EntitySystem> EntitySystem::instance;
 std::once_flag EntitySystem::onceFlag;
 

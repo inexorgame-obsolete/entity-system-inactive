@@ -38,7 +38,7 @@ namespace entity_system {
 				// TODO: Should we create entity attribute types if they have not been created yet here?
 				//create_entity_attribute_type(param_entity_attribute_types[i]);
 
-				param_new_entity_type->link_entity_attribute_type_to_entity_type(param_entity_attribute_types[i]);
+				param_new_entity_type->link_attribute_type(param_entity_attribute_types[i]);
 			}
 
 			create_entity_type(param_new_entity_type);

@@ -20,9 +20,15 @@ namespace entity_system {
     }
     
 
-	std::string EntityType::get_entity_type_name() const
+	std::string EntityType::get_type_name() const
 	{
 		return entity_type_name;
+	}
+
+
+	std::size_t EntityType::get_linked_attributes_count() const
+	{
+		return vector_of_linked_entity_attribute_types.size();
 	}
 
 
@@ -34,9 +40,7 @@ namespace entity_system {
 	}
 
 
-	// Checks if an entity attribute type
-	// is already linked to an entity type.
-	bool EntityType::is_entity_attribute_type_linked(const std::string& param_entity_attribute_type_name)
+	bool EntityType::has_attribute_type(const std::string& param_entity_attribute_type_name)
 	{
 		// TODO: Check how expensive this method is!
 
@@ -60,14 +64,25 @@ namespace entity_system {
 
 		return entity_attribute_type_found;
 	}
+	
 
-            
-	// Links an entity attribute type to an entity type.
-	ENTSYS_RESULT EntityType::link_entity_attribute_type_to_entity_type(const std::shared_ptr<EntityAttributeType>& param_linked_entity_attribute_type)
+	bool EntityType::has_attribute_type(const std::shared_ptr<EntityAttributeType>& param_entity_attribute_type)
+	{
+		return has_attribute_type(param_entity_attribute_type->get_entity_attribute_type_name());
+	}
+
+
+	void EntityType::reset_linked_attribute_types()
+	{
+		vector_of_linked_entity_attribute_types.clear();
+	}
+
+
+	ENTSYS_RESULT EntityType::link_attribute_type(const std::shared_ptr<EntityAttributeType>& param_linked_entity_attribute_type)
 	{
 		std::string entity_attribute_type_name = param_linked_entity_attribute_type->get_entity_attribute_type_name();
 
-		if(!is_entity_attribute_type_linked(entity_attribute_type_name))
+		if(!has_attribute_type(entity_attribute_type_name))
 		{
 			// The entity attribute type is not already
 			// linked to this entity type.

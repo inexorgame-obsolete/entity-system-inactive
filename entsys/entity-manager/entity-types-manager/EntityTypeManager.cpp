@@ -36,7 +36,7 @@ namespace entity_system {
 		}
 		
 		// Get the name of the new entity type.
-		std::string new_ent_type_name = param_new_entity_type->get_entity_type_name();
+		std::string new_ent_type_name = param_new_entity_type->get_type_name();
 
 		// Check if entity type with this name does already exist.
 		if(false == does_entity_type_exist(new_ent_type_name))
@@ -73,7 +73,7 @@ namespace entity_system {
 	{
 		// TODO: [CRITICAL] Remove all instances of this
 		// entity type before removing the entity type itself!
-		return delete_entity_type(param_entity_type_name->get_entity_type_name());
+		return delete_entity_type(param_entity_type_name->get_type_name());
 	}
 
 
