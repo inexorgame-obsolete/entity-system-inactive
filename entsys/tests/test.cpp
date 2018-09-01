@@ -12,6 +12,7 @@
 #include "test-components/DataContainerTests.hpp"
 #include "test-components/EntityTypeManagerTests.hpp"
 #include "test-components/EntityTypeTests.hpp"
+#include "test-components/EntityAttributeTypeTests.hpp"
 
 
 int main(int argc, char* argv[])

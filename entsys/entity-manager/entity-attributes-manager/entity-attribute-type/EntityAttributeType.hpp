@@ -9,6 +9,7 @@
 
 #include "../../../return-codes/ReturnCodes.hpp"
 #include "../../../data-validation/DataValidation.hpp"
+#include "../../../data-container/DataTypes.hpp"
 
 
 namespace inexor {
@@ -28,6 +29,9 @@ namespace entity_system {
 			
 			// PLEASE NOTE
 			// The corresponding DataContainer will be managed by the EntityAttributeTypeInstance class!
+			// The data type of this container however must be declared here.
+			ENTSYS_DATA_TYPE entity_attribute_data_type;
+
 
         public:
 
@@ -36,12 +40,17 @@ namespace entity_system {
 			
 			// Make this the default constructor so 
 			// the name of an entity type must be set!
-            EntityAttributeType(const std::string&);
+			EntityAttributeType(const std::string&, const ENTSYS_DATA_TYPE&);
+
+			EntityAttributeType(const std::string&);
 
             ~EntityAttributeType();
 
 			// Returns the name of the entity attribute type.
 			std::string get_entity_attribute_type_name() const;
+
+			// Returns the data type of the entity attribute type
+			ENTSYS_DATA_TYPE get_entity_attribute_data_type() const;
 
 			// Implement data validation method as required by base class inheritance!
 			virtual ENTSYS_DATA_VALIDATION_RESULT validate() override;
