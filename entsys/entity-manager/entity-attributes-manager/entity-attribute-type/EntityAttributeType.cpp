@@ -8,8 +8,14 @@ namespace inexor {
 namespace entity_system {
 
     
+	EntityAttributeType::EntityAttributeType()
+	{
+		// TODO: Implement!
+	}
+
+
 	EntityAttributeType::EntityAttributeType(const std::string& param_entity_attribute_type_name,
-		const ENTSYS_DATA_TYPE& param_entity_attribute_data_type)
+		                                     const ENTSYS_DATA_TYPE& param_entity_attribute_data_type)
 	{
 		entity_attribute_type_name = param_entity_attribute_type_name;
 		entity_attribute_data_type = param_entity_attribute_data_type;
@@ -31,7 +37,6 @@ namespace entity_system {
 	ENTSYS_DATA_VALIDATION_RESULT EntityAttributeType::validate()
 	{
 		// TODO: Implement!
-		// TODO: Validate DataContainer ?
 		return ENTSYS_DATA_INVALID;
 	}
 

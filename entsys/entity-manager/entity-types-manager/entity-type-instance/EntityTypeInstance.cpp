@@ -11,14 +11,28 @@ namespace inexor {
 namespace entity_system {
 
 
-    EntityTypeInstance::EntityTypeInstance()
-    {
-    }
+	EntityTypeInstance::EntityTypeInstance()
+	{
+		// TODO: Implement!
+	}
 
 
-    EntityTypeInstance::~EntityTypeInstance()
-    {
-    }
+	EntityTypeInstance::EntityTypeInstance(const EntityType& param_entity_type)
+	{
+		// TODO: Implement!
+	}
+
+
+	EntityTypeInstance::~EntityTypeInstance()
+	{
+		// TODO: Implement!
+	}
+
+
+	ENTSYS_DATA_VALIDATION_RESULT EntityTypeInstance::validate()
+	{
+		return ENTSYS_DATA_INVALID;
+	}
 
 
 };

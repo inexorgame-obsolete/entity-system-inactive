@@ -35,16 +35,17 @@ namespace entity_system {
 
         public:
 
-			// Remove the default constructor!
-			EntityAttributeType() = delete;
+			// 
+			EntityAttributeType();
 			
-			// Make this the default constructor so 
-			// the name of an entity type must be set!
+			// 
 			EntityAttributeType(const std::string&, const ENTSYS_DATA_TYPE&);
 
+			// 
 			EntityAttributeType(const std::string&);
 
-            ~EntityAttributeType();
+			// 
+			~EntityAttributeType();
 
 			// Returns the name of the entity attribute type.
 			std::string get_entity_attribute_type_name() const;

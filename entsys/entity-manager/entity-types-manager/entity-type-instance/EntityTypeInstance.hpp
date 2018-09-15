@@ -4,20 +4,37 @@
 #pragma once
 
 #include <string>
+
+#include "../../../data-validation/DataValidation.hpp"
+
 #include "../../entity-types-manager/entity-type/EntityType.hpp"
+#include "../../entity-attributes-manager/entity-attribute-type-instances/EntityAttributeTypeInstance.hpp"
 
 
 namespace inexor {
 namespace entity_system {
 
 
-    class EntityTypeInstance
+	// A base class for instances of types of entities.
+    class EntityTypeInstance : public DataValidation
     {
-        public:
+		private:
 
-            EntityTypeInstance();
+			std::vector<std::shared_ptr<EntityAttributeTypeInstance>> vector_of_instances_of_linked_entity_attribute_types;
 
-            ~EntityTypeInstance();
+		public:
+
+			// 
+			EntityTypeInstance();
+
+			// 
+			EntityTypeInstance(const EntityType&);
+
+			// 
+			~EntityTypeInstance();
+
+			// Implement data validation method as required by base class inheritance!
+			virtual ENTSYS_DATA_VALIDATION_RESULT validate() override;
 
     };
 
