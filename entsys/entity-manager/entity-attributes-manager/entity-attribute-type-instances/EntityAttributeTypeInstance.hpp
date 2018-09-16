@@ -29,6 +29,11 @@ namespace entity_system {
 			// 
 			~EntityAttributeTypeInstance();
 
+			// 
+			void set_entity_attribute_type(const std::shared_ptr<EntityAttributeType>&);
+
+			// 
+			std::shared_ptr<EntityAttributeType> get_entity_attribute_type() const;
 
 			// Returns the name of the entity attribute type.
 			std::string get_entity_attribute_type_name() const;

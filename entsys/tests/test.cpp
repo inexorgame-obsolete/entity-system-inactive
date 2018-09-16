@@ -13,6 +13,8 @@
 #include "test-components/EntityTypeManagerTests.hpp"
 #include "test-components/EntityTypeTests.hpp"
 #include "test-components/EntityAttributeTypeTests.hpp"
+#include "test-components/EntityAttributeTypeInstanceTest.hpp"
+
 
 int main(int argc, char* argv[])
 {
