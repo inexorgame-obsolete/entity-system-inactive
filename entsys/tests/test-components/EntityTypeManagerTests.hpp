@@ -47,7 +47,7 @@ EntitySystem& entsys = EntitySystem::Instance();
 
 TEST(EntityTypeManagerTests, create_entity_type_1)
 {
-	ENT_TYPE new_ent_type = std::make_shared<EntityType>(std::string("rocketlauncher"));
+	ENT_TYPE new_ent_type = CREATE_ENT_TYPE(std::string("rocketlauncher"));
 	entsys.create_entity_type(new_ent_type);
 	EXPECT_EQ(entsys.get_entity_types_count(), 1);
 	entsys.reset_entity_system();
@@ -58,13 +58,13 @@ TEST(EntityTypeManagerTests, create_entity_type_1)
 
 TEST(EntityTypeManagerTests, create_entity_type_2)
 {
-	ENT_TYPE new_ent_type = std::make_shared<EntityType>(std::string(""));
+	ENT_TYPE new_ent_type = CREATE_ENT_TYPE(std::string(""));
 	// This will fail because the name of the entity type is invalid!
 	entsys.create_entity_type(new_ent_type);
 	EXPECT_EQ(entsys.get_entity_types_count(), 0);
 
 	// Now set a valid name and try again.
-	std::shared_ptr<EntityType> new_ent_type2 = std::make_shared<EntityType>(std::string("barrel"));
+	ENT_TYPE new_ent_type2 = CREATE_ENT_TYPE(std::string("barrel"));
 	entsys.create_entity_type(new_ent_type2);
 	EXPECT_EQ(entsys.get_entity_types_count(), 1);
 
@@ -74,7 +74,7 @@ TEST(EntityTypeManagerTests, create_entity_type_2)
 	EXPECT_EQ(entsys.get_entity_types_count(), 1);
 	
 	// Now try to create an entity type which does already exist (again)!
-	ENT_TYPE new_ent_type3 = std::make_shared<EntityType>(std::string("barrel"));
+	ENT_TYPE new_ent_type3 = CREATE_ENT_TYPE(std::string("barrel"));
 	// This will fail!
 	entsys.create_entity_type(new_ent_type3);
 	EXPECT_EQ(entsys.get_entity_types_count(), 1);
@@ -85,58 +85,70 @@ TEST(EntityTypeManagerTests, create_entity_type_2)
 
 TEST(EntityTypeManagerTests, reset_entity_system)
 {
-	ENT_TYPE new_ent_type = std::make_shared<EntityType>(std::string("banana"));
+	ENT_TYPE new_ent_type = CREATE_ENT_TYPE(std::string("banana"));
 	entsys.create_entity_type(new_ent_type);
+
 	EXPECT_EQ(entsys.get_entity_types_count(), 1);
+
 	entsys.reset_entity_system();
 	EXPECT_EQ(entsys.get_entity_types_count(), 0);
+
 	// Cleanup!
 	entsys.reset_entity_system();
 }
 
 TEST(EntityTypeManagerTests, does_entity_type_exist)
 {
-	ENT_TYPE new_ent_type = std::make_shared<EntityType>(std::string("quaddamage"));
+	ENT_TYPE new_ent_type = CREATE_ENT_TYPE(std::string("quaddamage"));
 	entsys.create_entity_type(new_ent_type);
 	EXPECT_EQ(entsys.get_entity_types_count(), 1);
+
 	bool does_banana_exist = entsys.does_entity_type_exist(std::string("banana"));
 	EXPECT_EQ(does_banana_exist, false);
+
 	bool does_quaddamage_exist = entsys.does_entity_type_exist(std::string("quaddamage"));
 	EXPECT_EQ(does_quaddamage_exist, true);
+
 	// Cleanup!
 	entsys.reset_entity_system();
 }
 
 TEST(EntityTypeManagerTests, get_entity_types_count)
 {
-	ENT_TYPE new_ent_type = std::make_shared<EntityType>(std::string("shotgun"));
+	ENT_TYPE new_ent_type = CREATE_ENT_TYPE(std::string("shotgun"));
 	entsys.create_entity_type(new_ent_type);
 	EXPECT_EQ(entsys.get_entity_types_count(), 1);
-	ENT_TYPE new_ent_type2 = std::make_shared<EntityType>(std::string("shotgunshells"));
+
+	ENT_TYPE new_ent_type2 = CREATE_ENT_TYPE(std::string("shotgunshells"));
 	entsys.create_entity_type(new_ent_type2);
 	EXPECT_EQ(entsys.get_entity_types_count(), 2);
+
 	// Cleanup!
 	entsys.reset_entity_system();
 }
 
 TEST(EntityTypeManagerTests, delete_entity_type_1)
 {
-	ENT_TYPE new_ent_type = std::make_shared<EntityType>(std::string("minigun"));
+	ENT_TYPE new_ent_type = CREATE_ENT_TYPE(std::string("minigun"));
 	entsys.create_entity_type(new_ent_type);
 	EXPECT_EQ(entsys.get_entity_types_count(), 1);
+
 	entsys.delete_entity_type("minigun");
 	EXPECT_EQ(entsys.get_entity_types_count(), 0);
+
 	// Cleanup!
 	entsys.reset_entity_system();
 }
 
 TEST(EntityTypeManagerTests, delete_entity_type_2)
 {
-	ENT_TYPE new_ent_type = std::make_shared<EntityType>(std::string("minigun"));
+	ENT_TYPE new_ent_type = CREATE_ENT_TYPE(std::string("minigun"));
 	entsys.create_entity_type(new_ent_type);
 	EXPECT_EQ(entsys.get_entity_types_count(), 1);
+
 	entsys.delete_entity_type(new_ent_type);
 	EXPECT_EQ(entsys.get_entity_types_count(), 0);
+
 	// Cleanup!
 	entsys.reset_entity_system();
 }

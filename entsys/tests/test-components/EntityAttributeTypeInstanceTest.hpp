@@ -13,10 +13,10 @@ TEST(EntityAttributeTypeInstanceTests, get_entity_attribute_data_type)
 {
 	std::string ent_attr_name = std::string("density");
 	ENTSYS_DATA_TYPE ent_attr_data_type = ENTSYS_DATA_TYPE_FLOAT;
-	ENT_ATTR_TYPE new_ent_attr1 = std::make_shared<EntityAttributeType>(ent_attr_name, ent_attr_data_type);
+	ENT_ATTR_TYPE new_ent_attr1 = CREATE_ENT_ATTR_TYPE(ent_attr_name, ent_attr_data_type);
 	EXPECT_EQ(new_ent_attr1->get_entity_attribute_type_name(), ent_attr_name);
 
-	std::shared_ptr<EntityAttributeTypeInstance> new_ent_attr1_inst = std::make_shared<EntityAttributeTypeInstance>(new_ent_attr1);
+	ENT_ATTR_TYPE_INSTANCE new_ent_attr1_inst = CREATE_ENT_ATTR_TYPE_INSTANCE(new_ent_attr1);
 	EXPECT_EQ(new_ent_attr1_inst->get_entity_attribute_data_type(), ent_attr_data_type);
 }
 
@@ -24,10 +24,10 @@ TEST(EntityAttributeTypeInstanceTests, get_entity_attribute_type_name)
 {
 	std::string ent_attr_name = std::string("weight");
 	ENTSYS_DATA_TYPE ent_attr_data_type = ENTSYS_DATA_TYPE_FLOAT;
-	ENT_ATTR_TYPE new_ent_attr1 = std::make_shared<EntityAttributeType>(ent_attr_name, ent_attr_data_type);
+	ENT_ATTR_TYPE new_ent_attr1 = CREATE_ENT_ATTR_TYPE(ent_attr_name, ent_attr_data_type);
 	EXPECT_EQ(new_ent_attr1->get_entity_attribute_type_name(), ent_attr_name);
 
-	ENT_ATTR_TYPE_INSTANCE new_ent_attr1_inst = std::make_shared<EntityAttributeTypeInstance>(new_ent_attr1);
+	ENT_ATTR_TYPE_INSTANCE new_ent_attr1_inst = CREATE_ENT_ATTR_TYPE_INSTANCE(new_ent_attr1);
 	EXPECT_EQ(new_ent_attr1_inst->get_entity_attribute_data_type(), ent_attr_data_type);
 	EXPECT_EQ(new_ent_attr1_inst->get_entity_attribute_type_name(), ent_attr_name);
 }

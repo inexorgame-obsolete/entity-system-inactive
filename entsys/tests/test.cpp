@@ -9,12 +9,22 @@
 
 #include "../EntitySystem.hpp"
 
+// Tests for DataContainer class.
 #include "test-components/DataContainerTests.hpp"
-#include "test-components/EntityTypeManagerTests.hpp"
-#include "test-components/EntityTypeTests.hpp"
-#include "test-components/EntityAttributeTypeTests.hpp"
-#include "test-components/EntityAttributeTypeInstanceTest.hpp"
 
+// TEsts for types of entities and instances of them.
+#include "test-components/EntityTypeTests.hpp"
+#include "test-components/EntityTypeManagerTests.hpp"
+#include "test-components/EntityTypeInstanceTests.hpp"
+#include "test-components/EntityTypeInstanceManagerTests.hpp"
+
+// Tests for types of attributes of entities and instances of them.
+#include "test-components/EntityAttributeTypeTests.hpp"
+#include "test-components/EntityAttributeTypeManagerTests.hpp"
+#include "test-components/EntityAttributeTypeInstanceTest.hpp"
+#include "test-components/EntityAttributeTypeInstanceManagerTests.hpp"
+
+// TODO: Test for types of relations of entities and instances of them.
 
 int main(int argc, char* argv[])
 {

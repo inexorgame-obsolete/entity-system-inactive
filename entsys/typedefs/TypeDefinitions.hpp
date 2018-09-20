@@ -20,6 +20,10 @@ namespace entity_system {
 	#define ENT_TYPE std::shared_ptr<EntityType>
 	#define ENT_TYPE_INSTANCE std::shared_ptr<EntityTypeInstance>
 
+	#define CREATE_ENT_TYPE(x) std::make_shared<EntityType>(x)
+	#define CREATE_ENT_ATTR_TYPE(x,y) std::make_shared<EntityAttributeType>(x,y)
+	#define CREATE_ENT_ATTR_TYPE_INSTANCE(x) std::make_shared<EntityAttributeTypeInstance>(x)
+
 
 };
 };

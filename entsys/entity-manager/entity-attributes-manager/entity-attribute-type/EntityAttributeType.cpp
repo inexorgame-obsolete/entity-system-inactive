@@ -22,12 +22,6 @@ namespace entity_system {
 	}
 
 
-	EntityAttributeType::EntityAttributeType(const std::string& param_entity_attribute_type_name)
-	{
-		entity_attribute_type_name = param_entity_attribute_type_name;
-	}
-
-
     EntityAttributeType::~EntityAttributeType()
     {
 		// TODO: Implement!
