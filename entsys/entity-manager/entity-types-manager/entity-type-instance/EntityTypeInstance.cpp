@@ -9,15 +9,9 @@ namespace inexor {
 namespace entity_system {
 
 
-	EntityTypeInstance::EntityTypeInstance()
+	EntityTypeInstance::EntityTypeInstance(const std::shared_ptr<EntityType>& param_entity_type)
 	{
-		// TODO: Implement!
-	}
-
-
-	EntityTypeInstance::EntityTypeInstance(const EntityType& param_entity_type)
-	{
-		// TODO: Implement!
+		pointer_to_entity_type = param_entity_type;
 	}
 
 

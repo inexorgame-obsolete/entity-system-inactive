@@ -22,13 +22,15 @@ namespace entity_system {
 
 			std::vector<std::shared_ptr<EntityAttributeTypeInstance>> vector_of_instances_of_linked_entity_attribute_types;
 
+			std::shared_ptr<EntityType> pointer_to_entity_type;
+
 		public:
 
-			// 
-			EntityTypeInstance();
+			// Remove default constructor!
+			EntityTypeInstance() = delete;
 
 			// 
-			EntityTypeInstance(const EntityType&);
+			EntityTypeInstance(const std::shared_ptr<EntityType>&);
 
 			// 
 			~EntityTypeInstance();

@@ -15,7 +15,11 @@ namespace entity_system {
 	
     // By using these type definitions we can make later definitions shorter.
     
-	//#define ENTSYS_ENTITY_TYPE(x,y) std::shared_ptr<EntityType> x = std::make_shared<EntityType>(std::string(y));
+	#define ENT_ATTR_TYPE std::shared_ptr<EntityAttributeType>
+	#define ENT_ATTR_TYPE_INSTANCE std::shared_ptr<EntityAttributeTypeInstance>
+	#define ENT_TYPE std::shared_ptr<EntityType>
+	#define ENT_TYPE_INSTANCE std::shared_ptr<EntityTypeInstance>
+
 
 };
 };
