@@ -4,7 +4,6 @@
 
 #pragma once
 
-// Types of entities.
 #include "../../entity-manager/entity-types-manager/entity-type/EntityType.hpp"
 using namespace inexor::entity_system;
 
@@ -13,9 +12,9 @@ TEST(EntityTypeTests, get_type_name)
 {
 	std::string ent_name = std::string("grenade");
 	ENT_TYPE new_ent1 = CREATE_ENT_TYPE(ent_name);
-
 	EXPECT_EQ(new_ent1->get_type_name(), ent_name);
 }
+
 
 TEST(EntityTypeTests, link_entity_attribute_type_to_entity_type)
 {
@@ -37,6 +36,7 @@ TEST(EntityTypeTests, link_entity_attribute_type_to_entity_type)
 	weap1->link_attribute_type(attr4);
 	EXPECT_EQ(weap1->get_linked_attributes_count(), 4);
 }
+
 
 TEST(EntityTypeTests, has_attribute_type)
 {
@@ -63,6 +63,7 @@ TEST(EntityTypeTests, has_attribute_type)
 	EXPECT_EQ(weap1->has_attribute_type(attr4), true);
 }
 
+
 TEST(EntityTypeTests, reset_linked_attribute_types)
 {
 	ENT_TYPE weap1 = CREATE_ENT_TYPE("rocketlauncher");
@@ -70,6 +71,9 @@ TEST(EntityTypeTests, reset_linked_attribute_types)
 	ENT_ATTR_TYPE attr1 = CREATE_ENT_ATTR_TYPE("damage", ENTSYS_DATA_TYPE_FLOAT);
 	weap1->link_attribute_type(attr1);
 
+	EXPECT_EQ(weap1->has_attribute_type("damage"), true);
+	EXPECT_EQ(weap1->get_linked_attributes_count(), 1);
+
 	ENT_ATTR_TYPE attr2 = CREATE_ENT_ATTR_TYPE("weight", ENTSYS_DATA_TYPE_FLOAT);
 	weap1->link_attribute_type(attr2);
 
@@ -77,6 +81,7 @@ TEST(EntityTypeTests, reset_linked_attribute_types)
 	EXPECT_EQ(weap1->has_attribute_type("weight"), true);
 	EXPECT_EQ(weap1->get_linked_attributes_count(), 2);
 
+	// Reset all linked types of attributes!
 	weap1->reset_linked_attribute_types();
 	
 	EXPECT_EQ(weap1->has_attribute_type("damage"), false);
@@ -84,20 +89,22 @@ TEST(EntityTypeTests, reset_linked_attribute_types)
 	EXPECT_EQ(weap1->get_linked_attributes_count(), 0);
 }
 
+
 TEST(EntityTypeTests, get_linked_attributes_count)
 {
 	ENT_TYPE weap1 = CREATE_ENT_TYPE("rocketlauncher");
 
 	ENT_ATTR_TYPE attr1 = CREATE_ENT_ATTR_TYPE("damage", ENTSYS_DATA_TYPE_FLOAT);
-	weap1->link_attribute_type(attr1);
-
 	ENT_ATTR_TYPE attr2 = CREATE_ENT_ATTR_TYPE("weight", ENTSYS_DATA_TYPE_FLOAT);
+
+	weap1->link_attribute_type(attr1);
 	weap1->link_attribute_type(attr2);
 
 	EXPECT_EQ(weap1->has_attribute_type("damage"), true);
 	EXPECT_EQ(weap1->has_attribute_type("weight"), true);
 	EXPECT_EQ(weap1->get_linked_attributes_count(), 2);
 
+	// Reset linked types of attributes!
 	weap1->reset_linked_attribute_types();
 	
 	EXPECT_EQ(weap1->has_attribute_type("damage"), false);

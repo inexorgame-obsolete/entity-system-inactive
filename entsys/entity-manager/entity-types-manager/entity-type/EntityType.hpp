@@ -47,7 +47,7 @@ namespace entity_system {
 			// 
             ~EntityType();
 			
-			// Returns the name of the entity type;
+			// Returns the name of the entity type.
 			std::string get_type_name() const;
 
 			// Returns the number of linked entity attribute types.

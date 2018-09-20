@@ -3,4 +3,3 @@
 // (c)2018 Inexor
 
 #pragma once
-
