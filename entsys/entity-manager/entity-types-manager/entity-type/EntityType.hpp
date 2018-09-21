@@ -37,8 +37,8 @@ namespace entity_system {
 
         public:
 
-			// Remove the default constructor!
-			EntityType() = delete;
+			// 
+			EntityType();
 
 			// Make this the default constructor so 
 			// the name of an entity type must be set!

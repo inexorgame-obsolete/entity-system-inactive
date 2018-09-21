@@ -36,7 +36,7 @@ namespace entity_system {
         public:
 
 			// 
-			EntityAttributeType() = delete;
+			EntityAttributeType();
 			
 			// 
 			EntityAttributeType(const std::string&, const ENTSYS_DATA_TYPE&);

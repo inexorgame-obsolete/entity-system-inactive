@@ -5,7 +5,7 @@
 #pragma once
 
 // Instances of types of attributes of entities.
-#include "../../entity-manager/entity-attributes-manager/entity-attribute-type-instances/EntityAttributeTypeInstance.cpp"
+#include "../../entity-manager/entity-attributes-manager/entity-attribute-type-instances/EntityAttributeTypeInstance.hpp"
 using namespace inexor::entity_system;
 
 
@@ -19,6 +19,7 @@ TEST(EntityAttributeTypeInstanceTests, get_entity_attribute_data_type)
 	ENT_ATTR_TYPE_INSTANCE new_ent_attr1_inst = CREATE_ENT_ATTR_TYPE_INSTANCE(new_ent_attr1);
 	EXPECT_EQ(new_ent_attr1_inst->get_entity_attribute_data_type(), ent_attr_data_type);
 }
+
 
 TEST(EntityAttributeTypeInstanceTests, get_entity_attribute_type_name)
 {

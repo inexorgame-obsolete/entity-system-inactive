@@ -16,8 +16,30 @@ namespace entity_system {
 
     EntityTypeInstanceManager::~EntityTypeInstanceManager()
     {
-		// TODO: implement!
+		delete_all_entity_type_instances();
     }
+
+
+	std::shared_ptr<EntityTypeInstance> EntityTypeInstanceManager::create_entity_type_instance(const std::shared_ptr<EntityType>& param_entity_type)
+	{
+		std::shared_ptr<EntityTypeInstance> new_ent_type_inst = std::make_shared<EntityTypeInstance>(param_entity_type);
+
+		// Add this instance to global entity type instance buffer!
+		global_entity_type_instance_buffer.push_back(new_ent_type_inst);
+		return new_ent_type_inst;
+	}
+
+
+	const std::size_t EntityTypeInstanceManager::get_entity_type_instance_count() const
+	{
+		return global_entity_type_instance_buffer.size();
+	}
+
+
+	void EntityTypeInstanceManager::delete_all_entity_type_instances()
+	{
+		global_entity_type_instance_buffer.clear();
+	}
 
 
 };

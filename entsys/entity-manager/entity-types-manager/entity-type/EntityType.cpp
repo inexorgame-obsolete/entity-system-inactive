@@ -14,11 +14,17 @@ namespace entity_system {
 	}
     
 
-    EntityType::~EntityType()
-    {
+	EntityType::EntityType()
+	{
 		// TODO: Implement!
-    }
-    
+	}
+
+
+	EntityType::~EntityType()
+	{
+		// TODO: Implement!
+	}
+
 
 	std::string EntityType::get_type_name() const
 	{

@@ -16,6 +16,7 @@ namespace entity_system {
 
 
 	// A base class for instances of types of entities.
+	// Only EntityTypeInstanceManager can create instances!
     class EntityTypeInstance : public DataValidation
     {
 		private:
@@ -29,16 +30,13 @@ namespace entity_system {
 		public:
 
 			// Remove default constructor!
-			EntityTypeInstance() = delete;
+			EntityTypeInstance();
 
-			// 
+			// Create an instance of an entity type.
 			EntityTypeInstance(const std::shared_ptr<EntityType>&);
 
-			// 
+			// Destructor.
 			~EntityTypeInstance();
-
-			// 
-			void reset_memory();
 
 			// Implement data validation method as required by base class inheritance!
 			virtual ENTSYS_DATA_VALIDATION_RESULT validate() override;

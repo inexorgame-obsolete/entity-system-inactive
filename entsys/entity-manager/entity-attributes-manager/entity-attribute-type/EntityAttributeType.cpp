@@ -16,10 +16,16 @@ namespace entity_system {
 	}
 
 
-    EntityAttributeType::~EntityAttributeType()
-    {
+	EntityAttributeType::~EntityAttributeType()
+	{
 		// TODO: Implement!
-    }
+	}
+
+
+	EntityAttributeType::EntityAttributeType()
+	{
+		// TODO: Implement!
+	}
 
 	
 	ENTSYS_DATA_VALIDATION_RESULT EntityAttributeType::validate()

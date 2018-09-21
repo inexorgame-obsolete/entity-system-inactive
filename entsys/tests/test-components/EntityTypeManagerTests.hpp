@@ -5,33 +5,32 @@
 #pragma once
 
 // Data validation.
-#include "../../data-validation/DataValidation.cpp"
+#include "../../data-validation/DataValidation.hpp"
 
 // Entity manager.
-#include "../../entity-manager/EntityManager.cpp"
+#include "../../entity-manager/EntityManager.hpp"
 
 // Error handling.
-#include "../../error-handling/ErrorHandling.cpp"
-
+#include "../../error-handling/ErrorHandling.hpp"
 // Entity types.
-#include "../../entity-manager/entity-types-manager/entity-type/EntityType.cpp"
+#include "../../entity-manager/entity-types-manager/entity-type/EntityType.hpp"
 
 // Entity attribute types.
-#include "../../entity-manager/entity-attributes-manager/entity-attribute-type/EntityAttributeType.cpp"
+#include "../../entity-manager/entity-attributes-manager/entity-attribute-type/EntityAttributeType.hpp"
 
 // Entity types and instances of those.
-#include "../../entity-manager/entity-types-manager\EntityTypeManager.cpp"
-#include "../../entity-manager/entity-types-manager\EntityTypeInstanceManager.cpp"
+#include "../../entity-manager/entity-types-manager\EntityTypeManager.hpp"
+#include "../../entity-manager/entity-types-manager\EntityTypeInstanceManager.hpp"
 
 // Entity attribute types and instances of those.
-#include "../../entity-manager/entity-attributes-manager\EntityAttributeTypeManager.cpp"
-#include "../../entity-manager/entity-attributes-manager\EntityAttributeTypeInstanceManager.cpp"
+#include "../../entity-manager/entity-attributes-manager\EntityAttributeTypeManager.hpp"
+#include "../../entity-manager/entity-attributes-manager\EntityAttributeTypeInstanceManager.hpp"
 
 // Entity relation types and instances of those.
-#include "../../entity-manager/entity-relations-manager\EntityRelationTypeManager.cpp"
-#include "../../entity-manager/entity-relations-manager\EntityRelationTypeInstanceManager.cpp"
+#include "../../entity-manager/entity-relations-manager\EntityRelationTypeManager.hpp"
+#include "../../entity-manager/entity-relations-manager\EntityRelationTypeInstanceManager.hpp"
 
-#include "../../EntitySystem.cpp"
+#include "../../EntitySystem.hpp"
 using namespace inexor::entity_system;
 
 

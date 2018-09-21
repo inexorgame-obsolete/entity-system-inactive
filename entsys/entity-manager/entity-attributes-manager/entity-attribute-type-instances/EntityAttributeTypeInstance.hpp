@@ -22,7 +22,7 @@ namespace entity_system {
 		public:
 
 			// 
-			EntityAttributeTypeInstance() = delete;
+			EntityAttributeTypeInstance();
 
 			// 
 			EntityAttributeTypeInstance(const std::shared_ptr<EntityAttributeType>&);

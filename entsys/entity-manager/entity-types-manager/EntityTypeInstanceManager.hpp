@@ -3,7 +3,6 @@
 
 #pragma once
 
-#include <vector>
 #include "entity-type-instance\EntityTypeInstance.hpp"
 
 
@@ -11,11 +10,12 @@ namespace inexor {
 namespace entity_system {
 
 
+	// 
     class EntityTypeInstanceManager
     {
         private:            
             
-            std::vector<std::shared_ptr<EntityTypeInstance>> entity_type_instances;
+            std::vector<std::shared_ptr<EntityTypeInstance>> global_entity_type_instance_buffer;
             
         protected:
             
@@ -25,7 +25,18 @@ namespace entity_system {
 
         public:
 
-			std::shared_ptr<EntityTypeInstance> create_entity_type_instance(const std::string&);
+			// Create an entity type instance.
+			std::shared_ptr<EntityTypeInstance> create_entity_type_instance(const std::shared_ptr<EntityType>&);
+
+			// Return the number of created instances.
+			const std::size_t get_entity_type_instance_count() const;
+
+			// Erase all instances.
+			void delete_all_entity_type_instances();
+
+			// TODO: Evaluate this!
+			//std::vector<std::shared_ptr<EntityTypeInstance>> get_all_entity_type_instances() const;
+
 
     };
 

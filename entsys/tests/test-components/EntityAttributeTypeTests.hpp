@@ -18,6 +18,7 @@ TEST(EntityAttributeTypeTests, get_entity_attribute_type_name)
 	EXPECT_EQ(new_ent_attr1->get_entity_attribute_type_name(), "weight");
 }
 
+
 TEST(EntityAttributeTypeTests, get_entity_attribute_data_type)
 {
 	std::string ent_attr_name = "density";
