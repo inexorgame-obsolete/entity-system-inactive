@@ -40,7 +40,7 @@ std::unique_ptr<EntitySystem> EntitySystem::instance;
 std::once_flag EntitySystem::onceFlag;
 
 // Create one instance of the entity system.
-EntitySystem& entsys = EntitySystem::Instance();
+extern EntitySystem& entsys = EntitySystem::Instance();
 
 
 // Testing class methods of entity type manager.

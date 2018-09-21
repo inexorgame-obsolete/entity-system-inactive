@@ -12,7 +12,7 @@
 // Tests for DataContainer class.
 #include "test-components/DataContainerTests.hpp"
 
-// TEsts for types of entities and instances of them.
+// Tests for types of entities and instances of them.
 #include "test-components/EntityTypeTests.hpp"
 #include "test-components/EntityTypeManagerTests.hpp"
 #include "test-components/EntityTypeInstanceTests.hpp"

@@ -9,13 +9,8 @@ namespace inexor {
 namespace entity_system {
 
 
-	EntityAttributeTypeInstance::EntityAttributeTypeInstance()
-	{
-		// TODO: Implement!
-	}
-
-
 	EntityAttributeTypeInstance::EntityAttributeTypeInstance(const std::shared_ptr<EntityAttributeType>& param_entity_attribute_type)
+		                                                     : DataContainer(param_entity_attribute_type->get_entity_attribute_data_type()) // Initialise DataContainer class
 	{
 		pointer_to_entity_attribute_type = param_entity_attribute_type;
 	}
@@ -30,11 +25,11 @@ namespace entity_system {
 	void EntityAttributeTypeInstance::set_entity_attribute_type(const std::shared_ptr<EntityAttributeType>& param_pointer_to_ent_attr_type)
 	{
 		pointer_to_entity_attribute_type = param_pointer_to_ent_attr_type;
-		// TODO: Reset memory of DataContainer of this instance!
+		// Reset memory of DataContainer instance when changing the entity attribute type!
+		reset_memory();
 	}
 
 
-	// TODO: Discuss if this should be of a constant type!
 	std::shared_ptr<EntityAttributeType> EntityAttributeTypeInstance::get_entity_attribute_type() const
 	{
 		return pointer_to_entity_attribute_type;

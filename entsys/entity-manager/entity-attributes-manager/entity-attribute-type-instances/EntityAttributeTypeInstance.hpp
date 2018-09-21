@@ -4,6 +4,7 @@
 #pragma once
 
 #include "../entity-attribute-type/EntityAttributeType.hpp"
+#include "../../../data-container/DataContainer.hpp"
 
 
 namespace inexor {
@@ -11,7 +12,7 @@ namespace entity_system {
 
 
 	// A base class for instances of attributes of entities.
-	class EntityAttributeTypeInstance : public DataValidation
+	class EntityAttributeTypeInstance : public DataValidation, public DataContainer
 	{
 		private:
 
@@ -21,7 +22,7 @@ namespace entity_system {
 		public:
 
 			// 
-			EntityAttributeTypeInstance();
+			EntityAttributeTypeInstance() = delete;
 
 			// 
 			EntityAttributeTypeInstance(const std::shared_ptr<EntityAttributeType>&);
@@ -43,7 +44,6 @@ namespace entity_system {
 
 			// Implement data validation method as required by base class inheritance!
 			virtual ENTSYS_DATA_VALIDATION_RESULT validate() override;
-
 
 	};
 

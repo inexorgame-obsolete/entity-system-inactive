@@ -20,8 +20,10 @@ namespace entity_system {
     {
 		private:
 
+			// 
 			std::vector<std::shared_ptr<EntityAttributeTypeInstance>> vector_of_instances_of_linked_entity_attribute_types;
 
+			// 
 			std::shared_ptr<EntityType> pointer_to_entity_type;
 
 		public:
@@ -34,6 +36,9 @@ namespace entity_system {
 
 			// 
 			~EntityTypeInstance();
+
+			// 
+			void reset_memory();
 
 			// Implement data validation method as required by base class inheritance!
 			virtual ENTSYS_DATA_VALIDATION_RESULT validate() override;

@@ -29,14 +29,14 @@ namespace entity_system {
 			
 			// PLEASE NOTE
 			// The corresponding DataContainer will be managed by the EntityAttributeTypeInstance class!
-			// The data type of this container however must be declared here.
+			// The data type of this container is declared here.
 			ENTSYS_DATA_TYPE entity_attribute_data_type;
 
 
         public:
 
 			// 
-			EntityAttributeType();
+			EntityAttributeType() = delete;
 			
 			// 
 			EntityAttributeType(const std::string&, const ENTSYS_DATA_TYPE&);

@@ -15,10 +15,18 @@ namespace entity_system {
     }
 
 
-    DataContainer::DataContainer()
-    {
-		// TODO: Implement!
-    }
+	void DataContainer::reset_memory()
+	{
+		// Lock mutex using lock guards to ensure thread-safety.
+		std::lock_guard<std::mutex> lock(data_container_mutex);
+		data_container_data_type = ENTSYS_DATA_TYPE_UNDEFINED;
+		string_data = "";
+		int64_data = 0;
+		integer_data = 0;
+		double_data = 0.0;
+		float_data = 0.0f;
+		boolean_data = false;
+	}
 
 
     DataContainer::DataContainer(const std::int64_t& int_val)

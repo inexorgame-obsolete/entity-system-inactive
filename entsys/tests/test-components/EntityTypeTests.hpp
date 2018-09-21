@@ -10,7 +10,7 @@ using namespace inexor::entity_system;
 
 TEST(EntityTypeTests, get_type_name)
 {
-	std::string ent_name = std::string("grenade");
+	std::string ent_name = "grenade";
 	ENT_TYPE new_ent1 = CREATE_ENT_TYPE(ent_name);
 	EXPECT_EQ(new_ent1->get_type_name(), ent_name);
 }

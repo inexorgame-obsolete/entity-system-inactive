@@ -27,7 +27,7 @@ namespace entity_system {
 
             ENTSYS_DATA_TYPE data_container_data_type = ENTSYS_DATA_TYPE_UNDEFINED;
 
-            std::string string_data = std::string("");
+            std::string string_data = "";
 
             std::int64_t int64_data = 0;
 
@@ -56,8 +56,6 @@ namespace entity_system {
 			// Multithreading safety mutex.
 			std::mutex data_container_mutex;
 
-			DataContainer();
-
             // Overloaded constructors.
             DataContainer(const ENTSYS_DATA_TYPE&);
             DataContainer(const std::int64_t&);
@@ -68,6 +66,8 @@ namespace entity_system {
             DataContainer(const int&);
 
             ~DataContainer();
+
+			void reset_memory();
 
 
 			// Assign operators.

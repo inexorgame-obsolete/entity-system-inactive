@@ -15,13 +15,12 @@ namespace entity_system {
 	// to implement a data validation method!
     class DataValidation
     {
-        protected:
-
-            DataValidation();
-
-            ~DataValidation();
 
         public:
+
+			DataValidation();
+
+			~DataValidation();
 
             // Every class which inherits from DataValidation needs
             // to have an implementation of this method!
