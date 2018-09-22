@@ -71,7 +71,7 @@ namespace entity_system {
 	
 	ENTSYS_RESULT EntityTypeManager::delete_entity_type(const std::shared_ptr<EntityType>& param_entity_type_name)
 	{
-		// TODO: [CRITICAL] Remove all instances of this
+		// TODO: [CRITICAL] Remove all instances of this!
 		// entity type before removing the entity type itself!
 		return delete_entity_type(param_entity_type_name->get_type_name());
 	}

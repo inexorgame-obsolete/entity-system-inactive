@@ -20,13 +20,13 @@ namespace entity_system {
     }
 
 
-	std::shared_ptr<EntityTypeInstance> EntityTypeInstanceManager::create_entity_type_instance(const std::shared_ptr<EntityType>& param_entity_type)
+	ENTSYS_RESULT EntityTypeInstanceManager::register_entity_type_instance(const std::shared_ptr<EntityTypeInstance>& param_entity_type)
 	{
-		std::shared_ptr<EntityTypeInstance> new_ent_type_inst = std::make_shared<EntityTypeInstance>(param_entity_type);
-
 		// Add this instance to global entity type instance buffer!
-		global_entity_type_instance_buffer.push_back(new_ent_type_inst);
-		return new_ent_type_inst;
+		global_entity_type_instance_buffer.push_back(param_entity_type);
+
+		// TODO: Implement!
+		return ENTSYS_ERROR;
 	}
 
 

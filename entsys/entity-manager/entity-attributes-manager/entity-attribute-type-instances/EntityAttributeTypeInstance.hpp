@@ -12,17 +12,13 @@ namespace entity_system {
 
 
 	// A base class for instances of attributes of entities.
-	class EntityAttributeTypeInstance : public DataValidation, public DataContainer
+	class EntityAttributeTypeInstance : public EntityAttributeType,
+		                                public DataContainer
 	{
-		private:
-
-			// Pointer to entity type.
-			std::shared_ptr<EntityAttributeType> pointer_to_entity_attribute_type;
-
 		public:
 
 			// 
-			EntityAttributeTypeInstance();
+			EntityAttributeTypeInstance() = delete;
 
 			// 
 			EntityAttributeTypeInstance(const std::shared_ptr<EntityAttributeType>&);
@@ -30,19 +26,8 @@ namespace entity_system {
 			// 
 			~EntityAttributeTypeInstance();
 
-			// 
-			void set_entity_attribute_type(const std::shared_ptr<EntityAttributeType>&);
-
-			// 
-			std::shared_ptr<EntityAttributeType> get_entity_attribute_type() const;
-
-			// Returns the name of the entity attribute type.
-			std::string get_entity_attribute_type_name() const;
-
-			// Returns the data type of the entity attribute type
-			ENTSYS_DATA_TYPE get_entity_attribute_data_type() const;
-
 			// Implement data validation method as required by base class inheritance!
+			// This overrides EntityAttributeType::validate().
 			virtual ENTSYS_DATA_VALIDATION_RESULT validate() override;
 
 	};

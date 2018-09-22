@@ -3,16 +3,16 @@
 
 #pragma once
 
-#include <string>
-
-#include "../../../data-validation/DataValidation.hpp"
-
 #include "../../entity-types-manager/entity-type/EntityType.hpp"
 #include "../../entity-attributes-manager/entity-attribute-type-instances/EntityAttributeTypeInstance.hpp"
 
 
 namespace inexor {
 namespace entity_system {
+
+	// We have to add instances to the entity system
+	// when creatin them in the constructor!
+	extern class EntitySystem entsys;
 
 
 	// A base class for instances of types of entities.
@@ -22,7 +22,7 @@ namespace entity_system {
 		private:
 
 			// 
-			std::vector<std::shared_ptr<EntityAttributeTypeInstance>> vector_of_instances_of_linked_entity_attribute_types;
+			std::unordered_map<ENT_ATTR_TYPE, ENT_ATTR_TYPE_INSTANCE> linked_entity_attribute_type_instances;
 
 			// 
 			std::shared_ptr<EntityType> pointer_to_entity_type;
@@ -40,6 +40,9 @@ namespace entity_system {
 
 			// Implement data validation method as required by base class inheritance!
 			virtual ENTSYS_DATA_VALIDATION_RESULT validate() override;
+
+			// Set attribute data
+			void set_attribute_data(const std::shared_ptr<EntityAttributeType>&, const DataContainer&);
 
     };
 
