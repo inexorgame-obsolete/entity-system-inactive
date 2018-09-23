@@ -13,7 +13,7 @@
 // Tests for types of entities and instances of them.
 #include "test-components/EntityTypeTests.hpp"
 //#include "test-components/EntityTypeManagerTests.hpp"
-//#include "test-components/EntityTypeInstanceTests.hpp"
+#include "test-components/EntityTypeInstanceTests.hpp"
 //#include "test-components/EntityTypeInstanceManagerTests.hpp"
 
 // Tests for types of attributes of entities and instances of them.
