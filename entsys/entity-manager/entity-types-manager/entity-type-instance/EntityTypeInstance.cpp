@@ -21,14 +21,12 @@ namespace entity_system {
 		linked_entity_type = param_entity_type;
 
 		// Create entity attribute type instances for this entiy type instance!
-		/*
 		std::vector<std::shared_ptr<EntityAttributeType>> linked_entity_attribute_types = param_entity_type->get_linked_attribute_types();
 		for(std::size_t i = 0; i< linked_entity_attribute_types.size(); i++)
 		{
 			// Create an entity attribute type instance and store it in the map.
 			linked_entity_attribute_type_instances[linked_entity_attribute_types[i]] = std::make_shared<EntityAttributeTypeInstance>();
 		}
-		*/
 	}
 
 
@@ -39,13 +37,11 @@ namespace entity_system {
 		// when destroying entity type instance.
 		// Loop through std::map using range-based loop.
 		// No need for std::const_iterator, C++11 rocks!
-		/*
 		for(const auto& map_pair : linked_entity_attribute_type_instances)
 		{
 			// TODO: Debug!
 			map_pair.second->~EntityAttributeTypeInstance();
 		}
-		*/
 	}
 
 
