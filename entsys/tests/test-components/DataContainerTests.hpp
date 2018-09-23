@@ -4,7 +4,8 @@
 
 #pragma once
 
-#include "../data-container/DataContainer.cpp"
+#include "../../data-container/DataTypes.hpp"
+#include "../../data-container/DataContainer.hpp"
 using namespace inexor::entity_system;
 
 

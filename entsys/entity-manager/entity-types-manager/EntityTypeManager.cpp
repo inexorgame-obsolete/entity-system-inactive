@@ -23,7 +23,7 @@ namespace entity_system {
 	bool EntityTypeManager::does_entity_type_exist(const std::string& param_entity_type_name)
 	{
 		// Returns false is entity type does not already exist.
-		return !(entity_type_buffer_map.end() == entity_type_buffer_map.find(param_entity_type_name.c_str()));
+		return !(entity_type_buffer_map.end() == entity_type_buffer_map.find(param_entity_type_name));
 	}
 
 	

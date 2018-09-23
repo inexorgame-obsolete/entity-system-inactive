@@ -23,7 +23,7 @@ namespace entity_system {
 	bool EntityAttributeTypeManager::does_entity_attribute_type_exist(const std::string& param_entity_attribute_type_name)
 	{
 		// Returns false is entity attribute type does not already exist.
-		return !(entity_attribute_type_buffer_map.end() == entity_attribute_type_buffer_map.find(param_entity_attribute_type_name.c_str()));
+		return !(entity_attribute_type_buffer_map.end() == entity_attribute_type_buffer_map.find(param_entity_attribute_type_name));
 	}
 
 
@@ -31,7 +31,7 @@ namespace entity_system {
 		const std::string& param_ent_attr_type_name, const ENTSYS_DATA_TYPE& param_ent_attr_data_type)
 	{
 		std::shared_ptr<EntityAttributeType> new_ent_attr_type = std::make_shared<EntityAttributeType>(param_ent_attr_type_name, param_ent_attr_data_type);
-		entity_attribute_type_buffer_map[param_ent_attr_type_name.c_str()] = new_ent_attr_type;
+		entity_attribute_type_buffer_map[param_ent_attr_type_name] = new_ent_attr_type;
 		return new_ent_attr_type;
 	}
 

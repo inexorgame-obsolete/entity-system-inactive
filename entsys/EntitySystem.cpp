@@ -13,9 +13,9 @@ namespace entity_system {
 		// TODO: Implement!
 	}
 
-	// Create one single instance
-	// of the entity system.
-	std::shared_ptr<EntitySystem> entsys;
+
+	// Create one single instance of the entity system.
+	std::shared_ptr<EntitySystem> entsys = std::make_shared<EntitySystem>();
 
 };
 };

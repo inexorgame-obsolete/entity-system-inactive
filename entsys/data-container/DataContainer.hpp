@@ -67,8 +67,12 @@ namespace entity_system {
 
             ~DataContainer();
 
-			void reset_memory();
 
+			// Set the data type of the container.
+			ENTSYS_RESULT set_data_type(const ENTSYS_DATA_TYPE&);
+
+			// Returns the current data type of the data container.
+			ENTSYS_DATA_TYPE get_data_type() const;
 
 			// Assign operators.
 			// Do these have to be of const type ?
@@ -79,12 +83,6 @@ namespace entity_system {
             const std::string& operator=(const std::string&);
             const std::int64_t& operator=(const std::int64_t&);
 
-			// Set the data type of the container.
-            ENTSYS_RESULT set_data_type(const ENTSYS_DATA_TYPE&);
-
-			// Returns the current data type of the data container.
-            ENTSYS_DATA_TYPE get_data_type() const;
-
 			// Get methods.
 			const int get_int() const;
 			const bool get_bool() const;
@@ -92,6 +90,9 @@ namespace entity_system {
 			const double get_double() const;
 			const std::string get_string() const;
 			const std::int64_t get_int64() const;
+
+			// Reset all memory.
+			void reset_memory();
 
 	};
 

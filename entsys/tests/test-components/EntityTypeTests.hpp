@@ -5,19 +5,18 @@
 #pragma once
 
 #include "../../typedefs/TypeDefinitions.hpp"
-#include "../../entity-manager/entity-types-manager/entity-type/EntityType.hpp"
 using namespace inexor::entity_system;
 
 
-TEST(EntityTypeTests, get_type_name)
+TEST(Test_EntityType, get_type_name)
 {
 	std::string ent_name = "grenade";
 	ENT_TYPE new_ent1 = CREATE_ENT_TYPE(ent_name);
 	EXPECT_EQ(new_ent1->get_type_name(), ent_name);
 }
 
-/*
-TEST(EntityTypeTests, link_entity_attribute_type_to_entity_type)
+
+TEST(Tests_EntityType, link_attribute_type)
 {
 	ENT_TYPE weap1 = CREATE_ENT_TYPE("rocketlauncher");
 
@@ -39,7 +38,7 @@ TEST(EntityTypeTests, link_entity_attribute_type_to_entity_type)
 }
 
 
-TEST(EntityTypeTests, has_attribute_type)
+TEST(Tests_EntityType, has_attribute_type)
 {
 	ENT_TYPE weap1 = CREATE_ENT_TYPE("rocketlauncher");
 
@@ -65,7 +64,7 @@ TEST(EntityTypeTests, has_attribute_type)
 }
 
 
-TEST(EntityTypeTests, reset_linked_attribute_types)
+TEST(Tests_EntityType, reset_linked_attribute_types)
 {
 	ENT_TYPE weap1 = CREATE_ENT_TYPE("rocketlauncher");
 
@@ -91,7 +90,7 @@ TEST(EntityTypeTests, reset_linked_attribute_types)
 }
 
 
-TEST(EntityTypeTests, get_linked_attributes_count)
+TEST(Tests_EntityType, get_linked_attributes_count)
 {
 	ENT_TYPE weap1 = CREATE_ENT_TYPE("rocketlauncher");
 
@@ -113,4 +112,3 @@ TEST(EntityTypeTests, get_linked_attributes_count)
 	EXPECT_EQ(weap1->has_attribute_type("weight"), false);
 	EXPECT_EQ(weap1->get_linked_attributes_count(), 0);
 }
-*/

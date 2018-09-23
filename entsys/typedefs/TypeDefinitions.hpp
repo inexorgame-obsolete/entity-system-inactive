@@ -14,7 +14,7 @@
 namespace inexor {
 namespace entity_system {
 	
-	extern std::shared_ptr<class EntitySystem> entsys;
+	extern std::shared_ptr<EntitySystem> entsys;
 
     // By using these type definitions we can make later definitions shorter.
 

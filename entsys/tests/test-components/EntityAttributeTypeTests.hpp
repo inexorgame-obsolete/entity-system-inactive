@@ -4,12 +4,11 @@
 
 #pragma once
 
-// Types of attributes of entities.
 #include "../../entity-manager/entity-attributes-manager/entity-attribute-type/EntityAttributeType.hpp"
 using namespace inexor::entity_system;
 
 
-TEST(EntityAttributeTypeTests, get_entity_attribute_type_name)
+TEST(Test_EntityAttributeType, get_entity_attribute_type_name)
 {
 	std::string ent_attr_name = "weight";
 	ENTSYS_DATA_TYPE ent_attr_data_type = ENTSYS_DATA_TYPE_INT;
@@ -19,7 +18,7 @@ TEST(EntityAttributeTypeTests, get_entity_attribute_type_name)
 }
 
 
-TEST(EntityAttributeTypeTests, get_entity_attribute_data_type)
+TEST(Test_EntityAttributeType, get_entity_attribute_data_type)
 {
 	std::string ent_attr_name = "density";
 	ENTSYS_DATA_TYPE ent_attr_data_type = ENTSYS_DATA_TYPE_BOOL;

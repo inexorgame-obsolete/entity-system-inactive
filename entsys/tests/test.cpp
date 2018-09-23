@@ -17,7 +17,7 @@
 //#include "test-components/EntityTypeInstanceManagerTests.hpp"
 
 // Tests for types of attributes of entities and instances of them.
-//#include "test-components/EntityAttributeTypeTests.hpp"
+#include "test-components/EntityAttributeTypeTests.hpp"
 //#include "test-components/EntityAttributeTypeManagerTests.hpp"
 //#include "test-components/EntityAttributeTypeInstanceTest.hpp"
 //#include "test-components/EntityAttributeTypeInstanceManagerTests.hpp"
