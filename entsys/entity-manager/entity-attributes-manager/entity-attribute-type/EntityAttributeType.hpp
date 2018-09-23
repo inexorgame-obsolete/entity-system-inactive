@@ -17,9 +17,7 @@ namespace entity_system {
     
 	
 	// A base class for types of entity attributes.
-	// This class needs to implement a data validation method!
-	// PLEASE NOTE
-	// The corresponding DataContainer will be managed by the EntityAttributeTypeInstance class!
+	// This class MUST implement a data validation method because of inheritance rules!
     class EntityAttributeType : public DataValidation
     {
         protected:
@@ -27,22 +25,22 @@ namespace entity_system {
 			// Every entity attribute must have a unique name.
 			std::string entity_attribute_type_name;
 			
-			// PLEASE NOTE
-			// The corresponding DataContainer will be managed by the EntityAttributeTypeInstance class!
+			// The memory is associated with the entity attribute instance.
+			// It will be managed by the EntityAttributeTypeInstance class
 			// The data type of this container is declared here.
 			ENTSYS_DATA_TYPE entity_attribute_data_type;
 
-
         public:
 
-			// 
-			EntityAttributeType();
+			// TODO: Remove default constructor!
+			EntityAttributeType(); // = delete;
 			
-			// 
+			// TODO: Make this the default constructor.
 			EntityAttributeType(const std::string&, const ENTSYS_DATA_TYPE&);
 
 			// 
 			~EntityAttributeType();
+			
 
 			// Returns the name of the entity attribute type.
 			std::string get_entity_attribute_type_name() const;

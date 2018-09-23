@@ -8,15 +8,15 @@ namespace inexor {
 namespace entity_system {
     
 
-    EntityType::EntityType(const std::string& param_entity_type_name)
-    {
-		entity_type_name = param_entity_type_name;
-	}
-    
-
 	EntityType::EntityType()
 	{
 		// TODO: Implement!
+	}
+
+
+    EntityType::EntityType(const std::string& param_entity_type_name)
+    {
+		entity_type_name = param_entity_type_name;
 	}
 
 
@@ -34,7 +34,7 @@ namespace entity_system {
 
 	std::size_t EntityType::get_linked_attributes_count() const
 	{
-		return vector_of_linked_entity_attribute_types.size();
+		return linked_entity_attribute_types.size();
 	}
 
 
@@ -55,9 +55,9 @@ namespace entity_system {
 		std::string name1 = param_entity_attribute_type_name;
 		std::string name2 = "";
 
-		for(std::size_t i=0; i<vector_of_linked_entity_attribute_types.size(); i++)
+		for(std::size_t i=0; i<linked_entity_attribute_types.size(); i++)
 		{
-			name2 = vector_of_linked_entity_attribute_types[i]->get_entity_attribute_type_name();
+			name2 = linked_entity_attribute_types[i]->get_entity_attribute_type_name();
 
 			// Check if we can find this entity attribute type by name.
 			// This would mean it is already linked to the entity type!
@@ -80,7 +80,7 @@ namespace entity_system {
 
 	void EntityType::reset_linked_attribute_types()
 	{
-		vector_of_linked_entity_attribute_types.clear();
+		linked_entity_attribute_types.clear();
 	}
 
 
@@ -94,7 +94,7 @@ namespace entity_system {
 			// linked to this entity type.
 			
 			// Link entity attribute type to entity type.
-			vector_of_linked_entity_attribute_types.push_back(param_linked_entity_attribute_type);
+			linked_entity_attribute_types.push_back(param_linked_entity_attribute_type);
 
 			return ENTSYS_SUCCESS;
 		}

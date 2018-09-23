@@ -2,11 +2,17 @@
 // (c)2018 Inexor
 
 #include "EntityAttributeTypeInstance.hpp"
-#include "../../../EntitySystem.hpp"
 
 
 namespace inexor {
 namespace entity_system {
+
+
+	EntityAttributeTypeInstance::EntityAttributeTypeInstance()
+		: DataContainer(ENTSYS_DATA_TYPE_UNDEFINED)
+	{
+		// TODO: Implement
+	}
 
 
 	EntityAttributeTypeInstance::EntityAttributeTypeInstance(const std::shared_ptr<EntityAttributeType>& ent_attr_type)

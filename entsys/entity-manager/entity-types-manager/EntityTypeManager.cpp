@@ -23,12 +23,17 @@ namespace entity_system {
 	bool EntityTypeManager::does_entity_type_exist(const std::string& param_entity_type_name)
 	{
 		// Returns false is entity type does not already exist.
-		return !(map_of_entity_types.end() == map_of_entity_types.find(param_entity_type_name.c_str()));
+		return !(entity_type_buffer_map.end() == entity_type_buffer_map.find(param_entity_type_name.c_str()));
 	}
 
 	
-	ENTSYS_RESULT EntityTypeManager::create_entity_type(const std::shared_ptr<EntityType>& param_new_entity_type)
+	std::shared_ptr<EntityType> EntityTypeManager::create_entity_type(const std::string& param_new_entity_type)
 	{
+		std::shared_ptr<EntityType> new_ent_type = std::make_shared<EntityType>(param_new_entity_type);
+		entity_type_buffer_map[param_new_entity_type.c_str()] = new_ent_type;
+		return new_ent_type;
+
+		/*
 		if(ENTSYS_DATA_VALID != param_new_entity_type->validate())
 		{
 			error_message("error: data of new entity type is invalid!");
@@ -51,12 +56,13 @@ namespace entity_system {
 		}
 
 		return ENTSYS_SUCCESS;
+		*/
 	}
 
 
-	std::size_t EntityTypeManager::get_entity_types_count() const
+	const std::size_t EntityTypeManager::get_entity_types_count() const
 	{
-		return map_of_entity_types.size();
+		return entity_type_buffer_map.size();
 	}
 
 
@@ -64,7 +70,7 @@ namespace entity_system {
 	{
 		// TODO: [CRITICAL] Remove all instances of this
 		// entity type before removing the entity type itself!
-		map_of_entity_types.erase(param_entity_type_name);
+		entity_type_buffer_map.erase(param_entity_type_name);
 		return ENTSYS_SUCCESS;
 	}
 
@@ -79,7 +85,7 @@ namespace entity_system {
 
 	void EntityTypeManager::delete_all_entity_types_and_entity_type_instances()
 	{
-		map_of_entity_types.clear();
+		entity_type_buffer_map.clear();
 	}
 
 

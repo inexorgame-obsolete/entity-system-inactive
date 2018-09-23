@@ -21,23 +21,26 @@ namespace entity_system {
 
 			// In this unordered map all available types
 			// of entity attributes in the entity system will be stored.
-			std::unordered_map<std::string, std::shared_ptr<EntityAttributeType>> map_of_entity_attribute_types;
+			std::unordered_map<std::string, std::shared_ptr<EntityAttributeType>> entity_attribute_type_buffer_map;
 
         protected:
 
+			// 
 			EntityAttributeTypeManager();
 
+			// 
             ~EntityAttributeTypeManager();
 
         public:
 
+			// 
 			bool does_entity_attribute_type_exist(const std::string&);
 
 			// Create a new entity attribute type and store it in the entity system.
-			ENTSYS_RESULT create_entity_attribute_type(const std::shared_ptr<EntityAttributeType>&);
+			std::shared_ptr<EntityAttributeType> create_entity_attribute_type(const std::string&, const ENTSYS_DATA_TYPE&);
 
 			// Returns the number of available types of entities.
-			std::size_t get_entity_attribute_type_count() const;
+			const std::size_t get_entity_attribute_type_count() const;
 
 			// Deletes an entity attribute type from the entity system.
 			ENTSYS_RESULT delete_entity_attribute_type(const std::string&);

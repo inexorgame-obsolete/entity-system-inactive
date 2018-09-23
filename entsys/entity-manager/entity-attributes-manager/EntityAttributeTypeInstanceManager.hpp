@@ -10,18 +10,21 @@ namespace inexor {
 namespace entity_system {
 
 
-	// 
+	// A manager class for instances of attributes of entity types.
     class EntityAttributeTypeInstanceManager
     {
 		protected:
 
-			std::vector<std::shared_ptr<EntityAttributeTypeInstance>> global_entity_attribute_type_instance_buffer;
+			// 
+			std::vector<std::shared_ptr<EntityAttributeTypeInstance>> entity_attribute_type_instance_buffer;
 
 		protected:
             
-            EntityAttributeTypeInstanceManager();
+			// 
+			EntityAttributeTypeInstanceManager();
             
-            ~EntityAttributeTypeInstanceManager();
+			// 
+			~EntityAttributeTypeInstanceManager();
 
 		public:
 
@@ -30,8 +33,6 @@ namespace entity_system {
 
 			// Return the number of created instances.
 			const std::size_t get_entity_attribute_type_instance_count() const;
-
-			// TODO: Cannot delete entity attribute type instance without deleting entity type instance?
 
 	};
 

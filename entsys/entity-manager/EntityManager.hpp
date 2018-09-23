@@ -43,14 +43,7 @@ namespace entity_system {
 
 			// Delete all entity types, entity attribute types, entity relation types
 			// and instances of them.
-			void reset_entity_system();
-
-
-			// Validates the new entity type and all linked entity attribute
-			// types and adds them to the entity system if their data is valid.
-			ENTSYS_RESULT create_entity_type_with_attributes(const std::shared_ptr<EntityType>&,
-				                                             const std::vector<std::shared_ptr<EntityAttributeType>>&);
-
+			void reset();
 
     };
 

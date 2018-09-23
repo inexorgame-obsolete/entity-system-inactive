@@ -39,7 +39,6 @@ namespace entity_system {
 
             bool boolean_data = false;
 			
-		
 		protected:
 
             // Thread-safe set methods.
@@ -49,7 +48,6 @@ namespace entity_system {
             const double& set(const double&);
             const std::string& set(const std::string&);
             const std::int64_t& set(const std::int64_t&);
-
 
         public:
 

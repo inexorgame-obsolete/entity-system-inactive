@@ -10,10 +10,6 @@
 namespace inexor {
 namespace entity_system {
 
-	// We have to add instances to the entity system
-	// when creatin them in the constructor!
-	extern class EntitySystem entsys;
-
 
 	// A base class for instances of types of entities.
 	// Only EntityTypeInstanceManager can create instances!
@@ -22,21 +18,22 @@ namespace entity_system {
 		private:
 
 			// 
-			std::unordered_map<ENT_ATTR_TYPE, ENT_ATTR_TYPE_INSTANCE> linked_entity_attribute_type_instances;
+			std::unordered_map<std::shared_ptr<EntityAttributeType>, std::shared_ptr<EntityAttributeTypeInstance>> linked_entity_attribute_type_instances;
 
 			// 
-			std::shared_ptr<EntityType> pointer_to_entity_type;
+			std::shared_ptr<EntityType> entity_type;
 
 		public:
 
-			// Remove default constructor!
-			EntityTypeInstance();
+			// TODO: Remove default constructor!
+			EntityTypeInstance(); // = delete;
 
-			// Create an instance of an entity type.
+			// TODO: Make this the default constructor.
 			EntityTypeInstance(const std::shared_ptr<EntityType>&);
 
 			// Destructor.
 			~EntityTypeInstance();
+
 
 			// Implement data validation method as required by base class inheritance!
 			virtual ENTSYS_DATA_VALIDATION_RESULT validate() override;

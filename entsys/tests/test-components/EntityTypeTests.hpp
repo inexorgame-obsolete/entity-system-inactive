@@ -4,6 +4,7 @@
 
 #pragma once
 
+#include "../../typedefs/TypeDefinitions.hpp"
 #include "../../entity-manager/entity-types-manager/entity-type/EntityType.hpp"
 using namespace inexor::entity_system;
 

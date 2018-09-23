@@ -6,10 +6,6 @@
 #include <string>
 #include <unordered_map>
 
-#include "../../../return-codes/ReturnCodes.hpp"
-#include "../../../typedefs/TypeDefinitions.hpp"
-#include "../../../data-validation/DataValidation.hpp"
-
 #include "../../entity-attributes-manager/entity-attribute-type/EntityAttributeType.hpp"
 
 
@@ -28,24 +24,19 @@ namespace entity_system {
 
 			// Every entity type can have linked
 			// entity attribute types which will be stored here.
-			std::vector<std::shared_ptr<EntityAttributeType>> vector_of_linked_entity_attribute_types;
-			                        
-			// PLEASE NOTE
-			// Fixed entity attributes will be implemented
-			// by creating an advanced entity type
-			// which inherits from this base class.
+			std::vector<std::shared_ptr<EntityAttributeType>> linked_entity_attribute_types;
 
         public:
 
-			// 
-			EntityType();
+			// TODO: Remove default constructor!
+			EntityType(); // = delete;
 
-			// Make this the default constructor so 
-			// the name of an entity type must be set!
+			// TODO: Make this the default constructor.
             EntityType(const std::string&);
 
 			// 
             ~EntityType();
+
 			
 			// Returns the name of the entity type.
 			std::string get_type_name() const;

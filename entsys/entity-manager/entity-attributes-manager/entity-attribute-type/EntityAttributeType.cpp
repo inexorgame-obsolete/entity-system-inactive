@@ -8,6 +8,12 @@ namespace inexor {
 namespace entity_system {
 
 
+	EntityAttributeType::EntityAttributeType()
+	{
+		// TODO: Implement!
+	}
+
+
 	EntityAttributeType::EntityAttributeType(const std::string& param_entity_attribute_type_name,
 		                                     const ENTSYS_DATA_TYPE& param_entity_attribute_data_type)
 	{
@@ -17,12 +23,6 @@ namespace entity_system {
 
 
 	EntityAttributeType::~EntityAttributeType()
-	{
-		// TODO: Implement!
-	}
-
-
-	EntityAttributeType::EntityAttributeType()
 	{
 		// TODO: Implement!
 	}

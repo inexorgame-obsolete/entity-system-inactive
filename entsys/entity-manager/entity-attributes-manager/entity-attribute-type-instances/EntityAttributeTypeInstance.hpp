@@ -17,14 +17,15 @@ namespace entity_system {
 	{
 		public:
 
-			// 
-			EntityAttributeTypeInstance() = delete;
+			// TODO: Remove default constructor!
+			EntityAttributeTypeInstance(); // = delete;
 
-			// 
+			// TODO: Make this the default constructor.
 			EntityAttributeTypeInstance(const std::shared_ptr<EntityAttributeType>&);
 
 			// 
 			~EntityAttributeTypeInstance();
+
 
 			// Implement data validation method as required by base class inheritance!
 			// This overrides EntityAttributeType::validate().

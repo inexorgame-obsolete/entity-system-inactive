@@ -8,15 +8,14 @@ namespace inexor {
 namespace entity_system {
 
 
-	EntitySystem& EntitySystem::Instance()
+	EntitySystem::EntitySystem()
 	{
-		std::call_once(EntitySystem::onceFlag,[] (){
-			instance.reset(new EntitySystem); 
-		});
-
-		return *(instance.get());
+		// TODO: Implement!
 	}
 
+	// Create one single instance
+	// of the entity system.
+	std::shared_ptr<EntitySystem> entsys;
 
 };
 };
