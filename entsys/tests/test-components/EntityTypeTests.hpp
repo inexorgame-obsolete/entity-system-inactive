@@ -13,6 +13,9 @@ TEST(Test_EntityType, get_type_name)
 	std::string ent_name = "grenade";
 	ENT_TYPE new_ent1 = CREATE_ENT_TYPE(ent_name);
 	ASSERT_EQ(new_ent1->get_type_name(), ent_name);
+
+	// Cleanup!
+	entsys->reset_entity_system();
 }
 
 
@@ -35,6 +38,9 @@ TEST(Tests_EntityType, link_attribute_type)
 	ENT_ATTR_TYPE attr4 = CREATE_ENT_ATTR_TYPE("reloadtime", ENTSYS_DATA_TYPE_FLOAT);
 	weap1->link_attribute_type(attr4);
 	ASSERT_EQ(weap1->get_linked_attributes_count(), 4);
+
+	// Cleanup!
+	entsys->reset_entity_system();
 }
 
 
@@ -65,6 +71,9 @@ TEST(Tests_EntityType, has_attribute_type)
 
 	ASSERT_EQ(weap1->has_attribute_type("reloadtime"), true);
 	ASSERT_EQ(weap1->has_attribute_type(attr4), true);
+
+	// Cleanup!
+	entsys->reset_entity_system();
 }
 
 
@@ -91,6 +100,9 @@ TEST(Tests_EntityType, reset_linked_attribute_types)
 	ASSERT_EQ(weap1->has_attribute_type("damage"), false);
 	ASSERT_EQ(weap1->has_attribute_type("weight"), false);
 	ASSERT_EQ(weap1->get_linked_attributes_count(), 0);
+
+	// Cleanup!
+	entsys->reset_entity_system();
 }
 
 
@@ -115,4 +127,7 @@ TEST(Tests_EntityType, get_linked_attributes_count)
 	ASSERT_EQ(weap1->has_attribute_type("damage"), false);
 	ASSERT_EQ(weap1->has_attribute_type("weight"), false);
 	ASSERT_EQ(weap1->get_linked_attributes_count(), 0);
+
+	// Cleanup!
+	entsys->reset_entity_system();
 }

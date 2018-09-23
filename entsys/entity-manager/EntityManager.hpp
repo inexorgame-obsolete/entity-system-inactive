@@ -43,7 +43,7 @@ namespace entity_system {
 
 			// Delete all entity types, entity attribute types, entity relation types
 			// and instances of them.
-			void reset();
+			void reset_entity_system();
 
     };
 

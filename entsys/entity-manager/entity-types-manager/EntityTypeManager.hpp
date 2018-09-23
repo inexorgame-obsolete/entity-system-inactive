@@ -26,6 +26,9 @@ namespace entity_system {
 			// TODO: use UUID for access?
 			std::unordered_map<std::string, std::shared_ptr<EntityType>> entity_type_buffer_map;
 			
+			// Entity type error.
+			std::shared_ptr<EntityType> entity_type_ERROR;
+
 		protected:
 
 			//
@@ -34,8 +37,8 @@ namespace entity_system {
 			//
 			~EntityTypeManager();
 
-			//
-			void delete_all_entity_types_and_entity_type_instances();
+			// TODO: Should this be public ?
+			void delete_all_entity_types();
 
         public:
 
@@ -51,6 +54,7 @@ namespace entity_system {
 			// Deletes an entity type from the entity system.
 			ENTSYS_RESULT delete_entity_type(const std::string&);
 			ENTSYS_RESULT delete_entity_type(const std::shared_ptr<EntityType>&);
+
 
     };
 

@@ -37,6 +37,7 @@ namespace entity_system {
 
 	void EntityTypeInstanceManager::delete_all_entity_type_instances()
 	{
+		// TODO: [CRITICAL] Add mutex here!
 		entity_type_instance_buffer.clear();
 	}
 

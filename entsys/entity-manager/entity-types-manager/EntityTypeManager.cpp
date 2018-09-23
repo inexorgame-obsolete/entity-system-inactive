@@ -10,8 +10,9 @@ namespace entity_system {
 
     EntityTypeManager::EntityTypeManager()
     {
-		// TODO: implement!
-    }
+		// Error entity type
+		entity_type_ERROR = std::make_shared<EntityType>("ERROR");
+	}
 
 
     EntityTypeManager::~EntityTypeManager()
@@ -23,41 +24,31 @@ namespace entity_system {
 	bool EntityTypeManager::does_entity_type_exist(const std::string& param_entity_type_name)
 	{
 		// Returns false is entity type does not already exist.
-		return !(entity_type_buffer_map.end() == entity_type_buffer_map.find(param_entity_type_name));
+		return ! (entity_type_buffer_map.end() == entity_type_buffer_map.find(param_entity_type_name));
 	}
 
 	
 	std::shared_ptr<EntityType> EntityTypeManager::create_entity_type(const std::string& param_new_entity_type)
 	{
-		std::shared_ptr<EntityType> new_ent_type = std::make_shared<EntityType>(param_new_entity_type);
-		// TODO: use UUID for access?
-		entity_type_buffer_map[param_new_entity_type] = new_ent_type;
-		return new_ent_type;
-
-		/*
-		if(ENTSYS_DATA_VALID != param_new_entity_type->validate())
+		// Check if entity type's name is not empty.
+		if(0 == strcmp("", param_new_entity_type.c_str()))
 		{
-			error_message("error: data of new entity type is invalid!");
-			return ENTSYS_ERROR_DATA_INVALID;
+			// Return entity type error.
+			return entity_type_ERROR;
 		}
-		
-		// Get the name of the new entity type.
-		std::string new_ent_type_name = param_new_entity_type->get_type_name();
 
 		// Check if entity type with this name does already exist.
-		if(false == does_entity_type_exist(new_ent_type_name))
+		if(does_entity_type_exist(param_new_entity_type))
 		{
-			// Add to map of entity types.
-			map_of_entity_types[new_ent_type_name] = param_new_entity_type;
-		}
-		else
-		{
-			error_message("error: new entity type already exists!");
-			return ENTSYS_ERROR_DATA_DUPLICATE;
+			// Return entity type error.
+			return entity_type_ERROR;
 		}
 
-		return ENTSYS_SUCCESS;
-		*/
+		// Create entity type.
+		std::shared_ptr<EntityType> new_ent_type = std::make_shared<EntityType>(param_new_entity_type);
+		// Add new entity type to global map.
+		entity_type_buffer_map[param_new_entity_type] = new_ent_type;
+		return new_ent_type;
 	}
 
 
@@ -84,7 +75,7 @@ namespace entity_system {
 	}
 
 
-	void EntityTypeManager::delete_all_entity_types_and_entity_type_instances()
+	void EntityTypeManager::delete_all_entity_types()
 	{
 		entity_type_buffer_map.clear();
 	}

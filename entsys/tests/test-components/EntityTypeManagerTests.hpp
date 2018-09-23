@@ -14,11 +14,11 @@ TEST(Test_EntityTypeManager, create_entity_type_1)
 	ENT_TYPE new_ent_type = CREATE_ENT_TYPE("rocketlauncher");
 	ASSERT_EQ(entsys->get_entity_types_count(), 1);
 
-	entsys->reset();
+	entsys->reset_entity_system();
 	ASSERT_EQ(entsys->get_entity_types_count(), 0);
 
 	// Cleanup!
-	entsys->reset();
+	entsys->reset_entity_system();
 }
 
 
@@ -43,7 +43,7 @@ TEST(Test_EntityTypeManager, create_entity_type_2)
 	ASSERT_EQ(entsys->get_entity_types_count(), 1);
 
 	// Cleanup!
-	entsys->reset();
+	entsys->reset_entity_system();
 }
 
 
@@ -52,11 +52,11 @@ TEST(Test_EntityTypeManager, reset)
 	ENT_TYPE new_ent_type = CREATE_ENT_TYPE("banana");
 	ASSERT_EQ(entsys->get_entity_types_count(), 1);
 
-	entsys->reset();
+	entsys->reset_entity_system();
 	ASSERT_EQ(entsys->get_entity_types_count(), 0);
 
 	// Cleanup!
-	entsys->reset();
+	entsys->reset_entity_system();
 }
 
 
@@ -72,7 +72,7 @@ TEST(Tests_EntityTypeManager, does_entity_type_exist)
 	ASSERT_EQ(does_quaddamage_exist, true);
 
 	// Cleanup!
-	entsys->reset();
+	entsys->reset_entity_system();
 }
 
 
@@ -85,7 +85,7 @@ TEST(Tests_EntityTypeManager, get_entity_types_count)
 	ASSERT_EQ(entsys->get_entity_types_count(), 2);
 
 	// Cleanup!
-	entsys->reset();
+	entsys->reset_entity_system();
 }
 
 
@@ -98,7 +98,7 @@ TEST(Tests_EntityTypeManager, delete_entity_type_1)
 	ASSERT_EQ(entsys->get_entity_types_count(), 0);
 
 	// Cleanup!
-	entsys->reset();
+	entsys->reset_entity_system();
 }
 
 
@@ -111,5 +111,5 @@ TEST(Tests_EntityTypeManager, delete_entity_type_2)
 	ASSERT_EQ(entsys->get_entity_types_count(), 0);
 
 	// Cleanup!
-	entsys->reset();
+	entsys->reset_entity_system();
 }

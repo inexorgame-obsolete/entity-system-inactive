@@ -27,7 +27,7 @@ TEST(Test_EntityTypeInstance, create_entity_attribute_type_instance)
 	ENT_TYPE_INSTANCE pickup4 = CREATE_ENT_TYPE_INSTANCE(minigun);
 
 	// Cleanup!
-	entsys->reset();
+	entsys->reset_entity_system();
 }
 
 
@@ -63,4 +63,7 @@ TEST(Test_EntityTypeInstance, set_attribute_data)
 	const int magazine_size = 60;
 	pickup1->set_attribute_data(weapon_magazine_size, magazine_size);
 	ASSERT_EQ(pickup1->get_attribute_data_int(weapon_magazine_size), magazine_size);
+
+	// Cleanup!
+	entsys->reset_entity_system();
 }

@@ -16,6 +16,9 @@ TEST(Test_EntityAttributeType, get_entity_attribute_type_name)
 
 	ASSERT_EQ(new_ent_attr1->get_entity_attribute_type_name(), ent_attr_name);
 	ASSERT_EQ(new_ent_attr1->get_entity_attribute_type_name(), "weight");
+
+	// Cleanup!
+	entsys->reset_entity_system();
 }
 
 
@@ -27,4 +30,7 @@ TEST(Test_EntityAttributeType, get_entity_attribute_data_type)
 
 	ASSERT_EQ(new_ent_attr1->get_entity_attribute_data_type(), ent_attr_data_type);
 	ASSERT_EQ(new_ent_attr1->get_entity_attribute_data_type(), ENTSYS_DATA_TYPE_BOOL);
+
+	// Cleanup!
+	entsys->reset_entity_system();
 }

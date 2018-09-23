@@ -26,6 +26,10 @@ namespace entity_system {
 
 			// 
 			~EntityTypeInstanceManager();
+			
+			// TODO: Should this be public ?
+			// Delete all instances of entity types.
+			void delete_all_entity_type_instances();
 
         public:
 
@@ -34,9 +38,6 @@ namespace entity_system {
 
 			// Return the number of created instances.
 			const std::size_t get_entity_type_instance_count() const;
-
-			// Erase all instances.
-			void delete_all_entity_type_instances();
 
 	};
 

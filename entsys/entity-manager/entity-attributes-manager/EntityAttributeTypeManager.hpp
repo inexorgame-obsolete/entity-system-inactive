@@ -23,6 +23,9 @@ namespace entity_system {
 			// of entity attributes in the entity system will be stored.
 			std::unordered_map<std::string, std::shared_ptr<EntityAttributeType>> entity_attribute_type_buffer_map;
 
+			// Entity attribute type error.
+			std::shared_ptr<EntityAttributeType> entity_attribute_type_ERROR;
+
         protected:
 
 			// 
@@ -31,7 +34,11 @@ namespace entity_system {
 			// 
             ~EntityAttributeTypeManager();
 
-        public:
+			// TODO: Should this be public ?
+			// Delete all types of entity attributes.
+			void delete_all_entity_attribute_types();
+	
+		public:
 
 			// 
 			bool does_entity_attribute_type_exist(const std::string&);

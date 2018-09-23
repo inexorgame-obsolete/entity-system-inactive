@@ -20,9 +20,14 @@ namespace entity_system {
     }
 
 	
-	void EntityManager::reset()
+	void EntityManager::reset_entity_system()
 	{
-		delete_all_entity_types_and_entity_type_instances();
+		// Delete instances before deleting types!
+		delete_all_entity_attribute_type_instances();
+		delete_all_entity_type_instances();
+		delete_all_entity_attribute_types();
+		delete_all_entity_types();
+
 		// TODO: add more methods here..
 	}
 
