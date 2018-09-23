@@ -17,11 +17,13 @@ TEST(Test_DataContainer_DataTypeConstructor, ENTSYS_DATA_TYPE_INT)
 	ASSERT_EQ(IntegerContainer.get_data_type(), ENTSYS_DATA_TYPE_INT);
 }
 
+
 TEST(Test_DataContainer_DataTypeConstructor, ENTSYS_DATA_TYPE_BIG_INT)
 {
 	DataContainer IntegerContainer(ENTSYS_DATA_TYPE_BIG_INT);
 	ASSERT_EQ(IntegerContainer.get_data_type(), ENTSYS_DATA_TYPE_BIG_INT);
 }
+
 
 TEST(Test_DataContainer_DataTypeConstructor, ENTSYS_DATA_TYPE_FLOAT)
 {
@@ -29,11 +31,13 @@ TEST(Test_DataContainer_DataTypeConstructor, ENTSYS_DATA_TYPE_FLOAT)
 	ASSERT_EQ(IntegerContainer.get_data_type(), ENTSYS_DATA_TYPE_FLOAT);
 }
 
+
 TEST(Test_DataContainer_DataTypeConstructor, ENTSYS_DATA_TYPE_STRING)
 {
 	DataContainer IntegerContainer(ENTSYS_DATA_TYPE_STRING);
 	ASSERT_EQ(IntegerContainer.get_data_type(), ENTSYS_DATA_TYPE_STRING);
 }
+
 
 TEST(Test_DataContainer_DataTypeConstructor, ENTSYS_DATA_TYPE_DOUBLE)
 {
@@ -41,12 +45,12 @@ TEST(Test_DataContainer_DataTypeConstructor, ENTSYS_DATA_TYPE_DOUBLE)
 	ASSERT_EQ(IntegerContainer.get_data_type(), ENTSYS_DATA_TYPE_DOUBLE);
 }
 
+
 TEST(Test_DataContainer_DataTypeConstructor, ENTSYS_DATA_TYPE_BOOL)
 {
 	DataContainer IntegerContainer(ENTSYS_DATA_TYPE_BOOL);
 	ASSERT_EQ(IntegerContainer.get_data_type(), ENTSYS_DATA_TYPE_BOOL);
 }
-
 
 
 // Test constructor calls of DataContainer by passing value.
@@ -59,6 +63,7 @@ TEST(Test_DataContainer_DataValueConstructor, ENTSYS_DATA_TYPE_INT)
 	ASSERT_EQ(IntegerContainer.get_int(), IntegerTestValue);
 }
 
+
 TEST(Test_DataContainer_DataValueConstructor, ENTSYS_DATA_TYPE_BIG_INT)
 {
 	std::int64_t BigIntegerTestValue = 199499143;
@@ -66,6 +71,7 @@ TEST(Test_DataContainer_DataValueConstructor, ENTSYS_DATA_TYPE_BIG_INT)
 	ASSERT_EQ(IntegerContainer.get_data_type(), ENTSYS_DATA_TYPE_BIG_INT);
 	ASSERT_EQ(IntegerContainer.get_int64(), BigIntegerTestValue);
 }
+
 
 TEST(Test_DataContainer_DataValueConstructor, ENTSYS_DATA_TYPE_FLOAT)
 {
@@ -75,6 +81,7 @@ TEST(Test_DataContainer_DataValueConstructor, ENTSYS_DATA_TYPE_FLOAT)
 	ASSERT_EQ(FloatContainer.get_float(), FloatTestValue);
 }
 
+
 TEST(Test_DataContainer_DataValueConstructor, ENTSYS_DATA_TYPE_STRING)
 {
 	std::string StringTestValue = std::string("This is an example.");
@@ -82,6 +89,7 @@ TEST(Test_DataContainer_DataValueConstructor, ENTSYS_DATA_TYPE_STRING)
 	ASSERT_EQ(StringContainer.get_data_type(), ENTSYS_DATA_TYPE_STRING);
 	ASSERT_EQ(StringContainer.get_string(), StringTestValue);
 }
+
 
 TEST(Test_DataContainer_DataValueConstructor, ENTSYS_DATA_TYPE_DOUBLE)
 {
@@ -91,6 +99,7 @@ TEST(Test_DataContainer_DataValueConstructor, ENTSYS_DATA_TYPE_DOUBLE)
 	ASSERT_EQ(DoubleContainer.get_double(), DoubleTestValue);
 }
 
+
 TEST(Test_DataContainer_DataValueConstructor, ENTSYS_DATA_TYPE_BOOL)
 {
 	bool BoolTestValue = false;
@@ -98,7 +107,6 @@ TEST(Test_DataContainer_DataValueConstructor, ENTSYS_DATA_TYPE_BOOL)
 	ASSERT_EQ(BoolContainer.get_data_type(), ENTSYS_DATA_TYPE_BOOL);
 	ASSERT_EQ(BoolContainer.get_bool(), BoolTestValue);
 }
-
 
 
 // Test operator = of DataContainer by passing value.
@@ -111,6 +119,7 @@ TEST(Test_DataContainer_AssignOperator, ENTSYS_DATA_TYPE_INT)
 	ASSERT_EQ(IntegerContainer.get_int(), IntegerTestValue);
 }
 
+
 TEST(Test_DataContainer_AssignOperator, ENTSYS_DATA_TYPE_BIG_INT)
 {
 	std::int64_t BigIntegerTestValue = 199499143;
@@ -118,6 +127,7 @@ TEST(Test_DataContainer_AssignOperator, ENTSYS_DATA_TYPE_BIG_INT)
 	ASSERT_EQ(IntegerContainer.get_data_type(), ENTSYS_DATA_TYPE_BIG_INT);
 	ASSERT_EQ(IntegerContainer.get_int64(), BigIntegerTestValue);
 }
+
 
 TEST(Test_DataContainer_AssignOperator, ENTSYS_DATA_TYPE_FLOAT)
 {
@@ -127,6 +137,7 @@ TEST(Test_DataContainer_AssignOperator, ENTSYS_DATA_TYPE_FLOAT)
 	ASSERT_EQ(FloatContainer.get_float(), FloatTestValue);
 }
 
+
 TEST(Test_DataContainer_AssignOperator, ENTSYS_DATA_TYPE_STRING)
 {
 	std::string StringTestValue = std::string("This is an example.");
@@ -135,6 +146,7 @@ TEST(Test_DataContainer_AssignOperator, ENTSYS_DATA_TYPE_STRING)
 	ASSERT_EQ(StringContainer.get_string(), StringTestValue);
 }
 
+
 TEST(Test_DataContainer_AssignOperator, ENTSYS_DATA_TYPE_DOUBLE)
 {
 	double DoubleTestValue = 329895032542343.2323;
@@ -142,6 +154,7 @@ TEST(Test_DataContainer_AssignOperator, ENTSYS_DATA_TYPE_DOUBLE)
 	ASSERT_EQ(DoubleContainer.get_data_type(), ENTSYS_DATA_TYPE_DOUBLE);
 	ASSERT_EQ(DoubleContainer.get_double(), DoubleTestValue);
 }
+
 
 TEST(Test_DataContainer_AssignOperator, ENTSYS_DATA_TYPE_BOOL)
 {

@@ -14,7 +14,7 @@ TEST(Test_EntityAttributeType, get_entity_attribute_type_name)
 	ENTSYS_DATA_TYPE ent_attr_data_type = ENTSYS_DATA_TYPE_INT;
 	ENT_ATTR_TYPE new_ent_attr1 = CREATE_ENT_ATTR_TYPE(ent_attr_name, ent_attr_data_type);
 
-	ASSERT_EQ(new_ent_attr1->get_entity_attribute_type_name().c_str(), ent_attr_name.c_str());
+	ASSERT_EQ(new_ent_attr1->get_entity_attribute_type_name(), ent_attr_name);
 	ASSERT_EQ(new_ent_attr1->get_entity_attribute_type_name(), "weight");
 }
 
