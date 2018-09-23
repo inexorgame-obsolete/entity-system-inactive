@@ -52,6 +52,9 @@ namespace entity_system {
 			// Links an entity attribute type to an entity type.
 			ENTSYS_RESULT link_attribute_type(const std::shared_ptr<EntityAttributeType>&);
 	
+			// Returns a vector of linked types of attributes of entities.
+			const std::vector<std::shared_ptr<EntityAttributeType>> get_linked_attribute_types() const;
+
 			// Deletes all linked types of attributes.
 			void reset_linked_attribute_types();
 

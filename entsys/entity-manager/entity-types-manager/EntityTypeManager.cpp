@@ -30,7 +30,8 @@ namespace entity_system {
 	std::shared_ptr<EntityType> EntityTypeManager::create_entity_type(const std::string& param_new_entity_type)
 	{
 		std::shared_ptr<EntityType> new_ent_type = std::make_shared<EntityType>(param_new_entity_type);
-		entity_type_buffer_map[param_new_entity_type.c_str()] = new_ent_type;
+		// TODO: use UUID for access?
+		entity_type_buffer_map[param_new_entity_type] = new_ent_type;
 		return new_ent_type;
 
 		/*

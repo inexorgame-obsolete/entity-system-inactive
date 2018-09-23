@@ -18,10 +18,11 @@ namespace entity_system {
 		private:
 
 			// 
-			std::unordered_map<std::shared_ptr<EntityAttributeType>, std::shared_ptr<EntityAttributeTypeInstance>> linked_entity_attribute_type_instances;
+			std::unordered_map<std::shared_ptr<EntityAttributeType>,
+				               std::shared_ptr<EntityAttributeTypeInstance>> linked_entity_attribute_type_instances;
 
 			// 
-			std::shared_ptr<EntityType> entity_type;
+			std::shared_ptr<EntityType> linked_entity_type;
 
 		public:
 
@@ -38,8 +39,23 @@ namespace entity_system {
 			// Implement data validation method as required by base class inheritance!
 			virtual ENTSYS_DATA_VALIDATION_RESULT validate() override;
 
-			// Set attribute data
-			void set_attribute_data(const std::shared_ptr<EntityAttributeType>&, const DataContainer&);
+			// Set attribute data.
+			// TODO: Replace overloaded methods ?
+			void set_attribute_data(const std::shared_ptr<EntityAttributeType>&, const int&);
+			void set_attribute_data(const std::shared_ptr<EntityAttributeType>&, const bool&);
+			void set_attribute_data(const std::shared_ptr<EntityAttributeType>&, const float&);
+			void set_attribute_data(const std::shared_ptr<EntityAttributeType>&, const double&);
+			void set_attribute_data(const std::shared_ptr<EntityAttributeType>&, const std::string&);
+			void set_attribute_data(const std::shared_ptr<EntityAttributeType>&, const std::int64_t&);
+
+			// Get methods for attribute data.
+			// TODO: Inherit them directly from DataContainer ?
+			const int get_attribute_data_int(const std::shared_ptr<EntityAttributeType>&) const;
+			const bool get_attribute_data_bool(const std::shared_ptr<EntityAttributeType>&) const;
+			const float get_attribute_data_float(const std::shared_ptr<EntityAttributeType>&) const;
+			const double get_attribute_data_double(const std::shared_ptr<EntityAttributeType>&) const;
+			const std::string get_attribute_data_string(const std::shared_ptr<EntityAttributeType>&) const;
+			const std::int64_t get_attribute_data_int64(const std::shared_ptr<EntityAttributeType>&) const;
 
     };
 

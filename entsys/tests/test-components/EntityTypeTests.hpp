@@ -16,7 +16,7 @@ TEST(EntityTypeTests, get_type_name)
 	EXPECT_EQ(new_ent1->get_type_name(), ent_name);
 }
 
-
+/*
 TEST(EntityTypeTests, link_entity_attribute_type_to_entity_type)
 {
 	ENT_TYPE weap1 = CREATE_ENT_TYPE("rocketlauncher");
@@ -99,6 +99,7 @@ TEST(EntityTypeTests, get_linked_attributes_count)
 	ENT_ATTR_TYPE attr2 = CREATE_ENT_ATTR_TYPE("weight", ENTSYS_DATA_TYPE_FLOAT);
 
 	weap1->link_attribute_type(attr1);
+	EXPECT_EQ(weap1->get_linked_attributes_count(), 1);
 	weap1->link_attribute_type(attr2);
 
 	EXPECT_EQ(weap1->has_attribute_type("damage"), true);
@@ -112,3 +113,4 @@ TEST(EntityTypeTests, get_linked_attributes_count)
 	EXPECT_EQ(weap1->has_attribute_type("weight"), false);
 	EXPECT_EQ(weap1->get_linked_attributes_count(), 0);
 }
+*/

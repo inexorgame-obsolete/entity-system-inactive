@@ -39,7 +39,11 @@ namespace entity_system {
 
             bool boolean_data = false;
 			
-		protected:
+		public:
+
+			// We have to make these public since there
+			// is a problem with operator= and EntityTypeInstace!
+			// TODO: Fix EntityTypeInstance DataContainer operator= issue!
 
             // Thread-safe set methods.
             const int& set(const int&);
@@ -48,8 +52,6 @@ namespace entity_system {
             const double& set(const double&);
             const std::string& set(const std::string&);
             const std::int64_t& set(const std::int64_t&);
-
-        public:
 
 			// Multithreading safety mutex.
 			std::mutex data_container_mutex;

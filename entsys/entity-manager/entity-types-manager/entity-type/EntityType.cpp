@@ -103,5 +103,11 @@ namespace entity_system {
 	}
 
 
+	const std::vector<std::shared_ptr<EntityAttributeType>> EntityType::get_linked_attribute_types() const
+	{
+		return linked_entity_attribute_types;
+	}
+
+
 };
 };

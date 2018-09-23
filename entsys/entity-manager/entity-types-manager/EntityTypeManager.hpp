@@ -23,6 +23,7 @@ namespace entity_system {
 
 			// In this unordered map all available types 
 			// of entites in the entity system will be stored.
+			// TODO: use UUID for access?
 			std::unordered_map<std::string, std::shared_ptr<EntityType>> entity_type_buffer_map;
 			
 		protected:
