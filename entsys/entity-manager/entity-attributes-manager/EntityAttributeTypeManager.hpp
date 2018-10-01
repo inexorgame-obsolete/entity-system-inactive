@@ -15,15 +15,18 @@ namespace inexor {
 namespace entity_system {
     
 
+	// A manager class for types of entity attributes.
     class EntityAttributeTypeManager
     {
         private:
 
-			// In this unordered map all available types
-			// of entity attributes in the entity system will be stored.
+			// Every type of entity attribute which is
+			// available in the entity system will be stored in here.
 			std::unordered_map<std::string, std::shared_ptr<EntityAttributeType>> entity_attribute_type_buffer_map;
 
-			// Entity attribute type error.
+			// This will be returned when a create method fails
+			// TODO: Is there no better way to do this?
+			// TODO: Don't use exceptions!
 			std::shared_ptr<EntityAttributeType> entity_attribute_type_ERROR;
 
         protected:
@@ -57,6 +60,7 @@ namespace entity_system {
 			ENTSYS_DATA_VALIDATION_RESULT validate_attribute_types(const std::vector<std::shared_ptr<EntityAttributeType>>&);
 
 	};
+
 
 };
 };

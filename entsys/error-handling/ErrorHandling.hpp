@@ -12,6 +12,7 @@ namespace inexor {
 namespace entity_system {
 
 
+	// A handling class for errors in Inexor's entity system prototype.
 	class EntitySystemErrorHandler
 	{
 		protected:
@@ -20,11 +21,14 @@ namespace entity_system {
 
 		public:
 
+			// 
 			EntitySystemErrorHandler();
 
+			// 
 			~EntitySystemErrorHandler();
 
 	};
+
 
 };
 };

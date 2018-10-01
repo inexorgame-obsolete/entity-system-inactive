@@ -18,15 +18,18 @@ namespace entity_system {
 
         public:
 
+			// 
 			DataValidation();
 
+			// 
 			~DataValidation();
 
-            // Every class which inherits from DataValidation needs
-            // to have an implementation of this method!
+            // Every class which inherits from DataValidation
+            // must have an implementation of this method!
             virtual ENTSYS_DATA_VALIDATION_RESULT validate() = 0;
 
     };
+
 
 };
 };

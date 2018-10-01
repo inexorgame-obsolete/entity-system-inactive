@@ -51,6 +51,7 @@ namespace entity_system {
 		linked_entity_attribute_type_instances[param_entity_attribute_type]->set(param_int_data);
 	}
 
+
 	void EntityTypeInstance::set_attribute_data(const std::shared_ptr<EntityAttributeType>& param_entity_attribute_type, const bool& param_bool_data)
 	{
 		linked_entity_attribute_type_instances[param_entity_attribute_type]->set(param_bool_data);

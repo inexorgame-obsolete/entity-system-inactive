@@ -7,11 +7,13 @@ namespace inexor {
 namespace entity_system {
 
 
+	// Entity system error levels.
 	enum ENTSYS_ERROR_LEVEL
 	{
+		ENTSYS_LEVEL_INFO,
 		ENTSYS_LEVEL_WARNING,
 		ENTSYS_LEVEL_ERROR,
-		ENTSYS_LEVE_CRITICAL_ERRO
+		ENTSYS_LEVEL_CRITICAL_ERROR,
 	};
 
 

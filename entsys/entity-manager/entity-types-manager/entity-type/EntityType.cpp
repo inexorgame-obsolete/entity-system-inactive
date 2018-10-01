@@ -49,7 +49,6 @@ namespace entity_system {
 	bool EntityType::has_attribute_type(const std::string& param_entity_attribute_type_name)
 	{
 		// TODO: Check how expensive this method is!
-
 		bool entity_attribute_type_found = false;
 
 		std::string name1 = param_entity_attribute_type_name;
@@ -90,10 +89,9 @@ namespace entity_system {
 
 		if(!has_attribute_type(entity_attribute_type_name))
 		{
-			// The entity attribute type is not already
-			// linked to this entity type.
-			
-			// Link entity attribute type to entity type.
+			// The entity attribute type is
+			// not already linked to this entity type.
+			// Link entity attribute type to entity type!
 			linked_entity_attribute_types.push_back(param_linked_entity_attribute_type);
 
 			return ENTSYS_SUCCESS;

@@ -17,11 +17,13 @@ namespace entity_system {
     {
 		private:
 
-			// 
+			// Every time we create an instance of an entity type
+			// we must also create the corresponding instances of
+			// entity attribute types which are linked to the entity type.
 			std::unordered_map<std::shared_ptr<EntityAttributeType>,
 				               std::shared_ptr<EntityAttributeTypeInstance>> linked_entity_attribute_type_instances;
 
-			// 
+			// A pointer to the entity type base class.
 			std::shared_ptr<EntityType> linked_entity_type;
 
 		public:
@@ -34,9 +36,9 @@ namespace entity_system {
 
 			// Destructor.
 			~EntityTypeInstance();
-
-
-			// Implement data validation method as required by base class inheritance!
+			
+			// Implement data validation method.
+			// This is neccesary because we inherit from the DataValidation class!
 			virtual ENTSYS_DATA_VALIDATION_RESULT validate() override;
 
 			// Set attribute data.
@@ -58,6 +60,7 @@ namespace entity_system {
 			const std::int64_t get_attribute_data_int64(const std::shared_ptr<EntityAttributeType>&) const;
 
     };
+
 
 };
 };

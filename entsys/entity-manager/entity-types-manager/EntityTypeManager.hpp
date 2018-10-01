@@ -26,7 +26,9 @@ namespace entity_system {
 			// TODO: use UUID for access?
 			std::unordered_map<std::string, std::shared_ptr<EntityType>> entity_type_buffer_map;
 			
-			// Entity type error.
+			// This will be returned when a create method fails
+			// TODO: Is there no better way to do this?
+			// TODO: Don't use exceptions!
 			std::shared_ptr<EntityType> entity_type_ERROR;
 
 		protected:

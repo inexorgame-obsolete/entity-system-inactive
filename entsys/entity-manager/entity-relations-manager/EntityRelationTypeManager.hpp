@@ -8,13 +8,17 @@ namespace inexor {
 namespace entity_system {
 
 
+	// A manager class for types of entity relations.
     class EntityRelationTypeManager
     {
         protected:
 
-            EntityRelationTypeManager();
+			// 
+			EntityRelationTypeManager();
 
-            ~EntityRelationTypeManager();
+			// 
+			~EntityRelationTypeManager();
+
     };
 
 

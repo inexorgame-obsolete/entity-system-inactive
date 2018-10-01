@@ -21,10 +21,12 @@ TEST(Test_EntityTypeInstance, create_entity_attribute_type_instance)
 	minigun->link_attribute_type(weapon_magazine_size);
 
 	// Create an instance!
-	ENT_TYPE_INSTANCE pickup1 = CREATE_ENT_TYPE_INSTANCE(minigun);
-	ENT_TYPE_INSTANCE pickup2 = CREATE_ENT_TYPE_INSTANCE(minigun);
-	ENT_TYPE_INSTANCE pickup3 = CREATE_ENT_TYPE_INSTANCE(minigun);
-	ENT_TYPE_INSTANCE pickup4 = CREATE_ENT_TYPE_INSTANCE(minigun);
+	ENT_TYPE_INSTANCE minigunPickup1 = CREATE_ENT_TYPE_INSTANCE(minigun);
+	ENT_TYPE_INSTANCE minigunPickup2 = CREATE_ENT_TYPE_INSTANCE(minigun);
+	ENT_TYPE_INSTANCE minigunPickup3 = CREATE_ENT_TYPE_INSTANCE(minigun);
+	ENT_TYPE_INSTANCE minigunPickup4 = CREATE_ENT_TYPE_INSTANCE(minigun);
+
+	minigunPickup1->set_attribute_data(weapon_dmg, 166);
 
 	// Cleanup!
 	entsys->reset_entity_system();

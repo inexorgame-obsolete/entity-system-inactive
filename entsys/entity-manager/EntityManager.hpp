@@ -34,18 +34,20 @@ namespace entity_system {
 
 		protected:
 			
+			// 
 		    EntityManager();
 
-            ~EntityManager();
+			// 
+			~EntityManager();
 
 		public:
-
 
 			// Delete all entity types, entity attribute types, entity relation types
 			// and instances of them.
 			void reset_entity_system();
 
     };
+
 
 };
 };

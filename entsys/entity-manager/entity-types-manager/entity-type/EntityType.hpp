@@ -23,7 +23,8 @@ namespace entity_system {
 			std::string entity_type_name;
 
 			// Every entity type can have linked
-			// entity attribute types which will be stored here.
+			// entity attribute types which
+			// will be stored in here.
 			std::vector<std::shared_ptr<EntityAttributeType>> linked_entity_attribute_types;
 
         public:
@@ -37,7 +38,6 @@ namespace entity_system {
 			// 
             ~EntityType();
 
-			
 			// Returns the name of the entity type.
 			std::string get_type_name() const;
 
@@ -62,6 +62,7 @@ namespace entity_system {
 			virtual ENTSYS_DATA_VALIDATION_RESULT validate() override;
 
     };
+
 
 };
 };

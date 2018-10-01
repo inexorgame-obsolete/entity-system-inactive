@@ -41,7 +41,6 @@ namespace entity_system {
 			// 
 			~EntityAttributeType();
 			
-
 			// Returns the name of the entity attribute type.
 			std::string get_entity_attribute_type_name() const;
 

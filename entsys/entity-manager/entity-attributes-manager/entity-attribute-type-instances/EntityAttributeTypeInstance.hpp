@@ -26,12 +26,12 @@ namespace entity_system {
 			// 
 			~EntityAttributeTypeInstance();
 
-
 			// Implement data validation method as required by base class inheritance!
 			// This overrides EntityAttributeType::validate().
 			virtual ENTSYS_DATA_VALIDATION_RESULT validate() override;
 
 	};
+
 
 };
 };
