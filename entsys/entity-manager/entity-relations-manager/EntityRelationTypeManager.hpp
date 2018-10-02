@@ -3,6 +3,7 @@
 
 #pragma once
 
+#include "../entity-relations-manager/entity-relation-type/EntityRelationType.hpp"
 
 namespace inexor {
 namespace entity_system {
