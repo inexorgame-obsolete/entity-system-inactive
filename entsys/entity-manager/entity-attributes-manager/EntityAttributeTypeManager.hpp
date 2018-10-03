@@ -22,7 +22,7 @@ namespace entity_system {
 
 			// Every type of entity attribute which is
 			// available in the entity system will be stored in here.
-			std::unordered_map<std::string, std::shared_ptr<EntityAttributeType>> entity_attribute_type_buffer_map;
+			std::unordered_map<std::string, std::shared_ptr<EntityAttributeType>> entity_attribute_type_map;
 
 			// This will be returned when a create method fails
 			// TODO: Is there no better way to do this?

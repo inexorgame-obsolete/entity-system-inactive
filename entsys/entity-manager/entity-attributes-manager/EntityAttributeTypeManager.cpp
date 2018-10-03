@@ -23,7 +23,7 @@ namespace entity_system {
 	bool EntityAttributeTypeManager::does_entity_attribute_type_exist(const std::string& param_entity_attribute_type_name)
 	{
 		// Returns false is entity attribute type does not already exist.
-		return !(entity_attribute_type_buffer_map.end() == entity_attribute_type_buffer_map.find(param_entity_attribute_type_name));
+		return !(entity_attribute_type_map.end() == entity_attribute_type_map.find(param_entity_attribute_type_name));
 	}
 
 
@@ -47,14 +47,14 @@ namespace entity_system {
 		// Create entity attribute type.
 		std::shared_ptr<EntityAttributeType> new_ent_attr_type = std::make_shared<EntityAttributeType>(param_ent_attr_type_name, param_ent_attr_data_type);
 		// Add new entity attribute type to the global map.
-		entity_attribute_type_buffer_map[param_ent_attr_type_name] = new_ent_attr_type;
+		entity_attribute_type_map[param_ent_attr_type_name] = new_ent_attr_type;
 		return new_ent_attr_type;
 	}
 
 
 	const std::size_t EntityAttributeTypeManager::get_entity_attribute_type_count() const
 	{
-		return entity_attribute_type_buffer_map.size();
+		return entity_attribute_type_map.size();
 	}
 
 
@@ -62,7 +62,7 @@ namespace entity_system {
 	{
 		// TODO: [CRITICAL] Remove all instances of
 		// this entity attribute type before removing the entity attribute type itself!
-		entity_attribute_type_buffer_map.erase(param_entity_attribute_type);
+		entity_attribute_type_map.erase(param_entity_attribute_type);
 		return ENTSYS_SUCCESS;
 	}
 
@@ -81,7 +81,7 @@ namespace entity_system {
 	{
 		// TODO: [CRITICAL] Also remove entity attribute type instances!
 		// TODO: [CRITICAL] Add mutex here!
-		entity_attribute_type_buffer_map.clear();
+		entity_attribute_type_map.clear();
 	}
 
 
