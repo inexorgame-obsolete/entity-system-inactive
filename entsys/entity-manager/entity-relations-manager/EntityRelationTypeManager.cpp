@@ -19,6 +19,7 @@ namespace entity_system {
 		// TODO: implement!
     }
 
+
 	bool EntityRelationTypeManager::does_entity_relation_type_exist(const std::string& param_entity_relation_type_name)
 	{
 		// Returns false is entity relation type does not already exist.
