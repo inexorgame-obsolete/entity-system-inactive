@@ -5,6 +5,7 @@
 #pragma once
 
 #include "../EntitySystem.hpp"
+#include "../../typedefs/TypeDefinitions.hpp"
 
 
 // Testing class methods of entity type manager.

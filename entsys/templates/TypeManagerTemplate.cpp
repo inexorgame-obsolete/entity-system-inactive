@@ -6,7 +6,7 @@
 namespace inexor {
 namespace entity_system {
 
-	
+	/*
 	template <typename T>
 	TypeManagerTemplate<T>::TypeManagerTemplate()
 	{
@@ -70,6 +70,14 @@ namespace entity_system {
 
 	// 
 	template <typename T>
+	void TypeManagerTemplate<T>::delete_all_types()
+	{
+		type_map.clear();
+	}
+
+
+	// 
+	template <typename T>
 	void TypeManagerTemplate<T>::delete_type(const std::string& param_name)
 	{
 		// TODO: Delete all instances!!
@@ -83,6 +91,6 @@ namespace entity_system {
 	{
 		return type_map.size();
 	}
-
+	*/
 };
 };

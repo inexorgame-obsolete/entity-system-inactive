@@ -3,6 +3,7 @@
 
 #include "TypeInstanceManagerTemplate.hpp"
 
+
 namespace inexor {
 namespace entity_system {
 

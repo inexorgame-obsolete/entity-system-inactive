@@ -7,7 +7,7 @@
 namespace inexor {
 namespace entity_system {
     
-
+	/*
     EntityTypeManager::EntityTypeManager()
     {
 		// Error entity type.
@@ -79,7 +79,7 @@ namespace entity_system {
 	{
 		entity_type_map.clear();
 	}
-
+	*/
 
 };
 };
