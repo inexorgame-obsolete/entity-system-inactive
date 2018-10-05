@@ -5,6 +5,7 @@
 #pragma once
 
 #include "../EntitySystem.hpp"
+#include "../../templates/TypeManagerTemplate.hpp"
 #include "../../typedefs/TypeDefinitions.hpp"
 
 
