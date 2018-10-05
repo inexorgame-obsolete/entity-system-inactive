@@ -6,38 +6,36 @@
 #include "entity-type/EntityType.hpp"
 #include "entity-type-instance/EntityTypeInstance.hpp"
 
+#include "../../templates/TypeInstanceManagerTemplate.hpp"
+
 
 namespace inexor {
 namespace entity_system {
 
 
 	// A manager class for instances of types of entities.
-    class EntityTypeInstanceManager
-    {
-        private:            
-            
-			// 
-            std::vector<std::shared_ptr<EntityTypeInstance>> entity_type_instance_buffer;
-            
+    class EntityTypeInstanceManager : public TypeInstanceManagerTemplate<EntityType, EntityTypeInstance>//, public DataValidation
+    {            
         protected:
             
+			// TODO: Maybe add entity_type_instance_type_error ?
+			
 			// 
 			EntityTypeInstanceManager();
 
 			// 
 			~EntityTypeInstanceManager();
 			
-			// TODO: Should this be public ?
-			// Delete all instances of entity types.
-			void delete_all_entity_type_instances();
-
-        public:
+		public:
 
 			// Create an entity type instance.
 			std::shared_ptr<EntityTypeInstance> create_entity_type_instance(const std::shared_ptr<EntityType>&);
 
 			// Return the number of created instances.
 			const std::size_t get_entity_type_instance_count() const;
+
+			// Delete all instances of entity types.
+			void delete_all_entity_type_instances();
 
 	};
 

@@ -6,39 +6,39 @@
 
 namespace inexor {
 namespace entity_system {
+
     
-
-    EntityTypeInstanceManager::EntityTypeInstanceManager()
-    {
-		// TODO: implement!
-    }
-
-
-    EntityTypeInstanceManager::~EntityTypeInstanceManager()
-    {
-		delete_all_entity_type_instances();
-    }
-
-
-	std::shared_ptr<EntityTypeInstance> EntityTypeInstanceManager::create_entity_type_instance(
-		const std::shared_ptr<EntityType>& param_entity_type)
+	EntityTypeInstanceManager::EntityTypeInstanceManager()
 	{
-		std::shared_ptr<EntityTypeInstance> new_ent_type_instance = std::make_shared<EntityTypeInstance>(param_entity_type);
-		entity_type_instance_buffer.push_back(new_ent_type_instance);
+	}
+
+	
+	EntityTypeInstanceManager::~EntityTypeInstanceManager()
+	{
+	}
+
+
+	std::shared_ptr<EntityTypeInstance> EntityTypeInstanceManager::create_entity_type_instance(const std::shared_ptr<EntityType>& entity_type_pointer)
+	{
+		// Create a new entity type instance.
+		std::shared_ptr<EntityTypeInstance> new_ent_type_instance = std::make_shared<EntityTypeInstance>(entity_type_pointer);
+		// Call template class backend method.
+		add_instance_to_buffer(new_ent_type_instance);
 		return new_ent_type_instance;
 	}
 
 
 	const std::size_t EntityTypeInstanceManager::get_entity_type_instance_count() const
 	{
-		return entity_type_instance_buffer.size();
+		// Call template class backend method.
+		return get_type_instance_count();
 	}
 
 
 	void EntityTypeInstanceManager::delete_all_entity_type_instances()
 	{
-		// TODO: [CRITICAL] Add mutex here!
-		entity_type_instance_buffer.clear();
+		// Call template class backend method.
+		delete_all_type_instances();
 	}
 
 
