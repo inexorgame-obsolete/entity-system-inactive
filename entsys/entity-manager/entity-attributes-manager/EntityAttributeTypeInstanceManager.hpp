@@ -5,19 +5,17 @@
 
 #include "../entity-attributes-manager/entity-attribute-type-instances/EntityAttributeTypeInstance.hpp"
 
+#include "../../templates/TypeInstanceManagerTemplate.hpp"
+
 
 namespace inexor {
 namespace entity_system {
 
 
 	// A manager class for instances of attributes of entity types.
-    class EntityAttributeTypeInstanceManager
+    class EntityAttributeTypeInstanceManager :
+	public TypeInstanceManagerTemplate<EntityAttributeType, EntityAttributeTypeInstance>
     {
-		private:
-
-			// 
-			std::vector<std::shared_ptr<EntityAttributeTypeInstance>> entity_attribute_type_instance_buffer;
-
 		protected:
             
 			// 
