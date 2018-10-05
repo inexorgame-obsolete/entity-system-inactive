@@ -21,23 +21,23 @@ namespace entity_system {
 	template <typename T1, typename T2>
 	class TypeInstanceManagerTemplate
 	{
-		private:
+		protected:
 
 			// In this vector we will store shared pointers of <T2> instances.
 			std::vector<std::shared_ptr<T2>> type_instances;
-
-
-		protected:
+			
 
 			// 
 			TypeInstanceManagerTemplate()
 			{
+				// TODO: Implement!
 			}
 
 			
 			// 
 			~TypeInstanceManagerTemplate()
 			{
+				// TODO: Implement!
 			}
 
 

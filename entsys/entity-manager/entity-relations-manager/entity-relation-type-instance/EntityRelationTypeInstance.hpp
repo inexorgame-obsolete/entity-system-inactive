@@ -44,6 +44,10 @@ namespace entity_system {
 			// TODO: Set data !
 
 
+			// Implement data validation method.
+			// This is neccesary because we inherit from the DataValidation class!
+			virtual ENTSYS_DATA_VALIDATION_RESULT validate() override;
+
 	};
 
 

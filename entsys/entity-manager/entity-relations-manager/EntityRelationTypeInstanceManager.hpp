@@ -5,18 +5,16 @@
 
 #include "../entity-relations-manager/entity-relation-type-instance/EntityRelationTypeInstance.hpp"
 
+#include "../../templates/TypeInstanceManagerTemplate.hpp"
+
+
 namespace inexor {
 namespace entity_system {
 
 
 	// A manager class for instances of types of relations between entity types.
-    class EntityRelationTypeInstanceManager
+    class EntityRelationTypeInstanceManager : public TypeInstanceManagerTemplate<EntityRelationType, EntityRelationTypeInstance>
     {
-		private:
-
-			// Vector of instances of types of relations between entities.
-			std::vector<EntityRelationTypeInstance> relation_type_instances;
-
         protected:
             
 			// 
@@ -26,11 +24,14 @@ namespace entity_system {
 			~EntityRelationTypeInstanceManager();
 
 		public:
-
+		
 			// Create a new entity relation type instance.
 			std::shared_ptr<EntityRelationTypeInstance> create_entity_relation_type_instance(const std::shared_ptr<EntityRelationType>&,
 				                                                                             const std::shared_ptr<EntityTypeInstance>&,
 					                                                                         const std::shared_ptr<EntityTypeInstance>&);
+
+
+			const std::size_t get_relation_type_instances_count() const;
 
 			// TODO: get instances count.
 			// TODO: delete instance.

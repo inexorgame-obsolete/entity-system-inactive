@@ -27,7 +27,13 @@ namespace entity_system {
 
 	EntityRelationTypeInstance::~EntityRelationTypeInstance()
 	{
+	}
 
+
+	ENTSYS_DATA_VALIDATION_RESULT EntityRelationTypeInstance::validate()
+	{
+		// TODO: Implement!
+		return ENTSYS_DATA_INVALID;
 	}
 
 
