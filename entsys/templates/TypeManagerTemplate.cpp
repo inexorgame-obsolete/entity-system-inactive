@@ -6,31 +6,28 @@
 namespace inexor {
 namespace entity_system {
 
-	/*
+
 	template <typename T>
 	TypeManagerTemplate<T>::TypeManagerTemplate()
 	{
+		error_type = std::make_shared<T>(std::string("ERROR"));
 	}
 
 
 	template <typename T>
 	TypeManagerTemplate<T>::~TypeManagerTemplate()
 	{
-		// TODO: Call constructor of all types in unordered map?
 	}
 
 
-	//
 	template <typename T>
 	bool TypeManagerTemplate<T>::does_type_exist(const std::string& type_name)
 	{
-		return (type_map.end() == type_map.find(type_name));
+		return !(type_map.end() == type_map.find(type_name));
 	}
 
-
-	// Because of the constructor call in std::make_shared this method
-	// will might have to be overwritten when this class template gets inherited.
-	// Unless we can call the standard constructor of <T> we are fine.
+	
+	/*
 	template <typename T>
 	std::shared_ptr<T> TypeManagerTemplate<T>::create_and_add_type(const std::string& new_name)
 	{
@@ -58,9 +55,9 @@ namespace entity_system {
 		// Return type
 		return new_type;
 	}
+	*/
 
 
-	// 
 	template <typename T>
 	const std::shared_ptr<T> TypeManagerTemplate<T>::get_type(const std::string& param_name)
 	{
@@ -68,15 +65,6 @@ namespace entity_system {
 	}
 
 
-	// 
-	template <typename T>
-	void TypeManagerTemplate<T>::delete_all_types()
-	{
-		type_map.clear();
-	}
-
-
-	// 
 	template <typename T>
 	void TypeManagerTemplate<T>::delete_type(const std::string& param_name)
 	{
@@ -85,12 +73,19 @@ namespace entity_system {
 	}
 
 
-	// 
+	template <typename T>
+	void TypeManagerTemplate<T>::delete_all_types()
+	{
+		type_map.clear();
+	}
+	
+
 	template <typename T>
 	const std::size_t TypeManagerTemplate<T>::get_type_count() const
 	{
 		return type_map.size();
 	}
-	*/
+
+
 };
 };

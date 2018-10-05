@@ -106,53 +106,5 @@ namespace entity_system {
 	};
 
 
-	/*
-	// A manager class for types of entities
-    class EntityTypeManager : public EntitySystemErrorHandler
-    {
-		private:
-
-			// In this unordered map all available types 
-			// of entites in the entity system will be stored.
-			// TODO: use UUID for access?
-			std::unordered_map<std::string, std::shared_ptr<EntityType>> entity_type_map;
-			
-			// This will be returned when a create method fails
-			// TODO: Is there no better way to do this?
-			// TODO: Don't use exceptions!
-			std::shared_ptr<EntityType> entity_type_ERROR;
-
-		protected:
-
-			//
-			EntityTypeManager();
-
-			//
-			~EntityTypeManager();
-
-			// TODO: Should this be public ?
-			void delete_all_entity_types();
-
-        public:
-
-			// Search through the map of available types of entities.
-			bool does_entity_type_exist(const std::string&);
-
-			// Create a new entity type and store it in the entity system.
-			std::shared_ptr<EntityType> create_entity_type(const std::string&);
-
-			// Returns the number of available types of entities.
-			const std::size_t get_entity_types_count() const;
-
-			// Deletes an entity type from the entity system.
-			ENTSYS_RESULT delete_entity_type(const std::string&);
-			ENTSYS_RESULT delete_entity_type(const std::shared_ptr<EntityType>&);
-
-
-    };
-	*/
-
-
-
 };
 };
