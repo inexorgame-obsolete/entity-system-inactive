@@ -13,28 +13,30 @@
 
 #include "../../templates/TypeManagerTemplate.hpp"
 
+
 namespace inexor {
 namespace entity_system {
 
 
+	// A manager class for types of entities.
+	// This class is based on the manager template class.
 	class EntityTypeManager : public TypeManagerTemplate<EntityType>
 	{
 		private:
 
 			// Entity type: error type.
 			// This will be returned when a create method fails.
-			std::shared_ptr<EntityType> error_entity;
+			std::shared_ptr<EntityType> entity_type_error;
 
 		protected:
 
-			// 
+			// Constructor.
 			EntityTypeManager();
 
-			// 
+			// Destructor.
 			~EntityTypeManager();
 		
 		public:
-
 
 			// Search through the map of available types of entities.
 			bool does_entity_type_exist(const std::string&);
@@ -51,9 +53,8 @@ namespace entity_system {
 			// Deletes an entity type from the entity system.
 			void delete_entity_type(const std::shared_ptr<EntityType>&);
 
-			// 
+			// Removes all existing types of entities.
 			void delete_all_entity_types();
-
 
 	};
 

@@ -10,7 +10,7 @@ namespace entity_system {
 
     EntityRelationTypeManager::EntityRelationTypeManager()
     {
-		// TODO: Implement!
+		entity_relation_type_error = std::make_shared<EntityRelationType>("ERROR");
     }
 
 
@@ -22,8 +22,7 @@ namespace entity_system {
 
 	bool EntityRelationTypeManager::does_entity_relation_type_exist(const std::string& param_entity_relation_type_name)
 	{
-		// Returns false is entity relation type does not already exist.
-		return !(entity_relation_type_map.end() == entity_relation_type_map.find(param_entity_relation_type_name));
+		return does_type_exist(param_entity_relation_type_name);
 	}
 
 
@@ -31,28 +30,28 @@ namespace entity_system {
 		                                                                                       const std::shared_ptr<EntityType>& param_source_type,
 		                                                                                       const std::shared_ptr<EntityType>& param_destination_type)
 	{
-		// TODO: Fix: Check if type does already exist!
+		// Validate new entity relation type name.
+		if(!is_new_type_name_valid(param_new_entity_relation_type_name)) return entity_relation_type_error;
 
 		// Create new entity relation type.
 		std::shared_ptr<EntityRelationType> new_ent_relation_type = std::make_shared<EntityRelationType>(param_new_entity_relation_type_name, param_source_type, param_destination_type);
 
-		// Add entity relation type.
-		entity_relation_type_map[param_new_entity_relation_type_name] = new_ent_relation_type;
+		// TODO: [CRITICAL] Implement type->get_type_name() method using template classes for types!
+		add_type_to_map(param_new_entity_relation_type_name, new_ent_relation_type);
 		return new_ent_relation_type;
 	}
 
 
 	const std::size_t EntityRelationTypeManager::get_entity_relation_types_count() const
 	{
-		return entity_relation_type_map.size();
+		return get_type_count();
 	}
 
 
 	ENTSYS_RESULT EntityRelationTypeManager::delete_entity_relation_type(const std::string& param_entity_relation_type_name)
 	{
-		// TODO: [CRITICAL] Remove all instances of this
-		// entity relation type before removing the entity relation type itself!
-		entity_relation_type_map.erase(param_entity_relation_type_name);
+		// TODO: [CRITICAL] Remove all instances of this.
+		delete_type(param_entity_relation_type_name);
 		return ENTSYS_SUCCESS;
 	}
 
@@ -65,7 +64,7 @@ namespace entity_system {
 
 	void EntityRelationTypeManager::delete_all_entity_relation_types()
 	{
-		entity_relation_type_map.clear();
+		delete_all_types();
 	}
 
 

@@ -4,18 +4,20 @@
 #pragma once
 
 #include "../entity-relations-manager/entity-relation-type/EntityRelationType.hpp"
+#include "../../templates/TypeManagerTemplate.hpp"
+
 
 namespace inexor {
 namespace entity_system {
 
 
 	// A manager class for types of entity relations.
-    class EntityRelationTypeManager
+    class EntityRelationTypeManager : public TypeManagerTemplate<EntityRelationType>
     {
 		private:
 
-			// 
-			std::unordered_map<std::string, std::shared_ptr<EntityRelationType>> entity_relation_type_map;
+			// Error type.
+			std::shared_ptr<EntityRelationType> entity_relation_type_error;
 
         protected:
 
@@ -25,10 +27,10 @@ namespace entity_system {
 			// 
 			~EntityRelationTypeManager();
 
+		public:
+
 			// TODO: Should this be public ?
 			void delete_all_entity_relation_types();
-
-		public:
 
 			// Search through the map of available types of relations of entities.
 			bool does_entity_relation_type_exist(const std::string&);

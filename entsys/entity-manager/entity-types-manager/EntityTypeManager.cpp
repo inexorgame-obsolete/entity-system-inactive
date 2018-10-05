@@ -10,7 +10,7 @@ namespace entity_system {
 
 	EntityTypeManager::EntityTypeManager()
 	{
-		error_entity = std::make_shared<EntityType>("ERROR");
+		entity_type_error = std::make_shared<EntityType>("ERROR");
 	}
 
 
@@ -29,23 +29,19 @@ namespace entity_system {
 	std::shared_ptr<EntityType> EntityTypeManager::create_entity_type(const std::string& param_new_entity_type_name)
 	{
 		// Check if type with this name does already exist
-		if (does_type_exist(param_new_entity_type_name))
+		if(! is_new_type_name_valid(param_new_entity_type_name))
 		{
 			// This type does already exist
 			// TODO: Throw error message!
-			return error_entity;
-		}
-
-		if (0 == param_new_entity_type_name.compare(std::string("")))
-		{
-			// This type does already exist
-			// TODO: Throw error message!
-			return error_entity;
+			return entity_type_error;
 		}
 		// TODO: Further validation!!
 
+		// Create a new entity type instance.
 		std::shared_ptr<EntityType> new_entity_type = std::make_shared<EntityType>(param_new_entity_type_name);
-		type_map[param_new_entity_type_name] = new_entity_type;
+
+		// Add the new instance to the type map.
+		add_type_to_map(param_new_entity_type_name, new_entity_type);
 		return new_entity_type;
 	}
 

@@ -9,6 +9,7 @@
 namespace inexor {
 namespace entity_system {
 
+
 	// When using template classes it is not possible
 	// to separate definitions of class methods from their declaration.
 
@@ -18,12 +19,22 @@ namespace entity_system {
 	template <typename T>
 	class TypeManagerTemplate
 	{
-		public:
+		protected:
+
+			// All of those methods must be protected since the
+			// actual implementation of the type manager class
+			// will containt a method which has the right name
+			// but calls back to those methods here.
+			
+
+			// This unordered map will store all available types
+			// in a key/value pair of name => type.
+			std::unordered_map<std::string, std::shared_ptr<T>> type_map;
+
 
 			// 
 			TypeManagerTemplate()
 			{
-				error_type = std::make_shared<T>(std::string("ERROR"));
 			}
 
 
@@ -31,24 +42,6 @@ namespace entity_system {
 			~TypeManagerTemplate()
 			{
 			}
-
-
-		// All of those methods must be protected since the
-		// actual implementation of the type manager class
-		// will containt a method which has the right name
-		// but calls back to those methods here.
-		protected:
-
-
-			// This unordered map will store all available types
-			// in a key/value pair of name => type.
-			std::unordered_map<std::string, std::shared_ptr<T>> type_map;
-
-
-			// Error type.
-			// This will be returned when a class method fails.
-			// TODO: Discuss this. Is there no better way to do this? Do not use exceptions!
-			std::shared_ptr<T> error_type;
 
 
 			//
