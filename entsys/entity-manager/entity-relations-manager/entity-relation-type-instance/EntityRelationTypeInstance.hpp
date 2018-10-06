@@ -5,6 +5,7 @@
 
 #include "../entity-relation-type/EntityRelationType.hpp"
 #include "../../entity-types-manager/entity-type-instance/EntityTypeInstance.hpp"
+#include "../../../templates/TypeInstanceManagerTemplate.hpp"
 
 
 namespace inexor {
@@ -12,7 +13,7 @@ namespace entity_system {
 
 
 	// A base class for instances of types of relations between entity types.
-	class EntityRelationTypeInstance : public DataValidation
+	class EntityRelationTypeInstance : public TypeInstanceManagerTemplate<EntityRelationType,EntityRelationTypeInstance>
 	{
 		private:
 		
@@ -43,11 +44,7 @@ namespace entity_system {
 
 			// TODO: Set data !
 
-
-			// Implement data validation method.
-			// This is neccesary because we inherit from the DataValidation class!
-			virtual ENTSYS_DATA_VALIDATION_RESULT validate() override;
-
+			
 	};
 
 

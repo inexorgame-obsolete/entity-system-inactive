@@ -89,7 +89,7 @@ namespace entity_system {
     }
 
     
-    ENTSYS_RESULT DataContainer::set_data_type(const ENTSYS_DATA_TYPE& data_type)
+    ENTSYS_RESULT DataContainer::set_container_data_type(const ENTSYS_DATA_TYPE& data_type)
     {
 		// Lock mutex using lock guards to ensure thread-safety.
 		std::lock_guard<std::mutex> lock(data_container_mutex);
@@ -98,7 +98,7 @@ namespace entity_system {
     }
 
 
-    ENTSYS_DATA_TYPE DataContainer::get_data_type() const
+    ENTSYS_DATA_TYPE DataContainer::get_container_data_type() const
     {
         return data_container_data_type;
     }

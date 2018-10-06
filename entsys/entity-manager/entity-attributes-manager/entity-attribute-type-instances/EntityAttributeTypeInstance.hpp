@@ -5,6 +5,7 @@
 
 #include "../entity-attribute-type/EntityAttributeType.hpp"
 #include "../../../data-container/DataContainer.hpp"
+#include "../../../base-classes/TypeInstanceBase.hpp"
 
 
 namespace inexor {
@@ -12,8 +13,8 @@ namespace entity_system {
 
 
 	// A base class for instances of attributes of entities.
-	class EntityAttributeTypeInstance : public EntityAttributeType,
-		                                public DataContainer
+	class EntityAttributeTypeInstance : public TypeInstanceBase<EntityAttributeType,EntityAttributeTypeInstance>,
+                                        public DataContainer
 	{
 		public:
 
@@ -26,9 +27,6 @@ namespace entity_system {
 			// 
 			~EntityAttributeTypeInstance();
 
-			// Implement data validation method as required by base class inheritance!
-			// This overrides EntityAttributeType::validate().
-			virtual ENTSYS_DATA_VALIDATION_RESULT validate() override;
 
 	};
 

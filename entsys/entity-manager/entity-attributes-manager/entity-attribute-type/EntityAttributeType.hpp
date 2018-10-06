@@ -11,6 +11,8 @@
 #include "../../../data-validation/DataValidation.hpp"
 #include "../../../data-container/DataTypes.hpp"
 
+#include "../../../base-classes/TypeBase.hpp"
+
 
 namespace inexor {
 namespace entity_system {
@@ -18,17 +20,17 @@ namespace entity_system {
 	
 	// A base class for types of entity attributes.
 	// This class MUST implement a data validation method because of inheritance rules!
-    class EntityAttributeType : public DataValidation
+    class EntityAttributeType : public TypeBase
     {
-        protected:
+        private:
 
-			// Every entity attribute must have a unique name.
-			std::string entity_attribute_type_name;
-			
 			// The memory is associated with the entity attribute instance.
 			// It will be managed by the EntityAttributeTypeInstance class
 			// The data type of this container is declared here.
 			ENTSYS_DATA_TYPE entity_attribute_data_type;
+
+			// 
+			void set_data_type(const ENTSYS_DATA_TYPE&);
 
         public:
 
@@ -41,11 +43,8 @@ namespace entity_system {
 			// 
 			~EntityAttributeType();
 			
-			// Returns the name of the entity attribute type.
-			std::string get_entity_attribute_type_name() const;
-
 			// Returns the data type of the entity attribute type
-			ENTSYS_DATA_TYPE get_entity_attribute_data_type() const;
+			ENTSYS_DATA_TYPE get_attribute_data_type() const;
 
 			// Implement data validation method as required by base class inheritance!
 			virtual ENTSYS_DATA_VALIDATION_RESULT validate() override;

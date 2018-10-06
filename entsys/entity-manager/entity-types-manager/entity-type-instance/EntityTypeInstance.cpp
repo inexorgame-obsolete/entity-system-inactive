@@ -18,7 +18,8 @@ namespace entity_system {
 	{
 		// Reserve a pointer to the entity type 
 		// base type of this entity type instance.
-		linked_entity_type = param_entity_type;
+		set_type_pointer(param_entity_type);
+		set_type_name(param_entity_type->get_type_name());
 
 		// Create entity attribute type instances for this entiy type instance!
 		std::vector<std::shared_ptr<EntityAttributeType>> linked_entity_attribute_types = param_entity_type->get_linked_attribute_types();
@@ -119,13 +120,7 @@ namespace entity_system {
 	{
 		return linked_entity_attribute_type_instances.at(param_entity_attribute_type)->get_int64();
 	}
-
-
-	ENTSYS_DATA_VALIDATION_RESULT EntityTypeInstance::validate()
-	{
-		return ENTSYS_DATA_INVALID;
-	}
-
+	
 
 };
 };

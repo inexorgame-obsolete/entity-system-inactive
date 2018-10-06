@@ -50,7 +50,7 @@ namespace entity_system {
 
 		for(std::size_t i=0; i<linked_entity_attribute_types.size(); i++)
 		{
-			name2 = linked_entity_attribute_types[i]->get_entity_attribute_type_name();
+			name2 = linked_entity_attribute_types[i]->get_type_name();
 
 			// Check if we can find this entity attribute type by name.
 			// This would mean it is already linked to the entity type!
@@ -67,7 +67,7 @@ namespace entity_system {
 
 	bool EntityType::has_attribute_type(const std::shared_ptr<EntityAttributeType>& param_entity_attribute_type)
 	{
-		return has_attribute_type(param_entity_attribute_type->get_entity_attribute_type_name());
+		return has_attribute_type(param_entity_attribute_type->get_type_name());
 	}
 
 
@@ -79,7 +79,7 @@ namespace entity_system {
 
 	ENTSYS_RESULT EntityType::link_attribute_type(const std::shared_ptr<EntityAttributeType>& param_linked_entity_attribute_type)
 	{
-		std::string entity_attribute_type_name = param_linked_entity_attribute_type->get_entity_attribute_type_name();
+		std::string entity_attribute_type_name = param_linked_entity_attribute_type->get_type_name();
 
 		if(!has_attribute_type(entity_attribute_type_name))
 		{

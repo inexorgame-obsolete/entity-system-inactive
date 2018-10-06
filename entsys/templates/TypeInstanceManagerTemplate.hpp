@@ -6,6 +6,8 @@
 #include <vector>
 #include <memory>
 
+#include "../data-validation/DataValidation.hpp"
+
 
 namespace inexor {
 namespace entity_system {
@@ -63,7 +65,7 @@ namespace entity_system {
 
 			// TODO: Delete instance.
 			// TODO: Get instance.
-
+			
 	};
 
 

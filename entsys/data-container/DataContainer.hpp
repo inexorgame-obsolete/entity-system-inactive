@@ -69,10 +69,10 @@ namespace entity_system {
 
 
 			// Set the data type of the container.
-			ENTSYS_RESULT set_data_type(const ENTSYS_DATA_TYPE&);
+			ENTSYS_RESULT set_container_data_type(const ENTSYS_DATA_TYPE&);
 
 			// Returns the current data type of the data container.
-			ENTSYS_DATA_TYPE get_data_type() const;
+			ENTSYS_DATA_TYPE get_container_data_type() const;
 
 			// Assign operators.
 			// Do these have to be of const type ?

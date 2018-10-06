@@ -8,17 +8,17 @@ namespace inexor {
 namespace entity_system {
 
 
-	EntityAttributeTypeInstance::EntityAttributeTypeInstance()
-		: DataContainer(ENTSYS_DATA_TYPE_UNDEFINED)
+	EntityAttributeTypeInstance::EntityAttributeTypeInstance() : DataContainer(ENTSYS_DATA_TYPE_UNDEFINED)
 	{
 		// TODO: Implement
 	}
 
 
-	EntityAttributeTypeInstance::EntityAttributeTypeInstance(const std::shared_ptr<EntityAttributeType>& ent_attr_type)
-    :  EntityAttributeType(ent_attr_type->get_entity_attribute_type_name(), ent_attr_type->get_entity_attribute_data_type()),
-       DataContainer(ent_attr_type->get_entity_attribute_data_type())
+	EntityAttributeTypeInstance::EntityAttributeTypeInstance(const std::shared_ptr<EntityAttributeType>& ent_attr_type) :
+	DataContainer(ent_attr_type->get_attribute_data_type())
 	{
+		set_type_pointer(ent_attr_type);
+		set_type_name(ent_attr_type->get_type_name());
 		// TODO: Implement!
 	}
 
@@ -26,13 +26,6 @@ namespace entity_system {
 	EntityAttributeTypeInstance::~EntityAttributeTypeInstance()
 	{
 		// TODO: Implement!
-	}
-
-
-	ENTSYS_DATA_VALIDATION_RESULT EntityAttributeTypeInstance::validate()
-	{
-		// TODO: Implement!
-		return ENTSYS_DATA_INVALID;
 	}
 
 
