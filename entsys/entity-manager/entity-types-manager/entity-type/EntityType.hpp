@@ -7,6 +7,7 @@
 #include <unordered_map>
 
 #include "../../entity-attributes-manager/entity-attribute-type/EntityAttributeType.hpp"
+#include "../../../base-classes/TypeBase.hpp"
 
 
 namespace inexor {
@@ -15,16 +16,11 @@ namespace entity_system {
 	
 	// A base class for types of entities.
 	// This class needs to implement a data validation method!
-	class EntityType : public DataValidation
+	class EntityType : public TypeBase
     {
 		private:
 
-			// Every entity type must have a unique name.
-			std::string entity_type_name;
-
-			// Every entity type can have linked
-			// entity attribute types which
-			// will be stored in here.
+			// Every entity type can have linked entity attribute types.
 			std::vector<std::shared_ptr<EntityAttributeType>> linked_entity_attribute_types;
 
         public:
@@ -38,8 +34,6 @@ namespace entity_system {
 			// 
             ~EntityType();
 
-			// Returns the name of the entity type.
-			std::string get_type_name() const;
 
 			// Returns the number of linked entity attribute types.
 			std::size_t get_linked_attributes_count() const;
