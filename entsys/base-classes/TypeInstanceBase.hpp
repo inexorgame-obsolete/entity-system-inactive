@@ -22,6 +22,8 @@ namespace entity_system {
 			// 
 			std::shared_ptr<T1> type_pointer;
 
+			// TODO: Implement UUIDs!
+
 		public:
 
 
@@ -56,6 +58,7 @@ namespace entity_system {
 				type_pointer = param_type_pointer;
 			}
 
+			// TODO: Implement UUID get methods.
 
 	};
 

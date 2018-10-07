@@ -32,14 +32,11 @@ namespace entity_system {
 			void set_data_type(const ENTSYS_DATA_TYPE&);
 
         public:
-
-			// TODO: Remove default constructor!
-			EntityAttributeType(); // = delete;
-			
-			// TODO: Make this the default constructor.
+						
+			// Default constructor.
 			EntityAttributeType(const std::string&, const ENTSYS_DATA_TYPE&);
 
-			// 
+			// Destructor.
 			~EntityAttributeType();
 			
 			// Returns the data type of the entity attribute type

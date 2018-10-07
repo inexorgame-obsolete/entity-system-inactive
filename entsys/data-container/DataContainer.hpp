@@ -25,18 +25,13 @@ namespace entity_system {
     {
         private:
 
+			// Use C++11 initialisation instead of constructor.
             ENTSYS_DATA_TYPE data_container_data_type = ENTSYS_DATA_TYPE_UNDEFINED;
-
             std::string string_data = "";
-
             std::int64_t int64_data = 0;
-
             int integer_data = 0;
-
             double double_data = 0.0;
-
             float float_data = 0.0f;
-
             bool boolean_data = false;
 			
 		public:

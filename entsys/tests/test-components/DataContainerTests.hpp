@@ -11,6 +11,13 @@ using namespace inexor::entity_system;
 
 // Test constructor calls of DataContainer by passing data type.
 
+TEST(Test_DataContainer_DataTypeConstructor, ENTSYS_DATA_TYPE_UNDEFINED)
+{
+	DataContainer IntegerContainer(ENTSYS_DATA_TYPE_UNDEFINED);
+	ASSERT_EQ(IntegerContainer.get_container_data_type(), ENTSYS_DATA_TYPE_UNDEFINED);
+}
+
+
 TEST(Test_DataContainer_DataTypeConstructor, ENTSYS_DATA_TYPE_INT)
 {
 	DataContainer IntegerContainer(ENTSYS_DATA_TYPE_INT);

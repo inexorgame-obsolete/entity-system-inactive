@@ -26,6 +26,12 @@ namespace entity_system {
 	}
 
 
+	bool EntityTypeManager::does_entity_type_exist(const std::shared_ptr<EntityType>& param_entity_type)
+	{
+		return does_entity_type_exist(param_entity_type->get_type_name());
+	}
+
+
 	std::shared_ptr<EntityType> EntityTypeManager::create_entity_type(const std::string& param_new_entity_type_name)
 	{
 		// Check if type with this name does already exist

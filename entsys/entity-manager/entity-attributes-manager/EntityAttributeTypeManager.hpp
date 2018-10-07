@@ -39,8 +39,9 @@ namespace entity_system {
 			// Delete all types of entity attributes.
 			void delete_all_entity_attribute_types();
 
-			// 
+			// Check if an entity attribute type does already exist.
 			bool does_entity_attribute_type_exist(const std::string&);
+			bool does_entity_attribute_type_exist(const std::shared_ptr<EntityAttributeType>&);
 
 			// Create a new entity attribute type and store it in the entity system.
 			std::shared_ptr<EntityAttributeType> create_entity_attribute_type(const std::string&, const ENTSYS_DATA_TYPE&);

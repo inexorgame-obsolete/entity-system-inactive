@@ -18,13 +18,10 @@ namespace entity_system {
 	{
 		public:
 
-			// TODO: Remove default constructor!
-			EntityAttributeTypeInstance(); // = delete;
-
-			// TODO: Make this the default constructor.
+			// Default constructor.
 			EntityAttributeTypeInstance(const std::shared_ptr<EntityAttributeType>&);
 
-			// 
+			// Destructor.
 			~EntityAttributeTypeInstance();
 
 

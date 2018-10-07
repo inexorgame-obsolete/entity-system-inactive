@@ -8,12 +8,6 @@ namespace inexor {
 namespace entity_system {
     
 
-	EntityType::EntityType()
-	{
-		// TODO: Implement!
-	}
-
-
     EntityType::EntityType(const std::string& param_entity_type_name)
     {
 		set_type_name(param_entity_type_name);

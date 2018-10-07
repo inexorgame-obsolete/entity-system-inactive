@@ -8,12 +8,6 @@ namespace inexor {
 namespace entity_system {
 
 
-	EntityRelationAttributeType::EntityRelationAttributeType()
-	{
-		// TODO: Implement!
-	}
-
-
 	EntityRelationAttributeType::EntityRelationAttributeType(const std::string& param_entity_relation_attribute_type_name,
 		                                                     const ENTSYS_DATA_TYPE& param_entity_relation_attribute_data_type)
 	{

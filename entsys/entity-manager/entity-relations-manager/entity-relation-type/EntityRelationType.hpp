@@ -33,29 +33,25 @@ namespace entity_system {
 
 		public:
 
-			// TODO: Remove default constructor!
-			EntityRelationType(); // = delete;
-			
-			// TODO: Make this the default constructor!
-			EntityRelationType(const std::string&,
-				               const std::shared_ptr<EntityType>&,
-				               const std::shared_ptr<EntityType>&);
+			// Standard constructor.
+			EntityRelationType(const std::string&, const std::shared_ptr<EntityType>&, const std::shared_ptr<EntityType>&);
 
-			//
+			// Overloaded constructor.
 			EntityRelationType(const std::string&);
 
-			// 
+			// Destructor.
 			~EntityRelationType();
 
-			//
+			// Returns the name of the relation type.
 			std::string get_relation_type_name() const;
 
 			// Implement data validation method as required by base class inheritance!
 			virtual ENTSYS_DATA_VALIDATION_RESULT validate() override;
 
-			// TODO: Add and remove attributes!
+			// Links an entity relation attribute type.
 			ENTSYS_RESULT link_entity_relation_attribute_type();
 			
+			// TODO: Add and remove attributes!
 			// TODO: Implement get methods.
 
 	};

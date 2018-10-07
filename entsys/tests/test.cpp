@@ -17,12 +17,17 @@
 #include "test-components/EntityTypeInstanceManagerTests.hpp"
 
 // Tests for types of attributes of entities and instances of them.
-#include "test-components/EntityAttributeTypeTests.hpp"
-#include "test-components/EntityAttributeTypeManagerTests.hpp"
-#include "test-components/EntityAttributeTypeInstanceTest.hpp"
-#include "test-components/EntityAttributeTypeInstanceManagerTests.hpp"
+//#include "test-components/EntityAttributeTypeTests.hpp"
+//#include "test-components/EntityAttributeTypeManagerTests.hpp"
+//#include "test-components/EntityAttributeTypeInstanceTest.hpp"
+//#include "test-components/EntityAttributeTypeInstanceManagerTests.hpp"
 
-// TODO: Test for types of relations of entities and instances of them.
+// Tests for types of relations of entities and instances of them.
+//#include "test-components/EntityRelationTypeTests.hpp"
+//#include "test-components/EntitRelationTypeManagerTests.hpp"
+//#include "test-components/EntityRelationTypeInstanceTests.hpp"
+//#include "test-components/EntitRelationTypeInstanceManagerTests.hpp"
+
 
 int main(int argc, char* argv[])
 {

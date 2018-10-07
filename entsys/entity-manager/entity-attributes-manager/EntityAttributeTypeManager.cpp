@@ -22,8 +22,13 @@ namespace entity_system {
 
 	bool EntityAttributeTypeManager::does_entity_attribute_type_exist(const std::string& param_entity_attribute_type_name)
 	{
-		// Returns false is entity attribute type does not already exist.
 		return does_type_exist(param_entity_attribute_type_name);
+	}
+
+
+	bool EntityAttributeTypeManager::does_entity_attribute_type_exist(const std::shared_ptr<EntityAttributeType>& param_entity_attribute_type)
+	{
+		return does_entity_attribute_type_exist(param_entity_attribute_type->get_type_name());
 	}
 
 

@@ -25,18 +25,11 @@ namespace entity_system {
 
         public:
 
-			// TODO: Remove default constructor!
-			EntityType(); // = delete;
+			// Default constructor.
+			EntityType(const std::string&);
 
-			// TODO: Make this the default constructor.
-            EntityType(const std::string&);
-
-			// 
+			// Destructor.
             ~EntityType();
-
-
-			// Returns the number of linked entity attribute types.
-			std::size_t get_linked_attributes_count() const;
 
 			// Checks if an entity attribute type
 			// is already linked to an entity type.
@@ -46,6 +39,9 @@ namespace entity_system {
 			// Links an entity attribute type to an entity type.
 			ENTSYS_RESULT link_attribute_type(const std::shared_ptr<EntityAttributeType>&);
 	
+			// Returns the number of linked entity attribute types.
+			std::size_t get_linked_attributes_count() const;
+
 			// Returns a vector of linked types of attributes of entities.
 			const std::vector<std::shared_ptr<EntityAttributeType>> get_linked_attribute_types() const;
 

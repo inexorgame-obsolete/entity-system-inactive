@@ -8,12 +8,6 @@ namespace inexor {
 namespace entity_system {
 
 
-	EntityAttributeType::EntityAttributeType()
-	{
-		// TODO: Implement!
-	}
-
-
 	void EntityAttributeType::set_data_type(const ENTSYS_DATA_TYPE& param_ent_attr_data_type)
 	{
 		entity_attribute_data_type = param_ent_attr_data_type;

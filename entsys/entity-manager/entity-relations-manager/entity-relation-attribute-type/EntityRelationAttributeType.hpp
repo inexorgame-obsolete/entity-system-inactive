@@ -31,14 +31,11 @@ namespace entity_system {
 			ENTSYS_DATA_TYPE entity_relation_attribute_data_type;
 
         public:
-
-			// TODO: Remove default constructor!
-			EntityRelationAttributeType(); // = delete;
-			
-			// TODO: Make this the default constructor.
+						
+			// Default constructor.
 			EntityRelationAttributeType(const std::string&, const ENTSYS_DATA_TYPE&);
 
-			// 
+			// Destructor.
 			~EntityRelationAttributeType();
 			
 			// Returns the name of the entity attribute type.

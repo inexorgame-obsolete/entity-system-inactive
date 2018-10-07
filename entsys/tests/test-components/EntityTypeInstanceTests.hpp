@@ -7,24 +7,21 @@
 
 TEST(Test_EntityTypeInstance, create_entity_attribute_type_instance)
 {
-	// Create an entity type (weapon) called minigun.
-	ENT_TYPE minigun = CREATE_ENT_TYPE("minigun");
+	std::shared_ptr<EntityType> minigun = std::make_shared<EntityType>("minigun");
 
-	// Create entity attribute types.
-	ENT_ATTR_TYPE weapon_dmg = CREATE_ENT_ATTR_TYPE("weapondamage", ENTSYS_DATA_TYPE_INT);
+	std::shared_ptr<EntityAttributeType> weapon_dmg = std::make_shared<EntityAttributeType>("weapondamage", ENTSYS_DATA_TYPE_INT);
 	minigun->link_attribute_type(weapon_dmg);
 	
-	ENT_ATTR_TYPE weapon_weight = CREATE_ENT_ATTR_TYPE("weight", ENTSYS_DATA_TYPE_INT);
+	std::shared_ptr<EntityAttributeType> weapon_weight = std::make_shared<EntityAttributeType>("weight", ENTSYS_DATA_TYPE_INT);
 	minigun->link_attribute_type(weapon_weight);
 
-	ENT_ATTR_TYPE weapon_magazine_size = CREATE_ENT_ATTR_TYPE("ammosize", ENTSYS_DATA_TYPE_INT);
+	std::shared_ptr<EntityAttributeType> weapon_magazine_size = std::make_shared<EntityAttributeType>("ammosize", ENTSYS_DATA_TYPE_INT);
 	minigun->link_attribute_type(weapon_magazine_size);
 
-	// Create an instance!
-	ENT_TYPE_INSTANCE minigunPickup1 = CREATE_ENT_TYPE_INSTANCE(minigun);
-	ENT_TYPE_INSTANCE minigunPickup2 = CREATE_ENT_TYPE_INSTANCE(minigun);
-	ENT_TYPE_INSTANCE minigunPickup3 = CREATE_ENT_TYPE_INSTANCE(minigun);
-	ENT_TYPE_INSTANCE minigunPickup4 = CREATE_ENT_TYPE_INSTANCE(minigun);
+	std::shared_ptr<EntityTypeInstance> minigunPickup1 = std::make_shared<EntityTypeInstance>(minigun);
+	std::shared_ptr<EntityTypeInstance> minigunPickup2 = std::make_shared<EntityTypeInstance>(minigun);
+	std::shared_ptr<EntityTypeInstance> minigunPickup3 = std::make_shared<EntityTypeInstance>(minigun);
+	std::shared_ptr<EntityTypeInstance> minigunPickup4 = std::make_shared<EntityTypeInstance>(minigun);
 
 	minigunPickup1->set_attribute_data(weapon_dmg, 166);
 
@@ -35,24 +32,23 @@ TEST(Test_EntityTypeInstance, create_entity_attribute_type_instance)
 
 TEST(Test_EntityTypeInstance, set_attribute_data)
 {
-	// Create an entity type (weapon) called minigun.
-	ENT_TYPE minigun = CREATE_ENT_TYPE("minigun");
+	std::shared_ptr<EntityType> minigun = std::make_shared<EntityType>("minigun");
 
 	// Create entity attribute types.
-	ENT_ATTR_TYPE weapon_dmg = CREATE_ENT_ATTR_TYPE("weapondamage", ENTSYS_DATA_TYPE_INT);
+	std::shared_ptr<EntityAttributeType> weapon_dmg = std::make_shared<EntityAttributeType>("weapondamage", ENTSYS_DATA_TYPE_INT);
 	minigun->link_attribute_type(weapon_dmg);
 
-	ENT_ATTR_TYPE weapon_weight = CREATE_ENT_ATTR_TYPE("weight", ENTSYS_DATA_TYPE_INT);
+	std::shared_ptr<EntityAttributeType> weapon_weight = std::make_shared<EntityAttributeType>("weight", ENTSYS_DATA_TYPE_INT);
 	minigun->link_attribute_type(weapon_weight);
 
-	ENT_ATTR_TYPE weapon_magazine_size = CREATE_ENT_ATTR_TYPE("ammosize", ENTSYS_DATA_TYPE_INT);
+	std::shared_ptr<EntityAttributeType> weapon_magazine_size = std::make_shared<EntityAttributeType>("ammosize", ENTSYS_DATA_TYPE_INT);
 	minigun->link_attribute_type(weapon_magazine_size);
 
-	// Create an instance!
-	ENT_TYPE_INSTANCE pickup1 = CREATE_ENT_TYPE_INSTANCE(minigun);
-	ENT_TYPE_INSTANCE pickup2 = CREATE_ENT_TYPE_INSTANCE(minigun);
-	ENT_TYPE_INSTANCE pickup3 = CREATE_ENT_TYPE_INSTANCE(minigun);
-	ENT_TYPE_INSTANCE pickup4 = CREATE_ENT_TYPE_INSTANCE(minigun);
+	// Create an instance
+	std::shared_ptr<EntityTypeInstance> pickup1 = std::make_shared<EntityTypeInstance>(minigun);
+	std::shared_ptr<EntityTypeInstance> pickup2 = std::make_shared<EntityTypeInstance>(minigun);
+	std::shared_ptr<EntityTypeInstance> pickup3 = std::make_shared<EntityTypeInstance>(minigun);
+	std::shared_ptr<EntityTypeInstance> pickup4 = std::make_shared<EntityTypeInstance>(minigun);
 
 	const int dmg_val = 12;
 	pickup1->set_attribute_data(weapon_dmg, dmg_val);

@@ -24,11 +24,8 @@ namespace entity_system {
 			std::unordered_map<std::shared_ptr<EntityAttributeType>, std::shared_ptr<EntityAttributeTypeInstance>> linked_entity_attribute_type_instances;
 			
 		public:
-
-			// TODO: Remove default constructor!
-			EntityTypeInstance(); // = delete;
-
-			// TODO: Make this the default constructor.
+			
+			// Default constructor.
 			EntityTypeInstance(const std::shared_ptr<EntityType>&);
 
 			// Destructor.

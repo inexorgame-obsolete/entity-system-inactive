@@ -3,3 +3,8 @@
 // (c)2018 Inexor
 
 #pragma once
+
+TEST(Test_EntityTypeInstanceManager, TODO)
+{
+
+}

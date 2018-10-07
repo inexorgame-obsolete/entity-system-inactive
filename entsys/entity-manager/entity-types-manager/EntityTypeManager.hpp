@@ -39,7 +39,8 @@ namespace entity_system {
 
 			// Search through the map of available types of entities.
 			bool does_entity_type_exist(const std::string&);
-			
+			bool does_entity_type_exist(const std::shared_ptr<EntityType>&);
+
 			// Create a new entity type and store it in the entity system.
 			std::shared_ptr<EntityType> create_entity_type(const std::string&);
 

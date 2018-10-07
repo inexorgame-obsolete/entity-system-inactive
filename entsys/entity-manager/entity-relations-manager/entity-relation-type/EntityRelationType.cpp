@@ -9,12 +9,6 @@ namespace inexor {
 namespace entity_system {
 
 
-	EntityRelationType::EntityRelationType()
-	{
-		// TODO: Implement!
-	}
-
-
 	EntityRelationType::EntityRelationType(const std::string& param_relation_type_name)
 	{
 		relation_type_name = param_relation_type_name;
