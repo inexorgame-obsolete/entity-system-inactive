@@ -10,7 +10,7 @@ namespace inexor {
 namespace entity_system {
 
 
-	// 
+	// A template class for instances of types of any kind.
 	template <typename T1, typename T2>
 	class TypeInstanceBase
 	{

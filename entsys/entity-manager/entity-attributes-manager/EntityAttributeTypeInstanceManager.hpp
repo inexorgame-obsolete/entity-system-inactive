@@ -13,8 +13,7 @@ namespace entity_system {
 
 
 	// A manager class for instances of attributes of entity types.
-    class EntityAttributeTypeInstanceManager :
-	public TypeInstanceManagerTemplate<EntityAttributeType, EntityAttributeTypeInstance>
+    class EntityAttributeTypeInstanceManager : public TypeInstanceManagerTemplate<EntityAttributeTypeInstance>
     {
 		protected:
             

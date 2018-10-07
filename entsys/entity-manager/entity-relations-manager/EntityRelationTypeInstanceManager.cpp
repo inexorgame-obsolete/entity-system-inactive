@@ -32,6 +32,7 @@ namespace entity_system {
 				                                           ent_type_instance_destination);
 
 		add_instance_to_buffer(new_relation_type_instance);
+
 		return new_relation_type_instance;
 	}
 

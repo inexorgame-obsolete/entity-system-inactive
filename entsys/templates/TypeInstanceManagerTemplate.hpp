@@ -20,13 +20,13 @@ namespace entity_system {
 	// This will be used by EntityTypeInstanceManager,
 	// EntityAttributeTypeInstanceManager, EntityRelationTypeInstanceManager.
 	// T1 = entity type, T2 = entity type instance.
-	template <typename T1, typename T2>
+	template <typename T>
 	class TypeInstanceManagerTemplate
 	{
 		protected:
 
 			// In this vector we will store shared pointers of <T2> instances.
-			std::vector<std::shared_ptr<T2>> type_instances;
+			std::vector<std::shared_ptr<T>> type_instances;
 			
 
 			// 
@@ -44,7 +44,7 @@ namespace entity_system {
 
 
 			// 
-			void add_instance_to_buffer(const std::shared_ptr<T2>& param_instance_pointer)
+			void add_instance_to_buffer(const std::shared_ptr<T>& param_instance_pointer)
 			{
 				type_instances.push_back(param_instance_pointer);
 			}

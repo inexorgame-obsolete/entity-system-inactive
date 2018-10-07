@@ -22,8 +22,7 @@ namespace entity_system {
 
 			// TODO: Implement UUID here!
 			
-		public:
-			
+		protected:
 
 			// 
 			TypeBase()
@@ -45,6 +44,14 @@ namespace entity_system {
 			}
 
 
+			// TODO: Implement get_UUID() method!
+
+			// Every class which inherits from this base class needs to implement this data validation method.
+			virtual ENTSYS_DATA_VALIDATION_RESULT validate() override = 0;
+
+		
+		public:
+
 			//
 			const std::string get_type_name() const
 			{
@@ -52,10 +59,6 @@ namespace entity_system {
 			}
 
 
-			// TODO: Implement get_UUID() method!
-
-			// Every class which inherits from this base class needs to implement this data validation method.
-			virtual ENTSYS_DATA_VALIDATION_RESULT validate() override = 0;
 
 	};
 

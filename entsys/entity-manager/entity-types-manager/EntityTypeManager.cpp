@@ -35,7 +35,7 @@ namespace entity_system {
 			// TODO: Throw error message!
 			return entity_type_error;
 		}
-		// TODO: Further validation!!
+		// TODO: Add more validation here.
 
 		// Create a new entity type instance.
 		std::shared_ptr<EntityType> new_entity_type = std::make_shared<EntityType>(param_new_entity_type_name);
@@ -72,7 +72,6 @@ namespace entity_system {
 		// Call template class method.
 		delete_all_types();
 	}
-
 
 
 };

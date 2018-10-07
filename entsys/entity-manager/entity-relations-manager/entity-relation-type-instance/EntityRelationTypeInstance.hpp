@@ -13,7 +13,7 @@ namespace entity_system {
 
 
 	// A base class for instances of types of relations between entity types.
-	class EntityRelationTypeInstance : public TypeInstanceManagerTemplate<EntityRelationType,EntityRelationTypeInstance>
+	class EntityRelationTypeInstance : public TypeInstanceManagerTemplate<EntityRelationTypeInstance>
 	{
 		private:
 		
@@ -39,9 +39,9 @@ namespace entity_system {
 			//
 			~EntityRelationTypeInstance();
 
+
 			// TODO: get source entity type
 			// TODO: get destination entity type
-
 			// TODO: Set data !
 
 			

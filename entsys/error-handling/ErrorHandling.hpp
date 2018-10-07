@@ -8,6 +8,10 @@
 
 #include "ErrorLevels.hpp"
 
+// Undefine this macro when using release build.
+#define INEXOR_ENTSYS_DEBUG
+
+
 namespace inexor {
 namespace entity_system {
 

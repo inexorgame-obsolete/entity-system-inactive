@@ -83,8 +83,6 @@ namespace entity_system {
 	}
 
 
-	// Get methods for attribute data.
-	// TODO: Inherit them directly from DataContainer ?
 	const int EntityTypeInstance::get_attribute_data_int(const std::shared_ptr<EntityAttributeType>& param_entity_attribute_type) const
 	{
 		// TODO: Why does the [] operator not work here ?

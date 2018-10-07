@@ -19,6 +19,12 @@ namespace entity_system {
 	template <typename T>
 	class TypeManagerTemplate
 	{
+		private:
+
+			// This unordered map will store all available types
+			// in a key/value pair of name => type.
+			std::unordered_map<std::string, std::shared_ptr<T>> type_map;
+
 		protected:
 
 			// All of those methods must be protected since the
@@ -26,11 +32,6 @@ namespace entity_system {
 			// will containt a method which has the right name
 			// but calls back to those methods here.
 			
-
-			// This unordered map will store all available types
-			// in a key/value pair of name => type.
-			std::unordered_map<std::string, std::shared_ptr<T>> type_map;
-
 
 			// 
 			TypeManagerTemplate()

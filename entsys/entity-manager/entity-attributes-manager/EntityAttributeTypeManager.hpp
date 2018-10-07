@@ -9,7 +9,6 @@
 
 #include "entity-attribute-type\EntityAttributeType.hpp"
 #include "../../data-validation/DataValidationResults.hpp"
-
 #include "../../templates/TypeManagerTemplate.hpp"
 
 
@@ -18,7 +17,7 @@ namespace entity_system {
     
 
 	// A manager class for types of entity attributes.
-    class EntityAttributeTypeManager : public TypeManagerTemplate<EntityAttributeType>//, public DataValidation
+    class EntityAttributeTypeManager : public TypeManagerTemplate<EntityAttributeType>
     {
         private:
 

@@ -25,7 +25,7 @@ namespace entity_system {
 			~DataValidation();
 
             // Every class which inherits from DataValidation
-            // must have an implementation of this method!
+            // must have an implementation of this pure virtual validation method!
             virtual ENTSYS_DATA_VALIDATION_RESULT validate() = 0;
 
     };

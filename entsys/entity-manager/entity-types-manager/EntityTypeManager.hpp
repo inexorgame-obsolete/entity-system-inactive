@@ -7,10 +7,9 @@
 #include <string>
 #include <unordered_map>
 
-#include "../../data-validation/DataValidation.hpp"
+//#include "../../data-validation/DataValidation.hpp"
 #include "../entity-types-manager/entity-type/EntityType.hpp"
-#include "../../error-handling/ErrorHandling.hpp"
-
+//#include "../../error-handling/ErrorHandling.hpp"
 #include "../../templates/TypeManagerTemplate.hpp"
 
 

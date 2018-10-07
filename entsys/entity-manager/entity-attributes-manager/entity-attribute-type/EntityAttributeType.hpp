@@ -10,7 +10,6 @@
 #include "../../../return-codes/ReturnCodes.hpp"
 #include "../../../data-validation/DataValidation.hpp"
 #include "../../../data-container/DataTypes.hpp"
-
 #include "../../../base-classes/TypeBase.hpp"
 
 

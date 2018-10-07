@@ -13,7 +13,7 @@ namespace entity_system {
 
 
 	// A manager class for instances of types of relations between entity types.
-    class EntityRelationTypeInstanceManager : public TypeInstanceManagerTemplate<EntityRelationType, EntityRelationTypeInstance>
+    class EntityRelationTypeInstanceManager : public TypeInstanceManagerTemplate<EntityRelationTypeInstance>
     {
         protected:
             

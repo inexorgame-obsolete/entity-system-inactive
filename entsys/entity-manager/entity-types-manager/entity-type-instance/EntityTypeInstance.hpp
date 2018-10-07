@@ -14,8 +14,7 @@ namespace entity_system {
 
 	// A base class for instances of types of entities.
 	// Only EntityTypeInstanceManager can create instances!
-    class EntityTypeInstance :
-	public TypeInstanceBase<EntityType,EntityTypeInstance>
+    class EntityTypeInstance : public TypeInstanceBase<EntityType,EntityTypeInstance>
     {
 		private:
 

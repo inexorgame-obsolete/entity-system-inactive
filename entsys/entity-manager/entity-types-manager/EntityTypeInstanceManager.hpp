@@ -14,11 +14,11 @@ namespace entity_system {
 
 
 	// A manager class for instances of types of entities.
-    class EntityTypeInstanceManager : public TypeInstanceManagerTemplate<EntityType, EntityTypeInstance>//, public DataValidation
+    class EntityTypeInstanceManager : public TypeInstanceManagerTemplate<EntityTypeInstance>
     {            
         protected:
             
-			// TODO: Maybe add entity_type_instance_type_error ?
+			// TODO: Add entity_type_instance_type_error ?
 			
 			// 
 			EntityTypeInstanceManager();

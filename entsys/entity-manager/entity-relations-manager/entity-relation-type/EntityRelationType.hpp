@@ -30,6 +30,7 @@ namespace entity_system {
 			// to the entity relation type.
 			std::vector<std::shared_ptr<EntityRelationAttributeType>> linked_relation_attribute_types;
 
+
 		public:
 
 			// TODO: Remove default constructor!
@@ -45,13 +46,6 @@ namespace entity_system {
 
 			// 
 			~EntityRelationType();
-
-
-			//
-			//ENTSYS_RESULT set_source_entity_type(const std::shared_ptr<EntityType>&);
-
-			//
-			//ENTSYS_RESULT set_destination_entity_type(const std::shared_ptr<EntityType>&);
 
 			//
 			std::string get_relation_type_name() const;
