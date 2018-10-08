@@ -21,14 +21,11 @@ namespace entity_system {
 		private:
 
 			// Every entity type can have linked entity attribute types.
-			std::vector<std::shared_ptr<EntityAttributeType>> linked_entity_attribute_types;
+			std::vector<std::shared_ptr<EntityAttributeType>> linked_attributes;
 
         public:
 
-			// Default constructor.
 			EntityType(const std::string&);
-
-			// Destructor.
             ~EntityType();
 
 			// Checks if an entity attribute type
@@ -39,16 +36,17 @@ namespace entity_system {
 			// Links an entity attribute type to an entity type.
 			ENTSYS_RESULT link_attribute_type(const std::shared_ptr<EntityAttributeType>&);
 	
-			// Returns the number of linked entity attribute types.
+			// Returns the count of linked entity attribute types.
 			std::size_t get_linked_attributes_count() const;
 
-			// Returns a vector of linked types of attributes of entities.
+			// 
 			const std::vector<std::shared_ptr<EntityAttributeType>> get_linked_attribute_types() const;
 
-			// Deletes all linked types of attributes.
+			// Deletes all linked attribute types.
 			void reset_linked_attribute_types();
 
-			// Implement data validation method as required by base class inheritance!
+			// Data validation method.
+			// This is required because we inherit from DataValidation.
 			virtual ENTSYS_DATA_VALIDATION_RESULT validate() override;
 
     };

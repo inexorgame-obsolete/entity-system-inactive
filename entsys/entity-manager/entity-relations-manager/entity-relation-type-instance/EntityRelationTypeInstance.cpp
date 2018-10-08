@@ -9,12 +9,6 @@ namespace inexor {
 namespace entity_system {
 
 
-	EntityRelationTypeInstance::EntityRelationTypeInstance()
-	{
-		// TODO: Implement!
-	}
-
-
 	EntityRelationTypeInstance::EntityRelationTypeInstance(const std::shared_ptr<EntityRelationType>& param_ent_rel_type,
 		                                                   const std::shared_ptr<EntityTypeInstance>& param_source_entity_type_instance,
 		                                                   const std::shared_ptr<EntityTypeInstance>& param_destination_entity_type_instance)

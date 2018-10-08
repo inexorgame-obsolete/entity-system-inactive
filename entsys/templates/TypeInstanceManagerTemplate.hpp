@@ -32,14 +32,12 @@ namespace entity_system {
 			// 
 			TypeInstanceManagerTemplate()
 			{
-				// TODO: Implement!
 			}
 
 			
 			// 
 			~TypeInstanceManagerTemplate()
 			{
-				// TODO: Implement!
 			}
 
 

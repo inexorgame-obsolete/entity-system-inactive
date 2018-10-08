@@ -60,22 +60,18 @@ namespace entity_system {
 
 	void EntityTypeManager::delete_entity_type(const std::string& param_entity_type_name)
 	{
-		// TODO: Delete all instances!
 		delete_type(param_entity_type_name);
 	}
 
 
 	void EntityTypeManager::delete_entity_type(const std::shared_ptr<EntityType>& param_entity_type)
 	{
-		// TODO: Delete all instances!
 		delete_type(param_entity_type->get_type_name());
 	}
 
 
 	void EntityTypeManager::delete_all_entity_types()
 	{
-		// TODO: Delete all instances!
-		// Call template class method.
 		delete_all_types();
 	}
 

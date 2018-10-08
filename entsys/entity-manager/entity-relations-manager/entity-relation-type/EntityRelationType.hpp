@@ -5,6 +5,7 @@
 
 #include "../../entity-types-manager/entity-type/EntityType.hpp"
 #include "../../entity-relations-manager/entity-relation-attribute-type/EntityRelationAttributeType.hpp"
+#include "../../../base-classes/TypeBase.hpp"
 
 
 namespace inexor {
@@ -12,12 +13,9 @@ namespace entity_system {
 
 	
 	// A base class for types of entity relations
-	class EntityRelationType : public DataValidation
+	class EntityRelationType : public TypeBase
 	{
 		private:
-
-			// Every relation type must have a unique name.
-			std::string relation_type_name;
 
 			// The entity type of the source entity.
 			std::shared_ptr<EntityType> source_entity_type;
@@ -33,18 +31,13 @@ namespace entity_system {
 
 		public:
 
-			// Standard constructor.
 			EntityRelationType(const std::string&, const std::shared_ptr<EntityType>&, const std::shared_ptr<EntityType>&);
-
-			// Overloaded constructor.
-			EntityRelationType(const std::string&);
-
-			// Destructor.
+			// TODO: Remove this!
+			EntityRelationType(const std::string&)
+			{
+			}
 			~EntityRelationType();
-
-			// Returns the name of the relation type.
-			std::string get_relation_type_name() const;
-
+			
 			// Implement data validation method as required by base class inheritance!
 			virtual ENTSYS_DATA_VALIDATION_RESULT validate() override;
 

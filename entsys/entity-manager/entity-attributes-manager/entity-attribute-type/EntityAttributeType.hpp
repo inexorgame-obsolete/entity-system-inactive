@@ -23,20 +23,16 @@ namespace entity_system {
     {
         private:
 
-			// The memory is associated with the entity attribute instance.
-			// It will be managed by the EntityAttributeTypeInstance class
 			// The data type of this container is declared here.
+			// The container itself will be managed by EntityAttributeTypeInstance.
 			ENTSYS_DATA_TYPE entity_attribute_data_type;
 
-			// 
+			// Set the data of this attribute's data container.
 			void set_data_type(const ENTSYS_DATA_TYPE&);
 
         public:
 						
-			// Default constructor.
 			EntityAttributeType(const std::string&, const ENTSYS_DATA_TYPE&);
-
-			// Destructor.
 			~EntityAttributeType();
 			
 			// Returns the data type of the entity attribute type

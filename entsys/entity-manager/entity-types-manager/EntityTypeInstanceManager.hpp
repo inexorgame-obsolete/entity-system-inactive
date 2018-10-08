@@ -18,12 +18,7 @@ namespace entity_system {
     {            
         protected:
             
-			// TODO: Add entity_type_instance_type_error ?
-			
-			// 
 			EntityTypeInstanceManager();
-
-			// 
 			~EntityTypeInstanceManager();
 			
 		public:
@@ -31,7 +26,7 @@ namespace entity_system {
 			// Create an entity type instance.
 			std::shared_ptr<EntityTypeInstance> create_entity_type_instance(const std::shared_ptr<EntityType>&);
 
-			// Return the number of created instances.
+			// Get the number of existing instances.
 			const std::size_t get_entity_type_instance_count() const;
 
 			// Delete all instances of entity types.

@@ -16,7 +16,6 @@ namespace entity_system {
 
     EntityRelationTypeManager::~EntityRelationTypeManager()
     {
-		// TODO: implement!
     }
 
 
@@ -58,7 +57,7 @@ namespace entity_system {
 	
 	ENTSYS_RESULT EntityRelationTypeManager::delete_entity_relation_type(const std::shared_ptr<EntityRelationType>& param_entity_relation_type)
 	{
-		return delete_entity_relation_type(param_entity_relation_type->get_relation_type_name());
+		return delete_entity_relation_type(param_entity_relation_type->get_type_name());
 	}
 
 

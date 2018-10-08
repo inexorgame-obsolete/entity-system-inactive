@@ -21,23 +21,15 @@ namespace entity_system {
     {
         private:
 
-			// This will be returned when a create method fails
-			// TODO: Is there no better way to do this?
-			// TODO: Don't use exceptions!
+			// This error entity attribute type will be returned when a method fails.
 			std::shared_ptr<EntityAttributeType> entity_attribute_type_error;
 
         protected:
 
-			// 
 			EntityAttributeTypeManager();
-
-			// 
             ~EntityAttributeTypeManager();
 
 		public:
-
-			// Delete all types of entity attributes.
-			void delete_all_entity_attribute_types();
 
 			// Check if an entity attribute type does already exist.
 			bool does_entity_attribute_type_exist(const std::string&);
@@ -50,11 +42,13 @@ namespace entity_system {
 			const std::size_t get_entity_attribute_type_count() const;
 
 			// Deletes an entity attribute type from the entity system.
-			ENTSYS_RESULT delete_entity_attribute_type(const std::string&);
-			//ENTSYS_RESULT delete_entity_attribute_type(const std::shared_ptr<EntityAttributeType>&);
+			void delete_entity_attribute_type(const std::string&);
+			void delete_entity_attribute_type(const std::shared_ptr<EntityAttributeType>&);
+			// TODO: Delete by UUID.
 
-			// Validates entity attribute types.
-			//ENTSYS_DATA_VALIDATION_RESULT validate_attribute_types(const std::vector<std::shared_ptr<EntityAttributeType>>&);
+			// Delete all types of entity attributes.
+			void delete_all_entity_attribute_types();
+
 
 	};
 

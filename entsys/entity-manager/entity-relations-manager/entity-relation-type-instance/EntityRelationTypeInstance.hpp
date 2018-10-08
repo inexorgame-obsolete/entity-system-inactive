@@ -28,15 +28,10 @@ namespace entity_system {
 
 		public:
 
-			// TODO: Remove default constructor!
-			EntityRelationTypeInstance(); // = delete;
-			
-			// TODO: Make this the default constructor!
 			EntityRelationTypeInstance(const std::shared_ptr<EntityRelationType>&,
 				                       const std::shared_ptr<EntityTypeInstance>&,
 				                       const std::shared_ptr<EntityTypeInstance>&);
 
-			//
 			~EntityRelationTypeInstance();
 
 

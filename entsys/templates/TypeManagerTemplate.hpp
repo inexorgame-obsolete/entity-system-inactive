@@ -48,6 +48,7 @@ namespace entity_system {
 			//
 			bool does_type_exist(const std::string& type_name)
 			{
+				// TODO: Add MUTEX here?
 				return !(type_map.end() == type_map.find(type_name));
 			}
 			
@@ -61,9 +62,10 @@ namespace entity_system {
 			}
 
 
-			//
+			// Add a new type to the type map.
 			void add_type_to_map(const std::string& new_type_name, const std::shared_ptr<T>& new_type)
 			{
+				// TODO: Add MUTEX here!
 				type_map[new_type_name] = new_type;
 			}
 
@@ -75,23 +77,27 @@ namespace entity_system {
 			}
 
 
-			// 
+			// Get the number of existing types.
 			const std::size_t get_type_count() const
 			{
 				return type_map.size();
 			}
 
 
-			// 
+			// Delete one specific type.
 			void delete_type(const std::string& param_name)
 			{
+				// TODO: Add MUTEX here!
+				// TODO: Delete all instances first!
 				type_map.erase(param_name);
 			}
 			
 
-			// 
+			// Delete all types.
 			void delete_all_types()
 			{
+				// TODO: Add MUTEX here!
+				// TODO: Delete all instances first!
 				type_map.clear();
 			}
 

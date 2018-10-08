@@ -5,21 +5,16 @@
 
 #include "EntityRelationType.hpp"
 
+
 namespace inexor {
 namespace entity_system {
-
-
-	EntityRelationType::EntityRelationType(const std::string& param_relation_type_name)
-	{
-		relation_type_name = param_relation_type_name;
-	}
 
 
 	EntityRelationType::EntityRelationType(const std::string& param_relation_type_name,
 		                                   const std::shared_ptr<EntityType>& param_source_type,
 		                                   const std::shared_ptr<EntityType>& param_destination_type)
 	{
-		relation_type_name = param_relation_type_name;
+		set_type_name(param_relation_type_name);
 		source_entity_type = param_source_type;
 		destination_entity_type = param_destination_type;
 	}
@@ -28,12 +23,6 @@ namespace entity_system {
 	EntityRelationType::~EntityRelationType()
 	{
 		// TODO: Implement!
-	}
-
-
-	std::string EntityRelationType::get_relation_type_name() const
-	{
-		return relation_type_name;
 	}
 
 

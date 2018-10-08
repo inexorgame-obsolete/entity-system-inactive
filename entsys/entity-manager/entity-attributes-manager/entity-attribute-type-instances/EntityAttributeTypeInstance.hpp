@@ -18,10 +18,7 @@ namespace entity_system {
 	{
 		public:
 
-			// Default constructor.
 			EntityAttributeTypeInstance(const std::shared_ptr<EntityAttributeType>&);
-
-			// Destructor.
 			~EntityAttributeTypeInstance();
 
 

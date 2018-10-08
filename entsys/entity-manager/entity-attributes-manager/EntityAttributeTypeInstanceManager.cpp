@@ -2,10 +2,14 @@
 // (c)2018 Inexor
 
 #include "EntityAttributeTypeInstanceManager.hpp"
+#include "../../EntitySystem.hpp"
 
 
 namespace inexor {
 namespace entity_system {
+
+
+	extern std::shared_ptr<EntitySystem> entsys;
 
 
     EntityAttributeTypeInstanceManager::EntityAttributeTypeInstanceManager()
@@ -27,7 +31,7 @@ namespace entity_system {
 		// Create entity attribute type instance.
 		std::shared_ptr<EntityAttributeTypeInstance> new_ent_attr_type_instance
 			= std::make_shared<EntityAttributeTypeInstance>(param_ent_attr_type);
-		
+
 		// Call base template class method.
 		add_instance_to_buffer(new_ent_attr_type_instance);
 

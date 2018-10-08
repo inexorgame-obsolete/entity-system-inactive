@@ -2,40 +2,40 @@
 // (c)2018 Inexor
 
 #include "EntityTypeInstance.hpp"
+#include "../../../EntitySystem.hpp"
 
 
 namespace inexor {
 namespace entity_system {
 
 
-	EntityTypeInstance::EntityTypeInstance(const std::shared_ptr<EntityType>& param_entity_type)
+	extern std::shared_ptr<EntitySystem> entsys;
+
+
+	EntityTypeInstance::EntityTypeInstance(const std::shared_ptr<EntityType>& ent_type)
 	{
-		// Reserve a pointer to the entity type 
-		// base type of this entity type instance.
-		set_type_pointer(param_entity_type);
-		set_type_name(param_entity_type->get_type_name());
+		// 
+		set_type_pointer(ent_type);
+		// 
+		set_type_name(ent_type->get_type_name());
 
 		// Create entity attribute type instances for this entiy type instance!
-		std::vector<std::shared_ptr<EntityAttributeType>> linked_entity_attribute_types 
-			= param_entity_type->get_linked_attribute_types();
+		std::vector<std::shared_ptr<EntityAttributeType>> ent_type_attributes = ent_type->get_linked_attribute_types();
 
-		for(std::size_t i = 0; i< linked_entity_attribute_types.size(); i++)
+		for(std::size_t i = 0; i< ent_type_attributes.size(); i++)
 		{
 			// Create an entity attribute type instance and store it in the map.
-			linked_entity_attribute_type_instances[linked_entity_attribute_types[i]] 
-				= std::make_shared<EntityAttributeTypeInstance>(linked_entity_attribute_types[i]);
+			linked_attributes[ent_type_attributes[i]] = entsys->create_entity_attribute_type_instance(ent_type_attributes[i]);
 		}
 	}
 
 
 	EntityTypeInstance::~EntityTypeInstance()
 	{
-		// Call constructors of associated
-		// entity attribute type instances
-		// when destroying entity type instance.
+		// Destroy instances of associated entity attribute types.
 		// Loop through std::map using range-based loop.
 		// No need for std::const_iterator, C++11 rocks!
-		for(const auto& map_pair : linked_entity_attribute_type_instances)
+		for(const auto& map_pair : linked_attributes)
 		{
 			// TODO: Debug!
 			map_pair.second->~EntityAttributeTypeInstance();
@@ -43,79 +43,77 @@ namespace entity_system {
 	}
 
 
-	void EntityTypeInstance::set_attribute_data(const std::shared_ptr<EntityAttributeType>& param_entity_attribute_type,
-		                                        const int& param_int_data)
+	void EntityTypeInstance::set_attribute_data(const std::shared_ptr<EntityAttributeType>& ent_attr_type, const int& int_data)
 	{
-		linked_entity_attribute_type_instances[param_entity_attribute_type]->set(param_int_data);
+		linked_attributes[ent_attr_type]->set(int_data);
 	}
 
 
-	void EntityTypeInstance::set_attribute_data(const std::shared_ptr<EntityAttributeType>& param_entity_attribute_type, const bool& param_bool_data)
+	void EntityTypeInstance::set_attribute_data(const std::shared_ptr<EntityAttributeType>& ent_attr_type, const bool& bool_data)
 	{
-		linked_entity_attribute_type_instances[param_entity_attribute_type]->set(param_bool_data);
+		linked_attributes[ent_attr_type]->set(bool_data);
 	}
 
 
-	void EntityTypeInstance::set_attribute_data(const std::shared_ptr<EntityAttributeType>& param_entity_attribute_type, const float& param_float_data)
+	void EntityTypeInstance::set_attribute_data(const std::shared_ptr<EntityAttributeType>& ent_attr_type, const float& float_data)
 	{
-		linked_entity_attribute_type_instances[param_entity_attribute_type]->set(param_float_data);
+		linked_attributes[ent_attr_type]->set(float_data);
 	}
 
 
-	void EntityTypeInstance::set_attribute_data(const std::shared_ptr<EntityAttributeType>& param_entity_attribute_type, const double& param_double_data)
+	void EntityTypeInstance::set_attribute_data(const std::shared_ptr<EntityAttributeType>& ent_attr_type, const double& double_data)
 	{
-		linked_entity_attribute_type_instances[param_entity_attribute_type]->set(param_double_data);
+		linked_attributes[ent_attr_type]->set(double_data);
 	}
 
 
-	void EntityTypeInstance::set_attribute_data(const std::shared_ptr<EntityAttributeType>& param_entity_attribute_type, const std::string& param_string_data)
+	void EntityTypeInstance::set_attribute_data(const std::shared_ptr<EntityAttributeType>& ent_attr_type, const std::string& string_data)
 	{
-		linked_entity_attribute_type_instances[param_entity_attribute_type]->set(param_string_data);
+		linked_attributes[ent_attr_type]->set(string_data);
 	}
 
 
-	void EntityTypeInstance::set_attribute_data(const std::shared_ptr<EntityAttributeType>& param_entity_attribute_type, const std::int64_t& param_int64t_data)
+	void EntityTypeInstance::set_attribute_data(const std::shared_ptr<EntityAttributeType>& ent_attr_type, const std::int64_t& int64t_data)
 	{
-		linked_entity_attribute_type_instances[param_entity_attribute_type]->set(param_int64t_data);
+		linked_attributes[ent_attr_type]->set(int64t_data);
 	}
 
 
-	const int EntityTypeInstance::get_attribute_data_int(const std::shared_ptr<EntityAttributeType>& param_entity_attribute_type) const
+	void EntityTypeInstance::get_attribute_data(const std::shared_ptr<EntityAttributeType>& ent_attr_type, int& int_ref)
 	{
-		// TODO: Why does the [] operator not work here ?
-		return linked_entity_attribute_type_instances.at(param_entity_attribute_type)->get_int();
+		int_ref = linked_attributes[ent_attr_type]->get_int();
 	}
 
 
-	const bool EntityTypeInstance::get_attribute_data_bool(const std::shared_ptr<EntityAttributeType>& param_entity_attribute_type) const
+	void EntityTypeInstance::get_attribute_data(const std::shared_ptr<EntityAttributeType>& ent_attr_type, bool& bool_ref)
 	{
-		return linked_entity_attribute_type_instances.at(param_entity_attribute_type)->get_bool();
-	}
-
-
-	const float EntityTypeInstance::get_attribute_data_float(const std::shared_ptr<EntityAttributeType>& param_entity_attribute_type) const
-	{
-		return linked_entity_attribute_type_instances.at(param_entity_attribute_type)->get_float();
-	}
-
-
-	const double EntityTypeInstance::get_attribute_data_double(const std::shared_ptr<EntityAttributeType>& param_entity_attribute_type) const
-	{
-		return linked_entity_attribute_type_instances.at(param_entity_attribute_type)->get_double();
-	}
-
-
-	const std::string EntityTypeInstance::get_attribute_data_string(const std::shared_ptr<EntityAttributeType>& param_entity_attribute_type) const
-	{
-		return linked_entity_attribute_type_instances.at(param_entity_attribute_type)->get_string();
-	}
-
-
-	const std::int64_t EntityTypeInstance::get_attribute_data_int64(const std::shared_ptr<EntityAttributeType>& param_entity_attribute_type) const
-	{
-		return linked_entity_attribute_type_instances.at(param_entity_attribute_type)->get_int64();
+		bool_ref = linked_attributes[ent_attr_type]->get_bool();
 	}
 	
+	
+	void EntityTypeInstance::get_attribute_data(const std::shared_ptr<EntityAttributeType>& ent_attr_type, float& float_ref)
+	{
+		float_ref = linked_attributes[ent_attr_type]->get_float();
+	}
+	
+
+	void EntityTypeInstance::get_attribute_data(const std::shared_ptr<EntityAttributeType>& ent_attr_type, double& double_ref)
+	{
+		double_ref = linked_attributes[ent_attr_type]->get_double();
+	}
+	
+	
+	void EntityTypeInstance::get_attribute_data(const std::shared_ptr<EntityAttributeType>& ent_attr_type, std::string& string_ref)
+	{
+		string_ref = linked_attributes[ent_attr_type]->get_string();
+	}
+
+
+	void EntityTypeInstance::get_attribute_data(const std::shared_ptr<EntityAttributeType>& ent_attr_type, std::int64_t& int64_ref)
+	{
+		int64_ref = linked_attributes[ent_attr_type]->get_int64();
+	}
+
 
 };
 };

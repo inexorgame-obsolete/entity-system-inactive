@@ -17,6 +17,7 @@
 namespace inexor {
 namespace entity_system {
 	
+
 	// Initialisation macros for the entity system.
 	#define ENT_ATTR_TYPE                    std::shared_ptr<EntityAttributeType>
 	#define ENT_ATTR_TYPE_INSTANCE           std::shared_ptr<EntityAttributeTypeInstance>

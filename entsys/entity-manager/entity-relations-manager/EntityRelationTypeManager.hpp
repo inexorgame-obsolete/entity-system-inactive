@@ -21,16 +21,10 @@ namespace entity_system {
 
         protected:
 
-			// 
 			EntityRelationTypeManager();
-
-			// 
 			~EntityRelationTypeManager();
 
 		public:
-
-			// TODO: Should this be public ?
-			void delete_all_entity_relation_types();
 
 			// Search through the map of available types of relations of entities.
 			bool does_entity_relation_type_exist(const std::string&);
@@ -46,6 +40,10 @@ namespace entity_system {
 			// Deletes an entity type from the entity system.
 			ENTSYS_RESULT delete_entity_relation_type(const std::string&);
 			ENTSYS_RESULT delete_entity_relation_type(const std::shared_ptr<EntityRelationType>&);
+			// TODO: Delete by UUID.
+
+			// Delete all entity relation types.
+			void delete_all_entity_relation_types();
 
 	};
 

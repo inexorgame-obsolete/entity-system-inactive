@@ -10,13 +10,11 @@ namespace entity_system {
 
     EntityRelationTypeInstanceManager::EntityRelationTypeInstanceManager()
     {
-		// TODO: implement!
     }
 
 
     EntityRelationTypeInstanceManager::~EntityRelationTypeInstanceManager()
     {
-		// TODO: implement!
     }
 
 
@@ -41,6 +39,7 @@ namespace entity_system {
 	{
 		return get_type_instance_count();
 	}
+
 
 };
 };

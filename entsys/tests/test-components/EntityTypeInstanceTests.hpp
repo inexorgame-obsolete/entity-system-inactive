@@ -52,15 +52,21 @@ TEST(Test_EntityTypeInstance, set_attribute_data)
 
 	const int dmg_val = 12;
 	pickup1->set_attribute_data(weapon_dmg, dmg_val);
-	ASSERT_EQ(pickup1->get_attribute_data_int(weapon_dmg), dmg_val);
+	int dmg_val_test = 0;
+	pickup1->get_attribute_data(weapon_dmg, dmg_val_test);
+	ASSERT_EQ(dmg_val_test, dmg_val);
 
 	const int weight_val = 134;
 	pickup1->set_attribute_data(weapon_weight, weight_val);
-	ASSERT_EQ(pickup1->get_attribute_data_int(weapon_weight), weight_val);
+	int weight_val_test = 0;
+	pickup1->get_attribute_data(weapon_weight, weight_val_test);
+	ASSERT_EQ(weight_val_test, weight_val);
 
 	const int magazine_size = 60;
 	pickup1->set_attribute_data(weapon_magazine_size, magazine_size);
-	ASSERT_EQ(pickup1->get_attribute_data_int(weapon_magazine_size), magazine_size);
+	int magazine_val_test = 0;
+	pickup1->get_attribute_data(weapon_magazine_size, magazine_val_test);
+	ASSERT_EQ(magazine_val_test, magazine_size);
 
 	// Cleanup!
 	entsys->reset_entity_system();

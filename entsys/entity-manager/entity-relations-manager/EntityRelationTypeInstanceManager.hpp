@@ -4,7 +4,6 @@
 #pragma once
 
 #include "../entity-relations-manager/entity-relation-type-instance/EntityRelationTypeInstance.hpp"
-
 #include "../../templates/TypeInstanceManagerTemplate.hpp"
 
 
@@ -17,10 +16,7 @@ namespace entity_system {
     {
         protected:
             
-			// 
             EntityRelationTypeInstanceManager();
-            
-			// 
 			~EntityRelationTypeInstanceManager();
 
 		public:
