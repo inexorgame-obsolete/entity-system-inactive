@@ -22,7 +22,12 @@ namespace entity_system {
 
 	EntityRelationType::~EntityRelationType()
 	{
-		// TODO: Implement!
+	}
+	
+	
+	void EntityRelationType::link_entity_relation_attribute_type(const std::shared_ptr<EntityRelationAttributeType>& ent_rel_attr_type)
+	{
+		linked_rel_attr_types.push_back(ent_rel_attr_type);
 	}
 
 
@@ -30,13 +35,6 @@ namespace entity_system {
 	{
 		// TODO: Implement!
 		return ENTSYS_DATA_INVALID;
-	}
-	
-	
-	ENTSYS_RESULT EntityRelationType::link_entity_relation_attribute_type()
-	{
-		// TODO: Implement!
-		return ENTSYS_ERROR;
 	}
 
 

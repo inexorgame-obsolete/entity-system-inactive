@@ -17,33 +17,18 @@ namespace entity_system {
 	{
 		private:
 			
-			// The name of the type
+			// The unique name of the type.
 			std::string type_title;
 
 			// TODO: Implement UUID here!
 			
 		protected:
 
+			TypeBase();
+			~TypeBase();
 
-			// 
-			TypeBase()
-			{
-				// TODO: Create UUID!
-			}
-
-
-			// 
-			~TypeBase()
-			{
-			}
-
-
-			// 
-			void set_type_name(const std::string& type_name)
-			{
-				type_title = type_name;
-			}
-
+			// Set the name of this type.
+			void set_type_name(const std::string& type_name);
 
 			// TODO: Implement get_UUID() method!
 
@@ -53,12 +38,8 @@ namespace entity_system {
 		
 		public:
 
-			//
-			const std::string get_type_name() const
-			{
-				return type_title;
-			}
-
+			// Get the name of this type.
+			const std::string get_type_name() const;
 
 
 	};

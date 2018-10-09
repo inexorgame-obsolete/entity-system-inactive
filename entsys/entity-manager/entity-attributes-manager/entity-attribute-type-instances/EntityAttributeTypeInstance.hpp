@@ -21,6 +21,7 @@ namespace entity_system {
 			EntityAttributeTypeInstance(const std::shared_ptr<EntityAttributeType>&);
 			~EntityAttributeTypeInstance();
 
+			// Note: Set and get methods are already implemented by inheriting from DataContainer.
 
 	};
 

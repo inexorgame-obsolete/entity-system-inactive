@@ -26,7 +26,7 @@ namespace entity_system {
 
 			// This vector of relation attribute types will be linked
 			// to the entity relation type.
-			std::vector<std::shared_ptr<EntityRelationAttributeType>> linked_relation_attribute_types;
+			std::vector<std::shared_ptr<EntityRelationAttributeType>> linked_rel_attr_types;
 
 
 		public:
@@ -37,15 +37,16 @@ namespace entity_system {
 			{
 			}
 			~EntityRelationType();
+
+			// Links an entity relation attribute type.
+			void link_entity_relation_attribute_type(const std::shared_ptr<EntityRelationAttributeType>&);
 			
+			// TODO: Add relation attribute types!
+			// TODO: Get relation attribute types!
+						
 			// Implement data validation method as required by base class inheritance!
 			virtual ENTSYS_DATA_VALIDATION_RESULT validate() override;
 
-			// Links an entity relation attribute type.
-			ENTSYS_RESULT link_entity_relation_attribute_type();
-			
-			// TODO: Add and remove attributes!
-			// TODO: Implement get methods.
 
 	};
 
