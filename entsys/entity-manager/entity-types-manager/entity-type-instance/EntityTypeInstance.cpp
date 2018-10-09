@@ -43,73 +43,79 @@ namespace entity_system {
 
 	void EntityTypeInstance::set_attribute_data(const std::shared_ptr<EntityAttributeType>& ent_attr_type, const int& int_data)
 	{
-		linked_attributes[ent_attr_type]->set(int_data);
+		if(type_pointer->has_attribute_type(ent_attr_type)) linked_attributes[ent_attr_type]->set(int_data);
 	}
 
 
 	void EntityTypeInstance::set_attribute_data(const std::shared_ptr<EntityAttributeType>& ent_attr_type, const bool& bool_data)
 	{
-		linked_attributes[ent_attr_type]->set(bool_data);
+		if(type_pointer->has_attribute_type(ent_attr_type)) linked_attributes[ent_attr_type]->set(bool_data);
 	}
 
 
 	void EntityTypeInstance::set_attribute_data(const std::shared_ptr<EntityAttributeType>& ent_attr_type, const float& float_data)
 	{
-		linked_attributes[ent_attr_type]->set(float_data);
+		if(type_pointer->has_attribute_type(ent_attr_type)) linked_attributes[ent_attr_type]->set(float_data);
 	}
 
 
 	void EntityTypeInstance::set_attribute_data(const std::shared_ptr<EntityAttributeType>& ent_attr_type, const double& double_data)
 	{
-		linked_attributes[ent_attr_type]->set(double_data);
+		if(type_pointer->has_attribute_type(ent_attr_type)) linked_attributes[ent_attr_type]->set(double_data);
 	}
 
 
 	void EntityTypeInstance::set_attribute_data(const std::shared_ptr<EntityAttributeType>& ent_attr_type, const std::string& string_data)
 	{
-		linked_attributes[ent_attr_type]->set(string_data);
+		if(type_pointer->has_attribute_type(ent_attr_type)) linked_attributes[ent_attr_type]->set(string_data);
 	}
 
 
 	void EntityTypeInstance::set_attribute_data(const std::shared_ptr<EntityAttributeType>& ent_attr_type, const std::int64_t& int64t_data)
 	{
-		linked_attributes[ent_attr_type]->set(int64t_data);
+		if(type_pointer->has_attribute_type(ent_attr_type)) linked_attributes[ent_attr_type]->set(int64t_data);
 	}
 
 
 	void EntityTypeInstance::get_attribute_data(const std::shared_ptr<EntityAttributeType>& ent_attr_type, int& int_ref)
 	{
-		int_ref = linked_attributes[ent_attr_type]->get_int();
+		if(type_pointer->has_attribute_type(ent_attr_type)) int_ref = linked_attributes[ent_attr_type]->get_int();
+		else int_ref = 0;
 	}
 
 
 	void EntityTypeInstance::get_attribute_data(const std::shared_ptr<EntityAttributeType>& ent_attr_type, bool& bool_ref)
 	{
-		bool_ref = linked_attributes[ent_attr_type]->get_bool();
+		if(type_pointer->has_attribute_type(ent_attr_type)) bool_ref = linked_attributes[ent_attr_type]->get_bool();
+		else bool_ref = false;
 	}
 	
 	
 	void EntityTypeInstance::get_attribute_data(const std::shared_ptr<EntityAttributeType>& ent_attr_type, float& float_ref)
 	{
-		float_ref = linked_attributes[ent_attr_type]->get_float();
+		if(type_pointer->has_attribute_type(ent_attr_type)) float_ref = linked_attributes[ent_attr_type]->get_float();
+		else float_ref = 0.0f;
 	}
 	
 
 	void EntityTypeInstance::get_attribute_data(const std::shared_ptr<EntityAttributeType>& ent_attr_type, double& double_ref)
 	{
-		double_ref = linked_attributes[ent_attr_type]->get_double();
+		if(type_pointer->has_attribute_type(ent_attr_type)) double_ref = linked_attributes[ent_attr_type]->get_double();
+		else double_ref = 0.0;
 	}
 	
 	
 	void EntityTypeInstance::get_attribute_data(const std::shared_ptr<EntityAttributeType>& ent_attr_type, std::string& string_ref)
 	{
-		string_ref = linked_attributes[ent_attr_type]->get_string();
+		if(type_pointer->has_attribute_type(ent_attr_type)) string_ref = linked_attributes[ent_attr_type]->get_string();
+		else string_ref = "";
 	}
 
 
 	void EntityTypeInstance::get_attribute_data(const std::shared_ptr<EntityAttributeType>& ent_attr_type, std::int64_t& int64_ref)
 	{
-		int64_ref = linked_attributes[ent_attr_type]->get_int64();
+		if(type_pointer->has_attribute_type(ent_attr_type)) int64_ref = linked_attributes[ent_attr_type]->get_int64();
+		else int64_ref = 0;
 	}
 
 
