@@ -18,10 +18,10 @@ namespace entity_system {
 	}
 
 
-	std::shared_ptr<EntityTypeInstance> EntityTypeInstanceManager::create_entity_type_instance(const std::shared_ptr<EntityType>& entity_type_pointer)
+	std::shared_ptr<EntityTypeInstance> EntityTypeInstanceManager::create_entity_type_instance(const std::shared_ptr<EntityType>& ent_type)
 	{
 		// Create a new entity type instance.
-		std::shared_ptr<EntityTypeInstance> new_ent_type_instance = std::make_shared<EntityTypeInstance>(entity_type_pointer);
+		std::shared_ptr<EntityTypeInstance> new_ent_type_instance = std::make_shared<EntityTypeInstance>(ent_type);
 		
 		// Call template class backend method.
 		add_instance_to_buffer(new_ent_type_instance);

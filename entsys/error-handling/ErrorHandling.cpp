@@ -18,13 +18,11 @@ namespace entity_system {
 
 	EntitySystemErrorHandler::EntitySystemErrorHandler()
 	{
-		// TODO: implement!
 	}
 
 	
 	EntitySystemErrorHandler::~EntitySystemErrorHandler()
 	{
-		// TODO: implement!
 	}
 
 

@@ -23,30 +23,30 @@ namespace entity_system {
     }
 
 
-	bool EntityAttributeTypeManager::does_entity_attribute_type_exist(const std::string& param_entity_attribute_type_name)
+	bool EntityAttributeTypeManager::does_entity_attribute_type_exist(const std::string& ent_attr_type_name)
 	{
-		return does_type_exist(param_entity_attribute_type_name);
+		return does_type_exist(ent_attr_type_name);
 	}
 
 
-	bool EntityAttributeTypeManager::does_entity_attribute_type_exist(const std::shared_ptr<EntityAttributeType>& param_entity_attribute_type)
+	bool EntityAttributeTypeManager::does_entity_attribute_type_exist(const std::shared_ptr<EntityAttributeType>& ent_attr_type)
 	{
-		return does_entity_attribute_type_exist(param_entity_attribute_type->get_type_name());
+		return does_entity_attribute_type_exist(ent_attr_type->get_type_name());
 	}
 
 
-	std::shared_ptr<EntityAttributeType> EntityAttributeTypeManager::create_entity_attribute_type(const std::string& param_ent_attr_type_name,
-		                                                                                          const ENTSYS_DATA_TYPE& param_ent_attr_data_type)
+	std::shared_ptr<EntityAttributeType> EntityAttributeTypeManager::create_entity_attribute_type(const std::string& ent_attr_type_name,
+		                                                                                          const ENTSYS_DATA_TYPE& ent_attr_data_type)
 	{
 		// Check if entity attribute type's name is not empty.
-		if(! is_new_type_name_valid(param_ent_attr_type_name)) return entity_attribute_type_error;
+		if(! is_new_type_name_valid(ent_attr_type_name)) return entity_attribute_type_error;
 
 		// Create entity attribute type.
 		std::shared_ptr<EntityAttributeType> new_ent_attr_type
-			= entsys->create_entity_attribute_type(param_ent_attr_type_name, param_ent_attr_data_type);
+			= entsys->create_entity_attribute_type(ent_attr_type_name, ent_attr_data_type);
 		
 		// Add new entity attribute type to the global map.
-		add_type_to_map(param_ent_attr_type_name, new_ent_attr_type);
+		add_type_to_map(ent_attr_type_name, new_ent_attr_type);
 
 		return new_ent_attr_type;
 	}
@@ -58,9 +58,9 @@ namespace entity_system {
 	}
 
 
-	void EntityAttributeTypeManager::delete_entity_attribute_type(const std::string& param_entity_attribute_type)
+	void EntityAttributeTypeManager::delete_entity_attribute_type(const std::string& ent_attr_type)
 	{
-		delete_type(param_entity_attribute_type);
+		delete_type(ent_attr_type);
 	}
 
 

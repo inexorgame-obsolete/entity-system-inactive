@@ -8,9 +8,9 @@ namespace inexor {
 namespace entity_system {
     
 
-    EntityType::EntityType(const std::string& param_entity_type_name)
+    EntityType::EntityType(const std::string& ent_type_name)
     {
-		set_type_name(param_entity_type_name);
+		set_type_name(ent_type_name);
 	}
 
 
@@ -33,12 +33,12 @@ namespace entity_system {
 	}
 
 
-	bool EntityType::has_attribute_type(const std::string& param_entity_attribute_type_name)
+	bool EntityType::has_attribute_type(const std::string& ent_attr_type_name)
 	{
 		// TODO: Check how expensive this method is!
 		bool entity_attribute_type_found = false;
 
-		std::string name1 = param_entity_attribute_type_name;
+		std::string name1 = ent_attr_type_name;
 		std::string name2 = "";
 
 		for(std::size_t i=0; i< linked_attributes.size(); i++)
@@ -58,9 +58,9 @@ namespace entity_system {
 	}
 	
 
-	bool EntityType::has_attribute_type(const std::shared_ptr<EntityAttributeType>& param_entity_attribute_type)
+	bool EntityType::has_attribute_type(const std::shared_ptr<EntityAttributeType>& ent_attr_type)
 	{
-		return has_attribute_type(param_entity_attribute_type->get_type_name());
+		return has_attribute_type(ent_attr_type->get_type_name());
 	}
 
 
@@ -70,16 +70,16 @@ namespace entity_system {
 	}
 
 
-	ENTSYS_RESULT EntityType::link_attribute_type(const std::shared_ptr<EntityAttributeType>& param_linked_entity_attribute_type)
+	ENTSYS_RESULT EntityType::link_attribute_type(const std::shared_ptr<EntityAttributeType>& ent_attr_type)
 	{
-		std::string entity_attribute_type_name = param_linked_entity_attribute_type->get_type_name();
+		std::string entity_attribute_type_name = ent_attr_type->get_type_name();
 
 		if(!has_attribute_type(entity_attribute_type_name))
 		{
 			// The entity attribute type is
 			// not already linked to this entity type.
 			// Link entity attribute type to entity type!
-			linked_attributes.push_back(param_linked_entity_attribute_type);
+			linked_attributes.push_back(ent_attr_type);
 
 			return ENTSYS_SUCCESS;
 		}

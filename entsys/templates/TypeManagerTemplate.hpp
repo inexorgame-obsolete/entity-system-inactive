@@ -54,26 +54,26 @@ namespace entity_system {
 			
 
 			// 
-			bool is_new_type_name_valid(const std::string& param_new_type_name)
+			bool is_new_type_name_valid(const std::string& type_name)
 			{
-				if (0 == param_new_type_name.compare("")) return false;
-				if (does_type_exist(param_new_type_name)) return false;
+				if (0 == type_name.compare("")) return false;
+				if (does_type_exist(type_name)) return false;
 				return true;
 			}
 
 
 			// Add a new type to the type map.
-			void add_type_to_map(const std::string& new_type_name, const std::shared_ptr<T>& new_type)
+			void add_type_to_map(const std::string& type_name, const std::shared_ptr<T>& new_type)
 			{
 				// TODO: Add MUTEX here!
-				type_map[new_type_name] = new_type;
+				type_map[type_name] = new_type;
 			}
 
 
 			// 
-			const std::shared_ptr<T> get_type(const std::string& param_type_name)
+			const std::shared_ptr<T> get_type(const std::string& type_name)
 			{
-				return type_map[param_type_name];
+				return type_map[type_name];
 			}
 
 
@@ -85,11 +85,11 @@ namespace entity_system {
 
 
 			// Delete one specific type.
-			void delete_type(const std::string& param_name)
+			void delete_type(const std::string& type_name)
 			{
 				// TODO: Add MUTEX here!
 				// TODO: Delete all instances first!
-				type_map.erase(param_name);
+				type_map.erase(type_name);
 			}
 			
 

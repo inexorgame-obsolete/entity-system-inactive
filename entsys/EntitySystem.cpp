@@ -10,7 +10,11 @@ namespace entity_system {
 
 	EntitySystem::EntitySystem()
 	{
-		// TODO: Implement!
+	}
+
+	
+	EntitySystem::~EntitySystem()
+	{
 	}
 
 

@@ -8,24 +8,16 @@ namespace inexor {
 namespace entity_system {
 
 
-	EntityRelationAttributeType::EntityRelationAttributeType(const std::string& param_entity_relation_attribute_type_name,
-		                                                     const ENTSYS_DATA_TYPE& param_entity_relation_attribute_data_type)
+	EntityRelationAttributeType::EntityRelationAttributeType(const std::string& ent_rel_attr_type_name,
+		                                                     const ENTSYS_DATA_TYPE& ent_rel_attr_type_data_type)
 	{
-		entity_relation_attribute_type_name = param_entity_relation_attribute_type_name;
-		entity_relation_attribute_data_type = param_entity_relation_attribute_data_type;
+		entity_relation_attribute_type_name = ent_rel_attr_type_name;
+		entity_relation_attribute_data_type = ent_rel_attr_type_data_type;
 	}
 
 
 	EntityRelationAttributeType::~EntityRelationAttributeType()
 	{
-		// TODO: Implement!
-	}
-
-	
-	ENTSYS_DATA_VALIDATION_RESULT EntityRelationAttributeType::validate()
-	{
-		// TODO: Implement!
-		return ENTSYS_DATA_INVALID;
 	}
 
 
@@ -39,6 +31,14 @@ namespace entity_system {
 	{
 		return entity_relation_attribute_type_name;
 	}
+
+	
+	ENTSYS_DATA_VALIDATION_RESULT EntityRelationAttributeType::validate()
+	{
+		// TODO: Implement!
+		return ENTSYS_DATA_INVALID;
+	}
+
 
 
 };

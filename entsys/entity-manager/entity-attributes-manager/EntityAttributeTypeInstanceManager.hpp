@@ -17,10 +17,7 @@ namespace entity_system {
     {
 		protected:
             
-			// 
 			EntityAttributeTypeInstanceManager();
-            
-			// 
 			~EntityAttributeTypeInstanceManager();
 
 		public:

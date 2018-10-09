@@ -21,7 +21,7 @@ namespace entity_system {
 			std::shared_ptr<EntityType> source_entity_type;
 
 			// The entity type of the destination entity.
-			std::shared_ptr<EntityType> destination_entity_type;
+			std::shared_ptr<EntityType> target_entity_type;
 
 
 			// This vector of relation attribute types will be linked

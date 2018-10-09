@@ -42,9 +42,10 @@ namespace entity_system {
 
 
 			// 
-			void add_instance_to_buffer(const std::shared_ptr<T>& param_instance_pointer)
+			void add_instance_to_buffer(const std::shared_ptr<T>& type_instance)
 			{
-				type_instances.push_back(param_instance_pointer);
+				// TODO: Add MUTEX here!
+				type_instances.push_back(type_instance);
 			}
 
 
@@ -58,6 +59,7 @@ namespace entity_system {
 			// 
 			void delete_all_type_instances()
 			{
+				// TODO: Add MUTEX here!
 				type_instances.clear();
 			}
 

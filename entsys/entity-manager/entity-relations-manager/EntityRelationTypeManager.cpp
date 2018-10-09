@@ -19,24 +19,24 @@ namespace entity_system {
     }
 
 
-	bool EntityRelationTypeManager::does_entity_relation_type_exist(const std::string& param_entity_relation_type_name)
+	bool EntityRelationTypeManager::does_entity_relation_type_exist(const std::string& ent_rel_type_name)
 	{
-		return does_type_exist(param_entity_relation_type_name);
+		return does_type_exist(ent_rel_type_name);
 	}
 
 
-	std::shared_ptr<EntityRelationType> EntityRelationTypeManager::create_entity_relation_type(const std::string& param_new_entity_relation_type_name,
-		                                                                                       const std::shared_ptr<EntityType>& param_source_type,
-		                                                                                       const std::shared_ptr<EntityType>& param_destination_type)
+	std::shared_ptr<EntityRelationType> EntityRelationTypeManager::create_entity_relation_type(const std::string& ent_rel_type_name,
+		                                                                                       const std::shared_ptr<EntityType>& ent_type_source,
+		                                                                                       const std::shared_ptr<EntityType>& ent_type_target)
 	{
 		// Validate new entity relation type name.
-		if(!is_new_type_name_valid(param_new_entity_relation_type_name)) return entity_relation_type_error;
+		if(!is_new_type_name_valid(ent_rel_type_name)) return entity_relation_type_error;
 
 		// Create new entity relation type.
-		std::shared_ptr<EntityRelationType> new_ent_relation_type = std::make_shared<EntityRelationType>(param_new_entity_relation_type_name, param_source_type, param_destination_type);
+		std::shared_ptr<EntityRelationType> new_ent_relation_type = std::make_shared<EntityRelationType>(ent_rel_type_name, ent_type_source, ent_type_target);
 
-		// TODO: [CRITICAL] Implement type->get_type_name() method using template classes for types!
-		add_type_to_map(param_new_entity_relation_type_name, new_ent_relation_type);
+		// Add new entity relation type to type map.
+		add_type_to_map(ent_rel_type_name, new_ent_relation_type);
 		return new_ent_relation_type;
 	}
 
@@ -47,17 +47,16 @@ namespace entity_system {
 	}
 
 
-	ENTSYS_RESULT EntityRelationTypeManager::delete_entity_relation_type(const std::string& param_entity_relation_type_name)
+	ENTSYS_RESULT EntityRelationTypeManager::delete_entity_relation_type(const std::string& ent_rel_type_name)
 	{
-		// TODO: [CRITICAL] Remove all instances of this.
-		delete_type(param_entity_relation_type_name);
+		delete_type(ent_rel_type_name);
 		return ENTSYS_SUCCESS;
 	}
 
 	
-	ENTSYS_RESULT EntityRelationTypeManager::delete_entity_relation_type(const std::shared_ptr<EntityRelationType>& param_entity_relation_type)
+	ENTSYS_RESULT EntityRelationTypeManager::delete_entity_relation_type(const std::shared_ptr<EntityRelationType>& ent_rel_type)
 	{
-		return delete_entity_relation_type(param_entity_relation_type->get_type_name());
+		return delete_entity_relation_type(ent_rel_type->get_type_name());
 	}
 
 

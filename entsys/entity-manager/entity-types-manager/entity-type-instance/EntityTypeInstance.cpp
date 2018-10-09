@@ -14,9 +14,7 @@ namespace entity_system {
 
 	EntityTypeInstance::EntityTypeInstance(const std::shared_ptr<EntityType>& ent_type)
 	{
-		// 
 		set_type_pointer(ent_type);
-		// 
 		set_type_name(ent_type->get_type_name());
 
 		// Create entity attribute type instances for this entiy type instance!

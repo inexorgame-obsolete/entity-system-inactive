@@ -29,10 +29,10 @@ namespace entity_system {
 
 			const std::size_t get_relation_type_instances_count() const;
 
-			// TODO: get instances count.
-			// TODO: delete instance.
-			// TODO: get instance(s).
-			// TODO: delete all instances.
+			// TODO: Get instances count.
+			// TODO: Delete instance.
+			// TODO: Get instance(s).
+			// TODO: Delete all instances.
 
     };
 

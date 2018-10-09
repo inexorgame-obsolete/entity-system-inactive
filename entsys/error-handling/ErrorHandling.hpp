@@ -25,10 +25,7 @@ namespace entity_system {
 
 		public:
 
-			// 
 			EntitySystemErrorHandler();
-
-			// 
 			~EntitySystemErrorHandler();
 
 	};

@@ -10,13 +10,13 @@ namespace inexor {
 namespace entity_system {
 
 
-	EntityRelationType::EntityRelationType(const std::string& param_relation_type_name,
-		                                   const std::shared_ptr<EntityType>& param_source_type,
-		                                   const std::shared_ptr<EntityType>& param_destination_type)
+	EntityRelationType::EntityRelationType(const std::string& rel_type_name,
+		                                   const std::shared_ptr<EntityType>& ent_type_source,
+		                                   const std::shared_ptr<EntityType>& ent_type_target)
 	{
-		set_type_name(param_relation_type_name);
-		source_entity_type = param_source_type;
-		destination_entity_type = param_destination_type;
+		set_type_name(rel_type_name);
+		source_entity_type = ent_type_source;
+		target_entity_type = ent_type_target;
 	}
 
 

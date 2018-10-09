@@ -14,18 +14,19 @@ namespace entity_system {
 	template <typename T1, typename T2>
 	class TypeInstanceBase
 	{
-		private:
-
+		public:
+			
 			//
-			std::string type_name;
+			std::string type_title;
+			
+			// TODO: Implement UUIDs!
+
+		protected:
 
 			// 
 			std::shared_ptr<T1> type_pointer;
 
-			// TODO: Implement UUIDs!
-
 		public:
-
 
 			// 
 			TypeInstanceBase()
@@ -40,25 +41,27 @@ namespace entity_system {
 
 
 			// 
-			void set_type_name(const std::string& param_type_name)
+			void set_type_name(const std::string& type_name)
 			{
-				type_name = param_type_name;
+				type_title = type_name;
 			}
 
 			// 
 			const std::string get_type_name() const
 			{
-				return type_name;
+				return type_title;
 			}
 
 
 			// 
-			void set_type_pointer(const std::shared_ptr<T1>& param_type_pointer)
+			void set_type_pointer(const std::shared_ptr<T1>& type_ptr)
 			{
-				type_pointer = param_type_pointer;
+				type_pointer = type_ptr;
 			}
 
+
 			// TODO: Implement UUID get methods.
+
 
 	};
 

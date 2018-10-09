@@ -30,6 +30,8 @@ namespace entity_system {
 		public:
 
 			EntitySystem();
+			~EntitySystem();
+	
 	};
 
 

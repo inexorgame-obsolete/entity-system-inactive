@@ -18,7 +18,6 @@ namespace entity_system {
 
 	EntityAttributeTypeInstance::~EntityAttributeTypeInstance()
 	{
-		// TODO: Implement!
 	}
 
 
