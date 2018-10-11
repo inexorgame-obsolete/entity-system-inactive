@@ -19,7 +19,6 @@ namespace entity_system {
     
 	
 	// A base class for types of entity attributes.
-	// This class MUST implement a data validation method because of inheritance rules!
     class EntityAttributeType : public TypeBase, public AttributeBase
     {
         public:
@@ -31,7 +30,7 @@ namespace entity_system {
 			virtual ENTSYS_DATA_VALIDATION_RESULT validate() override;
 
 	};
-    
+
 
 };
 };

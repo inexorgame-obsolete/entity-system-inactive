@@ -16,7 +16,7 @@ namespace entity_system {
     {
 		private:
 
-			// Error type.
+			// This error type will be returned when a method fails.
 			std::shared_ptr<EntityRelationType> entity_relation_type_error;
 
         protected:
@@ -38,8 +38,8 @@ namespace entity_system {
 			const std::size_t get_entity_relation_types_count() const;
 
 			// Deletes an entity type from the entity system.
-			ENTSYS_RESULT delete_entity_relation_type(const std::string&);
-			ENTSYS_RESULT delete_entity_relation_type(const std::shared_ptr<EntityRelationType>&);
+			void delete_entity_relation_type(const std::string&);
+			void delete_entity_relation_type(const std::shared_ptr<EntityRelationType>&);
 			// TODO: Delete by UUID.
 
 			// Delete all entity relation types.

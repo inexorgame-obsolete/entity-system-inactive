@@ -39,7 +39,7 @@ namespace entity_system {
 			// Returns the count of linked entity attribute types.
 			std::size_t get_linked_attributes_count() const;
 
-			// 
+			// Return a vector of linked attributes.
 			const std::vector<std::shared_ptr<EntityAttributeType>> get_linked_attribute_types() const;
 
 			// Deletes all linked attribute types.

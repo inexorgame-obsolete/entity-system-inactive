@@ -23,8 +23,8 @@ namespace entity_system {
 	EntityRelationType::~EntityRelationType()
 	{
 	}
-	
-	
+
+
 	void EntityRelationType::link_entity_relation_attribute_type(const std::shared_ptr<EntityRelationAttributeType>& ent_rel_attr_type)
 	{
 		linked_rel_attr_types.push_back(ent_rel_attr_type);

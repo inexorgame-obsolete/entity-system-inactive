@@ -23,20 +23,14 @@ namespace entity_system {
 			// The entity type of the destination entity.
 			std::shared_ptr<EntityType> target_entity_type;
 
-
-			// This vector of relation attribute types will be linked
-			// to the entity relation type.
+			// Linked entity relation attribute types.
 			std::vector<std::shared_ptr<EntityRelationAttributeType>> linked_rel_attr_types;
-
 
 		public:
 
 			EntityRelationType(const std::string&, const std::shared_ptr<EntityType>&, const std::shared_ptr<EntityType>&);
-			// TODO: Remove this!
-			EntityRelationType(const std::string&)
-			{
-			}
 			~EntityRelationType();
+
 
 			// Links an entity relation attribute type.
 			void link_entity_relation_attribute_type(const std::shared_ptr<EntityRelationAttributeType>&);
