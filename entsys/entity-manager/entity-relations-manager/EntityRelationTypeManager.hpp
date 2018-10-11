@@ -16,8 +16,8 @@ namespace entity_system {
     {
 		private:
 
-			// This error type will be returned when a method fails.
-			std::shared_ptr<EntityRelationType> entity_relation_type_error;
+			// This entity relation error type will be returned when a method fails.
+			std::shared_ptr<EntityRelationType> entity_relation_type_error = std::make_shared<EntityRelationType>("ERROR", nullptr, nullptr);
 
         protected:
 
@@ -26,18 +26,20 @@ namespace entity_system {
 
 		public:
 
-			// Search through the map of available types of relations of entities.
+			// Check if an entity relation type does already exist.
 			bool does_entity_relation_type_exist(const std::string&);
-			
+			bool does_entity_relation_type_exist(const std::shared_ptr<EntityRelationType>&);
+			// TODO: check by UUID!
+
 			// Create a new entity relation type and store it in the entity system.
 			std::shared_ptr<EntityRelationType> create_entity_relation_type(const std::string&,
 				                                                            const std::shared_ptr<EntityType>&,
 				                                                            const std::shared_ptr<EntityType>&);
 
-			// Returns the number of available types of entity relations.
+			// Return the number of available entity relation types.
 			const std::size_t get_entity_relation_types_count() const;
 
-			// Deletes an entity type from the entity system.
+			// Delete an entity relation type.
 			void delete_entity_relation_type(const std::string&);
 			void delete_entity_relation_type(const std::shared_ptr<EntityRelationType>&);
 			// TODO: Delete by UUID.

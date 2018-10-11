@@ -24,10 +24,10 @@ namespace entity_system {
 			AttributeBase();
 			~AttributeBase();
 
-			// Set the data of this attribute's data container.
+			// Set the data type of this attribute's data container.
 			void set_attribute_data_type(const ENTSYS_DATA_TYPE&);
 			
-			// Returns the data type of the attribute type.
+			// Return the data type of the attribute type.
 			ENTSYS_DATA_TYPE get_attribute_data_type() const;
 
 

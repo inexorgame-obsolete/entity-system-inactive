@@ -19,8 +19,8 @@ namespace entity_system {
     
 
 	// A base class for types of entity attributes.
-	// This class MUST implement a data validation method because of inheritance rules!
-    class EntityRelationAttributeType : public TypeBase, public AttributeBase
+    class EntityRelationAttributeType : public TypeBase,
+		                                public AttributeBase
     {
         public:
 						

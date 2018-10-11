@@ -23,22 +23,23 @@ namespace entity_system {
 		// Create a new entity type instance.
 		std::shared_ptr<EntityTypeInstance> new_ent_type_instance = std::make_shared<EntityTypeInstance>(ent_type);
 		
-		// Call template class backend method.
+		// Call method of the template base class.
 		add_instance_to_buffer(new_ent_type_instance);
+		
 		return new_ent_type_instance;
 	}
 
 
 	const std::size_t EntityTypeInstanceManager::get_entity_type_instance_count() const
 	{
-		// Call template class backend method.
+		// Call method of the template base class.
 		return get_type_instance_count();
 	}
 
 
 	void EntityTypeInstanceManager::delete_all_entity_type_instances()
 	{
-		// Call template class backend method.
+		// Call method of the template base class.
 		delete_all_type_instances();
 	}
 

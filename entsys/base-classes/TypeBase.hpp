@@ -17,10 +17,10 @@ namespace entity_system {
 	{
 		private:
 			
-			// The unique name of the type.
+			// The unique name of this type.
 			std::string type_title;
 
-			// TODO: Implement UUID here!
+			// TODO: Implement UUID!
 			
 		protected:
 

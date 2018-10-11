@@ -23,7 +23,7 @@ TEST(Test_EntityTypeInstance, create_entity_attribute_type_instance)
 	std::shared_ptr<EntityTypeInstance> minigunPickup3 = std::make_shared<EntityTypeInstance>(minigun);
 	std::shared_ptr<EntityTypeInstance> minigunPickup4 = std::make_shared<EntityTypeInstance>(minigun);
 
-	minigunPickup1->set_attribute_data(weapon_dmg, 166);
+	minigunPickup1->set_data(weapon_dmg, 166);
 
 	// Cleanup!
 	entsys->reset_entity_system();
@@ -51,21 +51,21 @@ TEST(Test_EntityTypeInstance, set_attribute_data)
 	std::shared_ptr<EntityTypeInstance> pickup4 = std::make_shared<EntityTypeInstance>(minigun);
 
 	const int dmg_val = 12;
-	pickup1->set_attribute_data(weapon_dmg, dmg_val);
+	pickup1->set_data(weapon_dmg, dmg_val);
 	int dmg_val_test = 0;
-	pickup1->get_attribute_data(weapon_dmg, dmg_val_test);
+	pickup1->set_data(weapon_dmg, dmg_val_test);
 	ASSERT_EQ(dmg_val_test, dmg_val);
 
 	const int weight_val = 134;
-	pickup1->set_attribute_data(weapon_weight, weight_val);
+	pickup1->set_data(weapon_weight, weight_val);
 	int weight_val_test = 0;
-	pickup1->get_attribute_data(weapon_weight, weight_val_test);
+	pickup1->set_data(weapon_weight, weight_val_test);
 	ASSERT_EQ(weight_val_test, weight_val);
 
 	const int magazine_size = 60;
-	pickup1->set_attribute_data(weapon_magazine_size, magazine_size);
+	pickup1->set_data(weapon_magazine_size, magazine_size);
 	int magazine_val_test = 0;
-	pickup1->get_attribute_data(weapon_magazine_size, magazine_val_test);
+	pickup1->set_data(weapon_magazine_size, magazine_val_test);
 	ASSERT_EQ(magazine_val_test, magazine_size);
 
 	// Cleanup!

@@ -10,8 +10,6 @@ namespace entity_system {
 
     EntityRelationTypeManager::EntityRelationTypeManager()
     {
-		// TODO: Debug!
-		entity_relation_type_error = std::make_shared<EntityRelationType>("ERROR", nullptr, nullptr);
     }
 
 
@@ -23,6 +21,12 @@ namespace entity_system {
 	bool EntityRelationTypeManager::does_entity_relation_type_exist(const std::string& ent_rel_type_name)
 	{
 		return does_type_exist(ent_rel_type_name);
+	}
+
+
+	bool EntityRelationTypeManager::does_entity_relation_type_exist(const std::shared_ptr<EntityRelationType>& ent_rel_type)
+	{
+		return does_entity_relation_type_exist(ent_rel_type->get_type_name());
 	}
 
 

@@ -5,7 +5,6 @@
 
 #include "entity-type/EntityType.hpp"
 #include "entity-type-instance/EntityTypeInstance.hpp"
-
 #include "../../templates/TypeInstanceManagerTemplate.hpp"
 
 
@@ -31,6 +30,8 @@ namespace entity_system {
 
 			// Delete all instances of entity types.
 			void delete_all_entity_type_instances();
+
+			// TODO: Delete by UUID!
 
 	};
 

@@ -8,13 +8,14 @@
 
 #include "../data-validation/DataValidation.hpp"
 
+// When using template classes it is not possible
+// to separate definitions of class methods from their declaration.
+// This is the reason why there is no cpp file for this header file!
+
 
 namespace inexor {
 namespace entity_system {
 
-
-	// When using template classes it is not possible
-	// to separate definitions of class methods from their declaration.
 
 	// A class template for instance manager classes.
 	// This will be used by EntityTypeInstanceManager,
@@ -25,17 +26,15 @@ namespace entity_system {
 	{
 		protected:
 
-			// In this vector we will store shared pointers of <T2> instances.
+			// Vector of stored shared pointers of <T2> instances.
 			std::vector<std::shared_ptr<T>> type_instances;
 			
 
-			// 
 			TypeInstanceManagerTemplate()
 			{
 			}
 
 			
-			// 
 			~TypeInstanceManagerTemplate()
 			{
 			}
@@ -63,8 +62,9 @@ namespace entity_system {
 				type_instances.clear();
 			}
 
-			// TODO: Delete instance.
-			// TODO: Get instance.
+
+			// TODO: Delete instance by UUID.
+			// TODO: Get instance by UUID.
 			
 	};
 

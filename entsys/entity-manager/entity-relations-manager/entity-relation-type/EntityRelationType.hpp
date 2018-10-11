@@ -4,7 +4,7 @@
 #pragma once
 
 #include "../../entity-types-manager/entity-type/EntityType.hpp"
-#include "../../entity-relations-manager/entity-relation-attribute-type/EntityRelationAttributeType.hpp"
+#include "../../entity-relation-attributes-manager/entity-relation-attribute-type/EntityRelationAttributeType.hpp"
 #include "../../../base-classes/TypeBase.hpp"
 
 
@@ -12,7 +12,7 @@ namespace inexor {
 namespace entity_system {
 
 	
-	// A base class for types of entity relations
+	// A base class for types of entity relations.
 	class EntityRelationType : public TypeBase
 	{
 		private:
@@ -20,10 +20,10 @@ namespace entity_system {
 			// The entity type of the source entity.
 			std::shared_ptr<EntityType> source_entity_type;
 
-			// The entity type of the destination entity.
+			// The entity type of the target entity.
 			std::shared_ptr<EntityType> target_entity_type;
 
-			// Linked entity relation attribute types.
+			// Vector of stored entity relation attribute types which are linked to this entity relation type.
 			std::vector<std::shared_ptr<EntityRelationAttributeType>> linked_rel_attr_types;
 
 		public:
@@ -32,11 +32,11 @@ namespace entity_system {
 			~EntityRelationType();
 
 
-			// Links an entity relation attribute type.
+			// Link an entity relation attribute type to this entity relation type.
 			void link_entity_relation_attribute_type(const std::shared_ptr<EntityRelationAttributeType>&);
 			
-			// TODO: Add relation attribute types!
-			// TODO: Get relation attribute types!
+			// Get linked entity relation attribute types.
+			std::vector<std::shared_ptr<EntityRelationAttributeType>> get_linked_attribute_types() const;
 						
 			// Implement data validation method as required by base class inheritance!
 			virtual ENTSYS_DATA_VALIDATION_RESULT validate() override;

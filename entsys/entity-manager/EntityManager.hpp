@@ -5,17 +5,21 @@
 
 #include <vector>
 
-// Entity types and instances of those.
+// Entity types and instances of them.
 #include "entity-types-manager\EntityTypeManager.hpp"
 #include "entity-types-manager\EntityTypeInstanceManager.hpp"
 
-// Entity attribute types and instances of those.
+// Entity attribute types and instances of them.
 #include "entity-attributes-manager\EntityAttributeTypeManager.hpp"
 #include "entity-attributes-manager\EntityAttributeTypeInstanceManager.hpp"
 
-// Entity relation types and instances of those.
+// Entity relation types and instances of them.
 #include "entity-relations-manager\EntityRelationTypeManager.hpp"
 #include "entity-relations-manager\EntityRelationTypeInstanceManager.hpp"
+
+// Entity relation attribute types and instances of them.
+#include "entity-relation-attributes-manager/EntityRelationAttributeTypeManager.hpp"
+#include "entity-relation-attributes-manager/EntityRelationAttributeTypeInstanceManager.hpp"
 
 
 namespace inexor {
@@ -29,7 +33,9 @@ namespace entity_system {
                           public EntityAttributeTypeManager,
                           public EntityAttributeTypeInstanceManager,
                           public EntityRelationTypeManager,
-                          public EntityRelationTypeInstanceManager
+                          public EntityRelationTypeInstanceManager,
+						  public EntityRelationAttributeTypeManager,
+		                  public EntityRelationAttributeTypeInstanceManager
     {
 
 		protected:

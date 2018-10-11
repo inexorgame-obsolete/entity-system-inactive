@@ -11,6 +11,7 @@ namespace entity_system {
 
 
 	// A template class for instances of types of any kind.
+	// T1 = type, T2 = type instance.
 	template <typename T1, typename T2>
 	class TypeInstanceBase
 	{
@@ -28,13 +29,12 @@ namespace entity_system {
 
 		public:
 
-			// 
+
 			TypeInstanceBase()
 			{
 			}
 
 
-			// 
 			~TypeInstanceBase()
 			{
 			}
@@ -45,6 +45,7 @@ namespace entity_system {
 			{
 				type_title = type_name;
 			}
+
 
 			// 
 			const std::string get_type_name() const
@@ -59,9 +60,8 @@ namespace entity_system {
 				type_pointer = type_ptr;
 			}
 
-
+			
 			// TODO: Implement UUID get methods.
-
 
 	};
 

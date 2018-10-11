@@ -17,105 +17,23 @@ namespace entity_system {
 		set_type_pointer(ent_type);
 		set_type_name(ent_type->get_type_name());
 
-		// Create entity attribute type instances for this entiy type instance!
+		// Create all entity attribute type instances for this entity type instance!
 		std::vector<std::shared_ptr<EntityAttributeType>> ent_type_attributes = ent_type->get_linked_attribute_types();
 
-		for(std::size_t i = 0; i< ent_type_attributes.size(); i++)
+		for(std::size_t i=0; i<ent_type_attributes.size(); i++)
 		{
 			// Create an entity attribute type instance and store it in the map.
-			linked_attributes[ent_type_attributes[i]] = entsys->create_entity_attribute_type_instance(ent_type_attributes[i]);
+			// Use the entity system's EntityAttributeTypeInstanceManager method!
+			std::shared_ptr<EntityAttributeTypeInstance> new_ent_attr_type_instance
+				= entsys->create_entity_attribute_type_instance(ent_type_attributes[i]);
+
+			add_linked_instance(ent_type_attributes[i], new_ent_attr_type_instance);
 		}
 	}
 
 
 	EntityTypeInstance::~EntityTypeInstance()
 	{
-		// Destroy instances of associated entity attribute types.
-		// Loop through std::map using range-based loop.
-		// No need for std::const_iterator, C++11 rocks!
-		for(const auto& map_pair : linked_attributes)
-		{
-			// TODO: Debug!
-			map_pair.second->~EntityAttributeTypeInstance();
-		}
-	}
-
-
-	void EntityTypeInstance::set_attribute_data(const std::shared_ptr<EntityAttributeType>& ent_attr_type, const int& int_data)
-	{
-		if(type_pointer->has_attribute_type(ent_attr_type)) linked_attributes[ent_attr_type]->set(int_data);
-	}
-
-
-	void EntityTypeInstance::set_attribute_data(const std::shared_ptr<EntityAttributeType>& ent_attr_type, const bool& bool_data)
-	{
-		if(type_pointer->has_attribute_type(ent_attr_type)) linked_attributes[ent_attr_type]->set(bool_data);
-	}
-
-
-	void EntityTypeInstance::set_attribute_data(const std::shared_ptr<EntityAttributeType>& ent_attr_type, const float& float_data)
-	{
-		if(type_pointer->has_attribute_type(ent_attr_type)) linked_attributes[ent_attr_type]->set(float_data);
-	}
-
-
-	void EntityTypeInstance::set_attribute_data(const std::shared_ptr<EntityAttributeType>& ent_attr_type, const double& double_data)
-	{
-		if(type_pointer->has_attribute_type(ent_attr_type)) linked_attributes[ent_attr_type]->set(double_data);
-	}
-
-
-	void EntityTypeInstance::set_attribute_data(const std::shared_ptr<EntityAttributeType>& ent_attr_type, const std::string& string_data)
-	{
-		if(type_pointer->has_attribute_type(ent_attr_type)) linked_attributes[ent_attr_type]->set(string_data);
-	}
-
-
-	void EntityTypeInstance::set_attribute_data(const std::shared_ptr<EntityAttributeType>& ent_attr_type, const std::int64_t& int64t_data)
-	{
-		if(type_pointer->has_attribute_type(ent_attr_type)) linked_attributes[ent_attr_type]->set(int64t_data);
-	}
-
-
-	void EntityTypeInstance::get_attribute_data(const std::shared_ptr<EntityAttributeType>& ent_attr_type, int& int_ref)
-	{
-		if(type_pointer->has_attribute_type(ent_attr_type)) int_ref = linked_attributes[ent_attr_type]->get_int();
-		else int_ref = 0;
-	}
-
-
-	void EntityTypeInstance::get_attribute_data(const std::shared_ptr<EntityAttributeType>& ent_attr_type, bool& bool_ref)
-	{
-		if(type_pointer->has_attribute_type(ent_attr_type)) bool_ref = linked_attributes[ent_attr_type]->get_bool();
-		else bool_ref = false;
-	}
-	
-	
-	void EntityTypeInstance::get_attribute_data(const std::shared_ptr<EntityAttributeType>& ent_attr_type, float& float_ref)
-	{
-		if(type_pointer->has_attribute_type(ent_attr_type)) float_ref = linked_attributes[ent_attr_type]->get_float();
-		else float_ref = 0.0f;
-	}
-	
-
-	void EntityTypeInstance::get_attribute_data(const std::shared_ptr<EntityAttributeType>& ent_attr_type, double& double_ref)
-	{
-		if(type_pointer->has_attribute_type(ent_attr_type)) double_ref = linked_attributes[ent_attr_type]->get_double();
-		else double_ref = 0.0;
-	}
-	
-	
-	void EntityTypeInstance::get_attribute_data(const std::shared_ptr<EntityAttributeType>& ent_attr_type, std::string& string_ref)
-	{
-		if(type_pointer->has_attribute_type(ent_attr_type)) string_ref = linked_attributes[ent_attr_type]->get_string();
-		else string_ref = "";
-	}
-
-
-	void EntityTypeInstance::get_attribute_data(const std::shared_ptr<EntityAttributeType>& ent_attr_type, std::int64_t& int64_ref)
-	{
-		if(type_pointer->has_attribute_type(ent_attr_type)) int64_ref = linked_attributes[ent_attr_type]->get_int64();
-		else int64_ref = 0;
 	}
 
 

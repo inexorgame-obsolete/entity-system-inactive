@@ -31,6 +31,12 @@ namespace entity_system {
 	}
 
 
+	std::vector<std::shared_ptr<EntityRelationAttributeType>> EntityRelationType::get_linked_attribute_types() const
+	{
+		return linked_rel_attr_types;
+	}
+
+
 	ENTSYS_DATA_VALIDATION_RESULT EntityRelationType::validate()
 	{
 		// TODO: Implement!

@@ -6,12 +6,14 @@
 #include <unordered_map>
 #include <memory>
 
+// When using template classes it is not possible
+// to separate definitions of class methods from their declaration.
+// This is the reason why there is no cpp file for this header file!
+
+
 namespace inexor {
 namespace entity_system {
 
-
-	// When using template classes it is not possible
-	// to separate definitions of class methods from their declaration.
 
 	// A class template for type manager classes.
 	// This will be used for EntityTypeManager,
@@ -21,25 +23,22 @@ namespace entity_system {
 	{
 		private:
 
-			// This unordered map will store all available types
-			// in a key/value pair of name => type.
+			// This unordered map will store all available types in a key/value pair of name => type.
 			std::unordered_map<std::string, std::shared_ptr<T>> type_map;
 
 		protected:
 
 			// All of those methods must be protected since the
 			// actual implementation of the type manager class
-			// will containt a method which has the right name
+			// will contain a method which has an individual name
 			// but calls back to those methods here.
 			
 
-			// 
 			TypeManagerTemplate()
 			{
 			}
 
 
-			// 
 			~TypeManagerTemplate()
 			{
 			}
@@ -52,6 +51,9 @@ namespace entity_system {
 				return !(type_map.end() == type_map.find(type_name));
 			}
 			
+
+			// TODO: Does type exist by UUID?
+
 
 			// 
 			bool is_new_type_name_valid(const std::string& type_name)
@@ -70,11 +72,14 @@ namespace entity_system {
 			}
 
 
-			// 
+			// Return a certain type by name.
 			const std::shared_ptr<T> get_type(const std::string& type_name)
 			{
 				return type_map[type_name];
 			}
+
+
+			// TODO: Get by UUI!
 
 
 			// Get the number of existing types.
@@ -92,6 +97,9 @@ namespace entity_system {
 				type_map.erase(type_name);
 			}
 			
+
+			// TODO: Delete by UUID!
+
 
 			// Delete all types.
 			void delete_all_types()
