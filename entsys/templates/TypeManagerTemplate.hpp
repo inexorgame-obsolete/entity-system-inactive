@@ -15,7 +15,7 @@ namespace inexor {
 namespace entity_system {
 
 
-	// A class template for type manager classes.
+	// A template class for type manager classes.
 	// This will be used for EntityTypeManager,
 	// EntityAttributeTypeManager, EntityRelationTypeManager.
 	template <typename T>
@@ -23,7 +23,7 @@ namespace entity_system {
 	{
 		private:
 
-			// This unordered map will store all available types in a key/value pair of name => type.
+			// This unordered map will store all available types in a key/value pair.
 			std::unordered_map<std::string, std::shared_ptr<T>> type_map;
 
 		protected:
@@ -48,7 +48,7 @@ namespace entity_system {
 			bool does_type_exist(const std::string& type_name)
 			{
 				// TODO: Add MUTEX here?
-				return !(type_map.end() == type_map.find(type_name));
+				return ! (type_map.end() == type_map.find(type_name));
 			}
 			
 
@@ -58,8 +58,8 @@ namespace entity_system {
 			// 
 			bool is_new_type_name_valid(const std::string& type_name)
 			{
-				if (0 == type_name.compare("")) return false;
-				if (does_type_exist(type_name)) return false;
+				if(0 == type_name.compare("")) return false;
+				if(does_type_exist(type_name)) return false;
 				return true;
 			}
 
@@ -89,7 +89,7 @@ namespace entity_system {
 			}
 
 
-			// Delete one specific type.
+			// Delete a specific type.
 			void delete_type(const std::string& type_name)
 			{
 				// TODO: Add MUTEX here!

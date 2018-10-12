@@ -4,9 +4,9 @@
 #pragma once
 
 #include "../entity-relation-type/EntityRelationType.hpp"
-#include "../../entity-types-manager/entity-type-instance/EntityTypeInstance.hpp"
+#include "../../entity-type-manager/entity-type-instance/EntityTypeInstance.hpp"
 #include "../../../base-classes/TypeInstanceBase.hpp"
-#include "../../entity-relation-attributes-manager/entity-relation-attribute-type-instance/EntityRelationAttributeTypeInstance.hpp"
+#include "../../entity-relation-attribute-manager/entity-relation-attribute-type-instance/EntityRelationAttributeTypeInstance.hpp"
 
 
 namespace inexor {

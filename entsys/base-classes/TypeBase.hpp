@@ -34,8 +34,7 @@ namespace entity_system {
 
 			// Every class which inherits from this base class needs to implement this data validation method.
 			virtual ENTSYS_DATA_VALIDATION_RESULT validate() override = 0;
-
-		
+					
 		public:
 
 			// Get the name of this type.

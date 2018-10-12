@@ -6,20 +6,20 @@
 #include <vector>
 
 // Entity types and instances of them.
-#include "entity-types-manager\EntityTypeManager.hpp"
-#include "entity-types-manager\EntityTypeInstanceManager.hpp"
+#include "entity-type-manager\EntityTypeManager.hpp"
+#include "entity-type-manager\EntityTypeInstanceManager.hpp"
 
 // Entity attribute types and instances of them.
-#include "entity-attributes-manager\EntityAttributeTypeManager.hpp"
-#include "entity-attributes-manager\EntityAttributeTypeInstanceManager.hpp"
+#include "entity-attribute-manager\EntityAttributeTypeManager.hpp"
+#include "entity-attribute-manager\EntityAttributeTypeInstanceManager.hpp"
 
 // Entity relation types and instances of them.
-#include "entity-relations-manager\EntityRelationTypeManager.hpp"
-#include "entity-relations-manager\EntityRelationTypeInstanceManager.hpp"
+#include "entity-relation-manager\EntityRelationTypeManager.hpp"
+#include "entity-relation-manager\EntityRelationTypeInstanceManager.hpp"
 
 // Entity relation attribute types and instances of them.
-#include "entity-relation-attributes-manager/EntityRelationAttributeTypeManager.hpp"
-#include "entity-relation-attributes-manager/EntityRelationAttributeTypeInstanceManager.hpp"
+#include "entity-relation-attribute-manager/EntityRelationAttributeTypeManager.hpp"
+#include "entity-relation-attribute-manager/EntityRelationAttributeTypeInstanceManager.hpp"
 
 
 namespace inexor {

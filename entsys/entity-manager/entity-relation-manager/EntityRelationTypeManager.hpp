@@ -3,7 +3,7 @@
 
 #pragma once
 
-#include "../entity-relations-manager/entity-relation-type/EntityRelationType.hpp"
+#include "../entity-relation-manager/entity-relation-type/EntityRelationType.hpp"
 #include "../../templates/TypeManagerTemplate.hpp"
 
 

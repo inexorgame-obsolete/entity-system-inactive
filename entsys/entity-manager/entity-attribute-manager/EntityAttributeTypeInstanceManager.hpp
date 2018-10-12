@@ -3,8 +3,7 @@
 
 #pragma once
 
-#include "../entity-attributes-manager/entity-attribute-type-instances/EntityAttributeTypeInstance.hpp"
-
+#include "../entity-attribute-manager/entity-attribute-type-instances/EntityAttributeTypeInstance.hpp"
 #include "../../templates/TypeInstanceManagerTemplate.hpp"
 
 
@@ -22,13 +21,13 @@ namespace entity_system {
 
 		public:
 
-			// Create an entity attribute instance.
+			// Create an entity attribute type instance.
 			std::shared_ptr<EntityAttributeTypeInstance> create_entity_attribute_type_instance(const std::shared_ptr<EntityAttributeType>&);
 
-			// Return the number of created instances.
+			// Return the number of existing entity attribute type instances.
 			const std::size_t get_entity_attribute_type_instance_count() const;
 
-			// Delete all instances of entity attribute types.
+			// Delete all entity attribute type instances.
 			void delete_all_entity_attribute_type_instances();
 
 	};

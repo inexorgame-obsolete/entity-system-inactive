@@ -7,7 +7,7 @@
 #include <string>
 #include <unordered_map>
 
-#include "../entity-types-manager/entity-type/EntityType.hpp"
+#include "../entity-type-manager/entity-type/EntityType.hpp"
 #include "../../templates/TypeManagerTemplate.hpp"
 
 
@@ -34,19 +34,20 @@ namespace entity_system {
 			// Check if an entity type does already exist.
 			bool does_entity_type_exist(const std::string&);
 			bool does_entity_type_exist(const std::shared_ptr<EntityType>&);
+			// TODO: Check by UUID!
 
-			// Create a new entity type and add it to the entity system.
+			// Create a new entity type.
 			std::shared_ptr<EntityType> create_entity_type(const std::string&);
 
-			// Get the number of existing types of entities.
-			const std::size_t get_entity_types_count() const;
+			// Get the number of existing entity types.
+			std::size_t get_entity_types_count() const;
 			
-			// Delete an entity type from the entity system.
+			// Delete an entity type.
 			void delete_entity_type(const std::string&);
 			void delete_entity_type(const std::shared_ptr<EntityType>&);
 			// TODO: Delete by UUID.
 
-			// Remove all existing types of entities.
+			// Remove all entity types.
 			void delete_all_entity_types();
 
 	};

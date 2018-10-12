@@ -3,8 +3,8 @@
 
 #pragma once
 
-#include "../../entity-types-manager/entity-type/EntityType.hpp"
-#include "../../entity-attributes-manager/entity-attribute-type-instances/EntityAttributeTypeInstance.hpp"
+#include "../../entity-type-manager/entity-type/EntityType.hpp"
+#include "../../entity-attribute-manager/entity-attribute-type-instances/EntityAttributeTypeInstance.hpp"
 #include "../../../base-classes/TypeInstanceBase.hpp"
 #include "../../../templates/LinkedTypeInstancesMapTemplate.hpp"
 
@@ -15,7 +15,7 @@ namespace entity_system {
 
 	// A base class for instances of types of entities.
     class EntityTypeInstance : public TypeInstanceBase<EntityType,EntityTypeInstance>,
-		public LinkedTypeInstancesMapTemplate<EntityAttributeType,EntityAttributeTypeInstance>
+		                       public LinkedTypeInstancesMapTemplate<EntityAttributeType,EntityAttributeTypeInstance>
     {
 		public:
 			

@@ -14,21 +14,22 @@ namespace inexor {
 namespace entity_system {
 
 
+	// A template class for a linked map of type instances.
 	// typename T1 = type, typename T2 = type instance.
 	template <typename T1, typename T2>
 	class LinkedTypeInstancesMapTemplate
 	{
 		private:
 
-			//
+			// Linked map of type instances.
 			std::unordered_map<std::shared_ptr<T1>, std::shared_ptr<T2>> linked_instances;
 
 		protected:
 
 			//
-			void add_linked_instance(const std::shared_ptr<T1>& key, const std::shared_ptr<T2>& value)
+			void add_linked_instance(const std::shared_ptr<T1>& type_key, const std::shared_ptr<T2>& type_instance_value)
 			{
-				linked_instances[key] = value;
+				linked_instances[type_key] = type_instance_value;
 			}
 
 		public:

@@ -25,10 +25,10 @@ namespace entity_system {
 			// Create an entity type instance.
 			std::shared_ptr<EntityTypeInstance> create_entity_type_instance(const std::shared_ptr<EntityType>&);
 
-			// Get the number of existing instances.
+			// Get the number of existing entity type instances.
 			const std::size_t get_entity_type_instance_count() const;
 
-			// Delete all instances of entity types.
+			// Delete all entity type instances
 			void delete_all_entity_type_instances();
 
 			// TODO: Delete by UUID!

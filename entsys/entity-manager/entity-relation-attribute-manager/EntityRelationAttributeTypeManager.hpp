@@ -4,7 +4,7 @@
 #pragma once
 
 #include "../../templates/TypeManagerTemplate.hpp"
-#include "../entity-relation-attributes-manager/entity-relation-attribute-type/EntityRelationAttributeType.hpp"
+#include "../entity-relation-attribute-manager/entity-relation-attribute-type/EntityRelationAttributeType.hpp"
 
 
 namespace inexor {

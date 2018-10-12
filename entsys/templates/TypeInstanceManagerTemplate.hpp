@@ -17,16 +17,15 @@ namespace inexor {
 namespace entity_system {
 
 
-	// A class template for instance manager classes.
+	// A template class for instance manager classes.
 	// This will be used by EntityTypeInstanceManager,
 	// EntityAttributeTypeInstanceManager, EntityRelationTypeInstanceManager.
-	// T1 = entity type, T2 = entity type instance.
 	template <typename T>
 	class TypeInstanceManagerTemplate
 	{
 		protected:
 
-			// Vector of stored shared pointers of <T2> instances.
+			// Vector of stored shared pointers of type instances.
 			std::vector<std::shared_ptr<T>> type_instances;
 			
 

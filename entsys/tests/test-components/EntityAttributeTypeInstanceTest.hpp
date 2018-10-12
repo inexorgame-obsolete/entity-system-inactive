@@ -4,7 +4,7 @@
 
 #pragma once
 
-#include "../../entity-manager/entity-attributes-manager/entity-attribute-type-instances/EntityAttributeTypeInstance.hpp"
+#include "../../entity-manager/entity-attribute-manager/entity-attribute-type-instances/EntityAttributeTypeInstance.hpp"
 using namespace inexor::entity_system;
 
 

@@ -31,5 +31,6 @@ namespace entity_system {
 		return attribute_data_type;
 	}
 
+
 };
 };

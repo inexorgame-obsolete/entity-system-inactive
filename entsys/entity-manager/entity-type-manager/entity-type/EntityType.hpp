@@ -6,7 +6,7 @@
 #include <string>
 #include <unordered_map>
 
-#include "../../entity-attributes-manager/entity-attribute-type/EntityAttributeType.hpp"
+#include "../../entity-attribute-manager/entity-attribute-type/EntityAttributeType.hpp"
 #include "../../../base-classes/TypeBase.hpp"
 #include "../../../templates/LinkedTypeVectorTemplate.hpp"
 

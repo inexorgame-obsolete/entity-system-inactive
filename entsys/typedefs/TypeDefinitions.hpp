@@ -8,10 +8,10 @@
 
 #include "../EntitySystem.hpp"
 
-#include "../entity-manager/entity-attributes-manager/entity-attribute-type/EntityAttributeType.hpp"
-#include "../entity-manager/entity-types-manager/entity-type/EntityType.hpp"
-#include "../entity-manager/entity-relations-manager/entity-relation-type/EntityRelationType.hpp"
-#include "../entity-manager/entity-relations-manager/entity-relation-type-instance/EntityRelationTypeInstance.hpp"
+#include "../entity-manager/entity-attribute-manager/entity-attribute-type/EntityAttributeType.hpp"
+#include "../entity-manager/entity-type-manager/entity-type/EntityType.hpp"
+#include "../entity-manager/entity-relation-manager/entity-relation-type/EntityRelationType.hpp"
+#include "../entity-manager/entity-relation-manager/entity-relation-type-instance/EntityRelationTypeInstance.hpp"
 
 
 namespace inexor {

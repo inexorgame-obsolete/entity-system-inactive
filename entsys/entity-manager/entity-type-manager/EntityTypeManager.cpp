@@ -15,13 +15,12 @@ namespace entity_system {
 
 	EntityTypeManager::~EntityTypeManager()
 	{
-
 	}
 
 
 	bool EntityTypeManager::does_entity_type_exist(const std::string& ent_type_name)
 	{
-		// Call method of the template base class.
+		// Call template base class method.
 		return does_type_exist(ent_type_name);
 	}
 
@@ -47,37 +46,37 @@ namespace entity_system {
 		std::shared_ptr<EntityType> new_entity_type = std::make_shared<EntityType>(ent_type_name);
 
 		// Add the new instance to the type map.
-		// Call method of the template base class.
+		// Call template base class method.
 		add_type_to_map(ent_type_name, new_entity_type);
 
 		return new_entity_type;
 	}
 
 
-	const std::size_t EntityTypeManager::get_entity_types_count() const
+	std::size_t EntityTypeManager::get_entity_types_count() const
 	{
-		// Call method of the template base class.
+		// Call template base class method.
 		return get_type_count();
 	}
 
 
 	void EntityTypeManager::delete_entity_type(const std::string& ent_type_name)
 	{
-		// Call method of the template base class.
+		// Call template base class method.
 		delete_type(ent_type_name);
 	}
 
 
 	void EntityTypeManager::delete_entity_type(const std::shared_ptr<EntityType>& ent_type_name)
 	{
-		// Call method of the template base class.
+		// Call template base class method.
 		delete_type(ent_type_name->get_type_name());
 	}
 
 
 	void EntityTypeManager::delete_all_entity_types()
 	{
-		// Call method of the template base class.
+		// Call template base class method.
 		delete_all_types();
 	}
 

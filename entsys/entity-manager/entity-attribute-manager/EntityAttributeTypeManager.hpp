@@ -35,18 +35,18 @@ namespace entity_system {
 			bool does_entity_attribute_type_exist(const std::string&);
 			bool does_entity_attribute_type_exist(const std::shared_ptr<EntityAttributeType>&);
 
-			// Create a new entity attribute type and store it in the entity system.
+			// Create a new entity attribute type.
 			std::shared_ptr<EntityAttributeType> create_entity_attribute_type(const std::string&, const ENTSYS_DATA_TYPE&);
 
-			// Returns the number of available types of entities.
+			// Returns the number of available entity attribute types.
 			const std::size_t get_entity_attribute_type_count() const;
 
-			// Deletes an entity attribute type from the entity system.
+			// Deletes an entity attribute type.
 			void delete_entity_attribute_type(const std::string&);
 			void delete_entity_attribute_type(const std::shared_ptr<EntityAttributeType>&);
 			// TODO: Delete by UUID.
 
-			// Delete all types of entity attributes.
+			// Delete all entity attribute types.
 			void delete_all_entity_attribute_types();
 
 

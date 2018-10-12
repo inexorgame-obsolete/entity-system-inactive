@@ -3,8 +3,8 @@
 
 #pragma once
 
-#include "../entity-relation-attributes-manager/entity-relation-attribute-type-instance/EntityRelationAttributeTypeInstance.hpp"
-#include "../entity-relation-attributes-manager/entity-relation-attribute-type/EntityRelationAttributeType.hpp"
+#include "../entity-relation-attribute-manager/entity-relation-attribute-type-instance/EntityRelationAttributeTypeInstance.hpp"
+#include "../entity-relation-attribute-manager/entity-relation-attribute-type/EntityRelationAttributeType.hpp"
 #include "../../templates/TypeInstanceManagerTemplate.hpp"
 
 

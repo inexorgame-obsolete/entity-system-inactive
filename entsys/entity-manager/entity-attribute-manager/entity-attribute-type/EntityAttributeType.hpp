@@ -19,7 +19,8 @@ namespace entity_system {
     
 	
 	// A base class for types of entity attributes.
-    class EntityAttributeType : public TypeBase, public AttributeBase
+    class EntityAttributeType : public TypeBase,
+		                        public AttributeBase
     {
         public:
 						

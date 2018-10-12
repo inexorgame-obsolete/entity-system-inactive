@@ -29,7 +29,7 @@ namespace entity_system {
 		std::shared_ptr<EntityAttributeTypeInstance> new_ent_attr_type_instance
 			= std::make_shared<EntityAttributeTypeInstance>(ent_attr_type);
 
-		// Call base template class method.
+		// Call template base class method.
 		add_instance_to_buffer(new_ent_attr_type_instance);
 
 		return new_ent_attr_type_instance;
@@ -38,12 +38,14 @@ namespace entity_system {
 
 	const std::size_t EntityAttributeTypeInstanceManager::get_entity_attribute_type_instance_count() const
 	{
+		// Call template base class method.
 		return get_type_instance_count();
 	}
 
 	
 	void EntityAttributeTypeInstanceManager::delete_all_entity_attribute_type_instances()
 	{
+		// Call template base class method.
 		delete_all_type_instances();
 	}
 
