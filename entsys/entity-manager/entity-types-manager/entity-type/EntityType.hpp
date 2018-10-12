@@ -8,6 +8,7 @@
 
 #include "../../entity-attributes-manager/entity-attribute-type/EntityAttributeType.hpp"
 #include "../../../base-classes/TypeBase.hpp"
+#include "../../../templates/LinkedTypeVectorTemplate.hpp"
 
 
 namespace inexor {
@@ -16,13 +17,9 @@ namespace entity_system {
 	
 	// A base class for types of entities.
 	// This class needs to implement a data validation method!
-	class EntityType : public TypeBase
+	class EntityType : public TypeBase,
+                       public LinkedTypeVectorTemplate<EntityAttributeType>
     {
-		private:
-
-			// Vector of entity attribute types which are linked to this entity type.
-			std::vector<std::shared_ptr<EntityAttributeType>> linked_attributes;
-
         public:
 
 			EntityType(const std::string&);

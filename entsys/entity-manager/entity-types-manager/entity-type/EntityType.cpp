@@ -27,9 +27,9 @@ namespace entity_system {
 		std::string name1 = ent_attr_type_name;
 		std::string name2 = "";
 
-		for(std::size_t i=0; i< linked_attributes.size(); i++)
+		for(std::size_t i=0; i< linked_objects.size(); i++)
 		{
-			name2 = linked_attributes[i]->get_type_name();
+			name2 = linked_objects[i]->get_type_name();
 
 			// Check if we can find the entity attribute type by name.
 			// This would mean that it is already linked to this entity type!
@@ -59,7 +59,7 @@ namespace entity_system {
 			// The entity attribute type is
 			// not already linked to this entity type.
 			// Link entity attribute type to this entity type.
-			linked_attributes.push_back(ent_attr_type);
+			linked_objects.push_back(ent_attr_type);
 			return ENTSYS_SUCCESS;
 		}
 
@@ -69,19 +69,19 @@ namespace entity_system {
 
 	std::size_t EntityType::get_linked_attributes_count() const
 	{
-		return linked_attributes.size();
+		return get_linked_objects_count();
 	}
 
 
 	const std::vector<std::shared_ptr<EntityAttributeType>> EntityType::get_linked_attribute_types() const
 	{
-		return linked_attributes;
+		return get_linked_objects();
 	}
 
 
 	void EntityType::reset_linked_attribute_types()
 	{
-		linked_attributes.clear();
+		delete_all_linked_objects();
 	}
 
 
