@@ -6,7 +6,6 @@
 #include <vector>
 #include <memory>
 
-#include "../data-validation/DataValidation.hpp"
 
 // When using template classes it is not possible
 // to separate definitions of class methods from their declaration.
@@ -23,10 +22,12 @@ namespace entity_system {
 	template <typename T>
 	class TypeInstanceManagerTemplate
 	{
-		protected:
+		private:
 
-			// Vector of stored shared pointers of type instances.
+			// Vector of shared pointers of type instances.
 			std::vector<std::shared_ptr<T>> type_instances;
+		
+		protected:
 			
 
 			TypeInstanceManagerTemplate()

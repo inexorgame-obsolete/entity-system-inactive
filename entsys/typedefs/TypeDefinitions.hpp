@@ -8,11 +8,6 @@
 
 #include "../EntitySystem.hpp"
 
-#include "../entity-manager/entity-attribute-manager/entity-attribute-type/EntityAttributeType.hpp"
-#include "../entity-manager/entity-type-manager/entity-type/EntityType.hpp"
-#include "../entity-manager/entity-relation-manager/entity-relation-type/EntityRelationType.hpp"
-#include "../entity-manager/entity-relation-manager/entity-relation-type-instance/EntityRelationTypeInstance.hpp"
-
 
 namespace inexor {
 namespace entity_system {
@@ -30,7 +25,7 @@ namespace entity_system {
 	extern std::shared_ptr<EntitySystem> entsys;
 
 	// Instance create macros for the entity system.
-	// TODO: Give macro parameters better names than x,y,z.
+	// TODO: Give macro parameters better names than x,y,z!
 	#define CREATE_ENT_TYPE(x)               entsys->create_entity_type(x)
 	#define CREATE_ENT_TYPE_INSTANCE(x)      entsys->create_entity_type_instance(x)
 	#define CREATE_ENT_ATTR_TYPE(x,y)        entsys->create_entity_attribute_type(x,y)

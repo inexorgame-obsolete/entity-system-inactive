@@ -20,7 +20,7 @@ namespace entity_system {
 	{
 		protected:
 			
-			// Vector of stored objects which are linked to this.
+			// Vector of linked objects.
 			std::vector<std::shared_ptr<T>> linked_objects;
 
 		protected:
@@ -32,7 +32,7 @@ namespace entity_system {
 			}
 
 			
-			// TODO: Remove linked object
+			// TODO: Method for removing linked objects.
 
 
 			//

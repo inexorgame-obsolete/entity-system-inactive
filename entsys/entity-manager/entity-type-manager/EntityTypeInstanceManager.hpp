@@ -3,7 +3,6 @@
 
 #pragma once
 
-#include "entity-type/EntityType.hpp"
 #include "entity-type-instance/EntityTypeInstance.hpp"
 #include "../../templates/TypeInstanceManagerTemplate.hpp"
 

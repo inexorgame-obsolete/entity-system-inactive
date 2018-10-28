@@ -15,7 +15,7 @@ namespace inexor {
 namespace entity_system {
 
 
-	// A manager class for types of entities.
+	// A manager class for entity types.
 	class EntityTypeManager : public TypeManagerTemplate<EntityType>
 	{
 		private:

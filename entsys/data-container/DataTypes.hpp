@@ -3,6 +3,7 @@
 
 #pragma once
 
+
 namespace inexor {
 namespace entity_system {
 

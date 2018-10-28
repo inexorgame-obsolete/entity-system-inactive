@@ -38,7 +38,7 @@ namespace entity_system {
 		public:
 
 			// Get the name of this type.
-			const std::string get_type_name() const;
+			std::string get_type_name() const;
 
 
 	};

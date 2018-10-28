@@ -34,8 +34,8 @@ namespace entity_system {
                           public EntityAttributeTypeInstanceManager,
                           public EntityRelationTypeManager,
                           public EntityRelationTypeInstanceManager,
-						  public EntityRelationAttributeTypeManager,
-		                  public EntityRelationAttributeTypeInstanceManager
+                          public EntityRelationAttributeTypeManager,
+                          public EntityRelationAttributeTypeInstanceManager
     {
 
 		protected:
@@ -45,8 +45,8 @@ namespace entity_system {
 
 		public:
 
-			// Delete all entity types, entity attribute types, entity relation types
-			// and instances of them.
+			// Delete all entity types, entity attribute types,
+			// entity relation types and instances of them.
 			void reset_entity_system();
 
     };

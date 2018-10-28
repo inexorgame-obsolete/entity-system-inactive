@@ -24,7 +24,7 @@ namespace entity_system {
 	}
 
 
-	const std::string TypeBase::get_type_name() const
+	std::string TypeBase::get_type_name() const
 	{
 		return type_title;
 	}

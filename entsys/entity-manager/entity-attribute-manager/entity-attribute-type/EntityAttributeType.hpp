@@ -8,8 +8,6 @@
 #include <unordered_map>
 
 #include "../../../return-codes/ReturnCodes.hpp"
-#include "../../../data-validation/DataValidation.hpp"
-#include "../../../data-container/DataTypes.hpp"
 #include "../../../base-classes/TypeBase.hpp"
 #include "../../../base-classes/AttributeBase.hpp"
 
@@ -17,7 +15,7 @@
 namespace inexor {
 namespace entity_system {
     
-	
+
 	// A base class for types of entity attributes.
     class EntityAttributeType : public TypeBase,
 		                        public AttributeBase

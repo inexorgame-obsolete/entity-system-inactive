@@ -3,6 +3,7 @@
 
 #pragma once
 
+
 namespace inexor {
 namespace entity_system {
 
@@ -13,9 +14,7 @@ namespace entity_system {
         ENTSYS_ERROR = -1,
 		ENTSYS_SUCCESS = 1,
     };
-
-	// TODO: Add more result types.
-
+	
 
 };
 };
