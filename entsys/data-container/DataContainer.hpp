@@ -10,7 +10,7 @@
 
 #include "DataTypes.hpp"
 #include "../return-codes/ReturnCodes.hpp"
-#include "../templates/DataContainerTemplate.hpp"
+//#include "../templates/DataContainerTemplate.hpp"
 
 
 namespace inexor {
@@ -22,24 +22,32 @@ namespace entity_system {
     // This could speed the entity system very much!
 	
     // A flexible, multiple purpose data container.
-    class DataContainer : public DataContainerTemplate<std::string>,
-						  public DataContainerTemplate<std::int64_t>,
-		                  public DataContainerTemplate<int>,
-		                  public DataContainerTemplate<double>,
-		                  public DataContainerTemplate<float>,
-		                  public DataContainerTemplate<bool>
-					      // TODO: Add more data types here!
+    class DataContainer
     {
         private:
 
-			// Use C++11 initialisation instead of constructor.
+			// Use C++11 initialisation style instead of constructor list.
+
             ENTSYS_DATA_TYPE data_container_data_type = ENTSYS_DATA_TYPE_UNDEFINED;
+
+			std::int64_t data_int64 = 0;
+
+			std::string data_string = "";
+
+			double data_double = 0.0;
+
+			float data_float = 0.0f;
+
+			bool data_bool = false;
+
+			int data_int = 0;
 			
 			// Multithreading safety mutex.
 			//std::mutex container_mutex;
 
 		public:
 
+			// Don't use explicit keyword to prevent implicit conversion!
             DataContainer(const ENTSYS_DATA_TYPE&);
             DataContainer(const std::int64_t&);
             DataContainer(const std::string&);
@@ -47,7 +55,7 @@ namespace entity_system {
             DataContainer(const float&);
             DataContainer(const bool&);
             DataContainer(const int&);
-			
+
             ~DataContainer();
 
 			// Set the data type of the container.
@@ -55,7 +63,39 @@ namespace entity_system {
 
 			// Returns the current data type of the data container.
 			ENTSYS_DATA_TYPE get_data_type() const;
-			
+
+			// Reset all memory.
+			void reset_memory();
+
+			// Get methods for memory access.
+			// In C++ we can't have functions which only differ
+			// in their return value. There is no general way of
+			// implementing 'get_data()'.
+			std::int64_t get_int64() const;
+			std::string get_string() const;
+			double get_double() const;
+			float get_float() const;
+			bool get_bool() const;
+			int get_int() const;
+
+			// Set data methods.
+			DataContainer set_data(const DataContainer&);
+			DataContainer set_data(const std::int64_t&);
+			DataContainer set_data(const std::string&);
+			DataContainer set_data(const double&);
+			DataContainer set_data(const float&);
+			DataContainer set_data(const bool&);
+			DataContainer set_data(const int&);
+
+			// Initialisation operators.
+			DataContainer operator = (const DataContainer&);
+			DataContainer operator = (const std::int64_t&);
+			DataContainer operator = (const std::string&);
+			DataContainer operator = (const double&);
+			DataContainer operator = (const float&);
+			DataContainer operator = (const bool&);
+			DataContainer operator = (const int&);
+
 
 	};
 

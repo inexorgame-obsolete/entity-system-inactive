@@ -8,7 +8,7 @@
 #include <gtest/gtest.h>
 
 // Tests for DataContainer class.
-#include "test-components/DataContainerTests.hpp"
+#include "test-components/DataContainerTests/DataContainerTests.hpp"
 
 /*
 // Tests for types of entities and instances of them.
