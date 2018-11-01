@@ -7,8 +7,9 @@
 #include "../../../data-container/DataContainer.hpp"
 using namespace inexor::entity_system;
 
-// Components of this test:
-#include "DataContainer_ConstructorTests_1.hpp"
-#include "DataContainer_ConstructorTests_2.hpp"
-#include "DataContainer_AssignOperatorTests.hpp"
+// Constructor
+#include "constructor-tests/DataContainer_ConstructorTests.hpp"
 #include "DataContainer_DataTypeModificationTests.hpp"
+
+// Operators
+#include "operator-tests/DataContainer_OperatorTests.hpp"

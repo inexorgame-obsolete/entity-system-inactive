@@ -4,7 +4,6 @@
 
 #pragma once
 
-// Test operator = of DataContainer by passing value.
 
 TEST(Test_DataContainer_AssignOperator, ENTSYS_DATA_TYPE_INT)
 {

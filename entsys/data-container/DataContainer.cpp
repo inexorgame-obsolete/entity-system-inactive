@@ -116,42 +116,42 @@ namespace entity_system {
 	DataContainer DataContainer::set_data(const std::int64_t& int64_val)
 	{
 		data_int64 = int64_val;
-		return DataContainer(data_int64);
+		return *this;
 	}
 	
 	
 	DataContainer DataContainer::set_data(const std::string& string_val)
 	{
 		data_string = string_val;
-		return DataContainer(data_string);
+		return this;
 	}
 	
 	
 	DataContainer DataContainer::set_data(const double& double_val)
 	{
 		data_double = double_val;
-		return DataContainer(data_double);
+		return this;
 	}
 
 
 	DataContainer DataContainer::set_data(const float& float_val)
 	{
 		data_float = float_val;
-		return DataContainer(data_float);
+		return this;
 	}
 
 
 	DataContainer DataContainer::set_data(const bool& bool_val)
 	{
 		data_bool = bool_val;
-		return DataContainer(data_bool);
+		return this;
 	}
 
 
 	DataContainer DataContainer::set_data(const int& int_val)
 	{
 		data_int = int_val;
-		return DataContainer(data_int);
+		return *this;
 	}
 
 	
@@ -230,6 +230,40 @@ namespace entity_system {
 	DataContainer DataContainer::operator = (const int& intval)
 	{
 		return set_data(intval);
+	}
+
+	
+	DataContainer DataContainer::operator++(int)
+	{
+		switch(data_container_data_type)
+		{
+			case ENTSYS_DATA_TYPE_BIG_INT:
+			{
+				data_int64++;
+				return set_data(data_int64);
+				break;
+			}
+			case ENTSYS_DATA_TYPE_INT:
+			{
+				data_int++;
+				return set_data(data_int);
+				break;
+			}
+			case ENTSYS_DATA_TYPE_DOUBLE:
+			{
+				data_double++;
+				return set_data(data_double);
+				break;
+			}
+			case ENTSYS_DATA_TYPE_FLOAT:
+			{
+				data_float++;
+				return set_data(data_float);
+				break;
+			}
+			// Note: We can't increment std::string or bool!
+		}				
+		return *this;
 	}
 
 
