@@ -15,6 +15,7 @@ TEST(Test_DataContainer_ArithmeticOperator_Increment, ENTSYS_DATA_TYPE_INT)
 	ASSERT_EQ(IncrementMe.get_int(), (example_value+1));
 }
 
+
 TEST(Test_DataContainer_ArithmeticOperator_Increment, ENTSYS_DATA_TYPE_BIG_INT)
 {
 	std::int64_t example_value = 12546786543;
@@ -25,6 +26,7 @@ TEST(Test_DataContainer_ArithmeticOperator_Increment, ENTSYS_DATA_TYPE_BIG_INT)
 	ASSERT_EQ(IncrementMe.get_int64(), (example_value+1));
 }
 
+
 TEST(Test_DataContainer_ArithmeticOperator_Increment, ENTSYS_DATA_TYPE_DOUBLE)
 {
 	double example_value = 3245.0;
@@ -34,6 +36,7 @@ TEST(Test_DataContainer_ArithmeticOperator_Increment, ENTSYS_DATA_TYPE_DOUBLE)
 	IncrementMe++;
 	ASSERT_EQ(IncrementMe.get_double(), (example_value+1));
 }
+
 
 TEST(Test_DataContainer_ArithmeticOperator_Increment, ENTSYS_DATA_TYPE_FLOAT)
 {

@@ -267,5 +267,39 @@ namespace entity_system {
 	}
 
 
+	DataContainer DataContainer::operator--(int)
+	{
+		switch(data_container_data_type)
+		{
+			case ENTSYS_DATA_TYPE_BIG_INT:
+			{
+				data_int64--;
+				return set_data(data_int64);
+				break;
+			}
+			case ENTSYS_DATA_TYPE_INT:
+			{
+				data_int--;
+				return set_data(data_int);
+				break;
+			}
+			case ENTSYS_DATA_TYPE_DOUBLE:
+			{
+				data_double--;
+				return set_data(data_double);
+				break;
+			}
+			case ENTSYS_DATA_TYPE_FLOAT:
+			{
+				data_float--;
+				return set_data(data_float);
+				break;
+			}
+			// Note: We can't increment std::string or bool!
+		}				
+		return *this;
+	}
+
+
 };
 };

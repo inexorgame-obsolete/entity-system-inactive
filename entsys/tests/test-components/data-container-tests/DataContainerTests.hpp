@@ -7,9 +7,11 @@
 #include "../../../data-container/DataContainer.hpp"
 using namespace inexor::entity_system;
 
-// Constructor
+// Constructors.
 #include "constructor-tests/DataContainer_ConstructorTests.hpp"
-#include "DataContainer_DataTypeModificationTests.hpp"
 
-// Operators
+// Operators.
 #include "operator-tests/DataContainer_OperatorTests.hpp"
+
+// Changing data type.
+#include "method-tests/DataContainer_DataTypeModificationTests.hpp"

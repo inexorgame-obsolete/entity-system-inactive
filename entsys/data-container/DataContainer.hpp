@@ -98,7 +98,8 @@ namespace entity_system {
 			
 			// https://stackoverflow.com/questions/3846296/how-to-overload-the-operator-in-two-different-ways-for-postfix-a-and-prefix
 			DataContainer operator++(int);
-			
+			DataContainer operator--(int);
+
 
 	};
 
