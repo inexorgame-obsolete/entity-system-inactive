@@ -10,7 +10,6 @@
 
 #include "DataTypes.hpp"
 #include "../return-codes/ReturnCodes.hpp"
-//#include "../templates/DataContainerTemplate.hpp"
 
 
 namespace inexor {
@@ -28,7 +27,7 @@ namespace entity_system {
 
 			// Use C++11 initialisation style instead of constructor list.
 
-            ENTSYS_DATA_TYPE data_container_data_type = ENTSYS_DATA_TYPE_UNDEFINED;
+            ENTSYS_DATA_TYPE data_type = ENTSYS_DATA_TYPE_UNDEFINED;
 
 			std::int64_t data_int64 = 0;
 
@@ -78,6 +77,9 @@ namespace entity_system {
 			bool get_bool() const;
 			int get_int() const;
 
+			// Cast methods.
+			std::int64_t cast_to_int64() const;
+
 			// Set data methods.
 			DataContainer set_data(const DataContainer&);
 			DataContainer set_data(const std::int64_t&);
@@ -86,6 +88,7 @@ namespace entity_system {
 			DataContainer set_data(const float&);
 			DataContainer set_data(const bool&);
 			DataContainer set_data(const int&);
+
 
 			// Initialisation operators.
 			DataContainer operator = (const DataContainer&);
@@ -96,10 +99,114 @@ namespace entity_system {
 			DataContainer operator = (const bool&);
 			DataContainer operator = (const int&);
 			
-			// https://stackoverflow.com/questions/3846296/how-to-overload-the-operator-in-two-different-ways-for-postfix-a-and-prefix
-			DataContainer operator++(int);
-			DataContainer operator--(int);
 
+			// Increment and decrement operator.
+			DataContainer operator ++ (int);
+			DataContainer operator -- (int);
+
+
+			// Arithmetic operators.
+			DataContainer operator + (const int&);
+			DataContainer operator + (const float&);
+			DataContainer operator + (const double&);
+			DataContainer operator + (const std::int64_t&);
+			DataContainer operator + (const DataContainer&);
+			
+			DataContainer operator - (const int&);
+			DataContainer operator - (const float&);
+			DataContainer operator - (const double&);
+			DataContainer operator - (const std::int64_t&);
+			DataContainer operator - (const DataContainer&);
+
+			DataContainer operator * (const int&);
+			DataContainer operator * (const float&);
+			DataContainer operator * (const double&);
+			DataContainer operator * (const std::int64_t&);
+			DataContainer operator * (const DataContainer&);
+
+			DataContainer operator / (const int&);
+			DataContainer operator / (const float&);
+			DataContainer operator / (const double&);
+			DataContainer operator / (const std::int64_t&);
+			DataContainer operator / (const DataContainer&);
+
+			DataContainer operator % (const int&);
+			DataContainer operator % (const float&);
+			DataContainer operator % (const double&);
+			DataContainer operator % (const std::int64_t&);
+			DataContainer operator % (const DataContainer&);
+
+
+			// Compound assignment operators.
+			DataContainer operator += (const int&);
+			DataContainer operator += (const float&);
+			DataContainer operator += (const double&);
+			DataContainer operator += (const std::int64_t&);
+			DataContainer operator += (const DataContainer&);
+
+			DataContainer operator -= (const int&);
+			DataContainer operator -= (const float&);
+			DataContainer operator -= (const double&);
+			DataContainer operator -= (const std::int64_t&);
+			DataContainer operator -= (const DataContainer&);
+
+			DataContainer operator *= (const int&);
+			DataContainer operator *= (const float&);
+			DataContainer operator *= (const double&);
+			DataContainer operator *= (const std::int64_t&);
+			DataContainer operator *= (const DataContainer&);
+
+			DataContainer operator /= (const int&);
+			DataContainer operator /= (const float&);
+			DataContainer operator /= (const double&);
+			DataContainer operator /= (const std::int64_t&);
+			DataContainer operator /= (const DataContainer&);
+
+			DataContainer operator %= (const int&);
+			DataContainer operator %= (const float&);
+			DataContainer operator %= (const double&);
+			DataContainer operator %= (const std::int64_t&);
+			DataContainer operator %= (const DataContainer&);
+
+
+			// Compare operators.
+			DataContainer operator == (const int&);
+			DataContainer operator == (const float&);
+			DataContainer operator == (const double&);
+			DataContainer operator == (const std::int64_t&);
+			DataContainer operator == (const DataContainer&);
+
+			DataContainer operator != (const int&);
+			DataContainer operator != (const float&);
+			DataContainer operator != (const double&);
+			DataContainer operator != (const std::int64_t&);
+			DataContainer operator != (const DataContainer&);
+
+			DataContainer operator >= (const int&);
+			DataContainer operator >= (const float&);
+			DataContainer operator >= (const double&);
+			DataContainer operator >= (const std::int64_t&);
+			DataContainer operator >= (const DataContainer&);
+
+			DataContainer operator <= (const int&);
+			DataContainer operator <= (const float&);
+			DataContainer operator <= (const double&);
+			DataContainer operator <= (const std::int64_t&);
+			DataContainer operator <= (const DataContainer&);
+
+			DataContainer operator > (const int&);
+			DataContainer operator > (const float&);
+			DataContainer operator > (const double&);
+			DataContainer operator > (const std::int64_t&);
+			DataContainer operator > (const DataContainer&);
+
+			DataContainer operator < (const int&);
+			DataContainer operator < (const float&);
+			DataContainer operator < (const double&);
+			DataContainer operator < (const std::int64_t&);
+			DataContainer operator < (const DataContainer&);
+
+			// TODO: Implement more operators.
 
 	};
 

@@ -8,50 +8,50 @@ namespace inexor {
 namespace entity_system {
 
 
-    DataContainer::DataContainer(const ENTSYS_DATA_TYPE& data_type)
+    DataContainer::DataContainer(const ENTSYS_DATA_TYPE& param_data_type)
     {
-		data_container_data_type = data_type;
+		data_type = param_data_type;
     }
 
 
     DataContainer::DataContainer(const std::int64_t& int64val)
 	{
-		data_container_data_type = ENTSYS_DATA_TYPE_BIG_INT;
+		data_type = ENTSYS_DATA_TYPE_BIG_INT;
 		data_int64 = int64val;
     }
 
 
     DataContainer::DataContainer(const double& double_val)
     {
-		data_container_data_type = ENTSYS_DATA_TYPE_DOUBLE;
+		data_type = ENTSYS_DATA_TYPE_DOUBLE;
 		data_double = double_val;
     }
 
 
     DataContainer::DataContainer(const float& float_val)
     {
-		data_container_data_type = ENTSYS_DATA_TYPE_FLOAT;
+		data_type = ENTSYS_DATA_TYPE_FLOAT;
 		data_float = float_val;
     }
 
 
     DataContainer::DataContainer(const bool& bool_val)
     {
-		data_container_data_type = ENTSYS_DATA_TYPE_BOOL;
+		data_type = ENTSYS_DATA_TYPE_BOOL;
 		data_bool = bool_val;
     }
 
 
     DataContainer::DataContainer(const std::string& string_val)
     {
-		data_container_data_type = ENTSYS_DATA_TYPE_STRING;
+		data_type = ENTSYS_DATA_TYPE_STRING;
 		data_string = string_val;
     }
 
 
     DataContainer::DataContainer(const int& int_val)
     {
-		data_container_data_type = ENTSYS_DATA_TYPE_INT;
+		data_type = ENTSYS_DATA_TYPE_INT;
 		data_int = int_val;
     }
 
@@ -63,7 +63,7 @@ namespace entity_system {
 
     void DataContainer::reset_memory()
 	{
-		data_container_data_type = ENTSYS_DATA_TYPE_UNDEFINED;
+		data_type = ENTSYS_DATA_TYPE_UNDEFINED;
 		data_int64 = 0;
 		data_string = "";
 		data_double = 0.0;
@@ -73,16 +73,16 @@ namespace entity_system {
 	}
 
 
-    void DataContainer::set_data_type(const ENTSYS_DATA_TYPE& data_type)
+    void DataContainer::set_data_type(const ENTSYS_DATA_TYPE& param_data_type)
     {
 		reset_memory();
-		data_container_data_type = data_type;
+		data_type = param_data_type;
     }
 
 
     ENTSYS_DATA_TYPE DataContainer::get_data_type() const
     {
-		return data_container_data_type;
+		return data_type;
     }
 
 	
@@ -191,6 +191,7 @@ namespace entity_system {
 	}
 
 
+
 	DataContainer DataContainer::operator = (const DataContainer& cont)
 	{
 		return set_data(cont);
@@ -233,9 +234,10 @@ namespace entity_system {
 	}
 
 	
-	DataContainer DataContainer::operator++(int)
+
+	DataContainer DataContainer::operator ++ (int)
 	{
-		switch(data_container_data_type)
+		switch(data_type)
 		{
 			case ENTSYS_DATA_TYPE_BIG_INT:
 			{
@@ -267,9 +269,9 @@ namespace entity_system {
 	}
 
 
-	DataContainer DataContainer::operator--(int)
+	DataContainer DataContainer::operator -- (int)
 	{
-		switch(data_container_data_type)
+		switch(data_type)
 		{
 			case ENTSYS_DATA_TYPE_BIG_INT:
 			{
@@ -295,9 +297,624 @@ namespace entity_system {
 				return set_data(data_float);
 				break;
 			}
-			// Note: We can't increment std::string or bool!
 		}				
 		return *this;
+	}
+
+
+
+	DataContainer DataContainer::operator + (const int& param_int)
+	{
+		switch(data_type)
+		{
+			case ENTSYS_DATA_TYPE_BIG_INT:
+			{
+				data_int64 += param_int;
+				return set_data(data_int64);
+				break;
+			}
+			case ENTSYS_DATA_TYPE_INT:
+			{
+				data_int += param_int;
+				return set_data(data_int);
+				break;
+			}
+			case ENTSYS_DATA_TYPE_DOUBLE:
+			{
+				data_double += param_int;
+				return set_data(data_double);
+				break;
+			}
+			case ENTSYS_DATA_TYPE_FLOAT:
+			{
+				data_float += param_int;
+				return set_data(data_float);
+				break;
+			}
+		}				
+		return *this;
+	}
+
+
+	DataContainer DataContainer::operator + (const float& param_float)
+	{
+		switch(data_type)
+		{
+			case ENTSYS_DATA_TYPE_BIG_INT:
+			{
+				data_int64 += static_cast<std::int64_t>(param_float);
+				return set_data(data_int64);
+				break;
+			}
+			case ENTSYS_DATA_TYPE_INT:
+			{
+				data_int += static_cast<int>(param_float);
+				return set_data(data_int);
+				break;
+			}
+			case ENTSYS_DATA_TYPE_DOUBLE:
+			{
+				data_double += static_cast<double>(param_float);
+				return set_data(data_double);
+				break;
+			}
+			case ENTSYS_DATA_TYPE_FLOAT:
+			{
+				data_float += static_cast<float>(param_float);
+				return set_data(data_float);
+				break;
+			}
+		}				
+		return *this;	
+	}
+
+
+	DataContainer DataContainer::operator + (const double& param_double)
+	{
+		switch(data_type)
+		{
+			case ENTSYS_DATA_TYPE_BIG_INT:
+			{
+				data_int64 += static_cast<std::int64_t>(param_double);
+				return set_data(data_int64);
+				break;
+			}
+			case ENTSYS_DATA_TYPE_INT:
+			{
+				data_int += static_cast<int>(param_double);
+				return set_data(data_int);
+				break;
+			}
+			case ENTSYS_DATA_TYPE_DOUBLE:
+			{
+				data_double += static_cast<double>(param_double);
+				return set_data(data_double);
+				break;
+			}
+			case ENTSYS_DATA_TYPE_FLOAT:
+			{
+				data_float += static_cast<float>(param_double);
+				return set_data(data_float);
+				break;
+			}
+		}				
+		return *this;	
+	}
+
+
+	DataContainer DataContainer::operator + (const std::int64_t& param_int64)
+	{
+		switch(data_type)
+		{
+			case ENTSYS_DATA_TYPE_BIG_INT:
+			{
+				data_int64 += param_int64;
+				return set_data(data_int64);
+				break;
+			}
+			case ENTSYS_DATA_TYPE_INT:
+			{
+				data_int += static_cast<int>(param_int64);
+				return set_data(data_int);
+				break;
+			}
+			case ENTSYS_DATA_TYPE_DOUBLE:
+			{
+				data_double += static_cast<double>(param_int64);
+				return set_data(data_double);
+				break;
+			}
+			case ENTSYS_DATA_TYPE_FLOAT:
+			{
+				data_float += static_cast<float>(param_int64);
+				return set_data(data_float);
+				break;
+			}
+		}				
+		return *this;
+	}
+
+
+	DataContainer DataContainer::operator + (const DataContainer& param_cont)
+	{
+		// TODO: Change this so other data types are supported as well.
+		// This will cause an error in the automatic software tests.
+		std::int64_t container_value = param_cont.cast_to_int64();
+
+		switch(data_type)
+		{
+			case ENTSYS_DATA_TYPE_BIG_INT:
+			{
+				data_int64 += container_value;
+				return set_data(data_int64);
+				break;
+			}
+			case ENTSYS_DATA_TYPE_INT:
+			{
+				data_int += static_cast<int>(container_value);
+				return set_data(data_int);
+				break;
+			}
+			case ENTSYS_DATA_TYPE_DOUBLE:
+			{
+				data_double += static_cast<double>(container_value);
+				return set_data(data_double);
+				break;
+			}
+			case ENTSYS_DATA_TYPE_FLOAT:
+			{
+				data_float += static_cast<float>(container_value);
+				return set_data(data_float);
+				break;
+			}
+		}				
+		return *this;
+	}
+
+
+
+	DataContainer DataContainer::operator - (const int&)
+	{
+		// TODO: Implement!
+		return *this;
+	}
+	DataContainer DataContainer::operator - (const float&)
+	{
+		// TODO: Implement!
+		return *this;
+	}
+	DataContainer DataContainer::operator - (const double&)
+	{
+		// TODO: Implement!
+		return *this;
+	}
+	DataContainer DataContainer::operator - (const std::int64_t&)
+	{
+		// TODO: Implement!
+		return *this;
+	}
+	DataContainer DataContainer::operator - (const DataContainer&)
+	{
+		// TODO: Implement!
+		return *this;
+	}
+
+
+
+	DataContainer DataContainer::operator * (const int&)
+	{
+		// TODO: Implement!
+		return *this;
+	}
+	DataContainer DataContainer::operator * (const float&)
+	{
+		// TODO: Implement!
+		return *this;
+	}
+	DataContainer DataContainer::operator * (const double&)
+	{
+		// TODO: Implement!
+		return *this;
+	}
+	DataContainer DataContainer::operator * (const std::int64_t&)
+	{
+		// TODO: Implement!
+		return *this;
+	}
+	DataContainer DataContainer::operator * (const DataContainer&)
+	{
+		// TODO: Implement!
+		return *this;
+	}
+
+
+
+	DataContainer DataContainer::operator / (const int&)
+	{
+		// TODO: Implement!
+		return *this;
+	}
+	DataContainer DataContainer::operator / (const float&)
+	{
+		// TODO: Implement!
+		return *this;
+	}
+	DataContainer DataContainer::operator / (const double&)
+	{
+		// TODO: Implement!
+		return *this;
+	}
+	DataContainer DataContainer::operator / (const std::int64_t&)
+	{
+		// TODO: Implement!
+		return *this;
+	}
+	DataContainer DataContainer::operator / (const DataContainer&)
+	{
+		// TODO: Implement!
+		return *this;
+	}
+
+
+
+	DataContainer DataContainer::operator % (const int&)
+	{
+		// TODO: Implement!
+		return *this;
+	}
+	DataContainer DataContainer::operator % (const float&)
+	{
+		// TODO: Implement!
+		return *this;
+	}
+	DataContainer DataContainer::operator % (const double&)
+	{
+		// TODO: Implement!
+		return *this;
+	}
+	DataContainer DataContainer::operator % (const std::int64_t&)
+	{
+		// TODO: Implement!
+		return *this;
+	}
+	DataContainer DataContainer::operator % (const DataContainer&)
+	{
+		// TODO: Implement!
+		return *this;
+	}
+
+
+
+	DataContainer DataContainer::operator += (const int&)
+	{
+		// TODO: Implement!
+		return *this;
+	}
+	DataContainer DataContainer::operator += (const float&)
+	{
+		// TODO: Implement!
+		return *this;
+	}
+	DataContainer DataContainer::operator += (const double&)
+	{
+		// TODO: Implement!
+		return *this;
+	}
+	DataContainer DataContainer::operator += (const std::int64_t&)
+	{
+		// TODO: Implement!
+		return *this;
+	}
+	DataContainer DataContainer::operator += (const DataContainer&)
+	{
+		// TODO: Implement!
+		return *this;
+	}
+
+
+
+	DataContainer DataContainer::operator -= (const int&)
+	{
+		// TODO: Implement!
+		return *this;
+	}
+	DataContainer DataContainer::operator -= (const float&)
+	{
+		// TODO: Implement!
+		return *this;
+	}
+	DataContainer DataContainer::operator -= (const double&)
+	{
+		// TODO: Implement!
+		return *this;
+	}
+	DataContainer DataContainer::operator -= (const std::int64_t&)
+	{
+		// TODO: Implement!
+		return *this;
+	}
+	DataContainer DataContainer::operator -= (const DataContainer&)
+	{
+		// TODO: Implement!
+		return *this;
+	}
+
+
+	
+	DataContainer DataContainer::operator *= (const int&)
+	{
+		// TODO: Implement!
+		return *this;
+	}
+	DataContainer DataContainer::operator *= (const float&)
+	{
+		// TODO: Implement!
+		return *this;
+	}
+	DataContainer DataContainer::operator *= (const double&)
+	{
+		// TODO: Implement!
+		return *this;
+	}
+	DataContainer DataContainer::operator *= (const std::int64_t&)
+	{
+		// TODO: Implement!
+		return *this;
+	}
+	DataContainer DataContainer::operator *= (const DataContainer&)
+	{
+		// TODO: Implement!
+		return *this;
+	}
+
+
+
+	DataContainer DataContainer::operator /= (const int&)
+	{
+		// TODO: Implement!
+		return *this;
+	}
+	DataContainer DataContainer::operator /= (const float&)
+	{
+		// TODO: Implement!
+		return *this;
+	}
+	DataContainer DataContainer::operator /= (const double&)
+	{
+		// TODO: Implement!
+		return *this;
+	}
+	DataContainer DataContainer::operator /= (const std::int64_t&)
+	{
+		// TODO: Implement!
+		return *this;
+	}
+	DataContainer DataContainer::operator /= (const DataContainer&)
+	{
+		// TODO: Implement!
+		return *this;
+	}
+
+
+
+	DataContainer DataContainer::operator %= (const int&)
+	{
+		// TODO: Implement!
+		return *this;
+	}
+	DataContainer DataContainer::operator %= (const float&)
+	{
+		// TODO: Implement!
+		return *this;
+	}
+	DataContainer DataContainer::operator %= (const double&)
+	{
+		// TODO: Implement!
+		return *this;
+	}
+	DataContainer DataContainer::operator %= (const std::int64_t&)
+	{
+		// TODO: Implement!
+		return *this;
+	}
+	DataContainer DataContainer::operator %= (const DataContainer&)
+	{
+		// TODO: Implement!
+		return *this;
+	}
+
+
+
+	DataContainer DataContainer::operator == (const int&)
+	{
+		// TODO: Implement!
+		return *this;
+	}
+	DataContainer DataContainer::operator == (const float&)
+	{
+		// TODO: Implement!
+		return *this;
+	}
+	DataContainer DataContainer::operator == (const double&)
+	{
+		// TODO: Implement!
+		return *this;
+	}
+	DataContainer DataContainer::operator == (const std::int64_t&)
+	{
+		// TODO: Implement!
+		return *this;
+	}
+	DataContainer DataContainer::operator == (const DataContainer&)
+	{
+		// TODO: Implement!
+		return *this;
+	}
+
+
+
+	DataContainer DataContainer::operator != (const int&)
+	{
+		// TODO: Implement!
+		return *this;
+	}
+	DataContainer DataContainer::operator != (const float&)
+	{
+		// TODO: Implement!
+		return *this;
+	}
+	DataContainer DataContainer::operator != (const double&)
+	{
+		// TODO: Implement!
+		return *this;
+	}
+	DataContainer DataContainer::operator != (const std::int64_t&)
+	{
+		// TODO: Implement!
+		return *this;
+	}
+	DataContainer DataContainer::operator != (const DataContainer&)
+	{
+		// TODO: Implement!
+		return *this;
+	}
+
+
+
+	DataContainer DataContainer::operator >= (const int&)
+	{
+		// TODO: Implement!
+		return *this;
+	}
+	DataContainer DataContainer::operator >= (const float&)
+	{
+		// TODO: Implement!
+		return *this;
+	}
+	DataContainer DataContainer::operator >= (const double&)
+	{
+		// TODO: Implement!
+		return *this;
+	}
+	DataContainer DataContainer::operator >= (const std::int64_t&)
+	{
+		// TODO: Implement!
+		return *this;
+	}
+	DataContainer DataContainer::operator >= (const DataContainer&)
+	{
+		// TODO: Implement!
+		return *this;
+	}
+
+
+
+	DataContainer DataContainer::operator <= (const int&)
+	{
+		// TODO: Implement!
+		return *this;
+	}
+	DataContainer DataContainer::operator <= (const float&)
+	{
+		// TODO: Implement!
+		return *this;
+	}
+	DataContainer DataContainer::operator <= (const double&)
+	{
+		// TODO: Implement!
+		return *this;
+	}
+	DataContainer DataContainer::operator <= (const std::int64_t&)
+	{
+		// TODO: Implement!
+		return *this;
+	}
+	DataContainer DataContainer::operator <= (const DataContainer&)
+	{
+		// TODO: Implement!
+		return *this;
+	}
+
+
+
+	DataContainer DataContainer::operator > (const int&)
+	{
+		// TODO: Implement!
+		return *this;
+	}
+	DataContainer DataContainer::operator > (const float&)
+	{
+		// TODO: Implement!
+		return *this;
+	}
+	DataContainer DataContainer::operator > (const double&)
+	{
+		// TODO: Implement!
+		return *this;
+	}
+	DataContainer DataContainer::operator > (const std::int64_t&)
+	{
+		// TODO: Implement!
+		return *this;
+	}
+	DataContainer DataContainer::operator > (const DataContainer&)
+	{
+		// TODO: Implement!
+		return *this;
+	}
+
+
+
+	DataContainer DataContainer::operator < (const int&)
+	{
+		// TODO: Implement!
+		return *this;
+	}
+	DataContainer DataContainer::operator < (const float&)
+	{
+		// TODO: Implement!
+		return *this;
+	}
+	DataContainer DataContainer::operator < (const double&)
+	{
+		// TODO: Implement!
+		return *this;
+	}
+	DataContainer DataContainer::operator< (const std::int64_t&)
+	{
+		// TODO: Implement!
+		return *this;
+	}
+	DataContainer DataContainer::operator < (const DataContainer&)
+	{
+		// TODO: Implement!
+		return *this;
+	}
+
+
+	std::int64_t DataContainer::cast_to_int64() const
+	{
+		std::int64_t cast_value = 0;
+
+		switch(data_type)
+		{
+			case ENTSYS_DATA_TYPE_INT:
+				cast_value = static_cast<std::int64_t>(data_int);
+				break;
+
+			case ENTSYS_DATA_TYPE_FLOAT:
+				cast_value = static_cast<std::int64_t>(data_float);
+				break;
+
+			case ENTSYS_DATA_TYPE_DOUBLE:
+				cast_value = static_cast<std::int64_t>(data_double);
+				break;
+
+			case ENTSYS_DATA_TYPE_BIG_INT:
+				cast_value = data_int64;
+				break;
+		}
+		return cast_value;
 	}
 
 

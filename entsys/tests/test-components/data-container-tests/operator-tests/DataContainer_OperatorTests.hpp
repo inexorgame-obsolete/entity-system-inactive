@@ -7,3 +7,4 @@
 #include "components/DataContainer_AssignOperatorTests.hpp"
 #include "components/DataContainer_IncrementOperatorTests.hpp"
 #include "components/DataContainer_DecrementOperatorTests.hpp"
+#include "components/DataContainer_PlusOperatorTests.hpp"
