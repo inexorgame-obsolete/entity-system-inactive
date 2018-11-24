@@ -79,6 +79,9 @@ namespace entity_system {
 
 			// Cast methods.
 			std::int64_t cast_to_int64() const;
+			int cast_to_int() const;
+			double cast_to_double() const;
+			float cast_to_float() const;
 
 			// Set data methods.
 			DataContainer set_data(const DataContainer&);
