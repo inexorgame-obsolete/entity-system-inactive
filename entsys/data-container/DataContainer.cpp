@@ -393,7 +393,7 @@ namespace entity_system {
 		switch(data_type)
 		{
 			case ENTSYS_DATA_TYPE_INT:
-				cast_value = static_cast<int>(data_int);
+				cast_value = data_int;
 				break;
 
 			case ENTSYS_DATA_TYPE_FLOAT:
@@ -429,13 +429,13 @@ namespace entity_system {
 				break;
 
 			case ENTSYS_DATA_TYPE_DOUBLE:
-				cast_value = static_cast<double>(data_double);
+				cast_value = data_double;
 				break;
 
 			case ENTSYS_DATA_TYPE_BIG_INT:
 				// This is not a good idea
 				// We should not cast from int64 to int!
-				cast_value = static_cast<std::int64_t>(data_int64);
+				cast_value = static_cast<double>(data_int64);
 				break;
 		}
 		return cast_value;
@@ -453,15 +453,15 @@ namespace entity_system {
 				break;
 
 			case ENTSYS_DATA_TYPE_FLOAT:
-				cast_value = static_cast<float>(data_float);
+				cast_value = data_float;
 				break;
 
 			case ENTSYS_DATA_TYPE_DOUBLE:
-				cast_value = static_cast<double>(data_double);
+				cast_value = static_cast<float>(data_double);
 				break;
 
 			case ENTSYS_DATA_TYPE_BIG_INT:
-				cast_value = static_cast<std::int64_t>(data_int64);
+				cast_value = static_cast<float>(data_int64);
 				break;
 		}
 		return cast_value;

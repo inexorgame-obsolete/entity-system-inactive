@@ -21,7 +21,7 @@ namespace entity_system {
 	{
 		protected:
 
-			void error_message(const std::string&);
+			void entsys_message(const ENTSYS_ERROR_LEVEL&, const std::string&);
 
 		public:
 

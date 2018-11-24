@@ -8,7 +8,8 @@ namespace inexor {
 namespace entity_system {
 
 
-	void EntitySystemErrorHandler::error_message(const std::string& param_error_message)
+	void EntitySystemErrorHandler::entsys_message(const ENTSYS_ERROR_LEVEL& level,
+		                                          const std::string& param_error_message)
 	{
 		#ifdef INEXOR_ENTSYS_DEBUG
 		std::cout << param_error_message << std::endl;
