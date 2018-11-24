@@ -21,11 +21,15 @@ namespace entity_system {
 	{
 		protected:
 
+			// 
 			void entsys_message(const ENTSYS_ERROR_LEVEL&, const std::string&);
 
 		public:
 
+			// 
 			EntitySystemErrorHandler();
+			
+			// 
 			~EntitySystemErrorHandler();
 
 	};

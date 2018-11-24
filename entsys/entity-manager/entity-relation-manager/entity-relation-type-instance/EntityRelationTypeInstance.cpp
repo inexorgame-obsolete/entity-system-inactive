@@ -20,12 +20,12 @@ namespace entity_system {
 	{
 		// Store a pointer to the entity relation type.
 		set_type_pointer(ent_rel_type);
+
 		// Store source and target entity type instances.
 		source_entity_type_instance = ent_type_inst_source;
 		destination_entity_type_instance = ent_type_inst_target;
 
 		// Create all entity relation attribute type instances.
-		
 		std::vector<std::shared_ptr<EntityRelationAttributeType>> ent_rel_attributes = ent_rel_type->get_linked_attribute_types();
 
 		for(std::size_t i=0; i<ent_rel_attributes.size(); i++)

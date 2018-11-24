@@ -10,11 +10,13 @@ namespace entity_system {
 
 	TypeBase::TypeBase()
 	{
+		// TODO: Implement!
 	}
 
 
 	TypeBase::~TypeBase()
 	{
+		// TODO: Implement!
 	}
 
 

@@ -4,7 +4,7 @@
 #pragma once
 
 #include "entity-type-instance/EntityTypeInstance.hpp"
-#include "../../templates/TypeInstanceManagerTemplate.hpp"
+#include "../../templates/TypeInstanceManager.hpp"
 
 
 namespace inexor {
@@ -12,11 +12,15 @@ namespace entity_system {
 
 
 	// A manager class for instances of types of entities.
-    class EntityTypeInstanceManager : public TypeInstanceManagerTemplate<EntityTypeInstance>
+    class EntityTypeInstanceManager
+		: public TypeInstanceManager<EntityTypeInstance>
     {            
         protected:
             
+			// 
 			EntityTypeInstanceManager();
+
+			// 
 			~EntityTypeInstanceManager();
 			
 		public:

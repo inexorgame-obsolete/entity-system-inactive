@@ -21,7 +21,10 @@ namespace entity_system {
 
 		protected:
 			
+			// 
 			AttributeBase();
+
+			// 
 			~AttributeBase();
 
 			// Set the data type of this attribute's data container.

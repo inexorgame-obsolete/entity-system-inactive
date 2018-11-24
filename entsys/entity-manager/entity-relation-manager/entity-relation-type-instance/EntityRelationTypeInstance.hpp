@@ -30,10 +30,12 @@ namespace entity_system {
 
 		public:
 
+			// 
 			EntityRelationTypeInstance(const std::shared_ptr<EntityRelationType>&,
 				                       const std::shared_ptr<EntityTypeInstance>&,
 				                       const std::shared_ptr<EntityTypeInstance>&);
 
+			// 
 			~EntityRelationTypeInstance();
 
 

@@ -10,11 +10,13 @@ namespace entity_system {
 
     EntityManager::EntityManager()
     {
+		// TODO: Implement!
     }
 
 
     EntityManager::~EntityManager()
     {
+		// TODO: Implement!
     }
 
 	

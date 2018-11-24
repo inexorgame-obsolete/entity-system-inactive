@@ -10,11 +10,13 @@ namespace entity_system {
 
     EntityRelationTypeManager::EntityRelationTypeManager()
     {
+		// TODO: Implement!
     }
 
 
     EntityRelationTypeManager::~EntityRelationTypeManager()
     {
+		// TODO: Implement!
     }
 
 

@@ -92,7 +92,6 @@ namespace entity_system {
 			DataContainer set_data(const bool&);
 			DataContainer set_data(const int&);
 
-
 			// Initialisation operators.
 			DataContainer operator = (const DataContainer&);
 			DataContainer operator = (const std::int64_t&);

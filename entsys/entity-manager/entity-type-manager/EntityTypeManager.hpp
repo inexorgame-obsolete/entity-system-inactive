@@ -8,7 +8,7 @@
 #include <unordered_map>
 
 #include "../entity-type-manager/entity-type/EntityType.hpp"
-#include "../../templates/TypeManagerTemplate.hpp"
+#include "../../templates/TypeManager.hpp"
 
 
 namespace inexor {
@@ -16,7 +16,7 @@ namespace entity_system {
 
 
 	// A manager class for entity types.
-	class EntityTypeManager : public TypeManagerTemplate<EntityType>
+	class EntityTypeManager : public TypeManager<EntityType>
 	{
 		private:
 
@@ -26,7 +26,10 @@ namespace entity_system {
 
 		protected:
 
+			// 
 			EntityTypeManager();
+
+			// 
 			~EntityTypeManager();
 		
 		public:

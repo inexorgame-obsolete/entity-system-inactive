@@ -4,6 +4,58 @@
 
 #pragma once
 
+// Test constructor calls of DataContainer by passing data type.
+
+TEST(Test_DataContainer_DataTypeConstructor, ENTSYS_DATA_TYPE_UNDEFINED)
+{
+	DataContainer IntegerContainer(ENTSYS_DATA_TYPE_UNDEFINED);
+	ASSERT_EQ(IntegerContainer.get_data_type(), ENTSYS_DATA_TYPE_UNDEFINED);
+}
+
+
+TEST(Test_DataContainer_DataTypeConstructor, ENTSYS_DATA_TYPE_INT)
+{
+	DataContainer IntegerContainer(ENTSYS_DATA_TYPE_INT);
+	ASSERT_EQ(IntegerContainer.get_data_type(), ENTSYS_DATA_TYPE_INT);
+}
+
+
+TEST(Test_DataContainer_DataTypeConstructor, ENTSYS_DATA_TYPE_BIG_INT)
+{
+	DataContainer IntegerContainer(ENTSYS_DATA_TYPE_BIG_INT);
+	ASSERT_EQ(IntegerContainer.get_data_type(), ENTSYS_DATA_TYPE_BIG_INT);
+}
+
+
+TEST(Test_DataContainer_DataTypeConstructor, ENTSYS_DATA_TYPE_FLOAT)
+{
+	DataContainer IntegerContainer(ENTSYS_DATA_TYPE_FLOAT);
+	ASSERT_EQ(IntegerContainer.get_data_type(), ENTSYS_DATA_TYPE_FLOAT);
+}
+
+
+TEST(Test_DataContainer_DataTypeConstructor, ENTSYS_DATA_TYPE_STRING)
+{
+	DataContainer IntegerContainer(ENTSYS_DATA_TYPE_STRING);
+	ASSERT_EQ(IntegerContainer.get_data_type(), ENTSYS_DATA_TYPE_STRING);
+}
+
+
+TEST(Test_DataContainer_DataTypeConstructor, ENTSYS_DATA_TYPE_DOUBLE)
+{
+	DataContainer IntegerContainer(ENTSYS_DATA_TYPE_DOUBLE);
+	ASSERT_EQ(IntegerContainer.get_data_type(), ENTSYS_DATA_TYPE_DOUBLE);
+}
+
+
+TEST(Test_DataContainer_DataTypeConstructor, ENTSYS_DATA_TYPE_BOOL)
+{
+	DataContainer IntegerContainer(ENTSYS_DATA_TYPE_BOOL);
+	ASSERT_EQ(IntegerContainer.get_data_type(), ENTSYS_DATA_TYPE_BOOL);
+}
+
+
+
 // Test constructor calls of DataContainer by passing data.
 
 
@@ -59,7 +111,7 @@ TEST(Test_DataContainer_DataValueConstructor, ENTSYS_DATA_TYPE_INT)
 
 TEST(Test_DataContainer_DataValueConstructor, ENTSYS_DATA_TYPE_STRING)
 {
-	std::string str_val = "abcdefghijklmnopqrstuvwxyz1234567890?!\"ง$%&/()=?";
+	std::string str_val = "abcdefghijklmnopqrstuvwxyz1234567890?!\"ยง$%&/()=?";
 	DataContainer StringContainer(str_val);
 	ASSERT_EQ(StringContainer.get_data_type(), ENTSYS_DATA_TYPE_STRING);
 	std::string str_test = StringContainer.get_string();

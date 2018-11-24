@@ -12,6 +12,7 @@ namespace entity_system {
 	{
 		// Call template base class method.
 		set_type_name(ent_attr_type_name);
+
 		// Call template base class method.
 		set_attribute_data_type(ent_attr_data_type);
 	}
@@ -19,6 +20,7 @@ namespace entity_system {
 
 	EntityAttributeType::~EntityAttributeType()
 	{
+		// TODO: Implement!
 	}
 
 	

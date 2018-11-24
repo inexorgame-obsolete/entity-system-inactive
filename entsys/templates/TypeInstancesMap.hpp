@@ -17,7 +17,7 @@ namespace entity_system {
 	// A template class for a linked map of type instances.
 	// typename T1 = type, typename T2 = type instance.
 	template <typename T1, typename T2>
-	class LinkedTypeInstancesMapTemplate
+	class TypeInstancesMap
 	{
 		private:
 

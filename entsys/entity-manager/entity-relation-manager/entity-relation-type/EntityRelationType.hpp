@@ -28,9 +28,11 @@ namespace entity_system {
 
 		public:
 
+			// 
 			EntityRelationType(const std::string&, const std::shared_ptr<EntityType>&, const std::shared_ptr<EntityType>&);
+			
+			// 
 			~EntityRelationType();
-
 
 			// Link an entity relation attribute type to this entity relation type.
 			void link_entity_relation_attribute_type(const std::shared_ptr<EntityRelationAttributeType>&);

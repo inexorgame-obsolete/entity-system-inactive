@@ -11,19 +11,20 @@ namespace entity_system {
 	void EntitySystemErrorHandler::entsys_message(const ENTSYS_ERROR_LEVEL& level,
 		                                          const std::string& param_error_message)
 	{
-		#ifdef INEXOR_ENTSYS_DEBUG
+		// TODO: Link your log method here.
 		std::cout << param_error_message << std::endl;
-		#endif
 	}
 
 
 	EntitySystemErrorHandler::EntitySystemErrorHandler()
 	{
+		// TODO: Implement!
 	}
 
 	
 	EntitySystemErrorHandler::~EntitySystemErrorHandler()
 	{
+		// TODO: Implement!
 	}
 
 

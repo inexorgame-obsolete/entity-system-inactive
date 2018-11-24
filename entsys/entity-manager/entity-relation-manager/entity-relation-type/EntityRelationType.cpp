@@ -22,6 +22,7 @@ namespace entity_system {
 
 	EntityRelationType::~EntityRelationType()
 	{
+		// TODO: Implement!
 	}
 
 

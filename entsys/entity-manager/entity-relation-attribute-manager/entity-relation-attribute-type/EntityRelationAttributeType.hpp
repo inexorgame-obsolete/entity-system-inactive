@@ -19,12 +19,14 @@ namespace entity_system {
     
 
 	// A base class for types of entity attributes.
-    class EntityRelationAttributeType : public TypeBase,
-		                                public AttributeBase
+    class EntityRelationAttributeType : public TypeBase, public AttributeBase
     {
         public:
-						
+
+			// 
 			EntityRelationAttributeType(const std::string&, const ENTSYS_DATA_TYPE&);
+
+			// 
 			~EntityRelationAttributeType();
 
 			// Implement data validation method as required by base class inheritance!

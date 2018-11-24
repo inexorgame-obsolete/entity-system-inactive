@@ -37,6 +37,7 @@ namespace entity_system {
 
 	EntityTypeInstance::~EntityTypeInstance()
 	{
+		// TODO: Implement!
 	}
 
 

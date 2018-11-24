@@ -12,11 +12,13 @@ namespace entity_system {
 
 	AttributeBase::AttributeBase()
 	{
+		// TODO: Implement!
 	}
 
 
 	AttributeBase::~AttributeBase()
 	{
+		// TODO: Implement!
 	}
 
 

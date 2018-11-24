@@ -20,6 +20,7 @@ namespace entity_system {
 
     EntityAttributeTypeManager::~EntityAttributeTypeManager()
     {
+		// TODO: Implement!
     }
 
 

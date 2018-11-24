@@ -40,7 +40,10 @@ namespace entity_system {
 
 		protected:
 			
+			// 
 		    EntityManager();
+
+			// 
 			~EntityManager();
 
 		public:

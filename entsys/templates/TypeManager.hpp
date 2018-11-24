@@ -19,7 +19,7 @@ namespace entity_system {
 	// This will be used for EntityTypeManager,
 	// EntityAttributeTypeManager, EntityRelationTypeManager.
 	template <typename T>
-	class TypeManagerTemplate
+	class TypeManager
 	{
 		private:
 
@@ -34,12 +34,14 @@ namespace entity_system {
 			// but calls back to those methods here.
 			
 
-			TypeManagerTemplate()
+			// 
+			TypeManager()
 			{
 			}
 
 
-			~TypeManagerTemplate()
+			// 
+			~TypeManager()
 			{
 			}
 

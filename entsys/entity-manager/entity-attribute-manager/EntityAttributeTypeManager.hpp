@@ -9,7 +9,7 @@
 
 #include "entity-attribute-type\EntityAttributeType.hpp"
 #include "../../data-validation/DataValidationResults.hpp"
-#include "../../templates/TypeManagerTemplate.hpp"
+#include "../../templates/TypeManager.hpp"
 
 
 namespace inexor {
@@ -17,7 +17,7 @@ namespace entity_system {
     
 
 	// A manager class for types of entity attributes.
-    class EntityAttributeTypeManager : public TypeManagerTemplate<EntityAttributeType>
+    class EntityAttributeTypeManager : public TypeManager<EntityAttributeType>
     {
         private:
 
@@ -26,7 +26,10 @@ namespace entity_system {
 
         protected:
 
+			// 
 			EntityAttributeTypeManager();
+
+			// 
             ~EntityAttributeTypeManager();
 
 		public:

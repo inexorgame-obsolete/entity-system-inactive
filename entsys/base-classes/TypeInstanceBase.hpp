@@ -17,24 +17,24 @@ namespace entity_system {
 	{
 		public:
 			
-			// The unique name of this type instances' type base.
+			// The unique name of this type base instance.
 			std::string type_title;
 			
 			// TODO: Implement UUIDs!
 
 		protected:
 
-			// A pointer to the type of this type instance
+			// A pointer to the type of this type instance.
 			std::shared_ptr<T1> type_pointer;
 
 		public:
 
-
+			// 
 			TypeInstanceBase()
 			{
 			}
 
-
+			// 
 			~TypeInstanceBase()
 			{
 			}

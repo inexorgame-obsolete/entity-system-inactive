@@ -8,8 +8,8 @@ namespace inexor {
 namespace entity_system {
 	
 	
-	EntityAttributeTypeInstance::EntityAttributeTypeInstance(const std::shared_ptr<EntityAttributeType>& ent_attr_type) :
-		DataContainer(ent_attr_type->get_type_name())
+	EntityAttributeTypeInstance::EntityAttributeTypeInstance(const std::shared_ptr<EntityAttributeType>& ent_attr_type)
+		: DataContainer(ent_attr_type->get_type_name())
 	{
 		// Call template base class method.
 		set_type_pointer(ent_attr_type);
@@ -21,6 +21,7 @@ namespace entity_system {
 
 	EntityAttributeTypeInstance::~EntityAttributeTypeInstance()
 	{
+		// TODO: Implement!
 	}
 
 

@@ -24,7 +24,10 @@ namespace entity_system {
 			
 		protected:
 
+			// 
 			TypeBase();
+
+			// 
 			~TypeBase();
 
 			// Set the name of this type.

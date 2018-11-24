@@ -19,7 +19,10 @@ namespace entity_system {
 	{
 		public:
 
+			// 
 			EntityRelationAttributeTypeInstance(const std::shared_ptr<EntityRelationAttributeType>&);
+
+			// 
 			~EntityRelationAttributeTypeInstance();
 
 	};

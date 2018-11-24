@@ -20,22 +20,23 @@ namespace entity_system {
 	// This will be used by EntityTypeInstanceManager,
 	// EntityAttributeTypeInstanceManager, EntityRelationTypeInstanceManager.
 	template <typename T>
-	class TypeInstanceManagerTemplate
+	class TypeInstanceManager
 	{
 		private:
 
-			// Vector of shared pointers of type instances.
+			// 
 			std::vector<std::shared_ptr<T>> type_instances;
 		
 		protected:
 			
-
-			TypeInstanceManagerTemplate()
+			// 
+			TypeInstanceManager()
 			{
 			}
 
 			
-			~TypeInstanceManagerTemplate()
+			// 
+			~TypeInstanceManager()
 			{
 			}
 

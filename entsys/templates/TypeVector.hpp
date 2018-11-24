@@ -16,7 +16,7 @@ namespace entity_system {
 
 	// A template class for a linked std::vector of types.
 	template <typename T>
-	class LinkedTypeVectorTemplate
+	class TypeVector
 	{
 		protected:
 			

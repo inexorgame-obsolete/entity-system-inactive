@@ -16,6 +16,7 @@ namespace entity_system {
 
 	EntityRelationAttributeTypeInstance::~EntityRelationAttributeTypeInstance()
 	{
+		// TODO: Implement!
 	}
 
 

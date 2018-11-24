@@ -7,7 +7,7 @@
 #include <unordered_map>
 
 #include "../../entity-attribute-manager/entity-attribute-type/EntityAttributeType.hpp"
-#include "../../../templates/LinkedTypeVectorTemplate.hpp"
+#include "../../../templates/TypeVector.hpp"
 
 
 namespace inexor {
@@ -17,11 +17,14 @@ namespace entity_system {
 	// A base class for types of entities.
 	// This class needs to implement a data validation method!
 	class EntityType : public TypeBase,
-                       public LinkedTypeVectorTemplate<EntityAttributeType>
+                       public TypeVector<EntityAttributeType>
     {
         public:
 
+			// 
 			EntityType(const std::string&);
+
+			// 
             ~EntityType();
 
 			// Check if an entity attribute type is already linked to this entity type.

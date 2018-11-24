@@ -5,7 +5,7 @@
 
 #include "../entity-relation-attribute-manager/entity-relation-attribute-type-instance/EntityRelationAttributeTypeInstance.hpp"
 #include "../entity-relation-attribute-manager/entity-relation-attribute-type/EntityRelationAttributeType.hpp"
-#include "../../templates/TypeInstanceManagerTemplate.hpp"
+#include "../../templates/TypeInstanceManager.hpp"
 
 
 namespace inexor {
@@ -13,11 +13,15 @@ namespace entity_system {
 
 
 	//
-	class EntityRelationAttributeTypeInstanceManager : public TypeInstanceManagerTemplate<EntityRelationAttributeTypeInstance>
+	class EntityRelationAttributeTypeInstanceManager
+		: public TypeInstanceManager<EntityRelationAttributeTypeInstance>
 	{
 		protected:
 
+			// 
 			EntityRelationAttributeTypeInstanceManager();
+
+			// 
 			~EntityRelationAttributeTypeInstanceManager();
 
 	public:

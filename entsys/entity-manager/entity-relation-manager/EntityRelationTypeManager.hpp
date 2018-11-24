@@ -4,7 +4,7 @@
 #pragma once
 
 #include "../entity-relation-manager/entity-relation-type/EntityRelationType.hpp"
-#include "../../templates/TypeManagerTemplate.hpp"
+#include "../../templates/TypeManager.hpp"
 
 
 namespace inexor {
@@ -12,16 +12,20 @@ namespace entity_system {
 
 
 	// A manager class for types of entity relations.
-    class EntityRelationTypeManager : public TypeManagerTemplate<EntityRelationType>
+    class EntityRelationTypeManager : public TypeManager<EntityRelationType>
     {
 		private:
 
 			// This entity relation error type will be returned when a method fails.
-			std::shared_ptr<EntityRelationType> entity_relation_type_error = std::make_shared<EntityRelationType>("ERROR", nullptr, nullptr);
+			std::shared_ptr<EntityRelationType> entity_relation_type_error
+				= std::make_shared<EntityRelationType>("ERROR", nullptr, nullptr);
 
         protected:
 
+			// 
 			EntityRelationTypeManager();
+
+			// 
 			~EntityRelationTypeManager();
 
 		public:

@@ -18,7 +18,10 @@ namespace entity_system {
 
         public:
 
+			// 
 			DataValidation();
+
+			// 
 			~DataValidation();
 
             // Every class which inherits from DataValidation
