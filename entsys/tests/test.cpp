@@ -11,7 +11,6 @@
 #include "test-components/data-container-tests/DataContainerTests.hpp"
 
 // Tests for types of entities and instances of them.
-//#include "test-components/type-tests/entity-type-tests/EntityTypeTests.hpp"
 
 // Tests for types of attributes of entities and instances of them.
 

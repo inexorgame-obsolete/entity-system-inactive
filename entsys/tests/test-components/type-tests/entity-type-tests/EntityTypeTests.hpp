@@ -8,6 +8,33 @@
 using namespace inexor::entity_system;
 
 
+
+TEST(Hackathon2018, TODO)
+{
+	std::string teleport_name = "teleporter";
+	ENT_TYPE teleport = CREATE_ENT_TYPE(teleport_name);
+
+	ASSERT_EQ(teleport->get_type_name(), "teleporter");
+
+	ENT_ATTR_TYPE x = CREATE_ENT_ATTR_TYPE("pos_x", ENTSYS_DATA_TYPE_FLOAT);
+	ENT_ATTR_TYPE y = CREATE_ENT_ATTR_TYPE("pos_y", ENTSYS_DATA_TYPE_FLOAT);
+	ENT_ATTR_TYPE z = CREATE_ENT_ATTR_TYPE("pos_z", ENTSYS_DATA_TYPE_FLOAT);
+
+	teleport->link_attribute_type(x);
+	ASSERT_EQ(teleport->get_linked_attributes_count(), 1);
+	teleport->link_attribute_type(y);
+	ASSERT_EQ(teleport->get_linked_attributes_count(), 2);
+	teleport->link_attribute_type(z);
+	ASSERT_EQ(teleport->get_linked_attributes_count(), 3);
+
+	// Cleanup!
+	entsys->reset_entity_system();
+}
+
+/*
+
+
+
 TEST(Test_EntityType, get_type_name)
 {
 	std::string ent_name = "grenade";
@@ -17,6 +44,8 @@ TEST(Test_EntityType, get_type_name)
 	// Cleanup!
 	entsys->reset_entity_system();
 }
+
+
 
 
 TEST(Tests_EntityType, link_attribute_type)
