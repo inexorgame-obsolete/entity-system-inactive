@@ -5,6 +5,7 @@
 
 #include "../entity-attribute-manager/entity-attribute-type-instances/EntityAttributeTypeInstance.hpp"
 #include "../../templates/TypeInstanceManager.hpp"
+#include "../../typedefs/TypeDefinitions.hpp"
 
 
 namespace inexor {
@@ -12,8 +13,7 @@ namespace entity_system {
 
 
 	// A manager class for instances of attributes of entity types.
-    class EntityAttributeTypeInstanceManager
-		: public TypeInstanceManager<EntityAttributeTypeInstance>
+    class EntityAttributeTypeInstanceManager : public TypeInstanceManager<EntityAttributeTypeInstance>
     {
 		protected:
             
@@ -26,8 +26,7 @@ namespace entity_system {
 		public:
 
 			// Create an entity attribute type instance.
-			std::shared_ptr<EntityAttributeTypeInstance> create_entity_attribute_type_instance(
-				const std::shared_ptr<EntityAttributeType>&);
+			ENT_ATTR_TYPE_INST create_entity_attribute_type_instance(const ENT_ATTR_TYPE&);
 
 			// Return the number of existing entity attribute type instances.
 			const std::size_t get_entity_attribute_type_instance_count() const;

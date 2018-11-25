@@ -24,12 +24,10 @@ namespace entity_system {
     }
 
 
-	std::shared_ptr<EntityAttributeTypeInstance> EntityAttributeTypeInstanceManager::create_entity_attribute_type_instance(
-		const std::shared_ptr<EntityAttributeType>& ent_attr_type)
+	ENT_ATTR_TYPE_INST EntityAttributeTypeInstanceManager::create_entity_attribute_type_instance(const ENT_ATTR_TYPE& ent_attr_type)
 	{
 		// Create entity attribute type instance.
-		std::shared_ptr<EntityAttributeTypeInstance> new_ent_attr_type_instance
-			= std::make_shared<EntityAttributeTypeInstance>(ent_attr_type);
+		ENT_ATTR_TYPE_INST new_ent_attr_type_instance = std::make_shared<EntityAttributeTypeInstance>(ent_attr_type);
 
 		// Call template base class method.
 		add_instance_to_buffer(new_ent_attr_type_instance);

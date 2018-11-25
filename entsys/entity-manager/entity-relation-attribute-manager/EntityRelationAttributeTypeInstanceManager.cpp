@@ -20,12 +20,11 @@ namespace entity_system {
 	}
 
 
-	std::shared_ptr<EntityRelationAttributeTypeInstance> 
-		EntityRelationAttributeTypeInstanceManager::create_entity_relation_attribute_type_instance(
-			const std::shared_ptr<EntityRelationAttributeType>& ent_rel_attr_type)
+	ENT_REL_ATTR_TYPE_INST EntityRelationAttributeTypeInstanceManager
+		::create_entity_relation_attribute_type_instance(const ENT_REL_ATTR_TYPE& ent_rel_attr_type)
 	{
 		// Create a new entity relation attribute type instance.
-		std::shared_ptr<EntityRelationAttributeTypeInstance> new_ent_rel_attr_type_inst
+		ENT_REL_ATTR_TYPE_INST new_ent_rel_attr_type_inst
 			= std::make_shared<EntityRelationAttributeTypeInstance>(ent_rel_attr_type);
 		
 		// Call base template class method.

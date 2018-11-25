@@ -7,6 +7,7 @@
 #include "../../entity-type-manager/entity-type-instance/EntityTypeInstance.hpp"
 #include "../../../base-classes/TypeInstanceBase.hpp"
 #include "../../entity-relation-attribute-manager/entity-relation-attribute-type-instance/EntityRelationAttributeTypeInstance.hpp"
+#include "../../../typedefs/TypeDefinitions.hpp"
 
 
 namespace inexor {
@@ -19,21 +20,18 @@ namespace entity_system {
 		private:
 		
 			// The instance of the source entity type.
-			std::shared_ptr<EntityTypeInstance> source_entity_type_instance;
+			ENT_TYPE_INST source_entity_type_instance;
 
 			// The instance of the target entity type.
-			std::shared_ptr<EntityTypeInstance> destination_entity_type_instance;
+			ENT_TYPE_INST destination_entity_type_instance;
 			
-			// TODO
-			std::unordered_map<std::shared_ptr<EntityRelationAttributeType>,
-				               std::shared_ptr<EntityRelationAttributeTypeInstance>> relation_attribute_instances;
+			// 
+			std::unordered_map<ENT_REL_ATTR_TYPE, ENT_REL_ATTR_TYPE_INST> relation_attribute_instances;
 
 		public:
 
 			// 
-			EntityRelationTypeInstance(const std::shared_ptr<EntityRelationType>&,
-				                       const std::shared_ptr<EntityTypeInstance>&,
-				                       const std::shared_ptr<EntityTypeInstance>&);
+			EntityRelationTypeInstance(const ENT_REL_TYPE&, const ENT_TYPE_INST&, const ENT_TYPE_INST&);
 
 			// 
 			~EntityRelationTypeInstance();

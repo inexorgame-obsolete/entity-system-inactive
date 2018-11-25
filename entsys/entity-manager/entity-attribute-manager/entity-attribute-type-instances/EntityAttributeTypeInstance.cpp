@@ -8,7 +8,7 @@ namespace inexor {
 namespace entity_system {
 	
 	
-	EntityAttributeTypeInstance::EntityAttributeTypeInstance(const std::shared_ptr<EntityAttributeType>& ent_attr_type)
+	EntityAttributeTypeInstance::EntityAttributeTypeInstance(const ENT_ATTR_TYPE& ent_attr_type)
 		: DataContainer(ent_attr_type->get_type_name())
 	{
 		// Call template base class method.

@@ -12,8 +12,7 @@ namespace entity_system {
 
 
 	// A manager class for instances of types of entities.
-    class EntityTypeInstanceManager
-		: public TypeInstanceManager<EntityTypeInstance>
+    class EntityTypeInstanceManager : public TypeInstanceManager<EntityTypeInstance>
     {            
         protected:
             
@@ -26,7 +25,7 @@ namespace entity_system {
 		public:
 
 			// Create an entity type instance.
-			std::shared_ptr<EntityTypeInstance> create_entity_type_instance(const std::shared_ptr<EntityType>&);
+			ENT_TYPE_INST create_entity_type_instance(const ENT_TYPE&);
 
 			// Get the number of existing entity type instances.
 			const std::size_t get_entity_type_instance_count() const;

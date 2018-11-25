@@ -20,12 +20,11 @@ namespace entity_system {
 	}
 
 
-	std::shared_ptr<EntityRelationAttributeType> EntityRelationAttributeTypeManager::create_entity_relation_attribute_type(
+	ENT_REL_ATTR_TYPE EntityRelationAttributeTypeManager::create_entity_relation_attribute_type(
 			const std::string& ent_rel_attr_type_name, const ENTSYS_DATA_TYPE& ent_rel_attr_data_type)
 	{
 		// Create new entity relation attribute type
-		std::shared_ptr<EntityRelationAttributeType> new_ent_rel_attr_type
-			= std::make_shared<EntityRelationAttributeType>(ent_rel_attr_type_name, ent_rel_attr_data_type);
+		ENT_REL_ATTR_TYPE new_ent_rel_attr_type = std::make_shared<EntityRelationAttributeType>(ent_rel_attr_type_name, ent_rel_attr_data_type);
 
 		add_type_to_map(ent_rel_attr_type_name, new_ent_rel_attr_type);
 

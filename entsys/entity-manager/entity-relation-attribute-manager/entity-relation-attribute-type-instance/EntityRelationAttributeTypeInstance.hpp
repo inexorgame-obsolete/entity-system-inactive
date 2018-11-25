@@ -6,6 +6,7 @@
 #include "../entity-relation-attribute-type/EntityRelationAttributeType.hpp"
 #include "../../../base-classes/TypeInstanceBase.hpp"
 #include "../../../data-container/DataContainer.hpp"
+#include "../../../typedefs/TypeDefinitions.hpp"
 
 
 namespace inexor {
@@ -20,7 +21,7 @@ namespace entity_system {
 		public:
 
 			// 
-			EntityRelationAttributeTypeInstance(const std::shared_ptr<EntityRelationAttributeType>&);
+			EntityRelationAttributeTypeInstance(const ENT_REL_ATTR_TYPE&);
 
 			// 
 			~EntityRelationAttributeTypeInstance();

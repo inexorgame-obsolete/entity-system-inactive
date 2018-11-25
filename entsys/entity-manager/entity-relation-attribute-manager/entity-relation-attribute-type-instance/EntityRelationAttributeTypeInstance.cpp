@@ -8,7 +8,7 @@ namespace inexor {
 namespace entity_system {
 
 
-	EntityRelationAttributeTypeInstance::EntityRelationAttributeTypeInstance(const std::shared_ptr<EntityRelationAttributeType>& ent_rel_attr_type)
+	EntityRelationAttributeTypeInstance::EntityRelationAttributeTypeInstance(const ENT_REL_ATTR_TYPE& ent_rel_attr_type)
 		: DataContainer(ent_rel_attr_type->get_type_name())
 	{
 	}

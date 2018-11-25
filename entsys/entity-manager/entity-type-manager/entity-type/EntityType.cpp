@@ -45,13 +45,13 @@ namespace entity_system {
 	}
 	
 
-	bool EntityType::has_attribute_type(const std::shared_ptr<EntityAttributeType>& ent_attr_type)
+	bool EntityType::has_attribute_type(const ENT_ATTR_TYPE& ent_attr_type)
 	{
 		return has_attribute_type(ent_attr_type->get_type_name());
 	}
 
 
-	ENTSYS_RESULT EntityType::link_attribute_type(const std::shared_ptr<EntityAttributeType>& ent_attr_type)
+	ENTSYS_RESULT EntityType::link_attribute_type(const ENT_ATTR_TYPE& ent_attr_type)
 	{
 		if(! has_attribute_type(ent_attr_type->get_type_name()))
 		{
@@ -72,7 +72,7 @@ namespace entity_system {
 	}
 
 
-	const std::vector<std::shared_ptr<EntityAttributeType>> EntityType::get_linked_attribute_types() const
+	const std::vector<ENT_ATTR_TYPE> EntityType::get_linked_attribute_types() const
 	{
 		// Call template base class method.
 		return get_linked_objects();

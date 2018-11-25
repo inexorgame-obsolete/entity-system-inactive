@@ -25,11 +25,9 @@ namespace entity_system {
 		public:
 		
 			// Create a new entity relation type instance.
-			std::shared_ptr<EntityRelationTypeInstance> create_entity_relation_type_instance(const std::shared_ptr<EntityRelationType>&,
-				                                                                             const std::shared_ptr<EntityTypeInstance>&,
-					                                                                         const std::shared_ptr<EntityTypeInstance>&);
+			ENT_REL_TYPE_INST create_entity_relation_type_instance(const ENT_REL_TYPE&, const ENT_TYPE_INST&, const ENT_TYPE_INST&);
 
-
+			// 
 			const std::size_t get_relation_type_instances_count() const;
 
 			// TODO: Get instances count.

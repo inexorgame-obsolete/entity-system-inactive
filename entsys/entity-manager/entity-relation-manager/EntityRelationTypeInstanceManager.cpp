@@ -20,14 +20,13 @@ namespace entity_system {
     }
 
 
-	std::shared_ptr<EntityRelationTypeInstance> EntityRelationTypeInstanceManager::create_entity_relation_type_instance(
-		const std::shared_ptr<EntityRelationType>& ent_rel_type,
-		const std::shared_ptr<EntityTypeInstance>& ent_type_inst_source,
-		const std::shared_ptr<EntityTypeInstance>& ent_type_inst_target)
+	ENT_REL_TYPE_INST EntityRelationTypeInstanceManager::create_entity_relation_type_instance(
+		const ENT_REL_TYPE& ent_rel_type,
+		const ENT_TYPE_INST& ent_type_inst_source,
+		const ENT_TYPE_INST& ent_type_inst_target)
 	
 	{
-		std::shared_ptr<EntityRelationTypeInstance> new_relation_type_instance
-			= std::make_shared<EntityRelationTypeInstance>(ent_rel_type, ent_type_inst_source, ent_type_inst_target);
+		ENT_REL_TYPE_INST new_relation_type_instance = std::make_shared<EntityRelationTypeInstance>(ent_rel_type, ent_type_inst_source, ent_type_inst_target);
 
 		add_instance_to_buffer(new_relation_type_instance);
 

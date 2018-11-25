@@ -6,6 +6,7 @@
 #include "../entity-attribute-type/EntityAttributeType.hpp"
 #include "../../../data-container/DataContainer.hpp"
 #include "../../../base-classes/TypeInstanceBase.hpp"
+#include "../../../typedefs/TypeDefinitions.hpp"
 
 
 namespace inexor {
@@ -13,14 +14,13 @@ namespace entity_system {
 
 
 	// A base class for instances of attributes of entities.
-	class EntityAttributeTypeInstance
-		: public TypeInstanceBase<EntityAttributeType,EntityAttributeTypeInstance>,
-          public DataContainer
+	class EntityAttributeTypeInstance : public TypeInstanceBase<EntityAttributeType,EntityAttributeTypeInstance>,
+                                        public DataContainer
 	{
 		public:
 
 			// 
-			EntityAttributeTypeInstance(const std::shared_ptr<EntityAttributeType>&);
+			EntityAttributeTypeInstance(const ENT_ATTR_TYPE&);
 
 			// 
 			~EntityAttributeTypeInstance();

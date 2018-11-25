@@ -20,7 +20,7 @@ namespace entity_system {
 		public:
 			
 			// 
-			EntityTypeInstance(const std::shared_ptr<EntityType>&);
+			EntityTypeInstance(const ENT_TYPE&);
 
 			// 
 			~EntityTypeInstance();

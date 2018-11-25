@@ -14,9 +14,9 @@ namespace entity_system {
 	extern std::shared_ptr<EntitySystem> entsys;
 
 
-	EntityRelationTypeInstance::EntityRelationTypeInstance(const std::shared_ptr<EntityRelationType>& ent_rel_type,
-		                                                   const std::shared_ptr<EntityTypeInstance>& ent_type_inst_source,
-		                                                   const std::shared_ptr<EntityTypeInstance>& ent_type_inst_target)
+	EntityRelationTypeInstance::EntityRelationTypeInstance(const ENT_REL_TYPE& ent_rel_type,
+		                                                   const ENT_TYPE_INST& ent_type_inst_source,
+		                                                   const ENT_TYPE_INST& ent_type_inst_target)
 	{
 		// Store a pointer to the entity relation type.
 		set_type_pointer(ent_rel_type);
@@ -26,7 +26,7 @@ namespace entity_system {
 		destination_entity_type_instance = ent_type_inst_target;
 
 		// Create all entity relation attribute type instances.
-		std::vector<std::shared_ptr<EntityRelationAttributeType>> ent_rel_attributes = ent_rel_type->get_linked_attribute_types();
+		std::vector<ENT_REL_ATTR_TYPE> ent_rel_attributes = ent_rel_type->get_linked_attribute_types();
 
 		for(std::size_t i=0; i<ent_rel_attributes.size(); i++)
 		{

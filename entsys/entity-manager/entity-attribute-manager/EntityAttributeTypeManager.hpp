@@ -10,6 +10,7 @@
 #include "entity-attribute-type\EntityAttributeType.hpp"
 #include "../../data-validation/DataValidationResults.hpp"
 #include "../../templates/TypeManager.hpp"
+#include "../../typedefs/TypeDefinitions.hpp"
 
 
 namespace inexor {
@@ -22,7 +23,7 @@ namespace entity_system {
         private:
 
 			// This error entity attribute type will be returned when a method fails.
-			std::shared_ptr<EntityAttributeType> entity_attribute_type_error;
+			ENT_ATTR_TYPE entity_attribute_type_error;
 
         protected:
 
@@ -36,17 +37,17 @@ namespace entity_system {
 
 			// Check if an entity attribute type does already exist.
 			bool does_entity_attribute_type_exist(const std::string&);
-			bool does_entity_attribute_type_exist(const std::shared_ptr<EntityAttributeType>&);
+			bool does_entity_attribute_type_exist(const ENT_ATTR_TYPE&);
 
 			// Create a new entity attribute type.
-			std::shared_ptr<EntityAttributeType> create_entity_attribute_type(const std::string&, const ENTSYS_DATA_TYPE&);
+			ENT_ATTR_TYPE create_entity_attribute_type(const std::string&, const ENTSYS_DATA_TYPE&);
 
 			// Returns the number of available entity attribute types.
 			const std::size_t get_entity_attribute_type_count() const;
 
 			// Deletes an entity attribute type.
 			void delete_entity_attribute_type(const std::string&);
-			void delete_entity_attribute_type(const std::shared_ptr<EntityAttributeType>&);
+			void delete_entity_attribute_type(const ENT_ATTR_TYPE&);
 			// TODO: Delete by UUID.
 
 			// Delete all entity attribute types.

@@ -1,38 +1,21 @@
 // Inexor entity system prototype
 // (c)2018 Inexor
 
-#pragma once
-
 #include <memory>
-#include <unordered_map>
-
-#include "../EntitySystem.hpp"
 
 
 namespace inexor {
 namespace entity_system {
 	
 
-	// Initialisation macros for the entity system.
-	#define ENT_ATTR_TYPE                    std::shared_ptr<EntityAttributeType>
-	#define ENT_ATTR_TYPE_INSTANCE           std::shared_ptr<EntityAttributeTypeInstance>
-	#define ENT_TYPE                         std::shared_ptr<EntityType>
-	#define ENT_TYPE_INSTANCE                std::shared_ptr<EntityTypeInstance>
-	#define ENT_RELATION_TYPE                std::shared_ptr<EntityRelationType>
-	#define ENT_RELATION_TYPE_INSTANCE       std::shared_ptr<EntityRelationTypeInstance>
-
-	// The create macros depend on the entity system.
-	extern std::shared_ptr<EntitySystem> entsys;
-
-	// Instance create macros for the entity system.
-	// TODO: Give macro parameters better names than x,y,z!
-	#define CREATE_ENT_TYPE(x)               entsys->create_entity_type(x)
-	#define CREATE_ENT_TYPE_INSTANCE(x)      entsys->create_entity_type_instance(x)
-	#define CREATE_ENT_ATTR_TYPE(x,y)        entsys->create_entity_attribute_type(x,y)
-	#define CREATE_ENT_ATTR_TYPE_INSTANCE(x) entsys->create_entity_attribute_type_instance(x)
-	#define CREATE_ENT_REL_TYPE(x,y,z)       entsys->create_entity_relation_type(x,y,z)
-    #define CREATE_ENT_REL_TYPE_INSTANCE(x)  entsys->create_entity_relation_type_instance(x)
-
+	#define ENT_ATTR_TYPE                    std::shared_ptr<class EntityAttributeType>
+	#define ENT_ATTR_TYPE_INST               std::shared_ptr<class EntityAttributeTypeInstance>
+	#define ENT_TYPE                         std::shared_ptr<class EntityType>
+	#define ENT_TYPE_INST                    std::shared_ptr<class EntityTypeInstance>
+	#define ENT_REL_ATTR_TYPE                std::shared_ptr<class EntityRelationAttributeType>
+	#define ENT_REL_ATTR_TYPE_INST           std::shared_ptr<class EntityRelationAttributeTypeInstance>
+	#define ENT_REL_TYPE                     std::shared_ptr<class EntityRelationType>
+	#define ENT_REL_TYPE_INST                std::shared_ptr<class EntityRelationTypeInstance>
 
 };
 };
