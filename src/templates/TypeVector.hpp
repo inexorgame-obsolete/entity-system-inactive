@@ -4,6 +4,8 @@
 #pragma once
 
 #include <vector>
+#include <memory>
+
 
 // When using template classes it is not possible
 // to separate definitions of class methods from their declaration.
