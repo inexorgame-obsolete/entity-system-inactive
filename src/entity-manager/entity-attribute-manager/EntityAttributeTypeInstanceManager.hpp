@@ -12,26 +12,27 @@ namespace inexor {
 namespace entity_system {
 
 
-	// A manager class for instances of attributes of entity types.
+	/// A manager class for instances of attributes of entity types.
     class EntityAttributeTypeInstanceManager : public TypeInstanceManager<EntityAttributeTypeInstance>
     {
 		protected:
             
-			// 
+			/// Constructor.
 			EntityAttributeTypeInstanceManager();
 
-			// 
+			/// Destructor.
 			~EntityAttributeTypeInstanceManager();
 
 		public:
 
-			// Create an entity attribute type instance.
+			/// Creates an entity attribute type instance.
+			/// @param ? TODO
 			ENT_ATTR_TYPE_INST create_entity_attribute_type_instance(const ENT_ATTR_TYPE&);
 
-			// Return the number of existing entity attribute type instances.
+			/// Returns the number of existing entity attribute type instances.
 			const std::size_t get_entity_attribute_type_instance_count() const;
 
-			// Delete all entity attribute type instances.
+			/// Deletes all entity attribute type instances.
 			void delete_all_entity_attribute_type_instances();
 
 	};

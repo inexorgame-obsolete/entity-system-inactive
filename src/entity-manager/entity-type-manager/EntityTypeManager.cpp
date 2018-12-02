@@ -36,7 +36,7 @@ namespace entity_system {
 	ENT_TYPE EntityTypeManager::create_entity_type(const std::string& ent_type_name)
 	{
 		// Check if an entity type with this name does already exist.
-		if(! is_new_type_name_valid(ent_type_name))
+		if(! is_type_name_valid(ent_type_name))
 		{
 			// This entity type does already exist.
 			// TODO: Throw error message.

@@ -13,16 +13,17 @@ namespace inexor {
 namespace entity_system {
 
 
-	// A base class for instances of attributes of entities.
+	/// A base class for instances of attributes of entities.
 	class EntityAttributeTypeInstance : public TypeInstanceBase<EntityAttributeType,EntityAttributeTypeInstance>,
                                         public DataContainer
 	{
 		public:
 
-			// 
+			/// Constructor.
+			/// @param ? TODO
 			EntityAttributeTypeInstance(const ENT_ATTR_TYPE&);
 
-			// 
+			/// Destructor.
 			~EntityAttributeTypeInstance();
 
 			// Note: Set and get methods are already implemented by inheriting from DataContainer.

@@ -10,22 +10,19 @@ namespace inexor {
 namespace entity_system {
 
 
-    // A base class for data validation in entity system classes.
-	// Every class which inherits from this is required
-	// to implement a data validation method!
-    class DataValidation
+    /// @brief A base class for data validation in entity system classes.
+	class DataValidation
     {
 
         public:
 
-			// 
+			/// Constructor.
 			DataValidation();
 
-			// 
+			/// Destructor.
 			~DataValidation();
 
-            // Every class which inherits from DataValidation
-            // must have an implementation of this pure virtual validation method!
+            /// Every class which inherits from DataValidation must have an implementation of this pure virtual validation method!
             virtual ENTSYS_DATA_VALIDATION_RESULT validate() = 0;
 
     };

@@ -13,35 +13,39 @@ namespace inexor {
 namespace entity_system {
 
 	
-	// A base class for types of entity relations.
+	/// A base class for types of entity relations.
 	class EntityRelationType : public TypeBase
 	{
 		private:
 
-			// The entity type of the source entity.
+			/// The entity type of the source entity.
 			ENT_TYPE source_entity_type;
 
-			// The entity type of the target entity.
+			/// The entity type of the target entity.
 			ENT_TYPE target_entity_type;
 
-			// Vector of stored entity relation attribute types which are linked to this entity relation type.
+			/// Types of entity relation attributes which are linked to this entity relation type.
 			std::vector<ENT_REL_ATTR_TYPE> linked_rel_attr_types;
 
 		public:
 
-			// 
+			/// Constructor.
+			/// @param ?
+			/// @param ?
+			/// @param ?
 			EntityRelationType(const std::string&, const ENT_TYPE&, const ENT_TYPE&);
 			
-			// 
+			/// Destructor.
 			~EntityRelationType();
 
-			// Link an entity relation attribute type to this entity relation type.
+			/// Links an entity relation attribute type to this entity relation type.
+			/// @param ? TODO
 			void link_entity_relation_attribute_type(const ENT_REL_ATTR_TYPE&);
 			
-			// Get linked entity relation attribute types.
+			/// Returns linked entity relation attribute types.
 			std::vector<ENT_REL_ATTR_TYPE> get_linked_attribute_types() const;
 						
-			// Implement data validation method as required by base class inheritance!
+			/// Implementation of data validation method as required by inheritance of base class DataValidation!
 			virtual ENTSYS_DATA_VALIDATION_RESULT validate() override;
 
 

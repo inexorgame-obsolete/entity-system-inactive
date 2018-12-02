@@ -13,17 +13,18 @@ namespace inexor {
 namespace entity_system {
 
 
-	// A base class for instances of entity relation attribute types.
+	/// A base class for instances of entity relation attribute types.
 	class EntityRelationAttributeTypeInstance :
 		public TypeInstanceBase<EntityRelationAttributeType,EntityRelationAttributeTypeInstance>,
 		public DataContainer
 	{
 		public:
 
-			// 
+			/// Constructor.
+			/// @param ? TODO
 			EntityRelationAttributeTypeInstance(const ENT_REL_ATTR_TYPE&);
 
-			// 
+			/// Destructor.
 			~EntityRelationAttributeTypeInstance();
 
 	};

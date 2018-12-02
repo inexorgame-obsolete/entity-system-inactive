@@ -22,16 +22,16 @@ namespace entity_system {
 	//			EntityExporter
 
 
-    // Entity system prototype for Inexor.
-	// Currently this class is not a singleton implementation.
+	/// Entity system prototype for Inexor.
+	/// Currently this class is not a singleton implementation.
 	class EntitySystem : public EntityManager
 	{
 		public:
 
-			// 
+			/// Constructor.
 			EntitySystem();
 
-			// 
+			/// Destructor.
 			~EntitySystem();
 	
 	};

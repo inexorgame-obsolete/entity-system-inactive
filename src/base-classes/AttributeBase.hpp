@@ -11,26 +11,27 @@ namespace inexor {
 namespace entity_system {
 
 
-	// A base class for attributes of any type.
+	/// A base class for attributes of any type.
 	class AttributeBase : public DataValidation
 	{
 		private:
 
-			// The data type of this attribute.
+			/// The data type of this attribute.
 			ENTSYS_DATA_TYPE attribute_data_type;
 
 		protected:
 			
-			// 
+			/// Constructor.
 			AttributeBase();
 
-			// 
+			/// Destructor.
 			~AttributeBase();
 
-			// Set the data type of this attribute's data container.
+			/// Sets the data type of this attribute's data container.
+			/// @param attr_data_type The data type of the data which will be stored in this attribute.
 			void set_attribute_data_type(const ENTSYS_DATA_TYPE&);
 			
-			// Return the data type of the attribute type.
+			/// Returns the data type of the attribute type.
 			ENTSYS_DATA_TYPE get_attribute_data_type() const;
 
 

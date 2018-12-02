@@ -37,7 +37,7 @@ namespace entity_system {
                                                                         const ENT_TYPE& ent_type_target)
 	{
 		// Validate new entity relation type name.
-		if(!is_new_type_name_valid(ent_rel_type_name)) return entity_relation_type_error;
+		if(!is_type_name_valid(ent_rel_type_name)) return entity_relation_type_error;
 
 		// Create new entity relation type.
 		ENT_REL_TYPE new_ent_relation_type = std::make_shared<EntityRelationType>(ent_rel_type_name, ent_type_source, ent_type_target);

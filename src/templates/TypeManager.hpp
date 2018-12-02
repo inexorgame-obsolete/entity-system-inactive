@@ -15,15 +15,13 @@ namespace inexor {
 namespace entity_system {
 
 
-	// A template class for type manager classes.
-	// This will be used for EntityTypeManager,
-	// EntityAttributeTypeManager, EntityRelationTypeManager.
+	/// @brief A template class for type manager classes.
 	template <typename T>
 	class TypeManager
 	{
 		private:
 
-			// This unordered map will store all available types in a key/value pair.
+			/// Stores all available types.
 			std::unordered_map<std::string, std::shared_ptr<T>> type_map;
 
 		protected:
@@ -34,19 +32,20 @@ namespace entity_system {
 			// but calls back to those methods here.
 			
 
-			// 
+			/// Constructor.
 			TypeManager()
 			{
 			}
 
 
-			// 
+			/// Destructor.
 			~TypeManager()
 			{
 			}
 
 
-			//
+			/// @brief Checks if a type already exists.
+			/// @param type_name The name of the type.
 			bool does_type_exist(const std::string& type_name)
 			{
 				// TODO: Add MUTEX here?
@@ -57,8 +56,9 @@ namespace entity_system {
 			// TODO: Does type exist by UUID?
 
 
-			// 
-			bool is_new_type_name_valid(const std::string& type_name)
+			/// @brief Checks if the name of a type is valid.
+			/// @param type_name The name of the type.
+			bool is_type_name_valid(const std::string& type_name)
 			{
 				if(0 == type_name.compare("")) return false;
 				if(does_type_exist(type_name)) return false;
@@ -66,7 +66,9 @@ namespace entity_system {
 			}
 
 
-			// Add a new type to the type map.
+			/// @brief Adds a new type.
+			/// @param type_name The name of the new type.
+			/// @param new_type A shared pointer reference to the new type.
 			void add_type_to_map(const std::string& type_name, const std::shared_ptr<T>& new_type)
 			{
 				// TODO: Add MUTEX here!
@@ -74,7 +76,8 @@ namespace entity_system {
 			}
 
 
-			// Return a certain type by name.
+			/// @brief Returns a certain type by name.
+			/// @param type_name the name of the type to search for.
 			const std::shared_ptr<T> get_type(const std::string& type_name)
 			{
 				return type_map[type_name];
@@ -84,14 +87,14 @@ namespace entity_system {
 			// TODO: Get by UUI!
 
 
-			// Get the number of existing types.
+			/// Returns the number of existing types.
 			const std::size_t get_type_count() const
 			{
 				return type_map.size();
 			}
 
 
-			// Delete a specific type.
+			/// Deletes a specific type.
 			void delete_type(const std::string& type_name)
 			{
 				// TODO: Add MUTEX here!
@@ -103,7 +106,7 @@ namespace entity_system {
 			// TODO: Delete by UUID!
 
 
-			// Delete all types.
+			/// Deletes all types.
 			void delete_all_types()
 			{
 				// TODO: Add MUTEX here!

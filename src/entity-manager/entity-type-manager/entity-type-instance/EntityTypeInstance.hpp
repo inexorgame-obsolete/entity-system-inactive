@@ -13,16 +13,17 @@ namespace inexor {
 namespace entity_system {
 
 
-	// A base class for instances of types of entities.
+	/// A base class for instances of entity types.
     class EntityTypeInstance : public TypeInstanceBase<EntityType,EntityTypeInstance>,
 		                       public TypeInstancesMap<EntityAttributeType,EntityAttributeTypeInstance>
     {
 		public:
 			
-			// 
+			/// Constructor.
+			/// @param ? TODO
 			EntityTypeInstance(const ENT_TYPE&);
 
-			// 
+			/// Destructor.
 			~EntityTypeInstance();
 			
     };

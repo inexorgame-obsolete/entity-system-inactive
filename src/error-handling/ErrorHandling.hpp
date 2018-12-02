@@ -16,20 +16,22 @@ namespace inexor {
 namespace entity_system {
 
 
-	// A handling class for errors in Inexor's entity system prototype.
+	/// @brief An error handler class for in Inexor's entity system prototype.
 	class EntitySystemErrorHandler
 	{
 		protected:
 
-			// 
+			/// @brief process an error/warning/info message in the entity system.
+			/// @param level The error level which describes if its an info, warning of error message.
+			/// @param param_error_message The message which will be processed.
 			void entsys_message(const ENTSYS_ERROR_LEVEL&, const std::string&);
 
 		public:
 
-			// 
+			/// Constructor.
 			EntitySystemErrorHandler();
 			
-			// 
+			/// Destructor.
 			~EntitySystemErrorHandler();
 
 	};

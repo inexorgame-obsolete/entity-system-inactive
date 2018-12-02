@@ -1,7 +1,5 @@
 [requires]
 glm/0.9.9.1@g-truc/stable
-gtest/1.8.1@bincrafters/stable
-boost_uuid/1.67.0@bincrafters/stable 
 
 [generators]
 cmake

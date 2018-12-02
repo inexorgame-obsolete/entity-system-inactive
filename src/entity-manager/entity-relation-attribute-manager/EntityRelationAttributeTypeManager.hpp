@@ -12,26 +12,28 @@ namespace inexor {
 namespace entity_system {
 
 	
-	// 
+	/// A manager class for types of entity relation attributes.
 	class EntityRelationAttributeTypeManager : public TypeManager<EntityRelationAttributeType>
 	{
 		protected:
 
-			// 
+			/// Constructor.
 			EntityRelationAttributeTypeManager();
 
-			// 
+			/// Destructor.
 			~EntityRelationAttributeTypeManager();
 
 		public:
 
-			// Create an entity relation attribute type.
+			/// Creates an entity relation attribute type.
+			/// @param ? TODO
+			/// @param ? TODO
 			ENT_REL_ATTR_TYPE create_entity_relation_attribute_type(const std::string&, const ENTSYS_DATA_TYPE&);
 
-			// Get the number of existing entity relation attribute types.
+			/// Returns the number of existing types of entity relation attributes.
 			std::size_t get_entity_relation_attribute_type_count() const;
 
-			// Delete all types of entity relation attributes.
+			/// Deletes all types of entity relation attributes.
 			void delete_all_entity_relation_attribute_types();
 
 	};

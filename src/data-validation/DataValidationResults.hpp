@@ -8,7 +8,7 @@ namespace inexor {
 namespace entity_system {
 
 
-	// Data validation codes for entity system.
+	/// Data validation codes for the entity-system.
 	enum ENTSYS_DATA_VALIDATION_RESULT
 	{
 		ENTSYS_DATA_INVALID = -1,
