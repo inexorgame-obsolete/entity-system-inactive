@@ -3,6 +3,7 @@
 
 #pragma once
 
+#include <string>
 #include <unordered_map>
 #include <memory>
 
@@ -30,7 +31,7 @@ namespace entity_system {
 			// actual implementation of the type manager class
 			// will contain a method which has an individual name
 			// but calls back to those methods here.
-			
+
 
 			/// Constructor.
 			TypeManager()
@@ -51,7 +52,7 @@ namespace entity_system {
 				// TODO: Add MUTEX here?
 				return ! (type_map.end() == type_map.find(type_name));
 			}
-			
+
 
 			// TODO: Does type exist by UUID?
 
@@ -101,7 +102,7 @@ namespace entity_system {
 				// TODO: Delete all instances first!
 				type_map.erase(type_name);
 			}
-			
+
 
 			// TODO: Delete by UUID!
 
