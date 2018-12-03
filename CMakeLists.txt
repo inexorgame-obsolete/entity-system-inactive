@@ -52,8 +52,8 @@ file(GLOB source_files
 	"src/error-handling/*.cpp"
 	"src/return-codes/*.hpp"
 	"src/return-codes/*.cpp"
-	"src/templtes/*.hpp"
-	"src/templtes/*.cpp"
+	"src/templates/*.hpp"
+	"src/templates/*.cpp"
 	"src/typedefs/*.hpp"
 	"src/typedefs/*.cpp"
 )
