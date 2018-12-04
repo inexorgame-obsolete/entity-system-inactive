@@ -15,6 +15,18 @@ namespace entity_system {
 	/// A manager class for instances of attributes of entity types.
     class EntityAttributeTypeInstanceManager : public TypeInstanceManager<EntityAttributeTypeInstance>
     {
+		private:
+
+			/// We need this entity attribute type error
+			/// to create the entity attribute type instance error.
+			const ENT_ATTR_TYPE entity_attribute_type_error
+				= std::make_shared<EntityAttributeType>("ERROR", ENTSYS_DATA_TYPE_UNDEFINED);
+
+			/// This entity attribute type instance error
+			/// will be returned when a method fails.
+			const ENT_ATTR_TYPE_INST entity_attribute_type_instance_error
+				= std::make_shared<EntityAttributeTypeInstance>(entity_attribute_type_error);
+
 		protected:
             
 			/// Constructor.

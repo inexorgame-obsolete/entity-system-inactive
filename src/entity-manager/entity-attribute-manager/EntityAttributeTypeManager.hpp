@@ -22,8 +22,10 @@ namespace entity_system {
     {
         private:
 
-			/// This error entity attribute type will be returned when a method fails.
-			ENT_ATTR_TYPE entity_attribute_type_error;
+			/// This error entity attribute type error
+			/// will be returned when a method fails.
+			const ENT_ATTR_TYPE entity_attribute_type_error
+				= std::make_shared<EntityAttributeType>("ERROR", ENTSYS_DATA_TYPE_UNDEFINED);
 
         protected:
 

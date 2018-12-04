@@ -14,6 +14,30 @@ namespace entity_system {
 	/// A manager class for instances of entity relation types.
     class EntityRelationTypeInstanceManager : public TypeInstanceManager<EntityRelationTypeInstance>
     {
+		private:
+
+			/// We need this entity type error
+			/// to create the entity type instance error
+			const ENT_TYPE entity_type_error
+				= std::make_shared<EntityType>("ERROR");
+
+			/// We need this entity type instance error
+			/// to create the entity relation type error
+			const ENT_TYPE_INST entity_type_instance_error
+				= std::make_shared<EntityTypeInstance>(entity_type_error);
+
+			/// We need this entity relation type error
+			/// to create the entity relation type error instance.
+			const ENT_REL_TYPE entity_relation_type_error
+				= std::make_shared<EntityRelationType>("ERROR", entity_type_error, entity_type_error);
+
+			/// This entity relation type instance error
+			/// which will be returned when a method fails.
+			const ENT_REL_TYPE_INST entity_relation_type_instance_error
+				= std::make_shared<EntityRelationTypeInstance>(entity_relation_type_error,
+					                                           entity_type_instance_error,
+					                                           entity_type_instance_error);
+
         protected:
             
 			/// Constructor.

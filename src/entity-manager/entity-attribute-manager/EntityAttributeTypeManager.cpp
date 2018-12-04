@@ -14,7 +14,7 @@ namespace entity_system {
 
     EntityAttributeTypeManager::EntityAttributeTypeManager()
     {
-		entity_attribute_type_error = std::make_shared<EntityAttributeType>("ERROR", ENTSYS_DATA_TYPE_UNDEFINED);
+		// TODO: Implement!
     }
 
 

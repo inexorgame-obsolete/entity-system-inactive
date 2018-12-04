@@ -20,8 +20,10 @@ namespace entity_system {
 	{
 		private:
 
-			/// The error entity type which will be returned when a method fails.
-			const ENT_TYPE entity_type_error = std::make_shared<EntityType>("ERROR");
+			/// This entity type error
+			/// will be returned when a method fails.
+			const ENT_TYPE entity_type_error
+				= std::make_shared<EntityType>("ERROR");
 
 		protected:
 

@@ -16,8 +16,16 @@ namespace entity_system {
     {
 		private:
 
-			/// This entity relation error type will be returned when a method fails.
-			ENT_REL_TYPE entity_relation_type_error = std::make_shared<EntityRelationType>("ERROR", nullptr, nullptr);
+			/// We need this entity type error
+			/// to create the entity relation type error.
+			const ENT_TYPE entity_type_error
+				= std::make_shared<EntityType>("ERROR");
+
+			/// This entity relation type error
+			/// will be returned when a method fails.
+			const ENT_REL_TYPE entity_relation_type_error
+				= std::make_shared<EntityRelationType>("ERROR", entity_type_error, entity_type_error);
+			
 
         protected:
 

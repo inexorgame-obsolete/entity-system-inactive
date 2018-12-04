@@ -16,6 +16,17 @@ namespace entity_system {
 	/// A manager class for instances of types of entity relation attributes.
 	class EntityRelationAttributeTypeInstanceManager : public TypeInstanceManager<EntityRelationAttributeTypeInstance>
 	{
+		private:
+
+			/// We need this entity relation attribute type error
+			/// to create the entity relation attribute type instance error.
+			const ENT_REL_ATTR_TYPE entity_relation_attribute_type_error
+				= std::make_shared<EntityRelationAttributeType>("ERROR", ENTSYS_DATA_TYPE_UNDEFINED);
+
+			/// This entity relation attribute type instance error will be returned when a method fails.
+			const ENT_REL_ATTR_TYPE_INST entity_relation_attribute_type_instance_error
+				= std::make_shared<EntityRelationAttributeTypeInstance>(entity_relation_attribute_type_error);
+
 		protected:
 
 			/// Constructor.
@@ -24,7 +35,7 @@ namespace entity_system {
 			/// Destructor.
 			~EntityRelationAttributeTypeInstanceManager();
 
-	public:
+		public:
 			
 			/// Creates an entity relation attribute type instance.
 			/// @param ent_rel_attr_type A reference to a shared pointer of
