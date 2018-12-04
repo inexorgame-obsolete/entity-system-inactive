@@ -174,7 +174,7 @@ namespace entity_system {
 			case ENTSYS_DATA_TYPE_UNDEFINED:
 				break;
 		}
-		return this;
+		return *this;
 	}
 	
 	
@@ -203,7 +203,7 @@ namespace entity_system {
 			case ENTSYS_DATA_TYPE_UNDEFINED:
 				break;
 		}
-		return this;
+		return *this;
 	}
 
 
@@ -232,7 +232,7 @@ namespace entity_system {
 			case ENTSYS_DATA_TYPE_UNDEFINED:
 				break;
 		}
-		return this;
+		return *this;
 	}
 
 
@@ -261,7 +261,7 @@ namespace entity_system {
 			case ENTSYS_DATA_TYPE_UNDEFINED:
 				break;
 		}
-		return this;
+		return *this;
 	}
 
 
