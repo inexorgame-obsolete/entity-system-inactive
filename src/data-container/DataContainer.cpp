@@ -396,6 +396,8 @@ namespace entity_system {
 				cast_value = data_int64;
 				break;
 			case ENTSYS_DATA_TYPE_UNDEFINED:
+			case ENTSYS_DATA_TYPE_STRING:
+			case ENTSYS_DATA_TYPE_BOOL:
 				break;
 		}
 		return cast_value;
@@ -426,6 +428,8 @@ namespace entity_system {
 				cast_value = static_cast<int>(data_int64);
 				break;
 			case ENTSYS_DATA_TYPE_UNDEFINED:
+			case ENTSYS_DATA_TYPE_STRING:
+			case ENTSYS_DATA_TYPE_BOOL:
 				break;
 		}
 		return cast_value;
@@ -456,6 +460,8 @@ namespace entity_system {
 				cast_value = static_cast<double>(data_int64);
 				break;
 			case ENTSYS_DATA_TYPE_UNDEFINED:
+			case ENTSYS_DATA_TYPE_STRING:
+			case ENTSYS_DATA_TYPE_BOOL:
 				break;
 		}
 		return cast_value;
@@ -484,6 +490,8 @@ namespace entity_system {
 				cast_value = static_cast<float>(data_int64);
 				break;
 			case ENTSYS_DATA_TYPE_UNDEFINED:
+			case ENTSYS_DATA_TYPE_STRING:
+			case ENTSYS_DATA_TYPE_BOOL:
 				break;
 		}
 		return cast_value;
