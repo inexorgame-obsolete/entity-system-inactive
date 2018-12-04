@@ -112,6 +112,8 @@ namespace entity_system {
 			case ENTSYS_DATA_TYPE_STRING:
 				set_data(data_container.get_string());
 				break;
+			case ENTSYS_DATA_TYPE_UNDEFINED:
+				break;
 		}
 		return *this;
 	}
@@ -140,6 +142,8 @@ namespace entity_system {
 			case ENTSYS_DATA_TYPE_STRING:
 				data_string = std::to_string(int64_val);
 				break;
+			case ENTSYS_DATA_TYPE_UNDEFINED:
+				break;
 		}
 		return *this;
 	}
@@ -166,6 +170,8 @@ namespace entity_system {
 				break;
 			case ENTSYS_DATA_TYPE_STRING:
 				data_string = string_val;
+				break;
+			case ENTSYS_DATA_TYPE_UNDEFINED:
 				break;
 		}
 		return this;
@@ -194,6 +200,8 @@ namespace entity_system {
 			case ENTSYS_DATA_TYPE_STRING:
 				data_string = std::to_string(double_val);
 				break;
+			case ENTSYS_DATA_TYPE_UNDEFINED:
+				break;
 		}
 		return this;
 	}
@@ -220,6 +228,8 @@ namespace entity_system {
 				break;
 			case ENTSYS_DATA_TYPE_STRING:
 				data_string = std::to_string(float_val);
+				break;
+			case ENTSYS_DATA_TYPE_UNDEFINED:
 				break;
 		}
 		return this;
@@ -248,6 +258,8 @@ namespace entity_system {
 			case ENTSYS_DATA_TYPE_STRING:
 				data_string = (bool_val) ? std::string("1") : std::string("0");
 				break;
+			case ENTSYS_DATA_TYPE_UNDEFINED:
+				break;
 		}
 		return this;
 	}
@@ -274,6 +286,8 @@ namespace entity_system {
 				break;
 			case ENTSYS_DATA_TYPE_STRING:
 				data_string = std::to_string(int_val);
+				break;
+			case ENTSYS_DATA_TYPE_UNDEFINED:
 				break;
 		}
 		return *this;
@@ -381,6 +395,8 @@ namespace entity_system {
 			case ENTSYS_DATA_TYPE_BIG_INT:
 				cast_value = data_int64;
 				break;
+			case ENTSYS_DATA_TYPE_UNDEFINED:
+				break;
 		}
 		return cast_value;
 	}
@@ -408,6 +424,8 @@ namespace entity_system {
 				// This is not a good idea
 				// We should not cast from int64 to int!
 				cast_value = static_cast<int>(data_int64);
+				break;
+			case ENTSYS_DATA_TYPE_UNDEFINED:
 				break;
 		}
 		return cast_value;
@@ -437,6 +455,8 @@ namespace entity_system {
 				// We should not cast from int64 to int!
 				cast_value = static_cast<double>(data_int64);
 				break;
+			case ENTSYS_DATA_TYPE_UNDEFINED:
+				break;
 		}
 		return cast_value;
 	}
@@ -462,6 +482,8 @@ namespace entity_system {
 
 			case ENTSYS_DATA_TYPE_BIG_INT:
 				cast_value = static_cast<float>(data_int64);
+				break;
+			case ENTSYS_DATA_TYPE_UNDEFINED:
 				break;
 		}
 		return cast_value;
