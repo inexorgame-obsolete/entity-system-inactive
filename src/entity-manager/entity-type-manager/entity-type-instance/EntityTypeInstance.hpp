@@ -20,7 +20,10 @@ namespace entity_system {
 		public:
 			
 			/// Constructor.
-			/// @param ? TODO
+			/// @param ent_type A const reference of a shared pointer
+			/// to the entity type of which an instance will be created.
+			/// @return A shared pointer to the entity type instance which was created.
+			/// TODO: entity_type_instance_error!
 			EntityTypeInstance(const ENT_TYPE&);
 
 			/// Destructor.

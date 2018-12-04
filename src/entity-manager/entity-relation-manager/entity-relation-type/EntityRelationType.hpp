@@ -30,22 +30,30 @@ namespace entity_system {
 		public:
 
 			/// Constructor.
-			/// @param ?
-			/// @param ?
-			/// @param ?
+			/// @param rel_type_name The name of the new entity relation type name.
+			/// @param ent_type_source A reference to a shared pointer of an entity type
+			/// which is the source entity from which the relation will start.
+			/// @param ent_type_target A reference to a shared pointer of an entity type
+			/// which is the target entity to which the relation will go.
+			/// @return A shared pointer to the entity relation type which was created.
+			/// If creating the entity relation type fails, entity relation type 'error'
+			/// will be returned.
+			/// TODO: entity_relation_type_error
 			EntityRelationType(const std::string&, const ENT_TYPE&, const ENT_TYPE&);
 			
 			/// Destructor.
 			~EntityRelationType();
 
 			/// Links an entity relation attribute type to this entity relation type.
-			/// @param ? TODO
+			/// @param ent_rel_attr_type A reference to a shared pointer of an entity
+			/// relation attribute type which will be linked to this entity relation type.
 			void link_entity_relation_attribute_type(const ENT_REL_ATTR_TYPE&);
 			
-			/// Returns linked entity relation attribute types.
+			/// Returns all linked entity relation attribute types.
+			/// @return A std::vector of shared pointers of entity relation attribute type.
 			std::vector<ENT_REL_ATTR_TYPE> get_linked_attribute_types() const;
 						
-			/// Implementation of data validation method as required by inheritance of base class DataValidation!
+			/// 
 			virtual ENTSYS_DATA_VALIDATION_RESULT validate() override;
 
 

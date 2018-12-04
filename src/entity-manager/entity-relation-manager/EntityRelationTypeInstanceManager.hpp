@@ -25,12 +25,20 @@ namespace entity_system {
 		public:
 		
 			/// Creates a new entity relation type instance.
-			/// @param ? TODO
-			/// @param ? TODO
-			/// @param ? TODO
-			ENT_REL_TYPE_INST create_entity_relation_type_instance(const ENT_REL_TYPE&, const ENT_TYPE_INST&, const ENT_TYPE_INST&);
+			/// @param ent_rel_type A const reference to a shared pointer of
+			/// an entity relation type of which an instance will be created.
+			/// @param ent_type_inst_source A const reference to a shared pointer of
+			/// the entity type instance which will be used as <b>source</b> entity type instance.
+			/// @param ent_type_inst_target A const reference to a shared pointer of
+			/// the entity type instance which will be used as <b>target</b> entity type instance.
+			/// @return A shared pointer to the new entity relation type instance which was created.
+			/// <br>If This method fails, entity relation type instance 'error' will be returned.
+			ENT_REL_TYPE_INST create_entity_relation_type_instance(const ENT_REL_TYPE&,
+				                                                   const ENT_TYPE_INST&,
+				                                                   const ENT_TYPE_INST&);
 
 			/// Returns the number of relation type instances.
+			/// @return The number of existing entity relation type instances.
 			const std::size_t get_relation_type_instances_count() const;
 
 			// TODO: Get instances count.

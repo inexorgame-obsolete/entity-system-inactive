@@ -1,3 +1,4 @@
+/// @file Data validation result enumeration.
 // Inexor entity system prototype
 // (c)2018 Inexor
 
@@ -8,7 +9,8 @@ namespace inexor {
 namespace entity_system {
 
 
-	/// Data validation codes for the entity-system.
+	/// @class ENTSYS_DATA_VALIDATION_RESULT
+	/// @brief Data validation return codes for the entity-system.
 	enum ENTSYS_DATA_VALIDATION_RESULT
 	{
 		ENTSYS_DATA_INVALID = -1,

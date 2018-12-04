@@ -22,14 +22,14 @@ namespace entity_system {
         public:
 				
 			/// Constructor.
-			/// @param ? TODO
-			/// @param ? TODO
+			/// @param ent_attr_type_name The name of the new entity attribute type.
+			/// @param ent_attr_data_type The data type of the new entity attribute type.
 			EntityAttributeType(const std::string&, const ENTSYS_DATA_TYPE&);
 
 			/// Destructor.
 			~EntityAttributeType();
 
-			/// Implement data validation method as required by base class inheritance!
+			/// 
 			virtual ENTSYS_DATA_VALIDATION_RESULT validate() override;
 
 	};

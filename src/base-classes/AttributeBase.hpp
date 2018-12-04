@@ -32,6 +32,7 @@ namespace entity_system {
 			void set_attribute_data_type(const ENTSYS_DATA_TYPE&);
 			
 			/// Returns the data type of the attribute type.
+			/// @return The data type of the attribute type.
 			ENTSYS_DATA_TYPE get_attribute_data_type() const;
 
 

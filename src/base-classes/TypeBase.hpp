@@ -12,7 +12,7 @@ namespace inexor {
 namespace entity_system {
 
 
-	/// @brief A template class for types.
+	/// A template base class for types.
 	class TypeBase : public DataValidation
 	{
 		private:
@@ -30,18 +30,19 @@ namespace entity_system {
 			/// Destructor.
 			~TypeBase();
 
-			/// @brief Sets the name of this type.
-			/// @param type_name The name of the type.
+			/// Sets the name of this type.
+			/// @param type_name The unique name of the type.
 			void set_type_name(const std::string& type_name);
 
 			// TODO: Implement get_UUID() method!
 
-			/// @brief Every class which inherits from this base class needs to implement this data validation method.
+			/// 
 			virtual ENTSYS_DATA_VALIDATION_RESULT validate() override = 0;
 					
 		public:
 
 			/// Returns the name of this type.
+			/// @return The namf ot this type.
 			std::string get_type_name() const;
 
 

@@ -24,14 +24,16 @@ namespace entity_system {
         public:
 
 			/// Constructor.
-			/// @param ? TODO
-			/// @param ? TODO
+			/// @param ent_rel_attr_type_name The name of the new entity relation attribute type.
+			/// @param ent_rel_attr_type_data_type The data type of the new entity relation attribute type.
+			/// @return A shared pointer to the entity relation attribute type which was created.
+			/// TODO entity_relation_attribute_type_ERROR!
 			EntityRelationAttributeType(const std::string&, const ENTSYS_DATA_TYPE&);
 
 			/// Destructor.
 			~EntityRelationAttributeType();
 
-			/// Implement data validation method as required by base class inheritance!
+			/// 
 			virtual ENTSYS_DATA_VALIDATION_RESULT validate() override;
 
 	};

@@ -42,20 +42,23 @@ namespace entity_system {
 
 
 			/// Returns the name of this type.
+			/// @return The unique name of this type 
 			const std::string get_type_name() const
 			{
 				return type_title;
 			}
 
 
-			// TODO: Delete this.
+			/// Sets the name of the type.
+			/// @param type_name a const reference to
+			/// a std::string which is the name of this type.
 			void set_type_name(const std::string& type_name)
 			{
 				type_title = type_name;
 			}
 
 
-			/// @brief Sets the pointer of a type.
+			/// Sets the pointer of a type.
 			/// @param type_ptr A reference to a shared pointer of the source type.
 			void set_type_pointer(const std::shared_ptr<T1>& type_ptr)
 			{

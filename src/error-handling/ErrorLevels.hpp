@@ -8,6 +8,7 @@ namespace inexor {
 namespace entity_system {
 
 
+	/// @class ENTSYS_ERROR_LEVEL
 	/// @brief Entity system error levels.
 	enum ENTSYS_ERROR_LEVEL
 	{

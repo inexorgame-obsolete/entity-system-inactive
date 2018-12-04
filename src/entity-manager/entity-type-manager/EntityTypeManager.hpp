@@ -33,21 +33,29 @@ namespace entity_system {
 		
 		public:
 
-			/// @brief Checks if an entity type does already exist.
-			/// @param ?
+			/// Checks if an entity type does already exist.
+			/// @param ent_type_name The name of the entity type.
+			/// @return True if the entity type does already exist,
+			/// false otherwise.
 			bool does_entity_type_exist(const std::string&);
 			
-			/// @brief Checks if an entity type does already exist.
-			/// @param ?
+			/// Checks if an entity type does already exist.
+			/// @param ent_type A const reference of
+			/// a shared pointer to the entity type.
+			/// @return True if the entity type does already exist,
+			/// false otherwise.
 			bool does_entity_type_exist(const ENT_TYPE&);
 
 			// TODO: Check by UUID!
 
-			/// @brief Creates a new entity type.
+			/// Creates a new entity type.
 			/// @param ent_type_name The name of the new entity type.
+			/// @return A shared pointer to the entity type which was created.
+			/// If this method fails, entity_type_error will be returned.
 			ENT_TYPE create_entity_type(const std::string&);
 
-			/// @brief Returns the number of existing types of entities.
+			/// Returns the number of existing entity types.
+			/// @return The number of existing entity types.
 			std::size_t get_entity_types_count() const;
 			
 			/// Deletes an entity type by name.
@@ -55,7 +63,8 @@ namespace entity_system {
 			void delete_entity_type(const std::string&);
 
 			/// Deletes an entity type by entity type.
-			/// @param ent_type A reference to a shared pointer of the entity type which will be deleted.
+			/// @param ent_type A reference of a shared pointer
+			/// to the entity type which will be deleted.
 			void delete_entity_type(const ENT_TYPE&);
 			
 			// TODO: Delete by UUID.

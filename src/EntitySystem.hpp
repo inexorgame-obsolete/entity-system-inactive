@@ -22,7 +22,8 @@ namespace entity_system {
 	//			EntityExporter
 
 
-	/// Entity system prototype for Inexor.
+	/// @class EntitySystem
+  /// @brief Entity system prototype for Inexor.
 	/// Currently this class is not a singleton implementation.
 	class EntitySystem : public EntityManager
 	{
@@ -33,7 +34,7 @@ namespace entity_system {
 
 			/// Destructor.
 			~EntitySystem();
-	
+
 	};
 
 

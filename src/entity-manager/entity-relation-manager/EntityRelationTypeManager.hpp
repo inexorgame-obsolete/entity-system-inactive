@@ -30,30 +30,39 @@ namespace entity_system {
 		public:
 
 			/// Checks if an entity relation type does already exist.
-			/// @param ? TODO
+			/// @param ent_rel_type_name The name of the entity relation type.
+			/// @return true if this entity relation type does already exist,
+			/// false otherwise.
 			bool does_entity_relation_type_exist(const std::string&);
 
 			/// Checks if an entity relation type does already exist.
-			/// @param ? TODO
+			/// @param ent_rel_type A const reference of a shared pointer
+			/// to an entity relation type.
+			/// @return true if this entity relation type does already exist,
+			/// false otherwise.
 			bool does_entity_relation_type_exist(const ENT_REL_TYPE&);
 
 			// TODO: check by UUID!
 
 			/// Creates a new entity relation type and store it in the entity system.
-			/// @param ? TODO
-			/// @param ? TODO
-			/// @param ? TODO
+			/// @param ent_rel_type_name The name of the new entity relation type name.
+			/// @param ent_type_source A const reference of a shared pointer to
+			/// an entity type which will act as <b>source</b> entity type.
+			/// @param ent_type_target A const reference of a shared pointer to
+			/// an entity type which will act as <b>target</b> entity type.
 			ENT_REL_TYPE create_entity_relation_type(const std::string&, const ENT_TYPE&, const ENT_TYPE&);
 
 			/// Returns the number of available entity relation types.
+			/// @return The number of available entity relation types.
 			const std::size_t get_entity_relation_types_count() const;
 
 			/// Deletes an entity relation type.
-			/// @param ? TODO
+			/// @param ent_rel_type_name The name of the entity relation type name.
 			void delete_entity_relation_type(const std::string&);
 			
 			/// Deletes an entity relation type.
-			/// @param ? TODO
+			/// @param ent_rel_type A const reference of a shared pointer
+			/// to the entity relation type which will be deleted.
 			void delete_entity_relation_type(const ENT_REL_TYPE&);
 
 			// TODO: Delete by UUID.

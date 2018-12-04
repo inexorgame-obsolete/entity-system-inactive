@@ -31,9 +31,14 @@ namespace entity_system {
 		public:
 
 			/// Constructor.
-			/// @param ? TODO
-			/// @param ? TODO
-			/// @param ? TODO
+			/// @param ent_rel_type A const reference to a shared pointer of
+			/// an entity relation type of which an instance will be created.
+			/// @param ent_type_inst_source A const reference to a shared pointer of
+			/// an entity type instance which will be used as SOURCE entity instance.
+			/// @param ent_type_inst_target A const reference to a shared pointer of
+			/// an entity type instance which will be used as TARGET entity instance.
+			/// @return A shared pointer to the entity relation type instance which was
+			/// created. <br>If it fails, entity relation type instance 'error' will be returned.
 			EntityRelationTypeInstance(const ENT_REL_TYPE&, const ENT_TYPE_INST&, const ENT_TYPE_INST&);
 
 			/// Destructor.

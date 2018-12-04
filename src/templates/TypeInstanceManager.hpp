@@ -16,13 +16,13 @@ namespace inexor {
 namespace entity_system {
 
 
-	/// @brief A template class for instance manager classes.
+	/// A template base class for instance manager classes.
 	template <typename T>
 	class TypeInstanceManager
 	{
 		private:
 
-			/// The instances.
+			/// A vector of stored instances of templatable type.
 			std::vector<std::shared_ptr<T>> type_instances;
 		
 		protected:
@@ -39,7 +39,7 @@ namespace entity_system {
 			}
 
 
-			/// @brief Adds an instance to the instance buffer.
+			/// Adds an instance to the instance buffer.
 			/// @param type_instance The instance which will be added.
 			void add_instance_to_buffer(const std::shared_ptr<T>& type_instance)
 			{
@@ -49,6 +49,7 @@ namespace entity_system {
 
 
 			/// Returns the number of existing instances.
+			/// @return The number of existing instances.
 			const std::size_t get_type_instance_count() const
 			{
 				return type_instances.size();

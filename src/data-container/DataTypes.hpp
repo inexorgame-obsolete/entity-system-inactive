@@ -8,7 +8,8 @@ namespace inexor {
 namespace entity_system {
 
 
-    /// Data container memory type.
+	/// @class ENTSYS_DATA_TYPE
+    /// @brief Data container memory type.
     enum ENTSYS_DATA_TYPE 
     {
 		ENTSYS_DATA_TYPE_UNDEFINED = 0,

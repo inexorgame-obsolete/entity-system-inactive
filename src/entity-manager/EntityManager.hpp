@@ -26,7 +26,9 @@ namespace inexor {
 namespace entity_system {
 
 
-    /// The entity manager class is responsible for adding, modifying and removing entity types, entity attributes, entity relations and instances of these.
+    /// @class EntityManager
+    /// @brief The entity manager class is responsible for adding, modifying and removing entity types,
+	  /// entity attributes, entity relations and instances of these.
     class EntityManager : public EntityTypeManager,
                           public EntityTypeInstanceManager,
                           public EntityAttributeTypeManager,
@@ -38,7 +40,7 @@ namespace entity_system {
     {
 
 		protected:
-			
+
 			/// Constructor.
 		    EntityManager();
 

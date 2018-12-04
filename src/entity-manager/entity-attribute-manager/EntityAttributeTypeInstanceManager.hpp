@@ -26,10 +26,14 @@ namespace entity_system {
 		public:
 
 			/// Creates an entity attribute type instance.
-			/// @param ? TODO
+			/// @param ent_attr_type A reference to a shared pointer of
+			/// an entity attribute type of which an instance will be created.
+			/// @return A shared pointer to the entity attribute type instance which was created.
+			/// TODO: entity_attribute_type_instance_ERROR.
 			ENT_ATTR_TYPE_INST create_entity_attribute_type_instance(const ENT_ATTR_TYPE&);
 
 			/// Returns the number of existing entity attribute type instances.
+			/// @return The number of existing entity attribute type instances.
 			const std::size_t get_entity_attribute_type_instance_count() const;
 
 			/// Deletes all entity attribute type instances.

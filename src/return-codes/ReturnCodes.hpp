@@ -8,7 +8,8 @@ namespace inexor {
 namespace entity_system {
 
 
-	/// Entity system return codes.
+	/// @class ENTSYS_RESULT
+	/// @brief Entity system return codes.
 	enum ENTSYS_RESULT
     {
         ENTSYS_ERROR = -1,

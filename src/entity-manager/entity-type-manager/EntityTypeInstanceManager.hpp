@@ -25,10 +25,13 @@ namespace entity_system {
 		public:
 
 			/// Create an entity type instance.
-			/// @para ? TODO
+			/// @para ent_type TODO
+			/// @return A shared pointer to the entity type instance which was created.
+			/// TODO: error_entity_type_instance!
 			ENT_TYPE_INST create_entity_type_instance(const ENT_TYPE&);
 
 			/// Returns the number of existing entity type instances.
+			/// @return The number of existing entity type instances.
 			const std::size_t get_entity_type_instance_count() const;
 
 			/// Delete all entity type instances

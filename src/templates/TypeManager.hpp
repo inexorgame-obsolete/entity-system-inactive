@@ -16,13 +16,13 @@ namespace inexor {
 namespace entity_system {
 
 
-	/// @brief A template class for type manager classes.
+	/// A template base class for type manager classes.
 	template <typename T>
 	class TypeManager
 	{
 		private:
 
-			/// Stores all available types.
+			/// An unordered map which stores all available types.
 			std::unordered_map<std::string, std::shared_ptr<T>> type_map;
 
 		protected:
@@ -30,7 +30,7 @@ namespace entity_system {
 			// All of those methods must be protected since the
 			// actual implementation of the type manager class
 			// will contain a method which has an individual name
-			// but calls back to those methods here.
+			// but calls back to those base class methods here.
 
 
 			/// Constructor.
@@ -45,8 +45,10 @@ namespace entity_system {
 			}
 
 
-			/// @brief Checks if a type already exists.
+			/// Checks if a type already exists.
 			/// @param type_name The name of the type.
+			/// @return True if a type with this name
+			/// does already exist, false otherwise.
 			bool does_type_exist(const std::string& type_name)
 			{
 				// TODO: Add MUTEX here?
@@ -57,8 +59,9 @@ namespace entity_system {
 			// TODO: Does type exist by UUID?
 
 
-			/// @brief Checks if the name of a type is valid.
+			/// Checks if the name of a type is valid.
 			/// @param type_name The name of the type.
+			/// @return true if the name is valid, false otherwise.
 			bool is_type_name_valid(const std::string& type_name)
 			{
 				if(0 == type_name.compare("")) return false;
@@ -67,7 +70,7 @@ namespace entity_system {
 			}
 
 
-			/// @brief Adds a new type.
+			/// Adds a new type.
 			/// @param type_name The name of the new type.
 			/// @param new_type A shared pointer reference to the new type.
 			void add_type_to_map(const std::string& type_name, const std::shared_ptr<T>& new_type)
@@ -77,8 +80,9 @@ namespace entity_system {
 			}
 
 
-			/// @brief Returns a certain type by name.
+			/// Searches for the desired type by name and returns it.
 			/// @param type_name the name of the type to search for.
+			/// @return A const shared pointer to the type.
 			const std::shared_ptr<T> get_type(const std::string& type_name)
 			{
 				return type_map[type_name];
@@ -89,6 +93,7 @@ namespace entity_system {
 
 
 			/// Returns the number of existing types.
+			/// @return The number of existing types.
 			const std::size_t get_type_count() const
 			{
 				return type_map.size();
@@ -96,6 +101,7 @@ namespace entity_system {
 
 
 			/// Deletes a specific type.
+			/// @param type_name The name of the type which will be deleted.
 			void delete_type(const std::string& type_name)
 			{
 				// TODO: Add MUTEX here!
