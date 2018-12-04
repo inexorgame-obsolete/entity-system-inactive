@@ -15,14 +15,12 @@ namespace entity_system {
 	template <typename T1, typename T2>
 	class TypeInstanceBase
 	{
-		public:
+		protected:
 			
 			/// The unique name of the type of this instance.
 			std::string type_title;
 			
 			// TODO: Implement UUIDs!
-
-		protected:
 
 			/// A pointer to the type of this type instance.
 			std::shared_ptr<T1> type_pointer;

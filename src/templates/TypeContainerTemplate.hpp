@@ -18,14 +18,13 @@ namespace entity_system {
 
 	/// A template base class for a std::vector of a templatable type.
 	template <typename T>
-	class TypeVector
+	class TypeContainerTemplate
 	{
 		protected:
 			
 			/// Vector of objects of a templatable type.
 			std::vector<std::shared_ptr<T>> linked_objects;
 
-		protected:
 
 			/// Adds an object of templatable type to the vector.
 			/// @param new_object A const reference of a shared pointer to the new object.

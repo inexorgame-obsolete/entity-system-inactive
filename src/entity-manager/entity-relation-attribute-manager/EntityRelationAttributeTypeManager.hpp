@@ -3,7 +3,7 @@
 
 #pragma once
 
-#include "../../templates/TypeManager.hpp"
+#include "../../templates/TypeManagerTemplate.hpp"
 #include "../entity-relation-attribute-manager/entity-relation-attribute-type/EntityRelationAttributeType.hpp"
 #include "../../typedefs/TypeDefinitions.hpp"
 
@@ -13,7 +13,7 @@ namespace entity_system {
 
 	
 	/// A manager class for types of entity relation attributes.
-	class EntityRelationAttributeTypeManager : public TypeManager<EntityRelationAttributeType>
+	class EntityRelationAttributeTypeManager : public TypeManagerTemplate<EntityRelationAttributeType>
 	{
 		private:
 

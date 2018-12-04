@@ -18,9 +18,11 @@ namespace entity_system {
 
 	/// A template base class for type manager classes.
 	template <typename T>
-	class TypeManager
+	class TypeManagerTemplate
 	{
 		private:
+
+			// TODO: Store by UUID, not by name!
 
 			/// An unordered map which stores all available types.
 			std::unordered_map<std::string, std::shared_ptr<T>> type_map;
@@ -34,13 +36,13 @@ namespace entity_system {
 
 
 			/// Constructor.
-			TypeManager()
+			TypeManagerTemplate()
 			{
 			}
 
 
 			/// Destructor.
-			~TypeManager()
+			~TypeManagerTemplate()
 			{
 			}
 
@@ -61,7 +63,7 @@ namespace entity_system {
 
 			/// Checks if the name of a type is valid.
 			/// @param type_name The name of the type.
-			/// @return true if the name is valid, false otherwise.
+			/// @return True if the name is valid, false otherwise.
 			bool is_type_name_valid(const std::string& type_name)
 			{
 				if(0 == type_name.compare("")) return false;

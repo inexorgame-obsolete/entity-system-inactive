@@ -16,7 +16,7 @@ namespace entity_system {
 
 	/// A template base class for a map of instances of a templatable type.
 	template <typename T1, typename T2>
-	class TypeInstancesMap
+	class TypeInstancesContainerTemplate
 	{
 		private:
 			
@@ -25,6 +25,18 @@ namespace entity_system {
 
 		protected:
 
+			/// Constructor.
+			TypeInstancesContainerTemplate()
+			{
+			}
+
+
+			/// Destructor.
+			~TypeInstancesContainerTemplate()
+			{
+			}
+
+
 			/// Adds a type instance to the type instance map.
 			/// @param type_key The type of the instance which will be added.
 			/// @param type_instance_value The instance which will be added.
@@ -32,6 +44,7 @@ namespace entity_system {
 			{
 				linked_instances[type_key] = type_instance_value;
 			}
+
 
 		public:
 

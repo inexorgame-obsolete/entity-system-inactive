@@ -4,7 +4,7 @@
 #pragma once
 
 #include "../entity-relation-manager/entity-relation-type/EntityRelationType.hpp"
-#include "../../templates/TypeManager.hpp"
+#include "../../templates/TypeManagerTemplate.hpp"
 
 
 namespace inexor {
@@ -12,7 +12,7 @@ namespace entity_system {
 
 
 	/// A manager class for types of entity relations.
-    class EntityRelationTypeManager : public TypeManager<EntityRelationType>
+    class EntityRelationTypeManager : public TypeManagerTemplate<EntityRelationType>
     {
 		private:
 

@@ -4,7 +4,7 @@
 #pragma once
 
 #include "../entity-attribute-manager/entity-attribute-type-instances/EntityAttributeTypeInstance.hpp"
-#include "../../templates/TypeInstanceManager.hpp"
+#include "../../templates/TypeInstanceManagerTemplate.hpp"
 #include "../../typedefs/TypeDefinitions.hpp"
 
 
@@ -13,7 +13,7 @@ namespace entity_system {
 
 
 	/// A manager class for instances of attributes of entity types.
-    class EntityAttributeTypeInstanceManager : public TypeInstanceManager<EntityAttributeTypeInstance>
+    class EntityAttributeTypeInstanceManager : public TypeInstanceManagerTemplate<EntityAttributeTypeInstance>
     {
 		private:
 

@@ -5,7 +5,7 @@
 
 #include "../entity-relation-attribute-manager/entity-relation-attribute-type-instance/EntityRelationAttributeTypeInstance.hpp"
 #include "../entity-relation-attribute-manager/entity-relation-attribute-type/EntityRelationAttributeType.hpp"
-#include "../../templates/TypeInstanceManager.hpp"
+#include "../../templates/TypeInstanceManagerTemplate.hpp"
 #include "../../typedefs/TypeDefinitions.hpp"
 
 
@@ -14,7 +14,7 @@ namespace entity_system {
 
 
 	/// A manager class for instances of types of entity relation attributes.
-	class EntityRelationAttributeTypeInstanceManager : public TypeInstanceManager<EntityRelationAttributeTypeInstance>
+	class EntityRelationAttributeTypeInstanceManager : public TypeInstanceManagerTemplate<EntityRelationAttributeTypeInstance>
 	{
 		private:
 

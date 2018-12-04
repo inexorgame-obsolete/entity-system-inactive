@@ -1,4 +1,3 @@
-/// @brief Instance create macros for the entity system.
 // Inexor entity system prototype
 // (c)2018 Inexor
 

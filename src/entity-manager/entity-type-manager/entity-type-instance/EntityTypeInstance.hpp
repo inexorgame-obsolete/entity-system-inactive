@@ -6,7 +6,7 @@
 #include "../../entity-type-manager/entity-type/EntityType.hpp"
 #include "../../entity-attribute-manager/entity-attribute-type-instances/EntityAttributeTypeInstance.hpp"
 #include "../../../base-classes/TypeInstanceBase.hpp"
-#include "../../../templates/TypeInstancesMap.hpp"
+#include "../../../templates/TypeInstancesContainerTemplate.hpp"
 
 
 namespace inexor {
@@ -15,7 +15,7 @@ namespace entity_system {
 
 	/// A base class for instances of entity types.
     class EntityTypeInstance : public TypeInstanceBase<EntityType,EntityTypeInstance>,
-		                       public TypeInstancesMap<EntityAttributeType,EntityAttributeTypeInstance>
+		                       public TypeInstancesContainerTemplate<EntityAttributeType,EntityAttributeTypeInstance>
     {
 		public:
 			

@@ -18,7 +18,7 @@ namespace entity_system {
 
 	/// A template base class for instance manager classes.
 	template <typename T>
-	class TypeInstanceManager
+	class TypeInstanceManagerTemplate
 	{
 		private:
 
@@ -27,17 +27,6 @@ namespace entity_system {
 		
 		protected:
 			
-			/// Constructor.
-			TypeInstanceManager()
-			{
-			}
-
-			
-			/// Destructor.
-			~TypeInstanceManager()
-			{
-			}
-
 
 			/// Adds an instance to the instance buffer.
 			/// @param type_instance The instance which will be added.

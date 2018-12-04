@@ -7,7 +7,7 @@
 #include <unordered_map>
 
 #include "../../entity-attribute-manager/entity-attribute-type/EntityAttributeType.hpp"
-#include "../../../templates/TypeVector.hpp"
+#include "../../../templates/TypeContainerTemplate.hpp"
 #include "../../../typedefs/TypeDefinitions.hpp"
 
 
@@ -16,7 +16,7 @@ namespace entity_system {
 
 	
 	/// A base class for types of entities. This class needs to implement a data validation method!
-	class EntityType : public TypeBase, public TypeVector<EntityAttributeType>
+	class EntityType : public TypeBase, public TypeContainerTemplate<EntityAttributeType>
     {
         public:
 
