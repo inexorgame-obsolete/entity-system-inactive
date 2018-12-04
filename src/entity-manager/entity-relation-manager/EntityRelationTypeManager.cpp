@@ -37,10 +37,18 @@ namespace entity_system {
                                                                         const ENT_TYPE& ent_type_target)
 	{
 		// Validate new entity relation type name.
-		if(!is_type_name_valid(ent_rel_type_name)) return entity_relation_type_error;
+		if(!is_type_name_valid(ent_rel_type_name))
+		{
+			// This entity relation type does already exist.
+			// TODO: Throw error message.
+			return entity_relation_type_error;
+		}
 
 		// Create new entity relation type.
-		ENT_REL_TYPE new_ent_relation_type = std::make_shared<EntityRelationType>(ent_rel_type_name, ent_type_source, ent_type_target);
+		ENT_REL_TYPE new_ent_relation_type
+			= std::make_shared<EntityRelationType>(ent_rel_type_name,
+				                                   ent_type_source,
+				                                   ent_type_target);
 
 		// Add new entity relation type to type map.
 		add_type_to_map(ent_rel_type_name, new_ent_relation_type);

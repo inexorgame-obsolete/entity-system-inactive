@@ -20,11 +20,23 @@ namespace entity_system {
 	}
 
 
-	ENT_REL_ATTR_TYPE EntityRelationAttributeTypeManager::create_entity_relation_attribute_type(
-			const std::string& ent_rel_attr_type_name, const ENTSYS_DATA_TYPE& ent_rel_attr_data_type)
+	ENT_REL_ATTR_TYPE EntityRelationAttributeTypeManager
+		::create_entity_relation_attribute_type(const std::string& ent_rel_attr_type_name,
+			                                    const ENTSYS_DATA_TYPE& ent_rel_attr_data_type)
 	{
+		// Check if an entity relation attribute type
+		// with this name does already exist.
+		if(! is_type_name_valid(ent_rel_attr_type_name))
+		{
+			// This entity relation attribute type does already exist.
+			// TODO: Throw error message.
+			return entity_relation_attribute_type_error;
+		}
+
 		// Create new entity relation attribute type
-		ENT_REL_ATTR_TYPE new_ent_rel_attr_type = std::make_shared<EntityRelationAttributeType>(ent_rel_attr_type_name, ent_rel_attr_data_type);
+		ENT_REL_ATTR_TYPE new_ent_rel_attr_type
+			= std::make_shared<EntityRelationAttributeType>(ent_rel_attr_type_name,
+				                                            ent_rel_attr_data_type);
 
 		add_type_to_map(ent_rel_attr_type_name, new_ent_rel_attr_type);
 

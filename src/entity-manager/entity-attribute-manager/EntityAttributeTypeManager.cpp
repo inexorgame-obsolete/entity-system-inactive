@@ -41,7 +41,12 @@ namespace entity_system {
                                                                            const ENTSYS_DATA_TYPE& ent_attr_data_type)
 	{
 		// Check if entity attribute type's name is not empty.
-		if(! is_type_name_valid(ent_attr_type_name)) return entity_attribute_type_error;
+		if(! is_type_name_valid(ent_attr_type_name))
+		{
+			// This entity attribute type does already exist.
+			// TODO: Throw error message.
+			return entity_attribute_type_error;
+		}
 
 		// Create entity attribute type.
 		ENT_ATTR_TYPE new_ent_attr_type = entsys->create_entity_attribute_type(ent_attr_type_name, ent_attr_data_type);
