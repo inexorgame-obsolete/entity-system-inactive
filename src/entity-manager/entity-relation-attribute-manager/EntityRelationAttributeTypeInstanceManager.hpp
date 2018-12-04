@@ -41,7 +41,8 @@ namespace entity_system {
 			/// @param ent_rel_attr_type A reference to a shared pointer of
 			/// an entity relation attribute type of which an instance will be created.
 		    /// @return A shared pointer to the entity relation attribute type instance which was created.
-            /// TODO: entity_relation_attribute_type_instance_ERROR! 
+            /// <br>If the creation fails, entity_relation_attribute_type_instance_error will be returned
+			/// as error object.
 			ENT_REL_ATTR_TYPE_INST create_entity_relation_attribute_type_instance(const ENT_REL_ATTR_TYPE&);
 
 			/// Returns the number of existing entity relation attribute type instances.

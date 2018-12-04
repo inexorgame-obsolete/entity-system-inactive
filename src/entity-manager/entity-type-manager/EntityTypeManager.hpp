@@ -53,7 +53,7 @@ namespace entity_system {
 			/// Creates a new entity type.
 			/// @param ent_type_name The name of the new entity type.
 			/// @return A shared pointer to the entity type which was created.
-			/// If this method fails, entity_type_error will be returned.
+			/// <br>If this method fails, entity_type_error will be returned as error object.
 			ENT_TYPE create_entity_type(const std::string&);
 
 			/// Returns the number of existing entity types.

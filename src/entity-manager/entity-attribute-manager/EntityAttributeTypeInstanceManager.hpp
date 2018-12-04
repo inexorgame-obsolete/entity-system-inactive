@@ -41,7 +41,7 @@ namespace entity_system {
 			/// @param ent_attr_type A reference to a shared pointer of
 			/// an entity attribute type of which an instance will be created.
 			/// @return A shared pointer to the entity attribute type instance which was created.
-			/// TODO: entity_attribute_type_instance_ERROR.
+			/// <br>If this method fails, entity_attribute_type_instance_error will be returned as error object.
 			ENT_ATTR_TYPE_INST create_entity_attribute_type_instance(const ENT_ATTR_TYPE&);
 
 			/// Returns the number of existing entity attribute type instances.

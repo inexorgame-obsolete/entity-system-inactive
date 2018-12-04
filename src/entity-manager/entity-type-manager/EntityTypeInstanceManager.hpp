@@ -40,7 +40,8 @@ namespace entity_system {
 			/// @param ent_type A reference of a shared pointer
 			/// to an entity type of which an instance will be created.
 			/// @return A shared pointer to the entity type instance which was created.
-			/// TODO: error_entity_type_instance!
+			/// <br>If this method fails, entity_type_instance_error will be returned
+			/// as error object.
 			ENT_TYPE_INST create_entity_type_instance(const ENT_TYPE&);
 
 			/// Returns the number of existing entity type instances.

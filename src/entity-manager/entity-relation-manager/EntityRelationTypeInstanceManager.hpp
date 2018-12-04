@@ -56,7 +56,8 @@ namespace entity_system {
 			/// @param ent_type_inst_target A const reference to a shared pointer of
 			/// the entity type instance which will be used as <b>target</b> entity type instance.
 			/// @return A shared pointer to the new entity relation type instance which was created.
-			/// <br>If This method fails, entity relation type instance 'error' will be returned.
+			/// <br>If This method fails, entity_relation_type_instance_error will be returned
+			/// as error object.
 			ENT_REL_TYPE_INST create_entity_relation_type_instance(const ENT_REL_TYPE&,
 				                                                   const ENT_TYPE_INST&,
 				                                                   const ENT_TYPE_INST&);

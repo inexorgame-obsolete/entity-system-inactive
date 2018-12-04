@@ -55,7 +55,7 @@ namespace entity_system {
 			/// @param ent_attr_type_name The name of the new entity attribute type.
 			/// @param ent_attr_data_type The data type of the new entity attribute type.
 			/// @return A shared pointer to the entity attribute type which was created.
-			/// TODO: entity_attribute_type_ERROR.
+			/// <br>If this method fails, entity_attribute_type_error will be returned as error object.
 			ENT_ATTR_TYPE create_entity_attribute_type(const std::string&, const ENTSYS_DATA_TYPE&);
 
 			/// Returns the number of available entity attribute types.
