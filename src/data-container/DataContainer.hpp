@@ -20,7 +20,8 @@ namespace entity_system {
     // why not store a pointer to the value pair of the map in the write operation?
     // This could speed the entity system very much!
 	
-    /// A multiple purpose data container which can hold data of various types.
+    /// A data container which can
+	/// hold data of various types.
     class DataContainer
     {
         private:
@@ -48,12 +49,12 @@ namespace entity_system {
 			/// An integer variable for storing data in the container.
 			int data_int = 0;
 			
-			// Multithreading safety mutex.
+			// TODO: Implement multithreading!
 			//std::mutex container_mutex;
 
 		public:
 
-			// Don't use explicit keyword to prevent implicit conversion!
+			// Don't use the keyword explicit to prevent implicit conversion!
 
 			/// Constructor.
 			/// @param param_data_type The data type of this data container.
@@ -88,6 +89,7 @@ namespace entity_system {
 
 			/// Sets the data type of the container.
 			/// @param param_data_type The new data type of the data container.
+			/// @note This function calls reset_memory() before changing the data type.
 			void set_data_type(const ENTSYS_DATA_TYPE&);
 
 			/// Returns the current data type of the data container.
@@ -95,40 +97,47 @@ namespace entity_system {
 			ENTSYS_DATA_TYPE get_data_type() const;
 
 			/// Resets all memory.
+			/// @note This will reset the data type
+			/// of the container to ENTSYS_DATA_TYPE_UNDEFINED.
 			void reset_memory();
 
-			// Get methods for memory access.
-			// In C++ we can't have functions which only differ
-			// in their return value. There is no general way of
-			// implementing 'get_data()'.
+			// TODO: Do some research on this and refactor the code if possible.
+			// Get methods for memory access. In C++ we can't have functions which only differ
+			// in their return value (?) There is no general way of implementing 'get_data()'.
 
 			/// Returns the data container's 64 bit integer variable.
 			/// @return the data container's 64 bit integer variable.
+			/// @note This is not a cast operation!
 			std::int64_t get_int64() const;
 
 			/// Returns the data container's std::string variable.
 			/// @return the data container's std::string variable.
+			/// @note This is not a cast operation!
 			std::string get_string() const;
 
 			/// Returns the data container's double variable.
 			/// @return the data container's double variable.
+			/// @note This is not a cast operation!
 			double get_double() const;
 			
 			/// Returns the data container's float variable.
 			/// @return the data container's float variable.
+			/// @note This is not a cast operation!
 			float get_float() const;
 
 			/// Returns the data container's bool variable.
 			/// @return the data container's bool variable.
+			/// @note This is not a cast operation!
 			bool get_bool() const;
 
 			/// Returns the data container's integer variable.
 			/// @return the data container's integer variable.
+			/// @note This is not a cast operation!
 			int get_int() const;
 
 			/// Casts the container's data to 64 bit int.
-			/// @return A 64 bit integer which contains
-			/// which contains the casted memory.
+			/// @return A 64 bit integer which
+			/// contains the casted memory.
 			std::int64_t cast_to_int64() const;
 			
 			/// Casts the container's data to int.
@@ -183,36 +192,43 @@ namespace entity_system {
 
 			/// Assign operator.
 			/// @param cont The source data container from which data will be copied.
+			/// @note This operator function calls set_data().
 			/// @return *this (The dereferenced value of the this pointer).
 			DataContainer operator = (const DataContainer&);
 
 			/// Assign operator.
 			/// @param int64val The source 64 bit integer from which data will be copied.
+			/// @note This operator function calls set_data().
 			/// @return *this (The dereferenced value of the this pointer).
 			DataContainer operator = (const std::int64_t&);
 
 			/// Assign operator.
 			/// @param strval The source std::string from which data will be copied.
+			/// @note This operator function calls set_data().
 			/// @return *this (The dereferenced value of the this pointer).
 			DataContainer operator = (const std::string&);
 
 			/// Assign operator.
 			/// @param dblval The source double from which data will be copied.
+			/// @note This operator function calls set_data().
 			/// @return *this (The dereferenced value of the this pointer).
 			DataContainer operator = (const double&);
 
 			/// Assign operator.
 			/// @param fltval The source float from which data will be copied.
+			/// @note This operator function calls set_data().
 			/// @return *this (The dereferenced value of the this pointer).
 			DataContainer operator = (const float&);
 
 			/// Assign operator.
 			/// @param boolval The source bool from which data will be copied.
+			/// @note This operator function calls set_data().
 			/// @return *this (The dereferenced value of the this pointer).
 			DataContainer operator = (const bool&);
 
 			/// Assign operator.
 			/// @param intval The source int from which data will be copied.
+			/// @note This operator function calls set_data().
 			/// @return *this (The dereferenced value of the this pointer).
 			DataContainer operator = (const int&);
 			

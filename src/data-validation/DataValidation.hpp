@@ -22,7 +22,8 @@ namespace entity_system {
 			/// Destructor.
 			~DataValidation();
 
-			/// 
+			/// This data validation method MUST be implemented
+			/// by every class which inherits from this class!
             virtual ENTSYS_DATA_VALIDATION_RESULT validate() = 0;
 
     };

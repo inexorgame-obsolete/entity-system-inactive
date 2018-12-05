@@ -17,13 +17,12 @@ namespace inexor {
 namespace entity_system {
     
 
-	/// A manager class for types of entity attributes.
+	/// A manager class for entity attribute types.
     class EntityAttributeTypeManager : public TypeManagerTemplate<EntityAttributeType>
     {
         private:
 
-			/// This error entity attribute type error
-			/// will be returned when a method fails.
+			/// This entity attribute type error will be returned when a method fails.
 			const ENT_ATTR_TYPE entity_attribute_type_error
 				= std::make_shared<EntityAttributeType>("ERROR", ENTSYS_DATA_TYPE_UNDEFINED);
 
@@ -38,17 +37,18 @@ namespace entity_system {
 		public:
 
 			/// Checks if an entity attribute type does already exist.
-			/// @param ent_attr_type_name The name of an entity attribute type of
-			/// which we will check if this entity attribute type does already exist.
-			/// @return True if the entity attribute type does already exist,
-			/// false otherwise.
+			/// @param ent_attr_type_name The name of an entity
+			/// attribute type of which we will check if it does already exist.
+			/// @return True if the entity attribute type
+			/// does already exist, false otherwise.
 			bool does_entity_attribute_type_exist(const std::string&);
 
 			/// Checks if an entity attribute type does already exist.
-			/// @param ent_attr_type A reference to a shared pointer of an entity attribute type
-			/// of which we will check if this entity attribute type does already exist.
-			/// @return True if the entity attribute type does already exist,
-			/// false otherwise.
+			/// @param ent_attr_type A const reference to a shared pointer of
+			/// an entity attribute type of which we will check if it
+			/// does already exist.
+			/// @return True if the entity attribute type
+			/// does already exist, false otherwise.
 			bool does_entity_attribute_type_exist(const ENT_ATTR_TYPE&);
 
 			/// Creates a new entity attribute type.
@@ -67,7 +67,7 @@ namespace entity_system {
 			void delete_entity_attribute_type(const std::string&);
 			
 			/// Deletes an entity attribute type.
-			/// @param ent_attr_type A reference to a shared pointer of an entity attribute type which will be deleted.
+			/// @param ent_attr_type A const reference to a shared pointer of an entity attribute type which will be deleted.
 			void delete_entity_attribute_type(const ENT_ATTR_TYPE&);
 
 			// TODO: Delete by UUID.

@@ -16,7 +16,8 @@ namespace inexor {
 namespace entity_system {
 
 
-	/// A template base class for type manager classes.
+	/// A template base class
+	/// for type manager classes.
 	template <typename T>
 	class TypeManagerTemplate
 	{

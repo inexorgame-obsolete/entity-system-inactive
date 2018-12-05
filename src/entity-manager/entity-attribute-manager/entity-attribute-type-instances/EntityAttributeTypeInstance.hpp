@@ -13,7 +13,7 @@ namespace inexor {
 namespace entity_system {
 
 
-	/// A base class for instances of attributes of entities.
+	/// A base class for entity attribute type instances.
 	class EntityAttributeTypeInstance : public TypeInstanceBase<EntityAttributeType,EntityAttributeTypeInstance>,
                                         public DataContainer
 	{
@@ -22,8 +22,6 @@ namespace entity_system {
 			/// Constructor.
 			/// @param ent_attr_type A reference to a shared pointer of
 			/// an entity attribute type of which an instance will be created.
-			/// @return A shared pointer to the entity attribute type instance which was created.
-			/// TODO: entity_attribute_type_instance_ERROR.
 			EntityAttributeTypeInstance(const ENT_ATTR_TYPE&);
 
 			/// Destructor.

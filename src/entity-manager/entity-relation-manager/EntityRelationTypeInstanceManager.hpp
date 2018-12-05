@@ -11,7 +11,7 @@ namespace inexor {
 namespace entity_system {
 
 
-	/// A manager class for instances of entity relation types.
+	/// A manager class for entity relation type instances.
     class EntityRelationTypeInstanceManager : public TypeInstanceManagerTemplate<EntityRelationTypeInstance>
     {
 		private:
@@ -31,8 +31,7 @@ namespace entity_system {
 			const ENT_REL_TYPE entity_relation_type_error
 				= std::make_shared<EntityRelationType>("ERROR", entity_type_error, entity_type_error);
 
-			/// This entity relation type instance error
-			/// which will be returned when a method fails.
+			/// This entity relation type instance error will be returned when a method fails.
 			const ENT_REL_TYPE_INST entity_relation_type_instance_error
 				= std::make_shared<EntityRelationTypeInstance>(entity_relation_type_error,
 					                                           entity_type_instance_error,

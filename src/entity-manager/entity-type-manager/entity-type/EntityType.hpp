@@ -15,15 +15,14 @@ namespace inexor {
 namespace entity_system {
 
 	
-	/// A base class for types of entities. This class needs to implement a data validation method!
+	/// A base class for entity types.
 	class EntityType : public TypeBase, public TypeContainerTemplate<EntityAttributeType>
     {
         public:
 
 			/// Constructor.
-			/// @param ent_type_name The unique name of the entity type which will be created.
-			/// @return A shared pointer to the entity type which was created.
-			/// TODO: entity_type_error!
+			/// @param ent_type_name The unique name
+			/// of the entity type which will be created.
 			EntityType(const std::string&);
 
 			/// Destructor.
@@ -61,7 +60,8 @@ namespace entity_system {
 			/// Deletes all entity attribute types which are linked to this entity type.
 			void reset_linked_attribute_types();
 
-			/// 
+			/// Implement a data validation method as
+			/// required by class inheritance of DataValidation
 			virtual ENTSYS_DATA_VALIDATION_RESULT validate() override;
 
     };

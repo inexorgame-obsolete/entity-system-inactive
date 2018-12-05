@@ -16,7 +16,7 @@ namespace inexor {
 namespace entity_system {
 
 
-	/// An error handler class for Inexor's entity system prototype.
+	/// An error handler class.
 	class EntitySystemErrorHandler
 	{
 		protected:

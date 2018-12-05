@@ -12,6 +12,9 @@ namespace entity_system {
 
 
 	/// A base class for attributes of any type.
+	/// @note This base class does not implement
+	/// a data validation method! Every class which
+	/// inherits from AttributeBase must do this!
 	class AttributeBase : public DataValidation
 	{
 		private:
@@ -24,11 +27,14 @@ namespace entity_system {
 			/// Constructor.
 			AttributeBase();
 
+			// TODO: Add overloaded constructor.
+
 			/// Destructor.
 			~AttributeBase();
 
 			/// Sets the data type of this attribute's data container.
-			/// @param attr_data_type The data type of the data which will be stored in this attribute.
+			/// @param attr_data_type The data type of the data which
+			/// will be stored in this attribute.
 			void set_attribute_data_type(const ENTSYS_DATA_TYPE&);
 			
 			/// Returns the data type of the attribute type.

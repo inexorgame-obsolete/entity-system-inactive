@@ -44,5 +44,6 @@ namespace entity_system {
 
 	// TODO: Macros for deleting.
 
+
 };
 };

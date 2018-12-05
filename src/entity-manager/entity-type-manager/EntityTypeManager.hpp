@@ -20,10 +20,8 @@ namespace entity_system {
 	{
 		private:
 
-			/// This entity type error
-			/// will be returned when a method fails.
-			const ENT_TYPE entity_type_error
-				= std::make_shared<EntityType>("ERROR");
+			/// This entity type error will be returned when a method fails.
+			const ENT_TYPE entity_type_error = std::make_shared<EntityType>("ERROR");
 
 		protected:
 
@@ -65,7 +63,7 @@ namespace entity_system {
 			void delete_entity_type(const std::string&);
 
 			/// Deletes an entity type by entity type.
-			/// @param ent_type A reference of a shared pointer
+			/// @param ent_type A const reference of a shared pointer
 			/// to the entity type which will be deleted.
 			void delete_entity_type(const ENT_TYPE&);
 			

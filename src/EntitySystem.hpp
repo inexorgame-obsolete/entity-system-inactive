@@ -23,7 +23,7 @@ namespace entity_system {
 
 
 	/// @class EntitySystem
-  /// @brief Entity system prototype for Inexor.
+    /// @brief Entity system prototype for Inexor.
 	/// Currently this class is not a singleton implementation.
 	class EntitySystem : public EntityManager
 	{

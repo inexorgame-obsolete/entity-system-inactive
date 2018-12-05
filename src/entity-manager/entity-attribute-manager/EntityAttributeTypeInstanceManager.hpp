@@ -12,7 +12,7 @@ namespace inexor {
 namespace entity_system {
 
 
-	/// A manager class for instances of attributes of entity types.
+	/// A manager class for entity attribute type instances.
     class EntityAttributeTypeInstanceManager : public TypeInstanceManagerTemplate<EntityAttributeTypeInstance>
     {
 		private:
@@ -38,10 +38,12 @@ namespace entity_system {
 		public:
 
 			/// Creates an entity attribute type instance.
-			/// @param ent_attr_type A reference to a shared pointer of
+			/// @param ent_attr_type A const reference to a shared pointer of
 			/// an entity attribute type of which an instance will be created.
-			/// @return A shared pointer to the entity attribute type instance which was created.
-			/// <br>If this method fails, entity_attribute_type_instance_error will be returned as error object.
+			/// @return A shared pointer to the entity attribute type instance
+			/// which was created.
+			/// <br>If this method fails, entity_attribute_type_instance_error will be
+			/// returned as error object.
 			ENT_ATTR_TYPE_INST create_entity_attribute_type_instance(const ENT_ATTR_TYPE&);
 
 			/// Returns the number of existing entity attribute type instances.

@@ -16,7 +16,7 @@ namespace inexor {
 namespace entity_system {
     
 
-	/// A base class for types of entity attributes.
+	/// A base class for entity attribute types.
     class EntityAttributeType : public TypeBase, public AttributeBase
     {
         public:
@@ -29,7 +29,8 @@ namespace entity_system {
 			/// Destructor.
 			~EntityAttributeType();
 
-			/// 
+			/// Implement a data validation method as
+			/// required by class inheritance of DataValidation!
 			virtual ENTSYS_DATA_VALIDATION_RESULT validate() override;
 
 	};

@@ -12,13 +12,12 @@ namespace inexor {
 namespace entity_system {
 
 	
-	/// A manager class for types of entity relation attributes.
+	/// A manager class for entity relation attribute types.
 	class EntityRelationAttributeTypeManager : public TypeManagerTemplate<EntityRelationAttributeType>
 	{
 		private:
 
-			/// This entity relation attribute type error
-			/// which will be returned when a method fails.
+			/// This entity relation attribute type error will be returned when a method fails.
 			const ENT_REL_ATTR_TYPE entity_relation_attribute_type_error
 				= std::make_shared<EntityRelationAttributeType>("ERROR", ENTSYS_DATA_TYPE_UNDEFINED);
 

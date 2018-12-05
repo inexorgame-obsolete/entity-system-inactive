@@ -57,7 +57,7 @@ namespace entity_system {
 
 
 			/// Sets the pointer of a type.
-			/// @param type_ptr A reference to a shared pointer of the source type.
+			/// @param type_ptr A const reference to a shared pointer of the source type.
 			void set_type_pointer(const std::shared_ptr<T1>& type_ptr)
 			{
 				type_pointer = type_ptr;

@@ -11,7 +11,7 @@ namespace inexor {
 namespace entity_system {
 
 
-	/// A manager class for instances of types of entities.
+	/// A manager class for entity type instances.
     class EntityTypeInstanceManager : public TypeInstanceManagerTemplate<EntityTypeInstance>
 	{            
 		private:
@@ -37,7 +37,7 @@ namespace entity_system {
 		public:
 
 			/// Create an entity type instance.
-			/// @param ent_type A reference of a shared pointer
+			/// @param ent_type A const reference of a shared pointer
 			/// to an entity type of which an instance will be created.
 			/// @return A shared pointer to the entity type instance which was created.
 			/// <br>If this method fails, entity_type_instance_error will be returned

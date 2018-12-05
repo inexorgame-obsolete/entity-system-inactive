@@ -36,7 +36,8 @@ namespace entity_system {
 
 			// TODO: Implement get_UUID() method!
 
-			/// 
+			/// Implement a data validation method as
+			/// required by class inheritance of DataValidation!
 			virtual ENTSYS_DATA_VALIDATION_RESULT validate() override = 0;
 					
 		public:

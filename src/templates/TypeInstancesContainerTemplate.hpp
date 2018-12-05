@@ -14,7 +14,8 @@ namespace inexor {
 namespace entity_system {
 
 
-	/// A template base class for a map of instances of a templatable type.
+	/// A template base class
+	/// for a map of instances of a templatable type.
 	template <typename T1, typename T2>
 	class TypeInstancesContainerTemplate
 	{
