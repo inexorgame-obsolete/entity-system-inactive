@@ -6,6 +6,10 @@
 #include <string>
 
 #include "../data-validation//DataValidation.hpp"
+/// TODO: Fix conan package manager for dependencies!
+/// This file will not be contained in the repository itself.
+/// https://github.com/graeme-hill/crossguid
+#include <crossguid/guid.hpp>
 
 
 namespace inexor {
@@ -20,7 +24,8 @@ namespace entity_system {
 			/// The unique name of this type.
 			std::string type_title;
 
-			// TODO: Implement UUID!
+			/// The Universally Unique Identifier of this type.
+			xg::Guid type_UUID = xg::newGuid();
 			
 		protected:
 
