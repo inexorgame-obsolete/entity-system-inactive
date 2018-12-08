@@ -11,7 +11,7 @@
 #include "../../../data-validation/DataValidation.hpp"
 #include "../../../data-container/DataTypes.hpp"
 #include "../../../base-classes/TypeBase.hpp"
-#include "../../../base-classes/AttributeBase.hpp"
+#include "../../../base-classes/AttributeTypeBase.hpp"
 
 
 namespace inexor {
@@ -19,7 +19,7 @@ namespace entity_system {
     
 
 	/// A base class for entity relation attribute types.
-    class EntityRelationAttributeType : public TypeBase, public AttributeBase
+    class EntityRelationAttributeType : public TypeBase, public AttributeTypeBase
     {
         public:
 

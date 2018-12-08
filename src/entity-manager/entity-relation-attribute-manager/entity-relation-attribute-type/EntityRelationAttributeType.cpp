@@ -10,9 +10,9 @@ namespace entity_system {
 
 	EntityRelationAttributeType::EntityRelationAttributeType(const std::string& ent_rel_attr_type_name,
 		                                                     const ENTSYS_DATA_TYPE& ent_rel_attr_type_data_type)
+		: TypeBase(ent_rel_attr_type_name), AttributeTypeBase(ent_rel_attr_type_data_type)
 	{
-		set_type_name(ent_rel_attr_type_name);
-		set_attribute_data_type(ent_rel_attr_type_data_type);
+		// TODO: Implement
 	}
 
 

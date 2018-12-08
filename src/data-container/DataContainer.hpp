@@ -20,8 +20,7 @@ namespace entity_system {
     // why not store a pointer to the value pair of the map in the write operation?
     // This could speed the entity system very much!
 	
-    /// A data container which can
-	/// hold data of various types.
+    /// A data container which can hold data of various types.
     class DataContainer
     {
         private:

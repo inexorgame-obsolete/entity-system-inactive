@@ -11,8 +11,8 @@ namespace entity_system {
 	EntityRelationType::EntityRelationType(const std::string& rel_type_name,
 		                                   const ENT_TYPE& ent_type_source,
 		                                   const ENT_TYPE& ent_type_target)
+		: TypeBase(rel_type_name)
 	{
-		set_type_name(rel_type_name);
 		source_entity_type = ent_type_source;
 		target_entity_type = ent_type_target;
 	}

@@ -9,9 +9,9 @@ namespace entity_system {
     
 
     EntityType::EntityType(const std::string& ent_type_name)
+		: TypeBase(ent_type_name)
     {
-		// Call template base class method.
-		set_type_name(ent_type_name);
+		// TODO: Implement!
 	}
 
 

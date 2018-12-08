@@ -8,21 +8,15 @@ namespace inexor {
 namespace entity_system {
 
 
-	TypeBase::TypeBase()
+	TypeBase::TypeBase(const std::string& type_name)
 	{
-		// TODO: Implement!
+		type_title = type_name;
 	}
 
 
 	TypeBase::~TypeBase()
 	{
 		// TODO: Implement!
-	}
-
-
-	void TypeBase::set_type_name(const std::string& type_name)
-	{
-		type_title = type_name;
 	}
 
 

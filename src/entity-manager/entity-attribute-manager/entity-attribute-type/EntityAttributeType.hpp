@@ -9,7 +9,7 @@
 
 #include "../../../return-codes/ReturnCodes.hpp"
 #include "../../../base-classes/TypeBase.hpp"
-#include "../../../base-classes/AttributeBase.hpp"
+#include "../../../base-classes/AttributeTypeBase.hpp"
 
 
 namespace inexor {
@@ -17,7 +17,7 @@ namespace entity_system {
     
 
 	/// A base class for entity attribute types.
-    class EntityAttributeType : public TypeBase, public AttributeBase
+    class EntityAttributeType : public TypeBase, public AttributeTypeBase
     {
         public:
 				

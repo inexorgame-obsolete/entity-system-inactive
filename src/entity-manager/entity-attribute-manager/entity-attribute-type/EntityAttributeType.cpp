@@ -8,14 +8,10 @@ namespace inexor {
 namespace entity_system {
 
 
-	EntityAttributeType::EntityAttributeType(const std::string& ent_attr_type_name,
-		                                     const ENTSYS_DATA_TYPE& ent_attr_data_type)
+	EntityAttributeType::EntityAttributeType(const std::string& ent_attr_type_name, const ENTSYS_DATA_TYPE& ent_attr_data_type)
+    : AttributeTypeBase(ent_attr_data_type), TypeBase(ent_attr_type_name)
 	{
-		// Call template base class method.
-		set_type_name(ent_attr_type_name);
-
-		// Call template base class method.
-		set_attribute_data_type(ent_attr_data_type);
+		// TODO: Implement!
 	}
 
 

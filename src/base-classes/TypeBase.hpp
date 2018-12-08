@@ -6,6 +6,7 @@
 #include <string>
 
 #include "../data-validation//DataValidation.hpp"
+
 /// TODO: Fix conan package manager for dependencies!
 /// This file will not be contained in the repository itself.
 /// https://github.com/graeme-hill/crossguid
@@ -30,14 +31,10 @@ namespace entity_system {
 		protected:
 
 			/// Constructor.
-			TypeBase();
+			TypeBase(const std::string&);
 
 			/// Destructor.
 			~TypeBase();
-
-			/// Sets the name of this type.
-			/// @param type_name The unique name of the type.
-			void set_type_name(const std::string& type_name);
 
 			// TODO: Implement get_UUID() method!
 
