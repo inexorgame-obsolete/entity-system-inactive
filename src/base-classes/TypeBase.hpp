@@ -6,13 +6,16 @@
 #include <string>
 
 #include "../data-validation//DataValidation.hpp"
+#include "base-classes/GUID/GUIDBase.hpp"
+
 
 namespace inexor {
 namespace entity_system {
 
 
 	/// A template base class for types.
-	class TypeBase : public DataValidation
+	class TypeBase : public DataValidation,
+		             public GUIDBase
 	{
 		private:
 			

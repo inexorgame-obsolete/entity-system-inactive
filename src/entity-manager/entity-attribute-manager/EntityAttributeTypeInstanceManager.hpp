@@ -44,6 +44,8 @@ namespace entity_system {
 			/// which was created.
 			/// <br>If this method fails, entity_attribute_type_instance_error will be
 			/// returned as error object.
+			/// @note the GUID of the entity attribute type will be created
+			/// automatically because EntityAttributeType inherits from GUIDBase!
 			ENT_ATTR_TYPE_INST create_entity_attribute_type_instance(const ENT_ATTR_TYPE&);
 
 			/// Returns the number of existing entity attribute type instances.

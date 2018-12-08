@@ -22,6 +22,8 @@ namespace entity_system {
 			/// Constructor.
 			/// @param ent_type A const reference of a shared pointer
 			/// to the entity type of which an instance will be created.
+			/// @note The GUID of the new entity type instance will
+			/// be created automatically by the inheritance of GUIDBase!
 			EntityTypeInstance(const ENT_TYPE&);
 
 			/// Destructor.

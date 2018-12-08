@@ -56,6 +56,8 @@ namespace entity_system {
 			/// @param ent_attr_data_type The data type of the new entity attribute type.
 			/// @return A shared pointer to the entity attribute type which was created.
 			/// <br>If this method fails, entity_attribute_type_error will be returned as error object.
+			/// @note the GUID of the new entity attribute type will
+			/// be created automatically by the inheritance of GUIDBase!
 			ENT_ATTR_TYPE create_entity_attribute_type(const std::string&, const ENTSYS_DATA_TYPE&);
 
 			/// Returns the number of available entity attribute types.

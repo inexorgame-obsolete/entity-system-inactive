@@ -37,6 +37,8 @@ namespace entity_system {
 			/// an entity type instance which will be used as source entity instance.
 			/// @param ent_type_inst_target A const reference to a shared pointer of
 			/// an entity type instance which will be used as target entity instance.
+			/// @note The GUID of the new entity relation type instance will
+			/// be created automatically by the inheritance of GUIDBase!
 			EntityRelationTypeInstance(const ENT_REL_TYPE&, const ENT_TYPE_INST&, const ENT_TYPE_INST&);
 
 			/// Destructor.

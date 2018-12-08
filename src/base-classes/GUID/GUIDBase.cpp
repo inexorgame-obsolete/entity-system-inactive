@@ -20,9 +20,9 @@ namespace entity_system {
 	}
 
 
-	xg::Guid GUIDBase::get_guid() const
+	xg::Guid GUIDBase::get_GUID() const
 	{
-		return entsys_guid;
+		return the_GUID;
 	}
 
 

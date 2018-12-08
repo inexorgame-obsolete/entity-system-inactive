@@ -25,5 +25,11 @@ namespace entity_system {
 	}
 
 
+	xg::Guid EntityAttributeTypeInstance::get_entity_attribute_type_instance_GUID() const
+	{
+		return get_GUID();
+	}
+
+
 };
 };

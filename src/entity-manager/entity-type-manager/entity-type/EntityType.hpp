@@ -16,13 +16,16 @@ namespace entity_system {
 
 	
 	/// A base class for entity types.
-	class EntityType : public TypeBase, public TypeContainerTemplate<EntityAttributeType>
+	class EntityType : public TypeBase,
+		               public TypeContainerTemplate<EntityAttributeType>
     {
         public:
 
 			/// Constructor.
 			/// @param ent_type_name The unique name
 			/// of the entity type which will be created.
+			/// @note The GUID of the new entity type will be created
+			/// automatically by the inheritance of GUIDBase!
 			EntityType(const std::string&);
 
 			/// Destructor.

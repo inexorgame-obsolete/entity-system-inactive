@@ -19,7 +19,7 @@ namespace entity_system {
 		private:
 
 			/// The GUID of the class.
-			xg::Guid entsys_guid = xg::newGuid();
+			xg::Guid the_GUID = xg::newGuid();
 
 		protected:
 
@@ -31,7 +31,10 @@ namespace entity_system {
 
 			/// Returns the GUID of the class instance.
 			/// @return The GUID of the class instance.
-			xg::Guid get_guid() const;
+			xg::Guid get_GUID() const;
+
+
+			// TODO: Add reset method for creating a new random GUID.
 
 	};
 

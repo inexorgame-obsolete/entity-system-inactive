@@ -36,6 +36,8 @@ namespace entity_system {
 			/// which is the source entity from which the relation will start.
 			/// @param ent_type_target A const reference to a shared pointer of an entity type
 			/// which is the target entity to which the relation will go.
+			/// @note The GUID of the new entity relation type will
+			/// be created automatically by the inheritance of GUIDBase!
 			EntityRelationType(const std::string&, const ENT_TYPE&, const ENT_TYPE&);
 			
 			/// Destructor.

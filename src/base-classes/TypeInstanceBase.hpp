@@ -6,6 +6,8 @@
 #include <string>
 #include <memory>
 
+#include "../base-classes/GUID/GUIDBase.hpp"
+
 
 namespace inexor {
 namespace entity_system {
@@ -13,14 +15,12 @@ namespace entity_system {
 
 	/// A template class for instances.
 	template <typename T1, typename T2>
-	class TypeInstanceBase
+	class TypeInstanceBase : public GUIDBase
 	{
 		protected:
 			
 			/// The unique name of the type of this instance.
 			std::string type_title;
-			
-			// TODO: Implement UUIDs!
 
 			/// A pointer to the type of this type instance.
 			std::shared_ptr<T1> type_pointer;

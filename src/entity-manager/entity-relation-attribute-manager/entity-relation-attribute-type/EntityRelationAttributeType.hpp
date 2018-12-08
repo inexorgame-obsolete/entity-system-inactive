@@ -19,13 +19,16 @@ namespace entity_system {
     
 
 	/// A base class for entity relation attribute types.
-    class EntityRelationAttributeType : public TypeBase, public AttributeTypeBase
+    class EntityRelationAttributeType : public TypeBase,
+		                                public AttributeTypeBase
     {
         public:
 
 			/// Constructor.
 			/// @param ent_rel_attr_type_name The name of the new entity relation attribute type.
 			/// @param ent_rel_attr_type_data_type The data type of the new entity relation attribute type.
+			/// @note the GUID of the new entity relation attribute type will
+			/// be created automatically by the inheritance of GUIDBase!
 			EntityRelationAttributeType(const std::string&, const ENTSYS_DATA_TYPE&);
 
 			/// Destructor.

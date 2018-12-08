@@ -10,7 +10,6 @@
 #include "../../../return-codes/ReturnCodes.hpp"
 #include "../../../base-classes/TypeBase.hpp"
 #include "../../../base-classes/AttributeTypeBase.hpp"
-#include "base-classes/GUID/GUIDBase.hpp"
 
 
 namespace inexor {
@@ -19,14 +18,15 @@ namespace entity_system {
 
 	/// A base class for entity attribute types.
     class EntityAttributeType : public TypeBase,
-		                        public AttributeTypeBase,
-								public GUIDBase
+		                        public AttributeTypeBase
     {
         public:
 				
 			/// Constructor.
 			/// @param ent_attr_type_name The name of the new entity attribute type.
 			/// @param ent_attr_data_type The data type of the new entity attribute type.
+			/// @note the GUID of the new entity attribute type will
+			/// be created automatically by the inheritance of GUIDBase!
 			EntityAttributeType(const std::string&, const ENTSYS_DATA_TYPE&);
 
 			/// Destructor.

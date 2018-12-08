@@ -23,6 +23,8 @@ namespace entity_system {
 			/// Constructor.
 			/// @param ent_rel_attr_type A const reference to a shared pointer of
 			/// an entity relation attribute type of which an instance will be created.
+			/// @note the GUID of the new entity relation attribute type instance will
+			/// be created automatically by the inheritance of GUIDBase!
 			EntityRelationAttributeTypeInstance(const ENT_REL_ATTR_TYPE&);
 
 			/// Destructor.
