@@ -88,7 +88,6 @@ namespace entity_system {
 		return data_type;
     }
 
-	
 
 	DataContainer DataContainer::set_data(const DataContainer& data_container)
 	{

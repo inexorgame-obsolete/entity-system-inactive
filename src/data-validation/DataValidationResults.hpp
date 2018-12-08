@@ -9,8 +9,11 @@ namespace inexor {
 namespace entity_system {
 
 
+	// TODO: Should this be defined as a class in Doxygen ?
+
 	/// @class ENTSYS_DATA_VALIDATION_RESULT
-	/// @brief Data validation return codes for the entity-system.
+	/// @brief Data validation return codes
+	/// for the entity-system.
 	enum ENTSYS_DATA_VALIDATION_RESULT
 	{
 		ENTSYS_DATA_INVALID = -1,

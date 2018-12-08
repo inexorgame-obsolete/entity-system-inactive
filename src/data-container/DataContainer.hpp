@@ -10,6 +10,7 @@
 
 #include "DataTypes.hpp"
 #include "../return-codes/ReturnCodes.hpp"
+#include "../base-classes/GUID/GUIDBase.hpp"
 
 
 namespace inexor {
@@ -21,7 +22,7 @@ namespace entity_system {
     // This could speed the entity system very much!
 	
     /// A data container which can hold data of various types.
-    class DataContainer
+    class DataContainer : public GUIDBase
     {
         private:
 
@@ -94,6 +95,10 @@ namespace entity_system {
 			/// Returns the current data type of the data container.
 			/// @return The data type of this data container in the ENTSYS_DATA_TYPE format.
 			ENTSYS_DATA_TYPE get_data_type() const;
+
+			/// Returns the GUID of this data container.
+			/// @return ? TODO
+			xg::Guid get_GUID() const;
 
 			/// Resets all memory.
 			/// @note This will reset the data type

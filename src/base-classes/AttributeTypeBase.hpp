@@ -6,11 +6,6 @@
 #include "../data-container/DataTypes.hpp"
 #include "../data-validation/DataValidation.hpp"
 
-/// TODO: Fix conan package manager for dependencies!
-/// This file will not be contained in the repository itself.
-/// https://github.com/graeme-hill/crossguid
-#include <crossguid/guid.hpp>
-
 
 namespace inexor {
 namespace entity_system {
@@ -20,16 +15,15 @@ namespace entity_system {
 	/// @note This base class does not implement
 	/// a data validation method! Every class which
 	/// inherits from AttributeBase must do this!
+	/// @note This means we can only inherit from
+	/// AttributeTypeBase but not create instances
+	/// of it. This means it is an abstract class.
 	class AttributeTypeBase : public DataValidation
 	{
 		private:
 
 			/// The data type of this attribute.
 			ENTSYS_DATA_TYPE attribute_data_type;
-
-			/// The Universally Unique Identifier (UUID)
-			/// of this attribute type.
-			xg::Guid type_UUID = xg::newGuid();
 
 		protected:
 			

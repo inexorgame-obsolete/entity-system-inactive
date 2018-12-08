@@ -8,6 +8,8 @@ namespace inexor {
 namespace entity_system {
 
 
+	// TODO: Should this be defined as a class in Doxygen ?
+
 	/// @class ENTSYS_DATA_TYPE
     /// @brief Data container memory type.
     enum ENTSYS_DATA_TYPE 

@@ -16,7 +16,7 @@ namespace inexor {
 namespace entity_system {
 
 
-	/// A template base class for
+	/// @brief A template base class for
 	/// a std::vector of a templatable type.
 	template <typename T>
 	class TypeContainerTemplate

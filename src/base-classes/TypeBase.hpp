@@ -7,12 +7,6 @@
 
 #include "../data-validation//DataValidation.hpp"
 
-/// TODO: Fix conan package manager for dependencies!
-/// This file will not be contained in the repository itself.
-/// https://github.com/graeme-hill/crossguid
-#include <crossguid/guid.hpp>
-
-
 namespace inexor {
 namespace entity_system {
 
@@ -24,9 +18,6 @@ namespace entity_system {
 			
 			/// The unique name of this type.
 			std::string type_title;
-
-			/// The Universally Unique Identifier of this type.
-			xg::Guid type_UUID = xg::newGuid();
 			
 		protected:
 
@@ -36,8 +27,6 @@ namespace entity_system {
 			/// Destructor.
 			~TypeBase();
 
-			// TODO: Implement get_UUID() method!
-
 			/// Implement a data validation method as
 			/// required by class inheritance of DataValidation!
 			virtual ENTSYS_DATA_VALIDATION_RESULT validate() override = 0;
@@ -45,7 +34,7 @@ namespace entity_system {
 		public:
 
 			/// Returns the name of this type.
-			/// @return The namf ot this type.
+			/// @return The name of this type.
 			std::string get_type_name() const;
 
 
