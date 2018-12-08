@@ -6,8 +6,6 @@
 #include <string>
 #include <memory>
 
-#include "../base-classes/GUID/GUIDBase.hpp"
-
 
 namespace inexor {
 namespace entity_system {
@@ -15,7 +13,7 @@ namespace entity_system {
 
 	/// A template class for instances.
 	template <typename T1, typename T2>
-	class TypeInstanceBase : public GUIDBase
+	class TypeInstanceBase
 	{
 		protected:
 			

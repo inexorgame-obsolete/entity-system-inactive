@@ -7,6 +7,7 @@
 #include "../../entity-relation-attribute-manager/entity-relation-attribute-type/EntityRelationAttributeType.hpp"
 #include "../../../base-classes/TypeBase.hpp"
 #include "../../../typedefs/TypeDefinitions.hpp"
+#include "base-classes/GUID/GUIDBase.hpp"
 
 
 namespace inexor {
@@ -14,7 +15,8 @@ namespace entity_system {
 
 	
 	/// A base class for entity relation types.
-	class EntityRelationType : public TypeBase
+	class EntityRelationType : public TypeBase,
+		                       public GUIDBase
 	{
 		private:
 
@@ -32,10 +34,10 @@ namespace entity_system {
 
 			/// Constructor.
 			/// @param rel_type_name The name of the new entity relation type name.
-			/// @param ent_type_source A const reference to a shared pointer of an entity type
-			/// which is the source entity from which the relation will start.
-			/// @param ent_type_target A const reference to a shared pointer of an entity type
-			/// which is the target entity to which the relation will go.
+			/// @param ent_type_source A const reference to a shared pointer of an
+			/// entity type which is the source entity from which the relation will start.
+			/// @param ent_type_target A const reference to a shared pointer of an
+			/// entity type which is the target entity to which the relation will go.
 			/// @note The GUID of the new entity relation type will
 			/// be created automatically by the inheritance of GUIDBase!
 			EntityRelationType(const std::string&, const ENT_TYPE&, const ENT_TYPE&);

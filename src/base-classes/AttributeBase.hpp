@@ -18,7 +18,9 @@ namespace entity_system {
 	/// @note This means we can only inherit from
 	/// AttributeTypeBase but not create instances
 	/// of it. This means it is an abstract class.
-	class AttributeTypeBase : public DataValidation
+	/// @note AttributeBase does not have a GUID,
+	/// because it is only defined by ENTSYS_DATA_TYPE.
+	class AttributeBase : public DataValidation
 	{
 		private:
 
@@ -29,10 +31,10 @@ namespace entity_system {
 			
 			/// Constructor.
 			/// @param attr_data_type The data type of this attribute.
-			AttributeTypeBase(const ENTSYS_DATA_TYPE&);
+			AttributeBase(const ENTSYS_DATA_TYPE&);
 
 			/// Destructor.
-			~AttributeTypeBase();
+			~AttributeBase();
 			
 			/// Returns the data type of the attribute type.
 			/// @return The data type of the attribute type.

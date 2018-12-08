@@ -8,6 +8,7 @@
 #include "../../../base-classes/TypeInstanceBase.hpp"
 #include "../../entity-relation-attribute-manager/entity-relation-attribute-type-instance/EntityRelationAttributeTypeInstance.hpp"
 #include "../../../typedefs/TypeDefinitions.hpp"
+#include "base-classes/GUID/GUIDBase.hpp"
 
 
 namespace inexor {
@@ -15,7 +16,8 @@ namespace entity_system {
 
 
 	/// A base class for entity relation type instances.
-	class EntityRelationTypeInstance : public TypeInstanceBase<EntityRelationType,EntityRelationTypeInstance>
+	class EntityRelationTypeInstance : public TypeInstanceBase<EntityRelationType,EntityRelationTypeInstance>,
+		                               public GUIDBase
 	{
 		private:
 		

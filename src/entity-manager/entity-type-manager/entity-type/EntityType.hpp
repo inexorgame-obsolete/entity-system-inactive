@@ -9,6 +9,7 @@
 #include "../../entity-attribute-manager/entity-attribute-type/EntityAttributeType.hpp"
 #include "../../../templates/TypeContainerTemplate.hpp"
 #include "../../../typedefs/TypeDefinitions.hpp"
+#include "base-classes/GUID/GUIDBase.hpp"
 
 
 namespace inexor {
@@ -17,7 +18,8 @@ namespace entity_system {
 	
 	/// A base class for entity types.
 	class EntityType : public TypeBase,
-		               public TypeContainerTemplate<EntityAttributeType>
+		               public TypeContainerTemplate<EntityAttributeType>,
+		               public GUIDBase
     {
         public:
 

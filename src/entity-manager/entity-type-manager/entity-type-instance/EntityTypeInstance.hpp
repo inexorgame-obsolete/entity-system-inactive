@@ -7,6 +7,7 @@
 #include "../../entity-attribute-manager/entity-attribute-type-instances/EntityAttributeTypeInstance.hpp"
 #include "../../../base-classes/TypeInstanceBase.hpp"
 #include "../../../templates/TypeInstancesContainerTemplate.hpp"
+#include "base-classes/GUID/GUIDBase.hpp"
 
 
 namespace inexor {
@@ -15,7 +16,8 @@ namespace entity_system {
 
 	/// A base class for entity type instances.
     class EntityTypeInstance : public TypeInstanceBase<EntityType,EntityTypeInstance>,
-		                       public TypeInstancesContainerTemplate<EntityAttributeType,EntityAttributeTypeInstance>
+		                       public TypeInstancesContainerTemplate<EntityAttributeType,EntityAttributeTypeInstance>,
+		                       public GUIDBase
     {
 		public:
 			

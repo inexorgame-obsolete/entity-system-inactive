@@ -9,7 +9,7 @@ namespace entity_system {
 
 
 	EntityAttributeType::EntityAttributeType(const std::string& ent_attr_type_name, const ENTSYS_DATA_TYPE& ent_attr_data_type)
-    : AttributeTypeBase(ent_attr_data_type), TypeBase(ent_attr_type_name)
+    : AttributeBase(ent_attr_data_type), TypeBase(ent_attr_type_name)
 	{
 		// TODO: Implement!
 	}

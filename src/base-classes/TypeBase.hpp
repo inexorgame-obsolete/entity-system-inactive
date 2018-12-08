@@ -12,10 +12,12 @@
 namespace inexor {
 namespace entity_system {
 
+	/// @note It does not make sense to let TypeBase or AttributeBase
+	/// inherit from GUIDBase, because then EntityAttributeType would
+	/// contain multiple get_GUID() methods!
 
 	/// A template base class for types.
-	class TypeBase : public DataValidation,
-		             public GUIDBase
+	class TypeBase : public DataValidation
 	{
 		private:
 			

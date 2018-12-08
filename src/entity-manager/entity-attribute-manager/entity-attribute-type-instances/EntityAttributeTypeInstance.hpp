@@ -7,6 +7,7 @@
 #include "../../../data-container/DataContainer.hpp"
 #include "../../../base-classes/TypeInstanceBase.hpp"
 #include "../../../typedefs/TypeDefinitions.hpp"
+#include "base-classes/GUID/GUIDBase.hpp"
 
 
 namespace inexor {
@@ -15,7 +16,8 @@ namespace entity_system {
 
 	/// A base class for entity attribute type instances.
 	class EntityAttributeTypeInstance : public TypeInstanceBase<EntityAttributeType,EntityAttributeTypeInstance>,
-                                        public DataContainer
+                                        public DataContainer,
+		                                public GUIDBase
 	{
 		public:
 
