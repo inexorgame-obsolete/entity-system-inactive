@@ -19,6 +19,8 @@ file(GLOB source_files
     "src/EntitySystem.cpp"
     "src/base-classes/*.hpp"
     "src/base-classes/*.cpp"
+    "src/base-classes/GUID/*.hpp"
+    "src/base-classes/GUID/*.cpp"
 	"src/data-container/*.hpp"
 	"src/data-container/*.cpp"
 	"src/data-validation/*.hpp"
