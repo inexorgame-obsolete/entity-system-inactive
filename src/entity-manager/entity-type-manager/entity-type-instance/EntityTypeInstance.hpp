@@ -30,7 +30,8 @@ namespace entity_system {
 
 			/// Destructor.
 			~EntityTypeInstance();
-			
+
+
     };
 
 

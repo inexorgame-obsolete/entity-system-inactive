@@ -53,7 +53,7 @@ namespace entity_system {
 			/// Returns all linked entity relation attribute types.
 			/// @return A std::vector of shared pointers of entity relation attribute type.
 			std::vector<ENT_REL_ATTR_TYPE> get_linked_attribute_types() const;
-						
+
 			/// Implement a data validation method as
 			/// required by class inheritance of DataValidation!
 			virtual ENTSYS_DATA_VALIDATION_RESULT validate() override;

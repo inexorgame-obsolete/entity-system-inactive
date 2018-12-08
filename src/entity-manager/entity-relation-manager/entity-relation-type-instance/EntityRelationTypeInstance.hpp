@@ -46,7 +46,6 @@ namespace entity_system {
 			/// Destructor.
 			~EntityRelationTypeInstance();
 
-
 			// TODO: get source entity type
 			// TODO: get destination entity type
 			// TODO: Set data !

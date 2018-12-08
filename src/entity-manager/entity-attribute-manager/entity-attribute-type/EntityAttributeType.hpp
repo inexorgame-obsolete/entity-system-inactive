@@ -34,10 +34,6 @@ namespace entity_system {
 			/// Destructor.
 			~EntityAttributeType();
 
-			/// Returns the Globally Unique Identifier of this entity attribute type.
-			/// @return The GUID of this entity attribute type.
-			xg::Guid get_entity_attribute_type_GUID() const;
-
 			/// Implement a data validation method as
 			/// required by class inheritance of DataValidation!
 			virtual ENTSYS_DATA_VALIDATION_RESULT validate() override;

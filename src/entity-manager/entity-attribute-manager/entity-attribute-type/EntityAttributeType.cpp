@@ -20,12 +20,6 @@ namespace entity_system {
 		// TODO: Implement!
 	}
 
-
-	xg::Guid EntityAttributeType::get_entity_attribute_type_GUID() const
-	{
-		return get_GUID();
-	}
-
 	
 	ENTSYS_DATA_VALIDATION_RESULT EntityAttributeType::validate()
 	{

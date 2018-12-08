@@ -31,10 +31,6 @@ namespace entity_system {
 			/// Destructor.
 			~EntityAttributeTypeInstance();
 
-			/// Returns the GUID of the entity attribute type instance.
-			/// @return The GUID of the entity attribute type instance.
-			xg::Guid get_entity_attribute_type_instance_GUID() const;
-
 			// Note: Set and get methods are already implemented by inheriting from DataContainer.
 
 	};

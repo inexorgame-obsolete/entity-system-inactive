@@ -61,7 +61,7 @@ namespace entity_system {
 			/// Returns a vector of entity attribute types which are linked to this entity type.
 			/// @return a vector of entity attribute types which are linked to this entity type.
 			const std::vector<ENT_ATTR_TYPE> get_linked_attribute_types() const;
-
+			
 			/// Deletes all entity attribute types which are linked to this entity type.
 			void reset_linked_attribute_types();
 

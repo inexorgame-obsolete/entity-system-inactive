@@ -15,16 +15,16 @@ namespace entity_system {
 	/// @note This base class does not implement
 	/// a data validation method! Every class which
 	/// inherits from AttributeBase must do this!
-	/// @note This means we can only inherit from
-	/// AttributeTypeBase but not create instances
-	/// of it. This means it is an abstract class.
 	/// @note AttributeBase does not have a GUID,
 	/// because it is only defined by ENTSYS_DATA_TYPE.
+	/// @note We can only inherit from AttributeTypeBase
+	/// but we can't create instances of the class directly
+	/// because it is an abstract class.
 	class AttributeBase : public DataValidation
 	{
 		private:
 
-			/// The data type of this attribute.
+			/// The data type of the attribute.
 			ENTSYS_DATA_TYPE attribute_data_type;
 
 		protected:

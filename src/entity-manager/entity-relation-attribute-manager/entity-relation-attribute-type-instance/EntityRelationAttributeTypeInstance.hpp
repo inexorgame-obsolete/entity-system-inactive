@@ -31,6 +31,7 @@ namespace entity_system {
 
 			/// Destructor.
 			~EntityRelationAttributeTypeInstance();
+			
 
 	};
 
