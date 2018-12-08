@@ -55,7 +55,10 @@ namespace entity_system {
 			/// @param int_data The memory which will be copied to the instance.
 			void set_data(const std::shared_ptr<T1>& type_inst_ptr, const int& int_data)
 			{
-				if(linked_instances.end() != linked_instances.find(type_ptr)) linked_instances[type_ptr]->set(int_data);
+				if(linked_instances.end() != linked_instances.find(type_inst_ptr))
+				{
+					linked_instances[type_inst_ptr]->set_data(int_data);
+				}
 			}
 
 
@@ -65,7 +68,10 @@ namespace entity_system {
 			/// @param bool_data The memory which will be copied to the instance.
 			void set_data(const std::shared_ptr<T1>& type_inst_ptr, const bool& bool_data)
 			{
-				if(linked_instances.end() != linked_instances.find(type_ptr)) linked_instances[type_ptr]->set(bool_data);
+				if(linked_instances.end() != linked_instances.find(type_inst_ptr))
+				{
+					linked_instances[type_inst_ptr]->set_data(bool_data);
+				}
 			}
 
 
@@ -75,7 +81,10 @@ namespace entity_system {
 			/// @param float_data The memory which will be copied to the instance.
 			void set_data(const std::shared_ptr<T1>& type_inst_ptr, const float& float_data)
 			{
-				if(linked_instances.end() != linked_instances.find(type_ptr)) linked_instances[type_ptr]->set(float_data);
+				if(linked_instances.end() != linked_instances.find(type_inst_ptr))
+				{
+					linked_instances[type_inst_ptr]->set_data(float_data);
+				}
 			}
 
 
@@ -85,7 +94,10 @@ namespace entity_system {
 			/// @param double_data The memory which will be copied to the instance.
 			void set_data(const std::shared_ptr<T1>& type_inst_ptr, const double& double_data)
 			{
-				if(linked_instances.end() != linked_instances.find(type_ptr)) linked_instances[type_ptr]->set(double_data);
+				if(linked_instances.end() != linked_instances.find(type_inst_ptr))
+				{
+					linked_instances[type_inst_ptr]->set_data(double_data);
+				}
 			}
 
 
@@ -95,7 +107,10 @@ namespace entity_system {
 			/// @param string_data The memory which will be copied to the instance.
 			void set_data(const std::shared_ptr<T1>& type_inst_ptr, const std::string& string_data)
 			{
-				if(linked_instances.end() != linked_instances.find(type_ptr)) linked_instances[type_ptr]->set(string_data);
+				if(linked_instances.end() != linked_instances.find(type_inst_ptr))
+				{
+					linked_instances[type_inst_ptr]->set_data(string_data);
+				}
 			}
 
 
@@ -105,7 +120,10 @@ namespace entity_system {
 			/// @param int64t_data The memory which will be copied to the instance.
 			void set_data(const std::shared_ptr<T1>& type_inst_ptr, const std::int64_t& int64t_data)
 			{
-				if(linked_instances.end() != linked_instances.find(type_ptr)) linked_instances[type_ptr]->set(int64t_data);
+				if(linked_instances.end() != linked_instances.find(type_inst_ptr))
+				{
+					linked_instances[type_inst_ptr]->set_data(int64t_data);
+				}
 			}
 
 
@@ -119,8 +137,14 @@ namespace entity_system {
 			/// @return None.
 			void get_data(const std::shared_ptr<T1>& type_inst_ptr, int& int_ref)
 			{
-				if(linked_instances.end() != linked_instances.find(type_ptr)) int_ref = linked_instances[type_ptr]->get_int();
-				else int_ref = 0;
+				if(linked_instances.end() != linked_instances.find(type_inst_ptr))
+				{
+					int_ref = linked_instances[type_inst_ptr]->get_int();
+				}
+				else
+				{
+					int_ref = 0;
+				}
 			}
 
 			
@@ -132,8 +156,14 @@ namespace entity_system {
 			/// @return None.
 			void get_data(const std::shared_ptr<T1>& type_inst_ptr, bool& bool_ref)
 			{
-				if(linked_instances.end() != linked_instances.find(type_ptr)) bool_ref = linked_instances[type_ptr]->get_bool();
-				else bool_ref = false;
+				if(linked_instances.end() != linked_instances.find(type_inst_ptr))
+				{
+					bool_ref = linked_instances[type_inst_ptr]->get_bool();
+				}
+				else
+				{
+					bool_ref = false;
+				}
 			}
 
 			
@@ -145,11 +175,14 @@ namespace entity_system {
 			/// @return None.
 			void get_data(const std::shared_ptr<T1>& type_inst_ptr, float& float_ref)
 			{
-				if(linked_instances.end() != linked_instances.find(type_ptr))
+				if(linked_instances.end() != linked_instances.find(type_inst_ptr))
 				{
-					float_ref = linked_instances[type_ptr]->get_float();
+					float_ref = linked_instances[type_inst_ptr]->get_float();
 				}
-				else float_ref = 0.0f;
+				else
+				{
+					float_ref = 0.0f;
+				}
 			}
 
 
@@ -162,11 +195,14 @@ namespace entity_system {
 			/// @return None.
 			void get_data(const std::shared_ptr<T1>& type_inst_ptr, double& double_ref)
 			{
-				if(linked_instances.end() != linked_instances.find(type_ptr))
+				if(linked_instances.end() != linked_instances.find(type_inst_ptr))
 				{
-					double_ref = linked_instances[type_ptr]->get_double();
+					double_ref = linked_instances[type_inst_ptr]->get_double();
 				}
-				else double_ref = 0.0;
+				else
+				{
+					double_ref = 0.0;
+				}
 			}
 
 
@@ -178,11 +214,14 @@ namespace entity_system {
 			/// @return None.
 			void get_data(const std::shared_ptr<T1>& type_inst_ptr, std::string& string_ref)
 			{
-				if(linked_instances.end() != linked_instances.find(type_ptr))
+				if(linked_instances.end() != linked_instances.find(type_inst_ptr))
 				{
-					string_ref = linked_instances[type_ptr]->get_string();
+					string_ref = linked_instances[type_inst_ptr]->get_string();
 				}
-				else string_ref = "";
+				else
+				{
+					string_ref = "";
+				}
 			}
 
 
@@ -194,11 +233,14 @@ namespace entity_system {
 			/// @return None.
 			void get_data(const std::shared_ptr<T1>& type_inst_ptr, std::int64_t& int64_ref)
 			{
-				if(linked_instances.end() != linked_instances.find(type_ptr))
+				if(linked_instances.end() != linked_instances.find(type_inst_ptr))
 				{
-					int64_ref = linked_instances[type_ptr]->get_int64();
+					int64_ref = linked_instances[type_inst_ptr]->get_int64();
 				}
-				else int64_ref = 0;
+				else
+				{
+					int64_ref = 0;
+				}
 			}
 
 	};
