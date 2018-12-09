@@ -36,6 +36,8 @@ namespace entity_system {
 			/// Destructor.
 			~AttributeBase();
 			
+		public:
+
 			/// Returns the data type of the attribute type.
 			/// @return The data type of the attribute type.
 			ENTSYS_DATA_TYPE get_attribute_data_type() const;
