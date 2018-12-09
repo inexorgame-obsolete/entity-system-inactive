@@ -26,5 +26,12 @@ namespace entity_system {
 	}
 
 
+	void GUIDBase::generate_new_GUID()
+	{
+		/// Generate a new GUID.
+		the_GUID = xg::newGuid();
+	}
+
+
 };
 };

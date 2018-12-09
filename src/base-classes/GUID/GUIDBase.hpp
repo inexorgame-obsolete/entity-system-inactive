@@ -29,12 +29,14 @@ namespace entity_system {
 			/// Destructor.
 			~GUIDBase();
 
+		public:
+
 			/// Returns the GUID of the class instance.
 			/// @return The GUID of the class instance.
 			xg::Guid get_GUID() const;
 
-
-			// TODO: Add reset method for creating a new random GUID.
+			/// Generates a new GUID
+			void generate_new_GUID();
 
 	};
 
