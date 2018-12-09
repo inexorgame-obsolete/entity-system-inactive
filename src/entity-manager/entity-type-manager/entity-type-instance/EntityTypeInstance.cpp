@@ -13,13 +13,8 @@ namespace entity_system {
 
 
 	EntityTypeInstance::EntityTypeInstance(const ENT_TYPE& ent_type)
+		: TypeInstanceBase(ent_type)
 	{
-		// Call template base class method.
-		set_type_pointer(ent_type);
-
-		// Call template base class method.
-		set_type_name(ent_type->get_type_name());
-
 		// Create all entity attribute type instances for this entity type instance.
 		std::vector<ENT_ATTR_TYPE> ent_type_attributes = ent_type->get_linked_attribute_types();
 

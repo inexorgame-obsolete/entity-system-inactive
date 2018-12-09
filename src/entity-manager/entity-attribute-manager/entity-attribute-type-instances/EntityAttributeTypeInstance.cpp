@@ -9,13 +9,10 @@ namespace entity_system {
 	
 	
 	EntityAttributeTypeInstance::EntityAttributeTypeInstance(const ENT_ATTR_TYPE& ent_attr_type)
-		: DataContainer(ent_attr_type->get_type_name())
+		: DataContainer(ent_attr_type->get_attribute_data_type()),
+		TypeInstanceBase(ent_attr_type)
 	{
-		// Call template base class method.
-		set_type_pointer(ent_attr_type);
-
-		// Call template base class method.
-		set_type_name(ent_attr_type->get_type_name());
+		// TODO: Implement
 	}
 
 

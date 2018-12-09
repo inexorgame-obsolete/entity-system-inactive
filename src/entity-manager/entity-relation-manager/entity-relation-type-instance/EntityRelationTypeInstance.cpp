@@ -15,10 +15,8 @@ namespace entity_system {
 	EntityRelationTypeInstance::EntityRelationTypeInstance(const ENT_REL_TYPE& ent_rel_type,
 		                                                   const ENT_TYPE_INST& ent_type_inst_source,
 		                                                   const ENT_TYPE_INST& ent_type_inst_target)
+		: TypeInstanceBase(ent_rel_type)
 	{
-		// Store a pointer to the entity relation type.
-		set_type_pointer(ent_rel_type);
-
 		// Store source and target entity type instances.
 		source_entity_type_instance = ent_type_inst_source;
 		destination_entity_type_instance = ent_type_inst_target;
