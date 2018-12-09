@@ -16,7 +16,8 @@ namespace entity_system {
 	
 	EntitySystem::~EntitySystem()
 	{
-		// TODO: Implement!
+		/// Reset entity system at shutdown.
+		reset_entity_system();
 	}
 
 
