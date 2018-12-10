@@ -7,6 +7,10 @@ set(EXECUTABLE_OUTPUT_PATH ${CMAKE_BINARY_DIR})
 set(LIBRARY_OUTPUT_PATH ${CMAKE_BINARY_DIR})
 set (CMAKE_CXX_STANDARD 11)
 
+message(${CMAKE_CURRENT_SOURCE_DIR})
+include(${CMAKE_CURRENT_SOURCE_DIR}/build/conanbuildinfo.cmake)
+conan_basic_setup()
+
 include_directories("${CMAKE_SOURCE_DIR}/src")
 include_directories("${CMAKE_SOURCE_DIR}/dependencies/crossguid/include")
 
@@ -68,3 +72,4 @@ if(UNIX AND APPLE)
     target_link_libraries(entity-system "-framework CoreFoundation")
 endif()
 target_link_libraries(entity-system "${CMAKE_SOURCE_DIR}/dependencies/crossguid/build/libcrossguid.a")
+target_link_libraries(entity-system ${CONAN_LIBS})
