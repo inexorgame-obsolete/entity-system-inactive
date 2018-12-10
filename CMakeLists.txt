@@ -8,6 +8,7 @@ set(LIBRARY_OUTPUT_PATH ${CMAKE_BINARY_DIR})
 set (CMAKE_CXX_STANDARD 11)
 
 include_directories("${CMAKE_SOURCE_DIR}/src")
+include_directories("${CMAKE_SOURCE_DIR}/dependencies/crossguid/include")
 
 file(GLOB source_files
     "*.hpp"
@@ -62,3 +63,8 @@ file(GLOB source_files
 )
 
 add_executable(entity-system ${source_files})
+
+if(UNIX AND APPLE)
+    target_link_libraries(entity-system "-framework CoreFoundation")
+endif()
+target_link_libraries(entity-system "${CMAKE_SOURCE_DIR}/dependencies/crossguid/build/libcrossguid.a")
