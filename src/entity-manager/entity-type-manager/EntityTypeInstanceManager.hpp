@@ -48,6 +48,18 @@ namespace entity_system {
 			/// @return The number of existing entity type instances.
 			const std::size_t get_entity_type_instance_count() const;
 
+			/// Returns the number of existing entity type instances of given type.
+			/// @param ? TODO
+			const std::size_t get_entity_type_instances_count_of_type(const ENT_TYPE&);
+
+			/// Returns all entity type instances.
+			/// @return All entity type instances which exist in the entity system.
+			const std::vector<ENT_TYPE_INST> get_all_entity_type_instances() const;
+
+			/// Returns all entity type instances of given type.
+			/// @param ? TODO
+			const std::vector<ENT_TYPE_INST> get_all_entity_type_instances_of_type(const ENT_TYPE&);
+
 			/// Delete all entity type instances
 			void delete_all_entity_type_instances();
 

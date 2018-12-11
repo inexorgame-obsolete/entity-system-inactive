@@ -45,6 +45,24 @@ namespace entity_system {
 		delete_all_type_instances();
 	}
 
+	/*
+	const std::size_t EntityTypeInstanceManager::get_entity_type_instances_count_of_type(const ENT_TYPE&)
+	{
+		// Call template base class method.
+	}
+
+
+	const std::vector<ENT_TYPE_INST> EntityTypeInstanceManager::get_all_entity_type_instances() const
+	{
+		// Call template base class method.
+	}
+
+
+	const std::vector<ENT_TYPE_INST> EntityTypeInstanceManager::get_all_entity_type_instances_of_type(const ENT_TYPE&)
+	{
+		// Call template base class method.
+	}
+	*/
 
 };
 };
