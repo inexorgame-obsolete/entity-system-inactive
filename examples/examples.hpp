@@ -8,97 +8,87 @@ using namespace inexor::entity_system;
 
 // Create macros to make definitions short and easy.
 #include "typedefs/CreateMacros.hpp"
-
 using namespace std;
 
-void example_setup(const std::string msg)
+
+
+// The number of the code example.
+int example_number = 1;
+
+/// This message will be printed before a code example starts.
+void code_example_setup(const std::string& example_name)
 {
-	cout << endl << endl << "----------------------------------------" << endl;
-	cout << "EXAMPLE: " << msg << endl << endl;
+	cout << endl << endl;
+	cout << "Running example #" << example_number << ": " << example_name << endl;
+	cout << "-------------------------------------------" << endl;
+
+	// Increase code example number.
+	example_number++;
 }
 
 
-/// 
-void example_player()
+/// In this example we will create some fruits as simple examples
+/// for entity types. There will be no instances of any kind in this
+/// example.
+void example_fruits()
 {
-	example_setup("player");
+	// Setup example.
+	code_example_setup("Fruits");
 
-	ENT_TYPE player = CREATE_ENT_TYPE("player");
-	ENT_ATTR_TYPE nickname = CREATE_ENT_ATTR_TYPE("nickname", ENTSYS_DATA_TYPE_STRING);
+	// Create an entity of type "banana".
+	ENT_TYPE fruit1 = CREATE_ENT_TYPE("banana");
+	cout << "I just created an entity type called banana." << endl;
 
-	// TODO: Implement builder pattern!
-	player->link_attribute_type(nickname);
+	// Create an entity of type "apple".
+	ENT_TYPE fruit2 = CREATE_ENT_TYPE("apple");
+	cout << "I just created an entity type called apple." << endl;
 
-	ENT_TYPE_INST one = CREATE_ENT_TYPE_INST(player);
-	one->set_data(nickname, "Hanni");
+	cout << "We now have " << entsys->get_entity_type_count() << " entity types available." << endl;
 
-	ENT_TYPE_INST two = CREATE_ENT_TYPE_INST(player);
-	one->set_data(nickname, "Hanack");
+	// Delete entity type "banana".
+	cout << "Removing entity type banana." << endl;
+	DELETE_ENT_TYPE(fruit1);
+	cout << "We now have " << entsys->get_entity_type_count() << " entity types available." << endl;
 
-	ENT_TYPE_INST three = CREATE_ENT_TYPE_INST(player);
-	one->set_data(nickname, "Fohlen");
+	// Delete entity type "apple".
+	cout << "Removing entity type apple." << endl;
+	DELETE_ENT_TYPE(fruit2);
+	cout << "We now have " << entsys->get_entity_type_count() << " entity types available." << endl;
 
-	// How many players (entity type instances) do we have?
-	cout << "We have " << entsys->get_entity_type_instance_count() << " players." << endl;
-
-	// Cleanup!
+	// Cleanup.
 	entsys->reset_entity_system();
 }
 
 
-/// 
-void example_weapon()
+
+/// In this example we will create two other fruits as simple
+/// examples for entity types. We will create some instances of them.
+void example_fruit_instances()
 {
-	example_setup("weapon");
-	cout << "There should not exist entity types yet, right?" << endl;
-	cout << "Number of existing entity types: " << entsys->get_entity_types_count() << endl;
+	// Setup example.
+	code_example_setup("Fruitbowl");
 
-	cout << "Creating an entity of type pistol" << endl;
-	ENT_TYPE weapon_type = CREATE_ENT_TYPE("weapon");
+	// Create entity types.
+	ENT_TYPE fruit1 = CREATE_ENT_TYPE("apple");
+	ENT_TYPE fruit2 = CREATE_ENT_TYPE("ananas");
+	ENT_TYPE fruit3 = CREATE_ENT_TYPE("cherries");
 
-	cout << "Number of existing entity types " << entsys->get_entity_types_count() << endl;
+	cout << "We now have " << entsys->get_entity_type_count() << " entity types available." << endl;
 
-	cout << "Now lets create some attributes" << endl;
+	// Create an instance of entity type apple.
+	ENT_TYPE_INST freshApple = CREATE_ENT_TYPE_INST(fruit1);
+	// Create another instance of entity type apple.
+	ENT_TYPE_INST rottenApple = CREATE_ENT_TYPE_INST(fruit1);
 
-	ENT_ATTR_TYPE dmg = CREATE_ENT_ATTR_TYPE("damage", ENTSYS_DATA_TYPE_INT);
-	weapon_type->link_attribute_type(dmg);
+	cout << "We now have " << entsys->get_entity_type_instance_count() << " entity types instances available." << endl;
 
-	cout << "Number of existing entity attribute types " << entsys->get_entity_attribute_type_count() << endl;
-
-	ENT_ATTR_TYPE ammosize = CREATE_ENT_ATTR_TYPE("ammosize", ENTSYS_DATA_TYPE_INT);
-	weapon_type->link_attribute_type(ammosize);
-
-	ENT_ATTR_TYPE silenced = CREATE_ENT_ATTR_TYPE("silencer", ENTSYS_DATA_TYPE_BOOL);
-	weapon_type->link_attribute_type(silenced);
-
-	cout << "Number of existing entity attribute types:" << entsys->get_entity_attribute_type_count() << endl;
-	cout << "Lets create instances!" << endl;
-
-	ENT_TYPE_INST pistol = CREATE_ENT_TYPE_INST(weapon_type);
-
-	cout << "Number of existing entity type instances: " << entsys->get_entity_type_instance_count() << endl;
-	cout << "Lets set the data of the pistol" << endl;
-
-	bool isSilenced = false;
-	pistol->set_data(silenced, true);
-	pistol->get_data(silenced, isSilenced);
-	cout << "Lets see if it worked: " << isSilenced << endl;
-
-	pistol->set_data(silenced, false);
-	pistol->get_data(silenced, isSilenced);
-	cout << "Lets see if it worked: " << isSilenced << endl;
-
-	// Cleanup!
+	// Cleanup.
 	entsys->reset_entity_system();
 }
 
 
 void run_entsys_examples()
 {
-	example_player();
-	example_weapon();
-	// TODO: Add more examples here.
-	
-	// Cleanup!
-	entsys->reset_entity_system();
+	example_fruits();
+	example_fruit_instances();
 }

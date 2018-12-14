@@ -55,7 +55,7 @@ namespace entity_system {
 	}
 
 
-	std::size_t EntityTypeManager::get_entity_types_count() const
+	std::size_t EntityTypeManager::get_entity_type_count() const
 	{
 		// Call template base class method.
 		return get_type_count();

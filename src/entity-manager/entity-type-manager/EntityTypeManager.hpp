@@ -56,7 +56,7 @@ namespace entity_system {
 
 			/// Returns the number of existing entity types.
 			/// @return The number of existing entity types.
-			std::size_t get_entity_types_count() const;
+			std::size_t get_entity_type_count() const;
 			
 			/// Deletes an entity type by name.
 			/// @param ent_type_name The name of the entity type which will be deleted.
