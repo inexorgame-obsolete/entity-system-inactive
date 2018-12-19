@@ -8,7 +8,7 @@
 #include <unordered_map>
 
 #include "../../../return-codes/ReturnCodes.hpp"
-#include "../../../data-validation/DataValidation.hpp"
+#include "../../../data-validation/DataValidationBase.hpp"
 #include "../../../data-container/DataTypes.hpp"
 #include "../../../base-classes/TypeBase.hpp"
 #include "../../../base-classes/AttributeBase.hpp"

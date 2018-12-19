@@ -11,19 +11,19 @@ namespace entity_system {
 
 
     /// A base class for data validation in entity system classes.
-	class DataValidation
+	class DataValidationBase
     {
 
         public:
 
 			/// Constructor.
-			DataValidation();
+			DataValidationBase();
 
 			/// Destructor.
-			~DataValidation();
+			~DataValidationBase();
 
-			/// This data validation method MUST be implemented
-			/// by every class which inherits from this class!
+			/// This data validation method must be implemented
+			/// by every class which inherits from this base class!
             virtual ENTSYS_DATA_VALIDATION_RESULT validate() = 0;
 
     };

@@ -5,7 +5,7 @@
 
 #include <string>
 
-#include "../data-validation//DataValidation.hpp"
+#include "../data-validation//DataValidationBase.hpp"
 #include "base-classes/GUID/GUIDBase.hpp"
 
 
@@ -17,7 +17,7 @@ namespace entity_system {
 	/// contain multiple get_GUID() methods!
 
 	/// A template base class for types.
-	class TypeBase : public DataValidation
+	class TypeBase : public DataValidationBase
 	{
 		private:
 			

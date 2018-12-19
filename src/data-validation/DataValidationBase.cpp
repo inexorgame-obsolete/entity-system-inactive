@@ -1,20 +1,20 @@
 // Inexor entity system prototype
 // (c)2018 Inexor
 
-#include "DataValidation.hpp"
+#include "DataValidationBase.hpp"
 
 
 namespace inexor {
 namespace entity_system {
 
 
-    DataValidation::DataValidation()
+    DataValidationBase::DataValidationBase()
     {
 		// TODO: Implement!
     }
 
 
-    DataValidation::~DataValidation()
+    DataValidationBase::~DataValidationBase()
     {
 		// TODO: Implement!
     }

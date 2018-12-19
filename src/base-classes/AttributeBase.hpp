@@ -4,7 +4,7 @@
 #pragma once
 
 #include "../data-container/DataTypes.hpp"
-#include "../data-validation/DataValidation.hpp"
+#include "../data-validation/DataValidationBase.hpp"
 
 
 namespace inexor {
@@ -13,14 +13,14 @@ namespace entity_system {
 
 	/// @brief A base class for attributes of any type.
 	/// @note This base class does not implement
-	/// a data validation method! Every class which
+	/// a data validation method. Every class which
 	/// inherits from AttributeBase must do this!
-	/// @note AttributeBase does not have a GUID,
-	/// because it is only defined by ENTSYS_DATA_TYPE.
 	/// @note We can only inherit from AttributeTypeBase
-	/// but we can't create instances of the class directly
-	/// because it is an abstract class.
-	class AttributeBase : public DataValidation
+	/// but we can't create instances of the class
+	/// directly because it is an abstract class.
+	/// @note AttributeBase does not have a GUID,
+	/// because it is an abstract base class.
+	class AttributeBase : public DataValidationBase
 	{
 		private:
 
