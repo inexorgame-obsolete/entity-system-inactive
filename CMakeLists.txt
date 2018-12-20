@@ -15,17 +15,17 @@ include_directories("${CMAKE_SOURCE_DIR}/src")
 include_directories("${CMAKE_SOURCE_DIR}/dependencies/crossguid/include")
 
 file(GLOB source_files
-    "*.hpp"
-    "*.cpp"
-    "src/*.hpp"
-    "src/*.cpp"
-    "src/main.cpp"
-    "src/EntitySystem.hpp"
-    "src/EntitySystem.cpp"
-    "src/base-classes/*.hpp"
-    "src/base-classes/*.cpp"
-    "src/base-classes/GUID/*.hpp"
-    "src/base-classes/GUID/*.cpp"
+  "*.hpp"
+  "*.cpp"
+  "src/*.hpp"
+  "src/*.cpp"
+  "src/main.cpp"
+  "src/EntitySystem.hpp"
+  "src/EntitySystem.cpp"
+  "src/base-classes/*.hpp"
+  "src/base-classes/*.cpp"
+  "src/base-classes/GUID/*.hpp"
+  "src/base-classes/GUID/*.cpp"
 	"src/data-container/*.hpp"
 	"src/data-container/*.cpp"
 	"src/data-validation/*.hpp"
@@ -71,5 +71,12 @@ add_executable(entity-system ${source_files})
 if(UNIX AND APPLE)
     target_link_libraries(entity-system "-framework CoreFoundation")
 endif()
-target_link_libraries(entity-system "${CMAKE_SOURCE_DIR}/dependencies/crossguid/build/libcrossguid.a")
+
+if(WINDOWS)
+    target_link_libraries(entity-system "${CMAKE_SOURCE_DIR}/dependencies/crossguid/build/libcrossguid.lib")
+endif()
+
+if(UNIX AND APPLE)
+    target_link_libraries(entity-system "${CMAKE_SOURCE_DIR}/dependencies/crossguid/build/libcrossguid.a")
+endif()
 target_link_libraries(entity-system ${CONAN_LIBS})
