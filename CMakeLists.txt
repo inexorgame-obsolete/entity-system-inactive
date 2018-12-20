@@ -72,7 +72,7 @@ if(UNIX AND APPLE)
     target_link_libraries(entity-system "-framework CoreFoundation")
 endif()
 
-if(WINDOWS)
+if(WIN32)
     target_link_libraries(entity-system "${CMAKE_SOURCE_DIR}/dependencies/crossguid/build/libcrossguid.lib")
 endif()
 
