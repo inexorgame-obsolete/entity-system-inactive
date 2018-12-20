@@ -7,7 +7,7 @@
 using namespace inexor::entity_system;
 
 // Create macros to make definitions short and easy.
-#include "typedefs/CreateMacros.hpp"
+#include "macros/Macros.hpp"
 using namespace std;
 
 
