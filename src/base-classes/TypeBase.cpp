@@ -25,13 +25,6 @@ namespace entity_system {
 		return type_title;
 	}
 
-	
-	ENTSYS_DATA_VALIDATION_RESULT TypeBase::validate()
-	{
-		// TODO: Implement!
-		return ENTSYS_DATA_INVALID;
-	}
-
 
 };
 };

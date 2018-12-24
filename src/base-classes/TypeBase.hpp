@@ -16,14 +16,17 @@ namespace entity_system {
 	/// inherit from GUIDBase, because then EntityAttributeType would
 	/// contain multiple get_GUID() methods!
 
-	/// A template base class for types.
+	/// @brief A template base class for types.
+  /// @note This base class does not implement
+  /// a data validation method. Every class which
+  /// inherits from TypeBase must do this!
 	class TypeBase : public DataValidationBase
 	{
 		private:
-			
+
 			/// The unique name of this type.
 			std::string type_title;
-			
+
 		protected:
 
 			/// Constructor.
@@ -32,10 +35,6 @@ namespace entity_system {
 			/// Destructor.
 			~TypeBase();
 
-			/// Implement a data validation method as
-			/// required by class inheritance of DataValidation!
-			virtual ENTSYS_DATA_VALIDATION_RESULT validate() override = 0;
-					
 		public:
 
 			/// Returns the name of this type.
