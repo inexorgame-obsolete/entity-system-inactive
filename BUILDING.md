@@ -1,13 +1,10 @@
 building
 --------
 
-Given you have `git`, `cmake` and your favourite compiler toolchain installed, proceed as follows
+Given you have `git`, `cmake`, `conan` and your favourite compiler toolchain installed, proceed as follows
 
-- `git submodule update --init`
-- `cd dependencies/crossguid && mkdir build && cd build && cmake .. && make`
-- `cd ../../`
-- `mkdir -p build && cd build && cmake .. && make`
+- `conan install . -if=build --build missing`
+- `cd build && cmake .. && cmake --build .`
 
-This document is subject to change once `conan` config has been integrated!
 
 
