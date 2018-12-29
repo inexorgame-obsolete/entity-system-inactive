@@ -1,3 +1,0 @@
-[submodule "dependencies/crossguid"]
-	path = dependencies/crossguid
-	url = https://github.com/graeme-hill/crossguid.git
