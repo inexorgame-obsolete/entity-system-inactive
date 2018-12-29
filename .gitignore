@@ -34,5 +34,6 @@
 # Output folders
 bin/
 build/
+documentation/
 
 /desktop.ini
