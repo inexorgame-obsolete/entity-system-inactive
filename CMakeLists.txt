@@ -15,7 +15,6 @@ if(NOT WIN32)
 endif()
 
 include_directories("${CMAKE_SOURCE_DIR}/src")
-include_directories("${CMAKE_SOURCE_DIR}/dependencies/crossguid/include")
 
 file(GLOB_RECURSE source_files
   "src/*.hpp"
@@ -41,19 +40,10 @@ add_executable(entity-system ${normal_source_files})
 add_executable(tests ${test_source_files})
 
 
-# Quick fix from Hanni to make it work on Windows
+# Add OSX framework
 if(UNIX AND APPLE)
     target_link_libraries(entity-system "-framework CoreFoundation")
 endif()
 
-# Quick fix from Hanni to make it work on Windows
-if(WIN32)
-    target_link_libraries(entity-system "${CMAKE_SOURCE_DIR}/dependencies/crossguid/build/libcrossguid.lib")
-endif()
-
-if(UNIX AND APPLE)
-    target_link_libraries(entity-system "${CMAKE_SOURCE_DIR}/dependencies/crossguid/build/libcrossguid.a")
-endif()
 target_link_libraries(entity-system ${CONAN_LIBS})
 target_link_libraries(tests ${CONAN_LIBS})
-

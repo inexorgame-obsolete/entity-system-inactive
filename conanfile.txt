@@ -2,6 +2,7 @@
 glm/0.9.9.1@g-truc/stable
 gtest/1.8.1@bincrafters/stable
 crossguid/latest-at-28-12-18@inexorgame/stable
+grpc/1.14.1@inexorgame/stable
 
 [generators]
 cmake
