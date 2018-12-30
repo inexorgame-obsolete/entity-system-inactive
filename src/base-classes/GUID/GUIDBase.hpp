@@ -3,11 +3,7 @@
 
 #pragma once
 
-/// TODO: Fix conan package manager for dependencies!
-/// This file will not be contained in the repository itself.
-/// https://github.com/graeme-hill/crossguid
 #include <crossguid/guid.hpp>
-
 
 namespace inexor {
 namespace entity_system {

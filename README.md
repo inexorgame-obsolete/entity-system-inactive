@@ -27,4 +27,4 @@ Simply follow below instructions to get started:
 Given you have `doxygen` installed building the docs is easy as pie:
 
 - `cd entity-system`
-- `doxygen .`
+- `doxygen`
