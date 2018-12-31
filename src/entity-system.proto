@@ -1,83 +1,71 @@
 syntax = "proto3";
+
+import "google/protobuf/any.proto";
+import "google/protobuf/empty.proto";
+
 package inexor.entity_system;
 
-enum ENTSYS_RESULT
-{
-    ENTSYS_ERROR = 0;
-    ENTSYS_SUCCESS = 1;
+enum DataType {
+    Undefined = 0;
+    Int = 1;
+    BigInt = 2;
+    Float = 3;
+    String = 4;
+    Double = 5;
+    Bool = 6;
 }
 
-enum ENTSYS_ERROR_LEVEL
-{
-    ENTSYS_LEVEL_INFO = 0;
-    ENTSYS_LEVEL_WARNING = 1;
-    ENTSYS_LEVEL_ERROR = 2;
-    ENTSYS_LEVEL_CRITICAL_ERROR = 3;
+/// Defines the attribute an entity or can have
+message Attribute {
+    string name = 1;
+    DataType data_type = 2;
+    google.protobuf.Any value = 3;
 }
 
-enum ENTSYS_DATA_VALIDATION_RESULT
-{
-    ENTSYS_DATA_INVALID = 0;
-    ENTSYS_DATA_VALID = 1;
-    // TODO: Add new data validation result codes here.
+/// Defines entity's
+message Entity {
+    string name = 1;
+    repeated Attribute attribute = 2;
 }
 
-enum ENTSYS_DATA_TYPE {
-    ENTSYS_DATA_TYPE_UNDEFINED = 0;
-    ENTSYS_DATA_TYPE_INT = 1;
-    ENTSYS_DATA_TYPE_BIG_INT = 2;
-    ENTSYS_DATA_TYPE_FLOAT = 3;
-    ENTSYS_DATA_TYPE_STRING = 4;
-    ENTSYS_DATA_TYPE_DOUBLE = 5;
-    ENTSYS_DATA_TYPE_BOOL = 6;
+/// Defines a relation between two entities
+message Relation {
+    string name = 1;
+    Entity source = 2;
+    Entity target = 3;
 }
 
-message EntityAttributeType {
-    string ent_attr_type_name = 1;
-    ENTSYS_DATA_TYPE ent_attr_data_type = 2;
+/// Defines how a operation went in the entity system
+message Operation {
+    bool successful = 1;
+    string status = 2;
 }
 
-message EntityType {
-    string ent_type_name = 1;
-}
+service EntityService {
+    /// Create an entity
+    rpc CreateEntity (Entity) returns (Operation);
 
-message EntityRelationAttributeType {
-    string ent_rel_attr_type_name = 1;
-    ENTSYS_DATA_TYPE ent_rel_attr_type_data_type = 2;
-}
+    /// List all entities
+    rpc ListEntities (google.protobuf.Empty) returns (stream Entity);
 
-message EntityRelationType {
-    string rel_type_name = 1;
-    EntityType ent_type_source = 2;
-    EntityType ent_type_target = 3;
-}
+    /// Delete entity
+    rpc DeleteEntity (Entity) returns (Operation);
 
-message EntityOperation {
-    ENTSYS_RESULT result = 1;
-}
+    /// Create an attribute
+    rpc CreateAttribute (Attribute) returns (Operation);
 
-service EntitySystem {
-    // Create an entity type
-    rpc CreateEntityType (EntityType) returns (EntityOperation);
+    /// List all attributes
+    rpc ListAttributes (google.protobuf.Empty) returns (stream Attribute);
 
-    // Delete entity type
-    rpc DeleteEntityType (EntityType) returns (EntityOperation);
+    /// Delete an attribute
+    rpc DeleteAttribute (Attribute) returns (Operation);
 
-    // Create an entity attribute type
-    rpc CreateEntityAttributeType (EntityAttributeType) returns (EntityOperation);
+    /// Create a relation
+    rpc CreateRelation (Relation) returns (Operation);
 
-    // Delete entity attribute type
-    rpc DeleteEntityAttributeType (EntityAttributeType) returns (EntityOperation);
+    /// List relations
+    rpc ListRelations (google.protobuf.Empty) returns (stream Relation);
 
-    // Create an entity relation attribution type
-    rpc CreateEntityRelationAttributeType (EntityRelationAttributeType) returns (EntityOperation);
-
-    // Delete an entity relation attribute type
-    rpc DeleteEntityRelationAttributeType (EntityRelationAttributeType) returns (EntityOperation);
-
-    // Create an entity relation type
-    rpc CreateEntityRelationType (EntityRelationType) returns (EntityOperation);
-
-    // Delete an entity relation type
-    rpc DeleteEntityRelationType (EntityRelationType) returns (EntityOperation);
+    /// Delete relations
+    rpc DeleteRelation (Relation) returns (Operation);
 }

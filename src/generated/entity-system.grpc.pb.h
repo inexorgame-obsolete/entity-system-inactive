@@ -29,187 +29,216 @@ class ServerContext;
 namespace inexor {
 namespace entity_system {
 
-class EntitySystem final {
+class EntityService final {
  public:
   static constexpr char const* service_full_name() {
-    return "inexor.entity_system.EntitySystem";
+    return "inexor.entity_system.EntityService";
   }
   class StubInterface {
    public:
     virtual ~StubInterface() {}
-    // Create an entity type
-    virtual ::grpc::Status CreateEntityType(::grpc::ClientContext* context, const ::inexor::entity_system::EntityType& request, ::inexor::entity_system::EntityOperation* response) = 0;
-    std::unique_ptr< ::grpc::ClientAsyncResponseReaderInterface< ::inexor::entity_system::EntityOperation>> AsyncCreateEntityType(::grpc::ClientContext* context, const ::inexor::entity_system::EntityType& request, ::grpc::CompletionQueue* cq) {
-      return std::unique_ptr< ::grpc::ClientAsyncResponseReaderInterface< ::inexor::entity_system::EntityOperation>>(AsyncCreateEntityTypeRaw(context, request, cq));
+    // / Create an entity
+    virtual ::grpc::Status CreateEntity(::grpc::ClientContext* context, const ::inexor::entity_system::Entity& request, ::inexor::entity_system::Operation* response) = 0;
+    std::unique_ptr< ::grpc::ClientAsyncResponseReaderInterface< ::inexor::entity_system::Operation>> AsyncCreateEntity(::grpc::ClientContext* context, const ::inexor::entity_system::Entity& request, ::grpc::CompletionQueue* cq) {
+      return std::unique_ptr< ::grpc::ClientAsyncResponseReaderInterface< ::inexor::entity_system::Operation>>(AsyncCreateEntityRaw(context, request, cq));
     }
-    std::unique_ptr< ::grpc::ClientAsyncResponseReaderInterface< ::inexor::entity_system::EntityOperation>> PrepareAsyncCreateEntityType(::grpc::ClientContext* context, const ::inexor::entity_system::EntityType& request, ::grpc::CompletionQueue* cq) {
-      return std::unique_ptr< ::grpc::ClientAsyncResponseReaderInterface< ::inexor::entity_system::EntityOperation>>(PrepareAsyncCreateEntityTypeRaw(context, request, cq));
+    std::unique_ptr< ::grpc::ClientAsyncResponseReaderInterface< ::inexor::entity_system::Operation>> PrepareAsyncCreateEntity(::grpc::ClientContext* context, const ::inexor::entity_system::Entity& request, ::grpc::CompletionQueue* cq) {
+      return std::unique_ptr< ::grpc::ClientAsyncResponseReaderInterface< ::inexor::entity_system::Operation>>(PrepareAsyncCreateEntityRaw(context, request, cq));
     }
-    // Delete entity type
-    virtual ::grpc::Status DeleteEntityType(::grpc::ClientContext* context, const ::inexor::entity_system::EntityType& request, ::inexor::entity_system::EntityOperation* response) = 0;
-    std::unique_ptr< ::grpc::ClientAsyncResponseReaderInterface< ::inexor::entity_system::EntityOperation>> AsyncDeleteEntityType(::grpc::ClientContext* context, const ::inexor::entity_system::EntityType& request, ::grpc::CompletionQueue* cq) {
-      return std::unique_ptr< ::grpc::ClientAsyncResponseReaderInterface< ::inexor::entity_system::EntityOperation>>(AsyncDeleteEntityTypeRaw(context, request, cq));
+    // / List all entities
+    std::unique_ptr< ::grpc::ClientReaderInterface< ::inexor::entity_system::Entity>> ListEntities(::grpc::ClientContext* context, const ::google::protobuf::Empty& request) {
+      return std::unique_ptr< ::grpc::ClientReaderInterface< ::inexor::entity_system::Entity>>(ListEntitiesRaw(context, request));
     }
-    std::unique_ptr< ::grpc::ClientAsyncResponseReaderInterface< ::inexor::entity_system::EntityOperation>> PrepareAsyncDeleteEntityType(::grpc::ClientContext* context, const ::inexor::entity_system::EntityType& request, ::grpc::CompletionQueue* cq) {
-      return std::unique_ptr< ::grpc::ClientAsyncResponseReaderInterface< ::inexor::entity_system::EntityOperation>>(PrepareAsyncDeleteEntityTypeRaw(context, request, cq));
+    std::unique_ptr< ::grpc::ClientAsyncReaderInterface< ::inexor::entity_system::Entity>> AsyncListEntities(::grpc::ClientContext* context, const ::google::protobuf::Empty& request, ::grpc::CompletionQueue* cq, void* tag) {
+      return std::unique_ptr< ::grpc::ClientAsyncReaderInterface< ::inexor::entity_system::Entity>>(AsyncListEntitiesRaw(context, request, cq, tag));
     }
-    // Create an entity attribute type
-    virtual ::grpc::Status CreateEntityAttributeType(::grpc::ClientContext* context, const ::inexor::entity_system::EntityAttributeType& request, ::inexor::entity_system::EntityOperation* response) = 0;
-    std::unique_ptr< ::grpc::ClientAsyncResponseReaderInterface< ::inexor::entity_system::EntityOperation>> AsyncCreateEntityAttributeType(::grpc::ClientContext* context, const ::inexor::entity_system::EntityAttributeType& request, ::grpc::CompletionQueue* cq) {
-      return std::unique_ptr< ::grpc::ClientAsyncResponseReaderInterface< ::inexor::entity_system::EntityOperation>>(AsyncCreateEntityAttributeTypeRaw(context, request, cq));
+    std::unique_ptr< ::grpc::ClientAsyncReaderInterface< ::inexor::entity_system::Entity>> PrepareAsyncListEntities(::grpc::ClientContext* context, const ::google::protobuf::Empty& request, ::grpc::CompletionQueue* cq) {
+      return std::unique_ptr< ::grpc::ClientAsyncReaderInterface< ::inexor::entity_system::Entity>>(PrepareAsyncListEntitiesRaw(context, request, cq));
     }
-    std::unique_ptr< ::grpc::ClientAsyncResponseReaderInterface< ::inexor::entity_system::EntityOperation>> PrepareAsyncCreateEntityAttributeType(::grpc::ClientContext* context, const ::inexor::entity_system::EntityAttributeType& request, ::grpc::CompletionQueue* cq) {
-      return std::unique_ptr< ::grpc::ClientAsyncResponseReaderInterface< ::inexor::entity_system::EntityOperation>>(PrepareAsyncCreateEntityAttributeTypeRaw(context, request, cq));
+    // / Delete entity
+    virtual ::grpc::Status DeleteEntity(::grpc::ClientContext* context, const ::inexor::entity_system::Entity& request, ::inexor::entity_system::Operation* response) = 0;
+    std::unique_ptr< ::grpc::ClientAsyncResponseReaderInterface< ::inexor::entity_system::Operation>> AsyncDeleteEntity(::grpc::ClientContext* context, const ::inexor::entity_system::Entity& request, ::grpc::CompletionQueue* cq) {
+      return std::unique_ptr< ::grpc::ClientAsyncResponseReaderInterface< ::inexor::entity_system::Operation>>(AsyncDeleteEntityRaw(context, request, cq));
     }
-    // Delete entity attribute type
-    virtual ::grpc::Status DeleteEntityAttributeType(::grpc::ClientContext* context, const ::inexor::entity_system::EntityAttributeType& request, ::inexor::entity_system::EntityOperation* response) = 0;
-    std::unique_ptr< ::grpc::ClientAsyncResponseReaderInterface< ::inexor::entity_system::EntityOperation>> AsyncDeleteEntityAttributeType(::grpc::ClientContext* context, const ::inexor::entity_system::EntityAttributeType& request, ::grpc::CompletionQueue* cq) {
-      return std::unique_ptr< ::grpc::ClientAsyncResponseReaderInterface< ::inexor::entity_system::EntityOperation>>(AsyncDeleteEntityAttributeTypeRaw(context, request, cq));
+    std::unique_ptr< ::grpc::ClientAsyncResponseReaderInterface< ::inexor::entity_system::Operation>> PrepareAsyncDeleteEntity(::grpc::ClientContext* context, const ::inexor::entity_system::Entity& request, ::grpc::CompletionQueue* cq) {
+      return std::unique_ptr< ::grpc::ClientAsyncResponseReaderInterface< ::inexor::entity_system::Operation>>(PrepareAsyncDeleteEntityRaw(context, request, cq));
     }
-    std::unique_ptr< ::grpc::ClientAsyncResponseReaderInterface< ::inexor::entity_system::EntityOperation>> PrepareAsyncDeleteEntityAttributeType(::grpc::ClientContext* context, const ::inexor::entity_system::EntityAttributeType& request, ::grpc::CompletionQueue* cq) {
-      return std::unique_ptr< ::grpc::ClientAsyncResponseReaderInterface< ::inexor::entity_system::EntityOperation>>(PrepareAsyncDeleteEntityAttributeTypeRaw(context, request, cq));
+    // / Create an attribute
+    virtual ::grpc::Status CreateAttribute(::grpc::ClientContext* context, const ::inexor::entity_system::Attribute& request, ::inexor::entity_system::Operation* response) = 0;
+    std::unique_ptr< ::grpc::ClientAsyncResponseReaderInterface< ::inexor::entity_system::Operation>> AsyncCreateAttribute(::grpc::ClientContext* context, const ::inexor::entity_system::Attribute& request, ::grpc::CompletionQueue* cq) {
+      return std::unique_ptr< ::grpc::ClientAsyncResponseReaderInterface< ::inexor::entity_system::Operation>>(AsyncCreateAttributeRaw(context, request, cq));
     }
-    // Create an entity relation attribution type
-    virtual ::grpc::Status CreateEntityRelationAttributeType(::grpc::ClientContext* context, const ::inexor::entity_system::EntityRelationAttributeType& request, ::inexor::entity_system::EntityOperation* response) = 0;
-    std::unique_ptr< ::grpc::ClientAsyncResponseReaderInterface< ::inexor::entity_system::EntityOperation>> AsyncCreateEntityRelationAttributeType(::grpc::ClientContext* context, const ::inexor::entity_system::EntityRelationAttributeType& request, ::grpc::CompletionQueue* cq) {
-      return std::unique_ptr< ::grpc::ClientAsyncResponseReaderInterface< ::inexor::entity_system::EntityOperation>>(AsyncCreateEntityRelationAttributeTypeRaw(context, request, cq));
+    std::unique_ptr< ::grpc::ClientAsyncResponseReaderInterface< ::inexor::entity_system::Operation>> PrepareAsyncCreateAttribute(::grpc::ClientContext* context, const ::inexor::entity_system::Attribute& request, ::grpc::CompletionQueue* cq) {
+      return std::unique_ptr< ::grpc::ClientAsyncResponseReaderInterface< ::inexor::entity_system::Operation>>(PrepareAsyncCreateAttributeRaw(context, request, cq));
     }
-    std::unique_ptr< ::grpc::ClientAsyncResponseReaderInterface< ::inexor::entity_system::EntityOperation>> PrepareAsyncCreateEntityRelationAttributeType(::grpc::ClientContext* context, const ::inexor::entity_system::EntityRelationAttributeType& request, ::grpc::CompletionQueue* cq) {
-      return std::unique_ptr< ::grpc::ClientAsyncResponseReaderInterface< ::inexor::entity_system::EntityOperation>>(PrepareAsyncCreateEntityRelationAttributeTypeRaw(context, request, cq));
+    // / List all attributes
+    std::unique_ptr< ::grpc::ClientReaderInterface< ::inexor::entity_system::Attribute>> ListAttributes(::grpc::ClientContext* context, const ::google::protobuf::Empty& request) {
+      return std::unique_ptr< ::grpc::ClientReaderInterface< ::inexor::entity_system::Attribute>>(ListAttributesRaw(context, request));
     }
-    // Delete an entity relation attribute type
-    virtual ::grpc::Status DeleteEntityRelationAttributeType(::grpc::ClientContext* context, const ::inexor::entity_system::EntityRelationAttributeType& request, ::inexor::entity_system::EntityOperation* response) = 0;
-    std::unique_ptr< ::grpc::ClientAsyncResponseReaderInterface< ::inexor::entity_system::EntityOperation>> AsyncDeleteEntityRelationAttributeType(::grpc::ClientContext* context, const ::inexor::entity_system::EntityRelationAttributeType& request, ::grpc::CompletionQueue* cq) {
-      return std::unique_ptr< ::grpc::ClientAsyncResponseReaderInterface< ::inexor::entity_system::EntityOperation>>(AsyncDeleteEntityRelationAttributeTypeRaw(context, request, cq));
+    std::unique_ptr< ::grpc::ClientAsyncReaderInterface< ::inexor::entity_system::Attribute>> AsyncListAttributes(::grpc::ClientContext* context, const ::google::protobuf::Empty& request, ::grpc::CompletionQueue* cq, void* tag) {
+      return std::unique_ptr< ::grpc::ClientAsyncReaderInterface< ::inexor::entity_system::Attribute>>(AsyncListAttributesRaw(context, request, cq, tag));
     }
-    std::unique_ptr< ::grpc::ClientAsyncResponseReaderInterface< ::inexor::entity_system::EntityOperation>> PrepareAsyncDeleteEntityRelationAttributeType(::grpc::ClientContext* context, const ::inexor::entity_system::EntityRelationAttributeType& request, ::grpc::CompletionQueue* cq) {
-      return std::unique_ptr< ::grpc::ClientAsyncResponseReaderInterface< ::inexor::entity_system::EntityOperation>>(PrepareAsyncDeleteEntityRelationAttributeTypeRaw(context, request, cq));
+    std::unique_ptr< ::grpc::ClientAsyncReaderInterface< ::inexor::entity_system::Attribute>> PrepareAsyncListAttributes(::grpc::ClientContext* context, const ::google::protobuf::Empty& request, ::grpc::CompletionQueue* cq) {
+      return std::unique_ptr< ::grpc::ClientAsyncReaderInterface< ::inexor::entity_system::Attribute>>(PrepareAsyncListAttributesRaw(context, request, cq));
     }
-    // Create an entity relation type
-    virtual ::grpc::Status CreateEntityRelationType(::grpc::ClientContext* context, const ::inexor::entity_system::EntityRelationType& request, ::inexor::entity_system::EntityOperation* response) = 0;
-    std::unique_ptr< ::grpc::ClientAsyncResponseReaderInterface< ::inexor::entity_system::EntityOperation>> AsyncCreateEntityRelationType(::grpc::ClientContext* context, const ::inexor::entity_system::EntityRelationType& request, ::grpc::CompletionQueue* cq) {
-      return std::unique_ptr< ::grpc::ClientAsyncResponseReaderInterface< ::inexor::entity_system::EntityOperation>>(AsyncCreateEntityRelationTypeRaw(context, request, cq));
+    // / Delete an attribute
+    virtual ::grpc::Status DeleteAttribute(::grpc::ClientContext* context, const ::inexor::entity_system::Attribute& request, ::inexor::entity_system::Operation* response) = 0;
+    std::unique_ptr< ::grpc::ClientAsyncResponseReaderInterface< ::inexor::entity_system::Operation>> AsyncDeleteAttribute(::grpc::ClientContext* context, const ::inexor::entity_system::Attribute& request, ::grpc::CompletionQueue* cq) {
+      return std::unique_ptr< ::grpc::ClientAsyncResponseReaderInterface< ::inexor::entity_system::Operation>>(AsyncDeleteAttributeRaw(context, request, cq));
     }
-    std::unique_ptr< ::grpc::ClientAsyncResponseReaderInterface< ::inexor::entity_system::EntityOperation>> PrepareAsyncCreateEntityRelationType(::grpc::ClientContext* context, const ::inexor::entity_system::EntityRelationType& request, ::grpc::CompletionQueue* cq) {
-      return std::unique_ptr< ::grpc::ClientAsyncResponseReaderInterface< ::inexor::entity_system::EntityOperation>>(PrepareAsyncCreateEntityRelationTypeRaw(context, request, cq));
+    std::unique_ptr< ::grpc::ClientAsyncResponseReaderInterface< ::inexor::entity_system::Operation>> PrepareAsyncDeleteAttribute(::grpc::ClientContext* context, const ::inexor::entity_system::Attribute& request, ::grpc::CompletionQueue* cq) {
+      return std::unique_ptr< ::grpc::ClientAsyncResponseReaderInterface< ::inexor::entity_system::Operation>>(PrepareAsyncDeleteAttributeRaw(context, request, cq));
     }
-    // Delete an entity relation type
-    virtual ::grpc::Status DeleteEntityRelationType(::grpc::ClientContext* context, const ::inexor::entity_system::EntityRelationType& request, ::inexor::entity_system::EntityOperation* response) = 0;
-    std::unique_ptr< ::grpc::ClientAsyncResponseReaderInterface< ::inexor::entity_system::EntityOperation>> AsyncDeleteEntityRelationType(::grpc::ClientContext* context, const ::inexor::entity_system::EntityRelationType& request, ::grpc::CompletionQueue* cq) {
-      return std::unique_ptr< ::grpc::ClientAsyncResponseReaderInterface< ::inexor::entity_system::EntityOperation>>(AsyncDeleteEntityRelationTypeRaw(context, request, cq));
+    // / Create a relation
+    virtual ::grpc::Status CreateRelation(::grpc::ClientContext* context, const ::inexor::entity_system::Relation& request, ::inexor::entity_system::Operation* response) = 0;
+    std::unique_ptr< ::grpc::ClientAsyncResponseReaderInterface< ::inexor::entity_system::Operation>> AsyncCreateRelation(::grpc::ClientContext* context, const ::inexor::entity_system::Relation& request, ::grpc::CompletionQueue* cq) {
+      return std::unique_ptr< ::grpc::ClientAsyncResponseReaderInterface< ::inexor::entity_system::Operation>>(AsyncCreateRelationRaw(context, request, cq));
     }
-    std::unique_ptr< ::grpc::ClientAsyncResponseReaderInterface< ::inexor::entity_system::EntityOperation>> PrepareAsyncDeleteEntityRelationType(::grpc::ClientContext* context, const ::inexor::entity_system::EntityRelationType& request, ::grpc::CompletionQueue* cq) {
-      return std::unique_ptr< ::grpc::ClientAsyncResponseReaderInterface< ::inexor::entity_system::EntityOperation>>(PrepareAsyncDeleteEntityRelationTypeRaw(context, request, cq));
+    std::unique_ptr< ::grpc::ClientAsyncResponseReaderInterface< ::inexor::entity_system::Operation>> PrepareAsyncCreateRelation(::grpc::ClientContext* context, const ::inexor::entity_system::Relation& request, ::grpc::CompletionQueue* cq) {
+      return std::unique_ptr< ::grpc::ClientAsyncResponseReaderInterface< ::inexor::entity_system::Operation>>(PrepareAsyncCreateRelationRaw(context, request, cq));
+    }
+    // / List relations
+    std::unique_ptr< ::grpc::ClientReaderInterface< ::inexor::entity_system::Relation>> ListRelations(::grpc::ClientContext* context, const ::google::protobuf::Empty& request) {
+      return std::unique_ptr< ::grpc::ClientReaderInterface< ::inexor::entity_system::Relation>>(ListRelationsRaw(context, request));
+    }
+    std::unique_ptr< ::grpc::ClientAsyncReaderInterface< ::inexor::entity_system::Relation>> AsyncListRelations(::grpc::ClientContext* context, const ::google::protobuf::Empty& request, ::grpc::CompletionQueue* cq, void* tag) {
+      return std::unique_ptr< ::grpc::ClientAsyncReaderInterface< ::inexor::entity_system::Relation>>(AsyncListRelationsRaw(context, request, cq, tag));
+    }
+    std::unique_ptr< ::grpc::ClientAsyncReaderInterface< ::inexor::entity_system::Relation>> PrepareAsyncListRelations(::grpc::ClientContext* context, const ::google::protobuf::Empty& request, ::grpc::CompletionQueue* cq) {
+      return std::unique_ptr< ::grpc::ClientAsyncReaderInterface< ::inexor::entity_system::Relation>>(PrepareAsyncListRelationsRaw(context, request, cq));
+    }
+    // / Delete relations
+    virtual ::grpc::Status DeleteRelation(::grpc::ClientContext* context, const ::inexor::entity_system::Relation& request, ::inexor::entity_system::Operation* response) = 0;
+    std::unique_ptr< ::grpc::ClientAsyncResponseReaderInterface< ::inexor::entity_system::Operation>> AsyncDeleteRelation(::grpc::ClientContext* context, const ::inexor::entity_system::Relation& request, ::grpc::CompletionQueue* cq) {
+      return std::unique_ptr< ::grpc::ClientAsyncResponseReaderInterface< ::inexor::entity_system::Operation>>(AsyncDeleteRelationRaw(context, request, cq));
+    }
+    std::unique_ptr< ::grpc::ClientAsyncResponseReaderInterface< ::inexor::entity_system::Operation>> PrepareAsyncDeleteRelation(::grpc::ClientContext* context, const ::inexor::entity_system::Relation& request, ::grpc::CompletionQueue* cq) {
+      return std::unique_ptr< ::grpc::ClientAsyncResponseReaderInterface< ::inexor::entity_system::Operation>>(PrepareAsyncDeleteRelationRaw(context, request, cq));
     }
     class experimental_async_interface {
      public:
       virtual ~experimental_async_interface() {}
-      // Create an entity type
-      virtual void CreateEntityType(::grpc::ClientContext* context, const ::inexor::entity_system::EntityType* request, ::inexor::entity_system::EntityOperation* response, std::function<void(::grpc::Status)>) = 0;
-      // Delete entity type
-      virtual void DeleteEntityType(::grpc::ClientContext* context, const ::inexor::entity_system::EntityType* request, ::inexor::entity_system::EntityOperation* response, std::function<void(::grpc::Status)>) = 0;
-      // Create an entity attribute type
-      virtual void CreateEntityAttributeType(::grpc::ClientContext* context, const ::inexor::entity_system::EntityAttributeType* request, ::inexor::entity_system::EntityOperation* response, std::function<void(::grpc::Status)>) = 0;
-      // Delete entity attribute type
-      virtual void DeleteEntityAttributeType(::grpc::ClientContext* context, const ::inexor::entity_system::EntityAttributeType* request, ::inexor::entity_system::EntityOperation* response, std::function<void(::grpc::Status)>) = 0;
-      // Create an entity relation attribution type
-      virtual void CreateEntityRelationAttributeType(::grpc::ClientContext* context, const ::inexor::entity_system::EntityRelationAttributeType* request, ::inexor::entity_system::EntityOperation* response, std::function<void(::grpc::Status)>) = 0;
-      // Delete an entity relation attribute type
-      virtual void DeleteEntityRelationAttributeType(::grpc::ClientContext* context, const ::inexor::entity_system::EntityRelationAttributeType* request, ::inexor::entity_system::EntityOperation* response, std::function<void(::grpc::Status)>) = 0;
-      // Create an entity relation type
-      virtual void CreateEntityRelationType(::grpc::ClientContext* context, const ::inexor::entity_system::EntityRelationType* request, ::inexor::entity_system::EntityOperation* response, std::function<void(::grpc::Status)>) = 0;
-      // Delete an entity relation type
-      virtual void DeleteEntityRelationType(::grpc::ClientContext* context, const ::inexor::entity_system::EntityRelationType* request, ::inexor::entity_system::EntityOperation* response, std::function<void(::grpc::Status)>) = 0;
+      // / Create an entity
+      virtual void CreateEntity(::grpc::ClientContext* context, const ::inexor::entity_system::Entity* request, ::inexor::entity_system::Operation* response, std::function<void(::grpc::Status)>) = 0;
+      // / List all entities
+      // / Delete entity
+      virtual void DeleteEntity(::grpc::ClientContext* context, const ::inexor::entity_system::Entity* request, ::inexor::entity_system::Operation* response, std::function<void(::grpc::Status)>) = 0;
+      // / Create an attribute
+      virtual void CreateAttribute(::grpc::ClientContext* context, const ::inexor::entity_system::Attribute* request, ::inexor::entity_system::Operation* response, std::function<void(::grpc::Status)>) = 0;
+      // / List all attributes
+      // / Delete an attribute
+      virtual void DeleteAttribute(::grpc::ClientContext* context, const ::inexor::entity_system::Attribute* request, ::inexor::entity_system::Operation* response, std::function<void(::grpc::Status)>) = 0;
+      // / Create a relation
+      virtual void CreateRelation(::grpc::ClientContext* context, const ::inexor::entity_system::Relation* request, ::inexor::entity_system::Operation* response, std::function<void(::grpc::Status)>) = 0;
+      // / List relations
+      // / Delete relations
+      virtual void DeleteRelation(::grpc::ClientContext* context, const ::inexor::entity_system::Relation* request, ::inexor::entity_system::Operation* response, std::function<void(::grpc::Status)>) = 0;
     };
     virtual class experimental_async_interface* experimental_async() { return nullptr; }
   private:
-    virtual ::grpc::ClientAsyncResponseReaderInterface< ::inexor::entity_system::EntityOperation>* AsyncCreateEntityTypeRaw(::grpc::ClientContext* context, const ::inexor::entity_system::EntityType& request, ::grpc::CompletionQueue* cq) = 0;
-    virtual ::grpc::ClientAsyncResponseReaderInterface< ::inexor::entity_system::EntityOperation>* PrepareAsyncCreateEntityTypeRaw(::grpc::ClientContext* context, const ::inexor::entity_system::EntityType& request, ::grpc::CompletionQueue* cq) = 0;
-    virtual ::grpc::ClientAsyncResponseReaderInterface< ::inexor::entity_system::EntityOperation>* AsyncDeleteEntityTypeRaw(::grpc::ClientContext* context, const ::inexor::entity_system::EntityType& request, ::grpc::CompletionQueue* cq) = 0;
-    virtual ::grpc::ClientAsyncResponseReaderInterface< ::inexor::entity_system::EntityOperation>* PrepareAsyncDeleteEntityTypeRaw(::grpc::ClientContext* context, const ::inexor::entity_system::EntityType& request, ::grpc::CompletionQueue* cq) = 0;
-    virtual ::grpc::ClientAsyncResponseReaderInterface< ::inexor::entity_system::EntityOperation>* AsyncCreateEntityAttributeTypeRaw(::grpc::ClientContext* context, const ::inexor::entity_system::EntityAttributeType& request, ::grpc::CompletionQueue* cq) = 0;
-    virtual ::grpc::ClientAsyncResponseReaderInterface< ::inexor::entity_system::EntityOperation>* PrepareAsyncCreateEntityAttributeTypeRaw(::grpc::ClientContext* context, const ::inexor::entity_system::EntityAttributeType& request, ::grpc::CompletionQueue* cq) = 0;
-    virtual ::grpc::ClientAsyncResponseReaderInterface< ::inexor::entity_system::EntityOperation>* AsyncDeleteEntityAttributeTypeRaw(::grpc::ClientContext* context, const ::inexor::entity_system::EntityAttributeType& request, ::grpc::CompletionQueue* cq) = 0;
-    virtual ::grpc::ClientAsyncResponseReaderInterface< ::inexor::entity_system::EntityOperation>* PrepareAsyncDeleteEntityAttributeTypeRaw(::grpc::ClientContext* context, const ::inexor::entity_system::EntityAttributeType& request, ::grpc::CompletionQueue* cq) = 0;
-    virtual ::grpc::ClientAsyncResponseReaderInterface< ::inexor::entity_system::EntityOperation>* AsyncCreateEntityRelationAttributeTypeRaw(::grpc::ClientContext* context, const ::inexor::entity_system::EntityRelationAttributeType& request, ::grpc::CompletionQueue* cq) = 0;
-    virtual ::grpc::ClientAsyncResponseReaderInterface< ::inexor::entity_system::EntityOperation>* PrepareAsyncCreateEntityRelationAttributeTypeRaw(::grpc::ClientContext* context, const ::inexor::entity_system::EntityRelationAttributeType& request, ::grpc::CompletionQueue* cq) = 0;
-    virtual ::grpc::ClientAsyncResponseReaderInterface< ::inexor::entity_system::EntityOperation>* AsyncDeleteEntityRelationAttributeTypeRaw(::grpc::ClientContext* context, const ::inexor::entity_system::EntityRelationAttributeType& request, ::grpc::CompletionQueue* cq) = 0;
-    virtual ::grpc::ClientAsyncResponseReaderInterface< ::inexor::entity_system::EntityOperation>* PrepareAsyncDeleteEntityRelationAttributeTypeRaw(::grpc::ClientContext* context, const ::inexor::entity_system::EntityRelationAttributeType& request, ::grpc::CompletionQueue* cq) = 0;
-    virtual ::grpc::ClientAsyncResponseReaderInterface< ::inexor::entity_system::EntityOperation>* AsyncCreateEntityRelationTypeRaw(::grpc::ClientContext* context, const ::inexor::entity_system::EntityRelationType& request, ::grpc::CompletionQueue* cq) = 0;
-    virtual ::grpc::ClientAsyncResponseReaderInterface< ::inexor::entity_system::EntityOperation>* PrepareAsyncCreateEntityRelationTypeRaw(::grpc::ClientContext* context, const ::inexor::entity_system::EntityRelationType& request, ::grpc::CompletionQueue* cq) = 0;
-    virtual ::grpc::ClientAsyncResponseReaderInterface< ::inexor::entity_system::EntityOperation>* AsyncDeleteEntityRelationTypeRaw(::grpc::ClientContext* context, const ::inexor::entity_system::EntityRelationType& request, ::grpc::CompletionQueue* cq) = 0;
-    virtual ::grpc::ClientAsyncResponseReaderInterface< ::inexor::entity_system::EntityOperation>* PrepareAsyncDeleteEntityRelationTypeRaw(::grpc::ClientContext* context, const ::inexor::entity_system::EntityRelationType& request, ::grpc::CompletionQueue* cq) = 0;
+    virtual ::grpc::ClientAsyncResponseReaderInterface< ::inexor::entity_system::Operation>* AsyncCreateEntityRaw(::grpc::ClientContext* context, const ::inexor::entity_system::Entity& request, ::grpc::CompletionQueue* cq) = 0;
+    virtual ::grpc::ClientAsyncResponseReaderInterface< ::inexor::entity_system::Operation>* PrepareAsyncCreateEntityRaw(::grpc::ClientContext* context, const ::inexor::entity_system::Entity& request, ::grpc::CompletionQueue* cq) = 0;
+    virtual ::grpc::ClientReaderInterface< ::inexor::entity_system::Entity>* ListEntitiesRaw(::grpc::ClientContext* context, const ::google::protobuf::Empty& request) = 0;
+    virtual ::grpc::ClientAsyncReaderInterface< ::inexor::entity_system::Entity>* AsyncListEntitiesRaw(::grpc::ClientContext* context, const ::google::protobuf::Empty& request, ::grpc::CompletionQueue* cq, void* tag) = 0;
+    virtual ::grpc::ClientAsyncReaderInterface< ::inexor::entity_system::Entity>* PrepareAsyncListEntitiesRaw(::grpc::ClientContext* context, const ::google::protobuf::Empty& request, ::grpc::CompletionQueue* cq) = 0;
+    virtual ::grpc::ClientAsyncResponseReaderInterface< ::inexor::entity_system::Operation>* AsyncDeleteEntityRaw(::grpc::ClientContext* context, const ::inexor::entity_system::Entity& request, ::grpc::CompletionQueue* cq) = 0;
+    virtual ::grpc::ClientAsyncResponseReaderInterface< ::inexor::entity_system::Operation>* PrepareAsyncDeleteEntityRaw(::grpc::ClientContext* context, const ::inexor::entity_system::Entity& request, ::grpc::CompletionQueue* cq) = 0;
+    virtual ::grpc::ClientAsyncResponseReaderInterface< ::inexor::entity_system::Operation>* AsyncCreateAttributeRaw(::grpc::ClientContext* context, const ::inexor::entity_system::Attribute& request, ::grpc::CompletionQueue* cq) = 0;
+    virtual ::grpc::ClientAsyncResponseReaderInterface< ::inexor::entity_system::Operation>* PrepareAsyncCreateAttributeRaw(::grpc::ClientContext* context, const ::inexor::entity_system::Attribute& request, ::grpc::CompletionQueue* cq) = 0;
+    virtual ::grpc::ClientReaderInterface< ::inexor::entity_system::Attribute>* ListAttributesRaw(::grpc::ClientContext* context, const ::google::protobuf::Empty& request) = 0;
+    virtual ::grpc::ClientAsyncReaderInterface< ::inexor::entity_system::Attribute>* AsyncListAttributesRaw(::grpc::ClientContext* context, const ::google::protobuf::Empty& request, ::grpc::CompletionQueue* cq, void* tag) = 0;
+    virtual ::grpc::ClientAsyncReaderInterface< ::inexor::entity_system::Attribute>* PrepareAsyncListAttributesRaw(::grpc::ClientContext* context, const ::google::protobuf::Empty& request, ::grpc::CompletionQueue* cq) = 0;
+    virtual ::grpc::ClientAsyncResponseReaderInterface< ::inexor::entity_system::Operation>* AsyncDeleteAttributeRaw(::grpc::ClientContext* context, const ::inexor::entity_system::Attribute& request, ::grpc::CompletionQueue* cq) = 0;
+    virtual ::grpc::ClientAsyncResponseReaderInterface< ::inexor::entity_system::Operation>* PrepareAsyncDeleteAttributeRaw(::grpc::ClientContext* context, const ::inexor::entity_system::Attribute& request, ::grpc::CompletionQueue* cq) = 0;
+    virtual ::grpc::ClientAsyncResponseReaderInterface< ::inexor::entity_system::Operation>* AsyncCreateRelationRaw(::grpc::ClientContext* context, const ::inexor::entity_system::Relation& request, ::grpc::CompletionQueue* cq) = 0;
+    virtual ::grpc::ClientAsyncResponseReaderInterface< ::inexor::entity_system::Operation>* PrepareAsyncCreateRelationRaw(::grpc::ClientContext* context, const ::inexor::entity_system::Relation& request, ::grpc::CompletionQueue* cq) = 0;
+    virtual ::grpc::ClientReaderInterface< ::inexor::entity_system::Relation>* ListRelationsRaw(::grpc::ClientContext* context, const ::google::protobuf::Empty& request) = 0;
+    virtual ::grpc::ClientAsyncReaderInterface< ::inexor::entity_system::Relation>* AsyncListRelationsRaw(::grpc::ClientContext* context, const ::google::protobuf::Empty& request, ::grpc::CompletionQueue* cq, void* tag) = 0;
+    virtual ::grpc::ClientAsyncReaderInterface< ::inexor::entity_system::Relation>* PrepareAsyncListRelationsRaw(::grpc::ClientContext* context, const ::google::protobuf::Empty& request, ::grpc::CompletionQueue* cq) = 0;
+    virtual ::grpc::ClientAsyncResponseReaderInterface< ::inexor::entity_system::Operation>* AsyncDeleteRelationRaw(::grpc::ClientContext* context, const ::inexor::entity_system::Relation& request, ::grpc::CompletionQueue* cq) = 0;
+    virtual ::grpc::ClientAsyncResponseReaderInterface< ::inexor::entity_system::Operation>* PrepareAsyncDeleteRelationRaw(::grpc::ClientContext* context, const ::inexor::entity_system::Relation& request, ::grpc::CompletionQueue* cq) = 0;
   };
   class Stub final : public StubInterface {
    public:
     Stub(const std::shared_ptr< ::grpc::ChannelInterface>& channel);
-    ::grpc::Status CreateEntityType(::grpc::ClientContext* context, const ::inexor::entity_system::EntityType& request, ::inexor::entity_system::EntityOperation* response) override;
-    std::unique_ptr< ::grpc::ClientAsyncResponseReader< ::inexor::entity_system::EntityOperation>> AsyncCreateEntityType(::grpc::ClientContext* context, const ::inexor::entity_system::EntityType& request, ::grpc::CompletionQueue* cq) {
-      return std::unique_ptr< ::grpc::ClientAsyncResponseReader< ::inexor::entity_system::EntityOperation>>(AsyncCreateEntityTypeRaw(context, request, cq));
+    ::grpc::Status CreateEntity(::grpc::ClientContext* context, const ::inexor::entity_system::Entity& request, ::inexor::entity_system::Operation* response) override;
+    std::unique_ptr< ::grpc::ClientAsyncResponseReader< ::inexor::entity_system::Operation>> AsyncCreateEntity(::grpc::ClientContext* context, const ::inexor::entity_system::Entity& request, ::grpc::CompletionQueue* cq) {
+      return std::unique_ptr< ::grpc::ClientAsyncResponseReader< ::inexor::entity_system::Operation>>(AsyncCreateEntityRaw(context, request, cq));
     }
-    std::unique_ptr< ::grpc::ClientAsyncResponseReader< ::inexor::entity_system::EntityOperation>> PrepareAsyncCreateEntityType(::grpc::ClientContext* context, const ::inexor::entity_system::EntityType& request, ::grpc::CompletionQueue* cq) {
-      return std::unique_ptr< ::grpc::ClientAsyncResponseReader< ::inexor::entity_system::EntityOperation>>(PrepareAsyncCreateEntityTypeRaw(context, request, cq));
+    std::unique_ptr< ::grpc::ClientAsyncResponseReader< ::inexor::entity_system::Operation>> PrepareAsyncCreateEntity(::grpc::ClientContext* context, const ::inexor::entity_system::Entity& request, ::grpc::CompletionQueue* cq) {
+      return std::unique_ptr< ::grpc::ClientAsyncResponseReader< ::inexor::entity_system::Operation>>(PrepareAsyncCreateEntityRaw(context, request, cq));
     }
-    ::grpc::Status DeleteEntityType(::grpc::ClientContext* context, const ::inexor::entity_system::EntityType& request, ::inexor::entity_system::EntityOperation* response) override;
-    std::unique_ptr< ::grpc::ClientAsyncResponseReader< ::inexor::entity_system::EntityOperation>> AsyncDeleteEntityType(::grpc::ClientContext* context, const ::inexor::entity_system::EntityType& request, ::grpc::CompletionQueue* cq) {
-      return std::unique_ptr< ::grpc::ClientAsyncResponseReader< ::inexor::entity_system::EntityOperation>>(AsyncDeleteEntityTypeRaw(context, request, cq));
+    std::unique_ptr< ::grpc::ClientReader< ::inexor::entity_system::Entity>> ListEntities(::grpc::ClientContext* context, const ::google::protobuf::Empty& request) {
+      return std::unique_ptr< ::grpc::ClientReader< ::inexor::entity_system::Entity>>(ListEntitiesRaw(context, request));
     }
-    std::unique_ptr< ::grpc::ClientAsyncResponseReader< ::inexor::entity_system::EntityOperation>> PrepareAsyncDeleteEntityType(::grpc::ClientContext* context, const ::inexor::entity_system::EntityType& request, ::grpc::CompletionQueue* cq) {
-      return std::unique_ptr< ::grpc::ClientAsyncResponseReader< ::inexor::entity_system::EntityOperation>>(PrepareAsyncDeleteEntityTypeRaw(context, request, cq));
+    std::unique_ptr< ::grpc::ClientAsyncReader< ::inexor::entity_system::Entity>> AsyncListEntities(::grpc::ClientContext* context, const ::google::protobuf::Empty& request, ::grpc::CompletionQueue* cq, void* tag) {
+      return std::unique_ptr< ::grpc::ClientAsyncReader< ::inexor::entity_system::Entity>>(AsyncListEntitiesRaw(context, request, cq, tag));
     }
-    ::grpc::Status CreateEntityAttributeType(::grpc::ClientContext* context, const ::inexor::entity_system::EntityAttributeType& request, ::inexor::entity_system::EntityOperation* response) override;
-    std::unique_ptr< ::grpc::ClientAsyncResponseReader< ::inexor::entity_system::EntityOperation>> AsyncCreateEntityAttributeType(::grpc::ClientContext* context, const ::inexor::entity_system::EntityAttributeType& request, ::grpc::CompletionQueue* cq) {
-      return std::unique_ptr< ::grpc::ClientAsyncResponseReader< ::inexor::entity_system::EntityOperation>>(AsyncCreateEntityAttributeTypeRaw(context, request, cq));
+    std::unique_ptr< ::grpc::ClientAsyncReader< ::inexor::entity_system::Entity>> PrepareAsyncListEntities(::grpc::ClientContext* context, const ::google::protobuf::Empty& request, ::grpc::CompletionQueue* cq) {
+      return std::unique_ptr< ::grpc::ClientAsyncReader< ::inexor::entity_system::Entity>>(PrepareAsyncListEntitiesRaw(context, request, cq));
     }
-    std::unique_ptr< ::grpc::ClientAsyncResponseReader< ::inexor::entity_system::EntityOperation>> PrepareAsyncCreateEntityAttributeType(::grpc::ClientContext* context, const ::inexor::entity_system::EntityAttributeType& request, ::grpc::CompletionQueue* cq) {
-      return std::unique_ptr< ::grpc::ClientAsyncResponseReader< ::inexor::entity_system::EntityOperation>>(PrepareAsyncCreateEntityAttributeTypeRaw(context, request, cq));
+    ::grpc::Status DeleteEntity(::grpc::ClientContext* context, const ::inexor::entity_system::Entity& request, ::inexor::entity_system::Operation* response) override;
+    std::unique_ptr< ::grpc::ClientAsyncResponseReader< ::inexor::entity_system::Operation>> AsyncDeleteEntity(::grpc::ClientContext* context, const ::inexor::entity_system::Entity& request, ::grpc::CompletionQueue* cq) {
+      return std::unique_ptr< ::grpc::ClientAsyncResponseReader< ::inexor::entity_system::Operation>>(AsyncDeleteEntityRaw(context, request, cq));
     }
-    ::grpc::Status DeleteEntityAttributeType(::grpc::ClientContext* context, const ::inexor::entity_system::EntityAttributeType& request, ::inexor::entity_system::EntityOperation* response) override;
-    std::unique_ptr< ::grpc::ClientAsyncResponseReader< ::inexor::entity_system::EntityOperation>> AsyncDeleteEntityAttributeType(::grpc::ClientContext* context, const ::inexor::entity_system::EntityAttributeType& request, ::grpc::CompletionQueue* cq) {
-      return std::unique_ptr< ::grpc::ClientAsyncResponseReader< ::inexor::entity_system::EntityOperation>>(AsyncDeleteEntityAttributeTypeRaw(context, request, cq));
+    std::unique_ptr< ::grpc::ClientAsyncResponseReader< ::inexor::entity_system::Operation>> PrepareAsyncDeleteEntity(::grpc::ClientContext* context, const ::inexor::entity_system::Entity& request, ::grpc::CompletionQueue* cq) {
+      return std::unique_ptr< ::grpc::ClientAsyncResponseReader< ::inexor::entity_system::Operation>>(PrepareAsyncDeleteEntityRaw(context, request, cq));
     }
-    std::unique_ptr< ::grpc::ClientAsyncResponseReader< ::inexor::entity_system::EntityOperation>> PrepareAsyncDeleteEntityAttributeType(::grpc::ClientContext* context, const ::inexor::entity_system::EntityAttributeType& request, ::grpc::CompletionQueue* cq) {
-      return std::unique_ptr< ::grpc::ClientAsyncResponseReader< ::inexor::entity_system::EntityOperation>>(PrepareAsyncDeleteEntityAttributeTypeRaw(context, request, cq));
+    ::grpc::Status CreateAttribute(::grpc::ClientContext* context, const ::inexor::entity_system::Attribute& request, ::inexor::entity_system::Operation* response) override;
+    std::unique_ptr< ::grpc::ClientAsyncResponseReader< ::inexor::entity_system::Operation>> AsyncCreateAttribute(::grpc::ClientContext* context, const ::inexor::entity_system::Attribute& request, ::grpc::CompletionQueue* cq) {
+      return std::unique_ptr< ::grpc::ClientAsyncResponseReader< ::inexor::entity_system::Operation>>(AsyncCreateAttributeRaw(context, request, cq));
     }
-    ::grpc::Status CreateEntityRelationAttributeType(::grpc::ClientContext* context, const ::inexor::entity_system::EntityRelationAttributeType& request, ::inexor::entity_system::EntityOperation* response) override;
-    std::unique_ptr< ::grpc::ClientAsyncResponseReader< ::inexor::entity_system::EntityOperation>> AsyncCreateEntityRelationAttributeType(::grpc::ClientContext* context, const ::inexor::entity_system::EntityRelationAttributeType& request, ::grpc::CompletionQueue* cq) {
-      return std::unique_ptr< ::grpc::ClientAsyncResponseReader< ::inexor::entity_system::EntityOperation>>(AsyncCreateEntityRelationAttributeTypeRaw(context, request, cq));
+    std::unique_ptr< ::grpc::ClientAsyncResponseReader< ::inexor::entity_system::Operation>> PrepareAsyncCreateAttribute(::grpc::ClientContext* context, const ::inexor::entity_system::Attribute& request, ::grpc::CompletionQueue* cq) {
+      return std::unique_ptr< ::grpc::ClientAsyncResponseReader< ::inexor::entity_system::Operation>>(PrepareAsyncCreateAttributeRaw(context, request, cq));
     }
-    std::unique_ptr< ::grpc::ClientAsyncResponseReader< ::inexor::entity_system::EntityOperation>> PrepareAsyncCreateEntityRelationAttributeType(::grpc::ClientContext* context, const ::inexor::entity_system::EntityRelationAttributeType& request, ::grpc::CompletionQueue* cq) {
-      return std::unique_ptr< ::grpc::ClientAsyncResponseReader< ::inexor::entity_system::EntityOperation>>(PrepareAsyncCreateEntityRelationAttributeTypeRaw(context, request, cq));
+    std::unique_ptr< ::grpc::ClientReader< ::inexor::entity_system::Attribute>> ListAttributes(::grpc::ClientContext* context, const ::google::protobuf::Empty& request) {
+      return std::unique_ptr< ::grpc::ClientReader< ::inexor::entity_system::Attribute>>(ListAttributesRaw(context, request));
     }
-    ::grpc::Status DeleteEntityRelationAttributeType(::grpc::ClientContext* context, const ::inexor::entity_system::EntityRelationAttributeType& request, ::inexor::entity_system::EntityOperation* response) override;
-    std::unique_ptr< ::grpc::ClientAsyncResponseReader< ::inexor::entity_system::EntityOperation>> AsyncDeleteEntityRelationAttributeType(::grpc::ClientContext* context, const ::inexor::entity_system::EntityRelationAttributeType& request, ::grpc::CompletionQueue* cq) {
-      return std::unique_ptr< ::grpc::ClientAsyncResponseReader< ::inexor::entity_system::EntityOperation>>(AsyncDeleteEntityRelationAttributeTypeRaw(context, request, cq));
+    std::unique_ptr< ::grpc::ClientAsyncReader< ::inexor::entity_system::Attribute>> AsyncListAttributes(::grpc::ClientContext* context, const ::google::protobuf::Empty& request, ::grpc::CompletionQueue* cq, void* tag) {
+      return std::unique_ptr< ::grpc::ClientAsyncReader< ::inexor::entity_system::Attribute>>(AsyncListAttributesRaw(context, request, cq, tag));
     }
-    std::unique_ptr< ::grpc::ClientAsyncResponseReader< ::inexor::entity_system::EntityOperation>> PrepareAsyncDeleteEntityRelationAttributeType(::grpc::ClientContext* context, const ::inexor::entity_system::EntityRelationAttributeType& request, ::grpc::CompletionQueue* cq) {
-      return std::unique_ptr< ::grpc::ClientAsyncResponseReader< ::inexor::entity_system::EntityOperation>>(PrepareAsyncDeleteEntityRelationAttributeTypeRaw(context, request, cq));
+    std::unique_ptr< ::grpc::ClientAsyncReader< ::inexor::entity_system::Attribute>> PrepareAsyncListAttributes(::grpc::ClientContext* context, const ::google::protobuf::Empty& request, ::grpc::CompletionQueue* cq) {
+      return std::unique_ptr< ::grpc::ClientAsyncReader< ::inexor::entity_system::Attribute>>(PrepareAsyncListAttributesRaw(context, request, cq));
     }
-    ::grpc::Status CreateEntityRelationType(::grpc::ClientContext* context, const ::inexor::entity_system::EntityRelationType& request, ::inexor::entity_system::EntityOperation* response) override;
-    std::unique_ptr< ::grpc::ClientAsyncResponseReader< ::inexor::entity_system::EntityOperation>> AsyncCreateEntityRelationType(::grpc::ClientContext* context, const ::inexor::entity_system::EntityRelationType& request, ::grpc::CompletionQueue* cq) {
-      return std::unique_ptr< ::grpc::ClientAsyncResponseReader< ::inexor::entity_system::EntityOperation>>(AsyncCreateEntityRelationTypeRaw(context, request, cq));
+    ::grpc::Status DeleteAttribute(::grpc::ClientContext* context, const ::inexor::entity_system::Attribute& request, ::inexor::entity_system::Operation* response) override;
+    std::unique_ptr< ::grpc::ClientAsyncResponseReader< ::inexor::entity_system::Operation>> AsyncDeleteAttribute(::grpc::ClientContext* context, const ::inexor::entity_system::Attribute& request, ::grpc::CompletionQueue* cq) {
+      return std::unique_ptr< ::grpc::ClientAsyncResponseReader< ::inexor::entity_system::Operation>>(AsyncDeleteAttributeRaw(context, request, cq));
     }
-    std::unique_ptr< ::grpc::ClientAsyncResponseReader< ::inexor::entity_system::EntityOperation>> PrepareAsyncCreateEntityRelationType(::grpc::ClientContext* context, const ::inexor::entity_system::EntityRelationType& request, ::grpc::CompletionQueue* cq) {
-      return std::unique_ptr< ::grpc::ClientAsyncResponseReader< ::inexor::entity_system::EntityOperation>>(PrepareAsyncCreateEntityRelationTypeRaw(context, request, cq));
+    std::unique_ptr< ::grpc::ClientAsyncResponseReader< ::inexor::entity_system::Operation>> PrepareAsyncDeleteAttribute(::grpc::ClientContext* context, const ::inexor::entity_system::Attribute& request, ::grpc::CompletionQueue* cq) {
+      return std::unique_ptr< ::grpc::ClientAsyncResponseReader< ::inexor::entity_system::Operation>>(PrepareAsyncDeleteAttributeRaw(context, request, cq));
     }
-    ::grpc::Status DeleteEntityRelationType(::grpc::ClientContext* context, const ::inexor::entity_system::EntityRelationType& request, ::inexor::entity_system::EntityOperation* response) override;
-    std::unique_ptr< ::grpc::ClientAsyncResponseReader< ::inexor::entity_system::EntityOperation>> AsyncDeleteEntityRelationType(::grpc::ClientContext* context, const ::inexor::entity_system::EntityRelationType& request, ::grpc::CompletionQueue* cq) {
-      return std::unique_ptr< ::grpc::ClientAsyncResponseReader< ::inexor::entity_system::EntityOperation>>(AsyncDeleteEntityRelationTypeRaw(context, request, cq));
+    ::grpc::Status CreateRelation(::grpc::ClientContext* context, const ::inexor::entity_system::Relation& request, ::inexor::entity_system::Operation* response) override;
+    std::unique_ptr< ::grpc::ClientAsyncResponseReader< ::inexor::entity_system::Operation>> AsyncCreateRelation(::grpc::ClientContext* context, const ::inexor::entity_system::Relation& request, ::grpc::CompletionQueue* cq) {
+      return std::unique_ptr< ::grpc::ClientAsyncResponseReader< ::inexor::entity_system::Operation>>(AsyncCreateRelationRaw(context, request, cq));
     }
-    std::unique_ptr< ::grpc::ClientAsyncResponseReader< ::inexor::entity_system::EntityOperation>> PrepareAsyncDeleteEntityRelationType(::grpc::ClientContext* context, const ::inexor::entity_system::EntityRelationType& request, ::grpc::CompletionQueue* cq) {
-      return std::unique_ptr< ::grpc::ClientAsyncResponseReader< ::inexor::entity_system::EntityOperation>>(PrepareAsyncDeleteEntityRelationTypeRaw(context, request, cq));
+    std::unique_ptr< ::grpc::ClientAsyncResponseReader< ::inexor::entity_system::Operation>> PrepareAsyncCreateRelation(::grpc::ClientContext* context, const ::inexor::entity_system::Relation& request, ::grpc::CompletionQueue* cq) {
+      return std::unique_ptr< ::grpc::ClientAsyncResponseReader< ::inexor::entity_system::Operation>>(PrepareAsyncCreateRelationRaw(context, request, cq));
+    }
+    std::unique_ptr< ::grpc::ClientReader< ::inexor::entity_system::Relation>> ListRelations(::grpc::ClientContext* context, const ::google::protobuf::Empty& request) {
+      return std::unique_ptr< ::grpc::ClientReader< ::inexor::entity_system::Relation>>(ListRelationsRaw(context, request));
+    }
+    std::unique_ptr< ::grpc::ClientAsyncReader< ::inexor::entity_system::Relation>> AsyncListRelations(::grpc::ClientContext* context, const ::google::protobuf::Empty& request, ::grpc::CompletionQueue* cq, void* tag) {
+      return std::unique_ptr< ::grpc::ClientAsyncReader< ::inexor::entity_system::Relation>>(AsyncListRelationsRaw(context, request, cq, tag));
+    }
+    std::unique_ptr< ::grpc::ClientAsyncReader< ::inexor::entity_system::Relation>> PrepareAsyncListRelations(::grpc::ClientContext* context, const ::google::protobuf::Empty& request, ::grpc::CompletionQueue* cq) {
+      return std::unique_ptr< ::grpc::ClientAsyncReader< ::inexor::entity_system::Relation>>(PrepareAsyncListRelationsRaw(context, request, cq));
+    }
+    ::grpc::Status DeleteRelation(::grpc::ClientContext* context, const ::inexor::entity_system::Relation& request, ::inexor::entity_system::Operation* response) override;
+    std::unique_ptr< ::grpc::ClientAsyncResponseReader< ::inexor::entity_system::Operation>> AsyncDeleteRelation(::grpc::ClientContext* context, const ::inexor::entity_system::Relation& request, ::grpc::CompletionQueue* cq) {
+      return std::unique_ptr< ::grpc::ClientAsyncResponseReader< ::inexor::entity_system::Operation>>(AsyncDeleteRelationRaw(context, request, cq));
+    }
+    std::unique_ptr< ::grpc::ClientAsyncResponseReader< ::inexor::entity_system::Operation>> PrepareAsyncDeleteRelation(::grpc::ClientContext* context, const ::inexor::entity_system::Relation& request, ::grpc::CompletionQueue* cq) {
+      return std::unique_ptr< ::grpc::ClientAsyncResponseReader< ::inexor::entity_system::Operation>>(PrepareAsyncDeleteRelationRaw(context, request, cq));
     }
     class experimental_async final :
       public StubInterface::experimental_async_interface {
      public:
-      void CreateEntityType(::grpc::ClientContext* context, const ::inexor::entity_system::EntityType* request, ::inexor::entity_system::EntityOperation* response, std::function<void(::grpc::Status)>) override;
-      void DeleteEntityType(::grpc::ClientContext* context, const ::inexor::entity_system::EntityType* request, ::inexor::entity_system::EntityOperation* response, std::function<void(::grpc::Status)>) override;
-      void CreateEntityAttributeType(::grpc::ClientContext* context, const ::inexor::entity_system::EntityAttributeType* request, ::inexor::entity_system::EntityOperation* response, std::function<void(::grpc::Status)>) override;
-      void DeleteEntityAttributeType(::grpc::ClientContext* context, const ::inexor::entity_system::EntityAttributeType* request, ::inexor::entity_system::EntityOperation* response, std::function<void(::grpc::Status)>) override;
-      void CreateEntityRelationAttributeType(::grpc::ClientContext* context, const ::inexor::entity_system::EntityRelationAttributeType* request, ::inexor::entity_system::EntityOperation* response, std::function<void(::grpc::Status)>) override;
-      void DeleteEntityRelationAttributeType(::grpc::ClientContext* context, const ::inexor::entity_system::EntityRelationAttributeType* request, ::inexor::entity_system::EntityOperation* response, std::function<void(::grpc::Status)>) override;
-      void CreateEntityRelationType(::grpc::ClientContext* context, const ::inexor::entity_system::EntityRelationType* request, ::inexor::entity_system::EntityOperation* response, std::function<void(::grpc::Status)>) override;
-      void DeleteEntityRelationType(::grpc::ClientContext* context, const ::inexor::entity_system::EntityRelationType* request, ::inexor::entity_system::EntityOperation* response, std::function<void(::grpc::Status)>) override;
+      void CreateEntity(::grpc::ClientContext* context, const ::inexor::entity_system::Entity* request, ::inexor::entity_system::Operation* response, std::function<void(::grpc::Status)>) override;
+      void DeleteEntity(::grpc::ClientContext* context, const ::inexor::entity_system::Entity* request, ::inexor::entity_system::Operation* response, std::function<void(::grpc::Status)>) override;
+      void CreateAttribute(::grpc::ClientContext* context, const ::inexor::entity_system::Attribute* request, ::inexor::entity_system::Operation* response, std::function<void(::grpc::Status)>) override;
+      void DeleteAttribute(::grpc::ClientContext* context, const ::inexor::entity_system::Attribute* request, ::inexor::entity_system::Operation* response, std::function<void(::grpc::Status)>) override;
+      void CreateRelation(::grpc::ClientContext* context, const ::inexor::entity_system::Relation* request, ::inexor::entity_system::Operation* response, std::function<void(::grpc::Status)>) override;
+      void DeleteRelation(::grpc::ClientContext* context, const ::inexor::entity_system::Relation* request, ::inexor::entity_system::Operation* response, std::function<void(::grpc::Status)>) override;
      private:
       friend class Stub;
       explicit experimental_async(Stub* stub): stub_(stub) { }
@@ -221,30 +250,36 @@ class EntitySystem final {
    private:
     std::shared_ptr< ::grpc::ChannelInterface> channel_;
     class experimental_async async_stub_{this};
-    ::grpc::ClientAsyncResponseReader< ::inexor::entity_system::EntityOperation>* AsyncCreateEntityTypeRaw(::grpc::ClientContext* context, const ::inexor::entity_system::EntityType& request, ::grpc::CompletionQueue* cq) override;
-    ::grpc::ClientAsyncResponseReader< ::inexor::entity_system::EntityOperation>* PrepareAsyncCreateEntityTypeRaw(::grpc::ClientContext* context, const ::inexor::entity_system::EntityType& request, ::grpc::CompletionQueue* cq) override;
-    ::grpc::ClientAsyncResponseReader< ::inexor::entity_system::EntityOperation>* AsyncDeleteEntityTypeRaw(::grpc::ClientContext* context, const ::inexor::entity_system::EntityType& request, ::grpc::CompletionQueue* cq) override;
-    ::grpc::ClientAsyncResponseReader< ::inexor::entity_system::EntityOperation>* PrepareAsyncDeleteEntityTypeRaw(::grpc::ClientContext* context, const ::inexor::entity_system::EntityType& request, ::grpc::CompletionQueue* cq) override;
-    ::grpc::ClientAsyncResponseReader< ::inexor::entity_system::EntityOperation>* AsyncCreateEntityAttributeTypeRaw(::grpc::ClientContext* context, const ::inexor::entity_system::EntityAttributeType& request, ::grpc::CompletionQueue* cq) override;
-    ::grpc::ClientAsyncResponseReader< ::inexor::entity_system::EntityOperation>* PrepareAsyncCreateEntityAttributeTypeRaw(::grpc::ClientContext* context, const ::inexor::entity_system::EntityAttributeType& request, ::grpc::CompletionQueue* cq) override;
-    ::grpc::ClientAsyncResponseReader< ::inexor::entity_system::EntityOperation>* AsyncDeleteEntityAttributeTypeRaw(::grpc::ClientContext* context, const ::inexor::entity_system::EntityAttributeType& request, ::grpc::CompletionQueue* cq) override;
-    ::grpc::ClientAsyncResponseReader< ::inexor::entity_system::EntityOperation>* PrepareAsyncDeleteEntityAttributeTypeRaw(::grpc::ClientContext* context, const ::inexor::entity_system::EntityAttributeType& request, ::grpc::CompletionQueue* cq) override;
-    ::grpc::ClientAsyncResponseReader< ::inexor::entity_system::EntityOperation>* AsyncCreateEntityRelationAttributeTypeRaw(::grpc::ClientContext* context, const ::inexor::entity_system::EntityRelationAttributeType& request, ::grpc::CompletionQueue* cq) override;
-    ::grpc::ClientAsyncResponseReader< ::inexor::entity_system::EntityOperation>* PrepareAsyncCreateEntityRelationAttributeTypeRaw(::grpc::ClientContext* context, const ::inexor::entity_system::EntityRelationAttributeType& request, ::grpc::CompletionQueue* cq) override;
-    ::grpc::ClientAsyncResponseReader< ::inexor::entity_system::EntityOperation>* AsyncDeleteEntityRelationAttributeTypeRaw(::grpc::ClientContext* context, const ::inexor::entity_system::EntityRelationAttributeType& request, ::grpc::CompletionQueue* cq) override;
-    ::grpc::ClientAsyncResponseReader< ::inexor::entity_system::EntityOperation>* PrepareAsyncDeleteEntityRelationAttributeTypeRaw(::grpc::ClientContext* context, const ::inexor::entity_system::EntityRelationAttributeType& request, ::grpc::CompletionQueue* cq) override;
-    ::grpc::ClientAsyncResponseReader< ::inexor::entity_system::EntityOperation>* AsyncCreateEntityRelationTypeRaw(::grpc::ClientContext* context, const ::inexor::entity_system::EntityRelationType& request, ::grpc::CompletionQueue* cq) override;
-    ::grpc::ClientAsyncResponseReader< ::inexor::entity_system::EntityOperation>* PrepareAsyncCreateEntityRelationTypeRaw(::grpc::ClientContext* context, const ::inexor::entity_system::EntityRelationType& request, ::grpc::CompletionQueue* cq) override;
-    ::grpc::ClientAsyncResponseReader< ::inexor::entity_system::EntityOperation>* AsyncDeleteEntityRelationTypeRaw(::grpc::ClientContext* context, const ::inexor::entity_system::EntityRelationType& request, ::grpc::CompletionQueue* cq) override;
-    ::grpc::ClientAsyncResponseReader< ::inexor::entity_system::EntityOperation>* PrepareAsyncDeleteEntityRelationTypeRaw(::grpc::ClientContext* context, const ::inexor::entity_system::EntityRelationType& request, ::grpc::CompletionQueue* cq) override;
-    const ::grpc::internal::RpcMethod rpcmethod_CreateEntityType_;
-    const ::grpc::internal::RpcMethod rpcmethod_DeleteEntityType_;
-    const ::grpc::internal::RpcMethod rpcmethod_CreateEntityAttributeType_;
-    const ::grpc::internal::RpcMethod rpcmethod_DeleteEntityAttributeType_;
-    const ::grpc::internal::RpcMethod rpcmethod_CreateEntityRelationAttributeType_;
-    const ::grpc::internal::RpcMethod rpcmethod_DeleteEntityRelationAttributeType_;
-    const ::grpc::internal::RpcMethod rpcmethod_CreateEntityRelationType_;
-    const ::grpc::internal::RpcMethod rpcmethod_DeleteEntityRelationType_;
+    ::grpc::ClientAsyncResponseReader< ::inexor::entity_system::Operation>* AsyncCreateEntityRaw(::grpc::ClientContext* context, const ::inexor::entity_system::Entity& request, ::grpc::CompletionQueue* cq) override;
+    ::grpc::ClientAsyncResponseReader< ::inexor::entity_system::Operation>* PrepareAsyncCreateEntityRaw(::grpc::ClientContext* context, const ::inexor::entity_system::Entity& request, ::grpc::CompletionQueue* cq) override;
+    ::grpc::ClientReader< ::inexor::entity_system::Entity>* ListEntitiesRaw(::grpc::ClientContext* context, const ::google::protobuf::Empty& request) override;
+    ::grpc::ClientAsyncReader< ::inexor::entity_system::Entity>* AsyncListEntitiesRaw(::grpc::ClientContext* context, const ::google::protobuf::Empty& request, ::grpc::CompletionQueue* cq, void* tag) override;
+    ::grpc::ClientAsyncReader< ::inexor::entity_system::Entity>* PrepareAsyncListEntitiesRaw(::grpc::ClientContext* context, const ::google::protobuf::Empty& request, ::grpc::CompletionQueue* cq) override;
+    ::grpc::ClientAsyncResponseReader< ::inexor::entity_system::Operation>* AsyncDeleteEntityRaw(::grpc::ClientContext* context, const ::inexor::entity_system::Entity& request, ::grpc::CompletionQueue* cq) override;
+    ::grpc::ClientAsyncResponseReader< ::inexor::entity_system::Operation>* PrepareAsyncDeleteEntityRaw(::grpc::ClientContext* context, const ::inexor::entity_system::Entity& request, ::grpc::CompletionQueue* cq) override;
+    ::grpc::ClientAsyncResponseReader< ::inexor::entity_system::Operation>* AsyncCreateAttributeRaw(::grpc::ClientContext* context, const ::inexor::entity_system::Attribute& request, ::grpc::CompletionQueue* cq) override;
+    ::grpc::ClientAsyncResponseReader< ::inexor::entity_system::Operation>* PrepareAsyncCreateAttributeRaw(::grpc::ClientContext* context, const ::inexor::entity_system::Attribute& request, ::grpc::CompletionQueue* cq) override;
+    ::grpc::ClientReader< ::inexor::entity_system::Attribute>* ListAttributesRaw(::grpc::ClientContext* context, const ::google::protobuf::Empty& request) override;
+    ::grpc::ClientAsyncReader< ::inexor::entity_system::Attribute>* AsyncListAttributesRaw(::grpc::ClientContext* context, const ::google::protobuf::Empty& request, ::grpc::CompletionQueue* cq, void* tag) override;
+    ::grpc::ClientAsyncReader< ::inexor::entity_system::Attribute>* PrepareAsyncListAttributesRaw(::grpc::ClientContext* context, const ::google::protobuf::Empty& request, ::grpc::CompletionQueue* cq) override;
+    ::grpc::ClientAsyncResponseReader< ::inexor::entity_system::Operation>* AsyncDeleteAttributeRaw(::grpc::ClientContext* context, const ::inexor::entity_system::Attribute& request, ::grpc::CompletionQueue* cq) override;
+    ::grpc::ClientAsyncResponseReader< ::inexor::entity_system::Operation>* PrepareAsyncDeleteAttributeRaw(::grpc::ClientContext* context, const ::inexor::entity_system::Attribute& request, ::grpc::CompletionQueue* cq) override;
+    ::grpc::ClientAsyncResponseReader< ::inexor::entity_system::Operation>* AsyncCreateRelationRaw(::grpc::ClientContext* context, const ::inexor::entity_system::Relation& request, ::grpc::CompletionQueue* cq) override;
+    ::grpc::ClientAsyncResponseReader< ::inexor::entity_system::Operation>* PrepareAsyncCreateRelationRaw(::grpc::ClientContext* context, const ::inexor::entity_system::Relation& request, ::grpc::CompletionQueue* cq) override;
+    ::grpc::ClientReader< ::inexor::entity_system::Relation>* ListRelationsRaw(::grpc::ClientContext* context, const ::google::protobuf::Empty& request) override;
+    ::grpc::ClientAsyncReader< ::inexor::entity_system::Relation>* AsyncListRelationsRaw(::grpc::ClientContext* context, const ::google::protobuf::Empty& request, ::grpc::CompletionQueue* cq, void* tag) override;
+    ::grpc::ClientAsyncReader< ::inexor::entity_system::Relation>* PrepareAsyncListRelationsRaw(::grpc::ClientContext* context, const ::google::protobuf::Empty& request, ::grpc::CompletionQueue* cq) override;
+    ::grpc::ClientAsyncResponseReader< ::inexor::entity_system::Operation>* AsyncDeleteRelationRaw(::grpc::ClientContext* context, const ::inexor::entity_system::Relation& request, ::grpc::CompletionQueue* cq) override;
+    ::grpc::ClientAsyncResponseReader< ::inexor::entity_system::Operation>* PrepareAsyncDeleteRelationRaw(::grpc::ClientContext* context, const ::inexor::entity_system::Relation& request, ::grpc::CompletionQueue* cq) override;
+    const ::grpc::internal::RpcMethod rpcmethod_CreateEntity_;
+    const ::grpc::internal::RpcMethod rpcmethod_ListEntities_;
+    const ::grpc::internal::RpcMethod rpcmethod_DeleteEntity_;
+    const ::grpc::internal::RpcMethod rpcmethod_CreateAttribute_;
+    const ::grpc::internal::RpcMethod rpcmethod_ListAttributes_;
+    const ::grpc::internal::RpcMethod rpcmethod_DeleteAttribute_;
+    const ::grpc::internal::RpcMethod rpcmethod_CreateRelation_;
+    const ::grpc::internal::RpcMethod rpcmethod_ListRelations_;
+    const ::grpc::internal::RpcMethod rpcmethod_DeleteRelation_;
   };
   static std::unique_ptr<Stub> NewStub(const std::shared_ptr< ::grpc::ChannelInterface>& channel, const ::grpc::StubOptions& options = ::grpc::StubOptions());
 
@@ -252,1044 +287,1119 @@ class EntitySystem final {
    public:
     Service();
     virtual ~Service();
-    // Create an entity type
-    virtual ::grpc::Status CreateEntityType(::grpc::ServerContext* context, const ::inexor::entity_system::EntityType* request, ::inexor::entity_system::EntityOperation* response);
-    // Delete entity type
-    virtual ::grpc::Status DeleteEntityType(::grpc::ServerContext* context, const ::inexor::entity_system::EntityType* request, ::inexor::entity_system::EntityOperation* response);
-    // Create an entity attribute type
-    virtual ::grpc::Status CreateEntityAttributeType(::grpc::ServerContext* context, const ::inexor::entity_system::EntityAttributeType* request, ::inexor::entity_system::EntityOperation* response);
-    // Delete entity attribute type
-    virtual ::grpc::Status DeleteEntityAttributeType(::grpc::ServerContext* context, const ::inexor::entity_system::EntityAttributeType* request, ::inexor::entity_system::EntityOperation* response);
-    // Create an entity relation attribution type
-    virtual ::grpc::Status CreateEntityRelationAttributeType(::grpc::ServerContext* context, const ::inexor::entity_system::EntityRelationAttributeType* request, ::inexor::entity_system::EntityOperation* response);
-    // Delete an entity relation attribute type
-    virtual ::grpc::Status DeleteEntityRelationAttributeType(::grpc::ServerContext* context, const ::inexor::entity_system::EntityRelationAttributeType* request, ::inexor::entity_system::EntityOperation* response);
-    // Create an entity relation type
-    virtual ::grpc::Status CreateEntityRelationType(::grpc::ServerContext* context, const ::inexor::entity_system::EntityRelationType* request, ::inexor::entity_system::EntityOperation* response);
-    // Delete an entity relation type
-    virtual ::grpc::Status DeleteEntityRelationType(::grpc::ServerContext* context, const ::inexor::entity_system::EntityRelationType* request, ::inexor::entity_system::EntityOperation* response);
+    // / Create an entity
+    virtual ::grpc::Status CreateEntity(::grpc::ServerContext* context, const ::inexor::entity_system::Entity* request, ::inexor::entity_system::Operation* response);
+    // / List all entities
+    virtual ::grpc::Status ListEntities(::grpc::ServerContext* context, const ::google::protobuf::Empty* request, ::grpc::ServerWriter< ::inexor::entity_system::Entity>* writer);
+    // / Delete entity
+    virtual ::grpc::Status DeleteEntity(::grpc::ServerContext* context, const ::inexor::entity_system::Entity* request, ::inexor::entity_system::Operation* response);
+    // / Create an attribute
+    virtual ::grpc::Status CreateAttribute(::grpc::ServerContext* context, const ::inexor::entity_system::Attribute* request, ::inexor::entity_system::Operation* response);
+    // / List all attributes
+    virtual ::grpc::Status ListAttributes(::grpc::ServerContext* context, const ::google::protobuf::Empty* request, ::grpc::ServerWriter< ::inexor::entity_system::Attribute>* writer);
+    // / Delete an attribute
+    virtual ::grpc::Status DeleteAttribute(::grpc::ServerContext* context, const ::inexor::entity_system::Attribute* request, ::inexor::entity_system::Operation* response);
+    // / Create a relation
+    virtual ::grpc::Status CreateRelation(::grpc::ServerContext* context, const ::inexor::entity_system::Relation* request, ::inexor::entity_system::Operation* response);
+    // / List relations
+    virtual ::grpc::Status ListRelations(::grpc::ServerContext* context, const ::google::protobuf::Empty* request, ::grpc::ServerWriter< ::inexor::entity_system::Relation>* writer);
+    // / Delete relations
+    virtual ::grpc::Status DeleteRelation(::grpc::ServerContext* context, const ::inexor::entity_system::Relation* request, ::inexor::entity_system::Operation* response);
   };
   template <class BaseClass>
-  class WithAsyncMethod_CreateEntityType : public BaseClass {
+  class WithAsyncMethod_CreateEntity : public BaseClass {
    private:
     void BaseClassMustBeDerivedFromService(const Service *service) {}
    public:
-    WithAsyncMethod_CreateEntityType() {
+    WithAsyncMethod_CreateEntity() {
       ::grpc::Service::MarkMethodAsync(0);
     }
-    ~WithAsyncMethod_CreateEntityType() override {
+    ~WithAsyncMethod_CreateEntity() override {
       BaseClassMustBeDerivedFromService(this);
     }
     // disable synchronous version of this method
-    ::grpc::Status CreateEntityType(::grpc::ServerContext* context, const ::inexor::entity_system::EntityType* request, ::inexor::entity_system::EntityOperation* response) override {
+    ::grpc::Status CreateEntity(::grpc::ServerContext* context, const ::inexor::entity_system::Entity* request, ::inexor::entity_system::Operation* response) override {
       abort();
       return ::grpc::Status(::grpc::StatusCode::UNIMPLEMENTED, "");
     }
-    void RequestCreateEntityType(::grpc::ServerContext* context, ::inexor::entity_system::EntityType* request, ::grpc::ServerAsyncResponseWriter< ::inexor::entity_system::EntityOperation>* response, ::grpc::CompletionQueue* new_call_cq, ::grpc::ServerCompletionQueue* notification_cq, void *tag) {
+    void RequestCreateEntity(::grpc::ServerContext* context, ::inexor::entity_system::Entity* request, ::grpc::ServerAsyncResponseWriter< ::inexor::entity_system::Operation>* response, ::grpc::CompletionQueue* new_call_cq, ::grpc::ServerCompletionQueue* notification_cq, void *tag) {
       ::grpc::Service::RequestAsyncUnary(0, context, request, response, new_call_cq, notification_cq, tag);
     }
   };
   template <class BaseClass>
-  class WithAsyncMethod_DeleteEntityType : public BaseClass {
+  class WithAsyncMethod_ListEntities : public BaseClass {
    private:
     void BaseClassMustBeDerivedFromService(const Service *service) {}
    public:
-    WithAsyncMethod_DeleteEntityType() {
+    WithAsyncMethod_ListEntities() {
       ::grpc::Service::MarkMethodAsync(1);
     }
-    ~WithAsyncMethod_DeleteEntityType() override {
+    ~WithAsyncMethod_ListEntities() override {
       BaseClassMustBeDerivedFromService(this);
     }
     // disable synchronous version of this method
-    ::grpc::Status DeleteEntityType(::grpc::ServerContext* context, const ::inexor::entity_system::EntityType* request, ::inexor::entity_system::EntityOperation* response) override {
+    ::grpc::Status ListEntities(::grpc::ServerContext* context, const ::google::protobuf::Empty* request, ::grpc::ServerWriter< ::inexor::entity_system::Entity>* writer) override {
       abort();
       return ::grpc::Status(::grpc::StatusCode::UNIMPLEMENTED, "");
     }
-    void RequestDeleteEntityType(::grpc::ServerContext* context, ::inexor::entity_system::EntityType* request, ::grpc::ServerAsyncResponseWriter< ::inexor::entity_system::EntityOperation>* response, ::grpc::CompletionQueue* new_call_cq, ::grpc::ServerCompletionQueue* notification_cq, void *tag) {
-      ::grpc::Service::RequestAsyncUnary(1, context, request, response, new_call_cq, notification_cq, tag);
+    void RequestListEntities(::grpc::ServerContext* context, ::google::protobuf::Empty* request, ::grpc::ServerAsyncWriter< ::inexor::entity_system::Entity>* writer, ::grpc::CompletionQueue* new_call_cq, ::grpc::ServerCompletionQueue* notification_cq, void *tag) {
+      ::grpc::Service::RequestAsyncServerStreaming(1, context, request, writer, new_call_cq, notification_cq, tag);
     }
   };
   template <class BaseClass>
-  class WithAsyncMethod_CreateEntityAttributeType : public BaseClass {
+  class WithAsyncMethod_DeleteEntity : public BaseClass {
    private:
     void BaseClassMustBeDerivedFromService(const Service *service) {}
    public:
-    WithAsyncMethod_CreateEntityAttributeType() {
+    WithAsyncMethod_DeleteEntity() {
       ::grpc::Service::MarkMethodAsync(2);
     }
-    ~WithAsyncMethod_CreateEntityAttributeType() override {
+    ~WithAsyncMethod_DeleteEntity() override {
       BaseClassMustBeDerivedFromService(this);
     }
     // disable synchronous version of this method
-    ::grpc::Status CreateEntityAttributeType(::grpc::ServerContext* context, const ::inexor::entity_system::EntityAttributeType* request, ::inexor::entity_system::EntityOperation* response) override {
+    ::grpc::Status DeleteEntity(::grpc::ServerContext* context, const ::inexor::entity_system::Entity* request, ::inexor::entity_system::Operation* response) override {
       abort();
       return ::grpc::Status(::grpc::StatusCode::UNIMPLEMENTED, "");
     }
-    void RequestCreateEntityAttributeType(::grpc::ServerContext* context, ::inexor::entity_system::EntityAttributeType* request, ::grpc::ServerAsyncResponseWriter< ::inexor::entity_system::EntityOperation>* response, ::grpc::CompletionQueue* new_call_cq, ::grpc::ServerCompletionQueue* notification_cq, void *tag) {
+    void RequestDeleteEntity(::grpc::ServerContext* context, ::inexor::entity_system::Entity* request, ::grpc::ServerAsyncResponseWriter< ::inexor::entity_system::Operation>* response, ::grpc::CompletionQueue* new_call_cq, ::grpc::ServerCompletionQueue* notification_cq, void *tag) {
       ::grpc::Service::RequestAsyncUnary(2, context, request, response, new_call_cq, notification_cq, tag);
     }
   };
   template <class BaseClass>
-  class WithAsyncMethod_DeleteEntityAttributeType : public BaseClass {
+  class WithAsyncMethod_CreateAttribute : public BaseClass {
    private:
     void BaseClassMustBeDerivedFromService(const Service *service) {}
    public:
-    WithAsyncMethod_DeleteEntityAttributeType() {
+    WithAsyncMethod_CreateAttribute() {
       ::grpc::Service::MarkMethodAsync(3);
     }
-    ~WithAsyncMethod_DeleteEntityAttributeType() override {
+    ~WithAsyncMethod_CreateAttribute() override {
       BaseClassMustBeDerivedFromService(this);
     }
     // disable synchronous version of this method
-    ::grpc::Status DeleteEntityAttributeType(::grpc::ServerContext* context, const ::inexor::entity_system::EntityAttributeType* request, ::inexor::entity_system::EntityOperation* response) override {
+    ::grpc::Status CreateAttribute(::grpc::ServerContext* context, const ::inexor::entity_system::Attribute* request, ::inexor::entity_system::Operation* response) override {
       abort();
       return ::grpc::Status(::grpc::StatusCode::UNIMPLEMENTED, "");
     }
-    void RequestDeleteEntityAttributeType(::grpc::ServerContext* context, ::inexor::entity_system::EntityAttributeType* request, ::grpc::ServerAsyncResponseWriter< ::inexor::entity_system::EntityOperation>* response, ::grpc::CompletionQueue* new_call_cq, ::grpc::ServerCompletionQueue* notification_cq, void *tag) {
+    void RequestCreateAttribute(::grpc::ServerContext* context, ::inexor::entity_system::Attribute* request, ::grpc::ServerAsyncResponseWriter< ::inexor::entity_system::Operation>* response, ::grpc::CompletionQueue* new_call_cq, ::grpc::ServerCompletionQueue* notification_cq, void *tag) {
       ::grpc::Service::RequestAsyncUnary(3, context, request, response, new_call_cq, notification_cq, tag);
     }
   };
   template <class BaseClass>
-  class WithAsyncMethod_CreateEntityRelationAttributeType : public BaseClass {
+  class WithAsyncMethod_ListAttributes : public BaseClass {
    private:
     void BaseClassMustBeDerivedFromService(const Service *service) {}
    public:
-    WithAsyncMethod_CreateEntityRelationAttributeType() {
+    WithAsyncMethod_ListAttributes() {
       ::grpc::Service::MarkMethodAsync(4);
     }
-    ~WithAsyncMethod_CreateEntityRelationAttributeType() override {
+    ~WithAsyncMethod_ListAttributes() override {
       BaseClassMustBeDerivedFromService(this);
     }
     // disable synchronous version of this method
-    ::grpc::Status CreateEntityRelationAttributeType(::grpc::ServerContext* context, const ::inexor::entity_system::EntityRelationAttributeType* request, ::inexor::entity_system::EntityOperation* response) override {
+    ::grpc::Status ListAttributes(::grpc::ServerContext* context, const ::google::protobuf::Empty* request, ::grpc::ServerWriter< ::inexor::entity_system::Attribute>* writer) override {
       abort();
       return ::grpc::Status(::grpc::StatusCode::UNIMPLEMENTED, "");
     }
-    void RequestCreateEntityRelationAttributeType(::grpc::ServerContext* context, ::inexor::entity_system::EntityRelationAttributeType* request, ::grpc::ServerAsyncResponseWriter< ::inexor::entity_system::EntityOperation>* response, ::grpc::CompletionQueue* new_call_cq, ::grpc::ServerCompletionQueue* notification_cq, void *tag) {
-      ::grpc::Service::RequestAsyncUnary(4, context, request, response, new_call_cq, notification_cq, tag);
+    void RequestListAttributes(::grpc::ServerContext* context, ::google::protobuf::Empty* request, ::grpc::ServerAsyncWriter< ::inexor::entity_system::Attribute>* writer, ::grpc::CompletionQueue* new_call_cq, ::grpc::ServerCompletionQueue* notification_cq, void *tag) {
+      ::grpc::Service::RequestAsyncServerStreaming(4, context, request, writer, new_call_cq, notification_cq, tag);
     }
   };
   template <class BaseClass>
-  class WithAsyncMethod_DeleteEntityRelationAttributeType : public BaseClass {
+  class WithAsyncMethod_DeleteAttribute : public BaseClass {
    private:
     void BaseClassMustBeDerivedFromService(const Service *service) {}
    public:
-    WithAsyncMethod_DeleteEntityRelationAttributeType() {
+    WithAsyncMethod_DeleteAttribute() {
       ::grpc::Service::MarkMethodAsync(5);
     }
-    ~WithAsyncMethod_DeleteEntityRelationAttributeType() override {
+    ~WithAsyncMethod_DeleteAttribute() override {
       BaseClassMustBeDerivedFromService(this);
     }
     // disable synchronous version of this method
-    ::grpc::Status DeleteEntityRelationAttributeType(::grpc::ServerContext* context, const ::inexor::entity_system::EntityRelationAttributeType* request, ::inexor::entity_system::EntityOperation* response) override {
+    ::grpc::Status DeleteAttribute(::grpc::ServerContext* context, const ::inexor::entity_system::Attribute* request, ::inexor::entity_system::Operation* response) override {
       abort();
       return ::grpc::Status(::grpc::StatusCode::UNIMPLEMENTED, "");
     }
-    void RequestDeleteEntityRelationAttributeType(::grpc::ServerContext* context, ::inexor::entity_system::EntityRelationAttributeType* request, ::grpc::ServerAsyncResponseWriter< ::inexor::entity_system::EntityOperation>* response, ::grpc::CompletionQueue* new_call_cq, ::grpc::ServerCompletionQueue* notification_cq, void *tag) {
+    void RequestDeleteAttribute(::grpc::ServerContext* context, ::inexor::entity_system::Attribute* request, ::grpc::ServerAsyncResponseWriter< ::inexor::entity_system::Operation>* response, ::grpc::CompletionQueue* new_call_cq, ::grpc::ServerCompletionQueue* notification_cq, void *tag) {
       ::grpc::Service::RequestAsyncUnary(5, context, request, response, new_call_cq, notification_cq, tag);
     }
   };
   template <class BaseClass>
-  class WithAsyncMethod_CreateEntityRelationType : public BaseClass {
+  class WithAsyncMethod_CreateRelation : public BaseClass {
    private:
     void BaseClassMustBeDerivedFromService(const Service *service) {}
    public:
-    WithAsyncMethod_CreateEntityRelationType() {
+    WithAsyncMethod_CreateRelation() {
       ::grpc::Service::MarkMethodAsync(6);
     }
-    ~WithAsyncMethod_CreateEntityRelationType() override {
+    ~WithAsyncMethod_CreateRelation() override {
       BaseClassMustBeDerivedFromService(this);
     }
     // disable synchronous version of this method
-    ::grpc::Status CreateEntityRelationType(::grpc::ServerContext* context, const ::inexor::entity_system::EntityRelationType* request, ::inexor::entity_system::EntityOperation* response) override {
+    ::grpc::Status CreateRelation(::grpc::ServerContext* context, const ::inexor::entity_system::Relation* request, ::inexor::entity_system::Operation* response) override {
       abort();
       return ::grpc::Status(::grpc::StatusCode::UNIMPLEMENTED, "");
     }
-    void RequestCreateEntityRelationType(::grpc::ServerContext* context, ::inexor::entity_system::EntityRelationType* request, ::grpc::ServerAsyncResponseWriter< ::inexor::entity_system::EntityOperation>* response, ::grpc::CompletionQueue* new_call_cq, ::grpc::ServerCompletionQueue* notification_cq, void *tag) {
+    void RequestCreateRelation(::grpc::ServerContext* context, ::inexor::entity_system::Relation* request, ::grpc::ServerAsyncResponseWriter< ::inexor::entity_system::Operation>* response, ::grpc::CompletionQueue* new_call_cq, ::grpc::ServerCompletionQueue* notification_cq, void *tag) {
       ::grpc::Service::RequestAsyncUnary(6, context, request, response, new_call_cq, notification_cq, tag);
     }
   };
   template <class BaseClass>
-  class WithAsyncMethod_DeleteEntityRelationType : public BaseClass {
+  class WithAsyncMethod_ListRelations : public BaseClass {
    private:
     void BaseClassMustBeDerivedFromService(const Service *service) {}
    public:
-    WithAsyncMethod_DeleteEntityRelationType() {
+    WithAsyncMethod_ListRelations() {
       ::grpc::Service::MarkMethodAsync(7);
     }
-    ~WithAsyncMethod_DeleteEntityRelationType() override {
+    ~WithAsyncMethod_ListRelations() override {
       BaseClassMustBeDerivedFromService(this);
     }
     // disable synchronous version of this method
-    ::grpc::Status DeleteEntityRelationType(::grpc::ServerContext* context, const ::inexor::entity_system::EntityRelationType* request, ::inexor::entity_system::EntityOperation* response) override {
+    ::grpc::Status ListRelations(::grpc::ServerContext* context, const ::google::protobuf::Empty* request, ::grpc::ServerWriter< ::inexor::entity_system::Relation>* writer) override {
       abort();
       return ::grpc::Status(::grpc::StatusCode::UNIMPLEMENTED, "");
     }
-    void RequestDeleteEntityRelationType(::grpc::ServerContext* context, ::inexor::entity_system::EntityRelationType* request, ::grpc::ServerAsyncResponseWriter< ::inexor::entity_system::EntityOperation>* response, ::grpc::CompletionQueue* new_call_cq, ::grpc::ServerCompletionQueue* notification_cq, void *tag) {
-      ::grpc::Service::RequestAsyncUnary(7, context, request, response, new_call_cq, notification_cq, tag);
+    void RequestListRelations(::grpc::ServerContext* context, ::google::protobuf::Empty* request, ::grpc::ServerAsyncWriter< ::inexor::entity_system::Relation>* writer, ::grpc::CompletionQueue* new_call_cq, ::grpc::ServerCompletionQueue* notification_cq, void *tag) {
+      ::grpc::Service::RequestAsyncServerStreaming(7, context, request, writer, new_call_cq, notification_cq, tag);
     }
   };
-  typedef WithAsyncMethod_CreateEntityType<WithAsyncMethod_DeleteEntityType<WithAsyncMethod_CreateEntityAttributeType<WithAsyncMethod_DeleteEntityAttributeType<WithAsyncMethod_CreateEntityRelationAttributeType<WithAsyncMethod_DeleteEntityRelationAttributeType<WithAsyncMethod_CreateEntityRelationType<WithAsyncMethod_DeleteEntityRelationType<Service > > > > > > > > AsyncService;
   template <class BaseClass>
-  class ExperimentalWithCallbackMethod_CreateEntityType : public BaseClass {
+  class WithAsyncMethod_DeleteRelation : public BaseClass {
    private:
     void BaseClassMustBeDerivedFromService(const Service *service) {}
    public:
-    ExperimentalWithCallbackMethod_CreateEntityType() {
+    WithAsyncMethod_DeleteRelation() {
+      ::grpc::Service::MarkMethodAsync(8);
+    }
+    ~WithAsyncMethod_DeleteRelation() override {
+      BaseClassMustBeDerivedFromService(this);
+    }
+    // disable synchronous version of this method
+    ::grpc::Status DeleteRelation(::grpc::ServerContext* context, const ::inexor::entity_system::Relation* request, ::inexor::entity_system::Operation* response) override {
+      abort();
+      return ::grpc::Status(::grpc::StatusCode::UNIMPLEMENTED, "");
+    }
+    void RequestDeleteRelation(::grpc::ServerContext* context, ::inexor::entity_system::Relation* request, ::grpc::ServerAsyncResponseWriter< ::inexor::entity_system::Operation>* response, ::grpc::CompletionQueue* new_call_cq, ::grpc::ServerCompletionQueue* notification_cq, void *tag) {
+      ::grpc::Service::RequestAsyncUnary(8, context, request, response, new_call_cq, notification_cq, tag);
+    }
+  };
+  typedef WithAsyncMethod_CreateEntity<WithAsyncMethod_ListEntities<WithAsyncMethod_DeleteEntity<WithAsyncMethod_CreateAttribute<WithAsyncMethod_ListAttributes<WithAsyncMethod_DeleteAttribute<WithAsyncMethod_CreateRelation<WithAsyncMethod_ListRelations<WithAsyncMethod_DeleteRelation<Service > > > > > > > > > AsyncService;
+  template <class BaseClass>
+  class ExperimentalWithCallbackMethod_CreateEntity : public BaseClass {
+   private:
+    void BaseClassMustBeDerivedFromService(const Service *service) {}
+   public:
+    ExperimentalWithCallbackMethod_CreateEntity() {
       ::grpc::Service::experimental().MarkMethodCallback(0,
-        new ::grpc::internal::CallbackUnaryHandler< ExperimentalWithCallbackMethod_CreateEntityType<BaseClass>, ::inexor::entity_system::EntityType, ::inexor::entity_system::EntityOperation>(
+        new ::grpc::internal::CallbackUnaryHandler< ExperimentalWithCallbackMethod_CreateEntity<BaseClass>, ::inexor::entity_system::Entity, ::inexor::entity_system::Operation>(
           [this](::grpc::ServerContext* context,
-                 const ::inexor::entity_system::EntityType* request,
-                 ::inexor::entity_system::EntityOperation* response,
+                 const ::inexor::entity_system::Entity* request,
+                 ::inexor::entity_system::Operation* response,
                  ::grpc::experimental::ServerCallbackRpcController* controller) {
-                   this->CreateEntityType(context, request, response, controller);
+                   this->CreateEntity(context, request, response, controller);
                  }, this));
     }
-    ~ExperimentalWithCallbackMethod_CreateEntityType() override {
+    ~ExperimentalWithCallbackMethod_CreateEntity() override {
       BaseClassMustBeDerivedFromService(this);
     }
     // disable synchronous version of this method
-    ::grpc::Status CreateEntityType(::grpc::ServerContext* context, const ::inexor::entity_system::EntityType* request, ::inexor::entity_system::EntityOperation* response) override {
+    ::grpc::Status CreateEntity(::grpc::ServerContext* context, const ::inexor::entity_system::Entity* request, ::inexor::entity_system::Operation* response) override {
       abort();
       return ::grpc::Status(::grpc::StatusCode::UNIMPLEMENTED, "");
     }
-    virtual void CreateEntityType(::grpc::ServerContext* context, const ::inexor::entity_system::EntityType* request, ::inexor::entity_system::EntityOperation* response, ::grpc::experimental::ServerCallbackRpcController* controller) { controller->Finish(::grpc::Status(::grpc::StatusCode::UNIMPLEMENTED, "")); }
+    virtual void CreateEntity(::grpc::ServerContext* context, const ::inexor::entity_system::Entity* request, ::inexor::entity_system::Operation* response, ::grpc::experimental::ServerCallbackRpcController* controller) { controller->Finish(::grpc::Status(::grpc::StatusCode::UNIMPLEMENTED, "")); }
   };
   template <class BaseClass>
-  class ExperimentalWithCallbackMethod_DeleteEntityType : public BaseClass {
+  class ExperimentalWithCallbackMethod_ListEntities : public BaseClass {
    private:
     void BaseClassMustBeDerivedFromService(const Service *service) {}
    public:
-    ExperimentalWithCallbackMethod_DeleteEntityType() {
-      ::grpc::Service::experimental().MarkMethodCallback(1,
-        new ::grpc::internal::CallbackUnaryHandler< ExperimentalWithCallbackMethod_DeleteEntityType<BaseClass>, ::inexor::entity_system::EntityType, ::inexor::entity_system::EntityOperation>(
-          [this](::grpc::ServerContext* context,
-                 const ::inexor::entity_system::EntityType* request,
-                 ::inexor::entity_system::EntityOperation* response,
-                 ::grpc::experimental::ServerCallbackRpcController* controller) {
-                   this->DeleteEntityType(context, request, response, controller);
-                 }, this));
+    ExperimentalWithCallbackMethod_ListEntities() {
     }
-    ~ExperimentalWithCallbackMethod_DeleteEntityType() override {
+    ~ExperimentalWithCallbackMethod_ListEntities() override {
       BaseClassMustBeDerivedFromService(this);
     }
     // disable synchronous version of this method
-    ::grpc::Status DeleteEntityType(::grpc::ServerContext* context, const ::inexor::entity_system::EntityType* request, ::inexor::entity_system::EntityOperation* response) override {
+    ::grpc::Status ListEntities(::grpc::ServerContext* context, const ::google::protobuf::Empty* request, ::grpc::ServerWriter< ::inexor::entity_system::Entity>* writer) override {
       abort();
       return ::grpc::Status(::grpc::StatusCode::UNIMPLEMENTED, "");
     }
-    virtual void DeleteEntityType(::grpc::ServerContext* context, const ::inexor::entity_system::EntityType* request, ::inexor::entity_system::EntityOperation* response, ::grpc::experimental::ServerCallbackRpcController* controller) { controller->Finish(::grpc::Status(::grpc::StatusCode::UNIMPLEMENTED, "")); }
   };
   template <class BaseClass>
-  class ExperimentalWithCallbackMethod_CreateEntityAttributeType : public BaseClass {
+  class ExperimentalWithCallbackMethod_DeleteEntity : public BaseClass {
    private:
     void BaseClassMustBeDerivedFromService(const Service *service) {}
    public:
-    ExperimentalWithCallbackMethod_CreateEntityAttributeType() {
+    ExperimentalWithCallbackMethod_DeleteEntity() {
       ::grpc::Service::experimental().MarkMethodCallback(2,
-        new ::grpc::internal::CallbackUnaryHandler< ExperimentalWithCallbackMethod_CreateEntityAttributeType<BaseClass>, ::inexor::entity_system::EntityAttributeType, ::inexor::entity_system::EntityOperation>(
+        new ::grpc::internal::CallbackUnaryHandler< ExperimentalWithCallbackMethod_DeleteEntity<BaseClass>, ::inexor::entity_system::Entity, ::inexor::entity_system::Operation>(
           [this](::grpc::ServerContext* context,
-                 const ::inexor::entity_system::EntityAttributeType* request,
-                 ::inexor::entity_system::EntityOperation* response,
+                 const ::inexor::entity_system::Entity* request,
+                 ::inexor::entity_system::Operation* response,
                  ::grpc::experimental::ServerCallbackRpcController* controller) {
-                   this->CreateEntityAttributeType(context, request, response, controller);
+                   this->DeleteEntity(context, request, response, controller);
                  }, this));
     }
-    ~ExperimentalWithCallbackMethod_CreateEntityAttributeType() override {
+    ~ExperimentalWithCallbackMethod_DeleteEntity() override {
       BaseClassMustBeDerivedFromService(this);
     }
     // disable synchronous version of this method
-    ::grpc::Status CreateEntityAttributeType(::grpc::ServerContext* context, const ::inexor::entity_system::EntityAttributeType* request, ::inexor::entity_system::EntityOperation* response) override {
+    ::grpc::Status DeleteEntity(::grpc::ServerContext* context, const ::inexor::entity_system::Entity* request, ::inexor::entity_system::Operation* response) override {
       abort();
       return ::grpc::Status(::grpc::StatusCode::UNIMPLEMENTED, "");
     }
-    virtual void CreateEntityAttributeType(::grpc::ServerContext* context, const ::inexor::entity_system::EntityAttributeType* request, ::inexor::entity_system::EntityOperation* response, ::grpc::experimental::ServerCallbackRpcController* controller) { controller->Finish(::grpc::Status(::grpc::StatusCode::UNIMPLEMENTED, "")); }
+    virtual void DeleteEntity(::grpc::ServerContext* context, const ::inexor::entity_system::Entity* request, ::inexor::entity_system::Operation* response, ::grpc::experimental::ServerCallbackRpcController* controller) { controller->Finish(::grpc::Status(::grpc::StatusCode::UNIMPLEMENTED, "")); }
   };
   template <class BaseClass>
-  class ExperimentalWithCallbackMethod_DeleteEntityAttributeType : public BaseClass {
+  class ExperimentalWithCallbackMethod_CreateAttribute : public BaseClass {
    private:
     void BaseClassMustBeDerivedFromService(const Service *service) {}
    public:
-    ExperimentalWithCallbackMethod_DeleteEntityAttributeType() {
+    ExperimentalWithCallbackMethod_CreateAttribute() {
       ::grpc::Service::experimental().MarkMethodCallback(3,
-        new ::grpc::internal::CallbackUnaryHandler< ExperimentalWithCallbackMethod_DeleteEntityAttributeType<BaseClass>, ::inexor::entity_system::EntityAttributeType, ::inexor::entity_system::EntityOperation>(
+        new ::grpc::internal::CallbackUnaryHandler< ExperimentalWithCallbackMethod_CreateAttribute<BaseClass>, ::inexor::entity_system::Attribute, ::inexor::entity_system::Operation>(
           [this](::grpc::ServerContext* context,
-                 const ::inexor::entity_system::EntityAttributeType* request,
-                 ::inexor::entity_system::EntityOperation* response,
+                 const ::inexor::entity_system::Attribute* request,
+                 ::inexor::entity_system::Operation* response,
                  ::grpc::experimental::ServerCallbackRpcController* controller) {
-                   this->DeleteEntityAttributeType(context, request, response, controller);
+                   this->CreateAttribute(context, request, response, controller);
                  }, this));
     }
-    ~ExperimentalWithCallbackMethod_DeleteEntityAttributeType() override {
+    ~ExperimentalWithCallbackMethod_CreateAttribute() override {
       BaseClassMustBeDerivedFromService(this);
     }
     // disable synchronous version of this method
-    ::grpc::Status DeleteEntityAttributeType(::grpc::ServerContext* context, const ::inexor::entity_system::EntityAttributeType* request, ::inexor::entity_system::EntityOperation* response) override {
+    ::grpc::Status CreateAttribute(::grpc::ServerContext* context, const ::inexor::entity_system::Attribute* request, ::inexor::entity_system::Operation* response) override {
       abort();
       return ::grpc::Status(::grpc::StatusCode::UNIMPLEMENTED, "");
     }
-    virtual void DeleteEntityAttributeType(::grpc::ServerContext* context, const ::inexor::entity_system::EntityAttributeType* request, ::inexor::entity_system::EntityOperation* response, ::grpc::experimental::ServerCallbackRpcController* controller) { controller->Finish(::grpc::Status(::grpc::StatusCode::UNIMPLEMENTED, "")); }
+    virtual void CreateAttribute(::grpc::ServerContext* context, const ::inexor::entity_system::Attribute* request, ::inexor::entity_system::Operation* response, ::grpc::experimental::ServerCallbackRpcController* controller) { controller->Finish(::grpc::Status(::grpc::StatusCode::UNIMPLEMENTED, "")); }
   };
   template <class BaseClass>
-  class ExperimentalWithCallbackMethod_CreateEntityRelationAttributeType : public BaseClass {
+  class ExperimentalWithCallbackMethod_ListAttributes : public BaseClass {
    private:
     void BaseClassMustBeDerivedFromService(const Service *service) {}
    public:
-    ExperimentalWithCallbackMethod_CreateEntityRelationAttributeType() {
-      ::grpc::Service::experimental().MarkMethodCallback(4,
-        new ::grpc::internal::CallbackUnaryHandler< ExperimentalWithCallbackMethod_CreateEntityRelationAttributeType<BaseClass>, ::inexor::entity_system::EntityRelationAttributeType, ::inexor::entity_system::EntityOperation>(
-          [this](::grpc::ServerContext* context,
-                 const ::inexor::entity_system::EntityRelationAttributeType* request,
-                 ::inexor::entity_system::EntityOperation* response,
-                 ::grpc::experimental::ServerCallbackRpcController* controller) {
-                   this->CreateEntityRelationAttributeType(context, request, response, controller);
-                 }, this));
+    ExperimentalWithCallbackMethod_ListAttributes() {
     }
-    ~ExperimentalWithCallbackMethod_CreateEntityRelationAttributeType() override {
+    ~ExperimentalWithCallbackMethod_ListAttributes() override {
       BaseClassMustBeDerivedFromService(this);
     }
     // disable synchronous version of this method
-    ::grpc::Status CreateEntityRelationAttributeType(::grpc::ServerContext* context, const ::inexor::entity_system::EntityRelationAttributeType* request, ::inexor::entity_system::EntityOperation* response) override {
+    ::grpc::Status ListAttributes(::grpc::ServerContext* context, const ::google::protobuf::Empty* request, ::grpc::ServerWriter< ::inexor::entity_system::Attribute>* writer) override {
       abort();
       return ::grpc::Status(::grpc::StatusCode::UNIMPLEMENTED, "");
     }
-    virtual void CreateEntityRelationAttributeType(::grpc::ServerContext* context, const ::inexor::entity_system::EntityRelationAttributeType* request, ::inexor::entity_system::EntityOperation* response, ::grpc::experimental::ServerCallbackRpcController* controller) { controller->Finish(::grpc::Status(::grpc::StatusCode::UNIMPLEMENTED, "")); }
   };
   template <class BaseClass>
-  class ExperimentalWithCallbackMethod_DeleteEntityRelationAttributeType : public BaseClass {
+  class ExperimentalWithCallbackMethod_DeleteAttribute : public BaseClass {
    private:
     void BaseClassMustBeDerivedFromService(const Service *service) {}
    public:
-    ExperimentalWithCallbackMethod_DeleteEntityRelationAttributeType() {
+    ExperimentalWithCallbackMethod_DeleteAttribute() {
       ::grpc::Service::experimental().MarkMethodCallback(5,
-        new ::grpc::internal::CallbackUnaryHandler< ExperimentalWithCallbackMethod_DeleteEntityRelationAttributeType<BaseClass>, ::inexor::entity_system::EntityRelationAttributeType, ::inexor::entity_system::EntityOperation>(
+        new ::grpc::internal::CallbackUnaryHandler< ExperimentalWithCallbackMethod_DeleteAttribute<BaseClass>, ::inexor::entity_system::Attribute, ::inexor::entity_system::Operation>(
           [this](::grpc::ServerContext* context,
-                 const ::inexor::entity_system::EntityRelationAttributeType* request,
-                 ::inexor::entity_system::EntityOperation* response,
+                 const ::inexor::entity_system::Attribute* request,
+                 ::inexor::entity_system::Operation* response,
                  ::grpc::experimental::ServerCallbackRpcController* controller) {
-                   this->DeleteEntityRelationAttributeType(context, request, response, controller);
+                   this->DeleteAttribute(context, request, response, controller);
                  }, this));
     }
-    ~ExperimentalWithCallbackMethod_DeleteEntityRelationAttributeType() override {
+    ~ExperimentalWithCallbackMethod_DeleteAttribute() override {
       BaseClassMustBeDerivedFromService(this);
     }
     // disable synchronous version of this method
-    ::grpc::Status DeleteEntityRelationAttributeType(::grpc::ServerContext* context, const ::inexor::entity_system::EntityRelationAttributeType* request, ::inexor::entity_system::EntityOperation* response) override {
+    ::grpc::Status DeleteAttribute(::grpc::ServerContext* context, const ::inexor::entity_system::Attribute* request, ::inexor::entity_system::Operation* response) override {
       abort();
       return ::grpc::Status(::grpc::StatusCode::UNIMPLEMENTED, "");
     }
-    virtual void DeleteEntityRelationAttributeType(::grpc::ServerContext* context, const ::inexor::entity_system::EntityRelationAttributeType* request, ::inexor::entity_system::EntityOperation* response, ::grpc::experimental::ServerCallbackRpcController* controller) { controller->Finish(::grpc::Status(::grpc::StatusCode::UNIMPLEMENTED, "")); }
+    virtual void DeleteAttribute(::grpc::ServerContext* context, const ::inexor::entity_system::Attribute* request, ::inexor::entity_system::Operation* response, ::grpc::experimental::ServerCallbackRpcController* controller) { controller->Finish(::grpc::Status(::grpc::StatusCode::UNIMPLEMENTED, "")); }
   };
   template <class BaseClass>
-  class ExperimentalWithCallbackMethod_CreateEntityRelationType : public BaseClass {
+  class ExperimentalWithCallbackMethod_CreateRelation : public BaseClass {
    private:
     void BaseClassMustBeDerivedFromService(const Service *service) {}
    public:
-    ExperimentalWithCallbackMethod_CreateEntityRelationType() {
+    ExperimentalWithCallbackMethod_CreateRelation() {
       ::grpc::Service::experimental().MarkMethodCallback(6,
-        new ::grpc::internal::CallbackUnaryHandler< ExperimentalWithCallbackMethod_CreateEntityRelationType<BaseClass>, ::inexor::entity_system::EntityRelationType, ::inexor::entity_system::EntityOperation>(
+        new ::grpc::internal::CallbackUnaryHandler< ExperimentalWithCallbackMethod_CreateRelation<BaseClass>, ::inexor::entity_system::Relation, ::inexor::entity_system::Operation>(
           [this](::grpc::ServerContext* context,
-                 const ::inexor::entity_system::EntityRelationType* request,
-                 ::inexor::entity_system::EntityOperation* response,
+                 const ::inexor::entity_system::Relation* request,
+                 ::inexor::entity_system::Operation* response,
                  ::grpc::experimental::ServerCallbackRpcController* controller) {
-                   this->CreateEntityRelationType(context, request, response, controller);
+                   this->CreateRelation(context, request, response, controller);
                  }, this));
     }
-    ~ExperimentalWithCallbackMethod_CreateEntityRelationType() override {
+    ~ExperimentalWithCallbackMethod_CreateRelation() override {
       BaseClassMustBeDerivedFromService(this);
     }
     // disable synchronous version of this method
-    ::grpc::Status CreateEntityRelationType(::grpc::ServerContext* context, const ::inexor::entity_system::EntityRelationType* request, ::inexor::entity_system::EntityOperation* response) override {
+    ::grpc::Status CreateRelation(::grpc::ServerContext* context, const ::inexor::entity_system::Relation* request, ::inexor::entity_system::Operation* response) override {
       abort();
       return ::grpc::Status(::grpc::StatusCode::UNIMPLEMENTED, "");
     }
-    virtual void CreateEntityRelationType(::grpc::ServerContext* context, const ::inexor::entity_system::EntityRelationType* request, ::inexor::entity_system::EntityOperation* response, ::grpc::experimental::ServerCallbackRpcController* controller) { controller->Finish(::grpc::Status(::grpc::StatusCode::UNIMPLEMENTED, "")); }
+    virtual void CreateRelation(::grpc::ServerContext* context, const ::inexor::entity_system::Relation* request, ::inexor::entity_system::Operation* response, ::grpc::experimental::ServerCallbackRpcController* controller) { controller->Finish(::grpc::Status(::grpc::StatusCode::UNIMPLEMENTED, "")); }
   };
   template <class BaseClass>
-  class ExperimentalWithCallbackMethod_DeleteEntityRelationType : public BaseClass {
+  class ExperimentalWithCallbackMethod_ListRelations : public BaseClass {
    private:
     void BaseClassMustBeDerivedFromService(const Service *service) {}
    public:
-    ExperimentalWithCallbackMethod_DeleteEntityRelationType() {
-      ::grpc::Service::experimental().MarkMethodCallback(7,
-        new ::grpc::internal::CallbackUnaryHandler< ExperimentalWithCallbackMethod_DeleteEntityRelationType<BaseClass>, ::inexor::entity_system::EntityRelationType, ::inexor::entity_system::EntityOperation>(
-          [this](::grpc::ServerContext* context,
-                 const ::inexor::entity_system::EntityRelationType* request,
-                 ::inexor::entity_system::EntityOperation* response,
-                 ::grpc::experimental::ServerCallbackRpcController* controller) {
-                   this->DeleteEntityRelationType(context, request, response, controller);
-                 }, this));
+    ExperimentalWithCallbackMethod_ListRelations() {
     }
-    ~ExperimentalWithCallbackMethod_DeleteEntityRelationType() override {
+    ~ExperimentalWithCallbackMethod_ListRelations() override {
       BaseClassMustBeDerivedFromService(this);
     }
     // disable synchronous version of this method
-    ::grpc::Status DeleteEntityRelationType(::grpc::ServerContext* context, const ::inexor::entity_system::EntityRelationType* request, ::inexor::entity_system::EntityOperation* response) override {
+    ::grpc::Status ListRelations(::grpc::ServerContext* context, const ::google::protobuf::Empty* request, ::grpc::ServerWriter< ::inexor::entity_system::Relation>* writer) override {
       abort();
       return ::grpc::Status(::grpc::StatusCode::UNIMPLEMENTED, "");
     }
-    virtual void DeleteEntityRelationType(::grpc::ServerContext* context, const ::inexor::entity_system::EntityRelationType* request, ::inexor::entity_system::EntityOperation* response, ::grpc::experimental::ServerCallbackRpcController* controller) { controller->Finish(::grpc::Status(::grpc::StatusCode::UNIMPLEMENTED, "")); }
   };
-  typedef ExperimentalWithCallbackMethod_CreateEntityType<ExperimentalWithCallbackMethod_DeleteEntityType<ExperimentalWithCallbackMethod_CreateEntityAttributeType<ExperimentalWithCallbackMethod_DeleteEntityAttributeType<ExperimentalWithCallbackMethod_CreateEntityRelationAttributeType<ExperimentalWithCallbackMethod_DeleteEntityRelationAttributeType<ExperimentalWithCallbackMethod_CreateEntityRelationType<ExperimentalWithCallbackMethod_DeleteEntityRelationType<Service > > > > > > > > ExperimentalCallbackService;
   template <class BaseClass>
-  class WithGenericMethod_CreateEntityType : public BaseClass {
+  class ExperimentalWithCallbackMethod_DeleteRelation : public BaseClass {
    private:
     void BaseClassMustBeDerivedFromService(const Service *service) {}
    public:
-    WithGenericMethod_CreateEntityType() {
+    ExperimentalWithCallbackMethod_DeleteRelation() {
+      ::grpc::Service::experimental().MarkMethodCallback(8,
+        new ::grpc::internal::CallbackUnaryHandler< ExperimentalWithCallbackMethod_DeleteRelation<BaseClass>, ::inexor::entity_system::Relation, ::inexor::entity_system::Operation>(
+          [this](::grpc::ServerContext* context,
+                 const ::inexor::entity_system::Relation* request,
+                 ::inexor::entity_system::Operation* response,
+                 ::grpc::experimental::ServerCallbackRpcController* controller) {
+                   this->DeleteRelation(context, request, response, controller);
+                 }, this));
+    }
+    ~ExperimentalWithCallbackMethod_DeleteRelation() override {
+      BaseClassMustBeDerivedFromService(this);
+    }
+    // disable synchronous version of this method
+    ::grpc::Status DeleteRelation(::grpc::ServerContext* context, const ::inexor::entity_system::Relation* request, ::inexor::entity_system::Operation* response) override {
+      abort();
+      return ::grpc::Status(::grpc::StatusCode::UNIMPLEMENTED, "");
+    }
+    virtual void DeleteRelation(::grpc::ServerContext* context, const ::inexor::entity_system::Relation* request, ::inexor::entity_system::Operation* response, ::grpc::experimental::ServerCallbackRpcController* controller) { controller->Finish(::grpc::Status(::grpc::StatusCode::UNIMPLEMENTED, "")); }
+  };
+  typedef ExperimentalWithCallbackMethod_CreateEntity<ExperimentalWithCallbackMethod_ListEntities<ExperimentalWithCallbackMethod_DeleteEntity<ExperimentalWithCallbackMethod_CreateAttribute<ExperimentalWithCallbackMethod_ListAttributes<ExperimentalWithCallbackMethod_DeleteAttribute<ExperimentalWithCallbackMethod_CreateRelation<ExperimentalWithCallbackMethod_ListRelations<ExperimentalWithCallbackMethod_DeleteRelation<Service > > > > > > > > > ExperimentalCallbackService;
+  template <class BaseClass>
+  class WithGenericMethod_CreateEntity : public BaseClass {
+   private:
+    void BaseClassMustBeDerivedFromService(const Service *service) {}
+   public:
+    WithGenericMethod_CreateEntity() {
       ::grpc::Service::MarkMethodGeneric(0);
     }
-    ~WithGenericMethod_CreateEntityType() override {
+    ~WithGenericMethod_CreateEntity() override {
       BaseClassMustBeDerivedFromService(this);
     }
     // disable synchronous version of this method
-    ::grpc::Status CreateEntityType(::grpc::ServerContext* context, const ::inexor::entity_system::EntityType* request, ::inexor::entity_system::EntityOperation* response) override {
+    ::grpc::Status CreateEntity(::grpc::ServerContext* context, const ::inexor::entity_system::Entity* request, ::inexor::entity_system::Operation* response) override {
       abort();
       return ::grpc::Status(::grpc::StatusCode::UNIMPLEMENTED, "");
     }
   };
   template <class BaseClass>
-  class WithGenericMethod_DeleteEntityType : public BaseClass {
+  class WithGenericMethod_ListEntities : public BaseClass {
    private:
     void BaseClassMustBeDerivedFromService(const Service *service) {}
    public:
-    WithGenericMethod_DeleteEntityType() {
+    WithGenericMethod_ListEntities() {
       ::grpc::Service::MarkMethodGeneric(1);
     }
-    ~WithGenericMethod_DeleteEntityType() override {
+    ~WithGenericMethod_ListEntities() override {
       BaseClassMustBeDerivedFromService(this);
     }
     // disable synchronous version of this method
-    ::grpc::Status DeleteEntityType(::grpc::ServerContext* context, const ::inexor::entity_system::EntityType* request, ::inexor::entity_system::EntityOperation* response) override {
+    ::grpc::Status ListEntities(::grpc::ServerContext* context, const ::google::protobuf::Empty* request, ::grpc::ServerWriter< ::inexor::entity_system::Entity>* writer) override {
       abort();
       return ::grpc::Status(::grpc::StatusCode::UNIMPLEMENTED, "");
     }
   };
   template <class BaseClass>
-  class WithGenericMethod_CreateEntityAttributeType : public BaseClass {
+  class WithGenericMethod_DeleteEntity : public BaseClass {
    private:
     void BaseClassMustBeDerivedFromService(const Service *service) {}
    public:
-    WithGenericMethod_CreateEntityAttributeType() {
+    WithGenericMethod_DeleteEntity() {
       ::grpc::Service::MarkMethodGeneric(2);
     }
-    ~WithGenericMethod_CreateEntityAttributeType() override {
+    ~WithGenericMethod_DeleteEntity() override {
       BaseClassMustBeDerivedFromService(this);
     }
     // disable synchronous version of this method
-    ::grpc::Status CreateEntityAttributeType(::grpc::ServerContext* context, const ::inexor::entity_system::EntityAttributeType* request, ::inexor::entity_system::EntityOperation* response) override {
+    ::grpc::Status DeleteEntity(::grpc::ServerContext* context, const ::inexor::entity_system::Entity* request, ::inexor::entity_system::Operation* response) override {
       abort();
       return ::grpc::Status(::grpc::StatusCode::UNIMPLEMENTED, "");
     }
   };
   template <class BaseClass>
-  class WithGenericMethod_DeleteEntityAttributeType : public BaseClass {
+  class WithGenericMethod_CreateAttribute : public BaseClass {
    private:
     void BaseClassMustBeDerivedFromService(const Service *service) {}
    public:
-    WithGenericMethod_DeleteEntityAttributeType() {
+    WithGenericMethod_CreateAttribute() {
       ::grpc::Service::MarkMethodGeneric(3);
     }
-    ~WithGenericMethod_DeleteEntityAttributeType() override {
+    ~WithGenericMethod_CreateAttribute() override {
       BaseClassMustBeDerivedFromService(this);
     }
     // disable synchronous version of this method
-    ::grpc::Status DeleteEntityAttributeType(::grpc::ServerContext* context, const ::inexor::entity_system::EntityAttributeType* request, ::inexor::entity_system::EntityOperation* response) override {
+    ::grpc::Status CreateAttribute(::grpc::ServerContext* context, const ::inexor::entity_system::Attribute* request, ::inexor::entity_system::Operation* response) override {
       abort();
       return ::grpc::Status(::grpc::StatusCode::UNIMPLEMENTED, "");
     }
   };
   template <class BaseClass>
-  class WithGenericMethod_CreateEntityRelationAttributeType : public BaseClass {
+  class WithGenericMethod_ListAttributes : public BaseClass {
    private:
     void BaseClassMustBeDerivedFromService(const Service *service) {}
    public:
-    WithGenericMethod_CreateEntityRelationAttributeType() {
+    WithGenericMethod_ListAttributes() {
       ::grpc::Service::MarkMethodGeneric(4);
     }
-    ~WithGenericMethod_CreateEntityRelationAttributeType() override {
+    ~WithGenericMethod_ListAttributes() override {
       BaseClassMustBeDerivedFromService(this);
     }
     // disable synchronous version of this method
-    ::grpc::Status CreateEntityRelationAttributeType(::grpc::ServerContext* context, const ::inexor::entity_system::EntityRelationAttributeType* request, ::inexor::entity_system::EntityOperation* response) override {
+    ::grpc::Status ListAttributes(::grpc::ServerContext* context, const ::google::protobuf::Empty* request, ::grpc::ServerWriter< ::inexor::entity_system::Attribute>* writer) override {
       abort();
       return ::grpc::Status(::grpc::StatusCode::UNIMPLEMENTED, "");
     }
   };
   template <class BaseClass>
-  class WithGenericMethod_DeleteEntityRelationAttributeType : public BaseClass {
+  class WithGenericMethod_DeleteAttribute : public BaseClass {
    private:
     void BaseClassMustBeDerivedFromService(const Service *service) {}
    public:
-    WithGenericMethod_DeleteEntityRelationAttributeType() {
+    WithGenericMethod_DeleteAttribute() {
       ::grpc::Service::MarkMethodGeneric(5);
     }
-    ~WithGenericMethod_DeleteEntityRelationAttributeType() override {
+    ~WithGenericMethod_DeleteAttribute() override {
       BaseClassMustBeDerivedFromService(this);
     }
     // disable synchronous version of this method
-    ::grpc::Status DeleteEntityRelationAttributeType(::grpc::ServerContext* context, const ::inexor::entity_system::EntityRelationAttributeType* request, ::inexor::entity_system::EntityOperation* response) override {
+    ::grpc::Status DeleteAttribute(::grpc::ServerContext* context, const ::inexor::entity_system::Attribute* request, ::inexor::entity_system::Operation* response) override {
       abort();
       return ::grpc::Status(::grpc::StatusCode::UNIMPLEMENTED, "");
     }
   };
   template <class BaseClass>
-  class WithGenericMethod_CreateEntityRelationType : public BaseClass {
+  class WithGenericMethod_CreateRelation : public BaseClass {
    private:
     void BaseClassMustBeDerivedFromService(const Service *service) {}
    public:
-    WithGenericMethod_CreateEntityRelationType() {
+    WithGenericMethod_CreateRelation() {
       ::grpc::Service::MarkMethodGeneric(6);
     }
-    ~WithGenericMethod_CreateEntityRelationType() override {
+    ~WithGenericMethod_CreateRelation() override {
       BaseClassMustBeDerivedFromService(this);
     }
     // disable synchronous version of this method
-    ::grpc::Status CreateEntityRelationType(::grpc::ServerContext* context, const ::inexor::entity_system::EntityRelationType* request, ::inexor::entity_system::EntityOperation* response) override {
+    ::grpc::Status CreateRelation(::grpc::ServerContext* context, const ::inexor::entity_system::Relation* request, ::inexor::entity_system::Operation* response) override {
       abort();
       return ::grpc::Status(::grpc::StatusCode::UNIMPLEMENTED, "");
     }
   };
   template <class BaseClass>
-  class WithGenericMethod_DeleteEntityRelationType : public BaseClass {
+  class WithGenericMethod_ListRelations : public BaseClass {
    private:
     void BaseClassMustBeDerivedFromService(const Service *service) {}
    public:
-    WithGenericMethod_DeleteEntityRelationType() {
+    WithGenericMethod_ListRelations() {
       ::grpc::Service::MarkMethodGeneric(7);
     }
-    ~WithGenericMethod_DeleteEntityRelationType() override {
+    ~WithGenericMethod_ListRelations() override {
       BaseClassMustBeDerivedFromService(this);
     }
     // disable synchronous version of this method
-    ::grpc::Status DeleteEntityRelationType(::grpc::ServerContext* context, const ::inexor::entity_system::EntityRelationType* request, ::inexor::entity_system::EntityOperation* response) override {
+    ::grpc::Status ListRelations(::grpc::ServerContext* context, const ::google::protobuf::Empty* request, ::grpc::ServerWriter< ::inexor::entity_system::Relation>* writer) override {
       abort();
       return ::grpc::Status(::grpc::StatusCode::UNIMPLEMENTED, "");
     }
   };
   template <class BaseClass>
-  class WithRawMethod_CreateEntityType : public BaseClass {
+  class WithGenericMethod_DeleteRelation : public BaseClass {
    private:
     void BaseClassMustBeDerivedFromService(const Service *service) {}
    public:
-    WithRawMethod_CreateEntityType() {
-      ::grpc::Service::MarkMethodRaw(0);
+    WithGenericMethod_DeleteRelation() {
+      ::grpc::Service::MarkMethodGeneric(8);
     }
-    ~WithRawMethod_CreateEntityType() override {
+    ~WithGenericMethod_DeleteRelation() override {
       BaseClassMustBeDerivedFromService(this);
     }
     // disable synchronous version of this method
-    ::grpc::Status CreateEntityType(::grpc::ServerContext* context, const ::inexor::entity_system::EntityType* request, ::inexor::entity_system::EntityOperation* response) override {
+    ::grpc::Status DeleteRelation(::grpc::ServerContext* context, const ::inexor::entity_system::Relation* request, ::inexor::entity_system::Operation* response) override {
       abort();
       return ::grpc::Status(::grpc::StatusCode::UNIMPLEMENTED, "");
     }
-    void RequestCreateEntityType(::grpc::ServerContext* context, ::grpc::ByteBuffer* request, ::grpc::ServerAsyncResponseWriter< ::grpc::ByteBuffer>* response, ::grpc::CompletionQueue* new_call_cq, ::grpc::ServerCompletionQueue* notification_cq, void *tag) {
+  };
+  template <class BaseClass>
+  class WithRawMethod_CreateEntity : public BaseClass {
+   private:
+    void BaseClassMustBeDerivedFromService(const Service *service) {}
+   public:
+    WithRawMethod_CreateEntity() {
+      ::grpc::Service::MarkMethodRaw(0);
+    }
+    ~WithRawMethod_CreateEntity() override {
+      BaseClassMustBeDerivedFromService(this);
+    }
+    // disable synchronous version of this method
+    ::grpc::Status CreateEntity(::grpc::ServerContext* context, const ::inexor::entity_system::Entity* request, ::inexor::entity_system::Operation* response) override {
+      abort();
+      return ::grpc::Status(::grpc::StatusCode::UNIMPLEMENTED, "");
+    }
+    void RequestCreateEntity(::grpc::ServerContext* context, ::grpc::ByteBuffer* request, ::grpc::ServerAsyncResponseWriter< ::grpc::ByteBuffer>* response, ::grpc::CompletionQueue* new_call_cq, ::grpc::ServerCompletionQueue* notification_cq, void *tag) {
       ::grpc::Service::RequestAsyncUnary(0, context, request, response, new_call_cq, notification_cq, tag);
     }
   };
   template <class BaseClass>
-  class WithRawMethod_DeleteEntityType : public BaseClass {
+  class WithRawMethod_ListEntities : public BaseClass {
    private:
     void BaseClassMustBeDerivedFromService(const Service *service) {}
    public:
-    WithRawMethod_DeleteEntityType() {
+    WithRawMethod_ListEntities() {
       ::grpc::Service::MarkMethodRaw(1);
     }
-    ~WithRawMethod_DeleteEntityType() override {
+    ~WithRawMethod_ListEntities() override {
       BaseClassMustBeDerivedFromService(this);
     }
     // disable synchronous version of this method
-    ::grpc::Status DeleteEntityType(::grpc::ServerContext* context, const ::inexor::entity_system::EntityType* request, ::inexor::entity_system::EntityOperation* response) override {
+    ::grpc::Status ListEntities(::grpc::ServerContext* context, const ::google::protobuf::Empty* request, ::grpc::ServerWriter< ::inexor::entity_system::Entity>* writer) override {
       abort();
       return ::grpc::Status(::grpc::StatusCode::UNIMPLEMENTED, "");
     }
-    void RequestDeleteEntityType(::grpc::ServerContext* context, ::grpc::ByteBuffer* request, ::grpc::ServerAsyncResponseWriter< ::grpc::ByteBuffer>* response, ::grpc::CompletionQueue* new_call_cq, ::grpc::ServerCompletionQueue* notification_cq, void *tag) {
-      ::grpc::Service::RequestAsyncUnary(1, context, request, response, new_call_cq, notification_cq, tag);
+    void RequestListEntities(::grpc::ServerContext* context, ::grpc::ByteBuffer* request, ::grpc::ServerAsyncWriter< ::grpc::ByteBuffer>* writer, ::grpc::CompletionQueue* new_call_cq, ::grpc::ServerCompletionQueue* notification_cq, void *tag) {
+      ::grpc::Service::RequestAsyncServerStreaming(1, context, request, writer, new_call_cq, notification_cq, tag);
     }
   };
   template <class BaseClass>
-  class WithRawMethod_CreateEntityAttributeType : public BaseClass {
+  class WithRawMethod_DeleteEntity : public BaseClass {
    private:
     void BaseClassMustBeDerivedFromService(const Service *service) {}
    public:
-    WithRawMethod_CreateEntityAttributeType() {
+    WithRawMethod_DeleteEntity() {
       ::grpc::Service::MarkMethodRaw(2);
     }
-    ~WithRawMethod_CreateEntityAttributeType() override {
+    ~WithRawMethod_DeleteEntity() override {
       BaseClassMustBeDerivedFromService(this);
     }
     // disable synchronous version of this method
-    ::grpc::Status CreateEntityAttributeType(::grpc::ServerContext* context, const ::inexor::entity_system::EntityAttributeType* request, ::inexor::entity_system::EntityOperation* response) override {
+    ::grpc::Status DeleteEntity(::grpc::ServerContext* context, const ::inexor::entity_system::Entity* request, ::inexor::entity_system::Operation* response) override {
       abort();
       return ::grpc::Status(::grpc::StatusCode::UNIMPLEMENTED, "");
     }
-    void RequestCreateEntityAttributeType(::grpc::ServerContext* context, ::grpc::ByteBuffer* request, ::grpc::ServerAsyncResponseWriter< ::grpc::ByteBuffer>* response, ::grpc::CompletionQueue* new_call_cq, ::grpc::ServerCompletionQueue* notification_cq, void *tag) {
+    void RequestDeleteEntity(::grpc::ServerContext* context, ::grpc::ByteBuffer* request, ::grpc::ServerAsyncResponseWriter< ::grpc::ByteBuffer>* response, ::grpc::CompletionQueue* new_call_cq, ::grpc::ServerCompletionQueue* notification_cq, void *tag) {
       ::grpc::Service::RequestAsyncUnary(2, context, request, response, new_call_cq, notification_cq, tag);
     }
   };
   template <class BaseClass>
-  class WithRawMethod_DeleteEntityAttributeType : public BaseClass {
+  class WithRawMethod_CreateAttribute : public BaseClass {
    private:
     void BaseClassMustBeDerivedFromService(const Service *service) {}
    public:
-    WithRawMethod_DeleteEntityAttributeType() {
+    WithRawMethod_CreateAttribute() {
       ::grpc::Service::MarkMethodRaw(3);
     }
-    ~WithRawMethod_DeleteEntityAttributeType() override {
+    ~WithRawMethod_CreateAttribute() override {
       BaseClassMustBeDerivedFromService(this);
     }
     // disable synchronous version of this method
-    ::grpc::Status DeleteEntityAttributeType(::grpc::ServerContext* context, const ::inexor::entity_system::EntityAttributeType* request, ::inexor::entity_system::EntityOperation* response) override {
+    ::grpc::Status CreateAttribute(::grpc::ServerContext* context, const ::inexor::entity_system::Attribute* request, ::inexor::entity_system::Operation* response) override {
       abort();
       return ::grpc::Status(::grpc::StatusCode::UNIMPLEMENTED, "");
     }
-    void RequestDeleteEntityAttributeType(::grpc::ServerContext* context, ::grpc::ByteBuffer* request, ::grpc::ServerAsyncResponseWriter< ::grpc::ByteBuffer>* response, ::grpc::CompletionQueue* new_call_cq, ::grpc::ServerCompletionQueue* notification_cq, void *tag) {
+    void RequestCreateAttribute(::grpc::ServerContext* context, ::grpc::ByteBuffer* request, ::grpc::ServerAsyncResponseWriter< ::grpc::ByteBuffer>* response, ::grpc::CompletionQueue* new_call_cq, ::grpc::ServerCompletionQueue* notification_cq, void *tag) {
       ::grpc::Service::RequestAsyncUnary(3, context, request, response, new_call_cq, notification_cq, tag);
     }
   };
   template <class BaseClass>
-  class WithRawMethod_CreateEntityRelationAttributeType : public BaseClass {
+  class WithRawMethod_ListAttributes : public BaseClass {
    private:
     void BaseClassMustBeDerivedFromService(const Service *service) {}
    public:
-    WithRawMethod_CreateEntityRelationAttributeType() {
+    WithRawMethod_ListAttributes() {
       ::grpc::Service::MarkMethodRaw(4);
     }
-    ~WithRawMethod_CreateEntityRelationAttributeType() override {
+    ~WithRawMethod_ListAttributes() override {
       BaseClassMustBeDerivedFromService(this);
     }
     // disable synchronous version of this method
-    ::grpc::Status CreateEntityRelationAttributeType(::grpc::ServerContext* context, const ::inexor::entity_system::EntityRelationAttributeType* request, ::inexor::entity_system::EntityOperation* response) override {
+    ::grpc::Status ListAttributes(::grpc::ServerContext* context, const ::google::protobuf::Empty* request, ::grpc::ServerWriter< ::inexor::entity_system::Attribute>* writer) override {
       abort();
       return ::grpc::Status(::grpc::StatusCode::UNIMPLEMENTED, "");
     }
-    void RequestCreateEntityRelationAttributeType(::grpc::ServerContext* context, ::grpc::ByteBuffer* request, ::grpc::ServerAsyncResponseWriter< ::grpc::ByteBuffer>* response, ::grpc::CompletionQueue* new_call_cq, ::grpc::ServerCompletionQueue* notification_cq, void *tag) {
-      ::grpc::Service::RequestAsyncUnary(4, context, request, response, new_call_cq, notification_cq, tag);
+    void RequestListAttributes(::grpc::ServerContext* context, ::grpc::ByteBuffer* request, ::grpc::ServerAsyncWriter< ::grpc::ByteBuffer>* writer, ::grpc::CompletionQueue* new_call_cq, ::grpc::ServerCompletionQueue* notification_cq, void *tag) {
+      ::grpc::Service::RequestAsyncServerStreaming(4, context, request, writer, new_call_cq, notification_cq, tag);
     }
   };
   template <class BaseClass>
-  class WithRawMethod_DeleteEntityRelationAttributeType : public BaseClass {
+  class WithRawMethod_DeleteAttribute : public BaseClass {
    private:
     void BaseClassMustBeDerivedFromService(const Service *service) {}
    public:
-    WithRawMethod_DeleteEntityRelationAttributeType() {
+    WithRawMethod_DeleteAttribute() {
       ::grpc::Service::MarkMethodRaw(5);
     }
-    ~WithRawMethod_DeleteEntityRelationAttributeType() override {
+    ~WithRawMethod_DeleteAttribute() override {
       BaseClassMustBeDerivedFromService(this);
     }
     // disable synchronous version of this method
-    ::grpc::Status DeleteEntityRelationAttributeType(::grpc::ServerContext* context, const ::inexor::entity_system::EntityRelationAttributeType* request, ::inexor::entity_system::EntityOperation* response) override {
+    ::grpc::Status DeleteAttribute(::grpc::ServerContext* context, const ::inexor::entity_system::Attribute* request, ::inexor::entity_system::Operation* response) override {
       abort();
       return ::grpc::Status(::grpc::StatusCode::UNIMPLEMENTED, "");
     }
-    void RequestDeleteEntityRelationAttributeType(::grpc::ServerContext* context, ::grpc::ByteBuffer* request, ::grpc::ServerAsyncResponseWriter< ::grpc::ByteBuffer>* response, ::grpc::CompletionQueue* new_call_cq, ::grpc::ServerCompletionQueue* notification_cq, void *tag) {
+    void RequestDeleteAttribute(::grpc::ServerContext* context, ::grpc::ByteBuffer* request, ::grpc::ServerAsyncResponseWriter< ::grpc::ByteBuffer>* response, ::grpc::CompletionQueue* new_call_cq, ::grpc::ServerCompletionQueue* notification_cq, void *tag) {
       ::grpc::Service::RequestAsyncUnary(5, context, request, response, new_call_cq, notification_cq, tag);
     }
   };
   template <class BaseClass>
-  class WithRawMethod_CreateEntityRelationType : public BaseClass {
+  class WithRawMethod_CreateRelation : public BaseClass {
    private:
     void BaseClassMustBeDerivedFromService(const Service *service) {}
    public:
-    WithRawMethod_CreateEntityRelationType() {
+    WithRawMethod_CreateRelation() {
       ::grpc::Service::MarkMethodRaw(6);
     }
-    ~WithRawMethod_CreateEntityRelationType() override {
+    ~WithRawMethod_CreateRelation() override {
       BaseClassMustBeDerivedFromService(this);
     }
     // disable synchronous version of this method
-    ::grpc::Status CreateEntityRelationType(::grpc::ServerContext* context, const ::inexor::entity_system::EntityRelationType* request, ::inexor::entity_system::EntityOperation* response) override {
+    ::grpc::Status CreateRelation(::grpc::ServerContext* context, const ::inexor::entity_system::Relation* request, ::inexor::entity_system::Operation* response) override {
       abort();
       return ::grpc::Status(::grpc::StatusCode::UNIMPLEMENTED, "");
     }
-    void RequestCreateEntityRelationType(::grpc::ServerContext* context, ::grpc::ByteBuffer* request, ::grpc::ServerAsyncResponseWriter< ::grpc::ByteBuffer>* response, ::grpc::CompletionQueue* new_call_cq, ::grpc::ServerCompletionQueue* notification_cq, void *tag) {
+    void RequestCreateRelation(::grpc::ServerContext* context, ::grpc::ByteBuffer* request, ::grpc::ServerAsyncResponseWriter< ::grpc::ByteBuffer>* response, ::grpc::CompletionQueue* new_call_cq, ::grpc::ServerCompletionQueue* notification_cq, void *tag) {
       ::grpc::Service::RequestAsyncUnary(6, context, request, response, new_call_cq, notification_cq, tag);
     }
   };
   template <class BaseClass>
-  class WithRawMethod_DeleteEntityRelationType : public BaseClass {
+  class WithRawMethod_ListRelations : public BaseClass {
    private:
     void BaseClassMustBeDerivedFromService(const Service *service) {}
    public:
-    WithRawMethod_DeleteEntityRelationType() {
+    WithRawMethod_ListRelations() {
       ::grpc::Service::MarkMethodRaw(7);
     }
-    ~WithRawMethod_DeleteEntityRelationType() override {
+    ~WithRawMethod_ListRelations() override {
       BaseClassMustBeDerivedFromService(this);
     }
     // disable synchronous version of this method
-    ::grpc::Status DeleteEntityRelationType(::grpc::ServerContext* context, const ::inexor::entity_system::EntityRelationType* request, ::inexor::entity_system::EntityOperation* response) override {
+    ::grpc::Status ListRelations(::grpc::ServerContext* context, const ::google::protobuf::Empty* request, ::grpc::ServerWriter< ::inexor::entity_system::Relation>* writer) override {
       abort();
       return ::grpc::Status(::grpc::StatusCode::UNIMPLEMENTED, "");
     }
-    void RequestDeleteEntityRelationType(::grpc::ServerContext* context, ::grpc::ByteBuffer* request, ::grpc::ServerAsyncResponseWriter< ::grpc::ByteBuffer>* response, ::grpc::CompletionQueue* new_call_cq, ::grpc::ServerCompletionQueue* notification_cq, void *tag) {
-      ::grpc::Service::RequestAsyncUnary(7, context, request, response, new_call_cq, notification_cq, tag);
+    void RequestListRelations(::grpc::ServerContext* context, ::grpc::ByteBuffer* request, ::grpc::ServerAsyncWriter< ::grpc::ByteBuffer>* writer, ::grpc::CompletionQueue* new_call_cq, ::grpc::ServerCompletionQueue* notification_cq, void *tag) {
+      ::grpc::Service::RequestAsyncServerStreaming(7, context, request, writer, new_call_cq, notification_cq, tag);
     }
   };
   template <class BaseClass>
-  class ExperimentalWithRawCallbackMethod_CreateEntityType : public BaseClass {
+  class WithRawMethod_DeleteRelation : public BaseClass {
    private:
     void BaseClassMustBeDerivedFromService(const Service *service) {}
    public:
-    ExperimentalWithRawCallbackMethod_CreateEntityType() {
+    WithRawMethod_DeleteRelation() {
+      ::grpc::Service::MarkMethodRaw(8);
+    }
+    ~WithRawMethod_DeleteRelation() override {
+      BaseClassMustBeDerivedFromService(this);
+    }
+    // disable synchronous version of this method
+    ::grpc::Status DeleteRelation(::grpc::ServerContext* context, const ::inexor::entity_system::Relation* request, ::inexor::entity_system::Operation* response) override {
+      abort();
+      return ::grpc::Status(::grpc::StatusCode::UNIMPLEMENTED, "");
+    }
+    void RequestDeleteRelation(::grpc::ServerContext* context, ::grpc::ByteBuffer* request, ::grpc::ServerAsyncResponseWriter< ::grpc::ByteBuffer>* response, ::grpc::CompletionQueue* new_call_cq, ::grpc::ServerCompletionQueue* notification_cq, void *tag) {
+      ::grpc::Service::RequestAsyncUnary(8, context, request, response, new_call_cq, notification_cq, tag);
+    }
+  };
+  template <class BaseClass>
+  class ExperimentalWithRawCallbackMethod_CreateEntity : public BaseClass {
+   private:
+    void BaseClassMustBeDerivedFromService(const Service *service) {}
+   public:
+    ExperimentalWithRawCallbackMethod_CreateEntity() {
       ::grpc::Service::experimental().MarkMethodRawCallback(0,
-        new ::grpc::internal::CallbackUnaryHandler< ExperimentalWithRawCallbackMethod_CreateEntityType<BaseClass>, ::grpc::ByteBuffer, ::grpc::ByteBuffer>(
+        new ::grpc::internal::CallbackUnaryHandler< ExperimentalWithRawCallbackMethod_CreateEntity<BaseClass>, ::grpc::ByteBuffer, ::grpc::ByteBuffer>(
           [this](::grpc::ServerContext* context,
                  const ::grpc::ByteBuffer* request,
                  ::grpc::ByteBuffer* response,
                  ::grpc::experimental::ServerCallbackRpcController* controller) {
-                   this->CreateEntityType(context, request, response, controller);
+                   this->CreateEntity(context, request, response, controller);
                  }, this));
     }
-    ~ExperimentalWithRawCallbackMethod_CreateEntityType() override {
+    ~ExperimentalWithRawCallbackMethod_CreateEntity() override {
       BaseClassMustBeDerivedFromService(this);
     }
     // disable synchronous version of this method
-    ::grpc::Status CreateEntityType(::grpc::ServerContext* context, const ::inexor::entity_system::EntityType* request, ::inexor::entity_system::EntityOperation* response) override {
+    ::grpc::Status CreateEntity(::grpc::ServerContext* context, const ::inexor::entity_system::Entity* request, ::inexor::entity_system::Operation* response) override {
       abort();
       return ::grpc::Status(::grpc::StatusCode::UNIMPLEMENTED, "");
     }
-    virtual void CreateEntityType(::grpc::ServerContext* context, const ::grpc::ByteBuffer* request, ::grpc::ByteBuffer* response, ::grpc::experimental::ServerCallbackRpcController* controller) { controller->Finish(::grpc::Status(::grpc::StatusCode::UNIMPLEMENTED, "")); }
+    virtual void CreateEntity(::grpc::ServerContext* context, const ::grpc::ByteBuffer* request, ::grpc::ByteBuffer* response, ::grpc::experimental::ServerCallbackRpcController* controller) { controller->Finish(::grpc::Status(::grpc::StatusCode::UNIMPLEMENTED, "")); }
   };
   template <class BaseClass>
-  class ExperimentalWithRawCallbackMethod_DeleteEntityType : public BaseClass {
+  class ExperimentalWithRawCallbackMethod_ListEntities : public BaseClass {
    private:
     void BaseClassMustBeDerivedFromService(const Service *service) {}
    public:
-    ExperimentalWithRawCallbackMethod_DeleteEntityType() {
-      ::grpc::Service::experimental().MarkMethodRawCallback(1,
-        new ::grpc::internal::CallbackUnaryHandler< ExperimentalWithRawCallbackMethod_DeleteEntityType<BaseClass>, ::grpc::ByteBuffer, ::grpc::ByteBuffer>(
-          [this](::grpc::ServerContext* context,
-                 const ::grpc::ByteBuffer* request,
-                 ::grpc::ByteBuffer* response,
-                 ::grpc::experimental::ServerCallbackRpcController* controller) {
-                   this->DeleteEntityType(context, request, response, controller);
-                 }, this));
+    ExperimentalWithRawCallbackMethod_ListEntities() {
     }
-    ~ExperimentalWithRawCallbackMethod_DeleteEntityType() override {
+    ~ExperimentalWithRawCallbackMethod_ListEntities() override {
       BaseClassMustBeDerivedFromService(this);
     }
     // disable synchronous version of this method
-    ::grpc::Status DeleteEntityType(::grpc::ServerContext* context, const ::inexor::entity_system::EntityType* request, ::inexor::entity_system::EntityOperation* response) override {
+    ::grpc::Status ListEntities(::grpc::ServerContext* context, const ::google::protobuf::Empty* request, ::grpc::ServerWriter< ::inexor::entity_system::Entity>* writer) override {
       abort();
       return ::grpc::Status(::grpc::StatusCode::UNIMPLEMENTED, "");
     }
-    virtual void DeleteEntityType(::grpc::ServerContext* context, const ::grpc::ByteBuffer* request, ::grpc::ByteBuffer* response, ::grpc::experimental::ServerCallbackRpcController* controller) { controller->Finish(::grpc::Status(::grpc::StatusCode::UNIMPLEMENTED, "")); }
   };
   template <class BaseClass>
-  class ExperimentalWithRawCallbackMethod_CreateEntityAttributeType : public BaseClass {
+  class ExperimentalWithRawCallbackMethod_DeleteEntity : public BaseClass {
    private:
     void BaseClassMustBeDerivedFromService(const Service *service) {}
    public:
-    ExperimentalWithRawCallbackMethod_CreateEntityAttributeType() {
+    ExperimentalWithRawCallbackMethod_DeleteEntity() {
       ::grpc::Service::experimental().MarkMethodRawCallback(2,
-        new ::grpc::internal::CallbackUnaryHandler< ExperimentalWithRawCallbackMethod_CreateEntityAttributeType<BaseClass>, ::grpc::ByteBuffer, ::grpc::ByteBuffer>(
+        new ::grpc::internal::CallbackUnaryHandler< ExperimentalWithRawCallbackMethod_DeleteEntity<BaseClass>, ::grpc::ByteBuffer, ::grpc::ByteBuffer>(
           [this](::grpc::ServerContext* context,
                  const ::grpc::ByteBuffer* request,
                  ::grpc::ByteBuffer* response,
                  ::grpc::experimental::ServerCallbackRpcController* controller) {
-                   this->CreateEntityAttributeType(context, request, response, controller);
+                   this->DeleteEntity(context, request, response, controller);
                  }, this));
     }
-    ~ExperimentalWithRawCallbackMethod_CreateEntityAttributeType() override {
+    ~ExperimentalWithRawCallbackMethod_DeleteEntity() override {
       BaseClassMustBeDerivedFromService(this);
     }
     // disable synchronous version of this method
-    ::grpc::Status CreateEntityAttributeType(::grpc::ServerContext* context, const ::inexor::entity_system::EntityAttributeType* request, ::inexor::entity_system::EntityOperation* response) override {
+    ::grpc::Status DeleteEntity(::grpc::ServerContext* context, const ::inexor::entity_system::Entity* request, ::inexor::entity_system::Operation* response) override {
       abort();
       return ::grpc::Status(::grpc::StatusCode::UNIMPLEMENTED, "");
     }
-    virtual void CreateEntityAttributeType(::grpc::ServerContext* context, const ::grpc::ByteBuffer* request, ::grpc::ByteBuffer* response, ::grpc::experimental::ServerCallbackRpcController* controller) { controller->Finish(::grpc::Status(::grpc::StatusCode::UNIMPLEMENTED, "")); }
+    virtual void DeleteEntity(::grpc::ServerContext* context, const ::grpc::ByteBuffer* request, ::grpc::ByteBuffer* response, ::grpc::experimental::ServerCallbackRpcController* controller) { controller->Finish(::grpc::Status(::grpc::StatusCode::UNIMPLEMENTED, "")); }
   };
   template <class BaseClass>
-  class ExperimentalWithRawCallbackMethod_DeleteEntityAttributeType : public BaseClass {
+  class ExperimentalWithRawCallbackMethod_CreateAttribute : public BaseClass {
    private:
     void BaseClassMustBeDerivedFromService(const Service *service) {}
    public:
-    ExperimentalWithRawCallbackMethod_DeleteEntityAttributeType() {
+    ExperimentalWithRawCallbackMethod_CreateAttribute() {
       ::grpc::Service::experimental().MarkMethodRawCallback(3,
-        new ::grpc::internal::CallbackUnaryHandler< ExperimentalWithRawCallbackMethod_DeleteEntityAttributeType<BaseClass>, ::grpc::ByteBuffer, ::grpc::ByteBuffer>(
+        new ::grpc::internal::CallbackUnaryHandler< ExperimentalWithRawCallbackMethod_CreateAttribute<BaseClass>, ::grpc::ByteBuffer, ::grpc::ByteBuffer>(
           [this](::grpc::ServerContext* context,
                  const ::grpc::ByteBuffer* request,
                  ::grpc::ByteBuffer* response,
                  ::grpc::experimental::ServerCallbackRpcController* controller) {
-                   this->DeleteEntityAttributeType(context, request, response, controller);
+                   this->CreateAttribute(context, request, response, controller);
                  }, this));
     }
-    ~ExperimentalWithRawCallbackMethod_DeleteEntityAttributeType() override {
+    ~ExperimentalWithRawCallbackMethod_CreateAttribute() override {
       BaseClassMustBeDerivedFromService(this);
     }
     // disable synchronous version of this method
-    ::grpc::Status DeleteEntityAttributeType(::grpc::ServerContext* context, const ::inexor::entity_system::EntityAttributeType* request, ::inexor::entity_system::EntityOperation* response) override {
+    ::grpc::Status CreateAttribute(::grpc::ServerContext* context, const ::inexor::entity_system::Attribute* request, ::inexor::entity_system::Operation* response) override {
       abort();
       return ::grpc::Status(::grpc::StatusCode::UNIMPLEMENTED, "");
     }
-    virtual void DeleteEntityAttributeType(::grpc::ServerContext* context, const ::grpc::ByteBuffer* request, ::grpc::ByteBuffer* response, ::grpc::experimental::ServerCallbackRpcController* controller) { controller->Finish(::grpc::Status(::grpc::StatusCode::UNIMPLEMENTED, "")); }
+    virtual void CreateAttribute(::grpc::ServerContext* context, const ::grpc::ByteBuffer* request, ::grpc::ByteBuffer* response, ::grpc::experimental::ServerCallbackRpcController* controller) { controller->Finish(::grpc::Status(::grpc::StatusCode::UNIMPLEMENTED, "")); }
   };
   template <class BaseClass>
-  class ExperimentalWithRawCallbackMethod_CreateEntityRelationAttributeType : public BaseClass {
+  class ExperimentalWithRawCallbackMethod_ListAttributes : public BaseClass {
    private:
     void BaseClassMustBeDerivedFromService(const Service *service) {}
    public:
-    ExperimentalWithRawCallbackMethod_CreateEntityRelationAttributeType() {
-      ::grpc::Service::experimental().MarkMethodRawCallback(4,
-        new ::grpc::internal::CallbackUnaryHandler< ExperimentalWithRawCallbackMethod_CreateEntityRelationAttributeType<BaseClass>, ::grpc::ByteBuffer, ::grpc::ByteBuffer>(
-          [this](::grpc::ServerContext* context,
-                 const ::grpc::ByteBuffer* request,
-                 ::grpc::ByteBuffer* response,
-                 ::grpc::experimental::ServerCallbackRpcController* controller) {
-                   this->CreateEntityRelationAttributeType(context, request, response, controller);
-                 }, this));
+    ExperimentalWithRawCallbackMethod_ListAttributes() {
     }
-    ~ExperimentalWithRawCallbackMethod_CreateEntityRelationAttributeType() override {
+    ~ExperimentalWithRawCallbackMethod_ListAttributes() override {
       BaseClassMustBeDerivedFromService(this);
     }
     // disable synchronous version of this method
-    ::grpc::Status CreateEntityRelationAttributeType(::grpc::ServerContext* context, const ::inexor::entity_system::EntityRelationAttributeType* request, ::inexor::entity_system::EntityOperation* response) override {
+    ::grpc::Status ListAttributes(::grpc::ServerContext* context, const ::google::protobuf::Empty* request, ::grpc::ServerWriter< ::inexor::entity_system::Attribute>* writer) override {
       abort();
       return ::grpc::Status(::grpc::StatusCode::UNIMPLEMENTED, "");
     }
-    virtual void CreateEntityRelationAttributeType(::grpc::ServerContext* context, const ::grpc::ByteBuffer* request, ::grpc::ByteBuffer* response, ::grpc::experimental::ServerCallbackRpcController* controller) { controller->Finish(::grpc::Status(::grpc::StatusCode::UNIMPLEMENTED, "")); }
   };
   template <class BaseClass>
-  class ExperimentalWithRawCallbackMethod_DeleteEntityRelationAttributeType : public BaseClass {
+  class ExperimentalWithRawCallbackMethod_DeleteAttribute : public BaseClass {
    private:
     void BaseClassMustBeDerivedFromService(const Service *service) {}
    public:
-    ExperimentalWithRawCallbackMethod_DeleteEntityRelationAttributeType() {
+    ExperimentalWithRawCallbackMethod_DeleteAttribute() {
       ::grpc::Service::experimental().MarkMethodRawCallback(5,
-        new ::grpc::internal::CallbackUnaryHandler< ExperimentalWithRawCallbackMethod_DeleteEntityRelationAttributeType<BaseClass>, ::grpc::ByteBuffer, ::grpc::ByteBuffer>(
+        new ::grpc::internal::CallbackUnaryHandler< ExperimentalWithRawCallbackMethod_DeleteAttribute<BaseClass>, ::grpc::ByteBuffer, ::grpc::ByteBuffer>(
           [this](::grpc::ServerContext* context,
                  const ::grpc::ByteBuffer* request,
                  ::grpc::ByteBuffer* response,
                  ::grpc::experimental::ServerCallbackRpcController* controller) {
-                   this->DeleteEntityRelationAttributeType(context, request, response, controller);
+                   this->DeleteAttribute(context, request, response, controller);
                  }, this));
     }
-    ~ExperimentalWithRawCallbackMethod_DeleteEntityRelationAttributeType() override {
+    ~ExperimentalWithRawCallbackMethod_DeleteAttribute() override {
       BaseClassMustBeDerivedFromService(this);
     }
     // disable synchronous version of this method
-    ::grpc::Status DeleteEntityRelationAttributeType(::grpc::ServerContext* context, const ::inexor::entity_system::EntityRelationAttributeType* request, ::inexor::entity_system::EntityOperation* response) override {
+    ::grpc::Status DeleteAttribute(::grpc::ServerContext* context, const ::inexor::entity_system::Attribute* request, ::inexor::entity_system::Operation* response) override {
       abort();
       return ::grpc::Status(::grpc::StatusCode::UNIMPLEMENTED, "");
     }
-    virtual void DeleteEntityRelationAttributeType(::grpc::ServerContext* context, const ::grpc::ByteBuffer* request, ::grpc::ByteBuffer* response, ::grpc::experimental::ServerCallbackRpcController* controller) { controller->Finish(::grpc::Status(::grpc::StatusCode::UNIMPLEMENTED, "")); }
+    virtual void DeleteAttribute(::grpc::ServerContext* context, const ::grpc::ByteBuffer* request, ::grpc::ByteBuffer* response, ::grpc::experimental::ServerCallbackRpcController* controller) { controller->Finish(::grpc::Status(::grpc::StatusCode::UNIMPLEMENTED, "")); }
   };
   template <class BaseClass>
-  class ExperimentalWithRawCallbackMethod_CreateEntityRelationType : public BaseClass {
+  class ExperimentalWithRawCallbackMethod_CreateRelation : public BaseClass {
    private:
     void BaseClassMustBeDerivedFromService(const Service *service) {}
    public:
-    ExperimentalWithRawCallbackMethod_CreateEntityRelationType() {
+    ExperimentalWithRawCallbackMethod_CreateRelation() {
       ::grpc::Service::experimental().MarkMethodRawCallback(6,
-        new ::grpc::internal::CallbackUnaryHandler< ExperimentalWithRawCallbackMethod_CreateEntityRelationType<BaseClass>, ::grpc::ByteBuffer, ::grpc::ByteBuffer>(
+        new ::grpc::internal::CallbackUnaryHandler< ExperimentalWithRawCallbackMethod_CreateRelation<BaseClass>, ::grpc::ByteBuffer, ::grpc::ByteBuffer>(
           [this](::grpc::ServerContext* context,
                  const ::grpc::ByteBuffer* request,
                  ::grpc::ByteBuffer* response,
                  ::grpc::experimental::ServerCallbackRpcController* controller) {
-                   this->CreateEntityRelationType(context, request, response, controller);
+                   this->CreateRelation(context, request, response, controller);
                  }, this));
     }
-    ~ExperimentalWithRawCallbackMethod_CreateEntityRelationType() override {
+    ~ExperimentalWithRawCallbackMethod_CreateRelation() override {
       BaseClassMustBeDerivedFromService(this);
     }
     // disable synchronous version of this method
-    ::grpc::Status CreateEntityRelationType(::grpc::ServerContext* context, const ::inexor::entity_system::EntityRelationType* request, ::inexor::entity_system::EntityOperation* response) override {
+    ::grpc::Status CreateRelation(::grpc::ServerContext* context, const ::inexor::entity_system::Relation* request, ::inexor::entity_system::Operation* response) override {
       abort();
       return ::grpc::Status(::grpc::StatusCode::UNIMPLEMENTED, "");
     }
-    virtual void CreateEntityRelationType(::grpc::ServerContext* context, const ::grpc::ByteBuffer* request, ::grpc::ByteBuffer* response, ::grpc::experimental::ServerCallbackRpcController* controller) { controller->Finish(::grpc::Status(::grpc::StatusCode::UNIMPLEMENTED, "")); }
+    virtual void CreateRelation(::grpc::ServerContext* context, const ::grpc::ByteBuffer* request, ::grpc::ByteBuffer* response, ::grpc::experimental::ServerCallbackRpcController* controller) { controller->Finish(::grpc::Status(::grpc::StatusCode::UNIMPLEMENTED, "")); }
   };
   template <class BaseClass>
-  class ExperimentalWithRawCallbackMethod_DeleteEntityRelationType : public BaseClass {
+  class ExperimentalWithRawCallbackMethod_ListRelations : public BaseClass {
    private:
     void BaseClassMustBeDerivedFromService(const Service *service) {}
    public:
-    ExperimentalWithRawCallbackMethod_DeleteEntityRelationType() {
-      ::grpc::Service::experimental().MarkMethodRawCallback(7,
-        new ::grpc::internal::CallbackUnaryHandler< ExperimentalWithRawCallbackMethod_DeleteEntityRelationType<BaseClass>, ::grpc::ByteBuffer, ::grpc::ByteBuffer>(
+    ExperimentalWithRawCallbackMethod_ListRelations() {
+    }
+    ~ExperimentalWithRawCallbackMethod_ListRelations() override {
+      BaseClassMustBeDerivedFromService(this);
+    }
+    // disable synchronous version of this method
+    ::grpc::Status ListRelations(::grpc::ServerContext* context, const ::google::protobuf::Empty* request, ::grpc::ServerWriter< ::inexor::entity_system::Relation>* writer) override {
+      abort();
+      return ::grpc::Status(::grpc::StatusCode::UNIMPLEMENTED, "");
+    }
+  };
+  template <class BaseClass>
+  class ExperimentalWithRawCallbackMethod_DeleteRelation : public BaseClass {
+   private:
+    void BaseClassMustBeDerivedFromService(const Service *service) {}
+   public:
+    ExperimentalWithRawCallbackMethod_DeleteRelation() {
+      ::grpc::Service::experimental().MarkMethodRawCallback(8,
+        new ::grpc::internal::CallbackUnaryHandler< ExperimentalWithRawCallbackMethod_DeleteRelation<BaseClass>, ::grpc::ByteBuffer, ::grpc::ByteBuffer>(
           [this](::grpc::ServerContext* context,
                  const ::grpc::ByteBuffer* request,
                  ::grpc::ByteBuffer* response,
                  ::grpc::experimental::ServerCallbackRpcController* controller) {
-                   this->DeleteEntityRelationType(context, request, response, controller);
+                   this->DeleteRelation(context, request, response, controller);
                  }, this));
     }
-    ~ExperimentalWithRawCallbackMethod_DeleteEntityRelationType() override {
+    ~ExperimentalWithRawCallbackMethod_DeleteRelation() override {
       BaseClassMustBeDerivedFromService(this);
     }
     // disable synchronous version of this method
-    ::grpc::Status DeleteEntityRelationType(::grpc::ServerContext* context, const ::inexor::entity_system::EntityRelationType* request, ::inexor::entity_system::EntityOperation* response) override {
+    ::grpc::Status DeleteRelation(::grpc::ServerContext* context, const ::inexor::entity_system::Relation* request, ::inexor::entity_system::Operation* response) override {
       abort();
       return ::grpc::Status(::grpc::StatusCode::UNIMPLEMENTED, "");
     }
-    virtual void DeleteEntityRelationType(::grpc::ServerContext* context, const ::grpc::ByteBuffer* request, ::grpc::ByteBuffer* response, ::grpc::experimental::ServerCallbackRpcController* controller) { controller->Finish(::grpc::Status(::grpc::StatusCode::UNIMPLEMENTED, "")); }
+    virtual void DeleteRelation(::grpc::ServerContext* context, const ::grpc::ByteBuffer* request, ::grpc::ByteBuffer* response, ::grpc::experimental::ServerCallbackRpcController* controller) { controller->Finish(::grpc::Status(::grpc::StatusCode::UNIMPLEMENTED, "")); }
   };
   template <class BaseClass>
-  class WithStreamedUnaryMethod_CreateEntityType : public BaseClass {
+  class WithStreamedUnaryMethod_CreateEntity : public BaseClass {
    private:
     void BaseClassMustBeDerivedFromService(const Service *service) {}
    public:
-    WithStreamedUnaryMethod_CreateEntityType() {
+    WithStreamedUnaryMethod_CreateEntity() {
       ::grpc::Service::MarkMethodStreamed(0,
-        new ::grpc::internal::StreamedUnaryHandler< ::inexor::entity_system::EntityType, ::inexor::entity_system::EntityOperation>(std::bind(&WithStreamedUnaryMethod_CreateEntityType<BaseClass>::StreamedCreateEntityType, this, std::placeholders::_1, std::placeholders::_2)));
+        new ::grpc::internal::StreamedUnaryHandler< ::inexor::entity_system::Entity, ::inexor::entity_system::Operation>(std::bind(&WithStreamedUnaryMethod_CreateEntity<BaseClass>::StreamedCreateEntity, this, std::placeholders::_1, std::placeholders::_2)));
     }
-    ~WithStreamedUnaryMethod_CreateEntityType() override {
+    ~WithStreamedUnaryMethod_CreateEntity() override {
       BaseClassMustBeDerivedFromService(this);
     }
     // disable regular version of this method
-    ::grpc::Status CreateEntityType(::grpc::ServerContext* context, const ::inexor::entity_system::EntityType* request, ::inexor::entity_system::EntityOperation* response) override {
+    ::grpc::Status CreateEntity(::grpc::ServerContext* context, const ::inexor::entity_system::Entity* request, ::inexor::entity_system::Operation* response) override {
       abort();
       return ::grpc::Status(::grpc::StatusCode::UNIMPLEMENTED, "");
     }
     // replace default version of method with streamed unary
-    virtual ::grpc::Status StreamedCreateEntityType(::grpc::ServerContext* context, ::grpc::ServerUnaryStreamer< ::inexor::entity_system::EntityType,::inexor::entity_system::EntityOperation>* server_unary_streamer) = 0;
+    virtual ::grpc::Status StreamedCreateEntity(::grpc::ServerContext* context, ::grpc::ServerUnaryStreamer< ::inexor::entity_system::Entity,::inexor::entity_system::Operation>* server_unary_streamer) = 0;
   };
   template <class BaseClass>
-  class WithStreamedUnaryMethod_DeleteEntityType : public BaseClass {
+  class WithStreamedUnaryMethod_DeleteEntity : public BaseClass {
    private:
     void BaseClassMustBeDerivedFromService(const Service *service) {}
    public:
-    WithStreamedUnaryMethod_DeleteEntityType() {
-      ::grpc::Service::MarkMethodStreamed(1,
-        new ::grpc::internal::StreamedUnaryHandler< ::inexor::entity_system::EntityType, ::inexor::entity_system::EntityOperation>(std::bind(&WithStreamedUnaryMethod_DeleteEntityType<BaseClass>::StreamedDeleteEntityType, this, std::placeholders::_1, std::placeholders::_2)));
-    }
-    ~WithStreamedUnaryMethod_DeleteEntityType() override {
-      BaseClassMustBeDerivedFromService(this);
-    }
-    // disable regular version of this method
-    ::grpc::Status DeleteEntityType(::grpc::ServerContext* context, const ::inexor::entity_system::EntityType* request, ::inexor::entity_system::EntityOperation* response) override {
-      abort();
-      return ::grpc::Status(::grpc::StatusCode::UNIMPLEMENTED, "");
-    }
-    // replace default version of method with streamed unary
-    virtual ::grpc::Status StreamedDeleteEntityType(::grpc::ServerContext* context, ::grpc::ServerUnaryStreamer< ::inexor::entity_system::EntityType,::inexor::entity_system::EntityOperation>* server_unary_streamer) = 0;
-  };
-  template <class BaseClass>
-  class WithStreamedUnaryMethod_CreateEntityAttributeType : public BaseClass {
-   private:
-    void BaseClassMustBeDerivedFromService(const Service *service) {}
-   public:
-    WithStreamedUnaryMethod_CreateEntityAttributeType() {
+    WithStreamedUnaryMethod_DeleteEntity() {
       ::grpc::Service::MarkMethodStreamed(2,
-        new ::grpc::internal::StreamedUnaryHandler< ::inexor::entity_system::EntityAttributeType, ::inexor::entity_system::EntityOperation>(std::bind(&WithStreamedUnaryMethod_CreateEntityAttributeType<BaseClass>::StreamedCreateEntityAttributeType, this, std::placeholders::_1, std::placeholders::_2)));
+        new ::grpc::internal::StreamedUnaryHandler< ::inexor::entity_system::Entity, ::inexor::entity_system::Operation>(std::bind(&WithStreamedUnaryMethod_DeleteEntity<BaseClass>::StreamedDeleteEntity, this, std::placeholders::_1, std::placeholders::_2)));
     }
-    ~WithStreamedUnaryMethod_CreateEntityAttributeType() override {
+    ~WithStreamedUnaryMethod_DeleteEntity() override {
       BaseClassMustBeDerivedFromService(this);
     }
     // disable regular version of this method
-    ::grpc::Status CreateEntityAttributeType(::grpc::ServerContext* context, const ::inexor::entity_system::EntityAttributeType* request, ::inexor::entity_system::EntityOperation* response) override {
+    ::grpc::Status DeleteEntity(::grpc::ServerContext* context, const ::inexor::entity_system::Entity* request, ::inexor::entity_system::Operation* response) override {
       abort();
       return ::grpc::Status(::grpc::StatusCode::UNIMPLEMENTED, "");
     }
     // replace default version of method with streamed unary
-    virtual ::grpc::Status StreamedCreateEntityAttributeType(::grpc::ServerContext* context, ::grpc::ServerUnaryStreamer< ::inexor::entity_system::EntityAttributeType,::inexor::entity_system::EntityOperation>* server_unary_streamer) = 0;
+    virtual ::grpc::Status StreamedDeleteEntity(::grpc::ServerContext* context, ::grpc::ServerUnaryStreamer< ::inexor::entity_system::Entity,::inexor::entity_system::Operation>* server_unary_streamer) = 0;
   };
   template <class BaseClass>
-  class WithStreamedUnaryMethod_DeleteEntityAttributeType : public BaseClass {
+  class WithStreamedUnaryMethod_CreateAttribute : public BaseClass {
    private:
     void BaseClassMustBeDerivedFromService(const Service *service) {}
    public:
-    WithStreamedUnaryMethod_DeleteEntityAttributeType() {
+    WithStreamedUnaryMethod_CreateAttribute() {
       ::grpc::Service::MarkMethodStreamed(3,
-        new ::grpc::internal::StreamedUnaryHandler< ::inexor::entity_system::EntityAttributeType, ::inexor::entity_system::EntityOperation>(std::bind(&WithStreamedUnaryMethod_DeleteEntityAttributeType<BaseClass>::StreamedDeleteEntityAttributeType, this, std::placeholders::_1, std::placeholders::_2)));
+        new ::grpc::internal::StreamedUnaryHandler< ::inexor::entity_system::Attribute, ::inexor::entity_system::Operation>(std::bind(&WithStreamedUnaryMethod_CreateAttribute<BaseClass>::StreamedCreateAttribute, this, std::placeholders::_1, std::placeholders::_2)));
     }
-    ~WithStreamedUnaryMethod_DeleteEntityAttributeType() override {
+    ~WithStreamedUnaryMethod_CreateAttribute() override {
       BaseClassMustBeDerivedFromService(this);
     }
     // disable regular version of this method
-    ::grpc::Status DeleteEntityAttributeType(::grpc::ServerContext* context, const ::inexor::entity_system::EntityAttributeType* request, ::inexor::entity_system::EntityOperation* response) override {
+    ::grpc::Status CreateAttribute(::grpc::ServerContext* context, const ::inexor::entity_system::Attribute* request, ::inexor::entity_system::Operation* response) override {
       abort();
       return ::grpc::Status(::grpc::StatusCode::UNIMPLEMENTED, "");
     }
     // replace default version of method with streamed unary
-    virtual ::grpc::Status StreamedDeleteEntityAttributeType(::grpc::ServerContext* context, ::grpc::ServerUnaryStreamer< ::inexor::entity_system::EntityAttributeType,::inexor::entity_system::EntityOperation>* server_unary_streamer) = 0;
+    virtual ::grpc::Status StreamedCreateAttribute(::grpc::ServerContext* context, ::grpc::ServerUnaryStreamer< ::inexor::entity_system::Attribute,::inexor::entity_system::Operation>* server_unary_streamer) = 0;
   };
   template <class BaseClass>
-  class WithStreamedUnaryMethod_CreateEntityRelationAttributeType : public BaseClass {
+  class WithStreamedUnaryMethod_DeleteAttribute : public BaseClass {
    private:
     void BaseClassMustBeDerivedFromService(const Service *service) {}
    public:
-    WithStreamedUnaryMethod_CreateEntityRelationAttributeType() {
-      ::grpc::Service::MarkMethodStreamed(4,
-        new ::grpc::internal::StreamedUnaryHandler< ::inexor::entity_system::EntityRelationAttributeType, ::inexor::entity_system::EntityOperation>(std::bind(&WithStreamedUnaryMethod_CreateEntityRelationAttributeType<BaseClass>::StreamedCreateEntityRelationAttributeType, this, std::placeholders::_1, std::placeholders::_2)));
-    }
-    ~WithStreamedUnaryMethod_CreateEntityRelationAttributeType() override {
-      BaseClassMustBeDerivedFromService(this);
-    }
-    // disable regular version of this method
-    ::grpc::Status CreateEntityRelationAttributeType(::grpc::ServerContext* context, const ::inexor::entity_system::EntityRelationAttributeType* request, ::inexor::entity_system::EntityOperation* response) override {
-      abort();
-      return ::grpc::Status(::grpc::StatusCode::UNIMPLEMENTED, "");
-    }
-    // replace default version of method with streamed unary
-    virtual ::grpc::Status StreamedCreateEntityRelationAttributeType(::grpc::ServerContext* context, ::grpc::ServerUnaryStreamer< ::inexor::entity_system::EntityRelationAttributeType,::inexor::entity_system::EntityOperation>* server_unary_streamer) = 0;
-  };
-  template <class BaseClass>
-  class WithStreamedUnaryMethod_DeleteEntityRelationAttributeType : public BaseClass {
-   private:
-    void BaseClassMustBeDerivedFromService(const Service *service) {}
-   public:
-    WithStreamedUnaryMethod_DeleteEntityRelationAttributeType() {
+    WithStreamedUnaryMethod_DeleteAttribute() {
       ::grpc::Service::MarkMethodStreamed(5,
-        new ::grpc::internal::StreamedUnaryHandler< ::inexor::entity_system::EntityRelationAttributeType, ::inexor::entity_system::EntityOperation>(std::bind(&WithStreamedUnaryMethod_DeleteEntityRelationAttributeType<BaseClass>::StreamedDeleteEntityRelationAttributeType, this, std::placeholders::_1, std::placeholders::_2)));
+        new ::grpc::internal::StreamedUnaryHandler< ::inexor::entity_system::Attribute, ::inexor::entity_system::Operation>(std::bind(&WithStreamedUnaryMethod_DeleteAttribute<BaseClass>::StreamedDeleteAttribute, this, std::placeholders::_1, std::placeholders::_2)));
     }
-    ~WithStreamedUnaryMethod_DeleteEntityRelationAttributeType() override {
+    ~WithStreamedUnaryMethod_DeleteAttribute() override {
       BaseClassMustBeDerivedFromService(this);
     }
     // disable regular version of this method
-    ::grpc::Status DeleteEntityRelationAttributeType(::grpc::ServerContext* context, const ::inexor::entity_system::EntityRelationAttributeType* request, ::inexor::entity_system::EntityOperation* response) override {
+    ::grpc::Status DeleteAttribute(::grpc::ServerContext* context, const ::inexor::entity_system::Attribute* request, ::inexor::entity_system::Operation* response) override {
       abort();
       return ::grpc::Status(::grpc::StatusCode::UNIMPLEMENTED, "");
     }
     // replace default version of method with streamed unary
-    virtual ::grpc::Status StreamedDeleteEntityRelationAttributeType(::grpc::ServerContext* context, ::grpc::ServerUnaryStreamer< ::inexor::entity_system::EntityRelationAttributeType,::inexor::entity_system::EntityOperation>* server_unary_streamer) = 0;
+    virtual ::grpc::Status StreamedDeleteAttribute(::grpc::ServerContext* context, ::grpc::ServerUnaryStreamer< ::inexor::entity_system::Attribute,::inexor::entity_system::Operation>* server_unary_streamer) = 0;
   };
   template <class BaseClass>
-  class WithStreamedUnaryMethod_CreateEntityRelationType : public BaseClass {
+  class WithStreamedUnaryMethod_CreateRelation : public BaseClass {
    private:
     void BaseClassMustBeDerivedFromService(const Service *service) {}
    public:
-    WithStreamedUnaryMethod_CreateEntityRelationType() {
+    WithStreamedUnaryMethod_CreateRelation() {
       ::grpc::Service::MarkMethodStreamed(6,
-        new ::grpc::internal::StreamedUnaryHandler< ::inexor::entity_system::EntityRelationType, ::inexor::entity_system::EntityOperation>(std::bind(&WithStreamedUnaryMethod_CreateEntityRelationType<BaseClass>::StreamedCreateEntityRelationType, this, std::placeholders::_1, std::placeholders::_2)));
+        new ::grpc::internal::StreamedUnaryHandler< ::inexor::entity_system::Relation, ::inexor::entity_system::Operation>(std::bind(&WithStreamedUnaryMethod_CreateRelation<BaseClass>::StreamedCreateRelation, this, std::placeholders::_1, std::placeholders::_2)));
     }
-    ~WithStreamedUnaryMethod_CreateEntityRelationType() override {
+    ~WithStreamedUnaryMethod_CreateRelation() override {
       BaseClassMustBeDerivedFromService(this);
     }
     // disable regular version of this method
-    ::grpc::Status CreateEntityRelationType(::grpc::ServerContext* context, const ::inexor::entity_system::EntityRelationType* request, ::inexor::entity_system::EntityOperation* response) override {
+    ::grpc::Status CreateRelation(::grpc::ServerContext* context, const ::inexor::entity_system::Relation* request, ::inexor::entity_system::Operation* response) override {
       abort();
       return ::grpc::Status(::grpc::StatusCode::UNIMPLEMENTED, "");
     }
     // replace default version of method with streamed unary
-    virtual ::grpc::Status StreamedCreateEntityRelationType(::grpc::ServerContext* context, ::grpc::ServerUnaryStreamer< ::inexor::entity_system::EntityRelationType,::inexor::entity_system::EntityOperation>* server_unary_streamer) = 0;
+    virtual ::grpc::Status StreamedCreateRelation(::grpc::ServerContext* context, ::grpc::ServerUnaryStreamer< ::inexor::entity_system::Relation,::inexor::entity_system::Operation>* server_unary_streamer) = 0;
   };
   template <class BaseClass>
-  class WithStreamedUnaryMethod_DeleteEntityRelationType : public BaseClass {
+  class WithStreamedUnaryMethod_DeleteRelation : public BaseClass {
    private:
     void BaseClassMustBeDerivedFromService(const Service *service) {}
    public:
-    WithStreamedUnaryMethod_DeleteEntityRelationType() {
-      ::grpc::Service::MarkMethodStreamed(7,
-        new ::grpc::internal::StreamedUnaryHandler< ::inexor::entity_system::EntityRelationType, ::inexor::entity_system::EntityOperation>(std::bind(&WithStreamedUnaryMethod_DeleteEntityRelationType<BaseClass>::StreamedDeleteEntityRelationType, this, std::placeholders::_1, std::placeholders::_2)));
+    WithStreamedUnaryMethod_DeleteRelation() {
+      ::grpc::Service::MarkMethodStreamed(8,
+        new ::grpc::internal::StreamedUnaryHandler< ::inexor::entity_system::Relation, ::inexor::entity_system::Operation>(std::bind(&WithStreamedUnaryMethod_DeleteRelation<BaseClass>::StreamedDeleteRelation, this, std::placeholders::_1, std::placeholders::_2)));
     }
-    ~WithStreamedUnaryMethod_DeleteEntityRelationType() override {
+    ~WithStreamedUnaryMethod_DeleteRelation() override {
       BaseClassMustBeDerivedFromService(this);
     }
     // disable regular version of this method
-    ::grpc::Status DeleteEntityRelationType(::grpc::ServerContext* context, const ::inexor::entity_system::EntityRelationType* request, ::inexor::entity_system::EntityOperation* response) override {
+    ::grpc::Status DeleteRelation(::grpc::ServerContext* context, const ::inexor::entity_system::Relation* request, ::inexor::entity_system::Operation* response) override {
       abort();
       return ::grpc::Status(::grpc::StatusCode::UNIMPLEMENTED, "");
     }
     // replace default version of method with streamed unary
-    virtual ::grpc::Status StreamedDeleteEntityRelationType(::grpc::ServerContext* context, ::grpc::ServerUnaryStreamer< ::inexor::entity_system::EntityRelationType,::inexor::entity_system::EntityOperation>* server_unary_streamer) = 0;
+    virtual ::grpc::Status StreamedDeleteRelation(::grpc::ServerContext* context, ::grpc::ServerUnaryStreamer< ::inexor::entity_system::Relation,::inexor::entity_system::Operation>* server_unary_streamer) = 0;
   };
-  typedef WithStreamedUnaryMethod_CreateEntityType<WithStreamedUnaryMethod_DeleteEntityType<WithStreamedUnaryMethod_CreateEntityAttributeType<WithStreamedUnaryMethod_DeleteEntityAttributeType<WithStreamedUnaryMethod_CreateEntityRelationAttributeType<WithStreamedUnaryMethod_DeleteEntityRelationAttributeType<WithStreamedUnaryMethod_CreateEntityRelationType<WithStreamedUnaryMethod_DeleteEntityRelationType<Service > > > > > > > > StreamedUnaryService;
-  typedef Service SplitStreamedService;
-  typedef WithStreamedUnaryMethod_CreateEntityType<WithStreamedUnaryMethod_DeleteEntityType<WithStreamedUnaryMethod_CreateEntityAttributeType<WithStreamedUnaryMethod_DeleteEntityAttributeType<WithStreamedUnaryMethod_CreateEntityRelationAttributeType<WithStreamedUnaryMethod_DeleteEntityRelationAttributeType<WithStreamedUnaryMethod_CreateEntityRelationType<WithStreamedUnaryMethod_DeleteEntityRelationType<Service > > > > > > > > StreamedService;
+  typedef WithStreamedUnaryMethod_CreateEntity<WithStreamedUnaryMethod_DeleteEntity<WithStreamedUnaryMethod_CreateAttribute<WithStreamedUnaryMethod_DeleteAttribute<WithStreamedUnaryMethod_CreateRelation<WithStreamedUnaryMethod_DeleteRelation<Service > > > > > > StreamedUnaryService;
+  template <class BaseClass>
+  class WithSplitStreamingMethod_ListEntities : public BaseClass {
+   private:
+    void BaseClassMustBeDerivedFromService(const Service *service) {}
+   public:
+    WithSplitStreamingMethod_ListEntities() {
+      ::grpc::Service::MarkMethodStreamed(1,
+        new ::grpc::internal::SplitServerStreamingHandler< ::google::protobuf::Empty, ::inexor::entity_system::Entity>(std::bind(&WithSplitStreamingMethod_ListEntities<BaseClass>::StreamedListEntities, this, std::placeholders::_1, std::placeholders::_2)));
+    }
+    ~WithSplitStreamingMethod_ListEntities() override {
+      BaseClassMustBeDerivedFromService(this);
+    }
+    // disable regular version of this method
+    ::grpc::Status ListEntities(::grpc::ServerContext* context, const ::google::protobuf::Empty* request, ::grpc::ServerWriter< ::inexor::entity_system::Entity>* writer) override {
+      abort();
+      return ::grpc::Status(::grpc::StatusCode::UNIMPLEMENTED, "");
+    }
+    // replace default version of method with split streamed
+    virtual ::grpc::Status StreamedListEntities(::grpc::ServerContext* context, ::grpc::ServerSplitStreamer< ::google::protobuf::Empty,::inexor::entity_system::Entity>* server_split_streamer) = 0;
+  };
+  template <class BaseClass>
+  class WithSplitStreamingMethod_ListAttributes : public BaseClass {
+   private:
+    void BaseClassMustBeDerivedFromService(const Service *service) {}
+   public:
+    WithSplitStreamingMethod_ListAttributes() {
+      ::grpc::Service::MarkMethodStreamed(4,
+        new ::grpc::internal::SplitServerStreamingHandler< ::google::protobuf::Empty, ::inexor::entity_system::Attribute>(std::bind(&WithSplitStreamingMethod_ListAttributes<BaseClass>::StreamedListAttributes, this, std::placeholders::_1, std::placeholders::_2)));
+    }
+    ~WithSplitStreamingMethod_ListAttributes() override {
+      BaseClassMustBeDerivedFromService(this);
+    }
+    // disable regular version of this method
+    ::grpc::Status ListAttributes(::grpc::ServerContext* context, const ::google::protobuf::Empty* request, ::grpc::ServerWriter< ::inexor::entity_system::Attribute>* writer) override {
+      abort();
+      return ::grpc::Status(::grpc::StatusCode::UNIMPLEMENTED, "");
+    }
+    // replace default version of method with split streamed
+    virtual ::grpc::Status StreamedListAttributes(::grpc::ServerContext* context, ::grpc::ServerSplitStreamer< ::google::protobuf::Empty,::inexor::entity_system::Attribute>* server_split_streamer) = 0;
+  };
+  template <class BaseClass>
+  class WithSplitStreamingMethod_ListRelations : public BaseClass {
+   private:
+    void BaseClassMustBeDerivedFromService(const Service *service) {}
+   public:
+    WithSplitStreamingMethod_ListRelations() {
+      ::grpc::Service::MarkMethodStreamed(7,
+        new ::grpc::internal::SplitServerStreamingHandler< ::google::protobuf::Empty, ::inexor::entity_system::Relation>(std::bind(&WithSplitStreamingMethod_ListRelations<BaseClass>::StreamedListRelations, this, std::placeholders::_1, std::placeholders::_2)));
+    }
+    ~WithSplitStreamingMethod_ListRelations() override {
+      BaseClassMustBeDerivedFromService(this);
+    }
+    // disable regular version of this method
+    ::grpc::Status ListRelations(::grpc::ServerContext* context, const ::google::protobuf::Empty* request, ::grpc::ServerWriter< ::inexor::entity_system::Relation>* writer) override {
+      abort();
+      return ::grpc::Status(::grpc::StatusCode::UNIMPLEMENTED, "");
+    }
+    // replace default version of method with split streamed
+    virtual ::grpc::Status StreamedListRelations(::grpc::ServerContext* context, ::grpc::ServerSplitStreamer< ::google::protobuf::Empty,::inexor::entity_system::Relation>* server_split_streamer) = 0;
+  };
+  typedef WithSplitStreamingMethod_ListEntities<WithSplitStreamingMethod_ListAttributes<WithSplitStreamingMethod_ListRelations<Service > > > SplitStreamedService;
+  typedef WithStreamedUnaryMethod_CreateEntity<WithSplitStreamingMethod_ListEntities<WithStreamedUnaryMethod_DeleteEntity<WithStreamedUnaryMethod_CreateAttribute<WithSplitStreamingMethod_ListAttributes<WithStreamedUnaryMethod_DeleteAttribute<WithStreamedUnaryMethod_CreateRelation<WithSplitStreamingMethod_ListRelations<WithStreamedUnaryMethod_DeleteRelation<Service > > > > > > > > > StreamedService;
 };
 
 }  // namespace entity_system

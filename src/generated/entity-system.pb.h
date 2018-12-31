@@ -31,6 +31,8 @@
 #include <google/protobuf/extension_set.h>  // IWYU pragma: export
 #include <google/protobuf/generated_enum_reflection.h>
 #include <google/protobuf/unknown_field_set.h>
+#include <google/protobuf/any.pb.h>
+#include <google/protobuf/empty.pb.h>
 // @@protoc_insertion_point(includes)
 #define PROTOBUF_INTERNAL_EXPORT_protobuf_entity_2dsystem_2eproto 
 
@@ -39,7 +41,7 @@ namespace protobuf_entity_2dsystem_2eproto {
 struct TableStruct {
   static const ::google::protobuf::internal::ParseTableField entries[];
   static const ::google::protobuf::internal::AuxillaryParseTableField aux[];
-  static const ::google::protobuf::internal::ParseTable schema[5];
+  static const ::google::protobuf::internal::ParseTable schema[4];
   static const ::google::protobuf::internal::FieldMetadata field_metadata[];
   static const ::google::protobuf::internal::SerializationTable serialization_table[];
   static const ::google::protobuf::uint32 offsets[];
@@ -48,146 +50,77 @@ void AddDescriptors();
 }  // namespace protobuf_entity_2dsystem_2eproto
 namespace inexor {
 namespace entity_system {
-class EntityAttributeType;
-class EntityAttributeTypeDefaultTypeInternal;
-extern EntityAttributeTypeDefaultTypeInternal _EntityAttributeType_default_instance_;
-class EntityOperation;
-class EntityOperationDefaultTypeInternal;
-extern EntityOperationDefaultTypeInternal _EntityOperation_default_instance_;
-class EntityRelationAttributeType;
-class EntityRelationAttributeTypeDefaultTypeInternal;
-extern EntityRelationAttributeTypeDefaultTypeInternal _EntityRelationAttributeType_default_instance_;
-class EntityRelationType;
-class EntityRelationTypeDefaultTypeInternal;
-extern EntityRelationTypeDefaultTypeInternal _EntityRelationType_default_instance_;
-class EntityType;
-class EntityTypeDefaultTypeInternal;
-extern EntityTypeDefaultTypeInternal _EntityType_default_instance_;
+class Attribute;
+class AttributeDefaultTypeInternal;
+extern AttributeDefaultTypeInternal _Attribute_default_instance_;
+class Entity;
+class EntityDefaultTypeInternal;
+extern EntityDefaultTypeInternal _Entity_default_instance_;
+class Operation;
+class OperationDefaultTypeInternal;
+extern OperationDefaultTypeInternal _Operation_default_instance_;
+class Relation;
+class RelationDefaultTypeInternal;
+extern RelationDefaultTypeInternal _Relation_default_instance_;
 }  // namespace entity_system
 }  // namespace inexor
 namespace google {
 namespace protobuf {
-template<> ::inexor::entity_system::EntityAttributeType* Arena::CreateMaybeMessage<::inexor::entity_system::EntityAttributeType>(Arena*);
-template<> ::inexor::entity_system::EntityOperation* Arena::CreateMaybeMessage<::inexor::entity_system::EntityOperation>(Arena*);
-template<> ::inexor::entity_system::EntityRelationAttributeType* Arena::CreateMaybeMessage<::inexor::entity_system::EntityRelationAttributeType>(Arena*);
-template<> ::inexor::entity_system::EntityRelationType* Arena::CreateMaybeMessage<::inexor::entity_system::EntityRelationType>(Arena*);
-template<> ::inexor::entity_system::EntityType* Arena::CreateMaybeMessage<::inexor::entity_system::EntityType>(Arena*);
+template<> ::inexor::entity_system::Attribute* Arena::CreateMaybeMessage<::inexor::entity_system::Attribute>(Arena*);
+template<> ::inexor::entity_system::Entity* Arena::CreateMaybeMessage<::inexor::entity_system::Entity>(Arena*);
+template<> ::inexor::entity_system::Operation* Arena::CreateMaybeMessage<::inexor::entity_system::Operation>(Arena*);
+template<> ::inexor::entity_system::Relation* Arena::CreateMaybeMessage<::inexor::entity_system::Relation>(Arena*);
 }  // namespace protobuf
 }  // namespace google
 namespace inexor {
 namespace entity_system {
 
-enum ENTSYS_RESULT {
-  ENTSYS_ERROR = 0,
-  ENTSYS_SUCCESS = 1,
-  ENTSYS_RESULT_INT_MIN_SENTINEL_DO_NOT_USE_ = ::google::protobuf::kint32min,
-  ENTSYS_RESULT_INT_MAX_SENTINEL_DO_NOT_USE_ = ::google::protobuf::kint32max
+enum DataType {
+  Undefined = 0,
+  Int = 1,
+  BigInt = 2,
+  Float = 3,
+  String = 4,
+  Double = 5,
+  Bool = 6,
+  DataType_INT_MIN_SENTINEL_DO_NOT_USE_ = ::google::protobuf::kint32min,
+  DataType_INT_MAX_SENTINEL_DO_NOT_USE_ = ::google::protobuf::kint32max
 };
-bool ENTSYS_RESULT_IsValid(int value);
-const ENTSYS_RESULT ENTSYS_RESULT_MIN = ENTSYS_ERROR;
-const ENTSYS_RESULT ENTSYS_RESULT_MAX = ENTSYS_SUCCESS;
-const int ENTSYS_RESULT_ARRAYSIZE = ENTSYS_RESULT_MAX + 1;
+bool DataType_IsValid(int value);
+const DataType DataType_MIN = Undefined;
+const DataType DataType_MAX = Bool;
+const int DataType_ARRAYSIZE = DataType_MAX + 1;
 
-const ::google::protobuf::EnumDescriptor* ENTSYS_RESULT_descriptor();
-inline const ::std::string& ENTSYS_RESULT_Name(ENTSYS_RESULT value) {
+const ::google::protobuf::EnumDescriptor* DataType_descriptor();
+inline const ::std::string& DataType_Name(DataType value) {
   return ::google::protobuf::internal::NameOfEnum(
-    ENTSYS_RESULT_descriptor(), value);
+    DataType_descriptor(), value);
 }
-inline bool ENTSYS_RESULT_Parse(
-    const ::std::string& name, ENTSYS_RESULT* value) {
-  return ::google::protobuf::internal::ParseNamedEnum<ENTSYS_RESULT>(
-    ENTSYS_RESULT_descriptor(), name, value);
-}
-enum ENTSYS_ERROR_LEVEL {
-  ENTSYS_LEVEL_INFO = 0,
-  ENTSYS_LEVEL_WARNING = 1,
-  ENTSYS_LEVEL_ERROR = 2,
-  ENTSYS_LEVEL_CRITICAL_ERROR = 3,
-  ENTSYS_ERROR_LEVEL_INT_MIN_SENTINEL_DO_NOT_USE_ = ::google::protobuf::kint32min,
-  ENTSYS_ERROR_LEVEL_INT_MAX_SENTINEL_DO_NOT_USE_ = ::google::protobuf::kint32max
-};
-bool ENTSYS_ERROR_LEVEL_IsValid(int value);
-const ENTSYS_ERROR_LEVEL ENTSYS_ERROR_LEVEL_MIN = ENTSYS_LEVEL_INFO;
-const ENTSYS_ERROR_LEVEL ENTSYS_ERROR_LEVEL_MAX = ENTSYS_LEVEL_CRITICAL_ERROR;
-const int ENTSYS_ERROR_LEVEL_ARRAYSIZE = ENTSYS_ERROR_LEVEL_MAX + 1;
-
-const ::google::protobuf::EnumDescriptor* ENTSYS_ERROR_LEVEL_descriptor();
-inline const ::std::string& ENTSYS_ERROR_LEVEL_Name(ENTSYS_ERROR_LEVEL value) {
-  return ::google::protobuf::internal::NameOfEnum(
-    ENTSYS_ERROR_LEVEL_descriptor(), value);
-}
-inline bool ENTSYS_ERROR_LEVEL_Parse(
-    const ::std::string& name, ENTSYS_ERROR_LEVEL* value) {
-  return ::google::protobuf::internal::ParseNamedEnum<ENTSYS_ERROR_LEVEL>(
-    ENTSYS_ERROR_LEVEL_descriptor(), name, value);
-}
-enum ENTSYS_DATA_VALIDATION_RESULT {
-  ENTSYS_DATA_INVALID = 0,
-  ENTSYS_DATA_VALID = 1,
-  ENTSYS_DATA_VALIDATION_RESULT_INT_MIN_SENTINEL_DO_NOT_USE_ = ::google::protobuf::kint32min,
-  ENTSYS_DATA_VALIDATION_RESULT_INT_MAX_SENTINEL_DO_NOT_USE_ = ::google::protobuf::kint32max
-};
-bool ENTSYS_DATA_VALIDATION_RESULT_IsValid(int value);
-const ENTSYS_DATA_VALIDATION_RESULT ENTSYS_DATA_VALIDATION_RESULT_MIN = ENTSYS_DATA_INVALID;
-const ENTSYS_DATA_VALIDATION_RESULT ENTSYS_DATA_VALIDATION_RESULT_MAX = ENTSYS_DATA_VALID;
-const int ENTSYS_DATA_VALIDATION_RESULT_ARRAYSIZE = ENTSYS_DATA_VALIDATION_RESULT_MAX + 1;
-
-const ::google::protobuf::EnumDescriptor* ENTSYS_DATA_VALIDATION_RESULT_descriptor();
-inline const ::std::string& ENTSYS_DATA_VALIDATION_RESULT_Name(ENTSYS_DATA_VALIDATION_RESULT value) {
-  return ::google::protobuf::internal::NameOfEnum(
-    ENTSYS_DATA_VALIDATION_RESULT_descriptor(), value);
-}
-inline bool ENTSYS_DATA_VALIDATION_RESULT_Parse(
-    const ::std::string& name, ENTSYS_DATA_VALIDATION_RESULT* value) {
-  return ::google::protobuf::internal::ParseNamedEnum<ENTSYS_DATA_VALIDATION_RESULT>(
-    ENTSYS_DATA_VALIDATION_RESULT_descriptor(), name, value);
-}
-enum ENTSYS_DATA_TYPE {
-  ENTSYS_DATA_TYPE_UNDEFINED = 0,
-  ENTSYS_DATA_TYPE_INT = 1,
-  ENTSYS_DATA_TYPE_BIG_INT = 2,
-  ENTSYS_DATA_TYPE_FLOAT = 3,
-  ENTSYS_DATA_TYPE_STRING = 4,
-  ENTSYS_DATA_TYPE_DOUBLE = 5,
-  ENTSYS_DATA_TYPE_BOOL = 6,
-  ENTSYS_DATA_TYPE_INT_MIN_SENTINEL_DO_NOT_USE_ = ::google::protobuf::kint32min,
-  ENTSYS_DATA_TYPE_INT_MAX_SENTINEL_DO_NOT_USE_ = ::google::protobuf::kint32max
-};
-bool ENTSYS_DATA_TYPE_IsValid(int value);
-const ENTSYS_DATA_TYPE ENTSYS_DATA_TYPE_MIN = ENTSYS_DATA_TYPE_UNDEFINED;
-const ENTSYS_DATA_TYPE ENTSYS_DATA_TYPE_MAX = ENTSYS_DATA_TYPE_BOOL;
-const int ENTSYS_DATA_TYPE_ARRAYSIZE = ENTSYS_DATA_TYPE_MAX + 1;
-
-const ::google::protobuf::EnumDescriptor* ENTSYS_DATA_TYPE_descriptor();
-inline const ::std::string& ENTSYS_DATA_TYPE_Name(ENTSYS_DATA_TYPE value) {
-  return ::google::protobuf::internal::NameOfEnum(
-    ENTSYS_DATA_TYPE_descriptor(), value);
-}
-inline bool ENTSYS_DATA_TYPE_Parse(
-    const ::std::string& name, ENTSYS_DATA_TYPE* value) {
-  return ::google::protobuf::internal::ParseNamedEnum<ENTSYS_DATA_TYPE>(
-    ENTSYS_DATA_TYPE_descriptor(), name, value);
+inline bool DataType_Parse(
+    const ::std::string& name, DataType* value) {
+  return ::google::protobuf::internal::ParseNamedEnum<DataType>(
+    DataType_descriptor(), name, value);
 }
 // ===================================================================
 
-class EntityAttributeType : public ::google::protobuf::Message /* @@protoc_insertion_point(class_definition:inexor.entity_system.EntityAttributeType) */ {
+class Attribute : public ::google::protobuf::Message /* @@protoc_insertion_point(class_definition:inexor.entity_system.Attribute) */ {
  public:
-  EntityAttributeType();
-  virtual ~EntityAttributeType();
+  Attribute();
+  virtual ~Attribute();
 
-  EntityAttributeType(const EntityAttributeType& from);
+  Attribute(const Attribute& from);
 
-  inline EntityAttributeType& operator=(const EntityAttributeType& from) {
+  inline Attribute& operator=(const Attribute& from) {
     CopyFrom(from);
     return *this;
   }
   #if LANG_CXX11
-  EntityAttributeType(EntityAttributeType&& from) noexcept
-    : EntityAttributeType() {
+  Attribute(Attribute&& from) noexcept
+    : Attribute() {
     *this = ::std::move(from);
   }
 
-  inline EntityAttributeType& operator=(EntityAttributeType&& from) noexcept {
+  inline Attribute& operator=(Attribute&& from) noexcept {
     if (GetArenaNoVirtual() == from.GetArenaNoVirtual()) {
       if (this != &from) InternalSwap(&from);
     } else {
@@ -197,34 +130,34 @@ class EntityAttributeType : public ::google::protobuf::Message /* @@protoc_inser
   }
   #endif
   static const ::google::protobuf::Descriptor* descriptor();
-  static const EntityAttributeType& default_instance();
+  static const Attribute& default_instance();
 
   static void InitAsDefaultInstance();  // FOR INTERNAL USE ONLY
-  static inline const EntityAttributeType* internal_default_instance() {
-    return reinterpret_cast<const EntityAttributeType*>(
-               &_EntityAttributeType_default_instance_);
+  static inline const Attribute* internal_default_instance() {
+    return reinterpret_cast<const Attribute*>(
+               &_Attribute_default_instance_);
   }
   static constexpr int kIndexInFileMessages =
     0;
 
-  void Swap(EntityAttributeType* other);
-  friend void swap(EntityAttributeType& a, EntityAttributeType& b) {
+  void Swap(Attribute* other);
+  friend void swap(Attribute& a, Attribute& b) {
     a.Swap(&b);
   }
 
   // implements Message ----------------------------------------------
 
-  inline EntityAttributeType* New() const final {
-    return CreateMaybeMessage<EntityAttributeType>(NULL);
+  inline Attribute* New() const final {
+    return CreateMaybeMessage<Attribute>(NULL);
   }
 
-  EntityAttributeType* New(::google::protobuf::Arena* arena) const final {
-    return CreateMaybeMessage<EntityAttributeType>(arena);
+  Attribute* New(::google::protobuf::Arena* arena) const final {
+    return CreateMaybeMessage<Attribute>(arena);
   }
   void CopyFrom(const ::google::protobuf::Message& from) final;
   void MergeFrom(const ::google::protobuf::Message& from) final;
-  void CopyFrom(const EntityAttributeType& from);
-  void MergeFrom(const EntityAttributeType& from);
+  void CopyFrom(const Attribute& from);
+  void MergeFrom(const Attribute& from);
   void Clear() final;
   bool IsInitialized() const final;
 
@@ -241,7 +174,7 @@ class EntityAttributeType : public ::google::protobuf::Message /* @@protoc_inser
   void SharedCtor();
   void SharedDtor();
   void SetCachedSize(int size) const final;
-  void InternalSwap(EntityAttributeType* other);
+  void InternalSwap(Attribute* other);
   private:
   inline ::google::protobuf::Arena* GetArenaNoVirtual() const {
     return NULL;
@@ -257,55 +190,68 @@ class EntityAttributeType : public ::google::protobuf::Message /* @@protoc_inser
 
   // accessors -------------------------------------------------------
 
-  // string ent_attr_type_name = 1;
-  void clear_ent_attr_type_name();
-  static const int kEntAttrTypeNameFieldNumber = 1;
-  const ::std::string& ent_attr_type_name() const;
-  void set_ent_attr_type_name(const ::std::string& value);
+  // string name = 1;
+  void clear_name();
+  static const int kNameFieldNumber = 1;
+  const ::std::string& name() const;
+  void set_name(const ::std::string& value);
   #if LANG_CXX11
-  void set_ent_attr_type_name(::std::string&& value);
+  void set_name(::std::string&& value);
   #endif
-  void set_ent_attr_type_name(const char* value);
-  void set_ent_attr_type_name(const char* value, size_t size);
-  ::std::string* mutable_ent_attr_type_name();
-  ::std::string* release_ent_attr_type_name();
-  void set_allocated_ent_attr_type_name(::std::string* ent_attr_type_name);
+  void set_name(const char* value);
+  void set_name(const char* value, size_t size);
+  ::std::string* mutable_name();
+  ::std::string* release_name();
+  void set_allocated_name(::std::string* name);
 
-  // .inexor.entity_system.ENTSYS_DATA_TYPE ent_attr_data_type = 2;
-  void clear_ent_attr_data_type();
-  static const int kEntAttrDataTypeFieldNumber = 2;
-  ::inexor::entity_system::ENTSYS_DATA_TYPE ent_attr_data_type() const;
-  void set_ent_attr_data_type(::inexor::entity_system::ENTSYS_DATA_TYPE value);
+  // .google.protobuf.Any value = 3;
+  bool has_value() const;
+  void clear_value();
+  static const int kValueFieldNumber = 3;
+  private:
+  const ::google::protobuf::Any& _internal_value() const;
+  public:
+  const ::google::protobuf::Any& value() const;
+  ::google::protobuf::Any* release_value();
+  ::google::protobuf::Any* mutable_value();
+  void set_allocated_value(::google::protobuf::Any* value);
 
-  // @@protoc_insertion_point(class_scope:inexor.entity_system.EntityAttributeType)
+  // .inexor.entity_system.DataType data_type = 2;
+  void clear_data_type();
+  static const int kDataTypeFieldNumber = 2;
+  ::inexor::entity_system::DataType data_type() const;
+  void set_data_type(::inexor::entity_system::DataType value);
+
+  // @@protoc_insertion_point(class_scope:inexor.entity_system.Attribute)
  private:
 
   ::google::protobuf::internal::InternalMetadataWithArena _internal_metadata_;
-  ::google::protobuf::internal::ArenaStringPtr ent_attr_type_name_;
-  int ent_attr_data_type_;
+  ::google::protobuf::internal::ArenaStringPtr name_;
+  ::google::protobuf::Any* value_;
+  int data_type_;
   mutable ::google::protobuf::internal::CachedSize _cached_size_;
   friend struct ::protobuf_entity_2dsystem_2eproto::TableStruct;
 };
 // -------------------------------------------------------------------
 
-class EntityType : public ::google::protobuf::Message /* @@protoc_insertion_point(class_definition:inexor.entity_system.EntityType) */ {
+class Entity : public ::google::protobuf::Message /* @@protoc_insertion_point(class_definition:inexor.entity_system.Entity) */ {
  public:
-  EntityType();
-  virtual ~EntityType();
+  Entity();
+  virtual ~Entity();
 
-  EntityType(const EntityType& from);
+  Entity(const Entity& from);
 
-  inline EntityType& operator=(const EntityType& from) {
+  inline Entity& operator=(const Entity& from) {
     CopyFrom(from);
     return *this;
   }
   #if LANG_CXX11
-  EntityType(EntityType&& from) noexcept
-    : EntityType() {
+  Entity(Entity&& from) noexcept
+    : Entity() {
     *this = ::std::move(from);
   }
 
-  inline EntityType& operator=(EntityType&& from) noexcept {
+  inline Entity& operator=(Entity&& from) noexcept {
     if (GetArenaNoVirtual() == from.GetArenaNoVirtual()) {
       if (this != &from) InternalSwap(&from);
     } else {
@@ -315,34 +261,34 @@ class EntityType : public ::google::protobuf::Message /* @@protoc_insertion_poin
   }
   #endif
   static const ::google::protobuf::Descriptor* descriptor();
-  static const EntityType& default_instance();
+  static const Entity& default_instance();
 
   static void InitAsDefaultInstance();  // FOR INTERNAL USE ONLY
-  static inline const EntityType* internal_default_instance() {
-    return reinterpret_cast<const EntityType*>(
-               &_EntityType_default_instance_);
+  static inline const Entity* internal_default_instance() {
+    return reinterpret_cast<const Entity*>(
+               &_Entity_default_instance_);
   }
   static constexpr int kIndexInFileMessages =
     1;
 
-  void Swap(EntityType* other);
-  friend void swap(EntityType& a, EntityType& b) {
+  void Swap(Entity* other);
+  friend void swap(Entity& a, Entity& b) {
     a.Swap(&b);
   }
 
   // implements Message ----------------------------------------------
 
-  inline EntityType* New() const final {
-    return CreateMaybeMessage<EntityType>(NULL);
+  inline Entity* New() const final {
+    return CreateMaybeMessage<Entity>(NULL);
   }
 
-  EntityType* New(::google::protobuf::Arena* arena) const final {
-    return CreateMaybeMessage<EntityType>(arena);
+  Entity* New(::google::protobuf::Arena* arena) const final {
+    return CreateMaybeMessage<Entity>(arena);
   }
   void CopyFrom(const ::google::protobuf::Message& from) final;
   void MergeFrom(const ::google::protobuf::Message& from) final;
-  void CopyFrom(const EntityType& from);
-  void MergeFrom(const EntityType& from);
+  void CopyFrom(const Entity& from);
+  void MergeFrom(const Entity& from);
   void Clear() final;
   bool IsInitialized() const final;
 
@@ -359,7 +305,7 @@ class EntityType : public ::google::protobuf::Message /* @@protoc_insertion_poin
   void SharedCtor();
   void SharedDtor();
   void SetCachedSize(int size) const final;
-  void InternalSwap(EntityType* other);
+  void InternalSwap(Entity* other);
   private:
   inline ::google::protobuf::Arena* GetArenaNoVirtual() const {
     return NULL;
@@ -375,48 +321,61 @@ class EntityType : public ::google::protobuf::Message /* @@protoc_insertion_poin
 
   // accessors -------------------------------------------------------
 
-  // string ent_type_name = 1;
-  void clear_ent_type_name();
-  static const int kEntTypeNameFieldNumber = 1;
-  const ::std::string& ent_type_name() const;
-  void set_ent_type_name(const ::std::string& value);
-  #if LANG_CXX11
-  void set_ent_type_name(::std::string&& value);
-  #endif
-  void set_ent_type_name(const char* value);
-  void set_ent_type_name(const char* value, size_t size);
-  ::std::string* mutable_ent_type_name();
-  ::std::string* release_ent_type_name();
-  void set_allocated_ent_type_name(::std::string* ent_type_name);
+  // repeated .inexor.entity_system.Attribute attribute = 2;
+  int attribute_size() const;
+  void clear_attribute();
+  static const int kAttributeFieldNumber = 2;
+  ::inexor::entity_system::Attribute* mutable_attribute(int index);
+  ::google::protobuf::RepeatedPtrField< ::inexor::entity_system::Attribute >*
+      mutable_attribute();
+  const ::inexor::entity_system::Attribute& attribute(int index) const;
+  ::inexor::entity_system::Attribute* add_attribute();
+  const ::google::protobuf::RepeatedPtrField< ::inexor::entity_system::Attribute >&
+      attribute() const;
 
-  // @@protoc_insertion_point(class_scope:inexor.entity_system.EntityType)
+  // string name = 1;
+  void clear_name();
+  static const int kNameFieldNumber = 1;
+  const ::std::string& name() const;
+  void set_name(const ::std::string& value);
+  #if LANG_CXX11
+  void set_name(::std::string&& value);
+  #endif
+  void set_name(const char* value);
+  void set_name(const char* value, size_t size);
+  ::std::string* mutable_name();
+  ::std::string* release_name();
+  void set_allocated_name(::std::string* name);
+
+  // @@protoc_insertion_point(class_scope:inexor.entity_system.Entity)
  private:
 
   ::google::protobuf::internal::InternalMetadataWithArena _internal_metadata_;
-  ::google::protobuf::internal::ArenaStringPtr ent_type_name_;
+  ::google::protobuf::RepeatedPtrField< ::inexor::entity_system::Attribute > attribute_;
+  ::google::protobuf::internal::ArenaStringPtr name_;
   mutable ::google::protobuf::internal::CachedSize _cached_size_;
   friend struct ::protobuf_entity_2dsystem_2eproto::TableStruct;
 };
 // -------------------------------------------------------------------
 
-class EntityRelationAttributeType : public ::google::protobuf::Message /* @@protoc_insertion_point(class_definition:inexor.entity_system.EntityRelationAttributeType) */ {
+class Relation : public ::google::protobuf::Message /* @@protoc_insertion_point(class_definition:inexor.entity_system.Relation) */ {
  public:
-  EntityRelationAttributeType();
-  virtual ~EntityRelationAttributeType();
+  Relation();
+  virtual ~Relation();
 
-  EntityRelationAttributeType(const EntityRelationAttributeType& from);
+  Relation(const Relation& from);
 
-  inline EntityRelationAttributeType& operator=(const EntityRelationAttributeType& from) {
+  inline Relation& operator=(const Relation& from) {
     CopyFrom(from);
     return *this;
   }
   #if LANG_CXX11
-  EntityRelationAttributeType(EntityRelationAttributeType&& from) noexcept
-    : EntityRelationAttributeType() {
+  Relation(Relation&& from) noexcept
+    : Relation() {
     *this = ::std::move(from);
   }
 
-  inline EntityRelationAttributeType& operator=(EntityRelationAttributeType&& from) noexcept {
+  inline Relation& operator=(Relation&& from) noexcept {
     if (GetArenaNoVirtual() == from.GetArenaNoVirtual()) {
       if (this != &from) InternalSwap(&from);
     } else {
@@ -426,34 +385,34 @@ class EntityRelationAttributeType : public ::google::protobuf::Message /* @@prot
   }
   #endif
   static const ::google::protobuf::Descriptor* descriptor();
-  static const EntityRelationAttributeType& default_instance();
+  static const Relation& default_instance();
 
   static void InitAsDefaultInstance();  // FOR INTERNAL USE ONLY
-  static inline const EntityRelationAttributeType* internal_default_instance() {
-    return reinterpret_cast<const EntityRelationAttributeType*>(
-               &_EntityRelationAttributeType_default_instance_);
+  static inline const Relation* internal_default_instance() {
+    return reinterpret_cast<const Relation*>(
+               &_Relation_default_instance_);
   }
   static constexpr int kIndexInFileMessages =
     2;
 
-  void Swap(EntityRelationAttributeType* other);
-  friend void swap(EntityRelationAttributeType& a, EntityRelationAttributeType& b) {
+  void Swap(Relation* other);
+  friend void swap(Relation& a, Relation& b) {
     a.Swap(&b);
   }
 
   // implements Message ----------------------------------------------
 
-  inline EntityRelationAttributeType* New() const final {
-    return CreateMaybeMessage<EntityRelationAttributeType>(NULL);
+  inline Relation* New() const final {
+    return CreateMaybeMessage<Relation>(NULL);
   }
 
-  EntityRelationAttributeType* New(::google::protobuf::Arena* arena) const final {
-    return CreateMaybeMessage<EntityRelationAttributeType>(arena);
+  Relation* New(::google::protobuf::Arena* arena) const final {
+    return CreateMaybeMessage<Relation>(arena);
   }
   void CopyFrom(const ::google::protobuf::Message& from) final;
   void MergeFrom(const ::google::protobuf::Message& from) final;
-  void CopyFrom(const EntityRelationAttributeType& from);
-  void MergeFrom(const EntityRelationAttributeType& from);
+  void CopyFrom(const Relation& from);
+  void MergeFrom(const Relation& from);
   void Clear() final;
   bool IsInitialized() const final;
 
@@ -470,7 +429,7 @@ class EntityRelationAttributeType : public ::google::protobuf::Message /* @@prot
   void SharedCtor();
   void SharedDtor();
   void SetCachedSize(int size) const final;
-  void InternalSwap(EntityRelationAttributeType* other);
+  void InternalSwap(Relation* other);
   private:
   inline ::google::protobuf::Arena* GetArenaNoVirtual() const {
     return NULL;
@@ -486,55 +445,74 @@ class EntityRelationAttributeType : public ::google::protobuf::Message /* @@prot
 
   // accessors -------------------------------------------------------
 
-  // string ent_rel_attr_type_name = 1;
-  void clear_ent_rel_attr_type_name();
-  static const int kEntRelAttrTypeNameFieldNumber = 1;
-  const ::std::string& ent_rel_attr_type_name() const;
-  void set_ent_rel_attr_type_name(const ::std::string& value);
+  // string name = 1;
+  void clear_name();
+  static const int kNameFieldNumber = 1;
+  const ::std::string& name() const;
+  void set_name(const ::std::string& value);
   #if LANG_CXX11
-  void set_ent_rel_attr_type_name(::std::string&& value);
+  void set_name(::std::string&& value);
   #endif
-  void set_ent_rel_attr_type_name(const char* value);
-  void set_ent_rel_attr_type_name(const char* value, size_t size);
-  ::std::string* mutable_ent_rel_attr_type_name();
-  ::std::string* release_ent_rel_attr_type_name();
-  void set_allocated_ent_rel_attr_type_name(::std::string* ent_rel_attr_type_name);
+  void set_name(const char* value);
+  void set_name(const char* value, size_t size);
+  ::std::string* mutable_name();
+  ::std::string* release_name();
+  void set_allocated_name(::std::string* name);
 
-  // .inexor.entity_system.ENTSYS_DATA_TYPE ent_rel_attr_type_data_type = 2;
-  void clear_ent_rel_attr_type_data_type();
-  static const int kEntRelAttrTypeDataTypeFieldNumber = 2;
-  ::inexor::entity_system::ENTSYS_DATA_TYPE ent_rel_attr_type_data_type() const;
-  void set_ent_rel_attr_type_data_type(::inexor::entity_system::ENTSYS_DATA_TYPE value);
+  // .inexor.entity_system.Entity source = 2;
+  bool has_source() const;
+  void clear_source();
+  static const int kSourceFieldNumber = 2;
+  private:
+  const ::inexor::entity_system::Entity& _internal_source() const;
+  public:
+  const ::inexor::entity_system::Entity& source() const;
+  ::inexor::entity_system::Entity* release_source();
+  ::inexor::entity_system::Entity* mutable_source();
+  void set_allocated_source(::inexor::entity_system::Entity* source);
 
-  // @@protoc_insertion_point(class_scope:inexor.entity_system.EntityRelationAttributeType)
+  // .inexor.entity_system.Entity target = 3;
+  bool has_target() const;
+  void clear_target();
+  static const int kTargetFieldNumber = 3;
+  private:
+  const ::inexor::entity_system::Entity& _internal_target() const;
+  public:
+  const ::inexor::entity_system::Entity& target() const;
+  ::inexor::entity_system::Entity* release_target();
+  ::inexor::entity_system::Entity* mutable_target();
+  void set_allocated_target(::inexor::entity_system::Entity* target);
+
+  // @@protoc_insertion_point(class_scope:inexor.entity_system.Relation)
  private:
 
   ::google::protobuf::internal::InternalMetadataWithArena _internal_metadata_;
-  ::google::protobuf::internal::ArenaStringPtr ent_rel_attr_type_name_;
-  int ent_rel_attr_type_data_type_;
+  ::google::protobuf::internal::ArenaStringPtr name_;
+  ::inexor::entity_system::Entity* source_;
+  ::inexor::entity_system::Entity* target_;
   mutable ::google::protobuf::internal::CachedSize _cached_size_;
   friend struct ::protobuf_entity_2dsystem_2eproto::TableStruct;
 };
 // -------------------------------------------------------------------
 
-class EntityRelationType : public ::google::protobuf::Message /* @@protoc_insertion_point(class_definition:inexor.entity_system.EntityRelationType) */ {
+class Operation : public ::google::protobuf::Message /* @@protoc_insertion_point(class_definition:inexor.entity_system.Operation) */ {
  public:
-  EntityRelationType();
-  virtual ~EntityRelationType();
+  Operation();
+  virtual ~Operation();
 
-  EntityRelationType(const EntityRelationType& from);
+  Operation(const Operation& from);
 
-  inline EntityRelationType& operator=(const EntityRelationType& from) {
+  inline Operation& operator=(const Operation& from) {
     CopyFrom(from);
     return *this;
   }
   #if LANG_CXX11
-  EntityRelationType(EntityRelationType&& from) noexcept
-    : EntityRelationType() {
+  Operation(Operation&& from) noexcept
+    : Operation() {
     *this = ::std::move(from);
   }
 
-  inline EntityRelationType& operator=(EntityRelationType&& from) noexcept {
+  inline Operation& operator=(Operation&& from) noexcept {
     if (GetArenaNoVirtual() == from.GetArenaNoVirtual()) {
       if (this != &from) InternalSwap(&from);
     } else {
@@ -544,34 +522,34 @@ class EntityRelationType : public ::google::protobuf::Message /* @@protoc_insert
   }
   #endif
   static const ::google::protobuf::Descriptor* descriptor();
-  static const EntityRelationType& default_instance();
+  static const Operation& default_instance();
 
   static void InitAsDefaultInstance();  // FOR INTERNAL USE ONLY
-  static inline const EntityRelationType* internal_default_instance() {
-    return reinterpret_cast<const EntityRelationType*>(
-               &_EntityRelationType_default_instance_);
+  static inline const Operation* internal_default_instance() {
+    return reinterpret_cast<const Operation*>(
+               &_Operation_default_instance_);
   }
   static constexpr int kIndexInFileMessages =
     3;
 
-  void Swap(EntityRelationType* other);
-  friend void swap(EntityRelationType& a, EntityRelationType& b) {
+  void Swap(Operation* other);
+  friend void swap(Operation& a, Operation& b) {
     a.Swap(&b);
   }
 
   // implements Message ----------------------------------------------
 
-  inline EntityRelationType* New() const final {
-    return CreateMaybeMessage<EntityRelationType>(NULL);
+  inline Operation* New() const final {
+    return CreateMaybeMessage<Operation>(NULL);
   }
 
-  EntityRelationType* New(::google::protobuf::Arena* arena) const final {
-    return CreateMaybeMessage<EntityRelationType>(arena);
+  Operation* New(::google::protobuf::Arena* arena) const final {
+    return CreateMaybeMessage<Operation>(arena);
   }
   void CopyFrom(const ::google::protobuf::Message& from) final;
   void MergeFrom(const ::google::protobuf::Message& from) final;
-  void CopyFrom(const EntityRelationType& from);
-  void MergeFrom(const EntityRelationType& from);
+  void CopyFrom(const Operation& from);
+  void MergeFrom(const Operation& from);
   void Clear() final;
   bool IsInitialized() const final;
 
@@ -588,7 +566,7 @@ class EntityRelationType : public ::google::protobuf::Message /* @@protoc_insert
   void SharedCtor();
   void SharedDtor();
   void SetCachedSize(int size) const final;
-  void InternalSwap(EntityRelationType* other);
+  void InternalSwap(Operation* other);
   private:
   inline ::google::protobuf::Arena* GetArenaNoVirtual() const {
     return NULL;
@@ -604,154 +582,32 @@ class EntityRelationType : public ::google::protobuf::Message /* @@protoc_insert
 
   // accessors -------------------------------------------------------
 
-  // string rel_type_name = 1;
-  void clear_rel_type_name();
-  static const int kRelTypeNameFieldNumber = 1;
-  const ::std::string& rel_type_name() const;
-  void set_rel_type_name(const ::std::string& value);
+  // string status = 2;
+  void clear_status();
+  static const int kStatusFieldNumber = 2;
+  const ::std::string& status() const;
+  void set_status(const ::std::string& value);
   #if LANG_CXX11
-  void set_rel_type_name(::std::string&& value);
+  void set_status(::std::string&& value);
   #endif
-  void set_rel_type_name(const char* value);
-  void set_rel_type_name(const char* value, size_t size);
-  ::std::string* mutable_rel_type_name();
-  ::std::string* release_rel_type_name();
-  void set_allocated_rel_type_name(::std::string* rel_type_name);
+  void set_status(const char* value);
+  void set_status(const char* value, size_t size);
+  ::std::string* mutable_status();
+  ::std::string* release_status();
+  void set_allocated_status(::std::string* status);
 
-  // .inexor.entity_system.EntityType ent_type_source = 2;
-  bool has_ent_type_source() const;
-  void clear_ent_type_source();
-  static const int kEntTypeSourceFieldNumber = 2;
-  private:
-  const ::inexor::entity_system::EntityType& _internal_ent_type_source() const;
-  public:
-  const ::inexor::entity_system::EntityType& ent_type_source() const;
-  ::inexor::entity_system::EntityType* release_ent_type_source();
-  ::inexor::entity_system::EntityType* mutable_ent_type_source();
-  void set_allocated_ent_type_source(::inexor::entity_system::EntityType* ent_type_source);
+  // bool successful = 1;
+  void clear_successful();
+  static const int kSuccessfulFieldNumber = 1;
+  bool successful() const;
+  void set_successful(bool value);
 
-  // .inexor.entity_system.EntityType ent_type_target = 3;
-  bool has_ent_type_target() const;
-  void clear_ent_type_target();
-  static const int kEntTypeTargetFieldNumber = 3;
-  private:
-  const ::inexor::entity_system::EntityType& _internal_ent_type_target() const;
-  public:
-  const ::inexor::entity_system::EntityType& ent_type_target() const;
-  ::inexor::entity_system::EntityType* release_ent_type_target();
-  ::inexor::entity_system::EntityType* mutable_ent_type_target();
-  void set_allocated_ent_type_target(::inexor::entity_system::EntityType* ent_type_target);
-
-  // @@protoc_insertion_point(class_scope:inexor.entity_system.EntityRelationType)
+  // @@protoc_insertion_point(class_scope:inexor.entity_system.Operation)
  private:
 
   ::google::protobuf::internal::InternalMetadataWithArena _internal_metadata_;
-  ::google::protobuf::internal::ArenaStringPtr rel_type_name_;
-  ::inexor::entity_system::EntityType* ent_type_source_;
-  ::inexor::entity_system::EntityType* ent_type_target_;
-  mutable ::google::protobuf::internal::CachedSize _cached_size_;
-  friend struct ::protobuf_entity_2dsystem_2eproto::TableStruct;
-};
-// -------------------------------------------------------------------
-
-class EntityOperation : public ::google::protobuf::Message /* @@protoc_insertion_point(class_definition:inexor.entity_system.EntityOperation) */ {
- public:
-  EntityOperation();
-  virtual ~EntityOperation();
-
-  EntityOperation(const EntityOperation& from);
-
-  inline EntityOperation& operator=(const EntityOperation& from) {
-    CopyFrom(from);
-    return *this;
-  }
-  #if LANG_CXX11
-  EntityOperation(EntityOperation&& from) noexcept
-    : EntityOperation() {
-    *this = ::std::move(from);
-  }
-
-  inline EntityOperation& operator=(EntityOperation&& from) noexcept {
-    if (GetArenaNoVirtual() == from.GetArenaNoVirtual()) {
-      if (this != &from) InternalSwap(&from);
-    } else {
-      CopyFrom(from);
-    }
-    return *this;
-  }
-  #endif
-  static const ::google::protobuf::Descriptor* descriptor();
-  static const EntityOperation& default_instance();
-
-  static void InitAsDefaultInstance();  // FOR INTERNAL USE ONLY
-  static inline const EntityOperation* internal_default_instance() {
-    return reinterpret_cast<const EntityOperation*>(
-               &_EntityOperation_default_instance_);
-  }
-  static constexpr int kIndexInFileMessages =
-    4;
-
-  void Swap(EntityOperation* other);
-  friend void swap(EntityOperation& a, EntityOperation& b) {
-    a.Swap(&b);
-  }
-
-  // implements Message ----------------------------------------------
-
-  inline EntityOperation* New() const final {
-    return CreateMaybeMessage<EntityOperation>(NULL);
-  }
-
-  EntityOperation* New(::google::protobuf::Arena* arena) const final {
-    return CreateMaybeMessage<EntityOperation>(arena);
-  }
-  void CopyFrom(const ::google::protobuf::Message& from) final;
-  void MergeFrom(const ::google::protobuf::Message& from) final;
-  void CopyFrom(const EntityOperation& from);
-  void MergeFrom(const EntityOperation& from);
-  void Clear() final;
-  bool IsInitialized() const final;
-
-  size_t ByteSizeLong() const final;
-  bool MergePartialFromCodedStream(
-      ::google::protobuf::io::CodedInputStream* input) final;
-  void SerializeWithCachedSizes(
-      ::google::protobuf::io::CodedOutputStream* output) const final;
-  ::google::protobuf::uint8* InternalSerializeWithCachedSizesToArray(
-      bool deterministic, ::google::protobuf::uint8* target) const final;
-  int GetCachedSize() const final { return _cached_size_.Get(); }
-
-  private:
-  void SharedCtor();
-  void SharedDtor();
-  void SetCachedSize(int size) const final;
-  void InternalSwap(EntityOperation* other);
-  private:
-  inline ::google::protobuf::Arena* GetArenaNoVirtual() const {
-    return NULL;
-  }
-  inline void* MaybeArenaPtr() const {
-    return NULL;
-  }
-  public:
-
-  ::google::protobuf::Metadata GetMetadata() const final;
-
-  // nested types ----------------------------------------------------
-
-  // accessors -------------------------------------------------------
-
-  // .inexor.entity_system.ENTSYS_RESULT result = 1;
-  void clear_result();
-  static const int kResultFieldNumber = 1;
-  ::inexor::entity_system::ENTSYS_RESULT result() const;
-  void set_result(::inexor::entity_system::ENTSYS_RESULT value);
-
-  // @@protoc_insertion_point(class_scope:inexor.entity_system.EntityOperation)
- private:
-
-  ::google::protobuf::internal::InternalMetadataWithArena _internal_metadata_;
-  int result_;
+  ::google::protobuf::internal::ArenaStringPtr status_;
+  bool successful_;
   mutable ::google::protobuf::internal::CachedSize _cached_size_;
   friend struct ::protobuf_entity_2dsystem_2eproto::TableStruct;
 };
@@ -764,391 +620,449 @@ class EntityOperation : public ::google::protobuf::Message /* @@protoc_insertion
   #pragma GCC diagnostic push
   #pragma GCC diagnostic ignored "-Wstrict-aliasing"
 #endif  // __GNUC__
-// EntityAttributeType
+// Attribute
 
-// string ent_attr_type_name = 1;
-inline void EntityAttributeType::clear_ent_attr_type_name() {
-  ent_attr_type_name_.ClearToEmptyNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
+// string name = 1;
+inline void Attribute::clear_name() {
+  name_.ClearToEmptyNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
 }
-inline const ::std::string& EntityAttributeType::ent_attr_type_name() const {
-  // @@protoc_insertion_point(field_get:inexor.entity_system.EntityAttributeType.ent_attr_type_name)
-  return ent_attr_type_name_.GetNoArena();
+inline const ::std::string& Attribute::name() const {
+  // @@protoc_insertion_point(field_get:inexor.entity_system.Attribute.name)
+  return name_.GetNoArena();
 }
-inline void EntityAttributeType::set_ent_attr_type_name(const ::std::string& value) {
+inline void Attribute::set_name(const ::std::string& value) {
   
-  ent_attr_type_name_.SetNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), value);
-  // @@protoc_insertion_point(field_set:inexor.entity_system.EntityAttributeType.ent_attr_type_name)
+  name_.SetNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), value);
+  // @@protoc_insertion_point(field_set:inexor.entity_system.Attribute.name)
 }
 #if LANG_CXX11
-inline void EntityAttributeType::set_ent_attr_type_name(::std::string&& value) {
+inline void Attribute::set_name(::std::string&& value) {
   
-  ent_attr_type_name_.SetNoArena(
+  name_.SetNoArena(
     &::google::protobuf::internal::GetEmptyStringAlreadyInited(), ::std::move(value));
-  // @@protoc_insertion_point(field_set_rvalue:inexor.entity_system.EntityAttributeType.ent_attr_type_name)
+  // @@protoc_insertion_point(field_set_rvalue:inexor.entity_system.Attribute.name)
 }
 #endif
-inline void EntityAttributeType::set_ent_attr_type_name(const char* value) {
+inline void Attribute::set_name(const char* value) {
   GOOGLE_DCHECK(value != NULL);
   
-  ent_attr_type_name_.SetNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), ::std::string(value));
-  // @@protoc_insertion_point(field_set_char:inexor.entity_system.EntityAttributeType.ent_attr_type_name)
+  name_.SetNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), ::std::string(value));
+  // @@protoc_insertion_point(field_set_char:inexor.entity_system.Attribute.name)
 }
-inline void EntityAttributeType::set_ent_attr_type_name(const char* value, size_t size) {
+inline void Attribute::set_name(const char* value, size_t size) {
   
-  ent_attr_type_name_.SetNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited(),
+  name_.SetNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited(),
       ::std::string(reinterpret_cast<const char*>(value), size));
-  // @@protoc_insertion_point(field_set_pointer:inexor.entity_system.EntityAttributeType.ent_attr_type_name)
+  // @@protoc_insertion_point(field_set_pointer:inexor.entity_system.Attribute.name)
 }
-inline ::std::string* EntityAttributeType::mutable_ent_attr_type_name() {
+inline ::std::string* Attribute::mutable_name() {
   
-  // @@protoc_insertion_point(field_mutable:inexor.entity_system.EntityAttributeType.ent_attr_type_name)
-  return ent_attr_type_name_.MutableNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
+  // @@protoc_insertion_point(field_mutable:inexor.entity_system.Attribute.name)
+  return name_.MutableNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
 }
-inline ::std::string* EntityAttributeType::release_ent_attr_type_name() {
-  // @@protoc_insertion_point(field_release:inexor.entity_system.EntityAttributeType.ent_attr_type_name)
+inline ::std::string* Attribute::release_name() {
+  // @@protoc_insertion_point(field_release:inexor.entity_system.Attribute.name)
   
-  return ent_attr_type_name_.ReleaseNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
+  return name_.ReleaseNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
 }
-inline void EntityAttributeType::set_allocated_ent_attr_type_name(::std::string* ent_attr_type_name) {
-  if (ent_attr_type_name != NULL) {
+inline void Attribute::set_allocated_name(::std::string* name) {
+  if (name != NULL) {
     
   } else {
     
   }
-  ent_attr_type_name_.SetAllocatedNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), ent_attr_type_name);
-  // @@protoc_insertion_point(field_set_allocated:inexor.entity_system.EntityAttributeType.ent_attr_type_name)
+  name_.SetAllocatedNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), name);
+  // @@protoc_insertion_point(field_set_allocated:inexor.entity_system.Attribute.name)
 }
 
-// .inexor.entity_system.ENTSYS_DATA_TYPE ent_attr_data_type = 2;
-inline void EntityAttributeType::clear_ent_attr_data_type() {
-  ent_attr_data_type_ = 0;
+// .inexor.entity_system.DataType data_type = 2;
+inline void Attribute::clear_data_type() {
+  data_type_ = 0;
 }
-inline ::inexor::entity_system::ENTSYS_DATA_TYPE EntityAttributeType::ent_attr_data_type() const {
-  // @@protoc_insertion_point(field_get:inexor.entity_system.EntityAttributeType.ent_attr_data_type)
-  return static_cast< ::inexor::entity_system::ENTSYS_DATA_TYPE >(ent_attr_data_type_);
+inline ::inexor::entity_system::DataType Attribute::data_type() const {
+  // @@protoc_insertion_point(field_get:inexor.entity_system.Attribute.data_type)
+  return static_cast< ::inexor::entity_system::DataType >(data_type_);
 }
-inline void EntityAttributeType::set_ent_attr_data_type(::inexor::entity_system::ENTSYS_DATA_TYPE value) {
+inline void Attribute::set_data_type(::inexor::entity_system::DataType value) {
   
-  ent_attr_data_type_ = value;
-  // @@protoc_insertion_point(field_set:inexor.entity_system.EntityAttributeType.ent_attr_data_type)
+  data_type_ = value;
+  // @@protoc_insertion_point(field_set:inexor.entity_system.Attribute.data_type)
 }
 
-// -------------------------------------------------------------------
-
-// EntityType
-
-// string ent_type_name = 1;
-inline void EntityType::clear_ent_type_name() {
-  ent_type_name_.ClearToEmptyNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
+// .google.protobuf.Any value = 3;
+inline bool Attribute::has_value() const {
+  return this != internal_default_instance() && value_ != NULL;
 }
-inline const ::std::string& EntityType::ent_type_name() const {
-  // @@protoc_insertion_point(field_get:inexor.entity_system.EntityType.ent_type_name)
-  return ent_type_name_.GetNoArena();
+inline const ::google::protobuf::Any& Attribute::_internal_value() const {
+  return *value_;
 }
-inline void EntityType::set_ent_type_name(const ::std::string& value) {
+inline const ::google::protobuf::Any& Attribute::value() const {
+  const ::google::protobuf::Any* p = value_;
+  // @@protoc_insertion_point(field_get:inexor.entity_system.Attribute.value)
+  return p != NULL ? *p : *reinterpret_cast<const ::google::protobuf::Any*>(
+      &::google::protobuf::_Any_default_instance_);
+}
+inline ::google::protobuf::Any* Attribute::release_value() {
+  // @@protoc_insertion_point(field_release:inexor.entity_system.Attribute.value)
   
-  ent_type_name_.SetNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), value);
-  // @@protoc_insertion_point(field_set:inexor.entity_system.EntityType.ent_type_name)
-}
-#if LANG_CXX11
-inline void EntityType::set_ent_type_name(::std::string&& value) {
-  
-  ent_type_name_.SetNoArena(
-    &::google::protobuf::internal::GetEmptyStringAlreadyInited(), ::std::move(value));
-  // @@protoc_insertion_point(field_set_rvalue:inexor.entity_system.EntityType.ent_type_name)
-}
-#endif
-inline void EntityType::set_ent_type_name(const char* value) {
-  GOOGLE_DCHECK(value != NULL);
-  
-  ent_type_name_.SetNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), ::std::string(value));
-  // @@protoc_insertion_point(field_set_char:inexor.entity_system.EntityType.ent_type_name)
-}
-inline void EntityType::set_ent_type_name(const char* value, size_t size) {
-  
-  ent_type_name_.SetNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited(),
-      ::std::string(reinterpret_cast<const char*>(value), size));
-  // @@protoc_insertion_point(field_set_pointer:inexor.entity_system.EntityType.ent_type_name)
-}
-inline ::std::string* EntityType::mutable_ent_type_name() {
-  
-  // @@protoc_insertion_point(field_mutable:inexor.entity_system.EntityType.ent_type_name)
-  return ent_type_name_.MutableNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
-}
-inline ::std::string* EntityType::release_ent_type_name() {
-  // @@protoc_insertion_point(field_release:inexor.entity_system.EntityType.ent_type_name)
-  
-  return ent_type_name_.ReleaseNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
-}
-inline void EntityType::set_allocated_ent_type_name(::std::string* ent_type_name) {
-  if (ent_type_name != NULL) {
-    
-  } else {
-    
-  }
-  ent_type_name_.SetAllocatedNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), ent_type_name);
-  // @@protoc_insertion_point(field_set_allocated:inexor.entity_system.EntityType.ent_type_name)
-}
-
-// -------------------------------------------------------------------
-
-// EntityRelationAttributeType
-
-// string ent_rel_attr_type_name = 1;
-inline void EntityRelationAttributeType::clear_ent_rel_attr_type_name() {
-  ent_rel_attr_type_name_.ClearToEmptyNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
-}
-inline const ::std::string& EntityRelationAttributeType::ent_rel_attr_type_name() const {
-  // @@protoc_insertion_point(field_get:inexor.entity_system.EntityRelationAttributeType.ent_rel_attr_type_name)
-  return ent_rel_attr_type_name_.GetNoArena();
-}
-inline void EntityRelationAttributeType::set_ent_rel_attr_type_name(const ::std::string& value) {
-  
-  ent_rel_attr_type_name_.SetNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), value);
-  // @@protoc_insertion_point(field_set:inexor.entity_system.EntityRelationAttributeType.ent_rel_attr_type_name)
-}
-#if LANG_CXX11
-inline void EntityRelationAttributeType::set_ent_rel_attr_type_name(::std::string&& value) {
-  
-  ent_rel_attr_type_name_.SetNoArena(
-    &::google::protobuf::internal::GetEmptyStringAlreadyInited(), ::std::move(value));
-  // @@protoc_insertion_point(field_set_rvalue:inexor.entity_system.EntityRelationAttributeType.ent_rel_attr_type_name)
-}
-#endif
-inline void EntityRelationAttributeType::set_ent_rel_attr_type_name(const char* value) {
-  GOOGLE_DCHECK(value != NULL);
-  
-  ent_rel_attr_type_name_.SetNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), ::std::string(value));
-  // @@protoc_insertion_point(field_set_char:inexor.entity_system.EntityRelationAttributeType.ent_rel_attr_type_name)
-}
-inline void EntityRelationAttributeType::set_ent_rel_attr_type_name(const char* value, size_t size) {
-  
-  ent_rel_attr_type_name_.SetNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited(),
-      ::std::string(reinterpret_cast<const char*>(value), size));
-  // @@protoc_insertion_point(field_set_pointer:inexor.entity_system.EntityRelationAttributeType.ent_rel_attr_type_name)
-}
-inline ::std::string* EntityRelationAttributeType::mutable_ent_rel_attr_type_name() {
-  
-  // @@protoc_insertion_point(field_mutable:inexor.entity_system.EntityRelationAttributeType.ent_rel_attr_type_name)
-  return ent_rel_attr_type_name_.MutableNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
-}
-inline ::std::string* EntityRelationAttributeType::release_ent_rel_attr_type_name() {
-  // @@protoc_insertion_point(field_release:inexor.entity_system.EntityRelationAttributeType.ent_rel_attr_type_name)
-  
-  return ent_rel_attr_type_name_.ReleaseNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
-}
-inline void EntityRelationAttributeType::set_allocated_ent_rel_attr_type_name(::std::string* ent_rel_attr_type_name) {
-  if (ent_rel_attr_type_name != NULL) {
-    
-  } else {
-    
-  }
-  ent_rel_attr_type_name_.SetAllocatedNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), ent_rel_attr_type_name);
-  // @@protoc_insertion_point(field_set_allocated:inexor.entity_system.EntityRelationAttributeType.ent_rel_attr_type_name)
-}
-
-// .inexor.entity_system.ENTSYS_DATA_TYPE ent_rel_attr_type_data_type = 2;
-inline void EntityRelationAttributeType::clear_ent_rel_attr_type_data_type() {
-  ent_rel_attr_type_data_type_ = 0;
-}
-inline ::inexor::entity_system::ENTSYS_DATA_TYPE EntityRelationAttributeType::ent_rel_attr_type_data_type() const {
-  // @@protoc_insertion_point(field_get:inexor.entity_system.EntityRelationAttributeType.ent_rel_attr_type_data_type)
-  return static_cast< ::inexor::entity_system::ENTSYS_DATA_TYPE >(ent_rel_attr_type_data_type_);
-}
-inline void EntityRelationAttributeType::set_ent_rel_attr_type_data_type(::inexor::entity_system::ENTSYS_DATA_TYPE value) {
-  
-  ent_rel_attr_type_data_type_ = value;
-  // @@protoc_insertion_point(field_set:inexor.entity_system.EntityRelationAttributeType.ent_rel_attr_type_data_type)
-}
-
-// -------------------------------------------------------------------
-
-// EntityRelationType
-
-// string rel_type_name = 1;
-inline void EntityRelationType::clear_rel_type_name() {
-  rel_type_name_.ClearToEmptyNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
-}
-inline const ::std::string& EntityRelationType::rel_type_name() const {
-  // @@protoc_insertion_point(field_get:inexor.entity_system.EntityRelationType.rel_type_name)
-  return rel_type_name_.GetNoArena();
-}
-inline void EntityRelationType::set_rel_type_name(const ::std::string& value) {
-  
-  rel_type_name_.SetNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), value);
-  // @@protoc_insertion_point(field_set:inexor.entity_system.EntityRelationType.rel_type_name)
-}
-#if LANG_CXX11
-inline void EntityRelationType::set_rel_type_name(::std::string&& value) {
-  
-  rel_type_name_.SetNoArena(
-    &::google::protobuf::internal::GetEmptyStringAlreadyInited(), ::std::move(value));
-  // @@protoc_insertion_point(field_set_rvalue:inexor.entity_system.EntityRelationType.rel_type_name)
-}
-#endif
-inline void EntityRelationType::set_rel_type_name(const char* value) {
-  GOOGLE_DCHECK(value != NULL);
-  
-  rel_type_name_.SetNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), ::std::string(value));
-  // @@protoc_insertion_point(field_set_char:inexor.entity_system.EntityRelationType.rel_type_name)
-}
-inline void EntityRelationType::set_rel_type_name(const char* value, size_t size) {
-  
-  rel_type_name_.SetNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited(),
-      ::std::string(reinterpret_cast<const char*>(value), size));
-  // @@protoc_insertion_point(field_set_pointer:inexor.entity_system.EntityRelationType.rel_type_name)
-}
-inline ::std::string* EntityRelationType::mutable_rel_type_name() {
-  
-  // @@protoc_insertion_point(field_mutable:inexor.entity_system.EntityRelationType.rel_type_name)
-  return rel_type_name_.MutableNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
-}
-inline ::std::string* EntityRelationType::release_rel_type_name() {
-  // @@protoc_insertion_point(field_release:inexor.entity_system.EntityRelationType.rel_type_name)
-  
-  return rel_type_name_.ReleaseNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
-}
-inline void EntityRelationType::set_allocated_rel_type_name(::std::string* rel_type_name) {
-  if (rel_type_name != NULL) {
-    
-  } else {
-    
-  }
-  rel_type_name_.SetAllocatedNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), rel_type_name);
-  // @@protoc_insertion_point(field_set_allocated:inexor.entity_system.EntityRelationType.rel_type_name)
-}
-
-// .inexor.entity_system.EntityType ent_type_source = 2;
-inline bool EntityRelationType::has_ent_type_source() const {
-  return this != internal_default_instance() && ent_type_source_ != NULL;
-}
-inline void EntityRelationType::clear_ent_type_source() {
-  if (GetArenaNoVirtual() == NULL && ent_type_source_ != NULL) {
-    delete ent_type_source_;
-  }
-  ent_type_source_ = NULL;
-}
-inline const ::inexor::entity_system::EntityType& EntityRelationType::_internal_ent_type_source() const {
-  return *ent_type_source_;
-}
-inline const ::inexor::entity_system::EntityType& EntityRelationType::ent_type_source() const {
-  const ::inexor::entity_system::EntityType* p = ent_type_source_;
-  // @@protoc_insertion_point(field_get:inexor.entity_system.EntityRelationType.ent_type_source)
-  return p != NULL ? *p : *reinterpret_cast<const ::inexor::entity_system::EntityType*>(
-      &::inexor::entity_system::_EntityType_default_instance_);
-}
-inline ::inexor::entity_system::EntityType* EntityRelationType::release_ent_type_source() {
-  // @@protoc_insertion_point(field_release:inexor.entity_system.EntityRelationType.ent_type_source)
-  
-  ::inexor::entity_system::EntityType* temp = ent_type_source_;
-  ent_type_source_ = NULL;
+  ::google::protobuf::Any* temp = value_;
+  value_ = NULL;
   return temp;
 }
-inline ::inexor::entity_system::EntityType* EntityRelationType::mutable_ent_type_source() {
+inline ::google::protobuf::Any* Attribute::mutable_value() {
   
-  if (ent_type_source_ == NULL) {
-    auto* p = CreateMaybeMessage<::inexor::entity_system::EntityType>(GetArenaNoVirtual());
-    ent_type_source_ = p;
+  if (value_ == NULL) {
+    auto* p = CreateMaybeMessage<::google::protobuf::Any>(GetArenaNoVirtual());
+    value_ = p;
   }
-  // @@protoc_insertion_point(field_mutable:inexor.entity_system.EntityRelationType.ent_type_source)
-  return ent_type_source_;
+  // @@protoc_insertion_point(field_mutable:inexor.entity_system.Attribute.value)
+  return value_;
 }
-inline void EntityRelationType::set_allocated_ent_type_source(::inexor::entity_system::EntityType* ent_type_source) {
+inline void Attribute::set_allocated_value(::google::protobuf::Any* value) {
   ::google::protobuf::Arena* message_arena = GetArenaNoVirtual();
   if (message_arena == NULL) {
-    delete ent_type_source_;
+    delete reinterpret_cast< ::google::protobuf::MessageLite*>(value_);
   }
-  if (ent_type_source) {
+  if (value) {
     ::google::protobuf::Arena* submessage_arena = NULL;
     if (message_arena != submessage_arena) {
-      ent_type_source = ::google::protobuf::internal::GetOwnedMessage(
-          message_arena, ent_type_source, submessage_arena);
+      value = ::google::protobuf::internal::GetOwnedMessage(
+          message_arena, value, submessage_arena);
     }
     
   } else {
     
   }
-  ent_type_source_ = ent_type_source;
-  // @@protoc_insertion_point(field_set_allocated:inexor.entity_system.EntityRelationType.ent_type_source)
+  value_ = value;
+  // @@protoc_insertion_point(field_set_allocated:inexor.entity_system.Attribute.value)
 }
 
-// .inexor.entity_system.EntityType ent_type_target = 3;
-inline bool EntityRelationType::has_ent_type_target() const {
-  return this != internal_default_instance() && ent_type_target_ != NULL;
+// -------------------------------------------------------------------
+
+// Entity
+
+// string name = 1;
+inline void Entity::clear_name() {
+  name_.ClearToEmptyNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
 }
-inline void EntityRelationType::clear_ent_type_target() {
-  if (GetArenaNoVirtual() == NULL && ent_type_target_ != NULL) {
-    delete ent_type_target_;
-  }
-  ent_type_target_ = NULL;
+inline const ::std::string& Entity::name() const {
+  // @@protoc_insertion_point(field_get:inexor.entity_system.Entity.name)
+  return name_.GetNoArena();
 }
-inline const ::inexor::entity_system::EntityType& EntityRelationType::_internal_ent_type_target() const {
-  return *ent_type_target_;
-}
-inline const ::inexor::entity_system::EntityType& EntityRelationType::ent_type_target() const {
-  const ::inexor::entity_system::EntityType* p = ent_type_target_;
-  // @@protoc_insertion_point(field_get:inexor.entity_system.EntityRelationType.ent_type_target)
-  return p != NULL ? *p : *reinterpret_cast<const ::inexor::entity_system::EntityType*>(
-      &::inexor::entity_system::_EntityType_default_instance_);
-}
-inline ::inexor::entity_system::EntityType* EntityRelationType::release_ent_type_target() {
-  // @@protoc_insertion_point(field_release:inexor.entity_system.EntityRelationType.ent_type_target)
+inline void Entity::set_name(const ::std::string& value) {
   
-  ::inexor::entity_system::EntityType* temp = ent_type_target_;
-  ent_type_target_ = NULL;
+  name_.SetNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), value);
+  // @@protoc_insertion_point(field_set:inexor.entity_system.Entity.name)
+}
+#if LANG_CXX11
+inline void Entity::set_name(::std::string&& value) {
+  
+  name_.SetNoArena(
+    &::google::protobuf::internal::GetEmptyStringAlreadyInited(), ::std::move(value));
+  // @@protoc_insertion_point(field_set_rvalue:inexor.entity_system.Entity.name)
+}
+#endif
+inline void Entity::set_name(const char* value) {
+  GOOGLE_DCHECK(value != NULL);
+  
+  name_.SetNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), ::std::string(value));
+  // @@protoc_insertion_point(field_set_char:inexor.entity_system.Entity.name)
+}
+inline void Entity::set_name(const char* value, size_t size) {
+  
+  name_.SetNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited(),
+      ::std::string(reinterpret_cast<const char*>(value), size));
+  // @@protoc_insertion_point(field_set_pointer:inexor.entity_system.Entity.name)
+}
+inline ::std::string* Entity::mutable_name() {
+  
+  // @@protoc_insertion_point(field_mutable:inexor.entity_system.Entity.name)
+  return name_.MutableNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
+}
+inline ::std::string* Entity::release_name() {
+  // @@protoc_insertion_point(field_release:inexor.entity_system.Entity.name)
+  
+  return name_.ReleaseNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
+}
+inline void Entity::set_allocated_name(::std::string* name) {
+  if (name != NULL) {
+    
+  } else {
+    
+  }
+  name_.SetAllocatedNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), name);
+  // @@protoc_insertion_point(field_set_allocated:inexor.entity_system.Entity.name)
+}
+
+// repeated .inexor.entity_system.Attribute attribute = 2;
+inline int Entity::attribute_size() const {
+  return attribute_.size();
+}
+inline void Entity::clear_attribute() {
+  attribute_.Clear();
+}
+inline ::inexor::entity_system::Attribute* Entity::mutable_attribute(int index) {
+  // @@protoc_insertion_point(field_mutable:inexor.entity_system.Entity.attribute)
+  return attribute_.Mutable(index);
+}
+inline ::google::protobuf::RepeatedPtrField< ::inexor::entity_system::Attribute >*
+Entity::mutable_attribute() {
+  // @@protoc_insertion_point(field_mutable_list:inexor.entity_system.Entity.attribute)
+  return &attribute_;
+}
+inline const ::inexor::entity_system::Attribute& Entity::attribute(int index) const {
+  // @@protoc_insertion_point(field_get:inexor.entity_system.Entity.attribute)
+  return attribute_.Get(index);
+}
+inline ::inexor::entity_system::Attribute* Entity::add_attribute() {
+  // @@protoc_insertion_point(field_add:inexor.entity_system.Entity.attribute)
+  return attribute_.Add();
+}
+inline const ::google::protobuf::RepeatedPtrField< ::inexor::entity_system::Attribute >&
+Entity::attribute() const {
+  // @@protoc_insertion_point(field_list:inexor.entity_system.Entity.attribute)
+  return attribute_;
+}
+
+// -------------------------------------------------------------------
+
+// Relation
+
+// string name = 1;
+inline void Relation::clear_name() {
+  name_.ClearToEmptyNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
+}
+inline const ::std::string& Relation::name() const {
+  // @@protoc_insertion_point(field_get:inexor.entity_system.Relation.name)
+  return name_.GetNoArena();
+}
+inline void Relation::set_name(const ::std::string& value) {
+  
+  name_.SetNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), value);
+  // @@protoc_insertion_point(field_set:inexor.entity_system.Relation.name)
+}
+#if LANG_CXX11
+inline void Relation::set_name(::std::string&& value) {
+  
+  name_.SetNoArena(
+    &::google::protobuf::internal::GetEmptyStringAlreadyInited(), ::std::move(value));
+  // @@protoc_insertion_point(field_set_rvalue:inexor.entity_system.Relation.name)
+}
+#endif
+inline void Relation::set_name(const char* value) {
+  GOOGLE_DCHECK(value != NULL);
+  
+  name_.SetNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), ::std::string(value));
+  // @@protoc_insertion_point(field_set_char:inexor.entity_system.Relation.name)
+}
+inline void Relation::set_name(const char* value, size_t size) {
+  
+  name_.SetNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited(),
+      ::std::string(reinterpret_cast<const char*>(value), size));
+  // @@protoc_insertion_point(field_set_pointer:inexor.entity_system.Relation.name)
+}
+inline ::std::string* Relation::mutable_name() {
+  
+  // @@protoc_insertion_point(field_mutable:inexor.entity_system.Relation.name)
+  return name_.MutableNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
+}
+inline ::std::string* Relation::release_name() {
+  // @@protoc_insertion_point(field_release:inexor.entity_system.Relation.name)
+  
+  return name_.ReleaseNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
+}
+inline void Relation::set_allocated_name(::std::string* name) {
+  if (name != NULL) {
+    
+  } else {
+    
+  }
+  name_.SetAllocatedNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), name);
+  // @@protoc_insertion_point(field_set_allocated:inexor.entity_system.Relation.name)
+}
+
+// .inexor.entity_system.Entity source = 2;
+inline bool Relation::has_source() const {
+  return this != internal_default_instance() && source_ != NULL;
+}
+inline void Relation::clear_source() {
+  if (GetArenaNoVirtual() == NULL && source_ != NULL) {
+    delete source_;
+  }
+  source_ = NULL;
+}
+inline const ::inexor::entity_system::Entity& Relation::_internal_source() const {
+  return *source_;
+}
+inline const ::inexor::entity_system::Entity& Relation::source() const {
+  const ::inexor::entity_system::Entity* p = source_;
+  // @@protoc_insertion_point(field_get:inexor.entity_system.Relation.source)
+  return p != NULL ? *p : *reinterpret_cast<const ::inexor::entity_system::Entity*>(
+      &::inexor::entity_system::_Entity_default_instance_);
+}
+inline ::inexor::entity_system::Entity* Relation::release_source() {
+  // @@protoc_insertion_point(field_release:inexor.entity_system.Relation.source)
+  
+  ::inexor::entity_system::Entity* temp = source_;
+  source_ = NULL;
   return temp;
 }
-inline ::inexor::entity_system::EntityType* EntityRelationType::mutable_ent_type_target() {
+inline ::inexor::entity_system::Entity* Relation::mutable_source() {
   
-  if (ent_type_target_ == NULL) {
-    auto* p = CreateMaybeMessage<::inexor::entity_system::EntityType>(GetArenaNoVirtual());
-    ent_type_target_ = p;
+  if (source_ == NULL) {
+    auto* p = CreateMaybeMessage<::inexor::entity_system::Entity>(GetArenaNoVirtual());
+    source_ = p;
   }
-  // @@protoc_insertion_point(field_mutable:inexor.entity_system.EntityRelationType.ent_type_target)
-  return ent_type_target_;
+  // @@protoc_insertion_point(field_mutable:inexor.entity_system.Relation.source)
+  return source_;
 }
-inline void EntityRelationType::set_allocated_ent_type_target(::inexor::entity_system::EntityType* ent_type_target) {
+inline void Relation::set_allocated_source(::inexor::entity_system::Entity* source) {
   ::google::protobuf::Arena* message_arena = GetArenaNoVirtual();
   if (message_arena == NULL) {
-    delete ent_type_target_;
+    delete source_;
   }
-  if (ent_type_target) {
+  if (source) {
     ::google::protobuf::Arena* submessage_arena = NULL;
     if (message_arena != submessage_arena) {
-      ent_type_target = ::google::protobuf::internal::GetOwnedMessage(
-          message_arena, ent_type_target, submessage_arena);
+      source = ::google::protobuf::internal::GetOwnedMessage(
+          message_arena, source, submessage_arena);
     }
     
   } else {
     
   }
-  ent_type_target_ = ent_type_target;
-  // @@protoc_insertion_point(field_set_allocated:inexor.entity_system.EntityRelationType.ent_type_target)
+  source_ = source;
+  // @@protoc_insertion_point(field_set_allocated:inexor.entity_system.Relation.source)
+}
+
+// .inexor.entity_system.Entity target = 3;
+inline bool Relation::has_target() const {
+  return this != internal_default_instance() && target_ != NULL;
+}
+inline void Relation::clear_target() {
+  if (GetArenaNoVirtual() == NULL && target_ != NULL) {
+    delete target_;
+  }
+  target_ = NULL;
+}
+inline const ::inexor::entity_system::Entity& Relation::_internal_target() const {
+  return *target_;
+}
+inline const ::inexor::entity_system::Entity& Relation::target() const {
+  const ::inexor::entity_system::Entity* p = target_;
+  // @@protoc_insertion_point(field_get:inexor.entity_system.Relation.target)
+  return p != NULL ? *p : *reinterpret_cast<const ::inexor::entity_system::Entity*>(
+      &::inexor::entity_system::_Entity_default_instance_);
+}
+inline ::inexor::entity_system::Entity* Relation::release_target() {
+  // @@protoc_insertion_point(field_release:inexor.entity_system.Relation.target)
+  
+  ::inexor::entity_system::Entity* temp = target_;
+  target_ = NULL;
+  return temp;
+}
+inline ::inexor::entity_system::Entity* Relation::mutable_target() {
+  
+  if (target_ == NULL) {
+    auto* p = CreateMaybeMessage<::inexor::entity_system::Entity>(GetArenaNoVirtual());
+    target_ = p;
+  }
+  // @@protoc_insertion_point(field_mutable:inexor.entity_system.Relation.target)
+  return target_;
+}
+inline void Relation::set_allocated_target(::inexor::entity_system::Entity* target) {
+  ::google::protobuf::Arena* message_arena = GetArenaNoVirtual();
+  if (message_arena == NULL) {
+    delete target_;
+  }
+  if (target) {
+    ::google::protobuf::Arena* submessage_arena = NULL;
+    if (message_arena != submessage_arena) {
+      target = ::google::protobuf::internal::GetOwnedMessage(
+          message_arena, target, submessage_arena);
+    }
+    
+  } else {
+    
+  }
+  target_ = target;
+  // @@protoc_insertion_point(field_set_allocated:inexor.entity_system.Relation.target)
 }
 
 // -------------------------------------------------------------------
 
-// EntityOperation
+// Operation
 
-// .inexor.entity_system.ENTSYS_RESULT result = 1;
-inline void EntityOperation::clear_result() {
-  result_ = 0;
+// bool successful = 1;
+inline void Operation::clear_successful() {
+  successful_ = false;
 }
-inline ::inexor::entity_system::ENTSYS_RESULT EntityOperation::result() const {
-  // @@protoc_insertion_point(field_get:inexor.entity_system.EntityOperation.result)
-  return static_cast< ::inexor::entity_system::ENTSYS_RESULT >(result_);
+inline bool Operation::successful() const {
+  // @@protoc_insertion_point(field_get:inexor.entity_system.Operation.successful)
+  return successful_;
 }
-inline void EntityOperation::set_result(::inexor::entity_system::ENTSYS_RESULT value) {
+inline void Operation::set_successful(bool value) {
   
-  result_ = value;
-  // @@protoc_insertion_point(field_set:inexor.entity_system.EntityOperation.result)
+  successful_ = value;
+  // @@protoc_insertion_point(field_set:inexor.entity_system.Operation.successful)
+}
+
+// string status = 2;
+inline void Operation::clear_status() {
+  status_.ClearToEmptyNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
+}
+inline const ::std::string& Operation::status() const {
+  // @@protoc_insertion_point(field_get:inexor.entity_system.Operation.status)
+  return status_.GetNoArena();
+}
+inline void Operation::set_status(const ::std::string& value) {
+  
+  status_.SetNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), value);
+  // @@protoc_insertion_point(field_set:inexor.entity_system.Operation.status)
+}
+#if LANG_CXX11
+inline void Operation::set_status(::std::string&& value) {
+  
+  status_.SetNoArena(
+    &::google::protobuf::internal::GetEmptyStringAlreadyInited(), ::std::move(value));
+  // @@protoc_insertion_point(field_set_rvalue:inexor.entity_system.Operation.status)
+}
+#endif
+inline void Operation::set_status(const char* value) {
+  GOOGLE_DCHECK(value != NULL);
+  
+  status_.SetNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), ::std::string(value));
+  // @@protoc_insertion_point(field_set_char:inexor.entity_system.Operation.status)
+}
+inline void Operation::set_status(const char* value, size_t size) {
+  
+  status_.SetNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited(),
+      ::std::string(reinterpret_cast<const char*>(value), size));
+  // @@protoc_insertion_point(field_set_pointer:inexor.entity_system.Operation.status)
+}
+inline ::std::string* Operation::mutable_status() {
+  
+  // @@protoc_insertion_point(field_mutable:inexor.entity_system.Operation.status)
+  return status_.MutableNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
+}
+inline ::std::string* Operation::release_status() {
+  // @@protoc_insertion_point(field_release:inexor.entity_system.Operation.status)
+  
+  return status_.ReleaseNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
+}
+inline void Operation::set_allocated_status(::std::string* status) {
+  if (status != NULL) {
+    
+  } else {
+    
+  }
+  status_.SetAllocatedNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), status);
+  // @@protoc_insertion_point(field_set_allocated:inexor.entity_system.Operation.status)
 }
 
 #ifdef __GNUC__
   #pragma GCC diagnostic pop
 #endif  // __GNUC__
-// -------------------------------------------------------------------
-
 // -------------------------------------------------------------------
 
 // -------------------------------------------------------------------
@@ -1164,25 +1078,10 @@ inline void EntityOperation::set_result(::inexor::entity_system::ENTSYS_RESULT v
 namespace google {
 namespace protobuf {
 
-template <> struct is_proto_enum< ::inexor::entity_system::ENTSYS_RESULT> : ::std::true_type {};
+template <> struct is_proto_enum< ::inexor::entity_system::DataType> : ::std::true_type {};
 template <>
-inline const EnumDescriptor* GetEnumDescriptor< ::inexor::entity_system::ENTSYS_RESULT>() {
-  return ::inexor::entity_system::ENTSYS_RESULT_descriptor();
-}
-template <> struct is_proto_enum< ::inexor::entity_system::ENTSYS_ERROR_LEVEL> : ::std::true_type {};
-template <>
-inline const EnumDescriptor* GetEnumDescriptor< ::inexor::entity_system::ENTSYS_ERROR_LEVEL>() {
-  return ::inexor::entity_system::ENTSYS_ERROR_LEVEL_descriptor();
-}
-template <> struct is_proto_enum< ::inexor::entity_system::ENTSYS_DATA_VALIDATION_RESULT> : ::std::true_type {};
-template <>
-inline const EnumDescriptor* GetEnumDescriptor< ::inexor::entity_system::ENTSYS_DATA_VALIDATION_RESULT>() {
-  return ::inexor::entity_system::ENTSYS_DATA_VALIDATION_RESULT_descriptor();
-}
-template <> struct is_proto_enum< ::inexor::entity_system::ENTSYS_DATA_TYPE> : ::std::true_type {};
-template <>
-inline const EnumDescriptor* GetEnumDescriptor< ::inexor::entity_system::ENTSYS_DATA_TYPE>() {
-  return ::inexor::entity_system::ENTSYS_DATA_TYPE_descriptor();
+inline const EnumDescriptor* GetEnumDescriptor< ::inexor::entity_system::DataType>() {
+  return ::inexor::entity_system::DataType_descriptor();
 }
 
 }  // namespace protobuf

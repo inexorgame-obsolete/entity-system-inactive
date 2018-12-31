@@ -20,170 +20,150 @@
 // @@protoc_insertion_point(includes)
 
 namespace protobuf_entity_2dsystem_2eproto {
-extern PROTOBUF_INTERNAL_EXPORT_protobuf_entity_2dsystem_2eproto ::google::protobuf::internal::SCCInfo<0> scc_info_EntityType;
+extern PROTOBUF_INTERNAL_EXPORT_protobuf_entity_2dsystem_2eproto ::google::protobuf::internal::SCCInfo<1> scc_info_Attribute;
+extern PROTOBUF_INTERNAL_EXPORT_protobuf_entity_2dsystem_2eproto ::google::protobuf::internal::SCCInfo<1> scc_info_Entity;
 }  // namespace protobuf_entity_2dsystem_2eproto
+namespace protobuf_google_2fprotobuf_2fany_2eproto {
+extern PROTOBUF_INTERNAL_EXPORT_protobuf_google_2fprotobuf_2fany_2eproto ::google::protobuf::internal::SCCInfo<0> scc_info_Any;
+}  // namespace protobuf_google_2fprotobuf_2fany_2eproto
 namespace inexor {
 namespace entity_system {
-class EntityAttributeTypeDefaultTypeInternal {
+class AttributeDefaultTypeInternal {
  public:
-  ::google::protobuf::internal::ExplicitlyConstructed<EntityAttributeType>
+  ::google::protobuf::internal::ExplicitlyConstructed<Attribute>
       _instance;
-} _EntityAttributeType_default_instance_;
-class EntityTypeDefaultTypeInternal {
+} _Attribute_default_instance_;
+class EntityDefaultTypeInternal {
  public:
-  ::google::protobuf::internal::ExplicitlyConstructed<EntityType>
+  ::google::protobuf::internal::ExplicitlyConstructed<Entity>
       _instance;
-} _EntityType_default_instance_;
-class EntityRelationAttributeTypeDefaultTypeInternal {
+} _Entity_default_instance_;
+class RelationDefaultTypeInternal {
  public:
-  ::google::protobuf::internal::ExplicitlyConstructed<EntityRelationAttributeType>
+  ::google::protobuf::internal::ExplicitlyConstructed<Relation>
       _instance;
-} _EntityRelationAttributeType_default_instance_;
-class EntityRelationTypeDefaultTypeInternal {
+} _Relation_default_instance_;
+class OperationDefaultTypeInternal {
  public:
-  ::google::protobuf::internal::ExplicitlyConstructed<EntityRelationType>
+  ::google::protobuf::internal::ExplicitlyConstructed<Operation>
       _instance;
-} _EntityRelationType_default_instance_;
-class EntityOperationDefaultTypeInternal {
- public:
-  ::google::protobuf::internal::ExplicitlyConstructed<EntityOperation>
-      _instance;
-} _EntityOperation_default_instance_;
+} _Operation_default_instance_;
 }  // namespace entity_system
 }  // namespace inexor
 namespace protobuf_entity_2dsystem_2eproto {
-static void InitDefaultsEntityAttributeType() {
+static void InitDefaultsAttribute() {
   GOOGLE_PROTOBUF_VERIFY_VERSION;
 
   {
-    void* ptr = &::inexor::entity_system::_EntityAttributeType_default_instance_;
-    new (ptr) ::inexor::entity_system::EntityAttributeType();
+    void* ptr = &::inexor::entity_system::_Attribute_default_instance_;
+    new (ptr) ::inexor::entity_system::Attribute();
     ::google::protobuf::internal::OnShutdownDestroyMessage(ptr);
   }
-  ::inexor::entity_system::EntityAttributeType::InitAsDefaultInstance();
+  ::inexor::entity_system::Attribute::InitAsDefaultInstance();
 }
 
-::google::protobuf::internal::SCCInfo<0> scc_info_EntityAttributeType =
-    {{ATOMIC_VAR_INIT(::google::protobuf::internal::SCCInfoBase::kUninitialized), 0, InitDefaultsEntityAttributeType}, {}};
+::google::protobuf::internal::SCCInfo<1> scc_info_Attribute =
+    {{ATOMIC_VAR_INIT(::google::protobuf::internal::SCCInfoBase::kUninitialized), 1, InitDefaultsAttribute}, {
+      &protobuf_google_2fprotobuf_2fany_2eproto::scc_info_Any.base,}};
 
-static void InitDefaultsEntityType() {
+static void InitDefaultsEntity() {
   GOOGLE_PROTOBUF_VERIFY_VERSION;
 
   {
-    void* ptr = &::inexor::entity_system::_EntityType_default_instance_;
-    new (ptr) ::inexor::entity_system::EntityType();
+    void* ptr = &::inexor::entity_system::_Entity_default_instance_;
+    new (ptr) ::inexor::entity_system::Entity();
     ::google::protobuf::internal::OnShutdownDestroyMessage(ptr);
   }
-  ::inexor::entity_system::EntityType::InitAsDefaultInstance();
+  ::inexor::entity_system::Entity::InitAsDefaultInstance();
 }
 
-::google::protobuf::internal::SCCInfo<0> scc_info_EntityType =
-    {{ATOMIC_VAR_INIT(::google::protobuf::internal::SCCInfoBase::kUninitialized), 0, InitDefaultsEntityType}, {}};
+::google::protobuf::internal::SCCInfo<1> scc_info_Entity =
+    {{ATOMIC_VAR_INIT(::google::protobuf::internal::SCCInfoBase::kUninitialized), 1, InitDefaultsEntity}, {
+      &protobuf_entity_2dsystem_2eproto::scc_info_Attribute.base,}};
 
-static void InitDefaultsEntityRelationAttributeType() {
+static void InitDefaultsRelation() {
   GOOGLE_PROTOBUF_VERIFY_VERSION;
 
   {
-    void* ptr = &::inexor::entity_system::_EntityRelationAttributeType_default_instance_;
-    new (ptr) ::inexor::entity_system::EntityRelationAttributeType();
+    void* ptr = &::inexor::entity_system::_Relation_default_instance_;
+    new (ptr) ::inexor::entity_system::Relation();
     ::google::protobuf::internal::OnShutdownDestroyMessage(ptr);
   }
-  ::inexor::entity_system::EntityRelationAttributeType::InitAsDefaultInstance();
+  ::inexor::entity_system::Relation::InitAsDefaultInstance();
 }
 
-::google::protobuf::internal::SCCInfo<0> scc_info_EntityRelationAttributeType =
-    {{ATOMIC_VAR_INIT(::google::protobuf::internal::SCCInfoBase::kUninitialized), 0, InitDefaultsEntityRelationAttributeType}, {}};
+::google::protobuf::internal::SCCInfo<1> scc_info_Relation =
+    {{ATOMIC_VAR_INIT(::google::protobuf::internal::SCCInfoBase::kUninitialized), 1, InitDefaultsRelation}, {
+      &protobuf_entity_2dsystem_2eproto::scc_info_Entity.base,}};
 
-static void InitDefaultsEntityRelationType() {
+static void InitDefaultsOperation() {
   GOOGLE_PROTOBUF_VERIFY_VERSION;
 
   {
-    void* ptr = &::inexor::entity_system::_EntityRelationType_default_instance_;
-    new (ptr) ::inexor::entity_system::EntityRelationType();
+    void* ptr = &::inexor::entity_system::_Operation_default_instance_;
+    new (ptr) ::inexor::entity_system::Operation();
     ::google::protobuf::internal::OnShutdownDestroyMessage(ptr);
   }
-  ::inexor::entity_system::EntityRelationType::InitAsDefaultInstance();
+  ::inexor::entity_system::Operation::InitAsDefaultInstance();
 }
 
-::google::protobuf::internal::SCCInfo<1> scc_info_EntityRelationType =
-    {{ATOMIC_VAR_INIT(::google::protobuf::internal::SCCInfoBase::kUninitialized), 1, InitDefaultsEntityRelationType}, {
-      &protobuf_entity_2dsystem_2eproto::scc_info_EntityType.base,}};
-
-static void InitDefaultsEntityOperation() {
-  GOOGLE_PROTOBUF_VERIFY_VERSION;
-
-  {
-    void* ptr = &::inexor::entity_system::_EntityOperation_default_instance_;
-    new (ptr) ::inexor::entity_system::EntityOperation();
-    ::google::protobuf::internal::OnShutdownDestroyMessage(ptr);
-  }
-  ::inexor::entity_system::EntityOperation::InitAsDefaultInstance();
-}
-
-::google::protobuf::internal::SCCInfo<0> scc_info_EntityOperation =
-    {{ATOMIC_VAR_INIT(::google::protobuf::internal::SCCInfoBase::kUninitialized), 0, InitDefaultsEntityOperation}, {}};
+::google::protobuf::internal::SCCInfo<0> scc_info_Operation =
+    {{ATOMIC_VAR_INIT(::google::protobuf::internal::SCCInfoBase::kUninitialized), 0, InitDefaultsOperation}, {}};
 
 void InitDefaults() {
-  ::google::protobuf::internal::InitSCC(&scc_info_EntityAttributeType.base);
-  ::google::protobuf::internal::InitSCC(&scc_info_EntityType.base);
-  ::google::protobuf::internal::InitSCC(&scc_info_EntityRelationAttributeType.base);
-  ::google::protobuf::internal::InitSCC(&scc_info_EntityRelationType.base);
-  ::google::protobuf::internal::InitSCC(&scc_info_EntityOperation.base);
+  ::google::protobuf::internal::InitSCC(&scc_info_Attribute.base);
+  ::google::protobuf::internal::InitSCC(&scc_info_Entity.base);
+  ::google::protobuf::internal::InitSCC(&scc_info_Relation.base);
+  ::google::protobuf::internal::InitSCC(&scc_info_Operation.base);
 }
 
-::google::protobuf::Metadata file_level_metadata[5];
-const ::google::protobuf::EnumDescriptor* file_level_enum_descriptors[4];
+::google::protobuf::Metadata file_level_metadata[4];
+const ::google::protobuf::EnumDescriptor* file_level_enum_descriptors[1];
 
 const ::google::protobuf::uint32 TableStruct::offsets[] GOOGLE_PROTOBUF_ATTRIBUTE_SECTION_VARIABLE(protodesc_cold) = {
   ~0u,  // no _has_bits_
-  GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(::inexor::entity_system::EntityAttributeType, _internal_metadata_),
+  GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(::inexor::entity_system::Attribute, _internal_metadata_),
   ~0u,  // no _extensions_
   ~0u,  // no _oneof_case_
   ~0u,  // no _weak_field_map_
-  GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(::inexor::entity_system::EntityAttributeType, ent_attr_type_name_),
-  GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(::inexor::entity_system::EntityAttributeType, ent_attr_data_type_),
+  GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(::inexor::entity_system::Attribute, name_),
+  GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(::inexor::entity_system::Attribute, data_type_),
+  GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(::inexor::entity_system::Attribute, value_),
   ~0u,  // no _has_bits_
-  GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(::inexor::entity_system::EntityType, _internal_metadata_),
+  GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(::inexor::entity_system::Entity, _internal_metadata_),
   ~0u,  // no _extensions_
   ~0u,  // no _oneof_case_
   ~0u,  // no _weak_field_map_
-  GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(::inexor::entity_system::EntityType, ent_type_name_),
+  GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(::inexor::entity_system::Entity, name_),
+  GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(::inexor::entity_system::Entity, attribute_),
   ~0u,  // no _has_bits_
-  GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(::inexor::entity_system::EntityRelationAttributeType, _internal_metadata_),
+  GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(::inexor::entity_system::Relation, _internal_metadata_),
   ~0u,  // no _extensions_
   ~0u,  // no _oneof_case_
   ~0u,  // no _weak_field_map_
-  GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(::inexor::entity_system::EntityRelationAttributeType, ent_rel_attr_type_name_),
-  GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(::inexor::entity_system::EntityRelationAttributeType, ent_rel_attr_type_data_type_),
+  GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(::inexor::entity_system::Relation, name_),
+  GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(::inexor::entity_system::Relation, source_),
+  GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(::inexor::entity_system::Relation, target_),
   ~0u,  // no _has_bits_
-  GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(::inexor::entity_system::EntityRelationType, _internal_metadata_),
+  GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(::inexor::entity_system::Operation, _internal_metadata_),
   ~0u,  // no _extensions_
   ~0u,  // no _oneof_case_
   ~0u,  // no _weak_field_map_
-  GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(::inexor::entity_system::EntityRelationType, rel_type_name_),
-  GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(::inexor::entity_system::EntityRelationType, ent_type_source_),
-  GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(::inexor::entity_system::EntityRelationType, ent_type_target_),
-  ~0u,  // no _has_bits_
-  GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(::inexor::entity_system::EntityOperation, _internal_metadata_),
-  ~0u,  // no _extensions_
-  ~0u,  // no _oneof_case_
-  ~0u,  // no _weak_field_map_
-  GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(::inexor::entity_system::EntityOperation, result_),
+  GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(::inexor::entity_system::Operation, successful_),
+  GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(::inexor::entity_system::Operation, status_),
 };
 static const ::google::protobuf::internal::MigrationSchema schemas[] GOOGLE_PROTOBUF_ATTRIBUTE_SECTION_VARIABLE(protodesc_cold) = {
-  { 0, -1, sizeof(::inexor::entity_system::EntityAttributeType)},
-  { 7, -1, sizeof(::inexor::entity_system::EntityType)},
-  { 13, -1, sizeof(::inexor::entity_system::EntityRelationAttributeType)},
-  { 20, -1, sizeof(::inexor::entity_system::EntityRelationType)},
-  { 28, -1, sizeof(::inexor::entity_system::EntityOperation)},
+  { 0, -1, sizeof(::inexor::entity_system::Attribute)},
+  { 8, -1, sizeof(::inexor::entity_system::Entity)},
+  { 15, -1, sizeof(::inexor::entity_system::Relation)},
+  { 23, -1, sizeof(::inexor::entity_system::Operation)},
 };
 
 static ::google::protobuf::Message const * const file_default_instances[] = {
-  reinterpret_cast<const ::google::protobuf::Message*>(&::inexor::entity_system::_EntityAttributeType_default_instance_),
-  reinterpret_cast<const ::google::protobuf::Message*>(&::inexor::entity_system::_EntityType_default_instance_),
-  reinterpret_cast<const ::google::protobuf::Message*>(&::inexor::entity_system::_EntityRelationAttributeType_default_instance_),
-  reinterpret_cast<const ::google::protobuf::Message*>(&::inexor::entity_system::_EntityRelationType_default_instance_),
-  reinterpret_cast<const ::google::protobuf::Message*>(&::inexor::entity_system::_EntityOperation_default_instance_),
+  reinterpret_cast<const ::google::protobuf::Message*>(&::inexor::entity_system::_Attribute_default_instance_),
+  reinterpret_cast<const ::google::protobuf::Message*>(&::inexor::entity_system::_Entity_default_instance_),
+  reinterpret_cast<const ::google::protobuf::Message*>(&::inexor::entity_system::_Relation_default_instance_),
+  reinterpret_cast<const ::google::protobuf::Message*>(&::inexor::entity_system::_Operation_default_instance_),
 };
 
 void protobuf_AssignDescriptors() {
@@ -201,67 +181,52 @@ void protobuf_AssignDescriptorsOnce() {
 void protobuf_RegisterTypes(const ::std::string&) GOOGLE_PROTOBUF_ATTRIBUTE_COLD;
 void protobuf_RegisterTypes(const ::std::string&) {
   protobuf_AssignDescriptorsOnce();
-  ::google::protobuf::internal::RegisterAllTypes(file_level_metadata, 5);
+  ::google::protobuf::internal::RegisterAllTypes(file_level_metadata, 4);
 }
 
 void AddDescriptorsImpl() {
   InitDefaults();
   static const char descriptor[] GOOGLE_PROTOBUF_ATTRIBUTE_SECTION_VARIABLE(protodesc_cold) = {
       "\n\023entity-system.proto\022\024inexor.entity_sys"
-      "tem\"u\n\023EntityAttributeType\022\032\n\022ent_attr_t"
-      "ype_name\030\001 \001(\t\022B\n\022ent_attr_data_type\030\002 \001"
-      "(\0162&.inexor.entity_system.ENTSYS_DATA_TY"
-      "PE\"#\n\nEntityType\022\025\n\rent_type_name\030\001 \001(\t\""
-      "\212\001\n\033EntityRelationAttributeType\022\036\n\026ent_r"
-      "el_attr_type_name\030\001 \001(\t\022K\n\033ent_rel_attr_"
-      "type_data_type\030\002 \001(\0162&.inexor.entity_sys"
-      "tem.ENTSYS_DATA_TYPE\"\241\001\n\022EntityRelationT"
-      "ype\022\025\n\rrel_type_name\030\001 \001(\t\0229\n\017ent_type_s"
-      "ource\030\002 \001(\0132 .inexor.entity_system.Entit"
-      "yType\0229\n\017ent_type_target\030\003 \001(\0132 .inexor."
-      "entity_system.EntityType\"F\n\017EntityOperat"
-      "ion\0223\n\006result\030\001 \001(\0162#.inexor.entity_syst"
-      "em.ENTSYS_RESULT*5\n\rENTSYS_RESULT\022\020\n\014ENT"
-      "SYS_ERROR\020\000\022\022\n\016ENTSYS_SUCCESS\020\001*~\n\022ENTSY"
-      "S_ERROR_LEVEL\022\025\n\021ENTSYS_LEVEL_INFO\020\000\022\030\n\024"
-      "ENTSYS_LEVEL_WARNING\020\001\022\026\n\022ENTSYS_LEVEL_E"
-      "RROR\020\002\022\037\n\033ENTSYS_LEVEL_CRITICAL_ERROR\020\003*"
-      "O\n\035ENTSYS_DATA_VALIDATION_RESULT\022\027\n\023ENTS"
-      "YS_DATA_INVALID\020\000\022\025\n\021ENTSYS_DATA_VALID\020\001"
-      "*\333\001\n\020ENTSYS_DATA_TYPE\022\036\n\032ENTSYS_DATA_TYP"
-      "E_UNDEFINED\020\000\022\030\n\024ENTSYS_DATA_TYPE_INT\020\001\022"
-      "\034\n\030ENTSYS_DATA_TYPE_BIG_INT\020\002\022\032\n\026ENTSYS_"
-      "DATA_TYPE_FLOAT\020\003\022\033\n\027ENTSYS_DATA_TYPE_ST"
-      "RING\020\004\022\033\n\027ENTSYS_DATA_TYPE_DOUBLE\020\005\022\031\n\025E"
-      "NTSYS_DATA_TYPE_BOOL\020\0062\376\006\n\014EntitySystem\022"
-      "[\n\020CreateEntityType\022 .inexor.entity_syst"
-      "em.EntityType\032%.inexor.entity_system.Ent"
-      "ityOperation\022[\n\020DeleteEntityType\022 .inexo"
-      "r.entity_system.EntityType\032%.inexor.enti"
-      "ty_system.EntityOperation\022m\n\031CreateEntit"
-      "yAttributeType\022).inexor.entity_system.En"
-      "tityAttributeType\032%.inexor.entity_system"
-      ".EntityOperation\022m\n\031DeleteEntityAttribut"
-      "eType\022).inexor.entity_system.EntityAttri"
-      "buteType\032%.inexor.entity_system.EntityOp"
-      "eration\022}\n!CreateEntityRelationAttribute"
-      "Type\0221.inexor.entity_system.EntityRelati"
-      "onAttributeType\032%.inexor.entity_system.E"
-      "ntityOperation\022}\n!DeleteEntityRelationAt"
-      "tributeType\0221.inexor.entity_system.Entit"
-      "yRelationAttributeType\032%.inexor.entity_s"
-      "ystem.EntityOperation\022k\n\030CreateEntityRel"
-      "ationType\022(.inexor.entity_system.EntityR"
-      "elationType\032%.inexor.entity_system.Entit"
-      "yOperation\022k\n\030DeleteEntityRelationType\022("
-      ".inexor.entity_system.EntityRelationType"
-      "\032%.inexor.entity_system.EntityOperationb"
-      "\006proto3"
+      "tem\032\031google/protobuf/any.proto\032\033google/p"
+      "rotobuf/empty.proto\"q\n\tAttribute\022\014\n\004name"
+      "\030\001 \001(\t\0221\n\tdata_type\030\002 \001(\0162\036.inexor.entit"
+      "y_system.DataType\022#\n\005value\030\003 \001(\0132\024.googl"
+      "e.protobuf.Any\"J\n\006Entity\022\014\n\004name\030\001 \001(\t\0222"
+      "\n\tattribute\030\002 \003(\0132\037.inexor.entity_system"
+      ".Attribute\"t\n\010Relation\022\014\n\004name\030\001 \001(\t\022,\n\006"
+      "source\030\002 \001(\0132\034.inexor.entity_system.Enti"
+      "ty\022,\n\006target\030\003 \001(\0132\034.inexor.entity_syste"
+      "m.Entity\"/\n\tOperation\022\022\n\nsuccessful\030\001 \001("
+      "\010\022\016\n\006status\030\002 \001(\t*[\n\010DataType\022\r\n\tUndefin"
+      "ed\020\000\022\007\n\003Int\020\001\022\n\n\006BigInt\020\002\022\t\n\005Float\020\003\022\n\n\006"
+      "String\020\004\022\n\n\006Double\020\005\022\010\n\004Bool\020\0062\335\005\n\rEntit"
+      "yService\022M\n\014CreateEntity\022\034.inexor.entity"
+      "_system.Entity\032\037.inexor.entity_system.Op"
+      "eration\022F\n\014ListEntities\022\026.google.protobu"
+      "f.Empty\032\034.inexor.entity_system.Entity0\001\022"
+      "M\n\014DeleteEntity\022\034.inexor.entity_system.E"
+      "ntity\032\037.inexor.entity_system.Operation\022S"
+      "\n\017CreateAttribute\022\037.inexor.entity_system"
+      ".Attribute\032\037.inexor.entity_system.Operat"
+      "ion\022K\n\016ListAttributes\022\026.google.protobuf."
+      "Empty\032\037.inexor.entity_system.Attribute0\001"
+      "\022S\n\017DeleteAttribute\022\037.inexor.entity_syst"
+      "em.Attribute\032\037.inexor.entity_system.Oper"
+      "ation\022Q\n\016CreateRelation\022\036.inexor.entity_"
+      "system.Relation\032\037.inexor.entity_system.O"
+      "peration\022I\n\rListRelations\022\026.google.proto"
+      "buf.Empty\032\036.inexor.entity_system.Relatio"
+      "n0\001\022Q\n\016DeleteRelation\022\036.inexor.entity_sy"
+      "stem.Relation\032\037.inexor.entity_system.Ope"
+      "rationb\006proto3"
   };
   ::google::protobuf::DescriptorPool::InternalAddGeneratedFile(
-      descriptor, 1967);
+      descriptor, 1294);
   ::google::protobuf::MessageFactory::InternalRegisterGeneratedFile(
     "entity-system.proto", &protobuf_RegisterTypes);
+  ::protobuf_google_2fprotobuf_2fany_2eproto::AddDescriptors();
+  ::protobuf_google_2fprotobuf_2fempty_2eproto::AddDescriptors();
 }
 
 void AddDescriptors() {
@@ -277,55 +242,11 @@ struct StaticDescriptorInitializer {
 }  // namespace protobuf_entity_2dsystem_2eproto
 namespace inexor {
 namespace entity_system {
-const ::google::protobuf::EnumDescriptor* ENTSYS_RESULT_descriptor() {
+const ::google::protobuf::EnumDescriptor* DataType_descriptor() {
   protobuf_entity_2dsystem_2eproto::protobuf_AssignDescriptorsOnce();
   return protobuf_entity_2dsystem_2eproto::file_level_enum_descriptors[0];
 }
-bool ENTSYS_RESULT_IsValid(int value) {
-  switch (value) {
-    case 0:
-    case 1:
-      return true;
-    default:
-      return false;
-  }
-}
-
-const ::google::protobuf::EnumDescriptor* ENTSYS_ERROR_LEVEL_descriptor() {
-  protobuf_entity_2dsystem_2eproto::protobuf_AssignDescriptorsOnce();
-  return protobuf_entity_2dsystem_2eproto::file_level_enum_descriptors[1];
-}
-bool ENTSYS_ERROR_LEVEL_IsValid(int value) {
-  switch (value) {
-    case 0:
-    case 1:
-    case 2:
-    case 3:
-      return true;
-    default:
-      return false;
-  }
-}
-
-const ::google::protobuf::EnumDescriptor* ENTSYS_DATA_VALIDATION_RESULT_descriptor() {
-  protobuf_entity_2dsystem_2eproto::protobuf_AssignDescriptorsOnce();
-  return protobuf_entity_2dsystem_2eproto::file_level_enum_descriptors[2];
-}
-bool ENTSYS_DATA_VALIDATION_RESULT_IsValid(int value) {
-  switch (value) {
-    case 0:
-    case 1:
-      return true;
-    default:
-      return false;
-  }
-}
-
-const ::google::protobuf::EnumDescriptor* ENTSYS_DATA_TYPE_descriptor() {
-  protobuf_entity_2dsystem_2eproto::protobuf_AssignDescriptorsOnce();
-  return protobuf_entity_2dsystem_2eproto::file_level_enum_descriptors[3];
-}
-bool ENTSYS_DATA_TYPE_IsValid(int value) {
+bool DataType_IsValid(int value) {
   switch (value) {
     case 0:
     case 1:
@@ -343,98 +264,119 @@ bool ENTSYS_DATA_TYPE_IsValid(int value) {
 
 // ===================================================================
 
-void EntityAttributeType::InitAsDefaultInstance() {
+void Attribute::InitAsDefaultInstance() {
+  ::inexor::entity_system::_Attribute_default_instance_._instance.get_mutable()->value_ = const_cast< ::google::protobuf::Any*>(
+      ::google::protobuf::Any::internal_default_instance());
+}
+void Attribute::clear_value() {
+  if (GetArenaNoVirtual() == NULL && value_ != NULL) {
+    delete value_;
+  }
+  value_ = NULL;
 }
 #if !defined(_MSC_VER) || _MSC_VER >= 1900
-const int EntityAttributeType::kEntAttrTypeNameFieldNumber;
-const int EntityAttributeType::kEntAttrDataTypeFieldNumber;
+const int Attribute::kNameFieldNumber;
+const int Attribute::kDataTypeFieldNumber;
+const int Attribute::kValueFieldNumber;
 #endif  // !defined(_MSC_VER) || _MSC_VER >= 1900
 
-EntityAttributeType::EntityAttributeType()
+Attribute::Attribute()
   : ::google::protobuf::Message(), _internal_metadata_(NULL) {
   ::google::protobuf::internal::InitSCC(
-      &protobuf_entity_2dsystem_2eproto::scc_info_EntityAttributeType.base);
+      &protobuf_entity_2dsystem_2eproto::scc_info_Attribute.base);
   SharedCtor();
-  // @@protoc_insertion_point(constructor:inexor.entity_system.EntityAttributeType)
+  // @@protoc_insertion_point(constructor:inexor.entity_system.Attribute)
 }
-EntityAttributeType::EntityAttributeType(const EntityAttributeType& from)
+Attribute::Attribute(const Attribute& from)
   : ::google::protobuf::Message(),
       _internal_metadata_(NULL) {
   _internal_metadata_.MergeFrom(from._internal_metadata_);
-  ent_attr_type_name_.UnsafeSetDefault(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
-  if (from.ent_attr_type_name().size() > 0) {
-    ent_attr_type_name_.AssignWithDefault(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), from.ent_attr_type_name_);
+  name_.UnsafeSetDefault(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
+  if (from.name().size() > 0) {
+    name_.AssignWithDefault(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), from.name_);
   }
-  ent_attr_data_type_ = from.ent_attr_data_type_;
-  // @@protoc_insertion_point(copy_constructor:inexor.entity_system.EntityAttributeType)
+  if (from.has_value()) {
+    value_ = new ::google::protobuf::Any(*from.value_);
+  } else {
+    value_ = NULL;
+  }
+  data_type_ = from.data_type_;
+  // @@protoc_insertion_point(copy_constructor:inexor.entity_system.Attribute)
 }
 
-void EntityAttributeType::SharedCtor() {
-  ent_attr_type_name_.UnsafeSetDefault(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
-  ent_attr_data_type_ = 0;
+void Attribute::SharedCtor() {
+  name_.UnsafeSetDefault(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
+  ::memset(&value_, 0, static_cast<size_t>(
+      reinterpret_cast<char*>(&data_type_) -
+      reinterpret_cast<char*>(&value_)) + sizeof(data_type_));
 }
 
-EntityAttributeType::~EntityAttributeType() {
-  // @@protoc_insertion_point(destructor:inexor.entity_system.EntityAttributeType)
+Attribute::~Attribute() {
+  // @@protoc_insertion_point(destructor:inexor.entity_system.Attribute)
   SharedDtor();
 }
 
-void EntityAttributeType::SharedDtor() {
-  ent_attr_type_name_.DestroyNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
+void Attribute::SharedDtor() {
+  name_.DestroyNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
+  if (this != internal_default_instance()) delete value_;
 }
 
-void EntityAttributeType::SetCachedSize(int size) const {
+void Attribute::SetCachedSize(int size) const {
   _cached_size_.Set(size);
 }
-const ::google::protobuf::Descriptor* EntityAttributeType::descriptor() {
+const ::google::protobuf::Descriptor* Attribute::descriptor() {
   ::protobuf_entity_2dsystem_2eproto::protobuf_AssignDescriptorsOnce();
   return ::protobuf_entity_2dsystem_2eproto::file_level_metadata[kIndexInFileMessages].descriptor;
 }
 
-const EntityAttributeType& EntityAttributeType::default_instance() {
-  ::google::protobuf::internal::InitSCC(&protobuf_entity_2dsystem_2eproto::scc_info_EntityAttributeType.base);
+const Attribute& Attribute::default_instance() {
+  ::google::protobuf::internal::InitSCC(&protobuf_entity_2dsystem_2eproto::scc_info_Attribute.base);
   return *internal_default_instance();
 }
 
 
-void EntityAttributeType::Clear() {
-// @@protoc_insertion_point(message_clear_start:inexor.entity_system.EntityAttributeType)
+void Attribute::Clear() {
+// @@protoc_insertion_point(message_clear_start:inexor.entity_system.Attribute)
   ::google::protobuf::uint32 cached_has_bits = 0;
   // Prevent compiler warnings about cached_has_bits being unused
   (void) cached_has_bits;
 
-  ent_attr_type_name_.ClearToEmptyNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
-  ent_attr_data_type_ = 0;
+  name_.ClearToEmptyNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
+  if (GetArenaNoVirtual() == NULL && value_ != NULL) {
+    delete value_;
+  }
+  value_ = NULL;
+  data_type_ = 0;
   _internal_metadata_.Clear();
 }
 
-bool EntityAttributeType::MergePartialFromCodedStream(
+bool Attribute::MergePartialFromCodedStream(
     ::google::protobuf::io::CodedInputStream* input) {
 #define DO_(EXPRESSION) if (!GOOGLE_PREDICT_TRUE(EXPRESSION)) goto failure
   ::google::protobuf::uint32 tag;
-  // @@protoc_insertion_point(parse_start:inexor.entity_system.EntityAttributeType)
+  // @@protoc_insertion_point(parse_start:inexor.entity_system.Attribute)
   for (;;) {
     ::std::pair<::google::protobuf::uint32, bool> p = input->ReadTagWithCutoffNoLastTag(127u);
     tag = p.first;
     if (!p.second) goto handle_unusual;
     switch (::google::protobuf::internal::WireFormatLite::GetTagFieldNumber(tag)) {
-      // string ent_attr_type_name = 1;
+      // string name = 1;
       case 1: {
         if (static_cast< ::google::protobuf::uint8>(tag) ==
             static_cast< ::google::protobuf::uint8>(10u /* 10 & 0xFF */)) {
           DO_(::google::protobuf::internal::WireFormatLite::ReadString(
-                input, this->mutable_ent_attr_type_name()));
+                input, this->mutable_name()));
           DO_(::google::protobuf::internal::WireFormatLite::VerifyUtf8String(
-            this->ent_attr_type_name().data(), static_cast<int>(this->ent_attr_type_name().length()),
+            this->name().data(), static_cast<int>(this->name().length()),
             ::google::protobuf::internal::WireFormatLite::PARSE,
-            "inexor.entity_system.EntityAttributeType.ent_attr_type_name"));
+            "inexor.entity_system.Attribute.name"));
         } else {
           goto handle_unusual;
         }
         break;
       }
 
-      // .inexor.entity_system.ENTSYS_DATA_TYPE ent_attr_data_type = 2;
+      // .inexor.entity_system.DataType data_type = 2;
       case 2: {
         if (static_cast< ::google::protobuf::uint8>(tag) ==
             static_cast< ::google::protobuf::uint8>(16u /* 16 & 0xFF */)) {
@@ -442,849 +384,19 @@ bool EntityAttributeType::MergePartialFromCodedStream(
           DO_((::google::protobuf::internal::WireFormatLite::ReadPrimitive<
                    int, ::google::protobuf::internal::WireFormatLite::TYPE_ENUM>(
                  input, &value)));
-          set_ent_attr_data_type(static_cast< ::inexor::entity_system::ENTSYS_DATA_TYPE >(value));
+          set_data_type(static_cast< ::inexor::entity_system::DataType >(value));
         } else {
           goto handle_unusual;
         }
         break;
       }
 
-      default: {
-      handle_unusual:
-        if (tag == 0) {
-          goto success;
-        }
-        DO_(::google::protobuf::internal::WireFormat::SkipField(
-              input, tag, _internal_metadata_.mutable_unknown_fields()));
-        break;
-      }
-    }
-  }
-success:
-  // @@protoc_insertion_point(parse_success:inexor.entity_system.EntityAttributeType)
-  return true;
-failure:
-  // @@protoc_insertion_point(parse_failure:inexor.entity_system.EntityAttributeType)
-  return false;
-#undef DO_
-}
-
-void EntityAttributeType::SerializeWithCachedSizes(
-    ::google::protobuf::io::CodedOutputStream* output) const {
-  // @@protoc_insertion_point(serialize_start:inexor.entity_system.EntityAttributeType)
-  ::google::protobuf::uint32 cached_has_bits = 0;
-  (void) cached_has_bits;
-
-  // string ent_attr_type_name = 1;
-  if (this->ent_attr_type_name().size() > 0) {
-    ::google::protobuf::internal::WireFormatLite::VerifyUtf8String(
-      this->ent_attr_type_name().data(), static_cast<int>(this->ent_attr_type_name().length()),
-      ::google::protobuf::internal::WireFormatLite::SERIALIZE,
-      "inexor.entity_system.EntityAttributeType.ent_attr_type_name");
-    ::google::protobuf::internal::WireFormatLite::WriteStringMaybeAliased(
-      1, this->ent_attr_type_name(), output);
-  }
-
-  // .inexor.entity_system.ENTSYS_DATA_TYPE ent_attr_data_type = 2;
-  if (this->ent_attr_data_type() != 0) {
-    ::google::protobuf::internal::WireFormatLite::WriteEnum(
-      2, this->ent_attr_data_type(), output);
-  }
-
-  if ((_internal_metadata_.have_unknown_fields() &&  ::google::protobuf::internal::GetProto3PreserveUnknownsDefault())) {
-    ::google::protobuf::internal::WireFormat::SerializeUnknownFields(
-        (::google::protobuf::internal::GetProto3PreserveUnknownsDefault()   ? _internal_metadata_.unknown_fields()   : _internal_metadata_.default_instance()), output);
-  }
-  // @@protoc_insertion_point(serialize_end:inexor.entity_system.EntityAttributeType)
-}
-
-::google::protobuf::uint8* EntityAttributeType::InternalSerializeWithCachedSizesToArray(
-    bool deterministic, ::google::protobuf::uint8* target) const {
-  (void)deterministic; // Unused
-  // @@protoc_insertion_point(serialize_to_array_start:inexor.entity_system.EntityAttributeType)
-  ::google::protobuf::uint32 cached_has_bits = 0;
-  (void) cached_has_bits;
-
-  // string ent_attr_type_name = 1;
-  if (this->ent_attr_type_name().size() > 0) {
-    ::google::protobuf::internal::WireFormatLite::VerifyUtf8String(
-      this->ent_attr_type_name().data(), static_cast<int>(this->ent_attr_type_name().length()),
-      ::google::protobuf::internal::WireFormatLite::SERIALIZE,
-      "inexor.entity_system.EntityAttributeType.ent_attr_type_name");
-    target =
-      ::google::protobuf::internal::WireFormatLite::WriteStringToArray(
-        1, this->ent_attr_type_name(), target);
-  }
-
-  // .inexor.entity_system.ENTSYS_DATA_TYPE ent_attr_data_type = 2;
-  if (this->ent_attr_data_type() != 0) {
-    target = ::google::protobuf::internal::WireFormatLite::WriteEnumToArray(
-      2, this->ent_attr_data_type(), target);
-  }
-
-  if ((_internal_metadata_.have_unknown_fields() &&  ::google::protobuf::internal::GetProto3PreserveUnknownsDefault())) {
-    target = ::google::protobuf::internal::WireFormat::SerializeUnknownFieldsToArray(
-        (::google::protobuf::internal::GetProto3PreserveUnknownsDefault()   ? _internal_metadata_.unknown_fields()   : _internal_metadata_.default_instance()), target);
-  }
-  // @@protoc_insertion_point(serialize_to_array_end:inexor.entity_system.EntityAttributeType)
-  return target;
-}
-
-size_t EntityAttributeType::ByteSizeLong() const {
-// @@protoc_insertion_point(message_byte_size_start:inexor.entity_system.EntityAttributeType)
-  size_t total_size = 0;
-
-  if ((_internal_metadata_.have_unknown_fields() &&  ::google::protobuf::internal::GetProto3PreserveUnknownsDefault())) {
-    total_size +=
-      ::google::protobuf::internal::WireFormat::ComputeUnknownFieldsSize(
-        (::google::protobuf::internal::GetProto3PreserveUnknownsDefault()   ? _internal_metadata_.unknown_fields()   : _internal_metadata_.default_instance()));
-  }
-  // string ent_attr_type_name = 1;
-  if (this->ent_attr_type_name().size() > 0) {
-    total_size += 1 +
-      ::google::protobuf::internal::WireFormatLite::StringSize(
-        this->ent_attr_type_name());
-  }
-
-  // .inexor.entity_system.ENTSYS_DATA_TYPE ent_attr_data_type = 2;
-  if (this->ent_attr_data_type() != 0) {
-    total_size += 1 +
-      ::google::protobuf::internal::WireFormatLite::EnumSize(this->ent_attr_data_type());
-  }
-
-  int cached_size = ::google::protobuf::internal::ToCachedSize(total_size);
-  SetCachedSize(cached_size);
-  return total_size;
-}
-
-void EntityAttributeType::MergeFrom(const ::google::protobuf::Message& from) {
-// @@protoc_insertion_point(generalized_merge_from_start:inexor.entity_system.EntityAttributeType)
-  GOOGLE_DCHECK_NE(&from, this);
-  const EntityAttributeType* source =
-      ::google::protobuf::internal::DynamicCastToGenerated<const EntityAttributeType>(
-          &from);
-  if (source == NULL) {
-  // @@protoc_insertion_point(generalized_merge_from_cast_fail:inexor.entity_system.EntityAttributeType)
-    ::google::protobuf::internal::ReflectionOps::Merge(from, this);
-  } else {
-  // @@protoc_insertion_point(generalized_merge_from_cast_success:inexor.entity_system.EntityAttributeType)
-    MergeFrom(*source);
-  }
-}
-
-void EntityAttributeType::MergeFrom(const EntityAttributeType& from) {
-// @@protoc_insertion_point(class_specific_merge_from_start:inexor.entity_system.EntityAttributeType)
-  GOOGLE_DCHECK_NE(&from, this);
-  _internal_metadata_.MergeFrom(from._internal_metadata_);
-  ::google::protobuf::uint32 cached_has_bits = 0;
-  (void) cached_has_bits;
-
-  if (from.ent_attr_type_name().size() > 0) {
-
-    ent_attr_type_name_.AssignWithDefault(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), from.ent_attr_type_name_);
-  }
-  if (from.ent_attr_data_type() != 0) {
-    set_ent_attr_data_type(from.ent_attr_data_type());
-  }
-}
-
-void EntityAttributeType::CopyFrom(const ::google::protobuf::Message& from) {
-// @@protoc_insertion_point(generalized_copy_from_start:inexor.entity_system.EntityAttributeType)
-  if (&from == this) return;
-  Clear();
-  MergeFrom(from);
-}
-
-void EntityAttributeType::CopyFrom(const EntityAttributeType& from) {
-// @@protoc_insertion_point(class_specific_copy_from_start:inexor.entity_system.EntityAttributeType)
-  if (&from == this) return;
-  Clear();
-  MergeFrom(from);
-}
-
-bool EntityAttributeType::IsInitialized() const {
-  return true;
-}
-
-void EntityAttributeType::Swap(EntityAttributeType* other) {
-  if (other == this) return;
-  InternalSwap(other);
-}
-void EntityAttributeType::InternalSwap(EntityAttributeType* other) {
-  using std::swap;
-  ent_attr_type_name_.Swap(&other->ent_attr_type_name_, &::google::protobuf::internal::GetEmptyStringAlreadyInited(),
-    GetArenaNoVirtual());
-  swap(ent_attr_data_type_, other->ent_attr_data_type_);
-  _internal_metadata_.Swap(&other->_internal_metadata_);
-}
-
-::google::protobuf::Metadata EntityAttributeType::GetMetadata() const {
-  protobuf_entity_2dsystem_2eproto::protobuf_AssignDescriptorsOnce();
-  return ::protobuf_entity_2dsystem_2eproto::file_level_metadata[kIndexInFileMessages];
-}
-
-
-// ===================================================================
-
-void EntityType::InitAsDefaultInstance() {
-}
-#if !defined(_MSC_VER) || _MSC_VER >= 1900
-const int EntityType::kEntTypeNameFieldNumber;
-#endif  // !defined(_MSC_VER) || _MSC_VER >= 1900
-
-EntityType::EntityType()
-  : ::google::protobuf::Message(), _internal_metadata_(NULL) {
-  ::google::protobuf::internal::InitSCC(
-      &protobuf_entity_2dsystem_2eproto::scc_info_EntityType.base);
-  SharedCtor();
-  // @@protoc_insertion_point(constructor:inexor.entity_system.EntityType)
-}
-EntityType::EntityType(const EntityType& from)
-  : ::google::protobuf::Message(),
-      _internal_metadata_(NULL) {
-  _internal_metadata_.MergeFrom(from._internal_metadata_);
-  ent_type_name_.UnsafeSetDefault(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
-  if (from.ent_type_name().size() > 0) {
-    ent_type_name_.AssignWithDefault(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), from.ent_type_name_);
-  }
-  // @@protoc_insertion_point(copy_constructor:inexor.entity_system.EntityType)
-}
-
-void EntityType::SharedCtor() {
-  ent_type_name_.UnsafeSetDefault(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
-}
-
-EntityType::~EntityType() {
-  // @@protoc_insertion_point(destructor:inexor.entity_system.EntityType)
-  SharedDtor();
-}
-
-void EntityType::SharedDtor() {
-  ent_type_name_.DestroyNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
-}
-
-void EntityType::SetCachedSize(int size) const {
-  _cached_size_.Set(size);
-}
-const ::google::protobuf::Descriptor* EntityType::descriptor() {
-  ::protobuf_entity_2dsystem_2eproto::protobuf_AssignDescriptorsOnce();
-  return ::protobuf_entity_2dsystem_2eproto::file_level_metadata[kIndexInFileMessages].descriptor;
-}
-
-const EntityType& EntityType::default_instance() {
-  ::google::protobuf::internal::InitSCC(&protobuf_entity_2dsystem_2eproto::scc_info_EntityType.base);
-  return *internal_default_instance();
-}
-
-
-void EntityType::Clear() {
-// @@protoc_insertion_point(message_clear_start:inexor.entity_system.EntityType)
-  ::google::protobuf::uint32 cached_has_bits = 0;
-  // Prevent compiler warnings about cached_has_bits being unused
-  (void) cached_has_bits;
-
-  ent_type_name_.ClearToEmptyNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
-  _internal_metadata_.Clear();
-}
-
-bool EntityType::MergePartialFromCodedStream(
-    ::google::protobuf::io::CodedInputStream* input) {
-#define DO_(EXPRESSION) if (!GOOGLE_PREDICT_TRUE(EXPRESSION)) goto failure
-  ::google::protobuf::uint32 tag;
-  // @@protoc_insertion_point(parse_start:inexor.entity_system.EntityType)
-  for (;;) {
-    ::std::pair<::google::protobuf::uint32, bool> p = input->ReadTagWithCutoffNoLastTag(127u);
-    tag = p.first;
-    if (!p.second) goto handle_unusual;
-    switch (::google::protobuf::internal::WireFormatLite::GetTagFieldNumber(tag)) {
-      // string ent_type_name = 1;
-      case 1: {
-        if (static_cast< ::google::protobuf::uint8>(tag) ==
-            static_cast< ::google::protobuf::uint8>(10u /* 10 & 0xFF */)) {
-          DO_(::google::protobuf::internal::WireFormatLite::ReadString(
-                input, this->mutable_ent_type_name()));
-          DO_(::google::protobuf::internal::WireFormatLite::VerifyUtf8String(
-            this->ent_type_name().data(), static_cast<int>(this->ent_type_name().length()),
-            ::google::protobuf::internal::WireFormatLite::PARSE,
-            "inexor.entity_system.EntityType.ent_type_name"));
-        } else {
-          goto handle_unusual;
-        }
-        break;
-      }
-
-      default: {
-      handle_unusual:
-        if (tag == 0) {
-          goto success;
-        }
-        DO_(::google::protobuf::internal::WireFormat::SkipField(
-              input, tag, _internal_metadata_.mutable_unknown_fields()));
-        break;
-      }
-    }
-  }
-success:
-  // @@protoc_insertion_point(parse_success:inexor.entity_system.EntityType)
-  return true;
-failure:
-  // @@protoc_insertion_point(parse_failure:inexor.entity_system.EntityType)
-  return false;
-#undef DO_
-}
-
-void EntityType::SerializeWithCachedSizes(
-    ::google::protobuf::io::CodedOutputStream* output) const {
-  // @@protoc_insertion_point(serialize_start:inexor.entity_system.EntityType)
-  ::google::protobuf::uint32 cached_has_bits = 0;
-  (void) cached_has_bits;
-
-  // string ent_type_name = 1;
-  if (this->ent_type_name().size() > 0) {
-    ::google::protobuf::internal::WireFormatLite::VerifyUtf8String(
-      this->ent_type_name().data(), static_cast<int>(this->ent_type_name().length()),
-      ::google::protobuf::internal::WireFormatLite::SERIALIZE,
-      "inexor.entity_system.EntityType.ent_type_name");
-    ::google::protobuf::internal::WireFormatLite::WriteStringMaybeAliased(
-      1, this->ent_type_name(), output);
-  }
-
-  if ((_internal_metadata_.have_unknown_fields() &&  ::google::protobuf::internal::GetProto3PreserveUnknownsDefault())) {
-    ::google::protobuf::internal::WireFormat::SerializeUnknownFields(
-        (::google::protobuf::internal::GetProto3PreserveUnknownsDefault()   ? _internal_metadata_.unknown_fields()   : _internal_metadata_.default_instance()), output);
-  }
-  // @@protoc_insertion_point(serialize_end:inexor.entity_system.EntityType)
-}
-
-::google::protobuf::uint8* EntityType::InternalSerializeWithCachedSizesToArray(
-    bool deterministic, ::google::protobuf::uint8* target) const {
-  (void)deterministic; // Unused
-  // @@protoc_insertion_point(serialize_to_array_start:inexor.entity_system.EntityType)
-  ::google::protobuf::uint32 cached_has_bits = 0;
-  (void) cached_has_bits;
-
-  // string ent_type_name = 1;
-  if (this->ent_type_name().size() > 0) {
-    ::google::protobuf::internal::WireFormatLite::VerifyUtf8String(
-      this->ent_type_name().data(), static_cast<int>(this->ent_type_name().length()),
-      ::google::protobuf::internal::WireFormatLite::SERIALIZE,
-      "inexor.entity_system.EntityType.ent_type_name");
-    target =
-      ::google::protobuf::internal::WireFormatLite::WriteStringToArray(
-        1, this->ent_type_name(), target);
-  }
-
-  if ((_internal_metadata_.have_unknown_fields() &&  ::google::protobuf::internal::GetProto3PreserveUnknownsDefault())) {
-    target = ::google::protobuf::internal::WireFormat::SerializeUnknownFieldsToArray(
-        (::google::protobuf::internal::GetProto3PreserveUnknownsDefault()   ? _internal_metadata_.unknown_fields()   : _internal_metadata_.default_instance()), target);
-  }
-  // @@protoc_insertion_point(serialize_to_array_end:inexor.entity_system.EntityType)
-  return target;
-}
-
-size_t EntityType::ByteSizeLong() const {
-// @@protoc_insertion_point(message_byte_size_start:inexor.entity_system.EntityType)
-  size_t total_size = 0;
-
-  if ((_internal_metadata_.have_unknown_fields() &&  ::google::protobuf::internal::GetProto3PreserveUnknownsDefault())) {
-    total_size +=
-      ::google::protobuf::internal::WireFormat::ComputeUnknownFieldsSize(
-        (::google::protobuf::internal::GetProto3PreserveUnknownsDefault()   ? _internal_metadata_.unknown_fields()   : _internal_metadata_.default_instance()));
-  }
-  // string ent_type_name = 1;
-  if (this->ent_type_name().size() > 0) {
-    total_size += 1 +
-      ::google::protobuf::internal::WireFormatLite::StringSize(
-        this->ent_type_name());
-  }
-
-  int cached_size = ::google::protobuf::internal::ToCachedSize(total_size);
-  SetCachedSize(cached_size);
-  return total_size;
-}
-
-void EntityType::MergeFrom(const ::google::protobuf::Message& from) {
-// @@protoc_insertion_point(generalized_merge_from_start:inexor.entity_system.EntityType)
-  GOOGLE_DCHECK_NE(&from, this);
-  const EntityType* source =
-      ::google::protobuf::internal::DynamicCastToGenerated<const EntityType>(
-          &from);
-  if (source == NULL) {
-  // @@protoc_insertion_point(generalized_merge_from_cast_fail:inexor.entity_system.EntityType)
-    ::google::protobuf::internal::ReflectionOps::Merge(from, this);
-  } else {
-  // @@protoc_insertion_point(generalized_merge_from_cast_success:inexor.entity_system.EntityType)
-    MergeFrom(*source);
-  }
-}
-
-void EntityType::MergeFrom(const EntityType& from) {
-// @@protoc_insertion_point(class_specific_merge_from_start:inexor.entity_system.EntityType)
-  GOOGLE_DCHECK_NE(&from, this);
-  _internal_metadata_.MergeFrom(from._internal_metadata_);
-  ::google::protobuf::uint32 cached_has_bits = 0;
-  (void) cached_has_bits;
-
-  if (from.ent_type_name().size() > 0) {
-
-    ent_type_name_.AssignWithDefault(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), from.ent_type_name_);
-  }
-}
-
-void EntityType::CopyFrom(const ::google::protobuf::Message& from) {
-// @@protoc_insertion_point(generalized_copy_from_start:inexor.entity_system.EntityType)
-  if (&from == this) return;
-  Clear();
-  MergeFrom(from);
-}
-
-void EntityType::CopyFrom(const EntityType& from) {
-// @@protoc_insertion_point(class_specific_copy_from_start:inexor.entity_system.EntityType)
-  if (&from == this) return;
-  Clear();
-  MergeFrom(from);
-}
-
-bool EntityType::IsInitialized() const {
-  return true;
-}
-
-void EntityType::Swap(EntityType* other) {
-  if (other == this) return;
-  InternalSwap(other);
-}
-void EntityType::InternalSwap(EntityType* other) {
-  using std::swap;
-  ent_type_name_.Swap(&other->ent_type_name_, &::google::protobuf::internal::GetEmptyStringAlreadyInited(),
-    GetArenaNoVirtual());
-  _internal_metadata_.Swap(&other->_internal_metadata_);
-}
-
-::google::protobuf::Metadata EntityType::GetMetadata() const {
-  protobuf_entity_2dsystem_2eproto::protobuf_AssignDescriptorsOnce();
-  return ::protobuf_entity_2dsystem_2eproto::file_level_metadata[kIndexInFileMessages];
-}
-
-
-// ===================================================================
-
-void EntityRelationAttributeType::InitAsDefaultInstance() {
-}
-#if !defined(_MSC_VER) || _MSC_VER >= 1900
-const int EntityRelationAttributeType::kEntRelAttrTypeNameFieldNumber;
-const int EntityRelationAttributeType::kEntRelAttrTypeDataTypeFieldNumber;
-#endif  // !defined(_MSC_VER) || _MSC_VER >= 1900
-
-EntityRelationAttributeType::EntityRelationAttributeType()
-  : ::google::protobuf::Message(), _internal_metadata_(NULL) {
-  ::google::protobuf::internal::InitSCC(
-      &protobuf_entity_2dsystem_2eproto::scc_info_EntityRelationAttributeType.base);
-  SharedCtor();
-  // @@protoc_insertion_point(constructor:inexor.entity_system.EntityRelationAttributeType)
-}
-EntityRelationAttributeType::EntityRelationAttributeType(const EntityRelationAttributeType& from)
-  : ::google::protobuf::Message(),
-      _internal_metadata_(NULL) {
-  _internal_metadata_.MergeFrom(from._internal_metadata_);
-  ent_rel_attr_type_name_.UnsafeSetDefault(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
-  if (from.ent_rel_attr_type_name().size() > 0) {
-    ent_rel_attr_type_name_.AssignWithDefault(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), from.ent_rel_attr_type_name_);
-  }
-  ent_rel_attr_type_data_type_ = from.ent_rel_attr_type_data_type_;
-  // @@protoc_insertion_point(copy_constructor:inexor.entity_system.EntityRelationAttributeType)
-}
-
-void EntityRelationAttributeType::SharedCtor() {
-  ent_rel_attr_type_name_.UnsafeSetDefault(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
-  ent_rel_attr_type_data_type_ = 0;
-}
-
-EntityRelationAttributeType::~EntityRelationAttributeType() {
-  // @@protoc_insertion_point(destructor:inexor.entity_system.EntityRelationAttributeType)
-  SharedDtor();
-}
-
-void EntityRelationAttributeType::SharedDtor() {
-  ent_rel_attr_type_name_.DestroyNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
-}
-
-void EntityRelationAttributeType::SetCachedSize(int size) const {
-  _cached_size_.Set(size);
-}
-const ::google::protobuf::Descriptor* EntityRelationAttributeType::descriptor() {
-  ::protobuf_entity_2dsystem_2eproto::protobuf_AssignDescriptorsOnce();
-  return ::protobuf_entity_2dsystem_2eproto::file_level_metadata[kIndexInFileMessages].descriptor;
-}
-
-const EntityRelationAttributeType& EntityRelationAttributeType::default_instance() {
-  ::google::protobuf::internal::InitSCC(&protobuf_entity_2dsystem_2eproto::scc_info_EntityRelationAttributeType.base);
-  return *internal_default_instance();
-}
-
-
-void EntityRelationAttributeType::Clear() {
-// @@protoc_insertion_point(message_clear_start:inexor.entity_system.EntityRelationAttributeType)
-  ::google::protobuf::uint32 cached_has_bits = 0;
-  // Prevent compiler warnings about cached_has_bits being unused
-  (void) cached_has_bits;
-
-  ent_rel_attr_type_name_.ClearToEmptyNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
-  ent_rel_attr_type_data_type_ = 0;
-  _internal_metadata_.Clear();
-}
-
-bool EntityRelationAttributeType::MergePartialFromCodedStream(
-    ::google::protobuf::io::CodedInputStream* input) {
-#define DO_(EXPRESSION) if (!GOOGLE_PREDICT_TRUE(EXPRESSION)) goto failure
-  ::google::protobuf::uint32 tag;
-  // @@protoc_insertion_point(parse_start:inexor.entity_system.EntityRelationAttributeType)
-  for (;;) {
-    ::std::pair<::google::protobuf::uint32, bool> p = input->ReadTagWithCutoffNoLastTag(127u);
-    tag = p.first;
-    if (!p.second) goto handle_unusual;
-    switch (::google::protobuf::internal::WireFormatLite::GetTagFieldNumber(tag)) {
-      // string ent_rel_attr_type_name = 1;
-      case 1: {
-        if (static_cast< ::google::protobuf::uint8>(tag) ==
-            static_cast< ::google::protobuf::uint8>(10u /* 10 & 0xFF */)) {
-          DO_(::google::protobuf::internal::WireFormatLite::ReadString(
-                input, this->mutable_ent_rel_attr_type_name()));
-          DO_(::google::protobuf::internal::WireFormatLite::VerifyUtf8String(
-            this->ent_rel_attr_type_name().data(), static_cast<int>(this->ent_rel_attr_type_name().length()),
-            ::google::protobuf::internal::WireFormatLite::PARSE,
-            "inexor.entity_system.EntityRelationAttributeType.ent_rel_attr_type_name"));
-        } else {
-          goto handle_unusual;
-        }
-        break;
-      }
-
-      // .inexor.entity_system.ENTSYS_DATA_TYPE ent_rel_attr_type_data_type = 2;
-      case 2: {
-        if (static_cast< ::google::protobuf::uint8>(tag) ==
-            static_cast< ::google::protobuf::uint8>(16u /* 16 & 0xFF */)) {
-          int value;
-          DO_((::google::protobuf::internal::WireFormatLite::ReadPrimitive<
-                   int, ::google::protobuf::internal::WireFormatLite::TYPE_ENUM>(
-                 input, &value)));
-          set_ent_rel_attr_type_data_type(static_cast< ::inexor::entity_system::ENTSYS_DATA_TYPE >(value));
-        } else {
-          goto handle_unusual;
-        }
-        break;
-      }
-
-      default: {
-      handle_unusual:
-        if (tag == 0) {
-          goto success;
-        }
-        DO_(::google::protobuf::internal::WireFormat::SkipField(
-              input, tag, _internal_metadata_.mutable_unknown_fields()));
-        break;
-      }
-    }
-  }
-success:
-  // @@protoc_insertion_point(parse_success:inexor.entity_system.EntityRelationAttributeType)
-  return true;
-failure:
-  // @@protoc_insertion_point(parse_failure:inexor.entity_system.EntityRelationAttributeType)
-  return false;
-#undef DO_
-}
-
-void EntityRelationAttributeType::SerializeWithCachedSizes(
-    ::google::protobuf::io::CodedOutputStream* output) const {
-  // @@protoc_insertion_point(serialize_start:inexor.entity_system.EntityRelationAttributeType)
-  ::google::protobuf::uint32 cached_has_bits = 0;
-  (void) cached_has_bits;
-
-  // string ent_rel_attr_type_name = 1;
-  if (this->ent_rel_attr_type_name().size() > 0) {
-    ::google::protobuf::internal::WireFormatLite::VerifyUtf8String(
-      this->ent_rel_attr_type_name().data(), static_cast<int>(this->ent_rel_attr_type_name().length()),
-      ::google::protobuf::internal::WireFormatLite::SERIALIZE,
-      "inexor.entity_system.EntityRelationAttributeType.ent_rel_attr_type_name");
-    ::google::protobuf::internal::WireFormatLite::WriteStringMaybeAliased(
-      1, this->ent_rel_attr_type_name(), output);
-  }
-
-  // .inexor.entity_system.ENTSYS_DATA_TYPE ent_rel_attr_type_data_type = 2;
-  if (this->ent_rel_attr_type_data_type() != 0) {
-    ::google::protobuf::internal::WireFormatLite::WriteEnum(
-      2, this->ent_rel_attr_type_data_type(), output);
-  }
-
-  if ((_internal_metadata_.have_unknown_fields() &&  ::google::protobuf::internal::GetProto3PreserveUnknownsDefault())) {
-    ::google::protobuf::internal::WireFormat::SerializeUnknownFields(
-        (::google::protobuf::internal::GetProto3PreserveUnknownsDefault()   ? _internal_metadata_.unknown_fields()   : _internal_metadata_.default_instance()), output);
-  }
-  // @@protoc_insertion_point(serialize_end:inexor.entity_system.EntityRelationAttributeType)
-}
-
-::google::protobuf::uint8* EntityRelationAttributeType::InternalSerializeWithCachedSizesToArray(
-    bool deterministic, ::google::protobuf::uint8* target) const {
-  (void)deterministic; // Unused
-  // @@protoc_insertion_point(serialize_to_array_start:inexor.entity_system.EntityRelationAttributeType)
-  ::google::protobuf::uint32 cached_has_bits = 0;
-  (void) cached_has_bits;
-
-  // string ent_rel_attr_type_name = 1;
-  if (this->ent_rel_attr_type_name().size() > 0) {
-    ::google::protobuf::internal::WireFormatLite::VerifyUtf8String(
-      this->ent_rel_attr_type_name().data(), static_cast<int>(this->ent_rel_attr_type_name().length()),
-      ::google::protobuf::internal::WireFormatLite::SERIALIZE,
-      "inexor.entity_system.EntityRelationAttributeType.ent_rel_attr_type_name");
-    target =
-      ::google::protobuf::internal::WireFormatLite::WriteStringToArray(
-        1, this->ent_rel_attr_type_name(), target);
-  }
-
-  // .inexor.entity_system.ENTSYS_DATA_TYPE ent_rel_attr_type_data_type = 2;
-  if (this->ent_rel_attr_type_data_type() != 0) {
-    target = ::google::protobuf::internal::WireFormatLite::WriteEnumToArray(
-      2, this->ent_rel_attr_type_data_type(), target);
-  }
-
-  if ((_internal_metadata_.have_unknown_fields() &&  ::google::protobuf::internal::GetProto3PreserveUnknownsDefault())) {
-    target = ::google::protobuf::internal::WireFormat::SerializeUnknownFieldsToArray(
-        (::google::protobuf::internal::GetProto3PreserveUnknownsDefault()   ? _internal_metadata_.unknown_fields()   : _internal_metadata_.default_instance()), target);
-  }
-  // @@protoc_insertion_point(serialize_to_array_end:inexor.entity_system.EntityRelationAttributeType)
-  return target;
-}
-
-size_t EntityRelationAttributeType::ByteSizeLong() const {
-// @@protoc_insertion_point(message_byte_size_start:inexor.entity_system.EntityRelationAttributeType)
-  size_t total_size = 0;
-
-  if ((_internal_metadata_.have_unknown_fields() &&  ::google::protobuf::internal::GetProto3PreserveUnknownsDefault())) {
-    total_size +=
-      ::google::protobuf::internal::WireFormat::ComputeUnknownFieldsSize(
-        (::google::protobuf::internal::GetProto3PreserveUnknownsDefault()   ? _internal_metadata_.unknown_fields()   : _internal_metadata_.default_instance()));
-  }
-  // string ent_rel_attr_type_name = 1;
-  if (this->ent_rel_attr_type_name().size() > 0) {
-    total_size += 1 +
-      ::google::protobuf::internal::WireFormatLite::StringSize(
-        this->ent_rel_attr_type_name());
-  }
-
-  // .inexor.entity_system.ENTSYS_DATA_TYPE ent_rel_attr_type_data_type = 2;
-  if (this->ent_rel_attr_type_data_type() != 0) {
-    total_size += 1 +
-      ::google::protobuf::internal::WireFormatLite::EnumSize(this->ent_rel_attr_type_data_type());
-  }
-
-  int cached_size = ::google::protobuf::internal::ToCachedSize(total_size);
-  SetCachedSize(cached_size);
-  return total_size;
-}
-
-void EntityRelationAttributeType::MergeFrom(const ::google::protobuf::Message& from) {
-// @@protoc_insertion_point(generalized_merge_from_start:inexor.entity_system.EntityRelationAttributeType)
-  GOOGLE_DCHECK_NE(&from, this);
-  const EntityRelationAttributeType* source =
-      ::google::protobuf::internal::DynamicCastToGenerated<const EntityRelationAttributeType>(
-          &from);
-  if (source == NULL) {
-  // @@protoc_insertion_point(generalized_merge_from_cast_fail:inexor.entity_system.EntityRelationAttributeType)
-    ::google::protobuf::internal::ReflectionOps::Merge(from, this);
-  } else {
-  // @@protoc_insertion_point(generalized_merge_from_cast_success:inexor.entity_system.EntityRelationAttributeType)
-    MergeFrom(*source);
-  }
-}
-
-void EntityRelationAttributeType::MergeFrom(const EntityRelationAttributeType& from) {
-// @@protoc_insertion_point(class_specific_merge_from_start:inexor.entity_system.EntityRelationAttributeType)
-  GOOGLE_DCHECK_NE(&from, this);
-  _internal_metadata_.MergeFrom(from._internal_metadata_);
-  ::google::protobuf::uint32 cached_has_bits = 0;
-  (void) cached_has_bits;
-
-  if (from.ent_rel_attr_type_name().size() > 0) {
-
-    ent_rel_attr_type_name_.AssignWithDefault(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), from.ent_rel_attr_type_name_);
-  }
-  if (from.ent_rel_attr_type_data_type() != 0) {
-    set_ent_rel_attr_type_data_type(from.ent_rel_attr_type_data_type());
-  }
-}
-
-void EntityRelationAttributeType::CopyFrom(const ::google::protobuf::Message& from) {
-// @@protoc_insertion_point(generalized_copy_from_start:inexor.entity_system.EntityRelationAttributeType)
-  if (&from == this) return;
-  Clear();
-  MergeFrom(from);
-}
-
-void EntityRelationAttributeType::CopyFrom(const EntityRelationAttributeType& from) {
-// @@protoc_insertion_point(class_specific_copy_from_start:inexor.entity_system.EntityRelationAttributeType)
-  if (&from == this) return;
-  Clear();
-  MergeFrom(from);
-}
-
-bool EntityRelationAttributeType::IsInitialized() const {
-  return true;
-}
-
-void EntityRelationAttributeType::Swap(EntityRelationAttributeType* other) {
-  if (other == this) return;
-  InternalSwap(other);
-}
-void EntityRelationAttributeType::InternalSwap(EntityRelationAttributeType* other) {
-  using std::swap;
-  ent_rel_attr_type_name_.Swap(&other->ent_rel_attr_type_name_, &::google::protobuf::internal::GetEmptyStringAlreadyInited(),
-    GetArenaNoVirtual());
-  swap(ent_rel_attr_type_data_type_, other->ent_rel_attr_type_data_type_);
-  _internal_metadata_.Swap(&other->_internal_metadata_);
-}
-
-::google::protobuf::Metadata EntityRelationAttributeType::GetMetadata() const {
-  protobuf_entity_2dsystem_2eproto::protobuf_AssignDescriptorsOnce();
-  return ::protobuf_entity_2dsystem_2eproto::file_level_metadata[kIndexInFileMessages];
-}
-
-
-// ===================================================================
-
-void EntityRelationType::InitAsDefaultInstance() {
-  ::inexor::entity_system::_EntityRelationType_default_instance_._instance.get_mutable()->ent_type_source_ = const_cast< ::inexor::entity_system::EntityType*>(
-      ::inexor::entity_system::EntityType::internal_default_instance());
-  ::inexor::entity_system::_EntityRelationType_default_instance_._instance.get_mutable()->ent_type_target_ = const_cast< ::inexor::entity_system::EntityType*>(
-      ::inexor::entity_system::EntityType::internal_default_instance());
-}
-#if !defined(_MSC_VER) || _MSC_VER >= 1900
-const int EntityRelationType::kRelTypeNameFieldNumber;
-const int EntityRelationType::kEntTypeSourceFieldNumber;
-const int EntityRelationType::kEntTypeTargetFieldNumber;
-#endif  // !defined(_MSC_VER) || _MSC_VER >= 1900
-
-EntityRelationType::EntityRelationType()
-  : ::google::protobuf::Message(), _internal_metadata_(NULL) {
-  ::google::protobuf::internal::InitSCC(
-      &protobuf_entity_2dsystem_2eproto::scc_info_EntityRelationType.base);
-  SharedCtor();
-  // @@protoc_insertion_point(constructor:inexor.entity_system.EntityRelationType)
-}
-EntityRelationType::EntityRelationType(const EntityRelationType& from)
-  : ::google::protobuf::Message(),
-      _internal_metadata_(NULL) {
-  _internal_metadata_.MergeFrom(from._internal_metadata_);
-  rel_type_name_.UnsafeSetDefault(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
-  if (from.rel_type_name().size() > 0) {
-    rel_type_name_.AssignWithDefault(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), from.rel_type_name_);
-  }
-  if (from.has_ent_type_source()) {
-    ent_type_source_ = new ::inexor::entity_system::EntityType(*from.ent_type_source_);
-  } else {
-    ent_type_source_ = NULL;
-  }
-  if (from.has_ent_type_target()) {
-    ent_type_target_ = new ::inexor::entity_system::EntityType(*from.ent_type_target_);
-  } else {
-    ent_type_target_ = NULL;
-  }
-  // @@protoc_insertion_point(copy_constructor:inexor.entity_system.EntityRelationType)
-}
-
-void EntityRelationType::SharedCtor() {
-  rel_type_name_.UnsafeSetDefault(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
-  ::memset(&ent_type_source_, 0, static_cast<size_t>(
-      reinterpret_cast<char*>(&ent_type_target_) -
-      reinterpret_cast<char*>(&ent_type_source_)) + sizeof(ent_type_target_));
-}
-
-EntityRelationType::~EntityRelationType() {
-  // @@protoc_insertion_point(destructor:inexor.entity_system.EntityRelationType)
-  SharedDtor();
-}
-
-void EntityRelationType::SharedDtor() {
-  rel_type_name_.DestroyNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
-  if (this != internal_default_instance()) delete ent_type_source_;
-  if (this != internal_default_instance()) delete ent_type_target_;
-}
-
-void EntityRelationType::SetCachedSize(int size) const {
-  _cached_size_.Set(size);
-}
-const ::google::protobuf::Descriptor* EntityRelationType::descriptor() {
-  ::protobuf_entity_2dsystem_2eproto::protobuf_AssignDescriptorsOnce();
-  return ::protobuf_entity_2dsystem_2eproto::file_level_metadata[kIndexInFileMessages].descriptor;
-}
-
-const EntityRelationType& EntityRelationType::default_instance() {
-  ::google::protobuf::internal::InitSCC(&protobuf_entity_2dsystem_2eproto::scc_info_EntityRelationType.base);
-  return *internal_default_instance();
-}
-
-
-void EntityRelationType::Clear() {
-// @@protoc_insertion_point(message_clear_start:inexor.entity_system.EntityRelationType)
-  ::google::protobuf::uint32 cached_has_bits = 0;
-  // Prevent compiler warnings about cached_has_bits being unused
-  (void) cached_has_bits;
-
-  rel_type_name_.ClearToEmptyNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
-  if (GetArenaNoVirtual() == NULL && ent_type_source_ != NULL) {
-    delete ent_type_source_;
-  }
-  ent_type_source_ = NULL;
-  if (GetArenaNoVirtual() == NULL && ent_type_target_ != NULL) {
-    delete ent_type_target_;
-  }
-  ent_type_target_ = NULL;
-  _internal_metadata_.Clear();
-}
-
-bool EntityRelationType::MergePartialFromCodedStream(
-    ::google::protobuf::io::CodedInputStream* input) {
-#define DO_(EXPRESSION) if (!GOOGLE_PREDICT_TRUE(EXPRESSION)) goto failure
-  ::google::protobuf::uint32 tag;
-  // @@protoc_insertion_point(parse_start:inexor.entity_system.EntityRelationType)
-  for (;;) {
-    ::std::pair<::google::protobuf::uint32, bool> p = input->ReadTagWithCutoffNoLastTag(127u);
-    tag = p.first;
-    if (!p.second) goto handle_unusual;
-    switch (::google::protobuf::internal::WireFormatLite::GetTagFieldNumber(tag)) {
-      // string rel_type_name = 1;
-      case 1: {
-        if (static_cast< ::google::protobuf::uint8>(tag) ==
-            static_cast< ::google::protobuf::uint8>(10u /* 10 & 0xFF */)) {
-          DO_(::google::protobuf::internal::WireFormatLite::ReadString(
-                input, this->mutable_rel_type_name()));
-          DO_(::google::protobuf::internal::WireFormatLite::VerifyUtf8String(
-            this->rel_type_name().data(), static_cast<int>(this->rel_type_name().length()),
-            ::google::protobuf::internal::WireFormatLite::PARSE,
-            "inexor.entity_system.EntityRelationType.rel_type_name"));
-        } else {
-          goto handle_unusual;
-        }
-        break;
-      }
-
-      // .inexor.entity_system.EntityType ent_type_source = 2;
-      case 2: {
-        if (static_cast< ::google::protobuf::uint8>(tag) ==
-            static_cast< ::google::protobuf::uint8>(18u /* 18 & 0xFF */)) {
-          DO_(::google::protobuf::internal::WireFormatLite::ReadMessage(
-               input, mutable_ent_type_source()));
-        } else {
-          goto handle_unusual;
-        }
-        break;
-      }
-
-      // .inexor.entity_system.EntityType ent_type_target = 3;
+      // .google.protobuf.Any value = 3;
       case 3: {
         if (static_cast< ::google::protobuf::uint8>(tag) ==
             static_cast< ::google::protobuf::uint8>(26u /* 26 & 0xFF */)) {
           DO_(::google::protobuf::internal::WireFormatLite::ReadMessage(
-               input, mutable_ent_type_target()));
+               input, mutable_value()));
         } else {
           goto handle_unusual;
         }
@@ -1303,91 +415,90 @@ bool EntityRelationType::MergePartialFromCodedStream(
     }
   }
 success:
-  // @@protoc_insertion_point(parse_success:inexor.entity_system.EntityRelationType)
+  // @@protoc_insertion_point(parse_success:inexor.entity_system.Attribute)
   return true;
 failure:
-  // @@protoc_insertion_point(parse_failure:inexor.entity_system.EntityRelationType)
+  // @@protoc_insertion_point(parse_failure:inexor.entity_system.Attribute)
   return false;
 #undef DO_
 }
 
-void EntityRelationType::SerializeWithCachedSizes(
+void Attribute::SerializeWithCachedSizes(
     ::google::protobuf::io::CodedOutputStream* output) const {
-  // @@protoc_insertion_point(serialize_start:inexor.entity_system.EntityRelationType)
+  // @@protoc_insertion_point(serialize_start:inexor.entity_system.Attribute)
   ::google::protobuf::uint32 cached_has_bits = 0;
   (void) cached_has_bits;
 
-  // string rel_type_name = 1;
-  if (this->rel_type_name().size() > 0) {
+  // string name = 1;
+  if (this->name().size() > 0) {
     ::google::protobuf::internal::WireFormatLite::VerifyUtf8String(
-      this->rel_type_name().data(), static_cast<int>(this->rel_type_name().length()),
+      this->name().data(), static_cast<int>(this->name().length()),
       ::google::protobuf::internal::WireFormatLite::SERIALIZE,
-      "inexor.entity_system.EntityRelationType.rel_type_name");
+      "inexor.entity_system.Attribute.name");
     ::google::protobuf::internal::WireFormatLite::WriteStringMaybeAliased(
-      1, this->rel_type_name(), output);
+      1, this->name(), output);
   }
 
-  // .inexor.entity_system.EntityType ent_type_source = 2;
-  if (this->has_ent_type_source()) {
-    ::google::protobuf::internal::WireFormatLite::WriteMessageMaybeToArray(
-      2, this->_internal_ent_type_source(), output);
+  // .inexor.entity_system.DataType data_type = 2;
+  if (this->data_type() != 0) {
+    ::google::protobuf::internal::WireFormatLite::WriteEnum(
+      2, this->data_type(), output);
   }
 
-  // .inexor.entity_system.EntityType ent_type_target = 3;
-  if (this->has_ent_type_target()) {
+  // .google.protobuf.Any value = 3;
+  if (this->has_value()) {
     ::google::protobuf::internal::WireFormatLite::WriteMessageMaybeToArray(
-      3, this->_internal_ent_type_target(), output);
+      3, this->_internal_value(), output);
   }
 
   if ((_internal_metadata_.have_unknown_fields() &&  ::google::protobuf::internal::GetProto3PreserveUnknownsDefault())) {
     ::google::protobuf::internal::WireFormat::SerializeUnknownFields(
         (::google::protobuf::internal::GetProto3PreserveUnknownsDefault()   ? _internal_metadata_.unknown_fields()   : _internal_metadata_.default_instance()), output);
   }
-  // @@protoc_insertion_point(serialize_end:inexor.entity_system.EntityRelationType)
+  // @@protoc_insertion_point(serialize_end:inexor.entity_system.Attribute)
 }
 
-::google::protobuf::uint8* EntityRelationType::InternalSerializeWithCachedSizesToArray(
+::google::protobuf::uint8* Attribute::InternalSerializeWithCachedSizesToArray(
     bool deterministic, ::google::protobuf::uint8* target) const {
   (void)deterministic; // Unused
-  // @@protoc_insertion_point(serialize_to_array_start:inexor.entity_system.EntityRelationType)
+  // @@protoc_insertion_point(serialize_to_array_start:inexor.entity_system.Attribute)
   ::google::protobuf::uint32 cached_has_bits = 0;
   (void) cached_has_bits;
 
-  // string rel_type_name = 1;
-  if (this->rel_type_name().size() > 0) {
+  // string name = 1;
+  if (this->name().size() > 0) {
     ::google::protobuf::internal::WireFormatLite::VerifyUtf8String(
-      this->rel_type_name().data(), static_cast<int>(this->rel_type_name().length()),
+      this->name().data(), static_cast<int>(this->name().length()),
       ::google::protobuf::internal::WireFormatLite::SERIALIZE,
-      "inexor.entity_system.EntityRelationType.rel_type_name");
+      "inexor.entity_system.Attribute.name");
     target =
       ::google::protobuf::internal::WireFormatLite::WriteStringToArray(
-        1, this->rel_type_name(), target);
+        1, this->name(), target);
   }
 
-  // .inexor.entity_system.EntityType ent_type_source = 2;
-  if (this->has_ent_type_source()) {
-    target = ::google::protobuf::internal::WireFormatLite::
-      InternalWriteMessageToArray(
-        2, this->_internal_ent_type_source(), deterministic, target);
+  // .inexor.entity_system.DataType data_type = 2;
+  if (this->data_type() != 0) {
+    target = ::google::protobuf::internal::WireFormatLite::WriteEnumToArray(
+      2, this->data_type(), target);
   }
 
-  // .inexor.entity_system.EntityType ent_type_target = 3;
-  if (this->has_ent_type_target()) {
+  // .google.protobuf.Any value = 3;
+  if (this->has_value()) {
     target = ::google::protobuf::internal::WireFormatLite::
       InternalWriteMessageToArray(
-        3, this->_internal_ent_type_target(), deterministic, target);
+        3, this->_internal_value(), deterministic, target);
   }
 
   if ((_internal_metadata_.have_unknown_fields() &&  ::google::protobuf::internal::GetProto3PreserveUnknownsDefault())) {
     target = ::google::protobuf::internal::WireFormat::SerializeUnknownFieldsToArray(
         (::google::protobuf::internal::GetProto3PreserveUnknownsDefault()   ? _internal_metadata_.unknown_fields()   : _internal_metadata_.default_instance()), target);
   }
-  // @@protoc_insertion_point(serialize_to_array_end:inexor.entity_system.EntityRelationType)
+  // @@protoc_insertion_point(serialize_to_array_end:inexor.entity_system.Attribute)
   return target;
 }
 
-size_t EntityRelationType::ByteSizeLong() const {
-// @@protoc_insertion_point(message_byte_size_start:inexor.entity_system.EntityRelationType)
+size_t Attribute::ByteSizeLong() const {
+// @@protoc_insertion_point(message_byte_size_start:inexor.entity_system.Attribute)
   size_t total_size = 0;
 
   if ((_internal_metadata_.have_unknown_fields() &&  ::google::protobuf::internal::GetProto3PreserveUnknownsDefault())) {
@@ -1395,25 +506,24 @@ size_t EntityRelationType::ByteSizeLong() const {
       ::google::protobuf::internal::WireFormat::ComputeUnknownFieldsSize(
         (::google::protobuf::internal::GetProto3PreserveUnknownsDefault()   ? _internal_metadata_.unknown_fields()   : _internal_metadata_.default_instance()));
   }
-  // string rel_type_name = 1;
-  if (this->rel_type_name().size() > 0) {
+  // string name = 1;
+  if (this->name().size() > 0) {
     total_size += 1 +
       ::google::protobuf::internal::WireFormatLite::StringSize(
-        this->rel_type_name());
+        this->name());
   }
 
-  // .inexor.entity_system.EntityType ent_type_source = 2;
-  if (this->has_ent_type_source()) {
+  // .google.protobuf.Any value = 3;
+  if (this->has_value()) {
     total_size += 1 +
       ::google::protobuf::internal::WireFormatLite::MessageSize(
-        *ent_type_source_);
+        *value_);
   }
 
-  // .inexor.entity_system.EntityType ent_type_target = 3;
-  if (this->has_ent_type_target()) {
+  // .inexor.entity_system.DataType data_type = 2;
+  if (this->data_type() != 0) {
     total_size += 1 +
-      ::google::protobuf::internal::WireFormatLite::MessageSize(
-        *ent_type_target_);
+      ::google::protobuf::internal::WireFormatLite::EnumSize(this->data_type());
   }
 
   int cached_size = ::google::protobuf::internal::ToCachedSize(total_size);
@@ -1421,72 +531,72 @@ size_t EntityRelationType::ByteSizeLong() const {
   return total_size;
 }
 
-void EntityRelationType::MergeFrom(const ::google::protobuf::Message& from) {
-// @@protoc_insertion_point(generalized_merge_from_start:inexor.entity_system.EntityRelationType)
+void Attribute::MergeFrom(const ::google::protobuf::Message& from) {
+// @@protoc_insertion_point(generalized_merge_from_start:inexor.entity_system.Attribute)
   GOOGLE_DCHECK_NE(&from, this);
-  const EntityRelationType* source =
-      ::google::protobuf::internal::DynamicCastToGenerated<const EntityRelationType>(
+  const Attribute* source =
+      ::google::protobuf::internal::DynamicCastToGenerated<const Attribute>(
           &from);
   if (source == NULL) {
-  // @@protoc_insertion_point(generalized_merge_from_cast_fail:inexor.entity_system.EntityRelationType)
+  // @@protoc_insertion_point(generalized_merge_from_cast_fail:inexor.entity_system.Attribute)
     ::google::protobuf::internal::ReflectionOps::Merge(from, this);
   } else {
-  // @@protoc_insertion_point(generalized_merge_from_cast_success:inexor.entity_system.EntityRelationType)
+  // @@protoc_insertion_point(generalized_merge_from_cast_success:inexor.entity_system.Attribute)
     MergeFrom(*source);
   }
 }
 
-void EntityRelationType::MergeFrom(const EntityRelationType& from) {
-// @@protoc_insertion_point(class_specific_merge_from_start:inexor.entity_system.EntityRelationType)
+void Attribute::MergeFrom(const Attribute& from) {
+// @@protoc_insertion_point(class_specific_merge_from_start:inexor.entity_system.Attribute)
   GOOGLE_DCHECK_NE(&from, this);
   _internal_metadata_.MergeFrom(from._internal_metadata_);
   ::google::protobuf::uint32 cached_has_bits = 0;
   (void) cached_has_bits;
 
-  if (from.rel_type_name().size() > 0) {
+  if (from.name().size() > 0) {
 
-    rel_type_name_.AssignWithDefault(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), from.rel_type_name_);
+    name_.AssignWithDefault(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), from.name_);
   }
-  if (from.has_ent_type_source()) {
-    mutable_ent_type_source()->::inexor::entity_system::EntityType::MergeFrom(from.ent_type_source());
+  if (from.has_value()) {
+    mutable_value()->::google::protobuf::Any::MergeFrom(from.value());
   }
-  if (from.has_ent_type_target()) {
-    mutable_ent_type_target()->::inexor::entity_system::EntityType::MergeFrom(from.ent_type_target());
+  if (from.data_type() != 0) {
+    set_data_type(from.data_type());
   }
 }
 
-void EntityRelationType::CopyFrom(const ::google::protobuf::Message& from) {
-// @@protoc_insertion_point(generalized_copy_from_start:inexor.entity_system.EntityRelationType)
+void Attribute::CopyFrom(const ::google::protobuf::Message& from) {
+// @@protoc_insertion_point(generalized_copy_from_start:inexor.entity_system.Attribute)
   if (&from == this) return;
   Clear();
   MergeFrom(from);
 }
 
-void EntityRelationType::CopyFrom(const EntityRelationType& from) {
-// @@protoc_insertion_point(class_specific_copy_from_start:inexor.entity_system.EntityRelationType)
+void Attribute::CopyFrom(const Attribute& from) {
+// @@protoc_insertion_point(class_specific_copy_from_start:inexor.entity_system.Attribute)
   if (&from == this) return;
   Clear();
   MergeFrom(from);
 }
 
-bool EntityRelationType::IsInitialized() const {
+bool Attribute::IsInitialized() const {
   return true;
 }
 
-void EntityRelationType::Swap(EntityRelationType* other) {
+void Attribute::Swap(Attribute* other) {
   if (other == this) return;
   InternalSwap(other);
 }
-void EntityRelationType::InternalSwap(EntityRelationType* other) {
+void Attribute::InternalSwap(Attribute* other) {
   using std::swap;
-  rel_type_name_.Swap(&other->rel_type_name_, &::google::protobuf::internal::GetEmptyStringAlreadyInited(),
+  name_.Swap(&other->name_, &::google::protobuf::internal::GetEmptyStringAlreadyInited(),
     GetArenaNoVirtual());
-  swap(ent_type_source_, other->ent_type_source_);
-  swap(ent_type_target_, other->ent_type_target_);
+  swap(value_, other->value_);
+  swap(data_type_, other->data_type_);
   _internal_metadata_.Swap(&other->_internal_metadata_);
 }
 
-::google::protobuf::Metadata EntityRelationType::GetMetadata() const {
+::google::protobuf::Metadata Attribute::GetMetadata() const {
   protobuf_entity_2dsystem_2eproto::protobuf_AssignDescriptorsOnce();
   return ::protobuf_entity_2dsystem_2eproto::file_level_metadata[kIndexInFileMessages];
 }
@@ -1494,82 +604,102 @@ void EntityRelationType::InternalSwap(EntityRelationType* other) {
 
 // ===================================================================
 
-void EntityOperation::InitAsDefaultInstance() {
+void Entity::InitAsDefaultInstance() {
 }
 #if !defined(_MSC_VER) || _MSC_VER >= 1900
-const int EntityOperation::kResultFieldNumber;
+const int Entity::kNameFieldNumber;
+const int Entity::kAttributeFieldNumber;
 #endif  // !defined(_MSC_VER) || _MSC_VER >= 1900
 
-EntityOperation::EntityOperation()
+Entity::Entity()
   : ::google::protobuf::Message(), _internal_metadata_(NULL) {
   ::google::protobuf::internal::InitSCC(
-      &protobuf_entity_2dsystem_2eproto::scc_info_EntityOperation.base);
+      &protobuf_entity_2dsystem_2eproto::scc_info_Entity.base);
   SharedCtor();
-  // @@protoc_insertion_point(constructor:inexor.entity_system.EntityOperation)
+  // @@protoc_insertion_point(constructor:inexor.entity_system.Entity)
 }
-EntityOperation::EntityOperation(const EntityOperation& from)
+Entity::Entity(const Entity& from)
   : ::google::protobuf::Message(),
-      _internal_metadata_(NULL) {
+      _internal_metadata_(NULL),
+      attribute_(from.attribute_) {
   _internal_metadata_.MergeFrom(from._internal_metadata_);
-  result_ = from.result_;
-  // @@protoc_insertion_point(copy_constructor:inexor.entity_system.EntityOperation)
+  name_.UnsafeSetDefault(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
+  if (from.name().size() > 0) {
+    name_.AssignWithDefault(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), from.name_);
+  }
+  // @@protoc_insertion_point(copy_constructor:inexor.entity_system.Entity)
 }
 
-void EntityOperation::SharedCtor() {
-  result_ = 0;
+void Entity::SharedCtor() {
+  name_.UnsafeSetDefault(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
 }
 
-EntityOperation::~EntityOperation() {
-  // @@protoc_insertion_point(destructor:inexor.entity_system.EntityOperation)
+Entity::~Entity() {
+  // @@protoc_insertion_point(destructor:inexor.entity_system.Entity)
   SharedDtor();
 }
 
-void EntityOperation::SharedDtor() {
+void Entity::SharedDtor() {
+  name_.DestroyNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
 }
 
-void EntityOperation::SetCachedSize(int size) const {
+void Entity::SetCachedSize(int size) const {
   _cached_size_.Set(size);
 }
-const ::google::protobuf::Descriptor* EntityOperation::descriptor() {
+const ::google::protobuf::Descriptor* Entity::descriptor() {
   ::protobuf_entity_2dsystem_2eproto::protobuf_AssignDescriptorsOnce();
   return ::protobuf_entity_2dsystem_2eproto::file_level_metadata[kIndexInFileMessages].descriptor;
 }
 
-const EntityOperation& EntityOperation::default_instance() {
-  ::google::protobuf::internal::InitSCC(&protobuf_entity_2dsystem_2eproto::scc_info_EntityOperation.base);
+const Entity& Entity::default_instance() {
+  ::google::protobuf::internal::InitSCC(&protobuf_entity_2dsystem_2eproto::scc_info_Entity.base);
   return *internal_default_instance();
 }
 
 
-void EntityOperation::Clear() {
-// @@protoc_insertion_point(message_clear_start:inexor.entity_system.EntityOperation)
+void Entity::Clear() {
+// @@protoc_insertion_point(message_clear_start:inexor.entity_system.Entity)
   ::google::protobuf::uint32 cached_has_bits = 0;
   // Prevent compiler warnings about cached_has_bits being unused
   (void) cached_has_bits;
 
-  result_ = 0;
+  attribute_.Clear();
+  name_.ClearToEmptyNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
   _internal_metadata_.Clear();
 }
 
-bool EntityOperation::MergePartialFromCodedStream(
+bool Entity::MergePartialFromCodedStream(
     ::google::protobuf::io::CodedInputStream* input) {
 #define DO_(EXPRESSION) if (!GOOGLE_PREDICT_TRUE(EXPRESSION)) goto failure
   ::google::protobuf::uint32 tag;
-  // @@protoc_insertion_point(parse_start:inexor.entity_system.EntityOperation)
+  // @@protoc_insertion_point(parse_start:inexor.entity_system.Entity)
   for (;;) {
     ::std::pair<::google::protobuf::uint32, bool> p = input->ReadTagWithCutoffNoLastTag(127u);
     tag = p.first;
     if (!p.second) goto handle_unusual;
     switch (::google::protobuf::internal::WireFormatLite::GetTagFieldNumber(tag)) {
-      // .inexor.entity_system.ENTSYS_RESULT result = 1;
+      // string name = 1;
       case 1: {
         if (static_cast< ::google::protobuf::uint8>(tag) ==
-            static_cast< ::google::protobuf::uint8>(8u /* 8 & 0xFF */)) {
-          int value;
-          DO_((::google::protobuf::internal::WireFormatLite::ReadPrimitive<
-                   int, ::google::protobuf::internal::WireFormatLite::TYPE_ENUM>(
-                 input, &value)));
-          set_result(static_cast< ::inexor::entity_system::ENTSYS_RESULT >(value));
+            static_cast< ::google::protobuf::uint8>(10u /* 10 & 0xFF */)) {
+          DO_(::google::protobuf::internal::WireFormatLite::ReadString(
+                input, this->mutable_name()));
+          DO_(::google::protobuf::internal::WireFormatLite::VerifyUtf8String(
+            this->name().data(), static_cast<int>(this->name().length()),
+            ::google::protobuf::internal::WireFormatLite::PARSE,
+            "inexor.entity_system.Entity.name"));
+        } else {
+          goto handle_unusual;
+        }
+        break;
+      }
+
+      // repeated .inexor.entity_system.Attribute attribute = 2;
+      case 2: {
+        if (static_cast< ::google::protobuf::uint8>(tag) ==
+            static_cast< ::google::protobuf::uint8>(18u /* 18 & 0xFF */)) {
+          DO_(::google::protobuf::internal::WireFormatLite::ReadMessage(
+                input, add_attribute()));
         } else {
           goto handle_unusual;
         }
@@ -1588,56 +718,82 @@ bool EntityOperation::MergePartialFromCodedStream(
     }
   }
 success:
-  // @@protoc_insertion_point(parse_success:inexor.entity_system.EntityOperation)
+  // @@protoc_insertion_point(parse_success:inexor.entity_system.Entity)
   return true;
 failure:
-  // @@protoc_insertion_point(parse_failure:inexor.entity_system.EntityOperation)
+  // @@protoc_insertion_point(parse_failure:inexor.entity_system.Entity)
   return false;
 #undef DO_
 }
 
-void EntityOperation::SerializeWithCachedSizes(
+void Entity::SerializeWithCachedSizes(
     ::google::protobuf::io::CodedOutputStream* output) const {
-  // @@protoc_insertion_point(serialize_start:inexor.entity_system.EntityOperation)
+  // @@protoc_insertion_point(serialize_start:inexor.entity_system.Entity)
   ::google::protobuf::uint32 cached_has_bits = 0;
   (void) cached_has_bits;
 
-  // .inexor.entity_system.ENTSYS_RESULT result = 1;
-  if (this->result() != 0) {
-    ::google::protobuf::internal::WireFormatLite::WriteEnum(
-      1, this->result(), output);
+  // string name = 1;
+  if (this->name().size() > 0) {
+    ::google::protobuf::internal::WireFormatLite::VerifyUtf8String(
+      this->name().data(), static_cast<int>(this->name().length()),
+      ::google::protobuf::internal::WireFormatLite::SERIALIZE,
+      "inexor.entity_system.Entity.name");
+    ::google::protobuf::internal::WireFormatLite::WriteStringMaybeAliased(
+      1, this->name(), output);
+  }
+
+  // repeated .inexor.entity_system.Attribute attribute = 2;
+  for (unsigned int i = 0,
+      n = static_cast<unsigned int>(this->attribute_size()); i < n; i++) {
+    ::google::protobuf::internal::WireFormatLite::WriteMessageMaybeToArray(
+      2,
+      this->attribute(static_cast<int>(i)),
+      output);
   }
 
   if ((_internal_metadata_.have_unknown_fields() &&  ::google::protobuf::internal::GetProto3PreserveUnknownsDefault())) {
     ::google::protobuf::internal::WireFormat::SerializeUnknownFields(
         (::google::protobuf::internal::GetProto3PreserveUnknownsDefault()   ? _internal_metadata_.unknown_fields()   : _internal_metadata_.default_instance()), output);
   }
-  // @@protoc_insertion_point(serialize_end:inexor.entity_system.EntityOperation)
+  // @@protoc_insertion_point(serialize_end:inexor.entity_system.Entity)
 }
 
-::google::protobuf::uint8* EntityOperation::InternalSerializeWithCachedSizesToArray(
+::google::protobuf::uint8* Entity::InternalSerializeWithCachedSizesToArray(
     bool deterministic, ::google::protobuf::uint8* target) const {
   (void)deterministic; // Unused
-  // @@protoc_insertion_point(serialize_to_array_start:inexor.entity_system.EntityOperation)
+  // @@protoc_insertion_point(serialize_to_array_start:inexor.entity_system.Entity)
   ::google::protobuf::uint32 cached_has_bits = 0;
   (void) cached_has_bits;
 
-  // .inexor.entity_system.ENTSYS_RESULT result = 1;
-  if (this->result() != 0) {
-    target = ::google::protobuf::internal::WireFormatLite::WriteEnumToArray(
-      1, this->result(), target);
+  // string name = 1;
+  if (this->name().size() > 0) {
+    ::google::protobuf::internal::WireFormatLite::VerifyUtf8String(
+      this->name().data(), static_cast<int>(this->name().length()),
+      ::google::protobuf::internal::WireFormatLite::SERIALIZE,
+      "inexor.entity_system.Entity.name");
+    target =
+      ::google::protobuf::internal::WireFormatLite::WriteStringToArray(
+        1, this->name(), target);
+  }
+
+  // repeated .inexor.entity_system.Attribute attribute = 2;
+  for (unsigned int i = 0,
+      n = static_cast<unsigned int>(this->attribute_size()); i < n; i++) {
+    target = ::google::protobuf::internal::WireFormatLite::
+      InternalWriteMessageToArray(
+        2, this->attribute(static_cast<int>(i)), deterministic, target);
   }
 
   if ((_internal_metadata_.have_unknown_fields() &&  ::google::protobuf::internal::GetProto3PreserveUnknownsDefault())) {
     target = ::google::protobuf::internal::WireFormat::SerializeUnknownFieldsToArray(
         (::google::protobuf::internal::GetProto3PreserveUnknownsDefault()   ? _internal_metadata_.unknown_fields()   : _internal_metadata_.default_instance()), target);
   }
-  // @@protoc_insertion_point(serialize_to_array_end:inexor.entity_system.EntityOperation)
+  // @@protoc_insertion_point(serialize_to_array_end:inexor.entity_system.Entity)
   return target;
 }
 
-size_t EntityOperation::ByteSizeLong() const {
-// @@protoc_insertion_point(message_byte_size_start:inexor.entity_system.EntityOperation)
+size_t Entity::ByteSizeLong() const {
+// @@protoc_insertion_point(message_byte_size_start:inexor.entity_system.Entity)
   size_t total_size = 0;
 
   if ((_internal_metadata_.have_unknown_fields() &&  ::google::protobuf::internal::GetProto3PreserveUnknownsDefault())) {
@@ -1645,10 +801,22 @@ size_t EntityOperation::ByteSizeLong() const {
       ::google::protobuf::internal::WireFormat::ComputeUnknownFieldsSize(
         (::google::protobuf::internal::GetProto3PreserveUnknownsDefault()   ? _internal_metadata_.unknown_fields()   : _internal_metadata_.default_instance()));
   }
-  // .inexor.entity_system.ENTSYS_RESULT result = 1;
-  if (this->result() != 0) {
+  // repeated .inexor.entity_system.Attribute attribute = 2;
+  {
+    unsigned int count = static_cast<unsigned int>(this->attribute_size());
+    total_size += 1UL * count;
+    for (unsigned int i = 0; i < count; i++) {
+      total_size +=
+        ::google::protobuf::internal::WireFormatLite::MessageSize(
+          this->attribute(static_cast<int>(i)));
+    }
+  }
+
+  // string name = 1;
+  if (this->name().size() > 0) {
     total_size += 1 +
-      ::google::protobuf::internal::WireFormatLite::EnumSize(this->result());
+      ::google::protobuf::internal::WireFormatLite::StringSize(
+        this->name());
   }
 
   int cached_size = ::google::protobuf::internal::ToCachedSize(total_size);
@@ -1656,62 +824,688 @@ size_t EntityOperation::ByteSizeLong() const {
   return total_size;
 }
 
-void EntityOperation::MergeFrom(const ::google::protobuf::Message& from) {
-// @@protoc_insertion_point(generalized_merge_from_start:inexor.entity_system.EntityOperation)
+void Entity::MergeFrom(const ::google::protobuf::Message& from) {
+// @@protoc_insertion_point(generalized_merge_from_start:inexor.entity_system.Entity)
   GOOGLE_DCHECK_NE(&from, this);
-  const EntityOperation* source =
-      ::google::protobuf::internal::DynamicCastToGenerated<const EntityOperation>(
+  const Entity* source =
+      ::google::protobuf::internal::DynamicCastToGenerated<const Entity>(
           &from);
   if (source == NULL) {
-  // @@protoc_insertion_point(generalized_merge_from_cast_fail:inexor.entity_system.EntityOperation)
+  // @@protoc_insertion_point(generalized_merge_from_cast_fail:inexor.entity_system.Entity)
     ::google::protobuf::internal::ReflectionOps::Merge(from, this);
   } else {
-  // @@protoc_insertion_point(generalized_merge_from_cast_success:inexor.entity_system.EntityOperation)
+  // @@protoc_insertion_point(generalized_merge_from_cast_success:inexor.entity_system.Entity)
     MergeFrom(*source);
   }
 }
 
-void EntityOperation::MergeFrom(const EntityOperation& from) {
-// @@protoc_insertion_point(class_specific_merge_from_start:inexor.entity_system.EntityOperation)
+void Entity::MergeFrom(const Entity& from) {
+// @@protoc_insertion_point(class_specific_merge_from_start:inexor.entity_system.Entity)
   GOOGLE_DCHECK_NE(&from, this);
   _internal_metadata_.MergeFrom(from._internal_metadata_);
   ::google::protobuf::uint32 cached_has_bits = 0;
   (void) cached_has_bits;
 
-  if (from.result() != 0) {
-    set_result(from.result());
+  attribute_.MergeFrom(from.attribute_);
+  if (from.name().size() > 0) {
+
+    name_.AssignWithDefault(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), from.name_);
   }
 }
 
-void EntityOperation::CopyFrom(const ::google::protobuf::Message& from) {
-// @@protoc_insertion_point(generalized_copy_from_start:inexor.entity_system.EntityOperation)
+void Entity::CopyFrom(const ::google::protobuf::Message& from) {
+// @@protoc_insertion_point(generalized_copy_from_start:inexor.entity_system.Entity)
   if (&from == this) return;
   Clear();
   MergeFrom(from);
 }
 
-void EntityOperation::CopyFrom(const EntityOperation& from) {
-// @@protoc_insertion_point(class_specific_copy_from_start:inexor.entity_system.EntityOperation)
+void Entity::CopyFrom(const Entity& from) {
+// @@protoc_insertion_point(class_specific_copy_from_start:inexor.entity_system.Entity)
   if (&from == this) return;
   Clear();
   MergeFrom(from);
 }
 
-bool EntityOperation::IsInitialized() const {
+bool Entity::IsInitialized() const {
   return true;
 }
 
-void EntityOperation::Swap(EntityOperation* other) {
+void Entity::Swap(Entity* other) {
   if (other == this) return;
   InternalSwap(other);
 }
-void EntityOperation::InternalSwap(EntityOperation* other) {
+void Entity::InternalSwap(Entity* other) {
   using std::swap;
-  swap(result_, other->result_);
+  CastToBase(&attribute_)->InternalSwap(CastToBase(&other->attribute_));
+  name_.Swap(&other->name_, &::google::protobuf::internal::GetEmptyStringAlreadyInited(),
+    GetArenaNoVirtual());
   _internal_metadata_.Swap(&other->_internal_metadata_);
 }
 
-::google::protobuf::Metadata EntityOperation::GetMetadata() const {
+::google::protobuf::Metadata Entity::GetMetadata() const {
+  protobuf_entity_2dsystem_2eproto::protobuf_AssignDescriptorsOnce();
+  return ::protobuf_entity_2dsystem_2eproto::file_level_metadata[kIndexInFileMessages];
+}
+
+
+// ===================================================================
+
+void Relation::InitAsDefaultInstance() {
+  ::inexor::entity_system::_Relation_default_instance_._instance.get_mutable()->source_ = const_cast< ::inexor::entity_system::Entity*>(
+      ::inexor::entity_system::Entity::internal_default_instance());
+  ::inexor::entity_system::_Relation_default_instance_._instance.get_mutable()->target_ = const_cast< ::inexor::entity_system::Entity*>(
+      ::inexor::entity_system::Entity::internal_default_instance());
+}
+#if !defined(_MSC_VER) || _MSC_VER >= 1900
+const int Relation::kNameFieldNumber;
+const int Relation::kSourceFieldNumber;
+const int Relation::kTargetFieldNumber;
+#endif  // !defined(_MSC_VER) || _MSC_VER >= 1900
+
+Relation::Relation()
+  : ::google::protobuf::Message(), _internal_metadata_(NULL) {
+  ::google::protobuf::internal::InitSCC(
+      &protobuf_entity_2dsystem_2eproto::scc_info_Relation.base);
+  SharedCtor();
+  // @@protoc_insertion_point(constructor:inexor.entity_system.Relation)
+}
+Relation::Relation(const Relation& from)
+  : ::google::protobuf::Message(),
+      _internal_metadata_(NULL) {
+  _internal_metadata_.MergeFrom(from._internal_metadata_);
+  name_.UnsafeSetDefault(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
+  if (from.name().size() > 0) {
+    name_.AssignWithDefault(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), from.name_);
+  }
+  if (from.has_source()) {
+    source_ = new ::inexor::entity_system::Entity(*from.source_);
+  } else {
+    source_ = NULL;
+  }
+  if (from.has_target()) {
+    target_ = new ::inexor::entity_system::Entity(*from.target_);
+  } else {
+    target_ = NULL;
+  }
+  // @@protoc_insertion_point(copy_constructor:inexor.entity_system.Relation)
+}
+
+void Relation::SharedCtor() {
+  name_.UnsafeSetDefault(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
+  ::memset(&source_, 0, static_cast<size_t>(
+      reinterpret_cast<char*>(&target_) -
+      reinterpret_cast<char*>(&source_)) + sizeof(target_));
+}
+
+Relation::~Relation() {
+  // @@protoc_insertion_point(destructor:inexor.entity_system.Relation)
+  SharedDtor();
+}
+
+void Relation::SharedDtor() {
+  name_.DestroyNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
+  if (this != internal_default_instance()) delete source_;
+  if (this != internal_default_instance()) delete target_;
+}
+
+void Relation::SetCachedSize(int size) const {
+  _cached_size_.Set(size);
+}
+const ::google::protobuf::Descriptor* Relation::descriptor() {
+  ::protobuf_entity_2dsystem_2eproto::protobuf_AssignDescriptorsOnce();
+  return ::protobuf_entity_2dsystem_2eproto::file_level_metadata[kIndexInFileMessages].descriptor;
+}
+
+const Relation& Relation::default_instance() {
+  ::google::protobuf::internal::InitSCC(&protobuf_entity_2dsystem_2eproto::scc_info_Relation.base);
+  return *internal_default_instance();
+}
+
+
+void Relation::Clear() {
+// @@protoc_insertion_point(message_clear_start:inexor.entity_system.Relation)
+  ::google::protobuf::uint32 cached_has_bits = 0;
+  // Prevent compiler warnings about cached_has_bits being unused
+  (void) cached_has_bits;
+
+  name_.ClearToEmptyNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
+  if (GetArenaNoVirtual() == NULL && source_ != NULL) {
+    delete source_;
+  }
+  source_ = NULL;
+  if (GetArenaNoVirtual() == NULL && target_ != NULL) {
+    delete target_;
+  }
+  target_ = NULL;
+  _internal_metadata_.Clear();
+}
+
+bool Relation::MergePartialFromCodedStream(
+    ::google::protobuf::io::CodedInputStream* input) {
+#define DO_(EXPRESSION) if (!GOOGLE_PREDICT_TRUE(EXPRESSION)) goto failure
+  ::google::protobuf::uint32 tag;
+  // @@protoc_insertion_point(parse_start:inexor.entity_system.Relation)
+  for (;;) {
+    ::std::pair<::google::protobuf::uint32, bool> p = input->ReadTagWithCutoffNoLastTag(127u);
+    tag = p.first;
+    if (!p.second) goto handle_unusual;
+    switch (::google::protobuf::internal::WireFormatLite::GetTagFieldNumber(tag)) {
+      // string name = 1;
+      case 1: {
+        if (static_cast< ::google::protobuf::uint8>(tag) ==
+            static_cast< ::google::protobuf::uint8>(10u /* 10 & 0xFF */)) {
+          DO_(::google::protobuf::internal::WireFormatLite::ReadString(
+                input, this->mutable_name()));
+          DO_(::google::protobuf::internal::WireFormatLite::VerifyUtf8String(
+            this->name().data(), static_cast<int>(this->name().length()),
+            ::google::protobuf::internal::WireFormatLite::PARSE,
+            "inexor.entity_system.Relation.name"));
+        } else {
+          goto handle_unusual;
+        }
+        break;
+      }
+
+      // .inexor.entity_system.Entity source = 2;
+      case 2: {
+        if (static_cast< ::google::protobuf::uint8>(tag) ==
+            static_cast< ::google::protobuf::uint8>(18u /* 18 & 0xFF */)) {
+          DO_(::google::protobuf::internal::WireFormatLite::ReadMessage(
+               input, mutable_source()));
+        } else {
+          goto handle_unusual;
+        }
+        break;
+      }
+
+      // .inexor.entity_system.Entity target = 3;
+      case 3: {
+        if (static_cast< ::google::protobuf::uint8>(tag) ==
+            static_cast< ::google::protobuf::uint8>(26u /* 26 & 0xFF */)) {
+          DO_(::google::protobuf::internal::WireFormatLite::ReadMessage(
+               input, mutable_target()));
+        } else {
+          goto handle_unusual;
+        }
+        break;
+      }
+
+      default: {
+      handle_unusual:
+        if (tag == 0) {
+          goto success;
+        }
+        DO_(::google::protobuf::internal::WireFormat::SkipField(
+              input, tag, _internal_metadata_.mutable_unknown_fields()));
+        break;
+      }
+    }
+  }
+success:
+  // @@protoc_insertion_point(parse_success:inexor.entity_system.Relation)
+  return true;
+failure:
+  // @@protoc_insertion_point(parse_failure:inexor.entity_system.Relation)
+  return false;
+#undef DO_
+}
+
+void Relation::SerializeWithCachedSizes(
+    ::google::protobuf::io::CodedOutputStream* output) const {
+  // @@protoc_insertion_point(serialize_start:inexor.entity_system.Relation)
+  ::google::protobuf::uint32 cached_has_bits = 0;
+  (void) cached_has_bits;
+
+  // string name = 1;
+  if (this->name().size() > 0) {
+    ::google::protobuf::internal::WireFormatLite::VerifyUtf8String(
+      this->name().data(), static_cast<int>(this->name().length()),
+      ::google::protobuf::internal::WireFormatLite::SERIALIZE,
+      "inexor.entity_system.Relation.name");
+    ::google::protobuf::internal::WireFormatLite::WriteStringMaybeAliased(
+      1, this->name(), output);
+  }
+
+  // .inexor.entity_system.Entity source = 2;
+  if (this->has_source()) {
+    ::google::protobuf::internal::WireFormatLite::WriteMessageMaybeToArray(
+      2, this->_internal_source(), output);
+  }
+
+  // .inexor.entity_system.Entity target = 3;
+  if (this->has_target()) {
+    ::google::protobuf::internal::WireFormatLite::WriteMessageMaybeToArray(
+      3, this->_internal_target(), output);
+  }
+
+  if ((_internal_metadata_.have_unknown_fields() &&  ::google::protobuf::internal::GetProto3PreserveUnknownsDefault())) {
+    ::google::protobuf::internal::WireFormat::SerializeUnknownFields(
+        (::google::protobuf::internal::GetProto3PreserveUnknownsDefault()   ? _internal_metadata_.unknown_fields()   : _internal_metadata_.default_instance()), output);
+  }
+  // @@protoc_insertion_point(serialize_end:inexor.entity_system.Relation)
+}
+
+::google::protobuf::uint8* Relation::InternalSerializeWithCachedSizesToArray(
+    bool deterministic, ::google::protobuf::uint8* target) const {
+  (void)deterministic; // Unused
+  // @@protoc_insertion_point(serialize_to_array_start:inexor.entity_system.Relation)
+  ::google::protobuf::uint32 cached_has_bits = 0;
+  (void) cached_has_bits;
+
+  // string name = 1;
+  if (this->name().size() > 0) {
+    ::google::protobuf::internal::WireFormatLite::VerifyUtf8String(
+      this->name().data(), static_cast<int>(this->name().length()),
+      ::google::protobuf::internal::WireFormatLite::SERIALIZE,
+      "inexor.entity_system.Relation.name");
+    target =
+      ::google::protobuf::internal::WireFormatLite::WriteStringToArray(
+        1, this->name(), target);
+  }
+
+  // .inexor.entity_system.Entity source = 2;
+  if (this->has_source()) {
+    target = ::google::protobuf::internal::WireFormatLite::
+      InternalWriteMessageToArray(
+        2, this->_internal_source(), deterministic, target);
+  }
+
+  // .inexor.entity_system.Entity target = 3;
+  if (this->has_target()) {
+    target = ::google::protobuf::internal::WireFormatLite::
+      InternalWriteMessageToArray(
+        3, this->_internal_target(), deterministic, target);
+  }
+
+  if ((_internal_metadata_.have_unknown_fields() &&  ::google::protobuf::internal::GetProto3PreserveUnknownsDefault())) {
+    target = ::google::protobuf::internal::WireFormat::SerializeUnknownFieldsToArray(
+        (::google::protobuf::internal::GetProto3PreserveUnknownsDefault()   ? _internal_metadata_.unknown_fields()   : _internal_metadata_.default_instance()), target);
+  }
+  // @@protoc_insertion_point(serialize_to_array_end:inexor.entity_system.Relation)
+  return target;
+}
+
+size_t Relation::ByteSizeLong() const {
+// @@protoc_insertion_point(message_byte_size_start:inexor.entity_system.Relation)
+  size_t total_size = 0;
+
+  if ((_internal_metadata_.have_unknown_fields() &&  ::google::protobuf::internal::GetProto3PreserveUnknownsDefault())) {
+    total_size +=
+      ::google::protobuf::internal::WireFormat::ComputeUnknownFieldsSize(
+        (::google::protobuf::internal::GetProto3PreserveUnknownsDefault()   ? _internal_metadata_.unknown_fields()   : _internal_metadata_.default_instance()));
+  }
+  // string name = 1;
+  if (this->name().size() > 0) {
+    total_size += 1 +
+      ::google::protobuf::internal::WireFormatLite::StringSize(
+        this->name());
+  }
+
+  // .inexor.entity_system.Entity source = 2;
+  if (this->has_source()) {
+    total_size += 1 +
+      ::google::protobuf::internal::WireFormatLite::MessageSize(
+        *source_);
+  }
+
+  // .inexor.entity_system.Entity target = 3;
+  if (this->has_target()) {
+    total_size += 1 +
+      ::google::protobuf::internal::WireFormatLite::MessageSize(
+        *target_);
+  }
+
+  int cached_size = ::google::protobuf::internal::ToCachedSize(total_size);
+  SetCachedSize(cached_size);
+  return total_size;
+}
+
+void Relation::MergeFrom(const ::google::protobuf::Message& from) {
+// @@protoc_insertion_point(generalized_merge_from_start:inexor.entity_system.Relation)
+  GOOGLE_DCHECK_NE(&from, this);
+  const Relation* source =
+      ::google::protobuf::internal::DynamicCastToGenerated<const Relation>(
+          &from);
+  if (source == NULL) {
+  // @@protoc_insertion_point(generalized_merge_from_cast_fail:inexor.entity_system.Relation)
+    ::google::protobuf::internal::ReflectionOps::Merge(from, this);
+  } else {
+  // @@protoc_insertion_point(generalized_merge_from_cast_success:inexor.entity_system.Relation)
+    MergeFrom(*source);
+  }
+}
+
+void Relation::MergeFrom(const Relation& from) {
+// @@protoc_insertion_point(class_specific_merge_from_start:inexor.entity_system.Relation)
+  GOOGLE_DCHECK_NE(&from, this);
+  _internal_metadata_.MergeFrom(from._internal_metadata_);
+  ::google::protobuf::uint32 cached_has_bits = 0;
+  (void) cached_has_bits;
+
+  if (from.name().size() > 0) {
+
+    name_.AssignWithDefault(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), from.name_);
+  }
+  if (from.has_source()) {
+    mutable_source()->::inexor::entity_system::Entity::MergeFrom(from.source());
+  }
+  if (from.has_target()) {
+    mutable_target()->::inexor::entity_system::Entity::MergeFrom(from.target());
+  }
+}
+
+void Relation::CopyFrom(const ::google::protobuf::Message& from) {
+// @@protoc_insertion_point(generalized_copy_from_start:inexor.entity_system.Relation)
+  if (&from == this) return;
+  Clear();
+  MergeFrom(from);
+}
+
+void Relation::CopyFrom(const Relation& from) {
+// @@protoc_insertion_point(class_specific_copy_from_start:inexor.entity_system.Relation)
+  if (&from == this) return;
+  Clear();
+  MergeFrom(from);
+}
+
+bool Relation::IsInitialized() const {
+  return true;
+}
+
+void Relation::Swap(Relation* other) {
+  if (other == this) return;
+  InternalSwap(other);
+}
+void Relation::InternalSwap(Relation* other) {
+  using std::swap;
+  name_.Swap(&other->name_, &::google::protobuf::internal::GetEmptyStringAlreadyInited(),
+    GetArenaNoVirtual());
+  swap(source_, other->source_);
+  swap(target_, other->target_);
+  _internal_metadata_.Swap(&other->_internal_metadata_);
+}
+
+::google::protobuf::Metadata Relation::GetMetadata() const {
+  protobuf_entity_2dsystem_2eproto::protobuf_AssignDescriptorsOnce();
+  return ::protobuf_entity_2dsystem_2eproto::file_level_metadata[kIndexInFileMessages];
+}
+
+
+// ===================================================================
+
+void Operation::InitAsDefaultInstance() {
+}
+#if !defined(_MSC_VER) || _MSC_VER >= 1900
+const int Operation::kSuccessfulFieldNumber;
+const int Operation::kStatusFieldNumber;
+#endif  // !defined(_MSC_VER) || _MSC_VER >= 1900
+
+Operation::Operation()
+  : ::google::protobuf::Message(), _internal_metadata_(NULL) {
+  ::google::protobuf::internal::InitSCC(
+      &protobuf_entity_2dsystem_2eproto::scc_info_Operation.base);
+  SharedCtor();
+  // @@protoc_insertion_point(constructor:inexor.entity_system.Operation)
+}
+Operation::Operation(const Operation& from)
+  : ::google::protobuf::Message(),
+      _internal_metadata_(NULL) {
+  _internal_metadata_.MergeFrom(from._internal_metadata_);
+  status_.UnsafeSetDefault(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
+  if (from.status().size() > 0) {
+    status_.AssignWithDefault(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), from.status_);
+  }
+  successful_ = from.successful_;
+  // @@protoc_insertion_point(copy_constructor:inexor.entity_system.Operation)
+}
+
+void Operation::SharedCtor() {
+  status_.UnsafeSetDefault(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
+  successful_ = false;
+}
+
+Operation::~Operation() {
+  // @@protoc_insertion_point(destructor:inexor.entity_system.Operation)
+  SharedDtor();
+}
+
+void Operation::SharedDtor() {
+  status_.DestroyNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
+}
+
+void Operation::SetCachedSize(int size) const {
+  _cached_size_.Set(size);
+}
+const ::google::protobuf::Descriptor* Operation::descriptor() {
+  ::protobuf_entity_2dsystem_2eproto::protobuf_AssignDescriptorsOnce();
+  return ::protobuf_entity_2dsystem_2eproto::file_level_metadata[kIndexInFileMessages].descriptor;
+}
+
+const Operation& Operation::default_instance() {
+  ::google::protobuf::internal::InitSCC(&protobuf_entity_2dsystem_2eproto::scc_info_Operation.base);
+  return *internal_default_instance();
+}
+
+
+void Operation::Clear() {
+// @@protoc_insertion_point(message_clear_start:inexor.entity_system.Operation)
+  ::google::protobuf::uint32 cached_has_bits = 0;
+  // Prevent compiler warnings about cached_has_bits being unused
+  (void) cached_has_bits;
+
+  status_.ClearToEmptyNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
+  successful_ = false;
+  _internal_metadata_.Clear();
+}
+
+bool Operation::MergePartialFromCodedStream(
+    ::google::protobuf::io::CodedInputStream* input) {
+#define DO_(EXPRESSION) if (!GOOGLE_PREDICT_TRUE(EXPRESSION)) goto failure
+  ::google::protobuf::uint32 tag;
+  // @@protoc_insertion_point(parse_start:inexor.entity_system.Operation)
+  for (;;) {
+    ::std::pair<::google::protobuf::uint32, bool> p = input->ReadTagWithCutoffNoLastTag(127u);
+    tag = p.first;
+    if (!p.second) goto handle_unusual;
+    switch (::google::protobuf::internal::WireFormatLite::GetTagFieldNumber(tag)) {
+      // bool successful = 1;
+      case 1: {
+        if (static_cast< ::google::protobuf::uint8>(tag) ==
+            static_cast< ::google::protobuf::uint8>(8u /* 8 & 0xFF */)) {
+
+          DO_((::google::protobuf::internal::WireFormatLite::ReadPrimitive<
+                   bool, ::google::protobuf::internal::WireFormatLite::TYPE_BOOL>(
+                 input, &successful_)));
+        } else {
+          goto handle_unusual;
+        }
+        break;
+      }
+
+      // string status = 2;
+      case 2: {
+        if (static_cast< ::google::protobuf::uint8>(tag) ==
+            static_cast< ::google::protobuf::uint8>(18u /* 18 & 0xFF */)) {
+          DO_(::google::protobuf::internal::WireFormatLite::ReadString(
+                input, this->mutable_status()));
+          DO_(::google::protobuf::internal::WireFormatLite::VerifyUtf8String(
+            this->status().data(), static_cast<int>(this->status().length()),
+            ::google::protobuf::internal::WireFormatLite::PARSE,
+            "inexor.entity_system.Operation.status"));
+        } else {
+          goto handle_unusual;
+        }
+        break;
+      }
+
+      default: {
+      handle_unusual:
+        if (tag == 0) {
+          goto success;
+        }
+        DO_(::google::protobuf::internal::WireFormat::SkipField(
+              input, tag, _internal_metadata_.mutable_unknown_fields()));
+        break;
+      }
+    }
+  }
+success:
+  // @@protoc_insertion_point(parse_success:inexor.entity_system.Operation)
+  return true;
+failure:
+  // @@protoc_insertion_point(parse_failure:inexor.entity_system.Operation)
+  return false;
+#undef DO_
+}
+
+void Operation::SerializeWithCachedSizes(
+    ::google::protobuf::io::CodedOutputStream* output) const {
+  // @@protoc_insertion_point(serialize_start:inexor.entity_system.Operation)
+  ::google::protobuf::uint32 cached_has_bits = 0;
+  (void) cached_has_bits;
+
+  // bool successful = 1;
+  if (this->successful() != 0) {
+    ::google::protobuf::internal::WireFormatLite::WriteBool(1, this->successful(), output);
+  }
+
+  // string status = 2;
+  if (this->status().size() > 0) {
+    ::google::protobuf::internal::WireFormatLite::VerifyUtf8String(
+      this->status().data(), static_cast<int>(this->status().length()),
+      ::google::protobuf::internal::WireFormatLite::SERIALIZE,
+      "inexor.entity_system.Operation.status");
+    ::google::protobuf::internal::WireFormatLite::WriteStringMaybeAliased(
+      2, this->status(), output);
+  }
+
+  if ((_internal_metadata_.have_unknown_fields() &&  ::google::protobuf::internal::GetProto3PreserveUnknownsDefault())) {
+    ::google::protobuf::internal::WireFormat::SerializeUnknownFields(
+        (::google::protobuf::internal::GetProto3PreserveUnknownsDefault()   ? _internal_metadata_.unknown_fields()   : _internal_metadata_.default_instance()), output);
+  }
+  // @@protoc_insertion_point(serialize_end:inexor.entity_system.Operation)
+}
+
+::google::protobuf::uint8* Operation::InternalSerializeWithCachedSizesToArray(
+    bool deterministic, ::google::protobuf::uint8* target) const {
+  (void)deterministic; // Unused
+  // @@protoc_insertion_point(serialize_to_array_start:inexor.entity_system.Operation)
+  ::google::protobuf::uint32 cached_has_bits = 0;
+  (void) cached_has_bits;
+
+  // bool successful = 1;
+  if (this->successful() != 0) {
+    target = ::google::protobuf::internal::WireFormatLite::WriteBoolToArray(1, this->successful(), target);
+  }
+
+  // string status = 2;
+  if (this->status().size() > 0) {
+    ::google::protobuf::internal::WireFormatLite::VerifyUtf8String(
+      this->status().data(), static_cast<int>(this->status().length()),
+      ::google::protobuf::internal::WireFormatLite::SERIALIZE,
+      "inexor.entity_system.Operation.status");
+    target =
+      ::google::protobuf::internal::WireFormatLite::WriteStringToArray(
+        2, this->status(), target);
+  }
+
+  if ((_internal_metadata_.have_unknown_fields() &&  ::google::protobuf::internal::GetProto3PreserveUnknownsDefault())) {
+    target = ::google::protobuf::internal::WireFormat::SerializeUnknownFieldsToArray(
+        (::google::protobuf::internal::GetProto3PreserveUnknownsDefault()   ? _internal_metadata_.unknown_fields()   : _internal_metadata_.default_instance()), target);
+  }
+  // @@protoc_insertion_point(serialize_to_array_end:inexor.entity_system.Operation)
+  return target;
+}
+
+size_t Operation::ByteSizeLong() const {
+// @@protoc_insertion_point(message_byte_size_start:inexor.entity_system.Operation)
+  size_t total_size = 0;
+
+  if ((_internal_metadata_.have_unknown_fields() &&  ::google::protobuf::internal::GetProto3PreserveUnknownsDefault())) {
+    total_size +=
+      ::google::protobuf::internal::WireFormat::ComputeUnknownFieldsSize(
+        (::google::protobuf::internal::GetProto3PreserveUnknownsDefault()   ? _internal_metadata_.unknown_fields()   : _internal_metadata_.default_instance()));
+  }
+  // string status = 2;
+  if (this->status().size() > 0) {
+    total_size += 1 +
+      ::google::protobuf::internal::WireFormatLite::StringSize(
+        this->status());
+  }
+
+  // bool successful = 1;
+  if (this->successful() != 0) {
+    total_size += 1 + 1;
+  }
+
+  int cached_size = ::google::protobuf::internal::ToCachedSize(total_size);
+  SetCachedSize(cached_size);
+  return total_size;
+}
+
+void Operation::MergeFrom(const ::google::protobuf::Message& from) {
+// @@protoc_insertion_point(generalized_merge_from_start:inexor.entity_system.Operation)
+  GOOGLE_DCHECK_NE(&from, this);
+  const Operation* source =
+      ::google::protobuf::internal::DynamicCastToGenerated<const Operation>(
+          &from);
+  if (source == NULL) {
+  // @@protoc_insertion_point(generalized_merge_from_cast_fail:inexor.entity_system.Operation)
+    ::google::protobuf::internal::ReflectionOps::Merge(from, this);
+  } else {
+  // @@protoc_insertion_point(generalized_merge_from_cast_success:inexor.entity_system.Operation)
+    MergeFrom(*source);
+  }
+}
+
+void Operation::MergeFrom(const Operation& from) {
+// @@protoc_insertion_point(class_specific_merge_from_start:inexor.entity_system.Operation)
+  GOOGLE_DCHECK_NE(&from, this);
+  _internal_metadata_.MergeFrom(from._internal_metadata_);
+  ::google::protobuf::uint32 cached_has_bits = 0;
+  (void) cached_has_bits;
+
+  if (from.status().size() > 0) {
+
+    status_.AssignWithDefault(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), from.status_);
+  }
+  if (from.successful() != 0) {
+    set_successful(from.successful());
+  }
+}
+
+void Operation::CopyFrom(const ::google::protobuf::Message& from) {
+// @@protoc_insertion_point(generalized_copy_from_start:inexor.entity_system.Operation)
+  if (&from == this) return;
+  Clear();
+  MergeFrom(from);
+}
+
+void Operation::CopyFrom(const Operation& from) {
+// @@protoc_insertion_point(class_specific_copy_from_start:inexor.entity_system.Operation)
+  if (&from == this) return;
+  Clear();
+  MergeFrom(from);
+}
+
+bool Operation::IsInitialized() const {
+  return true;
+}
+
+void Operation::Swap(Operation* other) {
+  if (other == this) return;
+  InternalSwap(other);
+}
+void Operation::InternalSwap(Operation* other) {
+  using std::swap;
+  status_.Swap(&other->status_, &::google::protobuf::internal::GetEmptyStringAlreadyInited(),
+    GetArenaNoVirtual());
+  swap(successful_, other->successful_);
+  _internal_metadata_.Swap(&other->_internal_metadata_);
+}
+
+::google::protobuf::Metadata Operation::GetMetadata() const {
   protobuf_entity_2dsystem_2eproto::protobuf_AssignDescriptorsOnce();
   return ::protobuf_entity_2dsystem_2eproto::file_level_metadata[kIndexInFileMessages];
 }
@@ -1722,20 +1516,17 @@ void EntityOperation::InternalSwap(EntityOperation* other) {
 }  // namespace inexor
 namespace google {
 namespace protobuf {
-template<> GOOGLE_PROTOBUF_ATTRIBUTE_NOINLINE ::inexor::entity_system::EntityAttributeType* Arena::CreateMaybeMessage< ::inexor::entity_system::EntityAttributeType >(Arena* arena) {
-  return Arena::CreateInternal< ::inexor::entity_system::EntityAttributeType >(arena);
+template<> GOOGLE_PROTOBUF_ATTRIBUTE_NOINLINE ::inexor::entity_system::Attribute* Arena::CreateMaybeMessage< ::inexor::entity_system::Attribute >(Arena* arena) {
+  return Arena::CreateInternal< ::inexor::entity_system::Attribute >(arena);
 }
-template<> GOOGLE_PROTOBUF_ATTRIBUTE_NOINLINE ::inexor::entity_system::EntityType* Arena::CreateMaybeMessage< ::inexor::entity_system::EntityType >(Arena* arena) {
-  return Arena::CreateInternal< ::inexor::entity_system::EntityType >(arena);
+template<> GOOGLE_PROTOBUF_ATTRIBUTE_NOINLINE ::inexor::entity_system::Entity* Arena::CreateMaybeMessage< ::inexor::entity_system::Entity >(Arena* arena) {
+  return Arena::CreateInternal< ::inexor::entity_system::Entity >(arena);
 }
-template<> GOOGLE_PROTOBUF_ATTRIBUTE_NOINLINE ::inexor::entity_system::EntityRelationAttributeType* Arena::CreateMaybeMessage< ::inexor::entity_system::EntityRelationAttributeType >(Arena* arena) {
-  return Arena::CreateInternal< ::inexor::entity_system::EntityRelationAttributeType >(arena);
+template<> GOOGLE_PROTOBUF_ATTRIBUTE_NOINLINE ::inexor::entity_system::Relation* Arena::CreateMaybeMessage< ::inexor::entity_system::Relation >(Arena* arena) {
+  return Arena::CreateInternal< ::inexor::entity_system::Relation >(arena);
 }
-template<> GOOGLE_PROTOBUF_ATTRIBUTE_NOINLINE ::inexor::entity_system::EntityRelationType* Arena::CreateMaybeMessage< ::inexor::entity_system::EntityRelationType >(Arena* arena) {
-  return Arena::CreateInternal< ::inexor::entity_system::EntityRelationType >(arena);
-}
-template<> GOOGLE_PROTOBUF_ATTRIBUTE_NOINLINE ::inexor::entity_system::EntityOperation* Arena::CreateMaybeMessage< ::inexor::entity_system::EntityOperation >(Arena* arena) {
-  return Arena::CreateInternal< ::inexor::entity_system::EntityOperation >(arena);
+template<> GOOGLE_PROTOBUF_ATTRIBUTE_NOINLINE ::inexor::entity_system::Operation* Arena::CreateMaybeMessage< ::inexor::entity_system::Operation >(Arena* arena) {
+  return Arena::CreateInternal< ::inexor::entity_system::Operation >(arena);
 }
 }  // namespace protobuf
 }  // namespace google

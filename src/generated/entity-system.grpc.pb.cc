@@ -19,258 +19,276 @@
 namespace inexor {
 namespace entity_system {
 
-static const char* EntitySystem_method_names[] = {
-  "/inexor.entity_system.EntitySystem/CreateEntityType",
-  "/inexor.entity_system.EntitySystem/DeleteEntityType",
-  "/inexor.entity_system.EntitySystem/CreateEntityAttributeType",
-  "/inexor.entity_system.EntitySystem/DeleteEntityAttributeType",
-  "/inexor.entity_system.EntitySystem/CreateEntityRelationAttributeType",
-  "/inexor.entity_system.EntitySystem/DeleteEntityRelationAttributeType",
-  "/inexor.entity_system.EntitySystem/CreateEntityRelationType",
-  "/inexor.entity_system.EntitySystem/DeleteEntityRelationType",
+static const char* EntityService_method_names[] = {
+  "/inexor.entity_system.EntityService/CreateEntity",
+  "/inexor.entity_system.EntityService/ListEntities",
+  "/inexor.entity_system.EntityService/DeleteEntity",
+  "/inexor.entity_system.EntityService/CreateAttribute",
+  "/inexor.entity_system.EntityService/ListAttributes",
+  "/inexor.entity_system.EntityService/DeleteAttribute",
+  "/inexor.entity_system.EntityService/CreateRelation",
+  "/inexor.entity_system.EntityService/ListRelations",
+  "/inexor.entity_system.EntityService/DeleteRelation",
 };
 
-std::unique_ptr< EntitySystem::Stub> EntitySystem::NewStub(const std::shared_ptr< ::grpc::ChannelInterface>& channel, const ::grpc::StubOptions& options) {
+std::unique_ptr< EntityService::Stub> EntityService::NewStub(const std::shared_ptr< ::grpc::ChannelInterface>& channel, const ::grpc::StubOptions& options) {
   (void)options;
-  std::unique_ptr< EntitySystem::Stub> stub(new EntitySystem::Stub(channel));
+  std::unique_ptr< EntityService::Stub> stub(new EntityService::Stub(channel));
   return stub;
 }
 
-EntitySystem::Stub::Stub(const std::shared_ptr< ::grpc::ChannelInterface>& channel)
-  : channel_(channel), rpcmethod_CreateEntityType_(EntitySystem_method_names[0], ::grpc::internal::RpcMethod::NORMAL_RPC, channel)
-  , rpcmethod_DeleteEntityType_(EntitySystem_method_names[1], ::grpc::internal::RpcMethod::NORMAL_RPC, channel)
-  , rpcmethod_CreateEntityAttributeType_(EntitySystem_method_names[2], ::grpc::internal::RpcMethod::NORMAL_RPC, channel)
-  , rpcmethod_DeleteEntityAttributeType_(EntitySystem_method_names[3], ::grpc::internal::RpcMethod::NORMAL_RPC, channel)
-  , rpcmethod_CreateEntityRelationAttributeType_(EntitySystem_method_names[4], ::grpc::internal::RpcMethod::NORMAL_RPC, channel)
-  , rpcmethod_DeleteEntityRelationAttributeType_(EntitySystem_method_names[5], ::grpc::internal::RpcMethod::NORMAL_RPC, channel)
-  , rpcmethod_CreateEntityRelationType_(EntitySystem_method_names[6], ::grpc::internal::RpcMethod::NORMAL_RPC, channel)
-  , rpcmethod_DeleteEntityRelationType_(EntitySystem_method_names[7], ::grpc::internal::RpcMethod::NORMAL_RPC, channel)
+EntityService::Stub::Stub(const std::shared_ptr< ::grpc::ChannelInterface>& channel)
+  : channel_(channel), rpcmethod_CreateEntity_(EntityService_method_names[0], ::grpc::internal::RpcMethod::NORMAL_RPC, channel)
+  , rpcmethod_ListEntities_(EntityService_method_names[1], ::grpc::internal::RpcMethod::SERVER_STREAMING, channel)
+  , rpcmethod_DeleteEntity_(EntityService_method_names[2], ::grpc::internal::RpcMethod::NORMAL_RPC, channel)
+  , rpcmethod_CreateAttribute_(EntityService_method_names[3], ::grpc::internal::RpcMethod::NORMAL_RPC, channel)
+  , rpcmethod_ListAttributes_(EntityService_method_names[4], ::grpc::internal::RpcMethod::SERVER_STREAMING, channel)
+  , rpcmethod_DeleteAttribute_(EntityService_method_names[5], ::grpc::internal::RpcMethod::NORMAL_RPC, channel)
+  , rpcmethod_CreateRelation_(EntityService_method_names[6], ::grpc::internal::RpcMethod::NORMAL_RPC, channel)
+  , rpcmethod_ListRelations_(EntityService_method_names[7], ::grpc::internal::RpcMethod::SERVER_STREAMING, channel)
+  , rpcmethod_DeleteRelation_(EntityService_method_names[8], ::grpc::internal::RpcMethod::NORMAL_RPC, channel)
   {}
 
-::grpc::Status EntitySystem::Stub::CreateEntityType(::grpc::ClientContext* context, const ::inexor::entity_system::EntityType& request, ::inexor::entity_system::EntityOperation* response) {
-  return ::grpc::internal::BlockingUnaryCall(channel_.get(), rpcmethod_CreateEntityType_, context, request, response);
+::grpc::Status EntityService::Stub::CreateEntity(::grpc::ClientContext* context, const ::inexor::entity_system::Entity& request, ::inexor::entity_system::Operation* response) {
+  return ::grpc::internal::BlockingUnaryCall(channel_.get(), rpcmethod_CreateEntity_, context, request, response);
 }
 
-void EntitySystem::Stub::experimental_async::CreateEntityType(::grpc::ClientContext* context, const ::inexor::entity_system::EntityType* request, ::inexor::entity_system::EntityOperation* response, std::function<void(::grpc::Status)> f) {
-  return ::grpc::internal::CallbackUnaryCall(stub_->channel_.get(), stub_->rpcmethod_CreateEntityType_, context, request, response, std::move(f));
+void EntityService::Stub::experimental_async::CreateEntity(::grpc::ClientContext* context, const ::inexor::entity_system::Entity* request, ::inexor::entity_system::Operation* response, std::function<void(::grpc::Status)> f) {
+  return ::grpc::internal::CallbackUnaryCall(stub_->channel_.get(), stub_->rpcmethod_CreateEntity_, context, request, response, std::move(f));
 }
 
-::grpc::ClientAsyncResponseReader< ::inexor::entity_system::EntityOperation>* EntitySystem::Stub::AsyncCreateEntityTypeRaw(::grpc::ClientContext* context, const ::inexor::entity_system::EntityType& request, ::grpc::CompletionQueue* cq) {
-  return ::grpc::internal::ClientAsyncResponseReaderFactory< ::inexor::entity_system::EntityOperation>::Create(channel_.get(), cq, rpcmethod_CreateEntityType_, context, request, true);
+::grpc::ClientAsyncResponseReader< ::inexor::entity_system::Operation>* EntityService::Stub::AsyncCreateEntityRaw(::grpc::ClientContext* context, const ::inexor::entity_system::Entity& request, ::grpc::CompletionQueue* cq) {
+  return ::grpc::internal::ClientAsyncResponseReaderFactory< ::inexor::entity_system::Operation>::Create(channel_.get(), cq, rpcmethod_CreateEntity_, context, request, true);
 }
 
-::grpc::ClientAsyncResponseReader< ::inexor::entity_system::EntityOperation>* EntitySystem::Stub::PrepareAsyncCreateEntityTypeRaw(::grpc::ClientContext* context, const ::inexor::entity_system::EntityType& request, ::grpc::CompletionQueue* cq) {
-  return ::grpc::internal::ClientAsyncResponseReaderFactory< ::inexor::entity_system::EntityOperation>::Create(channel_.get(), cq, rpcmethod_CreateEntityType_, context, request, false);
+::grpc::ClientAsyncResponseReader< ::inexor::entity_system::Operation>* EntityService::Stub::PrepareAsyncCreateEntityRaw(::grpc::ClientContext* context, const ::inexor::entity_system::Entity& request, ::grpc::CompletionQueue* cq) {
+  return ::grpc::internal::ClientAsyncResponseReaderFactory< ::inexor::entity_system::Operation>::Create(channel_.get(), cq, rpcmethod_CreateEntity_, context, request, false);
 }
 
-::grpc::Status EntitySystem::Stub::DeleteEntityType(::grpc::ClientContext* context, const ::inexor::entity_system::EntityType& request, ::inexor::entity_system::EntityOperation* response) {
-  return ::grpc::internal::BlockingUnaryCall(channel_.get(), rpcmethod_DeleteEntityType_, context, request, response);
+::grpc::ClientReader< ::inexor::entity_system::Entity>* EntityService::Stub::ListEntitiesRaw(::grpc::ClientContext* context, const ::google::protobuf::Empty& request) {
+  return ::grpc::internal::ClientReaderFactory< ::inexor::entity_system::Entity>::Create(channel_.get(), rpcmethod_ListEntities_, context, request);
 }
 
-void EntitySystem::Stub::experimental_async::DeleteEntityType(::grpc::ClientContext* context, const ::inexor::entity_system::EntityType* request, ::inexor::entity_system::EntityOperation* response, std::function<void(::grpc::Status)> f) {
-  return ::grpc::internal::CallbackUnaryCall(stub_->channel_.get(), stub_->rpcmethod_DeleteEntityType_, context, request, response, std::move(f));
+::grpc::ClientAsyncReader< ::inexor::entity_system::Entity>* EntityService::Stub::AsyncListEntitiesRaw(::grpc::ClientContext* context, const ::google::protobuf::Empty& request, ::grpc::CompletionQueue* cq, void* tag) {
+  return ::grpc::internal::ClientAsyncReaderFactory< ::inexor::entity_system::Entity>::Create(channel_.get(), cq, rpcmethod_ListEntities_, context, request, true, tag);
 }
 
-::grpc::ClientAsyncResponseReader< ::inexor::entity_system::EntityOperation>* EntitySystem::Stub::AsyncDeleteEntityTypeRaw(::grpc::ClientContext* context, const ::inexor::entity_system::EntityType& request, ::grpc::CompletionQueue* cq) {
-  return ::grpc::internal::ClientAsyncResponseReaderFactory< ::inexor::entity_system::EntityOperation>::Create(channel_.get(), cq, rpcmethod_DeleteEntityType_, context, request, true);
+::grpc::ClientAsyncReader< ::inexor::entity_system::Entity>* EntityService::Stub::PrepareAsyncListEntitiesRaw(::grpc::ClientContext* context, const ::google::protobuf::Empty& request, ::grpc::CompletionQueue* cq) {
+  return ::grpc::internal::ClientAsyncReaderFactory< ::inexor::entity_system::Entity>::Create(channel_.get(), cq, rpcmethod_ListEntities_, context, request, false, nullptr);
 }
 
-::grpc::ClientAsyncResponseReader< ::inexor::entity_system::EntityOperation>* EntitySystem::Stub::PrepareAsyncDeleteEntityTypeRaw(::grpc::ClientContext* context, const ::inexor::entity_system::EntityType& request, ::grpc::CompletionQueue* cq) {
-  return ::grpc::internal::ClientAsyncResponseReaderFactory< ::inexor::entity_system::EntityOperation>::Create(channel_.get(), cq, rpcmethod_DeleteEntityType_, context, request, false);
+::grpc::Status EntityService::Stub::DeleteEntity(::grpc::ClientContext* context, const ::inexor::entity_system::Entity& request, ::inexor::entity_system::Operation* response) {
+  return ::grpc::internal::BlockingUnaryCall(channel_.get(), rpcmethod_DeleteEntity_, context, request, response);
 }
 
-::grpc::Status EntitySystem::Stub::CreateEntityAttributeType(::grpc::ClientContext* context, const ::inexor::entity_system::EntityAttributeType& request, ::inexor::entity_system::EntityOperation* response) {
-  return ::grpc::internal::BlockingUnaryCall(channel_.get(), rpcmethod_CreateEntityAttributeType_, context, request, response);
+void EntityService::Stub::experimental_async::DeleteEntity(::grpc::ClientContext* context, const ::inexor::entity_system::Entity* request, ::inexor::entity_system::Operation* response, std::function<void(::grpc::Status)> f) {
+  return ::grpc::internal::CallbackUnaryCall(stub_->channel_.get(), stub_->rpcmethod_DeleteEntity_, context, request, response, std::move(f));
 }
 
-void EntitySystem::Stub::experimental_async::CreateEntityAttributeType(::grpc::ClientContext* context, const ::inexor::entity_system::EntityAttributeType* request, ::inexor::entity_system::EntityOperation* response, std::function<void(::grpc::Status)> f) {
-  return ::grpc::internal::CallbackUnaryCall(stub_->channel_.get(), stub_->rpcmethod_CreateEntityAttributeType_, context, request, response, std::move(f));
+::grpc::ClientAsyncResponseReader< ::inexor::entity_system::Operation>* EntityService::Stub::AsyncDeleteEntityRaw(::grpc::ClientContext* context, const ::inexor::entity_system::Entity& request, ::grpc::CompletionQueue* cq) {
+  return ::grpc::internal::ClientAsyncResponseReaderFactory< ::inexor::entity_system::Operation>::Create(channel_.get(), cq, rpcmethod_DeleteEntity_, context, request, true);
 }
 
-::grpc::ClientAsyncResponseReader< ::inexor::entity_system::EntityOperation>* EntitySystem::Stub::AsyncCreateEntityAttributeTypeRaw(::grpc::ClientContext* context, const ::inexor::entity_system::EntityAttributeType& request, ::grpc::CompletionQueue* cq) {
-  return ::grpc::internal::ClientAsyncResponseReaderFactory< ::inexor::entity_system::EntityOperation>::Create(channel_.get(), cq, rpcmethod_CreateEntityAttributeType_, context, request, true);
+::grpc::ClientAsyncResponseReader< ::inexor::entity_system::Operation>* EntityService::Stub::PrepareAsyncDeleteEntityRaw(::grpc::ClientContext* context, const ::inexor::entity_system::Entity& request, ::grpc::CompletionQueue* cq) {
+  return ::grpc::internal::ClientAsyncResponseReaderFactory< ::inexor::entity_system::Operation>::Create(channel_.get(), cq, rpcmethod_DeleteEntity_, context, request, false);
 }
 
-::grpc::ClientAsyncResponseReader< ::inexor::entity_system::EntityOperation>* EntitySystem::Stub::PrepareAsyncCreateEntityAttributeTypeRaw(::grpc::ClientContext* context, const ::inexor::entity_system::EntityAttributeType& request, ::grpc::CompletionQueue* cq) {
-  return ::grpc::internal::ClientAsyncResponseReaderFactory< ::inexor::entity_system::EntityOperation>::Create(channel_.get(), cq, rpcmethod_CreateEntityAttributeType_, context, request, false);
+::grpc::Status EntityService::Stub::CreateAttribute(::grpc::ClientContext* context, const ::inexor::entity_system::Attribute& request, ::inexor::entity_system::Operation* response) {
+  return ::grpc::internal::BlockingUnaryCall(channel_.get(), rpcmethod_CreateAttribute_, context, request, response);
 }
 
-::grpc::Status EntitySystem::Stub::DeleteEntityAttributeType(::grpc::ClientContext* context, const ::inexor::entity_system::EntityAttributeType& request, ::inexor::entity_system::EntityOperation* response) {
-  return ::grpc::internal::BlockingUnaryCall(channel_.get(), rpcmethod_DeleteEntityAttributeType_, context, request, response);
+void EntityService::Stub::experimental_async::CreateAttribute(::grpc::ClientContext* context, const ::inexor::entity_system::Attribute* request, ::inexor::entity_system::Operation* response, std::function<void(::grpc::Status)> f) {
+  return ::grpc::internal::CallbackUnaryCall(stub_->channel_.get(), stub_->rpcmethod_CreateAttribute_, context, request, response, std::move(f));
 }
 
-void EntitySystem::Stub::experimental_async::DeleteEntityAttributeType(::grpc::ClientContext* context, const ::inexor::entity_system::EntityAttributeType* request, ::inexor::entity_system::EntityOperation* response, std::function<void(::grpc::Status)> f) {
-  return ::grpc::internal::CallbackUnaryCall(stub_->channel_.get(), stub_->rpcmethod_DeleteEntityAttributeType_, context, request, response, std::move(f));
+::grpc::ClientAsyncResponseReader< ::inexor::entity_system::Operation>* EntityService::Stub::AsyncCreateAttributeRaw(::grpc::ClientContext* context, const ::inexor::entity_system::Attribute& request, ::grpc::CompletionQueue* cq) {
+  return ::grpc::internal::ClientAsyncResponseReaderFactory< ::inexor::entity_system::Operation>::Create(channel_.get(), cq, rpcmethod_CreateAttribute_, context, request, true);
 }
 
-::grpc::ClientAsyncResponseReader< ::inexor::entity_system::EntityOperation>* EntitySystem::Stub::AsyncDeleteEntityAttributeTypeRaw(::grpc::ClientContext* context, const ::inexor::entity_system::EntityAttributeType& request, ::grpc::CompletionQueue* cq) {
-  return ::grpc::internal::ClientAsyncResponseReaderFactory< ::inexor::entity_system::EntityOperation>::Create(channel_.get(), cq, rpcmethod_DeleteEntityAttributeType_, context, request, true);
+::grpc::ClientAsyncResponseReader< ::inexor::entity_system::Operation>* EntityService::Stub::PrepareAsyncCreateAttributeRaw(::grpc::ClientContext* context, const ::inexor::entity_system::Attribute& request, ::grpc::CompletionQueue* cq) {
+  return ::grpc::internal::ClientAsyncResponseReaderFactory< ::inexor::entity_system::Operation>::Create(channel_.get(), cq, rpcmethod_CreateAttribute_, context, request, false);
 }
 
-::grpc::ClientAsyncResponseReader< ::inexor::entity_system::EntityOperation>* EntitySystem::Stub::PrepareAsyncDeleteEntityAttributeTypeRaw(::grpc::ClientContext* context, const ::inexor::entity_system::EntityAttributeType& request, ::grpc::CompletionQueue* cq) {
-  return ::grpc::internal::ClientAsyncResponseReaderFactory< ::inexor::entity_system::EntityOperation>::Create(channel_.get(), cq, rpcmethod_DeleteEntityAttributeType_, context, request, false);
+::grpc::ClientReader< ::inexor::entity_system::Attribute>* EntityService::Stub::ListAttributesRaw(::grpc::ClientContext* context, const ::google::protobuf::Empty& request) {
+  return ::grpc::internal::ClientReaderFactory< ::inexor::entity_system::Attribute>::Create(channel_.get(), rpcmethod_ListAttributes_, context, request);
 }
 
-::grpc::Status EntitySystem::Stub::CreateEntityRelationAttributeType(::grpc::ClientContext* context, const ::inexor::entity_system::EntityRelationAttributeType& request, ::inexor::entity_system::EntityOperation* response) {
-  return ::grpc::internal::BlockingUnaryCall(channel_.get(), rpcmethod_CreateEntityRelationAttributeType_, context, request, response);
+::grpc::ClientAsyncReader< ::inexor::entity_system::Attribute>* EntityService::Stub::AsyncListAttributesRaw(::grpc::ClientContext* context, const ::google::protobuf::Empty& request, ::grpc::CompletionQueue* cq, void* tag) {
+  return ::grpc::internal::ClientAsyncReaderFactory< ::inexor::entity_system::Attribute>::Create(channel_.get(), cq, rpcmethod_ListAttributes_, context, request, true, tag);
 }
 
-void EntitySystem::Stub::experimental_async::CreateEntityRelationAttributeType(::grpc::ClientContext* context, const ::inexor::entity_system::EntityRelationAttributeType* request, ::inexor::entity_system::EntityOperation* response, std::function<void(::grpc::Status)> f) {
-  return ::grpc::internal::CallbackUnaryCall(stub_->channel_.get(), stub_->rpcmethod_CreateEntityRelationAttributeType_, context, request, response, std::move(f));
+::grpc::ClientAsyncReader< ::inexor::entity_system::Attribute>* EntityService::Stub::PrepareAsyncListAttributesRaw(::grpc::ClientContext* context, const ::google::protobuf::Empty& request, ::grpc::CompletionQueue* cq) {
+  return ::grpc::internal::ClientAsyncReaderFactory< ::inexor::entity_system::Attribute>::Create(channel_.get(), cq, rpcmethod_ListAttributes_, context, request, false, nullptr);
 }
 
-::grpc::ClientAsyncResponseReader< ::inexor::entity_system::EntityOperation>* EntitySystem::Stub::AsyncCreateEntityRelationAttributeTypeRaw(::grpc::ClientContext* context, const ::inexor::entity_system::EntityRelationAttributeType& request, ::grpc::CompletionQueue* cq) {
-  return ::grpc::internal::ClientAsyncResponseReaderFactory< ::inexor::entity_system::EntityOperation>::Create(channel_.get(), cq, rpcmethod_CreateEntityRelationAttributeType_, context, request, true);
+::grpc::Status EntityService::Stub::DeleteAttribute(::grpc::ClientContext* context, const ::inexor::entity_system::Attribute& request, ::inexor::entity_system::Operation* response) {
+  return ::grpc::internal::BlockingUnaryCall(channel_.get(), rpcmethod_DeleteAttribute_, context, request, response);
 }
 
-::grpc::ClientAsyncResponseReader< ::inexor::entity_system::EntityOperation>* EntitySystem::Stub::PrepareAsyncCreateEntityRelationAttributeTypeRaw(::grpc::ClientContext* context, const ::inexor::entity_system::EntityRelationAttributeType& request, ::grpc::CompletionQueue* cq) {
-  return ::grpc::internal::ClientAsyncResponseReaderFactory< ::inexor::entity_system::EntityOperation>::Create(channel_.get(), cq, rpcmethod_CreateEntityRelationAttributeType_, context, request, false);
+void EntityService::Stub::experimental_async::DeleteAttribute(::grpc::ClientContext* context, const ::inexor::entity_system::Attribute* request, ::inexor::entity_system::Operation* response, std::function<void(::grpc::Status)> f) {
+  return ::grpc::internal::CallbackUnaryCall(stub_->channel_.get(), stub_->rpcmethod_DeleteAttribute_, context, request, response, std::move(f));
 }
 
-::grpc::Status EntitySystem::Stub::DeleteEntityRelationAttributeType(::grpc::ClientContext* context, const ::inexor::entity_system::EntityRelationAttributeType& request, ::inexor::entity_system::EntityOperation* response) {
-  return ::grpc::internal::BlockingUnaryCall(channel_.get(), rpcmethod_DeleteEntityRelationAttributeType_, context, request, response);
+::grpc::ClientAsyncResponseReader< ::inexor::entity_system::Operation>* EntityService::Stub::AsyncDeleteAttributeRaw(::grpc::ClientContext* context, const ::inexor::entity_system::Attribute& request, ::grpc::CompletionQueue* cq) {
+  return ::grpc::internal::ClientAsyncResponseReaderFactory< ::inexor::entity_system::Operation>::Create(channel_.get(), cq, rpcmethod_DeleteAttribute_, context, request, true);
 }
 
-void EntitySystem::Stub::experimental_async::DeleteEntityRelationAttributeType(::grpc::ClientContext* context, const ::inexor::entity_system::EntityRelationAttributeType* request, ::inexor::entity_system::EntityOperation* response, std::function<void(::grpc::Status)> f) {
-  return ::grpc::internal::CallbackUnaryCall(stub_->channel_.get(), stub_->rpcmethod_DeleteEntityRelationAttributeType_, context, request, response, std::move(f));
+::grpc::ClientAsyncResponseReader< ::inexor::entity_system::Operation>* EntityService::Stub::PrepareAsyncDeleteAttributeRaw(::grpc::ClientContext* context, const ::inexor::entity_system::Attribute& request, ::grpc::CompletionQueue* cq) {
+  return ::grpc::internal::ClientAsyncResponseReaderFactory< ::inexor::entity_system::Operation>::Create(channel_.get(), cq, rpcmethod_DeleteAttribute_, context, request, false);
 }
 
-::grpc::ClientAsyncResponseReader< ::inexor::entity_system::EntityOperation>* EntitySystem::Stub::AsyncDeleteEntityRelationAttributeTypeRaw(::grpc::ClientContext* context, const ::inexor::entity_system::EntityRelationAttributeType& request, ::grpc::CompletionQueue* cq) {
-  return ::grpc::internal::ClientAsyncResponseReaderFactory< ::inexor::entity_system::EntityOperation>::Create(channel_.get(), cq, rpcmethod_DeleteEntityRelationAttributeType_, context, request, true);
+::grpc::Status EntityService::Stub::CreateRelation(::grpc::ClientContext* context, const ::inexor::entity_system::Relation& request, ::inexor::entity_system::Operation* response) {
+  return ::grpc::internal::BlockingUnaryCall(channel_.get(), rpcmethod_CreateRelation_, context, request, response);
 }
 
-::grpc::ClientAsyncResponseReader< ::inexor::entity_system::EntityOperation>* EntitySystem::Stub::PrepareAsyncDeleteEntityRelationAttributeTypeRaw(::grpc::ClientContext* context, const ::inexor::entity_system::EntityRelationAttributeType& request, ::grpc::CompletionQueue* cq) {
-  return ::grpc::internal::ClientAsyncResponseReaderFactory< ::inexor::entity_system::EntityOperation>::Create(channel_.get(), cq, rpcmethod_DeleteEntityRelationAttributeType_, context, request, false);
+void EntityService::Stub::experimental_async::CreateRelation(::grpc::ClientContext* context, const ::inexor::entity_system::Relation* request, ::inexor::entity_system::Operation* response, std::function<void(::grpc::Status)> f) {
+  return ::grpc::internal::CallbackUnaryCall(stub_->channel_.get(), stub_->rpcmethod_CreateRelation_, context, request, response, std::move(f));
 }
 
-::grpc::Status EntitySystem::Stub::CreateEntityRelationType(::grpc::ClientContext* context, const ::inexor::entity_system::EntityRelationType& request, ::inexor::entity_system::EntityOperation* response) {
-  return ::grpc::internal::BlockingUnaryCall(channel_.get(), rpcmethod_CreateEntityRelationType_, context, request, response);
+::grpc::ClientAsyncResponseReader< ::inexor::entity_system::Operation>* EntityService::Stub::AsyncCreateRelationRaw(::grpc::ClientContext* context, const ::inexor::entity_system::Relation& request, ::grpc::CompletionQueue* cq) {
+  return ::grpc::internal::ClientAsyncResponseReaderFactory< ::inexor::entity_system::Operation>::Create(channel_.get(), cq, rpcmethod_CreateRelation_, context, request, true);
 }
 
-void EntitySystem::Stub::experimental_async::CreateEntityRelationType(::grpc::ClientContext* context, const ::inexor::entity_system::EntityRelationType* request, ::inexor::entity_system::EntityOperation* response, std::function<void(::grpc::Status)> f) {
-  return ::grpc::internal::CallbackUnaryCall(stub_->channel_.get(), stub_->rpcmethod_CreateEntityRelationType_, context, request, response, std::move(f));
+::grpc::ClientAsyncResponseReader< ::inexor::entity_system::Operation>* EntityService::Stub::PrepareAsyncCreateRelationRaw(::grpc::ClientContext* context, const ::inexor::entity_system::Relation& request, ::grpc::CompletionQueue* cq) {
+  return ::grpc::internal::ClientAsyncResponseReaderFactory< ::inexor::entity_system::Operation>::Create(channel_.get(), cq, rpcmethod_CreateRelation_, context, request, false);
 }
 
-::grpc::ClientAsyncResponseReader< ::inexor::entity_system::EntityOperation>* EntitySystem::Stub::AsyncCreateEntityRelationTypeRaw(::grpc::ClientContext* context, const ::inexor::entity_system::EntityRelationType& request, ::grpc::CompletionQueue* cq) {
-  return ::grpc::internal::ClientAsyncResponseReaderFactory< ::inexor::entity_system::EntityOperation>::Create(channel_.get(), cq, rpcmethod_CreateEntityRelationType_, context, request, true);
+::grpc::ClientReader< ::inexor::entity_system::Relation>* EntityService::Stub::ListRelationsRaw(::grpc::ClientContext* context, const ::google::protobuf::Empty& request) {
+  return ::grpc::internal::ClientReaderFactory< ::inexor::entity_system::Relation>::Create(channel_.get(), rpcmethod_ListRelations_, context, request);
 }
 
-::grpc::ClientAsyncResponseReader< ::inexor::entity_system::EntityOperation>* EntitySystem::Stub::PrepareAsyncCreateEntityRelationTypeRaw(::grpc::ClientContext* context, const ::inexor::entity_system::EntityRelationType& request, ::grpc::CompletionQueue* cq) {
-  return ::grpc::internal::ClientAsyncResponseReaderFactory< ::inexor::entity_system::EntityOperation>::Create(channel_.get(), cq, rpcmethod_CreateEntityRelationType_, context, request, false);
+::grpc::ClientAsyncReader< ::inexor::entity_system::Relation>* EntityService::Stub::AsyncListRelationsRaw(::grpc::ClientContext* context, const ::google::protobuf::Empty& request, ::grpc::CompletionQueue* cq, void* tag) {
+  return ::grpc::internal::ClientAsyncReaderFactory< ::inexor::entity_system::Relation>::Create(channel_.get(), cq, rpcmethod_ListRelations_, context, request, true, tag);
 }
 
-::grpc::Status EntitySystem::Stub::DeleteEntityRelationType(::grpc::ClientContext* context, const ::inexor::entity_system::EntityRelationType& request, ::inexor::entity_system::EntityOperation* response) {
-  return ::grpc::internal::BlockingUnaryCall(channel_.get(), rpcmethod_DeleteEntityRelationType_, context, request, response);
+::grpc::ClientAsyncReader< ::inexor::entity_system::Relation>* EntityService::Stub::PrepareAsyncListRelationsRaw(::grpc::ClientContext* context, const ::google::protobuf::Empty& request, ::grpc::CompletionQueue* cq) {
+  return ::grpc::internal::ClientAsyncReaderFactory< ::inexor::entity_system::Relation>::Create(channel_.get(), cq, rpcmethod_ListRelations_, context, request, false, nullptr);
 }
 
-void EntitySystem::Stub::experimental_async::DeleteEntityRelationType(::grpc::ClientContext* context, const ::inexor::entity_system::EntityRelationType* request, ::inexor::entity_system::EntityOperation* response, std::function<void(::grpc::Status)> f) {
-  return ::grpc::internal::CallbackUnaryCall(stub_->channel_.get(), stub_->rpcmethod_DeleteEntityRelationType_, context, request, response, std::move(f));
+::grpc::Status EntityService::Stub::DeleteRelation(::grpc::ClientContext* context, const ::inexor::entity_system::Relation& request, ::inexor::entity_system::Operation* response) {
+  return ::grpc::internal::BlockingUnaryCall(channel_.get(), rpcmethod_DeleteRelation_, context, request, response);
 }
 
-::grpc::ClientAsyncResponseReader< ::inexor::entity_system::EntityOperation>* EntitySystem::Stub::AsyncDeleteEntityRelationTypeRaw(::grpc::ClientContext* context, const ::inexor::entity_system::EntityRelationType& request, ::grpc::CompletionQueue* cq) {
-  return ::grpc::internal::ClientAsyncResponseReaderFactory< ::inexor::entity_system::EntityOperation>::Create(channel_.get(), cq, rpcmethod_DeleteEntityRelationType_, context, request, true);
+void EntityService::Stub::experimental_async::DeleteRelation(::grpc::ClientContext* context, const ::inexor::entity_system::Relation* request, ::inexor::entity_system::Operation* response, std::function<void(::grpc::Status)> f) {
+  return ::grpc::internal::CallbackUnaryCall(stub_->channel_.get(), stub_->rpcmethod_DeleteRelation_, context, request, response, std::move(f));
 }
 
-::grpc::ClientAsyncResponseReader< ::inexor::entity_system::EntityOperation>* EntitySystem::Stub::PrepareAsyncDeleteEntityRelationTypeRaw(::grpc::ClientContext* context, const ::inexor::entity_system::EntityRelationType& request, ::grpc::CompletionQueue* cq) {
-  return ::grpc::internal::ClientAsyncResponseReaderFactory< ::inexor::entity_system::EntityOperation>::Create(channel_.get(), cq, rpcmethod_DeleteEntityRelationType_, context, request, false);
+::grpc::ClientAsyncResponseReader< ::inexor::entity_system::Operation>* EntityService::Stub::AsyncDeleteRelationRaw(::grpc::ClientContext* context, const ::inexor::entity_system::Relation& request, ::grpc::CompletionQueue* cq) {
+  return ::grpc::internal::ClientAsyncResponseReaderFactory< ::inexor::entity_system::Operation>::Create(channel_.get(), cq, rpcmethod_DeleteRelation_, context, request, true);
 }
 
-EntitySystem::Service::Service() {
+::grpc::ClientAsyncResponseReader< ::inexor::entity_system::Operation>* EntityService::Stub::PrepareAsyncDeleteRelationRaw(::grpc::ClientContext* context, const ::inexor::entity_system::Relation& request, ::grpc::CompletionQueue* cq) {
+  return ::grpc::internal::ClientAsyncResponseReaderFactory< ::inexor::entity_system::Operation>::Create(channel_.get(), cq, rpcmethod_DeleteRelation_, context, request, false);
+}
+
+EntityService::Service::Service() {
   AddMethod(new ::grpc::internal::RpcServiceMethod(
-      EntitySystem_method_names[0],
+      EntityService_method_names[0],
       ::grpc::internal::RpcMethod::NORMAL_RPC,
-      new ::grpc::internal::RpcMethodHandler< EntitySystem::Service, ::inexor::entity_system::EntityType, ::inexor::entity_system::EntityOperation>(
-          std::mem_fn(&EntitySystem::Service::CreateEntityType), this)));
+      new ::grpc::internal::RpcMethodHandler< EntityService::Service, ::inexor::entity_system::Entity, ::inexor::entity_system::Operation>(
+          std::mem_fn(&EntityService::Service::CreateEntity), this)));
   AddMethod(new ::grpc::internal::RpcServiceMethod(
-      EntitySystem_method_names[1],
-      ::grpc::internal::RpcMethod::NORMAL_RPC,
-      new ::grpc::internal::RpcMethodHandler< EntitySystem::Service, ::inexor::entity_system::EntityType, ::inexor::entity_system::EntityOperation>(
-          std::mem_fn(&EntitySystem::Service::DeleteEntityType), this)));
+      EntityService_method_names[1],
+      ::grpc::internal::RpcMethod::SERVER_STREAMING,
+      new ::grpc::internal::ServerStreamingHandler< EntityService::Service, ::google::protobuf::Empty, ::inexor::entity_system::Entity>(
+          std::mem_fn(&EntityService::Service::ListEntities), this)));
   AddMethod(new ::grpc::internal::RpcServiceMethod(
-      EntitySystem_method_names[2],
+      EntityService_method_names[2],
       ::grpc::internal::RpcMethod::NORMAL_RPC,
-      new ::grpc::internal::RpcMethodHandler< EntitySystem::Service, ::inexor::entity_system::EntityAttributeType, ::inexor::entity_system::EntityOperation>(
-          std::mem_fn(&EntitySystem::Service::CreateEntityAttributeType), this)));
+      new ::grpc::internal::RpcMethodHandler< EntityService::Service, ::inexor::entity_system::Entity, ::inexor::entity_system::Operation>(
+          std::mem_fn(&EntityService::Service::DeleteEntity), this)));
   AddMethod(new ::grpc::internal::RpcServiceMethod(
-      EntitySystem_method_names[3],
+      EntityService_method_names[3],
       ::grpc::internal::RpcMethod::NORMAL_RPC,
-      new ::grpc::internal::RpcMethodHandler< EntitySystem::Service, ::inexor::entity_system::EntityAttributeType, ::inexor::entity_system::EntityOperation>(
-          std::mem_fn(&EntitySystem::Service::DeleteEntityAttributeType), this)));
+      new ::grpc::internal::RpcMethodHandler< EntityService::Service, ::inexor::entity_system::Attribute, ::inexor::entity_system::Operation>(
+          std::mem_fn(&EntityService::Service::CreateAttribute), this)));
   AddMethod(new ::grpc::internal::RpcServiceMethod(
-      EntitySystem_method_names[4],
-      ::grpc::internal::RpcMethod::NORMAL_RPC,
-      new ::grpc::internal::RpcMethodHandler< EntitySystem::Service, ::inexor::entity_system::EntityRelationAttributeType, ::inexor::entity_system::EntityOperation>(
-          std::mem_fn(&EntitySystem::Service::CreateEntityRelationAttributeType), this)));
+      EntityService_method_names[4],
+      ::grpc::internal::RpcMethod::SERVER_STREAMING,
+      new ::grpc::internal::ServerStreamingHandler< EntityService::Service, ::google::protobuf::Empty, ::inexor::entity_system::Attribute>(
+          std::mem_fn(&EntityService::Service::ListAttributes), this)));
   AddMethod(new ::grpc::internal::RpcServiceMethod(
-      EntitySystem_method_names[5],
+      EntityService_method_names[5],
       ::grpc::internal::RpcMethod::NORMAL_RPC,
-      new ::grpc::internal::RpcMethodHandler< EntitySystem::Service, ::inexor::entity_system::EntityRelationAttributeType, ::inexor::entity_system::EntityOperation>(
-          std::mem_fn(&EntitySystem::Service::DeleteEntityRelationAttributeType), this)));
+      new ::grpc::internal::RpcMethodHandler< EntityService::Service, ::inexor::entity_system::Attribute, ::inexor::entity_system::Operation>(
+          std::mem_fn(&EntityService::Service::DeleteAttribute), this)));
   AddMethod(new ::grpc::internal::RpcServiceMethod(
-      EntitySystem_method_names[6],
+      EntityService_method_names[6],
       ::grpc::internal::RpcMethod::NORMAL_RPC,
-      new ::grpc::internal::RpcMethodHandler< EntitySystem::Service, ::inexor::entity_system::EntityRelationType, ::inexor::entity_system::EntityOperation>(
-          std::mem_fn(&EntitySystem::Service::CreateEntityRelationType), this)));
+      new ::grpc::internal::RpcMethodHandler< EntityService::Service, ::inexor::entity_system::Relation, ::inexor::entity_system::Operation>(
+          std::mem_fn(&EntityService::Service::CreateRelation), this)));
   AddMethod(new ::grpc::internal::RpcServiceMethod(
-      EntitySystem_method_names[7],
+      EntityService_method_names[7],
+      ::grpc::internal::RpcMethod::SERVER_STREAMING,
+      new ::grpc::internal::ServerStreamingHandler< EntityService::Service, ::google::protobuf::Empty, ::inexor::entity_system::Relation>(
+          std::mem_fn(&EntityService::Service::ListRelations), this)));
+  AddMethod(new ::grpc::internal::RpcServiceMethod(
+      EntityService_method_names[8],
       ::grpc::internal::RpcMethod::NORMAL_RPC,
-      new ::grpc::internal::RpcMethodHandler< EntitySystem::Service, ::inexor::entity_system::EntityRelationType, ::inexor::entity_system::EntityOperation>(
-          std::mem_fn(&EntitySystem::Service::DeleteEntityRelationType), this)));
+      new ::grpc::internal::RpcMethodHandler< EntityService::Service, ::inexor::entity_system::Relation, ::inexor::entity_system::Operation>(
+          std::mem_fn(&EntityService::Service::DeleteRelation), this)));
 }
 
-EntitySystem::Service::~Service() {
+EntityService::Service::~Service() {
 }
 
-::grpc::Status EntitySystem::Service::CreateEntityType(::grpc::ServerContext* context, const ::inexor::entity_system::EntityType* request, ::inexor::entity_system::EntityOperation* response) {
+::grpc::Status EntityService::Service::CreateEntity(::grpc::ServerContext* context, const ::inexor::entity_system::Entity* request, ::inexor::entity_system::Operation* response) {
   (void) context;
   (void) request;
   (void) response;
   return ::grpc::Status(::grpc::StatusCode::UNIMPLEMENTED, "");
 }
 
-::grpc::Status EntitySystem::Service::DeleteEntityType(::grpc::ServerContext* context, const ::inexor::entity_system::EntityType* request, ::inexor::entity_system::EntityOperation* response) {
+::grpc::Status EntityService::Service::ListEntities(::grpc::ServerContext* context, const ::google::protobuf::Empty* request, ::grpc::ServerWriter< ::inexor::entity_system::Entity>* writer) {
+  (void) context;
+  (void) request;
+  (void) writer;
+  return ::grpc::Status(::grpc::StatusCode::UNIMPLEMENTED, "");
+}
+
+::grpc::Status EntityService::Service::DeleteEntity(::grpc::ServerContext* context, const ::inexor::entity_system::Entity* request, ::inexor::entity_system::Operation* response) {
   (void) context;
   (void) request;
   (void) response;
   return ::grpc::Status(::grpc::StatusCode::UNIMPLEMENTED, "");
 }
 
-::grpc::Status EntitySystem::Service::CreateEntityAttributeType(::grpc::ServerContext* context, const ::inexor::entity_system::EntityAttributeType* request, ::inexor::entity_system::EntityOperation* response) {
+::grpc::Status EntityService::Service::CreateAttribute(::grpc::ServerContext* context, const ::inexor::entity_system::Attribute* request, ::inexor::entity_system::Operation* response) {
   (void) context;
   (void) request;
   (void) response;
   return ::grpc::Status(::grpc::StatusCode::UNIMPLEMENTED, "");
 }
 
-::grpc::Status EntitySystem::Service::DeleteEntityAttributeType(::grpc::ServerContext* context, const ::inexor::entity_system::EntityAttributeType* request, ::inexor::entity_system::EntityOperation* response) {
+::grpc::Status EntityService::Service::ListAttributes(::grpc::ServerContext* context, const ::google::protobuf::Empty* request, ::grpc::ServerWriter< ::inexor::entity_system::Attribute>* writer) {
+  (void) context;
+  (void) request;
+  (void) writer;
+  return ::grpc::Status(::grpc::StatusCode::UNIMPLEMENTED, "");
+}
+
+::grpc::Status EntityService::Service::DeleteAttribute(::grpc::ServerContext* context, const ::inexor::entity_system::Attribute* request, ::inexor::entity_system::Operation* response) {
   (void) context;
   (void) request;
   (void) response;
   return ::grpc::Status(::grpc::StatusCode::UNIMPLEMENTED, "");
 }
 
-::grpc::Status EntitySystem::Service::CreateEntityRelationAttributeType(::grpc::ServerContext* context, const ::inexor::entity_system::EntityRelationAttributeType* request, ::inexor::entity_system::EntityOperation* response) {
+::grpc::Status EntityService::Service::CreateRelation(::grpc::ServerContext* context, const ::inexor::entity_system::Relation* request, ::inexor::entity_system::Operation* response) {
   (void) context;
   (void) request;
   (void) response;
   return ::grpc::Status(::grpc::StatusCode::UNIMPLEMENTED, "");
 }
 
-::grpc::Status EntitySystem::Service::DeleteEntityRelationAttributeType(::grpc::ServerContext* context, const ::inexor::entity_system::EntityRelationAttributeType* request, ::inexor::entity_system::EntityOperation* response) {
+::grpc::Status EntityService::Service::ListRelations(::grpc::ServerContext* context, const ::google::protobuf::Empty* request, ::grpc::ServerWriter< ::inexor::entity_system::Relation>* writer) {
   (void) context;
   (void) request;
-  (void) response;
+  (void) writer;
   return ::grpc::Status(::grpc::StatusCode::UNIMPLEMENTED, "");
 }
 
-::grpc::Status EntitySystem::Service::CreateEntityRelationType(::grpc::ServerContext* context, const ::inexor::entity_system::EntityRelationType* request, ::inexor::entity_system::EntityOperation* response) {
-  (void) context;
-  (void) request;
-  (void) response;
-  return ::grpc::Status(::grpc::StatusCode::UNIMPLEMENTED, "");
-}
-
-::grpc::Status EntitySystem::Service::DeleteEntityRelationType(::grpc::ServerContext* context, const ::inexor::entity_system::EntityRelationType* request, ::inexor::entity_system::EntityOperation* response) {
+::grpc::Status EntityService::Service::DeleteRelation(::grpc::ServerContext* context, const ::inexor::entity_system::Relation* request, ::inexor::entity_system::Operation* response) {
   (void) context;
   (void) request;
   (void) response;
