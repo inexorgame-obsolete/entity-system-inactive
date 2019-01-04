@@ -8,7 +8,7 @@
 #include "../../../base-classes/TypeInstanceBase.hpp"
 #include "../../entity-relation-attribute-manager/entity-relation-attribute-type-instance/EntityRelationAttributeTypeInstance.hpp"
 #include "../../../typedefs/TypeDefinitions.hpp"
-#include "base-classes/GUID/GUIDBase.hpp"
+#include "../../../base-classes/GUID/GUIDBase.hpp"
 
 
 namespace inexor {

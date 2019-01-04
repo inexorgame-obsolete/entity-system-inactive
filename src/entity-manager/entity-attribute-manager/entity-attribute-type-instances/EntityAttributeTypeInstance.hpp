@@ -7,7 +7,7 @@
 #include "../../../data-container/DataContainer.hpp"
 #include "../../../base-classes/TypeInstanceBase.hpp"
 #include "../../../typedefs/TypeDefinitions.hpp"
-#include "base-classes/GUID/GUIDBase.hpp"
+#include "../../../base-classes/GUID/GUIDBase.hpp"
 
 
 namespace inexor {

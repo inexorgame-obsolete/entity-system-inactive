@@ -6,7 +6,7 @@
 #include <string>
 
 #include "../data-validation//DataValidationBase.hpp"
-#include "base-classes/GUID/GUIDBase.hpp"
+#include "GUID/GUIDBase.hpp"
 
 
 namespace inexor {

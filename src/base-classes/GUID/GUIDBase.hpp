@@ -3,7 +3,7 @@
 
 #pragma once
 
-#include <crossguid/guid.hpp>
+#include "../dependencies/crossguid/Guid.hpp"
 
 namespace inexor {
 namespace entity_system {

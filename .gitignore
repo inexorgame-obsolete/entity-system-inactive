@@ -37,3 +37,8 @@ build/
 documentation/
 
 /desktop.ini
+/dependencies
+/.vs
+/EntitySystem.sln
+/EntitySystem
+/CMakeCache.txt

@@ -9,7 +9,7 @@
 #include "../../entity-attribute-manager/entity-attribute-type/EntityAttributeType.hpp"
 #include "../../../templates/TypeContainerTemplate.hpp"
 #include "../../../typedefs/TypeDefinitions.hpp"
-#include "base-classes/GUID/GUIDBase.hpp"
+#include "../../../base-classes/GUID/GUIDBase.hpp"
 
 
 namespace inexor {

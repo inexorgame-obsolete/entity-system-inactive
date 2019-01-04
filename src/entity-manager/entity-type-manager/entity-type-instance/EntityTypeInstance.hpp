@@ -7,7 +7,7 @@
 #include "../../entity-attribute-manager/entity-attribute-type-instances/EntityAttributeTypeInstance.hpp"
 #include "../../../base-classes/TypeInstanceBase.hpp"
 #include "../../../templates/TypeInstancesContainerTemplate.hpp"
-#include "base-classes/GUID/GUIDBase.hpp"
+#include "../../../base-classes/GUID/GUIDBase.hpp"
 
 
 namespace inexor {

@@ -10,7 +10,7 @@
 #include "../../../return-codes/ReturnCodes.hpp"
 #include "../../../base-classes/TypeBase.hpp"
 #include "../../../base-classes/AttributeBase.hpp"
-#include "base-classes/GUID/GUIDBase.hpp"
+#include "../../../base-classes/GUID/GUIDBase.hpp"
 
 
 namespace inexor {
