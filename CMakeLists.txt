@@ -30,7 +30,7 @@ endforeach()
 
 message(STATUS "NORMAL SOURCE FILES: ${normal_source_files}")
 
-add_executable(entity-system ${normal_source_files})
+add_library(entity-system ${normal_source_files})
 
 
 
@@ -47,7 +47,7 @@ endforeach()
 
 message(STATUS "TEST SOURCE FILES: ${test_source_files}")
 
-add_executable(tests ${test_source_files})
+add_executable(entity-system-tests ${test_source_files})
 
 
 
@@ -64,4 +64,4 @@ if(UNIX AND APPLE)
 endif()
 
 target_link_libraries(entity-system ${CONAN_LIBS})
-target_link_libraries(tests ${CONAN_LIBS})
+target_link_libraries(entity-system-tests ${CONAN_LIBS})
