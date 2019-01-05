@@ -17,7 +17,6 @@ Simply follow below instructions to get started:
 - `cd entity-system`
 - `mkdir build && cd build`
 - `conan remote add inexorgame https://api.bintray.com/conan/inexorgame/inexor-conan` (add `inexorgame` remote)
-- `conan remote add bincrafters https://api.bintray.com/conan/bincrafters/public-conan` (add `bincrafters` remote)
 - `conan install .. --build=missing` (installs all dependencies)
 - `cmake ..` (builds project files)
 - `make` (compiles `entity-system`)
