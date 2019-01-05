@@ -18,6 +18,7 @@ namespace entity_system {
 
 	/// @brief A template base class for
 	/// a std::vector of a templatable type.
+	/// @param T The type of this container.
 	template <typename T>
 	class TypeContainerTemplate
 	{

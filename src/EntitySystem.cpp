@@ -22,7 +22,7 @@ namespace entity_system {
 
 
 	// Create one single instance of the entity system.
-	// Please note that the entity system is not a singleton class at the moment.
+	// @note The entity system has no singleton implementation for now.
 	std::shared_ptr<EntitySystem> entsys = std::make_shared<EntitySystem>();
 	
 

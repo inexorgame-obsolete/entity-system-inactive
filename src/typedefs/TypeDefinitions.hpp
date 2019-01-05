@@ -8,7 +8,9 @@ namespace inexor {
 namespace entity_system {
 	
 
-	#define ENT_ATTR_TYPE            std::shared_ptr<class EntityAttributeType>
+	/// These macros make initialisations shorter.
+
+	#define ENT_ATTR_TYPE			 std::shared_ptr<class EntityAttributeType>
 	#define ENT_ATTR_TYPE_INST       std::shared_ptr<class EntityAttributeTypeInstance>
 	#define ENT_TYPE                 std::shared_ptr<class EntityType>
 	#define ENT_TYPE_INST            std::shared_ptr<class EntityTypeInstance>

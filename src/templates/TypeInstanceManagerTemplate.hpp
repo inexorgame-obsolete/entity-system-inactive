@@ -18,6 +18,7 @@ namespace entity_system {
 
 	/// @brief A template base class
 	/// for instance manager classes.
+	/// @param T The type for this type instance manager.
 	template <typename T>
 	class TypeInstanceManagerTemplate
 	{

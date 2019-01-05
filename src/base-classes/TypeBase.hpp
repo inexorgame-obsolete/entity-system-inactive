@@ -17,9 +17,9 @@ namespace entity_system {
 	/// contain multiple get_GUID() methods!
 
 	/// @brief A template base class for types.
-  /// @note This base class does not implement
-  /// a data validation method. Every class which
-  /// inherits from TypeBase must do this!
+	/// @note This base class does not implement
+	/// a data validation method. Every class which
+	/// inherits from TypeBase must do this!
 	class TypeBase : public DataValidationBase
 	{
 		private:

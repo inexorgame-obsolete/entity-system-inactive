@@ -11,7 +11,9 @@ namespace inexor {
 namespace entity_system {
 
 
-	/// A template class for instances.
+	/// @brief A template base class for instances.
+	/// @param T1 The type of the instance.
+	/// @param T2 The type instance.
 	template <typename T1, typename T2>
 	class TypeInstanceBase
 	{

@@ -13,18 +13,17 @@ namespace entity_system {
 
 
     // TODO: Implement
-	//			EntityEditor
-	//			EntityEditorRenderer
-	//			EntityGameSceneRenderer,
-    //			EntitySync
-	//			EntityErrorHandling
-	//			EntityImporter
-	//			EntityExporter
+	// TODO: EntityEditor
+	// TODO: EntityEditorRenderer
+	// TODO: EntityGameSceneRenderer,
+    // TODO: EntitySync
+	// TODO: EntityErrorHandling
+	// TODO: EntityImporter
+	// TODO: EntityExporter
 
 
 	/// @class EntitySystem
-    /// @brief Entity system prototype for Inexor.
-	/// Currently this class is not a singleton implementation.
+    /// @brief Entity system main class.
 	class EntitySystem : public EntityManager
 	{
 		public:
