@@ -1,9 +1,9 @@
 # Inexor entity-system prototype
-The development of a new and thread-safe entity-system is an essential requirement for the future of Inexor.
-This entity-system will lay the basis on which most of the other systems of the engine will be built on.
+
+This entity-system will lay the basis on the other systems of the game will be built on.
 For more information take a look at the [wiki](https://github.com/inexorgame/entity-system/wiki).
 
-## Building
+## Prerequirements
 
 To build the entity-system one needs:
 
@@ -11,20 +11,12 @@ To build the entity-system one needs:
 - `cmake`
 - [`conan`](https://conan.io)
 
-Simply follow below instructions to get started:
+## Build
 
-- clone via `git clone https://github.com/inexorgame/entity-system.git`
-- `cd entity-system`
 - `mkdir build && cd build`
-- `conan remote add inexorgame https://api.bintray.com/conan/inexorgame/inexor-conan` (add `inexorgame` remote)
-- `conan remote add bincrafters https://api.bintray.com/conan/bincrafters/public-conan` (add `bincrafters` remote)
-- `conan install .. --build=missing` (installs all dependencies)
-- `cmake ..` (builds project files)
-- `make` (compiles `entity-system`)
+- `cmake ..` (creates project files, can also be done via gui)
+- `cmake --build .` (compiles the project)
 
 ## Documentation
 
-Given you have `doxygen` installed building the docs is easy as pie:
-
-- `cd entity-system`
-- `doxygen`
+You need to run `doxygen` (retrievable from http://doxygen.nl/) inside this folder to create the docs at the moment.

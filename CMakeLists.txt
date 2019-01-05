@@ -5,14 +5,34 @@ project(entity-system)
 set(CMAKE_BINARY_DIR ${CMAKE_SOURCE_DIR}/bin)
 set(EXECUTABLE_OUTPUT_PATH ${CMAKE_BINARY_DIR})
 set(LIBRARY_OUTPUT_PATH ${CMAKE_BINARY_DIR})
-set (CMAKE_CXX_STANDARD 17)
+set(CMAKE_CXX_STANDARD 17)
 
-# Quick fix from Hanni to make it work on Windows
-if(NOT WIN32)
-  message(${CMAKE_CURRENT_SOURCE_DIR})
-  include(${CMAKE_CURRENT_SOURCE_DIR}/build/conanbuildinfo.cmake)
-  conan_basic_setup()
+# Dependency setup via conan
+
+# Download conan executer in case it does not exists
+if(NOT EXISTS "${CMAKE_CURRENT_BINARY_DIR}/conan.cmake")
+   message(STATUS "Downloading conan.cmake from https://github.com/conan-io/cmake-conan")
+   file(DOWNLOAD "https://raw.githubusercontent.com/conan-io/cmake-conan/v0.13/conan.cmake"
+                 "${CMAKE_CURRENT_BINARY_DIR}/conan.cmake")
 endif()
+
+include(${CMAKE_CURRENT_BINARY_DIR}/conan.cmake)
+
+if (NOT CMAKE_BUILD_TYPE)
+    set(CMAKE_BUILD_TYPE "Debug")
+endif(NOT CMAKE_BUILD_TYPE)
+
+conan_check(VERSION 1.4.0 REQUIRED)
+conan_add_remote(NAME bincrafters INDEX 1
+            URL https://api.bintray.com/conan/bincrafters/public-conan)
+conan_add_remote(NAME inexor INDEX 1
+            URL https://api.bintray.com/conan/inexorgame/inexor-conan)
+
+conan_cmake_run(CONANFILE conanfile.txt
+                BASIC_SETUP
+                BUILD missing
+                PROFILE default
+                PROFILE_AUTO build_type)
 
 include_directories("${CMAKE_SOURCE_DIR}/src")
 file(GLOB_RECURSE source_files
