@@ -287,11 +287,7 @@ paths:
         content:
           application/json:
             schema:
-              anyOf:
-                - type: string
-                - type: number
-                - type: integer
-                - type: boolean
+              type: string
       responses:
         '200':
           description: An entity type
@@ -1297,6 +1293,7 @@ components:
         message:
           type: string
     EntitySystem:
+      type: object
       properties:
         entity_types:
           $ref: '#/components/schemas/EntityTypes'
@@ -1312,6 +1309,7 @@ components:
         - entity_instances
         - relationship_instances
     EntityType:
+      type: object
       properties:
         entity_type_uuid:
           type: string
@@ -1328,6 +1326,7 @@ components:
       items:
         $ref: '#/components/schemas/EntityType'
     RelationshipType:
+      type: object
       properties:
         relationship_type_uuid:
           type: string
@@ -1350,6 +1349,7 @@ components:
       items:
         $ref: '#/components/schemas/RelationshipType'
     EntityInstance:
+      type: object
       properties:
         entity_instance_uuid:
           type: string
@@ -1366,6 +1366,7 @@ components:
       items:
         $ref: '#/components/schemas/EntityInstance'
     RelationshipInstance:
+      type: object
       properties:
         relationship_instance_uuid:
           type: string
@@ -1388,11 +1389,7 @@ components:
       items:
         $ref: '#/components/schemas/RelationshipInstance'
     Attribute:
-      required:
-        - uuid
-        - name
-        - datatype
-        - value
+      type: object
       properties:
         attribute_uuid:
           type: string
@@ -1401,12 +1398,12 @@ components:
         datatype:
           type: string
         value:
-          description: Any of string, integer, number or boolean
-      anyOf:
-        - type: string
-        - type: number
-        - type: integer
-        - type: boolean
+          type: string
+      required:
+        - attribute_uuid
+        - name
+        - datatype
+        - value
     Attributes:
       type: array
       items:
