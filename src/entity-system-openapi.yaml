@@ -232,7 +232,7 @@ paths:
   /entities/types/{entity_type_uuid}/attributes/{name}:
     get:
       summary: Returns the value of the named attribute of the entity type with the given UUID
-      operationId: getEntityTypeAttributes
+      operationId: getEntityTypeAttribute
       tags:
         - Entity Type
         - Attribute
@@ -860,7 +860,7 @@ paths:
                 $ref: '#/components/schemas/EntitySystemMessage'
     delete:
       summary: Deletes the attribute of the entity instance
-      operationId: getEntityInstanceAttribute
+      operationId: deleteEntityInstanceAttribute
       tags:
         - Entity Instance
         - Attribute
