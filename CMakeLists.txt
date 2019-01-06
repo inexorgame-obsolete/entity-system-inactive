@@ -19,7 +19,7 @@ endif()
 include(${CMAKE_CURRENT_BINARY_DIR}/conan.cmake)
 
 if (NOT CMAKE_BUILD_TYPE)
-    set(CMAKE_BUILD_TYPE "Debug")
+    set(CMAKE_BUILD_TYPE "Release") # this causes all kinds of trouble with crossguid-dbg not being found on Apple. Quick fix.
 endif(NOT CMAKE_BUILD_TYPE)
 
 conan_check(VERSION 1.4.0 REQUIRED)
@@ -43,6 +43,7 @@ file(GLOB_RECURSE source_files
 # Two targets: inexor-entity-system library and unit_test
 # Each file with "_test" in its name is a file added to unit_test
 set(NORMAL_SOURCE_FILES)
+list(FILTER source_files EXCLUDE REGEX "rest/*") # remove pistache code for now
 set(TEST_SOURCE_FILES)
 foreach(file ${source_files} )
   if(file MATCHES ".*_test.*" )
