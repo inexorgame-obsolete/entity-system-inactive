@@ -1,0 +1,1413 @@
+openapi: 3.0.0
+info:
+  version: 3.0.0
+  title: Inexor Entity System
+  license:
+    name: MIT
+  contact:
+    email: info@inexor.org
+servers:
+  - url: 'http://inexor.org/api/v1'
+paths:
+  /entitysystem:
+    get:
+      summary: Exports the whole entity system
+      operationId: exportEntitySystem
+      tags:
+        - Entity System
+      responses:
+        '200':
+          description: The entity system
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/EntitySystem'
+        default:
+          description: unexpected error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/EntitySystemMessage'
+    post:
+      summary: Imports the whole entity system
+      operationId: importEntitySystem
+      tags:
+        - Entity System
+      responses:
+        '200':
+          description: The entity system
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/EntitySystemMessage'
+        default:
+          description: unexpected error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/EntitySystemMessage'
+    delete:
+      summary: Clears the whole entity system
+      operationId: clearntitySystem
+      tags:
+        - Entity System
+      responses:
+        '200':
+          description: The entity system
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/EntitySystemMessage'
+        default:
+          description: unexpected error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/EntitySystemMessage'
+  /entities/types:
+    get:
+      summary: Lists all entity types
+      operationId: listAllEntityTypes
+      tags:
+        - Entity Type
+      responses:
+        '200':
+          description: A list of entity types
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/EntityTypes'
+        default:
+          description: unexpected error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/EntitySystemMessage'
+    post:
+      summary: Creates an entity type
+      operationId: createEntityType
+      tags:
+        - Entity Type
+      responses:
+        '200':
+          description: The created entity type
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/EntityType'
+        default:
+          description: unexpected error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/EntitySystemMessage'
+    delete:
+      summary: Deletes all entity types (and all entity instances)
+      operationId: deleteEntityTypes
+      tags:
+        - Entity Type
+      responses:
+        '200':
+          description: Success message
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/EntitySystemMessage'
+        default:
+          description: unexpected error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/EntitySystemMessage'
+  /entities/types/{entity_type_uuid}:
+    get:
+      summary: Returns the entity type with the given UUID
+      operationId: getEntityType
+      tags:
+        - Entity Type
+      parameters:
+        - name: entity_type_uuid
+          in: path
+          required: true
+          description: The UUID of the entity type to retrieve
+          schema:
+            type: string
+      responses:
+        '200':
+          description: An entity type
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/EntityType'
+        default:
+          description: unexpected error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/EntitySystemMessage'
+    post:
+      summary: Creates (or updates if already exists) the entity type with the given UUID
+      operationId: createOrUpdateEntityType
+      tags:
+        - Entity Type
+      parameters:
+        - name: entity_type_uuid
+          in: path
+          required: true
+          description: The UUID of the entity type to retrieve
+          schema:
+            type: string
+      requestBody:
+        description: The entity type as object
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/EntityType'
+      responses:
+        '200':
+          description: An entity type
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/EntityType'
+        default:
+          description: unexpected error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/EntitySystemMessage'
+    delete:
+      summary: Deletes the entity type with the given UUID
+      operationId: deleteEntityType
+      tags:
+        - Entity Type
+      parameters:
+        - name: entity_type_uuid
+          in: path
+          required: true
+          description: The UUID of the entity type to retrieve
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Success message
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/EntitySystemMessage'
+        default:
+          description: unexpected error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/EntitySystemMessage'
+  /entities/types/{entity_type_uuid}/attributes:
+    get:
+      summary: Returns all attributes of the given entity type with the given UUID
+      operationId: getEntityTypeAttributes
+      tags:
+        - Entity Type
+        - Attribute
+      parameters:
+        - name: entity_type_uuid
+          in: path
+          required: true
+          description: The UUID of the entity type to retrieve
+          schema:
+            type: string
+      responses:
+        '200':
+          description: An array of attributes
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Attributes'
+        default:
+          description: unexpected error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/EntitySystemMessage'
+  /entities/types/{entity_type_uuid}/attributes/{name}:
+    get:
+      summary: Returns the value of the named attribute of the entity type with the given UUID
+      operationId: getEntityTypeAttributes
+      tags:
+        - Entity Type
+        - Attribute
+      parameters:
+        - name: entity_type_uuid
+          in: path
+          required: true
+          description: The UUID of the entity type to retrieve
+          schema:
+            type: string
+        - name: name
+          in: path
+          required: true
+          description: The name of the attribute
+          schema:
+            type: string
+      responses:
+        '200':
+          description: The attribute
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Attribute'
+        default:
+          description: unexpected error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/EntitySystemMessage'
+    post:
+      summary: Creates (or updates if already exists) the value of the named attribute of the entity type with the given UUID
+      operationId: createOrUpdateEntityTypeAttribute
+      tags:
+        - Entity Type
+        - Attribute
+      parameters:
+        - name: entity_type_uuid
+          in: path
+          required: true
+          description: The UUID of the entity type to retrieve
+          schema:
+            type: string
+        - name: name
+          in: path
+          required: true
+          description: The name of the attribute
+          schema:
+            type: string
+      requestBody:
+        description: The entity type as object
+        required: true
+        content:
+          application/json:
+            schema:
+              anyOf:
+                - type: string
+                - type: number
+                - type: integer
+                - type: boolean
+      responses:
+        '200':
+          description: An entity type
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/EntityType'
+        default:
+          description: unexpected error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/EntitySystemMessage'
+    delete:
+      summary: Deletes the named attribute of the entity type with the given UUID
+      operationId: deleteEntityTypeAttribute
+      tags:
+        - Entity Type
+        - Attribute
+      parameters:
+        - name: entity_type_uuid
+          in: path
+          required: true
+          description: The UUID of the entity type to retrieve
+          schema:
+            type: string
+        - name: name
+          in: path
+          required: true
+          description: The name of the attribute
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Success message
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/EntitySystemMessage'
+        default:
+          description: unexpected error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/EntitySystemMessage'
+  /entities/types/{entity_type_uuid}/relationships:
+    get:
+      summary: Returns all incoming and outgoing relationship types of the entity type with the given UUID
+      operationId: getAllRelationshipTypesOfEntityType
+      tags:
+        - Entity Type
+        - Relationship Type
+      parameters:
+        - name: entity_type_uuid
+          in: path
+          required: true
+          description: The UUID of the entity type to retrieve
+          schema:
+            type: string
+      responses:
+        '200':
+          description: The incoming and outgoing relationship types
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/RelationshipTypes'
+        default:
+          description: unexpected error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/EntitySystemMessage'
+  /entities/types/{entity_type_uuid}/relationships/incoming:
+    get:
+      summary: Returns all incoming relationship types of the entity type with the given UUID
+      operationId: getAllIncomingRelationshipTypesOfEntityType
+      tags:
+        - Entity Type
+        - Relationship Type
+      parameters:
+        - name: entity_type_uuid
+          in: path
+          required: true
+          description: The UUID of the entity type to retrieve
+          schema:
+            type: string
+      responses:
+        '200':
+          description: The incoming relationship types
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/RelationshipTypes'
+        default:
+          description: unexpected error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/EntitySystemMessage'
+  /entities/types/{entity_type_uuid}/relationships/outgoing:
+    get:
+      summary: Returns all outgoing relationship types of the entity type with the given UUID
+      operationId: getAllOutgoingRelationshipTypesOfEntityType
+      tags:
+        - Entity Type
+        - Relationship Type
+      parameters:
+        - name: entity_type_uuid
+          in: path
+          required: true
+          description: The UUID of the entity type to retrieve
+          schema:
+            type: string
+      responses:
+        '200':
+          description: The outgoing relationship types
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/RelationshipTypes'
+        default:
+          description: unexpected error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/EntitySystemMessage'
+  /entities/types/{entity_type_uuid}/instances:
+    get:
+      summary: Returns all entity instances of the entity type with the given UUID
+      operationId: getAllInstancesOfEntityType
+      tags:
+        - Entity Type
+      parameters:
+        - name: entity_type_uuid
+          in: path
+          required: true
+          description: The UUID of the entity type to retrieve
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Array of entity instances
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/EntityInstances'
+        default:
+          description: unexpected error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/EntitySystemMessage'
+    delete:
+      summary: Deletes all entity instances of the entity type with the given UUID
+      operationId: deleteAllInstancesOfEntityType
+      tags:
+        - Entity Type
+      parameters:
+        - name: entity_type_uuid
+          in: path
+          required: true
+          description: The UUID of the entity type to retrieve
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Success message
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/EntitySystemMessage'
+        default:
+          description: unexpected error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/EntitySystemMessage'
+  /relationships/types:
+    get:
+      summary: Returns all relationship types
+      operationId: getAllRelationshipTypes
+      tags:
+        - Relationship Type
+      responses:
+        '200':
+          description: Array of relationship types
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/RelationshipTypes'
+        default:
+          description: unexpected error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/EntitySystemMessage'
+    post:
+      summary: Creates a relationship type
+      operationId: createRelationshipType
+      tags:
+        - Relationship Type
+      requestBody:
+        description: The relationship type as object
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/RelationshipType'
+      responses:
+        '200':
+          description: The created relationship type
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/RelationshipType'
+        default:
+          description: unexpected error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/EntitySystemMessage'
+    delete:
+      summary: Deletes all relationship types (and all relationship instances)
+      operationId: deleteAllRelationshipTypes
+      tags:
+        - Relationship Type
+      responses:
+        '200':
+          description: Success message
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/EntitySystemMessage'
+        default:
+          description: unexpected error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/EntitySystemMessage'
+  /relationships/types/{relationship_type_uuid}:
+    get:
+      summary: Returns the relationship type with the given UUID
+      operationId: getRelationshipType
+      tags:
+        - Relationship Type
+      parameters:
+        - name: relationship_type_uuid
+          in: path
+          required: true
+          description: The UUID of the relationship type to retrieve
+          schema:
+            type: string
+      responses:
+        '200':
+          description: An relationship type
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/RelationshipType'
+        default:
+          description: unexpected error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/EntitySystemMessage'
+    post:
+      summary: Creates or updates a relationship type
+      operationId: createOrUpdateRelationshipType
+      tags:
+        - Relationship Type
+      parameters:
+        - name: relationship_type_uuid
+          in: path
+          required: true
+          description: The UUID of the relationship type to create or update
+          schema:
+            type: string
+      requestBody:
+        description: The relationship type as object
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/RelationshipType'
+      responses:
+        '200':
+          description: The created or updated relationship type
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/RelationshipType'
+        default:
+          description: unexpected error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/EntitySystemMessage'
+    delete:
+      summary: Deletes the relationship type with the given UUID
+      operationId: deleteRelationshipType
+      tags:
+        - Relationship Type
+      parameters:
+        - name: relationship_type_uuid
+          in: path
+          required: true
+          description: The UUID of the relationship type to delete
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Success message
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/EntitySystemMessage'
+        default:
+          description: unexpected error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/EntitySystemMessage'
+  /entities/instances:
+    get:
+      summary: Returns all entity instances
+      operationId: getAllEntityInstances
+      tags:
+        - Entity Instance
+      responses:
+        '200':
+          description: Array of entity instances
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/EntityInstances'
+        default:
+          description: unexpected error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/EntitySystemMessage'
+    post:
+      summary: Creates an entity instance
+      operationId: createEntityInstance
+      tags:
+        - Entity Instance
+      requestBody:
+        description: The entity instanceas object
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/EntityInstance'
+      responses:
+        '200':
+          description: The created entity instance
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/EntityInstance'
+        default:
+          description: unexpected error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/EntitySystemMessage'
+    delete:
+      summary: Deletes all entity instances
+      operationId: deleteAllEntityInstances
+      tags:
+        - Entity Instance
+      responses:
+        '200':
+          description: Success message
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/EntitySystemMessage'
+        default:
+          description: unexpected error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/EntitySystemMessage'
+  /entities/instances/{entity_instance_uuid}:
+    get:
+      summary: Returns the entity instance with the given UUID
+      operationId: getEntityInstance
+      tags:
+        - Entity Instance
+      parameters:
+        - name: entity_instance_uuid
+          in: path
+          required: true
+          description: The UUID of the entity instance to retrieve
+          schema:
+            type: string
+      responses:
+        '200':
+          description: An entity instance
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/EntityInstance'
+        default:
+          description: unexpected error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/EntitySystemMessage'
+    post:
+      summary: Creates or updates an entity instance
+      operationId: createOrUpdateEntityInstance
+      tags:
+        - Entity Instance
+      parameters:
+        - name: entity_instance_uuid
+          in: path
+          required: true
+          description: The UUID of the entity instance to create or update
+          schema:
+            type: string
+      requestBody:
+        description: The entity instance as object
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/EntityInstance'
+      responses:
+        '200':
+          description: The created or updated entity instance
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/EntityInstance'
+        default:
+          description: unexpected error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/EntitySystemMessage'
+    delete:
+      summary: Deletes the entity instance with the given UUID
+      operationId: deleteEntityInstance
+      tags:
+        - Entity Instance
+      parameters:
+        - name: entity_instance_uuid
+          in: path
+          required: true
+          description: The UUID of the entity instance to delete
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Success message
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/EntitySystemMessage'
+        default:
+          description: unexpected error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/EntitySystemMessage'
+  /entities/instances/{entity_instance_uuid}/attributes:
+    get:
+      summary: Returns all attributes of the entity instance with the given UUID
+      operationId: getEntityInstanceAttributes
+      tags:
+        - Entity Instance
+        - Attribute
+      parameters:
+        - name: entity_instance_uuid
+          in: path
+          required: true
+          description: The UUID of the entity instance
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Array of attributes
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Attributes'
+        default:
+          description: unexpected error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/EntitySystemMessage'
+  /entities/instances/{entity_instance_uuid}/attributes/{name}:
+    get:
+      summary: Returns the value of the named attribute of the entity instance
+      operationId: getEntityInstanceAttribute
+      tags:
+        - Entity Instance
+        - Attribute
+      parameters:
+        - name: entity_instance_uuid
+          in: path
+          required: true
+          description: The UUID of the entity instance
+          schema:
+            type: string
+        - name: name
+          in: path
+          required: true
+          description: The name of the attribute
+          schema:
+            type: string
+      responses:
+        '200':
+          description: The attribute
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Attribute'
+        default:
+          description: unexpected error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/EntitySystemMessage'
+    post:
+      summary: Creates (or updates if already exists) the attribute of the entity instance
+      operationId: createOrUpdateEntityInstanceAttribute
+      tags:
+        - Entity Instance
+        - Attribute
+      parameters:
+        - name: entity_instance_uuid
+          in: path
+          required: true
+          description: The UUID of the entity instance
+          schema:
+            type: string
+        - name: name
+          in: path
+          required: true
+          description: The name of the attribute
+          schema:
+            type: string
+      requestBody:
+        description: The attribute as object
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Attribute'
+      responses:
+        '200':
+          description: The created or updated attribute
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Attribute'
+        default:
+          description: unexpected error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/EntitySystemMessage'
+    delete:
+      summary: Deletes the attribute of the entity instance
+      operationId: getEntityInstanceAttribute
+      tags:
+        - Entity Instance
+        - Attribute
+      parameters:
+        - name: entity_instance_uuid
+          in: path
+          required: true
+          description: The UUID of the entity instance
+          schema:
+            type: string
+        - name: name
+          in: path
+          required: true
+          description: The name of the attribute
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Success message
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/EntitySystemMessage'
+        default:
+          description: unexpected error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/EntitySystemMessage'
+  /entities/instances/{entity_instance_uuid}/relationships:
+    get:
+      summary: Returns all incoming and outgoing relationship instances of the entity instance
+      operationId: getAllRelationshipInstancesOfEntityInstance
+      tags:
+        - Entity Instance
+        - Relationship Instance
+      parameters:
+        - name: entity_instance_uuid
+          in: path
+          required: true
+          description: The UUID of the entity instance
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Array of relationship instances
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/RelationshipInstances'
+        default:
+          description: unexpected error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/EntitySystemMessage'
+  /entities/instances/{entity_instance_uuid}/relationships/incoming:
+    get:
+      summary: Returns all incoming relationship instances of the entity instance
+      operationId: getIncomingRelationshipInstancesOfEntityInstance
+      tags:
+        - Entity Instance
+        - Relationship Instance
+      parameters:
+        - name: entity_instance_uuid
+          in: path
+          required: true
+          description: The UUID of the entity instance
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Array of relationship instances
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/RelationshipInstances'
+        default:
+          description: unexpected error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/EntitySystemMessage'
+  /entities/instances/{entity_instance_uuid}/relationships/outgoing:
+    get:
+      summary: Returns all outgoing relationship instances of the entity instance
+      operationId: getOutgoingRelationshipInstancesOfEntityInstance
+      tags:
+        - Entity Instance
+        - Relationship Instance
+      parameters:
+        - name: entity_instance_uuid
+          in: path
+          required: true
+          description: The UUID of the entity instance
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Array of relationship instances
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/RelationshipInstances'
+        default:
+          description: unexpected error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/EntitySystemMessage'
+  /entities/instances/{entity_instance_uuid}/relationships/{relationship_type_uuid}:
+    get:
+      summary: Returns all incoming and outgoing relationship instances of a certain relationship type
+      operationId: getAllRelationshipInstancesByRelationshipTypeOfEntityInstance
+      tags:
+        - Entity Instance
+        - Relationship Type
+        - Relationship Instance
+      parameters:
+        - name: entity_instance_uuid
+          in: path
+          required: true
+          description: The UUID of the entity instance
+          schema:
+            type: string
+        - name: relationship_type_uuid
+          in: path
+          required: true
+          description: The UUID of the relationship type
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Array of relationship instances
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/RelationshipInstances'
+        default:
+          description: unexpected error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/EntitySystemMessage'
+  /entities/instances/{entity_instance_uuid}/relationships/{relationship_type_uuid}/incoming:
+    get:
+      summary: Returns all incoming and outgoing relationship instances of a certain relationship type
+      operationId: getIncomingRelationshipInstancesByRelationshipTypeOfEntityInstance
+      tags:
+        - Entity Instance
+        - Relationship Type
+        - Relationship Instance
+      parameters:
+        - name: entity_instance_uuid
+          in: path
+          required: true
+          description: The UUID of the entity instance
+          schema:
+            type: string
+        - name: relationship_type_uuid
+          in: path
+          required: true
+          description: The UUID of the relationship type
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Array of relationship instances
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/RelationshipInstances'
+        default:
+          description: unexpected error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/EntitySystemMessage'
+  /entities/instances/{entity_instance_uuid}/relationships/{relationship_type_uuid}/outgoing:
+    get:
+      summary: Returns all incoming and outgoing relationship instances of a certain relationship type
+      operationId: getOutgoingRelationshipInstancesByRelationshipTypeOfEntityInstance
+      tags:
+        - Entity Instance
+        - Relationship Type
+        - Relationship Instance
+      parameters:
+        - name: entity_instance_uuid
+          in: path
+          required: true
+          description: The UUID of the entity instance
+          schema:
+            type: string
+        - name: relationship_type_uuid
+          in: path
+          required: true
+          description: The UUID of the relationship type
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Array of relationship instances
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/RelationshipInstances'
+        default:
+          description: unexpected error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/EntitySystemMessage'
+  /relationships/instances:
+    get:
+      summary: Returns all relationship instances
+      operationId: getAllRelationshipInstances
+      tags:
+        - Relationship Instance
+      responses:
+        '200':
+          description: Array of relationship instances
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/RelationshipInstances'
+        default:
+          description: unexpected error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/EntitySystemMessage'
+    post:
+      summary: Creates a relationship instance
+      operationId: createRelationshipInstance
+      tags:
+        - Relationship Instance
+      requestBody:
+        description: The relationship instance as object
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/RelationshipInstance'
+      responses:
+        '200':
+          description: The created relationship instance
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/RelationshipInstance'
+        default:
+          description: unexpected error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/EntitySystemMessage'
+    delete:
+      summary: Deletes all relationship instances
+      operationId: deleteAllRelationshipInstances
+      tags:
+        - Relationship Instance
+      responses:
+        '200':
+          description: Success message
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/EntitySystemMessage'
+        default:
+          description: unexpected error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/EntitySystemMessage'
+  /relationships/instances/{relationship_instance_uuid}:
+    get:
+      summary: Returns the relationship instance with the given UUID
+      operationId: getRelationshipInstance
+      tags:
+        - Relationship Instance
+      parameters:
+        - name: relationship_instance_uuid
+          in: path
+          required: true
+          description: The UUID of the relationship instance
+          schema:
+            type: string
+      responses:
+        '200':
+          description: The relationship instance
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/RelationshipInstance'
+        default:
+          description: unexpected error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/EntitySystemMessage'
+    post:
+      summary: Creates (or updates if already exists) a relationship instance
+      operationId: createOrUpdateRelationshipInstance
+      tags:
+        - Relationship Instance
+      parameters:
+        - name: relationship_instance_uuid
+          in: path
+          required: true
+          description: The UUID of the relationship instance
+          schema:
+            type: string
+      requestBody:
+        description: The relationship instance as object
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/RelationshipInstance'
+      responses:
+        '200':
+          description: The created relationship instance
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/RelationshipInstance'
+        default:
+          description: unexpected error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/EntitySystemMessage'
+    delete:
+      summary: Deletes the relationship instance with the given UUID
+      operationId: deleteRelationshipInstance
+      tags:
+        - Relationship Instance
+      parameters:
+        - name: relationship_instance_uuid
+          in: path
+          required: true
+          description: The UUID of the relationship instance
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Success message
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/EntitySystemMessage'
+        default:
+          description: unexpected error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/EntitySystemMessage'
+  /relationships/instances/start/{start_entity_instance_uuid}/end/{end_entity_instance_uuid}:
+    get:
+      summary: Returns all relationships instances between a start entity instance and an end entity instance
+      operationId: getRelationshipInstancesBetweenStartAndEnd
+      tags:
+        - Entity Instance
+        - Relationship Instance
+      parameters:
+        - name: start_entity_instance_uuid
+          in: path
+          required: true
+          description: The UUID of the start entity instance
+          schema:
+            type: string
+        - name: end_entity_instance_uuid
+          in: path
+          required: true
+          description: The UUID of the end entity instance
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Array of relationship instances
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/RelationshipInstances'
+        default:
+          description: unexpected error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/EntitySystemMessage'
+    delete:
+      summary: Deletes all relationships instances between a start entity instance and an end entity instance
+      operationId: deleteRelationshipInstancesBetweenStartAndEnd
+      tags:
+        - Entity Instance
+        - Relationship Instance
+      parameters:
+        - name: start_entity_instance_uuid
+          in: path
+          required: true
+          description: The UUID of the start entity instance
+          schema:
+            type: string
+        - name: end_entity_instance_uuid
+          in: path
+          required: true
+          description: The UUID of the end entity instance
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Success message
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/EntitySystemMessage'
+        default:
+          description: unexpected error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/EntitySystemMessage'
+components:
+  schemas:
+    EntitySystemMessage:
+      type: object
+      required:
+        - code
+        - message
+      properties:
+        code:
+          type: integer
+          format: int32
+        message:
+          type: string
+    EntitySystem:
+      properties:
+        entity_types:
+          $ref: '#/components/schemas/EntityTypes'
+        relationship_types:
+          $ref: '#/components/schemas/RelationshipTypes'
+        entity_instances:
+          $ref: '#/components/schemas/EntityInstances'
+        relationship_instances:
+          $ref: '#/components/schemas/RelationshipInstances'
+      required:
+        - entity_types
+        - relationship_types
+        - entity_instances
+        - relationship_instances
+    EntityType:
+      properties:
+        entity_type_uuid:
+          type: string
+        name:
+          type: string
+        attributes:
+          $ref: '#/components/schemas/Attributes'
+      required:
+        - entity_type_uuid
+        - name
+        - attributes
+    EntityTypes:
+      type: array
+      items:
+        $ref: '#/components/schemas/EntityType'
+    RelationshipType:
+      properties:
+        relationship_type_uuid:
+          type: string
+        name:
+          type: string
+        start_node_entity_type_uuid:
+          type: string
+        end_node_entity_type_uuid:
+          type: string
+        attributes:
+          $ref: '#/components/schemas/Attributes'
+      required:
+        - relationship_type_uuid
+        - name
+        - start_node_entity_type_uuid
+        - end_node_entity_type_uuid
+        - attributes
+    RelationshipTypes:
+      type: array
+      items:
+        $ref: '#/components/schemas/RelationshipType'
+    EntityInstance:
+      properties:
+        entity_instance_uuid:
+          type: string
+        entity_type_uuid:
+          type: string
+        attributes:
+          $ref: '#/components/schemas/Attributes'
+      required:
+        - entity_instance_uuid
+        - entity_type_uuid
+        - attributes
+    EntityInstances:
+      type: array
+      items:
+        $ref: '#/components/schemas/EntityInstance'
+    RelationshipInstance:
+      properties:
+        relationship_instance_uuid:
+          type: string
+        relationship_type_uuid:
+          type: string
+        start_node_entity_instance_uuid:
+          type: string
+        end_node_entity_instance_uuid:
+          type: string
+        attributes:
+          $ref: '#/components/schemas/Attributes'
+      required:
+        - relationship_instance_uuid
+        - relationship_type_uuid
+        - start_node_entity_instance_uuid
+        - end_node_entity_instance_uuid
+        - attributes
+    RelationshipInstances:
+      type: array
+      items:
+        $ref: '#/components/schemas/RelationshipInstance'
+    Attribute:
+      required:
+        - uuid
+        - name
+        - datatype
+        - value
+      properties:
+        attribute_uuid:
+          type: string
+        name:
+          type: string
+        datatype:
+          type: string
+        value:
+          description: Any of string, integer, number or boolean
+      anyOf:
+        - type: string
+        - type: number
+        - type: integer
+        - type: boolean
+    Attributes:
+      type: array
+      items:
+        $ref: '#/components/schemas/Attribute'
