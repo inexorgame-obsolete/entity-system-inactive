@@ -1,6 +1,6 @@
 cmake_minimum_required (VERSION 3.4)
 
-project(entity-system)
+project(inexor-entity-system)
 
 set(CMAKE_BINARY_DIR ${CMAKE_SOURCE_DIR}/bin)
 set(EXECUTABLE_OUTPUT_PATH ${CMAKE_BINARY_DIR})
@@ -40,28 +40,32 @@ file(GLOB_RECURSE source_files
   "src/*.cpp"
 )
 
-# Two targets: entity-system library and unit_test
+# Two targets: inexor-entity-system library and unit_test
 # Each file with "_test" in its name is a file added to unit_test
-set(normal_source_files)
-set(test_source_files)
+set(NORMAL_SOURCE_FILES)
+set(TEST_SOURCE_FILES)
 foreach(file ${source_files} )
   if(file MATCHES ".*_test.*" )
-     set(test_source_files ${test_source_files} ${file})
+     set(TEST_SOURCE_FILES ${TEST_SOURCE_FILES} ${file})
   else()
-     set(normal_source_files ${normal_source_files} ${file})
+     set(NORMAL_SOURCE_FILES ${NORMAL_SOURCE_FILES} ${file})
   endif()
 endforeach()
 
-message(STATUS "NORMAL SOURCE FILES: ${normal_source_files}")
-message(STATUS "TEST SOURCE FILES: ${test_source_files}")
+message(STATUS "NORMAL SOURCE FILES: ${NORMAL_SOURCE_FILES}")
+message(STATUS "TEST SOURCE FILES: ${TEST_SOURCE_FILES}")
+message(STATUS "CONAN_LIBS: ${CONAN_LIBS}")
 
-add_library(entity-system ${normal_source_files})
-add_executable(entity-system-tests ${test_source_files})
-target_link_libraries(entity-system-tests entity-system)
+add_library(inexor-entity-system ${NORMAL_SOURCE_FILES})
+add_executable(inexor-entity-system-standalone ${NORMAL_SOURCE_FILES})
+add_executable(inexor-entity-system-tests ${TEST_SOURCE_FILES})
+target_link_libraries(inexor-entity-system-tests inexor-entity-system)
 
 if(UNIX AND APPLE)
-    target_link_libraries(entity-system "-framework CoreFoundation")
+    target_link_libraries(inexor-entity-system "-framework CoreFoundation")
+    target_link_libraries(inexor-entity-system-standalone "-framework CoreFoundation")
 endif()
 
-target_link_libraries(entity-system ${CONAN_LIBS})
-target_link_libraries(entity-system-tests ${CONAN_LIBS})
+target_link_libraries(inexor-entity-system ${CONAN_LIBS})
+target_link_libraries(inexor-entity-system-standalone ${CONAN_LIBS})
+target_link_libraries(inexor-entity-system-tests ${CONAN_LIBS})
