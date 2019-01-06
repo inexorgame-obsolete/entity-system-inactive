@@ -46,6 +46,7 @@ static void setUpUnixSignals(std::vector<int> quitSignals) {
 
 int main(int argc, char* argv[])
 {
+	std::cout << "Inexor Entity System (c) 2009-2019" << std::endl;
 
 	// Setup signal handling
 #ifdef __linux__
@@ -54,6 +55,7 @@ int main(int argc, char* argv[])
 #endif
 
     // Setup REST server
+	std::cout << "Starting REST server" << std::endl;
     rest_server = std::make_shared<RestServer>();
 	rest_server->start();
     return 0;
