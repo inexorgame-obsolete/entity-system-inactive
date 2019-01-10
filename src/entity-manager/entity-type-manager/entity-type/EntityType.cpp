@@ -8,8 +8,7 @@ namespace inexor {
 namespace entity_system {
     
 
-    EntityType::EntityType(const std::string& ent_type_name)
-		: TypeBase(ent_type_name)
+    EntityType::EntityType(const std::string& ent_type_name) : TypeBase(ent_type_name)
     {
 		// TODO: Implement!
 	}
@@ -23,43 +22,38 @@ namespace entity_system {
 
 	bool EntityType::has_attribute_type(const std::string& ent_attr_type_name)
 	{
-		bool entity_attribute_type_found = false;
-
-		std::string name1 = ent_attr_type_name;
-		std::string name2 = "";
-
-		for(std::size_t i=0; i<linked_objects.size(); i++)
-		{
-			name2 = linked_objects[i]->get_type_name();
-
-			// Check if we can find the entity attribute type by name.
-			// This would mean that it is already linked to this entity type!
-			if(0 == name1.compare(name2))
-			{
-				entity_attribute_type_found = true;
-				break;
-			}
-		}
-
-		return entity_attribute_type_found;
+        // Look through all linked entity attribute types.
+        for(int i=0; i<entity_attribute_instances.size(); i++)
+        {
+            if(0 == entity_attribute_instances[i]->get_type_name().compare(ent_attr_type_name))
+            {
+                // Yes, this entity attribute type is
+                // already linked to this entity type.
+                return true;
+            }
+        }
+        return false;
 	}
 	
 
 	bool EntityType::has_attribute_type(const ENT_ATTR_TYPE& ent_attr_type)
 	{
+        // Read only, no mutex require.
 		return has_attribute_type(ent_attr_type->get_type_name());
 	}
 
 
 	ENTSYS_RESULT EntityType::link_attribute_type(const ENT_ATTR_TYPE& ent_attr_type)
 	{
-		if(! has_attribute_type(ent_attr_type->get_type_name()))
+        // Is the entity attribute type already linked to this entity type?
+        if(! has_attribute_type(ent_attr_type->get_type_name()))
 		{
-			// The entity attribute type is not already linked to this entity type.
 			// Link entity attribute type to this entity type.
-			// Call template base class method.
-			add_linked_object(ent_attr_type);
-			return ENTSYS_SUCCESS;
+            // Use lock guard to ensure thread safety for this write operation!
+            std::lock_guard<std::mutex> lock(entity_type_mutex);
+            entity_attribute_instances.push_back(ent_attr_type);
+
+            return ENTSYS_SUCCESS;
 		}
 		return ENTSYS_ERROR;
 	}
@@ -67,22 +61,23 @@ namespace entity_system {
 
 	std::size_t EntityType::get_linked_attributes_count() const
 	{
-		// Call template base class method.
-		return get_linked_objects_count();
+        // Read only, no mutex required.
+        return entity_attribute_instances.size();
 	}
 
 
-	const std::vector<ENT_ATTR_TYPE> EntityType::get_linked_attribute_types() const
+	const std::vector<ENT_ATTR_TYPE>& EntityType::get_linked_attribute_types() const
 	{
-		// Call template base class method.
-		return get_linked_objects();
+        // Read only, no mutex required.
+        return entity_attribute_instances;
 	}
 
 
 	void EntityType::reset_linked_attribute_types()
 	{
-		// Call template base class method.
-		delete_all_linked_objects();
+        // Use lock guard to ensure thread safety for this write operation!
+        std::lock_guard<std::mutex> lock(entity_type_mutex);
+        entity_attribute_instances.clear();
 	}
 
 

@@ -5,9 +5,9 @@
 
 #include <string>
 #include <unordered_map>
+#include <mutex>
 
 #include "../../entity-attribute-manager/entity-attribute-type/EntityAttributeType.hpp"
-#include "../../../templates/TypeContainerTemplate.hpp"
 #include "../../../typedefs/TypeDefinitions.hpp"
 #include "../../../base-classes/GUID/GUIDBase.hpp"
 
@@ -17,10 +17,17 @@ namespace entity_system {
 
 	
 	/// A base class for entity types.
-	class EntityType : public TypeBase,
-		               public TypeContainerTemplate<EntityAttributeType>,
-		               public GUIDBase
+	class EntityType : public TypeBase, public GUIDBase
     {
+        
+        private:
+
+            /// 
+            std::vector<std::shared_ptr<EntityAttributeType>> entity_attribute_instances;
+
+            /// 
+            std::mutex entity_type_mutex;
+
         public:
 
 			/// Constructor.
@@ -60,7 +67,7 @@ namespace entity_system {
 
 			/// Returns a vector of entity attribute types which are linked to this entity type.
 			/// @return a vector of entity attribute types which are linked to this entity type.
-			const std::vector<ENT_ATTR_TYPE> get_linked_attribute_types() const;
+			const std::vector<ENT_ATTR_TYPE>& get_linked_attribute_types() const;
 			
 			/// Deletes all entity attribute types which are linked to this entity type.
 			void reset_linked_attribute_types();
