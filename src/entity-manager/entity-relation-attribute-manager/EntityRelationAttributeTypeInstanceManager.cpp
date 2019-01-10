@@ -9,6 +9,7 @@ namespace entity_system {
 
 	
 	EntityRelationAttributeTypeInstanceManager::EntityRelationAttributeTypeInstanceManager()
+		: TypeInstanceManagerTemplate(entity_relation_attribute_type_instance_error)
 	{
 		// TODO: Implement!
 	}

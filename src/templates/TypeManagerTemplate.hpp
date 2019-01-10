@@ -6,6 +6,7 @@
 #include <string>
 #include <unordered_map>
 #include <memory>
+#include <crossguid/guid.hpp>
 
 // When using template classes it is not possible
 // to separate definitions of class methods from their declaration.
@@ -23,10 +24,16 @@ namespace entity_system {
 	{
 		private:
 
-			// TODO: Store by UUID, not by name!
+			/// An unordered map which stores all available
+			/// type names as key and their corresponding GUID as value.
+			std::unordered_map<std::string, xg::Guid> stored_type_names;
+
+			/// An unordered map which stored all available
+			/// GUIDs as key and their corresponding type names as value.
+			std::unordered_map<xg::Guid, std::string> stored_type_GUIDs;
 
 			/// An unordered map which stores all available types.
-			std::unordered_map<std::string, std::shared_ptr<T>> type_map;
+			std::unordered_map<xg::Guid, std::shared_ptr<T>> stored_types;
 
 		protected:
 
@@ -48,18 +55,43 @@ namespace entity_system {
 			}
 
 
+			/// Returns the GUID of a type by name.
+			/// @param type_name The name of the type.
+			const xg::Guid get_GUID_by_type_name(const std::string& type_name)
+			{
+				// Read only, no mutex required.
+				return stored_type_names[type_name];
+			}
+
+
+			/// Returns the name of a type by given GUID.
+			/// @param type_GUID The GUID of the type.
+			const std::string get_type_name_by_GUID(const xg::Guid& type_GUID)
+			{
+				// Read only, no mutex required.
+				return stored_type_GUIDs[type_GUID];
+			}
+
+
 			/// Checks if a type already exists.
 			/// @param type_name The name of the type.
 			/// @return True if a type with this name
 			/// does already exist, false otherwise.
 			bool does_type_exist(const std::string& type_name)
 			{
-				// TODO: Add MUTEX here?
-				return ! (type_map.end() == type_map.find(type_name));
+				// Get the GUID of this type by name.
+				xg::Guid type_GUID = get_GUID_by_type_name(type_name);
+				// Read only, no mutex required.
+				return ! (stored_types.end() == stored_types.find(type_GUID));
 			}
 
 
-			// TODO: Does type exist by UUID?
+			/// Checks if a type already exists.
+			bool does_type_exist(const xg::Guid& type_GUID)
+			{
+				// Read only, no mutex required.
+				return !(stored_types.end() == stored_types.find(type_GUID));
+			}
 
 
 			/// Checks if the name of a type is valid.
@@ -69,6 +101,7 @@ namespace entity_system {
 			{
 				if(0 == type_name.compare("")) return false;
 				if(does_type_exist(type_name)) return false;
+				// TODO: Add further validation methods here.
 				return true;
 			}
 
@@ -76,10 +109,10 @@ namespace entity_system {
 			/// Adds a new type.
 			/// @param type_name The name of the new type.
 			/// @param new_type A shared pointer reference to the new type.
-			void add_type_to_map(const std::string& type_name, const std::shared_ptr<T>& new_type)
+			void add_type(const std::string& type_name, const std::shared_ptr<T>& new_type)
 			{
 				// TODO: Add MUTEX here!
-				type_map[type_name] = new_type;
+				stored_types[type_name] = new_type;
 			}
 
 
@@ -88,18 +121,27 @@ namespace entity_system {
 			/// @return A const shared pointer to the type.
 			const std::shared_ptr<T> get_type(const std::string& type_name)
 			{
-				return type_map[type_name];
+				// Get the GUID of this type by name.
+				xg::Guid type_GUID = get_GUID_by_name(type_name);
+				// Read only, no mutex required.
+				return stored_types[type_name];
 			}
 
 
-			// TODO: Get by UUI!
+			/// Searches for the desired type by name.
+			const std::shared_ptr<T> get_type(const xg::Guid& type_GUID)
+			{
+				// Read only, no mutex required.
+				return stored_types[type_GUID];
+			}
 
 
 			/// Returns the number of existing types.
 			/// @return The number of existing types.
 			const std::size_t get_type_count() const
 			{
-				return type_map.size();
+				// Read only, no mutex required.
+				return stored_types.size();
 			}
 
 
@@ -108,20 +150,37 @@ namespace entity_system {
 			void delete_type(const std::string& type_name)
 			{
 				// TODO: Add MUTEX here!
-				// TODO: Delete all instances first!
-				type_map.erase(type_name);
+				stored_types.erase(type_name);
 			}
 
 
-			// TODO: Delete by UUID!
+			// TODO: TEST!
+			void delete_type(const xg::Guid& type_GUID)
+			{
+				std::string type_name_to_delete = get_type_name_by_GUID(type_GUID);
+				xg::Guid type_GUID_to_delete = get_GUID_by_type_name(type_name_to_delete);
+
+				// MUTEX BEGIN
+
+				// Erase type name
+				stored_type_names.erase[type_name_to_delete];
+				// Erase GUID
+				stored_type_GUIDs.erase[type_GUID_to_delete];
+				// Erase type
+				stored_types.erase[type_GUID];
+
+				// MUTEX END
+			}
 
 
 			/// Deletes all types.
+			/// At this point it must be made sure
+			/// that all the type instances have been
+			/// deleted first.
 			void delete_all_types()
 			{
 				// TODO: Add MUTEX here!
-				// TODO: Delete all instances first!
-				type_map.clear();
+				stored_types.clear();
 			}
 
 

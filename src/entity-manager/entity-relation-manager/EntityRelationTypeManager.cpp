@@ -51,7 +51,7 @@ namespace entity_system {
 				                                   ent_type_target);
 
 		// Add new entity relation type to type map.
-		add_type_to_map(ent_rel_type_name, new_ent_relation_type);
+		add_type(ent_rel_type_name, new_ent_relation_type);
 
 		return new_ent_relation_type;
 	}

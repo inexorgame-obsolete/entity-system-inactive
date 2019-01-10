@@ -38,7 +38,7 @@ namespace entity_system {
 			= std::make_shared<EntityRelationAttributeType>(ent_rel_attr_type_name,
 				                                            ent_rel_attr_data_type);
 
-		add_type_to_map(ent_rel_attr_type_name, new_ent_rel_attr_type);
+		add_type(ent_rel_attr_type_name, new_ent_rel_attr_type);
 
 		return new_ent_rel_attr_type;
 	}

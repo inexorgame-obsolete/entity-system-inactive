@@ -9,6 +9,7 @@ namespace entity_system {
 
     
 	EntityTypeInstanceManager::EntityTypeInstanceManager()
+		: TypeInstanceManagerTemplate(entity_type_instance_error)
 	{
 		// TODO: Implement!
 	}

@@ -12,14 +12,13 @@ namespace inexor {
 namespace entity_system {
 
 
-    // TODO: Implement
-	// TODO: EntityEditor
-	// TODO: EntityEditorRenderer
-	// TODO: EntityGameSceneRenderer,
-    // TODO: EntitySync
-	// TODO: EntityErrorHandling
-	// TODO: EntityImporter
-	// TODO: EntityExporter
+	// TODO: Implement EntityEditor
+	// TODO: Implement EntityEditorRenderer
+	// TODO: Implement EntityGameSceneRenderer,
+    // TODO: Implement EntitySync
+	// TODO: Implement EntityErrorHandling
+	// TODO: Implement EntityImporter
+	// TODO: Implement EntityExporter
 
 
 	/// @class EntitySystem

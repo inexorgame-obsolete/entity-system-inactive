@@ -49,7 +49,7 @@ namespace entity_system {
 
 		// Add the new instance to the type map.
 		// Call template base class method.
-		add_type_to_map(ent_type_name, new_entity_type);
+		add_type(ent_type_name, new_entity_type);
 
 		return new_entity_type;
 	}

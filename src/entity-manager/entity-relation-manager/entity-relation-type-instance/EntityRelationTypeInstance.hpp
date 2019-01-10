@@ -46,8 +46,10 @@ namespace entity_system {
 			/// Destructor.
 			~EntityRelationTypeInstance();
 
-			// TODO: get source entity type
-			// TODO: get destination entity type
+			ENT_TYPE_INST get_source_entity_type_instance() const;
+
+			ENT_TYPE_INST get_target_entity_type_instance() const;
+
 			// TODO: Set data !
 
 			

@@ -49,7 +49,8 @@ namespace entity_system {
 			/// false otherwise.
 			bool does_entity_relation_type_exist(const ENT_REL_TYPE&);
 
-			// TODO: check by UUID!
+
+			bool does_entity_relation_type_exist(const xg::Guid&);
 
 			/// Creates a new entity relation type and store it in the entity system.
 			/// @param ent_rel_type_name The name of the new entity relation type name.
@@ -74,7 +75,8 @@ namespace entity_system {
 			/// to the entity relation type which will be deleted.
 			void delete_entity_relation_type(const ENT_REL_TYPE&);
 
-			// TODO: Delete by UUID.
+
+			void delete_entity_relation_type(const xg::Guid&);
 
 			/// Deletes all entity relation types.
 			void delete_all_entity_relation_types();

@@ -63,7 +63,8 @@ namespace entity_system {
 			/// Delete all entity type instances
 			void delete_all_entity_type_instances();
 
-			// TODO: Delete by UUID!
+
+			void delete_instance(const xg::Guid&);
 
 	};
 

@@ -13,6 +13,7 @@ namespace entity_system {
 
 
     EntityAttributeTypeInstanceManager::EntityAttributeTypeInstanceManager()
+		: TypeInstanceManagerTemplate(entity_attribute_type_instance_error)
     {
 		// TODO: Implement!
     }

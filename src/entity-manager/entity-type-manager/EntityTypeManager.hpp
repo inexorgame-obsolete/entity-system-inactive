@@ -46,7 +46,8 @@ namespace entity_system {
 			/// false otherwise.
 			bool does_entity_type_exist(const ENT_TYPE&);
 
-			// TODO: Check by UUID!
+			/// Checks if an entity type does already exist.
+			bool does_entity_type_exist(const xg::Guid&);
 
 			/// Creates a new entity type.
 			/// @param ent_type_name The name of the new entity type.
@@ -67,7 +68,8 @@ namespace entity_system {
 			/// to the entity type which will be deleted.
 			void delete_entity_type(const ENT_TYPE&);
 			
-			// TODO: Delete by UUID.
+			/// Deletes an entity type by GUID.
+			void delete_entity_type(const xg::Guid&);
 
 			/// Removes all types of entities.
 			void delete_all_entity_types();

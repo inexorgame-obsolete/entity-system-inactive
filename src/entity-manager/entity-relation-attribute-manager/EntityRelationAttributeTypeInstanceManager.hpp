@@ -14,7 +14,8 @@ namespace entity_system {
 
 
 	/// A manager class for entity relation attribute type instances.
-	class EntityRelationAttributeTypeInstanceManager : public TypeInstanceManagerTemplate<EntityRelationAttributeTypeInstance>
+	class EntityRelationAttributeTypeInstanceManager
+		: public TypeInstanceManagerTemplate<EntityRelationAttributeTypeInstance>
 	{
 		private:
 

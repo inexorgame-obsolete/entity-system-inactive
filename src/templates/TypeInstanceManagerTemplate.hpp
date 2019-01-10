@@ -25,10 +25,21 @@ namespace entity_system {
 		private:
 
 			/// A vector of stored instances of templatable type.
+			// TODO: Replace this with std::unordered_map of xg::Guid to std::shared_ptr<T> ?
 			std::vector<std::shared_ptr<T>> type_instances;
-		
+
+			// This error instance will be returned when a method fails.
+			// It will be set when the constructor is called
+			std::shared_ptr<T> error_instance;
+
 		protected:
 			
+			/// 
+			TypeInstanceManagerTemplate(const std::shared_ptr<T>& param_error_inst)
+			{
+				error_instance = param_error_inst;
+			}
+
 
 			/// Adds an instance to the instance buffer.
 			/// @param type_instance The instance which will be added.
@@ -56,7 +67,17 @@ namespace entity_system {
 
 
 			// TODO: Delete instance by UUID.
+			void delete_instance(const xg::Guid& type_GUID)
+			{
+				// TODO: Implement!
+			}
+
+
 			// TODO: Get instance by UUID.
+			std::shared_ptr<T> get_instance(const xg::Guid&)
+			{
+				return error_instance;
+			}
 			
 	};
 
