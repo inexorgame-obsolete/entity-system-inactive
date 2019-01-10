@@ -16,12 +16,15 @@ namespace entity_system {
 		private:
 
 			/// The GUID of the class.
-			xg::Guid the_GUID = xg::newGuid();
+			xg::Guid globally_unique_identifier = xg::newGuid();
 
 		protected:
 
 			/// Constructor.
 			GUIDBase();
+
+			/// Copy Constructor.
+			GUIDBase(const xg::Guid&);
 
 			/// Destructor.
 			~GUIDBase();

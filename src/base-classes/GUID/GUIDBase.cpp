@@ -14,6 +14,12 @@ namespace entity_system {
 	}
 
 
+	GUIDBase::GUIDBase(const xg::Guid& param_GUID)
+	{
+		globally_unique_identifier = param_GUID;
+	}
+
+
 	GUIDBase::~GUIDBase()
 	{
 		// TODO: Implement!
@@ -22,14 +28,14 @@ namespace entity_system {
 
 	xg::Guid GUIDBase::get_GUID() const
 	{
-		return the_GUID;
+		return globally_unique_identifier;
 	}
 
 
 	void GUIDBase::generate_new_GUID()
 	{
 		/// Generate a new GUID.
-		the_GUID = xg::newGuid();
+		globally_unique_identifier = xg::newGuid();
 	}
 
 
