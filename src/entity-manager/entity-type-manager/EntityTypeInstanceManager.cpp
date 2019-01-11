@@ -27,7 +27,7 @@ namespace entity_system {
 		ENT_TYPE_INST new_ent_type_instance = std::make_shared<EntityTypeInstance>(ent_type);
 		
 		// Call template base class method.
-		add_instance_to_buffer(new_ent_type_instance);
+		add_instance_to_buffer(new_ent_type_instance->get_GUID(), new_ent_type_instance);
 		
 		return new_ent_type_instance;
 	}

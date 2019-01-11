@@ -13,6 +13,7 @@ namespace entity_system {
 
 
     EntityAttributeTypeManager::EntityAttributeTypeManager()
+		: TypeManagerTemplate(entity_attribute_type_error)
     {
 		// TODO: Implement!
     }
@@ -77,6 +78,13 @@ namespace entity_system {
 		// Call template base class method.
 		delete_type(ent_attr_type->get_type_name());
 	}
+
+    
+    void EntityAttributeTypeManager::delete_entity_attribute_type(const xg::Guid& type_GUID)
+    {
+        // Call template base class method.
+        delete_type(type_GUID);
+    }
 
 
 	void EntityAttributeTypeManager::delete_all_entity_attribute_types()

@@ -72,8 +72,9 @@ namespace entity_system {
 			/// @param ent_attr_type A const reference to a shared pointer of an entity attribute type which will be deleted.
 			void delete_entity_attribute_type(const ENT_ATTR_TYPE&);
 
-
-			void delete_entity_attribute_type(const xg::Guid&);
+			/// Deletes an entity attribute type.
+            /// @param type_GUID The GUID of the entity attribute type.
+            void delete_entity_attribute_type(const xg::Guid&);
 
 			/// Delete all entity attribute types.
 			void delete_all_entity_attribute_types();

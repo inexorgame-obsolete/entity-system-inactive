@@ -22,14 +22,14 @@ namespace entity_system {
 
 
 	ENT_REL_ATTR_TYPE_INST EntityRelationAttributeTypeInstanceManager
-		::create_entity_relation_attribute_type_instance(const ENT_REL_ATTR_TYPE& ent_rel_attr_type)
+        ::create_entity_relation_attribute_type_instance(const ENT_REL_ATTR_TYPE& ent_rel_attr_type)
 	{
 		// Create a new entity relation attribute type instance.
 		ENT_REL_ATTR_TYPE_INST new_ent_rel_attr_type_inst
 			= std::make_shared<EntityRelationAttributeTypeInstance>(ent_rel_attr_type);
 		
 		// Call base template class method.
-		add_instance_to_buffer(new_ent_rel_attr_type_inst);
+		add_instance_to_buffer(new_ent_rel_attr_type_inst->get_GUID(), new_ent_rel_attr_type_inst);
 
 		return new_ent_rel_attr_type_inst;
 	}

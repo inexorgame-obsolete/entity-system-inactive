@@ -32,7 +32,8 @@ namespace entity_system {
 				                                                                                    ent_type_inst_source,
 				                                                                                    ent_type_inst_target);
 
-		add_instance_to_buffer(new_relation_type_instance);
+		// 
+		add_instance_to_buffer(new_relation_type_instance->get_GUID(), new_relation_type_instance);
 
 		return new_relation_type_instance;
 	}

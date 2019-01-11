@@ -9,6 +9,7 @@ namespace entity_system {
 
 
     EntityRelationTypeManager::EntityRelationTypeManager()
+		: TypeManagerTemplate(entity_relation_type_error)
     {
 		// TODO: Implement!
     }

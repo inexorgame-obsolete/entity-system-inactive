@@ -6,6 +6,7 @@
 #include <string>
 #include <unordered_map>
 #include <memory>
+#include <mutex>
 #include <crossguid/guid.hpp>
 
 // When using template classes it is not possible
@@ -35,6 +36,12 @@ namespace entity_system {
 			/// An unordered map which stores all available types.
 			std::unordered_map<xg::Guid, std::shared_ptr<T>> stored_types;
 
+			// 
+			std::mutex type_manager_mutex;
+
+			// Error type
+			std::shared_ptr<T> error_type;
+
 		protected:
 
 			// All of those methods must be protected since the
@@ -44,8 +51,11 @@ namespace entity_system {
 
 
 			/// Constructor.
-			TypeManagerTemplate()
+			TypeManagerTemplate(const std::shared_ptr<T>& param_error_type)
 			{
+				// Use lock guard to ensure thread safety for this write operation!
+				std::lock_guard<std::mutex> lock(type_manager_mutex);
+				error_type = param_error_type;
 			}
 
 
@@ -111,7 +121,8 @@ namespace entity_system {
 			/// @param new_type A shared pointer reference to the new type.
 			void add_type(const std::string& type_name, const std::shared_ptr<T>& new_type)
 			{
-				// TODO: Add MUTEX here!
+				// Use lock guard to ensure thread safety for this write operation!
+				std::lock_guard<std::mutex> lock(type_manager_mutex);
 				stored_types[type_name] = new_type;
 			}
 
@@ -149,7 +160,8 @@ namespace entity_system {
 			/// @param type_name The name of the type which will be deleted.
 			void delete_type(const std::string& type_name)
 			{
-				// TODO: Add MUTEX here!
+				// Use lock guard to ensure thread safety for this write operation!
+				std::lock_guard<std::mutex> lock(type_manager_mutex);
 				stored_types.erase(type_name);
 			}
 
@@ -160,16 +172,15 @@ namespace entity_system {
 				std::string type_name_to_delete = get_type_name_by_GUID(type_GUID);
 				xg::Guid type_GUID_to_delete = get_GUID_by_type_name(type_name_to_delete);
 
-				// MUTEX BEGIN
+				// Use lock guard to ensure thread safety for this write operations!
+				std::lock_guard<std::mutex> lock(type_manager_mutex);
 
 				// Erase type name
-				stored_type_names.erase[type_name_to_delete];
+				stored_type_names.erase(type_name_to_delete);
 				// Erase GUID
-				stored_type_GUIDs.erase[type_GUID_to_delete];
+				stored_type_GUIDs.erase(type_GUID_to_delete);
 				// Erase type
-				stored_types.erase[type_GUID];
-
-				// MUTEX END
+				stored_types.erase(type_GUID);
 			}
 
 
@@ -179,7 +190,8 @@ namespace entity_system {
 			/// deleted first.
 			void delete_all_types()
 			{
-				// TODO: Add MUTEX here!
+				// Use lock guard to ensure thread safety for this write operation!
+				std::lock_guard<std::mutex> lock(type_manager_mutex);
 				stored_types.clear();
 			}
 

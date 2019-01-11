@@ -9,6 +9,7 @@ namespace entity_system {
 
 	
 	EntityRelationAttributeTypeManager::EntityRelationAttributeTypeManager()
+		: TypeManagerTemplate(entity_relation_attribute_type_error)
 	{
 		// TODO: Implement!
 	}
@@ -20,9 +21,9 @@ namespace entity_system {
 	}
 
 
-	ENT_REL_ATTR_TYPE EntityRelationAttributeTypeManager
-		::create_entity_relation_attribute_type(const std::string& ent_rel_attr_type_name,
-			                                    const ENTSYS_DATA_TYPE& ent_rel_attr_data_type)
+	ENT_REL_ATTR_TYPE EntityRelationAttributeTypeManager::create_entity_relation_attribute_type(
+                      const std::string& ent_rel_attr_type_name,
+                      const ENTSYS_DATA_TYPE& ent_rel_attr_data_type)
 	{
 		// Check if an entity relation attribute type
 		// with this name does already exist.
