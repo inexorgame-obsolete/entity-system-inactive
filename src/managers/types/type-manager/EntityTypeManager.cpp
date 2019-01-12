@@ -35,7 +35,6 @@ namespace entity_system {
 
 
     /// Checks if an entity type does already exist.
-    // TODO: Test!
     bool EntityTypeManager::does_entity_type_exist(const xg::Guid& type_GUID)
     {
         return does_entity_type_exist(get_type(type_GUID)->get_type_name());

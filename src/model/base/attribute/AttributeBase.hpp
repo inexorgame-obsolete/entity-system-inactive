@@ -3,6 +3,8 @@
 
 #pragma once
 
+#include <mutex>
+
 #include "../../../model/data/container/DataContainer.hpp"
 #include "../../../model/data/validation/DataValidationBase.hpp"
 
@@ -31,6 +33,8 @@ namespace entity_system {
 			/// instance, not in this base class.
 			ENTSYS_DATA_TYPE attribute_data_type;
 
+            /// 
+            std::mutex attribute_type_base_mutex;
 
 		protected:
 			

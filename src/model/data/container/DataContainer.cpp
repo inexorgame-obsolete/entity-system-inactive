@@ -10,12 +10,16 @@ namespace entity_system {
 
     DataContainer::DataContainer(const ENTSYS_DATA_TYPE& param_data_type)
     {
+		// Use lock guard to ensure thread safety for this write operation!
+		std::lock_guard<std::mutex> lock(data_container_mutex);
 		data_type = param_data_type;
     }
 
 
     DataContainer::DataContainer(const std::int64_t& int64val)
 	{
+		// Use lock guard to ensure thread safety for this write operation!
+		std::lock_guard<std::mutex> lock(data_container_mutex);
 		data_type = ENTSYS_DATA_TYPE_BIG_INT;
 		data_int64 = int64val;
     }
@@ -23,6 +27,8 @@ namespace entity_system {
 
     DataContainer::DataContainer(const double& double_val)
     {
+		// Use lock guard to ensure thread safety for this write operation!
+		std::lock_guard<std::mutex> lock(data_container_mutex);
 		data_type = ENTSYS_DATA_TYPE_DOUBLE;
 		data_double = double_val;
     }
@@ -30,6 +36,8 @@ namespace entity_system {
 
     DataContainer::DataContainer(const float& float_val)
     {
+		// Use lock guard to ensure thread safety for this write operation!
+		std::lock_guard<std::mutex> lock(data_container_mutex);
 		data_type = ENTSYS_DATA_TYPE_FLOAT;
 		data_float = float_val;
     }
@@ -37,6 +45,8 @@ namespace entity_system {
 
     DataContainer::DataContainer(const bool& bool_val)
     {
+		// Use lock guard to ensure thread safety for this write operation!
+		std::lock_guard<std::mutex> lock(data_container_mutex);
 		data_type = ENTSYS_DATA_TYPE_BOOL;
 		data_bool = bool_val;
     }
@@ -44,6 +54,8 @@ namespace entity_system {
 
     DataContainer::DataContainer(const std::string& string_val)
     {
+		// Use lock guard to ensure thread safety for this write operation!
+		std::lock_guard<std::mutex> lock(data_container_mutex);
 		data_type = ENTSYS_DATA_TYPE_STRING;
 		data_string = string_val;
     }
@@ -51,6 +63,8 @@ namespace entity_system {
 
     DataContainer::DataContainer(const int& int_val)
     {
+		// Use lock guard to ensure thread safety for this write operation!
+		std::lock_guard<std::mutex> lock(data_container_mutex);
 		data_type = ENTSYS_DATA_TYPE_INT;
 		data_int = int_val;
     }
@@ -65,7 +79,9 @@ namespace entity_system {
 
     void DataContainer::reset_memory()
 	{
-		data_type = ENTSYS_DATA_TYPE_UNDEFINED;
+		// Use lock guard to ensure thread safety for this write operation!
+		std::lock_guard<std::mutex> lock(data_container_mutex);
+        data_type = ENTSYS_DATA_TYPE_UNDEFINED;
 		data_int64 = 0;
 		data_string = "";
 		data_double = 0.0;
@@ -78,6 +94,8 @@ namespace entity_system {
 
     void DataContainer::set_data_type(const ENTSYS_DATA_TYPE& param_data_type)
     {
+		// Use lock guard to ensure thread safety for this write operation!
+		std::lock_guard<std::mutex> lock(data_container_mutex);
 		reset_memory();
 		data_type = param_data_type;
     }
@@ -85,13 +103,16 @@ namespace entity_system {
 
     ENTSYS_DATA_TYPE DataContainer::get_data_type() const
     {
+        // Read only, no mutex required.
 		return data_type;
     }
 
 
 	DataContainer DataContainer::set_data(const DataContainer& data_container)
 	{
-		switch(data_container.get_data_type())
+		// Use lock guard to ensure thread safety for this write operation!
+		std::lock_guard<std::mutex> lock(data_container_mutex);
+	    switch(data_container.get_data_type())
 		{
 			case ENTSYS_DATA_TYPE_BIG_INT:
 				set_data(data_container.get_int64());
@@ -120,6 +141,8 @@ namespace entity_system {
 			
 	DataContainer DataContainer::set_data(const std::int64_t& int64_val)
 	{
+		// Use lock guard to ensure thread safety for this write operation!
+		std::lock_guard<std::mutex> lock(data_container_mutex);
 		switch(data_type)
 		{
 			case ENTSYS_DATA_TYPE_BIG_INT:
@@ -150,6 +173,8 @@ namespace entity_system {
 	
 	DataContainer DataContainer::set_data(const std::string& string_val)
 	{
+		// Use lock guard to ensure thread safety for this write operation!
+		std::lock_guard<std::mutex> lock(data_container_mutex);
 		switch(data_type)
 		{
 			case ENTSYS_DATA_TYPE_BIG_INT:
@@ -179,6 +204,8 @@ namespace entity_system {
 	
 	DataContainer DataContainer::set_data(const double& double_val)
 	{
+		// Use lock guard to ensure thread safety for this write operation!
+		std::lock_guard<std::mutex> lock(data_container_mutex);
 		switch(data_type)
 		{
 			case ENTSYS_DATA_TYPE_BIG_INT:
@@ -208,6 +235,8 @@ namespace entity_system {
 
 	DataContainer DataContainer::set_data(const float& float_val)
 	{
+		// Use lock guard to ensure thread safety for this write operation!
+		std::lock_guard<std::mutex> lock(data_container_mutex);
 		switch(data_type)
 		{
 			case ENTSYS_DATA_TYPE_BIG_INT:
@@ -237,6 +266,8 @@ namespace entity_system {
 
 	DataContainer DataContainer::set_data(const bool& bool_val)
 	{
+		// Use lock guard to ensure thread safety for this write operation!
+		std::lock_guard<std::mutex> lock(data_container_mutex);
 		switch(data_type)
 		{
 			case ENTSYS_DATA_TYPE_BIG_INT:
@@ -266,6 +297,8 @@ namespace entity_system {
 
 	DataContainer DataContainer::set_data(const int& int_val)
 	{
+		// Use lock guard to ensure thread safety for this write operation!
+		std::lock_guard<std::mutex> lock(data_container_mutex);
 		switch(data_type)
 		{
 			case ENTSYS_DATA_TYPE_BIG_INT:
@@ -296,36 +329,42 @@ namespace entity_system {
 	
 	std::int64_t DataContainer::get_int64() const
 	{
+        // Read only, no mutex required.
 		return data_int64;
 	}
 
 
 	std::string DataContainer::get_string() const
 	{
+        // Read only, no mutex required.
 		return data_string;
 	}
 
 
 	double DataContainer::get_double() const
 	{
+        // Read only, no mutex required.
 		return data_double;
 	}
 
 
 	float DataContainer::get_float() const
 	{
+        // Read only, no mutex required.
 		return data_float;
 	}
 
 
 	bool DataContainer::get_bool() const
 	{
+        // Read only, no mutex required.
 		return data_bool;
 	}
 
 
 	int DataContainer::get_int() const
 	{
+        // Read only, no mutex required.
 		return data_int;
 	}
 
@@ -333,42 +372,49 @@ namespace entity_system {
 
 	DataContainer DataContainer::operator = (const DataContainer& cont)
 	{
+        // Mutex is implemented in set function!
 		return set_data(cont);
 	}
 
 
 	DataContainer DataContainer::operator = (const std::int64_t& int64val)
 	{
+        // Mutex is implemented in set function!
 		return set_data(int64val);
 	}
 
 
 	DataContainer DataContainer::operator = (const std::string& strval)
 	{
+        // Mutex is implemented in set function!
 		return set_data(strval);
 	}
 
 
 	DataContainer DataContainer::operator = (const double& dblval)
 	{
+        // Mutex is implemented in set function!
 		return set_data(dblval);
 	}
 
 
 	DataContainer DataContainer::operator = (const float& fltval)
 	{
+        // Mutex is implemented in set function!
 		return set_data(fltval);
 	}
 	
 	
 	DataContainer DataContainer::operator = (const bool& boolval)
 	{
+        // Mutex is implemented in set function!
 		return set_data(boolval);
 	}
 
 
 	DataContainer DataContainer::operator = (const int& intval)
 	{
+        // Mutex is implemented in set function!
 		return set_data(intval);
 	}
 

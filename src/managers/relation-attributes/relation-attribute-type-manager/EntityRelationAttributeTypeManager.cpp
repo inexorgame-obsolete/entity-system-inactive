@@ -34,6 +34,7 @@ namespace entity_system {
 		// Create new entity relation attribute type
 		ENT_REL_ATTR_TYPE new_ent_rel_attr_type = std::make_shared<EntityRelationAttributeType>(ent_rel_attr_type_name, ent_rel_attr_data_type);
 
+        // 
 		add_type(ent_rel_attr_type_name, new_ent_rel_attr_type);
 
 		return new_ent_rel_attr_type;

@@ -3,6 +3,7 @@
 
 #pragma once
 
+#include <mutex>
 #include <crossguid/guid.hpp>
 
 
@@ -14,6 +15,9 @@ namespace entity_system {
 	class GUIDBase
 	{
 		private:
+
+            // 
+            std::mutex guid_base_mutex;
 
 			/// The GUID of the class.
 			xg::Guid globally_unique_identifier = xg::newGuid();

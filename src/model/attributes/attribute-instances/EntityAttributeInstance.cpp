@@ -8,7 +8,7 @@ namespace inexor {
 namespace entity_system {
 	
 	
-	EntityAttributeInstance::EntityAttributeInstance(const ENT_ATTR_TYPE& ent_attr_type) : DataContainer(ent_attr_type->get_attribute_data_type()), InstanceBase(ent_attr_type)
+	EntityAttributeInstance::EntityAttributeInstance(const ENT_ATTR_TYPE& ent_attr_type) : InstanceBase(ent_attr_type), DataContainer(ent_attr_type->get_attribute_data_type())
 	{
 		// TODO: Implement
 	}
