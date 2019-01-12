@@ -1,5 +1,5 @@
 // Inexor entity system prototype
-// (c)2018 Inexor
+// (c)2018-2019 Inexor
 
 #ifdef __linux__
 #include <vector>
@@ -46,7 +46,7 @@ static void setUpUnixSignals(std::vector<int> quitSignals) {
 
 int main(int argc, char* argv[])
 {
-	std::cout << "Inexor Entity System (c) 2009-2019" << std::endl;
+	std::cout << "Inexor Entity System (c) 2018-2019" << std::endl;
 
 	// Setup signal handling
 #ifdef __linux__
