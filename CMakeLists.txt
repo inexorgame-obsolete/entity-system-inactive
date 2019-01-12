@@ -18,8 +18,15 @@ endif()
 
 include(${CMAKE_CURRENT_BINARY_DIR}/conan.cmake)
 
+
 if (NOT CMAKE_BUILD_TYPE)
-    set(CMAKE_BUILD_TYPE "Release") # this causes all kinds of trouble with crossguid-dbg not being found on Apple. Quick fix.
+   if (NOT APPLE)
+      # We need Debug mode on WIN32 and UNIX!
+      set(CMAKE_BUILD_TYPE "Debug")
+   else()
+      # TODO: Fix Mac OSX issues!
+      set(CMAKE_BUILD_TYPE "Release")
+   endif(NOT APPLE)
 endif(NOT CMAKE_BUILD_TYPE)
 
 conan_check(VERSION 1.4.0 REQUIRED)
