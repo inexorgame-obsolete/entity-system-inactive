@@ -50,7 +50,6 @@ file(GLOB_RECURSE source_files
 # Two targets: inexor-entity-system library and unit_test
 # Each file with "_test" in its name is a file added to unit_test
 set(NORMAL_SOURCE_FILES)
-list(FILTER source_files EXCLUDE REGEX "rest/*") # remove pistache code for now
 set(TEST_SOURCE_FILES)
 foreach(file ${source_files} )
   if(file MATCHES ".*_test.*" )
