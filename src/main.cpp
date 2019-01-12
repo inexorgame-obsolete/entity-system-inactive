@@ -8,11 +8,11 @@
 #endif
 
 #include "EntitySystem.hpp"
-//#include "rest/RestServer.hpp"
+#include "rest/RestServer.hpp"
 
 using namespace inexor::entity_system;
 
-//std::shared_ptr<RestServer> rest_server;
+std::shared_ptr<RestServer> rest_server;
 
 #ifdef __linux__
 static void sigHandler(int sig){
@@ -22,7 +22,7 @@ static void sigHandler(int sig){
         case SIGTERM:
         case SIGHUP:
         default:
-        	rest_server->stop();
+        	rest_server->stop_services();
             break;
     }
     exit(0);
@@ -56,8 +56,8 @@ int main(int argc, char* argv[])
 
     // Setup REST server
 	std::cout << "Starting REST server" << std::endl;
-    //rest_server = std::make_shared<RestServer>();
-    //rest_server->start();
+    rest_server = std::make_shared<RestServer>();
+    rest_server->start_services();
     return 0;
 
 }
