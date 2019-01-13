@@ -68,7 +68,7 @@ namespace entity_system {
             bool does_instance_exist(const xg::Guid instance_GUID)
             {
                 // Read only, no mutex required.
-				return !(stored_tstored_instancesypes.end() == stored_instances.find(instance_GUID));
+				return !(stored_instances.end() == stored_instances.find(instance_GUID));
             }
 
 
