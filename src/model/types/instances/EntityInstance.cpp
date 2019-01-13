@@ -2,14 +2,11 @@
 // (c)2018-2019 Inexor
 
 #include "EntityInstance.hpp"
-#include "../../../EntitySystem.hpp"
+#include "../../../util/macros/Macros.hpp"
 
 
 namespace inexor {
 namespace entity_system {
-
-
-	extern std::shared_ptr<EntitySystem> entsys;
 
 
 	EntityInstance::EntityInstance(const ENT_TYPE& ent_type) : InstanceBase(ent_type)
@@ -21,10 +18,10 @@ namespace entity_system {
 		{
 			// Create an entity attribute type instance and store it in the map.
 			// Use the entity system's EntityAttributeInstanceManager method!
-			ENT_ATTR_INST new_ent_attr_type_instance = entsys->create_entity_attribute_type_instance(ent_type_attributes[i]);
+			ENT_ATTR_INST new_ent_attr_instance = CREATE_ENT_ATTR_INST(ent_type_attributes[i]);
 
 			// Call template base class method.
-			add_entity_attribute_instance(ent_type_attributes[i], new_ent_attr_type_instance);
+			add_entity_attribute_instance(ent_type_attributes[i], new_ent_attr_instance);
 		}
 	}
 

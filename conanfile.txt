@@ -5,6 +5,7 @@ crossguid/latest-at-28-12-18@inexorgame/stable
 #pistache/d5608a1@conan/stable
 #jsonformoderncpp/3.5.0@vthiery/stable
 restbed/6eb385fa9051203f28bf96cc1844bbb5a9a6481f@inexorgame/stable
+boost_property_tree/1.69.0@bincrafters/stable
 
 [generators]
 cmake

@@ -8,7 +8,7 @@ namespace inexor {
 namespace entity_system {
 
 	
-	EntityRelationAttributeInstanceManager::EntityRelationAttributeInstanceManager() : InstanceManagerTemplate(entity_relation_attribute_type_instance_error)
+	EntityRelationAttributeInstanceManager::EntityRelationAttributeInstanceManager() : InstanceManagerTemplate(entity_relation_attribute_instance_error)
 	{
 		// TODO: Implement!
 	}
@@ -20,7 +20,7 @@ namespace entity_system {
 	}
 
 
-	ENT_REL_ATTR_INST EntityRelationAttributeInstanceManager::create_entity_relation_attribute_type_instance(const ENT_REL_ATTR_TYPE& ent_rel_attr_type)
+	ENT_REL_ATTR_INST EntityRelationAttributeInstanceManager::create_entity_relation_attribute_instance(const ENT_REL_ATTR_TYPE& ent_rel_attr_type)
 	{
 		// Create a new entity relation attribute type instance.
 		ENT_REL_ATTR_INST new_ent_rel_attr_inst = std::make_shared<EntityRelationAttributeInstance>(ent_rel_attr_type);
@@ -33,7 +33,7 @@ namespace entity_system {
 	}
 
 
-	const std::size_t EntityRelationAttributeInstanceManager::get_entity_relation_attribute_type_instance_count() const
+	const std::size_t EntityRelationAttributeInstanceManager::get_entity_relation_attribute_instance_count() const
 	{
 		return get_instance_count();
 	}

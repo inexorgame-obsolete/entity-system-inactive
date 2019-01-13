@@ -21,10 +21,10 @@ namespace entity_system {
 		private:
 		
 			/// The source entity type instance.
-			ENT_INST source_entity_type_instance;
+			ENT_INST source_entity_instance;
 
 			/// The target entity type instance.
-			ENT_INST destination_entity_type_instance;
+			ENT_INST destination_entity_instance;
 			
 			/// Entity relation attribute type instances stored by entity relation attribute types.
 			std::unordered_map<ENT_REL_ATTR_TYPE, ENT_REL_ATTR_INST> relation_attribute_instances;

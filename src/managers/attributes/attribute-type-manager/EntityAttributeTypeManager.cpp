@@ -2,14 +2,10 @@
 // (c)2018-2019 Inexor
 
 #include "EntityAttributeTypeManager.hpp"
-#include "../../../EntitySystem.hpp"
 
 
 namespace inexor {
 namespace entity_system {
-
-
-	extern std::shared_ptr<EntitySystem> entsys;
 
 
     EntityAttributeTypeManager::EntityAttributeTypeManager() : TypeManagerTemplate(entity_attribute_type_error)
