@@ -19,11 +19,6 @@ namespace entity_system {
 		/// Reset entity system at shutdown.
 		reset_entity_system();
 	}
-
-
-	// Create one single instance of the entity system.
-	// @note The entity system has no singleton implementation for now.
-	std::shared_ptr<EntitySystem> entsys = std::make_shared<EntitySystem>();
 	
 
 };

@@ -11,8 +11,9 @@ namespace inexor {
 namespace entity_system {
 
 
-	RestServer::RestServer()
+	RestServer::RestServer(std::shared_ptr<inexor::entity_system::EntitySystem> entity_system)
 	{
+		this->entity_system = entity_system;
 		entity_system_api = make_shared<EntitySystemApi>();
 		entity_type_api = make_shared<EntityTypeApi>();
 		relationship_type_api = make_shared<RelationshipTypeApi>();

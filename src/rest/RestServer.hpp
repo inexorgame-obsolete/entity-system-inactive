@@ -14,6 +14,7 @@
 //#include <corvusoft/restbed/resource.hpp>
 //#include <corvusoft/restbed/service.hpp>
 
+#include "../EntitySystem.hpp"
 #include "api/EntitySystemApi.h"
 #include "api/EntityTypeApi.h"
 #include "api/RelationshipTypeApi.h"
@@ -33,7 +34,7 @@ namespace entity_system {
 		public:
 
 			/// Constructor.
-			RestServer();
+			RestServer(std::shared_ptr<inexor::entity_system::EntitySystem> entity_system);
 
 			/// Destructor.
 			~RestServer();
@@ -43,6 +44,7 @@ namespace entity_system {
 			void stop_services();
 
 		private:
+			std::shared_ptr<inexor::entity_system::EntitySystem> entity_system;
 			std::shared_ptr<EntitySystemApi> entity_system_api;
 			std::shared_ptr<EntityTypeApi> entity_type_api;
 			std::shared_ptr<RelationshipTypeApi> relationship_type_api;

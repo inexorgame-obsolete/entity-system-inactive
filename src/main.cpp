@@ -12,6 +12,8 @@
 
 using namespace inexor::entity_system;
 
+std::shared_ptr<inexor::entity_system::EntitySystem> entity_system;
+
 std::shared_ptr<RestServer> rest_server;
 
 #ifdef __linux__
@@ -54,9 +56,13 @@ int main(int argc, char* argv[])
     setUpUnixSignals(sigs);
 #endif
 
+	// Create one single instance of the entity system.
+	// @note The entity system has no singleton implementation for now.
+	entity_system = std::make_shared<inexor::entity_system::EntitySystem>();
+
     // Setup REST server
 	std::cout << "Starting REST server" << std::endl;
-    rest_server = std::make_shared<RestServer>();
+    rest_server = std::make_shared<RestServer>(entity_system);
     rest_server->start_services();
     return 0;
 
