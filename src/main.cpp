@@ -1,10 +1,16 @@
 // Inexor entity system prototype
 // (c)2018-2019 Inexor
 
-#ifdef __linux__
-#include <vector>
-#include <signal.h>
-#include <unistd.h>
+#include <memory>
+#include <cstdlib>
+#include <restbed>
+#include <csignal>
+#include <sys/types.h>
+
+#ifdef _WIN32
+    #include <process.h>
+#else
+    #include <unistd.h>
 #endif
 
 #include "EntitySystem.hpp"
@@ -24,46 +30,30 @@ namespace entity_system {
 
 using namespace inexor::entity_system;
 
-#ifdef __linux__
-static void sigHandler(int sig){
-    switch(sig){
-        case SIGINT:
-        case SIGQUIT:
-        case SIGTERM:
-        case SIGHUP:
-        default:
-        	std::cout << "Stopping REST server on port " << rest_server_port << std::endl;
-        	rest_server->stopService();
-            break;
-    }
-    exit(0);
+void sighup_handler( const int signal_number )
+{
+	std::cout << "Received SIGINT signal number " << signal_number << std::endl << "Stopping REST server on port " << rest_server_port << std::endl;
+	rest_server->stopService();
 }
 
-static void setUpUnixSignals(std::vector<int> quitSignals) {
-    sigset_t blocking_mask;
-    sigemptyset(&blocking_mask);
-    for (auto sig : quitSignals)
-        sigaddset(&blocking_mask, sig);
-
-    struct sigaction sa;
-    sa.sa_handler = sigHandler;
-    sa.sa_mask    = blocking_mask;
-    sa.sa_flags   = 0;
-
-    for (auto sig : quitSignals)
-        sigaction(sig, &sa, nullptr);
+void sigterm_handler( const int signal_number )
+{
+	std::cout << "Received SIGTERM signal number " << signal_number << std::endl << "Stopping REST server on port " << rest_server_port << std::endl;
+	rest_server->stopService();
 }
+
+void ready_handler( Service& )
+{
+#ifdef _WIN32
+	std::cout << "REST server on port " << rest_server_port << " is ready (PID: " << _getpid() << ")" << std::endl;
+#else
+	std::cout << "REST server on port " << rest_server_port << " is ready (PID: " << getpid() << ")" << std::endl;
 #endif
+}
 
 int main(int argc, char* argv[])
 {
 	std::cout << "Inexor Entity System (c) 2018-2019" << std::endl;
-
-	// Setup signal handling
-#ifdef __linux__
-    std::vector<int> sigs{SIGQUIT, SIGINT, SIGTERM, SIGHUP};
-    setUpUnixSignals(sigs);
-#endif
 
 	// Create one single instance of the entity system.
 	// @note The entity system has no singleton implementation for now.
@@ -83,8 +73,12 @@ int main(int argc, char* argv[])
 	std::cout << "Starting REST server on port " << rest_server_port << std::endl;
     rest_server = std::make_shared<RestServer>(entity_system);
     rest_server->set_service(rest_server);
+    rest_server->set_ready_handler(ready_handler);
+    rest_server->set_signal_handler(SIGINT, sighup_handler);
+    rest_server->set_signal_handler(SIGTERM, sigterm_handler);
     rest_server->create_resources();
     rest_server->startService(rest_server_port);
-    return 0;
+	std::cout << "Exit" << std::endl;
+    return EXIT_SUCCESS;
 
 }
