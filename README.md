@@ -1,7 +1,7 @@
 # Inexor entity-system prototype
 
 This entity-system will lay the basis on the other systems of the game will be built on.
-For more information take a look at the [wiki](https://github.com/inexorgame/entity-system/wiki).
+For more information take a look at the [wiki](https://inexor.org/wiki/features/entities/#the-goal).
 
 ## Prerequirements
 
