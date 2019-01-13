@@ -20,13 +20,7 @@ include(${CMAKE_CURRENT_BINARY_DIR}/conan.cmake)
 
 
 if (NOT CMAKE_BUILD_TYPE)
-   if (NOT APPLE)
-      # We need Debug mode on WIN32 and UNIX!
-      set(CMAKE_BUILD_TYPE "Debug")
-   else()
-      # TODO: Fix Mac OSX issues!
-      set(CMAKE_BUILD_TYPE "Release")
-   endif(NOT APPLE)
+    set(CMAKE_BUILD_TYPE "Debug")
 endif(NOT CMAKE_BUILD_TYPE)
 
 conan_check(VERSION 1.4.0 REQUIRED)
