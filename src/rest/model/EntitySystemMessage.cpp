@@ -43,8 +43,8 @@ std::string EntitySystemMessage::toJsonString()
 {
 	std::stringstream ss;
 	ptree pt;
-	pt.put("Code", m_Code);
-	pt.put("Message", m_Message);
+	pt.put("code", m_Code);
+	pt.put("message", m_Message);
 	write_json(ss, pt, false);
 	return ss.str();
 }
@@ -54,8 +54,8 @@ void EntitySystemMessage::fromJsonString(std::string const& jsonString)
 	std::stringstream ss(jsonString);
 	ptree pt;
 	read_json(ss,pt);
-	m_Code = pt.get("Code", 0);
-	m_Message = pt.get("Message", "");
+	m_Code = pt.get("code", 0);
+	m_Message = pt.get("message", "");
 }
 
 int32_t EntitySystemMessage::getCode() const

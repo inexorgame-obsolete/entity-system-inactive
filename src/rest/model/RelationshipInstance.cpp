@@ -45,10 +45,10 @@ std::string RelationshipInstance::toJsonString()
 {
 	std::stringstream ss;
 	ptree pt;
-	pt.put("Relationship_instance_uuid", m_Relationship_instance_uuid);
-	pt.put("Relationship_type_uuid", m_Relationship_type_uuid);
-	pt.put("Start_node_entity_instance_uuid", m_Start_node_entity_instance_uuid);
-	pt.put("End_node_entity_instance_uuid", m_End_node_entity_instance_uuid);
+	pt.put("relationship_instance_uuid", m_Relationship_instance_uuid);
+	pt.put("relationship_type_uuid", m_Relationship_type_uuid);
+	pt.put("start_node_entity_instance_uuid", m_Start_node_entity_instance_uuid);
+	pt.put("end_node_entity_instance_uuid", m_End_node_entity_instance_uuid);
 	write_json(ss, pt, false);
 	return ss.str();
 }
@@ -58,10 +58,10 @@ void RelationshipInstance::fromJsonString(std::string const& jsonString)
 	std::stringstream ss(jsonString);
 	ptree pt;
 	read_json(ss,pt);
-	m_Relationship_instance_uuid = pt.get("Relationship_instance_uuid", "");
-	m_Relationship_type_uuid = pt.get("Relationship_type_uuid", "");
-	m_Start_node_entity_instance_uuid = pt.get("Start_node_entity_instance_uuid", "");
-	m_End_node_entity_instance_uuid = pt.get("End_node_entity_instance_uuid", "");
+	m_Relationship_instance_uuid = pt.get("relationship_instance_uuid", "");
+	m_Relationship_type_uuid = pt.get("relationship_type_uuid", "");
+	m_Start_node_entity_instance_uuid = pt.get("start_node_entity_instance_uuid", "");
+	m_End_node_entity_instance_uuid = pt.get("end_node_entity_instance_uuid", "");
 }
 
 std::string RelationshipInstance::getRelationshipInstanceUuid() const

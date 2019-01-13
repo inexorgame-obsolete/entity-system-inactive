@@ -45,10 +45,10 @@ std::string Attribute::toJsonString()
 {
 	std::stringstream ss;
 	ptree pt;
-	pt.put("Attribute_uuid", m_Attribute_uuid);
-	pt.put("Name", m_Name);
-	pt.put("Datatype", m_Datatype);
-	pt.put("Value", m_Value);
+	pt.put("attribute_uuid", m_Attribute_uuid);
+	pt.put("name", m_Name);
+	pt.put("datatype", m_Datatype);
+	pt.put("value", m_Value);
 	write_json(ss, pt, false);
 	return ss.str();
 }
@@ -58,10 +58,10 @@ void Attribute::fromJsonString(std::string const& jsonString)
 	std::stringstream ss(jsonString);
 	ptree pt;
 	read_json(ss,pt);
-	m_Attribute_uuid = pt.get("Attribute_uuid", "");
-	m_Name = pt.get("Name", "");
-	m_Datatype = pt.get("Datatype", "");
-	m_Value = pt.get("Value", "");
+	m_Attribute_uuid = pt.get("attribute_uuid", "");
+	m_Name = pt.get("name", "");
+	m_Datatype = pt.get("datatype", "");
+	m_Value = pt.get("value", "");
 }
 
 std::string Attribute::getAttributeUuid() const

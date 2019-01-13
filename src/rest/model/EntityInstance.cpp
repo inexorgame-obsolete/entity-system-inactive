@@ -43,8 +43,8 @@ std::string EntityInstance::toJsonString()
 {
 	std::stringstream ss;
 	ptree pt;
-	pt.put("Entity_instance_uuid", m_Entity_instance_uuid);
-	pt.put("Entity_type_uuid", m_Entity_type_uuid);
+	pt.put("entity_instance_uuid", m_Entity_instance_uuid);
+	pt.put("entity_type_uuid", m_Entity_type_uuid);
 	write_json(ss, pt, false);
 	return ss.str();
 }
@@ -54,8 +54,8 @@ void EntityInstance::fromJsonString(std::string const& jsonString)
 	std::stringstream ss(jsonString);
 	ptree pt;
 	read_json(ss,pt);
-	m_Entity_instance_uuid = pt.get("Entity_instance_uuid", "");
-	m_Entity_type_uuid = pt.get("Entity_type_uuid", "");
+	m_Entity_instance_uuid = pt.get("entity_instance_uuid", "");
+	m_Entity_type_uuid = pt.get("entity_type_uuid", "");
 }
 
 std::string EntityInstance::getEntityInstanceUuid() const
