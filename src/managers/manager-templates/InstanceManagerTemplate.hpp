@@ -25,8 +25,8 @@ namespace entity_system {
 	{
 		private:
 
-
-            std::vector<std::shared_ptr<T>> stored_instances;
+            // 
+            std::unordered_map<xg::Guid, std::shared_ptr<T>> stored_instances;
 
 			// This error instance will be returned when a method fails.
 			// It will be set when the constructor is called
@@ -59,9 +59,17 @@ namespace entity_system {
 			{
 				// Use lock guard to ensure thread safety for this write operation!
 				std::lock_guard<std::mutex> lock(type_instance_manager_mutex);
-				//stored_type_instances[type_GUID] = type_instance;
-                stored_instances.push_back(instance);
+				stored_instances[type_GUID] = instance;
 			}
+
+
+            /// Checks if an instance does already exist.
+            /// @param instance_GUID The GUID of the instance.
+            bool does_instance_exist(const xg::Guid instance_GUID)
+            {
+                // Read only, no mutex required.
+				return !(stored_tstored_instancesypes.end() == stored_instances.find(instance_GUID));
+            }
 
 
 			/// Returns the number of existing instances.
@@ -72,8 +80,37 @@ namespace entity_system {
 				return stored_instances.size();
 			}
 
+            
+            // TODO: Get all instances of a certain type!
 
-			/// Deletes all instances.
+
+            /// Returns a specific instance.
+            /// @param type_GUID The GUID of the instance.
+			std::shared_ptr<T> get_instance(const xg::Guid& type_GUID)
+			{
+                // Check if an instance with this GUID exists.
+                if(does_instance_exist(type_GUID))
+                {
+                    // An instance with this GUID exists!
+                    return stored_instances[type_GUID];
+                }
+                // If it does not exist, return error instance!
+                return error_instance;
+			}
+
+
+			/// Deletes a specific instance
+            /// @param type_GUID The GUID of the instance which should be deleted!
+			void delete_instance(const xg::Guid& type_GUID)
+			{
+				// Use lock guard to ensure thread safety for this write operation!
+				std::lock_guard<std::mutex> lock(type_instance_manager_mutex);
+				// Erase the instance.
+				stored_instances.erase(type_GUID);
+			}
+
+            
+            /// Deletes all instances.
 			void delete_all_instances()
 			{
 				// Use lock guard to ensure thread safety for this write operation!
@@ -81,25 +118,6 @@ namespace entity_system {
 				stored_instances.clear();
 			}
 
-
-			/// 
-			void delete_instance(const xg::Guid& type_GUID)
-			{
-				// Use lock guard to ensure thread safety for this write operation!
-				std::lock_guard<std::mutex> lock(type_instance_manager_mutex);
-				// Erase the instance.
-				//stored_type_instances.erase(type_GUID);
-                // TODO: FIXTHIS!
-			}
-
-
-            /// 
-			std::shared_ptr<T> get_instance(const xg::Guid&)
-			{
-				// Read only, no mutex required.
-                // TODO: Implement!
-				return error_instance;
-			}
 			
 	};
 

@@ -10,16 +10,12 @@ namespace entity_system {
 
     DataContainer::DataContainer(const ENTSYS_DATA_TYPE& param_data_type)
     {
-		// Use lock guard to ensure thread safety for this write operation!
-		std::lock_guard<std::mutex> lock(data_container_mutex);
 		data_type = param_data_type;
     }
 
 
     DataContainer::DataContainer(const std::int64_t& int64val)
 	{
-		// Use lock guard to ensure thread safety for this write operation!
-		std::lock_guard<std::mutex> lock(data_container_mutex);
 		data_type = ENTSYS_DATA_TYPE_BIG_INT;
 		data_int64 = int64val;
     }
@@ -27,8 +23,6 @@ namespace entity_system {
 
     DataContainer::DataContainer(const double& double_val)
     {
-		// Use lock guard to ensure thread safety for this write operation!
-		std::lock_guard<std::mutex> lock(data_container_mutex);
 		data_type = ENTSYS_DATA_TYPE_DOUBLE;
 		data_double = double_val;
     }
@@ -36,8 +30,6 @@ namespace entity_system {
 
     DataContainer::DataContainer(const float& float_val)
     {
-		// Use lock guard to ensure thread safety for this write operation!
-		std::lock_guard<std::mutex> lock(data_container_mutex);
 		data_type = ENTSYS_DATA_TYPE_FLOAT;
 		data_float = float_val;
     }
@@ -45,8 +37,6 @@ namespace entity_system {
 
     DataContainer::DataContainer(const bool& bool_val)
     {
-		// Use lock guard to ensure thread safety for this write operation!
-		std::lock_guard<std::mutex> lock(data_container_mutex);
 		data_type = ENTSYS_DATA_TYPE_BOOL;
 		data_bool = bool_val;
     }
@@ -54,8 +44,6 @@ namespace entity_system {
 
     DataContainer::DataContainer(const std::string& string_val)
     {
-		// Use lock guard to ensure thread safety for this write operation!
-		std::lock_guard<std::mutex> lock(data_container_mutex);
 		data_type = ENTSYS_DATA_TYPE_STRING;
 		data_string = string_val;
     }
@@ -63,8 +51,6 @@ namespace entity_system {
 
     DataContainer::DataContainer(const int& int_val)
     {
-		// Use lock guard to ensure thread safety for this write operation!
-		std::lock_guard<std::mutex> lock(data_container_mutex);
 		data_type = ENTSYS_DATA_TYPE_INT;
 		data_int = int_val;
     }
@@ -79,23 +65,19 @@ namespace entity_system {
 
     void DataContainer::reset_memory()
 	{
-		// Use lock guard to ensure thread safety for this write operation!
-		std::lock_guard<std::mutex> lock(data_container_mutex);
-        data_type = ENTSYS_DATA_TYPE_UNDEFINED;
-		data_int64 = 0;
-		data_string = "";
-		data_double = 0.0;
-		data_float = 0.0f;
-		data_bool = false;
-		data_int = 0;
-		// TODO: Add more reset mechanisms here.
+      data_type = ENTSYS_DATA_TYPE_UNDEFINED;
+      data_int64 = 0;
+      data_string = "";
+      data_double = 0.0;
+      data_float = 0.0f;
+      data_bool = false;
+      data_int = 0;
+      // TODO: Add more reset mechanisms here.
 	}
 
 
     void DataContainer::set_data_type(const ENTSYS_DATA_TYPE& param_data_type)
     {
-		// Use lock guard to ensure thread safety for this write operation!
-		std::lock_guard<std::mutex> lock(data_container_mutex);
 		reset_memory();
 		data_type = param_data_type;
     }
@@ -103,15 +85,13 @@ namespace entity_system {
 
     ENTSYS_DATA_TYPE DataContainer::get_data_type() const
     {
-        // Read only, no mutex required.
-		return data_type;
+      // Read only, no mutex required.
+      return data_type;
     }
 
 
 	DataContainer DataContainer::set_data(const DataContainer& data_container)
 	{
-		// Use lock guard to ensure thread safety for this write operation!
-		std::lock_guard<std::mutex> lock(data_container_mutex);
 	    switch(data_container.get_data_type())
 		{
 			case ENTSYS_DATA_TYPE_BIG_INT:
@@ -135,14 +115,12 @@ namespace entity_system {
 			case ENTSYS_DATA_TYPE_UNDEFINED:
 				break;
 		}
-		return *this;
+		return DataContainer(this);
 	}
 
 			
 	DataContainer DataContainer::set_data(const std::int64_t& int64_val)
 	{
-		// Use lock guard to ensure thread safety for this write operation!
-		std::lock_guard<std::mutex> lock(data_container_mutex);
 		switch(data_type)
 		{
 			case ENTSYS_DATA_TYPE_BIG_INT:
@@ -167,14 +145,12 @@ namespace entity_system {
 			case ENTSYS_DATA_TYPE_UNDEFINED:
 				break;
 		}
-		return *this;
+		return DataContainer(this);
 	}
 	
 	
 	DataContainer DataContainer::set_data(const std::string& string_val)
 	{
-		// Use lock guard to ensure thread safety for this write operation!
-		std::lock_guard<std::mutex> lock(data_container_mutex);
 		switch(data_type)
 		{
 			case ENTSYS_DATA_TYPE_BIG_INT:
@@ -198,14 +174,12 @@ namespace entity_system {
 			case ENTSYS_DATA_TYPE_UNDEFINED:
 				break;
 		}
-		return *this;
+		return DataContainer(this);
 	}
 	
 	
 	DataContainer DataContainer::set_data(const double& double_val)
 	{
-		// Use lock guard to ensure thread safety for this write operation!
-		std::lock_guard<std::mutex> lock(data_container_mutex);
 		switch(data_type)
 		{
 			case ENTSYS_DATA_TYPE_BIG_INT:
@@ -229,14 +203,12 @@ namespace entity_system {
 			case ENTSYS_DATA_TYPE_UNDEFINED:
 				break;
 		}
-		return *this;
+		return DataContainer(this);
 	}
 
 
 	DataContainer DataContainer::set_data(const float& float_val)
 	{
-		// Use lock guard to ensure thread safety for this write operation!
-		std::lock_guard<std::mutex> lock(data_container_mutex);
 		switch(data_type)
 		{
 			case ENTSYS_DATA_TYPE_BIG_INT:
@@ -260,14 +232,12 @@ namespace entity_system {
 			case ENTSYS_DATA_TYPE_UNDEFINED:
 				break;
 		}
-		return *this;
+		return DataContainer(this);
 	}
 
 
 	DataContainer DataContainer::set_data(const bool& bool_val)
 	{
-		// Use lock guard to ensure thread safety for this write operation!
-		std::lock_guard<std::mutex> lock(data_container_mutex);
 		switch(data_type)
 		{
 			case ENTSYS_DATA_TYPE_BIG_INT:
@@ -291,14 +261,12 @@ namespace entity_system {
 			case ENTSYS_DATA_TYPE_UNDEFINED:
 				break;
 		}
-		return *this;
+		return DataContainer(this);
 	}
 
 
 	DataContainer DataContainer::set_data(const int& int_val)
 	{
-		// Use lock guard to ensure thread safety for this write operation!
-		std::lock_guard<std::mutex> lock(data_container_mutex);
 		switch(data_type)
 		{
 			case ENTSYS_DATA_TYPE_BIG_INT:
@@ -322,7 +290,7 @@ namespace entity_system {
 			case ENTSYS_DATA_TYPE_UNDEFINED:
 				break;
 		}
-		return *this;
+		return DataContainer(this);
 	}
 
 

@@ -25,29 +25,29 @@ namespace entity_system {
     {
         private:
 
-			/// The data type of this data container.
+            /// The data type of this data container.
             ENTSYS_DATA_TYPE data_type = ENTSYS_DATA_TYPE_UNDEFINED;
 
-			/// A 64 bit integer variable for storing data in the container.
-			std::int64_t data_int64 = 0;
+            /// A 64 bit integer variable for storing data in the container.
+            std::int64_t data_int64 = 0;
 
-			/// A std::string variable for storing data in the container.
-			std::string data_string = "";
+            /// A std::string variable for storing data in the container.
+            std::string data_string = "";
 
-			/// A double variable for storing data in the container.
-			double data_double = 0.0;
+            /// A double variable for storing data in the container.
+            double data_double = 0.0;
 
-			/// A float variable for storing data in the container.
-			float data_float = 0.0f;
+            /// A float variable for storing data in the container.
+            float data_float = 0.0f;
 
-			/// A boolean variable for storing data in the container.
-			bool data_bool = false;
+            /// A boolean variable for storing data in the container.
+            bool data_bool = false;
 
-			/// An integer variable for storing data in the container.
-			int data_int = 0;
-			
+            /// An integer variable for storing data in the container.
+            int data_int = 0;
+
             /// 
-            std::mutex data_container_mutex;
+            //std::mutex data_container_mutex;
 
 		public:
 
