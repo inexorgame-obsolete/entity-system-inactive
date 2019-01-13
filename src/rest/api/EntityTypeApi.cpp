@@ -25,29 +25,29 @@ namespace api {
 
 using namespace inexor::entity_system::rest::model;
 
-EntityTypeApi::EntityTypeApi() {
+EntityTypeApi::EntityTypeApi(std::shared_ptr<inexor::entity_system::EntitySystem> entity_system) {
 	std::shared_ptr<EntityTypeApiEntitiesTypesResource> spEntityTypeApiEntitiesTypesResource = std::make_shared<EntityTypeApiEntitiesTypesResource>();
 	this->publish(spEntityTypeApiEntitiesTypesResource);
 	
-	std::shared_ptr<EntityTypeApiEntitiesTypesEntity_type_uuidResource> spEntityTypeApiEntitiesTypesEntity_type_uuidResource = std::make_shared<EntityTypeApiEntitiesTypesEntity_type_uuidResource>();
+	std::shared_ptr<EntityTypeApiEntitiesTypesEntity_type_uuidResource> spEntityTypeApiEntitiesTypesEntity_type_uuidResource = std::make_shared<EntityTypeApiEntitiesTypesEntity_type_uuidResource>(entity_system);
 	this->publish(spEntityTypeApiEntitiesTypesEntity_type_uuidResource);
 	
-	std::shared_ptr<EntityTypeApiEntitiesTypesEntity_type_uuidAttributesNameResource> spEntityTypeApiEntitiesTypesEntity_type_uuidAttributesNameResource = std::make_shared<EntityTypeApiEntitiesTypesEntity_type_uuidAttributesNameResource>();
+	std::shared_ptr<EntityTypeApiEntitiesTypesEntity_type_uuidAttributesNameResource> spEntityTypeApiEntitiesTypesEntity_type_uuidAttributesNameResource = std::make_shared<EntityTypeApiEntitiesTypesEntity_type_uuidAttributesNameResource>(entity_system);
 	this->publish(spEntityTypeApiEntitiesTypesEntity_type_uuidAttributesNameResource);
 	
-	std::shared_ptr<EntityTypeApiEntitiesTypesEntity_type_uuidInstancesResource> spEntityTypeApiEntitiesTypesEntity_type_uuidInstancesResource = std::make_shared<EntityTypeApiEntitiesTypesEntity_type_uuidInstancesResource>();
+	std::shared_ptr<EntityTypeApiEntitiesTypesEntity_type_uuidInstancesResource> spEntityTypeApiEntitiesTypesEntity_type_uuidInstancesResource = std::make_shared<EntityTypeApiEntitiesTypesEntity_type_uuidInstancesResource>(entity_system);
 	this->publish(spEntityTypeApiEntitiesTypesEntity_type_uuidInstancesResource);
 	
-	std::shared_ptr<EntityTypeApiEntitiesTypesEntity_type_uuidRelationshipsIncomingResource> spEntityTypeApiEntitiesTypesEntity_type_uuidRelationshipsIncomingResource = std::make_shared<EntityTypeApiEntitiesTypesEntity_type_uuidRelationshipsIncomingResource>();
+	std::shared_ptr<EntityTypeApiEntitiesTypesEntity_type_uuidRelationshipsIncomingResource> spEntityTypeApiEntitiesTypesEntity_type_uuidRelationshipsIncomingResource = std::make_shared<EntityTypeApiEntitiesTypesEntity_type_uuidRelationshipsIncomingResource>(entity_system);
 	this->publish(spEntityTypeApiEntitiesTypesEntity_type_uuidRelationshipsIncomingResource);
 	
-	std::shared_ptr<EntityTypeApiEntitiesTypesEntity_type_uuidRelationshipsOutgoingResource> spEntityTypeApiEntitiesTypesEntity_type_uuidRelationshipsOutgoingResource = std::make_shared<EntityTypeApiEntitiesTypesEntity_type_uuidRelationshipsOutgoingResource>();
+	std::shared_ptr<EntityTypeApiEntitiesTypesEntity_type_uuidRelationshipsOutgoingResource> spEntityTypeApiEntitiesTypesEntity_type_uuidRelationshipsOutgoingResource = std::make_shared<EntityTypeApiEntitiesTypesEntity_type_uuidRelationshipsOutgoingResource>(entity_system);
 	this->publish(spEntityTypeApiEntitiesTypesEntity_type_uuidRelationshipsOutgoingResource);
 	
-	std::shared_ptr<EntityTypeApiEntitiesTypesEntity_type_uuidRelationshipsResource> spEntityTypeApiEntitiesTypesEntity_type_uuidRelationshipsResource = std::make_shared<EntityTypeApiEntitiesTypesEntity_type_uuidRelationshipsResource>();
+	std::shared_ptr<EntityTypeApiEntitiesTypesEntity_type_uuidRelationshipsResource> spEntityTypeApiEntitiesTypesEntity_type_uuidRelationshipsResource = std::make_shared<EntityTypeApiEntitiesTypesEntity_type_uuidRelationshipsResource>(entity_system);
 	this->publish(spEntityTypeApiEntitiesTypesEntity_type_uuidRelationshipsResource);
 	
-	std::shared_ptr<EntityTypeApiEntitiesTypesEntity_type_uuidAttributesResource> spEntityTypeApiEntitiesTypesEntity_type_uuidAttributesResource = std::make_shared<EntityTypeApiEntitiesTypesEntity_type_uuidAttributesResource>();
+	std::shared_ptr<EntityTypeApiEntitiesTypesEntity_type_uuidAttributesResource> spEntityTypeApiEntitiesTypesEntity_type_uuidAttributesResource = std::make_shared<EntityTypeApiEntitiesTypesEntity_type_uuidAttributesResource>(entity_system);
 	this->publish(spEntityTypeApiEntitiesTypesEntity_type_uuidAttributesResource);
 	
 }
@@ -66,8 +66,9 @@ void EntityTypeApi::stopService() {
 	this->stop();
 }
 
-EntityTypeApiEntitiesTypesResource::EntityTypeApiEntitiesTypesResource()
+EntityTypeApiEntitiesTypesResource::EntityTypeApiEntitiesTypesResource(std::shared_ptr<inexor::entity_system::EntitySystem> entity_system)
 {
+	this->entity_system = entity_system;
 	this->set_path("/entities/types/");
 	this->set_method_handler("POST",
 		std::bind(&EntityTypeApiEntitiesTypesResource::POST_method_handler, this,
@@ -163,8 +164,9 @@ void EntityTypeApiEntitiesTypesResource::GET_method_handler(const std::shared_pt
 }
 
 
-EntityTypeApiEntitiesTypesEntity_type_uuidResource::EntityTypeApiEntitiesTypesEntity_type_uuidResource()
+EntityTypeApiEntitiesTypesEntity_type_uuidResource::EntityTypeApiEntitiesTypesEntity_type_uuidResource(std::shared_ptr<inexor::entity_system::EntitySystem> entity_system)
 {
+	this->entity_system = entity_system;
 	this->set_path("/entities/types/{entity_type_uuid: .*}/");
 	this->set_method_handler("POST",
 		std::bind(&EntityTypeApiEntitiesTypesEntity_type_uuidResource::POST_method_handler, this,
@@ -278,8 +280,9 @@ void EntityTypeApiEntitiesTypesEntity_type_uuidResource::GET_method_handler(cons
 }
 
 
-EntityTypeApiEntitiesTypesEntity_type_uuidAttributesNameResource::EntityTypeApiEntitiesTypesEntity_type_uuidAttributesNameResource()
+EntityTypeApiEntitiesTypesEntity_type_uuidAttributesNameResource::EntityTypeApiEntitiesTypesEntity_type_uuidAttributesNameResource(std::shared_ptr<inexor::entity_system::EntitySystem> entity_system)
 {
+	this->entity_system = entity_system;
 	this->set_path("/entities/types/{entity_type_uuid: .*}/attributes/{name: .*}/");
 	this->set_method_handler("POST",
 		std::bind(&EntityTypeApiEntitiesTypesEntity_type_uuidAttributesNameResource::POST_method_handler, this,
@@ -396,8 +399,9 @@ void EntityTypeApiEntitiesTypesEntity_type_uuidAttributesNameResource::GET_metho
 }
 
 
-EntityTypeApiEntitiesTypesEntity_type_uuidInstancesResource::EntityTypeApiEntitiesTypesEntity_type_uuidInstancesResource()
+EntityTypeApiEntitiesTypesEntity_type_uuidInstancesResource::EntityTypeApiEntitiesTypesEntity_type_uuidInstancesResource(std::shared_ptr<inexor::entity_system::EntitySystem> entity_system)
 {
+	this->entity_system = entity_system;
 	this->set_path("/entities/types/{entity_type_uuid: .*}/instances/");
 	this->set_method_handler("DELETE",
 		std::bind(&EntityTypeApiEntitiesTypesEntity_type_uuidInstancesResource::DELETE_method_handler, this,
@@ -468,8 +472,9 @@ void EntityTypeApiEntitiesTypesEntity_type_uuidInstancesResource::GET_method_han
 }
 
 
-EntityTypeApiEntitiesTypesEntity_type_uuidRelationshipsIncomingResource::EntityTypeApiEntitiesTypesEntity_type_uuidRelationshipsIncomingResource()
+EntityTypeApiEntitiesTypesEntity_type_uuidRelationshipsIncomingResource::EntityTypeApiEntitiesTypesEntity_type_uuidRelationshipsIncomingResource(std::shared_ptr<inexor::entity_system::EntitySystem> entity_system)
 {
+	this->entity_system = entity_system;
 	this->set_path("/entities/types/{entity_type_uuid: .*}/relationships/incoming/");
 	this->set_method_handler("GET",
 		std::bind(&EntityTypeApiEntitiesTypesEntity_type_uuidRelationshipsIncomingResource::GET_method_handler, this,
@@ -509,8 +514,9 @@ void EntityTypeApiEntitiesTypesEntity_type_uuidRelationshipsIncomingResource::GE
 
 
 
-EntityTypeApiEntitiesTypesEntity_type_uuidRelationshipsOutgoingResource::EntityTypeApiEntitiesTypesEntity_type_uuidRelationshipsOutgoingResource()
+EntityTypeApiEntitiesTypesEntity_type_uuidRelationshipsOutgoingResource::EntityTypeApiEntitiesTypesEntity_type_uuidRelationshipsOutgoingResource(std::shared_ptr<inexor::entity_system::EntitySystem> entity_system)
 {
+	this->entity_system = entity_system;
 	this->set_path("/entities/types/{entity_type_uuid: .*}/relationships/outgoing/");
 	this->set_method_handler("GET",
 		std::bind(&EntityTypeApiEntitiesTypesEntity_type_uuidRelationshipsOutgoingResource::GET_method_handler, this,
@@ -550,8 +556,9 @@ void EntityTypeApiEntitiesTypesEntity_type_uuidRelationshipsOutgoingResource::GE
 
 
 
-EntityTypeApiEntitiesTypesEntity_type_uuidRelationshipsResource::EntityTypeApiEntitiesTypesEntity_type_uuidRelationshipsResource()
+EntityTypeApiEntitiesTypesEntity_type_uuidRelationshipsResource::EntityTypeApiEntitiesTypesEntity_type_uuidRelationshipsResource(std::shared_ptr<inexor::entity_system::EntitySystem> entity_system)
 {
+	this->entity_system = entity_system;
 	this->set_path("/entities/types/{entity_type_uuid: .*}/relationships/");
 	this->set_method_handler("GET",
 		std::bind(&EntityTypeApiEntitiesTypesEntity_type_uuidRelationshipsResource::GET_method_handler, this,
@@ -591,8 +598,9 @@ void EntityTypeApiEntitiesTypesEntity_type_uuidRelationshipsResource::GET_method
 
 
 
-EntityTypeApiEntitiesTypesEntity_type_uuidAttributesResource::EntityTypeApiEntitiesTypesEntity_type_uuidAttributesResource()
+EntityTypeApiEntitiesTypesEntity_type_uuidAttributesResource::EntityTypeApiEntitiesTypesEntity_type_uuidAttributesResource(std::shared_ptr<inexor::entity_system::EntitySystem> entity_system)
 {
+	this->entity_system = entity_system;
 	this->set_path("/entities/types/{entity_type_uuid: .*}/attributes/");
 	this->set_method_handler("GET",
 		std::bind(&EntityTypeApiEntitiesTypesEntity_type_uuidAttributesResource::GET_method_handler, this,

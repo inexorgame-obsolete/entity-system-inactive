@@ -25,7 +25,7 @@ namespace api {
 
 using namespace inexor::entity_system::rest::model;
 
-EntityInstanceApi::EntityInstanceApi() {
+EntityInstanceApi::EntityInstanceApi(std::shared_ptr<inexor::entity_system::EntitySystem> entity_system) {
 	std::shared_ptr<EntityInstanceApiEntitiesInstancesResource> spEntityInstanceApiEntitiesInstancesResource = std::make_shared<EntityInstanceApiEntitiesInstancesResource>();
 	this->publish(spEntityInstanceApiEntitiesInstancesResource);
 	

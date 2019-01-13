@@ -25,7 +25,7 @@ namespace api {
 
 using namespace inexor::entity_system::rest::model;
 
-RelationshipTypeApi::RelationshipTypeApi() {
+RelationshipTypeApi::RelationshipTypeApi(std::shared_ptr<inexor::entity_system::EntitySystem> entity_system) {
 	std::shared_ptr<RelationshipTypeApiRelationshipsTypesRelationship_type_uuidResource> spRelationshipTypeApiRelationshipsTypesRelationship_type_uuidResource = std::make_shared<RelationshipTypeApiRelationshipsTypesRelationship_type_uuidResource>();
 	this->publish(spRelationshipTypeApiRelationshipsTypesRelationship_type_uuidResource);
 	

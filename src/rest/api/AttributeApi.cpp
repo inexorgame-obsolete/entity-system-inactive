@@ -25,7 +25,7 @@ namespace api {
 
 using namespace inexor::entity_system::rest::model;
 
-AttributeApi::AttributeApi() {
+AttributeApi::AttributeApi(std::shared_ptr<inexor::entity_system::EntitySystem> entity_system) {
 	std::shared_ptr<AttributeApiEntitiesInstancesEntity_instance_uuidAttributesNameResource> spAttributeApiEntitiesInstancesEntity_instance_uuidAttributesNameResource = std::make_shared<AttributeApiEntitiesInstancesEntity_instance_uuidAttributesNameResource>();
 	this->publish(spAttributeApiEntitiesInstancesEntity_instance_uuidAttributesNameResource);
 	

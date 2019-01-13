@@ -27,6 +27,7 @@
 #include <corvusoft/restbed/resource.hpp>
 #include <corvusoft/restbed/service.hpp>
 
+#include "../../EntitySystem.hpp"
 #include "../model/Attribute.h"
 #include "../model/EntityInstance.h"
 #include "../model/EntitySystemMessage.h"
@@ -43,7 +44,7 @@ using namespace inexor::entity_system::rest::model;
 class  EntityTypeApi: public restbed::Service
 {
 public:
-	EntityTypeApi();
+	EntityTypeApi(std::shared_ptr<inexor::entity_system::EntitySystem> entity_system);
 	~EntityTypeApi();
 	void startService(int const& port);
 	void stopService();
@@ -59,11 +60,13 @@ public:
 class  EntityTypeApiEntitiesTypesResource: public restbed::Resource
 {
 public:
-	EntityTypeApiEntitiesTypesResource();
+	EntityTypeApiEntitiesTypesResource(std::shared_ptr<inexor::entity_system::EntitySystem> entity_system);
     virtual ~EntityTypeApiEntitiesTypesResource();
     void POST_method_handler(const std::shared_ptr<restbed::Session> session);
     void DELETE_method_handler(const std::shared_ptr<restbed::Session> session);
     void GET_method_handler(const std::shared_ptr<restbed::Session> session);
+private:
+	std::shared_ptr<inexor::entity_system::EntitySystem> entity_system;
 };
 
 /// <summary>
@@ -75,11 +78,13 @@ public:
 class  EntityTypeApiEntitiesTypesEntity_type_uuidResource: public restbed::Resource
 {
 public:
-	EntityTypeApiEntitiesTypesEntity_type_uuidResource();
+	EntityTypeApiEntitiesTypesEntity_type_uuidResource(std::shared_ptr<inexor::entity_system::EntitySystem> entity_system);
     virtual ~EntityTypeApiEntitiesTypesEntity_type_uuidResource();
     void POST_method_handler(const std::shared_ptr<restbed::Session> session);
     void DELETE_method_handler(const std::shared_ptr<restbed::Session> session);
     void GET_method_handler(const std::shared_ptr<restbed::Session> session);
+private:
+	std::shared_ptr<inexor::entity_system::EntitySystem> entity_system;
 };
 
 /// <summary>
@@ -91,11 +96,13 @@ public:
 class  EntityTypeApiEntitiesTypesEntity_type_uuidAttributesNameResource: public restbed::Resource
 {
 public:
-	EntityTypeApiEntitiesTypesEntity_type_uuidAttributesNameResource();
+	EntityTypeApiEntitiesTypesEntity_type_uuidAttributesNameResource(std::shared_ptr<inexor::entity_system::EntitySystem> entity_system);
     virtual ~EntityTypeApiEntitiesTypesEntity_type_uuidAttributesNameResource();
     void POST_method_handler(const std::shared_ptr<restbed::Session> session);
     void DELETE_method_handler(const std::shared_ptr<restbed::Session> session);
     void GET_method_handler(const std::shared_ptr<restbed::Session> session);
+private:
+	std::shared_ptr<inexor::entity_system::EntitySystem> entity_system;
 };
 
 /// <summary>
@@ -107,10 +114,12 @@ public:
 class  EntityTypeApiEntitiesTypesEntity_type_uuidInstancesResource: public restbed::Resource
 {
 public:
-	EntityTypeApiEntitiesTypesEntity_type_uuidInstancesResource();
+	EntityTypeApiEntitiesTypesEntity_type_uuidInstancesResource(std::shared_ptr<inexor::entity_system::EntitySystem> entity_system);
     virtual ~EntityTypeApiEntitiesTypesEntity_type_uuidInstancesResource();
     void DELETE_method_handler(const std::shared_ptr<restbed::Session> session);
     void GET_method_handler(const std::shared_ptr<restbed::Session> session);
+private:
+	std::shared_ptr<inexor::entity_system::EntitySystem> entity_system;
 };
 
 /// <summary>
@@ -122,9 +131,11 @@ public:
 class  EntityTypeApiEntitiesTypesEntity_type_uuidRelationshipsIncomingResource: public restbed::Resource
 {
 public:
-	EntityTypeApiEntitiesTypesEntity_type_uuidRelationshipsIncomingResource();
+	EntityTypeApiEntitiesTypesEntity_type_uuidRelationshipsIncomingResource(std::shared_ptr<inexor::entity_system::EntitySystem> entity_system);
     virtual ~EntityTypeApiEntitiesTypesEntity_type_uuidRelationshipsIncomingResource();
     void GET_method_handler(const std::shared_ptr<restbed::Session> session);
+private:
+	std::shared_ptr<inexor::entity_system::EntitySystem> entity_system;
 };
 
 /// <summary>
@@ -136,9 +147,11 @@ public:
 class  EntityTypeApiEntitiesTypesEntity_type_uuidRelationshipsOutgoingResource: public restbed::Resource
 {
 public:
-	EntityTypeApiEntitiesTypesEntity_type_uuidRelationshipsOutgoingResource();
+	EntityTypeApiEntitiesTypesEntity_type_uuidRelationshipsOutgoingResource(std::shared_ptr<inexor::entity_system::EntitySystem> entity_system);
     virtual ~EntityTypeApiEntitiesTypesEntity_type_uuidRelationshipsOutgoingResource();
     void GET_method_handler(const std::shared_ptr<restbed::Session> session);
+private:
+	std::shared_ptr<inexor::entity_system::EntitySystem> entity_system;
 };
 
 /// <summary>
@@ -150,9 +163,11 @@ public:
 class  EntityTypeApiEntitiesTypesEntity_type_uuidRelationshipsResource: public restbed::Resource
 {
 public:
-	EntityTypeApiEntitiesTypesEntity_type_uuidRelationshipsResource();
+	EntityTypeApiEntitiesTypesEntity_type_uuidRelationshipsResource(std::shared_ptr<inexor::entity_system::EntitySystem> entity_system);
     virtual ~EntityTypeApiEntitiesTypesEntity_type_uuidRelationshipsResource();
     void GET_method_handler(const std::shared_ptr<restbed::Session> session);
+private:
+	std::shared_ptr<inexor::entity_system::EntitySystem> entity_system;
 };
 
 /// <summary>
@@ -164,9 +179,11 @@ public:
 class  EntityTypeApiEntitiesTypesEntity_type_uuidAttributesResource: public restbed::Resource
 {
 public:
-	EntityTypeApiEntitiesTypesEntity_type_uuidAttributesResource();
+	EntityTypeApiEntitiesTypesEntity_type_uuidAttributesResource(std::shared_ptr<inexor::entity_system::EntitySystem> entity_system);
     virtual ~EntityTypeApiEntitiesTypesEntity_type_uuidAttributesResource();
     void GET_method_handler(const std::shared_ptr<restbed::Session> session);
+private:
+	std::shared_ptr<inexor::entity_system::EntitySystem> entity_system;
 };
 
 

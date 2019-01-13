@@ -26,6 +26,7 @@
 #include <corvusoft/restbed/resource.hpp>
 #include <corvusoft/restbed/service.hpp>
 
+#include "../../EntitySystem.hpp"
 #include "../model/EntitySystem.h"
 #include "../model/EntitySystemMessage.h"
 
@@ -39,7 +40,7 @@ using namespace inexor::entity_system::rest::model;
 class  EntitySystemApi: public restbed::Service
 {
 public:
-	EntitySystemApi();
+	EntitySystemApi(std::shared_ptr<inexor::entity_system::EntitySystem> entity_system);
 	~EntitySystemApi();
 	void startService(int const& port);
 	void stopService();

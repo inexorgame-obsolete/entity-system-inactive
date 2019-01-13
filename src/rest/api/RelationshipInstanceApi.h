@@ -27,6 +27,7 @@
 #include <corvusoft/restbed/resource.hpp>
 #include <corvusoft/restbed/service.hpp>
 
+#include "../../EntitySystem.hpp"
 #include "../model/EntitySystemMessage.h"
 #include "../model/RelationshipInstance.h"
 
@@ -40,7 +41,7 @@ using namespace inexor::entity_system::rest::model;
 class  RelationshipInstanceApi: public restbed::Service
 {
 public:
-	RelationshipInstanceApi();
+	RelationshipInstanceApi(std::shared_ptr<inexor::entity_system::EntitySystem> entity_system);
 	~RelationshipInstanceApi();
 	void startService(int const& port);
 	void stopService();

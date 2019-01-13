@@ -14,12 +14,12 @@ namespace entity_system {
 	RestServer::RestServer(std::shared_ptr<inexor::entity_system::EntitySystem> entity_system)
 	{
 		this->entity_system = entity_system;
-		entity_system_api = make_shared<EntitySystemApi>();
-		entity_type_api = make_shared<EntityTypeApi>();
-		relationship_type_api = make_shared<RelationshipTypeApi>();
-		entity_instance_api = make_shared<EntityInstanceApi>();
-		relationship_instance_api = make_shared<RelationshipInstanceApi>();
-		attribute_api = make_shared<AttributeApi>();
+		entity_system_api = make_shared<EntitySystemApi>(entity_system);
+		entity_type_api = make_shared<EntityTypeApi>(entity_system);
+		relationship_type_api = make_shared<RelationshipTypeApi>(entity_system);
+		entity_instance_api = make_shared<EntityInstanceApi>(entity_system);
+		relationship_instance_api = make_shared<RelationshipInstanceApi>(entity_system);
+		attribute_api = make_shared<AttributeApi>(entity_system);
 	}
 
 
