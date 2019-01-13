@@ -13,8 +13,8 @@
     #include <unistd.h>
 #endif
 
-#include "EntitySystem.hpp"
-#include "rest/RestServer.hpp"
+#include "entity-system/EntitySystem.hpp"
+#include "entity-system-rest/RestServer.hpp"
 
 namespace inexor {
 namespace entity_system {
