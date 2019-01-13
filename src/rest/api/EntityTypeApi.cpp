@@ -26,7 +26,7 @@ namespace api {
 using namespace inexor::entity_system::rest::model;
 
 EntityTypeApi::EntityTypeApi(std::shared_ptr<inexor::entity_system::EntitySystem> entity_system) {
-	std::shared_ptr<EntityTypeApiEntitiesTypesResource> spEntityTypeApiEntitiesTypesResource = std::make_shared<EntityTypeApiEntitiesTypesResource>();
+	std::shared_ptr<EntityTypeApiEntitiesTypesResource> spEntityTypeApiEntitiesTypesResource = std::make_shared<EntityTypeApiEntitiesTypesResource>(entity_system);
 	this->publish(spEntityTypeApiEntitiesTypesResource);
 	
 	std::shared_ptr<EntityTypeApiEntitiesTypesEntity_type_uuidResource> spEntityTypeApiEntitiesTypesEntity_type_uuidResource = std::make_shared<EntityTypeApiEntitiesTypesEntity_type_uuidResource>(entity_system);
@@ -88,8 +88,7 @@ EntityTypeApiEntitiesTypesResource::~EntityTypeApiEntitiesTypesResource()
 void EntityTypeApiEntitiesTypesResource::POST_method_handler(const std::shared_ptr<restbed::Session> session) {
 
 	const auto request = session->get_request();
-			
-			
+	auto entity_type = this->entity_system->create_entity_type("");
 
 			
 			// Change the value of this variable to the appropriate response before sending the response
