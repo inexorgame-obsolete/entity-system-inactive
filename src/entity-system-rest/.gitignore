@@ -1,6 +1,3 @@
-# Prerequisites
-*.d
-
 # Compiled Object files
 *.slo
 *.lo
@@ -30,18 +27,5 @@
 *.exe
 *.out
 *.app
-
-# Output folders
-bin/
-build/
-documentation/
-
-/desktop.ini
-/dependencies
-/.vs
-/EntitySystem.sln
-/EntitySystem
-/CMakeCache.txt
-/.cproject
-/.project
-/.settings
+/.openapi-generator-ignore
+/.openapi-generator
