@@ -19,7 +19,6 @@
 #ifndef EntityTypeApi_H_
 #define EntityTypeApi_H_
 
-
 #include <memory>
 #include <crossguid/guid.hpp>
 #include <string>
@@ -32,13 +31,13 @@
 #include "../model/EntityType.h"
 #include "../model/RelationshipType.h"
 
+using namespace inexor::entity_system::rest::model;
+using namespace restbed;
+
 namespace inexor {
 namespace entity_system {
 namespace rest {
 namespace api {
-
-using namespace inexor::entity_system::rest::model;
-using namespace restbed;
 
 class EntityTypeApi
 {

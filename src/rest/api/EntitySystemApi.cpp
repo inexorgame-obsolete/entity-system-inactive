@@ -24,25 +24,17 @@ namespace rest {
 namespace api {
 
 using namespace inexor::entity_system::rest::model;
+using namespace xg;
+using namespace restbed;
+using namespace std;
 
-EntitySystemApi::EntitySystemApi(std::shared_ptr<inexor::entity_system::EntitySystem> entity_system) {
-	std::shared_ptr<EntitySystemApiEntitysystemResource> spEntitySystemApiEntitysystemResource = std::make_shared<EntitySystemApiEntitysystemResource>();
-	this->publish(spEntitySystemApiEntitysystemResource);
-	
-}
-
+EntitySystemApi::EntitySystemApi() {}
 EntitySystemApi::~EntitySystemApi() {}
 
-void EntitySystemApi::startService(int const& port) {
-	std::shared_ptr<restbed::Settings> settings = std::make_shared<restbed::Settings>();
-	settings->set_port(port);
-	settings->set_root("/api/v1");
+void EntitySystemApi::createResources(std::shared_ptr<inexor::entity_system::EntitySystem> entity_system, std::shared_ptr<Service> service) {
+	std::shared_ptr<EntitySystemApiEntitysystemResource> spEntitySystemApiEntitysystemResource = std::make_shared<EntitySystemApiEntitysystemResource>();
+	service->publish(spEntitySystemApiEntitysystemResource);
 	
-	this->start(settings);
-}
-
-void EntitySystemApi::stopService() {
-	this->stop();
 }
 
 EntitySystemApiEntitysystemResource::EntitySystemApiEntitysystemResource()

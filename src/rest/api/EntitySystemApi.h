@@ -19,31 +19,29 @@
 #ifndef EntitySystemApi_H_
 #define EntitySystemApi_H_
 
-
 #include <memory>
-
-#include <corvusoft/restbed/session.hpp>
-#include <corvusoft/restbed/resource.hpp>
-#include <corvusoft/restbed/service.hpp>
+#include <crossguid/guid.hpp>
+#include <string>
+#include <restbed>
 
 #include "../../EntitySystem.hpp"
 #include "../model/EntitySystem.h"
 #include "../model/EntitySystemMessage.h"
+
+using namespace inexor::entity_system::rest::model;
+using namespace restbed;
 
 namespace inexor {
 namespace entity_system {
 namespace rest {
 namespace api {
 
-using namespace inexor::entity_system::rest::model;
-
-class  EntitySystemApi: public restbed::Service
+class  EntitySystemApi
 {
 public:
-	EntitySystemApi(std::shared_ptr<inexor::entity_system::EntitySystem> entity_system);
+	EntitySystemApi();
 	~EntitySystemApi();
-	void startService(int const& port);
-	void stopService();
+	void createResources(std::shared_ptr<inexor::entity_system::EntitySystem> entity_system, std::shared_ptr<Service> service);
 };
 
 

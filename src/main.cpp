@@ -17,6 +17,8 @@ namespace entity_system {
 
 	std::shared_ptr<RestServer> rest_server;
 
+	int rest_server_port = 8080;
+
 }
 }
 
@@ -30,7 +32,7 @@ static void sigHandler(int sig){
         case SIGTERM:
         case SIGHUP:
         default:
-        	// rest_server->stop_services();
+        	std::cout << "Stopping REST server on port " << rest_server_port << std::endl;
         	rest_server->stopService();
             break;
     }
@@ -67,6 +69,7 @@ int main(int argc, char* argv[])
 	// @note The entity system has no singleton implementation for now.
 	entity_system = std::make_shared<inexor::entity_system::EntitySystem>();
 
+	// We populate the entity system with an entity type with three attributes and create an instance
 	auto entity_type_camera = entity_system->create_entity_type("CAMERA");
 	auto attribute_type_position_x = entity_system->create_entity_attribute_type("position_x", ENTSYS_DATA_TYPE_FLOAT);
 	auto attribute_type_position_y = entity_system->create_entity_attribute_type("position_y", ENTSYS_DATA_TYPE_FLOAT);
@@ -74,22 +77,14 @@ int main(int argc, char* argv[])
 	entity_type_camera->link_attribute_type(attribute_type_position_x);
 	entity_type_camera->link_attribute_type(attribute_type_position_y);
 	entity_type_camera->link_attribute_type(attribute_type_position_z);
-
-//	auto attribute_type_position_x_1 = entity_system->create_entity_attribute_type_instance(attribute_type_position_x);
-//	auto attribute_type_position_y_1 = entity_system->create_entity_attribute_type_instance(attribute_type_position_y);
-//	auto attribute_type_position_z_1 = entity_system->create_entity_attribute_type_instance(attribute_type_position_z);
-
 	auto entity_instance_camera_1 = entity_system->create_entity_instance(entity_type_camera);
-//	entity_instance_camera_1->add_entity_attribute_instance(attribute_type_position_x, attribute_type_position_x_1);
-//	entity_instance_camera_1->add_entity_attribute_instance(attribute_type_position_y, attribute_type_position_y_1);
-//	entity_instance_camera_1->add_entity_attribute_instance(attribute_type_position_z, attribute_type_position_z_1);
 
     // Setup REST server
-	std::cout << "Starting REST server" << std::endl;
+	std::cout << "Starting REST server on port " << rest_server_port << std::endl;
     rest_server = std::make_shared<RestServer>(entity_system);
     rest_server->set_service(rest_server);
     rest_server->create_resources();
-    rest_server->startService(8080);
+    rest_server->startService(rest_server_port);
     return 0;
 
 }

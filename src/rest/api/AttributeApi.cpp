@@ -24,34 +24,26 @@ namespace rest {
 namespace api {
 
 using namespace inexor::entity_system::rest::model;
+using namespace xg;
+using namespace restbed;
+using namespace std;
 
-AttributeApi::AttributeApi(std::shared_ptr<inexor::entity_system::EntitySystem> entity_system) {
-	std::shared_ptr<AttributeApiEntitiesInstancesEntity_instance_uuidAttributesNameResource> spAttributeApiEntitiesInstancesEntity_instance_uuidAttributesNameResource = std::make_shared<AttributeApiEntitiesInstancesEntity_instance_uuidAttributesNameResource>();
-	this->publish(spAttributeApiEntitiesInstancesEntity_instance_uuidAttributesNameResource);
-	
-	std::shared_ptr<AttributeApiEntitiesTypesEntity_type_uuidAttributesNameResource> spAttributeApiEntitiesTypesEntity_type_uuidAttributesNameResource = std::make_shared<AttributeApiEntitiesTypesEntity_type_uuidAttributesNameResource>();
-	this->publish(spAttributeApiEntitiesTypesEntity_type_uuidAttributesNameResource);
-	
-	std::shared_ptr<AttributeApiEntitiesInstancesEntity_instance_uuidAttributesResource> spAttributeApiEntitiesInstancesEntity_instance_uuidAttributesResource = std::make_shared<AttributeApiEntitiesInstancesEntity_instance_uuidAttributesResource>();
-	this->publish(spAttributeApiEntitiesInstancesEntity_instance_uuidAttributesResource);
-	
-	std::shared_ptr<AttributeApiEntitiesTypesEntity_type_uuidAttributesResource> spAttributeApiEntitiesTypesEntity_type_uuidAttributesResource = std::make_shared<AttributeApiEntitiesTypesEntity_type_uuidAttributesResource>();
-	this->publish(spAttributeApiEntitiesTypesEntity_type_uuidAttributesResource);
-	
-}
-
+AttributeApi::AttributeApi() {}
 AttributeApi::~AttributeApi() {}
 
-void AttributeApi::startService(int const& port) {
-	std::shared_ptr<restbed::Settings> settings = std::make_shared<restbed::Settings>();
-	settings->set_port(port);
-	settings->set_root("/api/v1");
+void AttributeApi::createResources(std::shared_ptr<inexor::entity_system::EntitySystem> entity_system, std::shared_ptr<Service> service) {
+	std::shared_ptr<AttributeApiEntitiesInstancesEntity_instance_uuidAttributesNameResource> spAttributeApiEntitiesInstancesEntity_instance_uuidAttributesNameResource = std::make_shared<AttributeApiEntitiesInstancesEntity_instance_uuidAttributesNameResource>();
+	service->publish(spAttributeApiEntitiesInstancesEntity_instance_uuidAttributesNameResource);
 	
-	this->start(settings);
-}
-
-void AttributeApi::stopService() {
-	this->stop();
+	std::shared_ptr<AttributeApiEntitiesTypesEntity_type_uuidAttributesNameResource> spAttributeApiEntitiesTypesEntity_type_uuidAttributesNameResource = std::make_shared<AttributeApiEntitiesTypesEntity_type_uuidAttributesNameResource>();
+	service->publish(spAttributeApiEntitiesTypesEntity_type_uuidAttributesNameResource);
+	
+	std::shared_ptr<AttributeApiEntitiesInstancesEntity_instance_uuidAttributesResource> spAttributeApiEntitiesInstancesEntity_instance_uuidAttributesResource = std::make_shared<AttributeApiEntitiesInstancesEntity_instance_uuidAttributesResource>();
+	service->publish(spAttributeApiEntitiesInstancesEntity_instance_uuidAttributesResource);
+	
+	std::shared_ptr<AttributeApiEntitiesTypesEntity_type_uuidAttributesResource> spAttributeApiEntitiesTypesEntity_type_uuidAttributesResource = std::make_shared<AttributeApiEntitiesTypesEntity_type_uuidAttributesResource>();
+	service->publish(spAttributeApiEntitiesTypesEntity_type_uuidAttributesResource);
+	
 }
 
 AttributeApiEntitiesInstancesEntity_instance_uuidAttributesNameResource::AttributeApiEntitiesInstancesEntity_instance_uuidAttributesNameResource()

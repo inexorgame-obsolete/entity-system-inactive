@@ -29,9 +29,7 @@ using namespace xg;
 using namespace restbed;
 using namespace std;
 
-EntityTypeApi::EntityTypeApi() {
-}
-
+EntityTypeApi::EntityTypeApi() {}
 EntityTypeApi::~EntityTypeApi() {}
 
 void EntityTypeApi::createResources(std::shared_ptr<inexor::entity_system::EntitySystem> entity_system, std::shared_ptr<Service> service) {

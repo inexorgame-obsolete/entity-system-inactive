@@ -19,13 +19,10 @@
 #ifndef EntityInstanceApi_H_
 #define EntityInstanceApi_H_
 
-
 #include <memory>
+#include <crossguid/guid.hpp>
 #include <string>
-
-#include <corvusoft/restbed/session.hpp>
-#include <corvusoft/restbed/resource.hpp>
-#include <corvusoft/restbed/service.hpp>
+#include <restbed>
 
 #include "../../EntitySystem.hpp"
 #include "../model/Attribute.h"
@@ -33,20 +30,20 @@
 #include "../model/EntitySystemMessage.h"
 #include "../model/RelationshipInstance.h"
 
+using namespace inexor::entity_system::rest::model;
+using namespace restbed;
+
 namespace inexor {
 namespace entity_system {
 namespace rest {
 namespace api {
 
-using namespace inexor::entity_system::rest::model;
-
 class  EntityInstanceApi: public restbed::Service
 {
 public:
-	EntityInstanceApi(std::shared_ptr<inexor::entity_system::EntitySystem> entity_system);
+	EntityInstanceApi();
 	~EntityInstanceApi();
-	void startService(int const& port);
-	void stopService();
+	void createResources(std::shared_ptr<inexor::entity_system::EntitySystem> entity_system, std::shared_ptr<Service> service);
 };
 
 
