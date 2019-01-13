@@ -14,12 +14,6 @@ namespace entity_system {
 	RestServer::RestServer(std::shared_ptr<inexor::entity_system::EntitySystem> entity_system)
 	{
 		this->entity_system = entity_system;
-		entity_system_api = make_shared<EntitySystemApi>(entity_system);
-		entity_type_api = make_shared<EntityTypeApi>(entity_system);
-		relationship_type_api = make_shared<RelationshipTypeApi>(entity_system);
-		entity_instance_api = make_shared<EntityInstanceApi>(entity_system);
-		relationship_instance_api = make_shared<RelationshipInstanceApi>(entity_system);
-		attribute_api = make_shared<AttributeApi>(entity_system);
 	}
 
 
@@ -28,17 +22,42 @@ namespace entity_system {
 		// this->stop();
 	}
 
-	void RestServer::start_services()
+	std::shared_ptr<Service> RestServer::get_service()
 	{
-		std::cout << "Starting Inexor Entity System REST server on port 8080" << std::endl;
-		entity_system_api->startService(8080);
-		attribute_api->startService(8080);
-    }
+		return this->service;
+	}
 
-	void RestServer::stop_services()
+	void RestServer::set_service(std::shared_ptr<Service> service)
 	{
-		entity_system_api->stopService();
-		attribute_api->stopService();
+		this->service = service;
+	}
+
+	void RestServer::create_resources()
+	{
+//		EntitySystemApi::createResources(this->entity_system, this->service);
+		EntityTypeApi::createResources(this->entity_system, this->service);
+//		RelationshipTypeApi::createResources(this->entity_system, this->service);
+//		EntityInstanceApi::createResources(this->entity_system, this->service);
+//		RelationshipInstanceApi::createResources(this->entity_system, this->service);
+//		AttributeApi::createResources(this->entity_system, this->service);
+	}
+
+	std::shared_ptr<inexor::entity_system::EntitySystem> RestServer::get_entity_system()
+	{
+		return this->entity_system;
+	}
+
+	void RestServer::startService(int const& port) {
+		shared_ptr<Settings> settings = make_shared<Settings>();
+		settings->set_port(port);
+		settings->set_root("/api/v1");
+		settings->set_worker_limit(8);
+		settings->set_default_header("Connection", "close");
+		this->service->start(settings);
+	}
+
+	void RestServer::stopService() {
+		this->service->stop();
 	}
 
 };

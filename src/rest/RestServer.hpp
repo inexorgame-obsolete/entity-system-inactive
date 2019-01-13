@@ -23,13 +23,20 @@
 #include "api/AttributeApi.h"
 
 using namespace inexor::entity_system::rest::api;
+using namespace restbed;
 
 namespace inexor {
 namespace entity_system {
 
 	/// @class RestServer
     /// @brief The Inexor Entity System REST server.
-	class RestServer
+	class RestServer : public restbed::Service,
+	                   public EntityTypeApi
+//					   public EntitySystemApi,
+//					   public RelationshipTypeApi,
+//					   public EntityInstanceApi,
+//					   public RelationshipInstanceApi,
+//					   public AttributeApi
 	{
 		public:
 
@@ -39,18 +46,19 @@ namespace entity_system {
 			/// Destructor.
 			~RestServer();
 
-			void start_services();
+			std::shared_ptr<Service> get_service();
+			void set_service(std::shared_ptr<restbed::Service> service);
 
-			void stop_services();
+			void create_resources();
+
+			std::shared_ptr<inexor::entity_system::EntitySystem> get_entity_system();
+
+			void startService(int const& port);
+			void stopService();
 
 		private:
 			std::shared_ptr<inexor::entity_system::EntitySystem> entity_system;
-			std::shared_ptr<EntitySystemApi> entity_system_api;
-			std::shared_ptr<EntityTypeApi> entity_type_api;
-			std::shared_ptr<RelationshipTypeApi> relationship_type_api;
-			std::shared_ptr<EntityInstanceApi> entity_instance_api;
-			std::shared_ptr<RelationshipInstanceApi> relationship_instance_api;
-			std::shared_ptr<AttributeApi> attribute_api;
+			std::shared_ptr<restbed::Service> service;
 
 	};
 
