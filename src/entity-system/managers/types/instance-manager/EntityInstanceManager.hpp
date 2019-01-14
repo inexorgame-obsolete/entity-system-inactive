@@ -4,6 +4,7 @@
 #pragma once
 
 #include "entity-system/managers/manager-templates/InstanceManagerTemplate.hpp"
+#include "entity-system/managers/attributes/attribute-instance-manager/EntityAttributeInstanceManager.hpp"
 #include "entity-system/model/types/instances/EntityInstance.hpp"
 
 
@@ -32,6 +33,9 @@ namespace entity_system {
 			/// Destructor
 			~EntityInstanceManager();
 			
+    		/// The entity attribute instance manager
+    		std::shared_ptr<EntityAttributeInstanceManager> entity_attribute_instance_manager;
+
 		public:
 
 			/// Create an entity type instance.

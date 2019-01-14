@@ -19,7 +19,10 @@ namespace entity_system {
 	class EntityRelationInstance : public InstanceBase<EntityRelationType>, public GUIDBase
 	{
 		private:
-		
+
+			/// The relation type
+			// TODO: ENT_REL_TYPE relation_type;
+
 			/// The source entity type instance.
 			ENT_INST source_entity_instance;
 
@@ -45,7 +48,14 @@ namespace entity_system {
 			/// Destructor.
 			~EntityRelationInstance();
 
+			/// Returns all entity relation attribute instances.
+			/// @return A std::unordered_map of shared pointers of entity relation attribute type.
+			std::unordered_map<ENT_REL_ATTR_TYPE, ENT_REL_ATTR_INST> get_relation_attribute_instances() const;
+
             /// 
+			// TODO: ENT_REL_TYPE get_relation_type() const;
+
+            ///
 			ENT_INST get_source_entity_instance() const;
 
             /// 

@@ -6,17 +6,9 @@
 #include <memory>
 #include <unordered_map>
 
-#include "entity-system/EntitySystem.hpp"
-
 
 namespace inexor {
 namespace entity_system {
-	
-
-	/// The create macros depend on an instance
-	/// of the entity system.
-	extern std::shared_ptr<EntitySystem> entity_system;
-
 
 	/// Macro for creating an entity type
 	/// with EntityTypeManager.

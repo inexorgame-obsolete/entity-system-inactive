@@ -24,7 +24,21 @@ namespace entity_system {
 	{
 		// Create a new entity type instance.
 		ENT_INST new_ent_instance = std::make_shared<EntityInstance>(ent_type);
-		
+
+		// Create all entity attribute type instances for this entity type instance.
+		std::vector<ENT_ATTR_TYPE> ent_type_attributes = ent_type->get_linked_attribute_types();
+
+		for(std::size_t i=0; i<ent_type_attributes.size(); i++)
+		{
+			// Create an entity attribute type instance and store it in the map.
+			// Use the entity system's EntityAttributeInstanceManager method!
+			ENT_ATTR_INST new_ent_attr_instance = entity_attribute_instance_manager->create_entity_attribute_instance(ent_type_attributes[i]);
+			// create_entity_attribute_instance
+
+			// Call template base class method.
+			new_ent_instance->add_entity_attribute_instance(ent_type_attributes[i], new_ent_attr_instance);
+		}
+
 		// Call template base class method.
 		add_instance(new_ent_instance->get_GUID(), new_ent_instance);
 		

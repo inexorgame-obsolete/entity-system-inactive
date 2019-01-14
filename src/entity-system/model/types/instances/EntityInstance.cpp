@@ -3,8 +3,6 @@
 
 #include "EntityInstance.hpp"
 
-#include "entity-system/util/macros/Macros.hpp"
-
 
 namespace inexor {
 namespace entity_system {
@@ -12,18 +10,6 @@ namespace entity_system {
 
 	EntityInstance::EntityInstance(const ENT_TYPE& ent_type) : InstanceBase(ent_type)
 	{
-		// Create all entity attribute type instances for this entity type instance.
-		std::vector<ENT_ATTR_TYPE> ent_type_attributes = ent_type->get_linked_attribute_types();
-
-		for(std::size_t i=0; i<ent_type_attributes.size(); i++)
-		{
-			// Create an entity attribute type instance and store it in the map.
-			// Use the entity system's EntityAttributeInstanceManager method!
-			ENT_ATTR_INST new_ent_attr_instance = CREATE_ENT_ATTR_INST(ent_type_attributes[i]);
-
-			// Call template base class method.
-			add_entity_attribute_instance(ent_type_attributes[i], new_ent_attr_instance);
-		}
 	}
 
 
@@ -39,6 +25,12 @@ namespace entity_system {
         std::lock_guard<std::mutex> lock(entity_type_mutex);
         instances[ent_attr_type] = ent_attr_inst;
     }
+
+
+	std::unordered_map<std::shared_ptr<EntityAttributeType>, std::shared_ptr<EntityAttributeInstance>> EntityInstance::get_instances() const
+	{
+		return instances;
+	}
 
 
 };

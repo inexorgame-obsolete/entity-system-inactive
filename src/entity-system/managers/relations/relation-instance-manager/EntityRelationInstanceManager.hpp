@@ -6,6 +6,7 @@
 #include "entity-system/managers/relations/relation-instance-manager/EntityRelationInstanceManager.hpp"
 
 #include "entity-system/managers/manager-templates/InstanceManagerTemplate.hpp"
+#include "entity-system/managers/relation-attributes/relation-attribute-instance-manager/EntityRelationAttributeInstanceManager.hpp"
 #include "entity-system/model/relations/relation-instances/EntityRelationInstance.hpp"
 #include "entity-system/model/relations/relation-types/EntityRelationType.hpp"
 
@@ -41,6 +42,9 @@ namespace entity_system {
 
 			/// Destructor.
 			~EntityRelationInstanceManager();
+
+    		/// The entity relation attribute instance manager
+    		std::shared_ptr<EntityRelationAttributeInstanceManager> entity_relation_attribute_instance_manager;
 
 		public:
 		

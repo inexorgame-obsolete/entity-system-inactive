@@ -41,6 +41,9 @@ namespace entity_system {
             ///
             void add_entity_attribute_instance(const std::shared_ptr<EntityAttributeType>&, const std::shared_ptr<EntityAttributeInstance>&);
 
+            ///
+			std::unordered_map<std::shared_ptr<EntityAttributeType>, std::shared_ptr<EntityAttributeInstance>> get_instances() const;
+
             // TODO: Implement methods for setting and getting entity attribute instance data...
 
     };

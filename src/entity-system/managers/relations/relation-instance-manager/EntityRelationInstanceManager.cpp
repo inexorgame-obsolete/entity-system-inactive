@@ -10,6 +10,7 @@ namespace entity_system {
 
     EntityRelationInstanceManager::EntityRelationInstanceManager() : InstanceManagerTemplate(entity_relation_instance_error)
     {
+    	this->entity_relation_attribute_instance_manager = entity_relation_attribute_instance_manager;
 		// TODO: Implement!
     }
 
@@ -24,6 +25,18 @@ namespace entity_system {
 	{
 		// Create a new entity relation type instance.
 		ENT_REL_INST new_relation_instance = std::make_shared<EntityRelationInstance>(ent_rel_type, ent_type_inst_source, ent_type_inst_target);
+
+		// Create all entity relation attribute type instances.
+		std::vector<ENT_REL_ATTR_TYPE> ent_rel_attributes = ent_rel_type->get_linked_attribute_types();
+
+		// Get the attribute instance map
+		std::unordered_map<ENT_REL_ATTR_TYPE, ENT_REL_ATTR_INST> relation_attribute_instances = new_relation_instance->get_relation_attribute_instances();
+
+		// Create the attribute instances
+		for(std::size_t i = 0; i < ent_rel_attributes.size(); i++)
+		{
+			relation_attribute_instances[ent_rel_attributes[i]] = this->entity_relation_attribute_instance_manager->create_entity_relation_attribute_instance(ent_rel_attributes[i]);
+		}
 
 		// Add the relation type instance to the buffer.
 		add_instance(new_relation_instance->get_GUID(), new_relation_instance);

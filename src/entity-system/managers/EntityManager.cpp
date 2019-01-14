@@ -20,6 +20,13 @@ namespace entity_system {
     }
 
 	
+	void EntityManager::wire(std::shared_ptr<EntityManager> entity_manager)
+	{
+		EntityInstanceManager::entity_attribute_instance_manager = entity_manager;
+		EntityRelationInstanceManager::entity_relation_attribute_instance_manager = entity_manager;
+	}
+
+
 	void EntityManager::reset_entity_system()
 	{
 		// Delete instances before deleting types!
@@ -30,6 +37,10 @@ namespace entity_system {
 
 		// TODO: add more methods here..
 	}
+
+    std::shared_ptr<EntityManager> EntityManager::getptr() {
+        return shared_from_this();
+    }
 
 
 };
