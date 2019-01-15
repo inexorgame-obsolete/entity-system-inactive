@@ -1,56 +1,25 @@
-# Enable C++ support
-language: cpp
-
-#we are going to use containers
-sudo: true
+os: linux
+    
+services:
+  - docker
+    
+sudo: required
+    
+language: python
+    
+env:
+  matrix:
+    - DOCKER_IMAGE=conanio/gcc8 # 8.0
 
 matrix:
-  include:
-    - os: linux
-      dist: xenial
-      addons:
-        apt:
-          sources:
-            - ubuntu-toolchain-r-test
-          packages:
-            - g++-8
-            - libstdc++-6-dev
-            - python3-pip
-            - python3-setuptools
-      env:
-        - MATRIX_EVAL="CC=gcc-8 && CXX=g++-8"
-    - os: osx
-      osx_image: xcode10
-      compiler: clang # use default compiler
-      addons:
-        homebrew:
-          packages:
-          - zstd
-    - os: windows
+    include:
+        - os: osx
+          osx_image: xcode10.0 # apple-clang 10.0
+          language: generic
+          env:
 
-#download python where necessary
-before_install:
-  - if [[ "$TRAVIS_OS_NAME" == "windows" ]]; then choco install conan ; fi # this is not ideal but ok
-
-#install conan
 install:
-  - if [[ "$TRAVIS_OS_NAME" == "linux" ]]; then pip3 install conan  ; fi 
-  - if [[ "$TRAVIS_OS_NAME" == "osx" ]]; then pip3 install conan    ; fi
+  - ./.travis/install.sh
 
-#install dependencies and build
-before_script:  
-  - mkdir build
-  - cd build
-  - cmake ..
-  - make
-
-#execute the tests
 script:
-   - ls
-   - cd bin
-   - ls
-   - ./inexor-entity-system-tests
-
-notifications: # set notification options
-  email:
-    email: false
+  - ./.travis/run.sh
