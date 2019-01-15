@@ -13,11 +13,11 @@ matrix:
           sources:
             - ubuntu-toolchain-r-test
           packages:
-            - g++-7
+            - g++-8
             - python3-pip
             - python3-setuptools
       env:
-        - MATRIX_EVAL="CC=gcc-7 && CXX=g++-7"
+        - MATRIX_EVAL="CC=gcc-8 && CXX=g++-8"
     - os: osx
       osx_image: xcode10
       compiler: clang # use default compiler
