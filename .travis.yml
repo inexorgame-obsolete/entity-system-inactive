@@ -15,16 +15,15 @@ matrix:
 
 #download python where necessary
 before_install:
-  - if [[ "$TRAVIS_OS_NAME" == "linux" ]]; then sudo apt-get -qq update             ; fi 
-  - if [[ "$TRAVIS_OS_NAME" == "linux" ]]; then sudo apt-get install -y python3-pip ; fi 
-  - if [[ "$TRAVIS_OS_NAME" == "windows" ]]; then choco install python              ; fi
-  - if [[ "$TRAVIS_OS_NAME" == "windows" ]]; then choco install pip                 ; fi
+  - if [[ "$TRAVIS_OS_NAME" == "linux" ]]; then sudo apt-get -qq update                    ; fi 
+  - if [[ "$TRAVIS_OS_NAME" == "linux" ]]; then sudo apt-get install -y python3-pip        ; fi
+  - if [[ "$TRAVIS_OS_NAME" == "linux" ]]; then sudo apt-get install -y python3-setuptools ; fi 
+  - if [[ "$TRAVIS_OS_NAME" == "windows" ]]; then choco install conan                      ; fi # this is not ideal but pk
 
 #install conan
 install:
   - if [[ "$TRAVIS_OS_NAME" == "linux" ]]; then pip3 install conan  ; fi 
   - if [[ "$TRAVIS_OS_NAME" == "osx" ]]; then pip3 install conan    ; fi
-  - if [[ "$TRAVIS_OS_NAME" == "windows" ]]; then pip install conan ; fi
 
 #install dependencies and build
 before_script:  
