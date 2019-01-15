@@ -27,7 +27,9 @@ namespace example {
 	
 	ColorManager::~ColorManager()
 	{
+		// TODO: delete_entity_type should delete all instances of COLOR also
 		entity_system->delete_entity_type(entity_type_color);
+		colors.clear();
 	}
 
 	/// Creates a new color
@@ -55,6 +57,13 @@ namespace example {
 
 	float ColorManager::r(string name)
 	{
+		// Long:
+		// Detailed access to the attribute of the entity instance
+		auto entity_instance_attribute_r = entity_system->get_entity_attribute("r");
+		// Detailed access to the value of the attribute of the entity instance
+		float value = entity_instance_attribute_r->get_value();
+
+		// Short (comfortable access to the value of the entity attribute value):
 		// return this->colors[name]["r"];
 		return 0.0f;
 	}
