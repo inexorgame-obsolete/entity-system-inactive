@@ -12,8 +12,8 @@ dist: xenial # older build environments will likely fail because C++17
 
 #download python where necessary
 before_install:
-  - if [[ "$TRAVIS_OS_NAME" == "linux" ]]; then sudo apt-get -y install python3.7.1 ; fi 
-  - if [[ "$TRAVIS_OS_NAME" == "windows" ]]; then choco install python              ; fi
+  - if [[ "$TRAVIS_OS_NAME" == "linux" ]]; then sudo apt-get -y install python3.7 ; fi 
+  - if [[ "$TRAVIS_OS_NAME" == "windows" ]]; then choco install python            ; fi
 
 #install conan
 install:
