@@ -10,12 +10,12 @@ namespace entity_system {
 
 	// TODO: Should this be defined as a class in Doxygen ?
 
-	/// @class ENTSYS_DATA_TYPE
+    /// @class ENTSYS_DATA_TYPE
     /// @brief Data container memory type.
     enum ENTSYS_DATA_TYPE 
     {
-		ENTSYS_DATA_TYPE_UNDEFINED = 0,
-        ENTSYS_DATA_TYPE_INT,
+        ENTSYS_DATA_TYPE_UNDEFINED = -1, // TODO: Find a satisfying solution for this
+        ENTSYS_DATA_TYPE_INT = 0,
         ENTSYS_DATA_TYPE_BIG_INT,
         ENTSYS_DATA_TYPE_FLOAT,
         ENTSYS_DATA_TYPE_STRING,
