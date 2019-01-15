@@ -14,19 +14,22 @@ matrix:
             - ubuntu-toolchain-r-test
           packages:
             - g++-7
+            - python3-pip
+            - python3-setuptools
       env:
         - MATRIX_EVAL="CC=gcc-7 && CXX=g++-7"
     - os: osx
       osx_image: xcode10
       compiler: clang # use default compiler
+      addons:
+        homebrew:
+          packages:
+          - zstd
     - os: windows
 
 #download python where necessary
 before_install:
-  - if [[ "$TRAVIS_OS_NAME" == "linux" ]]; then sudo apt-get -qq update                    ; fi 
-  - if [[ "$TRAVIS_OS_NAME" == "linux" ]]; then sudo apt-get install -y python3-pip        ; fi
-  - if [[ "$TRAVIS_OS_NAME" == "linux" ]]; then sudo apt-get install -y python3-setuptools ; fi 
-  - if [[ "$TRAVIS_OS_NAME" == "windows" ]]; then choco install conan                      ; fi # this is not ideal but pk
+  - if [[ "$TRAVIS_OS_NAME" == "windows" ]]; then choco install conan ; fi # this is not ideal but ok
 
 #install conan
 install:
