@@ -45,6 +45,9 @@ namespace inexor {
 		entity_system = std::make_shared<inexor::entity_system::EntitySystem>();
 		entity_system->wire(entity_system);
 
+		// Create a simple subsystem which uses the entity system
+		auto color_manager = std::make_shared<inexor::entity_system::example::ColorManager>(entity_system);
+
 		// We populate the entity system with an entity type with three attributes and create an instance
 		std::cout << "Populating entity system with an entity type with three attributes and create an instance" << std::endl;
 		auto entity_type_camera = entity_system->create_entity_type("CAMERA");

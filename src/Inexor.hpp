@@ -17,6 +17,7 @@
 
 #include "entity-system/EntitySystem.hpp"
 #include "entity-system-rest/RestServer.hpp"
+#include "entity-system-example/ColorManager.hpp"
 
 
 namespace inexor {
