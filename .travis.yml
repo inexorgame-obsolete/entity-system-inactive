@@ -3,26 +3,12 @@ language: cpp
 
 #we are going to use containers
 sudo: true
-
-cache:
-  ccache: true
-  directories:
-    - $HOME/.ccache
-
 os:
   - linux
   - osx
   - windows
 
 dist: xenial # older build environments will likely fail because C++17
-
-# add some cccache to make it faster
-env:
-  global:
-    - USE_CCACHE=1
-    - CCACHE_COMPRESS=1
-    - CCACHE_MAXSIZE=200M
-    - CCACHE_CPP2=1
 
 #download python where necessary
 before_install:
