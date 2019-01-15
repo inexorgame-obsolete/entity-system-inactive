@@ -14,7 +14,7 @@ env:
 matrix:
     include:
         - os: osx
-          osx_image: xcode10.0 # apple-clang 10.0
+          osx_image: xcode10 # apple-clang 10.0
           language: generic
           env:
 
