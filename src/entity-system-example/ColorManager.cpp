@@ -59,9 +59,9 @@ namespace example {
 	{
 		// Long:
 		// Detailed access to the attribute of the entity instance
-		auto entity_instance_attribute_r = entity_system->get_entity_attribute("r");
+		// auto entity_instance_attribute_r = entity_system->get_entity_attribute("r");
 		// Detailed access to the value of the attribute of the entity instance
-		float value = entity_instance_attribute_r->get_value();
+		// float value = entity_instance_attribute_r->get_value();
 
 		// Short (comfortable access to the value of the entity attribute value):
 		// return this->colors[name]["r"];
