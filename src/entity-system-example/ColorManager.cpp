@@ -57,6 +57,17 @@ namespace example {
 
 	float ColorManager::r(string name)
 	{
+
+		// Even longer:
+		// std::optional<EntityAttributeInstance> entity_instance_attribute_instance_r_optional = entity_system->get_entity_instance_attribute_instance("r");
+		// if (entity_instance_attribute_instance_r_optional.has_value()) {
+		// 	EntityAttributeInstance entity_instance_attribute_instance_r = entity_instance_attribute_instance_r_optional.value();
+		// 	float value = entity_instance_attribute_instance_r->get_value();
+		// 	return value;
+		// } else {
+		// 	return 0.0f;
+		// }
+
 		// Long:
 		// Detailed access to the attribute of the entity instance
 		// auto entity_instance_attribute_r = entity_system->get_entity_attribute("r");
