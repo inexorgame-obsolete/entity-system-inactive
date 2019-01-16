@@ -57,6 +57,11 @@ message(STATUS "NORMAL SOURCE FILES: ${NORMAL_SOURCE_FILES}")
 message(STATUS "TEST SOURCE FILES: ${TEST_SOURCE_FILES}")
 message(STATUS "CONAN_LIBS: ${CONAN_LIBS}")
 
+# Hanni: Try to solve MSVC 2017 problems with C++2017.
+set_target_properties(inexor-entity-system PROPERTIES
+   CXX_STANDARD 17
+)
+
 add_library(inexor-entity-system ${NORMAL_SOURCE_FILES})
 add_executable(inexor-entity-system-standalone ${NORMAL_SOURCE_FILES})
 add_executable(inexor-entity-system-tests ${TEST_SOURCE_FILES})
