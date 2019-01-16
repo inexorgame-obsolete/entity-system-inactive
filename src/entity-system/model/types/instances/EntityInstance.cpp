@@ -1,4 +1,4 @@
-// Inexor entity system prototype
+// Inexor entity system
 // (c)2018-2019 Inexor
 
 #include "EntityInstance.hpp"
@@ -10,6 +10,7 @@ namespace entity_system {
 
 	EntityInstance::EntityInstance(const ENT_TYPE& ent_type) : InstanceBase(ent_type)
 	{
+        // TODO: Implement!
 	}
 
 
@@ -19,7 +20,7 @@ namespace entity_system {
 	}
 
 
-    void EntityInstance::add_entity_attribute_instance(const std::shared_ptr<EntityAttributeType>& ent_attr_type, const std::shared_ptr<EntityAttributeInstance>& ent_attr_inst)
+    void EntityInstance::add_entity_attribute_instance(const ENT_ATTR_TYPE& ent_attr_type, const ENT_ATTR_INST& ent_attr_inst)
     {
         // Use lock guard to ensure thread safety for this write operation!
         std::lock_guard<std::mutex> lock(entity_type_mutex);
@@ -27,9 +28,14 @@ namespace entity_system {
     }
 
 
-	std::unordered_map<std::shared_ptr<EntityAttributeType>, std::shared_ptr<EntityAttributeInstance>> EntityInstance::get_instances() const
+	std::optional<std::unordered_map<ENT_ATTR_TYPE, ENT_ATTR_INST>> EntityInstance::get_instances() const
 	{
-		return instances;
+        if(0 == instances.size())
+        {
+            return std::nullopt;
+        }
+        // Read only, no mutex required.
+        return std::optional<std::unordered_map<ENT_ATTR_TYPE, ENT_ATTR_INST>> { instances };
 	}
 
 

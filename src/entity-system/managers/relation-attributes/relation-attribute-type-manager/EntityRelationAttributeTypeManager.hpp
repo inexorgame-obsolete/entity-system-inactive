@@ -1,7 +1,9 @@
-// Inexor entity system prototype
+// Inexor entity system
 // (c)2018-2019 Inexor
 
 #pragma once
+
+#include <optional>
 
 #include "entity-system/managers/manager-templates/TypeManagerTemplate.hpp"
 #include "entity-system/model/relation-attributes/relation-attribute-instances/EntityRelationAttributeInstance.hpp"
@@ -16,11 +18,6 @@ namespace entity_system {
 	/// A manager class for entity relation attribute types.
 	class EntityRelationAttributeTypeManager : public TypeManagerTemplate<EntityRelationAttributeType>
 	{
-		private:
-
-			/// This entity relation attribute type error will be returned when a method fails.
-			const ENT_REL_ATTR_TYPE entity_relation_attribute_type_error = std::make_shared<EntityRelationAttributeType>("ERROR", ENTSYS_DATA_TYPE_UNDEFINED);
-
 		protected:
 
 			/// Constructor.
@@ -35,8 +32,7 @@ namespace entity_system {
 			/// @param ent_rel_attr_type_name The name of the new entity relation attribute type.
 			/// @param ent_rel_attr_data_type The data type of the new entity relation attribute type.
 			/// @return A shared pointer to the entity relation attribute type which was created.
-			/// <br>If this method fails, entity_relation_attribute_type_error will be returned as error object.
-			ENT_REL_ATTR_TYPE create_entity_relation_attribute_type(const std::string&, const ENTSYS_DATA_TYPE&);
+			std::optional<ENT_REL_ATTR_TYPE> create_entity_relation_attribute_type(const std::string&, const ENTSYS_DATA_TYPE&);
 
 			/// Returns the number of existing types of entity relation attributes.
 			/// @return The number of existing types of entity relation attributes.

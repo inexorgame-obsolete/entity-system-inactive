@@ -1,4 +1,4 @@
-// Inexor entity system prototype
+// Inexor entity system
 // (c)2018-2019 Inexor
 
 #include "EntityRelationInstance.hpp"
@@ -8,7 +8,8 @@ namespace inexor {
 namespace entity_system {
 
 
-	EntityRelationInstance::EntityRelationInstance(const ENT_REL_TYPE& ent_rel_type, const ENT_INST& ent_type_inst_source, const ENT_INST& ent_type_inst_target) : InstanceBase(ent_rel_type)
+	EntityRelationInstance::EntityRelationInstance(const ENT_REL_TYPE& ent_rel_type, const ENT_INST& ent_type_inst_source, const ENT_INST& ent_type_inst_target)
+        : InstanceBase(ent_rel_type)
 	{
 		// Store the relation type
 		// TODO: this->ent_rel_type = ent_rel_type;

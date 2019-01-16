@@ -1,10 +1,11 @@
-// Inexor entity system prototype
+// Inexor entity system
 // (c)2018-2019 Inexor
 
 #pragma once
 
 #include <string>
 #include <memory>
+#include <mutex>
 
 
 namespace inexor {
@@ -21,11 +22,15 @@ namespace entity_system {
 			/// A pointer to the type of this type instance.
 			std::shared_ptr<T> type_pointer;
 
+            /// Mutex for this instance base class.
+            std::mutex instance_base_mutex;
+
         protected:
 
             /// 
             std::shared_ptr<T> get_type() const
             {
+                // Read only, no mutex required.
                 return type_pointer;
             }
 
@@ -34,6 +39,8 @@ namespace entity_system {
 			/// Constructor.
 			InstanceBase(const std::shared_ptr<T>& type_ptr)
 			{
+                // Use lock guard to ensure thread safety for this write operation!
+                std::lock_guard<std::mutex> lock(instance_base_mutex);
 				type_pointer = type_ptr;
 			}
 			
@@ -41,6 +48,7 @@ namespace entity_system {
 			/// Destructor.
 			~InstanceBase()
 			{
+                // TODO: Implement!
 			}
 
 

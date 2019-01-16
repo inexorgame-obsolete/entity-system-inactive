@@ -1,9 +1,8 @@
-// Inexor entity system prototype
+// Inexor entity system
 // (c)2018-2019 Inexor
 
 #pragma once
 
-// #include <memory>
 #include <vector>
 
 #include "attributes/attribute-instance-manager/EntityAttributeInstanceManager.hpp"
@@ -24,8 +23,7 @@ namespace entity_system {
     /// @brief The entity manager class is responsible for adding,
     /// modifying and removing entity types, entity attributes,
     /// entity relations and instances of them.
-    class EntityManager : std::enable_shared_from_this<EntityManager>,
-	                      public EntityTypeManager,
+    class EntityManager : public EntityTypeManager,
                           public EntityInstanceManager,
                           public EntityAttributeTypeManager,
                           public EntityAttributeInstanceManager,
@@ -51,8 +49,7 @@ namespace entity_system {
 			/// Resets the entire entity system.
 			void reset_entity_system();
 
-			/// Shared ptr from this.
-			std::shared_ptr<EntityManager> getptr();
+
     };
 
 

@@ -10,11 +10,13 @@ namespace visual_scripting {
 
 	VisualScripting::VisualScripting()
 	{
+        // TODO: Implement!
 	}
 
 	
 	VisualScripting::~VisualScripting()
 	{
+        // TODO: Implement!
 	}
 	
 

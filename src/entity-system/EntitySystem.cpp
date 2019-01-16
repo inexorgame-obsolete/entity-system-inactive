@@ -1,4 +1,4 @@
-// Inexor entity system prototype
+// Inexor entity system
 // (c)2018-2019 Inexor
 
 #include "EntitySystem.hpp"
@@ -16,7 +16,7 @@ namespace entity_system {
 	
 	EntitySystem::~EntitySystem()
 	{
-		/// Reset entity system at shutdown.
+		// Reset entity system at shutdown.
 		reset_entity_system();
 	}
 	

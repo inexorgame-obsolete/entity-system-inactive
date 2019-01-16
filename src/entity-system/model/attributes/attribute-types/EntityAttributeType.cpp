@@ -1,4 +1,4 @@
-// Inexor entity system prototype
+// Inexor entity system
 // (c)2018-2019 Inexor
 
 #include "EntityAttributeType.hpp"
@@ -8,8 +8,7 @@ namespace inexor {
 namespace entity_system {
 
 
-	EntityAttributeType::EntityAttributeType(const std::string& ent_attr_type_name, const ENTSYS_DATA_TYPE& ent_attr_data_type)
-	: AttributeBase(ent_attr_data_type), TypeBase(ent_attr_type_name)
+	EntityAttributeType::EntityAttributeType(const std::string& ent_attr_type_name, const ENTSYS_DATA_TYPE& ent_attr_data_type) : AttributeBase(ent_attr_data_type), TypeBase(ent_attr_type_name)
 	{
 		// TODO: Implement!
 	}

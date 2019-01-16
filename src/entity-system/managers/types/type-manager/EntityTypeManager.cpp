@@ -1,4 +1,4 @@
-// Inexor entity system prototype
+// Inexor entity system
 // (c)2018-2019 Inexor
 
 #include "EntityTypeManager.hpp"
@@ -8,7 +8,7 @@ namespace inexor {
 namespace entity_system {
     
 
-	EntityTypeManager::EntityTypeManager() : TypeManagerTemplate(entity_type_error)
+	EntityTypeManager::EntityTypeManager()
 	{
 		// TODO: Implement!
 	}
@@ -34,32 +34,36 @@ namespace entity_system {
 	}
 
 
-    /// Checks if an entity type does already exist.
     bool EntityTypeManager::does_entity_type_exist(const xg::Guid& type_GUID)
     {
         return does_entity_type_exist(get_type(type_GUID)->get_type_name());
     }
 
 
-	ENT_TYPE EntityTypeManager::create_entity_type(const std::string& ent_type_name)
+	std::optional<ENT_TYPE> EntityTypeManager::create_entity_type(const std::string& ent_type_name)
 	{
 		// Check if an entity type with this name does already exist.
 		if(! is_type_name_valid(ent_type_name))
 		{
 			// This entity type does already exist.
-			// TODO: Throw error message.
-			return entity_type_error;
-		}
-		// TODO: Add more validation here.
+			// TODO: Notify error handler about this!
+
+            // Since we've not created a new entity type we can 
+            // now return std::nullopt thanks to std::optional.
+            return std::nullopt;
+        }
+
+		// Add more validation here if neccesary.
 
 		// Create a new entity type.
 		ENT_TYPE new_entity_type = std::make_shared<EntityType>(ent_type_name);
 
-		// Add the new instance to the type map.
-		// Call method of the template base class.
+		// Call method of the template base class
+        // to add the new instance to the type map.
 		add_type(ent_type_name, new_entity_type);
 
-		return new_entity_type;
+        // Return the entity type we've just created.
+        return std::optional<ENT_TYPE>{ new_entity_type };
 	}
 
 

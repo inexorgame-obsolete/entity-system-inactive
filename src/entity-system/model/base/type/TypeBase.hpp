@@ -1,9 +1,10 @@
-// Inexor entity system prototype
+// Inexor entity system
 // (c)2018-2019 Inexor
 
 #pragma once
 
 #include <string>
+#include <mutex>
 
 #include "entity-system/model/data/validation/DataValidationBase.hpp"
 #include "entity-system/util/uuid/GUIDBase.hpp"
@@ -11,6 +12,7 @@
 
 namespace inexor {
 namespace entity_system {
+
 
 	/// @note It does not make sense to let TypeBase or AttributeBase
 	/// inherit from GUIDBase, because then EntityAttributeType would
@@ -26,6 +28,9 @@ namespace entity_system {
 
 			/// The unique name of this type.
 			std::string type_title;
+
+            /// Mutex for this base class.
+            std::mutex type_base_mutex;
 
 		protected:
 

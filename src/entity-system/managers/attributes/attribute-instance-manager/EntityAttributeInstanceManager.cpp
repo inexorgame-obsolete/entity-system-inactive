@@ -1,4 +1,4 @@
-// Inexor entity system prototype
+// Inexor entity system
 // (c)2018-2019 Inexor
 
 #include "EntityAttributeInstanceManager.hpp"
@@ -8,7 +8,7 @@ namespace inexor {
 namespace entity_system {
 
 
-    EntityAttributeInstanceManager::EntityAttributeInstanceManager() : InstanceManagerTemplate(entity_attribute_instance_error)
+    EntityAttributeInstanceManager::EntityAttributeInstanceManager() : InstanceManagerTemplate()
     {
 		// TODO: Implement!
     }
@@ -20,7 +20,7 @@ namespace entity_system {
     }
 
 
-	ENT_ATTR_INST EntityAttributeInstanceManager::create_entity_attribute_instance(const ENT_ATTR_TYPE& ent_attr_type)
+	std::optional<ENT_ATTR_INST> EntityAttributeInstanceManager::create_entity_attribute_instance(const ENT_ATTR_TYPE& ent_attr_type)
 	{
 		// Create entity attribute type instance.
 		ENT_ATTR_INST new_ent_attr_instance = std::make_shared<EntityAttributeInstance>(ent_attr_type);
@@ -29,11 +29,11 @@ namespace entity_system {
 		add_instance(new_ent_attr_instance->get_GUID(), new_ent_attr_instance);
 
         // Read only, no mutex required.
-		return new_ent_attr_instance;
+        return std::optional<ENT_ATTR_INST> { new_ent_attr_instance };
 	}
 
 
-	const std::size_t EntityAttributeInstanceManager::get_entity_attribute_instance_count() const
+	std::size_t EntityAttributeInstanceManager::get_entity_attribute_instance_count() const
 	{
 		// Call template base class method.
         // Read only, no mutex required.

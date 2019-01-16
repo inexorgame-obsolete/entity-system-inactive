@@ -1,4 +1,4 @@
-// Inexor entity system prototype
+// Inexor entity system
 // (c)2018-2019 Inexor
 
 #include "EntityManager.hpp"
@@ -37,10 +37,6 @@ namespace entity_system {
 
 		// TODO: add more methods here..
 	}
-
-    std::shared_ptr<EntityManager> EntityManager::getptr() {
-        return shared_from_this();
-    }
 
 
 };

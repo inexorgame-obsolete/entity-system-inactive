@@ -1,4 +1,4 @@
-// Inexor entity system prototype
+// Inexor entity system
 // (c)2018-2019 Inexor
 
 #pragma once
@@ -15,14 +15,14 @@ namespace entity_system {
 	// TODO: Implement EntityEditor
 	// TODO: Implement EntityEditorRenderer
 	// TODO: Implement EntityGameSceneRenderer
-   // TODO: Implement EntitySync
+    // TODO: Implement EntitySync
 	// TODO: Implement EntityErrorHandling
 	// TODO: Implement EntityImporter
 	// TODO: Implement EntityExporter
 
 
 	/// @class EntitySystem
-   /// @brief Entity system main class.
+    /// @brief Entity system main class.
 	class EntitySystem : public EntityManager
 	{
 		public:

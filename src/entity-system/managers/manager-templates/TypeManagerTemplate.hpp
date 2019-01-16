@@ -1,4 +1,4 @@
-// Inexor entity system prototype
+// Inexor entity system
 // (c)2018-2019 Inexor
 
 #pragma once
@@ -36,11 +36,8 @@ namespace entity_system {
 			/// An unordered map which stores all available types.
 			std::unordered_map<xg::Guid, std::shared_ptr<T>> stored_types;
 
-			// 
+			/// The mutex for this base class.
 			std::mutex type_manager_mutex;
-
-			// Error type
-			std::shared_ptr<T> error_type;
 
 		protected:
 
@@ -51,36 +48,16 @@ namespace entity_system {
 
 
 			/// Constructor.
-			TypeManagerTemplate(const std::shared_ptr<T>& param_error_type)
-			{
-				// Use lock guard to ensure thread safety for this write operation!
-				std::lock_guard<std::mutex> lock(type_manager_mutex);
-				error_type = param_error_type;
-			}
+			TypeManagerTemplate()
+            {
+                // TODO: Implement!
+            }
 
 
 			/// Destructor.
 			~TypeManagerTemplate()
 			{
 				// TODO: Implement!
-			}
-
-
-			/// Returns the GUID of a type by name.
-			/// @param type_name The name of the type.
-			const xg::Guid get_GUID_by_type_name(const std::string& type_name)
-			{
-				// Read only, no mutex required.
-				return stored_type_names[type_name];
-			}
-
-
-			/// Returns the name of a type by given GUID.
-			/// @param type_GUID The GUID of the type.
-			const std::string get_type_name_by_GUID(const xg::Guid& type_GUID)
-			{
-				// Read only, no mutex required.
-				return stored_type_GUIDs[type_GUID];
 			}
 
 
@@ -128,7 +105,25 @@ namespace entity_system {
 			}
 
 
-			/// Searches for the desired type by name and returns it.
+			/// Returns the GUID of a type by name.
+			/// @param type_name The name of the type.
+			const xg::Guid get_GUID_by_type_name(const std::string& type_name)
+			{
+				// Read only, no mutex required.
+				return stored_type_names[type_name];
+			}
+
+
+			/// Returns the name of a type by given GUID.
+			/// @param type_GUID The GUID of the type.
+			const std::string get_type_name_by_GUID(const xg::Guid& type_GUID)
+			{
+				// Read only, no mutex required.
+				return stored_type_GUIDs[type_GUID];
+			}
+
+            
+            /// Searches for the desired type by name and returns it.
 			/// @param type_name the name of the type to search for.
 			/// @return A const shared pointer to the type.
 			const std::shared_ptr<T> get_type(const std::string& type_name)
@@ -167,9 +162,11 @@ namespace entity_system {
 			}
 
 
-			// TODO: TEST!
+            /// @brief Deletes a type by GUID.
+            /// @param type_GUID The GUID of the type.
 			void delete_type(const xg::Guid& type_GUID)
 			{
+                // We do not need a mutex for these read operations here.
 				std::string type_name_to_delete = get_type_name_by_GUID(type_GUID);
 				xg::Guid type_GUID_to_delete = get_GUID_by_type_name(type_name_to_delete);
 

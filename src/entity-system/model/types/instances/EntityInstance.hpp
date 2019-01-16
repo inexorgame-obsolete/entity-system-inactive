@@ -1,9 +1,10 @@
-// Inexor entity system prototype
+// Inexor entity system
 // (c)2018-2019 Inexor
 
 #pragma once
 
 #include <mutex>
+#include <optional>
 
 #include "entity-system/model/attributes/attribute-instances/EntityAttributeInstance.hpp"
 #include "entity-system/model/types/types/EntityType.hpp"
@@ -20,10 +21,12 @@ namespace entity_system {
     {
         private:
 
-            /// 
-            std::unordered_map<std::shared_ptr<EntityAttributeType>, std::shared_ptr<EntityAttributeInstance>> instances;
+            // A map for storing the instances by type.
+            // Every EntityInstance can have only one instance of
+            // a unique EntityAttributeType.
+            std::unordered_map<ENT_ATTR_TYPE, ENT_ATTR_INST> instances;
 
-            /// 
+            // Mutex for this entity instance.
             std::mutex entity_type_mutex;
 
 		public:
@@ -39,10 +42,11 @@ namespace entity_system {
 			~EntityInstance();
 
             ///
-            void add_entity_attribute_instance(const std::shared_ptr<EntityAttributeType>&, const std::shared_ptr<EntityAttributeInstance>&);
+            void add_entity_attribute_instance(const ENT_ATTR_TYPE&, const ENT_ATTR_INST&);
 
-            ///
-			std::unordered_map<std::shared_ptr<EntityAttributeType>, std::shared_ptr<EntityAttributeInstance>> get_instances() const;
+            /// @brief Get all the attribute instances.
+            /// @return All existing attribute instances.
+			std::optional<std::unordered_map<ENT_ATTR_TYPE, ENT_ATTR_INST>> get_instances() const;
 
             // TODO: Implement methods for setting and getting entity attribute instance data...
 

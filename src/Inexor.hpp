@@ -1,4 +1,4 @@
-// Inexor entity system prototype
+// Inexor entity system
 // (c)2018-2019 Inexor
 
 #pragma once
@@ -26,24 +26,36 @@ namespace inexor {
 	/// @brief Inexor main class.
 	class Inexor
 	{
-		public:
+		private:
+
+            /// 
+            std::shared_ptr<inexor::entity_system::EntitySystem> entity_system;
+
+
+            /// 
+			std::shared_ptr<inexor::entity_system::RestServer> rest_server;
+
+
+            /// 
+            int rest_server_port = 8080;
+
+        public:
 
 			/// Constructor.
 			Inexor();
 
+
 			/// Destructor.
 			~Inexor();
 
+
+            /// 
 			std::shared_ptr<inexor::entity_system::EntitySystem> get_entity_system();
 
+
+            /// 
 			std::shared_ptr<inexor::entity_system::RestServer> get_rest_server();
 
-		private:
-			std::shared_ptr<inexor::entity_system::EntitySystem> entity_system;
-
-			std::shared_ptr<inexor::entity_system::RestServer> rest_server;
-
-			int rest_server_port = 8080;
 	};
 
 

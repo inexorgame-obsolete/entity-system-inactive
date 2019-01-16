@@ -1,4 +1,4 @@
-// Inexor entity system prototype
+// Inexor entity system
 // (c)2018-2019 Inexor
 
 #pragma once
@@ -33,24 +33,22 @@ namespace entity_system {
 			// It will be set when the constructor is called
 			std::shared_ptr<T> error_instance;
 
-			// 
+			// Mutex for this base class.
 			std::mutex type_instance_manager_mutex;
 
 		protected:
 			
 			/// Constructor. 
-			InstanceManagerTemplate(const std::shared_ptr<T>& param_error_inst)
+			InstanceManagerTemplate()
 			{
-				// Use lock guard to ensure thread safety for this write operation!
-				std::lock_guard<std::mutex> lock(type_instance_manager_mutex);
-				error_instance = param_error_inst;
+                // TODO: Implement!
 			}
 
 
             /// Destructor.
             ~InstanceManagerTemplate()
             {
-                // TODO: Implement
+                // TODO: Implement!
             }
 
 

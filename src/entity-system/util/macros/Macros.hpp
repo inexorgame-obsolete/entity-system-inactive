@@ -1,5 +1,7 @@
-// Inexor entity system prototype
+// Inexor entity system
 // (c)2018-2019 Inexor
+
+//TODO: Refactor and delete this file!
 
 #pragma once
 

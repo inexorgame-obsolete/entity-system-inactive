@@ -1,4 +1,4 @@
-// Inexor entity system prototype
+// Inexor entity system
 // (c)2018-2019 Inexor
 
 #pragma once
@@ -14,7 +14,6 @@ namespace entity_system {
     /// @brief Data container memory type.
     enum ENTSYS_DATA_TYPE 
     {
-		ENTSYS_DATA_TYPE_UNDEFINED = 0,
         ENTSYS_DATA_TYPE_INT,
         ENTSYS_DATA_TYPE_BIG_INT,
         ENTSYS_DATA_TYPE_FLOAT,

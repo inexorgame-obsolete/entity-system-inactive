@@ -1,4 +1,4 @@
-// Inexor entity system prototype
+// Inexor entity system
 // (c)2018-2019 Inexor
 
 #include "DataContainer.hpp"
@@ -10,12 +10,14 @@ namespace entity_system {
 
     DataContainer::DataContainer(const ENTSYS_DATA_TYPE& param_data_type)
     {
+        // TODO: Add mutex here!
 		data_type = param_data_type;
     }
 
 
     DataContainer::DataContainer(const std::int64_t& int64val)
 	{
+        // TODO: Add mutex here!
 		data_type = ENTSYS_DATA_TYPE_BIG_INT;
 		data_int64 = int64val;
     }
@@ -23,6 +25,7 @@ namespace entity_system {
 
     DataContainer::DataContainer(const double& double_val)
     {
+        // TODO: Add mutex here!
 		data_type = ENTSYS_DATA_TYPE_DOUBLE;
 		data_double = double_val;
     }
@@ -30,6 +33,7 @@ namespace entity_system {
 
     DataContainer::DataContainer(const float& float_val)
     {
+        // TODO: Add mutex here!
 		data_type = ENTSYS_DATA_TYPE_FLOAT;
 		data_float = float_val;
     }
@@ -37,6 +41,7 @@ namespace entity_system {
 
     DataContainer::DataContainer(const bool& bool_val)
     {
+        // TODO: Add mutex here!
 		data_type = ENTSYS_DATA_TYPE_BOOL;
 		data_bool = bool_val;
     }
@@ -44,6 +49,7 @@ namespace entity_system {
 
     DataContainer::DataContainer(const std::string& string_val)
     {
+        // TODO: Add mutex here!
 		data_type = ENTSYS_DATA_TYPE_STRING;
 		data_string = string_val;
     }
@@ -51,6 +57,7 @@ namespace entity_system {
 
     DataContainer::DataContainer(const int& int_val)
     {
+        // TODO: Add mutex here!
 		data_type = ENTSYS_DATA_TYPE_INT;
 		data_int = int_val;
     }
@@ -65,19 +72,20 @@ namespace entity_system {
 
     void DataContainer::reset_memory()
 	{
-      data_type = ENTSYS_DATA_TYPE_UNDEFINED;
-      data_int64 = 0;
-      data_string = "";
-      data_double = 0.0;
-      data_float = 0.0f;
-      data_bool = false;
-      data_int = 0;
-      // TODO: Add more reset mechanisms here.
+        // TODO: Add mutex here!
+        data_int64 = 0;
+        data_string = "";
+        data_double = 0.0;
+        data_float = 0.0f;
+        data_bool = false;
+        data_int = 0;
+        // TODO: Add more reset mechanisms here.
 	}
 
 
     void DataContainer::set_data_type(const ENTSYS_DATA_TYPE& param_data_type)
     {
+        // TODO: Add mutex here!
 		reset_memory();
 		data_type = param_data_type;
     }
@@ -85,8 +93,8 @@ namespace entity_system {
 
     ENTSYS_DATA_TYPE DataContainer::get_data_type() const
     {
-      // Read only, no mutex required.
-      return data_type;
+        // Read only, no mutex required.
+        return data_type;
     }
 
 
@@ -111,8 +119,6 @@ namespace entity_system {
 				break;
 			case ENTSYS_DATA_TYPE_STRING:
 				set_data(data_container.get_string());
-				break;
-			case ENTSYS_DATA_TYPE_UNDEFINED:
 				break;
 		}
 		return DataContainer(this);
@@ -142,8 +148,6 @@ namespace entity_system {
 			case ENTSYS_DATA_TYPE_STRING:
 				data_string = std::to_string(int64_val);
 				break;
-			case ENTSYS_DATA_TYPE_UNDEFINED:
-				break;
 		}
 		return DataContainer(this);
 	}
@@ -170,8 +174,6 @@ namespace entity_system {
 				break;
 			case ENTSYS_DATA_TYPE_STRING:
 				data_string = string_val;
-				break;
-			case ENTSYS_DATA_TYPE_UNDEFINED:
 				break;
 		}
 		return DataContainer(this);
@@ -200,8 +202,6 @@ namespace entity_system {
 			case ENTSYS_DATA_TYPE_STRING:
 				data_string = std::to_string(double_val);
 				break;
-			case ENTSYS_DATA_TYPE_UNDEFINED:
-				break;
 		}
 		return DataContainer(this);
 	}
@@ -228,8 +228,6 @@ namespace entity_system {
 				break;
 			case ENTSYS_DATA_TYPE_STRING:
 				data_string = std::to_string(float_val);
-				break;
-			case ENTSYS_DATA_TYPE_UNDEFINED:
 				break;
 		}
 		return DataContainer(this);
@@ -258,8 +256,6 @@ namespace entity_system {
 			case ENTSYS_DATA_TYPE_STRING:
 				data_string = (bool_val) ? std::string("1") : std::string("0");
 				break;
-			case ENTSYS_DATA_TYPE_UNDEFINED:
-				break;
 		}
 		return DataContainer(this);
 	}
@@ -286,8 +282,6 @@ namespace entity_system {
 				break;
 			case ENTSYS_DATA_TYPE_STRING:
 				data_string = std::to_string(int_val);
-				break;
-			case ENTSYS_DATA_TYPE_UNDEFINED:
 				break;
 		}
 		return DataContainer(this);
@@ -408,7 +402,6 @@ namespace entity_system {
 			case ENTSYS_DATA_TYPE_BIG_INT:
 				cast_value = data_int64;
 				break;
-			case ENTSYS_DATA_TYPE_UNDEFINED:
 			case ENTSYS_DATA_TYPE_STRING:
 			case ENTSYS_DATA_TYPE_BOOL:
 				break;
@@ -440,7 +433,6 @@ namespace entity_system {
 				// We should not cast from int64 to int!
 				cast_value = static_cast<int>(data_int64);
 				break;
-			case ENTSYS_DATA_TYPE_UNDEFINED:
 			case ENTSYS_DATA_TYPE_STRING:
 			case ENTSYS_DATA_TYPE_BOOL:
 				break;
@@ -472,7 +464,6 @@ namespace entity_system {
 				// We should not cast from int64 to int!
 				cast_value = static_cast<double>(data_int64);
 				break;
-			case ENTSYS_DATA_TYPE_UNDEFINED:
 			case ENTSYS_DATA_TYPE_STRING:
 			case ENTSYS_DATA_TYPE_BOOL:
 				break;
@@ -502,7 +493,6 @@ namespace entity_system {
 			case ENTSYS_DATA_TYPE_BIG_INT:
 				cast_value = static_cast<float>(data_int64);
 				break;
-			case ENTSYS_DATA_TYPE_UNDEFINED:
 			case ENTSYS_DATA_TYPE_STRING:
 			case ENTSYS_DATA_TYPE_BOOL:
 				break;

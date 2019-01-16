@@ -50,7 +50,8 @@ namespace inexor {
 
 		// We populate the entity system with an entity type with three attributes and create an instance
 		std::cout << "Populating entity system with an entity type with three attributes and create an instance" << std::endl;
-		auto entity_type_camera = entity_system->create_entity_type("CAMERA");
+		/*
+        auto entity_type_camera = entity_system->create_entity_type("CAMERA");
 		auto attribute_type_position_x = entity_system->create_entity_attribute_type("position_x", ENTSYS_DATA_TYPE_FLOAT);
 		auto attribute_type_position_y = entity_system->create_entity_attribute_type("position_y", ENTSYS_DATA_TYPE_FLOAT);
 		auto attribute_type_position_z = entity_system->create_entity_attribute_type("position_z", ENTSYS_DATA_TYPE_FLOAT);
@@ -58,6 +59,7 @@ namespace inexor {
 		entity_type_camera->link_attribute_type(attribute_type_position_y);
 		entity_type_camera->link_attribute_type(attribute_type_position_z);
 		auto entity_instance_camera_1 = entity_system->create_entity_instance(entity_type_camera);
+        */
 
 	    // Setup REST server
 	    _rest_server_port = rest_server_port;

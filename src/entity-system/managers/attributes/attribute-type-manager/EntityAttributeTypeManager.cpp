@@ -1,4 +1,4 @@
-// Inexor entity system prototype
+// Inexor entity system
 // (c)2018-2019 Inexor
 
 #include "EntityAttributeTypeManager.hpp"
@@ -8,7 +8,7 @@ namespace inexor {
 namespace entity_system {
 
 
-    EntityAttributeTypeManager::EntityAttributeTypeManager() : TypeManagerTemplate(entity_attribute_type_error)
+    EntityAttributeTypeManager::EntityAttributeTypeManager() : TypeManagerTemplate()
     {
 		// TODO: Implement!
     }
@@ -33,14 +33,17 @@ namespace entity_system {
 	}
 
 
-	ENT_ATTR_TYPE EntityAttributeTypeManager::create_entity_attribute_type(const std::string& ent_attr_type_name, const ENTSYS_DATA_TYPE& ent_attr_data_type)
+	std::optional<ENT_ATTR_TYPE> EntityAttributeTypeManager::create_entity_attribute_type(const std::string& ent_attr_type_name, const ENTSYS_DATA_TYPE& ent_attr_data_type)
 	{
 		// Check if entity attribute type's name is not empty.
 		if(! is_type_name_valid(ent_attr_type_name))
 		{
 			// This entity attribute type does already exist.
 			// TODO: Throw error message.
-			return entity_attribute_type_error;
+			
+            // Since we've not created a new entity attribute type we can
+            // now return std::nullopt thanks to std::optional.
+            return std::nullopt;
 		}
 
 		// Create entity attribute type.
@@ -49,8 +52,30 @@ namespace entity_system {
 		// Call template base class method.
 		add_type(ent_attr_type_name, new_ent_attr_type);
 
-		return new_ent_attr_type;
+        return std::optional<ENT_ATTR_TYPE> { new_ent_attr_type };
 	}
+
+
+    /// Get an entity attribute type by name.
+    /// @param ? ?
+    std::optional<ENT_ATTR_TYPE> EntityAttributeTypeManager::get_entity_attribute_type(const std::string& type_name) const
+    {
+        /*
+        if(does_type_exist(type_name))
+        {
+            //return std::optional<ENT_ATTR_TYPE> {  };
+        }
+        */
+        return std::nullopt;
+    }
+
+
+    /// Get an entity attribute type by GUID.
+    /// @param ? ? 
+    std::optional<ENT_ATTR_TYPE> EntityAttributeTypeManager::get_entity_attribute_type(const xg::Guid& type_GUID) const
+    {
+        return std::nullopt;
+    }
 
 
 	const std::size_t EntityAttributeTypeManager::get_entity_attribute_type_count() const

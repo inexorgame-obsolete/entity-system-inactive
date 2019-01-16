@@ -1,4 +1,4 @@
-// Inexor entity system prototype
+// Inexor entity system
 // (c)2018-2019 Inexor
 
 #include "EntityType.hpp"
@@ -8,10 +8,10 @@ namespace inexor {
 namespace entity_system {
     
 
-   EntityType::EntityType(const std::string& ent_type_name) : TypeBase(ent_type_name)
-   {
+    EntityType::EntityType(const std::string& ent_type_name) : TypeBase(ent_type_name)
+    {
 		// TODO: Implement!
-	}
+    }
 
 
 	EntityType::~EntityType()
@@ -66,10 +66,16 @@ namespace entity_system {
 	}
 
 
-	const std::vector<ENT_ATTR_TYPE>& EntityType::get_linked_attribute_types() const
+	std::optional<std::vector<ENT_ATTR_TYPE>> EntityType::get_linked_attribute_types() const
 	{
+        if(0 == entity_attribute_instances.size())
+        {
+            // There are no linked entity attribute instances.
+            return std::nullopt;
+        }
+        
         // Read only, no mutex required.
-        return entity_attribute_instances;
+        return std::optional<std::vector<ENT_ATTR_TYPE>> { entity_attribute_instances };
 	}
 
 

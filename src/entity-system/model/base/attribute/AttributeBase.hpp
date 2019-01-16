@@ -1,9 +1,10 @@
-// Inexor entity system prototype
+// Inexor entity system
 // (c)2018-2019 Inexor
 
 #pragma once
 
 #include <mutex>
+#include <optional>
 
 #include "entity-system/model/data/container/DataContainer.hpp"
 #include "entity-system/model/data/validation/DataValidationBase.hpp"
@@ -29,11 +30,11 @@ namespace entity_system {
 		private:
 
 			/// The data type of the attribute.
-			/// @note The data is managed in the
-			/// instance, not in this base class.
+			/// @note The data is only managed in
+            /// the instance, not in this base class.
 			ENTSYS_DATA_TYPE attribute_data_type;
 
-            /// 
+            /// Mutex for this base class.
             std::mutex attribute_type_base_mutex;
 
 		protected:
@@ -48,7 +49,10 @@ namespace entity_system {
 			
 		public:
 
-			/// Returns the data type of the attribute.
+            /// @brief Returns the data type of the attribute.
+			/// @note Since the data type must be set when
+            /// the constructor is called, we do not
+            /// implement std::optional here.
 			/// @return The data type of the attribute.
 			ENTSYS_DATA_TYPE get_attribute_data_type() const;
 

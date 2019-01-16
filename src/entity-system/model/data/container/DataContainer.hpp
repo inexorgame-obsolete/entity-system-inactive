@@ -1,4 +1,4 @@
-// Inexor entity system prototype
+// Inexor entity system
 // (c)2018-2019 Inexor
 
 #pragma once
@@ -26,7 +26,7 @@ namespace entity_system {
         private:
 
             /// The data type of this data container.
-            ENTSYS_DATA_TYPE data_type = ENTSYS_DATA_TYPE_UNDEFINED;
+            ENTSYS_DATA_TYPE data_type = ENTSYS_DATA_TYPE_INT;
 
             /// A 64 bit integer variable for storing data in the container.
             std::int64_t data_int64 = 0;

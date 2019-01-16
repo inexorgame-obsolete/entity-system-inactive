@@ -1,4 +1,4 @@
-// Inexor entity system prototype
+// Inexor entity system
 // (c)2018-2019 Inexor
 
 #pragma once
@@ -16,7 +16,7 @@ namespace entity_system {
 	{
 		private:
 
-            // 
+            /// The mutex for this base class.
             std::mutex guid_base_mutex;
 
 			/// The GUID of the class.
