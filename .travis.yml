@@ -5,18 +5,18 @@ services:
     
 sudo: required
     
-language: python
-    
-env:
-  matrix:
-    - DOCKER_IMAGE=conanio/gcc8 # 8.0
+language: general
 
 matrix:
     include:
-        - os: osx
-          osx_image: xcode10 # apple-clang 10.0
-          language: generic
+        - os: linux
+          dist: xenial
           env:
+          - DOCKER_IMAGE=conanio/gcc8 # 8.0
+        - os: linux
+          dist: xenial
+          env:
+          - DOCKER_IMAGE=conanio/clang7 # 7.0
 
 install:
   - ./.travis/install.sh
