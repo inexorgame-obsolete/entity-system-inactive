@@ -56,7 +56,7 @@ namespace entity_system {
 
 			/// Returns the number of available entity relation types.
 			/// @return The number of available entity relation types.
-			const std::size_t get_entity_relation_types_count() const;
+			std::size_t get_entity_relation_types_count() const;
 
 
 			/// Deletes an entity relation type.

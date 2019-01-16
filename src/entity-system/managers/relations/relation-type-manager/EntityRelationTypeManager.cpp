@@ -57,7 +57,7 @@ namespace entity_system {
 	}
 
 
-	const std::size_t EntityRelationTypeManager::get_entity_relation_types_count() const
+	std::size_t EntityRelationTypeManager::get_entity_relation_types_count() const
 	{
         // 
 		return get_type_count();

@@ -61,7 +61,7 @@ namespace entity_system {
 
 			/// Returns the number of existing entity type instances.
 			/// @return The number of existing entity type instances.
-			const std::size_t get_entity_instance_count() const;
+			std::size_t get_entity_instance_count() const;
 
 
             // TODO: delete_entity_instance(const xg::Guid&);

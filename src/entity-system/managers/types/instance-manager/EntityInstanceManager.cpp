@@ -48,7 +48,7 @@ namespace entity_system {
 	}
 
 
-	const std::size_t EntityInstanceManager::get_entity_instance_count() const
+	std::size_t EntityInstanceManager::get_entity_instance_count() const
 	{
 		// Call template base class method.
 		return get_instance_count();

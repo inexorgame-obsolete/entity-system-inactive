@@ -73,7 +73,7 @@ namespace entity_system {
 
 			/// Returns the number of existing instances.
 			/// @return The number of existing instances.
-			const std::size_t get_instance_count() const
+			std::size_t get_instance_count() const
 			{
 				// Read only, no mutex required.
 				return stored_instances.size();
