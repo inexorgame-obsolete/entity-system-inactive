@@ -12,11 +12,7 @@ matrix:
         - os: linux
           dist: xenial
           env:
-          - DOCKER_IMAGE=conanio/gcc7 # GCC 7
-        - os: linux
-          dist: xenial
-          env:
-          - DOCKER_IMAGE=conanio/gcc8 # GCC 8
+          - DOCKER_IMAGE=conanio/gcc72 # GCC 7
         - os: linux
           dist: xenial
           env:
