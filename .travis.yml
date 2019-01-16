@@ -12,11 +12,15 @@ matrix:
         - os: linux
           dist: xenial
           env:
-          - DOCKER_IMAGE=conanio/gcc8 # 8.0
+          - DOCKER_IMAGE=conanio/gcc7 # GCC 7
         - os: linux
           dist: xenial
           env:
-          - DOCKER_IMAGE=conanio/clang7 # 7.0
+          - DOCKER_IMAGE=conanio/gcc8 # GCC 8
+        - os: linux
+          dist: xenial
+          env:
+          - DOCKER_IMAGE=conanio/clang7 # clang 7
 
 install:
   - ./.travis/install.sh
