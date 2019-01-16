@@ -3,6 +3,7 @@
 
 #include "Inexor.hpp"
 
+
 int main(int argc, char* argv[])
 {
 	std::shared_ptr<inexor::Inexor> inexor = std::make_shared<inexor::Inexor>();

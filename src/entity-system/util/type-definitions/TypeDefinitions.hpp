@@ -10,7 +10,6 @@ namespace inexor {
 namespace entity_system {
 	
 
-	/// These macros make initialisations shorter.
 	// TODO: Replace with 'using' or 'typedef'?
 
     #define ENT_ATTR_TYPE           std::shared_ptr<class EntityAttributeType>

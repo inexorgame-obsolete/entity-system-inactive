@@ -16,10 +16,10 @@ namespace visual_scripting {
 	{
 		public:
 
-			/// Constructor.
+			/// @brief Constructor.
 			VisualScripting();
 
-			/// Destructor.
+			/// @brief Destructor.
 			~VisualScripting();
 
 	};
