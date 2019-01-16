@@ -36,9 +36,17 @@ namespace entity_system {
 			/// automatically because EntityAttributeType inherits from GUIDBase!
 			std::optional<ENT_ATTR_INST> create_entity_attribute_instance(const ENT_ATTR_TYPE&);
 
+
+            std::optional<ENT_ATTR_INST> get_entity_attribute_instance(const xg::Guid&);
+
+
 			/// Returns the number of existing entity attribute type instances.
 			/// @return The number of existing entity attribute type instances.
 			std::size_t get_entity_attribute_instance_count() const;
+
+
+            std::size_t delete_entity_attribute_instance(const xg::Guid&);
+
 
 			/// Deletes all entity attribute type instances.
 			void delete_all_entity_attribute_instances();

@@ -19,26 +19,45 @@ namespace inexor {
 namespace entity_system {
     
 
-	/// A manager class for entity attribute types.
+    /// @class EntityAttributeTypeManager
+	/// @brief A manager class for entity attribute types.
     class EntityAttributeTypeManager : public TypeManagerTemplate<EntityAttributeType>
     {
         protected:
 
-			/// Constructor.
+			/// @brief Constructor.
 			EntityAttributeTypeManager();
 
 
-			/// Destructor.
+			/// @brief Destructor.
             ~EntityAttributeTypeManager();
 
 		public:
 
-			/// Checks if an entity attribute type does already exist.
+			/// @brief Creates a new entity attribute type.
+			/// @param ent_attr_type_name The name of the new entity attribute type.
+			/// @param ent_attr_data_type The data type of the new entity attribute type.
+			/// @return ?
+			std::optional<ENT_ATTR_TYPE> create_entity_attribute_type(const std::string&, const ENTSYS_DATA_TYPE&);
+
+            
+			/// @brief Creates a new entity attribute type.
+            /// @param ? 
+            /// @param ? 
+            /// @param ? 
+            /// @return ?
+            std::optional<ENT_ATTR_TYPE> create_entity_attribute_type(const xg::Guid&, const std::string&, const ENTSYS_DATA_TYPE&);
+
+            
+			/// @brief Checks if an entity attribute type does already exist.
 			/// @param ent_attr_type_name The name of an entity
 			/// attribute type of which we will check if it does already exist.
 			/// @return True if the entity attribute type
 			/// does already exist, false otherwise.
 			bool does_entity_attribute_type_exist(const std::string&);
+
+
+            bool does_entity_attribute_type_exist(const xg::Guid&);
 
 
 			/// Checks if an entity attribute type does already exist.
@@ -50,14 +69,6 @@ namespace entity_system {
 			bool does_entity_attribute_type_exist(const ENT_ATTR_TYPE&);
 
 
-			/// Creates a new entity attribute type.
-			/// @param ent_attr_type_name The name of the new entity attribute type.
-			/// @param ent_attr_data_type The data type of the new entity attribute type.
-			/// @return A shared pointer to the entity attribute type which was created.
-			/// be created automatically by the inheritance of GUIDBase!
-			std::optional<ENT_ATTR_TYPE> create_entity_attribute_type(const std::string&, const ENTSYS_DATA_TYPE&);
-
-
             /// Get an entity attribute type by name.
             /// @param type_name The name of the type we tant to check for.
             std::optional<ENT_ATTR_TYPE> get_entity_attribute_type(const std::string&) const;
@@ -67,10 +78,9 @@ namespace entity_system {
             /// @param type_GUID The GUID of the type we tant to check for.
             std::optional<ENT_ATTR_TYPE> get_entity_attribute_type(const xg::Guid&) const;
 
-            
             /// Returns the number of available entity attribute types.
 			/// @return The number of available entity attribute types.
-			const std::size_t get_entity_attribute_type_count() const;
+			std::size_t get_entity_attribute_type_count() const;
 
 
 			/// Deletes an entity attribute type.

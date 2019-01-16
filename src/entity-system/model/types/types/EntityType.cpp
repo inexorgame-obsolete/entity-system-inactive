@@ -8,13 +8,19 @@ namespace inexor {
 namespace entity_system {
     
 
-    EntityType::EntityType(const std::string& ent_type_name) : TypeBase(ent_type_name)
+    EntityType::EntityType(const std::string& ent_type_name) : TypeBase(ent_type_name), GUIDBase()
     {
 		// TODO: Implement!
     }
 
 
-	EntityType::~EntityType()
+    EntityType::EntityType(const xg::Guid& ent_type_GUID, const std::string& ent_type_name) : GUIDBase(ent_type_GUID), TypeBase(ent_type_name)
+    {
+		// TODO: Implement!
+    }
+
+	
+    EntityType::~EntityType()
 	{
 		// TODO: Implement!
 	}
@@ -32,9 +38,30 @@ namespace entity_system {
                 return true;
             }
         }
+        // No, this entity attribute type is
+        // not already linked to this entity type.
         return false;
 	}
 	
+
+    bool EntityType::has_attribute_type(const xg::Guid& ent_attr_type_GUID)
+    {
+        // Look through all linked entity attribute types.
+        for(int i=0; i<entity_attribute_instances.size(); i++)
+        {
+            // TODO: Does this even work? DEBUG!
+            if(ent_attr_type_GUID == entity_attribute_instances[i]->get_GUID())
+            {
+                // Yes, this entity attribute type is
+                // already linked to this entity type.
+                return true;
+            }
+        }
+        // No, this entity attribute type is
+        // not already linked to this entity type.
+        return false;
+    }
+
 
 	bool EntityType::has_attribute_type(const ENT_ATTR_TYPE& ent_attr_type)
 	{

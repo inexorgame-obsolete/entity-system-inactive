@@ -18,7 +18,8 @@ namespace inexor {
 namespace entity_system {
 
 	
-	/// A base class for entity types.
+    /// @class EntityType
+	/// @brief A base class for entity types.
 	class EntityType : public TypeBase, public GUIDBase
     {
         
@@ -32,35 +33,31 @@ namespace entity_system {
 
         public:
 
-			/// Constructor.
-			/// @param ent_type_name The unique name
-			/// of the entity type which will be created.
-			/// @note The GUID of the new entity type will be created
-			/// automatically by the inheritance of GUIDBase!
+			/// @brief Constructor.
+			/// @param ent_type_name The unique name of the entity type which will be created.
+			/// @note The GUID of the new entity type will be created automatically by the inheritance of GUIDBase!
 			EntityType(const std::string&);
 
-            
-            /// TODO!
-            EntityType(const xg::Guid&);
 
-
-            /// TODO!
+            /// @brief Constructor.
+            /// @param ent_type_GUID The GUID of the entity type which will be created.
+            /// @param ent_type_name The unique name of the entity type which will be created.
             EntityType(const xg::Guid&, const std::string&);
 
 
-			/// Destructor.
+			/// @brief Destructor.
 			~EntityType();
 
 
-			/// Check if an entity attribute type is already linked to this entity type.
-			/// @param ent_attr_type_name The name of the entity attribute type of which
-			/// will be checked if it is associated with this entity type.
-			/// @return True if this entity attribute type is already linked,
-			/// false otherwise.
+			/// @brief Check if an entity attribute type is already linked to this entity type.
+			/// @param ent_attr_type_name The name of the entity attribute type of which will be checked if it is associated with this entity type.
+			/// @return True if this entity attribute type is already linked, false otherwise.
 			bool has_attribute_type(const std::string&);
 
 
-            /// TODO!
+			/// @brief Check if an entity attribute type is already linked to this entity type.
+			/// @param ent_attr_type_GUID The GUID of the entity attribute type of which will be checked if it is associated with this entity type.
+			/// @return True if this entity attribute type is already linked, false otherwise.
             bool has_attribute_type(const xg::Guid&);
 
 

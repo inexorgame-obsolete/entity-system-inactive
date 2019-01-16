@@ -17,20 +17,30 @@ namespace inexor {
 namespace entity_system {
     
 
-	/// A base class for entity attribute types.
+    /// @class EntityAttributeType.
+	/// @brief A base class for entity attribute types.
     class EntityAttributeType : public TypeBase, public AttributeBase, public GUIDBase
     {
         public:
 				
-			/// Constructor.
+			/// @brief Constructor.
 			/// @param ent_attr_type_name The name of the new entity attribute type.
-			/// @param ent_attr_data_type The data type of the new entity attribute type.
-			/// @note the GUID of the new entity attribute type will
-			/// be created automatically by the inheritance of GUIDBase!
+			/// @param ent_attr_type_datatype The data type of the new entity attribute type.
+			/// @note the GUID of the new entity attribute type will be created automatically by the inheritance of GUIDBase!
 			EntityAttributeType(const std::string&, const ENTSYS_DATA_TYPE&);
 
-			/// Destructor.
+
+            /// @brief Constructor
+            /// @param ent_attr_type_GUID The GUID of the new entity attribute type.
+			/// @param ent_attr_type_name The name of the new entity attribute type.
+			/// @param ent_attr_type_datatype The data type of the new entity attribute type.
+			/// @note the GUID of the new entity attribute type will be created automatically by the inheritance of GUIDBase!
+            EntityAttributeType(const xg::Guid&, const std::string&, const ENTSYS_DATA_TYPE&);
+
+
+			/// @brief Destructor.
 			~EntityAttributeType();
+
 
 			/// Implement a data validation method as
 			/// required by class inheritance of DataValidation!

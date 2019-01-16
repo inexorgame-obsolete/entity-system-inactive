@@ -33,7 +33,7 @@ namespace entity_system {
 	}
 
 
-	std::optional<ENT_ATTR_TYPE> EntityAttributeTypeManager::create_entity_attribute_type(const std::string& ent_attr_type_name, const ENTSYS_DATA_TYPE& ent_attr_data_type)
+	std::optional<ENT_ATTR_TYPE> EntityAttributeTypeManager::create_entity_attribute_type(const std::string& ent_attr_type_name, const ENTSYS_DATA_TYPE& ent_attr_type_datatype)
 	{
 		// Check if entity attribute type's name is not empty.
 		if(! is_type_name_valid(ent_attr_type_name))
@@ -47,13 +47,31 @@ namespace entity_system {
 		}
 
 		// Create entity attribute type.
-		ENT_ATTR_TYPE new_ent_attr_type = std::make_shared<EntityAttributeType>(ent_attr_type_name, ent_attr_data_type);
+		ENT_ATTR_TYPE new_ent_attr_type = std::make_shared<EntityAttributeType>(ent_attr_type_name, ent_attr_type_datatype);
 		
 		// Call template base class method.
 		add_type(ent_attr_type_name, new_ent_attr_type);
 
         return std::optional<ENT_ATTR_TYPE> { new_ent_attr_type };
 	}
+
+
+    std::optional<ENT_ATTR_TYPE> EntityAttributeTypeManager::create_entity_attribute_type(const xg::Guid& ent_attr_type_GUID, const std::string& ent_attr_type_name, const ENTSYS_DATA_TYPE& ent_attr_type_datatype)
+    {
+        if(! is_type_name_valid(ent_attr_type_name))
+        {
+			// This entity attribute type does already exist.
+			// TODO: Throw error message.
+
+            // Since we've not created a new entity attribute type we can
+            // now return std::nullopt thanks to std::optional.
+            return std::nullopt;
+        }
+
+        ENT_ATTR_TYPE new_ent_attr_type = std::make_shared<EntityAttributeType>(ent_attr_type_name, ent_attr_type_datatype);
+
+        return std::optional<ENT_ATTR_TYPE> {  };
+    }
 
 
     /// Get an entity attribute type by name.
@@ -78,7 +96,7 @@ namespace entity_system {
     }
 
 
-	const std::size_t EntityAttributeTypeManager::get_entity_attribute_type_count() const
+	std::size_t EntityAttributeTypeManager::get_entity_attribute_type_count() const
 	{
 		// Call template base class method.
 		return get_type_count();
