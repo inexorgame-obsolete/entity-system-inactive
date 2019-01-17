@@ -71,7 +71,3 @@ target_link_libraries(inexor-entity-system ${CONAN_LIBS})
 target_link_libraries(inexor-entity-system-standalone ${CONAN_LIBS})
 target_link_libraries(inexor-entity-system-tests ${CONAN_LIBS})
 
-# Hanni: Try to solve MSVC 2017 problems with C++2017.
-set_target_properties(inexor-entity-system PROPERTIES
-   CXX_STANDARD 17
-)
