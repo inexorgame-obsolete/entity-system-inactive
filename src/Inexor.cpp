@@ -4,6 +4,7 @@
 #include "Inexor.hpp"
 
 using namespace inexor::entity_system;
+using namespace spdlog;
 
 namespace inexor {
 
@@ -37,11 +38,20 @@ namespace inexor {
 
 	Inexor::Inexor()
 	{
-		std::cout << "Inexor (c) 2009-2019" << std::endl;
+		spdlog::info("Inexor (c) 2009-2019");
+
+		// Logging initialization
+		spdlog::init_thread_pool(8192, 1);
+		auto stdout_sink = std::make_shared<spdlog::sinks::stdout_color_sink_mt>();
+		auto rotating_sink = std::make_shared<spdlog::sinks::rotating_file_sink_mt>("inexor.log", 1024 * 1024 * 10, 3);
+		std::vector<spdlog::sink_ptr> sinks {stdout_sink, rotating_sink};
+		auto logger = std::make_shared<spdlog::async_logger>("inexor.init", sinks.begin(), sinks.end(), spdlog::thread_pool(), spdlog::async_overflow_policy::block);
+		spdlog::register_logger(logger);
+		spdlog::get("inexor.init")->info("Asynchronous logging initialized");
 
 		// Create one single instance of the entity system.
 		// @note The entity system has no singleton implementation for now.
-		std::cout << "Starting entity system" << std::endl;
+		spdlog::get("inexor.init")->info("Starting entity system...");
 		entity_system = std::make_shared<inexor::entity_system::EntitySystem>();
 		entity_system->wire(entity_system);
 
@@ -49,7 +59,7 @@ namespace inexor {
 		auto color_manager = std::make_shared<inexor::entity_system::example::ColorManager>(entity_system);
 
 		// We populate the entity system with an entity type with three attributes and create an instance
-		std::cout << "Populating entity system with an entity type with three attributes and create an instance" << std::endl;
+		spdlog::get("inexor.init")->info("Populating entity system with an entity type with three attributes and create an instance");
 		/*
         auto entity_type_camera = entity_system->create_entity_type("CAMERA");
 		auto attribute_type_position_x = entity_system->create_entity_attribute_type("position_x", ENTSYS_DATA_TYPE_FLOAT);
@@ -63,7 +73,8 @@ namespace inexor {
 
 	    // Setup REST server
 	    _rest_server_port = rest_server_port;
-		std::cout << "Starting REST server on port " << rest_server_port << std::endl;
+	    spdlog::get("inexor.init")->info("Starting REST server on port: {}", rest_server_port);
+		// std::cout << "Starting REST server on port " << rest_server_port << std::endl;
 	    rest_server = std::make_shared<RestServer>(entity_system);
 	    rest_server->set_service(rest_server);
 	    rest_server->set_ready_handler(ready_handler);

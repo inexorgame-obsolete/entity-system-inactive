@@ -19,11 +19,16 @@
 #include "entity-system-rest/RestServer.hpp"
 #include "entity-system-example/ColorManager.hpp"
 
+#include "spdlog/spdlog.h"
+#include "spdlog/async.h"
+#include "spdlog/sinks/stdout_color_sinks.h"
+#include "spdlog/sinks/rotating_file_sink.h"
+using namespace spdlog;
 
 namespace inexor {
 
 	/// @class Inexor
-	/// @brief Inexor main class.
+	/// @brief The application container.
 	class Inexor
 	{
 		private:
@@ -55,6 +60,8 @@ namespace inexor {
 
             /// 
 			std::shared_ptr<inexor::entity_system::RestServer> get_rest_server();
+
+			///
 
 	};
 
