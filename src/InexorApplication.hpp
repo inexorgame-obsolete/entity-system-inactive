@@ -19,6 +19,7 @@
 
 #include "entity-system/EntitySystem.hpp"
 #include "entity-system-rest/RestServer.hpp"
+#include "entity-system-rest/RestServerLogger.hpp"
 #include "entity-system-example/ColorManager.hpp"
 
 #include "spdlog/spdlog.h"

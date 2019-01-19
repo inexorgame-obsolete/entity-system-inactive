@@ -75,6 +75,7 @@ namespace inexor {
 	    rest_server->set_signal_handler(SIGTERM, InexorApplication::call_sigterm_handlers);
 	    rest_server->set_ready_handler(InexorApplication::call_ready_handlers);
 	    rest_server->create_resources();
+	    rest_server->set_logger(std::make_shared<RestServerLogger>());
 	    rest_server->startService(0);
 
 	}
