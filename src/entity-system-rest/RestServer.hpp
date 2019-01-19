@@ -11,10 +11,9 @@
 
 #include <restbed>
 
+#include "spdlog/spdlog.h"
+
 #include "../entity-system/EntitySystem.hpp"
-//#include <corvusoft/restbed/session.hpp>
-//#include <corvusoft/restbed/resource.hpp>
-//#include <corvusoft/restbed/service.hpp>
 
 #include "api/EntitySystemApi.h"
 #include "api/EntityTypeApi.h"
@@ -22,6 +21,8 @@
 #include "api/EntityInstanceApi.h"
 #include "api/RelationshipInstanceApi.h"
 #include "api/AttributeApi.h"
+
+#define LOGGER_ENTITY_REST "inexor.entity.rest"
 
 using namespace inexor::entity_system::rest::api;
 using namespace restbed;
@@ -47,20 +48,35 @@ namespace entity_system {
 			/// Destructor.
 			~RestServer();
 
-			std::shared_ptr<Service> get_service();
-			void set_service(std::shared_ptr<restbed::Service> service);
-
 			void create_resources();
-
-			std::shared_ptr<inexor::entity_system::EntitySystem> get_entity_system();
 
 			void startService(int const& port);
 			void stopService();
 
+			void status();
+
+			/// Getter for the service
+			std::shared_ptr<Service> get_service();
+
+			/// Setter for the service
+			void set_service(std::shared_ptr<restbed::Service> service);
+
+			/// Getter for the entity system
+			std::shared_ptr<inexor::entity_system::EntitySystem> get_entity_system();
+
+			/// Getter for the REST server settings
+			std::shared_ptr<Settings> get_settings();
+
 		private:
+
+			/// The inexor entity system
 			std::shared_ptr<inexor::entity_system::EntitySystem> entity_system;
+
+			/// The REST service
 			std::shared_ptr<restbed::Service> service;
 
+			/// The settings of the REST server
+			std::shared_ptr<Settings> settings;
 	};
 
 
