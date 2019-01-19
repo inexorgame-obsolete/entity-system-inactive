@@ -17,15 +17,15 @@
 
 #include <boost/di.hpp>
 
+#include "spdlog/spdlog.h"
+
 #include "entity-system/EntitySystem.hpp"
 #include "entity-system-rest/RestServer.hpp"
 #include "entity-system-rest/RestServerLogger.hpp"
 #include "entity-system-example/ColorManager.hpp"
 
-#include "spdlog/spdlog.h"
-#include "spdlog/async.h"
-#include "spdlog/sinks/stdout_color_sinks.h"
-#include "spdlog/sinks/rotating_file_sink.h"
+#include "logging/LogManager.hpp"
+
 
 using namespace spdlog;
 
@@ -44,13 +44,17 @@ namespace inexor {
 			/// The dependencies defined are automatically injected!
 			InexorApplication(
 				std::shared_ptr<inexor::entity_system::EntitySystem> entity_system,
-				std::shared_ptr<inexor::entity_system::RestServer> rest_server
+				std::shared_ptr<inexor::entity_system::RestServer> rest_server,
+				std::shared_ptr<inexor::logging::LogManager> log_manager
 			);
 
 
 			/// Destructor.
 			/// Calls shutdown()
 			~InexorApplication();
+
+			/// Initializes the Inexor application.
+			void init();
 
 			/// Starts the Inexor application.
 			void start();
@@ -63,6 +67,9 @@ namespace inexor {
 
 			/// Restarts the Inexor application.
 			void restart();
+
+			/// Registers a logger
+			void register_logger(std::string logger_name);
 
 			/// Getter for the entity system
 			std::shared_ptr<inexor::entity_system::EntitySystem> get_entity_system();
@@ -78,8 +85,11 @@ namespace inexor {
             /// The REST server of the entity system
 			std::shared_ptr<inexor::entity_system::RestServer> rest_server;
 
+            /// Management of the loggers
+			std::shared_ptr<inexor::logging::LogManager> log_manager;
+
 			/// The running state of the Inexor application
-			bool running = false;
+			bool running;
 
             /// Signal handlers
             void sighup_handler(const int signal_number);

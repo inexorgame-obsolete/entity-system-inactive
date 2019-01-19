@@ -11,8 +11,13 @@ namespace inexor {
 namespace entity_system {
 
 
-	RestServer::RestServer(std::shared_ptr<inexor::entity_system::EntitySystem> entity_system) : entity_system(entity_system)
+	RestServer::RestServer(
+		std::shared_ptr<inexor::entity_system::EntitySystem> entity_system,
+		std::shared_ptr<inexor::logging::LogManager> log_manager
+	)
 	{
+		this->entity_system = entity_system;
+		this->log_manager = log_manager;
 		settings = make_shared<Settings>();
 		settings->set_port(8080);
 		settings->set_root("api/v1");
@@ -34,8 +39,9 @@ namespace entity_system {
 		this->service = service;
 	}
 
-	void RestServer::create_resources()
+	void RestServer::init()
 	{
+		log_manager->register_logger(LOGGER_ENTITY_REST);
 //		EntitySystemApi::createResources(this->entity_system, this->service);
 		EntityTypeApi::createResources(this->entity_system, this->service);
 //		RelationshipTypeApi::createResources(this->entity_system, this->service);
@@ -55,23 +61,16 @@ namespace entity_system {
 	}
 
 	void RestServer::startService(int const& _port) {
-		// port is ignored (already set in the settings!
+		// port is ignored (already set in the settings!)
 	    spdlog::get(LOGGER_ENTITY_REST)->info("Starting REST server on http://localhost:{}/{}", this->settings->get_port(), this->settings->get_root());
 		this->service->start(settings);
 	}
 
 	void RestServer::stopService() {
-	    spdlog::get(LOGGER_ENTITY_REST)->info("Stopping REST server");
-	    // spdlog::get(LOGGER_ENTITY_REST)->info("Stopping REST server on http://localhost:{}/{}", this->settings->get_port(), this->settings->get_root());
+	    spdlog::get(LOGGER_ENTITY_REST)->info("Stopping REST server on http://localhost:{}/{}", this->settings->get_port(), this->settings->get_root());
 		this->service->stop();
+	    spdlog::get(LOGGER_ENTITY_REST)->info("REST server stopped");
 	}
 
-	void RestServer::status() {
-		spdlog::get(LOGGER_ENTITY_REST)->info("REST server is running");
-//		auto http_uri = this->service->get_http_uri();
-//		spdlog::get(LOGGER_ENTITY_REST)->info("REST server is running on {}", http_uri->to_string());
-	    // spdlog::get(LOGGER_ENTITY_REST)->info("REST server is running on http://localhost:{}/{}", this->settings->get_port(), this->settings->get_root());
-	}
-
-};
-};
+}
+}

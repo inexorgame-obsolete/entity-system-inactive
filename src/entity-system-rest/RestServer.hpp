@@ -13,7 +13,8 @@
 
 #include "spdlog/spdlog.h"
 
-#include "../entity-system/EntitySystem.hpp"
+#include "entity-system/EntitySystem.hpp"
+#include "logging/LogManager.hpp"
 
 #include "api/EntitySystemApi.h"
 #include "api/EntityTypeApi.h"
@@ -43,17 +44,18 @@ namespace entity_system {
 		public:
 
 			/// Constructor.
-			RestServer(std::shared_ptr<inexor::entity_system::EntitySystem> entity_system);
+			RestServer(
+				std::shared_ptr<inexor::entity_system::EntitySystem> entity_system,
+				std::shared_ptr<inexor::logging::LogManager> log_manager
+			);
 
 			/// Destructor.
 			~RestServer();
 
-			void create_resources();
+			void init();
 
 			void startService(int const& port);
 			void stopService();
-
-			void status();
 
 			/// Getter for the service
 			std::shared_ptr<Service> get_service();
@@ -71,6 +73,9 @@ namespace entity_system {
 
 			/// The inexor entity system
 			std::shared_ptr<inexor::entity_system::EntitySystem> entity_system;
+
+            /// Management of the loggers
+			std::shared_ptr<inexor::logging::LogManager> log_manager;
 
 			/// The REST service
 			std::shared_ptr<restbed::Service> service;
