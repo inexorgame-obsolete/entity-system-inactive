@@ -98,17 +98,26 @@ namespace inexor {
 
             static void call_sighup_handlers(int signal_number)
             {
-				std::for_each(InexorApplication::instances.begin(), InexorApplication::instances.end(), std::bind2nd(std::mem_fun(&InexorApplication::sighup_handler), signal_number));
+            	for (InexorApplication* instance : InexorApplication::instances)
+            	{
+            		std::mem_fn(&InexorApplication::sighup_handler)(instance, signal_number);
+            	}
 			}
 
             static void call_sigterm_handlers(int signal_number)
             {
-				std::for_each(InexorApplication::instances.begin(), InexorApplication::instances.end(), std::bind2nd(std::mem_fun(&InexorApplication::sighup_handler), signal_number));
+            	for (InexorApplication* instance : InexorApplication::instances)
+            	{
+            		std::mem_fn(&InexorApplication::sigterm_handler)(instance, signal_number);
+            	}
 			}
 
             static void call_ready_handlers(Service& service)
             {
-				std::for_each(InexorApplication::instances.begin(), InexorApplication::instances.end(), std::bind2nd(std::mem_fun(&InexorApplication::ready_handler), service));
+            	for (InexorApplication* instance : InexorApplication::instances)
+            	{
+            		std::mem_fn(&InexorApplication::ready_handler)(instance, service);
+            	}
 			}
 
 			/// Static instances of the Inexor application
