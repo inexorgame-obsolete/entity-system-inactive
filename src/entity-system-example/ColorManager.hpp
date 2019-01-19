@@ -19,10 +19,16 @@ namespace example {
 		public:
 
 			/// Constructor.
-			ColorManager(std::shared_ptr<EntitySystem> entity_system);
+			ColorManager(
+				std::shared_ptr<EntityTypeManager> entity_type_manager,
+				std::shared_ptr<EntityInstanceManager> entity_instance_manager
+			);
 
 			/// Destructor.
 			~ColorManager();
+
+			/// Initialization
+			void init();
 
 			/// Creates a new color
 			void create_color(string name , float r, float g, float b);
@@ -44,8 +50,11 @@ namespace example {
 
 		private:
 
-			/// The entity system
-			std::shared_ptr<EntitySystem> entity_system;
+			/// The entity type manager
+			std::shared_ptr<EntityTypeManager> entity_type_manager;
+
+			/// The entity type manager
+			std::shared_ptr<EntityInstanceManager> entity_instance_manager;
 
 			/// The entity type: color
 			ENT_TYPE entity_type_color;

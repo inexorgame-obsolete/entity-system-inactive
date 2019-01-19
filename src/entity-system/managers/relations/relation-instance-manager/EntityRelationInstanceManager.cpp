@@ -8,7 +8,9 @@ namespace inexor {
 namespace entity_system {
 
 
-    EntityRelationInstanceManager::EntityRelationInstanceManager() : InstanceManagerTemplate()
+    EntityRelationInstanceManager::EntityRelationInstanceManager(
+    	std::shared_ptr<EntityRelationAttributeInstanceManager> entity_relation_attribute_instance_manager
+    ) : InstanceManagerTemplate()
     {
     	// Store pointer to the entity relation attribute instance manager.
         this->entity_relation_attribute_instance_manager = entity_relation_attribute_instance_manager;

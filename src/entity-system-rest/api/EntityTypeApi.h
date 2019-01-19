@@ -10,21 +10,15 @@
  * Do not edit the class manually.
  */
 
-/*
- * EntityTypeApi.h
- *
- * 
- */
-
-#ifndef EntityTypeApi_H_
-#define EntityTypeApi_H_
+#pragma once
 
 #include <memory>
 #include <crossguid/guid.hpp>
 #include <string>
 #include <restbed>
 
-#include "entity-system/EntitySystem.hpp"
+#include "entity-system/managers/types/type-manager/EntityTypeManager.hpp"
+
 #include "entity-system-rest/model/Attribute.h"
 #include "entity-system-rest/model/EntityInstance.h"
 #include "entity-system-rest/model/EntitySystemMessage.h"
@@ -39,12 +33,42 @@ namespace entity_system {
 namespace rest {
 namespace api {
 
+class EntityTypeApiEntitiesTypesResource;
+class EntityTypeApiEntitiesTypesEntity_type_uuidResource;
+class EntityTypeApiEntitiesTypesEntity_type_uuidAttributesNameResource;
+class EntityTypeApiEntitiesTypesEntity_type_uuidInstancesResource;
+class EntityTypeApiEntitiesTypesEntity_type_uuidRelationshipsIncomingResource;
+class EntityTypeApiEntitiesTypesEntity_type_uuidRelationshipsOutgoingResource;
+class EntityTypeApiEntitiesTypesEntity_type_uuidRelationshipsResource;
+class EntityTypeApiEntitiesTypesEntity_type_uuidAttributesResource;
+
 class EntityTypeApi
 {
-public:
-	EntityTypeApi();
-	~EntityTypeApi();
-	void createResources(std::shared_ptr<inexor::entity_system::EntitySystem> entity_system, std::shared_ptr<Service> service);
+	public:
+		EntityTypeApi(
+			std::shared_ptr<EntityTypeApiEntitiesTypesResource> spEntityTypeApiEntitiesTypesResource,
+			std::shared_ptr<EntityTypeApiEntitiesTypesEntity_type_uuidResource> spEntityTypeApiEntitiesTypesEntity_type_uuidResource,
+			std::shared_ptr<EntityTypeApiEntitiesTypesEntity_type_uuidAttributesNameResource> spEntityTypeApiEntitiesTypesEntity_type_uuidAttributesNameResource,
+			std::shared_ptr<EntityTypeApiEntitiesTypesEntity_type_uuidInstancesResource> spEntityTypeApiEntitiesTypesEntity_type_uuidInstancesResource,
+			std::shared_ptr<EntityTypeApiEntitiesTypesEntity_type_uuidRelationshipsIncomingResource> spEntityTypeApiEntitiesTypesEntity_type_uuidRelationshipsIncomingResource,
+			std::shared_ptr<EntityTypeApiEntitiesTypesEntity_type_uuidRelationshipsOutgoingResource> spEntityTypeApiEntitiesTypesEntity_type_uuidRelationshipsOutgoingResource,
+			std::shared_ptr<EntityTypeApiEntitiesTypesEntity_type_uuidRelationshipsResource> spEntityTypeApiEntitiesTypesEntity_type_uuidRelationshipsResource,
+			std::shared_ptr<EntityTypeApiEntitiesTypesEntity_type_uuidAttributesResource> spEntityTypeApiEntitiesTypesEntity_type_uuidAttributesResource
+		);
+		~EntityTypeApi();
+
+		void createResources(std::shared_ptr<Service> service);
+
+	private:
+		std::shared_ptr<EntityTypeApiEntitiesTypesResource> spEntityTypeApiEntitiesTypesResource;
+		std::shared_ptr<EntityTypeApiEntitiesTypesEntity_type_uuidResource> spEntityTypeApiEntitiesTypesEntity_type_uuidResource;
+		std::shared_ptr<EntityTypeApiEntitiesTypesEntity_type_uuidAttributesNameResource> spEntityTypeApiEntitiesTypesEntity_type_uuidAttributesNameResource;
+		std::shared_ptr<EntityTypeApiEntitiesTypesEntity_type_uuidInstancesResource> spEntityTypeApiEntitiesTypesEntity_type_uuidInstancesResource;
+		std::shared_ptr<EntityTypeApiEntitiesTypesEntity_type_uuidRelationshipsIncomingResource> spEntityTypeApiEntitiesTypesEntity_type_uuidRelationshipsIncomingResource;
+		std::shared_ptr<EntityTypeApiEntitiesTypesEntity_type_uuidRelationshipsOutgoingResource> spEntityTypeApiEntitiesTypesEntity_type_uuidRelationshipsOutgoingResource;
+		std::shared_ptr<EntityTypeApiEntitiesTypesEntity_type_uuidRelationshipsResource> spEntityTypeApiEntitiesTypesEntity_type_uuidRelationshipsResource;
+		std::shared_ptr<EntityTypeApiEntitiesTypesEntity_type_uuidAttributesResource> spEntityTypeApiEntitiesTypesEntity_type_uuidAttributesResource;
+
 };
 
 
@@ -57,13 +81,15 @@ public:
 class  EntityTypeApiEntitiesTypesResource: public Resource
 {
 public:
-	EntityTypeApiEntitiesTypesResource(std::shared_ptr<inexor::entity_system::EntitySystem> entity_system);
+	EntityTypeApiEntitiesTypesResource(
+		std::shared_ptr<inexor::entity_system::EntityTypeManager> entity_type_manager
+	);
     virtual ~EntityTypeApiEntitiesTypesResource();
     void POST_method_handler(const std::shared_ptr<Session> session);
     void DELETE_method_handler(const std::shared_ptr<Session> session);
     void GET_method_handler(const std::shared_ptr<Session> session);
 private:
-	std::shared_ptr<inexor::entity_system::EntitySystem> entity_system;
+	std::shared_ptr<inexor::entity_system::EntityTypeManager> entity_type_manager;
 };
 
 /// <summary>
@@ -75,13 +101,15 @@ private:
 class  EntityTypeApiEntitiesTypesEntity_type_uuidResource: public Resource
 {
 public:
-	EntityTypeApiEntitiesTypesEntity_type_uuidResource(std::shared_ptr<inexor::entity_system::EntitySystem> entity_system);
+	EntityTypeApiEntitiesTypesEntity_type_uuidResource(
+		std::shared_ptr<inexor::entity_system::EntityTypeManager> entity_type_manager
+	);
     virtual ~EntityTypeApiEntitiesTypesEntity_type_uuidResource();
     void POST_method_handler(const std::shared_ptr<Session> session);
     void DELETE_method_handler(const std::shared_ptr<Session> session);
     void GET_method_handler(const std::shared_ptr<Session> session);
 private:
-	std::shared_ptr<inexor::entity_system::EntitySystem> entity_system;
+    std::shared_ptr<inexor::entity_system::EntityTypeManager> entity_type_manager;
 };
 
 /// <summary>
@@ -93,13 +121,15 @@ private:
 class  EntityTypeApiEntitiesTypesEntity_type_uuidAttributesNameResource: public Resource
 {
 public:
-	EntityTypeApiEntitiesTypesEntity_type_uuidAttributesNameResource(std::shared_ptr<inexor::entity_system::EntitySystem> entity_system);
+	EntityTypeApiEntitiesTypesEntity_type_uuidAttributesNameResource(
+		std::shared_ptr<inexor::entity_system::EntityTypeManager> entity_type_manager
+	);
     virtual ~EntityTypeApiEntitiesTypesEntity_type_uuidAttributesNameResource();
     void POST_method_handler(const std::shared_ptr<Session> session);
     void DELETE_method_handler(const std::shared_ptr<Session> session);
     void GET_method_handler(const std::shared_ptr<Session> session);
 private:
-	std::shared_ptr<inexor::entity_system::EntitySystem> entity_system;
+    std::shared_ptr<inexor::entity_system::EntityTypeManager> entity_type_manager;
 };
 
 /// <summary>
@@ -111,12 +141,14 @@ private:
 class  EntityTypeApiEntitiesTypesEntity_type_uuidInstancesResource: public Resource
 {
 public:
-	EntityTypeApiEntitiesTypesEntity_type_uuidInstancesResource(std::shared_ptr<inexor::entity_system::EntitySystem> entity_system);
+	EntityTypeApiEntitiesTypesEntity_type_uuidInstancesResource(
+		std::shared_ptr<inexor::entity_system::EntityTypeManager> entity_type_manager
+	);
     virtual ~EntityTypeApiEntitiesTypesEntity_type_uuidInstancesResource();
     void DELETE_method_handler(const std::shared_ptr<Session> session);
     void GET_method_handler(const std::shared_ptr<Session> session);
 private:
-	std::shared_ptr<inexor::entity_system::EntitySystem> entity_system;
+    std::shared_ptr<inexor::entity_system::EntityTypeManager> entity_type_manager;
 };
 
 /// <summary>
@@ -128,11 +160,13 @@ private:
 class  EntityTypeApiEntitiesTypesEntity_type_uuidRelationshipsIncomingResource: public Resource
 {
 public:
-	EntityTypeApiEntitiesTypesEntity_type_uuidRelationshipsIncomingResource(std::shared_ptr<inexor::entity_system::EntitySystem> entity_system);
+	EntityTypeApiEntitiesTypesEntity_type_uuidRelationshipsIncomingResource(
+		std::shared_ptr<inexor::entity_system::EntityTypeManager> entity_type_manager
+	);
     virtual ~EntityTypeApiEntitiesTypesEntity_type_uuidRelationshipsIncomingResource();
     void GET_method_handler(const std::shared_ptr<Session> session);
 private:
-	std::shared_ptr<inexor::entity_system::EntitySystem> entity_system;
+    std::shared_ptr<inexor::entity_system::EntityTypeManager> entity_type_manager;
 };
 
 /// <summary>
@@ -144,11 +178,13 @@ private:
 class  EntityTypeApiEntitiesTypesEntity_type_uuidRelationshipsOutgoingResource: public Resource
 {
 public:
-	EntityTypeApiEntitiesTypesEntity_type_uuidRelationshipsOutgoingResource(std::shared_ptr<inexor::entity_system::EntitySystem> entity_system);
+	EntityTypeApiEntitiesTypesEntity_type_uuidRelationshipsOutgoingResource(
+		std::shared_ptr<inexor::entity_system::EntityTypeManager> entity_type_manager
+	);
     virtual ~EntityTypeApiEntitiesTypesEntity_type_uuidRelationshipsOutgoingResource();
     void GET_method_handler(const std::shared_ptr<Session> session);
 private:
-	std::shared_ptr<inexor::entity_system::EntitySystem> entity_system;
+    std::shared_ptr<inexor::entity_system::EntityTypeManager> entity_type_manager;
 };
 
 /// <summary>
@@ -160,11 +196,13 @@ private:
 class  EntityTypeApiEntitiesTypesEntity_type_uuidRelationshipsResource: public Resource
 {
 public:
-	EntityTypeApiEntitiesTypesEntity_type_uuidRelationshipsResource(std::shared_ptr<inexor::entity_system::EntitySystem> entity_system);
+	EntityTypeApiEntitiesTypesEntity_type_uuidRelationshipsResource(
+		std::shared_ptr<inexor::entity_system::EntityTypeManager> entity_type_manager
+	);
     virtual ~EntityTypeApiEntitiesTypesEntity_type_uuidRelationshipsResource();
     void GET_method_handler(const std::shared_ptr<Session> session);
 private:
-	std::shared_ptr<inexor::entity_system::EntitySystem> entity_system;
+    std::shared_ptr<inexor::entity_system::EntityTypeManager> entity_type_manager;
 };
 
 /// <summary>
@@ -176,11 +214,13 @@ private:
 class  EntityTypeApiEntitiesTypesEntity_type_uuidAttributesResource: public Resource
 {
 public:
-	EntityTypeApiEntitiesTypesEntity_type_uuidAttributesResource(std::shared_ptr<inexor::entity_system::EntitySystem> entity_system);
+	EntityTypeApiEntitiesTypesEntity_type_uuidAttributesResource(
+		std::shared_ptr<inexor::entity_system::EntityTypeManager> entity_type_manager
+	);
     virtual ~EntityTypeApiEntitiesTypesEntity_type_uuidAttributesResource();
     void GET_method_handler(const std::shared_ptr<Session> session);
 private:
-	std::shared_ptr<inexor::entity_system::EntitySystem> entity_system;
+    std::shared_ptr<inexor::entity_system::EntityTypeManager> entity_type_manager;
 };
 
 
@@ -188,6 +228,4 @@ private:
 }
 }
 }
-
-#endif /* EntityTypeApi_H_ */
 

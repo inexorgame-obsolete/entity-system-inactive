@@ -18,15 +18,13 @@ namespace entity_system {
 	/// A manager class for entity relation attribute types.
 	class EntityRelationAttributeTypeManager : public TypeManagerTemplate<EntityRelationAttributeType>
 	{
-		protected:
+		public:
 
 			/// Constructor.
 			EntityRelationAttributeTypeManager();
 
 			/// Destructor.
 			~EntityRelationAttributeTypeManager();
-
-		public:
 
 			/// Creates an entity relation attribute type.
 			/// @param ent_rel_attr_type_name The name of the new entity relation attribute type.

@@ -21,7 +21,7 @@ namespace entity_system {
 	/// @brief A manager class for entity types.
 	class EntityTypeManager : public TypeManagerTemplate<EntityType>
 	{
-		protected:
+		public:
 
 			/// @brief Constructor.
 			EntityTypeManager();
@@ -29,8 +29,6 @@ namespace entity_system {
 			/// @brief Destructor.
 			~EntityTypeManager();
 		
-		public:
-
 			/// @brief Creates a new entity type.
 			/// @param ent_type_name The name of the new entity type.
             /// @return ?

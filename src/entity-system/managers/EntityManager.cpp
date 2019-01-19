@@ -8,9 +8,25 @@ namespace inexor {
 namespace entity_system {
 
 
-    EntityManager::EntityManager()
+    EntityManager::EntityManager(
+		std::shared_ptr<inexor::entity_system::EntityTypeManager> entity_type_manager,
+		std::shared_ptr<inexor::entity_system::EntityInstanceManager> entity_instance_manager,
+		std::shared_ptr<inexor::entity_system::EntityAttributeTypeManager> entity_attribute_type_manager,
+		std::shared_ptr<inexor::entity_system::EntityAttributeInstanceManager> entity_attribute_instance_manager,
+		std::shared_ptr<inexor::entity_system::EntityRelationTypeManager> entity_relation_type_manager,
+		std::shared_ptr<inexor::entity_system::EntityRelationInstanceManager> entity_relation_instance_manager,
+		std::shared_ptr<inexor::entity_system::EntityRelationAttributeTypeManager> entity_relation_attribute_type_manager,
+		std::shared_ptr<inexor::entity_system::EntityRelationAttributeInstanceManager> entity_relation_attribute_instance_manager
+    )
     {
-		// TODO: Implement!
+		this->entity_type_manager = entity_type_manager;
+		this->entity_instance_manager = entity_instance_manager;
+		this->entity_attribute_type_manager = entity_attribute_type_manager;
+		this->entity_attribute_instance_manager = entity_attribute_instance_manager;
+		this->entity_relation_type_manager = entity_relation_type_manager;
+		this->entity_relation_instance_manager = entity_relation_instance_manager;
+		this->entity_relation_attribute_type_manager = entity_relation_attribute_type_manager;
+		this->entity_relation_attribute_instance_manager = entity_relation_attribute_instance_manager;
     }
 
 
@@ -19,21 +35,14 @@ namespace entity_system {
 		// TODO: Implement!
     }
 
-	
-	void EntityManager::wire(std::shared_ptr<EntityManager> entity_manager)
-	{
-		EntityInstanceManager::entity_attribute_instance_manager = entity_manager;
-		EntityRelationInstanceManager::entity_relation_attribute_instance_manager = entity_manager;
-	}
-
 
 	void EntityManager::reset_entity_system()
 	{
 		// Delete instances before deleting types!
-		delete_all_entity_attribute_instances();
-		delete_all_entity_instances();
-		delete_all_entity_attribute_types();
-		delete_all_entity_types();
+		entity_attribute_instance_manager->delete_all_entity_attribute_instances();
+		entity_instance_manager->delete_all_entity_instances();
+		entity_attribute_type_manager->delete_all_entity_attribute_types();
+		entity_type_manager->delete_all_entity_types();
 
 		// TODO: add more methods here..
 	}

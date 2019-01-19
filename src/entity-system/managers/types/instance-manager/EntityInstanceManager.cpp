@@ -8,9 +8,11 @@ namespace inexor {
 namespace entity_system {
 
     
-	EntityInstanceManager::EntityInstanceManager() : InstanceManagerTemplate()
+	EntityInstanceManager::EntityInstanceManager(
+		std::shared_ptr<EntityAttributeInstanceManager> entity_attribute_instance_manager
+	) : InstanceManagerTemplate()
 	{
-		// TODO: Implement!
+		this->entity_attribute_instance_manager = entity_attribute_instance_manager;
 	}
 
 	

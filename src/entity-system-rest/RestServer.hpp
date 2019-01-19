@@ -45,8 +45,17 @@ namespace entity_system {
 
 			/// Constructor.
 			RestServer(
-				std::shared_ptr<inexor::entity_system::EntitySystem> entity_system,
-				std::shared_ptr<inexor::logging::LogManager> log_manager
+				std::shared_ptr<inexor::logging::LogManager> log_manager,
+
+				std::shared_ptr<EntityTypeApiEntitiesTypesResource> spEntityTypeApiEntitiesTypesResource,
+				std::shared_ptr<EntityTypeApiEntitiesTypesEntity_type_uuidResource> spEntityTypeApiEntitiesTypesEntity_type_uuidResource,
+				std::shared_ptr<EntityTypeApiEntitiesTypesEntity_type_uuidAttributesNameResource> spEntityTypeApiEntitiesTypesEntity_type_uuidAttributesNameResource,
+				std::shared_ptr<EntityTypeApiEntitiesTypesEntity_type_uuidInstancesResource> spEntityTypeApiEntitiesTypesEntity_type_uuidInstancesResource,
+				std::shared_ptr<EntityTypeApiEntitiesTypesEntity_type_uuidRelationshipsIncomingResource> spEntityTypeApiEntitiesTypesEntity_type_uuidRelationshipsIncomingResource,
+				std::shared_ptr<EntityTypeApiEntitiesTypesEntity_type_uuidRelationshipsOutgoingResource> spEntityTypeApiEntitiesTypesEntity_type_uuidRelationshipsOutgoingResource,
+				std::shared_ptr<EntityTypeApiEntitiesTypesEntity_type_uuidRelationshipsResource> spEntityTypeApiEntitiesTypesEntity_type_uuidRelationshipsResource,
+				std::shared_ptr<EntityTypeApiEntitiesTypesEntity_type_uuidAttributesResource> spEntityTypeApiEntitiesTypesEntity_type_uuidAttributesResource
+
 			);
 
 			/// Destructor.
@@ -63,16 +72,10 @@ namespace entity_system {
 			/// Setter for the service
 			void set_service(std::shared_ptr<restbed::Service> service);
 
-			/// Getter for the entity system
-			std::shared_ptr<inexor::entity_system::EntitySystem> get_entity_system();
-
 			/// Getter for the REST server settings
 			std::shared_ptr<Settings> get_settings();
 
 		private:
-
-			/// The inexor entity system
-			std::shared_ptr<inexor::entity_system::EntitySystem> entity_system;
 
             /// Management of the loggers
 			std::shared_ptr<inexor::logging::LogManager> log_manager;

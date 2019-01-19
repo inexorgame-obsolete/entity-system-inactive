@@ -57,7 +57,6 @@ namespace inexor {
 			// Create one single instance of the entity system.
 			// @note The entity system has no singleton implementation for now.
 			spdlog::get(LOGGER_NAME)->info("Starting entity system...");
-			entity_system->wire(entity_system);
 
 			/*
 			// We populate the entity system with an entity type with three attributes and create an instance

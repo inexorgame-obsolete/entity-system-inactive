@@ -9,9 +9,25 @@ namespace inexor {
 namespace entity_system {
 namespace example {
 
-	ColorManager::ColorManager(std::shared_ptr<EntitySystem> entity_system)
+	ColorManager::ColorManager(
+		std::shared_ptr<EntityTypeManager> entity_type_manager,
+		std::shared_ptr<EntityInstanceManager> entity_instance_manager
+	)
 	{
-		this->entity_system = entity_system;
+		this->entity_type_manager = entity_type_manager;
+		this->entity_instance_manager = entity_instance_manager;
+	}
+
+
+	ColorManager::~ColorManager()
+	{
+		// TODO: delete_entity_type should delete all instances of COLOR also
+		// entity_system->delete_entity_type(entity_type_color);
+		colors.clear();
+	}
+
+	void ColorManager::init()
+	{
 		/*entity_type_color = entity_system->create_entity_type("COLOR");
 		auto attribute_type_name = entity_system->create_entity_attribute_type("name", ENTSYS_DATA_TYPE_STRING);
 		auto attribute_type_r = entity_system->create_entity_attribute_type("r", ENTSYS_DATA_TYPE_FLOAT);
@@ -23,14 +39,6 @@ namespace example {
 		entity_type_color->link_attribute_type(attribute_type_b);
 		std::cout << "Created entity type COLOR" << std::endl;
         */
-	}
-
-	
-	ColorManager::~ColorManager()
-	{
-		// TODO: delete_entity_type should delete all instances of COLOR also
-		entity_system->delete_entity_type(entity_type_color);
-		colors.clear();
 	}
 
 	/// Creates a new color

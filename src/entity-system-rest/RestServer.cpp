@@ -12,11 +12,28 @@ namespace entity_system {
 
 
 	RestServer::RestServer(
-		std::shared_ptr<inexor::entity_system::EntitySystem> entity_system,
-		std::shared_ptr<inexor::logging::LogManager> log_manager
+		std::shared_ptr<inexor::logging::LogManager> log_manager,
+
+		std::shared_ptr<EntityTypeApiEntitiesTypesResource> spEntityTypeApiEntitiesTypesResource,
+		std::shared_ptr<EntityTypeApiEntitiesTypesEntity_type_uuidResource> spEntityTypeApiEntitiesTypesEntity_type_uuidResource,
+		std::shared_ptr<EntityTypeApiEntitiesTypesEntity_type_uuidAttributesNameResource> spEntityTypeApiEntitiesTypesEntity_type_uuidAttributesNameResource,
+		std::shared_ptr<EntityTypeApiEntitiesTypesEntity_type_uuidInstancesResource> spEntityTypeApiEntitiesTypesEntity_type_uuidInstancesResource,
+		std::shared_ptr<EntityTypeApiEntitiesTypesEntity_type_uuidRelationshipsIncomingResource> spEntityTypeApiEntitiesTypesEntity_type_uuidRelationshipsIncomingResource,
+		std::shared_ptr<EntityTypeApiEntitiesTypesEntity_type_uuidRelationshipsOutgoingResource> spEntityTypeApiEntitiesTypesEntity_type_uuidRelationshipsOutgoingResource,
+		std::shared_ptr<EntityTypeApiEntitiesTypesEntity_type_uuidRelationshipsResource> spEntityTypeApiEntitiesTypesEntity_type_uuidRelationshipsResource,
+		std::shared_ptr<EntityTypeApiEntitiesTypesEntity_type_uuidAttributesResource> spEntityTypeApiEntitiesTypesEntity_type_uuidAttributesResource
 	)
+		: EntityTypeApi(
+			spEntityTypeApiEntitiesTypesResource,
+			spEntityTypeApiEntitiesTypesEntity_type_uuidResource,
+			spEntityTypeApiEntitiesTypesEntity_type_uuidAttributesNameResource,
+			spEntityTypeApiEntitiesTypesEntity_type_uuidInstancesResource,
+			spEntityTypeApiEntitiesTypesEntity_type_uuidRelationshipsIncomingResource,
+			spEntityTypeApiEntitiesTypesEntity_type_uuidRelationshipsOutgoingResource,
+			spEntityTypeApiEntitiesTypesEntity_type_uuidRelationshipsResource,
+			spEntityTypeApiEntitiesTypesEntity_type_uuidAttributesResource
+		)
 	{
-		this->entity_system = entity_system;
 		this->log_manager = log_manager;
 		settings = make_shared<Settings>();
 		settings->set_port(8080);
@@ -42,17 +59,12 @@ namespace entity_system {
 	void RestServer::init()
 	{
 		log_manager->register_logger(LOGGER_ENTITY_REST);
-//		EntitySystemApi::createResources(this->entity_system, this->service);
-		EntityTypeApi::createResources(this->entity_system, this->service);
-//		RelationshipTypeApi::createResources(this->entity_system, this->service);
-//		EntityInstanceApi::createResources(this->entity_system, this->service);
-//		RelationshipInstanceApi::createResources(this->entity_system, this->service);
+//		EntitySystemApi::createResources(this->service);
+		EntityTypeApi::createResources(this->service);
+//		RelationshipTypeApi::createResources(this->service);
+//		EntityInstanceApi::createResources(this->service);
+//		RelationshipInstanceApi::createResources(this->service);
 //		AttributeApi::createResources(this->entity_system, this->service);
-	}
-
-	shared_ptr<EntitySystem> RestServer::get_entity_system()
-	{
-		return this->entity_system;
 	}
 
 	shared_ptr<Settings> RestServer::get_settings()

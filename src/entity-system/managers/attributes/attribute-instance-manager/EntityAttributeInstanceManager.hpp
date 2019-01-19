@@ -17,15 +17,13 @@ namespace entity_system {
 	/// A manager class for entity attribute type instances.
     class EntityAttributeInstanceManager : public InstanceManagerTemplate<EntityAttributeInstance>
     {
-		protected:
+		public:
             
 			/// Constructor.
 			EntityAttributeInstanceManager();
 
 			/// Destructor.
 			~EntityAttributeInstanceManager();
-
-		public:
 
 			/// @brief Creates an entity attribute instance.
 			/// @param ent_attr_type The entity attribute type of which an instance will be created.

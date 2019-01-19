@@ -18,19 +18,16 @@ namespace entity_system {
 	/// A manager class for entity type instances.
     class EntityInstanceManager : public InstanceManagerTemplate<EntityInstance>
 	{
-        protected:
+        public:
 
 			/// Constructor
-			EntityInstanceManager();
+			EntityInstanceManager(
+				std::shared_ptr<EntityAttributeInstanceManager> entity_attribute_instance_manager
+			);
 
 			/// Destructor
 			~EntityInstanceManager();
 			
-    		/// The entity attribute instance manager
-    		std::shared_ptr<EntityAttributeInstanceManager> entity_attribute_instance_manager;
-
-		public:
-
 			/// Create an entity type instance.
 			/// @param ent_type A const reference of a shared pointer
 			/// to an entity type of which an instance will be created.
@@ -70,6 +67,11 @@ namespace entity_system {
 
 			/// Delete all entity type instances
 			void delete_all_entity_instances();
+
+        private:
+
+			/// The entity attribute instance manager
+    		std::shared_ptr<EntityAttributeInstanceManager> entity_attribute_instance_manager;
 
 
 	};

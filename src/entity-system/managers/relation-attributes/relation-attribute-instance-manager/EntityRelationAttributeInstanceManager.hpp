@@ -19,7 +19,7 @@ namespace entity_system {
 	/// A manager class for entity relation attribute type instances.
 	class EntityRelationAttributeInstanceManager : public InstanceManagerTemplate<EntityRelationAttributeInstance>
 	{
-		protected:
+		public:
 
 			/// Constructor.
 			EntityRelationAttributeInstanceManager();
@@ -27,8 +27,6 @@ namespace entity_system {
 			/// Destructor.
 			~EntityRelationAttributeInstanceManager();
 
-		public:
-			
 			/// Creates an entity relation attribute type instance.
 			/// @param ent_rel_attr_type A const reference to a shared pointer of
 			/// an entity relation attribute type of which an instance will be created.

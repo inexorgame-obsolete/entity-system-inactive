@@ -19,19 +19,16 @@ namespace entity_system {
 	/// A manager class for entity relation type instances.
     class EntityRelationInstanceManager : public InstanceManagerTemplate<EntityRelationInstance>
     {
-        protected:
+        public:
             
 			/// Constructor.
-            EntityRelationInstanceManager();
+            EntityRelationInstanceManager(
+            	std::shared_ptr<EntityRelationAttributeInstanceManager> entity_relation_attribute_instance_manager
+            );
 
 			/// Destructor.
 			~EntityRelationInstanceManager();
 
-    		/// The entity relation attribute instance manager
-    		std::shared_ptr<EntityRelationAttributeInstanceManager> entity_relation_attribute_instance_manager;
-
-		public:
-		
 			/// Creates a new entity relation type instance.
 			/// @param ent_rel_type A const reference to a shared pointer of
 			/// an entity relation type of which an instance will be created.
@@ -51,6 +48,11 @@ namespace entity_system {
 			// TODO: Delete instance.
 			// TODO: Get instance(s).
 			// TODO: Delete all instances.
+
+        private:
+
+    		/// The entity relation attribute instance manager
+    		std::shared_ptr<EntityRelationAttributeInstanceManager> entity_relation_attribute_instance_manager;
 
     };
 

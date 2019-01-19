@@ -16,15 +16,13 @@ namespace entity_system {
 	/// A manager class for entity relation types.
     class EntityRelationTypeManager : public TypeManagerTemplate<EntityRelationType>
     {
-        protected:
+        public:
 
 			/// Constructor.
 			EntityRelationTypeManager();
 
 			/// Destructor.
 			~EntityRelationTypeManager();
-
-		public:
 
 			/// Checks if an entity relation type does already exist.
 			/// @param ent_rel_type_name The name of the entity relation type.

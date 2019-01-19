@@ -23,7 +23,7 @@ namespace entity_system {
 	/// @brief A manager class for entity attribute types.
     class EntityAttributeTypeManager : public TypeManagerTemplate<EntityAttributeType>
     {
-        protected:
+        public:
 
 			/// @brief Constructor.
 			EntityAttributeTypeManager();
@@ -31,8 +31,6 @@ namespace entity_system {
 
 			/// @brief Destructor.
             ~EntityAttributeTypeManager();
-
-		public:
 
 			/// @brief Creates a new entity attribute type.
 			/// @param ent_attr_type_name The name of the new entity attribute type.
