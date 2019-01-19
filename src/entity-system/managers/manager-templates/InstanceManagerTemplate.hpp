@@ -136,7 +136,7 @@ namespace entity_system {
 
                 // Look up the GUID of the 
                 xg::Guid instance_to_delete = get_instance(type_ptr);
-                delete_instance(instance_to_delete);
+                return delete_instance(instance_to_delete);
             }
 
 
