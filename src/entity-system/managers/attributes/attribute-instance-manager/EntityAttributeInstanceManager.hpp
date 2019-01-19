@@ -27,28 +27,34 @@ namespace entity_system {
 
 		public:
 
-			/// Creates an entity attribute type instance.
-			/// @param ent_attr_type A const reference to a shared pointer of
-			/// an entity attribute type of which an instance will be created.
-			/// @return A shared pointer to the entity attribute type instance
-			/// which was created.
-			/// @note the GUID of the entity attribute type will be created
-			/// automatically because EntityAttributeType inherits from GUIDBase!
+			/// @brief Creates an entity attribute instance.
+			/// @param ent_attr_type The entity attribute type of which an instance will be created.
+			/// @return The entity attribute instance if creating it succeeded, std::nullopt otherwise.
 			std::optional<ENT_ATTR_INST> create_entity_attribute_instance(const ENT_ATTR_TYPE&);
 
 
-            std::optional<ENT_ATTR_INST> get_entity_attribute_instance(const xg::Guid&);
+            /// @brief Returns an entity attribute instance.
+            /// @param ent_attr_inst_GUID The GUID of the entity attribute instance.
+			/// @return The entity attribute instance if creating it succeeded, std::nullopt otherwise.
+            std::optional<ENT_ATTR_INST> get_entity_attribute_instance(const xg::Guid&) const;
 
 
-			/// Returns the number of existing entity attribute type instances.
-			/// @return The number of existing entity attribute type instances.
+			/// @brief Returns the number of existing entity attribute instances.
+			/// @return The number of existing entity attribute instances.
 			std::size_t get_entity_attribute_instance_count() const;
 
 
+            /// @brief Deletes a specific entity attribute instances.
+            /// @param ent_attr_inst_GUID The GUID of the entity attribute instance which will be deleted.
             std::size_t delete_entity_attribute_instance(const xg::Guid&);
 
 
-			/// Deletes all entity attribute type instances.
+            /// @brief Deletes a specific entity attribute instances.
+            /// @param The entity attribute instance which will be deleted.
+            std::size_t delete_entity_attribute_instance(const ENT_ATTR_INST&);
+
+
+			/// @brief Deletes all entity attribute instances.
 			void delete_all_entity_attribute_instances();
 
 	};
