@@ -12,7 +12,7 @@
 
 
 
-#include "EntitySystem.h"
+#include "EntitySystem.hpp"
 
 #include <string>
 #include <sstream>

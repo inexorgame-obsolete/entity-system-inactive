@@ -13,15 +13,15 @@
 
 #include "spdlog/spdlog.h"
 
+#include "api/AttributeApi.hpp"
+#include "api/EntityInstanceApi.hpp"
+#include "api/EntitySystemApi.hpp"
+#include "api/EntityTypeApi.hpp"
+#include "api/RelationshipInstanceApi.hpp"
+#include "api/RelationshipTypeApi.hpp"
 #include "entity-system/EntitySystem.hpp"
 #include "logging/LogManager.hpp"
 
-#include "api/EntitySystemApi.h"
-#include "api/EntityTypeApi.h"
-#include "api/RelationshipTypeApi.h"
-#include "api/EntityInstanceApi.h"
-#include "api/RelationshipInstanceApi.h"
-#include "api/AttributeApi.h"
 
 #define LOGGER_ENTITY_REST "inexor.entity.rest"
 

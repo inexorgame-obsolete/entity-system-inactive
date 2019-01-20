@@ -11,7 +11,8 @@
  */
 
 
-#include "AttributeApi.h"
+#include "AttributeApi.hpp"
+
 #include <crossguid/guid.hpp>
 
 namespace inexor {

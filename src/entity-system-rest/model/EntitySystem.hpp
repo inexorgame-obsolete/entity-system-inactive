@@ -22,10 +22,10 @@
 #include <vector>
 #include <memory>
 
-#include "RelationshipType.h"
-#include "RelationshipInstance.h"
-#include "EntityType.h"
-#include "EntityInstance.h"
+#include "EntityInstance.hpp"
+#include "EntityType.hpp"
+#include "RelationshipInstance.hpp"
+#include "RelationshipType.hpp"
 
 namespace inexor {
 namespace entity_system {

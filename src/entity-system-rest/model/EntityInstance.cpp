@@ -12,7 +12,7 @@
 
 
 
-#include "EntityInstance.h"
+#include "EntityInstance.hpp"
 
 #include <string>
 #include <sstream>

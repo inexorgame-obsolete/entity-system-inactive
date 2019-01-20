@@ -24,10 +24,10 @@
 #include <string>
 #include <restbed>
 
+#include "../model/EntitySystemMessage.hpp"
+#include "../model/RelationshipInstance.hpp"
+#include "../model/RelationshipType.hpp"
 #include "entity-system/EntitySystem.hpp"
-#include "entity-system-rest/model/EntitySystemMessage.h"
-#include "entity-system-rest/model/RelationshipInstance.h"
-#include "entity-system-rest/model/RelationshipType.h"
 
 using namespace inexor::entity_system::rest::model;
 using namespace restbed;

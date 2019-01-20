@@ -12,7 +12,7 @@
 
 
 
-#include "RelationshipType.h"
+#include "RelationshipType.hpp"
 
 #include <string>
 #include <sstream>

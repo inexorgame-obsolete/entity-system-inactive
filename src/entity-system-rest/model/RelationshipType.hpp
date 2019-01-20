@@ -11,19 +11,19 @@
  */
 
 /*
- * EntityType.h
+ * RelationshipType.h
  *
  * 
  */
 
-#ifndef EntityType_H_
-#define EntityType_H_
+#ifndef RelationshipType_H_
+#define RelationshipType_H_
 
 #include <string>
 #include <vector>
 #include <memory>
 
-#include "Attribute.h"
+#include "Attribute.hpp"
 
 namespace inexor {
 namespace entity_system {
@@ -33,23 +33,23 @@ namespace model {
 /// <summary>
 /// 
 /// </summary>
-class  EntityType
+class  RelationshipType
 {
 public:
-    EntityType();
-    virtual ~EntityType();
+    RelationshipType();
+    virtual ~RelationshipType();
     
     std::string toJsonString();
     void fromJsonString(std::string const& jsonString);
 
     /////////////////////////////////////////////
-    /// EntityType members
+    /// RelationshipType members
     
     /// <summary>
     /// 
     /// </summary>
-    std::string getEntityTypeUuid() const;
-    void setEntityTypeUuid(std::string value);
+    std::string getRelationshipTypeUuid() const;
+    void setRelationshipTypeUuid(std::string value);
     /// <summary>
     /// 
     /// </summary>
@@ -58,12 +58,24 @@ public:
     /// <summary>
     /// 
     /// </summary>
+    std::string getStartNodeEntityTypeUuid() const;
+    void setStartNodeEntityTypeUuid(std::string value);
+    /// <summary>
+    /// 
+    /// </summary>
+    std::string getEndNodeEntityTypeUuid() const;
+    void setEndNodeEntityTypeUuid(std::string value);
+    /// <summary>
+    /// 
+    /// </summary>
     std::vector<std::shared_ptr<Attribute>> getAttributes() const;
     void setAttributes(std::vector<std::shared_ptr<Attribute>> value);
 
 protected:
-    std::string m_Entity_type_uuid;
+    std::string m_Relationship_type_uuid;
     std::string m_Name;
+    std::string m_Start_node_entity_type_uuid;
+    std::string m_End_node_entity_type_uuid;
     std::vector<std::shared_ptr<Attribute>> m_Attributes;
 };
 
@@ -72,4 +84,4 @@ protected:
 }
 }
 
-#endif /* EntityType_H_ */
+#endif /* RelationshipType_H_ */

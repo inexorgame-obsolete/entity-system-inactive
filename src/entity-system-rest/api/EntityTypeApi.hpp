@@ -17,13 +17,15 @@
 #include <string>
 #include <restbed>
 
+#include "spdlog/spdlog.h"
+
+#include "../model/Attribute.hpp"
+#include "../model/EntityInstance.hpp"
+#include "../model/EntitySystemMessage.hpp"
+#include "../model/EntityType.hpp"
+#include "../model/RelationshipType.hpp"
 #include "entity-system/managers/types/type-manager/EntityTypeManager.hpp"
 
-#include "entity-system-rest/model/Attribute.h"
-#include "entity-system-rest/model/EntityInstance.h"
-#include "entity-system-rest/model/EntitySystemMessage.h"
-#include "entity-system-rest/model/EntityType.h"
-#include "entity-system-rest/model/RelationshipType.h"
 
 using namespace inexor::entity_system::rest::model;
 using namespace restbed;
@@ -80,16 +82,16 @@ class EntityTypeApi
 /// </remarks>
 class  EntityTypeApiEntitiesTypesResource: public Resource
 {
-public:
-	EntityTypeApiEntitiesTypesResource(
-		std::shared_ptr<inexor::entity_system::EntityTypeManager> entity_type_manager
-	);
-    virtual ~EntityTypeApiEntitiesTypesResource();
-    void POST_method_handler(const std::shared_ptr<Session> session);
-    void DELETE_method_handler(const std::shared_ptr<Session> session);
-    void GET_method_handler(const std::shared_ptr<Session> session);
-private:
-	std::shared_ptr<inexor::entity_system::EntityTypeManager> entity_type_manager;
+	public:
+		EntityTypeApiEntitiesTypesResource(
+			std::shared_ptr<inexor::entity_system::EntityTypeManager> entity_type_manager
+		);
+		virtual ~EntityTypeApiEntitiesTypesResource();
+		void POST_method_handler(const std::shared_ptr<Session> session);
+		void DELETE_method_handler(const std::shared_ptr<Session> session);
+		void GET_method_handler(const std::shared_ptr<Session> session);
+	private:
+		std::shared_ptr<inexor::entity_system::EntityTypeManager> entity_type_manager;
 };
 
 /// <summary>
@@ -100,16 +102,16 @@ private:
 /// </remarks>
 class  EntityTypeApiEntitiesTypesEntity_type_uuidResource: public Resource
 {
-public:
-	EntityTypeApiEntitiesTypesEntity_type_uuidResource(
-		std::shared_ptr<inexor::entity_system::EntityTypeManager> entity_type_manager
-	);
-    virtual ~EntityTypeApiEntitiesTypesEntity_type_uuidResource();
-    void POST_method_handler(const std::shared_ptr<Session> session);
-    void DELETE_method_handler(const std::shared_ptr<Session> session);
-    void GET_method_handler(const std::shared_ptr<Session> session);
-private:
-    std::shared_ptr<inexor::entity_system::EntityTypeManager> entity_type_manager;
+	public:
+		EntityTypeApiEntitiesTypesEntity_type_uuidResource(
+			std::shared_ptr<inexor::entity_system::EntityTypeManager> entity_type_manager
+		);
+		virtual ~EntityTypeApiEntitiesTypesEntity_type_uuidResource();
+		void POST_method_handler(const std::shared_ptr<Session> session);
+		void DELETE_method_handler(const std::shared_ptr<Session> session);
+		void GET_method_handler(const std::shared_ptr<Session> session);
+	private:
+		std::shared_ptr<inexor::entity_system::EntityTypeManager> entity_type_manager;
 };
 
 /// <summary>
@@ -120,16 +122,16 @@ private:
 /// </remarks>
 class  EntityTypeApiEntitiesTypesEntity_type_uuidAttributesNameResource: public Resource
 {
-public:
-	EntityTypeApiEntitiesTypesEntity_type_uuidAttributesNameResource(
-		std::shared_ptr<inexor::entity_system::EntityTypeManager> entity_type_manager
-	);
-    virtual ~EntityTypeApiEntitiesTypesEntity_type_uuidAttributesNameResource();
-    void POST_method_handler(const std::shared_ptr<Session> session);
-    void DELETE_method_handler(const std::shared_ptr<Session> session);
-    void GET_method_handler(const std::shared_ptr<Session> session);
-private:
-    std::shared_ptr<inexor::entity_system::EntityTypeManager> entity_type_manager;
+	public:
+		EntityTypeApiEntitiesTypesEntity_type_uuidAttributesNameResource(
+			std::shared_ptr<inexor::entity_system::EntityTypeManager> entity_type_manager
+		);
+		virtual ~EntityTypeApiEntitiesTypesEntity_type_uuidAttributesNameResource();
+		void POST_method_handler(const std::shared_ptr<Session> session);
+		void DELETE_method_handler(const std::shared_ptr<Session> session);
+		void GET_method_handler(const std::shared_ptr<Session> session);
+	private:
+		std::shared_ptr<inexor::entity_system::EntityTypeManager> entity_type_manager;
 };
 
 /// <summary>
@@ -140,15 +142,15 @@ private:
 /// </remarks>
 class  EntityTypeApiEntitiesTypesEntity_type_uuidInstancesResource: public Resource
 {
-public:
-	EntityTypeApiEntitiesTypesEntity_type_uuidInstancesResource(
-		std::shared_ptr<inexor::entity_system::EntityTypeManager> entity_type_manager
-	);
-    virtual ~EntityTypeApiEntitiesTypesEntity_type_uuidInstancesResource();
-    void DELETE_method_handler(const std::shared_ptr<Session> session);
-    void GET_method_handler(const std::shared_ptr<Session> session);
-private:
-    std::shared_ptr<inexor::entity_system::EntityTypeManager> entity_type_manager;
+	public:
+		EntityTypeApiEntitiesTypesEntity_type_uuidInstancesResource(
+			std::shared_ptr<inexor::entity_system::EntityTypeManager> entity_type_manager
+		);
+		virtual ~EntityTypeApiEntitiesTypesEntity_type_uuidInstancesResource();
+		void DELETE_method_handler(const std::shared_ptr<Session> session);
+		void GET_method_handler(const std::shared_ptr<Session> session);
+	private:
+		std::shared_ptr<inexor::entity_system::EntityTypeManager> entity_type_manager;
 };
 
 /// <summary>
@@ -159,14 +161,14 @@ private:
 /// </remarks>
 class  EntityTypeApiEntitiesTypesEntity_type_uuidRelationshipsIncomingResource: public Resource
 {
-public:
-	EntityTypeApiEntitiesTypesEntity_type_uuidRelationshipsIncomingResource(
-		std::shared_ptr<inexor::entity_system::EntityTypeManager> entity_type_manager
-	);
-    virtual ~EntityTypeApiEntitiesTypesEntity_type_uuidRelationshipsIncomingResource();
-    void GET_method_handler(const std::shared_ptr<Session> session);
-private:
-    std::shared_ptr<inexor::entity_system::EntityTypeManager> entity_type_manager;
+	public:
+		EntityTypeApiEntitiesTypesEntity_type_uuidRelationshipsIncomingResource(
+			std::shared_ptr<inexor::entity_system::EntityTypeManager> entity_type_manager
+		);
+		virtual ~EntityTypeApiEntitiesTypesEntity_type_uuidRelationshipsIncomingResource();
+		void GET_method_handler(const std::shared_ptr<Session> session);
+	private:
+		std::shared_ptr<inexor::entity_system::EntityTypeManager> entity_type_manager;
 };
 
 /// <summary>
@@ -177,14 +179,14 @@ private:
 /// </remarks>
 class  EntityTypeApiEntitiesTypesEntity_type_uuidRelationshipsOutgoingResource: public Resource
 {
-public:
-	EntityTypeApiEntitiesTypesEntity_type_uuidRelationshipsOutgoingResource(
-		std::shared_ptr<inexor::entity_system::EntityTypeManager> entity_type_manager
-	);
-    virtual ~EntityTypeApiEntitiesTypesEntity_type_uuidRelationshipsOutgoingResource();
-    void GET_method_handler(const std::shared_ptr<Session> session);
-private:
-    std::shared_ptr<inexor::entity_system::EntityTypeManager> entity_type_manager;
+	public:
+		EntityTypeApiEntitiesTypesEntity_type_uuidRelationshipsOutgoingResource(
+			std::shared_ptr<inexor::entity_system::EntityTypeManager> entity_type_manager
+		);
+		virtual ~EntityTypeApiEntitiesTypesEntity_type_uuidRelationshipsOutgoingResource();
+		void GET_method_handler(const std::shared_ptr<Session> session);
+	private:
+		std::shared_ptr<inexor::entity_system::EntityTypeManager> entity_type_manager;
 };
 
 /// <summary>
@@ -195,14 +197,14 @@ private:
 /// </remarks>
 class  EntityTypeApiEntitiesTypesEntity_type_uuidRelationshipsResource: public Resource
 {
-public:
-	EntityTypeApiEntitiesTypesEntity_type_uuidRelationshipsResource(
-		std::shared_ptr<inexor::entity_system::EntityTypeManager> entity_type_manager
-	);
-    virtual ~EntityTypeApiEntitiesTypesEntity_type_uuidRelationshipsResource();
-    void GET_method_handler(const std::shared_ptr<Session> session);
-private:
-    std::shared_ptr<inexor::entity_system::EntityTypeManager> entity_type_manager;
+	public:
+		EntityTypeApiEntitiesTypesEntity_type_uuidRelationshipsResource(
+			std::shared_ptr<inexor::entity_system::EntityTypeManager> entity_type_manager
+		);
+		virtual ~EntityTypeApiEntitiesTypesEntity_type_uuidRelationshipsResource();
+		void GET_method_handler(const std::shared_ptr<Session> session);
+	private:
+		std::shared_ptr<inexor::entity_system::EntityTypeManager> entity_type_manager;
 };
 
 /// <summary>
@@ -213,14 +215,14 @@ private:
 /// </remarks>
 class  EntityTypeApiEntitiesTypesEntity_type_uuidAttributesResource: public Resource
 {
-public:
-	EntityTypeApiEntitiesTypesEntity_type_uuidAttributesResource(
-		std::shared_ptr<inexor::entity_system::EntityTypeManager> entity_type_manager
-	);
-    virtual ~EntityTypeApiEntitiesTypesEntity_type_uuidAttributesResource();
-    void GET_method_handler(const std::shared_ptr<Session> session);
-private:
-    std::shared_ptr<inexor::entity_system::EntityTypeManager> entity_type_manager;
+	public:
+		EntityTypeApiEntitiesTypesEntity_type_uuidAttributesResource(
+			std::shared_ptr<inexor::entity_system::EntityTypeManager> entity_type_manager
+		);
+		virtual ~EntityTypeApiEntitiesTypesEntity_type_uuidAttributesResource();
+		void GET_method_handler(const std::shared_ptr<Session> session);
+	private:
+		std::shared_ptr<inexor::entity_system::EntityTypeManager> entity_type_manager;
 };
 
 

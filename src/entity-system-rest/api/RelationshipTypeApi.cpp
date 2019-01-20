@@ -11,12 +11,13 @@
  */
 
 
+#include "RelationshipTypeApi.hpp"
+
 #include <corvusoft/restbed/byte.hpp>
 #include <corvusoft/restbed/string.hpp>
 #include <corvusoft/restbed/settings.hpp>
 #include <corvusoft/restbed/request.hpp>
 
-#include "RelationshipTypeApi.h"
 
 namespace inexor {
 namespace entity_system {
