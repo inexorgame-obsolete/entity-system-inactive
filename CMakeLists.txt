@@ -70,3 +70,4 @@ endif()
 target_link_libraries(inexor-entity-system ${CONAN_LIBS})
 target_link_libraries(inexor-entity-system-standalone ${CONAN_LIBS})
 target_link_libraries(inexor-entity-system-tests ${CONAN_LIBS})
+

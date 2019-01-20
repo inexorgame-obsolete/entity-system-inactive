@@ -1,4 +1,5 @@
 # Inexor entity-system prototype
+[![Build Status](https://travis-ci.org/inexorgame/entity-system.svg?branch=master)](https://travis-ci.org/inexorgame/entity-system)
 
 This entity-system will lay the basis on the other systems of the game will be built on.
 For more information take a look at the [wiki](https://inexor.org/wiki/features/entities/#the-goal).
