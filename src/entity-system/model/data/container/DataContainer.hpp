@@ -15,7 +15,7 @@ namespace inexor {
 namespace entity_system {
 
     /// A data value can hold any value allowed by ENTSYS_DATA_TYPE
-    using DataValue = std::variant<int, std::int64_t, float, std::string, double, bool>;
+    using DataValue = std::variant<bool, int, std::int64_t, double, float, std::string>;
 
     /// A data container which can hold data of various types.
     struct DataContainer {
