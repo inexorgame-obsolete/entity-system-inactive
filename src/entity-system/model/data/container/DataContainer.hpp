@@ -9,7 +9,7 @@
 #include <mutex>
 
 #include "entity-system/model/data/DataTypes.hpp"
-#include "entity-system/util/error-handling/ReturnCodes.hpp"
+#include "entity-system/util/return-codes/ReturnCodes.hpp"
 
 
 namespace inexor {

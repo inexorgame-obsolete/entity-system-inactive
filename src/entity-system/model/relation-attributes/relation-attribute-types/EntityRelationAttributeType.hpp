@@ -11,7 +11,7 @@
 #include "entity-system/model/base/type/TypeBase.hpp"
 #include "entity-system/model/data/container/DataContainer.hpp"
 #include "entity-system/model/data/validation/DataValidationBase.hpp"
-#include "entity-system/util/error-handling/ReturnCodes.hpp"
+#include "entity-system/util/return-codes/ReturnCodes.hpp"
 #include "entity-system/util/uuid/GUIDBase.hpp"
 
 

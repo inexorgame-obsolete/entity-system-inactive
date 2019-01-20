@@ -16,7 +16,6 @@ namespace entity_system {
 	// TODO: Implement EntityEditorRenderer
 	// TODO: Implement EntityGameSceneRenderer
     // TODO: Implement EntitySync
-	// TODO: Implement EntityErrorHandling
 	// TODO: Implement EntityImporter
 	// TODO: Implement EntityExporter
 

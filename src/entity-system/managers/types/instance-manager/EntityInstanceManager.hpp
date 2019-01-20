@@ -8,7 +8,7 @@
 #include "entity-system/managers/manager-templates/InstanceManagerTemplate.hpp"
 #include "entity-system/managers/attributes/attribute-instance-manager/EntityAttributeInstanceManager.hpp"
 #include "entity-system/model/types/instances/EntityInstance.hpp"
-#include "entity-system/util/error-handling/ReturnCodes.hpp"
+#include "entity-system/util/return-codes/ReturnCodes.hpp"
 
 
 namespace inexor {
