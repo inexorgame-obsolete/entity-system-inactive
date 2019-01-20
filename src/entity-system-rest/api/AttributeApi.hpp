@@ -10,12 +10,6 @@
  * Do not edit the class manually.
  */
 
-/*
- * AttributeApi.h
- *
- * 
- */
-
 #pragma once
 
 #include <memory>
@@ -23,10 +17,14 @@
 #include <string>
 #include <restbed>
 
+#include "spdlog/spdlog.h"
+
+#include "../../entity-system/managers/entity-attributes/entity-attribute-instance-manager/EntityAttributeInstanceManager.hpp"
+#include "../../entity-system/managers/entity-attributes/entity-attribute-type-manager/EntityAttributeTypeManager.hpp"
 #include "../model/Attribute.hpp"
 #include "../model/EntitySystemMessage.hpp"
 #include "../model/EntityType.hpp"
-#include "entity-system/EntitySystem.hpp"
+
 
 using namespace inexor::entity_system::rest::model;
 using namespace restbed;
@@ -36,12 +34,28 @@ namespace entity_system {
 namespace rest {
 namespace api {
 
-class  AttributeApi
+// Forward declarations
+class AttributeApiEntitiesInstancesEntity_instance_uuidAttributesNameResource;
+class AttributeApiEntitiesTypesEntity_type_uuidAttributesNameResource;
+class AttributeApiEntitiesInstancesEntity_instance_uuidAttributesResource;
+class AttributeApiEntitiesTypesEntity_type_uuidAttributesResource;
+
+class AttributeApi
 {
-public:
-	AttributeApi();
-	~AttributeApi();
-	void createResources(std::shared_ptr<inexor::entity_system::EntitySystem> entity_system, std::shared_ptr<Service> service);
+	public:
+		AttributeApi(
+			std::shared_ptr<AttributeApiEntitiesInstancesEntity_instance_uuidAttributesNameResource> spAttributeApiEntitiesInstancesEntity_instance_uuidAttributesNameResource,
+			std::shared_ptr<AttributeApiEntitiesTypesEntity_type_uuidAttributesNameResource> spAttributeApiEntitiesTypesEntity_type_uuidAttributesNameResource,
+			std::shared_ptr<AttributeApiEntitiesInstancesEntity_instance_uuidAttributesResource> spAttributeApiEntitiesInstancesEntity_instance_uuidAttributesResource,
+			std::shared_ptr<AttributeApiEntitiesTypesEntity_type_uuidAttributesResource> spAttributeApiEntitiesTypesEntity_type_uuidAttributesResource
+		);
+		~AttributeApi();
+		void publish_resources(std::shared_ptr<Service> service);
+	private:
+		std::shared_ptr<AttributeApiEntitiesInstancesEntity_instance_uuidAttributesNameResource> spAttributeApiEntitiesInstancesEntity_instance_uuidAttributesNameResource;
+		std::shared_ptr<AttributeApiEntitiesTypesEntity_type_uuidAttributesNameResource> spAttributeApiEntitiesTypesEntity_type_uuidAttributesNameResource;
+		std::shared_ptr<AttributeApiEntitiesInstancesEntity_instance_uuidAttributesResource> spAttributeApiEntitiesInstancesEntity_instance_uuidAttributesResource;
+		std::shared_ptr<AttributeApiEntitiesTypesEntity_type_uuidAttributesResource> spAttributeApiEntitiesTypesEntity_type_uuidAttributesResource;
 };
 
 
@@ -51,14 +65,18 @@ public:
 /// <remarks>
 /// 
 /// </remarks>
-class  AttributeApiEntitiesInstancesEntity_instance_uuidAttributesNameResource: public restbed::Resource
+class AttributeApiEntitiesInstancesEntity_instance_uuidAttributesNameResource: public restbed::Resource
 {
-public:
-	AttributeApiEntitiesInstancesEntity_instance_uuidAttributesNameResource();
-    virtual ~AttributeApiEntitiesInstancesEntity_instance_uuidAttributesNameResource();
-    void POST_method_handler(const std::shared_ptr<restbed::Session> session);
-    void DELETE_method_handler(const std::shared_ptr<restbed::Session> session);
-    void GET_method_handler(const std::shared_ptr<restbed::Session> session);
+	public:
+		AttributeApiEntitiesInstancesEntity_instance_uuidAttributesNameResource(
+			std::shared_ptr<EntityAttributeInstanceManager> entity_attribute_instance_manager
+		);
+		virtual ~AttributeApiEntitiesInstancesEntity_instance_uuidAttributesNameResource();
+		void POST_method_handler(const std::shared_ptr<restbed::Session> session);
+		void DELETE_method_handler(const std::shared_ptr<restbed::Session> session);
+		void GET_method_handler(const std::shared_ptr<restbed::Session> session);
+	private:
+		std::shared_ptr<EntityAttributeInstanceManager> entity_attribute_instance_manager;
 };
 
 /// <summary>
@@ -67,14 +85,18 @@ public:
 /// <remarks>
 /// 
 /// </remarks>
-class  AttributeApiEntitiesTypesEntity_type_uuidAttributesNameResource: public restbed::Resource
+class AttributeApiEntitiesTypesEntity_type_uuidAttributesNameResource: public restbed::Resource
 {
-public:
-	AttributeApiEntitiesTypesEntity_type_uuidAttributesNameResource();
-    virtual ~AttributeApiEntitiesTypesEntity_type_uuidAttributesNameResource();
-    void POST_method_handler(const std::shared_ptr<restbed::Session> session);
-    void DELETE_method_handler(const std::shared_ptr<restbed::Session> session);
-    void GET_method_handler(const std::shared_ptr<restbed::Session> session);
+	public:
+		AttributeApiEntitiesTypesEntity_type_uuidAttributesNameResource(
+			std::shared_ptr<EntityAttributeTypeManager> entity_attribute_type_manager
+		);
+		virtual ~AttributeApiEntitiesTypesEntity_type_uuidAttributesNameResource();
+		void POST_method_handler(const std::shared_ptr<restbed::Session> session);
+		void DELETE_method_handler(const std::shared_ptr<restbed::Session> session);
+		void GET_method_handler(const std::shared_ptr<restbed::Session> session);
+	private:
+		std::shared_ptr<EntityAttributeTypeManager> entity_attribute_type_manager;
 };
 
 /// <summary>
@@ -83,12 +105,16 @@ public:
 /// <remarks>
 /// 
 /// </remarks>
-class  AttributeApiEntitiesInstancesEntity_instance_uuidAttributesResource: public restbed::Resource
+class AttributeApiEntitiesInstancesEntity_instance_uuidAttributesResource: public restbed::Resource
 {
-public:
-	AttributeApiEntitiesInstancesEntity_instance_uuidAttributesResource();
-    virtual ~AttributeApiEntitiesInstancesEntity_instance_uuidAttributesResource();
-    void GET_method_handler(const std::shared_ptr<restbed::Session> session);
+	public:
+		AttributeApiEntitiesInstancesEntity_instance_uuidAttributesResource(
+			std::shared_ptr<EntityAttributeInstanceManager> entity_attribute_instance_manager
+		);
+		virtual ~AttributeApiEntitiesInstancesEntity_instance_uuidAttributesResource();
+		void GET_method_handler(const std::shared_ptr<restbed::Session> session);
+	private:
+		std::shared_ptr<EntityAttributeInstanceManager> entity_attribute_instance_manager;
 };
 
 /// <summary>
@@ -97,12 +123,16 @@ public:
 /// <remarks>
 /// 
 /// </remarks>
-class  AttributeApiEntitiesTypesEntity_type_uuidAttributesResource: public restbed::Resource
+class AttributeApiEntitiesTypesEntity_type_uuidAttributesResource: public restbed::Resource
 {
-public:
-	AttributeApiEntitiesTypesEntity_type_uuidAttributesResource();
-    virtual ~AttributeApiEntitiesTypesEntity_type_uuidAttributesResource();
-    void GET_method_handler(const std::shared_ptr<restbed::Session> session);
+	public:
+		AttributeApiEntitiesTypesEntity_type_uuidAttributesResource(
+			std::shared_ptr<EntityAttributeTypeManager> entity_attribute_type_manager
+		);
+		virtual ~AttributeApiEntitiesTypesEntity_type_uuidAttributesResource();
+		void GET_method_handler(const std::shared_ptr<restbed::Session> session);
+	private:
+		std::shared_ptr<EntityAttributeTypeManager> entity_attribute_type_manager;
 };
 
 

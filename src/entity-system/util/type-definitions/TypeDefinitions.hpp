@@ -16,10 +16,10 @@ namespace entity_system {
     #define ENT_ATTR_INST           std::shared_ptr<class EntityAttributeInstance>
     #define ENT_TYPE                std::shared_ptr<class EntityType>
     #define ENT_INST                std::shared_ptr<class EntityInstance>
-    #define ENT_REL_TYPE            std::shared_ptr<class EntityRelationType>
-    #define ENT_REL_INST            std::shared_ptr<class EntityRelationInstance>
-    #define ENT_REL_ATTR_TYPE       std::shared_ptr<class EntityRelationAttributeType>
-    #define ENT_REL_ATTR_INST       std::shared_ptr<class EntityRelationAttributeInstance>
+    #define REL_TYPE                std::shared_ptr<class RelationType>
+    #define REL_INST                std::shared_ptr<class RelationInstance>
+    #define REL_ATTR_TYPE           std::shared_ptr<class RelationAttributeType>
+    #define REL_ATTR_INST           std::shared_ptr<class RelationAttributeInstance>
 
 
 };

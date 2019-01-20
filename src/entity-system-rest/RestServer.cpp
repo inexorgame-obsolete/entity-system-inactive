@@ -10,31 +10,26 @@ using namespace inexor::entity_system::rest::api;
 namespace inexor {
 namespace entity_system {
 
-
 	RestServer::RestServer(
 		std::shared_ptr<inexor::logging::LogManager> log_manager,
-
-		std::shared_ptr<EntityTypeApiEntitiesTypesResource> spEntityTypeApiEntitiesTypesResource,
-		std::shared_ptr<EntityTypeApiEntitiesTypesEntity_type_uuidResource> spEntityTypeApiEntitiesTypesEntity_type_uuidResource,
-		std::shared_ptr<EntityTypeApiEntitiesTypesEntity_type_uuidAttributesNameResource> spEntityTypeApiEntitiesTypesEntity_type_uuidAttributesNameResource,
-		std::shared_ptr<EntityTypeApiEntitiesTypesEntity_type_uuidInstancesResource> spEntityTypeApiEntitiesTypesEntity_type_uuidInstancesResource,
-		std::shared_ptr<EntityTypeApiEntitiesTypesEntity_type_uuidRelationshipsIncomingResource> spEntityTypeApiEntitiesTypesEntity_type_uuidRelationshipsIncomingResource,
-		std::shared_ptr<EntityTypeApiEntitiesTypesEntity_type_uuidRelationshipsOutgoingResource> spEntityTypeApiEntitiesTypesEntity_type_uuidRelationshipsOutgoingResource,
-		std::shared_ptr<EntityTypeApiEntitiesTypesEntity_type_uuidRelationshipsResource> spEntityTypeApiEntitiesTypesEntity_type_uuidRelationshipsResource,
-		std::shared_ptr<EntityTypeApiEntitiesTypesEntity_type_uuidAttributesResource> spEntityTypeApiEntitiesTypesEntity_type_uuidAttributesResource
+		std::shared_ptr<EntityTypeApi> entity_type_api,
+		std::shared_ptr<RelationTypeApi> relation_type_api,
+		std::shared_ptr<EntityInstanceApi> entity_instance_api,
+		std::shared_ptr<RelationInstanceApi> relation_instance_api,
+		std::shared_ptr<AttributeApi> attribute_api
 	)
-		: EntityTypeApi(
-			spEntityTypeApiEntitiesTypesResource,
-			spEntityTypeApiEntitiesTypesEntity_type_uuidResource,
-			spEntityTypeApiEntitiesTypesEntity_type_uuidAttributesNameResource,
-			spEntityTypeApiEntitiesTypesEntity_type_uuidInstancesResource,
-			spEntityTypeApiEntitiesTypesEntity_type_uuidRelationshipsIncomingResource,
-			spEntityTypeApiEntitiesTypesEntity_type_uuidRelationshipsOutgoingResource,
-			spEntityTypeApiEntitiesTypesEntity_type_uuidRelationshipsResource,
-			spEntityTypeApiEntitiesTypesEntity_type_uuidAttributesResource
-		)
 	{
 		this->log_manager = log_manager;
+
+		// Inject the REST APIs
+		this->entity_type_api = entity_type_api;
+		this->relation_type_api = relation_type_api;
+		this->entity_instance_api = entity_instance_api;
+		this->relation_instance_api = relation_instance_api;
+		this->attribute_api = attribute_api;
+
+		// Initialize the settings
+		// TODO: make this more dynamic!
 		settings = make_shared<Settings>();
 		settings->set_port(8080);
 		settings->set_root("api/v1");
@@ -58,13 +53,15 @@ namespace entity_system {
 
 	void RestServer::init()
 	{
+		// Register logger
 		log_manager->register_logger(LOGGER_ENTITY_REST);
-//		EntitySystemApi::createResources(this->service);
-		EntityTypeApi::createResources(this->service);
-//		RelationshipTypeApi::createResources(this->service);
-//		EntityInstanceApi::createResources(this->service);
-//		RelationshipInstanceApi::createResources(this->service);
-//		AttributeApi::createResources(this->entity_system, this->service);
+		// Publish resources on the service
+		entity_type_api->publish_resources(this->service);
+		relation_type_api->publish_resources(this->service);
+		entity_instance_api->publish_resources(this->service);
+		relation_instance_api->publish_resources(this->service);
+		//EntitySystemApi::publish_resources(this->service);
+		attribute_api->publish_resources(this->service);
 	}
 
 	shared_ptr<Settings> RestServer::get_settings()

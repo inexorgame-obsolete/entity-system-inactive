@@ -17,8 +17,8 @@
 #include "api/EntityInstanceApi.hpp"
 #include "api/EntitySystemApi.hpp"
 #include "api/EntityTypeApi.hpp"
-#include "api/RelationshipInstanceApi.hpp"
-#include "api/RelationshipTypeApi.hpp"
+#include "api/RelationInstanceApi.hpp"
+#include "api/RelationTypeApi.hpp"
 #include "entity-system/EntitySystem.hpp"
 #include "logging/LogManager.hpp"
 
@@ -33,13 +33,7 @@ namespace entity_system {
 
 	/// @class RestServer
     /// @brief The Inexor Entity System REST server.
-	class RestServer : public restbed::Service,
-	                   public EntityTypeApi
-//					   public EntitySystemApi,
-//					   public RelationshipTypeApi,
-//					   public EntityInstanceApi,
-//					   public RelationshipInstanceApi,
-//					   public AttributeApi
+	class RestServer : public restbed::Service
 	{
 		public:
 
@@ -47,14 +41,12 @@ namespace entity_system {
 			RestServer(
 				std::shared_ptr<inexor::logging::LogManager> log_manager,
 
-				std::shared_ptr<EntityTypeApiEntitiesTypesResource> spEntityTypeApiEntitiesTypesResource,
-				std::shared_ptr<EntityTypeApiEntitiesTypesEntity_type_uuidResource> spEntityTypeApiEntitiesTypesEntity_type_uuidResource,
-				std::shared_ptr<EntityTypeApiEntitiesTypesEntity_type_uuidAttributesNameResource> spEntityTypeApiEntitiesTypesEntity_type_uuidAttributesNameResource,
-				std::shared_ptr<EntityTypeApiEntitiesTypesEntity_type_uuidInstancesResource> spEntityTypeApiEntitiesTypesEntity_type_uuidInstancesResource,
-				std::shared_ptr<EntityTypeApiEntitiesTypesEntity_type_uuidRelationshipsIncomingResource> spEntityTypeApiEntitiesTypesEntity_type_uuidRelationshipsIncomingResource,
-				std::shared_ptr<EntityTypeApiEntitiesTypesEntity_type_uuidRelationshipsOutgoingResource> spEntityTypeApiEntitiesTypesEntity_type_uuidRelationshipsOutgoingResource,
-				std::shared_ptr<EntityTypeApiEntitiesTypesEntity_type_uuidRelationshipsResource> spEntityTypeApiEntitiesTypesEntity_type_uuidRelationshipsResource,
-				std::shared_ptr<EntityTypeApiEntitiesTypesEntity_type_uuidAttributesResource> spEntityTypeApiEntitiesTypesEntity_type_uuidAttributesResource
+				// The REST APIs
+				std::shared_ptr<EntityTypeApi> entity_type_api,
+				std::shared_ptr<RelationTypeApi> relation_type_api,
+				std::shared_ptr<EntityInstanceApi> entity_instance_api,
+				std::shared_ptr<RelationInstanceApi> relation_instance_api,
+				std::shared_ptr<AttributeApi> attribute_api
 
 			);
 
@@ -79,6 +71,21 @@ namespace entity_system {
 
             /// Management of the loggers
 			std::shared_ptr<inexor::logging::LogManager> log_manager;
+
+			/// The REST API for entity types
+			std::shared_ptr<EntityTypeApi> entity_type_api;
+
+			/// The REST API for relation types
+			std::shared_ptr<RelationTypeApi> relation_type_api;
+
+			/// The REST API for entity instances
+			std::shared_ptr<EntityInstanceApi> entity_instance_api;
+
+			/// The REST API for relation instance
+			std::shared_ptr<RelationInstanceApi> relation_instance_api;
+
+			/// The REST API for attributes
+			std::shared_ptr<AttributeApi> attribute_api;
 
 			/// The REST service
 			std::shared_ptr<restbed::Service> service;

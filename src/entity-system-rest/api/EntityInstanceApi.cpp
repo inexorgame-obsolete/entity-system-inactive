@@ -13,6 +13,8 @@
 
 #include "EntityInstanceApi.hpp"
 
+#include <crossguid/guid.hpp>
+
 #include <corvusoft/restbed/byte.hpp>
 #include <corvusoft/restbed/string.hpp>
 #include <corvusoft/restbed/settings.hpp>
@@ -29,57 +31,55 @@ using namespace xg;
 using namespace restbed;
 using namespace std;
 
-EntityInstanceApi::EntityInstanceApi() {}
+EntityInstanceApi::EntityInstanceApi(
+	std::shared_ptr<EntityInstanceApiEntitiesInstancesResource> spEntityInstanceApiEntitiesInstancesResource,
+	std::shared_ptr<EntityInstanceApiEntitiesInstancesEntity_instance_uuidResource> spEntityInstanceApiEntitiesInstancesEntity_instance_uuidResource,
+	std::shared_ptr<EntityInstanceApiEntitiesInstancesEntity_instance_uuidAttributesNameResource> spEntityInstanceApiEntitiesInstancesEntity_instance_uuidAttributesNameResource,
+	std::shared_ptr<EntityInstanceApiRelationsInstancesStartStart_entity_instance_uuidEndEnd_entity_instance_uuidResource> spEntityInstanceApiRelationsInstancesStartStart_entity_instance_uuidEndEnd_entity_instance_uuidResource,
+	std::shared_ptr<EntityInstanceApiEntitiesInstancesEntity_instance_uuidRelationsRelation_type_uuidResource> spEntityInstanceApiEntitiesInstancesEntity_instance_uuidRelationsRelation_type_uuidResource,
+	std::shared_ptr<EntityInstanceApiEntitiesInstancesEntity_instance_uuidRelationsResource> spEntityInstanceApiEntitiesInstancesEntity_instance_uuidRelationsResource,
+	std::shared_ptr<EntityInstanceApiEntitiesInstancesEntity_instance_uuidAttributesResource> spEntityInstanceApiEntitiesInstancesEntity_instance_uuidAttributesResource
+//	std::shared_ptr<EntityInstanceApiEntitiesInstancesEntity_instance_uuidRelationsRelation_type_uuidIncomingResource> spEntityInstanceApiEntitiesInstancesEntity_instance_uuidRelationsRelation_type_uuidIncomingResource,
+//	std::shared_ptr<EntityInstanceApiEntitiesInstancesEntity_instance_uuidRelationsIncomingResource> spEntityInstanceApiEntitiesInstancesEntity_instance_uuidRelationsIncomingResource,
+//	std::shared_ptr<EntityInstanceApiEntitiesInstancesEntity_instance_uuidRelationsRelation_type_uuidOutgoingResource> spEntityInstanceApiEntitiesInstancesEntity_instance_uuidRelationsRelation_type_uuidOutgoingResource,
+//	std::shared_ptr<EntityInstanceApiEntitiesInstancesEntity_instance_uuidRelationsOutgoingResource> spEntityInstanceApiEntitiesInstancesEntity_instance_uuidRelationsOutgoingResource
+)
+{
+	this->spEntityInstanceApiEntitiesInstancesResource = spEntityInstanceApiEntitiesInstancesResource;
+	this->spEntityInstanceApiEntitiesInstancesEntity_instance_uuidResource = spEntityInstanceApiEntitiesInstancesEntity_instance_uuidResource;
+	this->spEntityInstanceApiEntitiesInstancesEntity_instance_uuidAttributesNameResource = spEntityInstanceApiEntitiesInstancesEntity_instance_uuidAttributesNameResource;
+	this->spEntityInstanceApiRelationsInstancesStartStart_entity_instance_uuidEndEnd_entity_instance_uuidResource = spEntityInstanceApiRelationsInstancesStartStart_entity_instance_uuidEndEnd_entity_instance_uuidResource;
+	this->spEntityInstanceApiEntitiesInstancesEntity_instance_uuidRelationsRelation_type_uuidResource = spEntityInstanceApiEntitiesInstancesEntity_instance_uuidRelationsRelation_type_uuidResource;
+	this->spEntityInstanceApiEntitiesInstancesEntity_instance_uuidRelationsResource = spEntityInstanceApiEntitiesInstancesEntity_instance_uuidRelationsResource;
+	this->spEntityInstanceApiEntitiesInstancesEntity_instance_uuidAttributesResource = spEntityInstanceApiEntitiesInstancesEntity_instance_uuidAttributesResource;
+//	this->spEntityInstanceApiEntitiesInstancesEntity_instance_uuidRelationsRelation_type_uuidIncomingResource = spEntityInstanceApiEntitiesInstancesEntity_instance_uuidRelationsRelation_type_uuidIncomingResource;
+//	this->spEntityInstanceApiEntitiesInstancesEntity_instance_uuidRelationsIncomingResource = spEntityInstanceApiEntitiesInstancesEntity_instance_uuidRelationsIncomingResource;
+//	this->spEntityInstanceApiEntitiesInstancesEntity_instance_uuidRelationsRelation_type_uuidOutgoingResource = spEntityInstanceApiEntitiesInstancesEntity_instance_uuidRelationsRelation_type_uuidOutgoingResource;
+//	this->spEntityInstanceApiEntitiesInstancesEntity_instance_uuidRelationsOutgoingResource = spEntityInstanceApiEntitiesInstancesEntity_instance_uuidRelationsOutgoingResource;
+}
+
 EntityInstanceApi::~EntityInstanceApi() {}
 
-void EntityInstanceApi::createResources(std::shared_ptr<inexor::entity_system::EntitySystem> entity_system, std::shared_ptr<Service> service) {
-	std::shared_ptr<EntityInstanceApiEntitiesInstancesResource> spEntityInstanceApiEntitiesInstancesResource = std::make_shared<EntityInstanceApiEntitiesInstancesResource>();
+void EntityInstanceApi::publish_resources(std::shared_ptr<Service> service) {
 	service->publish(spEntityInstanceApiEntitiesInstancesResource);
-	
-	std::shared_ptr<EntityInstanceApiEntitiesInstancesEntity_instance_uuidResource> spEntityInstanceApiEntitiesInstancesEntity_instance_uuidResource = std::make_shared<EntityInstanceApiEntitiesInstancesEntity_instance_uuidResource>();
 	service->publish(spEntityInstanceApiEntitiesInstancesEntity_instance_uuidResource);
-	
-	std::shared_ptr<EntityInstanceApiEntitiesInstancesEntity_instance_uuidAttributesNameResource> spEntityInstanceApiEntitiesInstancesEntity_instance_uuidAttributesNameResource = std::make_shared<EntityInstanceApiEntitiesInstancesEntity_instance_uuidAttributesNameResource>();
 	service->publish(spEntityInstanceApiEntitiesInstancesEntity_instance_uuidAttributesNameResource);
-	
-	std::shared_ptr<EntityInstanceApiRelationshipsInstancesStartStart_entity_instance_uuidEndEnd_entity_instance_uuidResource> spEntityInstanceApiRelationshipsInstancesStartStart_entity_instance_uuidEndEnd_entity_instance_uuidResource = std::make_shared<EntityInstanceApiRelationshipsInstancesStartStart_entity_instance_uuidEndEnd_entity_instance_uuidResource>();
-	service->publish(spEntityInstanceApiRelationshipsInstancesStartStart_entity_instance_uuidEndEnd_entity_instance_uuidResource);
-	
-	std::shared_ptr<EntityInstanceApiEntitiesInstancesEntity_instance_uuidRelationshipsRelationship_type_uuidResource> spEntityInstanceApiEntitiesInstancesEntity_instance_uuidRelationshipsRelationship_type_uuidResource = std::make_shared<EntityInstanceApiEntitiesInstancesEntity_instance_uuidRelationshipsRelationship_type_uuidResource>();
-	service->publish(spEntityInstanceApiEntitiesInstancesEntity_instance_uuidRelationshipsRelationship_type_uuidResource);
-	
-	std::shared_ptr<EntityInstanceApiEntitiesInstancesEntity_instance_uuidRelationshipsResource> spEntityInstanceApiEntitiesInstancesEntity_instance_uuidRelationshipsResource = std::make_shared<EntityInstanceApiEntitiesInstancesEntity_instance_uuidRelationshipsResource>();
-	service->publish(spEntityInstanceApiEntitiesInstancesEntity_instance_uuidRelationshipsResource);
-	
-	std::shared_ptr<EntityInstanceApiEntitiesInstancesEntity_instance_uuidAttributesResource> spEntityInstanceApiEntitiesInstancesEntity_instance_uuidAttributesResource = std::make_shared<EntityInstanceApiEntitiesInstancesEntity_instance_uuidAttributesResource>();
+	service->publish(spEntityInstanceApiRelationsInstancesStartStart_entity_instance_uuidEndEnd_entity_instance_uuidResource);
+	service->publish(spEntityInstanceApiEntitiesInstancesEntity_instance_uuidRelationsRelation_type_uuidResource);
+	service->publish(spEntityInstanceApiEntitiesInstancesEntity_instance_uuidRelationsResource);
 	service->publish(spEntityInstanceApiEntitiesInstancesEntity_instance_uuidAttributesResource);
-	
-	std::shared_ptr<EntityInstanceApiEntitiesInstancesEntity_instance_uuidRelationshipsRelationship_type_uuidIncomingResource> spEntityInstanceApiEntitiesInstancesEntity_instance_uuidRelationshipsRelationship_type_uuidIncomingResource = std::make_shared<EntityInstanceApiEntitiesInstancesEntity_instance_uuidRelationshipsRelationship_type_uuidIncomingResource>();
-	service->publish(spEntityInstanceApiEntitiesInstancesEntity_instance_uuidRelationshipsRelationship_type_uuidIncomingResource);
-	
-	std::shared_ptr<EntityInstanceApiEntitiesInstancesEntity_instance_uuidRelationshipsIncomingResource> spEntityInstanceApiEntitiesInstancesEntity_instance_uuidRelationshipsIncomingResource = std::make_shared<EntityInstanceApiEntitiesInstancesEntity_instance_uuidRelationshipsIncomingResource>();
-	service->publish(spEntityInstanceApiEntitiesInstancesEntity_instance_uuidRelationshipsIncomingResource);
-	
-	std::shared_ptr<EntityInstanceApiEntitiesInstancesEntity_instance_uuidRelationshipsRelationship_type_uuidOutgoingResource> spEntityInstanceApiEntitiesInstancesEntity_instance_uuidRelationshipsRelationship_type_uuidOutgoingResource = std::make_shared<EntityInstanceApiEntitiesInstancesEntity_instance_uuidRelationshipsRelationship_type_uuidOutgoingResource>();
-	service->publish(spEntityInstanceApiEntitiesInstancesEntity_instance_uuidRelationshipsRelationship_type_uuidOutgoingResource);
-	
-	std::shared_ptr<EntityInstanceApiEntitiesInstancesEntity_instance_uuidRelationshipsOutgoingResource> spEntityInstanceApiEntitiesInstancesEntity_instance_uuidRelationshipsOutgoingResource = std::make_shared<EntityInstanceApiEntitiesInstancesEntity_instance_uuidRelationshipsOutgoingResource>();
-	service->publish(spEntityInstanceApiEntitiesInstancesEntity_instance_uuidRelationshipsOutgoingResource);
-	
+//	service->publish(spEntityInstanceApiEntitiesInstancesEntity_instance_uuidRelationsRelation_type_uuidIncomingResource);
+//	service->publish(spEntityInstanceApiEntitiesInstancesEntity_instance_uuidRelationsIncomingResource);
+//	service->publish(spEntityInstanceApiEntitiesInstancesEntity_instance_uuidRelationsRelation_type_uuidOutgoingResource);
+//	service->publish(spEntityInstanceApiEntitiesInstancesEntity_instance_uuidRelationsOutgoingResource);
 }
 
 EntityInstanceApiEntitiesInstancesResource::EntityInstanceApiEntitiesInstancesResource()
 {
 	this->set_path("/entities/instances/");
-	this->set_method_handler("POST",
-		std::bind(&EntityInstanceApiEntitiesInstancesResource::POST_method_handler, this,
-			std::placeholders::_1));
-	this->set_method_handler("DELETE",
-		std::bind(&EntityInstanceApiEntitiesInstancesResource::DELETE_method_handler, this,
-			std::placeholders::_1));
-	this->set_method_handler("GET",
-		std::bind(&EntityInstanceApiEntitiesInstancesResource::GET_method_handler, this,
-			std::placeholders::_1));
+	this->set_method_handler("POST", std::bind(&EntityInstanceApiEntitiesInstancesResource::POST_method_handler, this, std::placeholders::_1));
+	this->set_method_handler("DELETE", std::bind(&EntityInstanceApiEntitiesInstancesResource::DELETE_method_handler, this, std::placeholders::_1));
+	this->set_method_handler("GET", std::bind(&EntityInstanceApiEntitiesInstancesResource::GET_method_handler, this, std::placeholders::_1));
 }
 
 EntityInstanceApiEntitiesInstancesResource::~EntityInstanceApiEntitiesInstancesResource()
@@ -127,52 +127,46 @@ void EntityInstanceApiEntitiesInstancesResource::DELETE_method_handler(const std
 
 	const auto request = session->get_request();
 
-			
+	// Change the value of this variable to the appropriate response before sending the response
+	int status_code = 200;
 
-			
-			// Change the value of this variable to the appropriate response before sending the response
-			int status_code = 200;
-			
-			/**
-			 * Process the received information here
-			 */
-			
-			if (status_code == 200) {
-				std::shared_ptr<EntitySystemMessage> response = NULL;
-				session->close(200, "Success message", { {"Connection", "close"} });
-				return;
-			}
-			if (status_code == 0) {
-				std::shared_ptr<EntitySystemMessage> response = NULL;
-				session->close(0, "unexpected error", { {"Connection", "close"} });
-				return;
-			}
+	/**
+	 * Process the received information here
+	 */
+
+	if (status_code == 200) {
+		std::shared_ptr<EntitySystemMessage> response = NULL;
+		session->close(200, "Success message", { {"Connection", "close"} });
+		return;
+	}
+	if (status_code == 0) {
+		std::shared_ptr<EntitySystemMessage> response = NULL;
+		session->close(0, "unexpected error", { {"Connection", "close"} });
+		return;
+	}
 
 }
 void EntityInstanceApiEntitiesInstancesResource::GET_method_handler(const std::shared_ptr<restbed::Session> session) {
 
 	const auto request = session->get_request();
 
-			
+	// Change the value of this variable to the appropriate response before sending the response
+	int status_code = 200;
 
-			
-			// Change the value of this variable to the appropriate response before sending the response
-			int status_code = 200;
-			
-			/**
-			 * Process the received information here
-			 */
-			
-			if (status_code == 200) {
-				std::shared_ptr<EntityInstance> response = NULL;
-				session->close(200, "Array of entity instances", { {"Connection", "close"} });
-				return;
-			}
-			if (status_code == 0) {
-				std::shared_ptr<EntitySystemMessage> response = NULL;
-				session->close(0, "unexpected error", { {"Connection", "close"} });
-				return;
-			}
+	/**
+	 * Process the received information here
+	 */
+
+	if (status_code == 200) {
+		std::shared_ptr<EntityInstance> response = NULL;
+		session->close(200, "Array of entity instances", { {"Connection", "close"} });
+		return;
+	}
+	if (status_code == 0) {
+		std::shared_ptr<EntitySystemMessage> response = NULL;
+		session->close(0, "unexpected error", { {"Connection", "close"} });
+		return;
+	}
 
 }
 
@@ -180,15 +174,9 @@ void EntityInstanceApiEntitiesInstancesResource::GET_method_handler(const std::s
 EntityInstanceApiEntitiesInstancesEntity_instance_uuidResource::EntityInstanceApiEntitiesInstancesEntity_instance_uuidResource()
 {
 	this->set_path("/entities/instances/{entity_instance_uuid: .*}/");
-	this->set_method_handler("POST",
-		std::bind(&EntityInstanceApiEntitiesInstancesEntity_instance_uuidResource::POST_method_handler, this,
-			std::placeholders::_1));
-	this->set_method_handler("DELETE",
-		std::bind(&EntityInstanceApiEntitiesInstancesEntity_instance_uuidResource::DELETE_method_handler, this,
-			std::placeholders::_1));
-	this->set_method_handler("GET",
-		std::bind(&EntityInstanceApiEntitiesInstancesEntity_instance_uuidResource::GET_method_handler, this,
-			std::placeholders::_1));
+	this->set_method_handler("POST", std::bind(&EntityInstanceApiEntitiesInstancesEntity_instance_uuidResource::POST_method_handler, this, std::placeholders::_1));
+	this->set_method_handler("DELETE", std::bind(&EntityInstanceApiEntitiesInstancesEntity_instance_uuidResource::DELETE_method_handler, this, std::placeholders::_1));
+	this->set_method_handler("GET", std::bind(&EntityInstanceApiEntitiesInstancesEntity_instance_uuidResource::GET_method_handler, this, std::placeholders::_1));
 }
 
 EntityInstanceApiEntitiesInstancesEntity_instance_uuidResource::~EntityInstanceApiEntitiesInstancesEntity_instance_uuidResource()
@@ -212,8 +200,6 @@ void EntityInstanceApiEntitiesInstancesEntity_instance_uuidResource::POST_method
 			
 			// Getting the path params
 			const std::string entityInstanceUuid = request->get_path_parameter("entityInstanceUuid", "");
-			
-
 			
 			// Change the value of this variable to the appropriate response before sending the response
 			int status_code = 200;
@@ -241,8 +227,6 @@ void EntityInstanceApiEntitiesInstancesEntity_instance_uuidResource::DELETE_meth
 			// Getting the path params
 			const std::string entityInstanceUuid = request->get_path_parameter("entityInstanceUuid", "");
 			
-
-			
 			// Change the value of this variable to the appropriate response before sending the response
 			int status_code = 200;
 			
@@ -266,28 +250,26 @@ void EntityInstanceApiEntitiesInstancesEntity_instance_uuidResource::GET_method_
 
 	const auto request = session->get_request();
 
-			// Getting the path params
-			const std::string entityInstanceUuid = request->get_path_parameter("entityInstanceUuid", "");
-			
+	// Getting the path params
+	const std::string entityInstanceUuid = request->get_path_parameter("entityInstanceUuid", "");
 
-			
-			// Change the value of this variable to the appropriate response before sending the response
-			int status_code = 200;
-			
-			/**
-			 * Process the received information here
-			 */
-			
-			if (status_code == 200) {
-				std::shared_ptr<EntityInstance> response = NULL;
-				session->close(200, "An entity instance", { {"Connection", "close"} });
-				return;
-			}
-			if (status_code == 0) {
-				std::shared_ptr<EntitySystemMessage> response = NULL;
-				session->close(0, "unexpected error", { {"Connection", "close"} });
-				return;
-			}
+	// Change the value of this variable to the appropriate response before sending the response
+	int status_code = 200;
+
+	/**
+	 * Process the received information here
+	 */
+
+	if (status_code == 200) {
+		std::shared_ptr<EntityInstance> response = NULL;
+		session->close(200, "An entity instance", { {"Connection", "close"} });
+		return;
+	}
+	if (status_code == 0) {
+		std::shared_ptr<EntitySystemMessage> response = NULL;
+		session->close(0, "unexpected error", { {"Connection", "close"} });
+		return;
+	}
 
 }
 
@@ -295,15 +277,9 @@ void EntityInstanceApiEntitiesInstancesEntity_instance_uuidResource::GET_method_
 EntityInstanceApiEntitiesInstancesEntity_instance_uuidAttributesNameResource::EntityInstanceApiEntitiesInstancesEntity_instance_uuidAttributesNameResource()
 {
 	this->set_path("/entities/instances/{entity_instance_uuid: .*}/attributes/{name: .*}/");
-	this->set_method_handler("POST",
-		std::bind(&EntityInstanceApiEntitiesInstancesEntity_instance_uuidAttributesNameResource::POST_method_handler, this,
-			std::placeholders::_1));
-	this->set_method_handler("DELETE",
-		std::bind(&EntityInstanceApiEntitiesInstancesEntity_instance_uuidAttributesNameResource::DELETE_method_handler, this,
-			std::placeholders::_1));
-	this->set_method_handler("GET",
-		std::bind(&EntityInstanceApiEntitiesInstancesEntity_instance_uuidAttributesNameResource::GET_method_handler, this,
-			std::placeholders::_1));
+	this->set_method_handler("POST", std::bind(&EntityInstanceApiEntitiesInstancesEntity_instance_uuidAttributesNameResource::POST_method_handler, this, std::placeholders::_1));
+	this->set_method_handler("DELETE", std::bind(&EntityInstanceApiEntitiesInstancesEntity_instance_uuidAttributesNameResource::DELETE_method_handler, this, std::placeholders::_1));
+	this->set_method_handler("GET", std::bind(&EntityInstanceApiEntitiesInstancesEntity_instance_uuidAttributesNameResource::GET_method_handler, this, std::placeholders::_1));
 }
 
 EntityInstanceApiEntitiesInstancesEntity_instance_uuidAttributesNameResource::~EntityInstanceApiEntitiesInstancesEntity_instance_uuidAttributesNameResource()
@@ -354,214 +330,194 @@ void EntityInstanceApiEntitiesInstancesEntity_instance_uuidAttributesNameResourc
 
 	const auto request = session->get_request();
 
-			// Getting the path params
-			const std::string entityInstanceUuid = request->get_path_parameter("entityInstanceUuid", "");
-			const std::string name = request->get_path_parameter("name", "");
-			
+	// Getting the path params
+	const std::string entityInstanceUuid = request->get_path_parameter("entityInstanceUuid", "");
+	const std::string name = request->get_path_parameter("name", "");
 
-			
-			// Change the value of this variable to the appropriate response before sending the response
-			int status_code = 200;
-			
-			/**
-			 * Process the received information here
-			 */
-			
-			if (status_code == 200) {
-				std::shared_ptr<EntitySystemMessage> response = NULL;
-				session->close(200, "Success message", { {"Connection", "close"} });
-				return;
-			}
-			if (status_code == 0) {
-				std::shared_ptr<EntitySystemMessage> response = NULL;
-				session->close(0, "unexpected error", { {"Connection", "close"} });
-				return;
-			}
+	// Change the value of this variable to the appropriate response before sending the response
+	int status_code = 200;
+
+	/**
+	 * Process the received information here
+	 */
+
+	if (status_code == 200) {
+		std::shared_ptr<EntitySystemMessage> response = NULL;
+		session->close(200, "Success message", { {"Connection", "close"} });
+		return;
+	}
+	if (status_code == 0) {
+		std::shared_ptr<EntitySystemMessage> response = NULL;
+		session->close(0, "unexpected error", { {"Connection", "close"} });
+		return;
+	}
 
 }
 void EntityInstanceApiEntitiesInstancesEntity_instance_uuidAttributesNameResource::GET_method_handler(const std::shared_ptr<restbed::Session> session) {
 
 	const auto request = session->get_request();
 
-			// Getting the path params
-			const std::string entityInstanceUuid = request->get_path_parameter("entityInstanceUuid", "");
-			const std::string name = request->get_path_parameter("name", "");
-			
+	// Getting the path params
+	const std::string entityInstanceUuid = request->get_path_parameter("entityInstanceUuid", "");
+	const std::string name = request->get_path_parameter("name", "");
 
-			
-			// Change the value of this variable to the appropriate response before sending the response
-			int status_code = 200;
-			
-			/**
-			 * Process the received information here
-			 */
-			
-			if (status_code == 200) {
-				std::shared_ptr<Attribute> response = NULL;
-				session->close(200, "The attribute", { {"Connection", "close"} });
-				return;
-			}
-			if (status_code == 0) {
-				std::shared_ptr<EntitySystemMessage> response = NULL;
-				session->close(0, "unexpected error", { {"Connection", "close"} });
-				return;
-			}
+	// Change the value of this variable to the appropriate response before sending the response
+	int status_code = 200;
+
+	/**
+	 * Process the received information here
+	 */
+
+	if (status_code == 200) {
+		std::shared_ptr<Attribute> response = NULL;
+		session->close(200, "The attribute", { {"Connection", "close"} });
+		return;
+	}
+	if (status_code == 0) {
+		std::shared_ptr<EntitySystemMessage> response = NULL;
+		session->close(0, "unexpected error", { {"Connection", "close"} });
+		return;
+	}
 
 }
 
 
-EntityInstanceApiRelationshipsInstancesStartStart_entity_instance_uuidEndEnd_entity_instance_uuidResource::EntityInstanceApiRelationshipsInstancesStartStart_entity_instance_uuidEndEnd_entity_instance_uuidResource()
+EntityInstanceApiRelationsInstancesStartStart_entity_instance_uuidEndEnd_entity_instance_uuidResource::EntityInstanceApiRelationsInstancesStartStart_entity_instance_uuidEndEnd_entity_instance_uuidResource()
 {
-	this->set_path("/relationships/instances/start/{start_entity_instance_uuid: .*}/end/{end_entity_instance_uuid: .*}/");
-	this->set_method_handler("DELETE",
-		std::bind(&EntityInstanceApiRelationshipsInstancesStartStart_entity_instance_uuidEndEnd_entity_instance_uuidResource::DELETE_method_handler, this,
-			std::placeholders::_1));
-	this->set_method_handler("GET",
-		std::bind(&EntityInstanceApiRelationshipsInstancesStartStart_entity_instance_uuidEndEnd_entity_instance_uuidResource::GET_method_handler, this,
-			std::placeholders::_1));
+	this->set_path("/relations/instances/start/{start_entity_instance_uuid: .*}/end/{end_entity_instance_uuid: .*}/");
+	this->set_method_handler("DELETE", std::bind(&EntityInstanceApiRelationsInstancesStartStart_entity_instance_uuidEndEnd_entity_instance_uuidResource::DELETE_method_handler, this, std::placeholders::_1));
+	this->set_method_handler("GET", std::bind(&EntityInstanceApiRelationsInstancesStartStart_entity_instance_uuidEndEnd_entity_instance_uuidResource::GET_method_handler, this, std::placeholders::_1));
 }
 
-EntityInstanceApiRelationshipsInstancesStartStart_entity_instance_uuidEndEnd_entity_instance_uuidResource::~EntityInstanceApiRelationshipsInstancesStartStart_entity_instance_uuidEndEnd_entity_instance_uuidResource()
+EntityInstanceApiRelationsInstancesStartStart_entity_instance_uuidEndEnd_entity_instance_uuidResource::~EntityInstanceApiRelationsInstancesStartStart_entity_instance_uuidEndEnd_entity_instance_uuidResource()
 {
 }
 
-void EntityInstanceApiRelationshipsInstancesStartStart_entity_instance_uuidEndEnd_entity_instance_uuidResource::DELETE_method_handler(const std::shared_ptr<restbed::Session> session) {
+void EntityInstanceApiRelationsInstancesStartStart_entity_instance_uuidEndEnd_entity_instance_uuidResource::DELETE_method_handler(const std::shared_ptr<restbed::Session> session) {
 
 	const auto request = session->get_request();
 			
-			// Getting the path params
-			const std::string startEntityInstanceUuid = request->get_path_parameter("startEntityInstanceUuid", "");
-			const std::string endEntityInstanceUuid = request->get_path_parameter("endEntityInstanceUuid", "");
-			
+	// Getting the path params
+	const std::string startEntityInstanceUuid = request->get_path_parameter("startEntityInstanceUuid", "");
+	const std::string endEntityInstanceUuid = request->get_path_parameter("endEntityInstanceUuid", "");
 
-			
-			// Change the value of this variable to the appropriate response before sending the response
-			int status_code = 200;
-			
-			/**
-			 * Process the received information here
-			 */
-			
-			if (status_code == 200) {
-				session->close(200, "Success message", { {"Connection", "close"} });
-				return;
-			}
-			if (status_code == 0) {
-				session->close(0, "unexpected error", { {"Connection", "close"} });
-				return;
-			}
+	// Change the value of this variable to the appropriate response before sending the response
+	int status_code = 200;
+
+	/**
+	 * Process the received information here
+	 */
+
+	if (status_code == 200) {
+		session->close(200, "Success message", { {"Connection", "close"} });
+		return;
+	}
+	if (status_code == 0) {
+		session->close(0, "unexpected error", { {"Connection", "close"} });
+		return;
+	}
 
 }
 
-void EntityInstanceApiRelationshipsInstancesStartStart_entity_instance_uuidEndEnd_entity_instance_uuidResource::GET_method_handler(const std::shared_ptr<restbed::Session> session) {
+void EntityInstanceApiRelationsInstancesStartStart_entity_instance_uuidEndEnd_entity_instance_uuidResource::GET_method_handler(const std::shared_ptr<restbed::Session> session) {
 
 	const auto request = session->get_request();
 
-			// Getting the path params
-			const std::string startEntityInstanceUuid = request->get_path_parameter("startEntityInstanceUuid", "");
-			const std::string endEntityInstanceUuid = request->get_path_parameter("endEntityInstanceUuid", "");
-			
+	// Getting the path params
+	const std::string startEntityInstanceUuid = request->get_path_parameter("startEntityInstanceUuid", "");
+	const std::string endEntityInstanceUuid = request->get_path_parameter("endEntityInstanceUuid", "");
 
-			
-			// Change the value of this variable to the appropriate response before sending the response
-			int status_code = 200;
-			
-			/**
-			 * Process the received information here
-			 */
-			
-			if (status_code == 200) {
-				std::shared_ptr<RelationshipInstance> response = NULL;
-				session->close(200, "Array of relationship instances", { {"Connection", "close"} });
-				return;
-			}
-			if (status_code == 0) {
-				std::shared_ptr<EntitySystemMessage> response = NULL;
-				session->close(0, "unexpected error", { {"Connection", "close"} });
-				return;
-			}
+	// Change the value of this variable to the appropriate response before sending the response
+	int status_code = 200;
+
+	/**
+	 * Process the received information here
+	 */
+
+	if (status_code == 200) {
+		std::shared_ptr<RelationInstance> response = NULL;
+		session->close(200, "Array of relation instances", { {"Connection", "close"} });
+		return;
+	}
+	if (status_code == 0) {
+		std::shared_ptr<EntitySystemMessage> response = NULL;
+		session->close(0, "unexpected error", { {"Connection", "close"} });
+		return;
+	}
 
 }
 
 
-EntityInstanceApiEntitiesInstancesEntity_instance_uuidRelationshipsRelationship_type_uuidResource::EntityInstanceApiEntitiesInstancesEntity_instance_uuidRelationshipsRelationship_type_uuidResource()
+EntityInstanceApiEntitiesInstancesEntity_instance_uuidRelationsRelation_type_uuidResource::EntityInstanceApiEntitiesInstancesEntity_instance_uuidRelationsRelation_type_uuidResource()
 {
-	this->set_path("/entities/instances/{entity_instance_uuid: .*}/relationships/{relationship_type_uuid: .*}/");
-	this->set_method_handler("GET",
-		std::bind(&EntityInstanceApiEntitiesInstancesEntity_instance_uuidRelationshipsRelationship_type_uuidResource::GET_method_handler, this,
-			std::placeholders::_1));
+	this->set_path("/entities/instances/{entity_instance_uuid: .*}/relations/{relation_type_uuid: .*}/");
+	this->set_method_handler("GET", std::bind(&EntityInstanceApiEntitiesInstancesEntity_instance_uuidRelationsRelation_type_uuidResource::GET_method_handler, this, std::placeholders::_1));
 }
 
-EntityInstanceApiEntitiesInstancesEntity_instance_uuidRelationshipsRelationship_type_uuidResource::~EntityInstanceApiEntitiesInstancesEntity_instance_uuidRelationshipsRelationship_type_uuidResource()
+EntityInstanceApiEntitiesInstancesEntity_instance_uuidRelationsRelation_type_uuidResource::~EntityInstanceApiEntitiesInstancesEntity_instance_uuidRelationsRelation_type_uuidResource()
 {
 }
 
-void EntityInstanceApiEntitiesInstancesEntity_instance_uuidRelationshipsRelationship_type_uuidResource::GET_method_handler(const std::shared_ptr<restbed::Session> session) {
+void EntityInstanceApiEntitiesInstancesEntity_instance_uuidRelationsRelation_type_uuidResource::GET_method_handler(const std::shared_ptr<restbed::Session> session) {
 
 	const auto request = session->get_request();
 			
-			// Getting the path params
-			const std::string entityInstanceUuid = request->get_path_parameter("entityInstanceUuid", "");
-			const std::string relationshipTypeUuid = request->get_path_parameter("relationshipTypeUuid", "");
-			
+	// Getting the path params
+	const std::string entityInstanceUuid = request->get_path_parameter("entityInstanceUuid", "");
+	const std::string relationTypeUuid = request->get_path_parameter("relationTypeUuid", "");
 
-			
-			// Change the value of this variable to the appropriate response before sending the response
-			int status_code = 200;
-			
-			/**
-			 * Process the received information here
-			 */
-			
-			if (status_code == 200) {
-				session->close(200, "Array of relationship instances", { {"Connection", "close"} });
-				return;
-			}
-			if (status_code == 0) {
-				session->close(0, "unexpected error", { {"Connection", "close"} });
-				return;
-			}
+	// Change the value of this variable to the appropriate response before sending the response
+	int status_code = 200;
+
+	/**
+	 * Process the received information here
+	 */
+
+	if (status_code == 200) {
+		session->close(200, "Array of relation instances", { {"Connection", "close"} });
+		return;
+	}
+	if (status_code == 0) {
+		session->close(0, "unexpected error", { {"Connection", "close"} });
+		return;
+	}
 
 }
 
 
 
-EntityInstanceApiEntitiesInstancesEntity_instance_uuidRelationshipsResource::EntityInstanceApiEntitiesInstancesEntity_instance_uuidRelationshipsResource()
+EntityInstanceApiEntitiesInstancesEntity_instance_uuidRelationsResource::EntityInstanceApiEntitiesInstancesEntity_instance_uuidRelationsResource()
 {
-	this->set_path("/entities/instances/{entity_instance_uuid: .*}/relationships/");
-	this->set_method_handler("GET",
-		std::bind(&EntityInstanceApiEntitiesInstancesEntity_instance_uuidRelationshipsResource::GET_method_handler, this,
-			std::placeholders::_1));
+	this->set_path("/entities/instances/{entity_instance_uuid: .*}/relations/");
+	this->set_method_handler("GET", std::bind(&EntityInstanceApiEntitiesInstancesEntity_instance_uuidRelationsResource::GET_method_handler, this, std::placeholders::_1));
 }
 
-EntityInstanceApiEntitiesInstancesEntity_instance_uuidRelationshipsResource::~EntityInstanceApiEntitiesInstancesEntity_instance_uuidRelationshipsResource()
+EntityInstanceApiEntitiesInstancesEntity_instance_uuidRelationsResource::~EntityInstanceApiEntitiesInstancesEntity_instance_uuidRelationsResource()
 {
 }
 
-void EntityInstanceApiEntitiesInstancesEntity_instance_uuidRelationshipsResource::GET_method_handler(const std::shared_ptr<restbed::Session> session) {
+void EntityInstanceApiEntitiesInstancesEntity_instance_uuidRelationsResource::GET_method_handler(const std::shared_ptr<restbed::Session> session) {
 
 	const auto request = session->get_request();
 			
-			// Getting the path params
-			const std::string entityInstanceUuid = request->get_path_parameter("entityInstanceUuid", "");
-			
+	// Getting the path params
+	const std::string entityInstanceUuid = request->get_path_parameter("entityInstanceUuid", "");
 
-			
-			// Change the value of this variable to the appropriate response before sending the response
-			int status_code = 200;
-			
-			/**
-			 * Process the received information here
-			 */
-			
-			if (status_code == 200) {
-				session->close(200, "Array of relationship instances", { {"Connection", "close"} });
-				return;
-			}
-			if (status_code == 0) {
-				session->close(0, "unexpected error", { {"Connection", "close"} });
-				return;
-			}
+	// Change the value of this variable to the appropriate response before sending the response
+	int status_code = 200;
+
+	/**
+	 * Process the received information here
+	 */
+
+	if (status_code == 200) {
+		session->close(200, "Array of relation instances", { {"Connection", "close"} });
+		return;
+	}
+	if (status_code == 0) {
+		session->close(0, "unexpected error", { {"Connection", "close"} });
+		return;
+	}
 
 }
 
@@ -570,9 +526,7 @@ void EntityInstanceApiEntitiesInstancesEntity_instance_uuidRelationshipsResource
 EntityInstanceApiEntitiesInstancesEntity_instance_uuidAttributesResource::EntityInstanceApiEntitiesInstancesEntity_instance_uuidAttributesResource()
 {
 	this->set_path("/entities/instances/{entity_instance_uuid: .*}/attributes/");
-	this->set_method_handler("GET",
-		std::bind(&EntityInstanceApiEntitiesInstancesEntity_instance_uuidAttributesResource::GET_method_handler, this,
-			std::placeholders::_1));
+	this->set_method_handler("GET", std::bind(&EntityInstanceApiEntitiesInstancesEntity_instance_uuidAttributesResource::GET_method_handler, this, std::placeholders::_1));
 }
 
 EntityInstanceApiEntitiesInstancesEntity_instance_uuidAttributesResource::~EntityInstanceApiEntitiesInstancesEntity_instance_uuidAttributesResource()
@@ -583,192 +537,174 @@ void EntityInstanceApiEntitiesInstancesEntity_instance_uuidAttributesResource::G
 
 	const auto request = session->get_request();
 			
-			// Getting the path params
-			const std::string entityInstanceUuid = request->get_path_parameter("entityInstanceUuid", "");
-			
+	// Getting the path params
+	const std::string entityInstanceUuid = request->get_path_parameter("entityInstanceUuid", "");
 
-			
-			// Change the value of this variable to the appropriate response before sending the response
-			int status_code = 200;
-			
-			/**
-			 * Process the received information here
-			 */
-			
-			if (status_code == 200) {
-				session->close(200, "Array of attributes", { {"Connection", "close"} });
-				return;
-			}
-			if (status_code == 0) {
-				session->close(0, "unexpected error", { {"Connection", "close"} });
-				return;
-			}
+	// Change the value of this variable to the appropriate response before sending the response
+	int status_code = 200;
+
+	/**
+	 * Process the received information here
+	 */
+
+	if (status_code == 200) {
+		session->close(200, "Array of attributes", { {"Connection", "close"} });
+		return;
+	}
+	if (status_code == 0) {
+		session->close(0, "unexpected error", { {"Connection", "close"} });
+		return;
+	}
 
 }
 
 
 
-EntityInstanceApiEntitiesInstancesEntity_instance_uuidRelationshipsRelationship_type_uuidIncomingResource::EntityInstanceApiEntitiesInstancesEntity_instance_uuidRelationshipsRelationship_type_uuidIncomingResource()
+EntityInstanceApiEntitiesInstancesEntity_instance_uuidRelationsRelation_type_uuidIncomingResource::EntityInstanceApiEntitiesInstancesEntity_instance_uuidRelationsRelation_type_uuidIncomingResource()
 {
-	this->set_path("/entities/instances/{entity_instance_uuid: .*}/relationships/{relationship_type_uuid: .*}/incoming/");
-	this->set_method_handler("GET",
-		std::bind(&EntityInstanceApiEntitiesInstancesEntity_instance_uuidRelationshipsRelationship_type_uuidIncomingResource::GET_method_handler, this,
-			std::placeholders::_1));
+	this->set_path("/entities/instances/{entity_instance_uuid: .*}/relations/{relation_type_uuid: .*}/incoming/");
+	this->set_method_handler("GET", std::bind(&EntityInstanceApiEntitiesInstancesEntity_instance_uuidRelationsRelation_type_uuidIncomingResource::GET_method_handler, this, std::placeholders::_1));
 }
 
-EntityInstanceApiEntitiesInstancesEntity_instance_uuidRelationshipsRelationship_type_uuidIncomingResource::~EntityInstanceApiEntitiesInstancesEntity_instance_uuidRelationshipsRelationship_type_uuidIncomingResource()
+EntityInstanceApiEntitiesInstancesEntity_instance_uuidRelationsRelation_type_uuidIncomingResource::~EntityInstanceApiEntitiesInstancesEntity_instance_uuidRelationsRelation_type_uuidIncomingResource()
 {
 }
 
-void EntityInstanceApiEntitiesInstancesEntity_instance_uuidRelationshipsRelationship_type_uuidIncomingResource::GET_method_handler(const std::shared_ptr<restbed::Session> session) {
+void EntityInstanceApiEntitiesInstancesEntity_instance_uuidRelationsRelation_type_uuidIncomingResource::GET_method_handler(const std::shared_ptr<restbed::Session> session) {
 
 	const auto request = session->get_request();
 			
-			// Getting the path params
-			const std::string entityInstanceUuid = request->get_path_parameter("entityInstanceUuid", "");
-			const std::string relationshipTypeUuid = request->get_path_parameter("relationshipTypeUuid", "");
-			
+	// Getting the path params
+	const std::string entityInstanceUuid = request->get_path_parameter("entityInstanceUuid", "");
+	const std::string relationTypeUuid = request->get_path_parameter("relationTypeUuid", "");
 
-			
-			// Change the value of this variable to the appropriate response before sending the response
-			int status_code = 200;
-			
-			/**
-			 * Process the received information here
-			 */
-			
-			if (status_code == 200) {
-				session->close(200, "Array of relationship instances", { {"Connection", "close"} });
-				return;
-			}
-			if (status_code == 0) {
-				session->close(0, "unexpected error", { {"Connection", "close"} });
-				return;
-			}
+	// Change the value of this variable to the appropriate response before sending the response
+	int status_code = 200;
+
+	/**
+	 * Process the received information here
+	 */
+
+	if (status_code == 200) {
+		session->close(200, "Array of relation instances", { {"Connection", "close"} });
+		return;
+	}
+	if (status_code == 0) {
+		session->close(0, "unexpected error", { {"Connection", "close"} });
+		return;
+	}
 
 }
 
 
 
-EntityInstanceApiEntitiesInstancesEntity_instance_uuidRelationshipsIncomingResource::EntityInstanceApiEntitiesInstancesEntity_instance_uuidRelationshipsIncomingResource()
+EntityInstanceApiEntitiesInstancesEntity_instance_uuidRelationsIncomingResource::EntityInstanceApiEntitiesInstancesEntity_instance_uuidRelationsIncomingResource()
 {
-	this->set_path("/entities/instances/{entity_instance_uuid: .*}/relationships/incoming/");
-	this->set_method_handler("GET",
-		std::bind(&EntityInstanceApiEntitiesInstancesEntity_instance_uuidRelationshipsIncomingResource::GET_method_handler, this,
-			std::placeholders::_1));
+	this->set_path("/entities/instances/{entity_instance_uuid: .*}/relations/incoming/");
+	this->set_method_handler("GET", std::bind(&EntityInstanceApiEntitiesInstancesEntity_instance_uuidRelationsIncomingResource::GET_method_handler, this, std::placeholders::_1));
 }
 
-EntityInstanceApiEntitiesInstancesEntity_instance_uuidRelationshipsIncomingResource::~EntityInstanceApiEntitiesInstancesEntity_instance_uuidRelationshipsIncomingResource()
+EntityInstanceApiEntitiesInstancesEntity_instance_uuidRelationsIncomingResource::~EntityInstanceApiEntitiesInstancesEntity_instance_uuidRelationsIncomingResource()
 {
 }
 
-void EntityInstanceApiEntitiesInstancesEntity_instance_uuidRelationshipsIncomingResource::GET_method_handler(const std::shared_ptr<restbed::Session> session) {
+void EntityInstanceApiEntitiesInstancesEntity_instance_uuidRelationsIncomingResource::GET_method_handler(const std::shared_ptr<restbed::Session> session) {
 
 	const auto request = session->get_request();
 			
-			// Getting the path params
-			const std::string entityInstanceUuid = request->get_path_parameter("entityInstanceUuid", "");
-			
+	// Getting the path params
+	const std::string entityInstanceUuid = request->get_path_parameter("entityInstanceUuid", "");
 
-			
-			// Change the value of this variable to the appropriate response before sending the response
-			int status_code = 200;
-			
-			/**
-			 * Process the received information here
-			 */
-			
-			if (status_code == 200) {
-				session->close(200, "Array of relationship instances", { {"Connection", "close"} });
-				return;
-			}
-			if (status_code == 0) {
-				session->close(0, "unexpected error", { {"Connection", "close"} });
-				return;
-			}
+	// Change the value of this variable to the appropriate response before sending the response
+	int status_code = 200;
+
+	/**
+	 * Process the received information here
+	 */
+
+	if (status_code == 200) {
+		session->close(200, "Array of relation instances", { {"Connection", "close"} });
+		return;
+	}
+	if (status_code == 0) {
+		session->close(0, "unexpected error", { {"Connection", "close"} });
+		return;
+	}
 
 }
 
 
 
-EntityInstanceApiEntitiesInstancesEntity_instance_uuidRelationshipsRelationship_type_uuidOutgoingResource::EntityInstanceApiEntitiesInstancesEntity_instance_uuidRelationshipsRelationship_type_uuidOutgoingResource()
+EntityInstanceApiEntitiesInstancesEntity_instance_uuidRelationsRelation_type_uuidOutgoingResource::EntityInstanceApiEntitiesInstancesEntity_instance_uuidRelationsRelation_type_uuidOutgoingResource()
 {
-	this->set_path("/entities/instances/{entity_instance_uuid: .*}/relationships/{relationship_type_uuid: .*}/outgoing/");
-	this->set_method_handler("GET",
-		std::bind(&EntityInstanceApiEntitiesInstancesEntity_instance_uuidRelationshipsRelationship_type_uuidOutgoingResource::GET_method_handler, this,
-			std::placeholders::_1));
+	this->set_path("/entities/instances/{entity_instance_uuid: .*}/relations/{relation_type_uuid: .*}/outgoing/");
+	this->set_method_handler("GET", std::bind(&EntityInstanceApiEntitiesInstancesEntity_instance_uuidRelationsRelation_type_uuidOutgoingResource::GET_method_handler, this, std::placeholders::_1));
 }
 
-EntityInstanceApiEntitiesInstancesEntity_instance_uuidRelationshipsRelationship_type_uuidOutgoingResource::~EntityInstanceApiEntitiesInstancesEntity_instance_uuidRelationshipsRelationship_type_uuidOutgoingResource()
+EntityInstanceApiEntitiesInstancesEntity_instance_uuidRelationsRelation_type_uuidOutgoingResource::~EntityInstanceApiEntitiesInstancesEntity_instance_uuidRelationsRelation_type_uuidOutgoingResource()
 {
 }
 
-void EntityInstanceApiEntitiesInstancesEntity_instance_uuidRelationshipsRelationship_type_uuidOutgoingResource::GET_method_handler(const std::shared_ptr<restbed::Session> session) {
+void EntityInstanceApiEntitiesInstancesEntity_instance_uuidRelationsRelation_type_uuidOutgoingResource::GET_method_handler(const std::shared_ptr<restbed::Session> session) {
 
 	const auto request = session->get_request();
 			
-			// Getting the path params
-			const std::string entityInstanceUuid = request->get_path_parameter("entityInstanceUuid", "");
-			const std::string relationshipTypeUuid = request->get_path_parameter("relationshipTypeUuid", "");
-			
+	// Getting the path params
+	const std::string entityInstanceUuid = request->get_path_parameter("entityInstanceUuid", "");
+	const std::string relationTypeUuid = request->get_path_parameter("relationTypeUuid", "");
 
-			
-			// Change the value of this variable to the appropriate response before sending the response
-			int status_code = 200;
-			
-			/**
-			 * Process the received information here
-			 */
-			
-			if (status_code == 200) {
-				session->close(200, "Array of relationship instances", { {"Connection", "close"} });
-				return;
-			}
-			if (status_code == 0) {
-				session->close(0, "unexpected error", { {"Connection", "close"} });
-				return;
-			}
+	// Change the value of this variable to the appropriate response before sending the response
+	int status_code = 200;
+
+	/**
+	 * Process the received information here
+	 */
+
+	if (status_code == 200) {
+		session->close(200, "Array of relation instances", { {"Connection", "close"} });
+		return;
+	}
+	if (status_code == 0) {
+		session->close(0, "unexpected error", { {"Connection", "close"} });
+		return;
+	}
 
 }
 
 
 
-EntityInstanceApiEntitiesInstancesEntity_instance_uuidRelationshipsOutgoingResource::EntityInstanceApiEntitiesInstancesEntity_instance_uuidRelationshipsOutgoingResource()
+EntityInstanceApiEntitiesInstancesEntity_instance_uuidRelationsOutgoingResource::EntityInstanceApiEntitiesInstancesEntity_instance_uuidRelationsOutgoingResource()
 {
-	this->set_path("/entities/instances/{entity_instance_uuid: .*}/relationships/outgoing/");
-	this->set_method_handler("GET",
-		std::bind(&EntityInstanceApiEntitiesInstancesEntity_instance_uuidRelationshipsOutgoingResource::GET_method_handler, this,
-			std::placeholders::_1));
+	this->set_path("/entities/instances/{entity_instance_uuid: .*}/relations/outgoing/");
+	this->set_method_handler("GET", std::bind(&EntityInstanceApiEntitiesInstancesEntity_instance_uuidRelationsOutgoingResource::GET_method_handler, this, std::placeholders::_1));
 }
 
-EntityInstanceApiEntitiesInstancesEntity_instance_uuidRelationshipsOutgoingResource::~EntityInstanceApiEntitiesInstancesEntity_instance_uuidRelationshipsOutgoingResource()
+EntityInstanceApiEntitiesInstancesEntity_instance_uuidRelationsOutgoingResource::~EntityInstanceApiEntitiesInstancesEntity_instance_uuidRelationsOutgoingResource()
 {
 }
 
-void EntityInstanceApiEntitiesInstancesEntity_instance_uuidRelationshipsOutgoingResource::GET_method_handler(const std::shared_ptr<restbed::Session> session) {
+void EntityInstanceApiEntitiesInstancesEntity_instance_uuidRelationsOutgoingResource::GET_method_handler(const std::shared_ptr<restbed::Session> session) {
 
 	const auto request = session->get_request();
 			
-			// Getting the path params
-			const std::string entityInstanceUuid = request->get_path_parameter("entityInstanceUuid", "");
-			
+	// Getting the path params
+	const std::string entityInstanceUuid = request->get_path_parameter("entityInstanceUuid", "");
 
-			
-			// Change the value of this variable to the appropriate response before sending the response
-			int status_code = 200;
-			
-			/**
-			 * Process the received information here
-			 */
-			
-			if (status_code == 200) {
-				session->close(200, "Array of relationship instances", { {"Connection", "close"} });
-				return;
-			}
-			if (status_code == 0) {
-				session->close(0, "unexpected error", { {"Connection", "close"} });
-				return;
-			}
+	// Change the value of this variable to the appropriate response before sending the response
+	int status_code = 200;
+
+	/**
+	 * Process the received information here
+	 */
+
+	if (status_code == 200) {
+		session->close(200, "Array of relation instances", { {"Connection", "close"} });
+		return;
+	}
+	if (status_code == 0) {
+		session->close(0, "unexpected error", { {"Connection", "close"} });
+		return;
+	}
 
 }
 

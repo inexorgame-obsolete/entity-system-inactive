@@ -10,12 +10,6 @@
  * Do not edit the class manually.
  */
 
-/*
- * EntityInstanceApi.h
- *
- * 
- */
-
 #pragma once
 
 #include <memory>
@@ -23,10 +17,12 @@
 #include <string>
 #include <restbed>
 
+#include "spdlog/spdlog.h"
+
 #include "../model/Attribute.hpp"
 #include "../model/EntityInstance.hpp"
 #include "../model/EntitySystemMessage.hpp"
-#include "../model/RelationshipInstance.hpp"
+#include "../model/RelationInstance.hpp"
 #include "entity-system/EntitySystem.hpp"
 
 using namespace inexor::entity_system::rest::model;
@@ -37,12 +33,53 @@ namespace entity_system {
 namespace rest {
 namespace api {
 
+// Forward declarations
+class EntityInstanceApiEntitiesInstancesResource;
+class EntityInstanceApiEntitiesInstancesEntity_instance_uuidResource;
+class EntityInstanceApiEntitiesInstancesEntity_instance_uuidAttributesNameResource;
+class EntityInstanceApiRelationsInstancesStartStart_entity_instance_uuidEndEnd_entity_instance_uuidResource;
+class EntityInstanceApiEntitiesInstancesEntity_instance_uuidRelationsRelation_type_uuidResource;
+class EntityInstanceApiEntitiesInstancesEntity_instance_uuidRelationsResource;
+class EntityInstanceApiEntitiesInstancesEntity_instance_uuidAttributesResource;
+//class EntityInstanceApiEntitiesInstancesEntity_instance_uuidRelationsRelation_type_uuidIncomingResource;
+//class EntityInstanceApiEntitiesInstancesEntity_instance_uuidRelationsIncomingResource;
+//class EntityInstanceApiEntitiesInstancesEntity_instance_uuidRelationsRelation_type_uuidOutgoingResource;
+//class EntityInstanceApiEntitiesInstancesEntity_instance_uuidRelationsOutgoingResource;
+
+
 class  EntityInstanceApi: public restbed::Service
 {
-public:
-	EntityInstanceApi();
-	~EntityInstanceApi();
-	void createResources(std::shared_ptr<inexor::entity_system::EntitySystem> entity_system, std::shared_ptr<Service> service);
+	public:
+		EntityInstanceApi(
+			std::shared_ptr<EntityInstanceApiEntitiesInstancesResource> spEntityInstanceApiEntitiesInstancesResource,
+			std::shared_ptr<EntityInstanceApiEntitiesInstancesEntity_instance_uuidResource> spEntityInstanceApiEntitiesInstancesEntity_instance_uuidResource,
+			std::shared_ptr<EntityInstanceApiEntitiesInstancesEntity_instance_uuidAttributesNameResource> spEntityInstanceApiEntitiesInstancesEntity_instance_uuidAttributesNameResource,
+			std::shared_ptr<EntityInstanceApiRelationsInstancesStartStart_entity_instance_uuidEndEnd_entity_instance_uuidResource> spEntityInstanceApiRelationsInstancesStartStart_entity_instance_uuidEndEnd_entity_instance_uuidResource,
+			std::shared_ptr<EntityInstanceApiEntitiesInstancesEntity_instance_uuidRelationsRelation_type_uuidResource> spEntityInstanceApiEntitiesInstancesEntity_instance_uuidRelationsRelation_type_uuidResource,
+			std::shared_ptr<EntityInstanceApiEntitiesInstancesEntity_instance_uuidRelationsResource> spEntityInstanceApiEntitiesInstancesEntity_instance_uuidRelationsResource,
+			std::shared_ptr<EntityInstanceApiEntitiesInstancesEntity_instance_uuidAttributesResource> spEntityInstanceApiEntitiesInstancesEntity_instance_uuidAttributesResource
+//			std::shared_ptr<EntityInstanceApiEntitiesInstancesEntity_instance_uuidRelationsRelation_type_uuidIncomingResource> spEntityInstanceApiEntitiesInstancesEntity_instance_uuidRelationsRelation_type_uuidIncomingResource,
+//			std::shared_ptr<EntityInstanceApiEntitiesInstancesEntity_instance_uuidRelationsIncomingResource> spEntityInstanceApiEntitiesInstancesEntity_instance_uuidRelationsIncomingResource,
+//			std::shared_ptr<EntityInstanceApiEntitiesInstancesEntity_instance_uuidRelationsRelation_type_uuidOutgoingResource> spEntityInstanceApiEntitiesInstancesEntity_instance_uuidRelationsRelation_type_uuidOutgoingResource,
+//			std::shared_ptr<EntityInstanceApiEntitiesInstancesEntity_instance_uuidRelationsOutgoingResource> spEntityInstanceApiEntitiesInstancesEntity_instance_uuidRelationsOutgoingResource
+		);
+		~EntityInstanceApi();
+
+		void publish_resources(std::shared_ptr<Service> service);
+
+	private:
+		std::shared_ptr<EntityInstanceApiEntitiesInstancesResource> spEntityInstanceApiEntitiesInstancesResource;
+		std::shared_ptr<EntityInstanceApiEntitiesInstancesEntity_instance_uuidResource> spEntityInstanceApiEntitiesInstancesEntity_instance_uuidResource;
+		std::shared_ptr<EntityInstanceApiEntitiesInstancesEntity_instance_uuidAttributesNameResource> spEntityInstanceApiEntitiesInstancesEntity_instance_uuidAttributesNameResource;
+		std::shared_ptr<EntityInstanceApiRelationsInstancesStartStart_entity_instance_uuidEndEnd_entity_instance_uuidResource> spEntityInstanceApiRelationsInstancesStartStart_entity_instance_uuidEndEnd_entity_instance_uuidResource;
+		std::shared_ptr<EntityInstanceApiEntitiesInstancesEntity_instance_uuidRelationsRelation_type_uuidResource> spEntityInstanceApiEntitiesInstancesEntity_instance_uuidRelationsRelation_type_uuidResource;
+		std::shared_ptr<EntityInstanceApiEntitiesInstancesEntity_instance_uuidRelationsResource> spEntityInstanceApiEntitiesInstancesEntity_instance_uuidRelationsResource;
+		std::shared_ptr<EntityInstanceApiEntitiesInstancesEntity_instance_uuidAttributesResource> spEntityInstanceApiEntitiesInstancesEntity_instance_uuidAttributesResource;
+//		std::shared_ptr<EntityInstanceApiEntitiesInstancesEntity_instance_uuidRelationsRelation_type_uuidIncomingResource> spEntityInstanceApiEntitiesInstancesEntity_instance_uuidRelationsRelation_type_uuidIncomingResource;
+//		std::shared_ptr<EntityInstanceApiEntitiesInstancesEntity_instance_uuidRelationsIncomingResource> spEntityInstanceApiEntitiesInstancesEntity_instance_uuidRelationsIncomingResource;
+//		std::shared_ptr<EntityInstanceApiEntitiesInstancesEntity_instance_uuidRelationsRelation_type_uuidOutgoingResource> spEntityInstanceApiEntitiesInstancesEntity_instance_uuidRelationsRelation_type_uuidOutgoingResource;
+//		std::shared_ptr<EntityInstanceApiEntitiesInstancesEntity_instance_uuidRelationsOutgoingResource> spEntityInstanceApiEntitiesInstancesEntity_instance_uuidRelationsOutgoingResource;
+
 };
 
 
@@ -52,14 +89,14 @@ public:
 /// <remarks>
 /// 
 /// </remarks>
-class  EntityInstanceApiEntitiesInstancesResource: public restbed::Resource
+class EntityInstanceApiEntitiesInstancesResource: public restbed::Resource
 {
-public:
-	EntityInstanceApiEntitiesInstancesResource();
-    virtual ~EntityInstanceApiEntitiesInstancesResource();
-    void POST_method_handler(const std::shared_ptr<restbed::Session> session);
-    void DELETE_method_handler(const std::shared_ptr<restbed::Session> session);
-    void GET_method_handler(const std::shared_ptr<restbed::Session> session);
+	public:
+		EntityInstanceApiEntitiesInstancesResource();
+		virtual ~EntityInstanceApiEntitiesInstancesResource();
+		void POST_method_handler(const std::shared_ptr<restbed::Session> session);
+		void DELETE_method_handler(const std::shared_ptr<restbed::Session> session);
+		void GET_method_handler(const std::shared_ptr<restbed::Session> session);
 };
 
 /// <summary>
@@ -68,14 +105,14 @@ public:
 /// <remarks>
 /// 
 /// </remarks>
-class  EntityInstanceApiEntitiesInstancesEntity_instance_uuidResource: public restbed::Resource
+class EntityInstanceApiEntitiesInstancesEntity_instance_uuidResource: public restbed::Resource
 {
-public:
-	EntityInstanceApiEntitiesInstancesEntity_instance_uuidResource();
-    virtual ~EntityInstanceApiEntitiesInstancesEntity_instance_uuidResource();
-    void POST_method_handler(const std::shared_ptr<restbed::Session> session);
-    void DELETE_method_handler(const std::shared_ptr<restbed::Session> session);
-    void GET_method_handler(const std::shared_ptr<restbed::Session> session);
+	public:
+		EntityInstanceApiEntitiesInstancesEntity_instance_uuidResource();
+		virtual ~EntityInstanceApiEntitiesInstancesEntity_instance_uuidResource();
+		void POST_method_handler(const std::shared_ptr<restbed::Session> session);
+		void DELETE_method_handler(const std::shared_ptr<restbed::Session> session);
+		void GET_method_handler(const std::shared_ptr<restbed::Session> session);
 };
 
 /// <summary>
@@ -84,57 +121,57 @@ public:
 /// <remarks>
 /// 
 /// </remarks>
-class  EntityInstanceApiEntitiesInstancesEntity_instance_uuidAttributesNameResource: public restbed::Resource
+class EntityInstanceApiEntitiesInstancesEntity_instance_uuidAttributesNameResource: public restbed::Resource
 {
-public:
-	EntityInstanceApiEntitiesInstancesEntity_instance_uuidAttributesNameResource();
-    virtual ~EntityInstanceApiEntitiesInstancesEntity_instance_uuidAttributesNameResource();
-    void POST_method_handler(const std::shared_ptr<restbed::Session> session);
-    void DELETE_method_handler(const std::shared_ptr<restbed::Session> session);
-    void GET_method_handler(const std::shared_ptr<restbed::Session> session);
+	public:
+		EntityInstanceApiEntitiesInstancesEntity_instance_uuidAttributesNameResource();
+		virtual ~EntityInstanceApiEntitiesInstancesEntity_instance_uuidAttributesNameResource();
+		void POST_method_handler(const std::shared_ptr<restbed::Session> session);
+		void DELETE_method_handler(const std::shared_ptr<restbed::Session> session);
+		void GET_method_handler(const std::shared_ptr<restbed::Session> session);
 };
 
 /// <summary>
-/// Deletes all relationships instances between a start entity instance and an end entity instance
+/// Deletes all relations instances between a start entity instance and an end entity instance
 /// </summary>
 /// <remarks>
 /// 
 /// </remarks>
-class  EntityInstanceApiRelationshipsInstancesStartStart_entity_instance_uuidEndEnd_entity_instance_uuidResource: public restbed::Resource
+class EntityInstanceApiRelationsInstancesStartStart_entity_instance_uuidEndEnd_entity_instance_uuidResource: public restbed::Resource
 {
-public:
-	EntityInstanceApiRelationshipsInstancesStartStart_entity_instance_uuidEndEnd_entity_instance_uuidResource();
-    virtual ~EntityInstanceApiRelationshipsInstancesStartStart_entity_instance_uuidEndEnd_entity_instance_uuidResource();
-    void DELETE_method_handler(const std::shared_ptr<restbed::Session> session);
-    void GET_method_handler(const std::shared_ptr<restbed::Session> session);
+	public:
+		EntityInstanceApiRelationsInstancesStartStart_entity_instance_uuidEndEnd_entity_instance_uuidResource();
+		virtual ~EntityInstanceApiRelationsInstancesStartStart_entity_instance_uuidEndEnd_entity_instance_uuidResource();
+		void DELETE_method_handler(const std::shared_ptr<restbed::Session> session);
+		void GET_method_handler(const std::shared_ptr<restbed::Session> session);
 };
 
 /// <summary>
-/// Returns all incoming and outgoing relationship instances of a certain relationship type
+/// Returns all incoming and outgoing relation instances of a certain relation type
 /// </summary>
 /// <remarks>
 /// 
 /// </remarks>
-class  EntityInstanceApiEntitiesInstancesEntity_instance_uuidRelationshipsRelationship_type_uuidResource: public restbed::Resource
+class EntityInstanceApiEntitiesInstancesEntity_instance_uuidRelationsRelation_type_uuidResource: public restbed::Resource
 {
-public:
-	EntityInstanceApiEntitiesInstancesEntity_instance_uuidRelationshipsRelationship_type_uuidResource();
-    virtual ~EntityInstanceApiEntitiesInstancesEntity_instance_uuidRelationshipsRelationship_type_uuidResource();
-    void GET_method_handler(const std::shared_ptr<restbed::Session> session);
+	public:
+		EntityInstanceApiEntitiesInstancesEntity_instance_uuidRelationsRelation_type_uuidResource();
+		virtual ~EntityInstanceApiEntitiesInstancesEntity_instance_uuidRelationsRelation_type_uuidResource();
+		void GET_method_handler(const std::shared_ptr<restbed::Session> session);
 };
 
 /// <summary>
-/// Returns all incoming and outgoing relationship instances of the entity instance
+/// Returns all incoming and outgoing relation instances of the entity instance
 /// </summary>
 /// <remarks>
 /// 
 /// </remarks>
-class  EntityInstanceApiEntitiesInstancesEntity_instance_uuidRelationshipsResource: public restbed::Resource
+class EntityInstanceApiEntitiesInstancesEntity_instance_uuidRelationsResource: public restbed::Resource
 {
-public:
-	EntityInstanceApiEntitiesInstancesEntity_instance_uuidRelationshipsResource();
-    virtual ~EntityInstanceApiEntitiesInstancesEntity_instance_uuidRelationshipsResource();
-    void GET_method_handler(const std::shared_ptr<restbed::Session> session);
+	public:
+		EntityInstanceApiEntitiesInstancesEntity_instance_uuidRelationsResource();
+		virtual ~EntityInstanceApiEntitiesInstancesEntity_instance_uuidRelationsResource();
+		void GET_method_handler(const std::shared_ptr<restbed::Session> session);
 };
 
 /// <summary>
@@ -143,68 +180,68 @@ public:
 /// <remarks>
 /// 
 /// </remarks>
-class  EntityInstanceApiEntitiesInstancesEntity_instance_uuidAttributesResource: public restbed::Resource
+class EntityInstanceApiEntitiesInstancesEntity_instance_uuidAttributesResource: public restbed::Resource
 {
-public:
-	EntityInstanceApiEntitiesInstancesEntity_instance_uuidAttributesResource();
-    virtual ~EntityInstanceApiEntitiesInstancesEntity_instance_uuidAttributesResource();
-    void GET_method_handler(const std::shared_ptr<restbed::Session> session);
+	public:
+		EntityInstanceApiEntitiesInstancesEntity_instance_uuidAttributesResource();
+		virtual ~EntityInstanceApiEntitiesInstancesEntity_instance_uuidAttributesResource();
+		void GET_method_handler(const std::shared_ptr<restbed::Session> session);
 };
 
 /// <summary>
-/// Returns all incoming and outgoing relationship instances of a certain relationship type
+/// Returns all incoming and outgoing relation instances of a certain relation type
 /// </summary>
 /// <remarks>
 /// 
 /// </remarks>
-class  EntityInstanceApiEntitiesInstancesEntity_instance_uuidRelationshipsRelationship_type_uuidIncomingResource: public restbed::Resource
+class EntityInstanceApiEntitiesInstancesEntity_instance_uuidRelationsRelation_type_uuidIncomingResource: public restbed::Resource
 {
-public:
-	EntityInstanceApiEntitiesInstancesEntity_instance_uuidRelationshipsRelationship_type_uuidIncomingResource();
-    virtual ~EntityInstanceApiEntitiesInstancesEntity_instance_uuidRelationshipsRelationship_type_uuidIncomingResource();
-    void GET_method_handler(const std::shared_ptr<restbed::Session> session);
+	public:
+		EntityInstanceApiEntitiesInstancesEntity_instance_uuidRelationsRelation_type_uuidIncomingResource();
+		virtual ~EntityInstanceApiEntitiesInstancesEntity_instance_uuidRelationsRelation_type_uuidIncomingResource();
+		void GET_method_handler(const std::shared_ptr<restbed::Session> session);
 };
 
 /// <summary>
-/// Returns all incoming relationship instances of the entity instance
+/// Returns all incoming relation instances of the entity instance
 /// </summary>
 /// <remarks>
 /// 
 /// </remarks>
-class  EntityInstanceApiEntitiesInstancesEntity_instance_uuidRelationshipsIncomingResource: public restbed::Resource
+class EntityInstanceApiEntitiesInstancesEntity_instance_uuidRelationsIncomingResource: public restbed::Resource
 {
-public:
-	EntityInstanceApiEntitiesInstancesEntity_instance_uuidRelationshipsIncomingResource();
-    virtual ~EntityInstanceApiEntitiesInstancesEntity_instance_uuidRelationshipsIncomingResource();
-    void GET_method_handler(const std::shared_ptr<restbed::Session> session);
+	public:
+		EntityInstanceApiEntitiesInstancesEntity_instance_uuidRelationsIncomingResource();
+		virtual ~EntityInstanceApiEntitiesInstancesEntity_instance_uuidRelationsIncomingResource();
+		void GET_method_handler(const std::shared_ptr<restbed::Session> session);
 };
 
 /// <summary>
-/// Returns all incoming and outgoing relationship instances of a certain relationship type
+/// Returns all incoming and outgoing relation instances of a certain relation type
 /// </summary>
 /// <remarks>
 /// 
 /// </remarks>
-class  EntityInstanceApiEntitiesInstancesEntity_instance_uuidRelationshipsRelationship_type_uuidOutgoingResource: public restbed::Resource
+class EntityInstanceApiEntitiesInstancesEntity_instance_uuidRelationsRelation_type_uuidOutgoingResource: public restbed::Resource
 {
-public:
-	EntityInstanceApiEntitiesInstancesEntity_instance_uuidRelationshipsRelationship_type_uuidOutgoingResource();
-    virtual ~EntityInstanceApiEntitiesInstancesEntity_instance_uuidRelationshipsRelationship_type_uuidOutgoingResource();
-    void GET_method_handler(const std::shared_ptr<restbed::Session> session);
+	public:
+		EntityInstanceApiEntitiesInstancesEntity_instance_uuidRelationsRelation_type_uuidOutgoingResource();
+		virtual ~EntityInstanceApiEntitiesInstancesEntity_instance_uuidRelationsRelation_type_uuidOutgoingResource();
+		void GET_method_handler(const std::shared_ptr<restbed::Session> session);
 };
 
 /// <summary>
-/// Returns all outgoing relationship instances of the entity instance
+/// Returns all outgoing relation instances of the entity instance
 /// </summary>
 /// <remarks>
 /// 
 /// </remarks>
-class  EntityInstanceApiEntitiesInstancesEntity_instance_uuidRelationshipsOutgoingResource: public restbed::Resource
+class EntityInstanceApiEntitiesInstancesEntity_instance_uuidRelationsOutgoingResource: public restbed::Resource
 {
-public:
-	EntityInstanceApiEntitiesInstancesEntity_instance_uuidRelationshipsOutgoingResource();
-    virtual ~EntityInstanceApiEntitiesInstancesEntity_instance_uuidRelationshipsOutgoingResource();
-    void GET_method_handler(const std::shared_ptr<restbed::Session> session);
+	public:
+		EntityInstanceApiEntitiesInstancesEntity_instance_uuidRelationsOutgoingResource();
+		virtual ~EntityInstanceApiEntitiesInstancesEntity_instance_uuidRelationsOutgoingResource();
+		void GET_method_handler(const std::shared_ptr<restbed::Session> session);
 };
 
 

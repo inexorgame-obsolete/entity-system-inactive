@@ -19,12 +19,12 @@
 
 #include "spdlog/spdlog.h"
 
+#include "entity-system/managers/entities/entity-type-manager/EntityTypeManager.hpp"
 #include "../model/Attribute.hpp"
 #include "../model/EntityInstance.hpp"
 #include "../model/EntitySystemMessage.hpp"
 #include "../model/EntityType.hpp"
-#include "../model/RelationshipType.hpp"
-#include "entity-system/managers/types/type-manager/EntityTypeManager.hpp"
+#include "../model/RelationType.hpp"
 
 
 using namespace inexor::entity_system::rest::model;
@@ -35,13 +35,14 @@ namespace entity_system {
 namespace rest {
 namespace api {
 
+// Forward declarations
 class EntityTypeApiEntitiesTypesResource;
 class EntityTypeApiEntitiesTypesEntity_type_uuidResource;
 class EntityTypeApiEntitiesTypesEntity_type_uuidAttributesNameResource;
 class EntityTypeApiEntitiesTypesEntity_type_uuidInstancesResource;
-class EntityTypeApiEntitiesTypesEntity_type_uuidRelationshipsIncomingResource;
-class EntityTypeApiEntitiesTypesEntity_type_uuidRelationshipsOutgoingResource;
-class EntityTypeApiEntitiesTypesEntity_type_uuidRelationshipsResource;
+class EntityTypeApiEntitiesTypesEntity_type_uuidRelationsIncomingResource;
+class EntityTypeApiEntitiesTypesEntity_type_uuidRelationsOutgoingResource;
+class EntityTypeApiEntitiesTypesEntity_type_uuidRelationsResource;
 class EntityTypeApiEntitiesTypesEntity_type_uuidAttributesResource;
 
 class EntityTypeApi
@@ -52,23 +53,23 @@ class EntityTypeApi
 			std::shared_ptr<EntityTypeApiEntitiesTypesEntity_type_uuidResource> spEntityTypeApiEntitiesTypesEntity_type_uuidResource,
 			std::shared_ptr<EntityTypeApiEntitiesTypesEntity_type_uuidAttributesNameResource> spEntityTypeApiEntitiesTypesEntity_type_uuidAttributesNameResource,
 			std::shared_ptr<EntityTypeApiEntitiesTypesEntity_type_uuidInstancesResource> spEntityTypeApiEntitiesTypesEntity_type_uuidInstancesResource,
-			std::shared_ptr<EntityTypeApiEntitiesTypesEntity_type_uuidRelationshipsIncomingResource> spEntityTypeApiEntitiesTypesEntity_type_uuidRelationshipsIncomingResource,
-			std::shared_ptr<EntityTypeApiEntitiesTypesEntity_type_uuidRelationshipsOutgoingResource> spEntityTypeApiEntitiesTypesEntity_type_uuidRelationshipsOutgoingResource,
-			std::shared_ptr<EntityTypeApiEntitiesTypesEntity_type_uuidRelationshipsResource> spEntityTypeApiEntitiesTypesEntity_type_uuidRelationshipsResource,
+			std::shared_ptr<EntityTypeApiEntitiesTypesEntity_type_uuidRelationsIncomingResource> spEntityTypeApiEntitiesTypesEntity_type_uuidRelationsIncomingResource,
+			std::shared_ptr<EntityTypeApiEntitiesTypesEntity_type_uuidRelationsOutgoingResource> spEntityTypeApiEntitiesTypesEntity_type_uuidRelationsOutgoingResource,
+			std::shared_ptr<EntityTypeApiEntitiesTypesEntity_type_uuidRelationsResource> spEntityTypeApiEntitiesTypesEntity_type_uuidRelationsResource,
 			std::shared_ptr<EntityTypeApiEntitiesTypesEntity_type_uuidAttributesResource> spEntityTypeApiEntitiesTypesEntity_type_uuidAttributesResource
 		);
 		~EntityTypeApi();
 
-		void createResources(std::shared_ptr<Service> service);
+		void publish_resources(std::shared_ptr<Service> service);
 
 	private:
 		std::shared_ptr<EntityTypeApiEntitiesTypesResource> spEntityTypeApiEntitiesTypesResource;
 		std::shared_ptr<EntityTypeApiEntitiesTypesEntity_type_uuidResource> spEntityTypeApiEntitiesTypesEntity_type_uuidResource;
 		std::shared_ptr<EntityTypeApiEntitiesTypesEntity_type_uuidAttributesNameResource> spEntityTypeApiEntitiesTypesEntity_type_uuidAttributesNameResource;
 		std::shared_ptr<EntityTypeApiEntitiesTypesEntity_type_uuidInstancesResource> spEntityTypeApiEntitiesTypesEntity_type_uuidInstancesResource;
-		std::shared_ptr<EntityTypeApiEntitiesTypesEntity_type_uuidRelationshipsIncomingResource> spEntityTypeApiEntitiesTypesEntity_type_uuidRelationshipsIncomingResource;
-		std::shared_ptr<EntityTypeApiEntitiesTypesEntity_type_uuidRelationshipsOutgoingResource> spEntityTypeApiEntitiesTypesEntity_type_uuidRelationshipsOutgoingResource;
-		std::shared_ptr<EntityTypeApiEntitiesTypesEntity_type_uuidRelationshipsResource> spEntityTypeApiEntitiesTypesEntity_type_uuidRelationshipsResource;
+		std::shared_ptr<EntityTypeApiEntitiesTypesEntity_type_uuidRelationsIncomingResource> spEntityTypeApiEntitiesTypesEntity_type_uuidRelationsIncomingResource;
+		std::shared_ptr<EntityTypeApiEntitiesTypesEntity_type_uuidRelationsOutgoingResource> spEntityTypeApiEntitiesTypesEntity_type_uuidRelationsOutgoingResource;
+		std::shared_ptr<EntityTypeApiEntitiesTypesEntity_type_uuidRelationsResource> spEntityTypeApiEntitiesTypesEntity_type_uuidRelationsResource;
 		std::shared_ptr<EntityTypeApiEntitiesTypesEntity_type_uuidAttributesResource> spEntityTypeApiEntitiesTypesEntity_type_uuidAttributesResource;
 
 };
@@ -154,54 +155,54 @@ class  EntityTypeApiEntitiesTypesEntity_type_uuidInstancesResource: public Resou
 };
 
 /// <summary>
-/// Returns all incoming relationship types of the entity type with the given UUID
+/// Returns all incoming relation types of the entity type with the given UUID
 /// </summary>
 /// <remarks>
 /// 
 /// </remarks>
-class  EntityTypeApiEntitiesTypesEntity_type_uuidRelationshipsIncomingResource: public Resource
+class  EntityTypeApiEntitiesTypesEntity_type_uuidRelationsIncomingResource: public Resource
 {
 	public:
-		EntityTypeApiEntitiesTypesEntity_type_uuidRelationshipsIncomingResource(
+		EntityTypeApiEntitiesTypesEntity_type_uuidRelationsIncomingResource(
 			std::shared_ptr<inexor::entity_system::EntityTypeManager> entity_type_manager
 		);
-		virtual ~EntityTypeApiEntitiesTypesEntity_type_uuidRelationshipsIncomingResource();
+		virtual ~EntityTypeApiEntitiesTypesEntity_type_uuidRelationsIncomingResource();
 		void GET_method_handler(const std::shared_ptr<Session> session);
 	private:
 		std::shared_ptr<inexor::entity_system::EntityTypeManager> entity_type_manager;
 };
 
 /// <summary>
-/// Returns all outgoing relationship types of the entity type with the given UUID
+/// Returns all outgoing relation types of the entity type with the given UUID
 /// </summary>
 /// <remarks>
 /// 
 /// </remarks>
-class  EntityTypeApiEntitiesTypesEntity_type_uuidRelationshipsOutgoingResource: public Resource
+class  EntityTypeApiEntitiesTypesEntity_type_uuidRelationsOutgoingResource: public Resource
 {
 	public:
-		EntityTypeApiEntitiesTypesEntity_type_uuidRelationshipsOutgoingResource(
+		EntityTypeApiEntitiesTypesEntity_type_uuidRelationsOutgoingResource(
 			std::shared_ptr<inexor::entity_system::EntityTypeManager> entity_type_manager
 		);
-		virtual ~EntityTypeApiEntitiesTypesEntity_type_uuidRelationshipsOutgoingResource();
+		virtual ~EntityTypeApiEntitiesTypesEntity_type_uuidRelationsOutgoingResource();
 		void GET_method_handler(const std::shared_ptr<Session> session);
 	private:
 		std::shared_ptr<inexor::entity_system::EntityTypeManager> entity_type_manager;
 };
 
 /// <summary>
-/// Returns all incoming and outgoing relationship types of the entity type with the given UUID
+/// Returns all incoming and outgoing relation types of the entity type with the given UUID
 /// </summary>
 /// <remarks>
 /// 
 /// </remarks>
-class  EntityTypeApiEntitiesTypesEntity_type_uuidRelationshipsResource: public Resource
+class  EntityTypeApiEntitiesTypesEntity_type_uuidRelationsResource: public Resource
 {
 	public:
-		EntityTypeApiEntitiesTypesEntity_type_uuidRelationshipsResource(
+		EntityTypeApiEntitiesTypesEntity_type_uuidRelationsResource(
 			std::shared_ptr<inexor::entity_system::EntityTypeManager> entity_type_manager
 		);
-		virtual ~EntityTypeApiEntitiesTypesEntity_type_uuidRelationshipsResource();
+		virtual ~EntityTypeApiEntitiesTypesEntity_type_uuidRelationsResource();
 		void GET_method_handler(const std::shared_ptr<Session> session);
 	private:
 		std::shared_ptr<inexor::entity_system::EntityTypeManager> entity_type_manager;

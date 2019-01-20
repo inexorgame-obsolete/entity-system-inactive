@@ -10,14 +10,7 @@
  * Do not edit the class manually.
  */
 
-/*
- * EntitySystemMessage.h
- *
- * 
- */
-
-#ifndef EntitySystemMessage_H_
-#define EntitySystemMessage_H_
+#pragma once
 
 #include <string>
 #include <memory>
@@ -62,5 +55,3 @@ protected:
 }
 }
 }
-
-#endif /* EntitySystemMessage_H_ */

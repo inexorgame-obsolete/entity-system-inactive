@@ -26,28 +26,38 @@ namespace model {
 /// <summary>
 /// 
 /// </summary>
-class  EntityType
+class  RelationInstance
 {
 public:
-    EntityType();
-    virtual ~EntityType();
+    RelationInstance();
+    virtual ~RelationInstance();
     
     std::string toJsonString();
     void fromJsonString(std::string const& jsonString);
 
     /////////////////////////////////////////////
-    /// EntityType members
+    /// RelationInstance members
     
     /// <summary>
     /// 
     /// </summary>
-    std::string getEntityTypeUuid() const;
-    void setEntityTypeUuid(std::string value);
+    std::string getRelationInstanceUuid() const;
+    void setRelationInstanceUuid(std::string value);
     /// <summary>
     /// 
     /// </summary>
-    std::string getName() const;
-    void setName(std::string value);
+    std::string getRelationTypeUuid() const;
+    void setRelationTypeUuid(std::string value);
+    /// <summary>
+    /// 
+    /// </summary>
+    std::string getStartNodeEntityInstanceUuid() const;
+    void setStartNodeEntityInstanceUuid(std::string value);
+    /// <summary>
+    /// 
+    /// </summary>
+    std::string getEndNodeEntityInstanceUuid() const;
+    void setEndNodeEntityInstanceUuid(std::string value);
     /// <summary>
     /// 
     /// </summary>
@@ -55,8 +65,10 @@ public:
     void setAttributes(std::vector<std::shared_ptr<Attribute>> value);
 
 protected:
-    std::string m_Entity_type_uuid;
-    std::string m_Name;
+    std::string m_Relation_instance_uuid;
+    std::string m_Relation_type_uuid;
+    std::string m_Start_node_entity_instance_uuid;
+    std::string m_End_node_entity_instance_uuid;
     std::vector<std::shared_ptr<Attribute>> m_Attributes;
 };
 

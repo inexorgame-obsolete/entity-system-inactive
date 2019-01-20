@@ -10,22 +10,15 @@
  * Do not edit the class manually.
  */
 
-/*
- * EntitySystem.h
- *
- * 
- */
-
-#ifndef EntitySystem_H_
-#define EntitySystem_H_
+#pragma once
 
 #include <vector>
 #include <memory>
 
 #include "EntityInstance.hpp"
 #include "EntityType.hpp"
-#include "RelationshipInstance.hpp"
-#include "RelationshipType.hpp"
+#include "RelationInstance.hpp"
+#include "RelationType.hpp"
 
 namespace inexor {
 namespace entity_system {
@@ -55,8 +48,8 @@ public:
     /// <summary>
     /// 
     /// </summary>
-    std::vector<std::shared_ptr<RelationshipType>> getRelationshipTypes() const;
-    void setRelationshipTypes(std::vector<std::shared_ptr<RelationshipType>> value);
+    std::vector<std::shared_ptr<RelationType>> getRelationTypes() const;
+    void setRelationTypes(std::vector<std::shared_ptr<RelationType>> value);
     /// <summary>
     /// 
     /// </summary>
@@ -65,19 +58,17 @@ public:
     /// <summary>
     /// 
     /// </summary>
-    std::vector<std::shared_ptr<RelationshipInstance>> getRelationshipInstances() const;
-    void setRelationshipInstances(std::vector<std::shared_ptr<RelationshipInstance>> value);
+    std::vector<std::shared_ptr<RelationInstance>> getRelationInstances() const;
+    void setRelationInstances(std::vector<std::shared_ptr<RelationInstance>> value);
 
 protected:
     std::vector<std::shared_ptr<EntityType>> m_Entity_types;
-    std::vector<std::shared_ptr<RelationshipType>> m_Relationship_types;
+    std::vector<std::shared_ptr<RelationType>> m_Relation_types;
     std::vector<std::shared_ptr<EntityInstance>> m_Entity_instances;
-    std::vector<std::shared_ptr<RelationshipInstance>> m_Relationship_instances;
+    std::vector<std::shared_ptr<RelationInstance>> m_Relation_instances;
 };
 
 }
 }
 }
 }
-
-#endif /* EntitySystem_H_ */

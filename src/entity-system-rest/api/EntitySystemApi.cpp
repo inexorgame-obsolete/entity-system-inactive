@@ -13,6 +13,8 @@
 
 #include "EntitySystemApi.hpp"
 
+#include <crossguid/guid.hpp>
+
 #include <corvusoft/restbed/byte.hpp>
 #include <corvusoft/restbed/string.hpp>
 #include <corvusoft/restbed/settings.hpp>
@@ -32,7 +34,7 @@ using namespace std;
 EntitySystemApi::EntitySystemApi() {}
 EntitySystemApi::~EntitySystemApi() {}
 
-void EntitySystemApi::createResources(std::shared_ptr<inexor::entity_system::EntitySystem> entity_system, std::shared_ptr<Service> service) {
+void EntitySystemApi::publish_resources(std::shared_ptr<Service> service) {
 	std::shared_ptr<EntitySystemApiEntitysystemResource> spEntitySystemApiEntitysystemResource = std::make_shared<EntitySystemApiEntitysystemResource>();
 	service->publish(spEntitySystemApiEntitysystemResource);
 	
