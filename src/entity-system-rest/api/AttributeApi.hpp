@@ -16,8 +16,7 @@
  * 
  */
 
-#ifndef AttributeApi_H_
-#define AttributeApi_H_
+#pragma once
 
 #include <memory>
 #include <crossguid/guid.hpp>
@@ -111,6 +110,3 @@ public:
 }
 }
 }
-
-#endif /* AttributeApi_H_ */
-

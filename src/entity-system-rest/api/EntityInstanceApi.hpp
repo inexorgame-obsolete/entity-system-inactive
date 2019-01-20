@@ -16,8 +16,7 @@
  * 
  */
 
-#ifndef EntityInstanceApi_H_
-#define EntityInstanceApi_H_
+#pragma once
 
 #include <memory>
 #include <crossguid/guid.hpp>
@@ -213,6 +212,3 @@ public:
 }
 }
 }
-
-#endif /* EntityInstanceApi_H_ */
-

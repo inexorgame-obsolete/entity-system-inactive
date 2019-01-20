@@ -16,8 +16,7 @@
  * 
  */
 
-#ifndef RelationshipTypeApi_H_
-#define RelationshipTypeApi_H_
+#pragma once
 
 #include <memory>
 #include <crossguid/guid.hpp>
@@ -167,6 +166,3 @@ public:
 }
 }
 }
-
-#endif /* RelationshipTypeApi_H_ */
-

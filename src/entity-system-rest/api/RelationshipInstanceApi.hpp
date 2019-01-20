@@ -16,8 +16,7 @@
  * 
  */
 
-#ifndef RelationshipInstanceApi_H_
-#define RelationshipInstanceApi_H_
+#pragma once
 
 #include <memory>
 #include <crossguid/guid.hpp>
@@ -181,6 +180,3 @@ public:
 }
 }
 }
-
-#endif /* RelationshipInstanceApi_H_ */
-
