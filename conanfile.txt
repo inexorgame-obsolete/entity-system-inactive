@@ -11,3 +11,6 @@ boost-te/19.Jan.19@inexorgame/stable
 
 [generators]
 cmake
+
+[imports]
+lib, *.dylib* -> ./bin
