@@ -1,8 +1,5 @@
 os: linux
-    
-services:
-  - docker
-    
+
 sudo: required
     
 matrix:
@@ -12,11 +9,21 @@ matrix:
           language: general
           env:
           - DOCKER_IMAGE=conanio/gcc8 # GCC 8
+          services:
+            - docker
         - os: linux
           dist: xenial
           language: general
           env:
           - DOCKER_IMAGE=conanio/clang7 # clang 7
+          services:
+            - docker
+        - os: osx
+          osx_image: xcode10.1
+          compiler: clang
+          env:
+            - CC=/usr/bin/clang
+            - CXX=/usr/bin/clang++
 
 install:
   - ./.travis/install.sh
