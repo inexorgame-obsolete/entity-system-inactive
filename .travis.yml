@@ -7,11 +7,11 @@ sudo: required
     
 matrix:
     include:
-        #- os: linux
-        #  dist: xenial
-        #  language: general
-        #  env:
-        #  - DOCKER_IMAGE=conanio/gcc8 # GCC 8
+        - os: linux
+          dist: xenial
+          language: general
+          env:
+          - DOCKER_IMAGE=conanio/gcc8 # GCC 8
         - os: linux
           dist: xenial
           language: general
