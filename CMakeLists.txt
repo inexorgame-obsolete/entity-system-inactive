@@ -29,11 +29,24 @@ conan_add_remote(NAME bincrafters INDEX 1
 conan_add_remote(NAME inexor INDEX 1
             URL https://api.bintray.com/conan/inexorgame/inexor-conan)
 
-conan_cmake_run(CONANFILE conanfile.txt
-                BASIC_SETUP
-                BUILD missing
-                PROFILE default
-                PROFILE_AUTO build_type)
+if(UNIX AND NOT APPLE)
+    set(LIBCXX libstdc++11)
+endif()
+
+if(UNIX AND NOT APPLE)
+	conan_cmake_run(CONANFILE conanfile.txt
+        	        BASIC_SETUP
+                	BUILD missing
+                	PROFILE default
+                	PROFILE_AUTO build_type
+			SETTINGS compiler.libcxx=${LIBCXX})
+else()
+	conan_cmake_run(CONANFILE conanfile.txt
+			BASIC_SETUP
+			BUILD missing
+			PROFILE default
+			PROFILE_AUTO build_type)
+endif()
 
 include_directories("${CMAKE_SOURCE_DIR}/src")
 file(GLOB_RECURSE source_files
