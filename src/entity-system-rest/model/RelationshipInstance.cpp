@@ -12,7 +12,7 @@
 
 
 
-#include "RelationshipInstance.h"
+#include "RelationshipInstance.hpp"
 
 #include <string>
 #include <sstream>

@@ -11,19 +11,19 @@
  */
 
 /*
- * RelationshipInstance.h
+ * EntityInstance.h
  *
  * 
  */
 
-#ifndef RelationshipInstance_H_
-#define RelationshipInstance_H_
+#ifndef EntityInstance_H_
+#define EntityInstance_H_
 
 #include <string>
 #include <vector>
 #include <memory>
 
-#include "Attribute.h"
+#include "Attribute.hpp"
 
 namespace inexor {
 namespace entity_system {
@@ -33,38 +33,28 @@ namespace model {
 /// <summary>
 /// 
 /// </summary>
-class  RelationshipInstance
+class  EntityInstance
 {
 public:
-    RelationshipInstance();
-    virtual ~RelationshipInstance();
+    EntityInstance();
+    virtual ~EntityInstance();
     
     std::string toJsonString();
     void fromJsonString(std::string const& jsonString);
 
     /////////////////////////////////////////////
-    /// RelationshipInstance members
+    /// EntityInstance members
     
     /// <summary>
     /// 
     /// </summary>
-    std::string getRelationshipInstanceUuid() const;
-    void setRelationshipInstanceUuid(std::string value);
+    std::string getEntityInstanceUuid() const;
+    void setEntityInstanceUuid(std::string value);
     /// <summary>
     /// 
     /// </summary>
-    std::string getRelationshipTypeUuid() const;
-    void setRelationshipTypeUuid(std::string value);
-    /// <summary>
-    /// 
-    /// </summary>
-    std::string getStartNodeEntityInstanceUuid() const;
-    void setStartNodeEntityInstanceUuid(std::string value);
-    /// <summary>
-    /// 
-    /// </summary>
-    std::string getEndNodeEntityInstanceUuid() const;
-    void setEndNodeEntityInstanceUuid(std::string value);
+    std::string getEntityTypeUuid() const;
+    void setEntityTypeUuid(std::string value);
     /// <summary>
     /// 
     /// </summary>
@@ -72,10 +62,8 @@ public:
     void setAttributes(std::vector<std::shared_ptr<Attribute>> value);
 
 protected:
-    std::string m_Relationship_instance_uuid;
-    std::string m_Relationship_type_uuid;
-    std::string m_Start_node_entity_instance_uuid;
-    std::string m_End_node_entity_instance_uuid;
+    std::string m_Entity_instance_uuid;
+    std::string m_Entity_type_uuid;
     std::vector<std::shared_ptr<Attribute>> m_Attributes;
 };
 
@@ -84,4 +72,4 @@ protected:
 }
 }
 
-#endif /* RelationshipInstance_H_ */
+#endif /* EntityInstance_H_ */

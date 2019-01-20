@@ -10,14 +10,14 @@
  * Do not edit the class manually.
  */
 
+#include "EntityTypeApi.hpp"
 
+#include <map>
 #include <crossguid/guid.hpp>
 #include <corvusoft/restbed/byte.hpp>
 #include <corvusoft/restbed/string.hpp>
 #include <corvusoft/restbed/settings.hpp>
 #include <corvusoft/restbed/request.hpp>
-
-#include "EntityTypeApi.h"
 
 #include "entity-system/managers/types/type-manager/EntityTypeManager.hpp"
 
@@ -89,12 +89,11 @@ EntityTypeApiEntitiesTypesResource::~EntityTypeApiEntitiesTypesResource()
  * TODO: Creates an entity type.
  */
 void EntityTypeApiEntitiesTypesResource::POST_method_handler(const shared_ptr<Session> session) {
-	cout << "[POST] /entities/types/" << endl;
 
 	const auto request = session->get_request();
 
 	// TODO: implement
-	auto entity_type = this->entity_type_manager->create_entity_type("X");
+	auto entity_type = this->entity_type_manager->create_entity_type("");
 
 			
 	// Change the value of this variable to the appropriate response before sending the response
@@ -120,7 +119,6 @@ void EntityTypeApiEntitiesTypesResource::POST_method_handler(const shared_ptr<Se
  * DONE.
  */
 void EntityTypeApiEntitiesTypesResource::DELETE_method_handler(const shared_ptr<Session> session) {
-	cout << "[DELETE] /entities/types/" << endl;
 	const auto request = session->get_request();
 	int status_code = 200;
 	this->entity_type_manager->delete_all_entity_types();
@@ -140,7 +138,6 @@ void EntityTypeApiEntitiesTypesResource::DELETE_method_handler(const shared_ptr<
  * TODO: Lists all entity types.
  */
 void EntityTypeApiEntitiesTypesResource::GET_method_handler(const shared_ptr<Session> session) {
-	cout << "[GET] /entities/types/" << endl;
 	const auto request = session->get_request();
 	// Change the value of this variable to the appropriate response before sending the response
 	int status_code = 200;
@@ -249,10 +246,42 @@ void EntityTypeApiEntitiesTypesEntity_type_uuidResource::GET_method_handler(cons
 
 	const auto request = session->get_request();
 
+	std::map< std::string, std::string > params = request->get_path_parameters();
+	for (auto& kv : params) {
+		std::cout << kv.first << " has value " << kv.second << std::endl;
+	}
+
 	// Getting the path params
-	const string entityTypeUuid = request->get_path_parameter("entityTypeUuid", "");
+	std::string entity_type_uuid = request->get_path_parameter("entity_type_uuid", "");
 
+	spdlog::get("inexor.entity.rest")->info("Searching for entity type {}", entity_type_uuid);
 
+	bool exists = this->entity_type_manager->does_entity_type_exist(Guid(entity_type_uuid));
+	spdlog::get("inexor.entity.rest")->info(exists ? "entity type exists" : "entity type does not exist");
+
+	std::optional<std::shared_ptr<inexor::entity_system::EntityType> > entity_type_o = this->entity_type_manager->get_entity_type(Guid(entity_type_uuid));
+
+	if (entity_type_o.has_value()) {
+		spdlog::get("inexor.entity.rest")->info("found");
+		std::shared_ptr<inexor::entity_system::EntityType> entity_type = entity_type_o.value();
+		shared_ptr<EntityType> entity_type_model = std::make_shared<EntityType>();
+		entity_type_model->setEntityTypeUuid(entity_type->get_GUID().str());
+		entity_type_model->setName(entity_type->get_type_name());
+		session->close(restbed::OK, entity_type_model->toJsonString(), { {"Connection", "close"} });
+		return;
+	} else {
+		std::optional<std::shared_ptr<inexor::entity_system::EntityType> > entity_type_o1 = this->entity_type_manager->create_entity_type("TEST");
+		if (entity_type_o1.has_value()) {
+			std::shared_ptr<inexor::entity_system::EntityType> entity_type = entity_type_o1.value();
+			spdlog::get("inexor.entity.rest")->info("Created entity type {} {}", entity_type->get_GUID().str(), entity_type->get_type_name());
+		}
+		spdlog::get("inexor.entity.rest")->info("not found");
+		shared_ptr<EntitySystemMessage> entity_system_message = std::make_shared<EntitySystemMessage>();
+		entity_system_message->setCode(404);
+		entity_system_message->setMessage(fmt::format("Entity type UUID('{}') not found", entity_type_uuid));
+		session->close(restbed::NOT_FOUND, entity_system_message->toJsonString(), { {"Connection", "close"} });
+		return;
+	}
 
 	// Change the value of this variable to the appropriate response before sending the response
 	int status_code = 200;
@@ -262,9 +291,6 @@ void EntityTypeApiEntitiesTypesEntity_type_uuidResource::GET_method_handler(cons
 	 */
 
 	if (status_code == 200) {
-		shared_ptr<EntityType> response = NULL;
-		session->close(200, "An entity type", { {"Connection", "close"} });
-		return;
 	}
 	if (status_code == 0) {
 		shared_ptr<EntitySystemMessage> response = NULL;

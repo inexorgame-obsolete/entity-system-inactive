@@ -11,12 +11,13 @@
  */
 
 
+#include "EntitySystemApi.hpp"
+
 #include <corvusoft/restbed/byte.hpp>
 #include <corvusoft/restbed/string.hpp>
 #include <corvusoft/restbed/settings.hpp>
 #include <corvusoft/restbed/request.hpp>
 
-#include "EntitySystemApi.h"
 
 namespace inexor {
 namespace entity_system {

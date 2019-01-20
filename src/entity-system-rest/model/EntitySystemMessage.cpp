@@ -12,7 +12,7 @@
 
 
 
-#include "EntitySystemMessage.h"
+#include "EntitySystemMessage.hpp"
 
 #include <string>
 #include <sstream>

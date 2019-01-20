@@ -24,9 +24,9 @@
 #include <string>
 #include <restbed>
 
+#include "../model/EntitySystem.hpp"
+#include "../model/EntitySystemMessage.hpp"
 #include "entity-system/EntitySystem.hpp"
-#include "entity-system-rest/model/EntitySystem.h"
-#include "entity-system-rest/model/EntitySystemMessage.h"
 
 using namespace inexor::entity_system::rest::model;
 using namespace restbed;
