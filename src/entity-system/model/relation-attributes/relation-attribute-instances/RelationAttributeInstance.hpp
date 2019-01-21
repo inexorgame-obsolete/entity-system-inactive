@@ -15,7 +15,7 @@ namespace entity_system {
 
 
 	/// A base class for relation attribute type instances
-	class RelationAttributeInstance : public InstanceBase<RelationAttributeType>, public DataContainer, public GUIDBase
+        class RelationAttributeInstance : public InstanceBase<RelationAttributeType>, public GUIDBase
 	{
 		public:
 
