@@ -60,13 +60,13 @@ void EntitySystem::setEntityTypes(std::vector<std::shared_ptr<EntityType>> value
 {
     m_Entity_types = value;
 }
-std::vector<std::shared_ptr<RelationshipType>> EntitySystem::getRelationshipTypes() const
+std::vector<std::shared_ptr<RelationType>> EntitySystem::getRelationTypes() const
 {
-    return m_Relationship_types;
+    return m_Relation_types;
 }
-void EntitySystem::setRelationshipTypes(std::vector<std::shared_ptr<RelationshipType>> value)
+void EntitySystem::setRelationTypes(std::vector<std::shared_ptr<RelationType>> value)
 {
-    m_Relationship_types = value;
+    m_Relation_types = value;
 }
 std::vector<std::shared_ptr<EntityInstance>> EntitySystem::getEntityInstances() const
 {
@@ -76,13 +76,13 @@ void EntitySystem::setEntityInstances(std::vector<std::shared_ptr<EntityInstance
 {
     m_Entity_instances = value;
 }
-std::vector<std::shared_ptr<RelationshipInstance>> EntitySystem::getRelationshipInstances() const
+std::vector<std::shared_ptr<RelationInstance>> EntitySystem::getRelationInstances() const
 {
-    return m_Relationship_instances;
+    return m_Relation_instances;
 }
-void EntitySystem::setRelationshipInstances(std::vector<std::shared_ptr<RelationshipInstance>> value)
+void EntitySystem::setRelationInstances(std::vector<std::shared_ptr<RelationInstance>> value)
 {
-    m_Relationship_instances = value;
+    m_Relation_instances = value;
 }
 
 }

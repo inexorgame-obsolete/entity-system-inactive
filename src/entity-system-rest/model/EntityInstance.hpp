@@ -10,14 +10,7 @@
  * Do not edit the class manually.
  */
 
-/*
- * EntityInstance.h
- *
- * 
- */
-
-#ifndef EntityInstance_H_
-#define EntityInstance_H_
+#pragma once
 
 #include <string>
 #include <vector>
@@ -71,5 +64,3 @@ protected:
 }
 }
 }
-
-#endif /* EntityInstance_H_ */

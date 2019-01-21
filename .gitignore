@@ -46,3 +46,8 @@ documentation/
 /.project
 /.settings
 /inexor.log
+*.DS_STORE
+/.conan
+/.cache
+*.user
+

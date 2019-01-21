@@ -5,14 +5,14 @@
 
 #include <vector>
 
-#include "attributes/attribute-instance-manager/EntityAttributeInstanceManager.hpp"
-#include "attributes/attribute-type-manager/EntityAttributeTypeManager.hpp"
-#include "relation-attributes/relation-attribute-instance-manager/EntityRelationAttributeInstanceManager.hpp"
-#include "relation-attributes/relation-attribute-type-manager/EntityRelationAttributeTypeManager.hpp"
-#include "relations/relation-instance-manager/EntityRelationInstanceManager.hpp"
-#include "relations/relation-type-manager/EntityRelationTypeManager.hpp"
-#include "types/instance-manager/EntityInstanceManager.hpp"
-#include "types/type-manager/EntityTypeManager.hpp"
+#include "entities/entity-instance-manager/EntityInstanceManager.hpp"
+#include "entities/entity-type-manager/EntityTypeManager.hpp"
+#include "entity-attributes/entity-attribute-instance-manager/EntityAttributeInstanceManager.hpp"
+#include "entity-attributes/entity-attribute-type-manager/EntityAttributeTypeManager.hpp"
+#include "relations/relation-instance-manager/RelationInstanceManager.hpp"
+#include "relations/relation-type-manager/RelationTypeManager.hpp"
+#include "relation-attributes/relation-attribute-instance-manager/RelationAttributeInstanceManager.hpp"
+#include "relation-attributes/relation-attribute-type-manager/RelationAttributeTypeManager.hpp"
 
 
 namespace inexor {
@@ -34,10 +34,10 @@ namespace entity_system {
 		    	std::shared_ptr<inexor::entity_system::EntityInstanceManager> entity_instance_manager,
 				std::shared_ptr<inexor::entity_system::EntityAttributeTypeManager> entity_attribute_type_manager,
 				std::shared_ptr<inexor::entity_system::EntityAttributeInstanceManager> entity_attribute_instance_manager,
-				std::shared_ptr<inexor::entity_system::EntityRelationTypeManager> entity_relation_type_manager,
-				std::shared_ptr<inexor::entity_system::EntityRelationInstanceManager> entity_relation_instance_manager,
-				std::shared_ptr<inexor::entity_system::EntityRelationAttributeTypeManager> entity_relation_attribute_type_manager,
-				std::shared_ptr<inexor::entity_system::EntityRelationAttributeInstanceManager> entity_relation_attribute_instance_manager
+				std::shared_ptr<inexor::entity_system::RelationTypeManager> entity_relation_type_manager,
+				std::shared_ptr<inexor::entity_system::RelationInstanceManager> entity_relation_instance_manager,
+				std::shared_ptr<inexor::entity_system::RelationAttributeTypeManager> entity_relation_attribute_type_manager,
+				std::shared_ptr<inexor::entity_system::RelationAttributeInstanceManager> entity_relation_attribute_instance_manager
 		    );
 
 			/// Destructor.
@@ -61,16 +61,16 @@ namespace entity_system {
 			std::shared_ptr<inexor::entity_system::EntityAttributeInstanceManager> entity_attribute_instance_manager;
 
 			/// The entity relation type manager.
-			std::shared_ptr<inexor::entity_system::EntityRelationTypeManager> entity_relation_type_manager;
+			std::shared_ptr<inexor::entity_system::RelationTypeManager> entity_relation_type_manager;
 
 			/// The entity relation instance manager.
-			std::shared_ptr<inexor::entity_system::EntityRelationInstanceManager> entity_relation_instance_manager;
+			std::shared_ptr<inexor::entity_system::RelationInstanceManager> entity_relation_instance_manager;
 
 			/// The entity relation attribute type manager.
-			std::shared_ptr<inexor::entity_system::EntityRelationAttributeTypeManager> entity_relation_attribute_type_manager;
+			std::shared_ptr<inexor::entity_system::RelationAttributeTypeManager> entity_relation_attribute_type_manager;
 
 			/// The entity relation attribute instance manager.
-			std::shared_ptr<inexor::entity_system::EntityRelationAttributeInstanceManager> entity_relation_attribute_instance_manager;
+			std::shared_ptr<inexor::entity_system::RelationAttributeInstanceManager> entity_relation_attribute_instance_manager;
 
     };
 

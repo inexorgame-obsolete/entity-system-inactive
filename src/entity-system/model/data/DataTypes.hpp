@@ -26,10 +26,7 @@ namespace entity_system {
         ENTSYS_DATA_TYPE_VEC3,
         ENTSYS_DATA_TYPE_VEC4,
 
-        // Binary data
-
-        // TODO: Add vec3 support by supporting GLM:
-        // https://glm.g-truc.net/0.9.9/index.html
+        // TODO: Think about how to handle binary data
     };
 
 

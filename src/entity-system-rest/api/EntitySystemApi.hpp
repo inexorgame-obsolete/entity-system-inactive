@@ -10,19 +10,14 @@
  * Do not edit the class manually.
  */
 
-/*
- * EntitySystemApi.h
- *
- * 
- */
-
-#ifndef EntitySystemApi_H_
-#define EntitySystemApi_H_
+#pragma once
 
 #include <memory>
 #include <crossguid/guid.hpp>
 #include <string>
 #include <restbed>
+
+#include "spdlog/spdlog.h"
 
 #include "../model/EntitySystem.hpp"
 #include "../model/EntitySystemMessage.hpp"
@@ -41,7 +36,7 @@ class  EntitySystemApi
 public:
 	EntitySystemApi();
 	~EntitySystemApi();
-	void createResources(std::shared_ptr<inexor::entity_system::EntitySystem> entity_system, std::shared_ptr<Service> service);
+	void publish_resources(std::shared_ptr<Service> service);
 };
 
 
@@ -66,6 +61,3 @@ public:
 }
 }
 }
-
-#endif /* EntitySystemApi_H_ */
-

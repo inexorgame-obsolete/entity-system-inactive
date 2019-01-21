@@ -14,12 +14,13 @@
 
 #include <map>
 #include <crossguid/guid.hpp>
+
 #include <corvusoft/restbed/byte.hpp>
 #include <corvusoft/restbed/string.hpp>
 #include <corvusoft/restbed/settings.hpp>
 #include <corvusoft/restbed/request.hpp>
 
-#include "entity-system/managers/types/type-manager/EntityTypeManager.hpp"
+#include "entity-system/managers/entities/entity-type-manager/EntityTypeManager.hpp"
 
 namespace inexor {
 namespace entity_system {
@@ -36,9 +37,9 @@ EntityTypeApi::EntityTypeApi(
 	shared_ptr<EntityTypeApiEntitiesTypesEntity_type_uuidResource> spEntityTypeApiEntitiesTypesEntity_type_uuidResource,
 	shared_ptr<EntityTypeApiEntitiesTypesEntity_type_uuidAttributesNameResource> spEntityTypeApiEntitiesTypesEntity_type_uuidAttributesNameResource,
 	shared_ptr<EntityTypeApiEntitiesTypesEntity_type_uuidInstancesResource> spEntityTypeApiEntitiesTypesEntity_type_uuidInstancesResource,
-	shared_ptr<EntityTypeApiEntitiesTypesEntity_type_uuidRelationshipsIncomingResource> spEntityTypeApiEntitiesTypesEntity_type_uuidRelationshipsIncomingResource,
-	shared_ptr<EntityTypeApiEntitiesTypesEntity_type_uuidRelationshipsOutgoingResource> spEntityTypeApiEntitiesTypesEntity_type_uuidRelationshipsOutgoingResource,
-	shared_ptr<EntityTypeApiEntitiesTypesEntity_type_uuidRelationshipsResource> spEntityTypeApiEntitiesTypesEntity_type_uuidRelationshipsResource,
+	shared_ptr<EntityTypeApiEntitiesTypesEntity_type_uuidRelationsIncomingResource> spEntityTypeApiEntitiesTypesEntity_type_uuidRelationsIncomingResource,
+	shared_ptr<EntityTypeApiEntitiesTypesEntity_type_uuidRelationsOutgoingResource> spEntityTypeApiEntitiesTypesEntity_type_uuidRelationsOutgoingResource,
+	shared_ptr<EntityTypeApiEntitiesTypesEntity_type_uuidRelationsResource> spEntityTypeApiEntitiesTypesEntity_type_uuidRelationsResource,
 	shared_ptr<EntityTypeApiEntitiesTypesEntity_type_uuidAttributesResource> spEntityTypeApiEntitiesTypesEntity_type_uuidAttributesResource
 )
 {
@@ -46,9 +47,9 @@ EntityTypeApi::EntityTypeApi(
 	this->spEntityTypeApiEntitiesTypesEntity_type_uuidResource = spEntityTypeApiEntitiesTypesEntity_type_uuidResource;
 	this->spEntityTypeApiEntitiesTypesEntity_type_uuidAttributesNameResource = spEntityTypeApiEntitiesTypesEntity_type_uuidAttributesNameResource;
 	this->spEntityTypeApiEntitiesTypesEntity_type_uuidInstancesResource = spEntityTypeApiEntitiesTypesEntity_type_uuidInstancesResource;
-	this->spEntityTypeApiEntitiesTypesEntity_type_uuidRelationshipsIncomingResource = spEntityTypeApiEntitiesTypesEntity_type_uuidRelationshipsIncomingResource;
-	this->spEntityTypeApiEntitiesTypesEntity_type_uuidRelationshipsOutgoingResource = spEntityTypeApiEntitiesTypesEntity_type_uuidRelationshipsOutgoingResource;
-	this->spEntityTypeApiEntitiesTypesEntity_type_uuidRelationshipsResource = spEntityTypeApiEntitiesTypesEntity_type_uuidRelationshipsResource;
+	this->spEntityTypeApiEntitiesTypesEntity_type_uuidRelationsIncomingResource = spEntityTypeApiEntitiesTypesEntity_type_uuidRelationsIncomingResource;
+	this->spEntityTypeApiEntitiesTypesEntity_type_uuidRelationsOutgoingResource = spEntityTypeApiEntitiesTypesEntity_type_uuidRelationsOutgoingResource;
+	this->spEntityTypeApiEntitiesTypesEntity_type_uuidRelationsResource = spEntityTypeApiEntitiesTypesEntity_type_uuidRelationsResource;
 	this->spEntityTypeApiEntitiesTypesEntity_type_uuidAttributesResource = spEntityTypeApiEntitiesTypesEntity_type_uuidAttributesResource;
 }
 
@@ -56,14 +57,14 @@ EntityTypeApi::~EntityTypeApi()
 {
 }
 
-void EntityTypeApi::createResources(std::shared_ptr<Service> service) {
+void EntityTypeApi::publish_resources(std::shared_ptr<Service> service) {
 	service->publish(spEntityTypeApiEntitiesTypesResource);
 	service->publish(spEntityTypeApiEntitiesTypesEntity_type_uuidResource);
 	service->publish(spEntityTypeApiEntitiesTypesEntity_type_uuidAttributesNameResource);
 	service->publish(spEntityTypeApiEntitiesTypesEntity_type_uuidInstancesResource);
-	service->publish(spEntityTypeApiEntitiesTypesEntity_type_uuidRelationshipsIncomingResource);
-	service->publish(spEntityTypeApiEntitiesTypesEntity_type_uuidRelationshipsOutgoingResource);
-	service->publish(spEntityTypeApiEntitiesTypesEntity_type_uuidRelationshipsResource);
+	service->publish(spEntityTypeApiEntitiesTypesEntity_type_uuidRelationsIncomingResource);
+	service->publish(spEntityTypeApiEntitiesTypesEntity_type_uuidRelationsOutgoingResource);
+	service->publish(spEntityTypeApiEntitiesTypesEntity_type_uuidRelationsResource);
 	service->publish(spEntityTypeApiEntitiesTypesEntity_type_uuidAttributesResource);
 }
 
@@ -492,20 +493,20 @@ void EntityTypeApiEntitiesTypesEntity_type_uuidInstancesResource::GET_method_han
 }
 
 
-EntityTypeApiEntitiesTypesEntity_type_uuidRelationshipsIncomingResource::EntityTypeApiEntitiesTypesEntity_type_uuidRelationshipsIncomingResource(
+EntityTypeApiEntitiesTypesEntity_type_uuidRelationsIncomingResource::EntityTypeApiEntitiesTypesEntity_type_uuidRelationsIncomingResource(
 	std::shared_ptr<inexor::entity_system::EntityTypeManager> entity_type_manager
 )
 {
 	this->entity_type_manager = entity_type_manager;
-	this->set_path("/entities/types/{entity_type_uuid: .*}/relationships/incoming/");
-	this->set_method_handler("GET", bind(&EntityTypeApiEntitiesTypesEntity_type_uuidRelationshipsIncomingResource::GET_method_handler, this, placeholders::_1));
+	this->set_path("/entities/types/{entity_type_uuid: .*}/relations/incoming/");
+	this->set_method_handler("GET", bind(&EntityTypeApiEntitiesTypesEntity_type_uuidRelationsIncomingResource::GET_method_handler, this, placeholders::_1));
 }
 
-EntityTypeApiEntitiesTypesEntity_type_uuidRelationshipsIncomingResource::~EntityTypeApiEntitiesTypesEntity_type_uuidRelationshipsIncomingResource()
+EntityTypeApiEntitiesTypesEntity_type_uuidRelationsIncomingResource::~EntityTypeApiEntitiesTypesEntity_type_uuidRelationsIncomingResource()
 {
 }
 
-void EntityTypeApiEntitiesTypesEntity_type_uuidRelationshipsIncomingResource::GET_method_handler(const shared_ptr<Session> session) {
+void EntityTypeApiEntitiesTypesEntity_type_uuidRelationsIncomingResource::GET_method_handler(const shared_ptr<Session> session) {
 
 	const auto request = session->get_request();
 
@@ -522,7 +523,7 @@ void EntityTypeApiEntitiesTypesEntity_type_uuidRelationshipsIncomingResource::GE
 	 */
 
 	if (status_code == 200) {
-		session->close(200, "The incoming relationship types", { {"Connection", "close"} });
+		session->close(200, "The incoming relation types", { {"Connection", "close"} });
 		return;
 	}
 	if (status_code == 0) {
@@ -534,20 +535,20 @@ void EntityTypeApiEntitiesTypesEntity_type_uuidRelationshipsIncomingResource::GE
 
 
 
-EntityTypeApiEntitiesTypesEntity_type_uuidRelationshipsOutgoingResource::EntityTypeApiEntitiesTypesEntity_type_uuidRelationshipsOutgoingResource(
+EntityTypeApiEntitiesTypesEntity_type_uuidRelationsOutgoingResource::EntityTypeApiEntitiesTypesEntity_type_uuidRelationsOutgoingResource(
 	std::shared_ptr<inexor::entity_system::EntityTypeManager> entity_type_manager
 )
 {
 	this->entity_type_manager = entity_type_manager;
-	this->set_path("/entities/types/{entity_type_uuid: .*}/relationships/outgoing/");
-	this->set_method_handler("GET", bind(&EntityTypeApiEntitiesTypesEntity_type_uuidRelationshipsOutgoingResource::GET_method_handler, this, placeholders::_1));
+	this->set_path("/entities/types/{entity_type_uuid: .*}/relations/outgoing/");
+	this->set_method_handler("GET", bind(&EntityTypeApiEntitiesTypesEntity_type_uuidRelationsOutgoingResource::GET_method_handler, this, placeholders::_1));
 }
 
-EntityTypeApiEntitiesTypesEntity_type_uuidRelationshipsOutgoingResource::~EntityTypeApiEntitiesTypesEntity_type_uuidRelationshipsOutgoingResource()
+EntityTypeApiEntitiesTypesEntity_type_uuidRelationsOutgoingResource::~EntityTypeApiEntitiesTypesEntity_type_uuidRelationsOutgoingResource()
 {
 }
 
-void EntityTypeApiEntitiesTypesEntity_type_uuidRelationshipsOutgoingResource::GET_method_handler(const shared_ptr<Session> session) {
+void EntityTypeApiEntitiesTypesEntity_type_uuidRelationsOutgoingResource::GET_method_handler(const shared_ptr<Session> session) {
 
 	const auto request = session->get_request();
 
@@ -564,7 +565,7 @@ void EntityTypeApiEntitiesTypesEntity_type_uuidRelationshipsOutgoingResource::GE
 	 */
 
 	if (status_code == 200) {
-		session->close(200, "The outgoing relationship types", { {"Connection", "close"} });
+		session->close(200, "The outgoing relation types", { {"Connection", "close"} });
 		return;
 	}
 	if (status_code == 0) {
@@ -576,20 +577,20 @@ void EntityTypeApiEntitiesTypesEntity_type_uuidRelationshipsOutgoingResource::GE
 
 
 
-EntityTypeApiEntitiesTypesEntity_type_uuidRelationshipsResource::EntityTypeApiEntitiesTypesEntity_type_uuidRelationshipsResource(
+EntityTypeApiEntitiesTypesEntity_type_uuidRelationsResource::EntityTypeApiEntitiesTypesEntity_type_uuidRelationsResource(
 	std::shared_ptr<inexor::entity_system::EntityTypeManager> entity_type_manager
 )
 {
 	this->entity_type_manager = entity_type_manager;
-	this->set_path("/entities/types/{entity_type_uuid: .*}/relationships/");
-	this->set_method_handler("GET", bind(&EntityTypeApiEntitiesTypesEntity_type_uuidRelationshipsResource::GET_method_handler, this, placeholders::_1));
+	this->set_path("/entities/types/{entity_type_uuid: .*}/relations/");
+	this->set_method_handler("GET", bind(&EntityTypeApiEntitiesTypesEntity_type_uuidRelationsResource::GET_method_handler, this, placeholders::_1));
 }
 
-EntityTypeApiEntitiesTypesEntity_type_uuidRelationshipsResource::~EntityTypeApiEntitiesTypesEntity_type_uuidRelationshipsResource()
+EntityTypeApiEntitiesTypesEntity_type_uuidRelationsResource::~EntityTypeApiEntitiesTypesEntity_type_uuidRelationsResource()
 {
 }
 
-void EntityTypeApiEntitiesTypesEntity_type_uuidRelationshipsResource::GET_method_handler(const shared_ptr<Session> session) {
+void EntityTypeApiEntitiesTypesEntity_type_uuidRelationsResource::GET_method_handler(const shared_ptr<Session> session) {
 
 	const auto request = session->get_request();
 
@@ -606,7 +607,7 @@ void EntityTypeApiEntitiesTypesEntity_type_uuidRelationshipsResource::GET_method
 	 */
 
 	if (status_code == 200) {
-		session->close(200, "The incoming and outgoing relationship types", { {"Connection", "close"} });
+		session->close(200, "The incoming and outgoing relation types", { {"Connection", "close"} });
 		return;
 	}
 	if (status_code == 0) {

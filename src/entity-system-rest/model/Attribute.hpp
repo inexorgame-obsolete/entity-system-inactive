@@ -10,14 +10,7 @@
  * Do not edit the class manually.
  */
 
-/*
- * Attribute.h
- *
- * 
- */
-
-#ifndef Attribute_H_
-#define Attribute_H_
+#pragma once
 
 #include <string>
 #include <memory>
@@ -74,5 +67,3 @@ protected:
 }
 }
 }
-
-#endif /* Attribute_H_ */
