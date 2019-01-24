@@ -40,7 +40,7 @@ namespace entity_system {
                 va_list log_arguments;
                 va_start(log_arguments, format);
                 std::vsnprintf(spdlog_message, INEXOR_REST_API_MAX_MESSAGE_SIZE, format, log_arguments);
-                va_end(format);
+                va_end(log_arguments);
 
                 auto spdlog_handle = spdlog::get(LOGGER_ENTITY_REST);
 
