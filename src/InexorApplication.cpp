@@ -101,6 +101,7 @@ namespace inexor {
 			spdlog::get(LOGGER_NAME)->info("Uptime: {} s", rest_server->get_uptime().count());
 		}
 	    spdlog::get(LOGGER_NAME)->info("Inexor is no longer running");
+            std::exit(EXIT_SUCCESS); // exit run thread
 	}
 
 	void InexorApplication::shutdown()
