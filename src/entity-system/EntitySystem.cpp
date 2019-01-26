@@ -4,41 +4,45 @@
 #include "EntitySystem.hpp"
 
 
+using namespace inexor::entity_system;
+using namespace std;
+
+
 namespace inexor {
 namespace entity_system {
 
 
 	EntitySystem::EntitySystem(
-		std::shared_ptr<inexor::entity_system::EntityTypeManager> entity_type_manager,
-		std::shared_ptr<inexor::entity_system::EntityInstanceManager> entity_instance_manager,
-		std::shared_ptr<inexor::entity_system::EntityAttributeTypeManager> entity_attribute_type_manager,
-		std::shared_ptr<inexor::entity_system::EntityAttributeInstanceManager> entity_attribute_instance_manager,
-		std::shared_ptr<inexor::entity_system::RelationTypeManager> entity_relation_type_manager,
-		std::shared_ptr<inexor::entity_system::RelationInstanceManager> entity_relation_instance_manager,
-		std::shared_ptr<inexor::entity_system::RelationAttributeTypeManager> entity_relation_attribute_type_manager,
-		std::shared_ptr<inexor::entity_system::RelationAttributeInstanceManager> entity_relation_attribute_instance_manager
+		shared_ptr<EntityManager> entity_manager,
+		shared_ptr<RelationManager> relation_manager,
+		shared_ptr<BuilderManager> builder_manager
 	)
-		: EntityManager(
-			entity_type_manager,
-			entity_instance_manager,
-			entity_attribute_type_manager,
-			entity_attribute_instance_manager,
-			entity_relation_type_manager,
-			entity_relation_instance_manager,
-			entity_relation_attribute_type_manager,
-			entity_relation_attribute_instance_manager
-		)
+		: entity_manager(entity_manager),
+		  relation_manager(relation_manager),
+		  builder_manager(builder_manager)
 	{
-		// TODO: Implement!
 	}
 
 	
 	EntitySystem::~EntitySystem()
 	{
-		// Reset entity system at shutdown.
-		reset_entity_system();
 	}
-	
+
+
+    // Order of destruction:
+    // <ul>
+    // <li> Relations
+	// <li> Entities
+    // </ul>
+	void EntitySystem::reset_entity_system()
+	{
+		// Reset relations
+		relation_manager->reset_entity_system();
+
+		// Reset entities
+		entity_manager->reset_entity_system();
+	}
+
 
 };
 };

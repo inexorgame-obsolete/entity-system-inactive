@@ -6,40 +6,47 @@
 #include <iostream>
 
 #include "managers/EntityManager.hpp"
+#include "managers/RelationManager.hpp"
+#include "managers/BuilderManager.hpp"
+
+
+using namespace inexor::entity_system;
+using namespace std;
 
 
 namespace inexor {
 namespace entity_system {
 
 
-	// TODO: Implement EntityEditor
-	// TODO: Implement EntityEditorRenderer
-	// TODO: Implement EntityGameSceneRenderer
-    // TODO: Implement EntitySync
-	// TODO: Implement EntityImporter
-	// TODO: Implement EntityExporter
-
-
 	/// @class EntitySystem
     /// @brief Entity system main class.
-	class EntitySystem : public EntityManager
+	class EntitySystem
 	{
 		public:
 
 			/// Constructor.
 			EntitySystem(
-				std::shared_ptr<inexor::entity_system::EntityTypeManager> entity_type_manager,
-				std::shared_ptr<inexor::entity_system::EntityInstanceManager> entity_instance_manager,
-				std::shared_ptr<inexor::entity_system::EntityAttributeTypeManager> entity_attribute_type_manager,
-				std::shared_ptr<inexor::entity_system::EntityAttributeInstanceManager> entity_attribute_instance_manager,
-				std::shared_ptr<inexor::entity_system::RelationTypeManager> relation_type_manager,
-				std::shared_ptr<inexor::entity_system::RelationInstanceManager> relation_instance_manager,
-				std::shared_ptr<inexor::entity_system::RelationAttributeTypeManager> relation_attribute_type_manager,
-				std::shared_ptr<inexor::entity_system::RelationAttributeInstanceManager> relation_attribute_instance_manager
+				shared_ptr<EntityManager> entity_manager,
+				shared_ptr<RelationManager> relation_manager,
+				shared_ptr<BuilderManager> builder_manager
 			);
 
 			/// Destructor.
 			~EntitySystem();
+
+			/// Resets the entire entity system.
+			void reset_entity_system();
+
+		private:
+
+			/// The entity managers
+			shared_ptr<EntityManager> entity_manager;
+
+			/// The entity managers
+			shared_ptr<RelationManager> relation_manager;
+
+			/// The builder managers
+			shared_ptr<BuilderManager> builder_manager;
 
 	};
 
