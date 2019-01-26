@@ -57,6 +57,14 @@ namespace logging {
 		{
 			ENT_INST logger_instance = o_logger_instance.value();
 			spdlog::get("inexor.logging.LogManager")->info("Created entity instance (UUID: {}) of type {} (UUID: {})", logger_instance->get_GUID().str(), entity_type_logger->get_type_name(), entity_type_logger->get_GUID().str());
+			O_ENT_ATTR_INST o_ent_attr_inst = logger_instance->get_attribute_instance("logger_name");
+			if (o_ent_attr_inst.has_value()) {
+				ENT_ATTR_INST ent_attr_inst = o_ent_attr_inst.value();
+				string value = std::get<ENTSYS_DATA_TYPE_STRING>(ent_attr_inst->value);
+				spdlog::get("inexor.logging.LogManager")->info("logger_name = {}", value);
+			}
+		} else {
+			spdlog::get("inexor.logging.LogManager")->info("Failed to create entity instance of type {}", entity_type_logger->get_type_name());
 		}
 	}
 

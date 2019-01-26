@@ -2,6 +2,7 @@
 // (c)2018 Inexor
 
 #include "EntityInstanceBuilder.hpp"
+#include "spdlog/spdlog.h"
 
 using namespace inexor::entity_system;
 using namespace std;
@@ -64,15 +65,27 @@ namespace entity_system {
 		{
 			ENT_INST entity_instance = o_entity_instance.value();
 			// TODO: set attribute values
-//			for (auto& attribute_entry : entity_instance_attributes) {
-//				O_ENT_ATTR_TYPE o_attribute_type = entity_attribute_type_manager->create_entity_attribute_type(attribute_entry.first, attribute_entry.second);
-//				if (o_attribute_type.has_value()) {
-//					ENT_ATTR_TYPE attribute_type = o_attribute_type.value();
-//					entity_type->link_attribute_type(attribute_type);
-//				} else {
-//					return std::nullopt;
-//				}
-//			}
+			for (auto& attr_entry : entity_instance_attributes) {
+				O_ENT_ATTR_INST o_attr_inst = entity_instance->get_attribute_instance(attr_entry.first);
+				if (o_attr_inst.has_value()) {
+					ENT_ATTR_INST attr_inst = o_attr_inst.value();
+					if (attr_inst->type == attr_entry.second.type) {
+						attr_inst->value = attr_entry.second.value;
+						spdlog::info("Set attribute");
+						// spdlog::info("Set attribute {} = {}", attr_entry.first, attr_entry.second.value);
+					} else {
+						// Error: Wrong datatype
+						spdlog::info("Wrong datatype for attribute");
+						// spdlog::info("Wrong datatype for attribute {}: {} != {}", attr_entry.first, attr_inst->type, attr_entry.second.type);
+						return std::nullopt;
+					}
+				} else {
+					// Error: Attribute not found by name
+					spdlog::info("Attribute not found");
+					// spdlog::info("Attribute {} not found", attr_entry.first);
+					return std::nullopt;
+				}
+			}
 			return o_entity_instance;
 		}
 		return std::nullopt;

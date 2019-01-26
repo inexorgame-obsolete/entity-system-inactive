@@ -38,6 +38,18 @@ namespace entity_system {
         return std::optional<std::unordered_map<ENT_ATTR_TYPE, ENT_ATTR_INST>> { instances };
 	}
 
+	O_ENT_ATTR_INST EntityInstance::get_attribute_instance(const std::string& attr_name)
+	{
+		for (auto& ent_attr_entry : instances)
+		{
+			if (attr_name == ent_attr_entry.first->get_type_name())
+			{
+				return std::optional<ENT_ATTR_INST> { ent_attr_entry.second };
+			}
+		}
+		return std::nullopt;
+	}
+
 
 };
 };

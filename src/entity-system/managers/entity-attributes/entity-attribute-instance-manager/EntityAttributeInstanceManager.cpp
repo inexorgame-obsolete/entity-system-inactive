@@ -23,6 +23,7 @@ namespace entity_system {
     O_ENT_ATTR_INST EntityAttributeInstanceManager::create_entity_attribute_instance(const ENT_ATTR_TYPE& ent_attr_type)
 	{
 		// Create entity attribute instance.
+		// Also set the data type of the attribute instance to the data type of the attribute type
 		ENT_ATTR_INST new_ent_attr_instance = std::make_shared<EntityAttributeInstance>(ent_attr_type);
 
         // 

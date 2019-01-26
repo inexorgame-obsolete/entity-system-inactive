@@ -50,6 +50,9 @@ namespace entity_system {
 
             // TODO: Implement methods for setting and getting entity attribute instance data...
 
+            /// @brief Get the attribute instance by name.
+            /// @return The attribute instance with the given name.
+			std::optional<ENT_ATTR_INST> get_attribute_instance(const std::string& attr_name);
     };
 
 
