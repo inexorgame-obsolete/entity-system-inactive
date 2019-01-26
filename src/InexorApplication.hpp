@@ -24,7 +24,7 @@
 #include "entity-system-rest/RestServerLogger.hpp"
 #include "entity-system-example/ColorManager.hpp"
 
-#include "logging/LogManager.hpp"
+#include "logging/managers/LogManager.hpp"
 
 
 using namespace spdlog;

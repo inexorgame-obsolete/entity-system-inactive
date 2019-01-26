@@ -8,7 +8,7 @@
 #include "spdlog/sinks/stdout_color_sinks.h"
 #include "spdlog/sinks/rotating_file_sink.h"
 
-#include "../entity-system/EntitySystem.hpp"
+#include "entity-system/EntitySystem.hpp"
 
 namespace inexor {
 namespace logging {
@@ -30,6 +30,9 @@ namespace logging {
 
 			/// Registers a logger
 			void register_logger(std::string logger_name);
+
+			/// Unregisters a logger
+			void unregister_logger(std::string logger_name);
 
 		private:
 

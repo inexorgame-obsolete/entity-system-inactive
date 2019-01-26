@@ -9,7 +9,8 @@ namespace inexor {
 namespace logging {
 
 
-	LogManager::LogManager(std::shared_ptr<inexor::entity_system::EntitySystem> entity_system) : entity_system(entity_system)
+	LogManager::LogManager(std::shared_ptr<inexor::entity_system::EntitySystem> entity_system)
+		: entity_system(entity_system)
 	{
 	}
 
@@ -29,6 +30,10 @@ namespace logging {
 	void LogManager::register_logger(std::string logger_name) {
 		spdlog::register_logger(std::make_shared<spdlog::async_logger>(logger_name, sinks.begin(), sinks.end(), spdlog::thread_pool(), spdlog::async_overflow_policy::block));
 		spdlog::get("inexor.logging")->info("Registered logger {}", logger_name);
+	}
+
+	void LogManager::unregister_logger(std::string logger_name) {
+		spdlog::drop(logger_name);
 	}
 
 }

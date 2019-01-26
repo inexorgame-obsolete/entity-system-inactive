@@ -20,7 +20,7 @@
 #include "api/RelationInstanceApi.hpp"
 #include "api/RelationTypeApi.hpp"
 #include "entity-system/EntitySystem.hpp"
-#include "logging/LogManager.hpp"
+#include "logging/managers/LogManager.hpp"
 
 
 #define LOGGER_ENTITY_REST "inexor.entity.rest"
