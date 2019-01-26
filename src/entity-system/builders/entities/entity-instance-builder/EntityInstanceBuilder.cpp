@@ -52,23 +52,19 @@ namespace entity_system {
 	O_ENT_INST EntityInstanceBuilder::build()
 	{
 		O_ENT_INST o_entity_instance = nullopt;
+		if (!o_entity_type.has_value() && !entity_type_name.empty())
+		{
+			o_entity_type = entity_type_manager->get_entity_type(entity_type_name);
+		}
 		if (o_entity_type.has_value())
 		{
 			o_entity_instance = entity_instance_manager->create_entity_instance(o_entity_type.value());
-		} else if (!entity_type_name.empty())
-		{
-			o_entity_type = entity_type_manager->get_entity_type(entity_type_name);
-			if (o_entity_type.has_value())
-			{
-				o_entity_instance = entity_instance_manager->create_entity_instance(o_entity_type.value());
-			}
 		}
 		if (o_entity_instance.has_value())
 		{
 			ENT_INST entity_instance = o_entity_instance.value();
 			// TODO: set attribute values
-//			shared_ptr<EntityType> entity_type = o_entity_type.value();
-			for (auto& attribute_entry : entity_instance_attributes) {
+//			for (auto& attribute_entry : entity_instance_attributes) {
 //				O_ENT_ATTR_TYPE o_attribute_type = entity_attribute_type_manager->create_entity_attribute_type(attribute_entry.first, attribute_entry.second);
 //				if (o_attribute_type.has_value()) {
 //					ENT_ATTR_TYPE attribute_type = o_attribute_type.value();
@@ -76,7 +72,7 @@ namespace entity_system {
 //				} else {
 //					return std::nullopt;
 //				}
-			}
+//			}
 			return o_entity_instance;
 		}
 		return std::nullopt;
