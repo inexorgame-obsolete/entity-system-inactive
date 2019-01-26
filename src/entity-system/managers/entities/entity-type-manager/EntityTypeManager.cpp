@@ -40,7 +40,7 @@ namespace entity_system {
 
 		// Call method of the template base class
         // to add the new instance to the type map.
-		add_type(ent_type_name, new_entity_type);
+		add_type(ent_type_name, new_entity_type->get_GUID(), new_entity_type);
 
         // Return the entity type we've just created.
         return O_ENT_TYPE{ new_entity_type };
@@ -71,7 +71,7 @@ namespace entity_system {
 
 		// Call method of the template base class
         // to add the new instance to the type map.
-		add_type(ent_type_name, new_entity_type);
+		add_type(ent_type_name, new_entity_type->get_GUID(), new_entity_type);
 
         // Return the entity type we've just created.
         return O_ENT_TYPE{ new_entity_type };

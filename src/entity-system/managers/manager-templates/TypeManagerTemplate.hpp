@@ -100,12 +100,14 @@ namespace entity_system {
 			/// Adds a new type.
 			/// @param type_name The name of the new type.
 			/// @param new_type A shared pointer reference to the new type.
-			void add_type(const std::string& type_name, const std::shared_ptr<T>& new_type)
+			void add_type(const std::string& type_name, const xg::Guid& type_GUID, const std::shared_ptr<T>& new_type)
 			{
 				// Use lock guard to ensure thread safety for this write operation!
 				std::lock_guard<std::mutex> lock(type_manager_mutex);
 
-				stored_types[type_name] = new_type;
+				stored_type_names[type_name] = type_GUID;
+				stored_type_GUIDs[type_GUID] = type_name;
+				stored_types[type_GUID] = new_type;
 			}
 
 

@@ -38,7 +38,7 @@ namespace entity_system {
 		REL_ATTR_TYPE new_rel_attr_type = std::make_shared<RelationAttributeType>(rel_attr_type_name, rel_attr_data_type);
 
         // 
-		add_type(rel_attr_type_name, new_rel_attr_type);
+		add_type(rel_attr_type_name, new_rel_attr_type->get_GUID(), new_rel_attr_type);
 
         return O_REL_ATTR_TYPE { new_rel_attr_type };
 	}

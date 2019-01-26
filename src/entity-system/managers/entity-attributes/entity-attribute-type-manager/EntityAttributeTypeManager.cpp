@@ -50,7 +50,7 @@ namespace entity_system {
 		ENT_ATTR_TYPE new_ent_attr_type = std::make_shared<EntityAttributeType>(ent_attr_type_name, ent_attr_type_datatype);
 		
 		// Call template base class method.
-		add_type(ent_attr_type_name, new_ent_attr_type);
+		add_type(ent_attr_type_name, new_ent_attr_type->get_GUID(), new_ent_attr_type);
 
         return O_ENT_ATTR_TYPE { new_ent_attr_type };
 	}

@@ -51,7 +51,7 @@ namespace entity_system {
 		REL_TYPE new_relation_type = std::make_shared<RelationType>(rel_type_name, ent_type_source, ent_type_target);
 
 		// Add new entity relation type to type map.
-		add_type(rel_type_name, new_relation_type);
+		add_type(rel_type_name, new_relation_type->get_GUID(), new_relation_type);
 
         return O_REL_TYPE { new_relation_type };
 	}
