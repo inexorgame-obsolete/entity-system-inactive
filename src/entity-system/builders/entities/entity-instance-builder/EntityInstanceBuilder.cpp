@@ -2,7 +2,6 @@
 // (c)2018 Inexor
 
 #include "EntityInstanceBuilder.hpp"
-#include "spdlog/spdlog.h"
 
 using namespace inexor::entity_system;
 using namespace std;
@@ -66,29 +65,40 @@ namespace entity_system {
 			ENT_INST entity_instance = o_entity_instance.value();
 			// TODO: set attribute values
 			for (auto& attr_entry : entity_instance_attributes) {
+				string attr_name = attr_entry.first;
+				DataContainer attr_value = attr_entry.second;
 				O_ENT_ATTR_INST o_attr_inst = entity_instance->get_attribute_instance(attr_entry.first);
 				if (o_attr_inst.has_value()) {
 					ENT_ATTR_INST attr_inst = o_attr_inst.value();
-					if (attr_inst->type == attr_entry.second.type) {
-						attr_inst->value = attr_entry.second.value;
-						spdlog::info("Set attribute");
-						// spdlog::info("Set attribute {} = {}", attr_entry.first, attr_entry.second.value);
+					if (attr_inst->type == attr_value.type) {
+						attr_inst->value = attr_value.value;
+						switch (attr_inst->type)
+						{
+							case ENTSYS_DATA_TYPE_INT:
+								spdlog::debug("Set attribute {} = {}", attr_name, std::get<ENTSYS_DATA_TYPE_INT>(attr_inst->value));
+								break;
+							case ENTSYS_DATA_TYPE_STRING:
+								spdlog::debug("Set attribute {} = {}", attr_name, std::get<ENTSYS_DATA_TYPE_STRING>(attr_inst->value));
+								break;
+							default:
+								break;
+						}
 					} else {
 						// Error: Wrong datatype
-						spdlog::info("Wrong datatype for attribute");
-						// spdlog::info("Wrong datatype for attribute {}: {} != {}", attr_entry.first, attr_inst->type, attr_entry.second.type);
+						spdlog::error("Wrong datatype for attribute {}: {} != {}", attr_name, attr_inst->type, attr_value.type);
 						return std::nullopt;
 					}
 				} else {
 					// Error: Attribute not found by name
-					spdlog::info("Attribute not found");
-					// spdlog::info("Attribute {} not found", attr_entry.first);
+					spdlog::error("Entity instance attribute {} not found", attr_name);
 					return std::nullopt;
 				}
 			}
 			return o_entity_instance;
+		} else {
+			spdlog::info("Failed to create entity instance");
+			return std::nullopt;
 		}
-		return std::nullopt;
 	}
 
 }

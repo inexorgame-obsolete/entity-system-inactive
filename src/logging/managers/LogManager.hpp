@@ -45,6 +45,12 @@ namespace logging {
 			/// Unregisters a logger
 			void unregister_logger(std::string logger_name);
 
+			/// Sets the log level for the given logger
+			void set_level(std::string logger_name, spdlog::level::level_enum level);
+
+			/// Returns the log level for the given logger
+			spdlog::level::level_enum get_level(std::string logger_name);
+
 		private:
 
 			/// The logger sinks
@@ -61,6 +67,9 @@ namespace logging {
 
 			/// The entity type LOGGER
 			shared_ptr<inexor::entity_system::EntityType> entity_type_logger;
+
+			/// The logger representation in the entity system
+			unordered_map<std::string, shared_ptr<inexor::entity_system::EntityInstance>> logger_instances;
 
 	};
 

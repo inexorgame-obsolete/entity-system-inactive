@@ -35,11 +35,14 @@ namespace logging {
 		O_ENT_TYPE o_entity_type_logger = entity_type_builder_manager->get_builder()
 		  ->name("LOGGER")
 		  ->attribute("logger_name", ENTSYS_DATA_TYPE_STRING)
+		  ->attribute("log_level", ENTSYS_DATA_TYPE_INT)
 		  ->build();
 		if (o_entity_type_logger.has_value())
 		{
 			entity_type_logger = o_entity_type_logger.value();
 			spdlog::get("inexor.logging.LogManager")->info("Created entity type {} (UUID: {})", entity_type_logger->get_type_name(), entity_type_logger->get_GUID().str());
+		} else {
+			spdlog::get("inexor.logging.LogManager")->info("Failed to create entity type LOGGER");
 		}
 	}
 
@@ -48,23 +51,45 @@ namespace logging {
 		spdlog::get("inexor.logging.LogManager")->info("Registered logger {}", logger_name);
 
 		DataContainer attribute_logger_name = {ENTSYS_DATA_TYPE_STRING, logger_name};
+		DataContainer attribute_log_level = {ENTSYS_DATA_TYPE_INT, spdlog::level::level_enum::info};
 		O_ENT_INST o_logger_instance = entity_instance_builder_manager->get_builder()
 			->type(entity_type_logger)
 			->attribute("logger_name", attribute_logger_name)
+			->attribute("log_level", attribute_log_level)
 			->build();
 
 		if (o_logger_instance.has_value())
 		{
 			ENT_INST logger_instance = o_logger_instance.value();
 			spdlog::get("inexor.logging.LogManager")->info("Created entity instance (UUID: {}) of type {} (UUID: {})", logger_instance->get_GUID().str(), entity_type_logger->get_type_name(), entity_type_logger->get_GUID().str());
-			O_ENT_ATTR_INST o_ent_attr_inst = logger_instance->get_attribute_instance("logger_name");
-			if (o_ent_attr_inst.has_value()) {
-				ENT_ATTR_INST ent_attr_inst = o_ent_attr_inst.value();
-				string value = std::get<ENTSYS_DATA_TYPE_STRING>(ent_attr_inst->value);
-				spdlog::get("inexor.logging.LogManager")->info("logger_name = {}", value);
+			O_ENT_ATTR_INST o_logger_name = logger_instance->get_attribute_instance("logger_name");
+			O_ENT_ATTR_INST o_log_level = logger_instance->get_attribute_instance("log_level");
+			if (o_logger_name.has_value() && o_log_level.has_value()) {
+				spdlog::get("inexor.logging.LogManager")->info("logger_name = {}, log_level = {}", std::get<ENTSYS_DATA_TYPE_STRING>(o_logger_name.value()->value), std::get<ENTSYS_DATA_TYPE_INT>(o_log_level.value()->value));
 			}
+			logger_instances[logger_name] = logger_instance;
 		} else {
 			spdlog::get("inexor.logging.LogManager")->info("Failed to create entity instance of type {}", entity_type_logger->get_type_name());
+		}
+	}
+
+	void LogManager::set_level(std::string logger_name, spdlog::level::level_enum level)
+	{
+		if (logger_instances.count(logger_name)) {
+			spdlog::get(logger_name)->set_level(level);
+			O_ENT_ATTR_INST o_ent_attr_inst = logger_instances[logger_name]->get_attribute_instance("level");
+			if (o_ent_attr_inst.has_value()) {
+				o_ent_attr_inst.value()->value = level;
+			}
+		}
+	}
+
+	spdlog::level::level_enum LogManager::get_level(std::string logger_name)
+	{
+		if (logger_instances.count(logger_name)) {
+			return spdlog::get(logger_name)->level();
+		} else {
+			return spdlog::level::level_enum::off;
 		}
 	}
 

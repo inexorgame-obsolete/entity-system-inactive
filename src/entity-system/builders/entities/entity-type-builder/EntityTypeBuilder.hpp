@@ -3,6 +3,8 @@
 
 #pragma once
 
+#include "spdlog/spdlog.h"
+
 #include "entity-system/managers/entities/entity-type-manager/EntityTypeManager.hpp"
 #include "entity-system/managers/entity-attributes/entity-attribute-type-manager/EntityAttributeTypeManager.hpp"
 #include "entity-system/managers/entity-attributes/entity-attribute-instance-manager/EntityAttributeInstanceManager.hpp"

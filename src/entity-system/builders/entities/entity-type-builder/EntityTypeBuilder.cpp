@@ -47,7 +47,7 @@ namespace entity_system {
 
 	O_ENT_TYPE EntityTypeBuilder::build()
 	{
-		O_ENT_TYPE o_entity_type = entity_type_manager->create_entity_type("LOGGER");
+		O_ENT_TYPE o_entity_type = entity_type_manager->create_entity_type(entity_type_name);
 		if (o_entity_type.has_value())
 		{
 			shared_ptr<EntityType> entity_type = o_entity_type.value();
@@ -56,14 +56,18 @@ namespace entity_system {
 				if (o_attribute_type.has_value()) {
 					ENT_ATTR_TYPE attribute_type = o_attribute_type.value();
 					entity_type->link_attribute_type(attribute_type);
+					spdlog::debug("Created entity type attribute {} of data type {}", attribute_entry.first, attribute_entry.second);
 				} else {
+					spdlog::info("Failed to create entity type attribute {} of data type {}", attribute_entry.first, attribute_entry.second);
 					return std::nullopt;
 				}
 			}
-
+			spdlog::debug("Created entity type {}", entity_type->get_type_name());
 			return entity_type;
+		} else {
+			spdlog::error("Failed to create entity type {}", entity_type_name);
+			return std::nullopt;
 		}
-		return std::nullopt;
 	}
 
 }
