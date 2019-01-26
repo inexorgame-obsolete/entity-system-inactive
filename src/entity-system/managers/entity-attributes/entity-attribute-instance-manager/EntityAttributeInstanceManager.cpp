@@ -20,7 +20,7 @@ namespace entity_system {
     }
 
 
-	std::optional<ENT_ATTR_INST> EntityAttributeInstanceManager::create_entity_attribute_instance(const ENT_ATTR_TYPE& ent_attr_type)
+    O_ENT_ATTR_INST EntityAttributeInstanceManager::create_entity_attribute_instance(const ENT_ATTR_TYPE& ent_attr_type)
 	{
 		// Create entity attribute instance.
 		ENT_ATTR_INST new_ent_attr_instance = std::make_shared<EntityAttributeInstance>(ent_attr_type);
@@ -29,7 +29,7 @@ namespace entity_system {
         add_instance(new_ent_attr_instance->get_GUID(), new_ent_attr_instance);
 
         // 
-        return std::optional<ENT_ATTR_INST> { new_ent_attr_instance };
+        return O_ENT_ATTR_INST { new_ent_attr_instance };
 	}
     
 

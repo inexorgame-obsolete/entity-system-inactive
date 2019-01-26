@@ -32,18 +32,18 @@ namespace entity_system {
 			/// @param ent_type A const reference of a shared pointer
 			/// to an entity type of which an instance will be created.
 			/// @return A shared pointer to the entity type instance which was created.
-			std::optional<ENT_INST> create_entity_instance(const ENT_TYPE&);
+			O_ENT_INST create_entity_instance(const ENT_TYPE&);
 
 
 
             /// 
             /// 
-            std::optional<ENT_INST> get_entity_instance(const xg::Guid&);
+			O_ENT_INST get_entity_instance(const xg::Guid&);
 
 
             /// 
             /// 
-            std::optional<ENT_INST> get_entity_instance(const std::string&);
+			O_ENT_INST get_entity_instance(const std::string&);
 
 
             // TODO: get_all_entity_instances_of_type() const;
@@ -51,7 +51,7 @@ namespace entity_system {
 
             /// Returns all entity type instances.
 			/// @return All entity type instances which exist in the entity system.
-            std::optional<ENT_INST> get_all_entity_instances() const;
+			O_ENT_INST get_all_entity_instances() const;
 
 
             // TODO: get_entity_instance_count_of_type() const;

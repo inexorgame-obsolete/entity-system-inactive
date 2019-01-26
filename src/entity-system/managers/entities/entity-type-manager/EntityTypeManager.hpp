@@ -32,14 +32,14 @@ namespace entity_system {
 			/// @brief Creates a new entity type.
 			/// @param ent_type_name The name of the new entity type.
             /// @return ?
-			std::optional<ENT_TYPE> create_entity_type(const std::string&);
+			O_ENT_TYPE create_entity_type(const std::string&);
 
 
             /// @brief Creates a new entity type.
             /// @param ent_type_GUID The GUID of the new entity type.
             /// @param ent_type_name The name of the new entity type.
             /// @return ?
-            std::optional<ENT_TYPE> create_entity_type(const xg::Guid&, const std::string&);
+			O_ENT_TYPE create_entity_type(const xg::Guid&, const std::string&);
             
 
 			/// @brief Checks if an entity type does already exist.
@@ -67,13 +67,13 @@ namespace entity_system {
             /// @brief Returns an entity type.
             /// @param ent_type_GUID The GUID of the entity type.
             /// @return A std::optional<ENT_TYPE> of the entity type.
-            std::optional<ENT_TYPE> get_entity_type(const xg::Guid&);
+			O_ENT_TYPE get_entity_type(const xg::Guid&);
 
 
             /// @brief Returns an entity type.
             /// @param ent_type_name The name of the entity type.
             /// @return A std::optional<ENT_TYPE> of the entity type.
-            std::optional<ENT_TYPE> get_entity_type(const std::string&);
+			O_ENT_TYPE get_entity_type(const std::string&);
 
 
             /// @brief Deletes an entity type by name.

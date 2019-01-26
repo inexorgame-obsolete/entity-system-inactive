@@ -36,7 +36,7 @@ namespace entity_system {
 			/// @param ent_attr_type_name The name of the new entity attribute type.
 			/// @param ent_attr_data_type The data type of the new entity attribute type.
 			/// @return ?
-			std::optional<ENT_ATTR_TYPE> create_entity_attribute_type(const std::string&, const ENTSYS_DATA_TYPE&);
+			O_ENT_ATTR_TYPE create_entity_attribute_type(const std::string&, const ENTSYS_DATA_TYPE&);
 
             
 			/// @brief Creates a new entity attribute type.
@@ -44,7 +44,7 @@ namespace entity_system {
             /// @param ? 
             /// @param ? 
             /// @return ?
-            std::optional<ENT_ATTR_TYPE> create_entity_attribute_type(const xg::Guid&, const std::string&, const ENTSYS_DATA_TYPE&);
+			O_ENT_ATTR_TYPE create_entity_attribute_type(const xg::Guid&, const std::string&, const ENTSYS_DATA_TYPE&);
 
             
 			/// @brief Checks if an entity attribute type does already exist.
@@ -69,12 +69,12 @@ namespace entity_system {
 
             /// Get an entity attribute type by name.
             /// @param type_name The name of the type we tant to check for.
-            std::optional<ENT_ATTR_TYPE> get_entity_attribute_type(const std::string&) const;
+			O_ENT_ATTR_TYPE get_entity_attribute_type(const std::string&) const;
 
 
             /// Get an entity attribute type by GUID.
             /// @param type_GUID The GUID of the type we tant to check for.
-            std::optional<ENT_ATTR_TYPE> get_entity_attribute_type(const xg::Guid&) const;
+			O_ENT_ATTR_TYPE get_entity_attribute_type(const xg::Guid&) const;
 
             /// Returns the number of available entity attribute types.
 			/// @return The number of available entity attribute types.

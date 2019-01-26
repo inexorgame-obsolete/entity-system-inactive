@@ -20,7 +20,7 @@ namespace entity_system {
 	}
 
 
-	std::optional<ENT_TYPE> EntityTypeManager::create_entity_type(const std::string& ent_type_name)
+	O_ENT_TYPE EntityTypeManager::create_entity_type(const std::string& ent_type_name)
 	{
 		// Check if an entity type with this name does already exist.
 		if(! is_type_name_valid(ent_type_name))
@@ -43,11 +43,11 @@ namespace entity_system {
 		add_type(ent_type_name, new_entity_type);
 
         // Return the entity type we've just created.
-        return std::optional<ENT_TYPE>{ new_entity_type };
+        return O_ENT_TYPE{ new_entity_type };
 	}
 
     
-    std::optional<ENT_TYPE> EntityTypeManager::create_entity_type(const xg::Guid& ent_type_GUID, const std::string& ent_type_name)
+	O_ENT_TYPE EntityTypeManager::create_entity_type(const xg::Guid& ent_type_GUID, const std::string& ent_type_name)
     {
 		// Check if an entity type with this name does already exist.
 		if(! is_type_name_valid(ent_type_name))
@@ -74,7 +74,7 @@ namespace entity_system {
 		add_type(ent_type_name, new_entity_type);
 
         // Return the entity type we've just created.
-        return std::optional<ENT_TYPE>{ new_entity_type };
+        return O_ENT_TYPE{ new_entity_type };
     }
 
 
@@ -96,21 +96,21 @@ namespace entity_system {
 	}
 
 
-    std::optional<ENT_TYPE> EntityTypeManager::get_entity_type(const xg::Guid& ent_type_GUID)
+	O_ENT_TYPE EntityTypeManager::get_entity_type(const xg::Guid& ent_type_GUID)
     {
         if(does_type_exist(ent_type_GUID))
         {
-            return std::optional<ENT_TYPE> { get_type(ent_type_GUID) };
+            return O_ENT_TYPE { get_type(ent_type_GUID) };
         }
         return std::nullopt;
     }
 
 
-    std::optional<ENT_TYPE> EntityTypeManager::get_entity_type(const std::string& ent_type_name)
+	O_ENT_TYPE EntityTypeManager::get_entity_type(const std::string& ent_type_name)
     {
         if(does_type_exist(ent_type_name))
         {
-            return std::optional<ENT_TYPE> { get_type(ent_type_name) };
+            return O_ENT_TYPE { get_type(ent_type_name) };
         }
         return std::nullopt;
     }

@@ -34,7 +34,7 @@ namespace entity_system {
 	}
 
 
-	std::optional<REL_TYPE> RelationTypeManager::create_relation_type(const std::string& rel_type_name, const ENT_TYPE& ent_type_source, const ENT_TYPE& ent_type_target)
+	O_REL_TYPE RelationTypeManager::create_relation_type(const std::string& rel_type_name, const ENT_TYPE& ent_type_source, const ENT_TYPE& ent_type_target)
 	{
 		// Validate new entity relation type name.
 		if(!is_type_name_valid(rel_type_name))
@@ -53,7 +53,7 @@ namespace entity_system {
 		// Add new entity relation type to type map.
 		add_type(rel_type_name, new_relation_type);
 
-        return std::optional<REL_TYPE> { new_relation_type };
+        return O_REL_TYPE { new_relation_type };
 	}
 
 

@@ -37,7 +37,7 @@ namespace entity_system {
 			/// @param ent_type_inst_target A const reference to a shared pointer of
 			/// the entity type instance which will be used as <b>target</b> entity type instance.
 			/// @return A shared pointer to the new entity relation type instance which was created.
-			std::optional<REL_INST> create_relation_instance(const REL_TYPE&, const ENT_INST&, const ENT_INST&);
+			O_REL_INST create_relation_instance(const REL_TYPE&, const ENT_INST&, const ENT_INST&);
 
 			/// Returns the number of relation type instances.
 			/// @return The number of existing entity relation type instances.

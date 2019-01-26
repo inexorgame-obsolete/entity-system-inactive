@@ -20,7 +20,7 @@ namespace entity_system {
 	}
 
 
-	std::optional<REL_ATTR_INST> RelationAttributeInstanceManager::create_relation_attribute_instance(const REL_ATTR_TYPE& rel_attr_type)
+	O_REL_ATTR_INST RelationAttributeInstanceManager::create_relation_attribute_instance(const REL_ATTR_TYPE& rel_attr_type)
 	{
 		// Creates a new relation attribute type instance.
 		REL_ATTR_INST new_rel_attr_inst = std::make_shared<RelationAttributeInstance>(rel_attr_type);
@@ -29,7 +29,7 @@ namespace entity_system {
 		add_instance(new_rel_attr_inst->get_GUID(), new_rel_attr_inst);
 
         // Read only, no mutex required.
-        return std::optional<REL_ATTR_INST> { new_rel_attr_inst };
+        return O_REL_ATTR_INST { new_rel_attr_inst };
 	}
 
 

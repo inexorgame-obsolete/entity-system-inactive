@@ -49,7 +49,7 @@ namespace entity_system {
 			/// an entity type which will act as <b>source</b> entity type.
 			/// @param ent_type_target A const reference of a shared pointer to
 			/// an entity type which will act as <b>target</b> entity type.
-			std::optional<REL_TYPE> create_relation_type(const std::string&, const ENT_TYPE&, const ENT_TYPE&);
+			O_REL_TYPE create_relation_type(const std::string&, const ENT_TYPE&, const ENT_TYPE&);
 
 
 			/// Returns the number of available entity relation types.

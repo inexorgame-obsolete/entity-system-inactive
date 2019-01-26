@@ -22,7 +22,7 @@ namespace entity_system {
 	}
 
 
-	std::optional<ENT_INST> EntityInstanceManager::create_entity_instance(const ENT_TYPE& ent_type)
+	O_ENT_INST EntityInstanceManager::create_entity_instance(const ENT_TYPE& ent_type)
 	{
 		// Create a new entity type instance.
 		ENT_INST new_ent_instance = std::make_shared<EntityInstance>(ent_type);
@@ -46,7 +46,7 @@ namespace entity_system {
 		// Call template base class method.
 		add_instance(new_ent_instance->get_GUID(), new_ent_instance);
 		
-        return std::optional<ENT_INST> { new_ent_instance };
+        return O_ENT_INST { new_ent_instance };
 	}
 
 

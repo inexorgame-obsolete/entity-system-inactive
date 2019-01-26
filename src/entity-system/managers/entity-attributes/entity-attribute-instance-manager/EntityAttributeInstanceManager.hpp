@@ -28,13 +28,13 @@ namespace entity_system {
 			/// @brief Creates an entity attribute instance.
 			/// @param ent_attr_type The entity attribute type of which an instance will be created.
 			/// @return The entity attribute instance if creating it succeeded, std::nullopt otherwise.
-			std::optional<ENT_ATTR_INST> create_entity_attribute_instance(const ENT_ATTR_TYPE&);
+			O_ENT_ATTR_INST create_entity_attribute_instance(const ENT_ATTR_TYPE&);
 
 
             /// @brief Returns an entity attribute instance.
             /// @param ent_attr_inst_GUID The GUID of the entity attribute instance.
 			/// @return The entity attribute instance if creating it succeeded, std::nullopt otherwise.
-            std::optional<ENT_ATTR_INST> get_entity_attribute_instance(const xg::Guid&) const;
+			O_ENT_ATTR_INST get_entity_attribute_instance(const xg::Guid&) const;
 
 
 			/// @brief Returns the number of existing entity attribute instances.

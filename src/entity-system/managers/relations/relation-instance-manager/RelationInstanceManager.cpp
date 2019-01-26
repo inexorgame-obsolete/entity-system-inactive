@@ -23,7 +23,7 @@ namespace entity_system {
     }
 
 
-	std::optional<REL_INST> RelationInstanceManager::create_relation_instance(const REL_TYPE& rel_type, const ENT_INST& ent_type_inst_source, const ENT_INST& ent_type_inst_target)
+    O_REL_INST RelationInstanceManager::create_relation_instance(const REL_TYPE& rel_type, const ENT_INST& ent_type_inst_source, const ENT_INST& ent_type_inst_target)
 	{
 		// Create a new entity relation type instance.
 		REL_INST new_relation_instance = std::make_shared<RelationInstance>(rel_type, ent_type_inst_source, ent_type_inst_target);
@@ -44,7 +44,7 @@ namespace entity_system {
 		add_instance(new_relation_instance->get_GUID(), new_relation_instance);
 
         // Read only, no mutex required.
-        return std::optional<REL_INST> { new_relation_instance };
+        return O_REL_INST { new_relation_instance };
 	}
 
 

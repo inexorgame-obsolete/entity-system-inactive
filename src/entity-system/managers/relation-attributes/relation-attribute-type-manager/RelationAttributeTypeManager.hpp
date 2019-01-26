@@ -30,7 +30,7 @@ namespace entity_system {
 			/// @param rel_attr_type_name The name of the new relation attribute type.
 			/// @param rel_attr_data_type The data type of the new relation attribute type.
 			/// @return A shared pointer to the relation attribute type which was created.
-			std::optional<REL_ATTR_TYPE> create_relation_attribute_type(const std::string&, const ENTSYS_DATA_TYPE&);
+			O_REL_ATTR_TYPE create_relation_attribute_type(const std::string&, const ENTSYS_DATA_TYPE&);
 
 			/// Returns the number of existing types of relation attributes.
 			/// @return The number of existing types of relation attributes.

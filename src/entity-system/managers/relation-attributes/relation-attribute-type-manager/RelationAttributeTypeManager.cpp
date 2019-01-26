@@ -20,7 +20,7 @@ namespace entity_system {
 	}
 
 
-	std::optional<REL_ATTR_TYPE> RelationAttributeTypeManager::create_relation_attribute_type(const std::string& rel_attr_type_name, const ENTSYS_DATA_TYPE& rel_attr_data_type)
+	O_REL_ATTR_TYPE RelationAttributeTypeManager::create_relation_attribute_type(const std::string& rel_attr_type_name, const ENTSYS_DATA_TYPE& rel_attr_data_type)
 	{
 		// Check if an entity relation attribute type
 		// with this name does already exist.
@@ -40,7 +40,7 @@ namespace entity_system {
         // 
 		add_type(rel_attr_type_name, new_rel_attr_type);
 
-        return std::optional<REL_ATTR_TYPE> { new_rel_attr_type };
+        return O_REL_ATTR_TYPE { new_rel_attr_type };
 	}
 
 
