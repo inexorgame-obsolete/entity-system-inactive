@@ -49,6 +49,9 @@ namespace entity_system {
 			// TODO: Get instance(s).
 			// TODO: Delete all instances.
 
+			/// Delete all relation instances
+			void delete_all_relation_instances();
+
         private:
 
     		/// The entity relation attribute instance manager

@@ -55,5 +55,12 @@ namespace entity_system {
 	}
 
 
+	void RelationInstanceManager::delete_all_relation_instances()
+	{
+		// Call template base class method.
+		delete_all_instances();
+	}
+
+
 };
 };

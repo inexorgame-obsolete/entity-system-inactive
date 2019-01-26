@@ -45,19 +45,19 @@ namespace entity_system {
 	void EntityManager::reset_entity_system()
 	{
 		// Attribute instances
-		relation_attribute_instance_manager->delete_all_instances();
+		relation_attribute_instance_manager->delete_all_relation_attribute_instances();
 		entity_attribute_instance_manager->delete_all_entity_attribute_instances();
 
 		// Attribute types
-		relation_attribute_type_manager->delete_all_types();
+		relation_attribute_type_manager->delete_all_relation_attribute_types();
 		entity_attribute_type_manager->delete_all_entity_attribute_types();
 
 		// Instances
-		relation_instance_manager->delete_all_instances();
+		relation_instance_manager->delete_all_relation_instances();
 		entity_instance_manager->delete_all_entity_instances();
 
 		// Types
-		relation_type_manager->delete_all_types();
+		relation_type_manager->delete_all_relation_types();
 		entity_type_manager->delete_all_entity_types();
 
 		// TODO: is this sufficiant?

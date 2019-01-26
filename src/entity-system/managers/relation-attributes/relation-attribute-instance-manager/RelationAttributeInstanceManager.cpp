@@ -39,7 +39,7 @@ namespace entity_system {
 	}
 
 	
-	void RelationAttributeInstanceManager::delete_all_relation_type_attribute_instances()
+	void RelationAttributeInstanceManager::delete_all_relation_attribute_instances()
 	{
 		return delete_all_instances();
 	}

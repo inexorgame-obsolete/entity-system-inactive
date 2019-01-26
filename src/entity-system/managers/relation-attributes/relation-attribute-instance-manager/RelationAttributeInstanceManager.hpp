@@ -41,8 +41,8 @@ namespace entity_system {
 			/// @return The number of existing relation attribute type instances.
 			std::size_t get_relation_attribute_instance_count() const;
 
-			/// Deletes all instances of relation attribute types.
-			void delete_all_relation_type_attribute_instances();
+			/// Deletes all instances of relation attributes.
+			void delete_all_relation_attribute_instances();
 
 	};
 
