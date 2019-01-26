@@ -47,21 +47,15 @@ namespace entity_system {
 
 	O_ENT_TYPE EntityTypeBuilder::build()
 	{
-		/// The actual logic
-		/// The entity type LOGGER
-		shared_ptr<inexor::entity_system::EntityType> entity_type_logger;
-
-		/// The entity type LOGGER
-		shared_ptr<EntityAttributeType> attr_logger_name;
-
 		O_ENT_TYPE o_entity_type = entity_type_manager->create_entity_type("LOGGER");
 		if (o_entity_type.has_value())
 		{
 			shared_ptr<EntityType> entity_type = o_entity_type.value();
 			for (auto& attribute_entry : entity_type_attributes) {
-				O_ENT_ATTR_TYPE o_entity_attribute_type = entity_attribute_type_manager->create_entity_attribute_type(attribute_entry.first, attribute_entry.second);
-				if (o_entity_attribute_type.has_value()) {
-					entity_type_logger->link_attribute_type(o_entity_attribute_type.value());
+				O_ENT_ATTR_TYPE o_attribute_type = entity_attribute_type_manager->create_entity_attribute_type(attribute_entry.first, attribute_entry.second);
+				if (o_attribute_type.has_value()) {
+					ENT_ATTR_TYPE attribute_type = o_attribute_type.value();
+					entity_type->link_attribute_type(attribute_type);
 				} else {
 					return std::nullopt;
 				}
