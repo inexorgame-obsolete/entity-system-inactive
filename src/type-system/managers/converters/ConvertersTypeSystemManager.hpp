@@ -5,6 +5,8 @@
 
 #include "type-system/providers/converters/IntToFloatEntityTypeProvider.hpp"
 
+#include "type-system/factories/converters/IntToFloatFactory.hpp"
+
 using namespace inexor::entity_system;
 using namespace std;
 
@@ -20,7 +22,8 @@ namespace type_system {
 
 			/// Constructor.
 			ConvertersTypeSystemManager(
-				shared_ptr<IntToFloatEntityTypeProvider> int_to_float_entity_type_provider
+				shared_ptr<IntToFloatEntityTypeProvider> int_to_float_entity_type_provider,
+				shared_ptr<IntToFloatFactory> int_to_float_factory
 			);
 
 			/// Destructor.
@@ -33,6 +36,9 @@ namespace type_system {
 
 			/// Provider for entity type INT_TO_FLOAT.
 			shared_ptr<IntToFloatEntityTypeProvider> int_to_float_entity_type_provider;
+
+			/// Factory for entity type INT_TO_FLOAT.
+			shared_ptr<IntToFloatFactory> int_to_float_factory;
 
 	};
 

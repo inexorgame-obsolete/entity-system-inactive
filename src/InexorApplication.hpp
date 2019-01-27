@@ -26,6 +26,8 @@
 
 #include "type-system/managers/TypeSystemManager.hpp"
 
+#include "configuration/managers/ConfigurationManager.hpp"
+
 #include "logging/managers/LogManager.hpp"
 
 
@@ -47,6 +49,7 @@ namespace inexor {
 			InexorApplication(
 				std::shared_ptr<inexor::entity_system::EntitySystem> entity_system,
 				std::shared_ptr<inexor::entity_system::type_system::TypeSystemManager> type_system_manager,
+				std::shared_ptr<inexor::configuration::ConfigurationManager> configuration_manager,
 				std::shared_ptr<inexor::entity_system::RestServer> rest_server,
 				std::shared_ptr<inexor::logging::LogManager> log_manager
 			);
@@ -87,6 +90,9 @@ namespace inexor {
 
             /// The type system manager.
             std::shared_ptr<inexor::entity_system::type_system::TypeSystemManager> type_system_manager;
+
+            /// The type system manager.
+            std::shared_ptr<inexor::configuration::ConfigurationManager> configuration_manager;
 
             /// The REST server of the entity system
 			std::shared_ptr<inexor::entity_system::RestServer> rest_server;
