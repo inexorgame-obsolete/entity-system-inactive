@@ -13,23 +13,18 @@
 
 #include "EntityInstanceApi.hpp"
 
-#include <crossguid/guid.hpp>
-
-#include <corvusoft/restbed/byte.hpp>
-#include <corvusoft/restbed/string.hpp>
-#include <corvusoft/restbed/settings.hpp>
-#include <corvusoft/restbed/request.hpp>
-
 
 namespace inexor {
 namespace entity_system {
 namespace rest {
 namespace api {
 
+
 using namespace inexor::entity_system::rest::model;
 using namespace xg;
 using namespace restbed;
 using namespace std;
+
 
 EntityInstanceApi::EntityInstanceApi(
 	std::shared_ptr<EntityInstanceApiEntitiesInstancesResource> spEntityInstanceApiEntitiesInstancesResource,

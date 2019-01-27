@@ -10,27 +10,21 @@
  * Do not edit the class manually.
  */
 
+
 #include "EntityTypeApi.hpp"
 
-#include <map>
-#include <crossguid/guid.hpp>
-
-#include <corvusoft/restbed/byte.hpp>
-#include <corvusoft/restbed/string.hpp>
-#include <corvusoft/restbed/settings.hpp>
-#include <corvusoft/restbed/request.hpp>
-
-#include "entity-system/managers/entities/entity-type-manager/EntityTypeManager.hpp"
 
 namespace inexor {
 namespace entity_system {
 namespace rest {
 namespace api {
 
+
 using namespace inexor::entity_system::rest::model;
 using namespace xg;
 using namespace restbed;
 using namespace std;
+
 
 EntityTypeApi::EntityTypeApi(
 	shared_ptr<EntityTypeApiEntitiesTypesResource> spEntityTypeApiEntitiesTypesResource,

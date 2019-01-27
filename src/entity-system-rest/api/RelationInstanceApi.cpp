@@ -13,25 +13,18 @@
 
 #include "RelationInstanceApi.hpp"
 
-#include <crossguid/guid.hpp>
-
-#include <corvusoft/restbed/byte.hpp>
-#include <corvusoft/restbed/string.hpp>
-#include <corvusoft/restbed/settings.hpp>
-#include <corvusoft/restbed/request.hpp>
-
-#include "entity-system/managers/relations/relation-instance-manager/RelationInstanceManager.hpp"
-
 
 namespace inexor {
 namespace entity_system {
 namespace rest {
 namespace api {
 
+
 using namespace inexor::entity_system::rest::model;
 using namespace xg;
 using namespace restbed;
 using namespace std;
+
 
 RelationInstanceApi::RelationInstanceApi(
 	std::shared_ptr<RelationInstanceApiRelationsInstancesRelation_instance_uuidResource> spRelationInstanceApiRelationsInstancesRelation_instance_uuidResource,

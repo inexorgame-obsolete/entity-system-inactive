@@ -13,17 +13,18 @@
 
 #include "AttributeApi.hpp"
 
-#include <crossguid/guid.hpp>
 
 namespace inexor {
 namespace entity_system {
 namespace rest {
 namespace api {
 
+
 using namespace inexor::entity_system::rest::model;
 using namespace xg;
 using namespace restbed;
 using namespace std;
+
 
 AttributeApi::AttributeApi(
 	std::shared_ptr<AttributeApiEntitiesInstancesEntity_instance_uuidAttributesNameResource> spAttributeApiEntitiesInstancesEntity_instance_uuidAttributesNameResource,

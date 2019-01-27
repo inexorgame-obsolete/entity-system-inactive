@@ -10,25 +10,21 @@
  * Do not edit the class manually.
  */
 
+
 #include "RelationTypeApi.hpp"
 
-#include <map>
-#include <crossguid/guid.hpp>
-
-#include <corvusoft/restbed/byte.hpp>
-#include <corvusoft/restbed/string.hpp>
-#include <corvusoft/restbed/settings.hpp>
-#include <corvusoft/restbed/request.hpp>
 
 namespace inexor {
 namespace entity_system {
 namespace rest {
 namespace api {
 
+
 using namespace inexor::entity_system::rest::model;
 using namespace xg;
 using namespace restbed;
 using namespace std;
+
 
 RelationTypeApi::RelationTypeApi(
 	std::shared_ptr<RelationTypeApiRelationsTypesRelation_type_uuidResource> spRelationTypeApiRelationsTypesRelation_type_uuidResource,
