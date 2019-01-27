@@ -9,37 +9,35 @@
 using namespace inexor::entity_system;
 using namespace std;
 
-
 namespace inexor {
-namespace logging {
+namespace entity_system {
+namespace type_system {
 
-	/// @class LoggerEntityTypeProvider
-    /// @brief Provides the entity type LOGGER.
-	class LoggerEntityTypeProvider : public EntityTypeProvider
+	/// @class IntStoreEntityTypeProvider
+    /// @brief Provides the entity type INT_STORE.
+	class IntStoreEntityTypeProvider : public EntityTypeProvider
 	{
 		public:
 
 			/// Constructor.
-			LoggerEntityTypeProvider(
+			IntStoreEntityTypeProvider(
 				shared_ptr<EntityTypeBuilderManager> entity_type_builder_manager
 			) : EntityTypeProvider(
 				entity_type_builder_manager,
-				"LOGGER",
+				"INT_STORE",
 				{
-					{ "logger_name", ENTSYS_DATA_TYPE_STRING },
-					{ "log_level", ENTSYS_DATA_TYPE_INT }
+					{ "name", ENTSYS_DATA_TYPE_STRING },
+					{ "input_value", ENTSYS_DATA_TYPE_INT },
+					{ "default_value", ENTSYS_DATA_TYPE_INT },
+					{ "output_value", ENTSYS_DATA_TYPE_INT }
 				}
 			) {};
 
 			/// Destructor.
-			~LoggerEntityTypeProvider() {};
-
-			// static string ATTTRIBUTE_LOGGER_NAME = "logger_name";
-
-			// static string ATTTRIBUTE_LOG_LEVEL = "log_level";
+			~IntStoreEntityTypeProvider() {};
 
 	};
 
-
-};
-};
+}
+}
+}
