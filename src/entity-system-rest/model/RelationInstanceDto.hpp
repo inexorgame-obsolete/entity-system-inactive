@@ -32,45 +32,45 @@ namespace model {
 			RelationInstanceDto();
 			virtual ~RelationInstanceDto();
 
-			std::string toJsonString();
-			void fromJsonString(std::string const& jsonString);
+			std::string to_json_string();
+			void from_json_string(std::string const& json_string);
 
 			/// <summary>
 			///
 			/// </summary>
-			std::string getRelationInstanceUuid() const;
-			void setRelationInstanceUuid(std::string value);
+			std::string get_relation_instance_uuid() const;
+			void set_relation_instance_uuid(std::string relation_instance_uuid);
 
 			/// <summary>
 			///
 			/// </summary>
-			std::string getRelationTypeUuid() const;
-			void setRelationTypeUuid(std::string value);
+			std::string get_relation_type_uuid() const;
+			void set_relation_type_uuid(std::string relation_type_uuid);
 
 			/// <summary>
 			///
 			/// </summary>
-			std::string getStartNodeEntityInstanceUuid() const;
-			void setStartNodeEntityInstanceUuid(std::string value);
+			std::string get_start_node_entity_instance_uuid() const;
+			void set_start_node_entity_instance_uuid(std::string start_node_entity_instance_uuid);
 
 			/// <summary>
 			///
 			/// </summary>
-			std::string getEndNodeEntityInstanceUuid() const;
-			void setEndNodeEntityInstanceUuid(std::string value);
+			std::string get_end_node_entity_instance_uuid() const;
+			void set_end_node_entity_instance_uuid(std::string end_node_entity_instance_uuid);
 
 			/// <summary>
 			///
 			/// </summary>
-			std::vector<std::shared_ptr<AttributeDto>> getAttributes() const;
-			void setAttributes(std::vector<std::shared_ptr<AttributeDto>> value);
+			std::vector<std::shared_ptr<AttributeDto>> get_attributes() const;
+			void set_attributes(std::vector<std::shared_ptr<AttributeDto>> attributes);
 
 		protected:
-			std::string m_Relation_instance_uuid;
-			std::string m_Relation_type_uuid;
-			std::string m_Start_node_entity_instance_uuid;
-			std::string m_End_node_entity_instance_uuid;
-			std::vector<std::shared_ptr<AttributeDto>> m_Attributes;
+			std::string relation_instance_uuid;
+			std::string relation_type_uuid;
+			std::string start_node_entity_instance_uuid;
+			std::string end_node_entity_instance_uuid;
+			std::vector<std::shared_ptr<AttributeDto>> attributes;
 	};
 
 }

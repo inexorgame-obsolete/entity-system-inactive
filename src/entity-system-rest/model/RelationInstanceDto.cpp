@@ -30,79 +30,78 @@ namespace model {
 
 	RelationInstanceDto::RelationInstanceDto()
 	{
-		m_Relation_instance_uuid = "";
-		m_Relation_type_uuid = "";
-		m_Start_node_entity_instance_uuid = "";
-		m_End_node_entity_instance_uuid = "";
-
+		relation_instance_uuid = "";
+		relation_type_uuid = "";
+		start_node_entity_instance_uuid = "";
+		end_node_entity_instance_uuid = "";
 	}
 
 	RelationInstanceDto::~RelationInstanceDto()
 	{
 	}
 
-	std::string RelationInstanceDto::toJsonString()
+	std::string RelationInstanceDto::to_json_string()
 	{
 		std::stringstream ss;
 		ptree pt;
-		pt.put("relation_instance_uuid", m_Relation_instance_uuid);
-		pt.put("relation_type_uuid", m_Relation_type_uuid);
-		pt.put("start_node_entity_instance_uuid", m_Start_node_entity_instance_uuid);
-		pt.put("end_node_entity_instance_uuid", m_End_node_entity_instance_uuid);
+		pt.put("relation_instance_uuid", relation_instance_uuid);
+		pt.put("relation_type_uuid", relation_type_uuid);
+		pt.put("start_node_entity_instance_uuid", start_node_entity_instance_uuid);
+		pt.put("end_node_entity_instance_uuid", end_node_entity_instance_uuid);
 		write_json(ss, pt, false);
 		return ss.str();
 	}
 
-	void RelationInstanceDto::fromJsonString(std::string const& jsonString)
+	void RelationInstanceDto::from_json_string(std::string const& jsonString)
 	{
 		std::stringstream ss(jsonString);
 		ptree pt;
 		read_json(ss,pt);
-		m_Relation_instance_uuid = pt.get("relation_instance_uuid", "");
-		m_Relation_type_uuid = pt.get("relation_type_uuid", "");
-		m_Start_node_entity_instance_uuid = pt.get("start_node_entity_instance_uuid", "");
-		m_End_node_entity_instance_uuid = pt.get("end_node_entity_instance_uuid", "");
+		relation_instance_uuid = pt.get("relation_instance_uuid", "");
+		relation_type_uuid = pt.get("relation_type_uuid", "");
+		start_node_entity_instance_uuid = pt.get("start_node_entity_instance_uuid", "");
+		end_node_entity_instance_uuid = pt.get("end_node_entity_instance_uuid", "");
 	}
 
-	std::string RelationInstanceDto::getRelationInstanceUuid() const
+	std::string RelationInstanceDto::get_relation_instance_uuid() const
 	{
-		return m_Relation_instance_uuid;
+		return relation_instance_uuid;
 	}
-	void RelationInstanceDto::setRelationInstanceUuid(std::string value)
+	void RelationInstanceDto::set_relation_instance_uuid(std::string relation_instance_uuid)
 	{
-		m_Relation_instance_uuid = value;
+		this->relation_instance_uuid = relation_instance_uuid;
 	}
-	std::string RelationInstanceDto::getRelationTypeUuid() const
+	std::string RelationInstanceDto::get_relation_type_uuid() const
 	{
-		return m_Relation_type_uuid;
+		return relation_type_uuid;
 	}
-	void RelationInstanceDto::setRelationTypeUuid(std::string value)
+	void RelationInstanceDto::set_relation_type_uuid(std::string relation_type_uuid)
 	{
-		m_Relation_type_uuid = value;
+		this->relation_type_uuid = relation_type_uuid;
 	}
-	std::string RelationInstanceDto::getStartNodeEntityInstanceUuid() const
+	std::string RelationInstanceDto::get_start_node_entity_instance_uuid() const
 	{
-		return m_Start_node_entity_instance_uuid;
+		return start_node_entity_instance_uuid;
 	}
-	void RelationInstanceDto::setStartNodeEntityInstanceUuid(std::string value)
+	void RelationInstanceDto::set_start_node_entity_instance_uuid(std::string start_node_entity_instance_uuid)
 	{
-		m_Start_node_entity_instance_uuid = value;
+		this->start_node_entity_instance_uuid = start_node_entity_instance_uuid;
 	}
-	std::string RelationInstanceDto::getEndNodeEntityInstanceUuid() const
+	std::string RelationInstanceDto::get_end_node_entity_instance_uuid() const
 	{
-		return m_End_node_entity_instance_uuid;
+		return end_node_entity_instance_uuid;
 	}
-	void RelationInstanceDto::setEndNodeEntityInstanceUuid(std::string value)
+	void RelationInstanceDto::set_end_node_entity_instance_uuid(std::string end_node_entity_instance_uuid)
 	{
-		m_End_node_entity_instance_uuid = value;
+		this->end_node_entity_instance_uuid = end_node_entity_instance_uuid;
 	}
-	std::vector<std::shared_ptr<AttributeDto>> RelationInstanceDto::getAttributes() const
+	std::vector<std::shared_ptr<AttributeDto>> RelationInstanceDto::get_attributes() const
 	{
-		return m_Attributes;
+		return attributes;
 	}
-	void RelationInstanceDto::setAttributes(std::vector<std::shared_ptr<AttributeDto>> value)
+	void RelationInstanceDto::set_attributes(std::vector<std::shared_ptr<AttributeDto>> attributes)
 	{
-		m_Attributes = value;
+		this->attributes = attributes;
 	}
 
 }

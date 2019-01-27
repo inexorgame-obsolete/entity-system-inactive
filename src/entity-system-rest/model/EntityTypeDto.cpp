@@ -30,62 +30,61 @@ namespace model {
 
 	EntityTypeDto::EntityTypeDto()
 	{
-		m_Entity_type_uuid = "";
-		m_Name = "";
-
+		entity_type_uuid = "";
+		name = "";
 	}
 
 	EntityTypeDto::~EntityTypeDto()
 	{
 	}
 
-	std::string EntityTypeDto::toJsonString()
+	std::string EntityTypeDto::to_json_string()
 	{
 		std::stringstream ss;
 		ptree pt;
-		pt.put("entity_type_uuid", m_Entity_type_uuid);
-		pt.put("name", m_Name);
+		pt.put("entity_type_uuid", entity_type_uuid);
+		pt.put("name", name);
 		write_json(ss, pt, false);
 		return ss.str();
 	}
 
-	void EntityTypeDto::fromJsonString(std::string const& jsonString)
+	void EntityTypeDto::from_json_string(std::string const& json_string)
 	{
-		std::stringstream ss(jsonString);
+		std::stringstream ss(json_string);
 		ptree pt;
 		read_json(ss,pt);
-		m_Entity_type_uuid = pt.get("entity_type_uuid", "");
-		m_Name = pt.get("name", "");
+		entity_type_uuid = pt.get("entity_type_uuid", "");
+		name = pt.get("name", "");
 	}
 
-	std::string EntityTypeDto::getEntityTypeUuid() const
+	std::string EntityTypeDto::get_entity_type_uuid() const
 	{
-		return m_Entity_type_uuid;
+		return entity_type_uuid;
 	}
 
-	void EntityTypeDto::setEntityTypeUuid(std::string value)
+	void EntityTypeDto::set_entity_type_uuid(std::string entity_type_uuid)
 	{
-		m_Entity_type_uuid = value;
+		this->entity_type_uuid = entity_type_uuid;
 	}
 
-	std::string EntityTypeDto::getName() const
+	std::string EntityTypeDto::get_name() const
 	{
-		return m_Name;
+		return name;
 	}
 
-	void EntityTypeDto::setName(std::string value)
+	void EntityTypeDto::set_name(std::string name)
 	{
-		m_Name = value;
+		this->name = name;
 	}
 
-	std::vector<std::shared_ptr<AttributeDto>> EntityTypeDto::getAttributes() const
+	std::vector<std::shared_ptr<AttributeDto>> EntityTypeDto::get_attributes() const
 	{
-		return m_Attributes;
+		return attributes;
 	}
 
-	void EntityTypeDto::setAttributes(std::vector<std::shared_ptr<AttributeDto>> value)
+	void EntityTypeDto::set_attributes(std::vector<std::shared_ptr<AttributeDto>> attributes)
 	{
-		m_Attributes = value;
+		this->attributes = attributes;
 	}
 
 }

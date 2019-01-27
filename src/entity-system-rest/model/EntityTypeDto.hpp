@@ -32,31 +32,31 @@ namespace model {
 			EntityTypeDto();
 			virtual ~EntityTypeDto();
 
-			std::string toJsonString();
-			void fromJsonString(std::string const& jsonString);
+			std::string to_json_string();
+			void from_json_string(std::string const& json_string);
 
 			/// <summary>
 			///
 			/// </summary>
-			std::string getEntityTypeUuid() const;
-			void setEntityTypeUuid(std::string value);
+			std::string get_entity_type_uuid() const;
+			void set_entity_type_uuid(std::string entity_type_uuid);
 
 			/// <summary>
 			///
 			/// </summary>
-			std::string getName() const;
-			void setName(std::string value);
+			std::string get_name() const;
+			void set_name(std::string name);
 
 			/// <summary>
 			///
 			/// </summary>
-			std::vector<std::shared_ptr<AttributeDto>> getAttributes() const;
-			void setAttributes(std::vector<std::shared_ptr<AttributeDto>> value);
+			std::vector<std::shared_ptr<AttributeDto>> get_attributes() const;
+			void set_attributes(std::vector<std::shared_ptr<AttributeDto>> attributes);
 
 		protected:
-			std::string m_Entity_type_uuid;
-			std::string m_Name;
-			std::vector<std::shared_ptr<AttributeDto>> m_Attributes;
+			std::string entity_type_uuid;
+			std::string name;
+			std::vector<std::shared_ptr<AttributeDto>> attributes;
 	};
 
 }

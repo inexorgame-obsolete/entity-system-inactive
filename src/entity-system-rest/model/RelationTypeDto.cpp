@@ -30,10 +30,10 @@ namespace model {
 
 	RelationTypeDto::RelationTypeDto()
 	{
-		m_Relation_type_uuid = "";
-		m_Name = "";
-		m_Start_node_entity_type_uuid = "";
-		m_End_node_entity_type_uuid = "";
+		relation_type_uuid = "";
+		name = "";
+		start_node_entity_type_uuid = "";
+		end_node_entity_type_uuid = "";
 
 	}
 
@@ -41,77 +41,77 @@ namespace model {
 	{
 	}
 
-	std::string RelationTypeDto::toJsonString()
+	std::string RelationTypeDto::to_json_string()
 	{
 		std::stringstream ss;
 		ptree pt;
-		pt.put("relation_type_uuid", m_Relation_type_uuid);
-		pt.put("name", m_Name);
-		pt.put("start_node_entity_type_uuid", m_Start_node_entity_type_uuid);
-		pt.put("end_node_entity_type_uuid", m_End_node_entity_type_uuid);
+		pt.put("relation_type_uuid", relation_type_uuid);
+		pt.put("name", name);
+		pt.put("start_node_entity_type_uuid", start_node_entity_type_uuid);
+		pt.put("end_node_entity_type_uuid", end_node_entity_type_uuid);
 		write_json(ss, pt, false);
 		return ss.str();
 	}
 
-	void RelationTypeDto::fromJsonString(std::string const& jsonString)
+	void RelationTypeDto::from_json_string(std::string const& jsonString)
 	{
 		std::stringstream ss(jsonString);
 		ptree pt;
 		read_json(ss,pt);
-		m_Relation_type_uuid = pt.get("relation_type_uuid", "");
-		m_Name = pt.get("name", "");
-		m_Start_node_entity_type_uuid = pt.get("start_node_entity_type_uuid", "");
-		m_End_node_entity_type_uuid = pt.get("end_node_entity_type_uuid", "");
+		relation_type_uuid = pt.get("relation_type_uuid", "");
+		name = pt.get("name", "");
+		start_node_entity_type_uuid = pt.get("start_node_entity_type_uuid", "");
+		end_node_entity_type_uuid = pt.get("end_node_entity_type_uuid", "");
 	}
 
-	std::string RelationTypeDto::getRelationTypeUuid() const
+	std::string RelationTypeDto::get_relation_type_uuid() const
 	{
-		return m_Relation_type_uuid;
+		return relation_type_uuid;
 	}
 
-	void RelationTypeDto::setRelationTypeUuid(std::string value)
+	void RelationTypeDto::set_relation_type_uuid(std::string relation_type_uuid)
 	{
-		m_Relation_type_uuid = value;
+		this->relation_type_uuid = relation_type_uuid;
 	}
 
-	std::string RelationTypeDto::getName() const
+	std::string RelationTypeDto::get_name() const
 	{
-		return m_Name;
+		return name;
 	}
 
-	void RelationTypeDto::setName(std::string value)
+	void RelationTypeDto::set_name(std::string name)
 	{
-		m_Name = value;
+		this->name = name;
 	}
 
-	std::string RelationTypeDto::getStartNodeEntityTypeUuid() const
+	std::string RelationTypeDto::get_start_node_entity_type_uuid() const
 	{
-		return m_Start_node_entity_type_uuid;
+		return start_node_entity_type_uuid;
 	}
 
-	void RelationTypeDto::setStartNodeEntityTypeUuid(std::string value)
+	void RelationTypeDto::set_start_node_entity_type_uuid(std::string start_node_entity_type_uuid)
 	{
-		m_Start_node_entity_type_uuid = value;
+		this->start_node_entity_type_uuid = start_node_entity_type_uuid;
 	}
 
-	std::string RelationTypeDto::getEndNodeEntityTypeUuid() const
+	std::string RelationTypeDto::get_end_node_entity_type_uuid() const
 	{
-		return m_End_node_entity_type_uuid;
+		return end_node_entity_type_uuid;
 	}
 
-	void RelationTypeDto::setEndNodeEntityTypeUuid(std::string value)
+	void RelationTypeDto::set_end_node_entity_type_uuid(std::string end_node_entity_type_uuid)
 	{
-		m_End_node_entity_type_uuid = value;
+		this->end_node_entity_type_uuid = end_node_entity_type_uuid;
 	}
 
-	std::vector<std::shared_ptr<AttributeDto>> RelationTypeDto::getAttributes() const
+	std::vector<std::shared_ptr<AttributeDto>> RelationTypeDto::get_attributes() const
 	{
-		return m_Attributes;
+		return attributes;
 	}
 
-	void RelationTypeDto::setAttributes(std::vector<std::shared_ptr<AttributeDto>> value)
+	void RelationTypeDto::set_attributes(std::vector<std::shared_ptr<AttributeDto>> attributes)
 	{
-		m_Attributes = value;
+		this->attributes = attributes;
 	}
 
 }

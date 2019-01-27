@@ -29,8 +29,8 @@ namespace model {
 			EntitySystemMessageDto();
 			virtual ~EntitySystemMessageDto();
 
-			std::string toJsonString();
-			void fromJsonString(std::string const& jsonString);
+			std::string to_json_string();
+			void from_json_string(std::string const& json_string);
 
 			/// <summary>
 			///
@@ -45,8 +45,8 @@ namespace model {
 			void setMessage(std::string value);
 
 		protected:
-			int32_t m_Code;
-			std::string m_Message;
+			int32_t code;
+			std::string message;
 	};
 
 }

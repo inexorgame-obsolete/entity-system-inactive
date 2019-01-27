@@ -30,57 +30,56 @@ namespace model {
 
 	EntityInstanceDto::EntityInstanceDto()
 	{
-		m_Entity_instance_uuid = "";
-		m_Entity_type_uuid = "";
-
+		entity_instance_uuid = "";
+		entity_type_uuid = "";
 	}
 
 	EntityInstanceDto::~EntityInstanceDto()
 	{
 	}
 
-	std::string EntityInstanceDto::toJsonString()
+	std::string EntityInstanceDto::to_json_string()
 	{
 		std::stringstream ss;
 		ptree pt;
-		pt.put("entity_instance_uuid", m_Entity_instance_uuid);
-		pt.put("entity_type_uuid", m_Entity_type_uuid);
+		pt.put("entity_instance_uuid", entity_instance_uuid);
+		pt.put("entity_type_uuid", entity_type_uuid);
 		write_json(ss, pt, false);
 		return ss.str();
 	}
 
-	void EntityInstanceDto::fromJsonString(std::string const& jsonString)
+	void EntityInstanceDto::from_json_string(std::string const& jsonString)
 	{
 		std::stringstream ss(jsonString);
 		ptree pt;
 		read_json(ss,pt);
-		m_Entity_instance_uuid = pt.get("entity_instance_uuid", "");
-		m_Entity_type_uuid = pt.get("entity_type_uuid", "");
+		entity_instance_uuid = pt.get("entity_instance_uuid", "");
+		entity_type_uuid = pt.get("entity_type_uuid", "");
 	}
 
-	std::string EntityInstanceDto::getEntityInstanceUuid() const
+	std::string EntityInstanceDto::get_entity_instance_uuid() const
 	{
-		return m_Entity_instance_uuid;
+		return entity_instance_uuid;
 	}
-	void EntityInstanceDto::setEntityInstanceUuid(std::string value)
+	void EntityInstanceDto::set_entity_instance_uuid(std::string value)
 	{
-		m_Entity_instance_uuid = value;
+		this->entity_instance_uuid = value;
 	}
-	std::string EntityInstanceDto::getEntityTypeUuid() const
+	std::string EntityInstanceDto::get_entity_type_uuid() const
 	{
-		return m_Entity_type_uuid;
+		return entity_type_uuid;
 	}
-	void EntityInstanceDto::setEntityTypeUuid(std::string value)
+	void EntityInstanceDto::set_entity_type_uuid(std::string value)
 	{
-		m_Entity_type_uuid = value;
+		this->entity_type_uuid = value;
 	}
-	std::vector<std::shared_ptr<AttributeDto>> EntityInstanceDto::getAttributes() const
+	std::vector<std::shared_ptr<AttributeDto>> EntityInstanceDto::get_attributes() const
 	{
-		return m_Attributes;
+		return attributes;
 	}
-	void EntityInstanceDto::setAttributes(std::vector<std::shared_ptr<AttributeDto>> value)
+	void EntityInstanceDto::set_attributes(std::vector<std::shared_ptr<AttributeDto>> value)
 	{
-		m_Attributes = value;
+		this->attributes = value;
 	}
 
 }

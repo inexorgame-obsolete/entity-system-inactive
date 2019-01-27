@@ -194,7 +194,7 @@ void EntityInstanceApiEntitiesInstancesEntity_instance_uuidResource::POST_method
 			 */
 			
 			// Getting the path params
-			const std::string entityInstanceUuid = request->get_path_parameter("entityInstanceUuid", "");
+			const std::string entity_instance_uuid = request->get_path_parameter("entity_instance_uuid", "");
 			
 			// Change the value of this variable to the appropriate response before sending the response
 			int status_code = 200;
@@ -220,7 +220,7 @@ void EntityInstanceApiEntitiesInstancesEntity_instance_uuidResource::DELETE_meth
 	const auto request = session->get_request();
 
 			// Getting the path params
-			const std::string entityInstanceUuid = request->get_path_parameter("entityInstanceUuid", "");
+			const std::string entity_instance_uuid = request->get_path_parameter("entity_instance_uuid", "");
 			
 			// Change the value of this variable to the appropriate response before sending the response
 			int status_code = 200;
@@ -246,7 +246,7 @@ void EntityInstanceApiEntitiesInstancesEntity_instance_uuidResource::GET_method_
 	const auto request = session->get_request();
 
 	// Getting the path params
-	const std::string entityInstanceUuid = request->get_path_parameter("entityInstanceUuid", "");
+	const std::string entity_instance_uuid = request->get_path_parameter("entity_instance_uuid", "");
 
 	// Change the value of this variable to the appropriate response before sending the response
 	int status_code = 200;
@@ -297,7 +297,7 @@ void EntityInstanceApiEntitiesInstancesEntity_instance_uuidAttributesNameResourc
 			 */
 			
 			// Getting the path params
-			const std::string entityInstanceUuid = request->get_path_parameter("entityInstanceUuid", "");
+			const std::string entity_instance_uuid = request->get_path_parameter("entity_instance_uuid", "");
 			const std::string name = request->get_path_parameter("name", "");
 			
 
@@ -326,7 +326,7 @@ void EntityInstanceApiEntitiesInstancesEntity_instance_uuidAttributesNameResourc
 	const auto request = session->get_request();
 
 	// Getting the path params
-	const std::string entityInstanceUuid = request->get_path_parameter("entityInstanceUuid", "");
+	const std::string entity_instance_uuid = request->get_path_parameter("entity_instance_uuid", "");
 	const std::string name = request->get_path_parameter("name", "");
 
 	// Change the value of this variable to the appropriate response before sending the response
@@ -353,7 +353,7 @@ void EntityInstanceApiEntitiesInstancesEntity_instance_uuidAttributesNameResourc
 	const auto request = session->get_request();
 
 	// Getting the path params
-	const std::string entityInstanceUuid = request->get_path_parameter("entityInstanceUuid", "");
+	const std::string entity_instance_uuid = request->get_path_parameter("entity_instance_uuid", "");
 	const std::string name = request->get_path_parameter("name", "");
 
 	// Change the value of this variable to the appropriate response before sending the response
@@ -393,8 +393,8 @@ void EntityInstanceApiRelationsInstancesStartStart_entity_instance_uuidEndEnd_en
 	const auto request = session->get_request();
 			
 	// Getting the path params
-	const std::string startEntityInstanceUuid = request->get_path_parameter("startEntityInstanceUuid", "");
-	const std::string endEntityInstanceUuid = request->get_path_parameter("endEntityInstanceUuid", "");
+	const std::string start_entity_instance_uuid = request->get_path_parameter("start_entity_instance_uuid", "");
+	const std::string end_entity_instance_uuid = request->get_path_parameter("end_entity_instance_uuid", "");
 
 	// Change the value of this variable to the appropriate response before sending the response
 	int status_code = 200;
@@ -419,8 +419,8 @@ void EntityInstanceApiRelationsInstancesStartStart_entity_instance_uuidEndEnd_en
 	const auto request = session->get_request();
 
 	// Getting the path params
-	const std::string startEntityInstanceUuid = request->get_path_parameter("startEntityInstanceUuid", "");
-	const std::string endEntityInstanceUuid = request->get_path_parameter("endEntityInstanceUuid", "");
+	const std::string start_entity_instance_uuid = request->get_path_parameter("start_entity_instance_uuid", "");
+	const std::string end_entity_instance_uuid = request->get_path_parameter("end_entity_instance_uuid", "");
 
 	// Change the value of this variable to the appropriate response before sending the response
 	int status_code = 200;
@@ -458,8 +458,8 @@ void EntityInstanceApiEntitiesInstancesEntity_instance_uuidRelationsRelation_typ
 	const auto request = session->get_request();
 			
 	// Getting the path params
-	const std::string entityInstanceUuid = request->get_path_parameter("entityInstanceUuid", "");
-	const std::string relationTypeUuid = request->get_path_parameter("relationTypeUuid", "");
+	const std::string entity_instance_uuid = request->get_path_parameter("entity_instance_uuid", "");
+	const std::string relation_type_uuid = request->get_path_parameter("relation_type_uuid", "");
 
 	// Change the value of this variable to the appropriate response before sending the response
 	int status_code = 200;
@@ -496,7 +496,7 @@ void EntityInstanceApiEntitiesInstancesEntity_instance_uuidRelationsResource::GE
 	const auto request = session->get_request();
 			
 	// Getting the path params
-	const std::string entityInstanceUuid = request->get_path_parameter("entityInstanceUuid", "");
+	const std::string entity_instance_uuid = request->get_path_parameter("entity_instance_uuid", "");
 
 	// Change the value of this variable to the appropriate response before sending the response
 	int status_code = 200;
@@ -533,7 +533,7 @@ void EntityInstanceApiEntitiesInstancesEntity_instance_uuidAttributesResource::G
 	const auto request = session->get_request();
 			
 	// Getting the path params
-	const std::string entityInstanceUuid = request->get_path_parameter("entityInstanceUuid", "");
+	const std::string entity_instance_uuid = request->get_path_parameter("entity_instance_uuid", "");
 
 	// Change the value of this variable to the appropriate response before sending the response
 	int status_code = 200;
@@ -570,8 +570,8 @@ void EntityInstanceApiEntitiesInstancesEntity_instance_uuidRelationsRelation_typ
 	const auto request = session->get_request();
 			
 	// Getting the path params
-	const std::string entityInstanceUuid = request->get_path_parameter("entityInstanceUuid", "");
-	const std::string relationTypeUuid = request->get_path_parameter("relationTypeUuid", "");
+	const std::string entity_instance_uuid = request->get_path_parameter("entity_instance_uuid", "");
+	const std::string relation_type_uuid = request->get_path_parameter("relation_type_uuid", "");
 
 	// Change the value of this variable to the appropriate response before sending the response
 	int status_code = 200;
@@ -608,7 +608,7 @@ void EntityInstanceApiEntitiesInstancesEntity_instance_uuidRelationsIncomingReso
 	const auto request = session->get_request();
 			
 	// Getting the path params
-	const std::string entityInstanceUuid = request->get_path_parameter("entityInstanceUuid", "");
+	const std::string entity_instance_uuid = request->get_path_parameter("entity_instance_uuid", "");
 
 	// Change the value of this variable to the appropriate response before sending the response
 	int status_code = 200;
@@ -645,8 +645,8 @@ void EntityInstanceApiEntitiesInstancesEntity_instance_uuidRelationsRelation_typ
 	const auto request = session->get_request();
 			
 	// Getting the path params
-	const std::string entityInstanceUuid = request->get_path_parameter("entityInstanceUuid", "");
-	const std::string relationTypeUuid = request->get_path_parameter("relationTypeUuid", "");
+	const std::string entity_instance_uuid = request->get_path_parameter("entity_instance_uuid", "");
+	const std::string relation_type_uuid = request->get_path_parameter("relation_type_uuid", "");
 
 	// Change the value of this variable to the appropriate response before sending the response
 	int status_code = 200;
@@ -683,7 +683,7 @@ void EntityInstanceApiEntitiesInstancesEntity_instance_uuidRelationsOutgoingReso
 	const auto request = session->get_request();
 			
 	// Getting the path params
-	const std::string entityInstanceUuid = request->get_path_parameter("entityInstanceUuid", "");
+	const std::string entity_instance_uuid = request->get_path_parameter("entity_instance_uuid", "");
 
 	// Change the value of this variable to the appropriate response before sending the response
 	int status_code = 200;

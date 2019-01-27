@@ -29,38 +29,38 @@ namespace model {
 			AttributeDto();
 			virtual ~AttributeDto();
 
-			std::string toJsonString();
-			void fromJsonString(std::string const& jsonString);
+			std::string to_json_string();
+			void from_json_string(std::string const& json_string);
 
 			/// <summary>
 			///
 			/// </summary>
-			std::string getAttributeUuid() const;
-			void setAttributeUuid(std::string value);
+			std::string get_attribute_uuid() const;
+			void set_attribute_uuid(std::string attribute_uuid);
 
 			/// <summary>
 			///
 			/// </summary>
-			std::string getName() const;
-			void setName(std::string value);
+			std::string get_name() const;
+			void set_name(std::string name);
 
 			/// <summary>
 			///
 			/// </summary>
-			std::string getDatatype() const;
-			void setDatatype(std::string value);
+			std::string get_datatype() const;
+			void set_datatype(std::string datatype);
 
 			/// <summary>
 			///
 			/// </summary>
-			std::string getValue() const;
-			void setValue(std::string value);
+			std::string get_value() const;
+			void set_value(std::string value);
 
 		protected:
-			std::string m_Attribute_uuid;
-			std::string m_Name;
-			std::string m_Datatype;
-			std::string m_Value;
+			std::string attribute_uuid;
+			std::string name;
+			std::string datatype;
+			std::string value;
 	};
 
 }

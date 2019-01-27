@@ -30,78 +30,77 @@ namespace model {
 
 	AttributeDto::AttributeDto()
 	{
-		m_Attribute_uuid = "";
-		m_Name = "";
-		m_Datatype = "";
-		m_Value = "";
-
+		attribute_uuid = "";
+		name = "";
+		datatype = "";
+		value = "";
 	}
 
 	AttributeDto::~AttributeDto()
 	{
 	}
 
-	std::string AttributeDto::toJsonString()
+	std::string AttributeDto::to_json_string()
 	{
 		std::stringstream ss;
 		ptree pt;
-		pt.put("attribute_uuid", m_Attribute_uuid);
-		pt.put("name", m_Name);
-		pt.put("datatype", m_Datatype);
-		pt.put("value", m_Value);
+		pt.put("attribute_uuid", attribute_uuid);
+		pt.put("name", name);
+		pt.put("datatype", datatype);
+		pt.put("value", value);
 		write_json(ss, pt, false);
 		return ss.str();
 	}
 
-	void AttributeDto::fromJsonString(std::string const& jsonString)
+	void AttributeDto::from_json_string(std::string const& jsonString)
 	{
 		std::stringstream ss(jsonString);
 		ptree pt;
 		read_json(ss,pt);
-		m_Attribute_uuid = pt.get("attribute_uuid", "");
-		m_Name = pt.get("name", "");
-		m_Datatype = pt.get("datatype", "");
-		m_Value = pt.get("value", "");
+		attribute_uuid = pt.get("attribute_uuid", "");
+		name = pt.get("name", "");
+		datatype = pt.get("datatype", "");
+		value = pt.get("value", "");
 	}
 
-	std::string AttributeDto::getAttributeUuid() const
+	std::string AttributeDto::get_attribute_uuid() const
 	{
-		return m_Attribute_uuid;
+		return attribute_uuid;
 	}
 
-	void AttributeDto::setAttributeUuid(std::string value)
+	void AttributeDto::set_attribute_uuid(std::string attribute_uuid)
 	{
-		m_Attribute_uuid = value;
+		this->attribute_uuid = attribute_uuid;
 	}
 
-	std::string AttributeDto::getName() const
+	std::string AttributeDto::get_name() const
 	{
-		return m_Name;
+		return name;
 	}
 
-	void AttributeDto::setName(std::string value)
+	void AttributeDto::set_name(std::string name)
 	{
-		m_Name = value;
+		this->name = name;
 	}
 
-	std::string AttributeDto::getDatatype() const
+	std::string AttributeDto::get_datatype() const
 	{
-		return m_Datatype;
+		return datatype;
 	}
 
-	void AttributeDto::setDatatype(std::string value)
+	void AttributeDto::set_datatype(std::string datatype)
 	{
-		m_Datatype = value;
+		this->datatype = datatype;
 	}
 
-	std::string AttributeDto::getValue() const
+	std::string AttributeDto::get_value() const
 	{
-		return m_Value;
+		return value;
 	}
 
-	void AttributeDto::setValue(std::string value)
+	void AttributeDto::set_value(std::string value)
 	{
-		m_Value = value;
+		this->value = value;
 	}
 
 }

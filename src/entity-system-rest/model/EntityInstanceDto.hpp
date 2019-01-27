@@ -26,37 +26,37 @@ namespace model {
 	/// <summary>
 	///
 	/// </summary>
-	class  EntityInstanceDto
+	class EntityInstanceDto
 	{
 		public:
 			EntityInstanceDto();
 			virtual ~EntityInstanceDto();
 
-			std::string toJsonString();
-			void fromJsonString(std::string const& jsonString);
+			std::string to_json_string();
+			void from_json_string(std::string const& json_string);
 
 			/// <summary>
 			///
 			/// </summary>
-			std::string getEntityInstanceUuid() const;
-			void setEntityInstanceUuid(std::string value);
+			std::string get_entity_instance_uuid() const;
+			void set_entity_instance_uuid(std::string entity_instance_uuid);
 
 			/// <summary>
 			///
 			/// </summary>
-			std::string getEntityTypeUuid() const;
-			void setEntityTypeUuid(std::string value);
+			std::string get_entity_type_uuid() const;
+			void set_entity_type_uuid(std::string entity_type_uuid);
 
 			/// <summary>
 			///
 			/// </summary>
-			std::vector<std::shared_ptr<AttributeDto>> getAttributes() const;
-			void setAttributes(std::vector<std::shared_ptr<AttributeDto>> value);
+			std::vector<std::shared_ptr<AttributeDto>> get_attributes() const;
+			void set_attributes(std::vector<std::shared_ptr<AttributeDto>> attributes);
 
 		protected:
-			std::string m_Entity_instance_uuid;
-			std::string m_Entity_type_uuid;
-			std::vector<std::shared_ptr<AttributeDto>> m_Attributes;
+			std::string entity_instance_uuid;
+			std::string entity_type_uuid;
+			std::vector<std::shared_ptr<AttributeDto>> attributes;
 	};
 
 }

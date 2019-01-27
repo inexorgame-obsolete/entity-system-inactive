@@ -34,8 +34,8 @@ namespace model {
 			EntitySystemDto();
 			virtual ~EntitySystemDto();
 
-			std::string toJsonString();
-			void fromJsonString(std::string const& jsonString);
+			std::string to_json_string();
+			void from_json_string(std::string const& json_string);
 
 			/// <summary>
 			///
@@ -62,10 +62,10 @@ namespace model {
 			void setRelationInstances(std::vector<std::shared_ptr<RelationInstanceDto>> value);
 
 		protected:
-			std::vector<std::shared_ptr<EntityTypeDto>> m_Entity_types;
-			std::vector<std::shared_ptr<RelationTypeDto>> m_Relation_types;
-			std::vector<std::shared_ptr<EntityInstanceDto>> m_Entity_instances;
-			std::vector<std::shared_ptr<RelationInstanceDto>> m_Relation_instances;
+			std::vector<std::shared_ptr<EntityTypeDto>> entity_types;
+			std::vector<std::shared_ptr<RelationTypeDto>> relation_types;
+			std::vector<std::shared_ptr<EntityInstanceDto>> entity_instances;
+			std::vector<std::shared_ptr<RelationInstanceDto>> relation_instances;
 	};
 
 }

@@ -30,14 +30,13 @@ namespace model {
 
 	EntitySystemDto::EntitySystemDto()
 	{
-
 	}
 
 	EntitySystemDto::~EntitySystemDto()
 	{
 	}
 
-	std::string EntitySystemDto::toJsonString()
+	std::string EntitySystemDto::to_json_string()
 	{
 		std::stringstream ss;
 		ptree pt;
@@ -45,7 +44,7 @@ namespace model {
 		return ss.str();
 	}
 
-	void EntitySystemDto::fromJsonString(std::string const& jsonString)
+	void EntitySystemDto::from_json_string(std::string const& jsonString)
 	{
 		std::stringstream ss(jsonString);
 		ptree pt;
@@ -54,42 +53,42 @@ namespace model {
 
 	std::vector<std::shared_ptr<EntityTypeDto>> EntitySystemDto::getEntityTypes() const
 	{
-		return m_Entity_types;
+		return entity_types;
 	}
 
-	void EntitySystemDto::setEntityTypes(std::vector<std::shared_ptr<EntityTypeDto>> value)
+	void EntitySystemDto::setEntityTypes(std::vector<std::shared_ptr<EntityTypeDto>> entity_types)
 	{
-		m_Entity_types = value;
+		this->entity_types = entity_types;
 	}
 
 	std::vector<std::shared_ptr<RelationTypeDto>> EntitySystemDto::getRelationTypes() const
 	{
-		return m_Relation_types;
+		return relation_types;
 	}
 
-	void EntitySystemDto::setRelationTypes(std::vector<std::shared_ptr<RelationTypeDto>> value)
+	void EntitySystemDto::setRelationTypes(std::vector<std::shared_ptr<RelationTypeDto>> relation_types)
 	{
-		m_Relation_types = value;
+		this->relation_types = relation_types;
 	}
 
 	std::vector<std::shared_ptr<EntityInstanceDto>> EntitySystemDto::getEntityInstances() const
 	{
-		return m_Entity_instances;
+		return entity_instances;
 	}
 
-	void EntitySystemDto::setEntityInstances(std::vector<std::shared_ptr<EntityInstanceDto>> value)
+	void EntitySystemDto::setEntityInstances(std::vector<std::shared_ptr<EntityInstanceDto>> entity_instances)
 	{
-		m_Entity_instances = value;
+		this->entity_instances = entity_instances;
 	}
 
 	std::vector<std::shared_ptr<RelationInstanceDto>> EntitySystemDto::getRelationInstances() const
 	{
-		return m_Relation_instances;
+		return relation_instances;
 	}
 
-	void EntitySystemDto::setRelationInstances(std::vector<std::shared_ptr<RelationInstanceDto>> value)
+	void EntitySystemDto::setRelationInstances(std::vector<std::shared_ptr<RelationInstanceDto>> relation_instances)
 	{
-		m_Relation_instances = value;
+		this->relation_instances = relation_instances;
 	}
 
 }

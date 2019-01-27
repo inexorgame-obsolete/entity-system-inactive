@@ -185,7 +185,7 @@ void EntityTypeApiEntitiesTypesEntity_type_uuidResource::POST_method_handler(con
 			 */
 			
 			// Getting the path params
-			const string entityTypeUuid = request->get_path_parameter("entityTypeUuid", "");
+			const string entity_type_uuid = request->get_path_parameter("entity_type_uuid", "");
 			
 
 			
@@ -213,7 +213,7 @@ void EntityTypeApiEntitiesTypesEntity_type_uuidResource::DELETE_method_handler(c
 	const auto request = session->get_request();
 
 	// Getting the path params
-	const string entityTypeUuid = request->get_path_parameter("entityTypeUuid", "");
+	const string entity_type_uuid = request->get_path_parameter("entity_type_uuid", "");
 
 
 
@@ -223,7 +223,7 @@ void EntityTypeApiEntitiesTypesEntity_type_uuidResource::DELETE_method_handler(c
 	/**
 	 * Process the received information here
 	 */
-	// entity_system->delete_entity_type(g(entityTypeUuid));
+	// entity_system->delete_entity_type(g(entity_type_uuid));
 
 	if (status_code == 200) {
 		shared_ptr<EntitySystemMessageDto> response = NULL;
@@ -260,9 +260,9 @@ void EntityTypeApiEntitiesTypesEntity_type_uuidResource::GET_method_handler(cons
 		spdlog::get("inexor.entity.rest")->info("found");
 		std::shared_ptr<inexor::entity_system::EntityType> entity_type = entity_type_o.value();
 		shared_ptr<EntityTypeDto> entity_type_model = std::make_shared<EntityTypeDto>();
-		entity_type_model->setEntityTypeUuid(entity_type->get_GUID().str());
-		entity_type_model->setName(entity_type->get_type_name());
-		session->close(restbed::OK, entity_type_model->toJsonString(), { {"Connection", "close"} });
+		entity_type_model->set_entity_type_uuid(entity_type->get_GUID().str());
+		entity_type_model->set_name(entity_type->get_type_name());
+		session->close(restbed::OK, entity_type_model->to_json_string(), { {"Connection", "close"} });
 		return;
 	} else {
 		std::optional<std::shared_ptr<inexor::entity_system::EntityType> > entity_type_o1 = this->entity_type_manager->create_entity_type("TEST");
@@ -274,7 +274,7 @@ void EntityTypeApiEntitiesTypesEntity_type_uuidResource::GET_method_handler(cons
 		shared_ptr<EntitySystemMessageDto> entity_system_message = std::make_shared<EntitySystemMessageDto>();
 		entity_system_message->setCode(404);
 		entity_system_message->setMessage(fmt::format("Entity type UUID('{}') not found", entity_type_uuid));
-		session->close(restbed::NOT_FOUND, entity_system_message->toJsonString(), { {"Connection", "close"} });
+		session->close(restbed::NOT_FOUND, entity_system_message->to_json_string(), { {"Connection", "close"} });
 		return;
 	}
 
@@ -327,7 +327,7 @@ void EntityTypeApiEntitiesTypesEntity_type_uuidAttributesNameResource::POST_meth
 			 */
 			
 			// Getting the path params
-			const string entityTypeUuid = request->get_path_parameter("entityTypeUuid", "");
+			const string entity_type_uuid = request->get_path_parameter("entity_type_uuid", "");
 			const string name = request->get_path_parameter("name", "");
 			
 
@@ -356,7 +356,7 @@ void EntityTypeApiEntitiesTypesEntity_type_uuidAttributesNameResource::DELETE_me
 	const auto request = session->get_request();
 
 	// Getting the path params
-	const string entityTypeUuid = request->get_path_parameter("entityTypeUuid", "");
+	const string entity_type_uuid = request->get_path_parameter("entity_type_uuid", "");
 	const string name = request->get_path_parameter("name", "");
 
 
@@ -368,8 +368,8 @@ void EntityTypeApiEntitiesTypesEntity_type_uuidAttributesNameResource::DELETE_me
 	 * Process the received information here
 	 */
 
-	// Guid g(entityTypeUuid);
-	// auto entity_type = entity_system->get_type(g(entityTypeUuid));
+	// Guid g(entity_type_uuid);
+	// auto entity_type = entity_system->get_type(g(entity_type_uuid));
 	// auto attribute_type = entity_type->get_attribute_by_name(name);
 	// entity_system->delete_entity_attribute_type(attribute_type->get_uuid());
 
@@ -390,7 +390,7 @@ void EntityTypeApiEntitiesTypesEntity_type_uuidAttributesNameResource::GET_metho
 	const auto request = session->get_request();
 
 	// Getting the path params
-	const string entityTypeUuid = request->get_path_parameter("entityTypeUuid", "");
+	const string entity_type_uuid = request->get_path_parameter("entity_type_uuid", "");
 	const string name = request->get_path_parameter("name", "");
 
 
@@ -435,7 +435,7 @@ void EntityTypeApiEntitiesTypesEntity_type_uuidInstancesResource::DELETE_method_
 	const auto request = session->get_request();
 
 	// Getting the path params
-	const string entityTypeUuid = request->get_path_parameter("entityTypeUuid", "");
+	const string entity_type_uuid = request->get_path_parameter("entity_type_uuid", "");
 
 
 
@@ -462,7 +462,7 @@ void EntityTypeApiEntitiesTypesEntity_type_uuidInstancesResource::GET_method_han
 	const auto request = session->get_request();
 
 	// Getting the path params
-	const string entityTypeUuid = request->get_path_parameter("entityTypeUuid", "");
+	const string entity_type_uuid = request->get_path_parameter("entity_type_uuid", "");
 
 
 
@@ -505,7 +505,7 @@ void EntityTypeApiEntitiesTypesEntity_type_uuidRelationsIncomingResource::GET_me
 	const auto request = session->get_request();
 
 	// Getting the path params
-	const string entityTypeUuid = request->get_path_parameter("entityTypeUuid", "");
+	const string entity_type_uuid = request->get_path_parameter("entity_type_uuid", "");
 
 
 
@@ -547,7 +547,7 @@ void EntityTypeApiEntitiesTypesEntity_type_uuidRelationsOutgoingResource::GET_me
 	const auto request = session->get_request();
 
 	// Getting the path params
-	const string entityTypeUuid = request->get_path_parameter("entityTypeUuid", "");
+	const string entity_type_uuid = request->get_path_parameter("entity_type_uuid", "");
 
 
 
@@ -589,7 +589,7 @@ void EntityTypeApiEntitiesTypesEntity_type_uuidRelationsResource::GET_method_han
 	const auto request = session->get_request();
 
 	// Getting the path params
-	const string entityTypeUuid = request->get_path_parameter("entityTypeUuid", "");
+	const string entity_type_uuid = request->get_path_parameter("entity_type_uuid", "");
 
 
 
@@ -631,7 +631,7 @@ void EntityTypeApiEntitiesTypesEntity_type_uuidAttributesResource::GET_method_ha
 	const auto request = session->get_request();
 
 	// Getting the path params
-	const string entityTypeUuid = request->get_path_parameter("entityTypeUuid", "");
+	const string entity_type_uuid = request->get_path_parameter("entity_type_uuid", "");
 
 
 

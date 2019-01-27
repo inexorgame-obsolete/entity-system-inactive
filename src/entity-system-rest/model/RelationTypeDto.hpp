@@ -32,45 +32,45 @@ namespace model {
 		RelationTypeDto();
 		virtual ~RelationTypeDto();
 
-		std::string toJsonString();
-		void fromJsonString(std::string const& jsonString);
+		std::string to_json_string();
+		void from_json_string(std::string const& json_string);
 
 		/// <summary>
 		///
 		/// </summary>
-		std::string getRelationTypeUuid() const;
-		void setRelationTypeUuid(std::string value);
+		std::string get_relation_type_uuid() const;
+		void set_relation_type_uuid(std::string relation_type_uuid);
 
 		/// <summary>
 		///
 		/// </summary>
-		std::string getName() const;
-		void setName(std::string value);
+		std::string get_name() const;
+		void set_name(std::string name);
 
 		/// <summary>
 		///
 		/// </summary>
-		std::string getStartNodeEntityTypeUuid() const;
-		void setStartNodeEntityTypeUuid(std::string value);
+		std::string get_start_node_entity_type_uuid() const;
+		void set_start_node_entity_type_uuid(std::string start_node_entity_type_uuid);
 
 		/// <summary>
 		///
 		/// </summary>
-		std::string getEndNodeEntityTypeUuid() const;
-		void setEndNodeEntityTypeUuid(std::string value);
+		std::string get_end_node_entity_type_uuid() const;
+		void set_end_node_entity_type_uuid(std::string end_node_entity_type_uuid);
 
 		/// <summary>
 		///
 		/// </summary>
-		std::vector<std::shared_ptr<AttributeDto>> getAttributes() const;
-		void setAttributes(std::vector<std::shared_ptr<AttributeDto>> value);
+		std::vector<std::shared_ptr<AttributeDto>> get_attributes() const;
+		void set_attributes(std::vector<std::shared_ptr<AttributeDto>> attributes);
 
 	protected:
-		std::string m_Relation_type_uuid;
-		std::string m_Name;
-		std::string m_Start_node_entity_type_uuid;
-		std::string m_End_node_entity_type_uuid;
-		std::vector<std::shared_ptr<AttributeDto>> m_Attributes;
+		std::string relation_type_uuid;
+		std::string name;
+		std::string start_node_entity_type_uuid;
+		std::string end_node_entity_type_uuid;
+		std::vector<std::shared_ptr<AttributeDto>> attributes;
 	};
 
 }

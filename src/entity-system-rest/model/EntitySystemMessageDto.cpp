@@ -30,52 +30,51 @@ namespace model {
 
 	EntitySystemMessageDto::EntitySystemMessageDto()
 	{
-		m_Code = 0;
-		m_Message = "";
-
+		code = 0;
+		message = "";
 	}
 
 	EntitySystemMessageDto::~EntitySystemMessageDto()
 	{
 	}
 
-	std::string EntitySystemMessageDto::toJsonString()
+	std::string EntitySystemMessageDto::to_json_string()
 	{
 		std::stringstream ss;
 		ptree pt;
-		pt.put("code", m_Code);
-		pt.put("message", m_Message);
+		pt.put("code", code);
+		pt.put("message", message);
 		write_json(ss, pt, false);
 		return ss.str();
 	}
 
-	void EntitySystemMessageDto::fromJsonString(std::string const& jsonString)
+	void EntitySystemMessageDto::from_json_string(std::string const& jsonString)
 	{
 		std::stringstream ss(jsonString);
 		ptree pt;
 		read_json(ss,pt);
-		m_Code = pt.get("code", 0);
-		m_Message = pt.get("message", "");
+		code = pt.get("code", 0);
+		message = pt.get("message", "");
 	}
 
 	int32_t EntitySystemMessageDto::getCode() const
 	{
-		return m_Code;
+		return code;
 	}
 
 	void EntitySystemMessageDto::setCode(int32_t value)
 	{
-		m_Code = value;
+		this->code = value;
 	}
 
 	std::string EntitySystemMessageDto::getMessage() const
 	{
-		return m_Message;
+		return message;
 	}
 
 	void EntitySystemMessageDto::setMessage(std::string value)
 	{
-		m_Message = value;
+		this->message = value;
 	}
 
 }

@@ -91,7 +91,7 @@ void RelationTypeApiRelationsTypesRelation_type_uuidResource::POST_method_handle
 			 */
 			
 			// Getting the path params
-			const std::string relationTypeUuid = request->get_path_parameter("relationTypeUuid", "");
+			const std::string relation_type_uuid = request->get_path_parameter("relation_type_uuid", "");
 			
 
 			
@@ -119,7 +119,7 @@ void RelationTypeApiRelationsTypesRelation_type_uuidResource::DELETE_method_hand
 	const auto request = session->get_request();
 
 	// Getting the path params
-	const std::string relationTypeUuid = request->get_path_parameter("relationTypeUuid", "");
+	const std::string relation_type_uuid = request->get_path_parameter("relation_type_uuid", "");
 
 	// Change the value of this variable to the appropriate response before sending the response
 	int status_code = 200;
@@ -146,7 +146,7 @@ void RelationTypeApiRelationsTypesRelation_type_uuidResource::GET_method_handler
 	const auto request = session->get_request();
 
 	// Getting the path params
-	const std::string relationTypeUuid = request->get_path_parameter("relationTypeUuid", "");
+	const std::string relation_type_uuid = request->get_path_parameter("relation_type_uuid", "");
 
 	// Change the value of this variable to the appropriate response before sending the response
 	int status_code = 200;
@@ -285,7 +285,7 @@ void RelationTypeApiEntitiesTypesEntity_type_uuidRelationsIncomingResource::GET_
 	const auto request = session->get_request();
 
 	// Getting the path params
-	const std::string entityTypeUuid = request->get_path_parameter("entityTypeUuid", "");
+	const std::string entity_type_uuid = request->get_path_parameter("entity_type_uuid", "");
 
 
 
@@ -327,7 +327,7 @@ void RelationTypeApiEntitiesTypesEntity_type_uuidRelationsOutgoingResource::GET_
 	const auto request = session->get_request();
 
 	// Getting the path params
-	const std::string entityTypeUuid = request->get_path_parameter("entityTypeUuid", "");
+	const std::string entity_type_uuid = request->get_path_parameter("entity_type_uuid", "");
 
 
 
@@ -369,8 +369,8 @@ void RelationTypeApiEntitiesInstancesEntity_instance_uuidRelationsRelation_type_
 	const auto request = session->get_request();
 
 	// Getting the path params
-	const std::string entityInstanceUuid = request->get_path_parameter("entityInstanceUuid", "");
-	const std::string relationTypeUuid = request->get_path_parameter("relationTypeUuid", "");
+	const std::string entity_instance_uuid = request->get_path_parameter("entity_instance_uuid", "");
+	const std::string relation_type_uuid = request->get_path_parameter("relation_type_uuid", "");
 
 
 
@@ -412,7 +412,7 @@ void RelationTypeApiEntitiesTypesEntity_type_uuidRelationsResource::GET_method_h
 	const auto request = session->get_request();
 
 	// Getting the path params
-	const std::string entityTypeUuid = request->get_path_parameter("entityTypeUuid", "");
+	const std::string entity_type_uuid = request->get_path_parameter("entity_type_uuid", "");
 
 
 
@@ -454,8 +454,8 @@ void RelationTypeApiEntitiesInstancesEntity_instance_uuidRelationsRelation_type_
 	const auto request = session->get_request();
 
 	// Getting the path params
-	const std::string entityInstanceUuid = request->get_path_parameter("entityInstanceUuid", "");
-	const std::string relationTypeUuid = request->get_path_parameter("relationTypeUuid", "");
+	const std::string entity_instance_uuid = request->get_path_parameter("entity_instance_uuid", "");
+	const std::string relation_type_uuid = request->get_path_parameter("relation_type_uuid", "");
 
 
 
@@ -497,8 +497,8 @@ void RelationTypeApiEntitiesInstancesEntity_instance_uuidRelationsRelation_type_
 	const auto request = session->get_request();
 			
 	// Getting the path params
-	const std::string entityInstanceUuid = request->get_path_parameter("entityInstanceUuid", "");
-	const std::string relationTypeUuid = request->get_path_parameter("relationTypeUuid", "");
+	const std::string entity_instance_uuid = request->get_path_parameter("entity_instance_uuid", "");
+	const std::string relation_type_uuid = request->get_path_parameter("relation_type_uuid", "");
 
 
 
