@@ -265,31 +265,11 @@ void EntityTypeApiEntitiesTypesEntity_type_uuidResource::GET_method_handler(cons
 		session->close(restbed::OK, entity_type_model->to_json_string(), { {"Connection", "close"} });
 		return;
 	} else {
-		std::optional<std::shared_ptr<inexor::entity_system::EntityType> > entity_type_o1 = this->entity_type_manager->create_entity_type("TEST");
-		if (entity_type_o1.has_value()) {
-			std::shared_ptr<inexor::entity_system::EntityType> entity_type = entity_type_o1.value();
-			spdlog::get("inexor.entity.rest")->info("Created entity type {} {}", entity_type->get_GUID().str(), entity_type->get_type_name());
-		}
 		spdlog::get("inexor.entity.rest")->info("not found");
 		shared_ptr<EntitySystemMessageDto> entity_system_message = std::make_shared<EntitySystemMessageDto>();
 		entity_system_message->setCode(404);
 		entity_system_message->setMessage(fmt::format("Entity type UUID('{}') not found", entity_type_uuid));
 		session->close(restbed::NOT_FOUND, entity_system_message->to_json_string(), { {"Connection", "close"} });
-		return;
-	}
-
-	// Change the value of this variable to the appropriate response before sending the response
-	int status_code = 200;
-
-	/**
-	 * Process the received information here
-	 */
-
-	if (status_code == 200) {
-	}
-	if (status_code == 0) {
-		shared_ptr<EntitySystemMessageDto> response = NULL;
-		session->close(0, "unexpected error", { {"Connection", "close"} });
 		return;
 	}
 
