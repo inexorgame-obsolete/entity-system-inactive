@@ -58,6 +58,16 @@ namespace entity_system {
 	}
 
 
+	bool EntityInstanceManager::does_entity_instance_exist(const xg::Guid instance_GUID)
+	{
+		return does_instance_exist(instance_GUID);
+	}
+
+	O_ENT_INST EntityInstanceManager::get_entity_instance(const xg::Guid& instance_GUID)
+	{
+		return get_instance(instance_GUID);
+	}
+
 	std::size_t EntityInstanceManager::get_entity_instance_count() const
 	{
 		// Call template base class method.

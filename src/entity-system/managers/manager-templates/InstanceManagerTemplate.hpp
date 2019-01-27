@@ -86,15 +86,15 @@ namespace entity_system {
             /// @brief Returns a specific instance.
             /// @param type_GUID The GUID of the instance.
             /// @return If the instance exists it will be returned, std::nullopt otherwise.
-			std::optional<std::shared_ptr<T>> get_instance(const xg::Guid& type_GUID)
+			std::optional<std::shared_ptr<T>> get_instance(const xg::Guid& instance_GUID)
 			{
                 // Check if an instance with this GUID exists.
-                auto lookup = stored_instances.find(type_GUID);
+                auto lookup = stored_instances.find(instance_GUID);
 
                 // We've found a key value pair!
                 if(!(stored_instances.end() == lookup))
                 {
-                    return std::optional<std::shared_ptr<T>>{ lookup->first };
+                    return std::optional<std::shared_ptr<T>>{ lookup->second };
                 }
                 // We've found nothing!
                 return std::nullopt;

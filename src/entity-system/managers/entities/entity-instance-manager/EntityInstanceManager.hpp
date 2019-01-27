@@ -36,6 +36,11 @@ namespace entity_system {
 
 
 
+			/// @brief Checks if an entity instance does already exist.
+            /// @return True if the entity instance already exists, false otherwise.
+			bool does_entity_instance_exist(const xg::Guid);
+
+
             /// 
             /// 
 			O_ENT_INST get_entity_instance(const xg::Guid&);
@@ -51,7 +56,7 @@ namespace entity_system {
 
             /// Returns all entity type instances.
 			/// @return All entity type instances which exist in the entity system.
-			O_ENT_INST get_all_entity_instances() const;
+			std::vector<ENT_INST> get_all_entity_instances() const;
 
 
             // TODO: get_entity_instance_count_of_type() const;
