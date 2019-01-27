@@ -4,6 +4,8 @@
 #pragma once
 
 #include "type-system/providers/constants/IntConstantEntityTypeProvider.hpp"
+#include "type-system/providers/constants/FloatConstantEntityTypeProvider.hpp"
+#include "type-system/providers/constants/StringConstantEntityTypeProvider.hpp"
 
 using namespace inexor::entity_system;
 using namespace std;
@@ -20,7 +22,9 @@ namespace type_system {
 
 			/// Constructor.
 			ConstantsTypeSystemManager(
-				shared_ptr<IntConstantEntityTypeProvider> int_constant_entity_type_provider
+				shared_ptr<IntConstantEntityTypeProvider> int_constant_entity_type_provider,
+				shared_ptr<FloatConstantEntityTypeProvider> float_constant_entity_type_provider,
+				shared_ptr<StringConstantEntityTypeProvider> string_constant_entity_type_provider
 			);
 
 			/// Destructor.
@@ -33,6 +37,12 @@ namespace type_system {
 
 			/// Provider for entity type INT_CONSTANT.
 			shared_ptr<IntConstantEntityTypeProvider> int_constant_entity_type_provider;
+
+			/// Provider for entity type FLOAT_CONSTANT.
+			shared_ptr<FloatConstantEntityTypeProvider> float_constant_entity_type_provider;
+
+			/// Provider for entity type STRING_CONSTANT.
+			shared_ptr<StringConstantEntityTypeProvider> string_constant_entity_type_provider;
 
 	};
 
