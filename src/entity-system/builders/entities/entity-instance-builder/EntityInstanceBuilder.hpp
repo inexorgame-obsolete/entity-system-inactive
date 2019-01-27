@@ -44,6 +44,10 @@ namespace entity_system {
 			/// Sets the value of the attribute.
 			shared_ptr<EntityInstanceBuilder> attribute(string attribute_name, DataContainer value);
 
+			shared_ptr<EntityInstanceBuilder> attribute(string attribute_name, string value);
+
+			shared_ptr<EntityInstanceBuilder> attribute(string attribute_name, int value);
+
 			/// Builds and returns the created entity instance.
 			O_ENT_INST build();
 

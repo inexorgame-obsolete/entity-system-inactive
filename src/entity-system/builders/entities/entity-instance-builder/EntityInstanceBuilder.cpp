@@ -49,6 +49,18 @@ namespace entity_system {
 		return shared_from_this();
 	}
 
+	shared_ptr<EntityInstanceBuilder> EntityInstanceBuilder::attribute(string attribute_name, string value)
+	{
+		entity_instance_attributes[attribute_name] = {ENTSYS_DATA_TYPE_STRING, value};
+		return shared_from_this();
+	}
+
+	shared_ptr<EntityInstanceBuilder> EntityInstanceBuilder::attribute(string attribute_name, int value)
+	{
+		entity_instance_attributes[attribute_name] = {ENTSYS_DATA_TYPE_INT, value};
+		return shared_from_this();
+	}
+
 	O_ENT_INST EntityInstanceBuilder::build()
 	{
 		O_ENT_INST o_entity_instance = nullopt;
@@ -94,9 +106,10 @@ namespace entity_system {
 					return std::nullopt;
 				}
 			}
+			spdlog::info("Created entity instance (UUID: {}) of type {} (UUID: {})", entity_instance->get_GUID().str(), entity_instance->get_entity_type()->get_type_name(), entity_instance->get_entity_type()->get_GUID().str());
 			return o_entity_instance;
 		} else {
-			spdlog::info("Failed to create entity instance");
+			spdlog::error("Failed to create entity instance");
 			return std::nullopt;
 		}
 	}
