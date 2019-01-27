@@ -20,6 +20,12 @@ namespace entity_system {
 	}
 
 
+	ENT_TYPE EntityInstance::get_entity_type() const
+	{
+		return get_type();
+	}
+
+
     void EntityInstance::add_entity_attribute_instance(const ENT_ATTR_TYPE& ent_attr_type, const ENT_ATTR_INST& ent_attr_inst)
     {
         // Use lock guard to ensure thread safety for this write operation!

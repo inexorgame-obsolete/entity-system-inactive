@@ -41,6 +41,10 @@ namespace entity_system {
 			/// Destructor.
 			~EntityInstance();
 
+            /// @brief Get the entity type.
+            /// @return The entity type of the entity instance.
+			ENT_TYPE get_entity_type() const;
+
             ///
             void add_entity_attribute_instance(const ENT_ATTR_TYPE&, const ENT_ATTR_INST&);
 
