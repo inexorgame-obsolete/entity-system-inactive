@@ -21,6 +21,10 @@ namespace type_system {
 	{
 	}
 
+	void ConvertersTypeSystemManager::init()
+	{
+	}
+
 }
 }
 }

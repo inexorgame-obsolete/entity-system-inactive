@@ -49,6 +49,9 @@ namespace inexor {
 		spdlog::get(LOGGER_NAME)->info("PID: {}", getpid());
 #endif
 
+		// Type system initialization
+		type_system_manager->init();
+
 	}
 
 	void InexorApplication::start()

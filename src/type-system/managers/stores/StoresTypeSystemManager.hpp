@@ -30,7 +30,7 @@ namespace type_system {
 			/// Destructor.
 			~StoresTypeSystemManager();
 
-			/// Initialization of the loggers
+			/// Initialization
 			void init();
 
 		private:

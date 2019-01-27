@@ -30,6 +30,9 @@ namespace type_system {
 			/// Destructor.
 			~TypeSystemManager();
 
+			/// Initialization
+			void init();
+
 		private:
 
 			/// The type system manager for constants.

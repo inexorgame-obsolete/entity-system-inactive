@@ -26,6 +26,9 @@ namespace type_system {
 			/// Destructor.
 			~ConvertersTypeSystemManager();
 
+			/// Initialization
+			void init();
+
 		private:
 
 			/// Provider for entity type INT_TO_FLOAT.

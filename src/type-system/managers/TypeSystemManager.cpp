@@ -25,6 +25,13 @@ namespace type_system {
 	{
 	}
 
+	void TypeSystemManager::init()
+	{
+		constants_type_system_manager->init();
+		stores_type_system_manager->init();
+		converters_type_system_manager->init();
+	}
+
 }
 }
 }

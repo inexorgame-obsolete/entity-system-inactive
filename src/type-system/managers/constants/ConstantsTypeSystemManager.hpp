@@ -30,7 +30,7 @@ namespace type_system {
 			/// Destructor.
 			~ConstantsTypeSystemManager();
 
-			/// Initialization of the loggers
+			/// Initialization
 			void init();
 
 		private:

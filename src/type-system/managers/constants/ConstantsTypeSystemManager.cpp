@@ -25,6 +25,10 @@ namespace type_system {
 	{
 	}
 
+	void ConstantsTypeSystemManager::init()
+	{
+	}
+
 }
 }
 }
