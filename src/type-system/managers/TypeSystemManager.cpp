@@ -12,11 +12,13 @@ namespace type_system {
 
 	TypeSystemManager::TypeSystemManager(
 		shared_ptr<ConstantsTypeSystemManager> constants_type_system_manager,
-		shared_ptr<StoresTypeSystemManager> stores_type_system_manager
+		shared_ptr<StoresTypeSystemManager> stores_type_system_manager,
+		shared_ptr<ConvertersTypeSystemManager> converters_type_system_manager
 	)
 	{
 		this->constants_type_system_manager = constants_type_system_manager;
 		this->stores_type_system_manager = stores_type_system_manager;
+		this->converters_type_system_manager = converters_type_system_manager;
 	}
 
 	TypeSystemManager::~TypeSystemManager()

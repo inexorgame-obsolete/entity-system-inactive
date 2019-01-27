@@ -4,6 +4,7 @@
 #pragma once
 
 #include "constants/ConstantsTypeSystemManager.hpp"
+#include "converters/ConvertersTypeSystemManager.hpp"
 #include "stores/StoresTypeSystemManager.hpp"
 
 using namespace inexor::entity_system;
@@ -22,7 +23,8 @@ namespace type_system {
 			/// Constructor.
 			TypeSystemManager(
 				shared_ptr<ConstantsTypeSystemManager> constants_type_system_manager,
-				shared_ptr<StoresTypeSystemManager> stores_type_system_manager
+				shared_ptr<StoresTypeSystemManager> stores_type_system_manager,
+				shared_ptr<ConvertersTypeSystemManager> converters_type_system_manager
 			);
 
 			/// Destructor.
@@ -35,6 +37,9 @@ namespace type_system {
 
 			/// The type system manager for stores.
 			shared_ptr<StoresTypeSystemManager> stores_type_system_manager;
+
+			/// The type system manager for converters.
+			shared_ptr<ConvertersTypeSystemManager> converters_type_system_manager;
 
 	};
 
