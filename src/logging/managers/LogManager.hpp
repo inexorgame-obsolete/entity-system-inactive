@@ -14,6 +14,8 @@
 #include "entity-system/model/data/DataTypes.hpp"
 #include "entity-system/util/type-definitions/TypeDefinitions.hpp"
 
+#include "logging/providers/LoggerEntityTypeProvider.hpp"
+
 using namespace inexor::entity_system;
 using namespace std;
 
@@ -28,7 +30,7 @@ namespace logging {
 
 			/// Constructor.
 			LogManager(
-				shared_ptr<EntityTypeBuilderManager> entity_type_builder_manager,
+				shared_ptr<LoggerEntityTypeProvider> logger_entity_type_provider,
 				shared_ptr<EntityInstanceBuilderManager> entity_instance_builder_manager,
 				shared_ptr<EntityInstanceManager> entity_instance_manager
 			);
@@ -56,17 +58,14 @@ namespace logging {
 			/// The logger sinks
 			vector<spdlog::sink_ptr> sinks;
 
-			/// The entity type manager
-			shared_ptr<EntityTypeBuilderManager> entity_type_builder_manager;
+			/// The entity type provider
+			shared_ptr<LoggerEntityTypeProvider> logger_entity_type_provider;
 
 			/// The entity instance manager
 			shared_ptr<EntityInstanceBuilderManager> entity_instance_builder_manager;
 
 			/// The entity instance manager
 			shared_ptr<EntityInstanceManager> entity_instance_manager;
-
-			/// The entity type LOGGER
-			shared_ptr<inexor::entity_system::EntityType> entity_type_logger;
 
 			/// The logger representation in the entity system
 			unordered_map<std::string, shared_ptr<inexor::entity_system::EntityInstance>> logger_instances;
