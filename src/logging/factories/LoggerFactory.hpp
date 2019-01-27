@@ -3,17 +3,12 @@
 
 #pragma once
 
-#include "spdlog/spdlog.h"
-#include "spdlog/async.h"
-#include "spdlog/sinks/stdout_color_sinks.h"
-#include "spdlog/sinks/rotating_file_sink.h"
-
 #include "entity-system/managers/entities/entity-type-builder-manager/EntityTypeBuilderManager.hpp"
+#include "entity-system/managers/entities/entity-instance-builder-manager/EntityInstanceBuilderManager.hpp"
 #include "entity-system/managers/entities/entity-instance-manager/EntityInstanceManager.hpp"
 #include "entity-system/model/data/DataTypes.hpp"
 #include "entity-system/util/type-definitions/TypeDefinitions.hpp"
 
-#include "logging/factories/LoggerFactory.hpp"
 #include "logging/providers/LoggerEntityTypeProvider.hpp"
 
 using namespace inexor::entity_system;
@@ -22,53 +17,44 @@ using namespace std;
 namespace inexor {
 namespace logging {
 
-	/// @class LogManager
+	/// @class LoggerFactory
     /// @brief Management of the loggers.
-	class LogManager
+	class LoggerFactory
 	{
 		public:
 
 			/// Constructor.
-			LogManager(
+			LoggerFactory(
 				shared_ptr<LoggerEntityTypeProvider> logger_entity_type_provider,
-				shared_ptr<LoggerFactory> logger_factory,
+				shared_ptr<EntityInstanceBuilderManager> entity_instance_builder_manager,
 				shared_ptr<EntityInstanceManager> entity_instance_manager
 			);
 
 			/// Destructor.
-			~LogManager();
+			~LoggerFactory();
 
 			/// Initialization of the loggers
-			void init();
+			O_ENT_INST create_instance();
 
-			/// Registers a logger
-			void register_logger(std::string logger_name);
+			/// Creates an instance and sets the given name
+			O_ENT_INST create_instance(string logger_name);
 
-			/// Unregisters a logger
-			void unregister_logger(std::string logger_name);
+			/// Creates an instance and sets the given name
+			O_ENT_INST create_instance(string logger_name, spdlog::level::level_enum log_level);
 
-			/// Sets the log level for the given logger
-			void set_level(std::string logger_name, spdlog::level::level_enum level);
-
-			/// Returns the log level for the given logger
-			spdlog::level::level_enum get_level(std::string logger_name);
+			/// Creates multiple instances
+			vector<ENT_INST> create_instances(int count);
 
 		private:
-
-			/// The logger sinks
-			vector<spdlog::sink_ptr> sinks;
 
 			/// The entity type provider
 			shared_ptr<LoggerEntityTypeProvider> logger_entity_type_provider;
 
-			/// The entity type provider
-			shared_ptr<LoggerFactory> logger_factory;
+			/// The entity instance manager
+			shared_ptr<EntityInstanceBuilderManager> entity_instance_builder_manager;
 
 			/// The entity instance manager
 			shared_ptr<EntityInstanceManager> entity_instance_manager;
-
-			/// The logger representation in the entity system
-			unordered_map<std::string, shared_ptr<inexor::entity_system::EntityInstance>> logger_instances;
 
 	};
 

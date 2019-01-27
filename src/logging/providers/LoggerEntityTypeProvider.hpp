@@ -33,6 +33,10 @@ namespace logging {
 			/// Destructor.
 			~LoggerEntityTypeProvider() {};
 
+			// static string ATTTRIBUTE_LOGGER_NAME = "logger_name";
+
+			// static string ATTTRIBUTE_LOG_LEVEL = "log_level";
+
 	};
 
 

@@ -58,11 +58,11 @@ namespace entity_system {
 					entity_type->link_attribute_type(attribute_type);
 					spdlog::debug("Created entity type attribute {} of data type {}", attribute_entry.first, attribute_entry.second);
 				} else {
-					spdlog::info("Failed to create entity type attribute {} of data type {}", attribute_entry.first, attribute_entry.second);
+					spdlog::error("Failed to create entity type attribute {} of data type {}", attribute_entry.first, attribute_entry.second);
 					return std::nullopt;
 				}
 			}
-			spdlog::debug("Created entity type {}", entity_type->get_type_name());
+			spdlog::info("Created entity type {} (UUID: {})", entity_type->get_type_name(), entity_type->get_GUID().str());
 			return entity_type;
 		} else {
 			spdlog::error("Failed to create entity type {}", entity_type_name);

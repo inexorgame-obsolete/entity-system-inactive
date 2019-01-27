@@ -12,12 +12,12 @@ namespace logging {
 
 	LogManager::LogManager(
 		shared_ptr<LoggerEntityTypeProvider> logger_entity_type_provider,
-		shared_ptr<EntityInstanceBuilderManager> entity_instance_builder_manager,
+		shared_ptr<LoggerFactory> logger_factory,
 		shared_ptr<EntityInstanceManager> entity_instance_manager
 	)
 	{
 		this->logger_entity_type_provider = logger_entity_type_provider;
-		this->entity_instance_builder_manager = entity_instance_builder_manager;
+		this->logger_factory = logger_factory;
 		this->entity_instance_manager = entity_instance_manager;
 	}
 
@@ -38,16 +38,10 @@ namespace logging {
 		spdlog::register_logger(std::make_shared<spdlog::async_logger>(logger_name, sinks.begin(), sinks.end(), spdlog::thread_pool(), spdlog::async_overflow_policy::block));
 		spdlog::get("inexor.logging.LogManager")->info("Registered logger {}", logger_name);
 
-		O_ENT_INST o_logger_instance = entity_instance_builder_manager->get_builder()
-			->type(logger_entity_type_provider->get_type())
-			->attribute("logger_name", logger_name)
-			->attribute("log_level", spdlog::level::level_enum::info)
-			->build();
-
+		O_ENT_INST o_logger_instance = logger_factory->create_instance(logger_name, spdlog::level::level_enum::info);
 		if (o_logger_instance.has_value())
 		{
 			ENT_INST logger_instance = o_logger_instance.value();
-//			spdlog::get("inexor.logging.LogManager")->info("Created entity instance (UUID: {}) of type {} (UUID: {})", logger_instance->get_GUID().str(), logger_entity_type_provider->get_type()->get_type_name(), logger_entity_type_provider->get_type()->get_GUID().str());
 			O_ENT_ATTR_INST o_logger_name = logger_instance->get_attribute_instance("logger_name");
 			O_ENT_ATTR_INST o_log_level = logger_instance->get_attribute_instance("log_level");
 			if (o_logger_name.has_value() && o_log_level.has_value()) {
