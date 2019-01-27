@@ -19,8 +19,8 @@
 
 #include "spdlog/spdlog.h"
 
-#include "../model/EntitySystemMessage.hpp"
-#include "../model/RelationInstance.hpp"
+#include "../model/EntitySystemMessageDto.hpp"
+#include "../model/RelationInstanceDto.hpp"
 
 #include "entity-system/managers/relations/relation-instance-manager/RelationInstanceManager.hpp"
 

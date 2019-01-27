@@ -136,12 +136,12 @@ void RelationInstanceApiRelationsInstancesRelation_instance_uuidResource::DELETE
 	 */
 
 	if (status_code == 200) {
-		std::shared_ptr<EntitySystemMessage> response = NULL;
+		std::shared_ptr<EntitySystemMessageDto> response = NULL;
 		session->close(200, "Success message", { {"Connection", "close"} });
 		return;
 	}
 	if (status_code == 0) {
-		std::shared_ptr<EntitySystemMessage> response = NULL;
+		std::shared_ptr<EntitySystemMessageDto> response = NULL;
 		session->close(0, "unexpected error", { {"Connection", "close"} });
 		return;
 	}
@@ -162,12 +162,12 @@ void RelationInstanceApiRelationsInstancesRelation_instance_uuidResource::GET_me
 	 */
 
 	if (status_code == 200) {
-		std::shared_ptr<RelationInstance> response = NULL;
+		std::shared_ptr<RelationInstanceDto> response = NULL;
 		session->close(200, "The relation instance", { {"Connection", "close"} });
 		return;
 	}
 	if (status_code == 0) {
-		std::shared_ptr<EntitySystemMessage> response = NULL;
+		std::shared_ptr<EntitySystemMessageDto> response = NULL;
 		session->close(0, "unexpected error", { {"Connection", "close"} });
 		return;
 	}
@@ -237,12 +237,12 @@ void RelationInstanceApiRelationsInstancesResource::DELETE_method_handler(const 
 	 */
 
 	if (status_code == 200) {
-		std::shared_ptr<EntitySystemMessage> response = NULL;
+		std::shared_ptr<EntitySystemMessageDto> response = NULL;
 		session->close(200, "Success message", { {"Connection", "close"} });
 		return;
 	}
 	if (status_code == 0) {
-		std::shared_ptr<EntitySystemMessage> response = NULL;
+		std::shared_ptr<EntitySystemMessageDto> response = NULL;
 		session->close(0, "unexpected error", { {"Connection", "close"} });
 		return;
 	}
@@ -260,12 +260,12 @@ void RelationInstanceApiRelationsInstancesResource::GET_method_handler(const std
 	 */
 
 	if (status_code == 200) {
-		std::shared_ptr<RelationInstance> response = NULL;
+		std::shared_ptr<RelationInstanceDto> response = NULL;
 		session->close(200, "Array of relation instances", { {"Connection", "close"} });
 		return;
 	}
 	if (status_code == 0) {
-		std::shared_ptr<EntitySystemMessage> response = NULL;
+		std::shared_ptr<EntitySystemMessageDto> response = NULL;
 		session->close(0, "unexpected error", { {"Connection", "close"} });
 		return;
 	}
@@ -329,12 +329,12 @@ void RelationInstanceApiRelationsInstancesStartStart_entity_instance_uuidEndEnd_
 	 */
 
 	if (status_code == 200) {
-		std::shared_ptr<RelationInstance> response = NULL;
+		std::shared_ptr<RelationInstanceDto> response = NULL;
 		session->close(200, "Array of relation instances", { {"Connection", "close"} });
 		return;
 	}
 	if (status_code == 0) {
-		std::shared_ptr<EntitySystemMessage> response = NULL;
+		std::shared_ptr<EntitySystemMessageDto> response = NULL;
 		session->close(0, "unexpected error", { {"Connection", "close"} });
 		return;
 	}

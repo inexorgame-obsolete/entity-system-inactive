@@ -19,10 +19,10 @@
 
 #include "spdlog/spdlog.h"
 
-#include "../model/Attribute.hpp"
-#include "../model/EntityInstance.hpp"
-#include "../model/EntitySystemMessage.hpp"
-#include "../model/RelationInstance.hpp"
+#include "../model/AttributeDto.hpp"
+#include "../model/EntityInstanceDto.hpp"
+#include "../model/EntitySystemMessageDto.hpp"
+#include "../model/RelationInstanceDto.hpp"
 #include "entity-system/EntitySystem.hpp"
 
 using namespace inexor::entity_system::rest::model;

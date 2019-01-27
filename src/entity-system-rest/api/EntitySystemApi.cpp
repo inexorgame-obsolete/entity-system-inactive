@@ -98,12 +98,12 @@ void EntitySystemApiEntitysystemResource::GET_method_handler(const std::shared_p
 			 */
 			
 			if (status_code == 200) {
-				std::shared_ptr<EntitySystem> response = NULL;
+				std::shared_ptr<EntitySystemDto> response = NULL;
 				session->close(200, "The entity system", { {"Connection", "close"} });
 				return;
 			}
 			if (status_code == 0) {
-				std::shared_ptr<EntitySystemMessage> response = NULL;
+				std::shared_ptr<EntitySystemMessageDto> response = NULL;
 				session->close(0, "unexpected error", { {"Connection", "close"} });
 				return;
 			}
@@ -124,12 +124,12 @@ void EntitySystemApiEntitysystemResource::POST_method_handler(const std::shared_
 			 */
 			
 			if (status_code == 200) {
-				std::shared_ptr<EntitySystemMessage> response = NULL;
+				std::shared_ptr<EntitySystemMessageDto> response = NULL;
 				session->close(200, "The entity system", { {"Connection", "close"} });
 				return;
 			}
 			if (status_code == 0) {
-				std::shared_ptr<EntitySystemMessage> response = NULL;
+				std::shared_ptr<EntitySystemMessageDto> response = NULL;
 				session->close(0, "unexpected error", { {"Connection", "close"} });
 				return;
 			}

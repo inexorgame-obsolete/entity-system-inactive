@@ -117,12 +117,12 @@ void AttributeApiEntitiesInstancesEntity_instance_uuidAttributesNameResource::DE
 	 */
 
 	if (status_code == 200) {
-		std::shared_ptr<EntitySystemMessage> response = NULL;
+		std::shared_ptr<EntitySystemMessageDto> response = NULL;
 		session->close(200, "Success message", { {"Connection", "close"} });
 		return;
 	}
 	if (status_code == 0) {
-		std::shared_ptr<EntitySystemMessage> response = NULL;
+		std::shared_ptr<EntitySystemMessageDto> response = NULL;
 		session->close(0, "unexpected error", { {"Connection", "close"} });
 		return;
 	}
@@ -146,12 +146,12 @@ void AttributeApiEntitiesInstancesEntity_instance_uuidAttributesNameResource::GE
 	 */
 
 	if (status_code == 200) {
-		std::shared_ptr<Attribute> response = NULL;
+		std::shared_ptr<AttributeDto> response = NULL;
 		session->close(200, "The attribute", { {"Connection", "close"} });
 		return;
 	}
 	if (status_code == 0) {
-		std::shared_ptr<EntitySystemMessage> response = NULL;
+		std::shared_ptr<EntitySystemMessageDto> response = NULL;
 		session->close(0, "unexpected error", { {"Connection", "close"} });
 		return;
 	}
@@ -231,12 +231,12 @@ void AttributeApiEntitiesTypesEntity_type_uuidAttributesNameResource::DELETE_met
 	 */
 
 	if (status_code == 200) {
-		std::shared_ptr<EntitySystemMessage> response = NULL;
+		std::shared_ptr<EntitySystemMessageDto> response = NULL;
 		session->close(200, "Success message", { {"Connection", "close"} });
 		return;
 	}
 	if (status_code == 0) {
-		std::shared_ptr<EntitySystemMessage> response = NULL;
+		std::shared_ptr<EntitySystemMessageDto> response = NULL;
 		session->close(0, "unexpected error", { {"Connection", "close"} });
 		return;
 	}
@@ -261,12 +261,12 @@ void AttributeApiEntitiesTypesEntity_type_uuidAttributesNameResource::GET_method
 			 */
 			
 			if (status_code == 200) {
-				std::shared_ptr<Attribute> response = NULL;
+				std::shared_ptr<AttributeDto> response = NULL;
 				session->close(200, "The attribute", { {"Connection", "close"} });
 				return;
 			}
 			if (status_code == 0) {
-				std::shared_ptr<EntitySystemMessage> response = NULL;
+				std::shared_ptr<EntitySystemMessageDto> response = NULL;
 				session->close(0, "unexpected error", { {"Connection", "close"} });
 				return;
 			}

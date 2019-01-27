@@ -20,11 +20,11 @@
 #include "spdlog/spdlog.h"
 
 #include "entity-system/managers/entities/entity-type-manager/EntityTypeManager.hpp"
-#include "../model/Attribute.hpp"
-#include "../model/EntityInstance.hpp"
-#include "../model/EntitySystemMessage.hpp"
-#include "../model/EntityType.hpp"
-#include "../model/RelationType.hpp"
+#include "../model/AttributeDto.hpp"
+#include "../model/EntityInstanceDto.hpp"
+#include "../model/EntitySystemMessageDto.hpp"
+#include "../model/EntityTypeDto.hpp"
+#include "../model/RelationTypeDto.hpp"
 
 
 using namespace inexor::entity_system::rest::model;

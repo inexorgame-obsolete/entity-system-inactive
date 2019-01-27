@@ -124,12 +124,12 @@ void EntityTypeApiEntitiesTypesResource::DELETE_method_handler(const shared_ptr<
 	int status_code = 200;
 	this->entity_type_manager->delete_all_entity_types();
 	if (status_code == 200) {
-		shared_ptr<EntitySystemMessage> response = NULL;
+		shared_ptr<EntitySystemMessageDto> response = NULL;
 		session->close(200, "Success message", { {"Connection", "close"} });
 		return;
 	}
 	if (status_code == 0) {
-		shared_ptr<EntitySystemMessage> response = NULL;
+		shared_ptr<EntitySystemMessageDto> response = NULL;
 		session->close(0, "unexpected error", { {"Connection", "close"} });
 		return;
 	}
@@ -146,12 +146,12 @@ void EntityTypeApiEntitiesTypesResource::GET_method_handler(const shared_ptr<Ses
 	 * Process the received information here
 	 */
 	if (status_code == 200) {
-		shared_ptr<EntityType> response = NULL;
+		shared_ptr<EntityTypeDto> response = NULL;
 		session->close(200, "A list of entity types", { {"Connection", "close"} });
 		return;
 	}
 	if (status_code == 0) {
-		shared_ptr<EntitySystemMessage> response = NULL;
+		shared_ptr<EntitySystemMessageDto> response = NULL;
 		session->close(0, "unexpected error", { {"Connection", "close"} });
 		return;
 	}
@@ -232,12 +232,12 @@ void EntityTypeApiEntitiesTypesEntity_type_uuidResource::DELETE_method_handler(c
 	// entity_system->delete_entity_type(g(entityTypeUuid));
 
 	if (status_code == 200) {
-		shared_ptr<EntitySystemMessage> response = NULL;
+		shared_ptr<EntitySystemMessageDto> response = NULL;
 		session->close(200, "Success message", { {"Connection", "close"} });
 		return;
 	}
 	if (status_code == 0) {
-		shared_ptr<EntitySystemMessage> response = NULL;
+		shared_ptr<EntitySystemMessageDto> response = NULL;
 		session->close(0, "unexpected error", { {"Connection", "close"} });
 		return;
 	}
@@ -265,7 +265,7 @@ void EntityTypeApiEntitiesTypesEntity_type_uuidResource::GET_method_handler(cons
 	if (entity_type_o.has_value()) {
 		spdlog::get("inexor.entity.rest")->info("found");
 		std::shared_ptr<inexor::entity_system::EntityType> entity_type = entity_type_o.value();
-		shared_ptr<EntityType> entity_type_model = std::make_shared<EntityType>();
+		shared_ptr<EntityTypeDto> entity_type_model = std::make_shared<EntityTypeDto>();
 		entity_type_model->setEntityTypeUuid(entity_type->get_GUID().str());
 		entity_type_model->setName(entity_type->get_type_name());
 		session->close(restbed::OK, entity_type_model->toJsonString(), { {"Connection", "close"} });
@@ -277,7 +277,7 @@ void EntityTypeApiEntitiesTypesEntity_type_uuidResource::GET_method_handler(cons
 			spdlog::get("inexor.entity.rest")->info("Created entity type {} {}", entity_type->get_GUID().str(), entity_type->get_type_name());
 		}
 		spdlog::get("inexor.entity.rest")->info("not found");
-		shared_ptr<EntitySystemMessage> entity_system_message = std::make_shared<EntitySystemMessage>();
+		shared_ptr<EntitySystemMessageDto> entity_system_message = std::make_shared<EntitySystemMessageDto>();
 		entity_system_message->setCode(404);
 		entity_system_message->setMessage(fmt::format("Entity type UUID('{}') not found", entity_type_uuid));
 		session->close(restbed::NOT_FOUND, entity_system_message->toJsonString(), { {"Connection", "close"} });
@@ -294,7 +294,7 @@ void EntityTypeApiEntitiesTypesEntity_type_uuidResource::GET_method_handler(cons
 	if (status_code == 200) {
 	}
 	if (status_code == 0) {
-		shared_ptr<EntitySystemMessage> response = NULL;
+		shared_ptr<EntitySystemMessageDto> response = NULL;
 		session->close(0, "unexpected error", { {"Connection", "close"} });
 		return;
 	}
@@ -380,12 +380,12 @@ void EntityTypeApiEntitiesTypesEntity_type_uuidAttributesNameResource::DELETE_me
 	// entity_system->delete_entity_attribute_type(attribute_type->get_uuid());
 
 	if (status_code == 200) {
-		shared_ptr<EntitySystemMessage> response = NULL;
+		shared_ptr<EntitySystemMessageDto> response = NULL;
 		session->close(200, "Success message", { {"Connection", "close"} });
 		return;
 	}
 	if (status_code == 0) {
-		shared_ptr<EntitySystemMessage> response = NULL;
+		shared_ptr<EntitySystemMessageDto> response = NULL;
 		session->close(0, "unexpected error", { {"Connection", "close"} });
 		return;
 	}
@@ -409,12 +409,12 @@ void EntityTypeApiEntitiesTypesEntity_type_uuidAttributesNameResource::GET_metho
 	 */
 
 	if (status_code == 200) {
-		shared_ptr<Attribute> response = NULL;
+		shared_ptr<AttributeDto> response = NULL;
 		session->close(200, "The attribute", { {"Connection", "close"} });
 		return;
 	}
 	if (status_code == 0) {
-		shared_ptr<EntitySystemMessage> response = NULL;
+		shared_ptr<EntitySystemMessageDto> response = NULL;
 		session->close(0, "unexpected error", { {"Connection", "close"} });
 		return;
 	}
@@ -480,12 +480,12 @@ void EntityTypeApiEntitiesTypesEntity_type_uuidInstancesResource::GET_method_han
 	 */
 
 	if (status_code == 200) {
-		shared_ptr<EntityInstance> response = NULL;
+		shared_ptr<EntityInstanceDto> response = NULL;
 		session->close(200, "Array of entity instances", { {"Connection", "close"} });
 		return;
 	}
 	if (status_code == 0) {
-		shared_ptr<EntitySystemMessage> response = NULL;
+		shared_ptr<EntitySystemMessageDto> response = NULL;
 		session->close(0, "unexpected error", { {"Connection", "close"} });
 		return;
 	}
