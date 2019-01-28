@@ -15,6 +15,8 @@
 #include <string>
 #include <memory>
 
+#include "entity-system/model/data/container/DataContainer.hpp"
+
 namespace inexor {
 namespace entity_system {
 namespace rest {
@@ -47,20 +49,13 @@ namespace model {
 			/// <summary>
 			///
 			/// </summary>
-			std::string get_datatype() const;
-			void set_datatype(std::string datatype);
-
-			/// <summary>
-			///
-			/// </summary>
-			std::string get_value() const;
-			void set_value(std::string value);
+			DataContainer get_value() const;
+			void set_value(DataContainer value);
 
 		protected:
 			std::string attribute_uuid;
 			std::string name;
-			std::string datatype;
-			std::string value;
+			DataContainer value;
 	};
 
 }

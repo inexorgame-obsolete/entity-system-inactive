@@ -264,9 +264,26 @@ void EntityInstanceApiEntitiesInstancesEntity_instance_uuidResource::GET_method_
 	if (o_ent_inst.has_value()) {
 		spdlog::get("inexor.entity.rest")->info("found");
 		ENT_INST ent_inst = o_ent_inst.value();
-		shared_ptr<EntityInstanceDto> ent_inst_dto = std::make_shared<EntityInstanceDto>();
+		shared_ptr<EntityInstanceDto> ent_inst_dto = make_shared<EntityInstanceDto>();
 		ent_inst_dto->set_entity_instance_uuid(ent_inst->get_GUID().str());
 		ent_inst_dto->set_entity_type_uuid(ent_inst->get_entity_type()->get_GUID().str());
+		optional<unordered_map<ENT_ATTR_TYPE, ENT_ATTR_INST>> o_ent_inst_attrs = ent_inst->get_instances();
+		if (o_ent_inst_attrs.has_value())
+		{
+			unordered_map<ENT_ATTR_TYPE, ENT_ATTR_INST> ent_inst_attrs = o_ent_inst_attrs.value();
+			vector<shared_ptr<AttributeDto>> attribute_dtos;
+			for (auto& ent_inst_attr : ent_inst_attrs)
+			{
+				ENT_ATTR_TYPE ent_attr_type = ent_inst_attr.first;
+				ENT_ATTR_INST ent_attr_inst = ent_inst_attr.second;
+				shared_ptr<AttributeDto> attribute_dto = make_shared<AttributeDto>();
+				attribute_dto->set_attribute_uuid(ent_attr_inst->get_GUID().str());
+				attribute_dto->set_name(ent_attr_type->get_type_name());
+				attribute_dto->set_value({ent_attr_inst->type, ent_attr_inst->value});
+				attribute_dtos.push_back(attribute_dto);
+			}
+			ent_inst_dto->set_attributes(attribute_dtos);
+		}
 		// TODO: ent_inst_dto->set_attributes();
 		session->close(restbed::OK, ent_inst_dto->to_json_string(), { {"Connection", "close"} });
 		return;

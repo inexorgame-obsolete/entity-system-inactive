@@ -32,8 +32,6 @@ namespace model {
 	{
 		attribute_uuid = "";
 		name = "";
-		datatype = "";
-		value = "";
 	}
 
 	AttributeDto::~AttributeDto()
@@ -46,8 +44,45 @@ namespace model {
 		ptree pt;
 		pt.put("attribute_uuid", attribute_uuid);
 		pt.put("name", name);
-		pt.put("datatype", datatype);
-		pt.put("value", value);
+		switch (value.type)
+		{
+			case ENTSYS_DATA_TYPE_BOOL:
+				pt.put("datatype", "bool");
+				pt.put("value", std::get<ENTSYS_DATA_TYPE_BOOL>(value.value));
+				break;
+			case ENTSYS_DATA_TYPE_INT:
+				pt.put("datatype", "int");
+				pt.put("value", std::get<ENTSYS_DATA_TYPE_INT>(value.value));
+				break;
+			case ENTSYS_DATA_TYPE_BIG_INT:
+				pt.put("datatype", "big_int");
+				pt.put("value", std::get<ENTSYS_DATA_TYPE_BIG_INT>(value.value));
+				break;
+			case ENTSYS_DATA_TYPE_DOUBLE:
+				pt.put("datatype", "double");
+				pt.put("value", std::get<ENTSYS_DATA_TYPE_DOUBLE>(value.value));
+				break;
+			case ENTSYS_DATA_TYPE_FLOAT:
+				pt.put("datatype", "float");
+				pt.put("value", std::get<ENTSYS_DATA_TYPE_FLOAT>(value.value));
+				break;
+			case ENTSYS_DATA_TYPE_STRING:
+				pt.put("datatype", "string");
+				pt.put("value", std::get<ENTSYS_DATA_TYPE_STRING>(value.value));
+				break;
+//			case ENTSYS_DATA_TYPE_VEC3:
+//				pt.put("datatype", "vec3");
+//				pt.put("value", std::get<ENTSYS_DATA_TYPE_VEC3>(value.value));
+//				break;
+//			case ENTSYS_DATA_TYPE_VEC4:
+//				pt.put("datatype", "vec4");
+//				pt.put("value", std::get<ENTSYS_DATA_TYPE_VEC4>(value.value));
+//				break;
+			default:
+				pt.put("datatype", "");
+				pt.put("value", "");
+				break;
+		}
 		write_json(ss, pt, false);
 		return ss.str();
 	}
@@ -59,8 +94,11 @@ namespace model {
 		read_json(ss,pt);
 		attribute_uuid = pt.get("attribute_uuid", "");
 		name = pt.get("name", "");
-		datatype = pt.get("datatype", "");
-		value = pt.get("value", "");
+		std::string datatype = pt.get("datatype", "");
+//		if ("bool" == datatype)
+//		{
+//			value = {}
+//		}
 	}
 
 	std::string AttributeDto::get_attribute_uuid() const
@@ -83,22 +121,12 @@ namespace model {
 		this->name = name;
 	}
 
-	std::string AttributeDto::get_datatype() const
-	{
-		return datatype;
-	}
-
-	void AttributeDto::set_datatype(std::string datatype)
-	{
-		this->datatype = datatype;
-	}
-
-	std::string AttributeDto::get_value() const
+	DataContainer AttributeDto::get_value() const
 	{
 		return value;
 	}
 
-	void AttributeDto::set_value(std::string value)
+	void AttributeDto::set_value(DataContainer value)
 	{
 		this->value = value;
 	}

@@ -23,6 +23,9 @@ using boost::property_tree::ptree;
 using boost::property_tree::read_json;
 using boost::property_tree::write_json;
 
+#include "entity-system/model/data/DataTypes.hpp"
+#include "entity-system/model/data/container/DataContainer.hpp"
+
 namespace inexor {
 namespace entity_system {
 namespace rest {
@@ -44,6 +47,56 @@ namespace model {
 		ptree pt;
 		pt.put("entity_instance_uuid", entity_instance_uuid);
 		pt.put("entity_type_uuid", entity_type_uuid);
+		ptree pt_attributes;
+		for (auto attribute : attributes)
+		{
+			ptree pt_attribute;
+			pt_attribute.put("attribute_uuid", attribute->get_attribute_uuid());
+			pt_attribute.put("name", attribute->get_name());
+			DataContainer data_container = attribute->get_value();
+			switch (data_container.type)
+			{
+				case ENTSYS_DATA_TYPE_BOOL:
+					pt_attribute.put("datatype", "bool");
+					pt_attribute.put("value", std::get<ENTSYS_DATA_TYPE_BOOL>(data_container.value));
+					break;
+				case ENTSYS_DATA_TYPE_INT:
+					pt_attribute.put("datatype", "int");
+					pt_attribute.put("value", std::get<ENTSYS_DATA_TYPE_INT>(data_container.value));
+					break;
+				case ENTSYS_DATA_TYPE_BIG_INT:
+					pt_attribute.put("datatype", "big_int");
+					pt_attribute.put("value", std::get<ENTSYS_DATA_TYPE_BIG_INT>(data_container.value));
+					break;
+				case ENTSYS_DATA_TYPE_DOUBLE:
+					pt_attribute.put("datatype", "double");
+					pt_attribute.put("value", std::get<ENTSYS_DATA_TYPE_DOUBLE>(data_container.value));
+					break;
+				case ENTSYS_DATA_TYPE_FLOAT:
+					pt_attribute.put("datatype", "float");
+					pt_attribute.put("value", std::get<ENTSYS_DATA_TYPE_FLOAT>(data_container.value));
+					break;
+				case ENTSYS_DATA_TYPE_STRING:
+					pt_attribute.put("datatype", "string");
+					pt_attribute.put("value", std::get<ENTSYS_DATA_TYPE_STRING>(data_container.value));
+					break;
+//				case ENTSYS_DATA_TYPE_VEC3:
+//					pt.put("datatype", "vec3");
+//					pt.put("value", std::get<ENTSYS_DATA_TYPE_VEC3>(data_container.value));
+//					break;
+//				case ENTSYS_DATA_TYPE_VEC4:
+//					pt.put("datatype", "vec4");
+//					pt.put("value", std::get<ENTSYS_DATA_TYPE_VEC4>(data_container.value));
+//					break;
+				default:
+					pt_attribute.put("datatype", "");
+					pt_attribute.put("value", "");
+					break;
+			}
+
+			pt_attributes.push_back(std::make_pair("", pt_attribute));
+		}
+		pt.add_child("attributes", pt_attributes);
 		write_json(ss, pt, false);
 		return ss.str();
 	}
@@ -61,25 +114,25 @@ namespace model {
 	{
 		return entity_instance_uuid;
 	}
-	void EntityInstanceDto::set_entity_instance_uuid(std::string value)
+	void EntityInstanceDto::set_entity_instance_uuid(std::string entity_instance_uuid)
 	{
-		this->entity_instance_uuid = value;
+		this->entity_instance_uuid = entity_instance_uuid;
 	}
 	std::string EntityInstanceDto::get_entity_type_uuid() const
 	{
 		return entity_type_uuid;
 	}
-	void EntityInstanceDto::set_entity_type_uuid(std::string value)
+	void EntityInstanceDto::set_entity_type_uuid(std::string entity_type_uuid)
 	{
-		this->entity_type_uuid = value;
+		this->entity_type_uuid = entity_type_uuid;
 	}
 	std::vector<std::shared_ptr<AttributeDto>> EntityInstanceDto::get_attributes() const
 	{
 		return attributes;
 	}
-	void EntityInstanceDto::set_attributes(std::vector<std::shared_ptr<AttributeDto>> value)
+	void EntityInstanceDto::set_attributes(std::vector<std::shared_ptr<AttributeDto>> attributes)
 	{
-		this->attributes = value;
+		this->attributes = attributes;
 	}
 
 }
