@@ -61,6 +61,12 @@ namespace entity_system {
 		return shared_from_this();
 	}
 
+    shared_ptr<EntityInstanceBuilder> EntityInstanceBuilder::attribute(string attribute_name, float value)
+	{
+		entity_instance_attributes[attribute_name] = {ENTSYS_DATA_TYPE_FLOAT, value};
+		return shared_from_this();
+	}
+
 	O_ENT_INST EntityInstanceBuilder::build()
 	{
 		O_ENT_INST o_entity_instance = nullopt;

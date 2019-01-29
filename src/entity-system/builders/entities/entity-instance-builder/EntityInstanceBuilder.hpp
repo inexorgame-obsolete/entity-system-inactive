@@ -48,6 +48,8 @@ namespace entity_system {
 
 			shared_ptr<EntityInstanceBuilder> attribute(string attribute_name, int value);
 
+            shared_ptr<EntityInstanceBuilder> attribute(string attribute_name, float value);
+
 			/// Builds and returns the created entity instance.
 			O_ENT_INST build();
 
