@@ -61,6 +61,18 @@ namespace entity_system {
 			std::size_t get_relation_types_count() const;
 
 
+            /// @brief Returns an relation type.
+            /// @param ent_type_GUID The GUID of the relation type.
+            /// @return A std::optional<REL_TYPE> of the relation type.
+			O_REL_TYPE get_relation_type(const xg::Guid&);
+
+
+            /// @brief Returns an relation type.
+            /// @param ent_type_name The name of the relation type.
+            /// @return A std::optional<REL_TYPE> of the relation type.
+			O_REL_TYPE get_relation_type(const std::string&);
+
+
 			/// Deletes an entity relation type.
 			/// @param rel_type_name The name of the relation type name.
 			std::size_t delete_relation_type(const std::string&);

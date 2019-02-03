@@ -102,6 +102,12 @@ namespace entity_system {
 	}
 
 
+	std::size_t EntityTypeManager::get_entity_type_count() const
+	{
+		return get_type_count();
+	}
+
+
 	O_ENT_TYPE EntityTypeManager::get_entity_type(const xg::Guid& ent_type_GUID)
     {
         if(does_type_exist(ent_type_GUID))
@@ -120,12 +126,6 @@ namespace entity_system {
         }
         return std::nullopt;
     }
-
-
-	std::size_t EntityTypeManager::get_entity_type_count() const
-	{
-		return get_type_count();
-	}
 
 
 	std::size_t EntityTypeManager::delete_entity_type(const std::string& ent_type_name)

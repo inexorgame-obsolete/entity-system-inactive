@@ -67,6 +67,26 @@ namespace entity_system {
 	}
 
 
+	O_REL_TYPE RelationTypeManager::get_relation_type(const xg::Guid& rel_type_GUID)
+    {
+        if(does_type_exist(rel_type_GUID))
+        {
+            return O_REL_TYPE { get_type(rel_type_GUID) };
+        }
+        return std::nullopt;
+    }
+
+
+	O_REL_TYPE RelationTypeManager::get_relation_type(const std::string& rel_type_name)
+    {
+        if(does_type_exist(rel_type_name))
+        {
+            return O_REL_TYPE { get_type(rel_type_name) };
+        }
+        return std::nullopt;
+    }
+
+
 	std::size_t RelationTypeManager::delete_relation_type(const std::string& rel_type_name)
 	{
 		xg::Guid type_GUID = get_GUID_by_type_name(rel_type_name);
