@@ -3,10 +3,12 @@
 
 #pragma once
 
+#include "type-system/providers/constants/BoolConstantEntityTypeProvider.hpp"
 #include "type-system/providers/constants/IntConstantEntityTypeProvider.hpp"
 #include "type-system/providers/constants/FloatConstantEntityTypeProvider.hpp"
 #include "type-system/providers/constants/StringConstantEntityTypeProvider.hpp"
 
+#include "type-system/factories/constants/BoolConstantFactory.hpp"
 #include "type-system/factories/constants/IntConstantFactory.hpp"
 #include "type-system/factories/constants/FloatConstantFactory.hpp"
 #include "type-system/factories/constants/StringConstantFactory.hpp"
@@ -26,9 +28,11 @@ namespace type_system {
 
 			/// Constructor.
 			ConstantsTypeSystemManager(
+				shared_ptr<BoolConstantEntityTypeProvider> bool_constant_entity_type_provider,
 				shared_ptr<IntConstantEntityTypeProvider> int_constant_entity_type_provider,
 				shared_ptr<FloatConstantEntityTypeProvider> float_constant_entity_type_provider,
 				shared_ptr<StringConstantEntityTypeProvider> string_constant_entity_type_provider,
+				shared_ptr<BoolConstantFactory> bool_constant_factory,
 				shared_ptr<IntConstantFactory> int_constant_factory,
 				shared_ptr<FloatConstantFactory> float_constant_factory,
 				shared_ptr<StringConstantFactory> string_constant_factory
@@ -42,6 +46,9 @@ namespace type_system {
 
 		private:
 
+			/// Provider for entity type BOOL_CONSTANT.
+			shared_ptr<BoolConstantEntityTypeProvider> bool_constant_entity_type_provider;
+
 			/// Provider for entity type INT_CONSTANT.
 			shared_ptr<IntConstantEntityTypeProvider> int_constant_entity_type_provider;
 
@@ -50,6 +57,9 @@ namespace type_system {
 
 			/// Provider for entity type STRING_CONSTANT.
 			shared_ptr<StringConstantEntityTypeProvider> string_constant_entity_type_provider;
+
+			/// Factory for entity type BOOL_CONSTANT.
+			shared_ptr<BoolConstantFactory> bool_constant_factory;
 
 			/// Factory for entity type INT_CONSTANT.
 			shared_ptr<IntConstantFactory> int_constant_factory;
