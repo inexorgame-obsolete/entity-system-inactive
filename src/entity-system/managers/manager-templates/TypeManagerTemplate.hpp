@@ -166,6 +166,12 @@ namespace entity_system {
 				// Use lock guard to ensure thread safety for this write operation!
 				std::lock_guard<std::mutex> lock(type_manager_mutex);
 
+				xg::Guid type_GUID_to_delete = get_GUID_by_type_name(type_name);
+
+				// Erase type name
+				stored_type_names.erase(type_name);
+				// Erase GUID
+				stored_type_GUIDs.erase(type_GUID_to_delete);
 				// Erase type
                 std::size_t deleted_types = stored_types.erase(type_name);
 				return deleted_types;
@@ -203,6 +209,11 @@ namespace entity_system {
 				// Use lock guard to ensure thread safety for this write operation!
 				std::lock_guard<std::mutex> lock(type_manager_mutex);
 
+				// Erase type names
+				stored_type_names.clear();
+				// Erase GUIDs
+				stored_type_GUIDs.clear();
+				// Erase types
 				stored_types.clear();
 			}
 
