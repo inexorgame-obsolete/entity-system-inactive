@@ -26,10 +26,10 @@ namespace type_system {
 				entity_type_builder_manager,
 				"FLOAT_STORE",
 				{
-					{ "name", ENTSYS_DATA_TYPE_STRING },
-					{ "input_value", ENTSYS_DATA_TYPE_FLOAT },
-					{ "default_value", ENTSYS_DATA_TYPE_FLOAT },
-					{ "output_value", ENTSYS_DATA_TYPE_FLOAT }
+					{ "name", DataType::STRING },
+					{ "input_value", DataType::FLOAT },
+					{ "default_value", DataType::FLOAT },
+					{ "output_value", DataType::FLOAT }
 				}
 			) {};
 

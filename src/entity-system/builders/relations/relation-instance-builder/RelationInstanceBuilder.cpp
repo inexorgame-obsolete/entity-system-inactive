@@ -25,7 +25,7 @@ namespace entity_system {
 	{
 	}
 
-	shared_ptr<RelationInstanceBuilder> RelationInstanceBuilder::type(string relation_type_name)
+	shared_ptr<RelationInstanceBuilder> RelationInstanceBuilder::type(const string& relation_type_name)
 	{
 		this->relation_type_name = relation_type_name;
 		return shared_from_this();
@@ -37,7 +37,7 @@ namespace entity_system {
 		return shared_from_this();
 	}
 
-	shared_ptr<RelationInstanceBuilder> RelationInstanceBuilder::uuid(string relation_instance_uuid)
+	shared_ptr<RelationInstanceBuilder> RelationInstanceBuilder::uuid(const string& relation_instance_uuid)
 	{
 		this->relation_instance_uuid = relation_instance_uuid;
 		return shared_from_this();
@@ -55,27 +55,45 @@ namespace entity_system {
 		return shared_from_this();
 	}
 
-	shared_ptr<RelationInstanceBuilder> RelationInstanceBuilder::attribute(string attribute_name, DataContainer value)
+	shared_ptr<RelationInstanceBuilder> RelationInstanceBuilder::attribute(const string& attribute_name, const DataContainer& value)
 	{
 		relation_instance_attributes[attribute_name] = value;
 		return shared_from_this();
 	}
 
-	shared_ptr<RelationInstanceBuilder> RelationInstanceBuilder::attribute(string attribute_name, string value)
+	shared_ptr<RelationInstanceBuilder> RelationInstanceBuilder::attribute(const string& attribute_name, const bool& value)
 	{
-		relation_instance_attributes[attribute_name] = {ENTSYS_DATA_TYPE_STRING, value};
+		relation_instance_attributes[attribute_name] = {DataType::BOOL, value};
 		return shared_from_this();
 	}
 
-	shared_ptr<RelationInstanceBuilder> RelationInstanceBuilder::attribute(string attribute_name, int value)
+	shared_ptr<RelationInstanceBuilder> RelationInstanceBuilder::attribute(const string& attribute_name, const int& value)
 	{
-		relation_instance_attributes[attribute_name] = {ENTSYS_DATA_TYPE_INT, value};
+		relation_instance_attributes[attribute_name] = {DataType::INT, value};
 		return shared_from_this();
 	}
 
-    shared_ptr<RelationInstanceBuilder> RelationInstanceBuilder::attribute(string attribute_name, float value)
+	shared_ptr<RelationInstanceBuilder> RelationInstanceBuilder::attribute(const string& attribute_name, const int64_t& value)
 	{
-		relation_instance_attributes[attribute_name] = {ENTSYS_DATA_TYPE_FLOAT, value};
+		relation_instance_attributes[attribute_name] = {DataType::BIG_INT, value};
+		return shared_from_this();
+	}
+
+    shared_ptr<RelationInstanceBuilder> RelationInstanceBuilder::attribute(const string& attribute_name, const float& value)
+	{
+		relation_instance_attributes[attribute_name] = {DataType::FLOAT, value};
+		return shared_from_this();
+	}
+
+    shared_ptr<RelationInstanceBuilder> RelationInstanceBuilder::attribute(const string& attribute_name, const double& value)
+	{
+		relation_instance_attributes[attribute_name] = {DataType::DOUBLE, value};
+		return shared_from_this();
+	}
+
+	shared_ptr<RelationInstanceBuilder> RelationInstanceBuilder::attribute(const string& attribute_name, const string& value)
+	{
+		relation_instance_attributes[attribute_name] = {DataType::STRING, value};
 		return shared_from_this();
 	}
 
@@ -104,11 +122,11 @@ namespace entity_system {
 //						attr_inst->value = attr_value.value;
 //						switch (attr_inst->type)
 //						{
-//							case ENTSYS_DATA_TYPE_INT:
-//								spdlog::debug("Set attribute {} = {}", attr_name, std::get<ENTSYS_DATA_TYPE_INT>(attr_inst->value));
+//							case DataType::INT:
+//								spdlog::debug("Set attribute {} = {}", attr_name, std::get<DataType::INT>(attr_inst->value));
 //								break;
-//							case ENTSYS_DATA_TYPE_STRING:
-//								spdlog::debug("Set attribute {} = {}", attr_name, std::get<ENTSYS_DATA_TYPE_STRING>(attr_inst->value));
+//							case DataType::STRING:
+//								spdlog::debug("Set attribute {} = {}", attr_name, std::get<DataType::STRING>(attr_inst->value));
 //								break;
 //							default:
 //								break;

@@ -26,10 +26,10 @@ namespace type_system {
 				entity_type_builder_manager,
 				"INT_STORE",
 				{
-					{ "name", ENTSYS_DATA_TYPE_STRING },
-					{ "input_value", ENTSYS_DATA_TYPE_INT },
-					{ "default_value", ENTSYS_DATA_TYPE_INT },
-					{ "output_value", ENTSYS_DATA_TYPE_INT }
+					{ "name", DataType::STRING },
+					{ "input_value", DataType::INT },
+					{ "default_value", DataType::INT },
+					{ "output_value", DataType::INT }
 				}
 			) {};
 

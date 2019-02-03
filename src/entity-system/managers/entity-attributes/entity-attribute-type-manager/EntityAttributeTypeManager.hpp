@@ -36,7 +36,7 @@ namespace entity_system {
 			/// @param ent_attr_type_name The name of the new entity attribute type.
 			/// @param ent_attr_data_type The data type of the new entity attribute type.
 			/// @return ?
-			O_ENT_ATTR_TYPE create_entity_attribute_type(const std::string&, const ENTSYS_DATA_TYPE&);
+			O_ENT_ATTR_TYPE create_entity_attribute_type(const std::string&, const DataType&);
 
             
 			/// @brief Creates a new entity attribute type.
@@ -44,7 +44,7 @@ namespace entity_system {
             /// @param ? 
             /// @param ? 
             /// @return ?
-			O_ENT_ATTR_TYPE create_entity_attribute_type(const xg::Guid&, const std::string&, const ENTSYS_DATA_TYPE&);
+			O_ENT_ATTR_TYPE create_entity_attribute_type(const xg::Guid&, const std::string&, const DataType&);
 
             
 			/// @brief Checks if an entity attribute type does already exist.

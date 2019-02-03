@@ -33,22 +33,28 @@ namespace entity_system {
 			~EntityInstanceBuilder();
 
 			/// Sets the name of the entity type to use.
-			shared_ptr<EntityInstanceBuilder> type(string entity_type_name);
+			shared_ptr<EntityInstanceBuilder> type(const string& entity_type_name);
 
 			/// Sets the entity type to use.
 			shared_ptr<EntityInstanceBuilder> type(const ENT_TYPE& entity_type);
 
 			/// Sets the uuid of the entity instance.
-			shared_ptr<EntityInstanceBuilder> uuid(string entity_type_uuid);
+			shared_ptr<EntityInstanceBuilder> uuid(const string& entity_type_uuid);
 
 			/// Sets the value of the attribute.
-			shared_ptr<EntityInstanceBuilder> attribute(string attribute_name, DataContainer value);
+			shared_ptr<EntityInstanceBuilder> attribute(const string& attribute_name, const DataContainer& value);
 
-			shared_ptr<EntityInstanceBuilder> attribute(string attribute_name, string value);
+			shared_ptr<EntityInstanceBuilder> attribute(const string& attribute_name, const bool& value);
 
-			shared_ptr<EntityInstanceBuilder> attribute(string attribute_name, int value);
+			shared_ptr<EntityInstanceBuilder> attribute(const string& attribute_name, const int& value);
 
-            shared_ptr<EntityInstanceBuilder> attribute(string attribute_name, float value);
+			shared_ptr<EntityInstanceBuilder> attribute(const string& attribute_name, const int64_t& value);
+
+            shared_ptr<EntityInstanceBuilder> attribute(const string& attribute_name, const float& value);
+
+            shared_ptr<EntityInstanceBuilder> attribute(const string& attribute_name, const double& value);
+
+			shared_ptr<EntityInstanceBuilder> attribute(const string& attribute_name, const string& value);
 
 			/// Builds and returns the created entity instance.
 			O_ENT_INST build();

@@ -33,13 +33,13 @@ namespace entity_system {
 			~RelationInstanceBuilder();
 
 			/// Sets the name of the relation type to use.
-			shared_ptr<RelationInstanceBuilder> type(string relation_type_name);
+			shared_ptr<RelationInstanceBuilder> type(const string& relation_type_name);
 
 			/// Sets the relation type to use.
 			shared_ptr<RelationInstanceBuilder> type(const REL_TYPE& relation_type);
 
 			/// Sets the uuid of the relation instance.
-			shared_ptr<RelationInstanceBuilder> uuid(string relation_type_uuid);
+			shared_ptr<RelationInstanceBuilder> uuid(const string& relation_type_uuid);
 
 			/// Sets the source entity instance.
 			shared_ptr<RelationInstanceBuilder> source(ENT_INST ent_instance_source);
@@ -48,13 +48,19 @@ namespace entity_system {
 			shared_ptr<RelationInstanceBuilder> target(ENT_INST ent_instance_target);
 
 			/// Sets the value of the attribute.
-			shared_ptr<RelationInstanceBuilder> attribute(string attribute_name, DataContainer value);
+			shared_ptr<RelationInstanceBuilder> attribute(const string& attribute_name, const DataContainer& value);
 
-			shared_ptr<RelationInstanceBuilder> attribute(string attribute_name, string value);
+			shared_ptr<RelationInstanceBuilder> attribute(const string& attribute_name, const bool& value);
 
-			shared_ptr<RelationInstanceBuilder> attribute(string attribute_name, int value);
+			shared_ptr<RelationInstanceBuilder> attribute(const string& attribute_name, const int& value);
 
-            shared_ptr<RelationInstanceBuilder> attribute(string attribute_name, float value);
+			shared_ptr<RelationInstanceBuilder> attribute(const string& attribute_name, const int64_t& value);
+
+            shared_ptr<RelationInstanceBuilder> attribute(const string& attribute_name, const float& value);
+
+            shared_ptr<RelationInstanceBuilder> attribute(const string& attribute_name, const double& value);
+
+			shared_ptr<RelationInstanceBuilder> attribute(const string& attribute_name, const string& value);
 
 			/// Builds and returns the created relation instance.
 			O_REL_INST build();

@@ -51,7 +51,7 @@ namespace entity_system {
 		return shared_from_this();
 	}
 
-	shared_ptr<RelationTypeBuilder> RelationTypeBuilder::attribute(string attribute_name, ENTSYS_DATA_TYPE attribute_datatype)
+	shared_ptr<RelationTypeBuilder> RelationTypeBuilder::attribute(string attribute_name, DataType attribute_datatype)
 	{
 		relation_type_attributes[attribute_name] = attribute_datatype;
 		return shared_from_this();

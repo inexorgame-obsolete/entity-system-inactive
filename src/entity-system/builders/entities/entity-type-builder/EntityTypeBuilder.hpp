@@ -40,7 +40,7 @@ namespace entity_system {
 			shared_ptr<EntityTypeBuilder> uuid(string entity_type_uuid);
 
 			/// Sets the uuid of the entity type.
-			shared_ptr<EntityTypeBuilder> attribute(string attribute_name, ENTSYS_DATA_TYPE attribute_datatype);
+			shared_ptr<EntityTypeBuilder> attribute(string attribute_name, DataType attribute_datatype);
 
 			/// Builds and returns the created entity type.
 			O_ENT_TYPE build();
@@ -63,7 +63,7 @@ namespace entity_system {
 			string entity_type_uuid;
 
 			/// The attribute definitions.
-			unordered_map<string, ENTSYS_DATA_TYPE> entity_type_attributes;
+			unordered_map<string, DataType> entity_type_attributes;
 
 	};
 

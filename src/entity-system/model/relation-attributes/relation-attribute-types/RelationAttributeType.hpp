@@ -29,7 +29,7 @@ namespace entity_system {
 			/// @param rel_attr_type_data_type The data type of the new relation attribute type.
 			/// @note the GUID of the new relation attribute type will
 			/// be created automatically by the inheritance of GUIDBase!
-			RelationAttributeType(const std::string&, const ENTSYS_DATA_TYPE&);
+			RelationAttributeType(const std::string&, const DataType&);
 
 			/// Destructor.
 			~RelationAttributeType();

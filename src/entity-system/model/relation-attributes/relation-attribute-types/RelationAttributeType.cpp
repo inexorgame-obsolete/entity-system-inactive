@@ -8,7 +8,7 @@ namespace inexor {
 namespace entity_system {
 
 
-	RelationAttributeType::RelationAttributeType(const std::string& rel_attr_type_name, const ENTSYS_DATA_TYPE& rel_attr_type_data_type)
+	RelationAttributeType::RelationAttributeType(const std::string& rel_attr_type_name, const DataType& rel_attr_type_data_type)
         : TypeBase(rel_attr_type_name), AttributeBase(rel_attr_type_data_type)
 	{
 		// TODO: Implement

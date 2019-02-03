@@ -32,7 +32,7 @@ namespace entity_system {
 			/// The data type of the attribute.
 			/// @note The data is only managed in
             /// the instance, not in this base class.
-			ENTSYS_DATA_TYPE attribute_data_type;
+			DataType attribute_data_type;
 
             /// Mutex for this base class.
             std::mutex attribute_type_base_mutex;
@@ -42,7 +42,7 @@ namespace entity_system {
 			/// Constructor.
 			/// @param attr_data_type The data type
 			/// of the attribute.
-			AttributeBase(const ENTSYS_DATA_TYPE&);
+			AttributeBase(const DataType&);
 
 			/// Destructor.
 			~AttributeBase();
@@ -54,7 +54,7 @@ namespace entity_system {
             /// the constructor is called, we do not
             /// implement std::optional here.
 			/// @return The data type of the attribute.
-			ENTSYS_DATA_TYPE get_attribute_data_type() const;
+			DataType get_attribute_data_type() const;
 
 
 	};

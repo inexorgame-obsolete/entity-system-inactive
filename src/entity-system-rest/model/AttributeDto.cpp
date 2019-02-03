@@ -30,8 +30,18 @@ namespace model {
 
 	AttributeDto::AttributeDto()
 	{
-		attribute_uuid = "";
-		name = "";
+	}
+
+	AttributeDto::AttributeDto(const DataType& type, const DataValue& value)
+		: DataContainer(type, value)
+	{
+	}
+
+	AttributeDto::AttributeDto(const std::string& attribute_uuid, const std::string& name, const DataType& type, const DataValue& value)
+		: attribute_uuid(attribute_uuid),
+		  name(name),
+		  DataContainer(type, value)
+	{
 	}
 
 	AttributeDto::~AttributeDto()
@@ -44,43 +54,35 @@ namespace model {
 		ptree pt;
 		pt.put("attribute_uuid", attribute_uuid);
 		pt.put("name", name);
-		switch (value.type)
+		pt.put("datatype", type._to_string());
+		switch (type)
 		{
-			case ENTSYS_DATA_TYPE_BOOL:
-				pt.put("datatype", "bool");
-				pt.put("value", std::get<ENTSYS_DATA_TYPE_BOOL>(value.value));
+			case DataType::BOOL:
+				pt.put("value", std::get<DataType::BOOL>(value));
 				break;
-			case ENTSYS_DATA_TYPE_INT:
-				pt.put("datatype", "int");
-				pt.put("value", std::get<ENTSYS_DATA_TYPE_INT>(value.value));
+			case DataType::INT:
+				pt.put("value", std::get<DataType::INT>(value));
 				break;
-			case ENTSYS_DATA_TYPE_BIG_INT:
-				pt.put("datatype", "big_int");
-				pt.put("value", std::get<ENTSYS_DATA_TYPE_BIG_INT>(value.value));
+			case DataType::BIG_INT:
+				pt.put("value", std::get<DataType::BIG_INT>(value));
 				break;
-			case ENTSYS_DATA_TYPE_DOUBLE:
-				pt.put("datatype", "double");
-				pt.put("value", std::get<ENTSYS_DATA_TYPE_DOUBLE>(value.value));
+			case DataType::DOUBLE:
+				pt.put("value", std::get<DataType::DOUBLE>(value));
 				break;
-			case ENTSYS_DATA_TYPE_FLOAT:
-				pt.put("datatype", "float");
-				pt.put("value", std::get<ENTSYS_DATA_TYPE_FLOAT>(value.value));
+			case DataType::FLOAT:
+				pt.put("value", std::get<DataType::FLOAT>(value));
 				break;
-			case ENTSYS_DATA_TYPE_STRING:
-				pt.put("datatype", "string");
-				pt.put("value", std::get<ENTSYS_DATA_TYPE_STRING>(value.value));
+			case DataType::STRING:
+				pt.put("value", std::get<DataType::STRING>(value));
 				break;
-//			case ENTSYS_DATA_TYPE_VEC3:
-//				pt.put("datatype", "vec3");
-//				pt.put("value", std::get<ENTSYS_DATA_TYPE_VEC3>(value.value));
+//			case DataType::VEC3:
+//				pt.put("value", std::get<DataType::VEC3>(value));
 //				break;
-//			case ENTSYS_DATA_TYPE_VEC4:
-//				pt.put("datatype", "vec4");
-//				pt.put("value", std::get<ENTSYS_DATA_TYPE_VEC4>(value.value));
+//			case DataType::VEC4:
+//				pt.put("value", std::get<DataType::VEC4>(value));
 //				break;
 			default:
-				pt.put("datatype", "");
-				pt.put("value", "");
+				pt.put("value", 0);
 				break;
 		}
 		write_json(ss, pt, false);
@@ -95,10 +97,52 @@ namespace model {
 		attribute_uuid = pt.get("attribute_uuid", "");
 		name = pt.get("name", "");
 		std::string datatype = pt.get("datatype", "");
-//		if ("bool" == datatype)
-//		{
-//			value = {}
-//		}
+		type = DataType::_from_string(datatype.c_str());
+		switch (type)
+		{
+			case DataType::BOOL:
+			{
+				bool bool_value = pt.get("value", false);
+				value = bool_value;
+				break;
+			}
+			case DataType::INT:
+			{
+				int int_value = pt.get("value", 0);
+				value = int_value;
+				break;
+			}
+			case DataType::BIG_INT:
+			{
+				std::int64_t big_int_value = pt.get("value", 0);
+				value = big_int_value;
+				break;
+			}
+			case DataType::DOUBLE:
+			{
+				double double_value = pt.get("value", 0.0);
+				value = double_value;
+				break;
+			}
+			case DataType::FLOAT:
+			{
+				double float_value = pt.get("value", 0.0f);
+				value = float_value;
+				break;
+			}
+			case DataType::STRING:
+			{
+				std::string string_value = pt.get("value", "");
+				value = string_value;
+				break;
+			}
+//			case DataType::VEC3:
+//			case DataType::VEC4:
+			default:
+			{
+				break;
+			}
+		}
 	}
 
 	std::string AttributeDto::get_attribute_uuid() const
@@ -106,7 +150,7 @@ namespace model {
 		return attribute_uuid;
 	}
 
-	void AttributeDto::set_attribute_uuid(std::string attribute_uuid)
+	void AttributeDto::set_attribute_uuid(const std::string& attribute_uuid)
 	{
 		this->attribute_uuid = attribute_uuid;
 	}
@@ -116,17 +160,27 @@ namespace model {
 		return name;
 	}
 
-	void AttributeDto::set_name(std::string name)
+	void AttributeDto::set_name(const std::string& name)
 	{
 		this->name = name;
 	}
 
-	DataContainer AttributeDto::get_value() const
+	DataType AttributeDto::get_type() const
+	{
+		return type;
+	}
+
+	void AttributeDto::set_type(const DataType& type)
+	{
+		this->type = type;
+	}
+
+	DataValue AttributeDto::get_value() const
 	{
 		return value;
 	}
 
-	void AttributeDto::set_value(DataContainer value)
+	void AttributeDto::set_value(const DataValue& value)
 	{
 		this->value = value;
 	}

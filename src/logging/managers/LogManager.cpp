@@ -45,7 +45,7 @@ namespace logging {
 			O_ENT_ATTR_INST o_logger_name = logger_instance->get_attribute_instance("logger_name");
 			O_ENT_ATTR_INST o_log_level = logger_instance->get_attribute_instance("log_level");
 			if (o_logger_name.has_value() && o_log_level.has_value()) {
-				spdlog::get("inexor.logging.LogManager")->info("logger_name = {}, log_level = {}", std::get<ENTSYS_DATA_TYPE_STRING>(o_logger_name.value()->value), std::get<ENTSYS_DATA_TYPE_INT>(o_log_level.value()->value));
+				spdlog::get("inexor.logging.LogManager")->info("logger_name = {}, log_level = {}", std::get<DataType::STRING>(o_logger_name.value()->value), std::get<DataType::INT>(o_log_level.value()->value));
 			}
 			logger_instances[logger_name] = logger_instance;
 		} else {

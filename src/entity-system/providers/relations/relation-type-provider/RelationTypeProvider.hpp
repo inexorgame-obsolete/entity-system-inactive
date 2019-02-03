@@ -14,7 +14,7 @@ using namespace std;
 namespace inexor {
 namespace entity_system {
 
-	using AttributeList = unordered_map<string, ENTSYS_DATA_TYPE>;
+	using AttributeList = unordered_map<string, DataType>;
 
 	/// @class RelationTypeProvider
     /// @brief Provides the entity type.

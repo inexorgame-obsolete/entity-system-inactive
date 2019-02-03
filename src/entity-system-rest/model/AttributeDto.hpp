@@ -16,6 +16,7 @@
 #include <memory>
 
 #include "entity-system/model/data/container/DataContainer.hpp"
+#include "entity-system/model/data/DataTypes.hpp"
 
 namespace inexor {
 namespace entity_system {
@@ -25,10 +26,12 @@ namespace model {
 	/// <summary>
 	///
 	/// </summary>
-	class AttributeDto
+	class AttributeDto : public DataContainer
 	{
 		public:
 			AttributeDto();
+			AttributeDto(const DataType& type, const DataValue& value);
+			AttributeDto(const std::string& attribute_uuid, const std::string& name, const DataType& type, const DataValue& value);
 			virtual ~AttributeDto();
 
 			std::string to_json_string();
@@ -38,24 +41,29 @@ namespace model {
 			///
 			/// </summary>
 			std::string get_attribute_uuid() const;
-			void set_attribute_uuid(std::string attribute_uuid);
+			void set_attribute_uuid(const std::string& attribute_uuid);
 
 			/// <summary>
 			///
 			/// </summary>
 			std::string get_name() const;
-			void set_name(std::string name);
+			void set_name(const std::string& name);
 
 			/// <summary>
 			///
 			/// </summary>
-			DataContainer get_value() const;
-			void set_value(DataContainer value);
+			DataType get_type() const;
+			void set_type(const DataType& type);
+
+			/// <summary>
+			///
+			/// </summary>
+			DataValue get_value() const;
+			void set_value(const DataValue& value);
 
 		protected:
 			std::string attribute_uuid;
 			std::string name;
-			DataContainer value;
 	};
 
 }

@@ -26,8 +26,8 @@ namespace type_system {
 				entity_type_builder_manager,
 				"INT_TO_FLOAT",
 				{
-					{ "input", ENTSYS_DATA_TYPE_INT },
-					{ "value", ENTSYS_DATA_TYPE_FLOAT }
+					{ "input", DataType::INT },
+					{ "value", DataType::FLOAT }
 				}
 			) {};
 

@@ -19,12 +19,14 @@
 #include <boost/property_tree/ptree.hpp>
 #include <boost/property_tree/json_parser.hpp>
 
-using boost::property_tree::ptree;
-using boost::property_tree::read_json;
-using boost::property_tree::write_json;
+#include "spdlog/spdlog.h"
 
 #include "entity-system/model/data/DataTypes.hpp"
 #include "entity-system/model/data/container/DataContainer.hpp"
+
+using boost::property_tree::ptree;
+using boost::property_tree::read_json;
+using boost::property_tree::write_json;
 
 namespace inexor {
 namespace entity_system {
@@ -53,43 +55,34 @@ namespace model {
 			ptree pt_attribute;
 			pt_attribute.put("attribute_uuid", attribute->get_attribute_uuid());
 			pt_attribute.put("name", attribute->get_name());
-			DataContainer data_container = attribute->get_value();
-			switch (data_container.type)
+			pt_attribute.put("datatype", attribute->type._to_string());
+			switch (attribute->type)
 			{
-				case ENTSYS_DATA_TYPE_BOOL:
-					pt_attribute.put("datatype", "bool");
-					pt_attribute.put("value", std::get<ENTSYS_DATA_TYPE_BOOL>(data_container.value));
+				case DataType::BOOL:
+					pt_attribute.put("value", std::get<DataType::BOOL>(attribute->value));
 					break;
-				case ENTSYS_DATA_TYPE_INT:
-					pt_attribute.put("datatype", "int");
-					pt_attribute.put("value", std::get<ENTSYS_DATA_TYPE_INT>(data_container.value));
+				case DataType::INT:
+					pt_attribute.put("value", std::get<DataType::INT>(attribute->value));
 					break;
-				case ENTSYS_DATA_TYPE_BIG_INT:
-					pt_attribute.put("datatype", "big_int");
-					pt_attribute.put("value", std::get<ENTSYS_DATA_TYPE_BIG_INT>(data_container.value));
+				case DataType::BIG_INT:
+					pt_attribute.put("value", std::get<DataType::BIG_INT>(attribute->value));
 					break;
-				case ENTSYS_DATA_TYPE_DOUBLE:
-					pt_attribute.put("datatype", "double");
-					pt_attribute.put("value", std::get<ENTSYS_DATA_TYPE_DOUBLE>(data_container.value));
+				case DataType::DOUBLE:
+					pt_attribute.put("value", std::get<DataType::DOUBLE>(attribute->value));
 					break;
-				case ENTSYS_DATA_TYPE_FLOAT:
-					pt_attribute.put("datatype", "float");
-					pt_attribute.put("value", std::get<ENTSYS_DATA_TYPE_FLOAT>(data_container.value));
+				case DataType::FLOAT:
+					pt_attribute.put("value", std::get<DataType::FLOAT>(attribute->value));
 					break;
-				case ENTSYS_DATA_TYPE_STRING:
-					pt_attribute.put("datatype", "string");
-					pt_attribute.put("value", std::get<ENTSYS_DATA_TYPE_STRING>(data_container.value));
+				case DataType::STRING:
+					pt_attribute.put("value", std::get<DataType::STRING>(attribute->value));
 					break;
-//				case ENTSYS_DATA_TYPE_VEC3:
-//					pt.put("datatype", "vec3");
-//					pt.put("value", std::get<ENTSYS_DATA_TYPE_VEC3>(data_container.value));
+//				case DataType::VEC3:
+//					pt_attribute.put("value", std::get<DataType::VEC3>(attribute->value));
 //					break;
-//				case ENTSYS_DATA_TYPE_VEC4:
-//					pt.put("datatype", "vec4");
-//					pt.put("value", std::get<ENTSYS_DATA_TYPE_VEC4>(data_container.value));
+//				case DataType::VEC4:
+//					pt_attribute.put("value", std::get<DataType::VEC4>(attribute->value));
 //					break;
 				default:
-					pt_attribute.put("datatype", "");
 					pt_attribute.put("value", "");
 					break;
 			}

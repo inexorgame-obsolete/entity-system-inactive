@@ -26,8 +26,8 @@ namespace type_system {
 				entity_type_builder_manager,
 				"BOOL_CONSTANT",
 				{
-					{ "name", ENTSYS_DATA_TYPE_STRING },
-					{ "value", ENTSYS_DATA_TYPE_BOOL }
+					{ "name", DataType::STRING },
+					{ "value", DataType::BOOL }
 				}
 			) {};
 

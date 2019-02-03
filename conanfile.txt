@@ -9,6 +9,7 @@ boost_signals2/1.69.0@bincrafters/stable
 spdlog/1.3.0@bincrafters/stable
 boost-di/1.1.0@inexorgame/stable
 boost-te/19.Jan.19@inexorgame/stable
+better-enums/0.11.1@Spartan322/stable
 
 [generators]
 cmake

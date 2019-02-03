@@ -3,32 +3,21 @@
 
 #pragma once
 
+#define BETTER_ENUMS_DEFAULT_CONSTRUCTOR(Enum) \
+  public:                                      \
+    Enum() = default;
+
+#include <better-enums/enum.h>
+
 
 namespace inexor {
 namespace entity_system {
 
+	/// @class ENTSYS_DATA_TYPE
+	/// @brief Data container memory type.
+	BETTER_ENUM(DataType, int, BOOL = 0, INT, BIG_INT, DOUBLE, FLOAT, STRING, VEC3, VEC4)
 
-	// TODO: Should this be defined as a class in Doxygen ?
-
-    /// @class ENTSYS_DATA_TYPE
-    /// @brief Data container memory type.
-    enum ENTSYS_DATA_TYPE 
-    {
-        // Primitive types
-        ENTSYS_DATA_TYPE_BOOL = 0,
-        ENTSYS_DATA_TYPE_INT,
-        ENTSYS_DATA_TYPE_BIG_INT,
-        ENTSYS_DATA_TYPE_DOUBLE,
-        ENTSYS_DATA_TYPE_FLOAT,
-        ENTSYS_DATA_TYPE_STRING,
-
-        // Vector types from GLM
-        ENTSYS_DATA_TYPE_VEC3,
-        ENTSYS_DATA_TYPE_VEC4,
-
-        // TODO: Think about how to handle binary data
-    };
-
+	// TODO: Think about how to handle binary data
 
 };
 };

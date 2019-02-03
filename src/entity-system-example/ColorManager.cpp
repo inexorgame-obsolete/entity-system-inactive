@@ -29,10 +29,10 @@ namespace example {
 	void ColorManager::init()
 	{
 		/*entity_type_color = entity_system->create_entity_type("COLOR");
-		auto attribute_type_name = entity_system->create_entity_attribute_type("name", ENTSYS_DATA_TYPE_STRING);
-		auto attribute_type_r = entity_system->create_entity_attribute_type("r", ENTSYS_DATA_TYPE_FLOAT);
-		auto attribute_type_g = entity_system->create_entity_attribute_type("g", ENTSYS_DATA_TYPE_FLOAT);
-		auto attribute_type_b = entity_system->create_entity_attribute_type("b", ENTSYS_DATA_TYPE_FLOAT);
+		auto attribute_type_name = entity_system->create_entity_attribute_type("name", DataType::STRING);
+		auto attribute_type_r = entity_system->create_entity_attribute_type("r", DataType::FLOAT);
+		auto attribute_type_g = entity_system->create_entity_attribute_type("g", DataType::FLOAT);
+		auto attribute_type_b = entity_system->create_entity_attribute_type("b", DataType::FLOAT);
 		entity_type_color->link_attribute_type(attribute_type_name);
 		entity_type_color->link_attribute_type(attribute_type_r);
 		entity_type_color->link_attribute_type(attribute_type_g);

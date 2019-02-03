@@ -20,8 +20,12 @@ namespace entity_system {
 
     /// A data container which can hold data of various types.
     struct DataContainer {
-        ENTSYS_DATA_TYPE type;
-        DataValue value;
+		DataContainer() {};
+		DataContainer(const DataType& type) : type(type) {};
+		DataContainer(const DataValue& value) : value(value) {};
+		DataContainer(const DataType& type, const DataValue& value) : type(type), value(value) {};
+		DataType type;
+		DataValue value;
     };
 
 };

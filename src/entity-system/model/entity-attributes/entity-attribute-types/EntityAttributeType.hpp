@@ -27,7 +27,7 @@ namespace entity_system {
 			/// @param ent_attr_type_name The name of the new entity attribute type.
 			/// @param ent_attr_type_datatype The data type of the new entity attribute type.
 			/// @note the GUID of the new entity attribute type will be created automatically by the inheritance of GUIDBase!
-			EntityAttributeType(const std::string&, const ENTSYS_DATA_TYPE&);
+			EntityAttributeType(const std::string&, const DataType&);
 
 
             /// @brief Constructor
@@ -35,7 +35,7 @@ namespace entity_system {
 			/// @param ent_attr_type_name The name of the new entity attribute type.
 			/// @param ent_attr_type_datatype The data type of the new entity attribute type.
 			/// @note the GUID of the new entity attribute type will be created automatically by the inheritance of GUIDBase!
-            EntityAttributeType(const xg::Guid&, const std::string&, const ENTSYS_DATA_TYPE&);
+            EntityAttributeType(const xg::Guid&, const std::string&, const DataType&);
 
 
 			/// @brief Destructor.

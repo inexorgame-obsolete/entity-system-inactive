@@ -33,7 +33,7 @@ namespace entity_system {
 	}
 
 
-	O_ENT_ATTR_TYPE EntityAttributeTypeManager::create_entity_attribute_type(const std::string& ent_attr_type_name, const ENTSYS_DATA_TYPE& ent_attr_type_datatype)
+	O_ENT_ATTR_TYPE EntityAttributeTypeManager::create_entity_attribute_type(const std::string& ent_attr_type_name, const DataType& ent_attr_type_datatype)
 	{
 		// Check if entity attribute type's name is not empty.
 		if(! is_type_name_valid(ent_attr_type_name))
@@ -56,7 +56,7 @@ namespace entity_system {
 	}
 
 
-	O_ENT_ATTR_TYPE EntityAttributeTypeManager::create_entity_attribute_type(const xg::Guid& ent_attr_type_GUID, const std::string& ent_attr_type_name, const ENTSYS_DATA_TYPE& ent_attr_type_datatype)
+	O_ENT_ATTR_TYPE EntityAttributeTypeManager::create_entity_attribute_type(const xg::Guid& ent_attr_type_GUID, const std::string& ent_attr_type_name, const DataType& ent_attr_type_datatype)
     {
         if(! is_type_name_valid(ent_attr_type_name))
         {

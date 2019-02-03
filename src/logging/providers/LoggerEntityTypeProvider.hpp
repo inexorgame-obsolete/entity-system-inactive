@@ -26,8 +26,8 @@ namespace logging {
 				entity_type_builder_manager,
 				"LOGGER",
 				{
-					{ "logger_name", ENTSYS_DATA_TYPE_STRING },
-					{ "log_level", ENTSYS_DATA_TYPE_INT }
+					{ "logger_name", DataType::STRING },
+					{ "log_level", DataType::INT }
 				}
 			) {};
 

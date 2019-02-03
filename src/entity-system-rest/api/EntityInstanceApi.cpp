@@ -254,15 +254,14 @@ void EntityInstanceApiEntitiesInstancesEntity_instance_uuidResource::GET_method_
 	// Getting the path params
 	const string entity_instance_uuid = request->get_path_parameter("entity_instance_uuid", "");
 
-	spdlog::get("inexor.entity.rest")->info("Searching for entity instance {}", entity_instance_uuid);
+	spdlog::get("inexor.entity.rest")->debug("Searching for entity instance {}", entity_instance_uuid);
 
 	bool exists = this->entity_instance_manager->does_entity_instance_exist(Guid(entity_instance_uuid));
-	spdlog::get("inexor.entity.rest")->info(exists ? "entity instance exists" : "entity instance does not exist");
+	spdlog::get("inexor.entity.rest")->debug(exists ? "entity instance exists" : "entity instance does not exist");
 
 	O_ENT_INST o_ent_inst = this->entity_instance_manager->get_entity_instance(Guid(entity_instance_uuid));
 
 	if (o_ent_inst.has_value()) {
-		spdlog::get("inexor.entity.rest")->info("found");
 		ENT_INST ent_inst = o_ent_inst.value();
 		shared_ptr<EntityInstanceDto> ent_inst_dto = make_shared<EntityInstanceDto>();
 		ent_inst_dto->set_entity_instance_uuid(ent_inst->get_GUID().str());
@@ -276,10 +275,14 @@ void EntityInstanceApiEntitiesInstancesEntity_instance_uuidResource::GET_method_
 			{
 				ENT_ATTR_TYPE ent_attr_type = ent_inst_attr.first;
 				ENT_ATTR_INST ent_attr_inst = ent_inst_attr.second;
-				shared_ptr<AttributeDto> attribute_dto = make_shared<AttributeDto>();
-				attribute_dto->set_attribute_uuid(ent_attr_inst->get_GUID().str());
-				attribute_dto->set_name(ent_attr_type->get_type_name());
-				attribute_dto->set_value({ent_attr_inst->type, ent_attr_inst->value});
+				shared_ptr<AttributeDto> attribute_dto = make_shared<AttributeDto>(
+					ent_attr_inst->get_GUID().str(),
+					ent_attr_type->get_type_name(),
+					ent_attr_inst->type,
+					ent_attr_inst->value
+				);
+//				attribute_dto->set_attribute_uuid(ent_attr_inst->get_GUID().str());
+//				attribute_dto->set_name(ent_attr_type->get_type_name());
 				attribute_dtos.push_back(attribute_dto);
 			}
 			ent_inst_dto->set_attributes(attribute_dtos);
@@ -288,7 +291,7 @@ void EntityInstanceApiEntitiesInstancesEntity_instance_uuidResource::GET_method_
 		session->close(restbed::OK, ent_inst_dto->to_json_string(), { {"Connection", "close"} });
 		return;
 	} else {
-		spdlog::get("inexor.entity.rest")->info("not found");
+		spdlog::get("inexor.entity.rest")->debug("not found");
 		shared_ptr<EntitySystemMessageDto> entity_system_message = std::make_shared<EntitySystemMessageDto>();
 		entity_system_message->setCode(404);
 		entity_system_message->setMessage(fmt::format("Entity type UUID('{}') not found", entity_instance_uuid));

@@ -25,7 +25,7 @@ namespace entity_system {
 	{
 	}
 
-	shared_ptr<EntityInstanceBuilder> EntityInstanceBuilder::type(string entity_type_name)
+	shared_ptr<EntityInstanceBuilder> EntityInstanceBuilder::type(const string& entity_type_name)
 	{
 		this->entity_type_name = entity_type_name;
 		return shared_from_this();
@@ -37,33 +37,51 @@ namespace entity_system {
 		return shared_from_this();
 	}
 
-	shared_ptr<EntityInstanceBuilder> EntityInstanceBuilder::uuid(string entity_instance_uuid)
+	shared_ptr<EntityInstanceBuilder> EntityInstanceBuilder::uuid(const string& entity_instance_uuid)
 	{
 		this->entity_instance_uuid = entity_instance_uuid;
 		return shared_from_this();
 	}
 
-	shared_ptr<EntityInstanceBuilder> EntityInstanceBuilder::attribute(string attribute_name, DataContainer value)
+	shared_ptr<EntityInstanceBuilder> EntityInstanceBuilder::attribute(const string& attribute_name, const DataContainer& value)
 	{
 		entity_instance_attributes[attribute_name] = value;
 		return shared_from_this();
 	}
 
-	shared_ptr<EntityInstanceBuilder> EntityInstanceBuilder::attribute(string attribute_name, string value)
+	shared_ptr<EntityInstanceBuilder> EntityInstanceBuilder::attribute(const string& attribute_name, const bool& value)
 	{
-		entity_instance_attributes[attribute_name] = {ENTSYS_DATA_TYPE_STRING, value};
+		entity_instance_attributes[attribute_name] = {DataType::BOOL, value};
 		return shared_from_this();
 	}
 
-	shared_ptr<EntityInstanceBuilder> EntityInstanceBuilder::attribute(string attribute_name, int value)
+	shared_ptr<EntityInstanceBuilder> EntityInstanceBuilder::attribute(const string& attribute_name, const int& value)
 	{
-		entity_instance_attributes[attribute_name] = {ENTSYS_DATA_TYPE_INT, value};
+		entity_instance_attributes[attribute_name] = {DataType::INT, value};
 		return shared_from_this();
 	}
 
-    shared_ptr<EntityInstanceBuilder> EntityInstanceBuilder::attribute(string attribute_name, float value)
+	shared_ptr<EntityInstanceBuilder> EntityInstanceBuilder::attribute(const string& attribute_name, const int64_t& value)
 	{
-		entity_instance_attributes[attribute_name] = {ENTSYS_DATA_TYPE_FLOAT, value};
+		entity_instance_attributes[attribute_name] = {DataType::BIG_INT, value};
+		return shared_from_this();
+	}
+
+    shared_ptr<EntityInstanceBuilder> EntityInstanceBuilder::attribute(const string& attribute_name, const float& value)
+	{
+		entity_instance_attributes[attribute_name] = {DataType::FLOAT, value};
+		return shared_from_this();
+	}
+
+    shared_ptr<EntityInstanceBuilder> EntityInstanceBuilder::attribute(const string& attribute_name, const double& value)
+	{
+		entity_instance_attributes[attribute_name] = {DataType::DOUBLE, value};
+		return shared_from_this();
+	}
+
+	shared_ptr<EntityInstanceBuilder> EntityInstanceBuilder::attribute(const string& attribute_name, const string& value)
+	{
+		entity_instance_attributes[attribute_name] = {DataType::STRING, value};
 		return shared_from_this();
 	}
 
@@ -92,11 +110,23 @@ namespace entity_system {
 						attr_inst->value = attr_value.value;
 						switch (attr_inst->type)
 						{
-							case ENTSYS_DATA_TYPE_INT:
-								spdlog::debug("Set attribute {} = {}", attr_name, std::get<ENTSYS_DATA_TYPE_INT>(attr_inst->value));
+							case DataType::BOOL:
+								spdlog::debug("Set attribute {} = {}", attr_name, std::get<DataType::BOOL>(attr_inst->value));
 								break;
-							case ENTSYS_DATA_TYPE_STRING:
-								spdlog::debug("Set attribute {} = {}", attr_name, std::get<ENTSYS_DATA_TYPE_STRING>(attr_inst->value));
+							case DataType::INT:
+								spdlog::debug("Set attribute {} = {}", attr_name, std::get<DataType::INT>(attr_inst->value));
+								break;
+							case DataType::BIG_INT:
+								spdlog::debug("Set attribute {} = {}", attr_name, std::get<DataType::BIG_INT>(attr_inst->value));
+								break;
+							case DataType::DOUBLE:
+								spdlog::debug("Set attribute {} = {}", attr_name, std::get<DataType::DOUBLE>(attr_inst->value));
+								break;
+							case DataType::FLOAT:
+								spdlog::debug("Set attribute {} = {}", attr_name, std::get<DataType::FLOAT>(attr_inst->value));
+								break;
+							case DataType::STRING:
+								spdlog::debug("Set attribute {} = {}", attr_name, std::get<DataType::STRING>(attr_inst->value));
 								break;
 							default:
 								break;
