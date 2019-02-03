@@ -20,17 +20,17 @@ namespace entity_system {
     }
 
 
-	bool RelationTypeManager::does_relation_type_exist(const std::string& ent_rel_type_name)
+	bool RelationTypeManager::does_relation_type_exist(const std::string& rel_type_name)
 	{
         // 
-		return does_type_exist(ent_rel_type_name);
+		return does_type_exist(rel_type_name);
 	}
 
 
-	bool RelationTypeManager::does_relation_type_exist(const REL_TYPE& ent_rel_type)
+	bool RelationTypeManager::does_relation_type_exist(const REL_TYPE& rel_type)
 	{
         // 
-		return does_relation_type_exist(ent_rel_type->get_type_name());
+		return does_relation_type_exist(rel_type->get_type_name());
 	}
 
 
@@ -53,6 +53,9 @@ namespace entity_system {
 		// Add new entity relation type to type map.
 		add_type(rel_type_name, new_relation_type->get_GUID(), new_relation_type);
 
+		// Signal that the relation type has been created.
+		notify_relation_type_created(new_relation_type);
+
         return O_REL_TYPE { new_relation_type };
 	}
 
@@ -64,24 +67,62 @@ namespace entity_system {
 	}
 
 
-	void RelationTypeManager::delete_relation_type(const std::string& rel_type_name)
+	std::size_t RelationTypeManager::delete_relation_type(const std::string& rel_type_name)
 	{
-        // 
-		delete_type(rel_type_name);
+		xg::Guid type_GUID = get_GUID_by_type_name(rel_type_name);
+		std::size_t deleted_types_count = delete_type(rel_type_name);
+		notify_relation_type_deleted(type_GUID);
+		return deleted_types_count;
 	}
 
+
+	std::size_t RelationTypeManager::delete_relation_type(const xg::Guid& type_GUID)
+    {
+		std::size_t deleted_types_count = delete_type(type_GUID);
+		notify_relation_type_deleted(type_GUID);
+		return deleted_types_count;
+    }
+
 	
-	void RelationTypeManager::delete_relation_type(const REL_TYPE& rel_type)
+	std::size_t RelationTypeManager::delete_relation_type(const REL_TYPE& rel_type)
 	{
-        // 
-		return delete_relation_type(rel_type->get_type_name());
+		xg::Guid type_GUID = rel_type->get_GUID();
+		std::size_t deleted_types_count = delete_type(rel_type->get_type_name());
+		notify_relation_type_deleted(type_GUID);
+		return deleted_types_count;
+
 	}
 
 
 	void RelationTypeManager::delete_all_relation_types()
 	{
-        // 
+		// TODO: Make sure all relation instances will
+		// be deleted before deleting the relation types.
 		delete_all_types();
+	}
+
+
+	void RelationTypeManager::register_on_created(std::shared_ptr<RelationTypeCreatedListener> listener)
+	{
+		signal_relation_type_created.connect(std::bind(&RelationTypeCreatedListener::on_relation_type_created, listener.get(), std::placeholders::_1));
+	}
+
+
+	void RelationTypeManager::register_on_deleted(std::shared_ptr<RelationTypeDeletedListener> listener)
+	{
+		signal_relation_type_deleted.connect(std::bind(&RelationTypeDeletedListener::on_relation_type_deleted, listener.get(), std::placeholders::_1));
+	}
+
+
+	void RelationTypeManager::notify_relation_type_created(REL_TYPE new_entity_type)
+	{
+		signal_relation_type_created(new_entity_type);
+	}
+
+
+	void RelationTypeManager::notify_relation_type_deleted(const xg::Guid& type_GUID)
+	{
+		signal_relation_type_deleted(type_GUID);
 	}
 
 

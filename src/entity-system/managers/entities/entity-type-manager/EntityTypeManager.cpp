@@ -42,6 +42,9 @@ namespace entity_system {
         // to add the new instance to the type map.
 		add_type(ent_type_name, new_entity_type->get_GUID(), new_entity_type);
 
+		// Signal that the entity type has been created.
+		notify_entity_type_created(new_entity_type);
+
         // Return the entity type we've just created.
         return O_ENT_TYPE{ new_entity_type };
 	}
@@ -72,6 +75,9 @@ namespace entity_system {
 		// Call method of the template base class
         // to add the new instance to the type map.
 		add_type(ent_type_name, new_entity_type->get_GUID(), new_entity_type);
+
+		// Signal that the entity type has been created.
+		notify_entity_type_created(new_entity_type);
 
         // Return the entity type we've just created.
         return O_ENT_TYPE{ new_entity_type };
@@ -124,29 +130,60 @@ namespace entity_system {
 
 	std::size_t EntityTypeManager::delete_entity_type(const std::string& ent_type_name)
 	{
-		return delete_type(ent_type_name);
+		xg::Guid type_GUID = get_GUID_by_type_name(ent_type_name);
+		std::size_t deleted_types_count = delete_type(ent_type_name);
+		notify_entity_type_deleted(type_GUID);
+		return deleted_types_count;
 	}
 
 
-	std::size_t EntityTypeManager::delete_entity_type(const ENT_TYPE& ent_type_name)
-	{
-		return delete_type(ent_type_name->get_type_name());
-	}
-
-    
 	std::size_t EntityTypeManager::delete_entity_type(const xg::Guid& type_GUID)
     {
-        return delete_type(type_GUID);
+		std::size_t deleted_types_count = delete_type(type_GUID);
+		notify_entity_type_deleted(type_GUID);
+		return deleted_types_count;
     }
+
+
+	std::size_t EntityTypeManager::delete_entity_type(const ENT_TYPE& ent_type)
+	{
+		xg::Guid type_GUID = ent_type->get_GUID();
+		std::size_t deleted_types_count = delete_type(ent_type->get_type_name());
+		notify_entity_type_deleted(type_GUID);
+		return deleted_types_count;
+	}
 
 
 	void EntityTypeManager::delete_all_entity_types()
 	{
-		// TODO: Make sure all entity type instances will
+		// TODO: Make sure all entity instances will
 		// be deleted before deleting the entity types.
 		delete_all_types();
 	}
 
+
+	void EntityTypeManager::register_on_created(std::shared_ptr<EntityTypeCreatedListener> listener)
+	{
+		signal_entity_type_created.connect(std::bind(&EntityTypeCreatedListener::on_entity_type_created, listener.get(), std::placeholders::_1));
+	}
+
+
+	void EntityTypeManager::register_on_deleted(std::shared_ptr<EntityTypeDeletedListener> listener)
+	{
+		signal_entity_type_deleted.connect(std::bind(&EntityTypeDeletedListener::on_entity_type_deleted, listener.get(), std::placeholders::_1));
+	}
+
+
+	void EntityTypeManager::notify_entity_type_created(ENT_TYPE new_entity_type)
+	{
+		signal_entity_type_created(new_entity_type);
+	}
+
+
+	void EntityTypeManager::notify_entity_type_deleted(const xg::Guid& type_GUID)
+	{
+		signal_entity_type_deleted(type_GUID);
+	}
 
 };
 };

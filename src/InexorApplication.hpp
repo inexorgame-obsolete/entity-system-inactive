@@ -20,6 +20,7 @@
 #include "spdlog/spdlog.h"
 
 #include "entity-system/EntitySystem.hpp"
+#include "entity-system/managers/EntitySystemDebugger.hpp"
 #include "entity-system-rest/RestServer.hpp"
 #include "entity-system-rest/RestServerLogger.hpp"
 #include "entity-system-example/ColorManager.hpp"
@@ -51,6 +52,7 @@ namespace inexor {
 				std::shared_ptr<inexor::entity_system::type_system::TypeSystemManager> type_system_manager,
 				std::shared_ptr<inexor::configuration::ConfigurationManager> configuration_manager,
 				std::shared_ptr<inexor::entity_system::RestServer> rest_server,
+				std::shared_ptr<inexor::entity_system::EntitySystemDebugger> entity_system_debugger,
 				std::shared_ptr<inexor::logging::LogManager> log_manager
 			);
 
@@ -96,6 +98,9 @@ namespace inexor {
 
             /// The REST server of the entity system
 			std::shared_ptr<inexor::entity_system::RestServer> rest_server;
+
+            /// The debugger of the entity system
+			std::shared_ptr<inexor::entity_system::EntitySystemDebugger> entity_system_debugger;
 
             /// Management of the loggers
 			std::shared_ptr<inexor::logging::LogManager> log_manager;

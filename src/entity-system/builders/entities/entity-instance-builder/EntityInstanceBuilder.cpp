@@ -112,7 +112,6 @@ namespace entity_system {
 					return std::nullopt;
 				}
 			}
-			spdlog::info("Created entity instance (UUID: {}) of type {} (UUID: {})", entity_instance->get_GUID().str(), entity_instance->get_entity_type()->get_type_name(), entity_instance->get_entity_type()->get_GUID().str());
 			return o_entity_instance;
 		} else {
 			spdlog::error("Failed to create entity instance");

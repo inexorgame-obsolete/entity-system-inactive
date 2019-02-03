@@ -53,7 +53,10 @@ namespace entity_system {
 
 		// Call template base class method.
 		add_instance(new_ent_instance->get_GUID(), new_ent_instance);
-		
+
+		// Signal that the entity type has been created.
+		notify_entity_instance_created(new_ent_instance);
+
         return O_ENT_INST { new_ent_instance };
 	}
 
@@ -100,6 +103,47 @@ namespace entity_system {
 		// Call template base class method.
 	}
 	*/
+
+
+	void EntityInstanceManager::register_on_created(const xg::Guid& type_GUID, std::shared_ptr<EntityInstanceCreatedListener> listener)
+	{
+		if (signals_entity_instance_created.end() == signals_entity_instance_created.find(type_GUID))
+		{
+			auto signal = std::make_shared<boost::signals2::signal<void(ENT_INST)>>();
+			signals_entity_instance_created.insert(std::make_pair(type_GUID, signal));
+		}
+		signals_entity_instance_created[type_GUID]->connect(std::bind(&EntityInstanceCreatedListener::on_entity_instance_created, listener.get(), std::placeholders::_1));
+	}
+
+
+	void EntityInstanceManager::register_on_deleted(const xg::Guid& type_GUID, std::shared_ptr<EntityInstanceDeletedListener> listener)
+	{
+		if (signals_entity_instance_deleted.end() == signals_entity_instance_deleted.find(type_GUID))
+		{
+			auto signal = std::make_shared<boost::signals2::signal<void(const xg::Guid&, const xg::Guid&)>>();
+			signals_entity_instance_deleted.insert(std::make_pair(type_GUID, signal));
+		}
+		signals_entity_instance_deleted[type_GUID]->connect(std::bind(&EntityInstanceDeletedListener::on_entity_instance_deleted, listener.get(), std::placeholders::_1, std::placeholders::_2));
+	}
+
+
+	void EntityInstanceManager::notify_entity_instance_created(ENT_INST new_entity_instance)
+	{
+		xg::Guid type_GUID = new_entity_instance->get_entity_type()->get_GUID();
+		if (!(signals_entity_instance_created.end() == signals_entity_instance_created.find(type_GUID)))
+		{
+			signals_entity_instance_created[type_GUID]->operator ()(new_entity_instance);
+		}
+	}
+
+
+	void EntityInstanceManager::notify_entity_instance_deleted(const xg::Guid& type_GUID, const xg::Guid& inst_GUID)
+	{
+		if (!(signals_entity_instance_deleted.end() == signals_entity_instance_deleted.find(type_GUID)))
+		{
+			signals_entity_instance_deleted[type_GUID]->operator ()(type_GUID, inst_GUID);
+		}
+	}
 
 };
 };

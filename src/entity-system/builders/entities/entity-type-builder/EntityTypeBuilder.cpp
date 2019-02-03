@@ -62,7 +62,6 @@ namespace entity_system {
 					return std::nullopt;
 				}
 			}
-			spdlog::info("Created entity type {} (UUID: {})", entity_type->get_type_name(), entity_type->get_GUID().str());
 			return entity_type;
 		} else {
 			spdlog::error("Failed to create entity type {}", entity_type_name);

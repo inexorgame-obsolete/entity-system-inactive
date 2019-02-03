@@ -52,8 +52,9 @@ namespace entity_system {
 			/// @return A std::unordered_map of shared pointers of entity relation attribute type.
 			std::unordered_map<REL_ATTR_TYPE, REL_ATTR_INST> get_relation_attribute_instances() const;
 
-            /// 
-			// TODO: ENT_REL_TYPE get_relation_type() const;
+            /// @brief Get the relation type.
+            /// @return The relation type of the relation instance.
+			REL_TYPE get_relation_type() const;
 
             ///
 			ENT_INST get_source_entity_instance() const;

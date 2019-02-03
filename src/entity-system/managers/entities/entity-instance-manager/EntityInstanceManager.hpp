@@ -3,8 +3,12 @@
 
 #pragma once
 
+#include <boost/signals2.hpp>
+#include <crossguid/guid.hpp>
 #include <optional>
 
+#include "entity-system/listeners/entities/EntityInstanceCreatedListener.hpp"
+#include "entity-system/listeners/entities/EntityInstanceDeletedListener.hpp"
 #include "entity-system/model/entities/entity-instances/EntityInstance.hpp"
 #include "entity-system/managers/entity-attributes/entity-attribute-instance-manager/EntityAttributeInstanceManager.hpp"
 #include "entity-system/managers/manager-templates/InstanceManagerTemplate.hpp"
@@ -73,10 +77,39 @@ namespace entity_system {
 			/// Delete all entity type instances
 			void delete_all_entity_instances();
 
+
+			/// @brief Registers a new listener
+			void register_on_created(const xg::Guid&, std::shared_ptr<EntityInstanceCreatedListener> listener);
+
+
+			/// @brief Registers a new listener
+			void register_on_deleted(const xg::Guid&, std::shared_ptr<EntityInstanceDeletedListener> listener);
+
+
         private:
 
 			/// The entity attribute instance manager
     		std::shared_ptr<EntityAttributeInstanceManager> entity_attribute_instance_manager;
+
+
+			/// Notifies all listeners that a new entity instance has been created.
+			void notify_entity_instance_created(ENT_INST new_entity_instance);
+
+
+			/// Notifies all listeners that an entity instance has been deleted.
+			void notify_entity_instance_deleted(const xg::Guid& type_GUID, const xg::Guid& inst_GUID);
+
+
+			/// The signals that an entity instance has been created.
+			/// Key is the GUID of the entity type.
+			/// Value is a signal with one parameter: the created entity instance
+			std::unordered_map<xg::Guid, std::shared_ptr<boost::signals2::signal<void(ENT_INST new_entity_instance)> > > signals_entity_instance_created;
+
+
+			/// The signals that an entity instance has been deleted.
+			/// Key is the GUID of the entity type.
+			/// Value is a signal with two parameters: the GUID of the entity type, the GUID of the entity instance
+			std::unordered_map<xg::Guid, std::shared_ptr<boost::signals2::signal<void(const xg::Guid& type_GUID, const xg::Guid& instance_GUID)> > > signals_entity_instance_deleted;
 
 
 	};

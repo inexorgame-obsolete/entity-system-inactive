@@ -16,6 +16,7 @@ namespace inexor {
 		std::shared_ptr<inexor::entity_system::type_system::TypeSystemManager> type_system_manager,
 		std::shared_ptr<inexor::configuration::ConfigurationManager> configuration_manager,
 		std::shared_ptr<inexor::entity_system::RestServer> rest_server,
+		std::shared_ptr<inexor::entity_system::EntitySystemDebugger> entity_system_debugger,
 		std::shared_ptr<inexor::logging::LogManager> log_manager
 	)
 	{
@@ -23,6 +24,7 @@ namespace inexor {
 		this->type_system_manager = type_system_manager;
 		this->configuration_manager = configuration_manager;
 		this->rest_server = rest_server;
+		this->entity_system_debugger = entity_system_debugger;
 		this->log_manager = log_manager;
 		this->running = false;
 	}
@@ -39,6 +41,10 @@ namespace inexor {
 		// You can't do this in the constructor
 		InexorApplication::instances.push_back(this);
 
+		// Debugger
+		// TODO: enable with macro
+		entity_system_debugger->init();
+
 		// Logging initialization
 		log_manager->init();
 		log_manager->register_logger(LOGGER_NAME);
@@ -54,6 +60,7 @@ namespace inexor {
 		// Type system initialization
 		type_system_manager->init();
 
+		// Configuration manager initialization
 		configuration_manager->init();
 
 	}

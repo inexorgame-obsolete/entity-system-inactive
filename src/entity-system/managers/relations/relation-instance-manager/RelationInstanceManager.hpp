@@ -3,8 +3,12 @@
 
 #pragma once
 
+#include <boost/signals2.hpp>
+#include <crossguid/guid.hpp>
 #include <optional>
 
+#include "entity-system/listeners/relations/RelationInstanceCreatedListener.hpp"
+#include "entity-system/listeners/relations/RelationInstanceDeletedListener.hpp"
 #include "entity-system/managers/relations/relation-instance-manager/RelationInstanceManager.hpp"
 #include "entity-system/managers/manager-templates/InstanceManagerTemplate.hpp"
 #include "entity-system/managers/relation-attributes/relation-attribute-instance-manager/RelationAttributeInstanceManager.hpp"
@@ -52,10 +56,38 @@ namespace entity_system {
 			/// Delete all relation instances
 			void delete_all_relation_instances();
 
+
+			/// @brief Registers a new listener
+			void register_on_created(const xg::Guid&, std::shared_ptr<RelationInstanceCreatedListener> listener);
+
+
+			/// @brief Registers a new listener
+			void register_on_deleted(const xg::Guid&, std::shared_ptr<RelationInstanceDeletedListener> listener);
+
         private:
 
     		/// The entity relation attribute instance manager
     		std::shared_ptr<RelationAttributeInstanceManager> relation_attribute_instance_manager;
+
+
+			/// Notifies all listeners that a new relation instance has been created.
+			void notify_relation_instance_created(REL_INST new_entity_instance);
+
+
+			/// Notifies all listeners that a relation instance has been deleted.
+			void notify_relation_instance_deleted(const xg::Guid& type_GUID, const xg::Guid& inst_GUID);
+
+
+			/// The signals that an relation instance has been created.
+			/// Key is the GUID of the relation type.
+			/// Value is a signal with one parameter: the created relation instance
+			std::unordered_map<xg::Guid, std::shared_ptr<boost::signals2::signal<void(REL_INST new_relation_instance)> > > signals_relation_instance_created;
+
+
+			/// The signals that an relation instance has been deleted.
+			/// Key is the GUID of the relation type.
+			/// Value is a signal with two parameters: the GUID of the relation type, the GUID of the relation instance
+			std::unordered_map<xg::Guid, std::shared_ptr<boost::signals2::signal<void(const xg::Guid& type_GUID, const xg::Guid& instance_GUID)> > > signals_relation_instance_deleted;
 
     };
 

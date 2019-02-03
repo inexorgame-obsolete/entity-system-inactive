@@ -43,6 +43,9 @@ namespace entity_system {
 		// Add the relation type instance to the buffer.
 		add_instance(new_relation_instance->get_GUID(), new_relation_instance);
 
+		// Signal that the relation type has been created.
+		notify_relation_instance_created(new_relation_instance);
+
         // Read only, no mutex required.
         return O_REL_INST { new_relation_instance };
 	}
@@ -59,6 +62,47 @@ namespace entity_system {
 	{
 		// Call template base class method.
 		delete_all_instances();
+	}
+
+
+	void RelationInstanceManager::register_on_created(const xg::Guid& type_GUID, std::shared_ptr<RelationInstanceCreatedListener> listener)
+	{
+		if (signals_relation_instance_created.end() == signals_relation_instance_created.find(type_GUID))
+		{
+			auto signal = std::make_shared<boost::signals2::signal<void(REL_INST)>>();
+			signals_relation_instance_created.insert(std::make_pair(type_GUID, signal));
+		}
+		signals_relation_instance_created[type_GUID]->connect(std::bind(&RelationInstanceCreatedListener::on_relation_instance_created, listener.get(), std::placeholders::_1));
+	}
+
+
+	void RelationInstanceManager::register_on_deleted(const xg::Guid& type_GUID, std::shared_ptr<RelationInstanceDeletedListener> listener)
+	{
+		if (signals_relation_instance_deleted.end() == signals_relation_instance_deleted.find(type_GUID))
+		{
+			auto signal = std::make_shared<boost::signals2::signal<void(const xg::Guid&, const xg::Guid&)>>();
+			signals_relation_instance_deleted.insert(std::make_pair(type_GUID, signal));
+		}
+		signals_relation_instance_deleted[type_GUID]->connect(std::bind(&RelationInstanceDeletedListener::on_relation_instance_deleted, listener.get(), std::placeholders::_1, std::placeholders::_2));
+	}
+
+
+	void RelationInstanceManager::notify_relation_instance_created(REL_INST new_relation_instance)
+	{
+		xg::Guid type_GUID = new_relation_instance->get_relation_type()->get_GUID();
+		if (!(signals_relation_instance_created.end() == signals_relation_instance_created.find(type_GUID)))
+		{
+			signals_relation_instance_created[type_GUID]->operator ()(new_relation_instance);
+		}
+	}
+
+
+	void RelationInstanceManager::notify_relation_instance_deleted(const xg::Guid& type_GUID, const xg::Guid& inst_GUID)
+	{
+		if (!(signals_relation_instance_deleted.end() == signals_relation_instance_deleted.find(type_GUID)))
+		{
+			signals_relation_instance_deleted[type_GUID]->operator ()(type_GUID, inst_GUID);
+		}
 	}
 
 

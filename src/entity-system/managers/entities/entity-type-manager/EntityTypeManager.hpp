@@ -7,8 +7,11 @@
 #include <string>
 #include <optional>
 #include <unordered_map>
+#include <boost/signals2.hpp>
 #include <crossguid/guid.hpp>
 
+#include "entity-system/listeners/entities/EntityTypeCreatedListener.hpp"
+#include "entity-system/listeners/entities/EntityTypeDeletedListener.hpp"
 #include "entity-system/model/entities/entity-types/EntityType.hpp"
 #include "entity-system/managers/manager-templates/TypeManagerTemplate.hpp"
 
@@ -100,6 +103,32 @@ namespace entity_system {
 			/// @brief Removes all types of entities.
 			void delete_all_entity_types();
 
+
+			/// @brief Registers a new listener
+			void register_on_created(std::shared_ptr<EntityTypeCreatedListener> listener);
+
+
+			/// @brief Registers a new listener
+			void register_on_deleted(std::shared_ptr<EntityTypeDeletedListener> listener);
+
+
+		private:
+
+
+			/// Notifies all listeners that a new entity type has been created.
+			void notify_entity_type_created(ENT_TYPE new_entity_type);
+
+
+			/// Notifies all listeners that an entity type has been deleted.
+			void notify_entity_type_deleted(const xg::Guid& type_GUID);
+
+
+			/// Signal, that an entity type has been created.
+			boost::signals2::signal<void(ENT_TYPE new_entity_type)> signal_entity_type_created;
+
+
+			/// Signal, that an entity type has been deleted.
+			boost::signals2::signal<void(const xg::Guid& type_GUID)> signal_entity_type_deleted;
 
 	};
 
