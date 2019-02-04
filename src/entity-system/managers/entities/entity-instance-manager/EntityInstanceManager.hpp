@@ -50,23 +50,25 @@ namespace entity_system {
 			O_ENT_INST get_entity_instance(const xg::Guid&);
 
 
-            /// 
-            /// 
+            /// TODO: what's the parameter meaning?
+			/// TODO: implement
 			O_ENT_INST get_entity_instance(const std::string&);
 
 
             // TODO: get_all_entity_instances_of_type() const;
 
 
-            /// Returns all entity type instances.
-			/// @return All entity type instances which exist in the entity system.
+            /// Returns all entity instances.
+			/// @return All entity instances which exist in the entity system.
+			/// TODO: implement
 			std::vector<ENT_INST> get_all_entity_instances() const;
 
 
             // TODO: get_entity_instance_count_of_type() const;
 
-			/// Returns the number of existing entity type instances.
-			/// @return The number of existing entity type instances.
+
+			/// Returns the number of existing entity instances.
+			/// @return The number of existing entity instances.
 			std::size_t get_entity_instance_count() const;
 
 
@@ -74,7 +76,7 @@ namespace entity_system {
 			std::size_t delete_entity_instance(const xg::Guid& instance_GUID);
 
 
-			/// Delete entity instance by GUID
+			/// Delete entity instance
 			std::size_t delete_entity_instance(const ENT_INST& entity_instance);
 
 

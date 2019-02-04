@@ -43,8 +43,37 @@ namespace entity_system {
 			/// @return A shared pointer to the new entity relation type instance which was created.
 			O_REL_INST create_relation_instance(const REL_TYPE&, const ENT_INST&, const ENT_INST&);
 
-			/// Returns the number of relation type instances.
-			/// @return The number of existing entity relation type instances.
+
+
+			/// @brief Checks if an relation instance does already exist.
+            /// @return True if the relation instance already exists, false otherwise.
+			bool does_relation_instance_exist(const xg::Guid);
+
+
+            ///
+            ///
+			O_REL_INST get_relation_instance(const xg::Guid&);
+
+
+            /// TODO: what's the parameter meaning?
+			/// TODO: implement
+			O_REL_INST get_relation_instance(const std::string&);
+
+
+            // TODO: get_all_relation_instances_of_type() const;
+
+
+            /// Returns all relation instances.
+			/// @return All relation instances which exist in the entity system.
+			/// TODO: implement
+			std::vector<REL_INST> get_all_relation_instances() const;
+
+
+            // TODO: get_relation_instance_count_of_type() const;
+
+
+			/// Returns the number of relation instances.
+			/// @return The number of existing relation instances.
 			std::size_t get_relation_instances_count() const;
 
 
@@ -52,6 +81,29 @@ namespace entity_system {
 			// TODO: Delete instance.
 			// TODO: Get instance(s).
 			// TODO: Delete all instances.
+
+
+
+			/// Delete relation instance by GUID
+			std::size_t delete_relation_instance(const xg::Guid& instance_GUID);
+
+
+			/// Delete relation instance
+			std::size_t delete_relation_instance(const REL_INST& relation_instance);
+
+
+			// TODO: Delete relation instances by source entity instance
+
+
+			// TODO: Delete relation instances by target entity instance
+
+
+			// TODO: Delete relation instances by entity instance (both: source and target)
+			// Called by delete_entity_instance() -> also delete all relation instances of the to-be-deleted entity instance!
+
+
+			// TODO: Delete relation instances by relation type
+
 
 			/// Delete all relation instances
 			void delete_all_relation_instances();

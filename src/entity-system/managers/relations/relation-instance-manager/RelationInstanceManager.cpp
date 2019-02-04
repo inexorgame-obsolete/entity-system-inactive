@@ -51,10 +51,48 @@ namespace entity_system {
 	}
 
 
+    bool RelationInstanceManager::does_relation_instance_exist(const xg::Guid instance_GUID)
+	{
+		return does_instance_exist(instance_GUID);
+	}
+
+
+	O_REL_INST RelationInstanceManager::get_relation_instance(const xg::Guid& instance_GUID)
+	{
+		return get_instance(instance_GUID);
+	}
+
+
 	std::size_t RelationInstanceManager::get_relation_instances_count() const
 	{
         // Read only, no mutex required.
 		return get_instance_count();
+	}
+
+
+	std::size_t RelationInstanceManager::delete_relation_instance(const xg::Guid& instance_GUID)
+	{
+		O_REL_INST o_rel_inst = get_relation_instance(instance_GUID);
+		if (o_rel_inst.has_value())
+		{
+			REL_INST rel_inst = o_rel_inst.value();
+			xg::Guid type_GUID = rel_inst->get_relation_type()->get_GUID();
+			std::size_t deleted_instances_count = delete_instance(instance_GUID);
+			notify_relation_instance_deleted(type_GUID, instance_GUID);
+			return deleted_instances_count;
+		} else {
+			return 0;
+		}
+	}
+
+
+	std::size_t RelationInstanceManager::delete_relation_instance(const REL_INST& relation_instance)
+	{
+		xg::Guid instance_GUID = relation_instance->get_GUID();
+		xg::Guid type_GUID = relation_instance->get_relation_type()->get_GUID();
+		std::size_t deleted_instances_count = delete_instance(instance_GUID);
+		notify_relation_instance_deleted(type_GUID, instance_GUID);
+		return deleted_instances_count;
 	}
 
 

@@ -98,7 +98,7 @@ namespace entity_system {
 	{
 		xg::Guid instance_GUID = entity_instance->get_GUID();
 		xg::Guid type_GUID = entity_instance->get_entity_type()->get_GUID();
-		std::size_t deleted_instances_count = delete_instance(entity_instance);
+		std::size_t deleted_instances_count = delete_instance(instance_GUID);
 		notify_entity_instance_deleted(type_GUID, instance_GUID);
 		return deleted_instances_count;
 	}
