@@ -16,6 +16,8 @@ namespace entity_system {
 
 	using AttributeList = unordered_map<string, DataType>;
 
+	using FeatureList = unordered_map<string, EnumSet<Feature>>;
+
 	/// @class RelationTypeProvider
     /// @brief Provides the entity type.
 	class RelationTypeProvider
@@ -26,33 +28,37 @@ namespace entity_system {
 			RelationTypeProvider(
 				shared_ptr<RelationTypeBuilderManager> relation_type_builder_manager,
 				string relation_type_name,
-				AttributeList relation_type_attributes
+				AttributeList relation_type_attributes,
+				FeatureList relation_type_attribute_features
 			);
 
 			/// Destructor.
 			~RelationTypeProvider();
 
-			/// Returns the entity type
+			/// Returns the relation type
 			string get_type_name();
 
-			/// Returns the entity type
+			/// Returns the relation type
 			shared_ptr<RelationType> get_type();
 
 		private:
 
-			/// The entity type builder manager
+			/// The relation type builder manager
 			shared_ptr<RelationTypeBuilderManager> relation_type_builder_manager;
 
-			/// The entity type name
+			/// The relation type name
 			string relation_type_name;
 
-			/// The list of attributes of the entity type
+			/// The list of attributes of the relation type
 			AttributeList relation_type_attributes;
 
-			/// The entity type
+			/// The list of attributes of the relation type
+			FeatureList relation_type_attribute_features;
+
+			/// The relation type
 			shared_ptr<RelationType> relation_type;
 
-			/// True, if the entity type has been created
+			/// True, if the relation type has been created
 			bool created;
 	};
 

@@ -46,7 +46,7 @@ namespace entity_system {
 			shared_ptr<RelationTypeBuilder> target(ENT_TYPE ent_type_target);
 
 			/// Sets the uuid of the relation type.
-			shared_ptr<RelationTypeBuilder> attribute(string attribute_name, DataType attribute_datatype);
+			shared_ptr<RelationTypeBuilder> attribute(string attribute_name, DataType attribute_datatype, const EnumSet<Feature>& attribute_features);
 
 			/// Builds and returns the created relation type.
 			O_REL_TYPE build();
@@ -76,6 +76,9 @@ namespace entity_system {
 
 			/// The attribute definitions.
 			unordered_map<string, DataType> relation_type_attributes;
+
+			/// The attribute features.
+			unordered_map<string, EnumSet<Feature>> relation_type_attribute_features;
 
 	};
 

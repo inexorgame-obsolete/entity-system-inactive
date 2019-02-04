@@ -39,10 +39,10 @@ namespace entity_system {
 		return shared_from_this();
 	}
 
-	shared_ptr<EntityTypeBuilder> EntityTypeBuilder::attribute(const string& attribute_name, const DataType& attribute_datatype, const EnumSet<Feature>& features)
+	shared_ptr<EntityTypeBuilder> EntityTypeBuilder::attribute(const string& attribute_name, const DataType& attribute_datatype, const EnumSet<Feature>& attribute_features)
 	{
 		entity_type_attributes[attribute_name] = attribute_datatype;
-		entity_type_attribute_features[attribute_name] = features;
+		entity_type_attribute_features[attribute_name] = attribute_features;
 		return shared_from_this();
 	}
 

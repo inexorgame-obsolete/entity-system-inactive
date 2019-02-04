@@ -40,7 +40,7 @@ namespace entity_system {
 			shared_ptr<EntityTypeBuilder> uuid(string entity_type_uuid);
 
 			/// Adds an attribute
-			shared_ptr<EntityTypeBuilder> attribute(const string& attribute_name, const DataType& attribute_datatype, const EnumSet<Feature>& features);
+			shared_ptr<EntityTypeBuilder> attribute(const string& attribute_name, const DataType& attribute_datatype, const EnumSet<Feature>& attribute_features);
 
 			/// Builds and returns the created entity type.
 			O_ENT_TYPE build();
