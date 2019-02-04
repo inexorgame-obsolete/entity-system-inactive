@@ -24,8 +24,52 @@ namespace entity_system {
 
 	O_ENT_INST EntityInstanceManager::create_entity_instance(const ENT_TYPE& ent_type)
 	{
-		// Create a new entity type instance.
+		// Create a new entity type instance without GUID.
 		ENT_INST new_ent_instance = std::make_shared<EntityInstance>(ent_type);
+
+		// Create all entity attribute type instances for this entity type instance.
+		std::optional<std::vector<ENT_ATTR_TYPE>> o_ent_type_attributes = ent_type->get_linked_attribute_types();
+		if (o_ent_type_attributes.has_value())
+		{
+			std::vector<ENT_ATTR_TYPE> ent_type_attributes = o_ent_type_attributes.value();
+			for(std::size_t i=0; i<ent_type_attributes.size(); i++)
+			{
+				// Create an entity attribute type instance and store it in the map.
+				O_ENT_ATTR_INST o_new_ent_attr_inst = entity_attribute_instance_manager->create_entity_attribute_instance(ent_type_attributes[i]);
+				if (o_new_ent_attr_inst.has_value()) {
+					ENT_ATTR_INST new_ent_attr_inst = o_new_ent_attr_inst.value();
+					new_ent_instance->add_entity_attribute_instance(ent_type_attributes[i], new_ent_attr_inst);
+				}
+				// Use the entity system's EntityAttributeInstanceManager method!
+				// TODO: FIX: Create instances!
+				//ENT_ATTR_INST new_ent_attr_instance = ?->create_entity_attribute_instance(ent_type_attributes[i]);
+				// create_entity_attribute_instance
+
+				// Call template base class method.
+				// FIX!
+				//new_ent_instance->add_entity_attribute_instance(ent_type_attributes[i], new_ent_attr_instance);
+			}
+		}
+
+		// Call template base class method.
+		add_instance(new_ent_instance->get_GUID(), new_ent_instance);
+
+		// Signal that the entity type has been created.
+		notify_entity_instance_created(new_ent_instance);
+
+        return O_ENT_INST { new_ent_instance };
+	}
+
+	O_ENT_INST EntityInstanceManager::create_entity_instance(const xg::Guid& ent_inst_GUID, const ENT_TYPE& ent_type)
+	{
+		// Check if an entity instance with this GUID does already exist.
+        if(does_entity_instance_exist(ent_inst_GUID))
+        {
+            return std::nullopt;
+        }
+
+		// Create a new entity type instance with GUID.
+		ENT_INST new_ent_instance = std::make_shared<EntityInstance>(ent_inst_GUID, ent_type);
 
 		// Create all entity attribute type instances for this entity type instance.
 		std::optional<std::vector<ENT_ATTR_TYPE>> o_ent_type_attributes = ent_type->get_linked_attribute_types();

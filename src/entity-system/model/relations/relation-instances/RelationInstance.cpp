@@ -8,12 +8,23 @@ namespace inexor {
 namespace entity_system {
 
 
-	RelationInstance::RelationInstance(const REL_TYPE& rel_type, const ENT_INST& ent_type_inst_source, const ENT_INST& ent_type_inst_target)
-        : InstanceBase(rel_type)
+	RelationInstance::RelationInstance(const REL_TYPE& rel_type, const ENT_INST& ent_inst_source, const ENT_INST& ent_inst_target)
+        : GUIDBase(),
+		  InstanceBase(rel_type)
 	{
-		// Store source and target entity type instances.
-		source_entity_instance = ent_type_inst_source;
-		destination_entity_instance = ent_type_inst_target;
+		// Store source and target entity instances.
+		source_entity_instance = ent_inst_source;
+		destination_entity_instance = ent_inst_target;
+	}
+
+
+	RelationInstance::RelationInstance(const xg::Guid& inst_GUID, const REL_TYPE& rel_type, const ENT_INST& ent_inst_source, const ENT_INST& ent_inst_target)
+		: GUIDBase(inst_GUID),
+		  InstanceBase(rel_type)
+	{
+		// Store source and target entity instances.
+		source_entity_instance = ent_inst_source;
+		destination_entity_instance = ent_inst_target;
 	}
 
 

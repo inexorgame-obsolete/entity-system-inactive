@@ -59,7 +59,13 @@ namespace entity_system {
 
 	O_REL_TYPE RelationTypeBuilder::build()
 	{
-		O_REL_TYPE o_relation_type = relation_type_manager->create_relation_type(relation_type_name, ent_type_source, ent_type_target);
+		O_REL_TYPE o_relation_type;
+		if (!relation_type_uuid.empty())
+		{
+			o_relation_type = relation_type_manager->create_relation_type(xg::Guid(relation_type_uuid), relation_type_name, ent_type_source, ent_type_target);
+		} else {
+			o_relation_type = relation_type_manager->create_relation_type(relation_type_name, ent_type_source, ent_type_target);
+		}
 		if (o_relation_type.has_value())
 		{
 			shared_ptr<RelationType> relation_type = o_relation_type.value();

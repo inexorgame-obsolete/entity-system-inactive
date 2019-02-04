@@ -40,7 +40,16 @@ namespace entity_system {
 			/// @note The GUID of the new entity relation type will
 			/// be created automatically by the inheritance of GUIDBase!
 			RelationType(const std::string&, const ENT_TYPE&, const ENT_TYPE&);
-			
+
+            /// @brief Constructor.
+            /// @param ent_type_GUID The GUID of the entity type which will be created.
+            /// @param rel_type_name The unique name of the realtion type which will be created.
+			/// @param ent_type_source A const reference to a shared pointer of an
+			/// entity type which is the source entity from which the relation will start.
+			/// @param ent_type_target A const reference to a shared pointer of an
+			/// entity type which is the target entity to which the relation will go.
+			RelationType(const xg::Guid&, const std::string&, const ENT_TYPE&, const ENT_TYPE&);
+
 			/// Destructor.
 			~RelationType();
 

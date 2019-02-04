@@ -20,7 +20,7 @@ namespace inexor {
 namespace entity_system {
 
 
-	/// A manager class for entity relation type instances.
+	/// A manager class for relation instances.
     class RelationInstanceManager : public InstanceManagerTemplate<RelationInstance>
     {
         public:
@@ -33,15 +33,27 @@ namespace entity_system {
 			/// Destructor.
 			~RelationInstanceManager();
 
-			/// Creates a new entity relation type instance.
-			/// @param ent_rel_type A const reference to a shared pointer of
-			/// an entity relation type of which an instance will be created.
-			/// @param ent_type_inst_source A const reference to a shared pointer of
-			/// the entity type instance which will be used as <b>source</b> entity type instance.
-			/// @param ent_type_inst_target A const reference to a shared pointer of
-			/// the entity type instance which will be used as <b>target</b> entity type instance.
-			/// @return A shared pointer to the new entity relation type instance which was created.
+			/// Creates a new entity relation instance.
+			/// @param rel_type A const reference to a shared pointer of
+			/// an relation type of which an instance will be created.
+			/// @param ent_inst_source A const reference to a shared pointer of
+			/// the entity instance which will be used as <b>source</b> entity instance.
+			/// @param ent_inst_target A const reference to a shared pointer of
+			/// the entity instance which will be used as <b>target</b> entity instance.
+			/// @return A shared pointer to the new relation instance which was created.
 			O_REL_INST create_relation_instance(const REL_TYPE&, const ENT_INST&, const ENT_INST&);
+
+
+			/// Creates a new entity relation instance.
+            /// @param rel_inst_GUID The GUID of the new relation instance.
+			/// @param rel_type A const reference to a shared pointer of
+			/// a relation type of which an instance will be created.
+			/// @param ent_inst_source A const reference to a shared pointer of
+			/// the entity instance which will be used as <b>source</b> entity instance.
+			/// @param ent_inst_target A const reference to a shared pointer of
+			/// the entity instance which will be used as <b>target</b> entity instance.
+			/// @return A shared pointer to the new relation instance which was created.
+			O_REL_INST create_relation_instance(const xg::Guid&, const REL_TYPE&, const ENT_INST&, const ENT_INST&);
 
 
 

@@ -62,6 +62,7 @@ namespace entity_system {
             // now return std::nullopt thanks to std::optional.
             return std::nullopt;
         }
+		// Check if an entity type with this GUID does already exist.
         if(does_entity_type_exist(ent_type_GUID))
         {
             return std::nullopt;
@@ -128,6 +129,14 @@ namespace entity_system {
     }
 
 
+	std::size_t EntityTypeManager::delete_entity_type(const xg::Guid& type_GUID)
+    {
+		std::size_t deleted_types_count = delete_type(type_GUID);
+		notify_entity_type_deleted(type_GUID);
+		return deleted_types_count;
+    }
+
+
 	std::size_t EntityTypeManager::delete_entity_type(const std::string& ent_type_name)
 	{
 		xg::Guid type_GUID = get_GUID_by_type_name(ent_type_name);
@@ -135,14 +144,6 @@ namespace entity_system {
 		notify_entity_type_deleted(type_GUID);
 		return deleted_types_count;
 	}
-
-
-	std::size_t EntityTypeManager::delete_entity_type(const xg::Guid& type_GUID)
-    {
-		std::size_t deleted_types_count = delete_type(type_GUID);
-		notify_entity_type_deleted(type_GUID);
-		return deleted_types_count;
-    }
 
 
 	std::size_t EntityTypeManager::delete_entity_type(const ENT_TYPE& ent_type)

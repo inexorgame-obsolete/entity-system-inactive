@@ -46,15 +46,15 @@ namespace entity_system {
             
 
 			/// @brief Checks if an entity type does already exist.
+            /// @return True if the entity type already exists, false otherwise.
+			bool does_entity_type_exist(const xg::Guid&);
+
+
+			/// @brief Checks if an entity type does already exist.
 			/// @param ent_type_name The name of the entity type.
             /// @return True if the entity type already exists, false otherwise.
             bool does_entity_type_exist(const std::string&);
 			
-
-			/// @brief Checks if an entity type does already exist.
-            /// @return True if the entity type already exists, false otherwise.
-			bool does_entity_type_exist(const xg::Guid&);
-
 
 			/// @brief Checks if an entity type does already exist.
 			/// @param ent_type A const reference of a shared pointer to the entity type.
@@ -79,18 +79,18 @@ namespace entity_system {
 			O_ENT_TYPE get_entity_type(const std::string&);
 
 
-            /// @brief Deletes an entity type by name.
-			/// @param ent_type_name The name of the entity type which will be deleted.
-            /// @return ENTSYS_SUCCESS if deleting the entity type succeeded,
-            /// <br>ENTSYS_ERROR if deleting the entity type failed.
-			std::size_t delete_entity_type(const std::string&);
-			
-
 			/// @brief Deletes an entity type by GUID.
             /// @param ? The GUID of the entity type which will be deleted.
             /// @return ENTSYS_SUCCESS if deleting the entity type succeeded,
             /// <br>ENTSYS_ERROR if deleting the entity type failed.
 			std::size_t delete_entity_type(const xg::Guid&);
+
+
+            /// @brief Deletes an entity type by name.
+			/// @param ent_type_name The name of the entity type which will be deleted.
+            /// @return ENTSYS_SUCCESS if deleting the entity type succeeded,
+            /// <br>ENTSYS_ERROR if deleting the entity type failed.
+			std::size_t delete_entity_type(const std::string&);
 
 
 			/// @brief Deletes an entity type by entity type.

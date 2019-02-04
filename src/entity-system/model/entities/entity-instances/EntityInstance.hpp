@@ -38,6 +38,12 @@ namespace entity_system {
 			/// be created automatically by the inheritance of GUIDBase!
 			EntityInstance(const ENT_TYPE&);
 
+            /// @brief Constructor.
+            /// @param ent_inst_GUID The GUID of the entity instance which will be created.
+			/// @param ent_type A const reference of a shared pointer
+			/// to the entity type of which an instance will be created.
+			EntityInstance(const xg::Guid&, const ENT_TYPE&);
+
 			/// Destructor.
 			~EntityInstance();
 

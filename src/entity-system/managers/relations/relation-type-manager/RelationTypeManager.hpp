@@ -28,6 +28,30 @@ namespace entity_system {
 			/// Destructor.
 			~RelationTypeManager();
 
+
+			/// Creates a new relation type and store it in the entity system.
+			/// @param ent_rel_type_name The name of the new relation type name.
+			/// @param ent_type_source A const reference of a shared pointer to
+			/// an entity type which will act as <b>source</b> entity type.
+			/// @param ent_type_target A const reference of a shared pointer to
+			/// an entity type which will act as <b>target</b> entity type.
+			O_REL_TYPE create_relation_type(const std::string&, const ENT_TYPE&, const ENT_TYPE&);
+
+
+			/// Creates a new relation type and store it in the entity system.
+            /// @param rel_type_GUID The GUID of the new relation type.
+			/// @param rel_type_name The name of the new relation type.
+			/// @param ent_type_source A const reference of a shared pointer to
+			/// an entity type which will act as <b>source</b> entity type.
+			/// @param ent_type_target A const reference of a shared pointer to
+			/// an entity type which will act as <b>target</b> entity type.
+			O_REL_TYPE create_relation_type(const xg::Guid&, const std::string&, const ENT_TYPE&, const ENT_TYPE&);
+
+
+            ///
+			bool does_relation_type_exist(const xg::Guid&);
+
+
 			/// Checks if an relation type does already exist.
 			/// @param ent_rel_type_name The name of the relation type.
 			/// @return true if this relation type does already exist,
@@ -41,19 +65,6 @@ namespace entity_system {
 			/// @return true if this relation type does already exist,
 			/// false otherwise.
 			bool does_relation_type_exist(const REL_TYPE&);
-
-
-            /// 
-			bool does_relation_type_exist(const xg::Guid&);
-
-
-			/// Creates a new relation type and store it in the entity system.
-			/// @param ent_rel_type_name The name of the new relation type name.
-			/// @param ent_type_source A const reference of a shared pointer to
-			/// an entity type which will act as <b>source</b> entity type.
-			/// @param ent_type_target A const reference of a shared pointer to
-			/// an entity type which will act as <b>target</b> entity type.
-			O_REL_TYPE create_relation_type(const std::string&, const ENT_TYPE&, const ENT_TYPE&);
 
 
 			/// Returns the number of available relation types.
@@ -73,15 +84,15 @@ namespace entity_system {
 			O_REL_TYPE get_relation_type(const std::string&);
 
 
+			/// @brief Deletes an relation type by GUID.
+            /// @param rel_type_guid The GUID of the relation type which will be deleted.
+			std::size_t delete_relation_type(const xg::Guid&);
+
+
 			/// Deletes an entity relation type.
 			/// @param rel_type_name The name of the relation type name.
 			std::size_t delete_relation_type(const std::string&);
 
-
-			/// @brief Deletes an relation type by GUID.
-            /// @param rel_type_guid The GUID of the relation type which will be deleted.
-			std::size_t delete_relation_type(const xg::Guid&);
-			
 
 			/// Deletes an entity relation type.
 			/// @param rel_type A const reference of a shared pointer

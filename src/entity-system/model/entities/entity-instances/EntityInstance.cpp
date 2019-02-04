@@ -8,10 +8,20 @@ namespace inexor {
 namespace entity_system {
 
 
-	EntityInstance::EntityInstance(const ENT_TYPE& ent_type) : InstanceBase(ent_type)
+	EntityInstance::EntityInstance(const ENT_TYPE& ent_type)
+		: GUIDBase(),
+		  InstanceBase(ent_type)
 	{
         // TODO: Implement!
 	}
+
+
+	EntityInstance::EntityInstance(const xg::Guid& ent_inst_GUID, const ENT_TYPE& ent_type)
+    	: GUIDBase(ent_inst_GUID),
+		  InstanceBase(ent_type)
+    {
+		// TODO: Implement!
+    }
 
 
 	EntityInstance::~EntityInstance()

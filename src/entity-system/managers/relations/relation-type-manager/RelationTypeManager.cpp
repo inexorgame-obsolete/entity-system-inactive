@@ -20,43 +20,80 @@ namespace entity_system {
     }
 
 
-	bool RelationTypeManager::does_relation_type_exist(const std::string& rel_type_name)
-	{
-        // 
-		return does_type_exist(rel_type_name);
-	}
-
-
-	bool RelationTypeManager::does_relation_type_exist(const REL_TYPE& rel_type)
-	{
-        // 
-		return does_relation_type_exist(rel_type->get_type_name());
-	}
-
-
 	O_REL_TYPE RelationTypeManager::create_relation_type(const std::string& rel_type_name, const ENT_TYPE& ent_type_source, const ENT_TYPE& ent_type_target)
 	{
-		// Validate new entity relation type name.
+		// Validate new relation type name.
 		if(!is_type_name_valid(rel_type_name))
 		{
-			// This entity relation type does already exist.
+			// This relation type does already exist.
 			// TODO: Throw error message.
 
-            // Since we've not created a new entity relation type we can
+            // Since we've not created a new relation type we can
             // now return std::nullopt thanks to std::optional.
             return std::nullopt;
 		}
 
-		// Create new entity relation type.
+		// Create new relation type.
 		REL_TYPE new_relation_type = std::make_shared<RelationType>(rel_type_name, ent_type_source, ent_type_target);
 
-		// Add new entity relation type to type map.
+		// Add new relation type to type map.
 		add_type(rel_type_name, new_relation_type->get_GUID(), new_relation_type);
 
 		// Signal that the relation type has been created.
 		notify_relation_type_created(new_relation_type);
 
         return O_REL_TYPE { new_relation_type };
+	}
+
+
+	O_REL_TYPE RelationTypeManager::create_relation_type(const xg::Guid& rel_type_GUID, const std::string& rel_type_name, const ENT_TYPE& ent_type_source, const ENT_TYPE& ent_type_target)
+	{
+		// Validate new relation type name.
+		if(!is_type_name_valid(rel_type_name))
+		{
+			// This relation type does already exist.
+			// TODO: Throw error message.
+
+            // Since we've not created a new relation type we can
+            // now return std::nullopt thanks to std::optional.
+            return std::nullopt;
+		}
+		// Check if an relation type with this GUID does already exist.
+        if(does_relation_type_exist(rel_type_GUID))
+        {
+            return std::nullopt;
+        }
+
+		// Create new relation type.
+		REL_TYPE new_relation_type = std::make_shared<RelationType>(rel_type_GUID, rel_type_name, ent_type_source, ent_type_target);
+
+		// Add new relation type to type map.
+		add_type(rel_type_name, new_relation_type->get_GUID(), new_relation_type);
+
+		// Signal that the relation type has been created.
+		notify_relation_type_created(new_relation_type);
+
+        return O_REL_TYPE { new_relation_type };
+	}
+
+
+    bool RelationTypeManager::does_relation_type_exist(const xg::Guid& rel_type_GUID)
+    {
+        return does_relation_type_exist(get_type(rel_type_GUID)->get_type_name());
+    }
+
+
+	bool RelationTypeManager::does_relation_type_exist(const std::string& rel_type_name)
+	{
+        //
+		return does_type_exist(rel_type_name);
+	}
+
+
+	bool RelationTypeManager::does_relation_type_exist(const REL_TYPE& rel_type)
+	{
+        //
+		return does_relation_type_exist(rel_type->get_type_name());
 	}
 
 
@@ -87,6 +124,14 @@ namespace entity_system {
     }
 
 
+	std::size_t RelationTypeManager::delete_relation_type(const xg::Guid& type_GUID)
+    {
+		std::size_t deleted_types_count = delete_type(type_GUID);
+		notify_relation_type_deleted(type_GUID);
+		return deleted_types_count;
+    }
+
+
 	std::size_t RelationTypeManager::delete_relation_type(const std::string& rel_type_name)
 	{
 		xg::Guid type_GUID = get_GUID_by_type_name(rel_type_name);
@@ -94,14 +139,6 @@ namespace entity_system {
 		notify_relation_type_deleted(type_GUID);
 		return deleted_types_count;
 	}
-
-
-	std::size_t RelationTypeManager::delete_relation_type(const xg::Guid& type_GUID)
-    {
-		std::size_t deleted_types_count = delete_type(type_GUID);
-		notify_relation_type_deleted(type_GUID);
-		return deleted_types_count;
-    }
 
 	
 	std::size_t RelationTypeManager::delete_relation_type(const REL_TYPE& rel_type)

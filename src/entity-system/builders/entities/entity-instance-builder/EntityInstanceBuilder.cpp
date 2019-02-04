@@ -94,7 +94,12 @@ namespace entity_system {
 		}
 		if (o_entity_type.has_value())
 		{
-			o_entity_instance = entity_instance_manager->create_entity_instance(o_entity_type.value());
+			if (!entity_instance_uuid.empty())
+			{
+				o_entity_instance = entity_instance_manager->create_entity_instance(xg::Guid(entity_instance_uuid), o_entity_type.value());
+			} else {
+				o_entity_instance = entity_instance_manager->create_entity_instance(o_entity_type.value());
+			}
 		}
 		if (o_entity_instance.has_value())
 		{

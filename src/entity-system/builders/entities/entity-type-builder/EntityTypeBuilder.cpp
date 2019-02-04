@@ -47,7 +47,13 @@ namespace entity_system {
 
 	O_ENT_TYPE EntityTypeBuilder::build()
 	{
-		O_ENT_TYPE o_entity_type = entity_type_manager->create_entity_type(entity_type_name);
+		O_ENT_TYPE o_entity_type;
+		if (!entity_type_uuid.empty())
+		{
+			o_entity_type = entity_type_manager->create_entity_type(xg::Guid(entity_type_uuid), entity_type_name);
+		} else {
+			o_entity_type = entity_type_manager->create_entity_type(entity_type_name);
+		}
 		if (o_entity_type.has_value())
 		{
 			shared_ptr<EntityType> entity_type = o_entity_type.value();

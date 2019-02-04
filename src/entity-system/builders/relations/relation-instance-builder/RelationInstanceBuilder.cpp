@@ -106,7 +106,12 @@ namespace entity_system {
 		}
 		if (o_relation_type.has_value())
 		{
-			o_relation_instance = relation_instance_manager->create_relation_instance(o_relation_type.value(), ent_instance_source, ent_instance_target);
+			if (!relation_instance_uuid.empty())
+			{
+				o_relation_instance = relation_instance_manager->create_relation_instance(xg::Guid(relation_instance_uuid), o_relation_type.value(), ent_instance_source, ent_instance_target);
+			} else {
+				o_relation_instance = relation_instance_manager->create_relation_instance(o_relation_type.value(), ent_instance_source, ent_instance_target);
+			}
 		}
 		if (o_relation_instance.has_value())
 		{

@@ -45,6 +45,16 @@ namespace entity_system {
 			/// be created automatically by the inheritance of GUIDBase!
 			RelationInstance(const REL_TYPE&, const ENT_INST&, const ENT_INST&);
 
+			/// Constructor.
+            /// @param rel_inst_GUID The GUID of the relation instance which will be created.
+			/// @param rel_type A const reference to a shared pointer of
+			/// an relation type of which an instance will be created.
+			/// @param ent_inst_source A const reference to a shared pointer of
+			/// an entity instance which will be used as source entity instance.
+			/// @param ent_inst_target A const reference to a shared pointer of
+			/// an entity instance which will be used as target entity instance.
+			RelationInstance(const xg::Guid&, const REL_TYPE&, const ENT_INST&, const ENT_INST&);
+
 			/// Destructor.
 			~RelationInstance();
 

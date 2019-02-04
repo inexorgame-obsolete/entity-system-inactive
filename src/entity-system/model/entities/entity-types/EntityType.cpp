@@ -8,13 +8,17 @@ namespace inexor {
 namespace entity_system {
     
 
-    EntityType::EntityType(const std::string& ent_type_name) : TypeBase(ent_type_name), GUIDBase()
+    EntityType::EntityType(const std::string& ent_type_name)
+    	: GUIDBase(),
+		  TypeBase(ent_type_name)
     {
 		// TODO: Implement!
     }
 
 
-    EntityType::EntityType(const xg::Guid& ent_type_GUID, const std::string& ent_type_name) : GUIDBase(ent_type_GUID), TypeBase(ent_type_name)
+    EntityType::EntityType(const xg::Guid& ent_type_GUID, const std::string& ent_type_name)
+    	: GUIDBase(ent_type_GUID),
+		  TypeBase(ent_type_name)
     {
 		// TODO: Implement!
     }

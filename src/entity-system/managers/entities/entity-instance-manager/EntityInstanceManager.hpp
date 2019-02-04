@@ -19,7 +19,7 @@ namespace inexor {
 namespace entity_system {
 
 
-	/// A manager class for entity type instances.
+	/// A manager class for entity instances.
     class EntityInstanceManager : public InstanceManagerTemplate<EntityInstance>
 	{
         public:
@@ -31,13 +31,21 @@ namespace entity_system {
 
 			/// Destructor
 			~EntityInstanceManager();
-			
-			/// Create an entity type instance.
+
+
+			/// Create an entity instance.
 			/// @param ent_type A const reference of a shared pointer
 			/// to an entity type of which an instance will be created.
-			/// @return A shared pointer to the entity type instance which was created.
+			/// @return A shared pointer to the entity instance which was created.
 			O_ENT_INST create_entity_instance(const ENT_TYPE&);
 
+
+			/// Create an entity instance.
+            /// @param ent_inst_GUID The GUID of the new entity instance.
+			/// @param ent_type A const reference of a shared pointer
+			/// to an entity type of which an instance will be created.
+			/// @return A shared pointer to the entity instance which was created.
+			O_ENT_INST create_entity_instance(const xg::Guid&, const ENT_TYPE&);
 
 
 			/// @brief Checks if an entity instance does already exist.

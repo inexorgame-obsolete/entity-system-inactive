@@ -9,11 +9,21 @@ namespace entity_system {
 
 
 	RelationType::RelationType(const std::string& rel_type_name, const ENT_TYPE& ent_type_source, const ENT_TYPE& ent_type_target) 
-	: TypeBase(rel_type_name)
+		: GUIDBase(),
+		  TypeBase(rel_type_name)
 	{
 		source_entity_type = ent_type_source;
 		target_entity_type = ent_type_target;
 	}
+
+
+	RelationType::RelationType(const xg::Guid& rel_type_GUID, const std::string& rel_type_name, const ENT_TYPE& ent_type_source, const ENT_TYPE& ent_type_target)
+		: GUIDBase(rel_type_GUID),
+		  TypeBase(rel_type_name)
+    {
+		source_entity_type = ent_type_source;
+		target_entity_type = ent_type_target;
+    }
 
 
 	RelationType::~RelationType()
