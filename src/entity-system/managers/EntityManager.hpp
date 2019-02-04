@@ -5,10 +5,10 @@
 
 #include <vector>
 
-#include "entities/entity-instance-manager/EntityInstanceManager.hpp"
-#include "entities/entity-type-manager/EntityTypeManager.hpp"
-#include "entity-attributes/entity-attribute-instance-manager/EntityAttributeInstanceManager.hpp"
-#include "entity-attributes/entity-attribute-type-manager/EntityAttributeTypeManager.hpp"
+#include "entity-system/managers/entities/entity-instance-manager/EntityInstanceManager.hpp"
+#include "entity-system/managers/entities/entity-type-manager/EntityTypeManager.hpp"
+#include "entity-system/managers/entity-attributes/entity-attribute-instance-manager/EntityAttributeInstanceManager.hpp"
+#include "entity-system/managers/entity-attributes/entity-attribute-type-manager/EntityAttributeTypeManager.hpp"
 
 
 using namespace inexor::entity_system;
