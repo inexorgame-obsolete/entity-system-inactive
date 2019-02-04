@@ -30,6 +30,12 @@ namespace type_system {
 					{ "input_value", DataType::INT },
 					{ "default_value", DataType::INT },
 					{ "output_value", DataType::INT }
+				},
+				{
+					{ "name", 0 },
+					{ "input_value", 1 << Feature::INPUT },
+					{ "default_value", 1 << Feature::INPUT | 1 << Feature::OUTPUT },
+					{ "output_value", 1 << Feature::OUTPUT }
 				}
 			) {};
 

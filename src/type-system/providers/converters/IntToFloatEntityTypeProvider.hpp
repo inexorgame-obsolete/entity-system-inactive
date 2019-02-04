@@ -28,6 +28,10 @@ namespace type_system {
 				{
 					{ "input", DataType::INT },
 					{ "value", DataType::FLOAT }
+				},
+				{
+					{ "input", 1 << Feature::INPUT },
+					{ "value", 1 << Feature::OUTPUT }
 				}
 			) {};
 

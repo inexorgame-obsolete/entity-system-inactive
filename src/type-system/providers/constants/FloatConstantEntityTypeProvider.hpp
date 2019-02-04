@@ -28,6 +28,10 @@ namespace type_system {
 				{
 					{ "name", DataType::STRING },
 					{ "value", DataType::FLOAT }
+				},
+				{
+					{ "name", 1 << Feature::OUTPUT },
+					{ "value", 1 << Feature::OUTPUT }
 				}
 			) {};
 

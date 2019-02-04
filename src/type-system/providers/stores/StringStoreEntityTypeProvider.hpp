@@ -30,6 +30,12 @@ namespace type_system {
 					{ "input_value", DataType::STRING },
 					{ "default_value", DataType::STRING },
 					{ "output_value", DataType::STRING }
+				},
+				{
+					{ "name", 0 },
+					{ "input_value", 1 << Feature::INPUT },
+					{ "default_value", 1 << Feature::INPUT | 1 << Feature::OUTPUT },
+					{ "output_value", 1 << Feature::OUTPUT }
 				}
 			) {};
 

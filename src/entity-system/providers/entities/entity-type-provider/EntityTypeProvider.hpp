@@ -17,6 +17,8 @@ namespace entity_system {
 	// TODO: Move to TypeDefinitions
 	using AttributeList = unordered_map<string, DataType>;
 
+	using FeatureList = unordered_map<string, EnumSet<Feature>>;
+
 	/// @class EntityTypeProvider
     /// @brief Provides the entity type.
 	class EntityTypeProvider
@@ -27,7 +29,8 @@ namespace entity_system {
 			EntityTypeProvider(
 				shared_ptr<EntityTypeBuilderManager> entity_type_builder_manager,
 				string entity_type_name,
-				AttributeList entity_type_attributes
+				AttributeList entity_type_attributes,
+				FeatureList entity_type_attribute_features
 			);
 
 			/// Destructor.
@@ -49,6 +52,9 @@ namespace entity_system {
 
 			/// The list of attributes of the entity type
 			AttributeList entity_type_attributes;
+
+			/// The list of attributes of the entity type
+			FeatureList entity_type_attribute_features;
 
 			/// The entity type
 			shared_ptr<EntityType> entity_type;

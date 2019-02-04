@@ -28,6 +28,10 @@ namespace logging {
 				{
 					{ "logger_name", DataType::STRING },
 					{ "log_level", DataType::INT }
+				},
+				{
+					{ "logger_name", 1 << Feature::INPUT },
+					{ "log_level", 1 << Feature::INPUT | 1 << Feature::OUTPUT }
 				}
 			) {};
 

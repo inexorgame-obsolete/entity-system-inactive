@@ -39,8 +39,8 @@ namespace entity_system {
 			/// Sets the uuid of the entity type.
 			shared_ptr<EntityTypeBuilder> uuid(string entity_type_uuid);
 
-			/// Sets the uuid of the entity type.
-			shared_ptr<EntityTypeBuilder> attribute(string attribute_name, DataType attribute_datatype);
+			/// Adds an attribute
+			shared_ptr<EntityTypeBuilder> attribute(const string& attribute_name, const DataType& attribute_datatype, const EnumSet<Feature>& features);
 
 			/// Builds and returns the created entity type.
 			O_ENT_TYPE build();
@@ -64,6 +64,9 @@ namespace entity_system {
 
 			/// The attribute definitions.
 			unordered_map<string, DataType> entity_type_attributes;
+
+			/// The attribute features.
+			unordered_map<string, EnumSet<Feature>> entity_type_attribute_features;
 
 	};
 
