@@ -22,7 +22,7 @@ namespace entity_system {
 
     /// @class InstanceManagerTemplate
 	/// @brief A template base class for instance manager classes.
-	/// @param T The type for this type instance manager.
+	/// @param T The type for this instance manager.
 	template <typename T> class InstanceManagerTemplate
 	{
 		private:
@@ -31,7 +31,7 @@ namespace entity_system {
             std::unordered_map<xg::Guid, std::shared_ptr<T>> stored_instances;
 
 			// Mutex for this base class.
-			std::mutex type_instance_manager_mutex;
+			std::mutex instance_manager_mutex;
 
 		protected:
 			
@@ -50,13 +50,14 @@ namespace entity_system {
 
 
 			/// Adds an instance to the instance buffer.
-			/// @param type_instance The instance which will be added.
-			void add_instance(const xg::Guid type_GUID, std::shared_ptr<T>& instance)
+			/// @param instance_GUID The GUID of the instance.
+			/// @param instance The instance which will be added.
+			void add_instance(const xg::Guid instance_GUID, std::shared_ptr<T>& instance)
 			{
 				// Use lock guard to ensure thread safety for this write operation!
-				std::lock_guard<std::mutex> lock(type_instance_manager_mutex);
+				std::lock_guard<std::mutex> lock(instance_manager_mutex);
 				
-                stored_instances[type_GUID] = instance;
+                stored_instances[instance_GUID] = instance;
 			}
 
 
@@ -84,7 +85,7 @@ namespace entity_system {
 
 
             /// @brief Returns a specific instance.
-            /// @param type_GUID The GUID of the instance.
+            /// @param instance_GUID The GUID of the instance.
             /// @return If the instance exists it will be returned, std::nullopt otherwise.
 			std::optional<std::shared_ptr<T>> get_instance(const xg::Guid& instance_GUID)
 			{
@@ -102,11 +103,11 @@ namespace entity_system {
 
 
             /// @brief Looks up the GUID of an instance.
-            /// @param type_inst The instance of which we need the GUID.
+            /// @param instance The instance of which we need the GUID.
             /// @return The GUID of the instance.
-            std::optional<xg::Guid> get_GUID_from_instance(const std::shared_ptr<T>& type_inst)
+            std::optional<xg::Guid> get_GUID_from_instance(const std::shared_ptr<T>& instance)
             {
-                if(does_instance_exist(type_inst))
+                if(does_instance_exist(instance))
                 {
                     // Iterate through the unordered map and find the GUID of this type.
                     // TODO: Maybe implement ->get_GUID() method for T ?
@@ -117,25 +118,25 @@ namespace entity_system {
 
 
 			/// @brief Deletes a specific instance
-            /// @param type_GUID The GUID of the instance which should be deleted!
-			std::size_t delete_instance(const xg::Guid& type_GUID)
+            /// @param instance_GUID The GUID of the instance which should be deleted!
+			std::size_t delete_instance(const xg::Guid& instance_GUID)
 			{
 				// Use lock guard to ensure thread safety for this write operation!
-				std::lock_guard<std::mutex> lock(type_instance_manager_mutex);
+				std::lock_guard<std::mutex> lock(instance_manager_mutex);
 				
                 // Erase the instance.
-				return stored_instances.erase(type_GUID);
+				return stored_instances.erase(instance_GUID);
 			}
 
             
             /// @brief 
-            std::size_t delete_instance(const std::shared_ptr<T>& type_ptr)
+            std::size_t delete_instance(const std::shared_ptr<T>& instance)
             {
 				// Use lock guard to ensure thread safety for this write operation!
-				std::lock_guard<std::mutex> lock(type_instance_manager_mutex);
+				std::lock_guard<std::mutex> lock(instance_manager_mutex);
 
                 // Look up the GUID of the 
-                xg::Guid instance_to_delete = get_instance(type_ptr);
+                xg::Guid instance_to_delete = get_GUID_from_instance(instance);
                 return delete_instance(instance_to_delete);
             }
 
@@ -144,7 +145,7 @@ namespace entity_system {
 			void delete_all_instances()
 			{
 				// Use lock guard to ensure thread safety for this write operation!
-				std::lock_guard<std::mutex> lock(type_instance_manager_mutex);
+				std::lock_guard<std::mutex> lock(instance_manager_mutex);
 				
                 stored_instances.clear();
 			}

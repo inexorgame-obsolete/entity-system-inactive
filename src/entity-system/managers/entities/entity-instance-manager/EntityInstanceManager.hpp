@@ -70,8 +70,12 @@ namespace entity_system {
 			std::size_t get_entity_instance_count() const;
 
 
-            // TODO: delete_entity_instance(const xg::Guid&);
-            // TODO: delete_all_entity_instances();
+			/// Delete entity instance by GUID
+			std::size_t delete_entity_instance(const xg::Guid& instance_GUID);
+
+
+			/// Delete entity instance by GUID
+			std::size_t delete_entity_instance(const ENT_INST& entity_instance);
 
 
 			/// Delete all entity type instances

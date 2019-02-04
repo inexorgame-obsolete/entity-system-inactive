@@ -77,6 +77,31 @@ namespace entity_system {
 		return get_instance_count();
 	}
 
+	/// Delete entity instance by GUID
+	std::size_t EntityInstanceManager::delete_entity_instance(const xg::Guid& instance_GUID)
+	{
+		O_ENT_INST o_ent_inst = get_entity_instance(instance_GUID);
+		if (o_ent_inst.has_value())
+		{
+			ENT_INST ent_inst = o_ent_inst.value();
+			xg::Guid type_GUID = ent_inst->get_entity_type()->get_GUID();
+			std::size_t deleted_instances_count = delete_instance(instance_GUID);
+			notify_entity_instance_deleted(type_GUID, instance_GUID);
+			return deleted_instances_count;
+		} else {
+			return 0;
+		}
+	}
+
+	/// Delete entity instance by GUID
+	std::size_t EntityInstanceManager::delete_entity_instance(const ENT_INST& entity_instance)
+	{
+		xg::Guid instance_GUID = entity_instance->get_GUID();
+		xg::Guid type_GUID = entity_instance->get_entity_type()->get_GUID();
+		std::size_t deleted_instances_count = delete_instance(entity_instance);
+		notify_entity_instance_deleted(type_GUID, instance_GUID);
+		return deleted_instances_count;
+	}
 
 	void EntityInstanceManager::delete_all_entity_instances()
 	{
