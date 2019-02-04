@@ -20,5 +20,11 @@ namespace entity_system {
 	}
 
 
+	ENT_ATTR_TYPE EntityAttributeInstance::get_entity_attribute_type() const
+	{
+		return get_type();
+	}
+
+
 };
 };

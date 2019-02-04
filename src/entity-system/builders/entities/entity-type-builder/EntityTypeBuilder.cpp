@@ -58,7 +58,8 @@ namespace entity_system {
 		{
 			shared_ptr<EntityType> entity_type = o_entity_type.value();
 			for (auto& attribute_entry : entity_type_attributes) {
-				O_ENT_ATTR_TYPE o_attribute_type = entity_attribute_type_manager->create_entity_attribute_type(attribute_entry.first, attribute_entry.second);
+				EnumSet<Feature> features = 1 << Feature::INPUT | 1 << Feature::OUTPUT;
+				O_ENT_ATTR_TYPE o_attribute_type = entity_attribute_type_manager->create_entity_attribute_type(attribute_entry.first, attribute_entry.second, features);
 				if (o_attribute_type.has_value()) {
 					ENT_ATTR_TYPE attribute_type = o_attribute_type.value();
 					entity_type->link_attribute_type(attribute_type);

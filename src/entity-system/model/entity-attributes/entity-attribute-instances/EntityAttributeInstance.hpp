@@ -29,6 +29,10 @@ namespace entity_system {
 			/// Destructor.
 			~EntityAttributeInstance();
 
+            /// @brief Get the entity attribute type.
+            /// @return The type of the attribute.
+			ENT_ATTR_TYPE get_entity_attribute_type() const;
+
 			// Note: Set and get methods are already implemented by inheriting from DataContainer.
 
 	};

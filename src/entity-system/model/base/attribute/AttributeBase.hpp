@@ -34,6 +34,9 @@ namespace entity_system {
             /// the instance, not in this base class.
 			DataType attribute_data_type;
 
+			/// The features of the attribute.
+			EnumSet<Feature> features;
+
             /// Mutex for this base class.
             std::mutex attribute_type_base_mutex;
 
@@ -42,7 +45,7 @@ namespace entity_system {
 			/// Constructor.
 			/// @param attr_data_type The data type
 			/// of the attribute.
-			AttributeBase(const DataType&);
+			AttributeBase(const DataType&, const EnumSet<Feature>& features);
 
 			/// Destructor.
 			~AttributeBase();
@@ -56,6 +59,8 @@ namespace entity_system {
 			/// @return The data type of the attribute.
 			DataType get_attribute_data_type() const;
 
+			/// @brief Returns the features of the attribute.
+			EnumSet<Feature> get_attribute_features() const;
 
 	};
 

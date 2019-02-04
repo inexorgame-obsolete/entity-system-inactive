@@ -28,7 +28,10 @@ namespace entity_system {
 
 			/// Destructor.
 			~RelationAttributeInstance();
-			
+
+            /// @brief Get the relation attribute type.
+            /// @return The type of the attribute.
+			REL_ATTR_TYPE get_relation_attribute_type() const;
 
 	};
 

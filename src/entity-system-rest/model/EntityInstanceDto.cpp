@@ -56,6 +56,17 @@ namespace model {
 			pt_attribute.put("attribute_uuid", attribute->get_attribute_uuid());
 			pt_attribute.put("name", attribute->get_name());
 			pt_attribute.put("datatype", attribute->type._to_string());
+			ptree pt_attribute_features;
+			for (Feature feature : Feature::_values())
+			{
+				if (attribute->get_features().test(feature))
+				{
+					ptree pt_attribute_feature;
+					pt_attribute_feature.put("", feature._to_string());
+					pt_attribute_features.push_back(std::make_pair("", pt_attribute_feature));
+				}
+			}
+			pt_attribute.add_child("features", pt_attribute_features);
 			switch (attribute->type)
 			{
 				case DataType::BOOL:
@@ -86,7 +97,6 @@ namespace model {
 					pt_attribute.put("value", "");
 					break;
 			}
-
 			pt_attributes.push_back(std::make_pair("", pt_attribute));
 		}
 		pt.add_child("attributes", pt_attributes);

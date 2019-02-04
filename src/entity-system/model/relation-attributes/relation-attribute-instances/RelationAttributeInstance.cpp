@@ -20,5 +20,12 @@ namespace entity_system {
         // TODO: Implement!
     }
 
+
+	REL_ATTR_TYPE RelationAttributeInstance::get_relation_attribute_type() const
+	{
+		return get_type();
+	}
+
+
 };
 };

@@ -275,11 +275,13 @@ void EntityInstanceApiEntitiesInstancesEntity_instance_uuidResource::GET_method_
 			{
 				ENT_ATTR_TYPE ent_attr_type = ent_inst_attr.first;
 				ENT_ATTR_INST ent_attr_inst = ent_inst_attr.second;
+
 				shared_ptr<AttributeDto> attribute_dto = make_shared<AttributeDto>(
 					ent_attr_inst->get_GUID().str(),
 					ent_attr_type->get_type_name(),
 					ent_attr_inst->type,
-					ent_attr_inst->value
+					ent_attr_inst->value,
+					ent_attr_type->get_attribute_features()
 				);
 //				attribute_dto->set_attribute_uuid(ent_attr_inst->get_GUID().str());
 //				attribute_dto->set_name(ent_attr_type->get_type_name());

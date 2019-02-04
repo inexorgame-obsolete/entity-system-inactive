@@ -70,7 +70,8 @@ namespace entity_system {
 		{
 			shared_ptr<RelationType> relation_type = o_relation_type.value();
 			for (auto& attribute_entry : relation_type_attributes) {
-				O_REL_ATTR_TYPE o_attribute_type = relation_attribute_type_manager->create_relation_attribute_type(attribute_entry.first, attribute_entry.second);
+				EnumSet<Feature> features = 1 << Feature::INPUT | 1 << Feature::OUTPUT;
+				O_REL_ATTR_TYPE o_attribute_type = relation_attribute_type_manager->create_relation_attribute_type(attribute_entry.first, attribute_entry.second, features);
 				if (o_attribute_type.has_value()) {
 					REL_ATTR_TYPE attribute_type = o_attribute_type.value();
 					relation_type->link_relation_attribute_type(attribute_type);

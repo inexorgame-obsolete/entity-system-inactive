@@ -34,9 +34,10 @@ namespace entity_system {
 
 			/// @brief Creates a new entity attribute type.
 			/// @param ent_attr_type_name The name of the new entity attribute type.
-			/// @param ent_attr_data_type The data type of the new entity attribute type.
+			/// @param ent_attr_type_data_type The data type of the new entity attribute type.
+			/// @param ent_attr_type_features The features of the new entity attribute type.
 			/// @return ?
-			O_ENT_ATTR_TYPE create_entity_attribute_type(const std::string&, const DataType&);
+			O_ENT_ATTR_TYPE create_entity_attribute_type(const std::string&, const DataType&, const EnumSet<Feature>&);
 
             
 			/// @brief Creates a new entity attribute type.
@@ -44,7 +45,7 @@ namespace entity_system {
             /// @param ? 
             /// @param ? 
             /// @return ?
-			O_ENT_ATTR_TYPE create_entity_attribute_type(const xg::Guid&, const std::string&, const DataType&);
+			O_ENT_ATTR_TYPE create_entity_attribute_type(const xg::Guid&, const std::string&, const DataType&, const EnumSet<Feature>&);
 
             
 			/// @brief Checks if an entity attribute type does already exist.

@@ -30,8 +30,8 @@ namespace model {
 	{
 		public:
 			AttributeDto();
-			AttributeDto(const DataType& type, const DataValue& value);
-			AttributeDto(const std::string& attribute_uuid, const std::string& name, const DataType& type, const DataValue& value);
+			AttributeDto(const DataType& type, const DataValue& value, const EnumSet<Feature>& features);
+			AttributeDto(const std::string& attribute_uuid, const std::string& name, const DataType& type, const DataValue& value, const EnumSet<Feature>& features);
 			virtual ~AttributeDto();
 
 			std::string to_json_string();
@@ -61,9 +61,16 @@ namespace model {
 			DataValue get_value() const;
 			void set_value(const DataValue& value);
 
+			/// <summary>
+			///
+			/// </summary>
+			EnumSet<Feature> get_features() const;
+			void set_features(const EnumSet<Feature>& features);
+
 		protected:
 			std::string attribute_uuid;
 			std::string name;
+			EnumSet<Feature> features;
 	};
 
 }

@@ -32,15 +32,17 @@ namespace model {
 	{
 	}
 
-	AttributeDto::AttributeDto(const DataType& type, const DataValue& value)
-		: DataContainer(type, value)
+	AttributeDto::AttributeDto(const DataType& type, const DataValue& value, const EnumSet<Feature>& features)
+		: DataContainer(type, value),
+		  features(features)
 	{
 	}
 
-	AttributeDto::AttributeDto(const std::string& attribute_uuid, const std::string& name, const DataType& type, const DataValue& value)
+	AttributeDto::AttributeDto(const std::string& attribute_uuid, const std::string& name, const DataType& type, const DataValue& value, const EnumSet<Feature>& features)
 		: attribute_uuid(attribute_uuid),
 		  name(name),
-		  DataContainer(type, value)
+		  DataContainer(type, value),
+		  features(features)
 	{
 	}
 
@@ -55,6 +57,17 @@ namespace model {
 		pt.put("attribute_uuid", attribute_uuid);
 		pt.put("name", name);
 		pt.put("datatype", type._to_string());
+		ptree pt_attribute_features;
+		for (Feature feature : Feature::_values())
+		{
+			if (features.test(feature))
+			{
+				ptree pt_attribute_feature;
+				pt_attribute_feature.put("", feature._to_string());
+				pt_attribute_features.push_back(std::make_pair("", pt_attribute_feature));
+			}
+		}
+		pt.add_child("features", pt_attribute_features);
 		switch (type)
 		{
 			case DataType::BOOL:
@@ -183,6 +196,16 @@ namespace model {
 	void AttributeDto::set_value(const DataValue& value)
 	{
 		this->value = value;
+	}
+
+	EnumSet<Feature> AttributeDto::get_features() const
+	{
+		return features;
+	}
+
+	void AttributeDto::set_features(const EnumSet<Feature>& features)
+	{
+		this->features = features;
 	}
 
 }

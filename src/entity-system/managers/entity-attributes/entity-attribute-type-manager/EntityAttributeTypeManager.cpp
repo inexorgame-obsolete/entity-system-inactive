@@ -33,7 +33,7 @@ namespace entity_system {
 	}
 
 
-	O_ENT_ATTR_TYPE EntityAttributeTypeManager::create_entity_attribute_type(const std::string& ent_attr_type_name, const DataType& ent_attr_type_datatype)
+	O_ENT_ATTR_TYPE EntityAttributeTypeManager::create_entity_attribute_type(const std::string& ent_attr_type_name, const DataType& ent_attr_type_datatype, const EnumSet<Feature>& ent_attr_type_features)
 	{
 		// Check if entity attribute type's name is not empty.
 		if(! is_type_name_valid(ent_attr_type_name))
@@ -47,7 +47,7 @@ namespace entity_system {
 		}
 
 		// Create entity attribute type.
-		ENT_ATTR_TYPE new_ent_attr_type = std::make_shared<EntityAttributeType>(ent_attr_type_name, ent_attr_type_datatype);
+		ENT_ATTR_TYPE new_ent_attr_type = std::make_shared<EntityAttributeType>(ent_attr_type_name, ent_attr_type_datatype, ent_attr_type_features);
 		
 		// Call template base class method.
 		add_type(ent_attr_type_name, new_ent_attr_type->get_GUID(), new_ent_attr_type);
@@ -56,7 +56,7 @@ namespace entity_system {
 	}
 
 
-	O_ENT_ATTR_TYPE EntityAttributeTypeManager::create_entity_attribute_type(const xg::Guid& ent_attr_type_GUID, const std::string& ent_attr_type_name, const DataType& ent_attr_type_datatype)
+	O_ENT_ATTR_TYPE EntityAttributeTypeManager::create_entity_attribute_type(const xg::Guid& ent_attr_type_GUID, const std::string& ent_attr_type_name, const DataType& ent_attr_type_datatype, const EnumSet<Feature>& ent_attr_type_features)
     {
         if(! is_type_name_valid(ent_attr_type_name))
         {
@@ -68,7 +68,7 @@ namespace entity_system {
             return std::nullopt;
         }
 
-        ENT_ATTR_TYPE new_ent_attr_type = std::make_shared<EntityAttributeType>(ent_attr_type_name, ent_attr_type_datatype);
+        ENT_ATTR_TYPE new_ent_attr_type = std::make_shared<EntityAttributeType>(ent_attr_type_name, ent_attr_type_datatype, ent_attr_type_features);
 
         return O_ENT_ATTR_TYPE {  };
     }

@@ -20,7 +20,7 @@ namespace entity_system {
 	}
 
 
-	O_REL_ATTR_TYPE RelationAttributeTypeManager::create_relation_attribute_type(const std::string& rel_attr_type_name, const DataType& rel_attr_data_type)
+	O_REL_ATTR_TYPE RelationAttributeTypeManager::create_relation_attribute_type(const std::string& rel_attr_type_name, const DataType& rel_attr_type_data_type, const EnumSet<Feature>& rel_attr_type_features)
 	{
 		// Check if an entity relation attribute type
 		// with this name does already exist.
@@ -35,7 +35,7 @@ namespace entity_system {
 		}
 
 		// Create new entity relation attribute type
-		REL_ATTR_TYPE new_rel_attr_type = std::make_shared<RelationAttributeType>(rel_attr_type_name, rel_attr_data_type);
+		REL_ATTR_TYPE new_rel_attr_type = std::make_shared<RelationAttributeType>(rel_attr_type_name, rel_attr_type_data_type, rel_attr_type_features);
 
         // 
 		add_type(rel_attr_type_name, new_rel_attr_type->get_GUID(), new_rel_attr_type);
