@@ -34,9 +34,13 @@ namespace visual_scripting {
 		Guid input_attr_GUID = input_attr->get_GUID();
 		// Check non-equal uuid
 		// Check equal data type
+		// Check if output attribute has feature OUTPUT
+		// Check if input attribute has feature INPUT
 		// Check if input is not occupied
 		if (output_attr_GUID != input_attr_GUID
 			&& output_attr->type == input_attr->type
+			&& output_attr->get_entity_attribute_type()->get_attribute_features().test(Feature::OUTPUT)
+			&& input_attr->get_entity_attribute_type()->get_attribute_features().test(Feature::INPUT)
 			&& !input_occupied(input_attr_GUID))
 		{
 			return optional<shared_ptr<Connector>> { make_shared<Connector>(output_attr_GUID, input_attr_GUID) };
@@ -51,10 +55,14 @@ namespace visual_scripting {
 		// Check if connector uuid doesn't exist
 		// Check non-equal uuid
 		// Check equal data type
+		// Check if output attribute has feature OUTPUT
+		// Check if input attribute has feature INPUT
 		// Check if input is not occupied
 		if (!connector_exists(connector_GUID)
 			&& output_attr_GUID != input_attr_GUID
 			&& output_attr->type == input_attr->type
+			&& output_attr->get_entity_attribute_type()->get_attribute_features().test(Feature::OUTPUT)
+			&& input_attr->get_entity_attribute_type()->get_attribute_features().test(Feature::INPUT)
 			&& !input_occupied(input_attr_GUID))
 		{
 			return optional<shared_ptr<Connector>> { make_shared<Connector>(connector_GUID, output_attr_GUID, input_attr_GUID) };
@@ -67,8 +75,12 @@ namespace visual_scripting {
 		Guid output_attr_GUID = output_attr->get_GUID();
 		Guid input_attr_GUID = input_attr->get_GUID();
 		// Check equal data type
+		// Check if output attribute has feature OUTPUT
+		// Check if input attribute has feature INPUT
 		// Check if input is already occupied
 		if (output_attr->type == input_attr->type
+			&& output_attr->get_entity_attribute_type()->get_attribute_features().test(Feature::OUTPUT)
+			&& input_attr->get_relation_attribute_type()->get_attribute_features().test(Feature::INPUT)
 			&& !input_occupied(input_attr_GUID))
 		{
 			return optional<shared_ptr<Connector>> { make_shared<Connector>(output_attr_GUID, input_attr_GUID) };
@@ -82,9 +94,13 @@ namespace visual_scripting {
 		Guid input_attr_GUID = input_attr->get_GUID();
 		// Check if connector uuid doesn't exist
 		// Check equal data type
+		// Check if output attribute has feature OUTPUT
+		// Check if input attribute has feature INPUT
 		// Check if input is already occupied
 		if (!connector_exists(connector_GUID)
 			&& output_attr->type == input_attr->type
+			&& output_attr->get_entity_attribute_type()->get_attribute_features().test(Feature::OUTPUT)
+			&& input_attr->get_relation_attribute_type()->get_attribute_features().test(Feature::INPUT)
 			&& !input_occupied(input_attr_GUID))
 		{
 			return optional<shared_ptr<Connector>> { make_shared<Connector>(connector_GUID, output_attr_GUID, input_attr_GUID) };
@@ -97,8 +113,12 @@ namespace visual_scripting {
 		Guid output_attr_GUID = output_attr->get_GUID();
 		Guid input_attr_GUID = input_attr->get_GUID();
 		// Check equal data type
+		// Check if output attribute has feature OUTPUT
+		// Check if input attribute has feature INPUT
 		// Check if input is already occupied
 		if (output_attr->type == input_attr->type
+			&& output_attr->get_relation_attribute_type()->get_attribute_features().test(Feature::OUTPUT)
+			&& input_attr->get_entity_attribute_type()->get_attribute_features().test(Feature::INPUT)
 			&& !input_occupied(input_attr_GUID))
 		{
 			return optional<shared_ptr<Connector>> { make_shared<Connector>(output_attr_GUID, input_attr_GUID) };
@@ -112,9 +132,13 @@ namespace visual_scripting {
 		Guid input_attr_GUID = input_attr->get_GUID();
 		// Check if connector uuid doesn't exist
 		// Check equal data type
+		// Check if output attribute has feature OUTPUT
+		// Check if input attribute has feature INPUT
 		// Check if input is already occupied
 		if (!connector_exists(connector_GUID)
 			&& output_attr->type == input_attr->type
+			&& output_attr->get_relation_attribute_type()->get_attribute_features().test(Feature::OUTPUT)
+			&& input_attr->get_entity_attribute_type()->get_attribute_features().test(Feature::INPUT)
 			&& !input_occupied(input_attr_GUID))
 		{
 			return optional<shared_ptr<Connector>> { make_shared<Connector>(connector_GUID, output_attr_GUID, input_attr_GUID) };
@@ -128,9 +152,13 @@ namespace visual_scripting {
 		Guid input_attr_GUID = input_attr->get_GUID();
 		// Check non-equal uuid
 		// Check equal data type
+		// Check if output attribute has feature OUTPUT
+		// Check if input attribute has feature INPUT
 		// Check if input is already occupied
 		if (output_attr_GUID != input_attr_GUID
 			&& output_attr->type == input_attr->type
+			&& output_attr->get_relation_attribute_type()->get_attribute_features().test(Feature::OUTPUT)
+			&& input_attr->get_relation_attribute_type()->get_attribute_features().test(Feature::INPUT)
 			&& !input_occupied(input_attr_GUID))
 		{
 			return optional<shared_ptr<Connector>> { make_shared<Connector>(output_attr_GUID, input_attr_GUID) };
@@ -145,10 +173,14 @@ namespace visual_scripting {
 		// Check if connector uuid doesn't exist
 		// Check non-equal uuid
 		// Check equal data type
+		// Check if output attribute has feature OUTPUT
+		// Check if input attribute has feature INPUT
 		// Check if input is already occupied
 		if (!connector_exists(connector_GUID)
 			&& output_attr_GUID != input_attr_GUID
 			&& output_attr->type == input_attr->type
+			&& output_attr->get_relation_attribute_type()->get_attribute_features().test(Feature::OUTPUT)
+			&& input_attr->get_relation_attribute_type()->get_attribute_features().test(Feature::INPUT)
 			&& !input_occupied(input_attr_GUID))
 		{
 			return optional<shared_ptr<Connector>> { make_shared<Connector>(connector_GUID, output_attr_GUID, input_attr_GUID) };
