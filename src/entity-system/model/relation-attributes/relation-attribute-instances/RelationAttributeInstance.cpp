@@ -8,10 +8,11 @@ namespace inexor {
 namespace entity_system {
 
 
-    RelationAttributeInstance::RelationAttributeInstance(const REL_ATTR_TYPE& param_rel_attr_type)
-        : InstanceBase(param_rel_attr_type)
+    RelationAttributeInstance::RelationAttributeInstance(const REL_ATTR_TYPE& rel_attr_type)
+        : InstanceBase<RelationAttributeType>(rel_attr_type)
     {
         // TODO: Implement!
+		this->type = rel_attr_type->get_attribute_data_type();
     }
     
     

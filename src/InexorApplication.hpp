@@ -26,9 +26,8 @@
 #include "entity-system-example/ColorManager.hpp"
 
 #include "type-system/managers/TypeSystemManager.hpp"
-
 #include "configuration/managers/ConfigurationManager.hpp"
-
+#include "visual-scripting/VisualScriptingSystem.hpp"
 #include "logging/managers/LogManager.hpp"
 
 
@@ -53,6 +52,7 @@ namespace inexor {
 				std::shared_ptr<inexor::configuration::ConfigurationManager> configuration_manager,
 				std::shared_ptr<inexor::entity_system::RestServer> rest_server,
 				std::shared_ptr<inexor::entity_system::EntitySystemDebugger> entity_system_debugger,
+				std::shared_ptr<inexor::visual_scripting::VisualScriptingSystem> visual_scripting_system,
 				std::shared_ptr<inexor::logging::LogManager> log_manager
 			);
 
@@ -101,6 +101,9 @@ namespace inexor {
 
             /// The debugger of the entity system
 			std::shared_ptr<inexor::entity_system::EntitySystemDebugger> entity_system_debugger;
+
+			/// The visual scripting system
+			std::shared_ptr<inexor::visual_scripting::VisualScriptingSystem> visual_scripting_system;
 
             /// Management of the loggers
 			std::shared_ptr<inexor::logging::LogManager> log_manager;

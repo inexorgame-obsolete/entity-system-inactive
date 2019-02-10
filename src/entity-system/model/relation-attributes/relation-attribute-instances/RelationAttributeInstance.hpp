@@ -15,14 +15,14 @@ namespace entity_system {
 
 
 	/// A base class for relation attribute type instances
-        class RelationAttributeInstance : public InstanceBase<RelationAttributeType>, public GUIDBase
+	class RelationAttributeInstance : public InstanceBase<RelationAttributeType>, public DataContainer, public GUIDBase
 	{
 		public:
 
 			/// Constructor.
 			/// @param rel_attr_type A const reference to a shared pointer of
 			/// an relation attribute type of which an instance will be created.
-			/// @note the GUID of the new relation attribute type instance will
+			/// @note the GUID of the new relation attribute instance will
 			/// be created automatically by the inheritance of GUIDBase!
 			RelationAttributeInstance(const REL_ATTR_TYPE&);
 
@@ -32,6 +32,8 @@ namespace entity_system {
             /// @brief Get the relation attribute type.
             /// @return The type of the attribute.
 			REL_ATTR_TYPE get_relation_attribute_type() const;
+
+			// Note: Set and get methods are already implemented by inheriting from DataContainer.
 
 	};
 

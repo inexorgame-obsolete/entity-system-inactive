@@ -22,7 +22,7 @@ namespace entity_system {
 			/// Constructor.
 			/// @param ent_attr_type A reference to a shared pointer of
 			/// an entity attribute type of which an instance will be created.
-			/// @note the GUID of the new entity attribute type instance will
+			/// @note the GUID of the new entity attribute instance will
 			/// be created automatically by the inheritance of GUIDBase!
 			EntityAttributeInstance(const ENT_ATTR_TYPE&);
 

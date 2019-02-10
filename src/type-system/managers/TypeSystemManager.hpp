@@ -6,6 +6,7 @@
 #include "constants/ConstantsTypeSystemManager.hpp"
 #include "converters/ConvertersTypeSystemManager.hpp"
 #include "stores/StoresTypeSystemManager.hpp"
+#include "arithmetic/ArithmeticTypeSystemManager.hpp"
 
 using namespace inexor::entity_system;
 using namespace std;
@@ -24,7 +25,8 @@ namespace type_system {
 			TypeSystemManager(
 				shared_ptr<ConstantsTypeSystemManager> constants_type_system_manager,
 				shared_ptr<StoresTypeSystemManager> stores_type_system_manager,
-				shared_ptr<ConvertersTypeSystemManager> converters_type_system_manager
+				shared_ptr<ConvertersTypeSystemManager> converters_type_system_manager,
+				shared_ptr<ArithmeticTypeSystemManager> arithmetic_type_system_manager
 			);
 
 			/// Destructor.
@@ -43,6 +45,9 @@ namespace type_system {
 
 			/// The type system manager for converters.
 			shared_ptr<ConvertersTypeSystemManager> converters_type_system_manager;
+
+			/// The type system manager for arithmetic operations.
+			shared_ptr<ArithmeticTypeSystemManager> arithmetic_type_system_manager;
 
 	};
 

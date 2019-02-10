@@ -6,6 +6,8 @@
 
 namespace inexor {
 namespace entity_system {
+
+
 	EntityAttributeInstance::EntityAttributeInstance(const ENT_ATTR_TYPE& ent_attr_type)
         : InstanceBase<EntityAttributeType>(ent_attr_type)
 	{

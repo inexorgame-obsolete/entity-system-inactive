@@ -17,6 +17,7 @@ namespace inexor {
 		std::shared_ptr<inexor::configuration::ConfigurationManager> configuration_manager,
 		std::shared_ptr<inexor::entity_system::RestServer> rest_server,
 		std::shared_ptr<inexor::entity_system::EntitySystemDebugger> entity_system_debugger,
+		std::shared_ptr<inexor::visual_scripting::VisualScriptingSystem> visual_scripting_system,
 		std::shared_ptr<inexor::logging::LogManager> log_manager
 	)
 	{
@@ -25,6 +26,7 @@ namespace inexor {
 		this->configuration_manager = configuration_manager;
 		this->rest_server = rest_server;
 		this->entity_system_debugger = entity_system_debugger;
+		this->visual_scripting_system = visual_scripting_system;
 		this->log_manager = log_manager;
 		this->running = false;
 	}
@@ -59,6 +61,9 @@ namespace inexor {
 
 		// Type system initialization
 		type_system_manager->init();
+
+		// Initialize the visual scripting
+		visual_scripting_system->init();
 
 		// Configuration manager initialization
 		configuration_manager->init();
