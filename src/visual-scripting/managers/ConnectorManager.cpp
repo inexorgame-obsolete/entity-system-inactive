@@ -28,7 +28,10 @@ namespace visual_scripting {
 	{
 	}
 
-	optional<shared_ptr<Connector>> ConnectorManager::create_connector(const ENT_ATTR_INST& output_attr, const ENT_ATTR_INST& input_attr)
+	optional<shared_ptr<Connector>> ConnectorManager::create_connector(
+		const std::shared_ptr<class inexor::entity_system::EntityAttributeInstance>& output_attr,
+		const std::shared_ptr<class inexor::entity_system::EntityAttributeInstance>& input_attr
+	)
 	{
 		Guid output_attr_GUID = output_attr->get_GUID();
 		Guid input_attr_GUID = input_attr->get_GUID();
@@ -43,12 +46,19 @@ namespace visual_scripting {
 			&& input_attr->get_entity_attribute_type()->get_attribute_features().test(Feature::INPUT)
 			&& !input_occupied(input_attr_GUID))
 		{
-			return optional<shared_ptr<Connector>> { make_shared<Connector>(output_attr_GUID, input_attr_GUID) };
+//			DataValue output_value = output_attr->value;
+//			DataValue input_value = input_attr->value;
+			return optional<shared_ptr<Connector>> { make_shared<Connector>(output_attr, input_attr) };
+			// return optional<shared_ptr<Connector>> { make_shared<Connector>(output_attr_GUID, input_attr_GUID) };
 		}
 		return nullopt;
 	}
 
-	optional<shared_ptr<Connector>> ConnectorManager::create_connector(const Guid& connector_GUID, const ENT_ATTR_INST& output_attr, const ENT_ATTR_INST& input_attr)
+	optional<shared_ptr<Connector>> ConnectorManager::create_connector(
+		const Guid& connector_GUID,
+		const std::shared_ptr<class inexor::entity_system::EntityAttributeInstance>& output_attr,
+		const std::shared_ptr<class inexor::entity_system::EntityAttributeInstance>& input_attr
+	)
 	{
 		Guid output_attr_GUID = output_attr->get_GUID();
 		Guid input_attr_GUID = input_attr->get_GUID();
@@ -65,128 +75,129 @@ namespace visual_scripting {
 			&& input_attr->get_entity_attribute_type()->get_attribute_features().test(Feature::INPUT)
 			&& !input_occupied(input_attr_GUID))
 		{
-			return optional<shared_ptr<Connector>> { make_shared<Connector>(connector_GUID, output_attr_GUID, input_attr_GUID) };
+			return optional<shared_ptr<Connector>> { make_shared<Connector>(connector_GUID, output_attr, input_attr) };
+//			return optional<shared_ptr<Connector>> { make_shared<Connector>(connector_GUID, output_attr_GUID, input_attr_GUID) };
 		}
 		return nullopt;
 	}
 
-	optional<shared_ptr<Connector>> ConnectorManager::create_connector(const ENT_ATTR_INST& output_attr, const REL_ATTR_INST& input_attr)
-	{
-		Guid output_attr_GUID = output_attr->get_GUID();
-		Guid input_attr_GUID = input_attr->get_GUID();
-		// Check equal data type
-		// Check if output attribute has feature OUTPUT
-		// Check if input attribute has feature INPUT
-		// Check if input is already occupied
-		if (output_attr->type == input_attr->type
-			&& output_attr->get_entity_attribute_type()->get_attribute_features().test(Feature::OUTPUT)
-			&& input_attr->get_relation_attribute_type()->get_attribute_features().test(Feature::INPUT)
-			&& !input_occupied(input_attr_GUID))
-		{
-			return optional<shared_ptr<Connector>> { make_shared<Connector>(output_attr_GUID, input_attr_GUID) };
-		}
-		return nullopt;
-	}
-
-	optional<shared_ptr<Connector>> ConnectorManager::create_connector(const Guid& connector_GUID, const ENT_ATTR_INST& output_attr, const REL_ATTR_INST& input_attr)
-	{
-		Guid output_attr_GUID = output_attr->get_GUID();
-		Guid input_attr_GUID = input_attr->get_GUID();
-		// Check if connector uuid doesn't exist
-		// Check equal data type
-		// Check if output attribute has feature OUTPUT
-		// Check if input attribute has feature INPUT
-		// Check if input is already occupied
-		if (!connector_exists(connector_GUID)
-			&& output_attr->type == input_attr->type
-			&& output_attr->get_entity_attribute_type()->get_attribute_features().test(Feature::OUTPUT)
-			&& input_attr->get_relation_attribute_type()->get_attribute_features().test(Feature::INPUT)
-			&& !input_occupied(input_attr_GUID))
-		{
-			return optional<shared_ptr<Connector>> { make_shared<Connector>(connector_GUID, output_attr_GUID, input_attr_GUID) };
-		}
-		return nullopt;
-	}
-
-	optional<shared_ptr<Connector>> ConnectorManager::create_connector(const REL_ATTR_INST& output_attr, const ENT_ATTR_INST& input_attr)
-	{
-		Guid output_attr_GUID = output_attr->get_GUID();
-		Guid input_attr_GUID = input_attr->get_GUID();
-		// Check equal data type
-		// Check if output attribute has feature OUTPUT
-		// Check if input attribute has feature INPUT
-		// Check if input is already occupied
-		if (output_attr->type == input_attr->type
-			&& output_attr->get_relation_attribute_type()->get_attribute_features().test(Feature::OUTPUT)
-			&& input_attr->get_entity_attribute_type()->get_attribute_features().test(Feature::INPUT)
-			&& !input_occupied(input_attr_GUID))
-		{
-			return optional<shared_ptr<Connector>> { make_shared<Connector>(output_attr_GUID, input_attr_GUID) };
-		}
-		return nullopt;
-	}
-
-	optional<shared_ptr<Connector>> ConnectorManager::create_connector(const Guid& connector_GUID, const REL_ATTR_INST& output_attr, const ENT_ATTR_INST& input_attr)
-	{
-		Guid output_attr_GUID = output_attr->get_GUID();
-		Guid input_attr_GUID = input_attr->get_GUID();
-		// Check if connector uuid doesn't exist
-		// Check equal data type
-		// Check if output attribute has feature OUTPUT
-		// Check if input attribute has feature INPUT
-		// Check if input is already occupied
-		if (!connector_exists(connector_GUID)
-			&& output_attr->type == input_attr->type
-			&& output_attr->get_relation_attribute_type()->get_attribute_features().test(Feature::OUTPUT)
-			&& input_attr->get_entity_attribute_type()->get_attribute_features().test(Feature::INPUT)
-			&& !input_occupied(input_attr_GUID))
-		{
-			return optional<shared_ptr<Connector>> { make_shared<Connector>(connector_GUID, output_attr_GUID, input_attr_GUID) };
-		}
-		return nullopt;
-	}
-
-	optional<shared_ptr<Connector>> ConnectorManager::create_connector(const REL_ATTR_INST& output_attr, const REL_ATTR_INST& input_attr)
-	{
-		Guid output_attr_GUID = output_attr->get_GUID();
-		Guid input_attr_GUID = input_attr->get_GUID();
-		// Check non-equal uuid
-		// Check equal data type
-		// Check if output attribute has feature OUTPUT
-		// Check if input attribute has feature INPUT
-		// Check if input is already occupied
-		if (output_attr_GUID != input_attr_GUID
-			&& output_attr->type == input_attr->type
-			&& output_attr->get_relation_attribute_type()->get_attribute_features().test(Feature::OUTPUT)
-			&& input_attr->get_relation_attribute_type()->get_attribute_features().test(Feature::INPUT)
-			&& !input_occupied(input_attr_GUID))
-		{
-			return optional<shared_ptr<Connector>> { make_shared<Connector>(output_attr_GUID, input_attr_GUID) };
-		}
-		return nullopt;
-	}
-
-	optional<shared_ptr<Connector>> ConnectorManager::create_connector(const Guid& connector_GUID, const REL_ATTR_INST& output_attr, const REL_ATTR_INST& input_attr)
-	{
-		Guid output_attr_GUID = output_attr->get_GUID();
-		Guid input_attr_GUID = input_attr->get_GUID();
-		// Check if connector uuid doesn't exist
-		// Check non-equal uuid
-		// Check equal data type
-		// Check if output attribute has feature OUTPUT
-		// Check if input attribute has feature INPUT
-		// Check if input is already occupied
-		if (!connector_exists(connector_GUID)
-			&& output_attr_GUID != input_attr_GUID
-			&& output_attr->type == input_attr->type
-			&& output_attr->get_relation_attribute_type()->get_attribute_features().test(Feature::OUTPUT)
-			&& input_attr->get_relation_attribute_type()->get_attribute_features().test(Feature::INPUT)
-			&& !input_occupied(input_attr_GUID))
-		{
-			return optional<shared_ptr<Connector>> { make_shared<Connector>(connector_GUID, output_attr_GUID, input_attr_GUID) };
-		}
-		return nullopt;
-	}
+//	optional<shared_ptr<Connector>> ConnectorManager::create_connector(const ENT_ATTR_INST& output_attr, const REL_ATTR_INST& input_attr)
+//	{
+//		Guid output_attr_GUID = output_attr->get_GUID();
+//		Guid input_attr_GUID = input_attr->get_GUID();
+//		// Check equal data type
+//		// Check if output attribute has feature OUTPUT
+//		// Check if input attribute has feature INPUT
+//		// Check if input is already occupied
+//		if (output_attr->type == input_attr->type
+//			&& output_attr->get_entity_attribute_type()->get_attribute_features().test(Feature::OUTPUT)
+//			&& input_attr->get_relation_attribute_type()->get_attribute_features().test(Feature::INPUT)
+//			&& !input_occupied(input_attr_GUID))
+//		{
+//			return optional<shared_ptr<Connector>> { make_shared<Connector>(output_attr_GUID, input_attr_GUID) };
+//		}
+//		return nullopt;
+//	}
+//
+//	optional<shared_ptr<Connector>> ConnectorManager::create_connector(const Guid& connector_GUID, const ENT_ATTR_INST& output_attr, const REL_ATTR_INST& input_attr)
+//	{
+//		Guid output_attr_GUID = output_attr->get_GUID();
+//		Guid input_attr_GUID = input_attr->get_GUID();
+//		// Check if connector uuid doesn't exist
+//		// Check equal data type
+//		// Check if output attribute has feature OUTPUT
+//		// Check if input attribute has feature INPUT
+//		// Check if input is already occupied
+//		if (!connector_exists(connector_GUID)
+//			&& output_attr->type == input_attr->type
+//			&& output_attr->get_entity_attribute_type()->get_attribute_features().test(Feature::OUTPUT)
+//			&& input_attr->get_relation_attribute_type()->get_attribute_features().test(Feature::INPUT)
+//			&& !input_occupied(input_attr_GUID))
+//		{
+//			return optional<shared_ptr<Connector>> { make_shared<Connector>(connector_GUID, output_attr_GUID, input_attr_GUID) };
+//		}
+//		return nullopt;
+//	}
+//
+//	optional<shared_ptr<Connector>> ConnectorManager::create_connector(const REL_ATTR_INST& output_attr, const ENT_ATTR_INST& input_attr)
+//	{
+//		Guid output_attr_GUID = output_attr->get_GUID();
+//		Guid input_attr_GUID = input_attr->get_GUID();
+//		// Check equal data type
+//		// Check if output attribute has feature OUTPUT
+//		// Check if input attribute has feature INPUT
+//		// Check if input is already occupied
+//		if (output_attr->type == input_attr->type
+//			&& output_attr->get_relation_attribute_type()->get_attribute_features().test(Feature::OUTPUT)
+//			&& input_attr->get_entity_attribute_type()->get_attribute_features().test(Feature::INPUT)
+//			&& !input_occupied(input_attr_GUID))
+//		{
+//			return optional<shared_ptr<Connector>> { make_shared<Connector>(output_attr_GUID, input_attr_GUID) };
+//		}
+//		return nullopt;
+//	}
+//
+//	optional<shared_ptr<Connector>> ConnectorManager::create_connector(const Guid& connector_GUID, const REL_ATTR_INST& output_attr, const ENT_ATTR_INST& input_attr)
+//	{
+//		Guid output_attr_GUID = output_attr->get_GUID();
+//		Guid input_attr_GUID = input_attr->get_GUID();
+//		// Check if connector uuid doesn't exist
+//		// Check equal data type
+//		// Check if output attribute has feature OUTPUT
+//		// Check if input attribute has feature INPUT
+//		// Check if input is already occupied
+//		if (!connector_exists(connector_GUID)
+//			&& output_attr->type == input_attr->type
+//			&& output_attr->get_relation_attribute_type()->get_attribute_features().test(Feature::OUTPUT)
+//			&& input_attr->get_entity_attribute_type()->get_attribute_features().test(Feature::INPUT)
+//			&& !input_occupied(input_attr_GUID))
+//		{
+//			return optional<shared_ptr<Connector>> { make_shared<Connector>(connector_GUID, output_attr_GUID, input_attr_GUID) };
+//		}
+//		return nullopt;
+//	}
+//
+//	optional<shared_ptr<Connector>> ConnectorManager::create_connector(const REL_ATTR_INST& output_attr, const REL_ATTR_INST& input_attr)
+//	{
+//		Guid output_attr_GUID = output_attr->get_GUID();
+//		Guid input_attr_GUID = input_attr->get_GUID();
+//		// Check non-equal uuid
+//		// Check equal data type
+//		// Check if output attribute has feature OUTPUT
+//		// Check if input attribute has feature INPUT
+//		// Check if input is already occupied
+//		if (output_attr_GUID != input_attr_GUID
+//			&& output_attr->type == input_attr->type
+//			&& output_attr->get_relation_attribute_type()->get_attribute_features().test(Feature::OUTPUT)
+//			&& input_attr->get_relation_attribute_type()->get_attribute_features().test(Feature::INPUT)
+//			&& !input_occupied(input_attr_GUID))
+//		{
+//			return optional<shared_ptr<Connector>> { make_shared<Connector>(output_attr_GUID, input_attr_GUID) };
+//		}
+//		return nullopt;
+//	}
+//
+//	optional<shared_ptr<Connector>> ConnectorManager::create_connector(const Guid& connector_GUID, const REL_ATTR_INST& output_attr, const REL_ATTR_INST& input_attr)
+//	{
+//		Guid output_attr_GUID = output_attr->get_GUID();
+//		Guid input_attr_GUID = input_attr->get_GUID();
+//		// Check if connector uuid doesn't exist
+//		// Check non-equal uuid
+//		// Check equal data type
+//		// Check if output attribute has feature OUTPUT
+//		// Check if input attribute has feature INPUT
+//		// Check if input is already occupied
+//		if (!connector_exists(connector_GUID)
+//			&& output_attr_GUID != input_attr_GUID
+//			&& output_attr->type == input_attr->type
+//			&& output_attr->get_relation_attribute_type()->get_attribute_features().test(Feature::OUTPUT)
+//			&& input_attr->get_relation_attribute_type()->get_attribute_features().test(Feature::INPUT)
+//			&& !input_occupied(input_attr_GUID))
+//		{
+//			return optional<shared_ptr<Connector>> { make_shared<Connector>(connector_GUID, output_attr_GUID, input_attr_GUID) };
+//		}
+//		return nullopt;
+//	}
 
 	void ConnectorManager::delete_connector_by_input(const ENT_ATTR_INST& input_attr)
 	{

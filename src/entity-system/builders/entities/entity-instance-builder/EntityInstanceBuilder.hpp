@@ -42,7 +42,7 @@ namespace entity_system {
 			shared_ptr<EntityInstanceBuilder> uuid(const string& entity_type_uuid);
 
 			/// Sets the value of the attribute.
-			shared_ptr<EntityInstanceBuilder> attribute(const string& attribute_name, const DataContainer& value);
+			shared_ptr<EntityInstanceBuilder> attribute(const string& attribute_name, const DataContainerInitializer& value);
 
 			shared_ptr<EntityInstanceBuilder> attribute(const string& attribute_name, const bool& value);
 
@@ -77,7 +77,7 @@ namespace entity_system {
 			string entity_instance_uuid;
 
 			/// The attribute definitions.
-			unordered_map<string, DataContainer> entity_instance_attributes;
+			unordered_map<string, DataContainerInitializer> entity_instance_attributes;
 
 	};
 

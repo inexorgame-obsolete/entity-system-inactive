@@ -55,9 +55,9 @@ namespace entity_system {
 		return shared_from_this();
 	}
 
-	shared_ptr<RelationInstanceBuilder> RelationInstanceBuilder::attribute(const string& attribute_name, const DataContainer& value)
+	shared_ptr<RelationInstanceBuilder> RelationInstanceBuilder::attribute(const string& attribute_name, const DataContainerInitializer& initializer)
 	{
-		relation_instance_attributes[attribute_name] = value;
+		relation_instance_attributes[attribute_name] = {initializer.type, initializer.value };
 		return shared_from_this();
 	}
 
@@ -119,19 +119,19 @@ namespace entity_system {
 			// TODO: set attribute values
 			for (auto& attr_entry : relation_instance_attributes) {
 				string attr_name = attr_entry.first;
-				DataContainer attr_value = attr_entry.second;
+				DataContainerInitializer attr_value = attr_entry.second;
 //				O_REL_ATTR_INST o_attr_inst = relation_instance->get_attribute_instance(attr_entry.first);
 //				if (o_attr_inst.has_value()) {
 //					REL_ATTR_INST attr_inst = o_attr_inst.value();
 //					if (attr_inst->type == attr_value.type) {
-//						attr_inst->value = attr_value.value;
+//						attr_inst->value.Set(attr_value.value.Value());
 //						switch (attr_inst->type)
 //						{
 //							case DataType::INT:
-//								spdlog::debug("Set attribute {} = {}", attr_name, std::get<DataType::INT>(attr_inst->value));
+//								spdlog::debug("Set attribute {} = {}", attr_name, std::get<DataType::INT>(attr_inst->value.Value()));
 //								break;
 //							case DataType::STRING:
-//								spdlog::debug("Set attribute {} = {}", attr_name, std::get<DataType::STRING>(attr_inst->value));
+//								spdlog::debug("Set attribute {} = {}", attr_name, std::get<DataType::STRING>(attr_inst->value.Value()));
 //								break;
 //							default:
 //								break;

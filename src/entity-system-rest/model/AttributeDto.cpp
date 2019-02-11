@@ -28,9 +28,9 @@ namespace entity_system {
 namespace rest {
 namespace model {
 
-	AttributeDto::AttributeDto()
-	{
-	}
+//	AttributeDto::AttributeDto()
+//	{
+//	}
 
 	AttributeDto::AttributeDto(const DataType& type, const DataValue& value, const EnumSet<Feature>& features)
 		: DataContainer(type, value),
@@ -71,28 +71,28 @@ namespace model {
 		switch (type)
 		{
 			case DataType::BOOL:
-				pt.put("value", std::get<DataType::BOOL>(value));
+				pt.put("value", std::get<DataType::BOOL>(value.Value()));
 				break;
 			case DataType::INT:
-				pt.put("value", std::get<DataType::INT>(value));
+				pt.put("value", std::get<DataType::INT>(value.Value()));
 				break;
 			case DataType::BIG_INT:
-				pt.put("value", std::get<DataType::BIG_INT>(value));
+				pt.put("value", std::get<DataType::BIG_INT>(value.Value()));
 				break;
 			case DataType::DOUBLE:
-				pt.put("value", std::get<DataType::DOUBLE>(value));
+				pt.put("value", std::get<DataType::DOUBLE>(value.Value()));
 				break;
 			case DataType::FLOAT:
-				pt.put("value", std::get<DataType::FLOAT>(value));
+				pt.put("value", std::get<DataType::FLOAT>(value.Value()));
 				break;
 			case DataType::STRING:
-				pt.put("value", std::get<DataType::STRING>(value));
+				pt.put("value", std::get<DataType::STRING>(value.Value()));
 				break;
 //			case DataType::VEC3:
-//				pt.put("value", std::get<DataType::VEC3>(value));
+//				pt.put("value", std::get<DataType::VEC3>(value.Value());
 //				break;
 //			case DataType::VEC4:
-//				pt.put("value", std::get<DataType::VEC4>(value));
+//				pt.put("value", std::get<DataType::VEC4>(value.Value());
 //				break;
 			default:
 				pt.put("value", 0);
@@ -116,37 +116,37 @@ namespace model {
 			case DataType::BOOL:
 			{
 				bool bool_value = pt.get("value", false);
-				value = bool_value;
+				value.Set(bool_value);
 				break;
 			}
 			case DataType::INT:
 			{
 				int int_value = pt.get("value", 0);
-				value = int_value;
+				value.Set(int_value);
 				break;
 			}
 			case DataType::BIG_INT:
 			{
 				std::int64_t big_int_value = pt.get("value", 0);
-				value = big_int_value;
+				value.Set(big_int_value);
 				break;
 			}
 			case DataType::DOUBLE:
 			{
 				double double_value = pt.get("value", 0.0);
-				value = double_value;
+				value.Set(double_value);
 				break;
 			}
 			case DataType::FLOAT:
 			{
 				double float_value = pt.get("value", 0.0f);
-				value = float_value;
+				value.Set(float_value);
 				break;
 			}
 			case DataType::STRING:
 			{
 				std::string string_value = pt.get("value", "");
-				value = string_value;
+				value.Set(string_value);
 				break;
 			}
 //			case DataType::VEC3:
@@ -190,12 +190,12 @@ namespace model {
 
 	DataValue AttributeDto::get_value() const
 	{
-		return value;
+		return value.Value();
 	}
 
 	void AttributeDto::set_value(const DataValue& value)
 	{
-		this->value = value;
+		this->value.Set(value);
 	}
 
 	EnumSet<Feature> AttributeDto::get_features() const

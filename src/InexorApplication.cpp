@@ -62,11 +62,11 @@ namespace inexor {
 		// Type system initialization
 		type_system_manager->init();
 
-		// Initialize the visual scripting
-		visual_scripting_system->init();
-
 		// Configuration manager initialization
 		configuration_manager->init();
+
+		// Initialize the visual scripting
+		visual_scripting_system->init();
 
 	}
 

@@ -5,6 +5,10 @@
 
 #include <crossguid/guid.hpp>
 
+#include "react/Domain.h"
+#include "react/Signal.h"
+#include "react/Event.h"
+
 #include "entity-system/managers/entities/entity-instance-manager/EntityInstanceManager.hpp"
 #include "entity-system/managers/relations/relation-instance-manager/RelationInstanceManager.hpp"
 #include "entity-system/model/data/DataTypes.hpp"
@@ -51,50 +55,50 @@ namespace visual_scripting {
 			///                    attribute instance which is the input attribute.
 			optional<shared_ptr<Connector>> create_connector(const Guid& connector_GUID, const ENT_ATTR_INST& output_attr, const ENT_ATTR_INST& input_attr);
 
-			/// @brief Creates a connector from an entity attribute instance to a relation attribute instance.
-			/// @param output_attr A const reference to the shared pointer of the entity
-			///                    attribute instance which is the output attribute.
-			/// @param input_attr  A const reference to the shared pointer of the relation
-			///                    attribute instance which is the input attribute.
-			optional<shared_ptr<Connector>> create_connector(const ENT_ATTR_INST& output_attr, const REL_ATTR_INST& input_attr);
-
-			/// @brief Creates a connector from an entity attribute instance to a relation attribute instance.
-			/// @param connector_GUID The GUID of the newly created connector.
-			/// @param output_attr A const reference to the shared pointer of the entity
-			///                    attribute instance which is the output attribute.
-			/// @param input_attr  A const reference to the shared pointer of the relation
-			///                    attribute instance which is the input attribute.
-			optional<shared_ptr<Connector>> create_connector(const Guid& connector_GUID, const ENT_ATTR_INST& output_attr, const REL_ATTR_INST& input_attr);
-
-			/// @brief Creates a connector from a relation attribute instance to a entity attribute instance.
-			/// @param output_attr A const reference to the shared pointer of the relation
-			///                    attribute instance which is the output attribute.
-			/// @param input_attr  A const reference to the shared pointer of the entity
-			///                    attribute instance which is the input attribute.
-			optional<shared_ptr<Connector>> create_connector(const REL_ATTR_INST& output_attr, const ENT_ATTR_INST& input_attr);
-
-			/// @brief Creates a connector from a relation attribute instance to a entity attribute instance.
-			/// @param connector_GUID The GUID of the newly created connector.
-			/// @param output_attr A const reference to the shared pointer of the relation
-			///                    attribute instance which is the output attribute.
-			/// @param input_attr  A const reference to the shared pointer of the entity
-			///                    attribute instance which is the input attribute.
-			optional<shared_ptr<Connector>> create_connector(const Guid& connector_GUID, const REL_ATTR_INST& output_attr, const ENT_ATTR_INST& input_attr);
-
-			/// @brief Creates a connector from a relation attribute instance to another.
-			/// @param output_attr A const reference to the shared pointer of the relation
-			///                    attribute instance which is the output attribute.
-			/// @param input_attr  A const reference to the shared pointer of the relation
-			///                    attribute instance which is the input attribute.
-			optional<shared_ptr<Connector>> create_connector(const REL_ATTR_INST& output_attr, const REL_ATTR_INST& input_attr);
-
-			/// @brief Creates a connector from a relation attribute instance to another.
-			/// @param connector_GUID The GUID of the newly created connector.
-			/// @param output_attr A const reference to the shared pointer of the relation
-			///                    attribute instance which is the output attribute.
-			/// @param input_attr  A const reference to the shared pointer of the relation
-			///                    attribute instance which is the input attribute.
-			optional<shared_ptr<Connector>> create_connector(const Guid& connector_GUID, const REL_ATTR_INST& output_attr, const REL_ATTR_INST& input_attr);
+//			/// @brief Creates a connector from an entity attribute instance to a relation attribute instance.
+//			/// @param output_attr A const reference to the shared pointer of the entity
+//			///                    attribute instance which is the output attribute.
+//			/// @param input_attr  A const reference to the shared pointer of the relation
+//			///                    attribute instance which is the input attribute.
+//			optional<shared_ptr<Connector>> create_connector(const ENT_ATTR_INST& output_attr, const REL_ATTR_INST& input_attr);
+//
+//			/// @brief Creates a connector from an entity attribute instance to a relation attribute instance.
+//			/// @param connector_GUID The GUID of the newly created connector.
+//			/// @param output_attr A const reference to the shared pointer of the entity
+//			///                    attribute instance which is the output attribute.
+//			/// @param input_attr  A const reference to the shared pointer of the relation
+//			///                    attribute instance which is the input attribute.
+//			optional<shared_ptr<Connector>> create_connector(const Guid& connector_GUID, const ENT_ATTR_INST& output_attr, const REL_ATTR_INST& input_attr);
+//
+//			/// @brief Creates a connector from a relation attribute instance to a entity attribute instance.
+//			/// @param output_attr A const reference to the shared pointer of the relation
+//			///                    attribute instance which is the output attribute.
+//			/// @param input_attr  A const reference to the shared pointer of the entity
+//			///                    attribute instance which is the input attribute.
+//			optional<shared_ptr<Connector>> create_connector(const REL_ATTR_INST& output_attr, const ENT_ATTR_INST& input_attr);
+//
+//			/// @brief Creates a connector from a relation attribute instance to a entity attribute instance.
+//			/// @param connector_GUID The GUID of the newly created connector.
+//			/// @param output_attr A const reference to the shared pointer of the relation
+//			///                    attribute instance which is the output attribute.
+//			/// @param input_attr  A const reference to the shared pointer of the entity
+//			///                    attribute instance which is the input attribute.
+//			optional<shared_ptr<Connector>> create_connector(const Guid& connector_GUID, const REL_ATTR_INST& output_attr, const ENT_ATTR_INST& input_attr);
+//
+//			/// @brief Creates a connector from a relation attribute instance to another.
+//			/// @param output_attr A const reference to the shared pointer of the relation
+//			///                    attribute instance which is the output attribute.
+//			/// @param input_attr  A const reference to the shared pointer of the relation
+//			///                    attribute instance which is the input attribute.
+//			optional<shared_ptr<Connector>> create_connector(const REL_ATTR_INST& output_attr, const REL_ATTR_INST& input_attr);
+//
+//			/// @brief Creates a connector from a relation attribute instance to another.
+//			/// @param connector_GUID The GUID of the newly created connector.
+//			/// @param output_attr A const reference to the shared pointer of the relation
+//			///                    attribute instance which is the output attribute.
+//			/// @param input_attr  A const reference to the shared pointer of the relation
+//			///                    attribute instance which is the input attribute.
+//			optional<shared_ptr<Connector>> create_connector(const Guid& connector_GUID, const REL_ATTR_INST& output_attr, const REL_ATTR_INST& input_attr);
 
 			/// @brief Deletes the connector which is connected to the given input attribute.
 			/// @param input_attr A const reference to the shared pointer of the entity

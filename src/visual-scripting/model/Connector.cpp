@@ -10,19 +10,20 @@ using namespace xg;
 namespace inexor {
 namespace visual_scripting {
 
-	Connector::Connector(const Guid& output_attribute_GUID, const Guid& input_attribute_GUID)
-		: GUIDBase()
-	{
-        this->output_attribute_GUID = output_attribute_GUID;
-        this->input_attribute_GUID = input_attribute_GUID;
-	}
-
-	Connector::Connector(const Guid& connector_GUID, const Guid& output_attribute_GUID, const Guid& input_attribute_GUID)
-    	: GUIDBase(connector_GUID)
-    {
-        this->output_attribute_GUID = output_attribute_GUID;
-        this->input_attribute_GUID = input_attribute_GUID;
-    }
+//	Connector::Connector(const Guid& output_attribute_GUID, const Guid& input_attribute_GUID, const DataValue& output_value, const DataValue& input_value)
+//		: GUIDBase()
+//	{
+//        this->output_attribute_GUID = output_attribute_GUID;
+//        this->input_attribute_GUID = input_attribute_GUID;
+//        this->output_value = MakeVar<D>
+//	}
+//
+//	Connector::Connector(const Guid& connector_GUID, const Guid& output_attribute_GUID, const Guid& input_attribute_GUID, const DataValue& output_value, const DataValue& input_value)
+//    	: GUIDBase(connector_GUID)
+//    {
+//        this->output_attribute_GUID = output_attribute_GUID;
+//        this->input_attribute_GUID = input_attribute_GUID;
+//    }
 
 	Connector::~Connector()
 	{

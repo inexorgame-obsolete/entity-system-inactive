@@ -13,8 +13,6 @@
 #include "type-system/factories/constants/FloatConstantFactory.hpp"
 #include "type-system/factories/constants/StringConstantFactory.hpp"
 
-using namespace inexor::entity_system;
-using namespace inexor::entity_system::type_system;
 using namespace std;
 
 namespace inexor {
@@ -28,10 +26,10 @@ namespace configuration {
 
 			/// Constructor.
 			ConfigurationManager(
-				shared_ptr<BoolConstantFactory> bool_constant_factory,
-				shared_ptr<IntConstantFactory> int_constant_factory,
-				shared_ptr<FloatConstantFactory> float_constant_factory,
-				shared_ptr<StringConstantFactory> string_constant_factory
+				shared_ptr<inexor::entity_system::type_system::BoolConstantFactory> bool_constant_factory,
+				shared_ptr<inexor::entity_system::type_system::IntConstantFactory> int_constant_factory,
+				shared_ptr<inexor::entity_system::type_system::FloatConstantFactory> float_constant_factory,
+				shared_ptr<inexor::entity_system::type_system::StringConstantFactory> string_constant_factory
 			);
 
 			/// Destructor.
@@ -67,16 +65,16 @@ namespace configuration {
 		private:
 
 			/// Factory for BOOL_CONSTANT
-			shared_ptr<BoolConstantFactory> bool_constant_factory;
+			shared_ptr<inexor::entity_system::type_system::BoolConstantFactory> bool_constant_factory;
 
 			/// Factory for INT_CONSTANT
-			shared_ptr<IntConstantFactory> int_constant_factory;
+			shared_ptr<inexor::entity_system::type_system::IntConstantFactory> int_constant_factory;
 
 			/// Factory for FLOAT_CONSTANT
-			shared_ptr<FloatConstantFactory> float_constant_factory;
+			shared_ptr<inexor::entity_system::type_system::FloatConstantFactory> float_constant_factory;
 
 			/// Factory for STRING_CONSTANT
-			shared_ptr<StringConstantFactory> string_constant_factory;
+			shared_ptr<inexor::entity_system::type_system::StringConstantFactory> string_constant_factory;
 
 	};
 

@@ -30,7 +30,9 @@ namespace visual_scripting {
 		if (o_augend.has_value() && o_addend.has_value() && o_sum.has_value())
 		{
 			// std::shared_ptr<class EntityAttributeInstance> sum = o_sum.value();
-			o_sum.value()->value = std::get<DataType::INT>(o_augend.value()->value) + std::get<DataType::INT>(o_addend.value()->value);
+			o_sum.value()->value.Set(
+				std::get<DataType::INT>(o_augend.value()->value.Value()) + std::get<DataType::INT>(o_addend.value()->value.Value())
+			);
 		}
 	}
 

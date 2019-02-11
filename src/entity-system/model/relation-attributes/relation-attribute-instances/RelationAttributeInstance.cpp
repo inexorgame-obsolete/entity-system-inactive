@@ -9,7 +9,8 @@ namespace entity_system {
 
 
     RelationAttributeInstance::RelationAttributeInstance(const REL_ATTR_TYPE& rel_attr_type)
-        : InstanceBase<RelationAttributeType>(rel_attr_type)
+        : InstanceBase<RelationAttributeType>(rel_attr_type),
+		  DataContainer(rel_attr_type->get_attribute_data_type())
     {
         // TODO: Implement!
 		this->type = rel_attr_type->get_attribute_data_type();

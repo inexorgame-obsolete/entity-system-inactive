@@ -31,7 +31,7 @@ namespace type_system {
 				},
 				{
 					{ "name", 1 << Feature::OUTPUT },
-					{ "value", 1 << Feature::OUTPUT }
+					{ "value", 1 << Feature::OUTPUT | 1 << Feature::INPUT }
 				}
 			) {};
 

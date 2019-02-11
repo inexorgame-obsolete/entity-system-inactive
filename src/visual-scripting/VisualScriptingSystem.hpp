@@ -5,6 +5,7 @@
 
 #include <iostream>
 
+#include "type-system/factories/constants/IntConstantFactory.hpp"
 #include "visual-scripting/managers/ConnectorManager.hpp"
 #include "visual-scripting/managers/ActiveComponentManager.hpp"
 
@@ -22,7 +23,8 @@ namespace visual_scripting {
 			/// @brief Constructor.
 			VisualScriptingSystem(
 				std::shared_ptr<inexor::visual_scripting::ConnectorManager> connector_manager,
-				std::shared_ptr<inexor::visual_scripting::ActiveComponentManager> active_component_manager
+				std::shared_ptr<inexor::visual_scripting::ActiveComponentManager> active_component_manager,
+				shared_ptr<inexor::entity_system::type_system::IntConstantFactory> int_constant_factory
 			);
 
 			/// @brief Destructor.
@@ -30,6 +32,10 @@ namespace visual_scripting {
 
 			/// Initialization.
 			void init();
+
+			/// Tests for the connectors
+			void init_connector_tests();
+			void run_connector_tests();
 
 		private:
 
@@ -39,6 +45,7 @@ namespace visual_scripting {
 			/// The active component manager.
 			std::shared_ptr<inexor::visual_scripting::ActiveComponentManager> active_component_manager;
 
+			shared_ptr<inexor::entity_system::type_system::IntConstantFactory> int_constant_factory;
 	};
 
 

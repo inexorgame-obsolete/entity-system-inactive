@@ -29,7 +29,7 @@ namespace model {
 	class AttributeDto : public DataContainer
 	{
 		public:
-			AttributeDto();
+//			AttributeDto();
 			AttributeDto(const DataType& type, const DataValue& value, const EnumSet<Feature>& features);
 			AttributeDto(const std::string& attribute_uuid, const std::string& name, const DataType& type, const DataValue& value, const EnumSet<Feature>& features);
 			virtual ~AttributeDto();

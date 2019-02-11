@@ -70,28 +70,28 @@ namespace model {
 			switch (attribute->type)
 			{
 				case DataType::BOOL:
-					pt_attribute.put("value", std::get<DataType::BOOL>(attribute->value));
+					pt_attribute.put("value", std::get<DataType::BOOL>(attribute->value.Value()));
 					break;
 				case DataType::INT:
-					pt_attribute.put("value", std::get<DataType::INT>(attribute->value));
+					pt_attribute.put("value", std::get<DataType::INT>(attribute->value.Value()));
 					break;
 				case DataType::BIG_INT:
-					pt_attribute.put("value", std::get<DataType::BIG_INT>(attribute->value));
+					pt_attribute.put("value", std::get<DataType::BIG_INT>(attribute->value.Value()));
 					break;
 				case DataType::DOUBLE:
-					pt_attribute.put("value", std::get<DataType::DOUBLE>(attribute->value));
+					pt_attribute.put("value", std::get<DataType::DOUBLE>(attribute->value.Value()));
 					break;
 				case DataType::FLOAT:
-					pt_attribute.put("value", std::get<DataType::FLOAT>(attribute->value));
+					pt_attribute.put("value", std::get<DataType::FLOAT>(attribute->value.Value()));
 					break;
 				case DataType::STRING:
-					pt_attribute.put("value", std::get<DataType::STRING>(attribute->value));
+					pt_attribute.put("value", std::get<DataType::STRING>(attribute->value.Value()));
 					break;
 //				case DataType::VEC3:
-//					pt_attribute.put("value", std::get<DataType::VEC3>(attribute->value));
+//					pt_attribute.put("value", std::get<DataType::VEC3>(attribute->value.Value()));
 //					break;
 //				case DataType::VEC4:
-//					pt_attribute.put("value", std::get<DataType::VEC4>(attribute->value));
+//					pt_attribute.put("value", std::get<DataType::VEC4>(attribute->value.Value()));
 //					break;
 				default:
 					pt_attribute.put("value", "");

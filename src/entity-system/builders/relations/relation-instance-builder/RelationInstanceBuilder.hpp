@@ -48,7 +48,7 @@ namespace entity_system {
 			shared_ptr<RelationInstanceBuilder> target(ENT_INST ent_instance_target);
 
 			/// Sets the value of the attribute.
-			shared_ptr<RelationInstanceBuilder> attribute(const string& attribute_name, const DataContainer& value);
+			shared_ptr<RelationInstanceBuilder> attribute(const string& attribute_name, const DataContainerInitializer& value);
 
 			shared_ptr<RelationInstanceBuilder> attribute(const string& attribute_name, const bool& value);
 
@@ -89,7 +89,7 @@ namespace entity_system {
 			ENT_INST ent_instance_target;
 
 			/// The attribute definitions.
-			unordered_map<string, DataContainer> relation_instance_attributes;
+			unordered_map<string, DataContainerInitializer> relation_instance_attributes;
 
 	};
 

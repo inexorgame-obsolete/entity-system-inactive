@@ -280,7 +280,7 @@ void EntityInstanceApiEntitiesInstancesEntity_instance_uuidResource::GET_method_
 					ent_attr_inst->get_GUID().str(),
 					ent_attr_type->get_type_name(),
 					ent_attr_inst->type,
-					ent_attr_inst->value,
+					ent_attr_inst->value.Value(),
 					ent_attr_type->get_attribute_features()
 				);
 //				attribute_dto->set_attribute_uuid(ent_attr_inst->get_GUID().str());

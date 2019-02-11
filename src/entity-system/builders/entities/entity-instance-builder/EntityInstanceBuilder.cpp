@@ -43,9 +43,9 @@ namespace entity_system {
 		return shared_from_this();
 	}
 
-	shared_ptr<EntityInstanceBuilder> EntityInstanceBuilder::attribute(const string& attribute_name, const DataContainer& value)
+	shared_ptr<EntityInstanceBuilder> EntityInstanceBuilder::attribute(const string& attribute_name, const DataContainerInitializer& initializer)
 	{
-		entity_instance_attributes[attribute_name] = value;
+		entity_instance_attributes[attribute_name] = {initializer.type, initializer.value };
 		return shared_from_this();
 	}
 
@@ -107,31 +107,37 @@ namespace entity_system {
 			// TODO: set attribute values
 			for (auto& attr_entry : entity_instance_attributes) {
 				string attr_name = attr_entry.first;
-				DataContainer attr_value = attr_entry.second;
+				DataContainerInitializer attr_value = attr_entry.second;
 				O_ENT_ATTR_INST o_attr_inst = entity_instance->get_attribute_instance(attr_entry.first);
 				if (o_attr_inst.has_value()) {
 					ENT_ATTR_INST attr_inst = o_attr_inst.value();
 					if (attr_inst->type == attr_value.type) {
-						attr_inst->value = attr_value.value;
+						DataValue data_value = attr_value.value;
 						switch (attr_inst->type)
 						{
 							case DataType::BOOL:
-								spdlog::debug("Set attribute {} = {}", attr_name, std::get<DataType::BOOL>(attr_inst->value));
+								attr_inst->value.Set(std::get<DataType::BOOL>(data_value));
+								spdlog::debug("Set attribute {} = {}", attr_name, std::get<DataType::BOOL>(attr_inst->value.Value()));
 								break;
 							case DataType::INT:
-								spdlog::debug("Set attribute {} = {}", attr_name, std::get<DataType::INT>(attr_inst->value));
+								attr_inst->value.Set(std::get<DataType::INT>(data_value));
+								spdlog::debug("Set attribute {} = {}", attr_name, std::get<DataType::INT>(attr_inst->value.Value()));
 								break;
 							case DataType::BIG_INT:
-								spdlog::debug("Set attribute {} = {}", attr_name, std::get<DataType::BIG_INT>(attr_inst->value));
+								attr_inst->value.Set(std::get<DataType::BIG_INT>(data_value));
+								spdlog::debug("Set attribute {} = {}", attr_name, std::get<DataType::BIG_INT>(attr_inst->value.Value()));
 								break;
 							case DataType::DOUBLE:
-								spdlog::debug("Set attribute {} = {}", attr_name, std::get<DataType::DOUBLE>(attr_inst->value));
+								attr_inst->value.Set(std::get<DataType::DOUBLE>(data_value));
+								spdlog::debug("Set attribute {} = {}", attr_name, std::get<DataType::DOUBLE>(attr_inst->value.Value()));
 								break;
 							case DataType::FLOAT:
-								spdlog::debug("Set attribute {} = {}", attr_name, std::get<DataType::FLOAT>(attr_inst->value));
+								attr_inst->value.Set(std::get<DataType::FLOAT>(data_value));
+								spdlog::debug("Set attribute {} = {}", attr_name, std::get<DataType::FLOAT>(attr_inst->value.Value()));
 								break;
 							case DataType::STRING:
-								spdlog::debug("Set attribute {} = {}", attr_name, std::get<DataType::STRING>(attr_inst->value));
+								attr_inst->value.Set(std::get<DataType::STRING>(data_value));
+								spdlog::debug("Set attribute {} = {}", attr_name, std::get<DataType::STRING>(attr_inst->value.Value()));
 								break;
 							default:
 								break;
