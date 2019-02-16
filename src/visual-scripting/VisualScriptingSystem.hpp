@@ -7,7 +7,7 @@
 
 #include "type-system/factories/constants/IntConstantFactory.hpp"
 #include "visual-scripting/managers/ConnectorManager.hpp"
-#include "visual-scripting/managers/ActiveComponentManager.hpp"
+#include "visual-scripting/managers/ProcessorManager.hpp"
 #include "visual-scripting/tests/IntConstantConnectorTest.hpp"
 
 
@@ -24,7 +24,7 @@ namespace visual_scripting {
 			/// @brief Constructor.
 			VisualScriptingSystem(
 				std::shared_ptr<inexor::visual_scripting::ConnectorManager> connector_manager,
-				std::shared_ptr<inexor::visual_scripting::ActiveComponentManager> active_component_manager,
+				std::shared_ptr<inexor::visual_scripting::ProcessorManager> processor_manager,
 				std::shared_ptr<inexor::visual_scripting::IntConstantConnectorTest> int_constant_connector_test
 			);
 
@@ -40,7 +40,7 @@ namespace visual_scripting {
 			std::shared_ptr<inexor::visual_scripting::ConnectorManager> connector_manager;
 
 			/// The active component manager.
-			std::shared_ptr<inexor::visual_scripting::ActiveComponentManager> active_component_manager;
+			std::shared_ptr<inexor::visual_scripting::ProcessorManager> processor_manager;
 
 			/// The test case for connecting INT_CONSTANTs.
 			std::shared_ptr<inexor::visual_scripting::IntConstantConnectorTest> int_constant_connector_test;

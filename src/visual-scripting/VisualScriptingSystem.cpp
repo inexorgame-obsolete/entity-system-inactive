@@ -12,12 +12,12 @@ namespace visual_scripting {
 
 	VisualScriptingSystem::VisualScriptingSystem(
 		std::shared_ptr<inexor::visual_scripting::ConnectorManager> connector_manager,
-		std::shared_ptr<inexor::visual_scripting::ActiveComponentManager> active_component_manager,
+		std::shared_ptr<inexor::visual_scripting::ProcessorManager> processor_manager,
 		std::shared_ptr<inexor::visual_scripting::IntConstantConnectorTest> int_constant_connector_test
 	)
 	{
         this->connector_manager = connector_manager;
-        this->active_component_manager = active_component_manager;
+        this->processor_manager = processor_manager;
         this->int_constant_connector_test = int_constant_connector_test;
 	}
 
@@ -29,7 +29,7 @@ namespace visual_scripting {
 	void VisualScriptingSystem::init()
 	{
 		connector_manager->init();
-		active_component_manager->init();
+		processor_manager->init();
 		int_constant_connector_test->init();
 	}
 

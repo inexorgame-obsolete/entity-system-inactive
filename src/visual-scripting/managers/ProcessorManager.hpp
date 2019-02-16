@@ -9,47 +9,50 @@
 #include "entity-system/listeners/entities/EntityInstanceDeletedListener.hpp"
 #include "entity-system/model/data/DataTypes.hpp"
 #include "entity-system/util/type-definitions/TypeDefinitions.hpp"
-#include "visual-scripting/managers/ActiveComponentRegistry.hpp"
-#include "visual-scripting/managers/ArithmeticComponentManager.hpp"
-#include "visual-scripting/model/ActiveComponent.hpp"
+#include "visual-scripting/managers/ProcessorRegistry.hpp"
+#include "visual-scripting/managers/ArithmeticProcessorManager.hpp"
+#include "visual-scripting/model/Processor.hpp"
 
 using namespace inexor::entity_system;
 
 namespace inexor {
 namespace visual_scripting {
 
-	/// @class ActiveComponentManager
-    /// @brief Management of the active components.
+
+	/// @class ProcessorManager
+    /// @brief Management of the processors.
     /// The manager listens on created or deleted entity instances.
-	class ActiveComponentManager
-		: public enable_shared_from_this<ActiveComponentManager>,
+	class ProcessorManager
+		: public enable_shared_from_this<ProcessorManager>,
 		  public EntityInstanceCreatedListener,
 		  public EntityInstanceDeletedListener
 	{
 		public:
 
 			/// Constructor.
-			ActiveComponentManager(
-				std::shared_ptr<ActiveComponentRegistry> active_component_registry,
-				std::shared_ptr<ArithmeticComponentManager> arithmetic_component_manager
+			ProcessorManager(
+				std::shared_ptr<ProcessorRegistry> processor_registry,
+				std::shared_ptr<ArithmeticProcessorManager> arithmetic_processor_manager
 			);
 
 			/// Destructor.
-			~ActiveComponentManager();
+			~ProcessorManager();
 
-			/// Initialization of the ActiveComponentManager.
+			/// Initialization of the ProcessorManager.
 			void init();
 
+			/// Initializes an processor if a processor is registered
+			/// for the entity type of the created entity instance.
 			void on_entity_instance_created(std::shared_ptr<inexor::entity_system::EntityInstance> entity_instance);
 			void on_entity_instance_deleted(const xg::Guid& type_GUID, const xg::Guid& inst_GUID);
 
 		private:
 
 			/// The registry for active components
-			std::shared_ptr<ActiveComponentRegistry> active_component_registry;
+			std::shared_ptr<ProcessorRegistry> processor_registry;
 
-			/// The active components for arithmetic operations.
-			std::shared_ptr<ArithmeticComponentManager> arithmetic_component_manager;
+			/// The manager for arithmetic processors.
+			std::shared_ptr<ArithmeticProcessorManager> arithmetic_processor_manager;
 
 	};
 

@@ -9,8 +9,8 @@
 #include "entity-system/model/entities/entity-types/EntityType.hpp"
 #include "entity-system/model/entities/entity-instances/EntityInstance.hpp"
 #include "type-system/providers/arithmetic/AddIntEntityTypeProvider.hpp"
-#include "visual-scripting/managers/ActiveComponentRegistry.hpp"
-#include "visual-scripting/model/ActiveComponent.hpp"
+#include "visual-scripting/managers/ProcessorRegistry.hpp"
+#include "visual-scripting/model/Processor.hpp"
 
 using namespace inexor::entity_system;
 using namespace inexor::entity_system::type_system;
@@ -21,7 +21,7 @@ namespace visual_scripting {
 
 
 	/// A base class for active components.
-    class AddInt : public ActiveComponent
+    class AddInt : public Processor
     {
 
 		public:

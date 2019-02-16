@@ -18,19 +18,19 @@ namespace inexor {
 namespace visual_scripting {
 
 
-	/// A base class for active components.
-    class ActiveComponent
+	/// The base class for visual scripting processors.
+    class Processor
     {
 
 		public:
 
     		/// @brief The constructor.
-			ActiveComponent() {};
+    		Processor() {};
 
 			/// @brief The destructor.
-			~ActiveComponent() {};
+			~Processor() {};
 
-			/// The execution function of the active component.
+			/// The execution function of the processor.
 			virtual void execute(const shared_ptr<inexor::entity_system::EntityInstance>& entity_instance) const = 0;
 
 			/// Returns the entity type to bind.
