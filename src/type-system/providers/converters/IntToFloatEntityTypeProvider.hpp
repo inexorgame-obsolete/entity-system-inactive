@@ -26,12 +26,12 @@ namespace type_system {
 				entity_type_builder_manager,
 				"INT_TO_FLOAT",
 				{
-					{ "input", DataType::INT },
-					{ "value", DataType::FLOAT }
+					{ "int_to_float_input", DataType::INT },
+					{ "int_to_float_value", DataType::FLOAT }
 				},
 				{
-					{ "input", 1 << Feature::INPUT },
-					{ "value", 1 << Feature::OUTPUT }
+					{ "int_to_float_input", 1 << Feature::INPUT },
+					{ "int_to_float_value", 1 << Feature::OUTPUT }
 				}
 			) {};
 

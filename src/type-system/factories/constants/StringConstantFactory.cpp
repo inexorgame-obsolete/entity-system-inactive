@@ -27,8 +27,8 @@ namespace type_system {
 	{
 		return entity_instance_builder_manager->get_builder()
 			->type(entity_type_provider->get_type())
-			->attribute("name", "")
-			->attribute("value", "")
+			->attribute("string_constant_name", "")
+			->attribute("string_constant_value", "")
 			->build();
 	}
 
@@ -36,8 +36,8 @@ namespace type_system {
 	{
 		return entity_instance_builder_manager->get_builder()
 			->type(entity_type_provider->get_type())
-			->attribute("name", name)
-			->attribute("value", value)
+			->attribute("string_constant_name", name)
+			->attribute("string_constant_value", value)
 			->build();
 	}
 

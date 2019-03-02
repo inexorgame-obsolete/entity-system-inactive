@@ -13,30 +13,28 @@ namespace inexor {
 namespace entity_system {
 namespace type_system {
 
-	/// @class FloatConstantEntityTypeProvider
-    /// @brief Provides the entity type FLOAT_CONSTANT.
-	class FloatConstantEntityTypeProvider : public EntityTypeProvider
+	/// @class SinEntityTypeProvider
+    /// @brief Provides the entity type SIN.
+	class SinEntityTypeProvider : public EntityTypeProvider
 	{
 		public:
 
 			/// Constructor.
-			FloatConstantEntityTypeProvider(
+			SinEntityTypeProvider(
 				shared_ptr<EntityTypeBuilderManager> entity_type_builder_manager
 			) : EntityTypeProvider(
 				entity_type_builder_manager,
-				"FLOAT_CONSTANT",
+				"SIN",
 				{
-					{ "float_constant_name", DataType::STRING },
-					{ "float_constant_value", DataType::FLOAT }
+					{ "sin_value", DataType::FLOAT }
 				},
 				{
-					{ "float_constant_name", 1 << Feature::OUTPUT },
-					{ "float_constant_value", 1 << Feature::OUTPUT | 1 << Feature::INPUT }
+					{ "sin_value", 1 << Feature::OUTPUT }
 				}
 			) {};
 
 			/// Destructor.
-			~FloatConstantEntityTypeProvider() {};
+			~SinEntityTypeProvider() {};
 
 	};
 

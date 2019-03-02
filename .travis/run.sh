@@ -5,9 +5,5 @@ if [ -z $DOCKER_IMAGE ]; then
     .travis/run_project_build.sh
 else
     # Run with docker
-    if [[ $DOCKER_IMAGE =~ "gcc" ]]; then
-        docker run -e CC=/usr/bin/gcc -e CXX=/usr/bin/g++ -v$(pwd):/home/conan $DOCKER_IMAGE bash -c "pip install conan --upgrade && .travis/run_project_build.sh"
-    else
-        docker run -v$(pwd):/home/conan $DOCKER_IMAGE bash -c "pip install conan --upgrade && .travis/run_project_build.sh"
-    fi
+    docker run -v$(pwd):/home/conan $DOCKER_IMAGE bash -c "pip install conan --upgrade && .travis/run_project_build.sh"
 fi

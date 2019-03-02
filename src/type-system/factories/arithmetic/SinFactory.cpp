@@ -1,7 +1,7 @@
 // Inexor entity system
 // (c)2018 Inexor
 
-#include "AddIntFactory.hpp"
+#include "SinFactory.hpp"
 
 using namespace inexor::entity_system;
 using namespace std;
@@ -10,8 +10,8 @@ namespace inexor {
 namespace entity_system {
 namespace type_system {
 
-	AddIntFactory::AddIntFactory(
-		shared_ptr<AddIntEntityTypeProvider> entity_type_provider,
+	SinFactory::SinFactory(
+		shared_ptr<SinEntityTypeProvider> entity_type_provider,
 		shared_ptr<EntityInstanceBuilderManager> entity_instance_builder_manager
 	)
 	{
@@ -19,17 +19,15 @@ namespace type_system {
 		this->entity_instance_builder_manager = entity_instance_builder_manager;
 	}
 
-	AddIntFactory::~AddIntFactory()
+	SinFactory::~SinFactory()
 	{
 	}
 
-	O_ENT_INST AddIntFactory::create_instance()
+	O_ENT_INST SinFactory::create_instance()
 	{
 		return entity_instance_builder_manager->get_builder()
 			->type(entity_type_provider->get_type())
-			->attribute("add_int_augend", 0)
-			->attribute("add_int_addend", 0)
-			->attribute("add_int_sum", 0)
+			->attribute("sin_value", 0.0f)
 			->build();
 	}
 

@@ -44,187 +44,6 @@ namespace visual_scripting {
 		std::this_thread::sleep_for(2s);
 
 
-//		std::cout << "=== Creating Unconnected Signals ===" << std::endl;
-//
-//		VarSignalT<int> predecessor = MakeVar<D>(111);
-//
-//		SignalT<int> source = MakeSignal(predecessor, [] (int v) {
-//			std::cout << "predecessor -> source: " << v << std::endl;
-//			return v;
-//		});
-//
-//
-//		VarSignalT<int> dummy_source = MakeVar<D>(222);
-//
-//		auto signal_pack_for_target = With(dummy_source);
-//		// TempSignal<D, int, int(int v)>
-//		SignalT<int> target = MakeSignal(signal_pack_for_target, [] (int v) {
-//			std::cout << "target became: " << v << std::endl;
-//			return v;
-//		});
-//
-//
-//		SignalT<int> successor = MakeSignal(target, [] (int v) {
-//			std::cout << "target -> successor: " << v << std::endl;
-//			return v;
-//		});
-//
-////
-////		std::cout << "=== Connect source with target (as replacement for dummy_source) ===" << std::endl;
-////		std::cout << "Type of signal in signal pack: " << typeid(std::get<0> (signal_pack_for_target.Data)).name() << std::endl;
-////		std::get<0> (signal_pack_for_target.Data) = SignalT<int>(source);
-//		std::cout << "=== Connect source with target (replace target's point on its predecessor) ===" << std::endl;
-//		auto &predecssor_ptr = GetNodePtr(target); // target->ptr (const <-)
-//		auto &source_ptr = GetNodePtr(source);
-//		predecssor_ptr = source_ptr;
-//
-//
-//
-//		std::cout << "=== Test Connection ===" << std::endl;
-//
-//		std::cout << "predecessor.Set(11111)" << std::endl;
-//		predecessor.Set(11111);
-//
-//		std::cout << "predecessor == 11111 ???" << std::endl;
-//		assert(predecessor.Value() == 11111);
-//		std::cout << "source == 11111 ???" << std::endl;
-//		assert(source.Value() == 11111);
-//		std::cout << "target == 11111 ???" << std::endl;
-//		assert(target.Value() == 11111);
-//		std::cout << "successor == 11111 ???" << std::endl;
-//		assert(successor.Value() == 11111);
-
-		/// ////////////////////////////
-		// old try:
-
-//
-//
-//		std::cout << "=== Creating Signals ===" << std::endl;
-//
-//		VarSignalT<int> predecessor = MakeVar<D>(111);
-//
-//		std::cout << "predecessor == 111 ???" << std::endl;
-//		assert(predecessor.Value() == 111);
-//
-//		SignalT<int> source = MakeSignal(predecessor, [] (int v) {
-//			std::cout << "predecessor -> source: " << v << std::endl;
-//			return v;
-//		});
-//
-//		std::cout << "source == 111 ???" << std::endl;
-//		assert(source.Value() == 111);
-//
-//		VarSignalT<int> dummy_source = MakeVar<D>(222);
-//
-//		std::cout << "dummy_source == 222 ???" << std::endl;
-//		assert(dummy_source.Value() == 222);
-//
-//		// TempSignal<D, int, int(int v)>
-//		// SignalT<int> target =
-//		TempSignal<D, int, int(int v)> target = MakeSignal(dummy_source, [] (int v) {
-//			std::cout << "dummy_source -> (old) target: " << v << std::endl;
-//			return v;
-//		});
-//		target.modifyValue()
-//
-//		std::cout << "target == 222 ???" << std::endl;
-//		assert(target.Value() == 222);
-//
-//		SignalT<int> successor = MakeSignal(target, [] (int v) {
-//			std::cout << "target -> successor: " << v << std::endl;
-//			return v;
-//		});
-//
-//		std::cout << "successor == 222 ???" << std::endl;
-//		assert(successor.Value() == 222);
-//
-//
-//
-//
-//
-//		std::cout << "=== Phase 1 ===" << std::endl;
-//
-//		std::cout << "predecessor.Set(1111)" << std::endl;
-//		predecessor.Set(1111);
-//
-//		std::cout << "predecessor == 1111 ???" << std::endl;
-//		assert(predecessor.Value() == 1111);
-//		std::cout << "source == 1111 ???" << std::endl;
-//		assert(source.Value() == 1111);
-//
-//		std::cout << "dummy_source.Set(2222)" << std::endl;
-//		dummy_source.Set(2222);
-//
-//		std::cout << "dummy_source == 2222 ???" << std::endl;
-//		assert(dummy_source.Value() == 2222);
-//		std::cout << "target == 2222 ???" << std::endl;
-//		assert(target.Value() == 2222);
-//		std::cout << "successor == 2222 ???" << std::endl;
-//		assert(successor.Value() == 2222);
-//
-//
-//
-//
-//
-//		std::cout << "=== Update signal ===" << std::endl;
-//
-//		auto new_target = MakeSignal(source, [] (int v) {
-//			std::cout << "source -> (new) target: " << v << std::endl;
-//			return v;
-//		});
-//		// target = Signal(new_target);
-//
-//		target = make_shared();
-//
-//
-//
-//
-//		std::cout << "=== Phase 2 ===" << std::endl;
-//
-//		std::cout << "predecessor.Set(11111)" << std::endl;
-//		predecessor.Set(11111);
-////		std::cout << "dummy_source.Set(22222)" << std::endl;
-////		dummy_source.Set(22222);
-//
-//		std::cout << "predecessor == 11111 ???" << std::endl;
-//		assert(predecessor.Value() == 11111);
-//		std::cout << "source == 11111 ???" << std::endl;
-//		assert(source.Value() == 11111);
-//		std::cout << "target == 11111 ???" << std::endl;
-//		assert(target.Value() == 11111);
-//		std::cout << "successor == 11111 ???" << std::endl;
-//		assert(successor.Value() == 11111);
-
-//		DataValue int_value_2 = 222;
-//		VarSignalT<DataValue> predessor_2 = MakeVar<D>(int_value_2);
-//
-//		// connector_signal = MakeSignal(*output_attr->value, [] (inexor::entity_system::DataValue v) { return v; });
-//
-//    	/// The data container value (Signal) is not able to set the attribute value.
-//    	// SignalT<DataValue> value = MakeSignal(, [] (inexor::entity_system::DataValue v) { return v; });
-//
-//
-//		DataValue add_value_1 = 333;
-//		SignalT<DataValue> add_1 = MakeVar<D>(add_value_1);
-//
-//		DataValue add_value_2 = 444;
-//		SignalT<DataValue> add_2 = MakeVar<D>(add_value_2);
-//
-//		SignalT<DataValue> sum = MakeSignal(
-//			With(add_1, add_2),
-//			[] (inexor::entity_system::DataValue augend, inexor::entity_system::DataValue addend)
-//			{
-//				int result = std::get<DataType::INT>(augend) + std::get<DataType::INT>(addend);
-//				std::cout << "ADD_INT: " << std::get<DataType::INT>(augend) << " + " << std::get<DataType::INT>(addend) << " = " << result << std::endl;
-//				return DataValue(result);
-//			}
-//		);
-//
-//
-//    	/// The data container initial value (VarSignal) is able to set the attribute value.
-//    	VarSignalT<DataValue> own_value;
-
-
 		std::string source_name = "source";
 		int initial_source_value = 100;
 		std::cout << "Create entity instance '" << source_name << "'" << std::endl;
@@ -249,6 +68,7 @@ namespace visual_scripting {
 		std::cout << "Create entity instance '" << add_int_name << "'" << std::endl;
 		std::optional<std::shared_ptr<inexor::entity_system::EntityInstance>> o_add_int = add_int_factory->create_instance();
 
+
 		if (o_source.has_value() && o_target_1.has_value() && o_target_2.has_value() && o_target_3.has_value() && o_add_int.has_value())
 		{
 			std::shared_ptr<inexor::entity_system::EntityInstance> source = o_source.value();
@@ -258,15 +78,15 @@ namespace visual_scripting {
 			std::shared_ptr<inexor::entity_system::EntityInstance> add_int = o_add_int.value();
 
 			std::cout << "Get entity instance attributes" << std::endl;
-			std::string value_attribute_name = "value";
+			std::string value_attribute_name = "int_constant_value";
 			std::optional<std::shared_ptr<inexor::entity_system::EntityAttributeInstance>> o_source_attr_value = source->get_attribute_instance(value_attribute_name);
 			std::optional<std::shared_ptr<inexor::entity_system::EntityAttributeInstance>> o_target_1_attr_value = target_1->get_attribute_instance(value_attribute_name);
 			std::optional<std::shared_ptr<inexor::entity_system::EntityAttributeInstance>> o_target_2_attr_value = target_2->get_attribute_instance(value_attribute_name);
 			std::optional<std::shared_ptr<inexor::entity_system::EntityAttributeInstance>> o_target_3_attr_value = target_3->get_attribute_instance(value_attribute_name);
 
-			std::string augend_attribute_name = "augend";
-			std::string addend_attribute_name = "addend";
-			std::string sum_attribute_name = "sum";
+			std::string augend_attribute_name = "add_int_augend";
+			std::string addend_attribute_name = "add_int_addend";
+			std::string sum_attribute_name = "add_int_sum";
 			std::optional<std::shared_ptr<inexor::entity_system::EntityAttributeInstance>> o_add_int_attr_augend = add_int->get_attribute_instance(augend_attribute_name);
 			std::optional<std::shared_ptr<inexor::entity_system::EntityAttributeInstance>> o_add_int_attr_addend = add_int->get_attribute_instance(addend_attribute_name);
 			std::optional<std::shared_ptr<inexor::entity_system::EntityAttributeInstance>> o_add_int_attr_sum = add_int->get_attribute_instance(sum_attribute_name);

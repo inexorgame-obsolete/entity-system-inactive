@@ -26,12 +26,12 @@ namespace type_system {
 				entity_type_builder_manager,
 				"BOOL_CONSTANT",
 				{
-					{ "name", DataType::STRING },
-					{ "value", DataType::BOOL }
+					{ "bool_constant_name", DataType::STRING },
+					{ "bool_constant_value", DataType::BOOL }
 				},
 				{
-					{ "name", 1 << Feature::OUTPUT },
-					{ "value", 1 << Feature::OUTPUT }
+					{ "bool_constant_name", 1 << Feature::OUTPUT },
+					{ "bool_constant_value", 1 << Feature::OUTPUT }
 				}
 			) {};
 

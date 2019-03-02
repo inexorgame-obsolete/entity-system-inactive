@@ -27,19 +27,17 @@ namespace type_system {
 	{
 		return entity_instance_builder_manager->get_builder()
 			->type(entity_type_provider->get_type())
-			->attribute("name", "")
-			->attribute("input_value", 0)
-			->attribute("output_value", 0.0f)
+			->attribute("int_to_float_input", 0)
+			->attribute("int_to_float_value", 0.0f)
 			->build();
 	}
 
-	O_ENT_INST IntToFloatFactory::create_instance(const string& name, const int& input_value, const float& output_value)
+	O_ENT_INST IntToFloatFactory::create_instance(const string& name, const int& int_value, const float& float_value)
 	{
 		return entity_instance_builder_manager->get_builder()
 			->type(entity_type_provider->get_type())
-			->attribute("name", name)
-			->attribute("input_value", input_value)
-			->attribute("output_value", output_value)
+			->attribute("int_to_float_input", int_value)
+			->attribute("int_to_float_value", float_value)
 			->build();
 	}
 

@@ -26,12 +26,12 @@ namespace type_system {
 				entity_type_builder_manager,
 				"STRING_CONSTANT",
 				{
-					{ "name", DataType::STRING },
-					{ "value", DataType::STRING }
+					{ "string_constant_name", DataType::STRING },
+					{ "string_constant_value", DataType::STRING }
 				},
 				{
-					{ "name", 1 << Feature::OUTPUT },
-					{ "value", 1 << Feature::OUTPUT }
+					{ "string_constant_name", 1 << Feature::OUTPUT },
+					{ "string_constant_value", 1 << Feature::OUTPUT }
 				}
 			) {};
 

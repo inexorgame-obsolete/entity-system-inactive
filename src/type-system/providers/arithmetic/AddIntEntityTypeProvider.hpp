@@ -26,14 +26,14 @@ namespace type_system {
 				entity_type_builder_manager,
 				"ADD_INT",
 				{
-					{ "augend", DataType::INT },
-					{ "addend", DataType::INT },
-					{ "sum", DataType::INT }
+					{ "add_int_augend", DataType::INT },
+					{ "add_int_addend", DataType::INT },
+					{ "add_int_sum", DataType::INT }
 				},
 				{
-					{ "augend", 1 << Feature::INPUT },
-					{ "addend", 1 << Feature::INPUT },
-					{ "sum", 1 << Feature::OUTPUT }
+					{ "add_int_augend", 1 << Feature::INPUT },
+					{ "add_int_addend", 1 << Feature::INPUT },
+					{ "add_int_sum", 1 << Feature::OUTPUT }
 				}
 			) {};
 
