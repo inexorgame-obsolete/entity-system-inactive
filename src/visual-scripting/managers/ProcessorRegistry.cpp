@@ -26,7 +26,7 @@ namespace visual_scripting {
 		processors[processor->get_entity_type()] = processor;
 	}
 
-	std::optional<std::shared_ptr<Processor>> ProcessorRegistry::get_processor_by_entity_type(const ENT_TYPE& entity_type)
+	std::optional<std::shared_ptr<Processor>> ProcessorRegistry::get_processor(const ENT_TYPE& entity_type)
 	{
 		if (!(processors.end() == processors.find(entity_type)))
 		{

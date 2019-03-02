@@ -28,28 +28,30 @@ namespace visual_scripting {
 		this->arithmetic_processor_manager->init();
 	}
 
-	void ProcessorManager::on_entity_instance_created(std::shared_ptr<inexor::entity_system::EntityInstance> entity_instance)
-	{
-		// Get entity type
-		std::shared_ptr<EntityType> entity_type = entity_instance->get_entity_type();
-		// Get processor for entity type
-		std::optional<std::shared_ptr<Processor>> o_processor = processor_registry->get_processor_by_entity_type(entity_type);
-
-		if (o_processor.has_value())
-		{
-			std::shared_ptr<Processor> processor = o_processor.value();
-			// TODO: Get execution method for processor
-			// processor->execute(entity_instance);
-			// TODO: Create observer for each input atttribute of the entity instance
-			// TODO: Connect observers with execution method
-		}
-	}
-
-	void ProcessorManager::on_entity_instance_deleted(const xg::Guid& type_GUID, const xg::Guid& inst_GUID)
-	{
-		// Disconnect observers with execution method
-		// Delete observer for each input atttribute of the entity instance
-	}
+//	void ProcessorManager::on_entity_instance_created(std::shared_ptr<inexor::entity_system::EntityInstance> entity_instance)
+//	{
+//		// Get entity type
+//		std::shared_ptr<inexor::entity_system::EntityType> entity_type = entity_instance->get_entity_type();
+//		std::cout << "Entity instance [" << entity_instance->get_GUID().str() << "] of type [" << entity_type->get_type_name() << "] created" << std::endl;
+//
+//		// Get processor for entity type
+//		std::optional<std::shared_ptr<Processor>> o_processor = processor_registry->get_processor(entity_type);
+//
+//		if (o_processor.has_value())
+//		{
+//			std::shared_ptr<Processor> processor = o_processor.value();
+//			std::cout << "Entity type [" << entity_type->get_type_name() << "] has processor" << std::endl;
+//			processor->init_entity_instance(entity_instance);
+//		} else {
+//			std::cout << "Entity type [" << entity_type->get_type_name() << "] has no processor" << std::endl;
+//		}
+//	}
+//
+//	void ProcessorManager::on_entity_instance_deleted(const xg::Guid& type_GUID, const xg::Guid& inst_GUID)
+//	{
+//		// Disconnect observers with execution method
+//		// Delete observer for each input atttribute of the entity instance
+//	}
 
 
 }

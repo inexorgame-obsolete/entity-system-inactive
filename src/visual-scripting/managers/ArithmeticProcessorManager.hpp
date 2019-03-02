@@ -23,23 +23,23 @@ namespace visual_scripting {
 
 			/// Constructor.
 			ArithmeticProcessorManager(
-				std::shared_ptr<ProcessorRegistry> processor_registry,
-				std::shared_ptr<AddInt> add_int
+				std::shared_ptr<inexor::visual_scripting::ProcessorRegistry> processor_registry,
+				std::shared_ptr<inexor::visual_scripting::AddInt> add_int
 			);
 
 			/// Destructor.
 			~ArithmeticProcessorManager();
 
-			/// Initialization of the active components.
+			/// Initialization of the processors.
 			void init();
 
 		private:
 
-			// The registry for active components.
-			std::shared_ptr<ProcessorRegistry> processor_registry;
+			/// The processor registry
+			std::shared_ptr<inexor::visual_scripting::ProcessorRegistry> processor_registry;
 
 			// Addition for integers.
-			std::shared_ptr<AddInt> add_int;
+			std::shared_ptr<inexor::visual_scripting::AddInt> add_int;
 
 	};
 

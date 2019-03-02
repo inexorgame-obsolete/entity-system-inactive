@@ -3,45 +3,74 @@
 
 #include "AddInt.hpp"
 
-using namespace inexor::entity_system;
-using namespace std;
-using namespace xg;
+#include "react/Algorithm.h"
+#include "react/Domain.h"
+#include "react/Event.h"
+#include "react/Observer.h"
 
 namespace inexor {
 namespace visual_scripting {
 
 	AddInt::AddInt(
-		shared_ptr<AddIntEntityTypeProvider> entity_type_provider
+		std::shared_ptr<inexor::entity_system::type_system::AddIntEntityTypeProvider> entity_type_provider,
+		std::shared_ptr<inexor::entity_system::EntityInstanceManager> entity_instance_manager
 	)
+		: Processor(entity_type_provider->get_type()),
+		  entity_type_provider(entity_type_provider),
+		  entity_instance_manager(entity_instance_manager)
 	{
-		this->entity_type_provider = entity_type_provider;
 	}
 
 	AddInt::~AddInt()
 	{
 	}
 
-	/// The execution function of the active component.
-	void AddInt::execute(const shared_ptr<inexor::entity_system::EntityInstance>& entity_instance) const
+	void AddInt::init()
 	{
-		std::optional<std::shared_ptr<class EntityAttributeInstance>> o_augend = entity_instance->get_attribute_instance("augend");
-		std::optional<std::shared_ptr<class EntityAttributeInstance>> o_addend = entity_instance->get_attribute_instance("addend");
-		std::optional<std::shared_ptr<class EntityAttributeInstance>> o_sum = entity_instance->get_attribute_instance("sum");
+		entity_instance_manager->register_on_created(entity_type_provider->get_type()->get_GUID(), shared_from_this());
+		entity_instance_manager->register_on_deleted(entity_type_provider->get_type()->get_GUID(), shared_from_this());
+	}
+
+	void AddInt::on_entity_instance_created(std::shared_ptr<inexor::entity_system::EntityInstance> entity_instance)
+	{
+		// Get entity type
+		std::shared_ptr<inexor::entity_system::EntityType> entity_type = entity_instance->get_entity_type();
+		std::cout << "Entity instance [" << entity_instance->get_GUID().str() << "] of type [" << entity_type->get_type_name() << "] created" << std::endl;
+		connect(entity_instance);
+	}
+
+	void AddInt::on_entity_instance_deleted(const xg::Guid& type_GUID, const xg::Guid& inst_GUID)
+	{
+		// Disconnect observers with execution method
+		// Delete observer for each input atttribute of the entity instance
+	}
+
+	void AddInt::connect(const std::shared_ptr<inexor::entity_system::EntityInstance>& entity_instance)
+	{
+		std::cout << "Init entity instance for processor ADD_INT" << std::endl;
+		std::optional<std::shared_ptr<inexor::entity_system::EntityAttributeInstance>> o_augend = entity_instance->get_attribute_instance("augend");
+		std::optional<std::shared_ptr<inexor::entity_system::EntityAttributeInstance>> o_addend = entity_instance->get_attribute_instance("addend");
+		std::optional<std::shared_ptr<inexor::entity_system::EntityAttributeInstance>> o_sum = entity_instance->get_attribute_instance("sum");
 		if (o_augend.has_value() && o_addend.has_value() && o_sum.has_value())
 		{
-			// std::shared_ptr<class EntityAttributeInstance> sum = o_sum.value();
-			o_sum.value()->value.Set(
-				std::get<DataType::INT>(o_augend.value()->value.Value()) + std::get<DataType::INT>(o_addend.value()->value.Value())
+			signals[entity_instance] = MakeSignal(
+				With(
+					o_augend.value()->value,
+					o_addend.value()->value
+				),
+				[] (inexor::entity_system::DataValue augend, inexor::entity_system::DataValue addend)
+				{
+					int result = std::get<DataType::INT>(augend) + std::get<DataType::INT>(addend);
+					std::cout << "ADD_INT: " << std::get<DataType::INT>(augend) << " + " << std::get<DataType::INT>(addend) << " = " << result << std::endl;
+					return DataValue(result);
+				}
 			);
+			o_sum.value()->value = signals[entity_instance];
+		} else {
+			// TODO: warn!
+			std::cout << "attributes missing" << std::endl;
 		}
 	}
-
-	/// Returns the entity type to bind.
-	shared_ptr<inexor::entity_system::EntityType> AddInt::get_entity_type() const
-	{
-		return entity_type_provider->get_type();
-	}
-
 
 };
 };

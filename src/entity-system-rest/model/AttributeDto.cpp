@@ -116,37 +116,37 @@ namespace model {
 			case DataType::BOOL:
 			{
 				bool bool_value = pt.get("value", false);
-				value.Set(bool_value);
+//				value.Set(bool_value);
 				break;
 			}
 			case DataType::INT:
 			{
 				int int_value = pt.get("value", 0);
-				value.Set(int_value);
+//				value.Set(int_value);
 				break;
 			}
 			case DataType::BIG_INT:
 			{
 				std::int64_t big_int_value = pt.get("value", 0);
-				value.Set(big_int_value);
+//				value.Set(big_int_value);
 				break;
 			}
 			case DataType::DOUBLE:
 			{
 				double double_value = pt.get("value", 0.0);
-				value.Set(double_value);
+//				value.Set(double_value);
 				break;
 			}
 			case DataType::FLOAT:
 			{
 				double float_value = pt.get("value", 0.0f);
-				value.Set(float_value);
+//				value.Set(float_value);
 				break;
 			}
 			case DataType::STRING:
 			{
 				std::string string_value = pt.get("value", "");
-				value.Set(string_value);
+//				value.Set(string_value);
 				break;
 			}
 //			case DataType::VEC3:
@@ -195,7 +195,7 @@ namespace model {
 
 	void AttributeDto::set_value(const DataValue& value)
 	{
-		this->value.Set(value);
+//		this->value.Set(value);
 	}
 
 	EnumSet<Feature> AttributeDto::get_features() const

@@ -38,13 +38,13 @@ TEST(DataContainer, test_assigment)
     EXPECT_EQ(a, std::string("heya"));
 }
 
-TEST(DataContainer, test_glm_vectors)
-{
-    DataContainer vec3_attribute = {DataType::VEC3, glm::vec3(0, 0, 0)};
-    auto v3 = std::get<DataType::VEC3>(vec3_attribute.value.Value());
-    EXPECT_EQ(v3, glm::vec3(0, 0, 0));
-
-    DataContainer vec4_attribute = {DataType::VEC4, glm::vec4(glm::vec3(0, 0, 0), 0)};
-    auto v4 = std::get<DataType::VEC4>(vec4_attribute.value.Value());
-    EXPECT_EQ(v4, glm::vec4(glm::vec3(0, 0, 0), 0));
-}
+//TEST(DataContainer, test_glm_vectors)
+//{
+//    DataContainer vec3_attribute = {DataType::VEC3, glm::vec3(0, 0, 0)};
+//    auto v3 = std::get<DataType::VEC3>(vec3_attribute.value.Value());
+//    EXPECT_EQ(v3, glm::vec3(0, 0, 0));
+//
+//    DataContainer vec4_attribute = {DataType::VEC4, glm::vec4(glm::vec3(0, 0, 0), 0)};
+//    auto v4 = std::get<DataType::VEC4>(vec4_attribute.value.Value());
+//    EXPECT_EQ(v4, glm::vec4(glm::vec3(0, 0, 0), 0));
+//}

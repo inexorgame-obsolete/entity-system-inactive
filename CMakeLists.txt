@@ -43,8 +43,6 @@ conan_add_remote(NAME bincrafters INDEX 1
             URL https://api.bintray.com/conan/bincrafters/public-conan)
 conan_add_remote(NAME inexor INDEX 1
             URL https://api.bintray.com/conan/inexorgame/inexor-conan)
-conan_add_remote(NAME conan-transit INDEX 1
-            URL https://api.bintray.com/conan/conan/conan-transit)
 conan_add_remote(NAME helmesjo INDEX 1
             URL https://api.bintray.com/conan/helmesjo/public-conan)
 
