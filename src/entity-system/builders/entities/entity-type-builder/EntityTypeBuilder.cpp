@@ -63,15 +63,15 @@ namespace entity_system {
 				if (o_attribute_type.has_value()) {
 					ENT_ATTR_TYPE attribute_type = o_attribute_type.value();
 					entity_type->link_attribute_type(attribute_type);
-					spdlog::debug("Created entity type attribute {} of data type {}", attribute_entry.first, attribute_entry.second);
+					spdlog::debug("Created entity type attribute '{}' of data type '{}'", attribute_entry.first, attribute_entry.second._to_string());
 				} else {
-					spdlog::error("Failed to create entity type attribute {} of data type {}", attribute_entry.first, attribute_entry.second);
+					spdlog::error("Failed to create entity type '{}': Failed to create entity type attribute '{}' of data type '{}'", entity_type_name, attribute_entry.first, attribute_entry.second._to_string());
 					return std::nullopt;
 				}
 			}
 			return entity_type;
 		} else {
-			spdlog::error("Failed to create entity type {}", entity_type_name);
+			spdlog::error("Failed to create entity type '{}'", entity_type_name);
 			return std::nullopt;
 		}
 	}

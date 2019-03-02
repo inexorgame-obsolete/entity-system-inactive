@@ -9,6 +9,7 @@
 #include "visual-scripting/managers/ConnectorManager.hpp"
 #include "visual-scripting/managers/ProcessorManager.hpp"
 #include "visual-scripting/tests/IntConstantConnectorTest.hpp"
+#include "visual-scripting/tests/SinTest.hpp"
 
 
 namespace inexor {
@@ -25,7 +26,8 @@ namespace visual_scripting {
 			VisualScriptingSystem(
 				std::shared_ptr<inexor::visual_scripting::ConnectorManager> connector_manager,
 				std::shared_ptr<inexor::visual_scripting::ProcessorManager> processor_manager,
-				std::shared_ptr<inexor::visual_scripting::IntConstantConnectorTest> int_constant_connector_test
+				std::shared_ptr<inexor::visual_scripting::IntConstantConnectorTest> int_constant_connector_test,
+				std::shared_ptr<inexor::visual_scripting::SinTest> sin_test
 			);
 
 			/// @brief Destructor.
@@ -44,6 +46,9 @@ namespace visual_scripting {
 
 			/// The test case for connecting INT_CONSTANTs.
 			std::shared_ptr<inexor::visual_scripting::IntConstantConnectorTest> int_constant_connector_test;
+
+			/// The test case for SIN.
+			std::shared_ptr<inexor::visual_scripting::SinTest> sin_test;
 	};
 
 

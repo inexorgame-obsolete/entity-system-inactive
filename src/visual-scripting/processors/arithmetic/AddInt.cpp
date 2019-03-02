@@ -43,17 +43,19 @@ namespace visual_scripting {
 	{
 		// Disconnect observers with execution method
 		// Delete observer for each input atttribute of the entity instance
+		// TODO: remove / clear signal
+		// signals[inst_GUID].clear
 	}
 
 	void AddInt::connect(const std::shared_ptr<inexor::entity_system::EntityInstance>& entity_instance)
 	{
 		std::cout << "Init entity instance for processor ADD_INT" << std::endl;
-		std::optional<std::shared_ptr<inexor::entity_system::EntityAttributeInstance>> o_augend = entity_instance->get_attribute_instance("augend");
-		std::optional<std::shared_ptr<inexor::entity_system::EntityAttributeInstance>> o_addend = entity_instance->get_attribute_instance("addend");
-		std::optional<std::shared_ptr<inexor::entity_system::EntityAttributeInstance>> o_sum = entity_instance->get_attribute_instance("sum");
+		std::optional<std::shared_ptr<inexor::entity_system::EntityAttributeInstance>> o_augend = entity_instance->get_attribute_instance("add_int_augend");
+		std::optional<std::shared_ptr<inexor::entity_system::EntityAttributeInstance>> o_addend = entity_instance->get_attribute_instance("add_int_addend");
+		std::optional<std::shared_ptr<inexor::entity_system::EntityAttributeInstance>> o_sum = entity_instance->get_attribute_instance("add_int_sum");
 		if (o_augend.has_value() && o_addend.has_value() && o_sum.has_value())
 		{
-			signals[entity_instance] = MakeSignal(
+			signals[entity_instance->get_GUID()] = MakeSignal(
 				With(
 					o_augend.value()->value,
 					o_addend.value()->value
@@ -65,7 +67,7 @@ namespace visual_scripting {
 					return DataValue(result);
 				}
 			);
-			o_sum.value()->value = signals[entity_instance];
+			o_sum.value()->value = signals[entity_instance->get_GUID()];
 		} else {
 			// TODO: warn!
 			std::cout << "attributes missing" << std::endl;

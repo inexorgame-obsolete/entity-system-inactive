@@ -9,7 +9,7 @@
 #include "entity-system/model/data/DataTypes.hpp"
 #include "entity-system/util/type-definitions/TypeDefinitions.hpp"
 
-#include "type-system/providers/converters/IntToFloatEntityTypeProvider.hpp"
+#include "type-system/providers/arithmetic/SinEntityTypeProvider.hpp"
 
 using namespace inexor::entity_system;
 using namespace std;
@@ -18,31 +18,28 @@ namespace inexor {
 namespace entity_system {
 namespace type_system {
 
-	/// @class IntToFloatFactory
-    /// @brief Factory for entity instances of type INT_TO_FLOAT.
-	class IntToFloatFactory
+	/// @class SinFactory
+    /// @brief Factory for entity instances of type SIN.
+	class SinFactory
 	{
 		public:
 
 			/// Constructor.
-			IntToFloatFactory(
-				shared_ptr<IntToFloatEntityTypeProvider> entity_type_provider,
+			SinFactory(
+				shared_ptr<SinEntityTypeProvider> entity_type_provider,
 				shared_ptr<EntityInstanceBuilderManager> entity_instance_builder_manager
 			);
 
 			/// Destructor.
-			~IntToFloatFactory();
+			~SinFactory();
 
 			/// Creates an instance with default values
 			O_ENT_INST create_instance();
 
-			/// Creates an instance with the given name
-			O_ENT_INST create_instance(const string& name, const int& int_value, const float& float_value);
-
 		private:
 
 			/// The entity type provider
-			shared_ptr<IntToFloatEntityTypeProvider> entity_type_provider;
+			shared_ptr<SinEntityTypeProvider> entity_type_provider;
 
 			/// The entity instance manager
 			shared_ptr<EntityInstanceBuilderManager> entity_instance_builder_manager;

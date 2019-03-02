@@ -28,19 +28,6 @@ namespace entity_system {
 //    using DataValue = std::variant<bool, int, std::int64_t, double, float, std::string, glm::vec3, glm::vec4>;
     using DataValue = std::variant<bool, int, std::int64_t, double, float, std::string>;
 
-//	int int_f(int v) {
-//		return v;
-//    }
-//
-//	int int_s_t(int s, int t) {
-//		return s + t;
-//    }
-//
-//	VarSignalT<int> s = MakeVar<D>(0);
-//	VarSignalT<int> t = MakeVar<D>(0);
-//
-//	SignalT<int> v1 = MakeSignal(With(s, t), int_s_t);
-
     /// A data container which can hold data of various types.
     struct DataContainer {
 
@@ -68,42 +55,46 @@ namespace entity_system {
     			{
     				DataValue bool_value = false;
     				this->own_value = MakeVar<D>(bool_value);
-    				this->signal_wrapper = MakeVar<D>(this->own_value);
-    				this->value = Flatten(signal_wrapper);
     				break;
     			}
+    			case DataType::DOUBLE:
+    			{
+    				DataValue double_value = 0.0;
+    				this->own_value = MakeVar<D>(double_value);
+    				break;
+    			}
+    			case DataType::FLOAT:
+    			{
+    				DataValue float_value = 0.0f;
+    				this->own_value = MakeVar<D>(float_value);
+    				break;
+    			}
+//    			case DataType::STRING:
+//    			{
+//    				DataValue string_value = "";
+//    				this->own_value = MakeVar<D>(string_value);
+//    				break;
+//    			}
     			// TODO: Add other data types!
     			default:
     			case DataType::INT:
     			{
     				DataValue int_value = 0;
     				this->own_value = MakeVar<D>(int_value);
-    				this->signal_wrapper = MakeVar<D>(this->own_value);
-    				this->value = Flatten(signal_wrapper);
     				break;
     			}
     		}
+			this->signal_wrapper = MakeVar<D>(this->own_value);
+			this->value = Flatten(this->signal_wrapper);
 		};
 
 		DataContainer(const DataValue& data_value)
 		{
-//			// TODO: shorter version:
-//			// DataType::_from_integral(value.index());
-//    		switch (value.index())
-//    		{
-//    			case DataType::BOOL:
-//    				this->type = DataType::BOOL;
-//    				break;
-//    			default:
-//    			case DataType::INT:
-//    				this->type = DataType::INT;
-//    				break;
-//    		}
 			/// Detect type by std::variant index()
 			this->type = DataType::_from_integral(data_value.index());
 			this->own_value = MakeVar<D>(data_value);
 			this->signal_wrapper = MakeVar<D>(this->own_value);
-			this->value = Flatten(signal_wrapper);
+			this->value = Flatten(this->signal_wrapper);
 		};
 
 		DataContainer(const DataType& type, const DataValue& data_value)
@@ -111,7 +102,7 @@ namespace entity_system {
     	{
 			this->own_value = MakeVar<D>(data_value);
 			this->signal_wrapper = MakeVar<D>(this->own_value);
-			this->value = Flatten(signal_wrapper);
+			this->value = Flatten(this->signal_wrapper);
     	};
 
     };
