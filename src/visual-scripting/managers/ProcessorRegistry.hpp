@@ -33,7 +33,7 @@ namespace visual_scripting {
 			void register_processor(const std::shared_ptr<Processor>& processor);
 
 			/// @brief Returns the processor by entity type.
-			std::optional<std::shared_ptr<Processor>> get_processor_by_entity_type(const ENT_TYPE& entity_type);
+			std::optional<std::shared_ptr<Processor>> get_processor(const ENT_TYPE& entity_type);
 
 			/// @brief Returns true, if a processor is mapped to the given entity type.
 			bool has_processor(const ENT_TYPE& entity_type);

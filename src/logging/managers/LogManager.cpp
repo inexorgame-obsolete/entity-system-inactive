@@ -59,7 +59,7 @@ namespace logging {
 			spdlog::get(logger_name)->set_level(level);
 			O_ENT_ATTR_INST o_ent_attr_inst = logger_instances[logger_name]->get_attribute_instance("level");
 			if (o_ent_attr_inst.has_value()) {
-				o_ent_attr_inst.value()->value.Set(level);
+				o_ent_attr_inst.value()->own_value.Set(level);
 			}
 		}
 	}

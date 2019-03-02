@@ -23,15 +23,16 @@ namespace visual_scripting {
     /// @brief Management of the processors.
     /// The manager listens on created or deleted entity instances.
 	class ProcessorManager
-		: public enable_shared_from_this<ProcessorManager>,
-		  public EntityInstanceCreatedListener,
-		  public EntityInstanceDeletedListener
+//		: public enable_shared_from_this<ProcessorManager>,
+//		: public EntityInstanceCreatedListener,
+//		  public EntityInstanceDeletedListener
 	{
 		public:
 
 			/// Constructor.
 			ProcessorManager(
 				std::shared_ptr<ProcessorRegistry> processor_registry,
+//				std::shared_ptr<inexor::entity_system::EntityInstanceManager> entity_instance_manager,
 				std::shared_ptr<ArithmeticProcessorManager> arithmetic_processor_manager
 			);
 
@@ -41,15 +42,19 @@ namespace visual_scripting {
 			/// Initialization of the ProcessorManager.
 			void init();
 
-			/// Initializes an processor if a processor is registered
-			/// for the entity type of the created entity instance.
-			void on_entity_instance_created(std::shared_ptr<inexor::entity_system::EntityInstance> entity_instance);
-			void on_entity_instance_deleted(const xg::Guid& type_GUID, const xg::Guid& inst_GUID);
+//			/// Initializes an processor if a processor is registered
+//			/// for the entity type of the created entity instance.
+//			void on_entity_instance_created(std::shared_ptr<inexor::entity_system::EntityInstance> entity_instance);
+//
+//			void on_entity_instance_deleted(const xg::Guid& type_GUID, const xg::Guid& inst_GUID);
 
 		private:
 
 			/// The registry for active components
 			std::shared_ptr<ProcessorRegistry> processor_registry;
+
+//			/// The entity instance manager
+//			std::shared_ptr<inexor::entity_system::EntityInstanceManager> entity_instance_manager;
 
 			/// The manager for arithmetic processors.
 			std::shared_ptr<ArithmeticProcessorManager> arithmetic_processor_manager;
