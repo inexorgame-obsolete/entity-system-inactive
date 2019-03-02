@@ -56,10 +56,10 @@ namespace Magnum { namespace Examples {
         auto injector = boost::di::make_injector();
         auto application = injector.create<inexor::InexorApplication>();
         application.init();
-        std::thread start_thread(&inexor::InexorApplication::start, &application);
+        //std::thread start_thread(&inexor::InexorApplication::start, &application);
         std::thread run_thread(&inexor::InexorApplication::run, &application);
-        start_thread.join();
-        run_thread.join();
+        //start_thread.detach();
+        run_thread.detach();
     }
 
     void TriangleExample::drawEvent() {
