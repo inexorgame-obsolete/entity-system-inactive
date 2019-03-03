@@ -3,6 +3,15 @@
 
 #pragma once
 
+#include <Magnum/GL/Buffer.h>
+#include <Magnum/GL/DefaultFramebuffer.h>
+#include <Magnum/GL/Mesh.h>
+#include <Magnum/GL/Renderer.h>
+#include <Magnum/Platform/GLContext.h>
+#include <Magnum/Math/Color.h>
+#include <Magnum/Shaders/VertexColor.h>
+#include <GLFW/glfw3.h>
+
 #include "entity-system/managers/entities/entity-type-builder-manager/EntityTypeBuilderManager.hpp"
 #include "entity-system/managers/entities/entity-instance-builder-manager/EntityInstanceBuilderManager.hpp"
 #include "entity-system/managers/entities/entity-instance-manager/EntityInstanceManager.hpp"
@@ -29,6 +38,9 @@ namespace renderer {
 
         /// Destructor.
         ~RendererManager();
+
+        /// Initialize renderer.
+        void init();
 
     private:
         /// The entity type provider

@@ -11,36 +11,32 @@ using namespace std;
 
 
 namespace inexor {
-namespace logging {
+namespace renderer {
 
-	/// @class LoggerEntityTypeProvider
+	/// @class RendererEntityTypeProvider
     /// @brief Provides the entity type LOGGER.
-	class LoggerEntityTypeProvider : public EntityTypeProvider
+	class RendererEntityTypeProvider : public EntityTypeProvider
 	{
 		public:
 
 			/// Constructor.
-			LoggerEntityTypeProvider(
+			RendererEntityTypeProvider(
 				shared_ptr<EntityTypeBuilderManager> entity_type_builder_manager
 			) : EntityTypeProvider(
 				entity_type_builder_manager,
-				"LOGGER",
+				"RENDERER",
 				{
-					{ "logger_name", DataType::STRING },
-					{ "log_level", DataType::INT }
+					{ "renderer_x", DataType::FLOAT },
+					{ "renderer_y", DataType::FLOAT }
 				},
 				{
-					{ "logger_name", 1 << Feature::INPUT },
-					{ "log_level", 1 << Feature::INPUT | 1 << Feature::OUTPUT }
+					{ "renderer_x", 1 << Feature::INPUT | 1 << Feature::OUTPUT },
+					{ "renderer_y", 1 << Feature::INPUT | 1 << Feature::OUTPUT }
 				}
 			) {};
 
 			/// Destructor.
-			~LoggerEntityTypeProvider() {};
-
-			// static string ATTTRIBUTE_LOGGER_NAME = "logger_name";
-
-			// static string ATTTRIBUTE_LOG_LEVEL = "log_level";
+			~RendererEntityTypeProvider() {};
 
 	};
 

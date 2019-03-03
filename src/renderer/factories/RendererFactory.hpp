@@ -8,6 +8,7 @@
 #include "entity-system/managers/entities/entity-instance-manager/EntityInstanceManager.hpp"
 #include "entity-system/model/data/DataTypes.hpp"
 #include "entity-system/util/type-definitions/TypeDefinitions.hpp"
+#include "renderer/providers/RendererEntityTypeProvider.hpp"
 
 using namespace inexor::entity_system;
 using namespace std;
@@ -22,17 +23,21 @@ namespace renderer {
         public:
             /// Constructor.
             RendererFactory(
-                    shared_ptr<EntityInstanceBuilderManager> entity_instance_builder_manager,
-                    shared_ptr<EntityInstanceManager> entity_instance_manager
+				shared_ptr<RendererEntityTypeProvider> renderer_entity_type_provider,
+				shared_ptr<EntityInstanceBuilderManager> entity_instance_builder_manager,
+				shared_ptr<EntityInstanceManager> entity_instance_manager
             );
 
             /// Destructor.
             ~RendererFactory();
 
-            /// Initialization of the loggers
-            O_ENT_INST create_instance();
+            /// Creates a new renderer with the given coordinates.
+            O_ENT_INST create_instance(float x, float y);
 
         private:
+            /// The entity type provider
+            shared_ptr<RendererEntityTypeProvider> renderer_entity_type_provider;
+
             /// The entity instance manager
             shared_ptr<EntityInstanceBuilderManager> entity_instance_builder_manager;
 

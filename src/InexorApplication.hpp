@@ -29,6 +29,7 @@
 #include "configuration/managers/ConfigurationManager.hpp"
 #include "visual-scripting/VisualScriptingSystem.hpp"
 #include "logging/managers/LogManager.hpp"
+#include "renderer/managers/RendererManager.hpp"
 
 
 using namespace spdlog;
@@ -53,7 +54,8 @@ namespace inexor {
 				std::shared_ptr<inexor::entity_system::RestServer> rest_server,
 				std::shared_ptr<inexor::entity_system::EntitySystemDebugger> entity_system_debugger,
 				std::shared_ptr<inexor::visual_scripting::VisualScriptingSystem> visual_scripting_system,
-				std::shared_ptr<inexor::logging::LogManager> log_manager
+				std::shared_ptr<inexor::logging::LogManager> log_manager,
+				std::shared_ptr<inexor::renderer::RendererManager> renderer_manager
 			);
 
 
@@ -107,6 +109,9 @@ namespace inexor {
 
             /// Management of the loggers
 			std::shared_ptr<inexor::logging::LogManager> log_manager;
+
+            /// Management of the renderers
+			std::shared_ptr<inexor::renderer::RendererManager> renderer_manager;
 
 			/// The running state of the Inexor application
 			bool running;

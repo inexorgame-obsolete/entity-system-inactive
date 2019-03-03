@@ -18,7 +18,8 @@ namespace inexor {
 		std::shared_ptr<inexor::entity_system::RestServer> rest_server,
 		std::shared_ptr<inexor::entity_system::EntitySystemDebugger> entity_system_debugger,
 		std::shared_ptr<inexor::visual_scripting::VisualScriptingSystem> visual_scripting_system,
-		std::shared_ptr<inexor::logging::LogManager> log_manager
+		std::shared_ptr<inexor::logging::LogManager> log_manager,
+		std::shared_ptr<inexor::renderer::RendererManager> renderer_manager
 	)
 	{
 		this->entity_system = entity_system;
@@ -28,6 +29,7 @@ namespace inexor {
 		this->entity_system_debugger = entity_system_debugger;
 		this->visual_scripting_system = visual_scripting_system;
 		this->log_manager = log_manager;
+		this->renderer_manager = renderer_manager;
 		this->running = false;
 	}
 	
@@ -68,6 +70,8 @@ namespace inexor {
 		// Initialize the visual scripting
 		visual_scripting_system->init();
 
+		// Initialize the rendering
+		renderer_manager->init();
 	}
 
 	void InexorApplication::start()
