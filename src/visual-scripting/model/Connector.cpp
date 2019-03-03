@@ -42,7 +42,31 @@ namespace visual_scripting {
 	void Connector::connect()
 	{
 		this->observer = Observe(output_attr->value, [this] (DataValue value) {
-			std::cout << output_attr->get_GUID().str() << "." << output_attr->get_entity_attribute_type()->get_type_name() << " has changed: " << std::get<DataType::INT>(value) << std::endl;
+			std::cout << output_attr->get_GUID().str() << "." << output_attr->get_entity_attribute_type()->get_type_name() << " has changed: ";
+			switch (output_attr->type)
+			{
+				case DataType::BOOL:
+					std::cout << std::get<DataType::BOOL>(value);
+					break;
+				case DataType::INT:
+					std::cout << std::get<DataType::INT>(value);
+					break;
+				case DataType::BIG_INT:
+					std::cout << std::get<DataType::BIG_INT>(value);
+					break;
+				case DataType::DOUBLE:
+					std::cout << std::get<DataType::DOUBLE>(value);
+					break;
+				case DataType::FLOAT:
+					std::cout << std::get<DataType::FLOAT>(value);
+					break;
+				case DataType::STRING:
+					std::cout << std::get<DataType::STRING>(value);
+					break;
+				default:
+					break;
+			}
+			std::cout << std::endl;
 		});
 
 		input_attr->signal_wrapper <<= output_attr->value;
