@@ -25,6 +25,7 @@ namespace inexor {
 
         O_ENT_INST RendererFactory::create_instance(float x, float y) {
             return this->entity_instance_builder_manager->get_builder()
+				->type(this->renderer_entity_type_provider->get_type())
             	->attribute("renderer_x", x)
 				->attribute("renderer_y", y)
                 ->build();
