@@ -38,7 +38,7 @@ namespace visual_scripting {
 		// Get entity type
 		std::shared_ptr<inexor::entity_system::EntityType> entity_type = entity_instance->get_entity_type();
 		std::cout << "Entity instance [" << entity_instance->get_GUID().str() << "] of type [" << entity_type->get_type_name() << "] created" << std::endl;
-		connect(entity_instance);
+		make_signals(entity_instance);
 	}
 
 	void Sin::on_entity_instance_deleted(const xg::Guid& type_GUID, const xg::Guid& inst_GUID)
@@ -49,37 +49,58 @@ namespace visual_scripting {
 		// signals[inst_GUID].clear
 	}
 
-	void Sin::connect(const std::shared_ptr<inexor::entity_system::EntityInstance>& entity_instance)
+	void Sin::make_signals(const std::shared_ptr<inexor::entity_system::EntityInstance>& entity_instance)
 	{
 		std::cout << "Init entity instance for processor SIN" << std::endl;
-		std::optional<std::shared_ptr<inexor::entity_system::EntityAttributeInstance>> o_value = entity_instance->get_attribute_instance("sin_value");
-		if (o_value.has_value())
+		std::optional<std::shared_ptr<inexor::entity_system::EntityAttributeInstance>> o_attr_sin_value = entity_instance->get_attribute_instance("sin_value");
+		if (o_attr_sin_value.has_value())
 		{
 			xg::Guid guid = entity_instance->get_GUID();
-			event_sources[guid] = MakeEventSource<D, int>();
-			current_time_iterators[guid] = Hold(event_sources[guid], 0);
-		    std::thread start_thread([this, guid] () {
-			    int time_iterator = 0;
+			std::shared_ptr<inexor::entity_system::EntityAttributeInstance> attr_sin_value = o_attr_sin_value.value();
+		    std::thread start_thread([this, guid, attr_sin_value] () {
+
+		    	// Create event source
+				event_sources[guid] = MakeEventSource<D, int>();
+
+		    	// Hold last signal value
+				current_time_iterators[guid] = Hold(event_sources[guid], 0);
+
+				// Initialize the time iterator
+		    	int time_iterator = 0;
 				std::cout << "time_iterator = " << time_iterator << std::endl;
+
+				// Initialize the sinus resolution
+			    float resolution = 10.0f;
+
+			    // Create the signal
+			    signals[guid] = MakeSignal(
+					current_time_iterators[guid],
+					[resolution] (int time_iterator)
+					{
+				    	float x_value = time_iterator / resolution;
+						float y_value = sin(x_value);
+						return DataValue(y_value);
+					}
+				);
+
+			    // Attach the signal to the signal_wrapper
+				// o_attr_sin_value.value()->value = signals[guid];
+			    attr_sin_value->signal_wrapper <<= signals[guid];
+
+				// Loop while TODO
 				while (true)
 				{
+					// Wait
 					std::this_thread::sleep_for(50ms);
+
+					// Increase time iterator
 					time_iterator++;
+
+					// Fire time iterator event
 					this->event_sources[guid] << time_iterator;
 				}
 			});
 		    start_thread.detach();
-		    float resolution = 10.0f;
-			signals[guid] = MakeSignal(
-				current_time_iterators[guid],
-				[resolution] (int time_iterator)
-				{
-			    	float x_value = time_iterator / resolution;
-					float y_value = sin(x_value);
-					return DataValue(y_value);
-				}
-			);
-			o_value.value()->value = signals[guid];
 		} else {
 			// TODO: warn!
 			std::cout << "attributes missing" << std::endl;

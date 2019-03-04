@@ -73,10 +73,16 @@ namespace renderer {
         shared_ptr<EntityInstance> renderer;
 
         /// The sinus generator.
-        shared_ptr<EntityInstance> sin;
+        shared_ptr<EntityInstance> sin_x;
+
+        /// The sinus generator.
+        shared_ptr<EntityInstance> sin_y;
 
         /// The attribute sin_value
-        std::shared_ptr<inexor::entity_system::EntityAttributeInstance> sin_attr_value;
+        std::shared_ptr<inexor::entity_system::EntityAttributeInstance> sin_x_attr_value;
+
+        /// The attribute sin_value
+        std::shared_ptr<inexor::entity_system::EntityAttributeInstance> sin_y_attr_value;
 
         /// The attribute renderer_x
         std::shared_ptr<inexor::entity_system::EntityAttributeInstance> renderer_x_attr_value;

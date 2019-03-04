@@ -36,7 +36,7 @@ namespace visual_scripting {
 		// Get entity type
 		std::shared_ptr<inexor::entity_system::EntityType> entity_type = entity_instance->get_entity_type();
 		std::cout << "Entity instance [" << entity_instance->get_GUID().str() << "] of type [" << entity_type->get_type_name() << "] created" << std::endl;
-		connect(entity_instance);
+		make_signals(entity_instance);
 	}
 
 	void AddInt::on_entity_instance_deleted(const xg::Guid& type_GUID, const xg::Guid& inst_GUID)
@@ -47,7 +47,7 @@ namespace visual_scripting {
 		// signals[inst_GUID].clear
 	}
 
-	void AddInt::connect(const std::shared_ptr<inexor::entity_system::EntityInstance>& entity_instance)
+	void AddInt::make_signals(const std::shared_ptr<inexor::entity_system::EntityInstance>& entity_instance)
 	{
 		std::cout << "Init entity instance for processor ADD_INT" << std::endl;
 		std::optional<std::shared_ptr<inexor::entity_system::EntityAttributeInstance>> o_augend = entity_instance->get_attribute_instance("add_int_augend");

@@ -29,18 +29,22 @@ namespace renderer {
 	void RendererManager::init()
 	{
 		std::optional<std::shared_ptr<inexor::entity_system::EntityInstance>> o_renderer = renderer_factory->create_instance(0.5f, -0.5f);
-		std::optional<std::shared_ptr<inexor::entity_system::EntityInstance>> o_sin = sin_factory->create_instance();
+		std::optional<std::shared_ptr<inexor::entity_system::EntityInstance>> o_sin_x = sin_factory->create_instance();
+		std::optional<std::shared_ptr<inexor::entity_system::EntityInstance>> o_sin_y = sin_factory->create_instance();
 
-		if (o_renderer.has_value() && o_sin.has_value())
+		if (o_renderer.has_value() && o_sin_x.has_value() && o_sin_y.has_value())
 		{
 			renderer = o_renderer.value();
-			sin = o_sin.value();
-			std::optional<std::shared_ptr<inexor::entity_system::EntityAttributeInstance>> o_sin_attr_value = sin->get_attribute_instance("sin_value");
+			sin_x = o_sin_x.value();
+			sin_y = o_sin_y.value();
+			std::optional<std::shared_ptr<inexor::entity_system::EntityAttributeInstance>> o_sin_x_attr_value = sin_x->get_attribute_instance("sin_value");
+			std::optional<std::shared_ptr<inexor::entity_system::EntityAttributeInstance>> o_sin_y_attr_value = sin_y->get_attribute_instance("sin_value");
 			std::optional<std::shared_ptr<inexor::entity_system::EntityAttributeInstance>> o_renderer_x_attr_value = renderer->get_attribute_instance("renderer_x");
 			std::optional<std::shared_ptr<inexor::entity_system::EntityAttributeInstance>> o_renderer_y_attr_value = renderer->get_attribute_instance("renderer_y");
-			if (o_sin_attr_value.has_value() && o_renderer_x_attr_value.has_value() && o_renderer_y_attr_value.has_value())
+			if (o_sin_x_attr_value.has_value() && o_sin_y_attr_value.has_value() && o_renderer_x_attr_value.has_value() && o_renderer_y_attr_value.has_value())
 			{
-				sin_attr_value = o_sin_attr_value.value();
+				sin_x_attr_value = o_sin_x_attr_value.value();
+				sin_y_attr_value = o_sin_y_attr_value.value();
 				renderer_x_attr_value = o_renderer_x_attr_value.value();
 				renderer_y_attr_value = o_renderer_y_attr_value.value();
 			}
@@ -55,7 +59,7 @@ namespace renderer {
 	void RendererManager::start_window_thread()
 	{
 
-		std::optional<std::shared_ptr<inexor::visual_scripting::Connector>> connector_x = connector_manager->create_connector(sin_attr_value, renderer_x_attr_value);
+		std::optional<std::shared_ptr<inexor::visual_scripting::Connector>> connector_x = connector_manager->create_connector(sin_x_attr_value, renderer_x_attr_value);
 		if (!connector_x.has_value())
 		{
 			std::cout << "Failed to create connector_x" << std::endl;
@@ -63,7 +67,7 @@ namespace renderer {
 			connector_x.value()->enable_debug();
 		}
 
-		std::optional<std::shared_ptr<inexor::visual_scripting::Connector>> connector_y = connector_manager->create_connector(sin_attr_value, renderer_y_attr_value);
+		std::optional<std::shared_ptr<inexor::visual_scripting::Connector>> connector_y = connector_manager->create_connector(sin_y_attr_value, renderer_y_attr_value);
 		if (!connector_y.has_value())
 		{
 			std::cout << "Failed to create connector_y" << std::endl;
@@ -137,9 +141,10 @@ namespace renderer {
 				float y = 0.0f - std::get<DataType::FLOAT>(renderer_y_attr_value->value.Value());
 				std::cout << std::fixed << std::setprecision(3) << "(" << x << ", " << y << ")" << std::endl;
 
-				Matrix3 transformationMatrix = Matrix3::translation(Vector2::yAxis(y));
+				Matrix3 transformation_matrix_x = Matrix3::translation(Vector2::xAxis(x));
+				Matrix3 transformation_matrix_y = Matrix3::translation(Vector2::yAxis(y));
 
-				shader.setTransformationProjectionMatrix(transformationMatrix);
+				shader.setTransformationProjectionMatrix(transformation_matrix_x * transformation_matrix_y);
 
 				/* Render here */
 				GL::defaultFramebuffer.clear(GL::FramebufferClear::Color);

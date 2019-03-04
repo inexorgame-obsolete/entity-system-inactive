@@ -55,8 +55,8 @@ namespace visual_scripting {
 			/// Called when an entity instance of type SIN has been deleted
 			void on_entity_instance_deleted(const xg::Guid& type_GUID, const xg::Guid& inst_GUID);
 
-			/// Initialization of the
-			void connect(const std::shared_ptr<inexor::entity_system::EntityInstance>& entity_instance);
+			/// Initialization of the processor signals.
+			void make_signals(const std::shared_ptr<inexor::entity_system::EntityInstance>& entity_instance);
 
 		private:
 

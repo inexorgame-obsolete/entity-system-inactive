@@ -20,7 +20,9 @@ using namespace react;
 namespace inexor {
 namespace entity_system {
 
-	REACTIVE_DOMAIN(D, sequential)
+	/// The definition of the reactive domain, the mode and the engine
+	/// @see https://schlangster.github.io/cpp.react/reference/Domain.h/REACTIVE_DOMAIN.html
+	REACTIVE_DOMAIN(D, sequential_concurrent)
 
 	USING_REACTIVE_DOMAIN(D)
 
