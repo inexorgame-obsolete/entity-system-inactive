@@ -32,8 +32,6 @@ namespace visual_scripting {
 
 			USING_REACTIVE_DOMAIN(D)
 
-			ObserverT observer;
-
 			/// Constructor.
 			/// @param output_attribute_GUID GUID of the output attribute.
 			/// @param input_attribute_GUID GUID of the input attribute.
@@ -60,6 +58,9 @@ namespace visual_scripting {
             /// @brief Connects the output with the input.
 			void connect();
 
+            /// @brief Disconnects the output from the input and reconnects the input's own value again.
+			void disconnect();
+
             /// @brief Get the GUID of the connector.
             /// @return GUID of the connector.
 			Guid connector() const;
@@ -71,6 +72,15 @@ namespace visual_scripting {
             /// @brief Get the GUID of the input attribute.
             /// @return GUID of the input attribute.
 			Guid input() const;
+
+			/// @brief Enables the connector debugging.
+			void enable_debug();
+
+			/// @brief Disables the connector debugging.
+			void disable_debug();
+
+			/// @brief Returns true, if the connector debugging is enabled.
+			bool is_debug_enabled();
 
         private:
 
@@ -86,8 +96,11 @@ namespace visual_scripting {
 			/// The input attribute instance.
 			std::shared_ptr<inexor::entity_system::EntityAttributeInstance> input_attr;
 
+			/// The connector observer.
+			ObserverT observer;
+
 			/// The signal.
-			// TempSignal<D, DataValue> connector_signal;
+			bool debug_enabled;
 
     };
 

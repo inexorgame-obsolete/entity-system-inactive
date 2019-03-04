@@ -55,38 +55,27 @@ namespace visual_scripting {
 		std::optional<std::shared_ptr<inexor::entity_system::EntityAttributeInstance>> o_value = entity_instance->get_attribute_instance("sin_value");
 		if (o_value.has_value())
 		{
-			// std::unordered_map<xg::Guid, EventSourceT<float> > event_sources;
-
-			// auto event_source = MakeEventSource<D, int>();
-		    // auto current_time_iterator = Hold(event_source, 0);
-			// auto current_time_iterator = Hold(event_sources[guid], 0);
-
 			xg::Guid guid = entity_instance->get_GUID();
-
 			event_sources[guid] = MakeEventSource<D, int>();
 			current_time_iterators[guid] = Hold(event_sources[guid], 0);
-
 		    std::thread start_thread([this, guid] () {
 			    int time_iterator = 0;
 				std::cout << "time_iterator = " << time_iterator << std::endl;
 				while (true)
 				{
-					std::this_thread::sleep_for(10ms);
+					std::this_thread::sleep_for(50ms);
 					time_iterator++;
-					std::cout << "time_iterator = " << time_iterator << std::endl;
-//					this->event_sources[entity_instance->get_GUID()] << time_iterator;
 					this->event_sources[guid] << time_iterator;
 				}
 			});
 		    start_thread.detach();
-
+		    float resolution = 10.0f;
 			signals[guid] = MakeSignal(
 				current_time_iterators[guid],
-				[] (int time_iterator)
+				[resolution] (int time_iterator)
 				{
-			    	float x_value = time_iterator / 1000.0f;
+			    	float x_value = time_iterator / resolution;
 					float y_value = sin(x_value);
-					std::cout << "sin(" << x_value << ") = " << y_value << std::endl;
 					return DataValue(y_value);
 				}
 			);

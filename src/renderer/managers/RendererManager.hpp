@@ -3,6 +3,8 @@
 
 #pragma once
 
+#include <iomanip>
+
 #include <Magnum/GL/Buffer.h>
 #include <Magnum/GL/DefaultFramebuffer.h>
 #include <Magnum/GL/Mesh.h>
@@ -73,8 +75,13 @@ namespace renderer {
         /// The sinus generator.
         shared_ptr<EntityInstance> sin;
 
+        /// The attribute sin_value
+        std::shared_ptr<inexor::entity_system::EntityAttributeInstance> sin_attr_value;
+
+        /// The attribute renderer_x
         std::shared_ptr<inexor::entity_system::EntityAttributeInstance> renderer_x_attr_value;
 
+        /// The attribute renderer_x
         std::shared_ptr<inexor::entity_system::EntityAttributeInstance> renderer_y_attr_value;
 
     };
