@@ -20,11 +20,11 @@ matrix:
             - docker
         - os: osx
           osx_image: xcode10.2
-          compiler: clang
+          compiler: gcc
           language: cpp
           env:
-            - CC=/usr/bin/clang
-            - CXX=/usr/bin/clang++
+            - CC=/usr/bin/gcc
+            - CXX=/usr/bin/g++
 
 install:
   - ./.travis/install.sh
