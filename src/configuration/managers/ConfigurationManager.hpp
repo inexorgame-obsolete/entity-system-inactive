@@ -1,19 +1,10 @@
-// Inexor entity system
-// (c)2018 Inexor
-
 #pragma once
-
-#include "entity-system/managers/entities/entity-type-builder-manager/EntityTypeBuilderManager.hpp"
-#include "entity-system/managers/entities/entity-instance-manager/EntityInstanceManager.hpp"
-#include "entity-system/model/data/DataTypes.hpp"
-#include "entity-system/util/type-definitions/TypeDefinitions.hpp"
 
 #include "type-system/factories/constants/BoolConstantFactory.hpp"
 #include "type-system/factories/constants/IntConstantFactory.hpp"
 #include "type-system/factories/constants/FloatConstantFactory.hpp"
 #include "type-system/factories/constants/StringConstantFactory.hpp"
 
-using namespace std;
 
 namespace inexor {
 namespace configuration {
@@ -22,17 +13,21 @@ namespace configuration {
     /// @brief Management of configurations. Uses the entity system to store the configuration items.
 	class ConfigurationManager
 	{
+		using BoolConstantFactoryPtr = std::shared_ptr<entity_system::type_system::BoolConstantFactory>;
+		using IntConstantFactoryPtr = std::shared_ptr<entity_system::type_system::IntConstantFactory>;
+		using FloatConstantFactoryPtr = std::shared_ptr<entity_system::type_system::FloatConstantFactory>;
+		using StringConstantFactoryPtr = std::shared_ptr<entity_system::type_system::StringConstantFactory>;
+		using string = std::string;
+
 		public:
 
-			/// Constructor.
 			ConfigurationManager(
-				shared_ptr<inexor::entity_system::type_system::BoolConstantFactory> bool_constant_factory,
-				shared_ptr<inexor::entity_system::type_system::IntConstantFactory> int_constant_factory,
-				shared_ptr<inexor::entity_system::type_system::FloatConstantFactory> float_constant_factory,
-				shared_ptr<inexor::entity_system::type_system::StringConstantFactory> string_constant_factory
+				BoolConstantFactoryPtr bool_constant_factory,
+				IntConstantFactoryPtr int_constant_factory,
+				FloatConstantFactoryPtr float_constant_factory,
+				StringConstantFactoryPtr string_constant_factory
 			);
 
-			/// Destructor.
 			~ConfigurationManager();
 
 			/// Initialization
@@ -65,19 +60,17 @@ namespace configuration {
 		private:
 
 			/// Factory for BOOL_CONSTANT
-			shared_ptr<inexor::entity_system::type_system::BoolConstantFactory> bool_constant_factory;
+			BoolConstantFactoryPtr bool_constant_factory;
 
 			/// Factory for INT_CONSTANT
-			shared_ptr<inexor::entity_system::type_system::IntConstantFactory> int_constant_factory;
+			IntConstantFactoryPtr int_constant_factory;
 
 			/// Factory for FLOAT_CONSTANT
-			shared_ptr<inexor::entity_system::type_system::FloatConstantFactory> float_constant_factory;
+			FloatConstantFactoryPtr float_constant_factory;
 
 			/// Factory for STRING_CONSTANT
-			shared_ptr<inexor::entity_system::type_system::StringConstantFactory> string_constant_factory;
+			StringConstantFactoryPtr string_constant_factory;
 
 	};
 
-
-};
-};
+} } // inexor::configuration
