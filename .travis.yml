@@ -19,7 +19,7 @@ matrix:
           services:
             - docker
         - os: osx
-          osx_image: xcode10.1
+          osx_image: xcode10.2
           compiler: clang
           language: cpp
           env:
