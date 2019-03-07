@@ -18,8 +18,6 @@ namespace logging {
 	class LoggerEntityTypeProvider : public EntityTypeProvider
 	{
 		public:
-
-			/// Constructor.
 			LoggerEntityTypeProvider(
 				shared_ptr<EntityTypeBuilderManager> entity_type_builder_manager
 			) : EntityTypeProvider(
@@ -35,7 +33,6 @@ namespace logging {
 				}
 			) {};
 
-			/// Destructor.
 			~LoggerEntityTypeProvider() {};
 
 			// static string ATTTRIBUTE_LOGGER_NAME = "logger_name";
