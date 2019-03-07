@@ -1,11 +1,17 @@
-// Inexor entity system
-// (C) 2018-2019 Inexor
-
 #include "RendererManager.hpp"
 
+#include <Magnum/GL/Buffer.h>
+#include <Magnum/GL/DefaultFramebuffer.h>
+#include <Magnum/GL/Mesh.h>
+#include <Magnum/GL/Renderer.h>
+#include <Magnum/Platform/GLContext.h>
+#include <Magnum/Math/Color.h>
+#include <Magnum/Shaders/VertexColor.h>
+#include <GLFW/glfw3.h>
+
+using namespace std;
 using namespace Magnum;
 using namespace Math::Literals;
-
 
 namespace inexor {
 namespace renderer {
