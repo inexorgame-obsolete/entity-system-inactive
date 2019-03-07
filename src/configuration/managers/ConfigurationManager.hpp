@@ -9,8 +9,7 @@
 namespace inexor {
 namespace configuration {
 
-	/// @class ConfigurationManager
-    /// @brief Management of configurations. Uses the entity system to store the configuration items.
+    /// Management of configurations. Uses the entity system to store the configuration items.
 	class ConfigurationManager
 	{
 		using BoolConstantFactoryPtr = std::shared_ptr<entity_system::type_system::BoolConstantFactory>;

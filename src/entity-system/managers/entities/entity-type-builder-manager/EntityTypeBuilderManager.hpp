@@ -11,7 +11,6 @@
 
 #include "entity-system/builders/entities/entity-type-builder/EntityTypeBuilder.hpp"
 
-using namespace std;
 
 namespace inexor {
 namespace entity_system {
