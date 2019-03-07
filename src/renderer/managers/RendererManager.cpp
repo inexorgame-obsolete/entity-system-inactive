@@ -49,6 +49,7 @@ namespace renderer {
 			std::cout << "!window" << std::endl;
 			std::exit(1);
 		}
+		return window;
 	}
 
 	void RendererManager::init()
