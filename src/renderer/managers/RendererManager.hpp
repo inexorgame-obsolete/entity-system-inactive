@@ -54,7 +54,7 @@ namespace renderer {
         void init();
 
         /// Starts the window thread.
-        void start_window_thread();
+        void start_window_thread(GLFWwindow *windows);
 
     private:
         /// The entity type provider

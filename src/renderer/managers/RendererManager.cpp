@@ -26,6 +26,31 @@ namespace renderer {
 	{
 	}
 
+
+	GLFWwindow *create_window()
+	{
+		/* Initialize the library */
+		if(!glfwInit())
+		{
+			std::cout << "!glfwInit()" << std::endl;
+			std::exit(1);
+		}
+
+		/* Create a windowed mode window and its OpenGL context */
+		GLFWwindow* const window = glfwCreateWindow(
+			800,
+			600,
+			"Inexor Renderer 1",
+			nullptr,
+			nullptr
+		);
+		if(!window) {
+			glfwTerminate();
+			std::cout << "!window" << std::endl;
+			std::exit(1);
+		}
+	}
+
 	void RendererManager::init()
 	{
 		std::optional<std::shared_ptr<inexor::entity_system::EntityInstance>> o_renderer = renderer_factory->create_instance(0.5f, -0.5f);
@@ -52,13 +77,13 @@ namespace renderer {
 			std::cout << "Failed to create renderer instance!!!" << std::endl;
 		}
 
-		std::thread start_thread(&inexor::renderer::RendererManager::start_window_thread, this);
+		GLFWwindow *window = create_window();
+		std::thread start_thread(&inexor::renderer::RendererManager::start_window_thread, this, window);
 		start_thread.detach();
 	}
 
-	void RendererManager::start_window_thread()
+	void RendererManager::start_window_thread(GLFWwindow *window)
 	{
-
 		std::optional<std::shared_ptr<inexor::visual_scripting::Connector>> connector_x = connector_manager->create_connector(sin_x_attr_value, renderer_x_attr_value);
 		if (!connector_x.has_value())
 		{
@@ -75,96 +100,71 @@ namespace renderer {
 			connector_y.value()->enable_debug();
 		}
 
-		/* Initialize the library */
-		if(!glfwInit())
-		{
-			std::cout << "!glfwInit()" << std::endl;
-			std::exit(1);
-		}
-
-		/* Create a windowed mode window and its OpenGL context */
-		GLFWwindow* const window = glfwCreateWindow(
-			800,
-			600,
-			"Inexor Renderer 1",
-			nullptr,
-			nullptr
-		);
-		if(!window) {
-			glfwTerminate();
-			std::cout << "!window" << std::endl;
-			std::exit(1);
-		}
-
 		/* Make the window's context current */
 		glfwMakeContextCurrent(window);
 
+		/* Create Magnum context in an isolated scope */
+		// argc, argv
+		Platform::GLContext ctx{};
+
+		/* Setup the colored triangle */
+		using namespace Math::Literals;
+
+		struct TriangleVertex {
+			Vector2 position;
+			Color3 color;
+		};
+
+		const TriangleVertex data[] {
+			{{-0.5f, -0.5f}, 0xff0000_rgbf},    /* Left vertex, red color */
+			{{ 0.5f, -0.5f}, 0x00ff00_rgbf},    /* Right vertex, green color */
+			{{ 0.0f,  0.5f}, 0x0000ff_rgbf}     /* Top vertex, blue color */
+		};
+
+		GL::Buffer buffer;
+		buffer.setData(data);
+
+		GL::Mesh mesh;
+		mesh.setPrimitive(GL::MeshPrimitive::Triangles)
+			.setCount(3)
+			.addVertexBuffer(
+				buffer,
+				0,
+				Shaders::VertexColor2D::Position{},
+				Shaders::VertexColor2D::Color3{}
+			);
+
+		/// The shader
+		Shaders::VertexColor2D shader;
+
+		/* Loop until the user closes the window */
+		while(!glfwWindowShouldClose(window))
 		{
-			/* Create Magnum context in an isolated scope */
-			// argc, argv
-			Platform::GLContext ctx{};
+			float x = std::get<DataType::FLOAT>(renderer_x_attr_value->value.Value());
+			float y = 0.0f - std::get<DataType::FLOAT>(renderer_y_attr_value->value.Value());
+			std::cout << std::fixed << std::setprecision(3) << "(" << x << ", " << y << ")" << std::endl;
 
-			/* Setup the colored triangle */
-			using namespace Math::Literals;
+			Matrix3 transformation_matrix_x = Matrix3::translation(Vector2::xAxis(x));
+			Matrix3 transformation_matrix_y = Matrix3::translation(Vector2::yAxis(y));
 
-			struct TriangleVertex {
-				Vector2 position;
-				Color3 color;
-			};
+			shader.setTransformationProjectionMatrix(transformation_matrix_x * transformation_matrix_y);
 
-			const TriangleVertex data[] {
-				{{-0.5f, -0.5f}, 0xff0000_rgbf},    /* Left vertex, red color */
-				{{ 0.5f, -0.5f}, 0x00ff00_rgbf},    /* Right vertex, green color */
-				{{ 0.0f,  0.5f}, 0x0000ff_rgbf}     /* Top vertex, blue color */
-			};
+			/* Render here */
+			GL::defaultFramebuffer.clear(GL::FramebufferClear::Color);
+			mesh.draw(shader);
 
-			GL::Buffer buffer;
-			buffer.setData(data);
+			/* Swap front and back buffers */
+			glfwSwapBuffers(window);
 
-			GL::Mesh mesh;
-			mesh.setPrimitive(GL::MeshPrimitive::Triangles)
-				.setCount(3)
-				.addVertexBuffer(
-					buffer,
-					0,
-					Shaders::VertexColor2D::Position{},
-					Shaders::VertexColor2D::Color3{}
-				);
+			/* Poll for and process events */
+			glfwPollEvents();
 
-			/// The shader
-			Shaders::VertexColor2D shader;
-
-			/* Loop until the user closes the window */
-			while(!glfwWindowShouldClose(window))
-			{
-				float x = std::get<DataType::FLOAT>(renderer_x_attr_value->value.Value());
-				float y = 0.0f - std::get<DataType::FLOAT>(renderer_y_attr_value->value.Value());
-				std::cout << std::fixed << std::setprecision(3) << "(" << x << ", " << y << ")" << std::endl;
-
-				Matrix3 transformation_matrix_x = Matrix3::translation(Vector2::xAxis(x));
-				Matrix3 transformation_matrix_y = Matrix3::translation(Vector2::yAxis(y));
-
-				shader.setTransformationProjectionMatrix(transformation_matrix_x * transformation_matrix_y);
-
-				/* Render here */
-				GL::defaultFramebuffer.clear(GL::FramebufferClear::Color);
-				mesh.draw(shader);
-
-				/* Swap front and back buffers */
-				glfwSwapBuffers(window);
-
-				/* Poll for and process events */
-				glfwPollEvents();
-
-				std::this_thread::sleep_for(50ms);
-			}
-
-			std::cout << "Window closed!" << std::endl;
-			glfwTerminate();
-			std::exit(1);
-
+			std::this_thread::sleep_for(50ms);
 		}
 
+		std::cout << "Window closed!" << std::endl;
+		glfwTerminate();
+		std::exit(1);
 	}
 
 };
