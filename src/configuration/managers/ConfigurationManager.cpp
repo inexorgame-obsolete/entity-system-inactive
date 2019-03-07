@@ -14,10 +14,10 @@ namespace inexor {
 namespace configuration {
 
 	ConfigurationManager::ConfigurationManager(
-		shared_ptr<inexor::entity_system::type_system::BoolConstantFactory> bool_constant_factory,
-		shared_ptr<inexor::entity_system::type_system::IntConstantFactory> int_constant_factory,
-		shared_ptr<inexor::entity_system::type_system::FloatConstantFactory> float_constant_factory,
-		shared_ptr<inexor::entity_system::type_system::StringConstantFactory> string_constant_factory
+		BoolConstantFactoryPtr bool_constant_factory,
+		IntConstantFactoryPtr int_constant_factory,
+		FloatConstantFactoryPtr float_constant_factory,
+		StringConstantFactoryPtr string_constant_factory
 	)
 	{
 		this->bool_constant_factory = bool_constant_factory;

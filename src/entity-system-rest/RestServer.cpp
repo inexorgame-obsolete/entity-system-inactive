@@ -17,7 +17,7 @@ namespace entity_system {
 		std::shared_ptr<EntityInstanceApi> entity_instance_api,
 		std::shared_ptr<RelationInstanceApi> relation_instance_api,
 		std::shared_ptr<AttributeApi> attribute_api
-	)
+	): service_thread()
 	{
 		this->log_manager = log_manager;
 
@@ -33,12 +33,13 @@ namespace entity_system {
 		settings = make_shared<Settings>();
 		settings->set_port(8080);
 		settings->set_root("api/v1");
-		settings->set_worker_limit(8);
+		settings->set_worker_limit(1);
 		settings->set_default_header("Connection", "close");
 	}
 
 	RestServer::~RestServer()
 	{
+		if(service_thread.joinable()) service_thread.join();
 	}
 
 	std::shared_ptr<Service> RestServer::get_service()
@@ -69,15 +70,19 @@ namespace entity_system {
 		return this->settings;
 	}
 
-	void RestServer::startService(int const& _port) {
+	void RestServer::startService(uint16_t port) {
+		settings->set_port(port);
+        service_thread = std::thread([this]() {
+			// This is blocking for ever, so start it in own thread.
+			this->service->start(settings);
+		});
 		// port is ignored (already set in the settings!)
 	    spdlog::get(LOGGER_ENTITY_REST)->info("Starting REST server on http://localhost:{}/{}", this->settings->get_port(), this->settings->get_root());
-		this->service->start(settings);
 	}
 
 	void RestServer::stopService() {
 	    spdlog::get(LOGGER_ENTITY_REST)->info("Stopping REST server on http://localhost:{}/{}", this->settings->get_port(), this->settings->get_root());
-		this->service->stop();
+		service->stop();
 	    spdlog::get(LOGGER_ENTITY_REST)->info("REST server stopped");
 	}
 

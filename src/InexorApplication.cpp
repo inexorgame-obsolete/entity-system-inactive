@@ -1,7 +1,9 @@
 // Inexor
 // (c)2018-2019 Inexor
 
+#include "spdlog/spdlog.h"
 #include "InexorApplication.hpp"
+
 
 using namespace inexor::entity_system;
 using namespace spdlog;
@@ -72,66 +74,58 @@ namespace inexor {
 
 		// Initialize the rendering
 		renderer_manager->init();
-	}
 
-	void InexorApplication::start()
-	{
-		spdlog::get(LOGGER_NAME)->info("start()");
-		if (!running) {
-
-			// Create one single instance of the entity system.
-			// @note The entity system has no singleton implementation for now.
-			spdlog::get(LOGGER_NAME)->info("Starting entity system...");
-
-			// Setup REST server
-			rest_server->set_service(rest_server);
-			rest_server->set_signal_handler(SIGINT, InexorApplication::call_sighup_handlers);
-			rest_server->set_signal_handler(SIGTERM, InexorApplication::call_sigterm_handlers);
-			rest_server->set_ready_handler(InexorApplication::call_ready_handlers);
-			rest_server->init();
-			rest_server->set_logger(std::make_shared<RestServerLogger>());
-			rest_server->startService(0);
-		} else {
-			spdlog::get(LOGGER_NAME)->info("Already running");
-		}
-
+		// Setup REST server
+		rest_server->set_service(rest_server);
+		rest_server->set_signal_handler(SIGINT, InexorApplication::call_sighup_handlers);
+		rest_server->set_signal_handler(SIGTERM, InexorApplication::call_sigterm_handlers);
+		rest_server->set_ready_handler(InexorApplication::call_ready_handlers);
+		rest_server->init();
+		rest_server->set_logger(std::make_shared<RestServerLogger>());
 	}
 
 	void InexorApplication::run()
 	{
-	    spdlog::get(LOGGER_NAME)->info("Waiting for services being started");
+		// Start the REST server and just go an as soon as it is started.
+		rest_server->startService();
+
+	    spdlog::get(LOGGER_NAME)->info("Waiting for REST service being started");
 		while (!running) {
+			// wait until the rest server started up
+			// which calls ready_handlers() as soon as it is.
+			// Then running becomes true and we leave
 			std::this_thread::sleep_for(10ms);
 		}
+
 	    spdlog::get(LOGGER_NAME)->info("Inexor is running");
 		while (running) {
+			// everything else happens in the execution graph or in threads for the ES instances.
 			std::this_thread::sleep_for(5s);
 			spdlog::get(LOGGER_NAME)->info("Uptime: {} s", rest_server->get_uptime().count());
 		}
+
 	    spdlog::get(LOGGER_NAME)->info("Inexor is no longer running");
-            std::exit(EXIT_SUCCESS); // exit run thread
+		std::exit(EXIT_SUCCESS);
 	}
 
 	void InexorApplication::shutdown()
 	{
 		if (running) {
-			spdlog::get(LOGGER_NAME)->info("Shutting down Inexor...");
-			running = false;
-			std::this_thread::sleep_for(1s);
-			rest_server->stopService();
-			spdlog::get(LOGGER_NAME)->info("Shutdown completed");
-		} else {
 			spdlog::get(LOGGER_NAME)->info("Not running");
+			return;
 		}
+		spdlog::get(LOGGER_NAME)->info("Shutting down Inexor...");
+		running = false;
+		std::this_thread::sleep_for(1s);
+		rest_server->stopService();
+		spdlog::get(LOGGER_NAME)->info("Shutdown completed");
 	}
 
 	void InexorApplication::restart()
 	{
 	    spdlog::get(LOGGER_NAME)->info("Restarting Inexor...");
 		shutdown();
-		std::this_thread::sleep_for(1s);
-		std::thread start_thread(&inexor::InexorApplication::start, this);
-		std::thread run_thread(&inexor::InexorApplication::run, this);
+		run();
 	    spdlog::get(LOGGER_NAME)->info("Restart completed");
 	}
 

@@ -32,7 +32,6 @@
 #include "renderer/managers/RendererManager.hpp"
 
 
-using namespace spdlog;
 
 #define LOGGER_NAME "inexor.app"
 
@@ -66,16 +65,13 @@ namespace inexor {
 			/// Initializes the Inexor application.
 			void init();
 
-			/// Starts the Inexor application.
-			void start();
-
-			/// Run loop of the Inexor application.
+			/// Run loop of the Inexor application. Blocks for ever (or until this->running was set to false)
 			void run();
 
 			/// Shuts down the Inexor application.
 			void shutdown();
 
-			/// Restarts the Inexor application.
+			/// Restarts the Inexor application, i.e. slightly improved wrapper around shutdown() and init();
 			void restart();
 
 			/// Registers a logger

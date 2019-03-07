@@ -37,25 +37,23 @@ namespace entity_system {
 	{
 		public:
 
-			/// Constructor.
 			RestServer(
 				std::shared_ptr<inexor::logging::LogManager> log_manager,
 
-				// The REST APIs
+				// Inject the REST APIs from dedicated classes
 				std::shared_ptr<EntityTypeApi> entity_type_api,
 				std::shared_ptr<RelationTypeApi> relation_type_api,
 				std::shared_ptr<EntityInstanceApi> entity_instance_api,
 				std::shared_ptr<RelationInstanceApi> relation_instance_api,
 				std::shared_ptr<AttributeApi> attribute_api
-
 			);
 
-			/// Destructor.
 			~RestServer();
 
 			void init();
 
-			void startService(int const& port);
+			/// Start the server on a specific port (in a dedicated thread)
+			void startService(uint16_t port = 8080);
 			void stopService();
 
 			/// Getter for the service
@@ -87,11 +85,14 @@ namespace entity_system {
 			/// The REST API for attributes
 			std::shared_ptr<AttributeApi> attribute_api;
 
-			/// The REST service
+			// TODO: Get rid of this tight coupling
 			std::shared_ptr<restbed::Service> service;
 
 			/// The settings of the REST server
 			std::shared_ptr<Settings> settings;
+
+			/// The dedicated thread running the service (because the restbed service is blocking)
+			std::thread service_thread;
 	};
 
 
