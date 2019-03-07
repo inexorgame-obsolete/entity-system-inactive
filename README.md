@@ -45,9 +45,13 @@ To build the entity-system one needs:
 
 ### Documentation
 
-You need to run `doxygen` (retrievable from http://doxygen.nl/) inside this folder to create the docs at the moment, like so:
+You need to install
+- `doxygen`  (retrievable from http://doxygen.nl/)
+- `graphviz` see [their website](https://www.graphviz.org/)
 
-`doxygen . `
+Once installed invoke `doxygen` from the `entity-system` directoy like so:
+
+`doxygen`
 
 ## Join us
 
