@@ -3,6 +3,7 @@
 
 #include "spdlog/spdlog.h"
 #include "InexorApplication.hpp"
+#include <GLFW/glfw3.h>
 
 
 using namespace inexor::entity_system;
@@ -102,6 +103,8 @@ namespace inexor {
 			// everything else happens in the execution graph or in threads for the ES instances.
 			std::this_thread::sleep_for(5s);
 			spdlog::get(LOGGER_NAME)->info("Uptime: {} s", rest_server->get_uptime().count());
+			/* Poll for and process events */
+			glfwPollEvents();
 		}
 
 	    spdlog::get(LOGGER_NAME)->info("Inexor is no longer running");

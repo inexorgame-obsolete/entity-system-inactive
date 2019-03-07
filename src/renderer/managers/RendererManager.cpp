@@ -163,9 +163,6 @@ namespace renderer {
 			/* Swap front and back buffers */
 			glfwSwapBuffers(window);
 
-			/* Poll for and process events */
-			glfwPollEvents();
-
 			std::this_thread::sleep_for(50ms);
 		}
 
