@@ -16,7 +16,7 @@
 #include "renderer/factories/RendererFactory.hpp"
 #include "visual-scripting/managers/ConnectorManager.hpp"
 
-#include "type-system/factories/arithmetic/SinFactory.hpp"
+#include "type-system/factories/trigonometric/SinFactory.hpp"
 
 
 struct GLFWwindow;

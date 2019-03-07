@@ -12,15 +12,11 @@ namespace type_system {
 
 	ArithmeticTypeSystemManager::ArithmeticTypeSystemManager(
 		shared_ptr<AddIntEntityTypeProvider> add_int_entity_type_provider,
-		shared_ptr<SinEntityTypeProvider> sin_entity_type_provider,
-		shared_ptr<AddIntFactory> add_int_factory,
-		shared_ptr<SinFactory> sin_factory
+		shared_ptr<AddIntFactory> add_int_factory
 	)
 	{
 		this->add_int_entity_type_provider = add_int_entity_type_provider;
-		this->sin_entity_type_provider = sin_entity_type_provider;
 		this->add_int_factory = add_int_factory;
-		this->sin_factory = sin_factory;
 	}
 
 	ArithmeticTypeSystemManager::~ArithmeticTypeSystemManager()

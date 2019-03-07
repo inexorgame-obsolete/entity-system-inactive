@@ -5,7 +5,7 @@
 
 #include <iostream>
 
-#include "type-system/factories/arithmetic/SinFactory.hpp"
+#include "type-system/factories/trigonometric/SinFactory.hpp"
 #include "type-system/factories/constants/FloatConstantFactory.hpp"
 #include "visual-scripting/managers/ConnectorManager.hpp"
 

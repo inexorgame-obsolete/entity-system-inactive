@@ -9,7 +9,7 @@
 #include "entity-system/model/data/DataTypes.hpp"
 #include "entity-system/util/type-definitions/TypeDefinitions.hpp"
 
-#include "type-system/providers/arithmetic/SinEntityTypeProvider.hpp"
+#include "type-system/providers/trigonometric/SinEntityTypeProvider.hpp"
 
 using namespace inexor::entity_system;
 using namespace std;

@@ -8,27 +8,27 @@
 #include "entity-system/model/data/DataTypes.hpp"
 #include "entity-system/util/type-definitions/TypeDefinitions.hpp"
 #include "visual-scripting/managers/ProcessorRegistry.hpp"
-#include "visual-scripting/processors/arithmetic/AddInt.hpp"
+#include "visual-scripting/processors/trigonometric/Sin.hpp"
 
 using namespace inexor::entity_system;
 
 namespace inexor {
 namespace visual_scripting {
 
-	/// @class ArithmeticProcessorManager
+	/// @class TrigonometricProcessorManager
     /// @brief Management of the arithmetic processors.
-	class ArithmeticProcessorManager
+	class TrigonometricProcessorManager
 	{
 		public:
 
 			/// Constructor.
-			ArithmeticProcessorManager(
+			TrigonometricProcessorManager(
 				std::shared_ptr<inexor::visual_scripting::ProcessorRegistry> processor_registry,
-				std::shared_ptr<inexor::visual_scripting::AddInt> add_int
+				std::shared_ptr<inexor::visual_scripting::Sin> sin
 			);
 
 			/// Destructor.
-			~ArithmeticProcessorManager();
+			~TrigonometricProcessorManager();
 
 			/// Initialization of the processors.
 			void init();
@@ -39,7 +39,7 @@ namespace visual_scripting {
 			std::shared_ptr<inexor::visual_scripting::ProcessorRegistry> processor_registry;
 
 			// Addition for integers.
-			std::shared_ptr<inexor::visual_scripting::AddInt> add_int;
+			std::shared_ptr<inexor::visual_scripting::Sin> sin;
 
 	};
 

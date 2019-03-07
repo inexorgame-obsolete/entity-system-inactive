@@ -14,7 +14,7 @@
 #include "entity-system/model/entities/entity-types/EntityType.hpp"
 #include "entity-system/model/entities/entity-instances/EntityInstance.hpp"
 #include "entity-system/managers/entities/entity-instance-manager/EntityInstanceManager.hpp"
-#include "type-system/providers/arithmetic/SinEntityTypeProvider.hpp"
+#include "type-system/providers/trigonometric/SinEntityTypeProvider.hpp"
 #include "visual-scripting/managers/ProcessorRegistry.hpp"
 #include "visual-scripting/model/Processor.hpp"
 
