@@ -106,9 +106,6 @@ namespace inexor {
 			/* Poll for and process events */
 			glfwPollEvents();
 		}
-
-	    spdlog::get(LOGGER_NAME)->info("Inexor is no longer running");
-		std::exit(EXIT_SUCCESS);
 	}
 
 	void InexorApplication::shutdown()
@@ -117,10 +114,11 @@ namespace inexor {
 			spdlog::get(LOGGER_NAME)->info("Not running");
 			return;
 		}
+
 		spdlog::get(LOGGER_NAME)->info("Shutting down Inexor...");
-		running = false;
 		std::this_thread::sleep_for(1s);
 		rest_server->stopService();
+		running = false;
 		spdlog::get(LOGGER_NAME)->info("Shutdown completed");
 	}
 
