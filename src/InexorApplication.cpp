@@ -15,7 +15,7 @@ namespace inexor {
 		std::shared_ptr<inexor::entity_system::EntitySystem> entity_system,
 		std::shared_ptr<inexor::entity_system::type_system::TypeSystemManager> type_system_manager,
 		std::shared_ptr<inexor::configuration::ConfigurationManager> configuration_manager,
-		std::shared_ptr<inexor::entity_system::RestServer> rest_server,
+		std::shared_ptr<inexor::rest::RestServer> rest_server,
 		std::shared_ptr<inexor::entity_system::EntitySystemDebugger> entity_system_debugger,
 		std::shared_ptr<inexor::visual_scripting::VisualScriptingSystem> visual_scripting_system,
 		std::shared_ptr<inexor::logging::LogManager> log_manager
@@ -80,13 +80,10 @@ namespace inexor {
 			spdlog::get(LOGGER_NAME)->info("Starting entity system...");
 
 			// Setup REST server
-			rest_server->set_service(rest_server);
-			rest_server->set_signal_handler(SIGINT, InexorApplication::call_sighup_handlers);
-			rest_server->set_signal_handler(SIGTERM, InexorApplication::call_sigterm_handlers);
-			rest_server->set_ready_handler(InexorApplication::call_ready_handlers);
-			rest_server->init();
-			rest_server->set_logger(std::make_shared<RestServerLogger>());
-			rest_server->startService(0);
+			rest_server->set_port(8080);
+			rest_server->start();
+			//spdlog::get(LOGGER_NAME)->info("REST server is running on http://localhost:{}/{}", rest_server->get_settings()->get_port(), rest_server->get_settings()->get_root());
+			running = true;
 		} else {
 			spdlog::get(LOGGER_NAME)->info("Already running");
 		}
@@ -102,7 +99,7 @@ namespace inexor {
 	    spdlog::get(LOGGER_NAME)->info("Inexor is running");
 		while (running) {
 			std::this_thread::sleep_for(5s);
-			spdlog::get(LOGGER_NAME)->info("Uptime: {} s", rest_server->get_uptime().count());
+			//spdlog::get(LOGGER_NAME)->info("Uptime: {} s", rest_server->get_uptime().count());
 		}
 	    spdlog::get(LOGGER_NAME)->info("Inexor is no longer running");
             std::exit(EXIT_SUCCESS); // exit run thread
@@ -114,7 +111,6 @@ namespace inexor {
 			spdlog::get(LOGGER_NAME)->info("Shutting down Inexor...");
 			running = false;
 			std::this_thread::sleep_for(1s);
-			rest_server->stopService();
 			spdlog::get(LOGGER_NAME)->info("Shutdown completed");
 		} else {
 			spdlog::get(LOGGER_NAME)->info("Not running");
@@ -140,12 +136,6 @@ namespace inexor {
 		return entity_system;
 	}
 
-
-	std::shared_ptr<inexor::entity_system::RestServer> InexorApplication::get_rest_server()
-	{
-		return rest_server;
-	}
-
 	void InexorApplication::sighup_handler(const int signal_number)
 	{
 	    spdlog::get(LOGGER_NAME)->info("Received SIGINT signal number {}", signal_number);
@@ -156,15 +146,6 @@ namespace inexor {
 	{
 	    spdlog::get(LOGGER_NAME)->info("Received SIGTERM signal number {}", signal_number);
 		shutdown();
-	}
-
-	void InexorApplication::ready_handler(Service&)
-	{
-	    spdlog::get(LOGGER_NAME)->info("REST server is running on http://localhost:{}/{}", rest_server->get_settings()->get_port(), rest_server->get_settings()->get_root());
-
-		// Set running state
-		running = true;
-
 	}
 
 };

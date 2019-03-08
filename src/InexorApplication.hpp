@@ -5,7 +5,6 @@
 
 #include <memory>
 #include <cstdlib>
-#include <restbed>
 #include <csignal>
 #include <sys/types.h>
 
@@ -21,9 +20,8 @@
 
 #include "entity-system/EntitySystem.hpp"
 #include "entity-system/managers/EntitySystemDebugger.hpp"
-#include "entity-system-rest/RestServer.hpp"
-#include "entity-system-rest/RestServerLogger.hpp"
 #include "entity-system-example/ColorManager.hpp"
+#include "entity-system-rest/RestServer.hpp"
 
 #include "type-system/managers/TypeSystemManager.hpp"
 #include "configuration/managers/ConfigurationManager.hpp"
@@ -50,7 +48,7 @@ namespace inexor {
 				std::shared_ptr<inexor::entity_system::EntitySystem> entity_system,
 				std::shared_ptr<inexor::entity_system::type_system::TypeSystemManager> type_system_manager,
 				std::shared_ptr<inexor::configuration::ConfigurationManager> configuration_manager,
-				std::shared_ptr<inexor::entity_system::RestServer> rest_server,
+				std::shared_ptr<inexor::rest::RestServer> rest_server,
 				std::shared_ptr<inexor::entity_system::EntitySystemDebugger> entity_system_debugger,
 				std::shared_ptr<inexor::visual_scripting::VisualScriptingSystem> visual_scripting_system,
 				std::shared_ptr<inexor::logging::LogManager> log_manager
@@ -82,9 +80,6 @@ namespace inexor {
 			/// Getter for the entity system
 			std::shared_ptr<inexor::entity_system::EntitySystem> get_entity_system();
 
-			/// Getter for the rest server
-			std::shared_ptr<inexor::entity_system::RestServer> get_rest_server();
-
 		private:
 
             /// The entity system of Inexor
@@ -97,7 +92,7 @@ namespace inexor {
             std::shared_ptr<inexor::configuration::ConfigurationManager> configuration_manager;
 
             /// The REST server of the entity system
-			std::shared_ptr<inexor::entity_system::RestServer> rest_server;
+			std::shared_ptr<inexor::rest::RestServer> rest_server;
 
             /// The debugger of the entity system
 			std::shared_ptr<inexor::entity_system::EntitySystemDebugger> entity_system_debugger;
@@ -114,7 +109,6 @@ namespace inexor {
             /// Signal handlers
             void sighup_handler(const int signal_number);
             void sigterm_handler(const int signal_number);
-            void ready_handler(Service&);
 
             static void call_sighup_handlers(int signal_number)
             {
@@ -129,14 +123,6 @@ namespace inexor {
             	for (InexorApplication* instance : InexorApplication::instances)
             	{
             		std::mem_fn(&InexorApplication::sigterm_handler)(instance, signal_number);
-            	}
-			}
-
-            static void call_ready_handlers(Service& service)
-            {
-            	for (InexorApplication* instance : InexorApplication::instances)
-            	{
-            		std::mem_fn(&InexorApplication::ready_handler)(instance, service);
             	}
 			}
 
