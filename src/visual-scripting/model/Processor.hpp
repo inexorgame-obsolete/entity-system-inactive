@@ -8,7 +8,7 @@
 
 #include "react/Observer.h"
 
-#include "entity-system/providers/entities/entity-type-provider/EntityTypeProvider.hpp"
+#include "entity-system/providers/EntityTypeProvider.hpp"
 #include "entity-system/managers/entities/entity-instance-manager/EntityInstanceManager.hpp"
 #include "entity-system/model/entities/entity-types/EntityType.hpp"
 #include "entity-system/model/entities/entity-instances/EntityInstance.hpp"

@@ -9,9 +9,10 @@
 #include "entity-system/model/data/DataTypes.hpp"
 #include "entity-system/util/type-definitions/TypeDefinitions.hpp"
 
-#include "logging/providers/LoggerEntityTypeProvider.hpp"
+#include "type-system/providers/logger/LoggerEntityTypeProvider.hpp"
 
 using namespace inexor::entity_system;
+using namespace inexor::entity_system::type_system;
 using namespace std;
 
 namespace inexor {

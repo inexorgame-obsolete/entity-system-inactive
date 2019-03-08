@@ -13,8 +13,8 @@
 #include "entity-system/model/data/DataTypes.hpp"
 #include "entity-system/util/type-definitions/TypeDefinitions.hpp"
 
-#include "logging/factories/LoggerFactory.hpp"
-#include "logging/providers/LoggerEntityTypeProvider.hpp"
+#include "type-system/factories/logger/LoggerFactory.hpp"
+#include "type-system/providers/logger/LoggerEntityTypeProvider.hpp"
 
 using namespace inexor::entity_system;
 using namespace std;

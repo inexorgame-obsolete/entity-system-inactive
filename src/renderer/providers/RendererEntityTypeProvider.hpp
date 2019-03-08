@@ -1,45 +1,42 @@
-// Inexor entity system
-// (c)2018 Inexor
-
 #pragma once
 
 #include "entity-system/managers/entities/entity-type-builder-manager/EntityTypeBuilderManager.hpp"
-#include "entity-system/providers/entities/entity-type-provider/EntityTypeProvider.hpp"
-
-using namespace inexor::entity_system;
-using namespace std;
-
+#include "entity-system/providers/EntityTypeProvider.hpp"
 
 namespace inexor {
 namespace renderer {
 
-	/// @class RendererEntityTypeProvider
-    /// @brief Provides the entity type LOGGER.
+	using namespace inexor::entity_system;
+
+	/// Provides an entity type "RENDERER".
 	class RendererEntityTypeProvider : public EntityTypeProvider
 	{
 		public:
 
-			/// Constructor.
+			/// Constructs the specialized provider for the RENERER entity type
 			RendererEntityTypeProvider(
-				shared_ptr<EntityTypeBuilderManager> entity_type_builder_manager
+				std::shared_ptr<EntityTypeBuilderManager> entity_type_builder_manager
 			) : EntityTypeProvider(
 				entity_type_builder_manager,
-				"RENDERER",
+				TYPE_NAME,
 				{
-					{ "renderer_x", DataType::FLOAT },
-					{ "renderer_y", DataType::FLOAT }
-				},
-				{
-					{ "renderer_x", 1 << Feature::INPUT | 1 << Feature::OUTPUT },
-					{ "renderer_y", 1 << Feature::INPUT | 1 << Feature::OUTPUT }
+					{ RENDERER_X, { DataType::FLOAT, 1 << Feature::INPUT } },
+					{ RENDERER_Y, { DataType::FLOAT, 1 << Feature::INPUT } }
 				}
 			) {};
 
-			/// Destructor.
 			~RendererEntityTypeProvider() {};
+
+			/// Defines the name of this entity type
+			static constexpr char TYPE_NAME[] = "RENDERER";
+
+			/// The name of the renderer x attribute value.
+			static constexpr char RENDERER_X[] = "renderer_x";
+
+			/// The name of the renderer y attribute value.
+			static constexpr char RENDERER_Y[] = "renderer_y";
 
 	};
 
-
-};
-};
+}
+}

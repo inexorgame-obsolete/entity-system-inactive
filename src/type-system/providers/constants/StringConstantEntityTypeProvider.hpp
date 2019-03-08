@@ -1,42 +1,39 @@
-// Inexor entity system
-// (c)2018 Inexor
-
 #pragma once
 
 #include "entity-system/managers/entities/entity-type-builder-manager/EntityTypeBuilderManager.hpp"
-#include "entity-system/providers/entities/entity-type-provider/EntityTypeProvider.hpp"
-
-using namespace inexor::entity_system;
-using namespace std;
+#include "entity-system/providers/EntityTypeProvider.hpp"
 
 namespace inexor {
 namespace entity_system {
 namespace type_system {
 
-	/// @class StringConstantEntityTypeProvider
-    /// @brief Provides the entity type STRING_CONSTANT.
+	/// Provides an entity type "STRING_CONSTANT" which is a pure string constant variable.
 	class StringConstantEntityTypeProvider : public EntityTypeProvider
 	{
 		public:
 
-			/// Constructor.
+			/// Constructs the specialized provider for the STRING_CONSTANT entity type
 			StringConstantEntityTypeProvider(
-				shared_ptr<EntityTypeBuilderManager> entity_type_builder_manager
+				std::shared_ptr<EntityTypeBuilderManager> entity_type_builder_manager
 			) : EntityTypeProvider(
 				entity_type_builder_manager,
-				"STRING_CONSTANT",
+				TYPE_NAME,
 				{
-					{ "string_constant_name", DataType::STRING },
-					{ "string_constant_value", DataType::STRING }
-				},
-				{
-					{ "string_constant_name", 1 << Feature::OUTPUT },
-					{ "string_constant_value", 1 << Feature::OUTPUT }
+					{ STRING_CONSTANT_NAME, { DataType::STRING, 1 << Feature::OUTPUT } },
+					{ STRING_CONSTANT_VALUE, { DataType::STRING, 1 << Feature::OUTPUT } }
 				}
 			) {};
 
-			/// Destructor.
 			~StringConstantEntityTypeProvider() {};
+
+			/// Defines the name of this entity type
+			static constexpr char TYPE_NAME[] = "STRING_CONSTANT";
+
+			/// The name of the output attribute string_constant_name
+			static constexpr char STRING_CONSTANT_NAME[] = "string_constant_name";
+
+			/// The name of the output attribute string_constant_value
+			static constexpr char STRING_CONSTANT_VALUE[] = "string_constant_value";
 
 	};
 

@@ -1,6 +1,3 @@
-// Inexor entity system
-// (c)2018 Inexor
-
 #pragma once
 
 #include "entity-system/managers/entities/entity-type-builder-manager/EntityTypeBuilderManager.hpp"

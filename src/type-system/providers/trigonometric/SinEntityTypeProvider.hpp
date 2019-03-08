@@ -1,40 +1,36 @@
-// Inexor entity system
-// (c)2018 Inexor
-
 #pragma once
 
 #include "entity-system/managers/entities/entity-type-builder-manager/EntityTypeBuilderManager.hpp"
-#include "entity-system/providers/entities/entity-type-provider/EntityTypeProvider.hpp"
-
-using namespace inexor::entity_system;
-using namespace std;
+#include "entity-system/providers/EntityTypeProvider.hpp"
 
 namespace inexor {
 namespace entity_system {
 namespace type_system {
 
-	/// @class SinEntityTypeProvider
-    /// @brief Provides the entity type SIN.
+	/// Provides an entity type "SIN" which is a sinus value generator.
 	class SinEntityTypeProvider : public EntityTypeProvider
 	{
 		public:
 
-			/// Constructor.
+			/// Constructs the specialized provider for the SIN entity type
 			SinEntityTypeProvider(
-				shared_ptr<EntityTypeBuilderManager> entity_type_builder_manager
+				std::shared_ptr<EntityTypeBuilderManager> entity_type_builder_manager
 			) : EntityTypeProvider(
 				entity_type_builder_manager,
-				"SIN",
+				TYPE_NAME,
 				{
-					{ "sin_value", DataType::FLOAT }
-				},
-				{
-					{ "sin_value", 1 << Feature::OUTPUT }
+					{ SIN_VALUE, { DataType::FLOAT, 1 << Feature::OUTPUT } }
 				}
 			) {};
 
 			/// Destructor.
 			~SinEntityTypeProvider() {};
+
+			/// Defines the name of this entity type
+			static constexpr char TYPE_NAME[] = "SIN";
+
+			/// The sinus value attribute
+			static constexpr char SIN_VALUE[] = "sin_value";
 
 	};
 

@@ -11,7 +11,6 @@
 
 #include "entity-system/model/data/container/DataContainer.hpp"
 #include "entity-system/model/data/DataTypes.hpp"
-#include "entity-system/model/entities/entity-types/EntityType.hpp"
 #include "entity-system/model/entities/entity-instances/EntityInstance.hpp"
 #include "entity-system/managers/entities/entity-instance-manager/EntityInstanceManager.hpp"
 #include "type-system/providers/trigonometric/SinEntityTypeProvider.hpp"
