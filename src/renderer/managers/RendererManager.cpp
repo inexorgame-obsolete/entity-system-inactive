@@ -19,11 +19,13 @@ namespace renderer {
 	RendererManager::RendererManager(
 		shared_ptr<inexor::renderer::RendererFactory> render_factory,
 		shared_ptr<inexor::entity_system::type_system::SinFactory> sin_factory,
+		shared_ptr<inexor::entity_system::type_system::CosFactory> cos_factory,
 		std::shared_ptr<inexor::visual_scripting::ConnectorManager> connector_manager,
 		shared_ptr<EntityInstanceManager> entity_instance_manager
 	) {
 		this->renderer_factory = render_factory;
 		this->sin_factory = sin_factory;
+		this->cos_factory = cos_factory;
 		this->connector_manager = connector_manager;
 		this->entity_instance_manager = entity_instance_manager;
 	}
@@ -62,23 +64,25 @@ namespace renderer {
 	{
 		std::optional<std::shared_ptr<inexor::entity_system::EntityInstance>> o_renderer = renderer_factory->create_instance(0.5f, -0.5f);
 		std::optional<std::shared_ptr<inexor::entity_system::EntityInstance>> o_sin_x = sin_factory->create_instance();
-		std::optional<std::shared_ptr<inexor::entity_system::EntityInstance>> o_sin_y = sin_factory->create_instance();
+		std::optional<std::shared_ptr<inexor::entity_system::EntityInstance>> o_cos_y = cos_factory->create_instance();
 
-		if (o_renderer.has_value() && o_sin_x.has_value() && o_sin_y.has_value())
+		if (o_renderer.has_value() && o_sin_x.has_value() && o_cos_y.has_value())
 		{
 			renderer = o_renderer.value();
 			sin_x = o_sin_x.value();
-			sin_y = o_sin_y.value();
-			std::optional<std::shared_ptr<inexor::entity_system::EntityAttributeInstance>> o_sin_x_attr_value = sin_x->get_attribute_instance("sin_value");
-			std::optional<std::shared_ptr<inexor::entity_system::EntityAttributeInstance>> o_sin_y_attr_value = sin_y->get_attribute_instance("sin_value");
-			std::optional<std::shared_ptr<inexor::entity_system::EntityAttributeInstance>> o_renderer_x_attr_value = renderer->get_attribute_instance("renderer_x");
-			std::optional<std::shared_ptr<inexor::entity_system::EntityAttributeInstance>> o_renderer_y_attr_value = renderer->get_attribute_instance("renderer_y");
-			if (o_sin_x_attr_value.has_value() && o_sin_y_attr_value.has_value() && o_renderer_x_attr_value.has_value() && o_renderer_y_attr_value.has_value())
+			cos_y = o_cos_y.value();
+			std::optional<std::shared_ptr<inexor::entity_system::EntityAttributeInstance>> o_sin_x_attr_value = sin_x->get_attribute_instance(inexor::entity_system::type_system::SinEntityTypeProvider::SIN_VALUE);
+			std::optional<std::shared_ptr<inexor::entity_system::EntityAttributeInstance>> o_cos_y_attr_value = cos_y->get_attribute_instance(inexor::entity_system::type_system::CosEntityTypeProvider::COS_VALUE);
+			std::optional<std::shared_ptr<inexor::entity_system::EntityAttributeInstance>> o_renderer_x_attr_value = renderer->get_attribute_instance(RendererEntityTypeProvider::RENDERER_X);
+			std::optional<std::shared_ptr<inexor::entity_system::EntityAttributeInstance>> o_renderer_y_attr_value = renderer->get_attribute_instance(RendererEntityTypeProvider::RENDERER_Y);
+			if (o_sin_x_attr_value.has_value() && o_cos_y_attr_value.has_value() && o_renderer_x_attr_value.has_value() && o_renderer_y_attr_value.has_value())
 			{
 				sin_x_attr_value = o_sin_x_attr_value.value();
-				sin_y_attr_value = o_sin_y_attr_value.value();
+				cos_y_attr_value = o_cos_y_attr_value.value();
 				renderer_x_attr_value = o_renderer_x_attr_value.value();
 				renderer_y_attr_value = o_renderer_y_attr_value.value();
+			} else {
+
 			}
 		} else {
 			std::cout << "Failed to create renderer instance!!!" << std::endl;
@@ -99,7 +103,7 @@ namespace renderer {
 			connector_x.value()->enable_debug();
 		}
 
-		std::optional<std::shared_ptr<inexor::visual_scripting::Connector>> connector_y = connector_manager->create_connector(sin_y_attr_value, renderer_y_attr_value);
+		std::optional<std::shared_ptr<inexor::visual_scripting::Connector>> connector_y = connector_manager->create_connector(cos_y_attr_value, renderer_y_attr_value);
 		if (!connector_y.has_value())
 		{
 			std::cout << "Failed to create connector_y" << std::endl;

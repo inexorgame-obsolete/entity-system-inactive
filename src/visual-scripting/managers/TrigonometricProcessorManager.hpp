@@ -9,6 +9,7 @@
 #include "entity-system/util/type-definitions/TypeDefinitions.hpp"
 #include "visual-scripting/managers/ProcessorRegistry.hpp"
 #include "visual-scripting/processors/trigonometric/Sin.hpp"
+#include "visual-scripting/processors/trigonometric/Cos.hpp"
 
 using namespace inexor::entity_system;
 
@@ -24,7 +25,8 @@ namespace visual_scripting {
 			/// Constructor.
 			TrigonometricProcessorManager(
 				std::shared_ptr<inexor::visual_scripting::ProcessorRegistry> processor_registry,
-				std::shared_ptr<inexor::visual_scripting::Sin> sin
+				std::shared_ptr<inexor::visual_scripting::Sin> sin,
+				std::shared_ptr<inexor::visual_scripting::Cos> cos
 			);
 
 			/// Destructor.
@@ -38,8 +40,11 @@ namespace visual_scripting {
 			/// The processor registry
 			std::shared_ptr<inexor::visual_scripting::ProcessorRegistry> processor_registry;
 
-			// Addition for integers.
+			// The sin generator.
 			std::shared_ptr<inexor::visual_scripting::Sin> sin;
+
+			// The cos generator.
+			std::shared_ptr<inexor::visual_scripting::Cos> cos;
 
 	};
 

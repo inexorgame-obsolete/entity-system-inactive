@@ -11,11 +11,13 @@ namespace visual_scripting {
 
 	TrigonometricProcessorManager::TrigonometricProcessorManager(
 		std::shared_ptr<inexor::visual_scripting::ProcessorRegistry> processor_registry,
-		std::shared_ptr<inexor::visual_scripting::Sin> sin
+		std::shared_ptr<inexor::visual_scripting::Sin> sin,
+		std::shared_ptr<inexor::visual_scripting::Cos> cos
 	)
 	{
 		this->processor_registry = processor_registry;
 		this->sin = sin;
+		this->cos = cos;
 	}
 
 	TrigonometricProcessorManager::~TrigonometricProcessorManager()
@@ -26,7 +28,7 @@ namespace visual_scripting {
 	{
 		processor_registry->init();
 		sin->init();
-
+		cos->init();
 	}
 
 

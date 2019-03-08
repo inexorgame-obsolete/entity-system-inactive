@@ -17,6 +17,7 @@
 #include "visual-scripting/managers/ConnectorManager.hpp"
 
 #include "type-system/factories/trigonometric/SinFactory.hpp"
+#include "type-system/factories/trigonometric/CosFactory.hpp"
 
 
 struct GLFWwindow;
@@ -31,6 +32,7 @@ namespace renderer {
         RendererManager(
                 std::shared_ptr<RendererFactory> render_factory,
 				std::shared_ptr<entity_system::type_system::SinFactory> sin_factory,
+				std::shared_ptr<entity_system::type_system::CosFactory> cos_factory,
 				std::shared_ptr<visual_scripting::ConnectorManager> connector_manager,
                 std::shared_ptr<EntityInstanceManager> entity_instance_manager
         );
@@ -51,6 +53,9 @@ namespace renderer {
         /// The sin factory
         std::shared_ptr<entity_system::type_system::SinFactory> sin_factory;
 
+        /// The sin factory
+        std::shared_ptr<entity_system::type_system::CosFactory> cos_factory;
+
         /// The connector manager
 		std::shared_ptr<visual_scripting::ConnectorManager> connector_manager;
 
@@ -64,13 +69,13 @@ namespace renderer {
         shared_ptr<EntityInstance> sin_x;
 
         /// The sinus generator.
-        shared_ptr<EntityInstance> sin_y;
+        shared_ptr<EntityInstance> cos_y;
 
         /// The attribute sin_value
         std::shared_ptr<entity_system::EntityAttributeInstance> sin_x_attr_value;
 
-        /// The attribute sin_value
-        std::shared_ptr<entity_system::EntityAttributeInstance> sin_y_attr_value;
+        /// The attribute cos_value
+        std::shared_ptr<entity_system::EntityAttributeInstance> cos_y_attr_value;
 
         /// The attribute renderer_x
         std::shared_ptr<entity_system::EntityAttributeInstance> renderer_x_attr_value;

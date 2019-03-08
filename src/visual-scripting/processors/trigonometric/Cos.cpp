@@ -1,7 +1,7 @@
 // Inexor entity system
 // (c)2018-2019 Inexor
 
-#include "Sin.hpp"
+#include "Cos.hpp"
 
 #include "react/Algorithm.h"
 #include "react/Domain.h"
@@ -13,8 +13,8 @@ using namespace std::chrono;
 namespace inexor {
 namespace visual_scripting {
 
-	Sin::Sin(
-		std::shared_ptr<inexor::entity_system::type_system::SinEntityTypeProvider> entity_type_provider,
+	Cos::Cos(
+		std::shared_ptr<inexor::entity_system::type_system::CosEntityTypeProvider> entity_type_provider,
 		std::shared_ptr<inexor::entity_system::EntityInstanceManager> entity_instance_manager
 	)
 		: Processor(entity_type_provider->get_type()),
@@ -23,17 +23,17 @@ namespace visual_scripting {
 	{
 	}
 
-	Sin::~Sin()
+	Cos::~Cos()
 	{
 	}
 
-	void Sin::init()
+	void Cos::init()
 	{
 		entity_instance_manager->register_on_created(entity_type_provider->get_type()->get_GUID(), shared_from_this());
 		entity_instance_manager->register_on_deleted(entity_type_provider->get_type()->get_GUID(), shared_from_this());
 	}
 
-	void Sin::on_entity_instance_created(std::shared_ptr<inexor::entity_system::EntityInstance> entity_instance)
+	void Cos::on_entity_instance_created(std::shared_ptr<inexor::entity_system::EntityInstance> entity_instance)
 	{
 		// Get entity type
 		std::shared_ptr<inexor::entity_system::EntityType> entity_type = entity_instance->get_entity_type();
@@ -41,7 +41,7 @@ namespace visual_scripting {
 		make_signals(entity_instance);
 	}
 
-	void Sin::on_entity_instance_deleted(const xg::Guid& type_GUID, const xg::Guid& inst_GUID)
+	void Cos::on_entity_instance_deleted(const xg::Guid& type_GUID, const xg::Guid& inst_GUID)
 	{
 		// Disconnect observers with execution method
 		// Delete observer for each input atttribute of the entity instance
@@ -49,10 +49,10 @@ namespace visual_scripting {
 		// signals[inst_GUID].clear
 	}
 
-	void Sin::make_signals(const std::shared_ptr<inexor::entity_system::EntityInstance>& entity_instance)
+	void Cos::make_signals(const std::shared_ptr<inexor::entity_system::EntityInstance>& entity_instance)
 	{
-		std::cout << "Init entity instance for processor SIN" << std::endl;
-		std::optional<std::shared_ptr<inexor::entity_system::EntityAttributeInstance>> o_attr_sin_value = entity_instance->get_attribute_instance(inexor::entity_system::type_system::SinEntityTypeProvider::SIN_VALUE);
+		std::cout << "Init entity instance for processor COS" << std::endl;
+		std::optional<std::shared_ptr<inexor::entity_system::EntityAttributeInstance>> o_attr_sin_value = entity_instance->get_attribute_instance(inexor::entity_system::type_system::CosEntityTypeProvider::COS_VALUE);
 		if (o_attr_sin_value.has_value())
 		{
 			xg::Guid guid = entity_instance->get_GUID();
@@ -78,7 +78,7 @@ namespace visual_scripting {
 					[resolution] (int time_iterator)
 					{
 				    	float x_value = time_iterator / resolution;
-						float y_value = sin(x_value);
+						float y_value = cos(x_value);
 						return DataValue(y_value);
 					}
 				);
