@@ -2,9 +2,8 @@
 glm/0.9.9.1@g-truc/stable
 gtest/1.8.1@bincrafters/stable
 crossguid/06-03-19@inexorgame/testing
-#jsonformoderncpp/3.5.0@vthiery/stable
-restbed/6eb385fa9051203f28bf96cc1844bbb5a9a6481f@inexorgame/stable
-boost_property_tree/1.69.0@bincrafters/stable
+jsonformoderncpp/3.5.0@vthiery/stable
+Simple-Web-Server/v3.0.0-rc3@inexorgame/stable
 boost_signals2/1.69.0@bincrafters/stable
 spdlog/1.3.0@bincrafters/stable
 boost-di/1.1.0@inexorgame/stable
