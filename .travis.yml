@@ -25,6 +25,8 @@ matrix:
           env:
             - CC=/usr/bin/clang
             - CXX=/usr/bin/clang++
+    allow_failures:
+      - env: DOCKER_IMAGE=conanio/clang7
 
 install:
   - ./.travis/install.sh
