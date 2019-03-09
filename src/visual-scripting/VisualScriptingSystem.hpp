@@ -52,5 +52,5 @@ namespace visual_scripting {
 	};
 
 
-};
-};
+}
+}

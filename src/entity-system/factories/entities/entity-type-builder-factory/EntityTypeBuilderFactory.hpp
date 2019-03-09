@@ -1,52 +1,51 @@
-// Inexor entity system
-// (c)2018 Inexor
-
 #pragma once
 
 #include "entity-system/managers/entities/entity-type-manager/EntityTypeManager.hpp"
 #include "entity-system/managers/entity-attributes/entity-attribute-type-manager/EntityAttributeTypeManager.hpp"
 #include "entity-system/managers/entity-attributes/entity-attribute-instance-manager/EntityAttributeInstanceManager.hpp"
-#include "entity-system/model/data/DataTypes.hpp"
-#include "entity-system/util/type-definitions/TypeDefinitions.hpp"
-
 #include "entity-system/builders/entities/entity-type-builder/EntityTypeBuilder.hpp"
-
 
 namespace inexor {
 namespace entity_system {
 
+	using EntityTypeBuilderPtr = std::shared_ptr<EntityTypeBuilder>;
+
 	/// @class EntityTypeBuilder
     /// @brief Management of the loggers.
-	class EntityTypeBuilderManager
+	class EntityTypeBuilderFactory
 	{
 		public:
 
+			using EntityTypeManagerPtr = std::shared_ptr<EntityTypeManager>;
+			using EntityAttributeTypeManagerPtr = std::shared_ptr<EntityAttributeTypeManager>;
+			using EntityAttributeInstanceManagerPtr = std::shared_ptr<EntityAttributeInstanceManager>;
+
 			/// Constructor.
-			EntityTypeBuilderManager(
-				shared_ptr<EntityTypeManager> entity_type_manager,
-				shared_ptr<EntityAttributeTypeManager> entity_attribute_type_manager,
-				shared_ptr<EntityAttributeInstanceManager> entity_attribute_instance_manager
+			EntityTypeBuilderFactory(
+				EntityTypeManagerPtr entity_type_manager,
+				EntityAttributeTypeManagerPtr entity_attribute_type_manager,
+				EntityAttributeInstanceManagerPtr entity_attribute_instance_manager
 			);
 
 			/// Destructor.
-			~EntityTypeBuilderManager();
+			~EntityTypeBuilderFactory();
 
 			/// Initialization of the manager
 			void init();
 
 			/// Returns a new instance of a builder
-			shared_ptr<EntityTypeBuilder> get_builder();
+			EntityTypeBuilderPtr get_builder();
 
 		private:
 
 			/// The entity type manager
-			shared_ptr<EntityTypeManager> entity_type_manager;
+			EntityTypeManagerPtr entity_type_manager;
 
 			/// The entity attribute instance manager
-			shared_ptr<EntityAttributeTypeManager> entity_attribute_type_manager;
+			EntityAttributeTypeManagerPtr entity_attribute_type_manager;
 
 			/// The entity attribute instance manager
-			shared_ptr<EntityAttributeInstanceManager> entity_attribute_instance_manager;
+			EntityAttributeInstanceManagerPtr entity_attribute_instance_manager;
 	};
 
 

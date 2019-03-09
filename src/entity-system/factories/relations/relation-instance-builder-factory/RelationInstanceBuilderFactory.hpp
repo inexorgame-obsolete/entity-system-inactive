@@ -1,51 +1,47 @@
-// Inexor entity system
-// (c)2018 Inexor
-
 #pragma once
 
 #include "entity-system/managers/relations/relation-instance-manager/RelationInstanceManager.hpp"
 #include "entity-system/managers/relations/relation-type-manager/RelationTypeManager.hpp"
-#include "entity-system/model/data/DataTypes.hpp"
-#include "entity-system/util/type-definitions/TypeDefinitions.hpp"
-
 #include "entity-system/builders/relations/relation-instance-builder/RelationInstanceBuilder.hpp"
-
-using namespace std;
 
 namespace inexor {
 namespace entity_system {
 
+	using RelationInstanceBuilderPtr = std::shared_ptr<RelationInstanceBuilder>;
+
 	/// @class RelationInstanceBuilder
     /// @brief Manages the relation instance builders.
-	class RelationInstanceBuilderManager
+	class RelationInstanceBuilderFactory
 	{
 		public:
 
+			using RelationInstanceManagerPtr = std::shared_ptr<RelationInstanceManager>;
+			using RelationTypeManagerPtr = std::shared_ptr<RelationTypeManager>;
+
 			/// Constructor.
-			RelationInstanceBuilderManager(
-				shared_ptr<RelationInstanceManager> relation_instance_manager,
-				shared_ptr<RelationTypeManager> relation_type_manager
+			RelationInstanceBuilderFactory(
+				RelationInstanceManagerPtr relation_instance_manager,
+				RelationTypeManagerPtr relation_type_manager
 			);
 
 			/// Destructor.
-			~RelationInstanceBuilderManager();
+			~RelationInstanceBuilderFactory();
 
 			/// Initialization of the manager
 			void init();
 
 			/// Returns a new instance of a builder
-			shared_ptr<RelationInstanceBuilder> get_builder();
+			RelationInstanceBuilderPtr get_builder();
 
 		private:
 
 			/// The relation instance manager
-			shared_ptr<RelationInstanceManager> relation_instance_manager;
+			RelationInstanceManagerPtr relation_instance_manager;
 
 			/// The relation type manager
-			shared_ptr<RelationTypeManager> relation_type_manager;
+			RelationTypeManagerPtr relation_type_manager;
 
 	};
 
-
-};
-};
+}
+}

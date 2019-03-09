@@ -1,6 +1,6 @@
 #pragma once
 
-#include "entity-system/managers/entities/entity-type-builder-manager/EntityTypeBuilderManager.hpp"
+#include "entity-system/factories/entities/entity-type-builder-factory/EntityTypeBuilderFactory.hpp"
 #include "entity-system/providers/EntityTypeProvider.hpp"
 
 namespace inexor {
@@ -14,7 +14,7 @@ namespace type_system {
 
 			/// Constructs the specialized provider for the BOOL_CONSTANT entity type
 			BoolConstantEntityTypeProvider(
-				std::shared_ptr<EntityTypeBuilderManager> entity_type_builder_manager
+				std::shared_ptr<EntityTypeBuilderFactory> entity_type_builder_manager
 			) : EntityTypeProvider(
 				entity_type_builder_manager,
 				TYPE_NAME,

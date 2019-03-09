@@ -12,12 +12,12 @@ namespace logging {
 
 	LoggerFactory::LoggerFactory(
 		shared_ptr<LoggerEntityTypeProvider> logger_entity_type_provider,
-		shared_ptr<EntityInstanceBuilderManager> entity_instance_builder_manager,
+		shared_ptr<EntityInstanceBuilderFactory> entity_instance_builder_factory,
 		shared_ptr<EntityInstanceManager> entity_instance_manager
 	)
 	{
 		this->logger_entity_type_provider = logger_entity_type_provider;
-		this->entity_instance_builder_manager = entity_instance_builder_manager;
+		this->entity_instance_builder_factory = entity_instance_builder_factory;
 		this->entity_instance_manager = entity_instance_manager;
 	}
 
@@ -27,7 +27,7 @@ namespace logging {
 
 	O_ENT_INST LoggerFactory::create_instance()
 	{
-		return entity_instance_builder_manager->get_builder()
+		return entity_instance_builder_factory->get_builder()
 			->type(logger_entity_type_provider->get_type())
 			->attribute("logger_name", "")
 			->attribute("log_level", spdlog::level::level_enum::info)
@@ -36,7 +36,7 @@ namespace logging {
 
 	O_ENT_INST LoggerFactory::create_instance(string logger_name)
 	{
-		return entity_instance_builder_manager->get_builder()
+		return entity_instance_builder_factory->get_builder()
 			->type(logger_entity_type_provider->get_type())
 			->attribute("logger_name", logger_name)
 			->attribute("log_level", spdlog::level::level_enum::info)
@@ -45,7 +45,7 @@ namespace logging {
 
 	O_ENT_INST LoggerFactory::create_instance(string logger_name, spdlog::level::level_enum log_level)
 	{
-		return entity_instance_builder_manager->get_builder()
+		return entity_instance_builder_factory->get_builder()
 			->type(logger_entity_type_provider->get_type())
 			->attribute("logger_name", logger_name)
 			->attribute("log_level", log_level)

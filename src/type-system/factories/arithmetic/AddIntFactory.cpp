@@ -12,11 +12,11 @@ namespace type_system {
 
 	AddIntFactory::AddIntFactory(
 		shared_ptr<AddIntEntityTypeProvider> entity_type_provider,
-		shared_ptr<EntityInstanceBuilderManager> entity_instance_builder_manager
+		shared_ptr<EntityInstanceBuilderFactory> entity_instance_builder_factory
 	)
 	{
 		this->entity_type_provider = entity_type_provider;
-		this->entity_instance_builder_manager = entity_instance_builder_manager;
+		this->entity_instance_builder_factory = entity_instance_builder_factory;
 	}
 
 	AddIntFactory::~AddIntFactory()
@@ -25,7 +25,7 @@ namespace type_system {
 
 	O_ENT_INST AddIntFactory::create_instance()
 	{
-		return entity_instance_builder_manager->get_builder()
+		return entity_instance_builder_factory->get_builder()
 			->type(entity_type_provider->get_type())
 			->attribute("add_int_augend", 0)
 			->attribute("add_int_addend", 0)

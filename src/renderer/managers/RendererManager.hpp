@@ -5,8 +5,6 @@
 
 #include <iomanip>
 
-#include "entity-system/managers/entities/entity-type-builder-manager/EntityTypeBuilderManager.hpp"
-#include "entity-system/managers/entities/entity-instance-builder-manager/EntityInstanceBuilderManager.hpp"
 #include "entity-system/managers/entities/entity-instance-manager/EntityInstanceManager.hpp"
 #include "entity-system/model/data/DataTypes.hpp"
 #include "visual-scripting/model/Connector.hpp"
@@ -84,5 +82,6 @@ namespace renderer {
         std::shared_ptr<entity_system::EntityAttributeInstance> renderer_y_attr_value;
 
     };
-};
-};
+
+}
+}

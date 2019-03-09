@@ -1,40 +1,34 @@
-// Inexor entity system
-// (c)2018 Inexor
-
 #include "IntConstantFactory.hpp"
-
-using namespace inexor::entity_system;
-using namespace std;
 
 namespace inexor {
 namespace entity_system {
 namespace type_system {
 
 	IntConstantFactory::IntConstantFactory(
-		shared_ptr<IntConstantEntityTypeProvider> entity_type_provider,
-		shared_ptr<EntityInstanceBuilderManager> entity_instance_builder_manager
+		IntConstantEntityTypeProviderPtr entity_type_provider,
+		EntityInstanceBuilderFactoryPtr entity_instance_builder_factory
 	)
 	{
 		this->entity_type_provider = entity_type_provider;
-		this->entity_instance_builder_manager = entity_instance_builder_manager;
+		this->entity_instance_builder_factory = entity_instance_builder_factory;
 	}
 
 	IntConstantFactory::~IntConstantFactory()
 	{
 	}
 
-	O_ENT_INST IntConstantFactory::create_instance()
+	EntityInstancePtrOpt IntConstantFactory::create_instance()
 	{
-		return entity_instance_builder_manager->get_builder()
+		return entity_instance_builder_factory->get_builder()
 			->type(entity_type_provider->get_type())
-			->attribute("int_constant_name", "")
+			->attribute(IntConstantEntityTypeProvider::INT_CONSTANT_NAME, "")
 			->attribute("int_constant_value", 0)
 			->build();
 	}
 
-	O_ENT_INST IntConstantFactory::create_instance(const string& name, const int& value)
+	EntityInstancePtrOpt IntConstantFactory::create_instance(const string& name, const int& value)
 	{
-		return entity_instance_builder_manager->get_builder()
+		return entity_instance_builder_factory->get_builder()
 			->type(entity_type_provider->get_type())
 			->attribute("int_constant_name", name)
 			->attribute("int_constant_value", value)

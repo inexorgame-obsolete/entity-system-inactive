@@ -1,6 +1,3 @@
-// Inexor entity system
-// (c)2018-2019 Inexor
-
 #pragma once
 
 #include <iostream>
@@ -19,11 +16,15 @@ namespace visual_scripting {
 	{
 		public:
 
+			using ConnectorManagerPtr = std::shared_ptr<ConnectorManager>;
+			using IntConstantFactoryPtr = std::shared_ptr<inexor::entity_system::type_system::IntConstantFactory>;
+			using AddIntFactoryPtr = std::shared_ptr<inexor::entity_system::type_system::AddIntFactory>;
+
 			/// @brief Constructor.
 			IntConstantConnectorTest(
-				std::shared_ptr<inexor::visual_scripting::ConnectorManager> connector_manager,
-				std::shared_ptr<inexor::entity_system::type_system::IntConstantFactory> int_constant_factory,
-				std::shared_ptr<inexor::entity_system::type_system::AddIntFactory> add_int_factory
+				ConnectorManagerPtr connector_manager,
+				IntConstantFactoryPtr int_constant_factory,
+				AddIntFactoryPtr add_int_factory
 			);
 
 			/// @brief Destructor.
@@ -38,15 +39,15 @@ namespace visual_scripting {
 		private:
 
 			/// The connector manager.
-			std::shared_ptr<inexor::visual_scripting::ConnectorManager> connector_manager;
+			ConnectorManagerPtr connector_manager;
 
 			/// Factory for INT_CONSTANT
-			std::shared_ptr<inexor::entity_system::type_system::IntConstantFactory> int_constant_factory;
+			IntConstantFactoryPtr int_constant_factory;
 
 			/// Factory for ADD_INT
-			std::shared_ptr<inexor::entity_system::type_system::AddIntFactory> add_int_factory;
+			AddIntFactoryPtr add_int_factory;
 	};
 
 
-};
-};
+}
+}

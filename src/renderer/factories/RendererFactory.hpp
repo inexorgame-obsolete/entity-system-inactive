@@ -3,8 +3,8 @@
 
 #pragma once
 
-#include "entity-system/managers/entities/entity-type-builder-manager/EntityTypeBuilderManager.hpp"
-#include "entity-system/managers/entities/entity-instance-builder-manager/EntityInstanceBuilderManager.hpp"
+#include "entity-system/factories/entities/entity-type-builder-factory/EntityTypeBuilderFactory.hpp"
+#include "entity-system/factories/entities/entity-instance-builder-factory/EntityInstanceBuilderFactory.hpp"
 #include "entity-system/managers/entities/entity-instance-manager/EntityInstanceManager.hpp"
 #include "entity-system/model/data/DataTypes.hpp"
 #include "entity-system/util/type-definitions/TypeDefinitions.hpp"
@@ -24,7 +24,7 @@ namespace renderer {
             /// Constructor.
             RendererFactory(
 				shared_ptr<RendererEntityTypeProvider> renderer_entity_type_provider,
-				shared_ptr<EntityInstanceBuilderManager> entity_instance_builder_manager,
+				shared_ptr<EntityInstanceBuilderFactory> entity_instance_builder_factory,
 				shared_ptr<EntityInstanceManager> entity_instance_manager
             );
 
@@ -38,8 +38,8 @@ namespace renderer {
             /// The entity type provider
             shared_ptr<RendererEntityTypeProvider> renderer_entity_type_provider;
 
-            /// The entity instance manager
-            shared_ptr<EntityInstanceBuilderManager> entity_instance_builder_manager;
+            /// The entity instance builder factory
+            shared_ptr<EntityInstanceBuilderFactory> entity_instance_builder_factory;
 
             /// The entity instance manager
             shared_ptr<EntityInstanceManager> entity_instance_manager;

@@ -1,6 +1,6 @@
 #pragma once
 
-#include "entity-system/managers/entities/entity-type-builder-manager/EntityTypeBuilderManager.hpp"
+#include "entity-system/factories/entities/entity-type-builder-factory/EntityTypeBuilderFactory.hpp"
 #include "entity-system/providers/EntityTypeProvider.hpp"
 
 namespace inexor {
@@ -15,9 +15,9 @@ namespace renderer {
 
 			/// Constructs the specialized provider for the RENERER entity type
 			RendererEntityTypeProvider(
-				std::shared_ptr<EntityTypeBuilderManager> entity_type_builder_manager
+				std::shared_ptr<EntityTypeBuilderFactory> entity_type_builder_factory
 			) : EntityTypeProvider(
-				entity_type_builder_manager,
+				entity_type_builder_factory,
 				TYPE_NAME,
 				{
 					{ RENDERER_X, { DataType::FLOAT, 1 << Feature::INPUT } },

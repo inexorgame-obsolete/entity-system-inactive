@@ -166,4 +166,4 @@ namespace inexor {
 
 	}
 
-};
+}

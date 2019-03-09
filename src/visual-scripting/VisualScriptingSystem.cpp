@@ -37,5 +37,5 @@ namespace visual_scripting {
 	}
 
 
-};
-};
+}
+}

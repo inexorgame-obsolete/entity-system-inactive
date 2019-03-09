@@ -1,21 +1,19 @@
-// Inexor entity system
-// (c)2018 Inexor
-
 #pragma once
-
-#include "spdlog/spdlog.h"
 
 #include "entity-system/managers/entities/entity-type-manager/EntityTypeManager.hpp"
 #include "entity-system/managers/entity-attributes/entity-attribute-type-manager/EntityAttributeTypeManager.hpp"
 #include "entity-system/managers/entity-attributes/entity-attribute-instance-manager/EntityAttributeInstanceManager.hpp"
+#include "entity-system/model/entities/entity-types/EntityType.hpp"
 #include "entity-system/model/data/DataTypes.hpp"
-#include "entity-system/util/type-definitions/TypeDefinitions.hpp"
-
-using namespace inexor::entity_system;
-using namespace std;
 
 namespace inexor {
 namespace entity_system {
+
+	using string = std::string;
+	using AttributeList = std::unordered_map<string, std::pair<DataType, EnumSet<Feature>>>;
+	class EntityTypeBuilder;
+	using EntityTypeBuilderPtr = std::shared_ptr<EntityTypeBuilder>;
+	using EntityTypePtrOpt = std::optional<std::shared_ptr<EntityType>>;
 
 	/// @class EntityTypeBuilder
     /// @brief Management of the loggers.
@@ -23,38 +21,51 @@ namespace entity_system {
 	{
 		public:
 
+			using EntityTypeManagerPtr = std::shared_ptr<EntityTypeManager>;
+			using EntityAttributeTypeManagerPtr = std::shared_ptr<EntityAttributeTypeManager>;
+			using EntityAttributeInstanceManagerPtr = std::shared_ptr<EntityAttributeInstanceManager>;
+
 			/// Constructor.
 			EntityTypeBuilder(
-				shared_ptr<EntityTypeManager> entity_type_manager,
-				shared_ptr<EntityAttributeTypeManager> entity_attribute_type_manager,
-				shared_ptr<EntityAttributeInstanceManager> entity_attribute_instance_manager
+				EntityTypeManagerPtr entity_type_manager,
+				EntityAttributeTypeManagerPtr entity_attribute_type_manager,
+				EntityAttributeInstanceManagerPtr entity_attribute_instance_manager
 			);
 
 			/// Destructor.
 			~EntityTypeBuilder();
 
 			/// Sets the name of the entity type.
-			shared_ptr<EntityTypeBuilder> name(string entity_type_name);
+			EntityTypeBuilderPtr name(string entity_type_name);
 
 			/// Sets the uuid of the entity type.
-			shared_ptr<EntityTypeBuilder> uuid(string entity_type_uuid);
+			EntityTypeBuilderPtr uuid(string entity_type_uuid);
 
 			/// Adds an attribute
-			shared_ptr<EntityTypeBuilder> attribute(const string& attribute_name, const DataType& attribute_datatype, const EnumSet<Feature>& attribute_features);
+			EntityTypeBuilderPtr attribute(const string& attribute_name, const DataType& attribute_datatype, const EnumSet<Feature>& attribute_features);
+
+			/// Adds an input attribute
+			EntityTypeBuilderPtr input(const string& attribute_name, const DataType& attribute_datatype);
+
+			/// Adds an output attribute
+			EntityTypeBuilderPtr output(const string& attribute_name, const DataType& attribute_datatype);
+
+			/// Adds an attribute which is an input and output at the same time
+			EntityTypeBuilderPtr inout(const string& attribute_name, const DataType& attribute_datatype);
 
 			/// Builds and returns the created entity type.
-			O_ENT_TYPE build();
+			EntityTypePtrOpt build();
 
 		private:
 
 			/// The entity type manager
-			shared_ptr<EntityTypeManager> entity_type_manager;
+			EntityTypeManagerPtr entity_type_manager;
 
 			/// The entity attribute instance manager
-			shared_ptr<EntityAttributeTypeManager> entity_attribute_type_manager;
+			EntityAttributeTypeManagerPtr entity_attribute_type_manager;
 
 			/// The entity attribute instance manager
-			shared_ptr<EntityAttributeInstanceManager> entity_attribute_instance_manager;
+			EntityAttributeInstanceManagerPtr entity_attribute_instance_manager;
 
 			/// The name of the new entity type.
 			string entity_type_name;
@@ -63,13 +74,10 @@ namespace entity_system {
 			string entity_type_uuid;
 
 			/// The attribute definitions.
-			unordered_map<string, DataType> entity_type_attributes;
-
-			/// The attribute features.
-			unordered_map<string, EnumSet<Feature>> entity_type_attribute_features;
+			AttributeList entity_type_attributes;
 
 	};
 
 
-};
-};
+}
+}

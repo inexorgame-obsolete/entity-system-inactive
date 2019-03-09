@@ -1,43 +1,37 @@
-// Inexor entity system
-// (c)2018 Inexor
-
 #include "StringConstantFactory.hpp"
-
-using namespace inexor::entity_system;
-using namespace std;
 
 namespace inexor {
 namespace entity_system {
 namespace type_system {
 
 	StringConstantFactory::StringConstantFactory(
-		shared_ptr<StringConstantEntityTypeProvider> entity_type_provider,
-		shared_ptr<EntityInstanceBuilderManager> entity_instance_builder_manager
+		StringConstantEntityTypeProviderPtr entity_type_provider,
+		EntityInstanceBuilderFactoryPtr entity_instance_builder_factory
 	)
 	{
 		this->entity_type_provider = entity_type_provider;
-		this->entity_instance_builder_manager = entity_instance_builder_manager;
+		this->entity_instance_builder_factory = entity_instance_builder_factory;
 	}
 
 	StringConstantFactory::~StringConstantFactory()
 	{
 	}
 
-	O_ENT_INST StringConstantFactory::create_instance()
+	EntityInstancePtrOpt StringConstantFactory::create_instance()
 	{
-		return entity_instance_builder_manager->get_builder()
+		return entity_instance_builder_factory->get_builder()
 			->type(entity_type_provider->get_type())
-			->attribute("string_constant_name", "")
-			->attribute("string_constant_value", "")
+			->attribute(StringConstantEntityTypeProvider::STRING_CONSTANT_NAME, "")
+			->attribute(StringConstantEntityTypeProvider::STRING_CONSTANT_VALUE, "")
 			->build();
 	}
 
-	O_ENT_INST StringConstantFactory::create_instance(const string& name, const string& value)
+	EntityInstancePtrOpt StringConstantFactory::create_instance(const std::string& name, const std::string& value)
 	{
-		return entity_instance_builder_manager->get_builder()
+		return entity_instance_builder_factory->get_builder()
 			->type(entity_type_provider->get_type())
-			->attribute("string_constant_name", name)
-			->attribute("string_constant_value", value)
+			->attribute(StringConstantEntityTypeProvider::STRING_CONSTANT_NAME, name)
+			->attribute(StringConstantEntityTypeProvider::STRING_CONSTANT_VALUE, value)
 			->build();
 	}
 
