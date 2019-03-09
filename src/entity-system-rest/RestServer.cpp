@@ -1,8 +1,7 @@
 #include <functional>
 
 #include "RestServer.hpp"
-#include "entity-system-rest/api/EntityInstances.hpp"
-
+#include "entity-system-rest/controllers/EntityInstance.hpp"
 
 namespace inexor {
     namespace rest {
@@ -40,10 +39,7 @@ namespace inexor {
 
         void RestServer::create_resources()
         {
-            auto entity_instances = api::EntityInstances(this->entity_instance_manager);
-            /*function<void(shared_ptr<HttpServer::Response>, shared_ptr<HttpServer::Request>)> entity_instances_functor = std::bind(&api::EntityInstances::get_entity_instance_by_uuid, ref(entity_instances), _1, _2);
-
-            this->http_server->resource["^/entities/instances/([0-9a-f]{12})$"]["GET"] = entity_instances_functor;*/
+            this->http_server->resource["^/entities/instances/([0-9a-f]{12})$"]["GET"] = controllers::get_instance_by_uuid;
         }
     };
 };

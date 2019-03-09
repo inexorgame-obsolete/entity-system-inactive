@@ -3,7 +3,6 @@
 #include <memory>
 #include "server_http.hpp"
 
-#include "entity-system-rest/api/EntityInstances.hpp"
 #include "logging/managers/LogManager.hpp"
 
 using HttpServer = SimpleWeb::Server<SimpleWeb::HTTP>;
