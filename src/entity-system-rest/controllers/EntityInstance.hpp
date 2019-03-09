@@ -12,7 +12,7 @@ using Response = HttpServer::Response;
 namespace inexor {
     namespace rest {
         namespace controllers {
-            void get_instance_by_uuid(shared_ptr<Response> response, shared_ptr<Request> request)
+            void get_instance_by_uuid(shared_ptr<EntityInstanceManager> entity_instance_manager, shared_ptr<Response> response, shared_ptr<Request> request)
             {
                 auto content = request->content.string();
                 // request->content.string() is a convenience function for:

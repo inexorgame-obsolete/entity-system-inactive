@@ -39,7 +39,8 @@ namespace inexor {
 
         void RestServer::create_resources()
         {
-            this->http_server->resource["^/entities/instances/([0-9a-f]{12})$"]["GET"] = controllers::get_instance_by_uuid;
+            function<void (Response, Request)> functor = bind(&controllers::get_instance_by_uuid, &entity_instance_manager, placeholders::_1, placeholders::_2);
+            //this->http_server->resource["^/entities/instances/([0-9a-f]{12})$"]["GET"] = controllers::get_instance_by_uuid;
         }
     };
 };
