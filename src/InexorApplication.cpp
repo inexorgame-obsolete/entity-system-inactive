@@ -80,7 +80,6 @@ namespace inexor {
 			spdlog::get(LOGGER_NAME)->info("Starting entity system...");
 
 			// Setup REST server
-			rest_server->set_port(8080);
 			rest_server->start();
 			//spdlog::get(LOGGER_NAME)->info("REST server is running on http://localhost:{}/{}", rest_server->get_settings()->get_port(), rest_server->get_settings()->get_root());
 			running = true;

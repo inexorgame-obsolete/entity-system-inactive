@@ -3,6 +3,7 @@
 #include <memory>
 #include "server_http.hpp"
 
+#include "entity-system-rest/api/EntityInstances.hpp"
 #include "logging/managers/LogManager.hpp"
 
 using HttpServer = SimpleWeb::Server<SimpleWeb::HTTP>;
@@ -14,20 +15,22 @@ namespace rest {
     class RestServer {
     public:
         RestServer(
-            shared_ptr<inexor::logging::LogManager> log_manager
+            shared_ptr<inexor::logging::LogManager> log_manager,
+            shared_ptr<inexor::entity_system::EntityInstanceManager> entity_instance_manager
         );
 
         ~RestServer();
 
         void start();
-        void set_port(unsigned int port);
+        void set_port(unsigned short port);
+        void create_resources();
 
     private:
         shared_ptr<inexor::logging::LogManager> log_manager;
+        shared_ptr<inexor::entity_system::EntityInstanceManager> entity_instance_manager;
 
         shared_ptr<HttpServer> http_server;
-
-        unsigned int port;
+        unsigned short port;
     };
 };
 };
