@@ -19,11 +19,10 @@
 
 #include "spdlog/spdlog.h"
 
-#include "entity-system/EntitySystem.hpp"
+#include "entity-system/EntitySystemModule.hpp"
 #include "entity-system/managers/EntitySystemDebugger.hpp"
 #include "entity-system-rest/RestServer.hpp"
 #include "entity-system-rest/RestServerLogger.hpp"
-#include "entity-system-example/ColorManager.hpp"
 
 #include "type-system/TypeSystemModule.hpp"
 #include "configuration/ConfigurationModule.hpp"
@@ -47,7 +46,7 @@ namespace inexor {
 			/// Constructor.
 			/// The dependencies defined are automatically injected!
 			InexorApplication(
-				std::shared_ptr<inexor::entity_system::EntitySystem> entity_system,
+				std::shared_ptr<inexor::entity_system::EntitySystemModule> entity_system_module,
 				std::shared_ptr<inexor::entity_system::type_system::TypeSystemModule> type_system_module,
 				std::shared_ptr<inexor::configuration::ConfigurationModule> configuration_module,
 				std::shared_ptr<inexor::entity_system::RestServer> rest_server,
@@ -78,7 +77,7 @@ namespace inexor {
 			void register_logger(std::string logger_name);
 
 			/// Getter for the entity system
-			std::shared_ptr<inexor::entity_system::EntitySystem> get_entity_system();
+			std::shared_ptr<inexor::entity_system::EntitySystemModule> get_entity_system();
 
 			/// Getter for the rest server
 			std::shared_ptr<inexor::entity_system::RestServer> get_rest_server();
@@ -86,7 +85,7 @@ namespace inexor {
 		private:
 
             /// The entity system of Inexor
-            std::shared_ptr<inexor::entity_system::EntitySystem> entity_system;
+            std::shared_ptr<inexor::entity_system::EntitySystemModule> entity_system_module;
 
             /// The type system manager.
             std::shared_ptr<inexor::entity_system::type_system::TypeSystemModule> type_system_module;

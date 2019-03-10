@@ -1,9 +1,9 @@
-#include "EntitySystem.hpp"
+#include "EntitySystemModule.hpp"
 
 namespace inexor {
 namespace entity_system {
 
-	EntitySystem::EntitySystem(
+	EntitySystemModule::EntitySystemModule(
 		EntityManagerPtr entity_manager,
 		RelationManagerPtr relation_manager,
 		BuilderFactoryManagerPtr builder_factory_manager
@@ -14,7 +14,7 @@ namespace entity_system {
 	{
 	}
 
-	EntitySystem::~EntitySystem()
+	EntitySystemModule::~EntitySystemModule()
 	{
 	}
 
@@ -23,7 +23,7 @@ namespace entity_system {
     // <li> Relations
 	// <li> Entities
     // </ul>
-	void EntitySystem::reset_entity_system()
+	void EntitySystemModule::reset_entity_system()
 	{
 		// Reset relations
 		relation_manager->reset_entity_system();

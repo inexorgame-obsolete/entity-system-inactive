@@ -15,7 +15,7 @@ namespace inexor {
 	std::vector<InexorApplication *> InexorApplication::instances;
 
 	InexorApplication::InexorApplication(
-		std::shared_ptr<inexor::entity_system::EntitySystem> entity_system,
+		std::shared_ptr<inexor::entity_system::EntitySystemModule> entity_system_module,
 		std::shared_ptr<inexor::entity_system::type_system::TypeSystemModule> type_system_module,
 		std::shared_ptr<inexor::configuration::ConfigurationModule> configuration_module,
 		std::shared_ptr<inexor::entity_system::RestServer> rest_server,
@@ -25,7 +25,7 @@ namespace inexor {
 		std::shared_ptr<inexor::renderer::RendererManager> renderer_manager
 	)
 	{
-		this->entity_system = entity_system;
+		this->entity_system_module = entity_system_module;
 		this->type_system_module = type_system_module;
 		this->configuration_module = configuration_module;
 		this->rest_server = rest_server;
@@ -134,9 +134,9 @@ namespace inexor {
 		log_manager->register_logger(logger_name);
 	}
 
-	std::shared_ptr<inexor::entity_system::EntitySystem> InexorApplication::get_entity_system()
+	std::shared_ptr<inexor::entity_system::EntitySystemModule> InexorApplication::get_entity_system()
 	{
-		return entity_system;
+		return entity_system_module;
 	}
 
 

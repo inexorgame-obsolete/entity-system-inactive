@@ -19,7 +19,6 @@
 #include "api/EntityTypeApi.hpp"
 #include "api/RelationInstanceApi.hpp"
 #include "api/RelationTypeApi.hpp"
-#include "entity-system/EntitySystem.hpp"
 #include "logging/managers/LogManager.hpp"
 
 

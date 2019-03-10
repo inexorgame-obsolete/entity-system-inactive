@@ -4,14 +4,11 @@
 #include "entity-system/managers/RelationManager.hpp"
 #include "entity-system/managers/BuilderFactoryManager.hpp"
 
-#include <iostream>
-
 namespace inexor {
 namespace entity_system {
 
-	/// @class EntitySystem
-    /// @brief Entity system main class.
-	class EntitySystem
+	/// The entity system module
+	class EntitySystemModule
 	{
 		public:
 
@@ -19,28 +16,27 @@ namespace entity_system {
 			using RelationManagerPtr = std::shared_ptr<RelationManager>;
 			using BuilderFactoryManagerPtr = std::shared_ptr<BuilderFactoryManager>;
 
-			/// Constructor.
-			EntitySystem(
+			/// Constructs the entity system module
+			EntitySystemModule(
 				EntityManagerPtr entity_manager,
 				RelationManagerPtr relation_manager,
 				BuilderFactoryManagerPtr builder_factory_manager
 			);
 
-			/// Destructor.
-			~EntitySystem();
+			~EntitySystemModule();
 
 			/// Resets the entire entity system.
 			void reset_entity_system();
 
 		private:
 
-			/// The entity manager
+			/// The manager for entity types and entity instances
 			EntityManagerPtr entity_manager;
 
-			/// The entity manager
+			/// The manager for relation types and relation instances
 			RelationManagerPtr relation_manager;
 
-			/// The builder factory manager
+			/// The manager for the builder factories
 			BuilderFactoryManagerPtr builder_factory_manager;
 
 	};

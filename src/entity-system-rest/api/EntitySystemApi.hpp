@@ -25,7 +25,6 @@
 
 #include "../model/EntitySystemDto.hpp"
 #include "../model/EntitySystemMessageDto.hpp"
-#include "entity-system/EntitySystem.hpp"
 
 using namespace inexor::entity_system::rest::model;
 using namespace restbed;

@@ -28,7 +28,6 @@
 #include "../model/EntityInstanceDto.hpp"
 #include "../model/EntitySystemMessageDto.hpp"
 #include "../model/RelationInstanceDto.hpp"
-#include "entity-system/EntitySystem.hpp"
 
 using namespace inexor::entity_system::rest::model;
 using namespace restbed;
