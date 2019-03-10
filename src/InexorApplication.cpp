@@ -66,7 +66,7 @@ namespace inexor {
 		configuration_manager->init();
 
 		// Initialize the visual scripting
-		visual_scripting_system->init();
+		// visual_scripting_system->init();
 
 	}
 
@@ -80,8 +80,8 @@ namespace inexor {
 			spdlog::get(LOGGER_NAME)->info("Starting entity system...");
 
 			// Setup REST server
+			rest_server->create_resources();
 			rest_server->start();
-			//spdlog::get(LOGGER_NAME)->info("REST server is running on http://localhost:{}/{}", rest_server->get_settings()->get_port(), rest_server->get_settings()->get_root());
 			running = true;
 		} else {
 			spdlog::get(LOGGER_NAME)->info("Already running");

@@ -1,9 +1,13 @@
 #pragma once
 
 #include <memory>
+
 #include "server_http.hpp"
+#include "spdlog/spdlog.h"
 
 #include "logging/managers/LogManager.hpp"
+
+#define LOGGER_ENTITY_REST "inexor.entity.rest"
 
 using HttpServer = SimpleWeb::Server<SimpleWeb::HTTP>;
 using namespace std;

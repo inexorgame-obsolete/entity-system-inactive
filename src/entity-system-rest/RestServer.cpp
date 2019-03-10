@@ -1,7 +1,6 @@
 #include <functional>
 
 #include "RestServer.hpp"
-#include "entity-system-rest/controllers/EntityInstance.hpp"
 
 namespace inexor {
     namespace rest {
@@ -25,11 +24,14 @@ namespace inexor {
 
         void RestServer::start()
         {
-            thread server_thread([=]()
+            http_server->config.port = port;
+            thread server_thread([this]()
             {
-                http_server->start();
+                this->log_manager->register_logger(LOGGER_ENTITY_REST);
+                spdlog::get(LOGGER_ENTITY_REST)->info("Starting REST server on http://localhost:{}", this->port);
+                this->http_server->start();
             });
-            server_thread.detach();
+            server_thread.join();
         }
 
         void RestServer::set_port(unsigned short port)
@@ -39,8 +41,14 @@ namespace inexor {
 
         void RestServer::create_resources()
         {
-            function<void (Response, Request)> functor = bind(&controllers::get_instance_by_uuid, &entity_instance_manager, placeholders::_1, placeholders::_2);
-            //this->http_server->resource["^/entities/instances/([0-9a-f]{12})$"]["GET"] = controllers::get_instance_by_uuid;
+            http_server->resource["^/string$"]["GET"] = [this](shared_ptr<HttpServer::Response> response, shared_ptr<HttpServer::Request> request) {
+                // Retrieve string:
+                string content = "abc";
+
+                *response << "HTTP/1.1 200 OK\r\nContent-Length: " << content.size() << "\r\n\r\n"
+                          << content;
+            };
+
         }
     };
 };
