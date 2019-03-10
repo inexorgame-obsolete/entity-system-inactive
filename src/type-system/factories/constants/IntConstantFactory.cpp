@@ -22,7 +22,7 @@ namespace type_system {
 		return entity_instance_builder_factory->get_builder()
 			->type(entity_type_provider->get_type())
 			->attribute(IntConstantEntityTypeProvider::INT_CONSTANT_NAME, "")
-			->attribute("int_constant_value", 0)
+			->attribute(IntConstantEntityTypeProvider::INT_CONSTANT_VALUE, 0)
 			->build();
 	}
 
@@ -30,8 +30,8 @@ namespace type_system {
 	{
 		return entity_instance_builder_factory->get_builder()
 			->type(entity_type_provider->get_type())
-			->attribute("int_constant_name", name)
-			->attribute("int_constant_value", value)
+			->attribute(IntConstantEntityTypeProvider::INT_CONSTANT_NAME, name)
+			->attribute(IntConstantEntityTypeProvider::INT_CONSTANT_VALUE, value)
 			->build();
 	}
 
