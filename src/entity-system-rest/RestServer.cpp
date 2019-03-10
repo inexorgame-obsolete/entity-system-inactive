@@ -1,5 +1,3 @@
-#include <functional>
-
 #include "RestServer.hpp"
 
 namespace inexor {
@@ -7,11 +5,11 @@ namespace inexor {
 
         RestServer::RestServer(
             shared_ptr<inexor::logging::LogManager> log_manager,
-            shared_ptr<inexor::entity_system::EntityInstanceManager> entity_instance_manager
+            shared_ptr<inexor::entity_system::EntityTypeManager> entity_type_manager
         )
         {
             this->log_manager = log_manager;
-            this->entity_instance_manager = entity_instance_manager;
+            this->entity_type_manager = entity_type_manager;
             this->http_server = make_shared<HttpServer>();
             this->port = 8080; // Default port
             // Initialize API's by injecting the http server
@@ -41,9 +39,17 @@ namespace inexor {
 
         void RestServer::create_resources()
         {
-            http_server->resource["^/string$"]["GET"] = [this](shared_ptr<HttpServer::Response> response, shared_ptr<HttpServer::Request> request) {
+            http_server->resource["^/entities/type/(" + uuid_regex + ")$"]["GET"] = [this](shared_ptr<HttpServer::Response> response, shared_ptr<HttpServer::Request> request) {
                 // Retrieve string:
-                string content = "abc";
+                string content;
+                string type_uuid = request->path_match[1];
+
+                if (this->entity_type_manager->does_entity_type_exist(type_uuid)) { 
+                    O_ENT_TYPE type_instance = this->entity_type_manager->get_entity_type(type_uuid);
+                    // Serialize type
+                } else {
+
+                }
 
                 *response << "HTTP/1.1 200 OK\r\nContent-Length: " << content.size() << "\r\n\r\n"
                           << content;
