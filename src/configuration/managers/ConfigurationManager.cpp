@@ -2,9 +2,7 @@
 
 #include "spdlog/spdlog.h"
 
-#include "entity-system/managers/entities/entity-instance-manager/EntityInstanceManager.hpp"
 #include "entity-system/model/data/DataTypes.hpp"
-#include "entity-system/util/type-definitions/TypeDefinitions.hpp"
 
 namespace inexor {
 namespace configuration {
@@ -28,13 +26,6 @@ namespace configuration {
 
 	void ConfigurationManager::init()
 	{
-#ifdef _WIN32
-		set("PID", _getpid());
-#else
-		set("PID", getpid());
-#endif
-		set("SYS_NUM_CONCURRENT_THREADS", (int) std::thread::hardware_concurrency());
-		list();
 	}
 
 	bool ConfigurationManager::exists(std::string config_name)
