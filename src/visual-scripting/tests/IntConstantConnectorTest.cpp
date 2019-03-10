@@ -9,7 +9,8 @@
 
 #include "IntConstantConnectorTest.hpp"
 
-using namespace std;
+using IntConstantEntityTypeProvider = inexor::entity_system::type_system::IntConstantEntityTypeProvider;
+using AddIntEntityTypeProvider = inexor::entity_system::type_system::AddIntEntityTypeProvider;
 
 namespace inexor {
 namespace visual_scripting {
@@ -76,18 +77,14 @@ namespace visual_scripting {
 			std::shared_ptr<inexor::entity_system::EntityInstance> add_int = o_add_int.value();
 
 			std::cout << "Get entity instance attributes" << std::endl;
-			std::string value_attribute_name = "int_constant_value";
-			std::optional<std::shared_ptr<inexor::entity_system::EntityAttributeInstance>> o_source_attr_value = source->get_attribute_instance(value_attribute_name);
-			std::optional<std::shared_ptr<inexor::entity_system::EntityAttributeInstance>> o_target_1_attr_value = target_1->get_attribute_instance(value_attribute_name);
-			std::optional<std::shared_ptr<inexor::entity_system::EntityAttributeInstance>> o_target_2_attr_value = target_2->get_attribute_instance(value_attribute_name);
-			std::optional<std::shared_ptr<inexor::entity_system::EntityAttributeInstance>> o_target_3_attr_value = target_3->get_attribute_instance(value_attribute_name);
+			std::optional<std::shared_ptr<inexor::entity_system::EntityAttributeInstance>> o_source_attr_value = source->get_attribute_instance(IntConstantEntityTypeProvider::INT_CONSTANT_VALUE);
+			std::optional<std::shared_ptr<inexor::entity_system::EntityAttributeInstance>> o_target_1_attr_value = target_1->get_attribute_instance(IntConstantEntityTypeProvider::INT_CONSTANT_VALUE);
+			std::optional<std::shared_ptr<inexor::entity_system::EntityAttributeInstance>> o_target_2_attr_value = target_2->get_attribute_instance(IntConstantEntityTypeProvider::INT_CONSTANT_VALUE);
+			std::optional<std::shared_ptr<inexor::entity_system::EntityAttributeInstance>> o_target_3_attr_value = target_3->get_attribute_instance(IntConstantEntityTypeProvider::INT_CONSTANT_VALUE);
 
-			std::string augend_attribute_name = "add_int_augend";
-			std::string addend_attribute_name = "add_int_addend";
-			std::string sum_attribute_name = "add_int_sum";
-			std::optional<std::shared_ptr<inexor::entity_system::EntityAttributeInstance>> o_add_int_attr_augend = add_int->get_attribute_instance(augend_attribute_name);
-			std::optional<std::shared_ptr<inexor::entity_system::EntityAttributeInstance>> o_add_int_attr_addend = add_int->get_attribute_instance(addend_attribute_name);
-			std::optional<std::shared_ptr<inexor::entity_system::EntityAttributeInstance>> o_add_int_attr_sum = add_int->get_attribute_instance(sum_attribute_name);
+			std::optional<std::shared_ptr<inexor::entity_system::EntityAttributeInstance>> o_add_int_attr_augend = add_int->get_attribute_instance(AddIntEntityTypeProvider::ADD_INT_AUGEND);
+			std::optional<std::shared_ptr<inexor::entity_system::EntityAttributeInstance>> o_add_int_attr_addend = add_int->get_attribute_instance(AddIntEntityTypeProvider::ADD_INT_ADDEND);
+			std::optional<std::shared_ptr<inexor::entity_system::EntityAttributeInstance>> o_add_int_attr_sum = add_int->get_attribute_instance(AddIntEntityTypeProvider::ADD_INT_SUM);
 
 			if (o_source_attr_value.has_value() && o_target_1_attr_value.has_value() && o_target_2_attr_value.has_value() && o_target_3_attr_value.has_value() && o_add_int_attr_augend.has_value() && o_add_int_attr_addend.has_value() && o_add_int_attr_sum.has_value())
 			{
@@ -100,54 +97,94 @@ namespace visual_scripting {
 				std::shared_ptr<inexor::entity_system::EntityAttributeInstance> add_int_attr_sum = o_add_int_attr_sum.value();
 
 				std::cout << "Initial values (before connector created)" << std::endl;
-				std::cout << source_name << "." << value_attribute_name << " = " << std::get<DataType::INT>(source_attr_value->value.Value()) << std::endl;
-				std::cout << target_1_name << "." << value_attribute_name << " = " << std::get<DataType::INT>(target_1_attr_value->value.Value()) << std::endl;
-				std::cout << target_2_name << "." << value_attribute_name << " = " << std::get<DataType::INT>(target_2_attr_value->value.Value()) << std::endl;
-				std::cout << target_3_name << "." << value_attribute_name << " = " << std::get<DataType::INT>(target_3_attr_value->value.Value()) << std::endl;
-				std::cout << add_int_name << "." << augend_attribute_name << " = " << std::get<DataType::INT>(add_int_attr_augend->value.Value()) << std::endl;
-				std::cout << add_int_name << "." << addend_attribute_name << " = " << std::get<DataType::INT>(add_int_attr_addend->value.Value()) << std::endl;
-				std::cout << add_int_name << "." << sum_attribute_name << " = " << std::get<DataType::INT>(add_int_attr_sum->value.Value()) << std::endl;
+				std::cout << source_name << "." << IntConstantEntityTypeProvider::INT_CONSTANT_VALUE << " = " << std::get<DataType::INT>(source_attr_value->value.Value()) << std::endl;
+				std::cout << target_1_name << "." << IntConstantEntityTypeProvider::INT_CONSTANT_VALUE << " = " << std::get<DataType::INT>(target_1_attr_value->value.Value()) << std::endl;
+				std::cout << target_2_name << "." << IntConstantEntityTypeProvider::INT_CONSTANT_VALUE << " = " << std::get<DataType::INT>(target_2_attr_value->value.Value()) << std::endl;
+				std::cout << target_3_name << "." << IntConstantEntityTypeProvider::INT_CONSTANT_VALUE << " = " << std::get<DataType::INT>(target_3_attr_value->value.Value()) << std::endl;
+				std::cout << add_int_name << "." << AddIntEntityTypeProvider::ADD_INT_AUGEND << " = " << std::get<DataType::INT>(add_int_attr_augend->value.Value()) << std::endl;
+				std::cout << add_int_name << "." << AddIntEntityTypeProvider::ADD_INT_ADDEND << " = " << std::get<DataType::INT>(add_int_attr_addend->value.Value()) << std::endl;
+				std::cout << add_int_name << "." << AddIntEntityTypeProvider::ADD_INT_SUM << " = " << std::get<DataType::INT>(add_int_attr_sum->value.Value()) << std::endl;
 
-				std::cout << "Create connector " << source_name << "." << value_attribute_name << " ---> " << target_1_name << "." << value_attribute_name << std::endl;
+				std::cout << "Create connector " << source_name << "." << IntConstantEntityTypeProvider::INT_CONSTANT_VALUE << " ---> " << target_1_name << "." << IntConstantEntityTypeProvider::INT_CONSTANT_VALUE << ": ";
 				std::optional<std::shared_ptr<inexor::visual_scripting::Connector>> connector_1 = connector_manager->create_connector(source_attr_value, target_1_attr_value);
+				if (connector_1.has_value())
+				{
+					connector_1.value()->enable_debug();
+					std::cout << "success";
+				} else  {
+					std::cout << "failed!";
+				}
+				std::cout << std::endl;
 
-				std::cout << "Create connector " << source_name << "." << value_attribute_name << " ---> " << target_2_name << "." << value_attribute_name << std::endl;
+				std::cout << "Create connector " << source_name << "." << IntConstantEntityTypeProvider::INT_CONSTANT_VALUE << " ---> " << target_2_name << "." << IntConstantEntityTypeProvider::INT_CONSTANT_VALUE << ": ";
 				std::optional<std::shared_ptr<inexor::visual_scripting::Connector>> connector_2 = connector_manager->create_connector(source_attr_value, target_2_attr_value);
+				if (connector_2.has_value())
+				{
+//					connector_2.value()->enable_debug();
+					std::cout << "success";
+				} else  {
+					std::cout << "failed!";
+				}
+				std::cout << std::endl;
 
-				std::cout << "Create connector " << target_1_name << "." << value_attribute_name << " ---> " << target_3_name << "." << value_attribute_name << std::endl;
+				std::cout << "Create connector " << target_1_name << "." << IntConstantEntityTypeProvider::INT_CONSTANT_VALUE << " ---> " << target_3_name << "." << IntConstantEntityTypeProvider::INT_CONSTANT_VALUE << ": ";
 				std::optional<std::shared_ptr<inexor::visual_scripting::Connector>> connector_3 = connector_manager->create_connector(target_1_attr_value, target_3_attr_value);
+				if (connector_3.has_value())
+				{
+					connector_3.value()->enable_debug();
+					std::cout << "success";
+				} else  {
+					std::cout << "failed!";
+				}
+				std::cout << std::endl;
 
-				std::cout << "Create connector " << target_2_name << "." << value_attribute_name << " ---> " << add_int_name << "." << augend_attribute_name << std::endl;
+				std::cout << "Create connector " << target_2_name << "." << IntConstantEntityTypeProvider::INT_CONSTANT_VALUE << " ---> " << add_int_name << "." << AddIntEntityTypeProvider::ADD_INT_AUGEND << ": ";
 				std::optional<std::shared_ptr<inexor::visual_scripting::Connector>> connector_4 = connector_manager->create_connector(target_2_attr_value, add_int_attr_augend);
+				if (connector_4.has_value())
+				{
+					connector_4.value()->enable_debug();
+					std::cout << "success";
+				} else  {
+					std::cout << "failed!";
+				}
+				std::cout << std::endl;
 
-				std::cout << "Create connector " << target_3_name << "." << value_attribute_name << " ---> " << add_int_name << "." << addend_attribute_name << std::endl;
+				std::cout << "Create connector " << target_3_name << "." << IntConstantEntityTypeProvider::INT_CONSTANT_VALUE << " ---> " << add_int_name << "." << AddIntEntityTypeProvider::ADD_INT_ADDEND << ": ";
 				std::optional<std::shared_ptr<inexor::visual_scripting::Connector>> connector_5 = connector_manager->create_connector(target_3_attr_value, add_int_attr_addend);
+				if (connector_5.has_value())
+				{
+					connector_5.value()->enable_debug();
+					std::cout << "success";
+				} else  {
+					std::cout << "failed!";
+				}
+				std::cout << std::endl;
 
 				std::cout << "Initial values (after connector created)" << std::endl;
-				std::cout << source_name << "." << value_attribute_name << " = " << std::get<DataType::INT>(source_attr_value->value.Value()) << std::endl;
-				std::cout << target_1_name << "." << value_attribute_name << " = " << std::get<DataType::INT>(target_1_attr_value->value.Value()) << std::endl;
-				std::cout << target_2_name << "." << value_attribute_name << " = " << std::get<DataType::INT>(target_2_attr_value->value.Value()) << std::endl;
-				std::cout << target_3_name << "." << value_attribute_name << " = " << std::get<DataType::INT>(target_3_attr_value->value.Value()) << std::endl;
-				std::cout << add_int_name << "." << augend_attribute_name << " = " << std::get<DataType::INT>(add_int_attr_augend->value.Value()) << std::endl;
-				std::cout << add_int_name << "." << addend_attribute_name << " = " << std::get<DataType::INT>(add_int_attr_addend->value.Value()) << std::endl;
-				std::cout << add_int_name << "." << sum_attribute_name << " = " << std::get<DataType::INT>(add_int_attr_sum->value.Value()) << std::endl;
+				std::cout << source_name << "." << IntConstantEntityTypeProvider::INT_CONSTANT_VALUE << " = " << std::get<DataType::INT>(source_attr_value->value.Value()) << std::endl;
+				std::cout << target_1_name << "." << IntConstantEntityTypeProvider::INT_CONSTANT_VALUE << " = " << std::get<DataType::INT>(target_1_attr_value->value.Value()) << std::endl;
+				std::cout << target_2_name << "." << IntConstantEntityTypeProvider::INT_CONSTANT_VALUE << " = " << std::get<DataType::INT>(target_2_attr_value->value.Value()) << std::endl;
+				std::cout << target_3_name << "." << IntConstantEntityTypeProvider::INT_CONSTANT_VALUE << " = " << std::get<DataType::INT>(target_3_attr_value->value.Value()) << std::endl;
+				std::cout << add_int_name << "." << AddIntEntityTypeProvider::ADD_INT_AUGEND << " = " << std::get<DataType::INT>(add_int_attr_augend->value.Value()) << std::endl;
+				std::cout << add_int_name << "." << AddIntEntityTypeProvider::ADD_INT_ADDEND << " = " << std::get<DataType::INT>(add_int_attr_addend->value.Value()) << std::endl;
+				std::cout << add_int_name << "." << AddIntEntityTypeProvider::ADD_INT_SUM << " = " << std::get<DataType::INT>(add_int_attr_sum->value.Value()) << std::endl;
 				std::random_device rdev;
 				std::mt19937 rgen(rdev());
 				std::uniform_int_distribution<int> idist(0, 1000);
 				int i = 0;
 				while (i < 998)
 				{
-					std::this_thread::sleep_for(10s);
+					std::this_thread::sleep_for(2s);
 					i = idist(rgen);
 					std::cout << "source.value.Set(" << i << ")" << std::endl;
 					source_attr_value->own_value.Set(i);
-					std::cout << source_name << "." << value_attribute_name << " = " << std::get<DataType::INT>(source_attr_value->value.Value()) << std::endl;
-					std::cout << target_1_name << "." << value_attribute_name << " = " << std::get<DataType::INT>(target_1_attr_value->value.Value()) << std::endl;
-					std::cout << target_2_name << "." << value_attribute_name << " = " << std::get<DataType::INT>(target_2_attr_value->value.Value()) << std::endl;
-					std::cout << target_3_name << "." << value_attribute_name << " = " << std::get<DataType::INT>(target_3_attr_value->value.Value()) << std::endl;
-					std::cout << add_int_name << "." << augend_attribute_name << " = " << std::get<DataType::INT>(add_int_attr_augend->value.Value()) << std::endl;
-					std::cout << add_int_name << "." << addend_attribute_name << " = " << std::get<DataType::INT>(add_int_attr_addend->value.Value()) << std::endl;
-					std::cout << add_int_name << "." << sum_attribute_name << " = " << std::get<DataType::INT>(add_int_attr_sum->value.Value()) << std::endl;
+					std::cout << source_name << "." << IntConstantEntityTypeProvider::INT_CONSTANT_VALUE << " = " << std::get<DataType::INT>(source_attr_value->value.Value()) << std::endl;
+					std::cout << target_1_name << "." << IntConstantEntityTypeProvider::INT_CONSTANT_VALUE << " = " << std::get<DataType::INT>(target_1_attr_value->value.Value()) << std::endl;
+					std::cout << target_2_name << "." << IntConstantEntityTypeProvider::INT_CONSTANT_VALUE << " = " << std::get<DataType::INT>(target_2_attr_value->value.Value()) << std::endl;
+					std::cout << target_3_name << "." << IntConstantEntityTypeProvider::INT_CONSTANT_VALUE << " = " << std::get<DataType::INT>(target_3_attr_value->value.Value()) << std::endl;
+					std::cout << add_int_name << "." << AddIntEntityTypeProvider::ADD_INT_AUGEND << " = " << std::get<DataType::INT>(add_int_attr_augend->value.Value()) << std::endl;
+					std::cout << add_int_name << "." << AddIntEntityTypeProvider::ADD_INT_ADDEND << " = " << std::get<DataType::INT>(add_int_attr_addend->value.Value()) << std::endl;
+					std::cout << add_int_name << "." << AddIntEntityTypeProvider::ADD_INT_SUM << " = " << std::get<DataType::INT>(add_int_attr_sum->value.Value()) << std::endl;
 				}
 			}
 		}

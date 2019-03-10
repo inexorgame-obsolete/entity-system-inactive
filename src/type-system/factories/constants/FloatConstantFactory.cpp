@@ -5,7 +5,7 @@ namespace entity_system {
 namespace type_system {
 
 	FloatConstantFactory::FloatConstantFactory(
-		shared_ptr<FloatConstantEntityTypeProvider> entity_type_provider,
+		FloatConstantEntityTypeProviderPtr entity_type_provider,
 		EntityInstanceBuilderFactoryPtr entity_instance_builder_factory
 	)
 	{
@@ -17,12 +17,16 @@ namespace type_system {
 	{
 	}
 
+	void FloatConstantFactory::init()
+	{
+	}
+
 	EntityInstancePtrOpt FloatConstantFactory::create_instance()
 	{
 		return entity_instance_builder_factory->get_builder()
 			->type(entity_type_provider->get_type())
-			->attribute("float_constant_name", "")
-			->attribute("float_constant_value", 0.0f)
+			->attribute(FloatConstantEntityTypeProvider::FLOAT_CONSTANT_NAME, "")
+			->attribute(FloatConstantEntityTypeProvider::FLOAT_CONSTANT_VALUE, 0.0f)
 			->build();
 	}
 
@@ -30,8 +34,8 @@ namespace type_system {
 	{
 		return entity_instance_builder_factory->get_builder()
 			->type(entity_type_provider->get_type())
-			->attribute("float_constant_name", name)
-			->attribute("float_constant_value", value)
+			->attribute(FloatConstantEntityTypeProvider::FLOAT_CONSTANT_NAME, name)
+			->attribute(FloatConstantEntityTypeProvider::FLOAT_CONSTANT_VALUE, value)
 			->build();
 	}
 

@@ -1,7 +1,5 @@
 #include "CosFactory.hpp"
 
-using namespace std;
-
 namespace inexor {
 namespace entity_system {
 namespace type_system {
@@ -19,7 +17,11 @@ namespace type_system {
 	{
 	}
 
-	O_ENT_INST CosFactory::create_instance()
+	void CosFactory::init()
+	{
+	}
+
+	EntityInstancePtrOpt CosFactory::create_instance()
 	{
 		return entity_instance_builder_factory->get_builder()
 			->type(entity_type_provider->get_type())

@@ -45,7 +45,7 @@ namespace visual_scripting {
 			///                    attribute instance which is the output attribute.
 			/// @param input_attr  A const reference to the shared pointer of the entity
 			///                    attribute instance which is the input attribute.
-			optional<shared_ptr<Connector>> create_connector(const ENT_ATTR_INST& output_attr, const ENT_ATTR_INST& input_attr);
+			std::optional<std::shared_ptr<Connector>> create_connector(const ENT_ATTR_INST& output_attr, const ENT_ATTR_INST& input_attr);
 
 			/// @brief Creates a connector from an entity attribute instance to another.
 			/// @param connector_GUID The GUID of the newly created connector.
@@ -53,7 +53,7 @@ namespace visual_scripting {
 			///                    attribute instance which is the output attribute.
 			/// @param input_attr  A const reference to the shared pointer of the entity
 			///                    attribute instance which is the input attribute.
-			optional<shared_ptr<Connector>> create_connector(const Guid& connector_GUID, const ENT_ATTR_INST& output_attr, const ENT_ATTR_INST& input_attr);
+			std::optional<std::shared_ptr<Connector>> create_connector(const Guid& connector_GUID, const ENT_ATTR_INST& output_attr, const ENT_ATTR_INST& input_attr);
 
 //			/// @brief Creates a connector from an entity attribute instance to a relation attribute instance.
 //			/// @param output_attr A const reference to the shared pointer of the entity

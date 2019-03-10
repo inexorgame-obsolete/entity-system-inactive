@@ -144,7 +144,7 @@ namespace entity_system {
 						}
 					} else {
 						// Error: Wrong datatype
-						spdlog::error("Wrong datatype for attribute {}: {} != {}", attr_name, attr_inst->type, attr_value.type);
+						spdlog::error("Wrong datatype for attribute {} of new entity instance of type {}: {} != {}", attr_name, o_entity_type.value()->get_type_name(), attr_inst->type._to_string(), attr_value.type._to_string());
 						return std::nullopt;
 					}
 				} else {

@@ -5,7 +5,7 @@ namespace entity_system {
 namespace type_system {
 
 	BoolConstantFactory::BoolConstantFactory(
-		shared_ptr<BoolConstantEntityTypeProvider> entity_type_provider,
+		BoolConstantEntityTypeProviderPtr entity_type_provider,
 		EntityInstanceBuilderFactoryPtr entity_instance_builder_factory
 	)
 	{
@@ -17,12 +17,16 @@ namespace type_system {
 	{
 	}
 
+	void BoolConstantFactory::init()
+	{
+	}
+
 	EntityInstancePtrOpt BoolConstantFactory::create_instance()
 	{
 		return entity_instance_builder_factory->get_builder()
 			->type(entity_type_provider->get_type())
-			->attribute("bool_constant_name", "")
-			->attribute("bool_constant_value", false)
+			->attribute(BoolConstantEntityTypeProvider::BOOL_CONSTANT_NAME, "")
+			->attribute(BoolConstantEntityTypeProvider::BOOL_CONSTANT_VALUE, false)
 			->build();
 	}
 
@@ -30,8 +34,8 @@ namespace type_system {
 	{
 		return entity_instance_builder_factory->get_builder()
 			->type(entity_type_provider->get_type())
-			->attribute("bool_constant_name", name)
-			->attribute("bool_constant_value", value)
+			->attribute(BoolConstantEntityTypeProvider::BOOL_CONSTANT_NAME, name)
+			->attribute(BoolConstantEntityTypeProvider::BOOL_CONSTANT_VALUE, value)
 			->build();
 	}
 

@@ -1,6 +1,3 @@
-// Inexor entity system
-// (c)2018 Inexor
-
 #pragma once
 
 #include "spdlog/spdlog.h"
@@ -10,17 +7,19 @@
 
 #include "entity-system/factories/entities/entity-type-builder-factory/EntityTypeBuilderFactory.hpp"
 #include "entity-system/managers/entities/entity-instance-manager/EntityInstanceManager.hpp"
-#include "entity-system/model/data/DataTypes.hpp"
-#include "entity-system/util/type-definitions/TypeDefinitions.hpp"
+#include "entity-system/model/entities/entity-instances/EntityInstance.hpp"
 
 #include "type-system/factories/logger/LoggerFactory.hpp"
 #include "type-system/providers/logger/LoggerEntityTypeProvider.hpp"
 
-using namespace inexor::entity_system;
-using namespace std;
-
 namespace inexor {
 namespace logging {
+
+	using LoggerEntityTypeProviderPtr = std::shared_ptr<entity_system::type_system::LoggerEntityTypeProvider>;
+	using LoggerFactoryPtr = std::shared_ptr<entity_system::type_system::LoggerFactory>;
+	using EntityInstanceManagerPtr = std::shared_ptr<entity_system::EntityInstanceManager>;
+	using EntityInstancePtr = std::shared_ptr<entity_system::EntityInstance>;
+	using EntityInstancePtrOpt = std::optional<EntityInstancePtr>;
 
 	/// @class LogManager
     /// @brief Management of the loggers.
@@ -30,9 +29,9 @@ namespace logging {
 
 			/// Constructor.
 			LogManager(
-				shared_ptr<LoggerEntityTypeProvider> logger_entity_type_provider,
-				shared_ptr<LoggerFactory> logger_factory,
-				shared_ptr<EntityInstanceManager> entity_instance_manager
+				LoggerEntityTypeProviderPtr logger_entity_type_provider,
+				LoggerFactoryPtr logger_factory,
+				EntityInstanceManagerPtr entity_instance_manager
 			);
 
 			/// Destructor.
@@ -59,16 +58,16 @@ namespace logging {
 			vector<spdlog::sink_ptr> sinks;
 
 			/// The entity type provider
-			shared_ptr<LoggerEntityTypeProvider> logger_entity_type_provider;
+			LoggerEntityTypeProviderPtr logger_entity_type_provider;
 
 			/// The entity type provider
-			shared_ptr<LoggerFactory> logger_factory;
+			LoggerFactoryPtr logger_factory;
 
 			/// The entity instance manager
-			shared_ptr<EntityInstanceManager> entity_instance_manager;
+			EntityInstanceManagerPtr entity_instance_manager;
 
 			/// The logger representation in the entity system
-			unordered_map<std::string, shared_ptr<inexor::entity_system::EntityInstance>> logger_instances;
+			unordered_map<std::string, EntityInstancePtr> logger_instances;
 
 	};
 

@@ -16,7 +16,7 @@ namespace inexor {
 
 	InexorApplication::InexorApplication(
 		std::shared_ptr<inexor::entity_system::EntitySystem> entity_system,
-		std::shared_ptr<inexor::entity_system::type_system::TypeSystemManager> type_system_manager,
+		std::shared_ptr<inexor::entity_system::type_system::TypeSystemModule> type_system_module,
 		std::shared_ptr<inexor::configuration::ConfigurationModule> configuration_module,
 		std::shared_ptr<inexor::entity_system::RestServer> rest_server,
 		std::shared_ptr<inexor::entity_system::EntitySystemDebugger> entity_system_debugger,
@@ -26,7 +26,7 @@ namespace inexor {
 	)
 	{
 		this->entity_system = entity_system;
-		this->type_system_manager = type_system_manager;
+		this->type_system_module = type_system_module;
 		this->configuration_module = configuration_module;
 		this->rest_server = rest_server;
 		this->entity_system_debugger = entity_system_debugger;
@@ -65,7 +65,7 @@ namespace inexor {
 #endif
 
 		// Type system initialization
-		type_system_manager->init();
+		type_system_module->init();
 
 		// Configuration manager initialization
 		configuration_module->init(argc, argv);

@@ -20,7 +20,7 @@ namespace type_system {
 				TYPE_NAME,
 				{
 					{ FLOAT_CONSTANT_NAME, { DataType::STRING, 1 << Feature::OUTPUT } },
-					{ FLOAT_CONSTANT_VALUE, { DataType::FLOAT, 1 << Feature::OUTPUT } }
+					{ FLOAT_CONSTANT_VALUE, { DataType::FLOAT, 1 << Feature::INPUT | 1 << Feature::OUTPUT } }
 				}
 			) {};
 

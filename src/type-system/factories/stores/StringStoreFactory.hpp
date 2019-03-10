@@ -1,11 +1,7 @@
 #pragma once
 
-#include "entity-system/factories/entities/entity-type-builder-factory/EntityTypeBuilderFactory.hpp"
 #include "entity-system/factories/entities/entity-instance-builder-factory/EntityInstanceBuilderFactory.hpp"
-#include "entity-system/managers/entities/entity-instance-manager/EntityInstanceManager.hpp"
-#include "entity-system/model/data/DataTypes.hpp"
-#include "entity-system/util/type-definitions/TypeDefinitions.hpp"
-
+#include "entity-system/model/entities/entity-instances/EntityInstance.hpp"
 #include "type-system/providers/stores/StringStoreEntityTypeProvider.hpp"
 
 using namespace inexor::entity_system;
@@ -15,22 +11,25 @@ namespace inexor {
 namespace entity_system {
 namespace type_system {
 
+	using StringStoreEntityTypeProviderPtr = std::shared_ptr<StringStoreEntityTypeProvider>;
 	using EntityInstancePtrOpt = std::optional<std::shared_ptr<EntityInstance>>;
+	using EntityInstanceBuilderFactoryPtr = std::shared_ptr<EntityInstanceBuilderFactory>;
 
-	/// @class StringStoreFactory
-    /// @brief Factory for entity instances of type STRING_STORE.
+    /// Factory for creating entity instances of type STRING_STORE.
 	class StringStoreFactory
 	{
 		public:
 
-			/// Constructor.
+			/// Constructs a factory for creating entity instances of type STRING_STORE.
 			StringStoreFactory(
-				shared_ptr<StringStoreEntityTypeProvider> entity_type_provider,
-				shared_ptr<EntityInstanceBuilderFactory> entity_instance_builder_factory
+				StringStoreEntityTypeProviderPtr entity_type_provider,
+				EntityInstanceBuilderFactoryPtr entity_instance_builder_factory
 			);
 
-			/// Destructor.
 			~StringStoreFactory();
+
+			/// Initializes the factory.
+			void init();
 
 			/// Creates an instance with default values
 			EntityInstancePtrOpt create_instance();
@@ -40,11 +39,11 @@ namespace type_system {
 
 		private:
 
-			/// The entity type provider
-			shared_ptr<StringStoreEntityTypeProvider> entity_type_provider;
+			/// Provides the entity type STRING_STORE.
+			StringStoreEntityTypeProviderPtr entity_type_provider;
 
-			/// The entity instance manager
-			shared_ptr<EntityInstanceBuilderFactory> entity_instance_builder_factory;
+			/// Factory for creating entity instance builders.
+			EntityInstanceBuilderFactoryPtr entity_instance_builder_factory;
 
 	};
 

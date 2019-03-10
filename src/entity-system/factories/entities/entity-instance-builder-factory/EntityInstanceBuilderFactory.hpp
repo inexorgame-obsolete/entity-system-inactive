@@ -9,15 +9,14 @@ namespace inexor {
 namespace entity_system {
 
 	using EntityInstanceBuilderPtr = std::shared_ptr<EntityInstanceBuilder>;
+	using EntityInstanceManagerPtr = std::shared_ptr<EntityInstanceManager>;
+	using EntityTypeManagerPtr = std::shared_ptr<EntityTypeManager>;
 
 	/// @class EntityTypeBuilder
     /// @brief Management of the loggers.
 	class EntityInstanceBuilderFactory
 	{
 		public:
-
-			using EntityInstanceManagerPtr = std::shared_ptr<EntityInstanceManager>;
-			using EntityTypeManagerPtr = std::shared_ptr<EntityTypeManager>;
 
 			/// Constructor.
 			EntityInstanceBuilderFactory(

@@ -17,6 +17,10 @@ namespace type_system {
 	{
 	}
 
+	void StringConstantFactory::init()
+	{
+	}
+
 	EntityInstancePtrOpt StringConstantFactory::create_instance()
 	{
 		return entity_instance_builder_factory->get_builder()

@@ -1,8 +1,8 @@
 #pragma once
 
 #include "entity-system/factories/entities/entity-instance-builder-factory/EntityInstanceBuilderFactory.hpp"
-#include "type-system/providers/trigonometric/SinEntityTypeProvider.hpp"
 #include "entity-system/model/entities/entity-instances/EntityInstance.hpp"
+#include "type-system/providers/trigonometric/SinEntityTypeProvider.hpp"
 
 namespace inexor {
 namespace entity_system {
@@ -10,8 +10,7 @@ namespace type_system {
 
 	using EntityInstancePtrOpt = std::optional<std::shared_ptr<EntityInstance>>;
 
-	/// @class SinFactory
-    /// @brief Factory for entity instances of type SIN.
+    /// Factory for creating entity instances of type SIN.
 	class SinFactory
 	{
 		public:
@@ -19,28 +18,29 @@ namespace type_system {
 			using SinEntityTypeProviderPtr = std::shared_ptr<SinEntityTypeProvider>;
 			using EntityInstanceBuilderFactoryPtr = std::shared_ptr<EntityInstanceBuilderFactory>;
 
-			/// Constructor.
+			/// Constructs a factory for creating entity instances of type SIN.
 			SinFactory(
 				SinEntityTypeProviderPtr entity_type_provider,
 				EntityInstanceBuilderFactoryPtr entity_instance_builder_factory
 			);
 
-			/// Destructor.
 			~SinFactory();
+
+			/// Initializes the factory.
+			void init();
 
 			/// Creates an instance with default values
 			EntityInstancePtrOpt create_instance();
 
 		private:
 
-			/// The entity type provider
+			/// Provides the entity type SIN.
 			SinEntityTypeProviderPtr entity_type_provider;
 
-			/// The entity instance manager
+			/// Factory for creating entity instance builders.
 			EntityInstanceBuilderFactoryPtr entity_instance_builder_factory;
 
 	};
-
 
 }
 }

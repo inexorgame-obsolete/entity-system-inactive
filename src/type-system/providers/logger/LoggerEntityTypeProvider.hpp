@@ -19,7 +19,7 @@ namespace type_system {
 				entity_type_builder_manager,
 				TYPE_NAME,
 				{
-					{ LOGGER_NAME, { DataType::STRING, 1 << Feature::INPUT | 1 << Feature::OUTPUT } },
+					{ LOGGER_NAME, { DataType::STRING, 1 << Feature::OUTPUT } },
 					{ LOG_LEVEL, { DataType::INT, 1 << Feature::INPUT | 1 << Feature::OUTPUT } },
 					{ LOG_MESSAGE, { DataType::STRING, 1 << Feature::INPUT } }
 				}

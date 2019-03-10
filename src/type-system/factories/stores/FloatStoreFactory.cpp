@@ -1,18 +1,12 @@
-// Inexor entity system
-// (c)2018 Inexor
-
 #include "FloatStoreFactory.hpp"
-
-using namespace inexor::entity_system;
-using namespace std;
 
 namespace inexor {
 namespace entity_system {
 namespace type_system {
 
 	FloatStoreFactory::FloatStoreFactory(
-		shared_ptr<FloatStoreEntityTypeProvider> entity_type_provider,
-		shared_ptr<EntityInstanceBuilderFactory> entity_instance_builder_factory
+		FloatStoreEntityTypeProviderPtr entity_type_provider,
+		EntityInstanceBuilderFactoryPtr entity_instance_builder_factory
 	)
 	{
 		this->entity_type_provider = entity_type_provider;
@@ -23,25 +17,29 @@ namespace type_system {
 	{
 	}
 
-	O_ENT_INST FloatStoreFactory::create_instance()
+	void FloatStoreFactory::init()
+	{
+	}
+
+	EntityInstancePtrOpt FloatStoreFactory::create_instance()
 	{
 		return entity_instance_builder_factory->get_builder()
 			->type(entity_type_provider->get_type())
-			->attribute("name", "")
-			->attribute("input_value", 0)
-			->attribute("default_value", 0)
-			->attribute("output_value", 0)
+			->attribute(FloatStoreEntityTypeProvider::FLOAT_STORE_NAME, "")
+			->attribute(FloatStoreEntityTypeProvider::FLOAT_STORE_INPUT_VALUE, 0.0f)
+			->attribute(FloatStoreEntityTypeProvider::FLOAT_STORE_DEFAULT_VALUE, 0.0f)
+			->attribute(FloatStoreEntityTypeProvider::FLOAT_STORE_OUTPUT_VALUE, 0.0f)
 			->build();
 	}
 
-	O_ENT_INST FloatStoreFactory::create_instance(const string& name, const float& input_value, const float& default_value, const float& output_value)
+	EntityInstancePtrOpt FloatStoreFactory::create_instance(const string& name, const float& input_value, const float& default_value, const float& output_value)
 	{
 		return entity_instance_builder_factory->get_builder()
 			->type(entity_type_provider->get_type())
-			->attribute("name", name)
-			->attribute("input_value", input_value)
-			->attribute("default_value", default_value)
-			->attribute("output_value", output_value)
+			->attribute(FloatStoreEntityTypeProvider::FLOAT_STORE_NAME, name)
+			->attribute(FloatStoreEntityTypeProvider::FLOAT_STORE_INPUT_VALUE, input_value)
+			->attribute(FloatStoreEntityTypeProvider::FLOAT_STORE_DEFAULT_VALUE, default_value)
+			->attribute(FloatStoreEntityTypeProvider::FLOAT_STORE_OUTPUT_VALUE, output_value)
 			->build();
 	}
 

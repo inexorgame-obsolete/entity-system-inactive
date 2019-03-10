@@ -20,7 +20,7 @@ namespace type_system {
 				TYPE_NAME,
 				{
 					{ INT_CONSTANT_NAME, { DataType::STRING, 1 << Feature::OUTPUT } },
-					{ INT_CONSTANT_VALUE, { DataType::INT, 1 << Feature::OUTPUT } }
+					{ INT_CONSTANT_VALUE, { DataType::INT, 1 << Feature::INPUT | 1 << Feature::OUTPUT } }
 				}
 			) {};
 

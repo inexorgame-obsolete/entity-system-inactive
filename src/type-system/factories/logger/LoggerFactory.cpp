@@ -1,63 +1,62 @@
-// Inexor entity system
-// (c)2018 Inexor
-
 #include "LoggerFactory.hpp"
 
-using namespace inexor::entity_system;
-using namespace std;
-
 namespace inexor {
-namespace logging {
-
+namespace entity_system {
+namespace type_system {
 
 	LoggerFactory::LoggerFactory(
-		shared_ptr<LoggerEntityTypeProvider> logger_entity_type_provider,
-		shared_ptr<EntityInstanceBuilderFactory> entity_instance_builder_factory,
-		shared_ptr<EntityInstanceManager> entity_instance_manager
+		LoggerEntityTypeProviderPtr logger_entity_type_provider,
+		EntityInstanceBuilderFactoryPtr entity_instance_builder_factory
 	)
 	{
 		this->logger_entity_type_provider = logger_entity_type_provider;
 		this->entity_instance_builder_factory = entity_instance_builder_factory;
-		this->entity_instance_manager = entity_instance_manager;
 	}
 
 	LoggerFactory::~LoggerFactory()
 	{
 	}
 
-	O_ENT_INST LoggerFactory::create_instance()
+	void LoggerFactory::init()
+	{
+	}
+
+	EntityInstancePtrOpt LoggerFactory::create_instance()
 	{
 		return entity_instance_builder_factory->get_builder()
 			->type(logger_entity_type_provider->get_type())
-			->attribute("logger_name", "")
-			->attribute("log_level", spdlog::level::level_enum::info)
+			->attribute(LoggerEntityTypeProvider::LOGGER_NAME, "")
+			->attribute(LoggerEntityTypeProvider::LOG_LEVEL, spdlog::level::level_enum::info)
+			->attribute(LoggerEntityTypeProvider::LOG_MESSAGE, std::string(""))
 			->build();
 	}
 
-	O_ENT_INST LoggerFactory::create_instance(string logger_name)
+	EntityInstancePtrOpt LoggerFactory::create_instance(std::string logger_name)
 	{
 		return entity_instance_builder_factory->get_builder()
 			->type(logger_entity_type_provider->get_type())
-			->attribute("logger_name", logger_name)
-			->attribute("log_level", spdlog::level::level_enum::info)
+			->attribute(LoggerEntityTypeProvider::LOGGER_NAME, logger_name)
+			->attribute(LoggerEntityTypeProvider::LOG_LEVEL, spdlog::level::level_enum::info)
+			->attribute(LoggerEntityTypeProvider::LOG_MESSAGE, std::string(""))
 			->build();
 	}
 
-	O_ENT_INST LoggerFactory::create_instance(string logger_name, spdlog::level::level_enum log_level)
+	EntityInstancePtrOpt LoggerFactory::create_instance(std::string logger_name, spdlog::level::level_enum log_level)
 	{
 		return entity_instance_builder_factory->get_builder()
 			->type(logger_entity_type_provider->get_type())
-			->attribute("logger_name", logger_name)
-			->attribute("log_level", log_level)
+			->attribute(LoggerEntityTypeProvider::LOGGER_NAME, logger_name)
+			->attribute(LoggerEntityTypeProvider::LOG_LEVEL, log_level)
+			->attribute(LoggerEntityTypeProvider::LOG_MESSAGE, std::string(""))
 			->build();
 	}
 
-	vector<ENT_INST> LoggerFactory::create_instances(int count)
+	std::vector<EntityInstancePtr> LoggerFactory::create_instances(int count)
 	{
-		vector<ENT_INST> instances;
+		std::vector<EntityInstancePtr> instances;
 		for (int i = 0; i < count; i++)
 		{
-			O_ENT_INST o_ent_inst = create_instance();
+			EntityInstancePtrOpt o_ent_inst = create_instance();
 			if (o_ent_inst.has_value()) {
 				instances.push_back(o_ent_inst.value());
 			}
@@ -65,5 +64,6 @@ namespace logging {
 		return instances;
 	}
 
+}
 }
 }

@@ -28,7 +28,7 @@ namespace visual_scripting {
 	{
 	}
 
-	optional<shared_ptr<Connector>> ConnectorManager::create_connector(
+	std::optional<std::shared_ptr<Connector>> ConnectorManager::create_connector(
 		const std::shared_ptr<class inexor::entity_system::EntityAttributeInstance>& output_attr,
 		const std::shared_ptr<class inexor::entity_system::EntityAttributeInstance>& input_attr
 	)
@@ -48,7 +48,11 @@ namespace visual_scripting {
 		{
 //			DataValue output_value = output_attr->value;
 //			DataValue input_value = input_attr->value;
-			return optional<shared_ptr<Connector>> { make_shared<Connector>(output_attr, input_attr) };
+			std::shared_ptr<Connector> connector = make_shared<Connector>(output_attr, input_attr);
+			connectors[connector->get_GUID()] = connector;
+			output_to_connectors[output_attr_GUID].push_back(connector);
+			input_to_connector[input_attr_GUID] = connector;
+			return std::optional<std::shared_ptr<Connector>> { connector };
 			// return optional<shared_ptr<Connector>> { make_shared<Connector>(output_attr_GUID, input_attr_GUID) };
 		}
 		return nullopt;

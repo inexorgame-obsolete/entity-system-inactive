@@ -17,7 +17,11 @@ namespace type_system {
 	{
 	}
 
-	std::optional<std::shared_ptr<EntityInstance> > SinFactory::create_instance()
+	void SinFactory::init()
+	{
+	}
+
+	EntityInstancePtrOpt SinFactory::create_instance()
 	{
 		return entity_instance_builder_factory->get_builder()
 			->type(entity_type_provider->get_type())

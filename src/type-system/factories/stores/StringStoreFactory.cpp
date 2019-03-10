@@ -1,18 +1,12 @@
-// Inexor entity system
-// (c)2018 Inexor
-
 #include "StringStoreFactory.hpp"
-
-using namespace inexor::entity_system;
-using namespace std;
 
 namespace inexor {
 namespace entity_system {
 namespace type_system {
 
 	StringStoreFactory::StringStoreFactory(
-		shared_ptr<StringStoreEntityTypeProvider> entity_type_provider,
-		shared_ptr<EntityInstanceBuilderFactory> entity_instance_builder_factory
+		StringStoreEntityTypeProviderPtr entity_type_provider,
+		EntityInstanceBuilderFactoryPtr entity_instance_builder_factory
 	)
 	{
 		this->entity_type_provider = entity_type_provider;
@@ -23,25 +17,29 @@ namespace type_system {
 	{
 	}
 
-	O_ENT_INST StringStoreFactory::create_instance()
+	void StringStoreFactory::init()
+	{
+	}
+
+	EntityInstancePtrOpt StringStoreFactory::create_instance()
 	{
 		return entity_instance_builder_factory->get_builder()
 			->type(entity_type_provider->get_type())
-			->attribute("name", "")
-			->attribute("input_value", "")
-			->attribute("default_value", "")
-			->attribute("output_value", "")
+			->attribute(StringStoreEntityTypeProvider::STRING_STORE_NAME, "")
+			->attribute(StringStoreEntityTypeProvider::STRING_STORE_INPUT_VALUE, "")
+			->attribute(StringStoreEntityTypeProvider::STRING_STORE_DEFAULT_VALUE, "")
+			->attribute(StringStoreEntityTypeProvider::STRING_STORE_OUTPUT_VALUE, "")
 			->build();
 	}
 
-	O_ENT_INST StringStoreFactory::create_instance(const string& name, const string& input_value, const string& default_value, const string& output_value)
+	EntityInstancePtrOpt StringStoreFactory::create_instance(const string& name, const string& input_value, const string& default_value, const string& output_value)
 	{
 		return entity_instance_builder_factory->get_builder()
 			->type(entity_type_provider->get_type())
-			->attribute("name", name)
-			->attribute("input_value", input_value)
-			->attribute("default_value", default_value)
-			->attribute("output_value", output_value)
+			->attribute(StringStoreEntityTypeProvider::STRING_STORE_NAME, name)
+			->attribute(StringStoreEntityTypeProvider::STRING_STORE_INPUT_VALUE, input_value)
+			->attribute(StringStoreEntityTypeProvider::STRING_STORE_DEFAULT_VALUE, default_value)
+			->attribute(StringStoreEntityTypeProvider::STRING_STORE_OUTPUT_VALUE, output_value)
 			->build();
 	}
 
