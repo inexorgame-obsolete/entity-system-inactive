@@ -1,5 +1,5 @@
-// Inexor visual scripting
-// (c)2018-2019 Inexor
+#include "entity-system/model/entities/entity-instances/EntityInstance.hpp"
+#include "visual-scripting/model/Connector.hpp"
 
 #include <random>
 
@@ -8,8 +8,6 @@
 #include "react/Observer.h"
 
 #include "SinTest.hpp"
-#include "entity-system/model/entities/entity-instances/EntityInstance.hpp"
-#include "visual-scripting/model/Connector.hpp"
 
 using namespace std;
 
@@ -18,9 +16,9 @@ namespace visual_scripting {
 
 
 	SinTest::SinTest(
-		std::shared_ptr<inexor::visual_scripting::ConnectorManager> connector_manager,
-		std::shared_ptr<inexor::entity_system::type_system::FloatConstantFactory> float_constant_factory,
-		std::shared_ptr<inexor::entity_system::type_system::SinFactory> sin_factory
+		ConnectorManagerPtr connector_manager,
+		FloatConstantFactoryPtr float_constant_factory,
+		SinFactoryPtr sin_factory
 	)
 	{
         this->connector_manager = connector_manager;
@@ -102,5 +100,5 @@ namespace visual_scripting {
 	}
 
 
-};
-};
+}
+}

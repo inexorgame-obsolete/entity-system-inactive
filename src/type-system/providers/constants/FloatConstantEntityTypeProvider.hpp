@@ -1,42 +1,39 @@
-// Inexor entity system
-// (c)2018 Inexor
-
 #pragma once
 
-#include "entity-system/managers/entities/entity-type-builder-manager/EntityTypeBuilderManager.hpp"
-#include "entity-system/providers/entities/entity-type-provider/EntityTypeProvider.hpp"
-
-using namespace inexor::entity_system;
-using namespace std;
+#include "entity-system/factories/entities/entity-type-builder-factory/EntityTypeBuilderFactory.hpp"
+#include "entity-system/providers/EntityTypeProvider.hpp"
 
 namespace inexor {
 namespace entity_system {
 namespace type_system {
 
-	/// @class FloatConstantEntityTypeProvider
-    /// @brief Provides the entity type FLOAT_CONSTANT.
+	/// Provides an entity type "FLOAT_CONSTANT" which is a pure float constant variable.
 	class FloatConstantEntityTypeProvider : public EntityTypeProvider
 	{
 		public:
 
-			/// Constructor.
+			/// Constructs the specialized provider for the FLOAT_CONSTANT entity type
 			FloatConstantEntityTypeProvider(
-				shared_ptr<EntityTypeBuilderManager> entity_type_builder_manager
+				std::shared_ptr<EntityTypeBuilderFactory> entity_type_builder_manager
 			) : EntityTypeProvider(
 				entity_type_builder_manager,
-				"FLOAT_CONSTANT",
+				TYPE_NAME,
 				{
-					{ "float_constant_name", DataType::STRING },
-					{ "float_constant_value", DataType::FLOAT }
-				},
-				{
-					{ "float_constant_name", 1 << Feature::OUTPUT },
-					{ "float_constant_value", 1 << Feature::OUTPUT | 1 << Feature::INPUT }
+					{ FLOAT_CONSTANT_NAME, { DataType::STRING, 1 << Feature::OUTPUT } },
+					{ FLOAT_CONSTANT_VALUE, { DataType::FLOAT, 1 << Feature::OUTPUT } }
 				}
 			) {};
 
-			/// Destructor.
 			~FloatConstantEntityTypeProvider() {};
+
+			/// Defines the name of this entity type
+			static constexpr char TYPE_NAME[] = "FLOAT_CONSTANT";
+
+			/// The name of the output attribute float_constant_name
+			static constexpr char FLOAT_CONSTANT_NAME[] = "float_constant_name";
+
+			/// The name of the output attribute float_constant_value
+			static constexpr char FLOAT_CONSTANT_VALUE[] = "float_constant_value";
 
 	};
 

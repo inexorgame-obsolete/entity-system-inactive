@@ -1,22 +1,13 @@
-// Inexor entity system
-// (c)2018-2019 Inexor
-
 #pragma once
+
+#include "entity-system/managers/EntityManager.hpp"
+#include "entity-system/managers/RelationManager.hpp"
+#include "entity-system/managers/BuilderFactoryManager.hpp"
 
 #include <iostream>
 
-#include "managers/EntityManager.hpp"
-#include "managers/RelationManager.hpp"
-#include "managers/BuilderManager.hpp"
-
-
-using namespace inexor::entity_system;
-using namespace std;
-
-
 namespace inexor {
 namespace entity_system {
-
 
 	/// @class EntitySystem
     /// @brief Entity system main class.
@@ -24,11 +15,15 @@ namespace entity_system {
 	{
 		public:
 
+			using EntityManagerPtr = std::shared_ptr<EntityManager>;
+			using RelationManagerPtr = std::shared_ptr<RelationManager>;
+			using BuilderFactoryManagerPtr = std::shared_ptr<BuilderFactoryManager>;
+
 			/// Constructor.
 			EntitySystem(
-				shared_ptr<EntityManager> entity_manager,
-				shared_ptr<RelationManager> relation_manager,
-				shared_ptr<BuilderManager> builder_manager
+				EntityManagerPtr entity_manager,
+				RelationManagerPtr relation_manager,
+				BuilderFactoryManagerPtr builder_factory_manager
 			);
 
 			/// Destructor.
@@ -39,17 +34,17 @@ namespace entity_system {
 
 		private:
 
-			/// The entity managers
-			shared_ptr<EntityManager> entity_manager;
+			/// The entity manager
+			EntityManagerPtr entity_manager;
 
-			/// The entity managers
-			shared_ptr<RelationManager> relation_manager;
+			/// The entity manager
+			RelationManagerPtr relation_manager;
 
-			/// The builder managers
-			shared_ptr<BuilderManager> builder_manager;
+			/// The builder factory manager
+			BuilderFactoryManagerPtr builder_factory_manager;
 
 	};
 
 
-};
-};
+}
+}

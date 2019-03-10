@@ -1,21 +1,20 @@
-// Inexor entity system
-// (c)2018 Inexor
-
 #pragma once
-
-#include "spdlog/spdlog.h"
 
 #include "entity-system/managers/relations/relation-type-manager/RelationTypeManager.hpp"
 #include "entity-system/managers/relation-attributes/relation-attribute-type-manager/RelationAttributeTypeManager.hpp"
 #include "entity-system/managers/relation-attributes/relation-attribute-instance-manager/RelationAttributeInstanceManager.hpp"
 #include "entity-system/model/data/DataTypes.hpp"
-#include "entity-system/util/type-definitions/TypeDefinitions.hpp"
-
-using namespace inexor::entity_system;
-using namespace std;
+#include "entity-system/model/entities/entity-types/EntityType.hpp"
+#include "entity-system/model/relations/relation-types/RelationType.hpp"
 
 namespace inexor {
 namespace entity_system {
+
+	using string = std::string;
+	using AttributeList = std::unordered_map<string, std::pair<DataType, EnumSet<Feature>>>;
+	class RelationTypeBuilder;
+	using RelationTypeBuilderPtr = std::shared_ptr<RelationTypeBuilder>;
+	using RelationTypePtrOpt = std::optional<std::shared_ptr<RelationType>>;
 
 	/// @class RelationTypeBuilder
     /// @brief Builder for relation types.
@@ -23,44 +22,49 @@ namespace entity_system {
 	{
 		public:
 
+			using RelationTypeManagerPtr = std::shared_ptr<RelationTypeManager>;
+			using RelationAttributeTypeManagerPtr = std::shared_ptr<RelationAttributeTypeManager>;
+			using RelationAttributeInstanceManagerPtr = std::shared_ptr<RelationAttributeInstanceManager>;
+			using EntityTypePtr = std::shared_ptr<EntityType>;
+
 			/// Constructor.
 			RelationTypeBuilder(
-				shared_ptr<RelationTypeManager> relation_type_manager,
-				shared_ptr<RelationAttributeTypeManager> relation_attribute_type_manager,
-				shared_ptr<RelationAttributeInstanceManager> relation_attribute_instance_manager
+				RelationTypeManagerPtr relation_type_manager,
+				RelationAttributeTypeManagerPtr relation_attribute_type_manager,
+				RelationAttributeInstanceManagerPtr relation_attribute_instance_manager
 			);
 
 			/// Destructor.
 			~RelationTypeBuilder();
 
 			/// Sets the name of the relation type.
-			shared_ptr<RelationTypeBuilder> name(string relation_type_name);
+			RelationTypeBuilderPtr name(string relation_type_name);
 
 			/// Sets the uuid of the relation type.
-			shared_ptr<RelationTypeBuilder> uuid(string relation_type_uuid);
+			RelationTypeBuilderPtr uuid(string relation_type_uuid);
 
 			/// Sets the source entity type.
-			shared_ptr<RelationTypeBuilder> source(ENT_TYPE ent_type_source);
+			RelationTypeBuilderPtr source(EntityTypePtr ent_type_source);
 
 			/// Sets the target entity type.
-			shared_ptr<RelationTypeBuilder> target(ENT_TYPE ent_type_target);
+			RelationTypeBuilderPtr target(EntityTypePtr ent_type_target);
 
 			/// Sets the uuid of the relation type.
-			shared_ptr<RelationTypeBuilder> attribute(string attribute_name, DataType attribute_datatype, const EnumSet<Feature>& attribute_features);
+			RelationTypeBuilderPtr attribute(string attribute_name, DataType attribute_datatype, const EnumSet<Feature>& attribute_features);
 
 			/// Builds and returns the created relation type.
-			O_REL_TYPE build();
+			RelationTypePtrOpt build();
 
 		private:
 
 			/// The relation type manager
-			shared_ptr<RelationTypeManager> relation_type_manager;
+			RelationTypeManagerPtr relation_type_manager;
 
 			/// The relation attribute instance manager
-			shared_ptr<RelationAttributeTypeManager> relation_attribute_type_manager;
+			RelationAttributeTypeManagerPtr relation_attribute_type_manager;
 
 			/// The relation attribute instance manager
-			shared_ptr<RelationAttributeInstanceManager> relation_attribute_instance_manager;
+			RelationAttributeInstanceManagerPtr relation_attribute_instance_manager;
 
 			/// The name of the new relation type.
 			string relation_type_name;
@@ -69,19 +73,16 @@ namespace entity_system {
 			string relation_type_uuid;
 
 			/// The source entity type.
-			ENT_TYPE ent_type_source;
+			EntityTypePtr ent_type_source;
 
 			/// The target entity type.
-			ENT_TYPE ent_type_target;
+			EntityTypePtr ent_type_target;
 
 			/// The attribute definitions.
-			unordered_map<string, DataType> relation_type_attributes;
-
-			/// The attribute features.
-			unordered_map<string, EnumSet<Feature>> relation_type_attribute_features;
+			AttributeList relation_type_attributes;
 
 	};
 
 
-};
-};
+}
+}

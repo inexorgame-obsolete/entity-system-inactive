@@ -1,42 +1,39 @@
-// Inexor entity system
-// (c)2018 Inexor
-
 #pragma once
 
-#include "entity-system/managers/entities/entity-type-builder-manager/EntityTypeBuilderManager.hpp"
-#include "entity-system/providers/entities/entity-type-provider/EntityTypeProvider.hpp"
-
-using namespace inexor::entity_system;
-using namespace std;
+#include "entity-system/factories/entities/entity-type-builder-factory/EntityTypeBuilderFactory.hpp"
+#include "entity-system/providers/EntityTypeProvider.hpp"
 
 namespace inexor {
 namespace entity_system {
 namespace type_system {
 
-	/// @class IntToFloatEntityTypeProvider
-    /// @brief Provides the entity type INT_TO_FLOAT.
+	/// Provides an entity type "INT_TO_FLOAT" which converts int values to float values.
 	class IntToFloatEntityTypeProvider : public EntityTypeProvider
 	{
 		public:
 
-			/// Constructor.
+			/// Constructs the specialized provider for the INT_TO_FLOAT entity type
 			IntToFloatEntityTypeProvider(
-				shared_ptr<EntityTypeBuilderManager> entity_type_builder_manager
+				std::shared_ptr<EntityTypeBuilderFactory> entity_type_builder_manager
 			) : EntityTypeProvider(
 				entity_type_builder_manager,
-				"INT_TO_FLOAT",
+				TYPE_NAME,
 				{
-					{ "int_to_float_input", DataType::INT },
-					{ "int_to_float_value", DataType::FLOAT }
-				},
-				{
-					{ "int_to_float_input", 1 << Feature::INPUT },
-					{ "int_to_float_value", 1 << Feature::OUTPUT }
+					{ INT_TO_FLOAT_INPUT, { DataType::INT, 1 << Feature::INPUT } },
+					{ INT_TO_FLOAT_VALUE, { DataType::FLOAT, 1 << Feature::OUTPUT } }
 				}
 			) {};
 
-			/// Destructor.
 			~IntToFloatEntityTypeProvider() {};
+
+			/// Defines the name of this entity type
+			static constexpr char TYPE_NAME[] = "INT_TO_FLOAT";
+
+			/// The name of the input attribute int_to_float_input
+			static constexpr char INT_TO_FLOAT_INPUT[] = "int_to_float_input";
+
+			/// The name of the output attribute int_to_float_value
+			static constexpr char INT_TO_FLOAT_VALUE[] = "int_to_float_value";
 
 	};
 

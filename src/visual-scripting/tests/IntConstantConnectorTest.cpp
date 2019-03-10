@@ -1,5 +1,5 @@
-// Inexor visual scripting
-// (c)2018-2019 Inexor
+#include "entity-system/model/entities/entity-instances/EntityInstance.hpp"
+#include "visual-scripting/model/Connector.hpp"
 
 #include <random>
 
@@ -8,8 +8,6 @@
 #include "react/Observer.h"
 
 #include "IntConstantConnectorTest.hpp"
-#include "entity-system/model/entities/entity-instances/EntityInstance.hpp"
-#include "visual-scripting/model/Connector.hpp"
 
 using namespace std;
 
@@ -18,9 +16,9 @@ namespace visual_scripting {
 
 
 	IntConstantConnectorTest::IntConstantConnectorTest(
-		std::shared_ptr<inexor::visual_scripting::ConnectorManager> connector_manager,
-		std::shared_ptr<inexor::entity_system::type_system::IntConstantFactory> int_constant_factory,
-		std::shared_ptr<inexor::entity_system::type_system::AddIntFactory> add_int_factory
+		ConnectorManagerPtr connector_manager,
+		IntConstantFactoryPtr int_constant_factory,
+		AddIntFactoryPtr add_int_factory
 	)
 	{
         this->connector_manager = connector_manager;
@@ -47,26 +45,26 @@ namespace visual_scripting {
 		std::string source_name = "source";
 		int initial_source_value = 100;
 		std::cout << "Create entity instance '" << source_name << "'" << std::endl;
-		std::optional<std::shared_ptr<inexor::entity_system::EntityInstance>> o_source = int_constant_factory->create_instance(source_name, initial_source_value);
+		auto o_source = int_constant_factory->create_instance(source_name, initial_source_value);
 
 		std::string target_1_name = "target1";
 		int target_1_initial_value = 200;
 		std::cout << "Create entity instance '" << target_1_name << "'" << std::endl;
-		std::optional<std::shared_ptr<inexor::entity_system::EntityInstance>> o_target_1 = int_constant_factory->create_instance(target_1_name, target_1_initial_value);
+		auto o_target_1 = int_constant_factory->create_instance(target_1_name, target_1_initial_value);
 
 		std::string target_2_name = "target2";
 		int target_2_initial_value = 300;
 		std::cout << "Create entity instance '" << target_2_name << "'" << std::endl;
-		std::optional<std::shared_ptr<inexor::entity_system::EntityInstance>> o_target_2 = int_constant_factory->create_instance(target_2_name, target_2_initial_value);
+		auto o_target_2 = int_constant_factory->create_instance(target_2_name, target_2_initial_value);
 
 		std::string target_3_name = "target3";
 		int target_3_initial_value = 400;
 		std::cout << "Create entity instance '" << target_3_name << "'" << std::endl;
-		std::optional<std::shared_ptr<inexor::entity_system::EntityInstance>> o_target_3 = int_constant_factory->create_instance(target_3_name, target_3_initial_value);
+		auto o_target_3 = int_constant_factory->create_instance(target_3_name, target_3_initial_value);
 
 		std::string add_int_name = "add_int";
 		std::cout << "Create entity instance '" << add_int_name << "'" << std::endl;
-		std::optional<std::shared_ptr<inexor::entity_system::EntityInstance>> o_add_int = add_int_factory->create_instance();
+		auto o_add_int = add_int_factory->create_instance();
 
 
 		if (o_source.has_value() && o_target_1.has_value() && o_target_2.has_value() && o_target_3.has_value() && o_add_int.has_value())
@@ -157,5 +155,5 @@ namespace visual_scripting {
 	}
 
 
-};
-};
+}
+}

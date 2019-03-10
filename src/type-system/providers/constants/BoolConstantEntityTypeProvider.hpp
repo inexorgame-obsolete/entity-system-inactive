@@ -1,42 +1,39 @@
-// Inexor entity system
-// (c)2018 Inexor
-
 #pragma once
 
-#include "entity-system/managers/entities/entity-type-builder-manager/EntityTypeBuilderManager.hpp"
-#include "entity-system/providers/entities/entity-type-provider/EntityTypeProvider.hpp"
-
-using namespace inexor::entity_system;
-using namespace std;
+#include "entity-system/factories/entities/entity-type-builder-factory/EntityTypeBuilderFactory.hpp"
+#include "entity-system/providers/EntityTypeProvider.hpp"
 
 namespace inexor {
 namespace entity_system {
 namespace type_system {
 
-	/// @class BoolConstantEntityTypeProvider
-    /// @brief Provides the entity type BOOL_CONSTANT.
+	/// Provides an entity type "BOOL_CONSTANT" which is a pure bool constant variable.
 	class BoolConstantEntityTypeProvider : public EntityTypeProvider
 	{
 		public:
 
-			/// Constructor.
+			/// Constructs the specialized provider for the BOOL_CONSTANT entity type
 			BoolConstantEntityTypeProvider(
-				shared_ptr<EntityTypeBuilderManager> entity_type_builder_manager
+				std::shared_ptr<EntityTypeBuilderFactory> entity_type_builder_manager
 			) : EntityTypeProvider(
 				entity_type_builder_manager,
-				"BOOL_CONSTANT",
+				TYPE_NAME,
 				{
-					{ "bool_constant_name", DataType::STRING },
-					{ "bool_constant_value", DataType::BOOL }
-				},
-				{
-					{ "bool_constant_name", 1 << Feature::OUTPUT },
-					{ "bool_constant_value", 1 << Feature::OUTPUT }
+					{ BOOL_CONSTANT_NAME, { DataType::STRING, 1 << Feature::OUTPUT } },
+					{ BOOL_CONSTANT_VALUE, { DataType::BOOL, 1 << Feature::OUTPUT } }
 				}
 			) {};
 
-			/// Destructor.
 			~BoolConstantEntityTypeProvider() {};
+
+			/// Defines the name of this entity type
+			static constexpr char TYPE_NAME[] = "BOOL_CONSTANT";
+
+			/// The name of the output attribute bool_constant_name
+			static constexpr char BOOL_CONSTANT_NAME[] = "bool_constant_name";
+
+			/// The name of the output attribute bool_constant_value
+			static constexpr char BOOL_CONSTANT_VALUE[] = "bool_constant_value";
 
 	};
 

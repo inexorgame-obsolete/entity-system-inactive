@@ -12,11 +12,11 @@ namespace type_system {
 
 	StringStoreFactory::StringStoreFactory(
 		shared_ptr<StringStoreEntityTypeProvider> entity_type_provider,
-		shared_ptr<EntityInstanceBuilderManager> entity_instance_builder_manager
+		shared_ptr<EntityInstanceBuilderFactory> entity_instance_builder_factory
 	)
 	{
 		this->entity_type_provider = entity_type_provider;
-		this->entity_instance_builder_manager = entity_instance_builder_manager;
+		this->entity_instance_builder_factory = entity_instance_builder_factory;
 	}
 
 	StringStoreFactory::~StringStoreFactory()
@@ -25,7 +25,7 @@ namespace type_system {
 
 	O_ENT_INST StringStoreFactory::create_instance()
 	{
-		return entity_instance_builder_manager->get_builder()
+		return entity_instance_builder_factory->get_builder()
 			->type(entity_type_provider->get_type())
 			->attribute("name", "")
 			->attribute("input_value", "")
@@ -36,7 +36,7 @@ namespace type_system {
 
 	O_ENT_INST StringStoreFactory::create_instance(const string& name, const string& input_value, const string& default_value, const string& output_value)
 	{
-		return entity_instance_builder_manager->get_builder()
+		return entity_instance_builder_factory->get_builder()
 			->type(entity_type_provider->get_type())
 			->attribute("name", name)
 			->attribute("input_value", input_value)

@@ -15,13 +15,15 @@ namespace type_system {
 		shared_ptr<ConstantsTypeSystemManager> constants_type_system_manager,
 		shared_ptr<StoresTypeSystemManager> stores_type_system_manager,
 		shared_ptr<ConvertersTypeSystemManager> converters_type_system_manager,
-		shared_ptr<ArithmeticTypeSystemManager> arithmetic_type_system_manager
+		shared_ptr<ArithmeticTypeSystemManager> arithmetic_type_system_manager,
+		shared_ptr<TrigonometricTypeSystemManager> trigonometric_type_system_manager
 	)
 	{
 		this->constants_type_system_manager = constants_type_system_manager;
 		this->stores_type_system_manager = stores_type_system_manager;
 		this->converters_type_system_manager = converters_type_system_manager;
 		this->arithmetic_type_system_manager = arithmetic_type_system_manager;
+		this->trigonometric_type_system_manager = trigonometric_type_system_manager;
 	}
 
 	TypeSystemManager::~TypeSystemManager()
@@ -34,6 +36,7 @@ namespace type_system {
 		stores_type_system_manager->init();
 		converters_type_system_manager->init();
 		arithmetic_type_system_manager->init();
+		trigonometric_type_system_manager->init();
 	}
 
 

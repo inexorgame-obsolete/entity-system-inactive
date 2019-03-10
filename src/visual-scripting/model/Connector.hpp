@@ -25,14 +25,13 @@ namespace inexor {
 namespace visual_scripting {
 
 
-	/// A base class for entity type instances.
+	/// A connector propagates the value of an output-attribute to
+	/// an input-attribute.
     class Connector : public GUIDBase
     {
 		public:
 
 			USING_REACTIVE_DOMAIN(D)
-
-			ObserverT observer;
 
 			/// Constructor.
 			/// @param output_attribute_GUID GUID of the output attribute.
@@ -60,6 +59,9 @@ namespace visual_scripting {
             /// @brief Connects the output with the input.
 			void connect();
 
+            /// @brief Disconnects the output from the input and reconnects the input's own value again.
+			void disconnect();
+
             /// @brief Get the GUID of the connector.
             /// @return GUID of the connector.
 			Guid connector() const;
@@ -71,6 +73,15 @@ namespace visual_scripting {
             /// @brief Get the GUID of the input attribute.
             /// @return GUID of the input attribute.
 			Guid input() const;
+
+			/// @brief Enables the debugging mode.
+			void enable_debug();
+
+			/// @brief Disables the debugging mode.
+			void disable_debug();
+
+			/// @brief Returns true, if the connector is in debugging mode.
+			bool is_debug_enabled();
 
         private:
 
@@ -86,8 +97,11 @@ namespace visual_scripting {
 			/// The input attribute instance.
 			std::shared_ptr<inexor::entity_system::EntityAttributeInstance> input_attr;
 
-			/// The signal.
-			// TempSignal<D, DataValue> connector_signal;
+			/// The observer for debugging the connector.
+			ObserverT observer;
+
+			/// If true, the connector is in debugging mode.
+			bool debug_enabled;
 
     };
 

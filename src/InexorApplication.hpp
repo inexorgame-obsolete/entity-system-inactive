@@ -26,12 +26,12 @@
 #include "entity-system-example/ColorManager.hpp"
 
 #include "type-system/managers/TypeSystemManager.hpp"
-#include "configuration/managers/ConfigurationManager.hpp"
+#include "configuration/ConfigurationModule.hpp"
 #include "visual-scripting/VisualScriptingSystem.hpp"
 #include "logging/managers/LogManager.hpp"
+#include "renderer/managers/RendererManager.hpp"
 
 
-using namespace spdlog;
 
 #define LOGGER_NAME "inexor.app"
 
@@ -49,11 +49,12 @@ namespace inexor {
 			InexorApplication(
 				std::shared_ptr<inexor::entity_system::EntitySystem> entity_system,
 				std::shared_ptr<inexor::entity_system::type_system::TypeSystemManager> type_system_manager,
-				std::shared_ptr<inexor::configuration::ConfigurationManager> configuration_manager,
+				std::shared_ptr<inexor::configuration::ConfigurationModule> configuration_module,
 				std::shared_ptr<inexor::entity_system::RestServer> rest_server,
 				std::shared_ptr<inexor::entity_system::EntitySystemDebugger> entity_system_debugger,
 				std::shared_ptr<inexor::visual_scripting::VisualScriptingSystem> visual_scripting_system,
-				std::shared_ptr<inexor::logging::LogManager> log_manager
+				std::shared_ptr<inexor::logging::LogManager> log_manager,
+				std::shared_ptr<inexor::renderer::RendererManager> renderer_manager
 			);
 
 
@@ -62,18 +63,15 @@ namespace inexor {
 			~InexorApplication();
 
 			/// Initializes the Inexor application.
-			void init();
+			void init(int argc, char* argv[]);
 
-			/// Starts the Inexor application.
-			void start();
-
-			/// Run loop of the Inexor application.
+			/// Run loop of the Inexor application. Blocks for ever (or until this->running was set to false)
 			void run();
 
 			/// Shuts down the Inexor application.
 			void shutdown();
 
-			/// Restarts the Inexor application.
+			/// Restarts the Inexor application, i.e. slightly improved wrapper around shutdown() and init();
 			void restart();
 
 			/// Registers a logger
@@ -93,8 +91,8 @@ namespace inexor {
             /// The type system manager.
             std::shared_ptr<inexor::entity_system::type_system::TypeSystemManager> type_system_manager;
 
-            /// The type system manager.
-            std::shared_ptr<inexor::configuration::ConfigurationManager> configuration_manager;
+            /// The configuration manager.
+            std::shared_ptr<inexor::configuration::ConfigurationModule> configuration_module;
 
             /// The REST server of the entity system
 			std::shared_ptr<inexor::entity_system::RestServer> rest_server;
@@ -107,6 +105,9 @@ namespace inexor {
 
             /// Management of the loggers
 			std::shared_ptr<inexor::logging::LogManager> log_manager;
+
+            /// Management of the renderers
+			std::shared_ptr<inexor::renderer::RendererManager> renderer_manager;
 
 			/// The running state of the Inexor application
 			bool running;
@@ -146,4 +147,4 @@ namespace inexor {
 	};
 
 
-};
+}

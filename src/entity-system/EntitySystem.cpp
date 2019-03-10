@@ -1,33 +1,22 @@
-// Inexor entity system
-// (c)2018-2019 Inexor
-
 #include "EntitySystem.hpp"
-
-
-using namespace inexor::entity_system;
-using namespace std;
-
 
 namespace inexor {
 namespace entity_system {
 
-
 	EntitySystem::EntitySystem(
-		shared_ptr<EntityManager> entity_manager,
-		shared_ptr<RelationManager> relation_manager,
-		shared_ptr<BuilderManager> builder_manager
+		EntityManagerPtr entity_manager,
+		RelationManagerPtr relation_manager,
+		BuilderFactoryManagerPtr builder_factory_manager
 	)
 		: entity_manager(entity_manager),
 		  relation_manager(relation_manager),
-		  builder_manager(builder_manager)
+		  builder_factory_manager(builder_factory_manager)
 	{
 	}
 
-	
 	EntitySystem::~EntitySystem()
 	{
 	}
-
 
     // Order of destruction:
     // <ul>
@@ -43,6 +32,5 @@ namespace entity_system {
 		entity_manager->reset_entity_system();
 	}
 
-
-};
-};
+}
+}

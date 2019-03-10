@@ -43,6 +43,8 @@ conan_add_remote(NAME bincrafters INDEX 1
             URL https://api.bintray.com/conan/bincrafters/public-conan)
 conan_add_remote(NAME inexor INDEX 1
             URL https://api.bintray.com/conan/inexorgame/inexor-conan)
+conan_add_remote(NAME helmesjo INDEX 1
+            URL https://api.bintray.com/conan/helmesjo/public-conan)
 
 if(UNIX AND NOT APPLE)
     set(LIBCXX libstdc++11)
@@ -81,25 +83,32 @@ foreach(file ${source_files} )
   endif()
 endforeach()
 
-message(STATUS "NORMAL SOURCE FILES: ${NORMAL_SOURCE_FILES}")
+# all non-test source files minus the main.cpp are going to the library
+set(LIBRARY_SOURCE_FILES ${NORMAL_SOURCE_FILES})
+list(REMOVE_ITEM LIBRARY_SOURCE_FILES "src/main.cpp")
+
+message(STATUS "NORMAL SOURCE FILES: ${NORMAL_SOURCE_FILES} + src/main.cpp")
 message(STATUS "TEST SOURCE FILES: ${TEST_SOURCE_FILES}")
 message(STATUS "CONAN_LIBS: ${CONAN_LIBS}")
 
-add_library(inexor-entity-system ${NORMAL_SOURCE_FILES})
-add_executable(inexor-entity-system-standalone ${NORMAL_SOURCE_FILES})
+add_library(inexor-entity-system-lib ${LIBRARY_SOURCE_FILES})
+target_link_libraries(inexor-entity-system-lib ${CONAN_LIBS})
+#if(APPLE) <- Fohlen, can you verify this is not needed?
+    # target_link_libraries(inexor-entity-system-lib "-framework CoreFoundation")
+#endif()
+
+add_executable(inexor-entity-system-standalone src/main.cpp)
+target_link_libraries(inexor-entity-system-standalone inexor-entity-system-lib)
+target_link_libraries(inexor-entity-system-standalone ${CONAN_LIBS})
+if(APPLE)
+    target_link_libraries(inexor-entity-system-standalone "-framework CoreFoundation")
+endif()
+
 add_executable(inexor-entity-system-tests ${TEST_SOURCE_FILES})
-target_link_libraries(inexor-entity-system-tests inexor-entity-system)
+target_link_libraries(inexor-entity-system-tests inexor-entity-system-lib)
+target_link_libraries(inexor-entity-system-tests ${CONAN_LIBS})
 
 # Use folder structure in Visual Studio.
 assign_source_group(${NORMAL_SOURCE_FILES})
 assign_source_group(${TEST_SOURCE_FILES})
-
-if(UNIX AND APPLE)
-    target_link_libraries(inexor-entity-system "-framework CoreFoundation")
-    target_link_libraries(inexor-entity-system-standalone "-framework CoreFoundation")
-endif()
-
-target_link_libraries(inexor-entity-system ${CONAN_LIBS})
-target_link_libraries(inexor-entity-system-standalone ${CONAN_LIBS})
-target_link_libraries(inexor-entity-system-tests ${CONAN_LIBS})
 

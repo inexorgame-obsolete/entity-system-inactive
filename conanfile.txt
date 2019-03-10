@@ -11,9 +11,14 @@ boost-di/1.1.0@inexorgame/stable
 boost-te/19.Jan.19@inexorgame/stable
 better-enums/0.11.1@Spartan322/stable
 cpp.react/legacy1@inexorgame/stable
+magnum/2018.10@helmesjo/stable
 
 [generators]
 cmake
 
 [imports]
 lib, *.dylib* -> ./bin
+
+[options]
+magnum:with_glfwapplication=True
+magnum:with_sdl2application=False

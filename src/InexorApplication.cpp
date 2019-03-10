@@ -1,7 +1,10 @@
 // Inexor
 // (c)2018-2019 Inexor
 
+#include "spdlog/spdlog.h"
 #include "InexorApplication.hpp"
+#include <GLFW/glfw3.h>
+
 
 using namespace inexor::entity_system;
 using namespace spdlog;
@@ -14,20 +17,22 @@ namespace inexor {
 	InexorApplication::InexorApplication(
 		std::shared_ptr<inexor::entity_system::EntitySystem> entity_system,
 		std::shared_ptr<inexor::entity_system::type_system::TypeSystemManager> type_system_manager,
-		std::shared_ptr<inexor::configuration::ConfigurationManager> configuration_manager,
+		std::shared_ptr<inexor::configuration::ConfigurationModule> configuration_module,
 		std::shared_ptr<inexor::entity_system::RestServer> rest_server,
 		std::shared_ptr<inexor::entity_system::EntitySystemDebugger> entity_system_debugger,
 		std::shared_ptr<inexor::visual_scripting::VisualScriptingSystem> visual_scripting_system,
-		std::shared_ptr<inexor::logging::LogManager> log_manager
+		std::shared_ptr<inexor::logging::LogManager> log_manager,
+		std::shared_ptr<inexor::renderer::RendererManager> renderer_manager
 	)
 	{
 		this->entity_system = entity_system;
 		this->type_system_manager = type_system_manager;
-		this->configuration_manager = configuration_manager;
+		this->configuration_module = configuration_module;
 		this->rest_server = rest_server;
 		this->entity_system_debugger = entity_system_debugger;
 		this->visual_scripting_system = visual_scripting_system;
 		this->log_manager = log_manager;
+		this->renderer_manager = renderer_manager;
 		this->running = false;
 	}
 	
@@ -36,7 +41,7 @@ namespace inexor {
 		// shutdown();
 	}
 
-	void InexorApplication::init()
+	void InexorApplication::init(int argc, char* argv[])
 	{
 
 		// Register application instance in static vector
@@ -63,71 +68,65 @@ namespace inexor {
 		type_system_manager->init();
 
 		// Configuration manager initialization
-		configuration_manager->init();
+		configuration_module->init(argc, argv);
 
 		// Initialize the visual scripting
 		visual_scripting_system->init();
 
-	}
+		// Initialize the rendering
+		renderer_manager->init();
 
-	void InexorApplication::start()
-	{
-		spdlog::get(LOGGER_NAME)->info("start()");
-		if (!running) {
-
-			// Create one single instance of the entity system.
-			// @note The entity system has no singleton implementation for now.
-			spdlog::get(LOGGER_NAME)->info("Starting entity system...");
-
-			// Setup REST server
-			rest_server->set_service(rest_server);
-			rest_server->set_signal_handler(SIGINT, InexorApplication::call_sighup_handlers);
-			rest_server->set_signal_handler(SIGTERM, InexorApplication::call_sigterm_handlers);
-			rest_server->set_ready_handler(InexorApplication::call_ready_handlers);
-			rest_server->init();
-			rest_server->set_logger(std::make_shared<RestServerLogger>());
-			rest_server->startService(0);
-		} else {
-			spdlog::get(LOGGER_NAME)->info("Already running");
-		}
-
+		// Setup REST server
+		rest_server->set_service(rest_server);
+		rest_server->set_signal_handler(SIGINT, InexorApplication::call_sighup_handlers);
+		rest_server->set_signal_handler(SIGTERM, InexorApplication::call_sigterm_handlers);
+		rest_server->set_ready_handler(InexorApplication::call_ready_handlers);
+		rest_server->init();
+		rest_server->set_logger(std::make_shared<RestServerLogger>());
 	}
 
 	void InexorApplication::run()
 	{
-	    spdlog::get(LOGGER_NAME)->info("Waiting for services being started");
+		// Start the REST server and just go an as soon as it is started.
+		rest_server->startService();
+
+	    spdlog::get(LOGGER_NAME)->info("Waiting for REST service being started");
 		while (!running) {
+			// wait until the rest server started up
+			// which calls ready_handlers() as soon as it is.
+			// Then running becomes true and we leave
 			std::this_thread::sleep_for(10ms);
 		}
+
 	    spdlog::get(LOGGER_NAME)->info("Inexor is running");
 		while (running) {
+			// everything else happens in the execution graph or in threads for the ES instances.
 			std::this_thread::sleep_for(5s);
 			spdlog::get(LOGGER_NAME)->info("Uptime: {} s", rest_server->get_uptime().count());
+			/* Poll for and process events */
+			glfwPollEvents();
 		}
-	    spdlog::get(LOGGER_NAME)->info("Inexor is no longer running");
-            std::exit(EXIT_SUCCESS); // exit run thread
 	}
 
 	void InexorApplication::shutdown()
 	{
 		if (running) {
-			spdlog::get(LOGGER_NAME)->info("Shutting down Inexor...");
-			running = false;
-			std::this_thread::sleep_for(1s);
-			rest_server->stopService();
-			spdlog::get(LOGGER_NAME)->info("Shutdown completed");
-		} else {
 			spdlog::get(LOGGER_NAME)->info("Not running");
+			return;
 		}
+
+		spdlog::get(LOGGER_NAME)->info("Shutting down Inexor...");
+		std::this_thread::sleep_for(1s);
+		rest_server->stopService();
+		running = false;
+		spdlog::get(LOGGER_NAME)->info("Shutdown completed");
 	}
 
 	void InexorApplication::restart()
 	{
 	    spdlog::get(LOGGER_NAME)->info("Restarting Inexor...");
 		shutdown();
-		std::this_thread::sleep_for(1s);
-		std::thread start_thread(&inexor::InexorApplication::start, this);
-		std::thread run_thread(&inexor::InexorApplication::run, this);
+		run();
 	    spdlog::get(LOGGER_NAME)->info("Restart completed");
 	}
 
@@ -167,4 +166,4 @@ namespace inexor {
 
 	}
 
-};
+}
