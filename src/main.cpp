@@ -6,7 +6,7 @@ int main(int argc, char* argv[])
 {
 	auto injector = boost::di::make_injector();
 	auto application = injector.create<inexor::InexorApplication>();
-	application.init();
+	application.init(argc, argv);
 	application.run();
     return EXIT_SUCCESS;
 }

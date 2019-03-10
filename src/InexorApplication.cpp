@@ -41,7 +41,7 @@ namespace inexor {
 		// shutdown();
 	}
 
-	void InexorApplication::init()
+	void InexorApplication::init(int argc, char* argv[])
 	{
 
 		// Register application instance in static vector
@@ -68,7 +68,7 @@ namespace inexor {
 		type_system_manager->init();
 
 		// Configuration manager initialization
-		configuration_module->init();
+		configuration_module->init(argc, argv);
 
 		// Initialize the visual scripting
 		visual_scripting_system->init();

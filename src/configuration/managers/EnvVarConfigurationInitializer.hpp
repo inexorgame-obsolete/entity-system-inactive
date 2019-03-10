@@ -4,10 +4,6 @@
 
 #include <string>
 
-//#define BETTER_ENUMS_DEFAULT_CONSTRUCTOR(Enum) \
-//  public:                                      \
-//    Enum() = default;
-
 #include <better-enums/enum.h>
 
 namespace inexor {
@@ -43,22 +39,6 @@ namespace configuration {
 
 			/// Returns the value of the environment variable if exists or nullopt
 			std::optional<std::string> get_env_var(std::string const& env_name);
-
-//			/// The name of the output attribute int_constant_value
-//			static constexpr char ENVIRONMENT_VARIABLES[11][] = {
-//				"DISPLAY",
-//				"LC_TIME",
-//				"SHELL",
-//				"PATH",
-//				"USERNAME",
-//				"DESKTOP_SESSION",
-//				"GDK_BACKEND",
-//				"USER",
-//				"PWD",
-//				"HOME",
-//				"LANGUAGE",
-//				"LANG"
-//			};
 
 	};
 

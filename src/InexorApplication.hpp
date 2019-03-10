@@ -63,7 +63,7 @@ namespace inexor {
 			~InexorApplication();
 
 			/// Initializes the Inexor application.
-			void init();
+			void init(int argc, char* argv[]);
 
 			/// Run loop of the Inexor application. Blocks for ever (or until this->running was set to false)
 			void run();

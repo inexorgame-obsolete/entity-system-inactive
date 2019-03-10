@@ -19,13 +19,6 @@ namespace configuration {
 
 	void EnvVarConfigurationInitializer::init()
 	{
-#ifdef _WIN32
-		configuration_manager->set("PID", _getpid());
-#else
-		configuration_manager->set("PID", getpid());
-#endif
-		configuration_manager->set("SYS_NUM_CONCURRENT_THREADS", (int) std::thread::hardware_concurrency());
-
 		for (size_t index = 0; index < EnvironmentVariables::_size(); ++index)
 		{
 			set_by_env_var(EnvironmentVariables::_names()[index]);
