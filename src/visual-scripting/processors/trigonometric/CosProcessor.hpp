@@ -1,11 +1,5 @@
 #pragma once
 
-#include <chrono>
-#include <mutex>
-#include <optional>
-
-#include "react/Event.h"
-
 #include "entity-system/model/data/container/DataContainer.hpp"
 #include "entity-system/model/data/DataTypes.hpp"
 #include "entity-system/model/entities/entity-instances/EntityInstance.hpp"
@@ -14,24 +8,29 @@
 #include "visual-scripting/managers/ProcessorRegistry.hpp"
 #include "visual-scripting/model/Processor.hpp"
 
+#include "react/Event.h"
+
+#include <chrono>
+#include <mutex>
+#include <optional>
+
 using namespace react;
 using namespace std::chrono;
 
 namespace inexor {
 namespace visual_scripting {
 
-
-	/// A base class for active components.
+	/// Processor which calculates the cosinus.
     class CosProcessor
     	: public Processor,
-		  public EntityInstanceCreatedListener,
-		  public EntityInstanceDeletedListener,
-		  public enable_shared_from_this<CosProcessor>
+		  public entity_system::EntityInstanceCreatedListener,
+		  public entity_system::EntityInstanceDeletedListener,
+		  public std::enable_shared_from_this<CosProcessor>
     {
 
 		public:
 
-    		USING_REACTIVE_DOMAIN(D)
+    		USING_REACTIVE_DOMAIN(entity_system::D)
 
     		/// @brief The constructor.
 			CosProcessor(
@@ -63,7 +62,7 @@ namespace visual_scripting {
 			std::shared_ptr<inexor::entity_system::EntityInstanceManager> entity_instance_manager;
 
 			/// The signals per entity instance.
-			std::unordered_map<xg::Guid, SignalT<DataValue> > signals;
+			std::unordered_map<xg::Guid, SignalT<entity_system::DataValue> > signals;
 
 			/// The event sources per entity instance.
 			std::unordered_map<xg::Guid, EventSourceT<int> > event_sources;

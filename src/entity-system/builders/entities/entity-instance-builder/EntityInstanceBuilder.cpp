@@ -1,93 +1,93 @@
-// Inexor entity system
-// (c)2018 Inexor
-
 #include "EntityInstanceBuilder.hpp"
 
-using namespace inexor::entity_system;
-using namespace std;
+#include "entity-system/model/data/DataTypes.hpp"
+
+#include "spdlog/spdlog.h"
 
 namespace inexor {
 namespace entity_system {
 
+	using EntityAttributeInstancePtr = std::shared_ptr<EntityAttributeInstance>;
+	using EntityAttributeInstancePtrOpt = std::optional<EntityAttributeInstancePtr>;
 
 	EntityInstanceBuilder::EntityInstanceBuilder(
-		shared_ptr<EntityInstanceManager> entity_instance_manager,
-		shared_ptr<EntityTypeManager> entity_type_manager
+		EntityInstanceManagerPtr entity_instance_manager,
+		EntityTypeManagerPtr entity_type_manager
 	)
 	{
 		this->entity_instance_manager = entity_instance_manager;
 		this->entity_type_manager = entity_type_manager;
 		entity_type_name = "";
-		o_entity_type = nullopt;
+		o_entity_type = std::nullopt;
 	}
 
 	EntityInstanceBuilder::~EntityInstanceBuilder()
 	{
 	}
 
-	shared_ptr<EntityInstanceBuilder> EntityInstanceBuilder::type(const string& entity_type_name)
+	EntityInstanceBuilderPtr EntityInstanceBuilder::type(const std::string& entity_type_name)
 	{
 		this->entity_type_name = entity_type_name;
 		return shared_from_this();
 	}
 
-	shared_ptr<EntityInstanceBuilder> EntityInstanceBuilder::type(const ENT_TYPE& entity_type)
+	EntityInstanceBuilderPtr EntityInstanceBuilder::type(const EntityTypePtr& entity_type)
 	{
 		this->o_entity_type = { entity_type };
 		return shared_from_this();
 	}
 
-	shared_ptr<EntityInstanceBuilder> EntityInstanceBuilder::uuid(const string& entity_instance_uuid)
+	EntityInstanceBuilderPtr EntityInstanceBuilder::uuid(const std::string& entity_instance_uuid)
 	{
 		this->entity_instance_uuid = entity_instance_uuid;
 		return shared_from_this();
 	}
 
-	shared_ptr<EntityInstanceBuilder> EntityInstanceBuilder::attribute(const string& attribute_name, const DataContainerInitializer& initializer)
+	EntityInstanceBuilderPtr EntityInstanceBuilder::attribute(const std::string& attribute_name, const DataContainerInitializer& initializer)
 	{
 		entity_instance_attributes[attribute_name] = {initializer.type, initializer.value };
 		return shared_from_this();
 	}
 
-	shared_ptr<EntityInstanceBuilder> EntityInstanceBuilder::attribute(const string& attribute_name, const bool& value)
+	EntityInstanceBuilderPtr EntityInstanceBuilder::attribute(const std::string& attribute_name, const bool& value)
 	{
 		entity_instance_attributes[attribute_name] = {DataType::BOOL, value};
 		return shared_from_this();
 	}
 
-	shared_ptr<EntityInstanceBuilder> EntityInstanceBuilder::attribute(const string& attribute_name, const int& value)
+	EntityInstanceBuilderPtr EntityInstanceBuilder::attribute(const std::string& attribute_name, const int& value)
 	{
 		entity_instance_attributes[attribute_name] = {DataType::INT, value};
 		return shared_from_this();
 	}
 
-	shared_ptr<EntityInstanceBuilder> EntityInstanceBuilder::attribute(const string& attribute_name, const int64_t& value)
+	EntityInstanceBuilderPtr EntityInstanceBuilder::attribute(const std::string& attribute_name, const int64_t& value)
 	{
 		entity_instance_attributes[attribute_name] = {DataType::BIG_INT, value};
 		return shared_from_this();
 	}
 
-    shared_ptr<EntityInstanceBuilder> EntityInstanceBuilder::attribute(const string& attribute_name, const float& value)
+    EntityInstanceBuilderPtr EntityInstanceBuilder::attribute(const std::string& attribute_name, const float& value)
 	{
 		entity_instance_attributes[attribute_name] = {DataType::FLOAT, value};
 		return shared_from_this();
 	}
 
-    shared_ptr<EntityInstanceBuilder> EntityInstanceBuilder::attribute(const string& attribute_name, const double& value)
+    EntityInstanceBuilderPtr EntityInstanceBuilder::attribute(const std::string& attribute_name, const double& value)
 	{
 		entity_instance_attributes[attribute_name] = {DataType::DOUBLE, value};
 		return shared_from_this();
 	}
 
-	shared_ptr<EntityInstanceBuilder> EntityInstanceBuilder::attribute(const string& attribute_name, const string& value)
+	EntityInstanceBuilderPtr EntityInstanceBuilder::attribute(const std::string& attribute_name, const std::string& value)
 	{
 		entity_instance_attributes[attribute_name] = {DataType::STRING, value};
 		return shared_from_this();
 	}
 
-	O_ENT_INST EntityInstanceBuilder::build()
+	EntityInstancePtrOpt EntityInstanceBuilder::build()
 	{
-		O_ENT_INST o_entity_instance = nullopt;
+		EntityInstancePtrOpt o_entity_instance = std::nullopt;
 		if (!o_entity_type.has_value() && !entity_type_name.empty())
 		{
 			o_entity_type = entity_type_manager->get_entity_type(entity_type_name);
@@ -103,14 +103,14 @@ namespace entity_system {
 		}
 		if (o_entity_instance.has_value())
 		{
-			ENT_INST entity_instance = o_entity_instance.value();
+			EntityInstancePtr entity_instance = o_entity_instance.value();
 			// TODO: set attribute values
 			for (auto& attr_entry : entity_instance_attributes) {
-				string attr_name = attr_entry.first;
+				std::string attr_name = attr_entry.first;
 				DataContainerInitializer attr_value = attr_entry.second;
-				O_ENT_ATTR_INST o_attr_inst = entity_instance->get_attribute_instance(attr_entry.first);
+				EntityAttributeInstancePtrOpt o_attr_inst = entity_instance->get_attribute_instance(attr_entry.first);
 				if (o_attr_inst.has_value()) {
-					ENT_ATTR_INST attr_inst = o_attr_inst.value();
+					EntityAttributeInstancePtr attr_inst = o_attr_inst.value();
 					if (attr_inst->type == attr_value.type) {
 						DataValue data_value = attr_value.value;
 						switch (attr_inst->type)

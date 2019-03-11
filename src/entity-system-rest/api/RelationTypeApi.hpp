@@ -12,6 +12,12 @@
 
 #pragma once
 
+#include "../model/EntitySystemMessageDto.hpp"
+#include "../model/RelationInstanceDto.hpp"
+#include "../model/RelationTypeDto.hpp"
+
+#include "entity-system/managers/relations/relation-type-manager/RelationTypeManager.hpp"
+
 #include <memory>
 #include <corvusoft/restbed/request.hpp>
 #include <corvusoft/restbed/resource.hpp>
@@ -21,12 +27,6 @@
 #include <string>
 
 #include "spdlog/spdlog.h"
-
-#include "../model/EntitySystemMessageDto.hpp"
-#include "../model/RelationInstanceDto.hpp"
-#include "../model/RelationTypeDto.hpp"
-
-#include "entity-system/managers/relations/relation-type-manager/RelationTypeManager.hpp"
 
 using namespace inexor::entity_system::rest::model;
 using namespace restbed;

@@ -1,26 +1,28 @@
-// Inexor entity system
-// (c)2018 Inexor
-
 #pragma once
 
+#include "entity-system/model/entity-attributes/entity-attribute-instances/EntityAttributeInstance.hpp"
+#include "entity-system/model/relation-attributes/relation-attribute-instances/RelationAttributeInstance.hpp"
+#include "entity-system/managers/entities/entity-instance-manager/EntityInstanceManager.hpp"
+#include "entity-system/managers/relations/relation-instance-manager/RelationInstanceManager.hpp"
+#include "entity-system/model/data/DataTypes.hpp"
+#include "visual-scripting/model/Connector.hpp"
+
 #include <crossguid/guid.hpp>
+#include <optional>
 
 #include "react/Domain.h"
 #include "react/Signal.h"
 #include "react/Event.h"
 
-#include "entity-system/managers/entities/entity-instance-manager/EntityInstanceManager.hpp"
-#include "entity-system/managers/relations/relation-instance-manager/RelationInstanceManager.hpp"
-#include "entity-system/model/data/DataTypes.hpp"
-#include "entity-system/util/type-definitions/TypeDefinitions.hpp"
-#include "visual-scripting/model/Connector.hpp"
-
-using namespace inexor::entity_system;
-using namespace std;
-using namespace xg;
-
 namespace inexor {
 namespace visual_scripting {
+
+	using EntityInstanceManagerPtr = std::shared_ptr<entity_system::EntityInstanceManager>;
+	using RelationInstanceManagerPtr = std::shared_ptr<entity_system::RelationInstanceManager>;
+	using EntityAttributeInstancePtr = std::shared_ptr<entity_system::EntityAttributeInstance>;
+	using RelationAttributeInstancePtr = std::shared_ptr<entity_system::RelationAttributeInstance>;
+	using ConnectorPtr = std::shared_ptr<Connector>;
+	using ConnectorPtrOpt = std::optional<ConnectorPtr>;
 
 	/// @class ConnectorManager
     /// @brief Management of the connectors.
@@ -30,8 +32,8 @@ namespace visual_scripting {
 
 			/// Constructor.
 			ConnectorManager(
-				shared_ptr<EntityInstanceManager> entity_instance_manager,
-				shared_ptr<RelationInstanceManager> relation_instance_manager
+				EntityInstanceManagerPtr entity_instance_manager,
+				RelationInstanceManagerPtr relation_instance_manager
 			);
 
 			/// Destructor.
@@ -45,7 +47,7 @@ namespace visual_scripting {
 			///                    attribute instance which is the output attribute.
 			/// @param input_attr  A const reference to the shared pointer of the entity
 			///                    attribute instance which is the input attribute.
-			std::optional<std::shared_ptr<Connector>> create_connector(const ENT_ATTR_INST& output_attr, const ENT_ATTR_INST& input_attr);
+			ConnectorPtrOpt create_connector(const EntityAttributeInstancePtr& output_attr, const EntityAttributeInstancePtr& input_attr);
 
 			/// @brief Creates a connector from an entity attribute instance to another.
 			/// @param connector_GUID The GUID of the newly created connector.
@@ -53,14 +55,14 @@ namespace visual_scripting {
 			///                    attribute instance which is the output attribute.
 			/// @param input_attr  A const reference to the shared pointer of the entity
 			///                    attribute instance which is the input attribute.
-			std::optional<std::shared_ptr<Connector>> create_connector(const Guid& connector_GUID, const ENT_ATTR_INST& output_attr, const ENT_ATTR_INST& input_attr);
+			ConnectorPtrOpt create_connector(const xg::Guid& connector_GUID, const EntityAttributeInstancePtr& output_attr, const EntityAttributeInstancePtr& input_attr);
 
 //			/// @brief Creates a connector from an entity attribute instance to a relation attribute instance.
 //			/// @param output_attr A const reference to the shared pointer of the entity
 //			///                    attribute instance which is the output attribute.
 //			/// @param input_attr  A const reference to the shared pointer of the relation
 //			///                    attribute instance which is the input attribute.
-//			optional<shared_ptr<Connector>> create_connector(const ENT_ATTR_INST& output_attr, const REL_ATTR_INST& input_attr);
+//			ConnectorPtrOpt create_connector(const EntityAttributeInstancePtr& output_attr, const RelationAttributeInstancePtr& input_attr);
 //
 //			/// @brief Creates a connector from an entity attribute instance to a relation attribute instance.
 //			/// @param connector_GUID The GUID of the newly created connector.
@@ -68,14 +70,14 @@ namespace visual_scripting {
 //			///                    attribute instance which is the output attribute.
 //			/// @param input_attr  A const reference to the shared pointer of the relation
 //			///                    attribute instance which is the input attribute.
-//			optional<shared_ptr<Connector>> create_connector(const Guid& connector_GUID, const ENT_ATTR_INST& output_attr, const REL_ATTR_INST& input_attr);
+//			ConnectorPtrOpt create_connector(const xg::Guid& connector_GUID, const EntityAttributeInstancePtr& output_attr, const RelationAttributeInstancePtr& input_attr);
 //
 //			/// @brief Creates a connector from a relation attribute instance to a entity attribute instance.
 //			/// @param output_attr A const reference to the shared pointer of the relation
 //			///                    attribute instance which is the output attribute.
 //			/// @param input_attr  A const reference to the shared pointer of the entity
 //			///                    attribute instance which is the input attribute.
-//			optional<shared_ptr<Connector>> create_connector(const REL_ATTR_INST& output_attr, const ENT_ATTR_INST& input_attr);
+//			ConnectorPtrOpt create_connector(const RelationAttributeInstancePtr& output_attr, const EntityAttributeInstancePtr& input_attr);
 //
 //			/// @brief Creates a connector from a relation attribute instance to a entity attribute instance.
 //			/// @param connector_GUID The GUID of the newly created connector.
@@ -83,14 +85,14 @@ namespace visual_scripting {
 //			///                    attribute instance which is the output attribute.
 //			/// @param input_attr  A const reference to the shared pointer of the entity
 //			///                    attribute instance which is the input attribute.
-//			optional<shared_ptr<Connector>> create_connector(const Guid& connector_GUID, const REL_ATTR_INST& output_attr, const ENT_ATTR_INST& input_attr);
+//			ConnectorPtrOpt create_connector(const xg::Guid& connector_GUID, const RelationAttributeInstancePtr& output_attr, const EntityAttributeInstancePtr& input_attr);
 //
 //			/// @brief Creates a connector from a relation attribute instance to another.
 //			/// @param output_attr A const reference to the shared pointer of the relation
 //			///                    attribute instance which is the output attribute.
 //			/// @param input_attr  A const reference to the shared pointer of the relation
 //			///                    attribute instance which is the input attribute.
-//			optional<shared_ptr<Connector>> create_connector(const REL_ATTR_INST& output_attr, const REL_ATTR_INST& input_attr);
+//			ConnectorPtrOpt create_connector(const RelationAttributeInstancePtr& output_attr, const RelationAttributeInstancePtr& input_attr);
 //
 //			/// @brief Creates a connector from a relation attribute instance to another.
 //			/// @param connector_GUID The GUID of the newly created connector.
@@ -98,62 +100,61 @@ namespace visual_scripting {
 //			///                    attribute instance which is the output attribute.
 //			/// @param input_attr  A const reference to the shared pointer of the relation
 //			///                    attribute instance which is the input attribute.
-//			optional<shared_ptr<Connector>> create_connector(const Guid& connector_GUID, const REL_ATTR_INST& output_attr, const REL_ATTR_INST& input_attr);
+//			ConnectorPtrOpt create_connector(const xg::Guid& connector_GUID, const RelationAttributeInstancePtr& output_attr, const RelationAttributeInstancePtr& input_attr);
 
 			/// @brief Deletes the connector which is connected to the given input attribute.
 			/// @param input_attr A const reference to the shared pointer of the entity
 			///                    attribute instance which is the input attribute.
-			void delete_connector_by_input(const ENT_ATTR_INST& input_attr);
+			void delete_connector_by_input(const EntityAttributeInstancePtr& input_attr);
 
 			/// @brief Deletes the connector which is connected to the given input attribute.
 			/// @param input_attr A const reference to the shared pointer of the relation
 			///                    attribute instance which is the input attribute.
-			void delete_connector_by_input(const REL_ATTR_INST& input_attr);
+			void delete_connector_by_input(const RelationAttributeInstancePtr& input_attr);
 
 			/// @brief Deletes all connectors which are connected to the given output attribute.
 			/// @param input_attr A const reference to the shared pointer of the entity
 			///                    attribute instance which is the output attribute.
-			void delete_connectors_by_output(const ENT_ATTR_INST& output_attr);
+			void delete_connectors_by_output(const EntityAttributeInstancePtr& output_attr);
 
 			/// @brief Deletes all connectors which are connected to the given output attribute.
 			/// @param input_attr A const reference to the shared pointer of the relation
 			///                    attribute instance which is the output attribute.
-			void delete_connectors_by_output(const REL_ATTR_INST& output_attr);
+			void delete_connectors_by_output(const RelationAttributeInstancePtr& output_attr);
 
 			/// @brief Deletes the connector with the given GUID.
 			/// @param connector_GUID The GUID of the connector.
-			void delete_connector(const Guid& connector_GUID);
+			void delete_connector(const xg::Guid& connector_GUID);
 
 			/// @brief Deletes the given connector.
 			/// @param connector A const reference to the shared pointer of the connector.
-			void delete_connector(const shared_ptr<Connector>& connector);
+			void delete_connector(const ConnectorPtr& connector);
 
 			/// @brief Returns true, if a connector exists with the given GUID.
 			/// @param connector_GUID The GUID to search for.
-			bool connector_exists(const Guid& connector_GUID);
+			bool connector_exists(const xg::Guid& connector_GUID);
 
 			/// @brief Returns true, if a connector already exists which occupies the given input attribute.
 			/// @param connector_GUID The GUID of the input attribute.
-			bool input_occupied(const Guid& input_attr_GUID);
+			bool input_occupied(const xg::Guid& input_attr_GUID);
 
 		private:
 
 			/// The entity instance manager
-			shared_ptr<EntityInstanceManager> entity_instance_manager;
+			EntityInstanceManagerPtr entity_instance_manager;
 
 			/// The relation instance manager
-			shared_ptr<RelationInstanceManager> relation_instance_manager;
-
+			RelationInstanceManagerPtr relation_instance_manager;
 
 			/// Stores the connectors to search by GUID of the connector.
-			unordered_map<Guid, shared_ptr<Connector>> connectors;
+			std::unordered_map<xg::Guid, ConnectorPtr> connectors;
 
 			/// Stores the list of outgoing connectors to search by GUID of the output attribute instance.
-			unordered_map<Guid, vector<shared_ptr<Connector>>> output_to_connectors;
+			std::unordered_map<xg::Guid, std::vector<ConnectorPtr>> output_to_connectors;
 
 			/// Stores the incoming connectors to search by GUID of the input attribute instance.
 			/// Each input can only have one connection! This can be used to check if an input is already occupied.
-			unordered_map<Guid, shared_ptr<Connector>> input_to_connector;
+			std::unordered_map<xg::Guid, ConnectorPtr> input_to_connector;
 
 	};
 

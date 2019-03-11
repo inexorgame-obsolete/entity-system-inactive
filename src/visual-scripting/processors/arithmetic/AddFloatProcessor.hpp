@@ -20,9 +20,9 @@ namespace visual_scripting {
 	/// Processor for entity instances of type ADD_FLOAT.
     class AddFloatProcessor
     	: public Processor,
-		  public EntityInstanceCreatedListener,
-		  public EntityInstanceDeletedListener,
-		  public enable_shared_from_this<AddFloatProcessor>
+		  public entity_system::EntityInstanceCreatedListener,
+		  public entity_system::EntityInstanceDeletedListener,
+		  public std::enable_shared_from_this<AddFloatProcessor>
     {
 
     	using AddFloatEntityTypeProviderPtr = std::shared_ptr<inexor::entity_system::type_system::AddFloatEntityTypeProvider>;
@@ -31,7 +31,7 @@ namespace visual_scripting {
 
 		public:
 
-    		USING_REACTIVE_DOMAIN(D)
+    		USING_REACTIVE_DOMAIN(entity_system::D)
 
     		/// @brief Constructs a new entity instance of type ADD_FLOAT.
 			AddFloatProcessor(
@@ -62,7 +62,7 @@ namespace visual_scripting {
 			EntityInstanceManagerPtr entity_instance_manager;
 
 			/// The signals per entity instance.
-			std::unordered_map<xg::Guid, SignalT<DataValue> > signals;
+			std::unordered_map<xg::Guid, SignalT<entity_system::DataValue> > signals;
 
     };
 

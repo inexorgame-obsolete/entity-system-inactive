@@ -1,14 +1,11 @@
 #pragma once
 
-#include <iostream>
-
 #include "type-system/factories/arithmetic/AddIntFactory.hpp"
 #include "type-system/factories/constants/IntConstantFactory.hpp"
 #include "visual-scripting/managers/ConnectorManager.hpp"
 
 namespace inexor {
 namespace visual_scripting {
-
 
 	/// @class IntConstantConnectorTest
     /// @brief Tests for connecting INT_CONSTANT entity instances
@@ -47,7 +44,6 @@ namespace visual_scripting {
 			/// Factory for ADD_INT
 			AddIntFactoryPtr add_int_factory;
 	};
-
 
 }
 }

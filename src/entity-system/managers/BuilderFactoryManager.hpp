@@ -5,8 +5,6 @@
 #include "entity-system/factories/relations/relation-type-builder-factory/RelationTypeBuilderFactory.hpp"
 #include "entity-system/factories/relations/relation-instance-builder-factory/RelationInstanceBuilderFactory.hpp"
 
-#include <vector>
-
 namespace inexor {
 namespace entity_system {
 
@@ -17,7 +15,7 @@ namespace entity_system {
 
 		public:
 
-    		using EntityTypeBuilderFactoryPtr = shared_ptr<EntityTypeBuilderFactory>;
+    		using EntityTypeBuilderFactoryPtr = std::shared_ptr<EntityTypeBuilderFactory>;
     		using EntityInstanceBuilderFactoryPtr = std::shared_ptr<EntityInstanceBuilderFactory>;
     		using RelationTypeBuilderFactoryPtr = std::shared_ptr<RelationTypeBuilderFactory>;
     		using RelationInstanceBuilderFactoryPtr = std::shared_ptr<RelationInstanceBuilderFactory>;
@@ -49,6 +47,5 @@ namespace entity_system {
 
     };
 
-
-};
-};
+}
+}

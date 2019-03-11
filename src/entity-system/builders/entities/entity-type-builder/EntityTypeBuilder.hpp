@@ -13,11 +13,12 @@ namespace entity_system {
 	using AttributeList = std::unordered_map<string, std::pair<DataType, EnumSet<Feature>>>;
 	class EntityTypeBuilder;
 	using EntityTypeBuilderPtr = std::shared_ptr<EntityTypeBuilder>;
-	using EntityTypePtrOpt = std::optional<std::shared_ptr<EntityType>>;
+	using EntityTypePtr = std::shared_ptr<EntityType>;
+	using EntityTypePtrOpt = std::optional<EntityTypePtr>;
 
 	/// @class EntityTypeBuilder
     /// @brief Management of the loggers.
-	class EntityTypeBuilder : public enable_shared_from_this<EntityTypeBuilder>
+	class EntityTypeBuilder : public std::enable_shared_from_this<EntityTypeBuilder>
 	{
 		public:
 

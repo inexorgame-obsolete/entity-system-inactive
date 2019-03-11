@@ -3,11 +3,17 @@
 #include "entity-system/model/data/DataTypes.hpp"
 #include "entity-system/model/entities/entity-types/EntityType.hpp"
 #include "entity-system/model/relations/relation-types/RelationType.hpp"
+#include "entity-system/model/relation-attributes/relation-attribute-types/RelationAttributeType.hpp"
 
 #include "spdlog/spdlog.h"
 
+#include <crossguid/guid.hpp>
+
 namespace inexor {
 namespace entity_system {
+
+	using RelationAttributeTypePtr = std::shared_ptr<RelationAttributeType>;
+	using RelationAttributeTypePtrOpt = std::optional<RelationAttributeTypePtr>;
 
 	RelationTypeBuilder::RelationTypeBuilder(
 		RelationTypeManagerPtr relation_type_manager,
@@ -69,9 +75,9 @@ namespace entity_system {
 		{
 			std::shared_ptr<RelationType> relation_type = o_relation_type.value();
 			for (auto& attribute_entry : relation_type_attributes) {
-				O_REL_ATTR_TYPE o_attribute_type = relation_attribute_type_manager->create_relation_attribute_type(attribute_entry.first, attribute_entry.second.first, attribute_entry.second.second);
+				RelationAttributeTypePtrOpt o_attribute_type = relation_attribute_type_manager->create_relation_attribute_type(attribute_entry.first, attribute_entry.second.first, attribute_entry.second.second);
 				if (o_attribute_type.has_value()) {
-					REL_ATTR_TYPE attribute_type = o_attribute_type.value();
+					RelationAttributeTypePtr attribute_type = o_attribute_type.value();
 					relation_type->link_relation_attribute_type(attribute_type);
 					spdlog::debug("Created relation type attribute {} of data type {}", attribute_entry.first, attribute_entry.second.first);
 				} else {

@@ -1,38 +1,38 @@
-// Inexor entity system
-// (C) 2018-2019 Inexor
-
 #pragma once
-
-#include <iomanip>
 
 #include "entity-system/managers/entities/entity-instance-manager/EntityInstanceManager.hpp"
 #include "entity-system/model/data/DataTypes.hpp"
-#include "visual-scripting/model/Connector.hpp"
-#include "entity-system/util/type-definitions/TypeDefinitions.hpp"
-#include "entity-system/model/data/DataTypes.hpp"
-
-#include "renderer/factories/RendererFactory.hpp"
-#include "visual-scripting/managers/ConnectorManager.hpp"
-
 #include "type-system/factories/trigonometric/SinFactory.hpp"
 #include "type-system/factories/trigonometric/CosFactory.hpp"
-
+#include "visual-scripting/managers/ConnectorManager.hpp"
+#include "visual-scripting/model/Connector.hpp"
+#include "renderer/factories/RendererFactory.hpp"
 
 struct GLFWwindow;
 
 namespace inexor {
 namespace renderer {
-    /// @class RendererManager
+
+	using EntityInstanceManagerPtr = std::shared_ptr<entity_system::EntityInstanceManager>;
+	using SinFactoryPtr = std::shared_ptr<entity_system::type_system::SinFactory>;
+	using CosFactoryPtr = std::shared_ptr<entity_system::type_system::CosFactory>;
+	using ConnectorManagerPtr = std::shared_ptr<visual_scripting::ConnectorManager>;
+	using RendererFactoryPtr = std::shared_ptr<RendererFactory>;
+	using EntityInstancePtr = std::shared_ptr<EntityInstance>;
+	using EntityAttributeInstancePtr = std::shared_ptr<entity_system::EntityAttributeInstance>;
+
+	/// @class RendererManager
     /// @brief Management of the rendering.
     class RendererManager : public enable_shared_from_this<RendererManager> {
     public:
-        /// Constructor.
+
+    	/// Constructor.
         RendererManager(
-                std::shared_ptr<RendererFactory> render_factory,
-				std::shared_ptr<entity_system::type_system::SinFactory> sin_factory,
-				std::shared_ptr<entity_system::type_system::CosFactory> cos_factory,
-				std::shared_ptr<visual_scripting::ConnectorManager> connector_manager,
-                std::shared_ptr<EntityInstanceManager> entity_instance_manager
+        	EntityInstanceManagerPtr entity_instance_manager,
+			SinFactoryPtr sin_factory,
+			CosFactoryPtr cos_factory,
+			ConnectorManagerPtr connector_manager,
+			RendererFactoryPtr render_factory
         );
 
         /// Destructor.
@@ -45,41 +45,42 @@ namespace renderer {
         void start_window_thread(GLFWwindow *windows);
 
     private:
-        /// The entity type provider
-        std::shared_ptr<RendererFactory> renderer_factory;
-
-        /// The sin factory
-        std::shared_ptr<entity_system::type_system::SinFactory> sin_factory;
-
-        /// The sin factory
-        std::shared_ptr<entity_system::type_system::CosFactory> cos_factory;
-
-        /// The connector manager
-		std::shared_ptr<visual_scripting::ConnectorManager> connector_manager;
 
         /// The entity instance manager
-        shared_ptr<EntityInstanceManager> entity_instance_manager;
+		EntityInstanceManagerPtr entity_instance_manager;
+
+        /// The sin factory
+        SinFactoryPtr sin_factory;
+
+        /// The sin factory
+        CosFactoryPtr cos_factory;
+
+		/// The entity type provider
+        RendererFactoryPtr renderer_factory;
+
+        /// The connector manager
+		ConnectorManagerPtr connector_manager;
 
         /// The renderer entity instance.
         shared_ptr<EntityInstance> renderer;
 
         /// The sinus generator.
-        shared_ptr<EntityInstance> sin_x;
+        EntityInstancePtr sin_x;
 
         /// The sinus generator.
-        shared_ptr<EntityInstance> cos_y;
+        EntityInstancePtr cos_y;
 
         /// The attribute sin_value
-        std::shared_ptr<entity_system::EntityAttributeInstance> sin_x_attr_value;
+        EntityAttributeInstancePtr sin_x_attr_value;
 
         /// The attribute cos_value
-        std::shared_ptr<entity_system::EntityAttributeInstance> cos_y_attr_value;
+        EntityAttributeInstancePtr cos_y_attr_value;
 
         /// The attribute renderer_x
-        std::shared_ptr<entity_system::EntityAttributeInstance> renderer_x_attr_value;
+        EntityAttributeInstancePtr renderer_x_attr_value;
 
         /// The attribute renderer_x
-        std::shared_ptr<entity_system::EntityAttributeInstance> renderer_y_attr_value;
+        EntityAttributeInstancePtr renderer_y_attr_value;
 
     };
 

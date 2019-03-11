@@ -1,5 +1,16 @@
 #pragma once
 
+#include "entity-system/EntitySystemModule.hpp"
+#include "entity-system/managers/EntitySystemDebugger.hpp"
+#include "entity-system-rest/RestServer.hpp"
+#include "entity-system-rest/RestServerLogger.hpp"
+
+#include "type-system/TypeSystemModule.hpp"
+#include "configuration/ConfigurationModule.hpp"
+#include "visual-scripting/VisualScriptingSystemModule.hpp"
+#include "logging/managers/LogManager.hpp"
+#include "renderer/managers/RendererManager.hpp"
+
 #include <memory>
 #include <cstdlib>
 #include <restbed>
@@ -15,17 +26,6 @@
 #include <boost/di.hpp>
 
 #include "spdlog/spdlog.h"
-
-#include "entity-system/EntitySystemModule.hpp"
-#include "entity-system/managers/EntitySystemDebugger.hpp"
-#include "entity-system-rest/RestServer.hpp"
-#include "entity-system-rest/RestServerLogger.hpp"
-
-#include "type-system/TypeSystemModule.hpp"
-#include "configuration/ConfigurationModule.hpp"
-#include "visual-scripting/VisualScriptingSystemModule.hpp"
-#include "logging/managers/LogManager.hpp"
-#include "renderer/managers/RendererManager.hpp"
 
 
 

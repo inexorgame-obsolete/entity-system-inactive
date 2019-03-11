@@ -1,23 +1,20 @@
-// Inexor entity system
-// (c)2018-2019 Inexor
-
 #pragma once
+
+#include "entity-system/model/entity-attributes/entity-attribute-types/EntityAttributeType.hpp"
+#include "entity-system/model/base/type/TypeBase.hpp"
+#include "entity-system/util/uuid/GUIDBase.hpp"
 
 #include <mutex>
 #include <string>
 #include <optional>
 #include <unordered_map>
 
-#include "entity-system/model/entity-attributes/entity-attribute-types/EntityAttributeType.hpp"
-#include "entity-system/model/base/type/TypeBase.hpp"
-#include "entity-system/util/type-definitions/TypeDefinitions.hpp"
-#include "entity-system/util/uuid/GUIDBase.hpp"
-
-
 namespace inexor {
 namespace entity_system {
 
-	
+	using EntityAttributeTypePtr = std::shared_ptr<EntityAttributeType>;
+	using EntityAttributeTypePtrList = std::vector<EntityAttributeTypePtr>;
+
     /// @class EntityType
 	/// @brief A base class for entity types.
 	class EntityType : public TypeBase, public GUIDBase
@@ -26,7 +23,7 @@ namespace entity_system {
         private:
 
             /// A vector of stored entity attribute instances.
-            std::vector<ENT_ATTR_TYPE> entity_attribute_instances;
+			EntityAttributeTypePtrList entity_attribute_instances;
 
             /// Mutex for the entity type class.
             std::mutex entity_type_mutex;
@@ -67,14 +64,14 @@ namespace entity_system {
 			/// with this entity type.
 			/// @return True if this entity attribute type is already associated,
 			/// false otherwise.
-			bool has_attribute_type(const ENT_ATTR_TYPE&);
+			bool has_attribute_type(const EntityAttributeTypePtr&);
         
 
 			/// Links an entity attribute type to this entity type.
 			/// @param ent_attr_type A const reference of a shared pointer to
 			/// an entity attribute type which will be linked to this entity type.
 			/// @return ENTSYS_SUCCESS if linking succeeded, ENTSYS_ERROR otherwise.
-			ENTSYS_RESULT link_attribute_type(const ENT_ATTR_TYPE&);
+			ENTSYS_RESULT link_attribute_type(const EntityAttributeTypePtr&);
 
             
             /// TODO!
@@ -92,7 +89,7 @@ namespace entity_system {
 
 			/// Returns a vector of entity attribute types which are linked to this entity type.
 			/// @return a vector of entity attribute types which are linked to this entity type.
-			std::optional<std::vector<ENT_ATTR_TYPE>> get_linked_attribute_types() const;
+			std::optional<EntityAttributeTypePtrList> get_linked_attribute_types() const;
 			
 
 			/// Deletes all entity attribute types which are linked to this entity type.
@@ -106,5 +103,5 @@ namespace entity_system {
     };
 
 
-};
-};
+}
+}

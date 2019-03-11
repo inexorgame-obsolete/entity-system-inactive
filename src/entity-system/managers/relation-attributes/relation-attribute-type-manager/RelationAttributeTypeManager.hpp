@@ -1,20 +1,17 @@
-// Inexor entity system
-// (c)2018-2019 Inexor
-
 #pragma once
-
-#include <optional>
 
 #include "entity-system/model/relation-attributes/relation-attribute-types/RelationAttributeType.hpp"
 #include "entity-system/managers/manager-templates/TypeManagerTemplate.hpp"
 #include "entity-system/model/relation-attributes/relation-attribute-instances/RelationAttributeInstance.hpp"
-#include "entity-system/util/type-definitions/TypeDefinitions.hpp"
 
+#include <optional>
 
 namespace inexor {
 namespace entity_system {
 
-	
+	using RelationAttributeTypePtr = std::shared_ptr<RelationAttributeType>;
+	using RelationAttributeTypePtrOpt = std::optional<RelationAttributeTypePtr>;
+
 	/// A manager class for relation attribute types.
 	class RelationAttributeTypeManager : public TypeManagerTemplate<RelationAttributeType>
 	{
@@ -31,7 +28,7 @@ namespace entity_system {
 			/// @param rel_attr_type_data_type The data type of the new relation attribute type.
 			/// @param rel_attr_type_features The features of the new relation attribute type.
 			/// @return A shared pointer to the relation attribute type which was created.
-			O_REL_ATTR_TYPE create_relation_attribute_type(const std::string&, const DataType&, const EnumSet<Feature>&);
+			RelationAttributeTypePtrOpt create_relation_attribute_type(const std::string&, const DataType&, const EnumSet<Feature>&);
 
 			/// Returns the number of existing types of relation attributes.
 			/// @return The number of existing types of relation attributes.
@@ -42,6 +39,5 @@ namespace entity_system {
 
 	};
 
-
-};
-};
+}
+}

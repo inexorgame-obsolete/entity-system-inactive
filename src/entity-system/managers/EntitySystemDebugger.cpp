@@ -1,19 +1,13 @@
-// Inexor entity system
-// (c)2018 Inexor
-
 #include "EntitySystemDebugger.hpp"
-
-using namespace inexor::entity_system;
-using namespace std;
 
 namespace inexor {
 namespace entity_system {
 
 	EntitySystemDebugger::EntitySystemDebugger(
-		shared_ptr<EntityTypeManager> entity_type_manager,
-		shared_ptr<EntityInstanceManager> entity_instance_manager,
-		shared_ptr<RelationTypeManager> relation_type_manager,
-		shared_ptr<RelationInstanceManager> relation_instance_manager
+		EntityTypeManagerPtr entity_type_manager,
+		EntityInstanceManagerPtr entity_instance_manager,
+		RelationTypeManagerPtr relation_type_manager,
+		RelationInstanceManagerPtr relation_instance_manager
 	)
 	{
 		this->entity_type_manager = entity_type_manager;
@@ -34,7 +28,7 @@ namespace entity_system {
 		relation_type_manager->register_on_deleted(shared_from_this());
 	}
 
-	void EntitySystemDebugger::on_entity_type_created(ENT_TYPE entity_type)
+	void EntitySystemDebugger::on_entity_type_created(EntityTypePtr entity_type)
 	{
 		spdlog::info("[DBG] Created entity type {} (UUID: {})", entity_type->get_type_name(), entity_type->get_GUID().str());
 		entity_instance_manager->register_on_created(entity_type->get_GUID(), shared_from_this());
@@ -47,7 +41,7 @@ namespace entity_system {
 		// TODO: unregister listeners?
 	}
 
-	void EntitySystemDebugger::on_entity_instance_created(ENT_INST entity_instance)
+	void EntitySystemDebugger::on_entity_instance_created(EntityInstancePtr entity_instance)
 	{
 		spdlog::info("[DBG] Created entity instance of type {} (UUID: {})", entity_instance->get_entity_type()->get_type_name(), entity_instance->get_GUID().str());
 	}
@@ -57,7 +51,7 @@ namespace entity_system {
 		spdlog::info("[DBG] Deleted entity instance {} of type {}", inst_GUID.str(), type_GUID.str());
 	}
 
-	void EntitySystemDebugger::on_relation_type_created(REL_TYPE rel_type)
+	void EntitySystemDebugger::on_relation_type_created(RelationTypePtr rel_type)
 	{
 		spdlog::info("[DBG] Created relation type {} (UUID: {})", rel_type->get_type_name(), rel_type->get_GUID().str());
 		relation_instance_manager->register_on_created(rel_type->get_GUID(), shared_from_this());
@@ -69,7 +63,7 @@ namespace entity_system {
 		spdlog::info("[DBG] Deleted relation type (UUID: {})", type_GUID.str());
 	}
 
-	void EntitySystemDebugger::on_relation_instance_created(REL_INST relation_instance)
+	void EntitySystemDebugger::on_relation_instance_created(RelationInstancePtr relation_instance)
 	{
 		spdlog::info("[DBG] Created relation instance of type {} (UUID: {})", relation_instance->get_relation_type()->get_type_name(), relation_instance->get_GUID().str());
 	}

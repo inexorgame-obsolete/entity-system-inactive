@@ -1,5 +1,6 @@
 #pragma once
 
+#include "entity-system/model/data/DataTypes.hpp"
 #include "type-system/factories/constants/BoolConstantFactory.hpp"
 #include "type-system/factories/constants/IntConstantFactory.hpp"
 #include "type-system/factories/constants/FloatConstantFactory.hpp"
@@ -10,6 +11,8 @@
 namespace inexor {
 namespace configuration {
 
+	using DataType = entity_system::DataType;
+
     /// Management of configuration items. Uses the entity system
     /// to store the configuration items as entities of type '*_CONSTANT'.
 	class ConfigurationManager
@@ -18,7 +21,6 @@ namespace configuration {
 		using IntConstantFactoryPtr = std::shared_ptr<entity_system::type_system::IntConstantFactory>;
 		using FloatConstantFactoryPtr = std::shared_ptr<entity_system::type_system::FloatConstantFactory>;
 		using StringConstantFactoryPtr = std::shared_ptr<entity_system::type_system::StringConstantFactory>;
-		using string = std::string;
 		using EntityInstancePtr = std::shared_ptr<entity_system::EntityInstance>;
 		using EntityInstancePtrOpt = std::optional<EntityInstancePtr>;
 		using EntityAttributeInstancePtr = std::shared_ptr<entity_system::EntityAttributeInstance>;
@@ -42,28 +44,28 @@ namespace configuration {
 			bool exists(std::string config_name);
 
 			/// Sets a configuration (bool).
-			void set(string config_name, bool value);
+			void set(std::string config_name, bool value);
 
 			/// Sets a configuration (int).
-			void set(string config_name, int value);
+			void set(std::string config_name, int value);
 
 			/// Sets a configuration (float).
-			void set(string config_name, float value);
+			void set(std::string config_name, float value);
 
 			/// Sets a configuration (string).
-			void set(string config_name, string value);
+			void set(std::string config_name, std::string value);
 
 			/// Returns the configuration value (bool).
-			bool get_bool(string config_name);
+			bool get_bool(std::string config_name);
 
 			/// Returns the configuration value (int).
-			int get_int(string config_name);
+			int get_int(std::string config_name);
 
 			/// Returns the configuration value (float).
-			float get_float(string config_name);
+			float get_float(std::string config_name);
 
 			/// Returns the configuration value (string).
-			string get_string(string config_name);
+			std::string get_string(std::string config_name);
 
 			/// Returns the data type of the configuration item.
 			DataType get_type(std::string config_name);

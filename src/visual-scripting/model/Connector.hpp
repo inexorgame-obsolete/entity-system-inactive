@@ -1,45 +1,36 @@
-// Inexor entity system
-// (c)2018-2019 Inexor
-
 #pragma once
+
+#include "entity-system/model/entity-attributes/entity-attribute-instances/EntityAttributeInstance.hpp"
+#include "entity-system/util/uuid/GUIDBase.hpp"
+
+#include "react/Domain.h"
+#include "react/Observer.h"
 
 #include <mutex>
 #include <optional>
 
-#include "react/Domain.h"
-#include "react/Signal.h"
-#include "react/Observer.h"
-
-#include "entity-system/model/data/container/DataContainer.hpp"
-#include "entity-system/model/data/DataTypes.hpp"
-#include "entity-system/model/entity-attributes/entity-attribute-instances/EntityAttributeInstance.hpp"
-#include "entity-system/util/uuid/GUIDBase.hpp"
-#include "entity-system/util/type-definitions/TypeDefinitions.hpp"
-
-using namespace inexor::entity_system;
-using namespace std;
-using namespace xg;
 using namespace react;
 
 namespace inexor {
 namespace visual_scripting {
 
+	using EntityAttributeInstancePtr = std::shared_ptr<entity_system::EntityAttributeInstance>;
 
 	/// A connector propagates the value of an output-attribute to
 	/// an input-attribute.
-    class Connector : public GUIDBase
+    class Connector : public entity_system::GUIDBase
     {
 		public:
 
-			USING_REACTIVE_DOMAIN(D)
+			USING_REACTIVE_DOMAIN(inexor::entity_system::D)
 
 			/// Constructor.
 			/// @param output_attribute_GUID GUID of the output attribute.
 			/// @param input_attribute_GUID GUID of the input attribute.
 			/// @note The GUID of the connector.
 			Connector(
-				const std::shared_ptr<inexor::entity_system::EntityAttributeInstance> & output_attr,
-				const std::shared_ptr<inexor::entity_system::EntityAttributeInstance> & input_attr
+				const EntityAttributeInstancePtr& output_attr,
+				const EntityAttributeInstancePtr & input_attr
 			);
 
             /// @brief Constructor.
@@ -48,9 +39,9 @@ namespace visual_scripting {
 			/// @param input_attribute_GUID GUID of the input attribute.
 			/// @note The GUID of the connector.
 			Connector(
-				const Guid& connector_GUID,
-				const std::shared_ptr<inexor::entity_system::EntityAttributeInstance> & output_attr,
-				const std::shared_ptr<inexor::entity_system::EntityAttributeInstance> & input_attr
+				const xg::Guid& connector_GUID,
+				const EntityAttributeInstancePtr & output_attr,
+				const EntityAttributeInstancePtr & input_attr
 			);
 
 			/// Destructor.
@@ -64,15 +55,15 @@ namespace visual_scripting {
 
             /// @brief Get the GUID of the connector.
             /// @return GUID of the connector.
-			Guid connector() const;
+			xg::Guid connector() const;
 
             /// @brief Get the GUID of the output attribute.
             /// @return GUID of the output attribute.
-			Guid output() const;
+			xg::Guid output() const;
 
             /// @brief Get the GUID of the input attribute.
             /// @return GUID of the input attribute.
-			Guid input() const;
+			xg::Guid input() const;
 
 			/// @brief Enables the debugging mode.
 			void enable_debug();
@@ -86,16 +77,16 @@ namespace visual_scripting {
         private:
 
 			/// GUID of the output attribute.
-			Guid output_attribute_GUID;
+			xg::Guid output_attribute_GUID;
 
 			/// GUID of the input attribute.
-			Guid input_attribute_GUID;
+			xg::Guid input_attribute_GUID;
 
 			/// The output attribute instance.
-			std::shared_ptr<inexor::entity_system::EntityAttributeInstance> output_attr;
+			EntityAttributeInstancePtr output_attr;
 
 			/// The input attribute instance.
-			std::shared_ptr<inexor::entity_system::EntityAttributeInstance> input_attr;
+			EntityAttributeInstancePtr input_attr;
 
 			/// The observer for debugging the connector.
 			ObserverT observer;
@@ -105,6 +96,5 @@ namespace visual_scripting {
 
     };
 
-
-};
-};
+}
+}

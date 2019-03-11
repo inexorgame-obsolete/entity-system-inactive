@@ -1,21 +1,15 @@
-// Inexor entity system
-// (c)2018-2019 Inexor
-
 #pragma once
-
-#include <string>
-#include <vector>
-#include <unordered_map>
 
 #include "entity-system/model/base/attribute/AttributeBase.hpp"
 #include "entity-system/model/base/type/TypeBase.hpp"
+#include "entity-system/model/data/DataTypes.hpp"
 #include "entity-system/util/return-codes/ReturnCodes.hpp"
 #include "entity-system/util/uuid/GUIDBase.hpp"
 
+#include <string>
 
 namespace inexor {
 namespace entity_system {
-    
 
     /// @class EntityAttributeType.
 	/// @brief A base class for entity attribute types.
@@ -30,7 +24,6 @@ namespace entity_system {
 			/// @note the GUID of the new entity attribute type will be created automatically by the inheritance of GUIDBase!
 			EntityAttributeType(const std::string&, const DataType&, const EnumSet<Feature>&);
 
-
             /// @brief Constructor
             /// @param ent_attr_type_GUID The GUID of the new entity attribute type.
 			/// @param ent_attr_type_name The name of the new entity attribute type.
@@ -39,10 +32,8 @@ namespace entity_system {
 			/// @note the GUID of the new entity attribute type will be created automatically by the inheritance of GUIDBase!
             EntityAttributeType(const xg::Guid&, const std::string&, const DataType&, const EnumSet<Feature>&);
 
-
 			/// @brief Destructor.
 			~EntityAttributeType();
-
 
 			/// Implement a data validation method as
 			/// required by class inheritance of DataValidation!
@@ -50,6 +41,5 @@ namespace entity_system {
 
 	};
 
-
-};
-};
+}
+}

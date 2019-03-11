@@ -1,98 +1,101 @@
-// Inexor entity system
-// (c)2018 Inexor
-
 #pragma once
-
-#include "spdlog/spdlog.h"
 
 #include "entity-system/managers/relations/relation-instance-manager/RelationInstanceManager.hpp"
 #include "entity-system/managers/relations/relation-type-manager/RelationTypeManager.hpp"
-#include "entity-system/model/data/DataTypes.hpp"
 #include "entity-system/model/data/container/DataContainer.hpp"
-#include "entity-system/util/type-definitions/TypeDefinitions.hpp"
 
-using namespace inexor::entity_system;
-using namespace std;
+#include "spdlog/spdlog.h"
 
 namespace inexor {
 namespace entity_system {
 
+	class RelationInstanceBuilder;
+	using RelationInstanceBuilderPtr = std::shared_ptr<RelationInstanceBuilder>;
+	using RelationInstanceManagerPtr = std::shared_ptr<RelationInstanceManager>;
+	using RelationTypeManagerPtr = std::shared_ptr<RelationTypeManager>;
+
+	using EntityInstancePtr = std::shared_ptr<EntityInstance>;
+	using RelationTypePtr = std::shared_ptr<RelationType>;
+	using RelationTypePtrOpt = std::optional<RelationTypePtr>;
+	using RelationInstancePtr = std::shared_ptr<RelationInstance>;
+	using RelationInstancePtrOpt = std::optional<RelationInstancePtr>;
+
 	/// @class RelationInstanceBuilder
     /// @brief Builder for relation instances.
-	class RelationInstanceBuilder : public enable_shared_from_this<RelationInstanceBuilder>
+	class RelationInstanceBuilder : public std::enable_shared_from_this<RelationInstanceBuilder>
 	{
 		public:
 
 			/// Constructor.
 			RelationInstanceBuilder(
-				shared_ptr<RelationInstanceManager> relation_instance_manager,
-				shared_ptr<RelationTypeManager> relation_type_manager
+				RelationInstanceManagerPtr relation_instance_manager,
+				RelationTypeManagerPtr relation_type_manager
 			);
 
 			/// Destructor.
 			~RelationInstanceBuilder();
 
 			/// Sets the name of the relation type to use.
-			shared_ptr<RelationInstanceBuilder> type(const string& relation_type_name);
+			RelationInstanceBuilderPtr type(const std::string& relation_type_name);
 
 			/// Sets the relation type to use.
-			shared_ptr<RelationInstanceBuilder> type(const REL_TYPE& relation_type);
+			RelationInstanceBuilderPtr type(const RelationTypePtr& relation_type);
 
 			/// Sets the uuid of the relation instance.
-			shared_ptr<RelationInstanceBuilder> uuid(const string& relation_type_uuid);
+			RelationInstanceBuilderPtr uuid(const std::string& relation_type_uuid);
 
 			/// Sets the source entity instance.
-			shared_ptr<RelationInstanceBuilder> source(ENT_INST ent_instance_source);
+			RelationInstanceBuilderPtr source(EntityInstancePtr ent_instance_source);
 
 			/// Sets the target entity instance.
-			shared_ptr<RelationInstanceBuilder> target(ENT_INST ent_instance_target);
+			RelationInstanceBuilderPtr target(EntityInstancePtr ent_instance_target);
 
 			/// Sets the value of the attribute.
-			shared_ptr<RelationInstanceBuilder> attribute(const string& attribute_name, const DataContainerInitializer& value);
+			RelationInstanceBuilderPtr attribute(const std::string& attribute_name, const DataContainerInitializer& value);
 
-			shared_ptr<RelationInstanceBuilder> attribute(const string& attribute_name, const bool& value);
+			RelationInstanceBuilderPtr attribute(const std::string& attribute_name, const bool& value);
 
-			shared_ptr<RelationInstanceBuilder> attribute(const string& attribute_name, const int& value);
+			RelationInstanceBuilderPtr attribute(const std::string& attribute_name, const int& value);
 
-			shared_ptr<RelationInstanceBuilder> attribute(const string& attribute_name, const int64_t& value);
+			RelationInstanceBuilderPtr attribute(const std::string& attribute_name, const int64_t& value);
 
-            shared_ptr<RelationInstanceBuilder> attribute(const string& attribute_name, const float& value);
+            RelationInstanceBuilderPtr attribute(const std::string& attribute_name, const float& value);
 
-            shared_ptr<RelationInstanceBuilder> attribute(const string& attribute_name, const double& value);
+            RelationInstanceBuilderPtr attribute(const std::string& attribute_name, const double& value);
 
-			shared_ptr<RelationInstanceBuilder> attribute(const string& attribute_name, const string& value);
+			RelationInstanceBuilderPtr attribute(const std::string& attribute_name, const std::string& value);
 
 			/// Builds and returns the created relation instance.
-			O_REL_INST build();
+			RelationInstancePtrOpt build();
 
 		private:
 
 			/// The relation instance manager
-			shared_ptr<RelationInstanceManager> relation_instance_manager;
+			RelationInstanceManagerPtr relation_instance_manager;
 
 			/// The relation type manager
-			shared_ptr<RelationTypeManager> relation_type_manager;
+			RelationTypeManagerPtr relation_type_manager;
 
 			/// The name of the relation type to use.
-			string relation_type_name;
+			std::string relation_type_name;
 
 			/// The relation type to use.
-			O_REL_TYPE o_relation_type;
+			RelationTypePtrOpt o_relation_type;
 
 			/// The UUID of the new relation instance.
-			string relation_instance_uuid;
+			std::string relation_instance_uuid;
 
 			/// The source entity instance.
-			ENT_INST ent_instance_source;
+			EntityInstancePtr ent_instance_source;
 
 			/// The target entity instance.
-			ENT_INST ent_instance_target;
+			EntityInstancePtr ent_instance_target;
 
 			/// The attribute definitions.
-			unordered_map<string, DataContainerInitializer> relation_instance_attributes;
+			std::unordered_map<std::string, DataContainerInitializer> relation_instance_attributes;
 
 	};
 
 
-};
-};
+}
+}

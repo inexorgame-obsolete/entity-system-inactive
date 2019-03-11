@@ -1,11 +1,4 @@
-// Inexor entity system
-// (c)2018-2019 Inexor
-
 #pragma once
-
-#include <boost/signals2.hpp>
-#include <crossguid/guid.hpp>
-#include <optional>
 
 #include "entity-system/listeners/entities/EntityInstanceCreatedListener.hpp"
 #include "entity-system/listeners/entities/EntityInstanceDeletedListener.hpp"
@@ -14,10 +7,16 @@
 #include "entity-system/managers/manager-templates/InstanceManagerTemplate.hpp"
 #include "entity-system/util/return-codes/ReturnCodes.hpp"
 
+#include <boost/signals2.hpp>
+#include <crossguid/guid.hpp>
+#include <optional>
 
 namespace inexor {
 namespace entity_system {
 
+	using EntityTypePtr = std::shared_ptr<EntityType>;
+	using EntityInstancePtr = std::shared_ptr<EntityInstance>;
+	using EntityInstancePtrOpt = std::optional<EntityInstancePtr>;
 
 	/// A manager class for entity instances.
     class EntityInstanceManager : public InstanceManagerTemplate<EntityInstance>
@@ -37,7 +36,7 @@ namespace entity_system {
 			/// @param ent_type A const reference of a shared pointer
 			/// to an entity type of which an instance will be created.
 			/// @return A shared pointer to the entity instance which was created.
-			O_ENT_INST create_entity_instance(const ENT_TYPE&);
+			EntityInstancePtrOpt create_entity_instance(const EntityTypePtr&);
 
 
 			/// Create an entity instance.
@@ -45,7 +44,7 @@ namespace entity_system {
 			/// @param ent_type A const reference of a shared pointer
 			/// to an entity type of which an instance will be created.
 			/// @return A shared pointer to the entity instance which was created.
-			O_ENT_INST create_entity_instance(const xg::Guid&, const ENT_TYPE&);
+			EntityInstancePtrOpt create_entity_instance(const xg::Guid&, const EntityTypePtr&);
 
 
 			/// @brief Checks if an entity instance does already exist.
@@ -55,12 +54,12 @@ namespace entity_system {
 
             /// 
             /// 
-			O_ENT_INST get_entity_instance(const xg::Guid&);
+			EntityInstancePtrOpt get_entity_instance(const xg::Guid&);
 
 
             /// TODO: what's the parameter meaning?
 			/// TODO: implement
-			O_ENT_INST get_entity_instance(const std::string&);
+			EntityInstancePtrOpt get_entity_instance(const std::string&);
 
 
             // TODO: get_all_entity_instances_of_type() const;
@@ -69,7 +68,7 @@ namespace entity_system {
             /// Returns all entity instances.
 			/// @return All entity instances which exist in the entity system.
 			/// TODO: implement
-			std::vector<ENT_INST> get_all_entity_instances() const;
+			std::vector<EntityInstancePtr> get_all_entity_instances() const;
 
 
             // TODO: get_entity_instance_count_of_type() const;
@@ -85,7 +84,7 @@ namespace entity_system {
 
 
 			/// Delete entity instance
-			std::size_t delete_entity_instance(const ENT_INST& entity_instance);
+			std::size_t delete_entity_instance(const EntityInstancePtr& entity_instance);
 
 
 			/// Delete all entity type instances
@@ -107,7 +106,7 @@ namespace entity_system {
 
 
 			/// Notifies all listeners that a new entity instance has been created.
-			void notify_entity_instance_created(ENT_INST new_entity_instance);
+			void notify_entity_instance_created(EntityInstancePtr new_entity_instance);
 
 
 			/// Notifies all listeners that an entity instance has been deleted.
@@ -117,7 +116,7 @@ namespace entity_system {
 			/// The signals that an entity instance has been created.
 			/// Key is the GUID of the entity type.
 			/// Value is a signal with one parameter: the created entity instance
-			std::unordered_map<xg::Guid, std::shared_ptr<boost::signals2::signal<void(ENT_INST new_entity_instance)> > > signals_entity_instance_created;
+			std::unordered_map<xg::Guid, std::shared_ptr<boost::signals2::signal<void(EntityInstancePtr new_entity_instance)> > > signals_entity_instance_created;
 
 
 			/// The signals that an entity instance has been deleted.

@@ -1,26 +1,17 @@
-// Inexor entity system
-// (c)2018-2019 Inexor
-
 #include "EntityTypeManager.hpp"
-
 
 namespace inexor {
 namespace entity_system {
-    
 
 	EntityTypeManager::EntityTypeManager()
 	{
-		// TODO: Implement!
 	}
-
 
 	EntityTypeManager::~EntityTypeManager()
 	{
-		// TODO: Implement!
 	}
 
-
-	O_ENT_TYPE EntityTypeManager::create_entity_type(const std::string& ent_type_name)
+	EntityTypePtrOpt EntityTypeManager::create_entity_type(const std::string& ent_type_name)
 	{
 		// Check if an entity type with this name does already exist.
 		if(! is_type_name_valid(ent_type_name))
@@ -36,7 +27,7 @@ namespace entity_system {
 		// Add more validation here if neccesary.
 
 		// Create a new entity type.
-		ENT_TYPE new_entity_type = std::make_shared<EntityType>(ent_type_name);
+		EntityTypePtr new_entity_type = std::make_shared<EntityType>(ent_type_name);
 
 		// Call method of the template base class
         // to add the new instance to the type map.
@@ -46,11 +37,9 @@ namespace entity_system {
 		notify_entity_type_created(new_entity_type);
 
         // Return the entity type we've just created.
-        return O_ENT_TYPE{ new_entity_type };
+        return EntityTypePtrOpt{ new_entity_type };
 	}
-
-    
-	O_ENT_TYPE EntityTypeManager::create_entity_type(const xg::Guid& ent_type_GUID, const std::string& ent_type_name)
+	EntityTypePtrOpt EntityTypeManager::create_entity_type(const xg::Guid& ent_type_GUID, const std::string& ent_type_name)
     {
 		// Check if an entity type with this name does already exist.
 		if(! is_type_name_valid(ent_type_name))
@@ -71,7 +60,7 @@ namespace entity_system {
 		// Add more validation here if neccesary.
 
 		// Create a new entity type.
-		ENT_TYPE new_entity_type = std::make_shared<EntityType>(ent_type_GUID, ent_type_name);
+		EntityTypePtr new_entity_type = std::make_shared<EntityType>(ent_type_GUID, ent_type_name);
 
 		// Call method of the template base class
         // to add the new instance to the type map.
@@ -81,53 +70,46 @@ namespace entity_system {
 		notify_entity_type_created(new_entity_type);
 
         // Return the entity type we've just created.
-        return O_ENT_TYPE{ new_entity_type };
+        return EntityTypePtrOpt{ new_entity_type };
     }
-
 
     bool EntityTypeManager::does_entity_type_exist(const xg::Guid& ent_type_GUID)
     {
         return does_entity_type_exist(get_type(ent_type_GUID)->get_type_name());
     }
 
-
     bool EntityTypeManager::does_entity_type_exist(const std::string& ent_type_name)
 	{
 		return does_type_exist(ent_type_name);
 	}
 
-
-	bool EntityTypeManager::does_entity_type_exist(const ENT_TYPE& ent_type_shared_ptr)
+	bool EntityTypeManager::does_entity_type_exist(const EntityTypePtr& ent_type_shared_ptr)
 	{
 		return does_entity_type_exist(ent_type_shared_ptr->get_type_name());
 	}
-
 
 	std::size_t EntityTypeManager::get_entity_type_count() const
 	{
 		return get_type_count();
 	}
 
-
-	O_ENT_TYPE EntityTypeManager::get_entity_type(const xg::Guid& ent_type_GUID)
+	EntityTypePtrOpt EntityTypeManager::get_entity_type(const xg::Guid& ent_type_GUID)
     {
         if(does_type_exist(ent_type_GUID))
         {
-            return O_ENT_TYPE { get_type(ent_type_GUID) };
+            return EntityTypePtrOpt { get_type(ent_type_GUID) };
         }
         return std::nullopt;
     }
 
-
-	O_ENT_TYPE EntityTypeManager::get_entity_type(const std::string& ent_type_name)
+	EntityTypePtrOpt EntityTypeManager::get_entity_type(const std::string& ent_type_name)
     {
         if(does_type_exist(ent_type_name))
         {
-            return O_ENT_TYPE { get_type(ent_type_name) };
+            return EntityTypePtrOpt { get_type(ent_type_name) };
         }
         return std::nullopt;
     }
-
 
 	std::size_t EntityTypeManager::delete_entity_type(const xg::Guid& type_GUID)
     {
@@ -135,7 +117,6 @@ namespace entity_system {
 		notify_entity_type_deleted(type_GUID);
 		return deleted_types_count;
     }
-
 
 	std::size_t EntityTypeManager::delete_entity_type(const std::string& ent_type_name)
 	{
@@ -145,15 +126,13 @@ namespace entity_system {
 		return deleted_types_count;
 	}
 
-
-	std::size_t EntityTypeManager::delete_entity_type(const ENT_TYPE& ent_type)
+	std::size_t EntityTypeManager::delete_entity_type(const EntityTypePtr& ent_type)
 	{
 		xg::Guid type_GUID = ent_type->get_GUID();
 		std::size_t deleted_types_count = delete_type(ent_type->get_type_name());
 		notify_entity_type_deleted(type_GUID);
 		return deleted_types_count;
 	}
-
 
 	void EntityTypeManager::delete_all_entity_types()
 	{
@@ -162,29 +141,25 @@ namespace entity_system {
 		delete_all_types();
 	}
 
-
 	void EntityTypeManager::register_on_created(std::shared_ptr<EntityTypeCreatedListener> listener)
 	{
 		signal_entity_type_created.connect(std::bind(&EntityTypeCreatedListener::on_entity_type_created, listener.get(), std::placeholders::_1));
 	}
-
 
 	void EntityTypeManager::register_on_deleted(std::shared_ptr<EntityTypeDeletedListener> listener)
 	{
 		signal_entity_type_deleted.connect(std::bind(&EntityTypeDeletedListener::on_entity_type_deleted, listener.get(), std::placeholders::_1));
 	}
 
-
-	void EntityTypeManager::notify_entity_type_created(ENT_TYPE new_entity_type)
+	void EntityTypeManager::notify_entity_type_created(EntityTypePtr new_entity_type)
 	{
 		signal_entity_type_created(new_entity_type);
 	}
-
 
 	void EntityTypeManager::notify_entity_type_deleted(const xg::Guid& type_GUID)
 	{
 		signal_entity_type_deleted(type_GUID);
 	}
 
-};
-};
+}
+}

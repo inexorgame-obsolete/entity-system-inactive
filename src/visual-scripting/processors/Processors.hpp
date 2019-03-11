@@ -1,17 +1,11 @@
 #pragma once
 
-#include <crossguid/guid.hpp>
-
-#include "entity-system/listeners/entities/EntityInstanceCreatedListener.hpp"
-#include "entity-system/listeners/entities/EntityInstanceDeletedListener.hpp"
-#include "entity-system/model/data/DataTypes.hpp"
-#include "entity-system/util/type-definitions/TypeDefinitions.hpp"
 #include "visual-scripting/managers/ProcessorRegistry.hpp"
 #include "visual-scripting/processors/arithmetic/ArithmeticProcessors.hpp"
 #include "visual-scripting/processors/trigonometric/TrigonometricProcessors.hpp"
 #include "visual-scripting/model/Processor.hpp"
 
-using namespace inexor::entity_system;
+#include <crossguid/guid.hpp>
 
 namespace inexor {
 namespace visual_scripting {

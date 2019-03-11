@@ -57,7 +57,7 @@ namespace visual_scripting {
 		    std::thread start_thread([this, guid, attr_sin_value] () {
 
 		    	// Create event source
-				event_sources[guid] = MakeEventSource<D, int>();
+				event_sources[guid] = MakeEventSource<entity_system::D, int>();
 
 		    	// Hold last signal value
 				current_time_iterators[guid] = Hold(event_sources[guid], 0);
@@ -76,7 +76,7 @@ namespace visual_scripting {
 					{
 				    	float x_value = time_iterator / resolution;
 						float y_value = sin(x_value);
-						return DataValue(y_value);
+						return entity_system::DataValue(y_value);
 					}
 				);
 

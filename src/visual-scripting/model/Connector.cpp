@@ -1,19 +1,20 @@
-// Inexor entity system
-// (c)2018-2019 Inexor
-
 #include "Connector.hpp"
 
-using namespace inexor::entity_system;
-using namespace std;
-using namespace xg;
+#include "entity-system/model/data/container/DataContainer.hpp"
+#include "entity-system/model/data/DataTypes.hpp"
+
+#include <iostream>
 
 namespace inexor {
 namespace visual_scripting {
 
+	using DataValue = entity_system::DataValue;
+	using DataType = entity_system::DataType;
+
 	Connector::Connector(
-		const std::shared_ptr<inexor::entity_system::EntityAttributeInstance> & output_attr,
-		const std::shared_ptr<inexor::entity_system::EntityAttributeInstance> & input_attr
-	) : GUIDBase()
+		const EntityAttributeInstancePtr& output_attr,
+		const EntityAttributeInstancePtr& input_attr
+	) : entity_system::GUIDBase()
 	{
 		this->output_attr = output_attr;
 		this->input_attr = input_attr;
@@ -24,9 +25,9 @@ namespace visual_scripting {
 	};
 
 	Connector::Connector(
-		const Guid& connector_GUID,
-		const std::shared_ptr<inexor::entity_system::EntityAttributeInstance> & output_attr,
-		const std::shared_ptr<inexor::entity_system::EntityAttributeInstance> & input_attr
+		const xg::Guid& connector_GUID,
+		const EntityAttributeInstancePtr& output_attr,
+		const EntityAttributeInstancePtr& input_attr
 	) : GUIDBase(connector_GUID)
 	{
 		this->output_attr = output_attr;
@@ -53,17 +54,17 @@ namespace visual_scripting {
 		input_attr->signal_wrapper <<= input_attr->own_value;
 	}
 
-	Guid Connector::connector() const
+	xg::Guid Connector::connector() const
 	{
 		return get_GUID();
 	}
 
-	Guid Connector::output() const
+	xg::Guid Connector::output() const
 	{
 		return output_attribute_GUID;
 	}
 
-	Guid Connector::input() const
+	xg::Guid Connector::input() const
 	{
 		return input_attribute_GUID;
 	}
@@ -117,5 +118,5 @@ namespace visual_scripting {
 		return debug_enabled;
 	}
 
-};
-};
+}
+}

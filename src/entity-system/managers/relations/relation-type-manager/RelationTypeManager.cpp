@@ -1,26 +1,17 @@
-// Inexor entity system
-// (c)2018-2019 Inexor
-
 #include "RelationTypeManager.hpp"
-
 
 namespace inexor {
 namespace entity_system {
 
-
     RelationTypeManager::RelationTypeManager() : TypeManagerTemplate()
     {
-		// TODO: Implement!
     }
-
 
     RelationTypeManager::~RelationTypeManager()
     {
-		// TODO: Implement!
     }
 
-
-	O_REL_TYPE RelationTypeManager::create_relation_type(const std::string& rel_type_name, const ENT_TYPE& ent_type_source, const ENT_TYPE& ent_type_target)
+    RelationTypePtrOpt RelationTypeManager::create_relation_type(const std::string& rel_type_name, const EntityTypePtr& ent_type_source, const EntityTypePtr& ent_type_target)
 	{
 		// Validate new relation type name.
 		if(!is_type_name_valid(rel_type_name))
@@ -34,7 +25,7 @@ namespace entity_system {
 		}
 
 		// Create new relation type.
-		REL_TYPE new_relation_type = std::make_shared<RelationType>(rel_type_name, ent_type_source, ent_type_target);
+		RelationTypePtr new_relation_type = std::make_shared<RelationType>(rel_type_name, ent_type_source, ent_type_target);
 
 		// Add new relation type to type map.
 		add_type(rel_type_name, new_relation_type->get_GUID(), new_relation_type);
@@ -42,11 +33,10 @@ namespace entity_system {
 		// Signal that the relation type has been created.
 		notify_relation_type_created(new_relation_type);
 
-        return O_REL_TYPE { new_relation_type };
+        return RelationTypePtrOpt { new_relation_type };
 	}
 
-
-	O_REL_TYPE RelationTypeManager::create_relation_type(const xg::Guid& rel_type_GUID, const std::string& rel_type_name, const ENT_TYPE& ent_type_source, const ENT_TYPE& ent_type_target)
+    RelationTypePtrOpt RelationTypeManager::create_relation_type(const xg::Guid& rel_type_GUID, const std::string& rel_type_name, const EntityTypePtr& ent_type_source, const EntityTypePtr& ent_type_target)
 	{
 		// Validate new relation type name.
 		if(!is_type_name_valid(rel_type_name))
@@ -65,7 +55,7 @@ namespace entity_system {
         }
 
 		// Create new relation type.
-		REL_TYPE new_relation_type = std::make_shared<RelationType>(rel_type_GUID, rel_type_name, ent_type_source, ent_type_target);
+        RelationTypePtr new_relation_type = std::make_shared<RelationType>(rel_type_GUID, rel_type_name, ent_type_source, ent_type_target);
 
 		// Add new relation type to type map.
 		add_type(rel_type_name, new_relation_type->get_GUID(), new_relation_type);
@@ -73,15 +63,13 @@ namespace entity_system {
 		// Signal that the relation type has been created.
 		notify_relation_type_created(new_relation_type);
 
-        return O_REL_TYPE { new_relation_type };
+        return RelationTypePtrOpt { new_relation_type };
 	}
-
 
     bool RelationTypeManager::does_relation_type_exist(const xg::Guid& rel_type_GUID)
     {
         return does_relation_type_exist(get_type(rel_type_GUID)->get_type_name());
     }
-
 
 	bool RelationTypeManager::does_relation_type_exist(const std::string& rel_type_name)
 	{
@@ -89,13 +77,11 @@ namespace entity_system {
 		return does_type_exist(rel_type_name);
 	}
 
-
-	bool RelationTypeManager::does_relation_type_exist(const REL_TYPE& rel_type)
+	bool RelationTypeManager::does_relation_type_exist(const RelationTypePtr& rel_type)
 	{
         //
 		return does_relation_type_exist(rel_type->get_type_name());
 	}
-
 
 	std::size_t RelationTypeManager::get_relation_types_count() const
 	{
@@ -103,26 +89,23 @@ namespace entity_system {
 		return get_type_count();
 	}
 
-
-	O_REL_TYPE RelationTypeManager::get_relation_type(const xg::Guid& rel_type_GUID)
+	RelationTypePtrOpt RelationTypeManager::get_relation_type(const xg::Guid& rel_type_GUID)
     {
         if(does_type_exist(rel_type_GUID))
         {
-            return O_REL_TYPE { get_type(rel_type_GUID) };
+            return RelationTypePtrOpt { get_type(rel_type_GUID) };
         }
         return std::nullopt;
     }
 
-
-	O_REL_TYPE RelationTypeManager::get_relation_type(const std::string& rel_type_name)
+	RelationTypePtrOpt RelationTypeManager::get_relation_type(const std::string& rel_type_name)
     {
         if(does_type_exist(rel_type_name))
         {
-            return O_REL_TYPE { get_type(rel_type_name) };
+            return RelationTypePtrOpt { get_type(rel_type_name) };
         }
         return std::nullopt;
     }
-
 
 	std::size_t RelationTypeManager::delete_relation_type(const xg::Guid& type_GUID)
     {
@@ -130,7 +113,6 @@ namespace entity_system {
 		notify_relation_type_deleted(type_GUID);
 		return deleted_types_count;
     }
-
 
 	std::size_t RelationTypeManager::delete_relation_type(const std::string& rel_type_name)
 	{
@@ -140,8 +122,7 @@ namespace entity_system {
 		return deleted_types_count;
 	}
 
-	
-	std::size_t RelationTypeManager::delete_relation_type(const REL_TYPE& rel_type)
+	std::size_t RelationTypeManager::delete_relation_type(const RelationTypePtr& rel_type)
 	{
 		xg::Guid type_GUID = rel_type->get_GUID();
 		std::size_t deleted_types_count = delete_type(rel_type->get_type_name());
@@ -150,7 +131,6 @@ namespace entity_system {
 
 	}
 
-
 	void RelationTypeManager::delete_all_relation_types()
 	{
 		// TODO: Make sure all relation instances will
@@ -158,30 +138,25 @@ namespace entity_system {
 		delete_all_types();
 	}
 
-
 	void RelationTypeManager::register_on_created(std::shared_ptr<RelationTypeCreatedListener> listener)
 	{
 		signal_relation_type_created.connect(std::bind(&RelationTypeCreatedListener::on_relation_type_created, listener.get(), std::placeholders::_1));
 	}
-
 
 	void RelationTypeManager::register_on_deleted(std::shared_ptr<RelationTypeDeletedListener> listener)
 	{
 		signal_relation_type_deleted.connect(std::bind(&RelationTypeDeletedListener::on_relation_type_deleted, listener.get(), std::placeholders::_1));
 	}
 
-
-	void RelationTypeManager::notify_relation_type_created(REL_TYPE new_entity_type)
+	void RelationTypeManager::notify_relation_type_created(RelationTypePtr new_entity_type)
 	{
 		signal_relation_type_created(new_entity_type);
 	}
-
 
 	void RelationTypeManager::notify_relation_type_deleted(const xg::Guid& type_GUID)
 	{
 		signal_relation_type_deleted(type_GUID);
 	}
 
-
-};
-};
+}
+}

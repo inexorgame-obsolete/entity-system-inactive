@@ -1,11 +1,4 @@
-// Inexor entity system
-// (c)2018 Inexor
-
 #pragma once
-
-#include <crossguid/guid.hpp>
-
-#include "spdlog/spdlog.h"
 
 #include "entity-system/listeners/entities/EntityTypeCreatedListener.hpp"
 #include "entity-system/listeners/entities/EntityTypeDeletedListener.hpp"
@@ -13,40 +6,51 @@
 #include "entity-system/listeners/entities/EntityInstanceDeletedListener.hpp"
 #include "entity-system/listeners/relations/RelationTypeCreatedListener.hpp"
 #include "entity-system/listeners/relations/RelationTypeDeletedListener.hpp"
+#include "entity-system/listeners/relations/RelationInstanceCreatedListener.hpp"
+#include "entity-system/listeners/relations/RelationInstanceDeletedListener.hpp"
 #include "entity-system/managers/entities/entity-type-manager/EntityTypeManager.hpp"
 #include "entity-system/managers/entities/entity-instance-manager/EntityInstanceManager.hpp"
 #include "entity-system/managers/relations/relation-type-manager/RelationTypeManager.hpp"
 #include "entity-system/managers/relations/relation-instance-manager/RelationInstanceManager.hpp"
 #include "entity-system/model/data/DataTypes.hpp"
-#include "entity-system/util/type-definitions/TypeDefinitions.hpp"
 
-using namespace inexor::entity_system;
-using namespace std;
+#include <crossguid/guid.hpp>
+
+#include "spdlog/spdlog.h"
 
 namespace inexor {
 namespace entity_system {
 
+	using EntityTypeManagerPtr = std::shared_ptr<EntityTypeManager>;
+	using EntityInstanceManagerPtr = std::shared_ptr<EntityInstanceManager>;
+	using RelationTypeManagerPtr = std::shared_ptr<RelationTypeManager>;
+	using RelationInstanceManagerPtr = std::shared_ptr<RelationInstanceManager>;
+	using EntityTypePtr = std::shared_ptr<EntityType>;
+	using EntityInstancePtr = std::shared_ptr<EntityInstance>;
+	using RelationTypePtr = std::shared_ptr<RelationType>;
+	using RelationInstancePtr = std::shared_ptr<RelationInstance>;
+
 	/// @class EntitySystemDebugger
     /// @brief Debugger for the entity system
 	class EntitySystemDebugger
-		: public enable_shared_from_this<EntitySystemDebugger>,
-		  public EntityTypeCreatedListener,
+		: public EntityTypeCreatedListener,
 		  public EntityTypeDeletedListener,
 		  public EntityInstanceCreatedListener,
 		  public EntityInstanceDeletedListener,
 		  public RelationTypeCreatedListener,
 		  public RelationTypeDeletedListener,
 		  public RelationInstanceCreatedListener,
-		  public RelationInstanceDeletedListener
+		  public RelationInstanceDeletedListener,
+		  public std::enable_shared_from_this<EntitySystemDebugger>
 	{
 		public:
 
 			/// Constructor.
 			EntitySystemDebugger(
-				shared_ptr<EntityTypeManager> entity_type_manager,
-				shared_ptr<EntityInstanceManager> entity_instance_manager,
-				shared_ptr<RelationTypeManager> relation_type_manager,
-				shared_ptr<RelationInstanceManager> relation_instance_manager
+				EntityTypeManagerPtr entity_type_manager,
+				EntityInstanceManagerPtr entity_instance_manager,
+				RelationTypeManagerPtr relation_type_manager,
+				RelationInstanceManagerPtr relation_instance_manager
 			);
 
 			/// Destructor.
@@ -55,34 +59,33 @@ namespace entity_system {
 			/// Initialization
 			void init();
 
-			void on_entity_type_created(ENT_TYPE entity_type);
+			void on_entity_type_created(EntityTypePtr entity_type);
 			void on_entity_type_deleted(const xg::Guid& type_GUID);
 
-			void on_entity_instance_created(ENT_INST entity_instance);
+			void on_entity_instance_created(EntityInstancePtr entity_instance);
 			void on_entity_instance_deleted(const xg::Guid& type_GUID, const xg::Guid& inst_GUID);
 
-			void on_relation_type_created(REL_TYPE relation_type);
+			void on_relation_type_created(RelationTypePtr relation_type);
 			void on_relation_type_deleted(const xg::Guid& type_GUID);
 
-			void on_relation_instance_created(REL_INST relation_instance);
+			void on_relation_instance_created(RelationInstancePtr relation_instance);
 			void on_relation_instance_deleted(const xg::Guid& type_GUID, const xg::Guid& inst_GUID);
 
 		private:
 
 			/// The entity type manager
-			shared_ptr<EntityTypeManager> entity_type_manager;
+			EntityTypeManagerPtr entity_type_manager;
 
 			/// The entity instance manager
-			shared_ptr<EntityInstanceManager> entity_instance_manager;
+			EntityInstanceManagerPtr entity_instance_manager;
 
 			/// The relation type manager
-			shared_ptr<RelationTypeManager> relation_type_manager;
+			RelationTypeManagerPtr relation_type_manager;
 
 			/// The relation instance manager
-			shared_ptr<RelationInstanceManager> relation_instance_manager;
+			RelationInstanceManagerPtr relation_instance_manager;
 
 	};
 
-
-};
-};
+}
+}

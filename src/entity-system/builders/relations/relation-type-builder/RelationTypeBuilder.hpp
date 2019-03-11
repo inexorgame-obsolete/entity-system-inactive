@@ -10,15 +10,14 @@
 namespace inexor {
 namespace entity_system {
 
-	using string = std::string;
-	using AttributeList = std::unordered_map<string, std::pair<DataType, EnumSet<Feature>>>;
+	using AttributeList = std::unordered_map<std::string, std::pair<DataType, EnumSet<Feature>>>;
 	class RelationTypeBuilder;
 	using RelationTypeBuilderPtr = std::shared_ptr<RelationTypeBuilder>;
 	using RelationTypePtrOpt = std::optional<std::shared_ptr<RelationType>>;
 
 	/// @class RelationTypeBuilder
     /// @brief Builder for relation types.
-	class RelationTypeBuilder : public enable_shared_from_this<RelationTypeBuilder>
+	class RelationTypeBuilder : public std::enable_shared_from_this<RelationTypeBuilder>
 	{
 		public:
 
@@ -38,10 +37,10 @@ namespace entity_system {
 			~RelationTypeBuilder();
 
 			/// Sets the name of the relation type.
-			RelationTypeBuilderPtr name(string relation_type_name);
+			RelationTypeBuilderPtr name(std::string relation_type_name);
 
 			/// Sets the uuid of the relation type.
-			RelationTypeBuilderPtr uuid(string relation_type_uuid);
+			RelationTypeBuilderPtr uuid(std::string relation_type_uuid);
 
 			/// Sets the source entity type.
 			RelationTypeBuilderPtr source(EntityTypePtr ent_type_source);
@@ -50,7 +49,7 @@ namespace entity_system {
 			RelationTypeBuilderPtr target(EntityTypePtr ent_type_target);
 
 			/// Sets the uuid of the relation type.
-			RelationTypeBuilderPtr attribute(string attribute_name, DataType attribute_datatype, const EnumSet<Feature>& attribute_features);
+			RelationTypeBuilderPtr attribute(std::string attribute_name, DataType attribute_datatype, const EnumSet<Feature>& attribute_features);
 
 			/// Builds and returns the created relation type.
 			RelationTypePtrOpt build();
@@ -67,10 +66,10 @@ namespace entity_system {
 			RelationAttributeInstanceManagerPtr relation_attribute_instance_manager;
 
 			/// The name of the new relation type.
-			string relation_type_name;
+			std::string relation_type_name;
 
 			/// The UUID of the new relation type.
-			string relation_type_uuid;
+			std::string relation_type_uuid;
 
 			/// The source entity type.
 			EntityTypePtr ent_type_source;

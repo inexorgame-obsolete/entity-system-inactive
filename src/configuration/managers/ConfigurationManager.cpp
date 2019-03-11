@@ -2,8 +2,6 @@
 
 #include "spdlog/spdlog.h"
 
-#include "entity-system/model/data/DataTypes.hpp"
-
 namespace inexor {
 namespace configuration {
 

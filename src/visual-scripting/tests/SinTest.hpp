@@ -5,8 +5,6 @@
 #include "type-system/factories/constants/FloatConstantFactory.hpp"
 #include "visual-scripting/managers/ConnectorManager.hpp"
 
-#include <iostream>
-
 namespace inexor {
 namespace visual_scripting {
 

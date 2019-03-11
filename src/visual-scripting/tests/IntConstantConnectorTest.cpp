@@ -1,20 +1,25 @@
+#include "IntConstantConnectorTest.hpp"
+
 #include "entity-system/model/entities/entity-instances/EntityInstance.hpp"
 #include "visual-scripting/model/Connector.hpp"
-
-#include <random>
 
 #include "react/Domain.h"
 #include "react/Signal.h"
 #include "react/Observer.h"
 
-#include "IntConstantConnectorTest.hpp"
+#include <iostream>
+#include <chrono>
+#include <thread>
+#include <random>
 
-using IntConstantEntityTypeProvider = inexor::entity_system::type_system::IntConstantEntityTypeProvider;
-using AddIntEntityTypeProvider = inexor::entity_system::type_system::AddIntEntityTypeProvider;
+using namespace std::chrono_literals;
 
 namespace inexor {
 namespace visual_scripting {
 
+	using IntConstantEntityTypeProvider = entity_system::type_system::IntConstantEntityTypeProvider;
+	using AddIntEntityTypeProvider = entity_system::type_system::AddIntEntityTypeProvider;
+	using DataType = entity_system::DataType;
 
 	IntConstantConnectorTest::IntConstantConnectorTest(
 		ConnectorManagerPtr connector_manager,

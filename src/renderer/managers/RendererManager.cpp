@@ -9,19 +9,23 @@
 #include <Magnum/Shaders/VertexColor.h>
 #include <GLFW/glfw3.h>
 
-using namespace std;
+#include <iomanip>
+
 using namespace Magnum;
 using namespace Math::Literals;
 
 namespace inexor {
 namespace renderer {
 
+	using EntityInstancePtrOpt = std::optional<EntityInstancePtr>;
+	using EntityAttributeInstanceOpt = std::optional<EntityAttributeInstancePtr>;
+
 	RendererManager::RendererManager(
-		shared_ptr<inexor::renderer::RendererFactory> render_factory,
-		shared_ptr<inexor::entity_system::type_system::SinFactory> sin_factory,
-		shared_ptr<inexor::entity_system::type_system::CosFactory> cos_factory,
-		std::shared_ptr<inexor::visual_scripting::ConnectorManager> connector_manager,
-		shared_ptr<EntityInstanceManager> entity_instance_manager
+		EntityInstanceManagerPtr entity_instance_manager,
+		SinFactoryPtr sin_factory,
+		CosFactoryPtr cos_factory,
+		ConnectorManagerPtr connector_manager,
+		RendererFactoryPtr render_factory
 	) {
 		this->renderer_factory = render_factory;
 		this->sin_factory = sin_factory;
@@ -62,19 +66,19 @@ namespace renderer {
 
 	void RendererManager::init()
 	{
-		std::optional<std::shared_ptr<inexor::entity_system::EntityInstance>> o_renderer = renderer_factory->create_instance(0.5f, -0.5f);
-		std::optional<std::shared_ptr<inexor::entity_system::EntityInstance>> o_sin_x = sin_factory->create_instance();
-		std::optional<std::shared_ptr<inexor::entity_system::EntityInstance>> o_cos_y = cos_factory->create_instance();
+		EntityInstancePtrOpt o_renderer = renderer_factory->create_instance(0.5f, -0.5f);
+		EntityInstancePtrOpt o_sin_x = sin_factory->create_instance();
+		EntityInstancePtrOpt o_cos_y = cos_factory->create_instance();
 
 		if (o_renderer.has_value() && o_sin_x.has_value() && o_cos_y.has_value())
 		{
 			renderer = o_renderer.value();
 			sin_x = o_sin_x.value();
 			cos_y = o_cos_y.value();
-			std::optional<std::shared_ptr<inexor::entity_system::EntityAttributeInstance>> o_sin_x_attr_value = sin_x->get_attribute_instance(inexor::entity_system::type_system::SinEntityTypeProvider::SIN_VALUE);
-			std::optional<std::shared_ptr<inexor::entity_system::EntityAttributeInstance>> o_cos_y_attr_value = cos_y->get_attribute_instance(inexor::entity_system::type_system::CosEntityTypeProvider::COS_VALUE);
-			std::optional<std::shared_ptr<inexor::entity_system::EntityAttributeInstance>> o_renderer_x_attr_value = renderer->get_attribute_instance(RendererEntityTypeProvider::RENDERER_X);
-			std::optional<std::shared_ptr<inexor::entity_system::EntityAttributeInstance>> o_renderer_y_attr_value = renderer->get_attribute_instance(RendererEntityTypeProvider::RENDERER_Y);
+			EntityAttributeInstanceOpt o_sin_x_attr_value = sin_x->get_attribute_instance(inexor::entity_system::type_system::SinEntityTypeProvider::SIN_VALUE);
+			EntityAttributeInstanceOpt o_cos_y_attr_value = cos_y->get_attribute_instance(inexor::entity_system::type_system::CosEntityTypeProvider::COS_VALUE);
+			EntityAttributeInstanceOpt o_renderer_x_attr_value = renderer->get_attribute_instance(RendererEntityTypeProvider::RENDERER_X);
+			EntityAttributeInstanceOpt o_renderer_y_attr_value = renderer->get_attribute_instance(RendererEntityTypeProvider::RENDERER_Y);
 			if (o_sin_x_attr_value.has_value() && o_cos_y_attr_value.has_value() && o_renderer_x_attr_value.has_value() && o_renderer_y_attr_value.has_value())
 			{
 				sin_x_attr_value = o_sin_x_attr_value.value();
@@ -175,5 +179,5 @@ namespace renderer {
 		std::exit(1);
 	}
 
-};
-};
+}
+}

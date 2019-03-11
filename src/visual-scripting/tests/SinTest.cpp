@@ -1,22 +1,24 @@
+#include "SinTest.hpp"
 #include "entity-system/model/entities/entity-instances/EntityInstance.hpp"
 #include "visual-scripting/model/Connector.hpp"
-
-#include <random>
 
 #include "react/Domain.h"
 #include "react/Signal.h"
 #include "react/Observer.h"
 
-#include "SinTest.hpp"
+#include <iostream>
+#include <chrono>
+#include <thread>
+#include <random>
 
-using namespace std;
-
-using FloatConstantEntityTypeProvider = inexor::entity_system::type_system::FloatConstantEntityTypeProvider;
-using SinEntityTypeProvider = inexor::entity_system::type_system::SinEntityTypeProvider;
+using namespace std::chrono_literals;
 
 namespace inexor {
 namespace visual_scripting {
 
+	using FloatConstantEntityTypeProvider = entity_system::type_system::FloatConstantEntityTypeProvider;
+	using SinEntityTypeProvider = entity_system::type_system::SinEntityTypeProvider;
+	using DataType = entity_system::DataType;
 
 	SinTest::SinTest(
 		ConnectorManagerPtr connector_manager,
@@ -98,7 +100,6 @@ namespace visual_scripting {
 		}
 
 	}
-
 
 }
 }

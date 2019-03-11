@@ -1,12 +1,7 @@
-// Inexor entity system
-// (c)2018-2019 Inexor
-
 #include "GUIDBase.hpp"
-
 
 namespace inexor {
 namespace entity_system {
-
 
 	GUIDBase::GUIDBase()
 	{
@@ -15,7 +10,6 @@ namespace entity_system {
 
         globally_unique_identifier = xg::newGuid();
 	}
-
 
 	GUIDBase::GUIDBase(const xg::Guid& param_GUID)
 	{
@@ -26,19 +20,15 @@ namespace entity_system {
 		globally_unique_identifier = param_GUID;
 	}
 
-
 	GUIDBase::~GUIDBase()
 	{
-		// TODO: Implement!
 	}
-
 
 	xg::Guid GUIDBase::get_GUID() const
 	{
         // Read only, no mutex required.
 		return globally_unique_identifier;
 	}
-
 
 	void GUIDBase::generate_new_GUID()
 	{
@@ -49,6 +39,5 @@ namespace entity_system {
 		globally_unique_identifier = xg::newGuid();
 	}
 
-
-};
-};
+}
+}

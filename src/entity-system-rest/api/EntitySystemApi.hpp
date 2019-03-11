@@ -12,6 +12,9 @@
 
 #pragma once
 
+#include "../model/EntitySystemDto.hpp"
+#include "../model/EntitySystemMessageDto.hpp"
+
 #include <memory>
 #include <corvusoft/restbed/request.hpp>
 #include <corvusoft/restbed/resource.hpp>
@@ -22,9 +25,6 @@
 #include <string>
 
 #include "spdlog/spdlog.h"
-
-#include "../model/EntitySystemDto.hpp"
-#include "../model/EntitySystemMessageDto.hpp"
 
 using namespace inexor::entity_system::rest::model;
 using namespace restbed;

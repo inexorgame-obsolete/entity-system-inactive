@@ -1,15 +1,10 @@
-// Inexor entity system
-// (c)2018-2019 Inexor
-
 #pragma once
 
 #include <mutex>
 #include <crossguid/guid.hpp>
 
-
 namespace inexor {
 namespace entity_system {
-
 
 	/// @brief A base class for
     /// globally unique identifiers (GUIDs).
@@ -46,5 +41,5 @@ namespace entity_system {
 
 	};
 
-};
-};
+}
+}

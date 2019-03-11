@@ -1,24 +1,20 @@
-// Inexor entity system
-// (c)2018-2019 Inexor
-
 #pragma once
 
-#include <vector>
-#include <string>
-#include <optional>
-#include <unordered_map>
-#include <boost/signals2.hpp>
-#include <crossguid/guid.hpp>
-
+#include "entity-system/managers/manager-templates/TypeManagerTemplate.hpp"
+#include "entity-system/model/entities/entity-types/EntityType.hpp"
 #include "entity-system/listeners/entities/EntityTypeCreatedListener.hpp"
 #include "entity-system/listeners/entities/EntityTypeDeletedListener.hpp"
-#include "entity-system/model/entities/entity-types/EntityType.hpp"
-#include "entity-system/managers/manager-templates/TypeManagerTemplate.hpp"
 
+#include <string>
+#include <optional>
+#include <boost/signals2.hpp>
+#include <crossguid/guid.hpp>
 
 namespace inexor {
 namespace entity_system {
 
+	using EntityTypePtr = std::shared_ptr<EntityType>;
+	using EntityTypePtrOpt = std::optional<EntityTypePtr>;
 
     /// @class EntityTypeManager
 	/// @brief A manager class for entity types.
@@ -35,14 +31,14 @@ namespace entity_system {
 			/// @brief Creates a new entity type.
 			/// @param ent_type_name The name of the new entity type.
             /// @return ?
-			O_ENT_TYPE create_entity_type(const std::string&);
+			EntityTypePtrOpt create_entity_type(const std::string&);
 
 
             /// @brief Creates a new entity type.
             /// @param ent_type_GUID The GUID of the new entity type.
             /// @param ent_type_name The name of the new entity type.
             /// @return ?
-			O_ENT_TYPE create_entity_type(const xg::Guid&, const std::string&);
+			EntityTypePtrOpt create_entity_type(const xg::Guid&, const std::string&);
             
 
 			/// @brief Checks if an entity type does already exist.
@@ -59,7 +55,7 @@ namespace entity_system {
 			/// @brief Checks if an entity type does already exist.
 			/// @param ent_type A const reference of a shared pointer to the entity type.
             /// @return True if the entity type already exists, false otherwise.
-			bool does_entity_type_exist(const ENT_TYPE&);
+			bool does_entity_type_exist(const EntityTypePtr&);
 
             
             /// @brief Returns the number of existing entity types.
@@ -69,14 +65,14 @@ namespace entity_system {
 
             /// @brief Returns an entity type.
             /// @param ent_type_GUID The GUID of the entity type.
-            /// @return A std::optional<ENT_TYPE> of the entity type.
-			O_ENT_TYPE get_entity_type(const xg::Guid&);
+            /// @return A std::optional<EntityTypePtr> of the entity type.
+			EntityTypePtrOpt get_entity_type(const xg::Guid&);
 
 
             /// @brief Returns an entity type.
             /// @param ent_type_name The name of the entity type.
-            /// @return A std::optional<ENT_TYPE> of the entity type.
-			O_ENT_TYPE get_entity_type(const std::string&);
+            /// @return A std::optional<EntityTypePtr> of the entity type.
+			EntityTypePtrOpt get_entity_type(const std::string&);
 
 
 			/// @brief Deletes an entity type by GUID.
@@ -97,7 +93,7 @@ namespace entity_system {
 			/// @param ent_type A const reference of a shared pointer to the entity type which will be deleted.
             /// @return ENTSYS_SUCCESS if deleting the entity type succeeded,
             /// <br>ENTSYS_ERROR if deleting the entity type failed.
-			std::size_t delete_entity_type(const ENT_TYPE&);
+			std::size_t delete_entity_type(const EntityTypePtr&);
 
 
 			/// @brief Removes all types of entities.
@@ -116,7 +112,7 @@ namespace entity_system {
 
 
 			/// Notifies all listeners that a new entity type has been created.
-			void notify_entity_type_created(ENT_TYPE new_entity_type);
+			void notify_entity_type_created(EntityTypePtr new_entity_type);
 
 
 			/// Notifies all listeners that an entity type has been deleted.
@@ -124,7 +120,7 @@ namespace entity_system {
 
 
 			/// Signal, that an entity type has been created.
-			boost::signals2::signal<void(ENT_TYPE new_entity_type)> signal_entity_type_created;
+			boost::signals2::signal<void(EntityTypePtr new_entity_type)> signal_entity_type_created;
 
 
 			/// Signal, that an entity type has been deleted.
@@ -132,6 +128,5 @@ namespace entity_system {
 
 	};
 
-
-};
-};
+}
+}

@@ -4,6 +4,8 @@
 #include "entity-system/model/entities/entity-instances/EntityInstance.hpp"
 #include "type-system/providers/logger/LoggerEntityTypeProvider.hpp"
 
+#include "spdlog/spdlog.h"
+
 namespace inexor {
 namespace entity_system {
 namespace type_system {

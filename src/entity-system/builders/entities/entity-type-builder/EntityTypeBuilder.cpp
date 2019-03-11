@@ -8,6 +8,9 @@
 namespace inexor {
 namespace entity_system {
 
+	using EntityAttributeTypePtr = std::shared_ptr<EntityAttributeType>;
+	using EntityAttributeTypePtrOpt = std::optional<EntityAttributeTypePtr>;
+
 	EntityTypeBuilder::EntityTypeBuilder(
 		EntityTypeManagerPtr entity_type_manager,
 		EntityAttributeTypeManagerPtr entity_attribute_type_manager,
@@ -75,11 +78,11 @@ namespace entity_system {
 		}
 		if (o_entity_type.has_value())
 		{
-			std::shared_ptr<EntityType> entity_type = o_entity_type.value();
+			EntityTypePtr entity_type = o_entity_type.value();
 			for (auto& attribute_entry : entity_type_attributes) {
-				O_ENT_ATTR_TYPE o_attribute_type = entity_attribute_type_manager->create_entity_attribute_type(attribute_entry.first, attribute_entry.second.first, attribute_entry.second.second);
+				EntityAttributeTypePtrOpt o_attribute_type = entity_attribute_type_manager->create_entity_attribute_type(attribute_entry.first, attribute_entry.second.first, attribute_entry.second.second);
 				if (o_attribute_type.has_value()) {
-					ENT_ATTR_TYPE attribute_type = o_attribute_type.value();
+					EntityAttributeTypePtr attribute_type = o_attribute_type.value();
 					entity_type->link_attribute_type(attribute_type);
 					spdlog::debug("Created entity type attribute '{}' of data type '{}'", attribute_entry.first, attribute_entry.second.first._to_string());
 				} else {
