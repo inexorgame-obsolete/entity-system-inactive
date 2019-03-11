@@ -1,12 +1,6 @@
-// Inexor entity system
-// (c)2018 Inexor
-
 #pragma once
 
-#include "entity-system/util/type-definitions/TypeDefinitions.hpp"
-
-using namespace inexor::entity_system;
-using namespace std;
+#include "entity-system/model/relations/relation-instances/RelationInstance.hpp"
 
 namespace inexor {
 namespace entity_system {
@@ -18,10 +12,10 @@ namespace entity_system {
 		public:
 
 			/// Called if a new relation instance has been created.
-			virtual void on_relation_instance_created(REL_INST relation_instance) = 0;
+			virtual void on_relation_instance_created(std::shared_ptr<RelationInstance> relation_instance) = 0;
 
 	};
 
 
-};
-};
+}
+}

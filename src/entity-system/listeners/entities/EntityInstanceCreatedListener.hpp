@@ -1,12 +1,6 @@
-// Inexor entity system
-// (c)2018 Inexor
-
 #pragma once
 
-#include "entity-system/util/type-definitions/TypeDefinitions.hpp"
-
-using namespace inexor::entity_system;
-using namespace std;
+#include "entity-system/model/entities/entity-instances/EntityInstance.hpp"
 
 namespace inexor {
 namespace entity_system {
@@ -18,10 +12,9 @@ namespace entity_system {
 		public:
 
 			/// Called if a new entity instance has been created.
-			virtual void on_entity_instance_created(ENT_INST entity_instance) = 0;
+			virtual void on_entity_instance_created(std::shared_ptr<EntityInstance> entity_instance) = 0;
 
 	};
 
-
-};
-};
+}
+}

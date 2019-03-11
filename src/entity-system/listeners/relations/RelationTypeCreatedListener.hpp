@@ -1,12 +1,6 @@
-// Inexor entity system
-// (c)2018 Inexor
-
 #pragma once
 
-#include "entity-system/util/type-definitions/TypeDefinitions.hpp"
-
-using namespace inexor::entity_system;
-using namespace std;
+#include "entity-system/model/relations/relation-types/RelationType.hpp"
 
 namespace inexor {
 namespace entity_system {
@@ -18,10 +12,9 @@ namespace entity_system {
 		public:
 
 			/// Called if a new relation type has been created.
-			virtual void on_relation_type_created(REL_TYPE relation_type) = 0;
+			virtual void on_relation_type_created(std::shared_ptr<RelationType> relation_type) = 0;
 
 	};
 
-
-};
-};
+}
+}
