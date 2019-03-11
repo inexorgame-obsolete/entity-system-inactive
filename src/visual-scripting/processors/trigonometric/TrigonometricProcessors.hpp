@@ -2,12 +2,14 @@
 
 #include "visual-scripting/processors/trigonometric/SinProcessor.hpp"
 #include "visual-scripting/processors/trigonometric/CosProcessor.hpp"
+#include "visual-scripting/processors/trigonometric/TanProcessor.hpp"
 
 namespace inexor {
 namespace visual_scripting {
 
 	using SinProcessorPtr = std::shared_ptr<SinProcessor>;
 	using CosProcessorPtr = std::shared_ptr<CosProcessor>;
+	using TanProcessorPtr = std::shared_ptr<TanProcessor>;
 
 	/// @class TrigonometricProcessors
     /// @brief Management of the trigonometric processors.
@@ -18,7 +20,8 @@ namespace visual_scripting {
 			/// Constructs the trigonometric processors.
 			TrigonometricProcessors(
 				SinProcessorPtr sin_processor,
-				CosProcessorPtr cos_processor
+				CosProcessorPtr cos_processor,
+				TanProcessorPtr tan_processor
 			);
 
 			~TrigonometricProcessors();
@@ -33,6 +36,9 @@ namespace visual_scripting {
 
 			// The cos generator.
 			CosProcessorPtr cos_processor;
+
+			// The tan generator.
+			TanProcessorPtr tan_processor;
 
 	};
 

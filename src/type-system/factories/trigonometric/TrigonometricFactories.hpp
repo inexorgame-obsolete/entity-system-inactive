@@ -1,7 +1,8 @@
 #pragma once
 
-#include "type-system/factories/trigonometric/CosFactory.hpp"
 #include "type-system/factories/trigonometric/SinFactory.hpp"
+#include "type-system/factories/trigonometric/CosFactory.hpp"
+#include "type-system/factories/trigonometric/TanFactory.hpp"
 
 #include <memory>
 
@@ -9,8 +10,9 @@ namespace inexor {
 namespace entity_system {
 namespace type_system {
 
-	using CosFactoryPtr = std::shared_ptr<CosFactory>;
 	using SinFactoryPtr = std::shared_ptr<SinFactory>;
+	using CosFactoryPtr = std::shared_ptr<CosFactory>;
+	using TanFactoryPtr = std::shared_ptr<TanFactory>;
 
 	/// The trigonometric factories.
 	class TrigonometricFactories
@@ -19,8 +21,9 @@ namespace type_system {
 
 			/// Constructs the trigonometric factories.
 			TrigonometricFactories(
+				SinFactoryPtr sin_factory,
 				CosFactoryPtr cos_factory,
-				SinFactoryPtr sin_factory
+				TanFactoryPtr tan_factory
 			);
 
 			~TrigonometricFactories();
@@ -30,11 +33,14 @@ namespace type_system {
 
 		private:
 
+			/// Factory for creating entity instances of type SIN.
+			SinFactoryPtr sin_factory;
+
 			/// Factory for creating entity instances of type COS.
 			CosFactoryPtr cos_factory;
 
-			/// Factory for creating entity instances of type SIN.
-			SinFactoryPtr sin_factory;
+			/// Factory for creating entity instances of type TAN.
+			TanFactoryPtr tan_factory;
 
 	};
 
