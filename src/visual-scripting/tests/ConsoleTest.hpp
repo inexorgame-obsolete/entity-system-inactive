@@ -1,0 +1,57 @@
+#pragma once
+
+#include "entity-system/factories/entities/entity-instance-builder-factory/EntityInstanceBuilderFactory.hpp"
+#include "type-system/providers/console/StdInEntityTypeProvider.hpp"
+#include "type-system/providers/console/StdOutEntityTypeProvider.hpp"
+#include "visual-scripting/managers/ConnectorManager.hpp"
+
+namespace inexor {
+namespace visual_scripting {
+
+	using ConnectorManagerPtr = std::shared_ptr<ConnectorManager>;
+	using StdInEntityTypeProvider = entity_system::type_system::StdInEntityTypeProvider;
+	using StdInEntityTypeProviderPtr = std::shared_ptr<StdInEntityTypeProvider>;
+	using StdOutEntityTypeProvider = entity_system::type_system::StdOutEntityTypeProvider;
+	using StdOutEntityTypeProviderPtr = std::shared_ptr<StdOutEntityTypeProvider>;
+	using EntityInstanceBuilderFactoryPtr = std::shared_ptr<entity_system::EntityInstanceBuilderFactory>;
+
+	using EntityInstancePtr = std::shared_ptr<entity_system::EntityInstance>;
+	using EntityInstancePtrOpt = std::optional<EntityInstancePtr>;
+
+	/// @class ConsoleTest
+    /// @brief Tests for the CONSOLE_STDIN and CONSOLE_STDOUT.
+	class ConsoleTest
+	{
+		public:
+
+    		USING_REACTIVE_DOMAIN(entity_system::D)
+
+			ConsoleTest(
+				ConnectorManagerPtr connector_manager,
+				StdInEntityTypeProviderPtr stdin_entity_type_provider,
+				StdOutEntityTypeProviderPtr stdout_entity_type_provider,
+				EntityInstanceBuilderFactoryPtr entity_instance_builder_factory
+			);
+
+			~ConsoleTest();
+
+			/// Initialization.
+			void init();
+
+			/// Tests for the connectors
+			void run_connector_tests();
+
+		private:
+
+			ConnectorManagerPtr connector_manager;
+			StdInEntityTypeProviderPtr stdin_entity_type_provider;
+			StdOutEntityTypeProviderPtr stdout_entity_type_provider;
+			EntityInstanceBuilderFactoryPtr entity_instance_builder_factory;
+
+			EntityInstancePtrOpt o_stdin;
+			EntityInstancePtrOpt o_stdout;
+
+	};
+
+}
+}

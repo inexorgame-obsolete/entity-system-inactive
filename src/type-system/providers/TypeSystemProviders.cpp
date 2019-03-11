@@ -7,6 +7,7 @@ namespace type_system {
 	TypeSystemProviders::TypeSystemProviders(
 		EntityTypeBuilderFactoryPtr entity_type_builder_factory,
 		ArithmeticProvidersPtr arithmetic_providers,
+		ConsoleProvidersPtr console_providers,
 		ConstantProvidersPtr constant_providers,
 		ConverterProvidersPtr converter_providers,
 		LoggerProvidersPtr logger_providers,
@@ -16,6 +17,7 @@ namespace type_system {
 	{
 		this->entity_type_builder_factory = entity_type_builder_factory;
 		this->arithmetic_providers = arithmetic_providers;
+		this->console_providers = console_providers;
 		this->constant_providers = constant_providers;
 		this->converter_providers = converter_providers;
 		this->logger_providers = logger_providers;
@@ -31,6 +33,7 @@ namespace type_system {
 	{
 		entity_type_builder_factory->init();
 		arithmetic_providers->init();
+		console_providers->init();
 		constant_providers->init();
 		converter_providers->init();
 		logger_providers->init();

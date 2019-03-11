@@ -3,6 +3,7 @@
 #include "entity-system/factories/entities/entity-type-builder-factory/EntityTypeBuilderFactory.hpp"
 
 #include "type-system/providers/arithmetic/ArithmeticProviders.hpp"
+#include "type-system/providers/console/ConsoleProviders.hpp"
 #include "type-system/providers/constants/ConstantProviders.hpp"
 #include "type-system/providers/converters/ConverterProviders.hpp"
 #include "type-system/providers/logger/LoggerProviders.hpp"
@@ -15,6 +16,7 @@ namespace type_system {
 
 	using EntityTypeBuilderFactoryPtr = std::shared_ptr<EntityTypeBuilderFactory>;
 	using ArithmeticProvidersPtr = std::shared_ptr<ArithmeticProviders>;
+	using ConsoleProvidersPtr = std::shared_ptr<ConsoleProviders>;
 	using ConstantProvidersPtr = std::shared_ptr<ConstantProviders>;
 	using ConverterProvidersPtr = std::shared_ptr<ConverterProviders>;
 	using LoggerProvidersPtr = std::shared_ptr<LoggerProviders>;
@@ -30,6 +32,7 @@ namespace type_system {
 			TypeSystemProviders(
 				EntityTypeBuilderFactoryPtr entity_type_builder_factory,
 				ArithmeticProvidersPtr arithmetic_providers,
+				ConsoleProvidersPtr console_providers,
 				ConstantProvidersPtr constant_providers,
 				ConverterProvidersPtr converter_providers,
 				LoggerProvidersPtr logger_providers,
@@ -49,6 +52,9 @@ namespace type_system {
 
 			/// The providers for arithmetic operations.
 			ArithmeticProvidersPtr arithmetic_providers;
+
+			/// The providers for the console.
+			ConsoleProvidersPtr console_providers;
 
 			/// The providers for constants.
 			ConstantProvidersPtr constant_providers;
