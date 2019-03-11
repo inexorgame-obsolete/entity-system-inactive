@@ -21,12 +21,14 @@ namespace visual_scripting {
 	SinTest::SinTest(
 		ConnectorManagerPtr connector_manager,
 		FloatConstantFactoryPtr float_constant_factory,
-		SinFactoryPtr sin_factory
+		SinFactoryPtr sin_factory,
+		AddFloatFactoryPtr add_float_factory
 	)
 	{
         this->connector_manager = connector_manager;
         this->float_constant_factory = float_constant_factory;
         this->sin_factory = sin_factory;
+        this->add_float_factory = add_float_factory;
 	}
 
 	

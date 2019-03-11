@@ -1,5 +1,6 @@
 #pragma once
 
+#include "type-system/factories/arithmetic/AddFloatFactory.hpp"
 #include "type-system/factories/trigonometric/SinFactory.hpp"
 #include "type-system/factories/constants/FloatConstantFactory.hpp"
 #include "visual-scripting/managers/ConnectorManager.hpp"
@@ -19,12 +20,14 @@ namespace visual_scripting {
 			using ConnectorManagerPtr = std::shared_ptr<ConnectorManager>;
 			using FloatConstantFactoryPtr = std::shared_ptr<inexor::entity_system::type_system::FloatConstantFactory>;
 			using SinFactoryPtr = std::shared_ptr<inexor::entity_system::type_system::SinFactory>;
+			using AddFloatFactoryPtr = std::shared_ptr<inexor::entity_system::type_system::AddFloatFactory>;
 
 			/// @brief Constructor.
 			SinTest(
 				ConnectorManagerPtr connector_manager,
 				FloatConstantFactoryPtr float_constant_factory,
-				SinFactoryPtr sin_factory
+				SinFactoryPtr sin_factory,
+				AddFloatFactoryPtr add_float_factory
 			);
 
 			/// @brief Destructor.
@@ -46,6 +49,9 @@ namespace visual_scripting {
 
 			/// Factory for SIN
 			SinFactoryPtr sin_factory;
+
+			/// Factory for ADD_FLOAT
+			AddFloatFactoryPtr add_float_factory;
 	};
 
 

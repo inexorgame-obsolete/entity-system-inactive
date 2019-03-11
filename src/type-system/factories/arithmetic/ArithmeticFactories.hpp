@@ -1,12 +1,14 @@
 #pragma once
 
 #include "type-system/factories/arithmetic/AddIntFactory.hpp"
+#include "type-system/factories/arithmetic/AddFloatFactory.hpp"
 
 namespace inexor {
 namespace entity_system {
 namespace type_system {
 
 	using AddIntFactoryPtr = std::shared_ptr<AddIntFactory>;
+	using AddFloatFactoryPtr = std::shared_ptr<AddFloatFactory>;
 
 	/// The arithmetic factories.
 	class ArithmeticFactories
@@ -15,7 +17,8 @@ namespace type_system {
 
 			/// Constructs the arithmetic factories.
 			ArithmeticFactories(
-				AddIntFactoryPtr add_int_factory
+				AddIntFactoryPtr add_int_factory,
+				AddFloatFactoryPtr add_float_factory
 			);
 
 			~ArithmeticFactories();
@@ -27,6 +30,9 @@ namespace type_system {
 
 			/// Factory for creating entity instances of type ADD_INT.
 			AddIntFactoryPtr add_int_factory;
+
+			/// Factory for creating entity instances of type ADD_FLOAT.
+			AddFloatFactoryPtr add_float_factory;
 
 	};
 

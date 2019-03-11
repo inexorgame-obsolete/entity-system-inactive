@@ -5,10 +5,12 @@ namespace entity_system {
 namespace type_system {
 
 	ArithmeticProviders::ArithmeticProviders(
-		AddIntEntityTypeProviderPtr add_int_entity_type_provider
+		AddIntEntityTypeProviderPtr add_int_entity_type_provider,
+		AddFloatEntityTypeProviderPtr add_float_entity_type_provider
 	)
 	{
 		this->add_int_entity_type_provider = add_int_entity_type_provider;
+		this->add_float_entity_type_provider = add_float_entity_type_provider;
 	}
 
 	ArithmeticProviders::~ArithmeticProviders()

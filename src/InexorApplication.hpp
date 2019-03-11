@@ -1,6 +1,3 @@
-// Inexor entity system
-// (c)2018-2019 Inexor
-
 #pragma once
 
 #include <memory>
@@ -26,7 +23,7 @@
 
 #include "type-system/TypeSystemModule.hpp"
 #include "configuration/ConfigurationModule.hpp"
-#include "visual-scripting/VisualScriptingSystem.hpp"
+#include "visual-scripting/VisualScriptingSystemModule.hpp"
 #include "logging/managers/LogManager.hpp"
 #include "renderer/managers/RendererManager.hpp"
 
@@ -36,6 +33,15 @@
 
 namespace inexor {
 
+	using EntitySystemModulePtr = std::shared_ptr<entity_system::EntitySystemModule>;
+	using TypeSystemModulePtr = std::shared_ptr<entity_system::type_system::TypeSystemModule>;
+	using ConfigurationModulePtr = std::shared_ptr<configuration::ConfigurationModule>;
+	using RestServerPtr = std::shared_ptr<entity_system::RestServer>;
+	using EntitySystemDebuggerPtr = std::shared_ptr<entity_system::EntitySystemDebugger>;
+	using VisualScriptingSystemModulePtr = std::shared_ptr<visual_scripting::VisualScriptingSystemModule>;
+	using LogManagerPtr = std::shared_ptr<logging::LogManager>;
+	using RendererManagerPtr = std::shared_ptr<renderer::RendererManager>;
+
 	/// @class Inexor
 	/// @brief The application container.
 	class InexorApplication
@@ -43,19 +49,26 @@ namespace inexor {
 
 		public:
 
-			/// Constructor.
-			/// The dependencies defined are automatically injected!
+			/// Constructs the inexor application. The dependencies
+			/// defined are automatically injected!
+			/// @param entity_system_module
+			/// @param type_system_module
+			/// @param configuration_module
+			/// @param rest_server
+			/// @param entity_system_debugger
+			/// @param visual_scripting_system_module
+			/// @param log_manager
+			/// @param renderer_manager
 			InexorApplication(
-				std::shared_ptr<inexor::entity_system::EntitySystemModule> entity_system_module,
-				std::shared_ptr<inexor::entity_system::type_system::TypeSystemModule> type_system_module,
-				std::shared_ptr<inexor::configuration::ConfigurationModule> configuration_module,
-				std::shared_ptr<inexor::entity_system::RestServer> rest_server,
-				std::shared_ptr<inexor::entity_system::EntitySystemDebugger> entity_system_debugger,
-				std::shared_ptr<inexor::visual_scripting::VisualScriptingSystem> visual_scripting_system,
-				std::shared_ptr<inexor::logging::LogManager> log_manager,
-				std::shared_ptr<inexor::renderer::RendererManager> renderer_manager
+				EntitySystemModulePtr entity_system_module,
+				TypeSystemModulePtr type_system_module,
+				ConfigurationModulePtr configuration_module,
+				RestServerPtr rest_server,
+				EntitySystemDebuggerPtr entity_system_debugger,
+				VisualScriptingSystemModulePtr visual_scripting_system_module,
+				LogManagerPtr log_manager,
+				RendererManagerPtr renderer_manager
 			);
-
 
 			/// Destructor.
 			/// Calls shutdown()
@@ -77,36 +90,36 @@ namespace inexor {
 			void register_logger(std::string logger_name);
 
 			/// Getter for the entity system
-			std::shared_ptr<inexor::entity_system::EntitySystemModule> get_entity_system();
+			std::shared_ptr<entity_system::EntitySystemModule> get_entity_system();
 
 			/// Getter for the rest server
-			std::shared_ptr<inexor::entity_system::RestServer> get_rest_server();
+			std::shared_ptr<entity_system::RestServer> get_rest_server();
 
 		private:
 
             /// The entity system of Inexor
-            std::shared_ptr<inexor::entity_system::EntitySystemModule> entity_system_module;
+			EntitySystemModulePtr entity_system_module;
 
             /// The type system manager.
-            std::shared_ptr<inexor::entity_system::type_system::TypeSystemModule> type_system_module;
+			TypeSystemModulePtr type_system_module;
 
             /// The configuration manager.
-            std::shared_ptr<inexor::configuration::ConfigurationModule> configuration_module;
+			ConfigurationModulePtr configuration_module;
 
             /// The REST server of the entity system
-			std::shared_ptr<inexor::entity_system::RestServer> rest_server;
+			RestServerPtr rest_server;
 
             /// The debugger of the entity system
-			std::shared_ptr<inexor::entity_system::EntitySystemDebugger> entity_system_debugger;
+			EntitySystemDebuggerPtr entity_system_debugger;
 
 			/// The visual scripting system
-			std::shared_ptr<inexor::visual_scripting::VisualScriptingSystem> visual_scripting_system;
+			VisualScriptingSystemModulePtr visual_scripting_system_module;
 
             /// Management of the loggers
-			std::shared_ptr<inexor::logging::LogManager> log_manager;
+			LogManagerPtr log_manager;
 
             /// Management of the renderers
-			std::shared_ptr<inexor::renderer::RendererManager> renderer_manager;
+			RendererManagerPtr renderer_manager;
 
 			/// The running state of the Inexor application
 			bool running;
@@ -144,6 +157,5 @@ namespace inexor {
 			static std::vector<InexorApplication *> instances;
 
 	};
-
 
 }

@@ -1,12 +1,8 @@
-// Inexor
-// (c)2018-2019 Inexor
+#include "InexorApplication.hpp"
 
 #include "spdlog/spdlog.h"
-#include "InexorApplication.hpp"
 #include <GLFW/glfw3.h>
 
-
-using namespace inexor::entity_system;
 using namespace spdlog;
 
 namespace inexor {
@@ -15,14 +11,14 @@ namespace inexor {
 	std::vector<InexorApplication *> InexorApplication::instances;
 
 	InexorApplication::InexorApplication(
-		std::shared_ptr<inexor::entity_system::EntitySystemModule> entity_system_module,
-		std::shared_ptr<inexor::entity_system::type_system::TypeSystemModule> type_system_module,
-		std::shared_ptr<inexor::configuration::ConfigurationModule> configuration_module,
-		std::shared_ptr<inexor::entity_system::RestServer> rest_server,
-		std::shared_ptr<inexor::entity_system::EntitySystemDebugger> entity_system_debugger,
-		std::shared_ptr<inexor::visual_scripting::VisualScriptingSystem> visual_scripting_system,
-		std::shared_ptr<inexor::logging::LogManager> log_manager,
-		std::shared_ptr<inexor::renderer::RendererManager> renderer_manager
+		EntitySystemModulePtr entity_system_module,
+		TypeSystemModulePtr type_system_module,
+		ConfigurationModulePtr configuration_module,
+		RestServerPtr rest_server,
+		EntitySystemDebuggerPtr entity_system_debugger,
+		VisualScriptingSystemModulePtr visual_scripting_system_module,
+		LogManagerPtr log_manager,
+		RendererManagerPtr renderer_manager
 	)
 	{
 		this->entity_system_module = entity_system_module;
@@ -30,7 +26,7 @@ namespace inexor {
 		this->configuration_module = configuration_module;
 		this->rest_server = rest_server;
 		this->entity_system_debugger = entity_system_debugger;
-		this->visual_scripting_system = visual_scripting_system;
+		this->visual_scripting_system_module = visual_scripting_system_module;
 		this->log_manager = log_manager;
 		this->renderer_manager = renderer_manager;
 		this->running = false;
@@ -71,7 +67,7 @@ namespace inexor {
 		configuration_module->init(argc, argv);
 
 		// Initialize the visual scripting
-		visual_scripting_system->init();
+		visual_scripting_system_module->init();
 
 		// Initialize the rendering
 		renderer_manager->init();
@@ -134,13 +130,13 @@ namespace inexor {
 		log_manager->register_logger(logger_name);
 	}
 
-	std::shared_ptr<inexor::entity_system::EntitySystemModule> InexorApplication::get_entity_system()
+	std::shared_ptr<entity_system::EntitySystemModule> InexorApplication::get_entity_system()
 	{
 		return entity_system_module;
 	}
 
 
-	std::shared_ptr<inexor::entity_system::RestServer> InexorApplication::get_rest_server()
+	std::shared_ptr<entity_system::RestServer> InexorApplication::get_rest_server()
 	{
 		return rest_server;
 	}

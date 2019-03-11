@@ -1,6 +1,3 @@
-// Inexor entity system
-// (c)2018-2019 Inexor
-
 #pragma once
 
 #include <chrono>
@@ -25,11 +22,11 @@ namespace visual_scripting {
 
 
 	/// A base class for active components.
-    class Sin
+    class SinProcessor
     	: public Processor,
 		  public EntityInstanceCreatedListener,
 		  public EntityInstanceDeletedListener,
-		  public enable_shared_from_this<Sin>
+		  public enable_shared_from_this<SinProcessor>
     {
 
 		public:
@@ -37,13 +34,13 @@ namespace visual_scripting {
     		USING_REACTIVE_DOMAIN(D)
 
     		/// @brief The constructor.
-			Sin(
+			SinProcessor(
 				std::shared_ptr<inexor::entity_system::type_system::SinEntityTypeProvider> entity_type_provider,
 				std::shared_ptr<inexor::entity_system::EntityInstanceManager> entity_instance_manager
 			);
 
 			/// @brief The destructor.
-			~Sin();
+			~SinProcessor();
 
 			/// Initialization of the processor.
 			void init();
