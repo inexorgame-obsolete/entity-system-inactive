@@ -9,6 +9,7 @@ namespace type_system {
 		ConstantFactoriesPtr constant_factories,
 		ConverterFactoriesPtr converter_factories,
 		LoggerFactoriesPtr logger_factories,
+		LogicalFactoriesPtr logical_factories,
 		StoreFactoriesPtr store_factories,
 		TrigonometricFactoriesPtr trigonometric_factories
 	)
@@ -17,6 +18,7 @@ namespace type_system {
 		this->constant_factories = constant_factories;
 		this->converter_factories = converter_factories;
 		this->logger_factories = logger_factories;
+		this->logical_factories = logical_factories;
 		this->store_factories = store_factories;
 		this->trigonometric_factories = trigonometric_factories;
 	}
@@ -31,6 +33,7 @@ namespace type_system {
 		constant_factories->init();
 		converter_factories->init();
 		logger_factories->init();
+		logical_factories->init();
 		store_factories->init();
 		trigonometric_factories->init();
 	}

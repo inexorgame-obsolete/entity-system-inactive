@@ -4,6 +4,7 @@
 #include "type-system/factories/constants/ConstantFactories.hpp"
 #include "type-system/factories/converters/ConverterFactories.hpp"
 #include "type-system/factories/logger/LoggerFactories.hpp"
+#include "type-system/factories/logical/LogicalFactories.hpp"
 #include "type-system/factories/stores/StoreFactories.hpp"
 #include "type-system/factories/trigonometric/TrigonometricFactories.hpp"
 
@@ -15,6 +16,7 @@ namespace type_system {
 	using ConstantFactoriesPtr = std::shared_ptr<ConstantFactories>;
 	using ConverterFactoriesPtr = std::shared_ptr<ConverterFactories>;
 	using LoggerFactoriesPtr = std::shared_ptr<LoggerFactories>;
+	using LogicalFactoriesPtr = std::shared_ptr<LogicalFactories>;
 	using StoreFactoriesPtr = std::shared_ptr<StoreFactories>;
 	using TrigonometricFactoriesPtr = std::shared_ptr<TrigonometricFactories>;
 
@@ -29,6 +31,7 @@ namespace type_system {
 				ConstantFactoriesPtr constant_factories,
 				ConverterFactoriesPtr converter_factories,
 				LoggerFactoriesPtr logger_factories,
+				LogicalFactoriesPtr logical_factories,
 				StoreFactoriesPtr store_factories,
 				TrigonometricFactoriesPtr trigonometric_factories
 			);
@@ -51,6 +54,9 @@ namespace type_system {
 
 			/// The factories for loggers.
 			LoggerFactoriesPtr logger_factories;
+
+			/// The factories for the logical operations.
+			LogicalFactoriesPtr logical_factories;
 
 			/// The factories for stores.
 			StoreFactoriesPtr store_factories;

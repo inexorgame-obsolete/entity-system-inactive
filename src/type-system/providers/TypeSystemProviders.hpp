@@ -7,6 +7,7 @@
 #include "type-system/providers/constants/ConstantProviders.hpp"
 #include "type-system/providers/converters/ConverterProviders.hpp"
 #include "type-system/providers/logger/LoggerProviders.hpp"
+#include "type-system/providers/logical/LogicalProviders.hpp"
 #include "type-system/providers/stores/StoreProviders.hpp"
 #include "type-system/providers/trigonometric/TrigonometricProviders.hpp"
 
@@ -20,6 +21,7 @@ namespace type_system {
 	using ConstantProvidersPtr = std::shared_ptr<ConstantProviders>;
 	using ConverterProvidersPtr = std::shared_ptr<ConverterProviders>;
 	using LoggerProvidersPtr = std::shared_ptr<LoggerProviders>;
+	using LogicalProvidersPtr = std::shared_ptr<LogicalProviders>;
 	using StoreProvidersPtr = std::shared_ptr<StoreProviders>;
 	using TrigonometricProvidersPtr = std::shared_ptr<TrigonometricProviders>;
 
@@ -36,6 +38,7 @@ namespace type_system {
 				ConstantProvidersPtr constant_providers,
 				ConverterProvidersPtr converter_providers,
 				LoggerProvidersPtr logger_providers,
+				LogicalProvidersPtr logical_providers,
 				StoreProvidersPtr store_providers,
 				TrigonometricProvidersPtr trigonometric_providers
 			);
@@ -64,6 +67,9 @@ namespace type_system {
 
 			/// The providers for loggers.
 			LoggerProvidersPtr logger_providers;
+
+			/// The providers for logical operations.
+			LogicalProvidersPtr logical_providers;
 
 			/// The providers for stores.
 			StoreProvidersPtr store_providers;

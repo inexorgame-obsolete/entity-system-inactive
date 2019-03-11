@@ -4,6 +4,7 @@
 #include "visual-scripting/processors/arithmetic/ArithmeticProcessors.hpp"
 #include "visual-scripting/processors/console/ConsoleProcessors.hpp"
 #include "visual-scripting/processors/logger/LoggerProcessors.hpp"
+#include "visual-scripting/processors/logical/LogicalProcessors.hpp"
 #include "visual-scripting/processors/trigonometric/TrigonometricProcessors.hpp"
 #include "visual-scripting/model/Processor.hpp"
 
@@ -14,6 +15,7 @@ namespace visual_scripting {
 	using ArithmeticProcessorsPtr = std::shared_ptr<ArithmeticProcessors>;
 	using ConsoleProcessorsPtr = std::shared_ptr<ConsoleProcessors>;
 	using LoggerProcessorsPtr = std::shared_ptr<LoggerProcessors>;
+	using LogicalProcessorsPtr = std::shared_ptr<LogicalProcessors>;
 	using TrigonometricProcessorsPtr = std::shared_ptr<TrigonometricProcessors>;
 
     /// Provides processors.
@@ -27,6 +29,7 @@ namespace visual_scripting {
 				ArithmeticProcessorsPtr arithmetic_processors,
 				ConsoleProcessorsPtr console_processors,
 				LoggerProcessorsPtr logger_processors,
+				LogicalProcessorsPtr logical_processors,
 				TrigonometricProcessorsPtr trigonometric_processors
 			);
 
@@ -40,7 +43,7 @@ namespace visual_scripting {
 			/// The registry for processors.
 			ProcessorRegistryPtr processor_registry;
 
-			/// The manager for arithmetic processors.
+			/// The manager for processors for arithmetic operations.
 			ArithmeticProcessorsPtr arithmetic_processors;
 
 			/// The manager for console processors.
@@ -49,7 +52,10 @@ namespace visual_scripting {
 			/// The manager for logger processors.
 			LoggerProcessorsPtr logger_processors;
 
-			/// The manager for trigonometric processors.
+			/// The manager for processors for logical operations.
+			LogicalProcessorsPtr logical_processors;
+
+			/// The manager for processors trigonometric operations.
 			TrigonometricProcessorsPtr trigonometric_processors;
 
 	};
