@@ -32,7 +32,7 @@ namespace logging {
 		spdlog::get(LOGGER_NAME)->info("Asynchronous logging initialized");
 	}
 
-	void LogManager::register_logger(std::string logger_name) {
+	EntityInstancePtrOpt LogManager::register_logger(std::string logger_name) {
 		spdlog::register_logger(std::make_shared<spdlog::async_logger>(logger_name, sinks.begin(), sinks.end(), spdlog::thread_pool(), spdlog::async_overflow_policy::block));
 		spdlog::get(LOGGER_NAME)->info("Registered logger {}", logger_name);
 
@@ -46,8 +46,10 @@ namespace logging {
 				spdlog::get(LOGGER_NAME)->info("logger_name = {}, log_level = {}", std::get<entity_system::DataType::STRING>(o_logger_name.value()->value.Value()), std::get<entity_system::DataType::INT>(o_log_level.value()->value.Value()));
 			}
 			logger_instances[logger_name] = logger_instance;
+			return EntityInstancePtrOpt { logger_instances[logger_name] };
 		} else {
 			spdlog::get(LOGGER_NAME)->info("Failed to create entity instance of type {}", logger_entity_type_provider->get_type()->get_type_name());
+			return std::nullopt;
 		}
 	}
 
@@ -72,6 +74,15 @@ namespace logging {
 			return spdlog::get(logger_name)->level();
 		} else {
 			return spdlog::level::level_enum::off;
+		}
+	}
+
+	EntityInstancePtrOpt LogManager::get_logger(std::string logger_name)
+	{
+		if (logger_instances.count(logger_name)) {
+			return EntityInstancePtrOpt { logger_instances[logger_name] };
+		} else {
+			return std::nullopt;
 		}
 	}
 

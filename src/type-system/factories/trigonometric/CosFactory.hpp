@@ -4,8 +4,6 @@
 #include "entity-system/model/entities/entity-instances/EntityInstance.hpp"
 #include "type-system/providers/trigonometric/CosEntityTypeProvider.hpp"
 
-using namespace std;
-
 namespace inexor {
 namespace entity_system {
 namespace type_system {

@@ -27,10 +27,6 @@
 
 #include "spdlog/spdlog.h"
 
-
-
-#define LOGGER_NAME "inexor.app"
-
 namespace inexor {
 
 	using EntitySystemModulePtr = std::shared_ptr<entity_system::EntitySystemModule>;
@@ -155,6 +151,9 @@ namespace inexor {
 
 			/// Static instances of the Inexor application
 			static std::vector<InexorApplication *> instances;
+
+			/// The logger name of this service
+			static constexpr char LOGGER_NAME[] = "inexor.app";
 
 	};
 

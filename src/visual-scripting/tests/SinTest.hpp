@@ -8,7 +8,6 @@
 namespace inexor {
 namespace visual_scripting {
 
-
 	/// @class SinTest
     /// @brief Tests for the SIN type.
 	class SinTest
@@ -51,7 +50,6 @@ namespace visual_scripting {
 			/// Factory for ADD_FLOAT
 			AddFloatFactoryPtr add_float_factory;
 	};
-
 
 }
 }

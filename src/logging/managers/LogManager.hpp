@@ -46,7 +46,7 @@ namespace logging {
 			void init();
 
 			/// Registers a logger
-			void register_logger(std::string logger_name);
+			EntityInstancePtrOpt register_logger(std::string logger_name);
 
 			/// Unregisters a logger
 			void unregister_logger(std::string logger_name);
@@ -56,6 +56,8 @@ namespace logging {
 
 			/// Returns the log level for the given logger
 			spdlog::level::level_enum get_level(std::string logger_name);
+
+			EntityInstancePtrOpt get_logger(std::string logger_name);
 
 			/// Called when an entity instance of type ADD_INT has been created
 			void on_entity_instance_created(EntityInstancePtr entity_instance);

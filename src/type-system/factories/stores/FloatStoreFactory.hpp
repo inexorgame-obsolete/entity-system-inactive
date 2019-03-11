@@ -4,9 +4,6 @@
 #include "entity-system/model/entities/entity-instances/EntityInstance.hpp"
 #include "type-system/providers/stores/FloatStoreEntityTypeProvider.hpp"
 
-using namespace inexor::entity_system;
-using namespace std;
-
 namespace inexor {
 namespace entity_system {
 namespace type_system {
@@ -35,7 +32,7 @@ namespace type_system {
 			EntityInstancePtrOpt create_instance();
 
 			/// Creates an instance with the given name
-			EntityInstancePtrOpt create_instance(const string& name, const float& input_value, const float& default_value, const float& output_value);
+			EntityInstancePtrOpt create_instance(const std::string& name, const float& input_value, const float& default_value, const float& output_value);
 
 		private:
 
@@ -46,7 +43,6 @@ namespace type_system {
 			EntityInstanceBuilderFactoryPtr entity_instance_builder_factory;
 
 	};
-
 
 }
 }

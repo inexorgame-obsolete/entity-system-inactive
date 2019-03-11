@@ -1,19 +1,16 @@
-// Inexor entity system
-// (c)2018-2019 Inexor
-
 #pragma once
 
-#include <string>
-#include <variant>
-#include <cstdint>
-#include <glm/glm.hpp>
+#include "entity-system/model/data/DataTypes.hpp"
+#include "entity-system/util/return-codes/ReturnCodes.hpp"
 
 #include "react/Domain.h"
 #include "react/Signal.h"
 #include "react/Observer.h"
 
-#include "entity-system/model/data/DataTypes.hpp"
-#include "entity-system/util/return-codes/ReturnCodes.hpp"
+#include <string>
+#include <variant>
+#include <cstdint>
+#include <glm/glm.hpp>
 
 using namespace react;
 
@@ -26,28 +23,31 @@ namespace entity_system {
 
 	USING_REACTIVE_DOMAIN(D)
 
-    /// A data value can hold any value allowed by enum DataType.
-//    using DataValue = std::variant<bool, int, std::int64_t, double, float, std::string, glm::vec3, glm::vec4>;
-    using DataValue = std::variant<bool, int, std::int64_t, double, float, std::string>;
+	/// A data value can hold any value allowed by enum DataType.
+	// using DataValue = std::variant<bool, int, std::int64_t, double, float, std::string, glm::vec3, glm::vec4>;
+	using DataValue = std::variant<bool, int, std::int64_t, double, float, std::string>;
 
-    /// A data container which can hold data of various types.
-    struct DataContainer {
+	/// A data container which can hold data of various types.
+	struct DataContainer {
 
-    	/// The data type.
+		/// The data type.
 		DataType type;
 
-    	/// The own value.
-    	VarSignalT<DataValue> own_value;
+		/// The own value.
+		VarSignalT<DataValue> own_value;
 
-    	/// The outer value.
-    	VarSignal<D, SignalT<DataValue>> signal_wrapper;
+		/// The outer value.
+		VarSignal<D, SignalT<DataValue>> signal_wrapper;
 
-    	/// The flatted (output) value.
-    	SignalT<DataValue> value;
+		/// The flattened (output) value.
+		SignalT<DataValue> value;
 
+		// No default constructor because we don't have and cannot detect the data type
+		// DataContainer() {};
 
-//    	DataContainer() {};
-
+		/// Constructs a new data container using the given data type
+		/// and the default value of the data type.
+		/// @param type The data type.
 		DataContainer(const DataType& type)
 			: type(type)
 		{
@@ -71,12 +71,12 @@ namespace entity_system {
     				this->own_value = MakeVar<D>(float_value);
     				break;
     			}
-//    			case DataType::STRING:
-//    			{
-//    				DataValue string_value = "";
-//    				this->own_value = MakeVar<D>(string_value);
-//    				break;
-//    			}
+    			case DataType::STRING:
+    			{
+    				DataValue string_value = std::string("");
+    				this->own_value = MakeVar<D>(string_value);
+    				break;
+    			}
     			// TODO: Add other data types!
     			default:
     			case DataType::INT:
@@ -100,19 +100,19 @@ namespace entity_system {
 		};
 
 		DataContainer(const DataType& type, const DataValue& data_value)
-    		: type(type)
-    	{
+			: type(type)
+		{
 			this->own_value = MakeVar<D>(data_value);
 			this->signal_wrapper = MakeVar<D>(this->own_value);
 			this->value = Flatten(this->signal_wrapper);
-    	};
+		};
 
-    };
+	};
 
-    struct DataContainerInitializer {
-   		DataType type;
-   		DataValue value;
-    };
+	struct DataContainerInitializer {
+		DataType type;
+		DataValue value;
+	};
 
-};
-};
+}
+}

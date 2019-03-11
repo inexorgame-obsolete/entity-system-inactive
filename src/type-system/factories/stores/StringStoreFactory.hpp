@@ -4,9 +4,6 @@
 #include "entity-system/model/entities/entity-instances/EntityInstance.hpp"
 #include "type-system/providers/stores/StringStoreEntityTypeProvider.hpp"
 
-using namespace inexor::entity_system;
-using namespace std;
-
 namespace inexor {
 namespace entity_system {
 namespace type_system {
@@ -35,7 +32,7 @@ namespace type_system {
 			EntityInstancePtrOpt create_instance();
 
 			/// Creates an instance with the given name
-			EntityInstancePtrOpt create_instance(const string& name, const string& input_value, const string& default_value, const string& output_value);
+			EntityInstancePtrOpt create_instance(const std::string& name, const std::string& input_value, const std::string& default_value, const std::string& output_value);
 
 		private:
 

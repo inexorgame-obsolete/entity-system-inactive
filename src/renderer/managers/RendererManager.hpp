@@ -23,64 +23,66 @@ namespace renderer {
 
 	/// @class RendererManager
     /// @brief Management of the rendering.
-    class RendererManager : public enable_shared_from_this<RendererManager> {
-    public:
+    class RendererManager
+    	: public std::enable_shared_from_this<RendererManager>
+    {
+		public:
 
-    	/// Constructor.
-        RendererManager(
-        	EntityInstanceManagerPtr entity_instance_manager,
-			SinFactoryPtr sin_factory,
-			CosFactoryPtr cos_factory,
-			ConnectorManagerPtr connector_manager,
-			RendererFactoryPtr render_factory
-        );
+			/// Constructor.
+			RendererManager(
+				EntityInstanceManagerPtr entity_instance_manager,
+				SinFactoryPtr sin_factory,
+				CosFactoryPtr cos_factory,
+				ConnectorManagerPtr connector_manager,
+				RendererFactoryPtr render_factory
+			);
 
-        /// Destructor.
-        ~RendererManager();
+			/// Destructor.
+			~RendererManager();
 
-        /// Initialize renderer.
-        void init();
+			/// Initialize renderer.
+			void init();
 
-        /// Starts the window thread.
-        void start_window_thread(GLFWwindow *windows);
+			/// Starts the window thread.
+			void start_window_thread(GLFWwindow *windows);
 
-    private:
+		private:
 
-        /// The entity instance manager
-		EntityInstanceManagerPtr entity_instance_manager;
+			/// The entity instance manager
+			EntityInstanceManagerPtr entity_instance_manager;
 
-        /// The sin factory
-        SinFactoryPtr sin_factory;
+			/// The sin factory
+			SinFactoryPtr sin_factory;
 
-        /// The sin factory
-        CosFactoryPtr cos_factory;
+			/// The sin factory
+			CosFactoryPtr cos_factory;
 
-		/// The entity type provider
-        RendererFactoryPtr renderer_factory;
+			/// The entity type provider
+			RendererFactoryPtr renderer_factory;
 
-        /// The connector manager
-		ConnectorManagerPtr connector_manager;
+			/// The connector manager
+			ConnectorManagerPtr connector_manager;
 
-        /// The renderer entity instance.
-        shared_ptr<EntityInstance> renderer;
+			/// The renderer entity instance.
+			EntityInstancePtr renderer;
 
-        /// The sinus generator.
-        EntityInstancePtr sin_x;
+			/// The sinus generator.
+			EntityInstancePtr sin_x;
 
-        /// The sinus generator.
-        EntityInstancePtr cos_y;
+			/// The sinus generator.
+			EntityInstancePtr cos_y;
 
-        /// The attribute sin_value
-        EntityAttributeInstancePtr sin_x_attr_value;
+			/// The attribute sin_value
+			EntityAttributeInstancePtr sin_x_attr_value;
 
-        /// The attribute cos_value
-        EntityAttributeInstancePtr cos_y_attr_value;
+			/// The attribute cos_value
+			EntityAttributeInstancePtr cos_y_attr_value;
 
-        /// The attribute renderer_x
-        EntityAttributeInstancePtr renderer_x_attr_value;
+			/// The attribute renderer_x
+			EntityAttributeInstancePtr renderer_x_attr_value;
 
-        /// The attribute renderer_x
-        EntityAttributeInstancePtr renderer_y_attr_value;
+			/// The attribute renderer_x
+			EntityAttributeInstancePtr renderer_y_attr_value;
 
     };
 

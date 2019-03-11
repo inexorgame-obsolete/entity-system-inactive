@@ -4,7 +4,7 @@
 #include "entity-system/model/entities/entity-instances/EntityInstance.hpp"
 #include "type-system/providers/logger/LoggerEntityTypeProvider.hpp"
 
-#include "spdlog/spdlog.h"
+#include "spdlog/common.h"
 
 namespace inexor {
 namespace entity_system {
@@ -22,7 +22,7 @@ namespace type_system {
 
 			/// Constructor.
 			LoggerFactory(
-				LoggerEntityTypeProviderPtr logger_entity_type_provider,
+				LoggerEntityTypeProviderPtr entity_type_provider,
 				EntityInstanceBuilderFactoryPtr entity_instance_builder_factory
 			);
 
@@ -47,13 +47,12 @@ namespace type_system {
 		private:
 
 			/// Provides the entity type LOGGER.
-			LoggerEntityTypeProviderPtr logger_entity_type_provider;
+			LoggerEntityTypeProviderPtr entity_type_provider;
 
 			/// Factory for creating entity instance builders.
 			EntityInstanceBuilderFactoryPtr entity_instance_builder_factory;
 
 	};
-
 
 }
 }

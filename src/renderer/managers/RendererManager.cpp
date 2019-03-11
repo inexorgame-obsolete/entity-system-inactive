@@ -11,6 +11,7 @@
 
 #include <iomanip>
 
+using namespace std::chrono_literals;
 using namespace Magnum;
 using namespace Math::Literals;
 
