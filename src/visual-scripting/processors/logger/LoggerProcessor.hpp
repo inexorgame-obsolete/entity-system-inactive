@@ -9,10 +9,6 @@
 #include "visual-scripting/model/Processor.hpp"
 #include "logging/managers/LogManager.hpp"
 
-#include <mutex>
-#include <optional>
-
-
 namespace inexor {
 namespace visual_scripting {
 
@@ -56,6 +52,9 @@ namespace visual_scripting {
 			/// Initialization of the processor signals.
 			void make_signals(const EntityInstancePtr& entity_instance);
 
+			/// The logger name of this processor.
+			static constexpr char LOGGER_NAME[] = "inexor.vs.p.l.logger";
+
 		private:
 
 			/// Provides the entity type LOGGER.
@@ -70,8 +69,10 @@ namespace visual_scripting {
 			/// The signals per entity instance.
 			std::unordered_map<xg::Guid, ObserverT> observers;
 
-    };
+			/// Logger
+			std::shared_ptr<spdlog::logger> logger;
 
+    };
 
 }
 }

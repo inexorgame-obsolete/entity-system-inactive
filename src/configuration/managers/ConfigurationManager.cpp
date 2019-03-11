@@ -1,5 +1,7 @@
 #include "ConfigurationManager.hpp"
 
+#include "entity-system/model/data/container/DataContainer.hpp"
+
 #include "spdlog/spdlog.h"
 
 namespace inexor {
@@ -9,13 +11,15 @@ namespace configuration {
 		BoolConstantFactoryPtr bool_constant_factory,
 		IntConstantFactoryPtr int_constant_factory,
 		FloatConstantFactoryPtr float_constant_factory,
-		StringConstantFactoryPtr string_constant_factory
+		StringConstantFactoryPtr string_constant_factory,
+		LogManagerPtr log_manager
 	)
 	{
 		this->bool_constant_factory = bool_constant_factory;
 		this->int_constant_factory = int_constant_factory;
 		this->float_constant_factory = float_constant_factory;
 		this->string_constant_factory = string_constant_factory;
+		this->log_manager = log_manager;
 	}
 
 	ConfigurationManager::~ConfigurationManager()
@@ -24,6 +28,7 @@ namespace configuration {
 
 	void ConfigurationManager::init()
 	{
+		log_manager->register_logger(LOGGER_NAME);
 	}
 
 	bool ConfigurationManager::exists(std::string config_name)
@@ -99,26 +104,15 @@ namespace configuration {
 
 	void ConfigurationManager::list()
 	{
-		spdlog::info("Configuration items:");
+		spdlog::get(LOGGER_NAME)->info("Configuration items:");
 		for (auto& it : config_items)
 		{
-			switch (it.second->type)
-			{
-				case DataType::BOOL:
-					spdlog::info("  [{}] [{}] [{}]", it.first, it.second->type._to_string(), std::get<DataType::BOOL>(it.second->value.Value()));
-					break;
-				case DataType::INT:
-					spdlog::info("  [{}] [{}] [{}]", it.first, it.second->type._to_string(), std::get<DataType::INT>(it.second->value.Value()));
-					break;
-				case DataType::FLOAT:
-					spdlog::info("  [{}] [{}] [{}]", it.first, it.second->type._to_string(), std::get<DataType::FLOAT>(it.second->value.Value()));
-					break;
-				case DataType::STRING:
-					spdlog::info("  [{}] [{}] [{}]", it.first, it.second->type._to_string(), std::get<DataType::STRING>(it.second->value.Value()));
-					break;
-				default:
-					break;
-			}
+			spdlog::get(LOGGER_NAME)->info(
+				"  [{}] [{}] [{}]",
+				it.first,
+				it.second->type._to_string(),
+				data_value_to_string(it.second->type, it.second->value.Value())
+			);
 		}
 	}
 
@@ -131,23 +125,7 @@ namespace configuration {
 			if (o_attribute_instance.has_value())
 			{
 				config_items[config_name] = o_attribute_instance.value();
-				switch (config_items[config_name]->type)
-				{
-					case DataType::BOOL:
-						spdlog::info("Added configuration: [{}] [{}] [{}]", config_name, config_items[config_name]->type._to_string(), std::get<DataType::BOOL>(config_items[config_name]->value.Value()));
-						break;
-					case DataType::INT:
-						spdlog::info("Added configuration: [{}] [{}] [{}]", config_name, config_items[config_name]->type._to_string(), std::get<DataType::INT>(config_items[config_name]->value.Value()));
-						break;
-					case DataType::FLOAT:
-						spdlog::info("Added configuration: [{}] [{}] [{}]", config_name, config_items[config_name]->type._to_string(), std::get<DataType::FLOAT>(config_items[config_name]->value.Value()));
-						break;
-					case DataType::STRING:
-						spdlog::info("Added configuration: [{}] [{}] [{}]", config_name, config_items[config_name]->type._to_string(), std::get<DataType::STRING>(config_items[config_name]->value.Value()));
-						break;
-					default:
-						break;
-				}
+				spdlog::get(LOGGER_NAME)->info("Added configuration: [{}] [{}] [{}]", config_name, config_items[config_name]->type._to_string(), data_value_to_string(config_items[config_name]->type, config_items[config_name]->value.Value()));
 			}
 		}
 	}

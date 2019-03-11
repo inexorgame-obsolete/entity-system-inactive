@@ -6,9 +6,6 @@
 #include "react/Domain.h"
 #include "react/Observer.h"
 
-#include <mutex>
-#include <optional>
-
 using namespace react;
 
 namespace inexor {
@@ -22,7 +19,7 @@ namespace visual_scripting {
     {
 		public:
 
-			USING_REACTIVE_DOMAIN(inexor::entity_system::D)
+			USING_REACTIVE_DOMAIN(entity_system::D)
 
 			/// Constructor.
 			/// @param output_attribute_GUID GUID of the output attribute.
@@ -73,6 +70,9 @@ namespace visual_scripting {
 
 			/// @brief Returns true, if the connector is in debugging mode.
 			bool is_debug_enabled();
+
+			/// The logger name of this processor.
+			static constexpr char LOGGER_NAME[] = "inexor.vs.connector";
 
         private:
 

@@ -9,6 +9,8 @@
 #include <Magnum/Shaders/VertexColor.h>
 #include <GLFW/glfw3.h>
 
+#include "spdlog/spdlog.h"
+
 #include <iomanip>
 
 using namespace std::chrono_literals;
@@ -23,29 +25,30 @@ namespace renderer {
 
 	RendererManager::RendererManager(
 		EntityInstanceManagerPtr entity_instance_manager,
+		ConnectorManagerPtr connector_manager,
 		SinFactoryPtr sin_factory,
 		CosFactoryPtr cos_factory,
-		ConnectorManagerPtr connector_manager,
-		RendererFactoryPtr render_factory
+		RendererFactoryPtr render_factory,
+		LogManagerPtr log_manager
 	) {
-		this->renderer_factory = render_factory;
+		this->entity_instance_manager = entity_instance_manager;
+		this->connector_manager = connector_manager;
 		this->sin_factory = sin_factory;
 		this->cos_factory = cos_factory;
-		this->connector_manager = connector_manager;
-		this->entity_instance_manager = entity_instance_manager;
+		this->renderer_factory = render_factory;
+		this->log_manager = log_manager;
 	}
 
 	RendererManager::~RendererManager()
 	{
 	}
 
-
 	GLFWwindow *create_window()
 	{
 		/* Initialize the library */
 		if(!glfwInit())
 		{
-			std::cout << "!glfwInit()" << std::endl;
+			spdlog::get(RendererManager::LOGGER_NAME)->error("Failed to initialize glfw!");
 			std::exit(1);
 		}
 
@@ -59,7 +62,7 @@ namespace renderer {
 		);
 		if(!window) {
 			glfwTerminate();
-			std::cout << "!window" << std::endl;
+			spdlog::get(RendererManager::LOGGER_NAME)->error("Failed to create window!");
 			std::exit(1);
 		}
 		return window;
@@ -67,6 +70,8 @@ namespace renderer {
 
 	void RendererManager::init()
 	{
+		log_manager->register_logger(LOGGER_NAME);
+
 		EntityInstancePtrOpt o_renderer = renderer_factory->create_instance(0.5f, -0.5f);
 		EntityInstancePtrOpt o_sin_x = sin_factory->create_instance();
 		EntityInstancePtrOpt o_cos_y = cos_factory->create_instance();
@@ -90,7 +95,7 @@ namespace renderer {
 
 			}
 		} else {
-			std::cout << "Failed to create renderer instance!!!" << std::endl;
+			spdlog::get(LOGGER_NAME)->error("Failed to create renderer instance");
 		}
 
 		GLFWwindow *window = create_window();
@@ -103,7 +108,7 @@ namespace renderer {
 		std::optional<std::shared_ptr<inexor::visual_scripting::Connector>> connector_x = connector_manager->create_connector(sin_x_attr_value, renderer_x_attr_value);
 		if (!connector_x.has_value())
 		{
-			std::cout << "Failed to create connector_x" << std::endl;
+			spdlog::get(LOGGER_NAME)->error("Failed to create connector_x");
 		} else {
 			connector_x.value()->enable_debug();
 		}
@@ -111,7 +116,7 @@ namespace renderer {
 		std::optional<std::shared_ptr<inexor::visual_scripting::Connector>> connector_y = connector_manager->create_connector(cos_y_attr_value, renderer_y_attr_value);
 		if (!connector_y.has_value())
 		{
-			std::cout << "Failed to create connector_y" << std::endl;
+			spdlog::get(LOGGER_NAME)->error("Failed to create connector_y");
 		} else {
 			connector_y.value()->enable_debug();
 		}
@@ -158,7 +163,7 @@ namespace renderer {
 		{
 			float x = std::get<DataType::FLOAT>(renderer_x_attr_value->value.Value());
 			float y = 0.0f - std::get<DataType::FLOAT>(renderer_y_attr_value->value.Value());
-			std::cout << std::fixed << std::setprecision(3) << "(" << x << ", " << y << ")" << std::endl;
+			spdlog::get(LOGGER_NAME)->info("TranslationXY({}, {})", x, y);
 
 			Matrix3 transformation_matrix_x = Matrix3::translation(Vector2::xAxis(x));
 			Matrix3 transformation_matrix_y = Matrix3::translation(Vector2::yAxis(y));
@@ -175,7 +180,7 @@ namespace renderer {
 			std::this_thread::sleep_for(50ms);
 		}
 
-		std::cout << "Window closed!" << std::endl;
+		spdlog::get(LOGGER_NAME)->info("Window closed!");
 		glfwTerminate();
 		std::exit(1);
 	}

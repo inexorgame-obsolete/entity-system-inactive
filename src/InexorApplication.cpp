@@ -51,6 +51,7 @@ namespace inexor {
 		// Logging initialization
 		log_manager->init();
 		log_manager->register_logger(LOGGER_NAME);
+		entity_system_debugger->init_logger();
 
 		spdlog::get(LOGGER_NAME)->info("init()");
 

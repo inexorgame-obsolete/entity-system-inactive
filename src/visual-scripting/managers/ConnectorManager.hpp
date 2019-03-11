@@ -6,6 +6,7 @@
 #include "entity-system/managers/relations/relation-instance-manager/RelationInstanceManager.hpp"
 #include "entity-system/model/data/DataTypes.hpp"
 #include "visual-scripting/model/Connector.hpp"
+#include "logging/managers/LogManager.hpp"
 
 #include <crossguid/guid.hpp>
 #include <optional>
@@ -19,6 +20,7 @@ namespace visual_scripting {
 
 	using EntityInstanceManagerPtr = std::shared_ptr<entity_system::EntityInstanceManager>;
 	using RelationInstanceManagerPtr = std::shared_ptr<entity_system::RelationInstanceManager>;
+	using LogManagerPtr = std::shared_ptr<inexor::logging::LogManager>;
 	using EntityAttributeInstancePtr = std::shared_ptr<entity_system::EntityAttributeInstance>;
 	using RelationAttributeInstancePtr = std::shared_ptr<entity_system::RelationAttributeInstance>;
 	using ConnectorPtr = std::shared_ptr<Connector>;
@@ -33,7 +35,8 @@ namespace visual_scripting {
 			/// Constructor.
 			ConnectorManager(
 				EntityInstanceManagerPtr entity_instance_manager,
-				RelationInstanceManagerPtr relation_instance_manager
+				RelationInstanceManagerPtr relation_instance_manager,
+				LogManagerPtr log_manager
 			);
 
 			/// Destructor.
@@ -146,6 +149,9 @@ namespace visual_scripting {
 			/// The relation instance manager
 			RelationInstanceManagerPtr relation_instance_manager;
 
+			/// The log manager
+			LogManagerPtr log_manager;
+
 			/// Stores the connectors to search by GUID of the connector.
 			std::unordered_map<xg::Guid, ConnectorPtr> connectors;
 
@@ -156,8 +162,11 @@ namespace visual_scripting {
 			/// Each input can only have one connection! This can be used to check if an input is already occupied.
 			std::unordered_map<xg::Guid, ConnectorPtr> input_to_connector;
 
+			/// The logger name of this service.
+			static constexpr char LOGGER_NAME[] = "inexor.vs.connector.manager";
+
 	};
 
 
-};
-};
+}
+}

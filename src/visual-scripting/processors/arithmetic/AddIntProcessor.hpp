@@ -7,9 +7,7 @@
 #include "type-system/providers/arithmetic/AddIntEntityTypeProvider.hpp"
 #include "visual-scripting/managers/ProcessorRegistry.hpp"
 #include "visual-scripting/model/Processor.hpp"
-
-#include <mutex>
-#include <optional>
+#include "logging/managers/LogManager.hpp"
 
 namespace inexor {
 namespace visual_scripting {
@@ -26,6 +24,7 @@ namespace visual_scripting {
 
     	using AddIntEntityTypeProviderPtr = std::shared_ptr<inexor::entity_system::type_system::AddIntEntityTypeProvider>;
     	using EntityInstanceManagerPtr = std::shared_ptr<inexor::entity_system::EntityInstanceManager>;
+    	using LogManagerPtr = std::shared_ptr<inexor::logging::LogManager>;
     	using EntityInstancePtr = std::shared_ptr<inexor::entity_system::EntityInstance>;
 
 		public:
@@ -35,7 +34,8 @@ namespace visual_scripting {
     		/// @brief Constructs a new entity instance of type ADD_INT.
 			AddIntProcessor(
 				AddIntEntityTypeProviderPtr entity_type_provider,
-				EntityInstanceManagerPtr entity_instance_manager
+				EntityInstanceManagerPtr entity_instance_manager,
+				LogManagerPtr log_manager
 			);
 
 			~AddIntProcessor();
@@ -60,8 +60,14 @@ namespace visual_scripting {
 			/// The entity instance manager
 			EntityInstanceManagerPtr entity_instance_manager;
 
+			/// The log manager
+			LogManagerPtr log_manager;
+
 			/// The signals per entity instance.
 			std::unordered_map<xg::Guid, SignalT<entity_system::DataValue> > signals;
+
+			/// The logger name of this processor.
+			static constexpr char LOGGER_NAME[] = "inexor.vs.p.a.addint";
 
     };
 

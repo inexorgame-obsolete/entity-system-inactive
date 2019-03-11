@@ -2,21 +2,26 @@
 
 #include "react/Algorithm.h"
 #include "react/Domain.h"
-#include "react/Event.h"
 #include "react/Observer.h"
+
+#include "spdlog/spdlog.h"
 
 using namespace std::chrono;
 
 namespace inexor {
 namespace visual_scripting {
 
+	using SinEntityTypeProvider = entity_system::type_system::SinEntityTypeProvider;
+
 	SinProcessor::SinProcessor(
-		std::shared_ptr<inexor::entity_system::type_system::SinEntityTypeProvider> entity_type_provider,
-		std::shared_ptr<inexor::entity_system::EntityInstanceManager> entity_instance_manager
+		SinEntityTypeProviderPtr entity_type_provider,
+		EntityInstanceManagerPtr entity_instance_manager,
+		LogManagerPtr log_manager
 	)
 		: Processor(entity_type_provider->get_type()),
 		  entity_type_provider(entity_type_provider),
-		  entity_instance_manager(entity_instance_manager)
+		  entity_instance_manager(entity_instance_manager),
+		  log_manager(log_manager)
 	{
 	}
 
@@ -26,15 +31,13 @@ namespace visual_scripting {
 
 	void SinProcessor::init()
 	{
+		log_manager->register_logger(LOGGER_NAME);
 		entity_instance_manager->register_on_created(entity_type_provider->get_type()->get_GUID(), shared_from_this());
 		entity_instance_manager->register_on_deleted(entity_type_provider->get_type()->get_GUID(), shared_from_this());
 	}
 
 	void SinProcessor::on_entity_instance_created(std::shared_ptr<inexor::entity_system::EntityInstance> entity_instance)
 	{
-		// Get entity type
-		std::shared_ptr<inexor::entity_system::EntityType> entity_type = entity_instance->get_entity_type();
-		std::cout << "Entity instance [" << entity_instance->get_GUID().str() << "] of type [" << entity_type->get_type_name() << "] created" << std::endl;
 		make_signals(entity_instance);
 	}
 
@@ -48,8 +51,8 @@ namespace visual_scripting {
 
 	void SinProcessor::make_signals(const std::shared_ptr<inexor::entity_system::EntityInstance>& entity_instance)
 	{
-		std::cout << "Init entity instance for processor SIN" << std::endl;
-		std::optional<std::shared_ptr<inexor::entity_system::EntityAttributeInstance>> o_attr_sin_value = entity_instance->get_attribute_instance(inexor::entity_system::type_system::SinEntityTypeProvider::SIN_VALUE);
+		spdlog::get(LOGGER_NAME)->debug("Initializing processor SIN for newly created entity instance {} of type {}", entity_instance->get_GUID().str(), entity_instance->get_entity_type()->get_type_name());
+		std::optional<std::shared_ptr<inexor::entity_system::EntityAttributeInstance>> o_attr_sin_value = entity_instance->get_attribute_instance(SinEntityTypeProvider::SIN_VALUE);
 		if (o_attr_sin_value.has_value())
 		{
 			xg::Guid guid = entity_instance->get_GUID();
@@ -64,7 +67,6 @@ namespace visual_scripting {
 
 				// Initialize the time iterator
 		    	int time_iterator = 0;
-				std::cout << "time_iterator = " << time_iterator << std::endl;
 
 				// Initialize the sinus resolution
 			    float resolution = 10.0f;
@@ -99,10 +101,9 @@ namespace visual_scripting {
 			});
 		    start_thread.detach();
 		} else {
-			// TODO: warn!
-			std::cout << "attributes missing" << std::endl;
+			spdlog::get(LOGGER_NAME)->error("Failed to initialize processor signals for entity instance {} of type {}: Missing attribute {}", entity_instance->get_GUID().str(), entity_instance->get_entity_type()->get_type_name(), SinEntityTypeProvider::SIN_VALUE);
 		}
 	}
 
-};
-};
+}
+}

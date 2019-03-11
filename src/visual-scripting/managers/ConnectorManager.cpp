@@ -7,11 +7,13 @@ namespace visual_scripting {
 
 	ConnectorManager::ConnectorManager(
 		EntityInstanceManagerPtr entity_instance_manager,
-		RelationInstanceManagerPtr relation_instance_manager
+		RelationInstanceManagerPtr relation_instance_manager,
+		LogManagerPtr log_manager
 	)
 	{
 		this->entity_instance_manager = entity_instance_manager;
 		this->relation_instance_manager = relation_instance_manager;
+		this->log_manager = log_manager;
 	}
 
 	ConnectorManager::~ConnectorManager()
@@ -20,6 +22,8 @@ namespace visual_scripting {
 
 	void ConnectorManager::init()
 	{
+		log_manager->register_logger(LOGGER_NAME);
+		log_manager->register_logger(Connector::LOGGER_NAME);
 	}
 
 	ConnectorPtrOpt ConnectorManager::create_connector(

@@ -5,6 +5,7 @@
 #include "type-system/factories/constants/IntConstantFactory.hpp"
 #include "type-system/factories/constants/FloatConstantFactory.hpp"
 #include "type-system/factories/constants/StringConstantFactory.hpp"
+#include "logging/managers/LogManager.hpp"
 
 #include <unordered_map>
 
@@ -21,6 +22,7 @@ namespace configuration {
 		using IntConstantFactoryPtr = std::shared_ptr<entity_system::type_system::IntConstantFactory>;
 		using FloatConstantFactoryPtr = std::shared_ptr<entity_system::type_system::FloatConstantFactory>;
 		using StringConstantFactoryPtr = std::shared_ptr<entity_system::type_system::StringConstantFactory>;
+		using LogManagerPtr = std::shared_ptr<inexor::logging::LogManager>;
 		using EntityInstancePtr = std::shared_ptr<entity_system::EntityInstance>;
 		using EntityInstancePtrOpt = std::optional<EntityInstancePtr>;
 		using EntityAttributeInstancePtr = std::shared_ptr<entity_system::EntityAttributeInstance>;
@@ -32,7 +34,8 @@ namespace configuration {
 				BoolConstantFactoryPtr bool_constant_factory,
 				IntConstantFactoryPtr int_constant_factory,
 				FloatConstantFactoryPtr float_constant_factory,
-				StringConstantFactoryPtr string_constant_factory
+				StringConstantFactoryPtr string_constant_factory,
+				LogManagerPtr log_manager
 			);
 
 			~ConfigurationManager();
@@ -87,6 +90,9 @@ namespace configuration {
 			/// Factory for STRING_CONSTANT
 			StringConstantFactoryPtr string_constant_factory;
 
+			/// The log manager
+			LogManagerPtr log_manager;
+
 			/// The names of the configuration items managed by the configuration manager
 			std::unordered_map<std::string, EntityAttributeInstancePtr> config_items;
 
@@ -97,6 +103,9 @@ namespace configuration {
 			static constexpr char INT_CONSTANT_VALUE[] = "int_constant_value";
 			static constexpr char FLOAT_CONSTANT_VALUE[] = "float_constant_value";
 			static constexpr char STRING_CONSTANT_VALUE[] = "string_constant_value";
+
+			/// The logger name of this processor.
+			static constexpr char LOGGER_NAME[] = "inexor.config.manager";
 
 	};
 

@@ -1,6 +1,7 @@
 #include "LogManager.hpp"
 
 #include "entity-system/model/entity-attributes/entity-attribute-instances/EntityAttributeInstance.hpp"
+#include "visual-scripting/processors/logger/LoggerProcessor.hpp"
 
 namespace inexor {
 namespace logging {
@@ -29,6 +30,7 @@ namespace logging {
 		sinks.push_back(std::make_shared<spdlog::sinks::stdout_color_sink_mt>());
 		sinks.push_back(std::make_shared<spdlog::sinks::rotating_file_sink_mt>(LOG_FILE_NAME, 1024 * 1024 * 10, 3));
 		spdlog::register_logger(std::make_shared<spdlog::async_logger>(LOGGER_NAME, sinks.begin(), sinks.end(), spdlog::thread_pool(), spdlog::async_overflow_policy::block));
+		spdlog::register_logger(std::make_shared<spdlog::async_logger>(visual_scripting::LoggerProcessor::LOGGER_NAME, sinks.begin(), sinks.end(), spdlog::thread_pool(), spdlog::async_overflow_policy::block));
 		spdlog::get(LOGGER_NAME)->info("Asynchronous logging initialized");
 	}
 
@@ -43,7 +45,7 @@ namespace logging {
 			EntityAttributeInstancePtrOpt o_logger_name = logger_instance->get_attribute_instance(entity_system::type_system::LoggerEntityTypeProvider::LOGGER_NAME);
 			EntityAttributeInstancePtrOpt o_log_level = logger_instance->get_attribute_instance(entity_system::type_system::LoggerEntityTypeProvider::LOG_LEVEL);
 			if (o_logger_name.has_value() && o_log_level.has_value()) {
-				spdlog::get(LOGGER_NAME)->info("logger_name = {}, log_level = {}", std::get<entity_system::DataType::STRING>(o_logger_name.value()->value.Value()), std::get<entity_system::DataType::INT>(o_log_level.value()->value.Value()));
+				spdlog::get(LOGGER_NAME)->debug("logger_name = {}, log_level = {}", std::get<entity_system::DataType::STRING>(o_logger_name.value()->value.Value()), std::get<entity_system::DataType::INT>(o_log_level.value()->value.Value()));
 			}
 			logger_instances[logger_name] = logger_instance;
 			return EntityInstancePtrOpt { logger_instances[logger_name] };

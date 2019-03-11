@@ -114,5 +114,26 @@ namespace entity_system {
 		DataValue value;
 	};
 
+	static inline std::string data_value_to_string(DataType type, DataValue value)
+	{
+		switch (type)
+		{
+			case DataType::BOOL:
+				return std::get<DataType::BOOL>(value) ? "true" : "false";
+			case DataType::INT:
+				return std::to_string(std::get<DataType::INT>(value));
+			case DataType::BIG_INT:
+				return std::to_string(std::get<DataType::BIG_INT>(value));
+			case DataType::DOUBLE:
+				return std::to_string(std::get<DataType::DOUBLE>(value));
+			case DataType::FLOAT:
+				return std::to_string(std::get<DataType::FLOAT>(value));
+			case DataType::STRING:
+				return std::get<DataType::STRING>(value);
+			default:
+				return "";
+		}
+	}
+
 }
 }

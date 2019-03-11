@@ -12,6 +12,8 @@ namespace visual_scripting {
 	using namespace inexor::entity_system::type_system;
 	using EntityAttributeInstancePtrOptional = std::optional<std::shared_ptr<EntityAttributeInstance>>;
 
+	using EntityTypePtr = std::shared_ptr<entity_system::EntityType>;
+
 	LoggerProcessor::LoggerProcessor(
 		LoggerEntityTypeProviderPtr entity_type_provider,
 		EntityInstanceManagerPtr entity_instance_manager,
@@ -22,6 +24,7 @@ namespace visual_scripting {
 		  entity_instance_manager(entity_instance_manager),
 		  log_manager(log_manager)
 	{
+		this->logger = spdlog::default_logger();
 	}
 
 	LoggerProcessor::~LoggerProcessor()
@@ -30,14 +33,13 @@ namespace visual_scripting {
 
 	void LoggerProcessor::init()
 	{
+		logger = spdlog::get(LOGGER_NAME);
 		entity_instance_manager->register_on_created(entity_type_provider->get_type()->get_GUID(), shared_from_this());
 		entity_instance_manager->register_on_deleted(entity_type_provider->get_type()->get_GUID(), shared_from_this());
 	}
 
 	void LoggerProcessor::on_entity_instance_created(EntityInstancePtr entity_instance)
 	{
-		std::shared_ptr<inexor::entity_system::EntityType> entity_type = entity_instance->get_entity_type();
-		std::cout << "Entity instance [" << entity_instance->get_GUID().str() << "] of type [" << entity_type->get_type_name() << "] created" << std::endl;
 		make_signals(entity_instance);
 	}
 
@@ -51,7 +53,7 @@ namespace visual_scripting {
 
 	void LoggerProcessor::make_signals(const EntityInstancePtr& entity_instance)
 	{
-		std::cout << "Init entity instance for processor LOGGER" << std::endl;
+		logger->debug("Initializing processor LOGGER for newly created entity instance {} of type {}", entity_instance->get_GUID().str(), entity_instance->get_entity_type()->get_type_name());
 		auto o_logger_name = entity_instance->get_attribute_instance(LoggerEntityTypeProvider::LOGGER_NAME);
 		auto o_log_message = entity_instance->get_attribute_instance(LoggerEntityTypeProvider::LOG_MESSAGE);
 		if (o_logger_name.has_value() && o_log_message.has_value())
@@ -61,8 +63,7 @@ namespace visual_scripting {
 				spdlog::get(logger_name)->info(std::get<DataType::STRING>(log_message));
 			});
 		} else {
-			// TODO: warn!
-			std::cout << "attributes missing" << std::endl;
+			logger->error("Failed to initialize processor signals for entity instance {} of type {}: Missing one of these attributes {} {}", entity_instance->get_GUID().str(), entity_instance->get_entity_type()->get_type_name(), LoggerEntityTypeProvider::LOGGER_NAME, LoggerEntityTypeProvider::LOG_MESSAGE);
 		}
 	}
 

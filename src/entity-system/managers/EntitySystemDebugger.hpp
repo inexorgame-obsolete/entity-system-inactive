@@ -13,10 +13,9 @@
 #include "entity-system/managers/relations/relation-type-manager/RelationTypeManager.hpp"
 #include "entity-system/managers/relations/relation-instance-manager/RelationInstanceManager.hpp"
 #include "entity-system/model/data/DataTypes.hpp"
+#include "logging/managers/LogManager.hpp"
 
 #include <crossguid/guid.hpp>
-
-#include "spdlog/spdlog.h"
 
 namespace inexor {
 namespace entity_system {
@@ -25,6 +24,7 @@ namespace entity_system {
 	using EntityInstanceManagerPtr = std::shared_ptr<EntityInstanceManager>;
 	using RelationTypeManagerPtr = std::shared_ptr<RelationTypeManager>;
 	using RelationInstanceManagerPtr = std::shared_ptr<RelationInstanceManager>;
+	using LogManagerPtr = std::shared_ptr<inexor::logging::LogManager>;
 	using EntityTypePtr = std::shared_ptr<EntityType>;
 	using EntityInstancePtr = std::shared_ptr<EntityInstance>;
 	using RelationTypePtr = std::shared_ptr<RelationType>;
@@ -50,7 +50,8 @@ namespace entity_system {
 				EntityTypeManagerPtr entity_type_manager,
 				EntityInstanceManagerPtr entity_instance_manager,
 				RelationTypeManagerPtr relation_type_manager,
-				RelationInstanceManagerPtr relation_instance_manager
+				RelationInstanceManagerPtr relation_instance_manager,
+				LogManagerPtr log_manager
 			);
 
 			/// Destructor.
@@ -58,6 +59,9 @@ namespace entity_system {
 
 			/// Initialization
 			void init();
+
+			/// Initialization
+			void init_logger();
 
 			void on_entity_type_created(EntityTypePtr entity_type);
 			void on_entity_type_deleted(const xg::Guid& type_GUID);
@@ -84,6 +88,15 @@ namespace entity_system {
 
 			/// The relation instance manager
 			RelationInstanceManagerPtr relation_instance_manager;
+
+			/// The log manager
+			LogManagerPtr log_manager;
+
+			/// Logger
+			std::shared_ptr<spdlog::logger> logger;
+
+			/// The logger name of this processor.
+			static constexpr char LOGGER_NAME[] = "inexor.entity.dbg";
 
 	};
 

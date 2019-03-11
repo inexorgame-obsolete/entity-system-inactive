@@ -1,12 +1,4 @@
-// Inexor entity system
-// (c)2018-2019 Inexor
-
 #include "AddIntProcessor.hpp"
-
-#include "react/Algorithm.h"
-#include "react/Domain.h"
-#include "react/Event.h"
-#include "react/Observer.h"
 
 namespace inexor {
 namespace visual_scripting {
@@ -17,11 +9,13 @@ namespace visual_scripting {
 
 	AddIntProcessor::AddIntProcessor(
 		AddIntEntityTypeProviderPtr entity_type_provider,
-		EntityInstanceManagerPtr entity_instance_manager
+		EntityInstanceManagerPtr entity_instance_manager,
+		LogManagerPtr log_manager
 	)
 		: Processor(entity_type_provider->get_type()),
 		  entity_type_provider(entity_type_provider),
-		  entity_instance_manager(entity_instance_manager)
+		  entity_instance_manager(entity_instance_manager),
+		  log_manager(log_manager)
 	{
 	}
 
@@ -31,14 +25,13 @@ namespace visual_scripting {
 
 	void AddIntProcessor::init()
 	{
+		log_manager->register_logger(LOGGER_NAME);
 		entity_instance_manager->register_on_created(entity_type_provider->get_type()->get_GUID(), shared_from_this());
 		entity_instance_manager->register_on_deleted(entity_type_provider->get_type()->get_GUID(), shared_from_this());
 	}
 
 	void AddIntProcessor::on_entity_instance_created(EntityInstancePtr entity_instance)
 	{
-		std::shared_ptr<inexor::entity_system::EntityType> entity_type = entity_instance->get_entity_type();
-		std::cout << "Entity instance [" << entity_instance->get_GUID().str() << "] of type [" << entity_type->get_type_name() << "] created" << std::endl;
 		make_signals(entity_instance);
 	}
 
@@ -52,7 +45,7 @@ namespace visual_scripting {
 
 	void AddIntProcessor::make_signals(const EntityInstancePtr& entity_instance)
 	{
-		std::cout << "Init entity instance for processor ADD_INT" << std::endl;
+		spdlog::get(LOGGER_NAME)->debug("Initializing processor ADD_INT for newly created entity instance {} of type {}", entity_instance->get_GUID().str(), entity_instance->get_entity_type()->get_type_name());
 		auto o_augend = entity_instance->get_attribute_instance(AddIntEntityTypeProvider::ADD_INT_AUGEND);
 		auto o_addend = entity_instance->get_attribute_instance(AddIntEntityTypeProvider::ADD_INT_ADDEND);
 		auto o_sum = entity_instance->get_attribute_instance(AddIntEntityTypeProvider::ADD_INT_SUM);
@@ -65,15 +58,12 @@ namespace visual_scripting {
 				),
 				[] (DataValue augend, DataValue addend)
 				{
-					int result = std::get<DataType::INT>(augend) + std::get<DataType::INT>(addend);
-					std::cout << "ADD_INT: " << std::get<DataType::INT>(augend) << " + " << std::get<DataType::INT>(addend) << " = " << result << std::endl;
-					return DataValue(result);
+					return DataValue(std::get<DataType::INT>(augend) + std::get<DataType::INT>(addend));
 				}
 			);
 			o_sum.value()->value = signals[entity_instance->get_GUID()];
 		} else {
-			// TODO: warn!
-			std::cout << "attributes missing" << std::endl;
+			spdlog::get(LOGGER_NAME)->error("Failed to initialize processor signals for entity instance {} of type {}: Missing one of these attributes: {} {} {}", entity_instance->get_GUID().str(), entity_instance->get_entity_type()->get_type_name(), AddIntEntityTypeProvider::ADD_INT_AUGEND, AddIntEntityTypeProvider::ADD_INT_ADDEND, AddIntEntityTypeProvider::ADD_INT_SUM);
 		}
 	}
 

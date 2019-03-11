@@ -3,7 +3,7 @@
 #include "entity-system/model/data/container/DataContainer.hpp"
 #include "entity-system/model/data/DataTypes.hpp"
 
-#include <iostream>
+#include "spdlog/spdlog.h"
 
 namespace inexor {
 namespace visual_scripting {
@@ -46,7 +46,13 @@ namespace visual_scripting {
 	void Connector::connect()
 	{
 		input_attr->signal_wrapper <<= output_attr->value;
-		std::cout << output_attr->get_GUID().str() << "." << output_attr->get_entity_attribute_type()->get_type_name() << "]--->" << input_attr->get_GUID().str() << "." << input_attr->get_entity_attribute_type()->get_type_name() << std::endl;
+		spdlog::get(LOGGER_NAME)->debug(
+			"Connect output {}.{} with input {}.{}",
+			output_attr->get_GUID().str(),
+			output_attr->get_entity_attribute_type()->get_type_name(),
+			input_attr->get_GUID().str(),
+			input_attr->get_entity_attribute_type()->get_type_name()
+		);
 	}
 
 	void Connector::disconnect()
@@ -74,31 +80,14 @@ namespace visual_scripting {
 		if (!debug_enabled)
 		{
 			this->observer = Observe(output_attr->value, [this] (DataValue value) {
-				std::cout << output_attr->get_GUID().str() << "." << output_attr->get_entity_attribute_type()->get_type_name() << " has changed: ";
-				switch (output_attr->type)
-				{
-					case DataType::BOOL:
-						std::cout << std::get<DataType::BOOL>(value);
-						break;
-					case DataType::INT:
-						std::cout << std::get<DataType::INT>(value);
-						break;
-					case DataType::BIG_INT:
-						std::cout << std::get<DataType::BIG_INT>(value);
-						break;
-					case DataType::DOUBLE:
-						std::cout << std::get<DataType::DOUBLE>(value);
-						break;
-					case DataType::FLOAT:
-						std::cout << std::get<DataType::FLOAT>(value);
-						break;
-					case DataType::STRING:
-						std::cout << std::get<DataType::STRING>(value);
-						break;
-					default:
-						break;
-				}
-				std::cout << std::endl;
+				spdlog::get(LOGGER_NAME)->info(
+					"{}.{} ---[{}]---> {}.{}",
+					output_attr->get_GUID().str(),
+					output_attr->get_entity_attribute_type()->get_type_name(),
+					data_value_to_string(output_attr->type, value),
+					input_attr->get_GUID().str(),
+					input_attr->get_entity_attribute_type()->get_type_name()
+				);
 			});
 			debug_enabled = true;
 		}
