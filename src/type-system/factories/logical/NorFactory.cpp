@@ -26,7 +26,7 @@ namespace type_system {
 		return entity_instance_builder_factory->get_builder()
 			->type(entity_type_provider->get_type())
 			->attribute(NorEntityTypeProvider::NOR_INPUT_1, false)
-			->attribute(NorEntityTypeProvider::NOR_INPUT_1, false)
+			->attribute(NorEntityTypeProvider::NOR_INPUT_2, false)
 			->attribute(NorEntityTypeProvider::NOR_RESULT, false)
 			->build();
 	}

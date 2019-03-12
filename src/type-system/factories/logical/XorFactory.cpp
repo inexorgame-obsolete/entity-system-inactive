@@ -26,7 +26,7 @@ namespace type_system {
 		return entity_instance_builder_factory->get_builder()
 			->type(entity_type_provider->get_type())
 			->attribute(XorEntityTypeProvider::XOR_INPUT_1, false)
-			->attribute(XorEntityTypeProvider::XOR_INPUT_1, false)
+			->attribute(XorEntityTypeProvider::XOR_INPUT_2, false)
 			->attribute(XorEntityTypeProvider::XOR_RESULT, false)
 			->build();
 	}
