@@ -27,12 +27,14 @@ namespace visual_scripting {
 		ConnectorManagerPtr connector_manager,
 		StdInEntityTypeProviderPtr stdin_entity_type_provider,
 		StdOutEntityTypeProviderPtr stdout_entity_type_provider,
+		StdErrEntityTypeProviderPtr stderr_entity_type_provider,
 		EntityInstanceBuilderFactoryPtr entity_instance_builder_factory
 	)
 	{
         this->connector_manager = connector_manager;
         this->stdin_entity_type_provider = stdin_entity_type_provider;
         this->stdout_entity_type_provider = stdout_entity_type_provider;
+        this->stderr_entity_type_provider = stderr_entity_type_provider;
         this->entity_instance_builder_factory = entity_instance_builder_factory;
 	}
 
@@ -67,8 +69,19 @@ namespace visual_scripting {
 		EntityAttributeInstancePtrOpt o_stdout_value = o_stdout.value()->get_attribute_instance(StdOutEntityTypeProvider::CONSOLE_STDOUT);
 		EntityAttributeInstancePtr stdout_value = o_stdout_value.value();
 
+		// Create single instance for STDERR
+		o_stderr = entity_instance_builder_factory->get_builder()
+			->type(stderr_entity_type_provider->get_type())
+			->attribute(StdErrEntityTypeProvider::CONSOLE_STDERR, std::string(""))
+			->build();
+		EntityAttributeInstancePtrOpt o_stderr_value = o_stderr.value()->get_attribute_instance(StdErrEntityTypeProvider::CONSOLE_STDERR);
+		EntityAttributeInstancePtr stderr_value = o_stderr_value.value();
+
 		ConnectorPtrOpt stdin_stdout_connector = connector_manager->create_connector(stdin_value, stdout_value);
 		stdin_stdout_connector.value()->enable_debug();
+
+		ConnectorPtrOpt stdin_stderr_connector = connector_manager->create_connector(stdin_value, stderr_value);
+		stdin_stderr_connector.value()->enable_debug();
 
 	}
 

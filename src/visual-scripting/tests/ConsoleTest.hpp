@@ -3,6 +3,7 @@
 #include "entity-system/factories/entities/entity-instance-builder-factory/EntityInstanceBuilderFactory.hpp"
 #include "type-system/providers/console/StdInEntityTypeProvider.hpp"
 #include "type-system/providers/console/StdOutEntityTypeProvider.hpp"
+#include "type-system/providers/console/StdErrEntityTypeProvider.hpp"
 #include "visual-scripting/managers/ConnectorManager.hpp"
 
 namespace inexor {
@@ -13,6 +14,8 @@ namespace visual_scripting {
 	using StdInEntityTypeProviderPtr = std::shared_ptr<StdInEntityTypeProvider>;
 	using StdOutEntityTypeProvider = entity_system::type_system::StdOutEntityTypeProvider;
 	using StdOutEntityTypeProviderPtr = std::shared_ptr<StdOutEntityTypeProvider>;
+	using StdErrEntityTypeProvider = entity_system::type_system::StdErrEntityTypeProvider;
+	using StdErrEntityTypeProviderPtr = std::shared_ptr<StdErrEntityTypeProvider>;
 	using EntityInstanceBuilderFactoryPtr = std::shared_ptr<entity_system::EntityInstanceBuilderFactory>;
 
 	using EntityInstancePtr = std::shared_ptr<entity_system::EntityInstance>;
@@ -30,6 +33,7 @@ namespace visual_scripting {
 				ConnectorManagerPtr connector_manager,
 				StdInEntityTypeProviderPtr stdin_entity_type_provider,
 				StdOutEntityTypeProviderPtr stdout_entity_type_provider,
+				StdErrEntityTypeProviderPtr stderr_entity_type_provider,
 				EntityInstanceBuilderFactoryPtr entity_instance_builder_factory
 			);
 
@@ -46,10 +50,12 @@ namespace visual_scripting {
 			ConnectorManagerPtr connector_manager;
 			StdInEntityTypeProviderPtr stdin_entity_type_provider;
 			StdOutEntityTypeProviderPtr stdout_entity_type_provider;
+			StdErrEntityTypeProviderPtr stderr_entity_type_provider;
 			EntityInstanceBuilderFactoryPtr entity_instance_builder_factory;
 
 			EntityInstancePtrOpt o_stdin;
 			EntityInstancePtrOpt o_stdout;
+			EntityInstancePtrOpt o_stderr;
 
 	};
 

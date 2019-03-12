@@ -2,12 +2,14 @@
 
 #include "visual-scripting/processors/console/StdInProcessor.hpp"
 #include "visual-scripting/processors/console/StdOutProcessor.hpp"
+#include "visual-scripting/processors/console/StdErrProcessor.hpp"
 
 namespace inexor {
 namespace visual_scripting {
 
 	using StdInProcessorPtr = std::shared_ptr<StdInProcessor>;
 	using StdOutProcessorPtr = std::shared_ptr<StdOutProcessor>;
+	using StdErrProcessorPtr = std::shared_ptr<StdErrProcessor>;
 
 	/// @class ConsoleProcessors
     /// @brief Management of the logger processors.
@@ -18,7 +20,8 @@ namespace visual_scripting {
 			/// Constructs the logger processors.
 			ConsoleProcessors(
 				StdInProcessorPtr stdin_processor,
-				StdOutProcessorPtr stdout_processor
+				StdOutProcessorPtr stdout_processor,
+				StdErrProcessorPtr stderr_processor
 			);
 
 			~ConsoleProcessors();
@@ -33,6 +36,9 @@ namespace visual_scripting {
 
 			// Processor for the entity type CONSOLE_STDOUT
 			StdOutProcessorPtr stdout_processor;
+
+			// Processor for the entity type CONSOLE_STDERR
+			StdErrProcessorPtr stderr_processor;
 
 	};
 

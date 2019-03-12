@@ -12,7 +12,7 @@ namespace type_system {
 	{
 		public:
 
-			/// Constructs the specialized provider for the LOGGER entity type
+			/// Constructs the specialized provider for the entity type CONSOLE_STDOUT
 			StdOutEntityTypeProvider(
 				std::shared_ptr<EntityTypeBuilderFactory> entity_type_builder_manager
 			) : EntityTypeProvider(
@@ -28,7 +28,7 @@ namespace type_system {
 			/// Defines the name of this entity type
 			static constexpr char TYPE_NAME[] = "CONSOLE_STDOUT";
 
-			/// The name of the attribute console_std_out
+			/// The name of the attribute console_stdout
 			static constexpr char CONSOLE_STDOUT[] = "console_stdout";
 
 	};

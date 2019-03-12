@@ -7,29 +7,29 @@ namespace inexor {
 namespace entity_system {
 namespace type_system {
 
-	/// Provides an entity type "CONSOLE_STDIN".
-	class StdInEntityTypeProvider : public EntityTypeProvider
+	/// Provides an entity type "CONSOLE_STDERR".
+	class StdErrEntityTypeProvider : public EntityTypeProvider
 	{
 		public:
 
-			/// Constructs the specialized provider for the entity type CONSOLE_STDIN
-			StdInEntityTypeProvider(
+			/// Constructs the specialized provider for the entity type CONSOLE_STDERR
+			StdErrEntityTypeProvider(
 				std::shared_ptr<EntityTypeBuilderFactory> entity_type_builder_manager
 			) : EntityTypeProvider(
 				entity_type_builder_manager,
 				TYPE_NAME,
 				{
-					{ CONSOLE_STDIN, { DataType::STRING, 1 << Feature::OUTPUT } }
+					{ CONSOLE_STDERR, { DataType::STRING, 1 << Feature::INPUT } }
 				}
 			) {};
 
-			~StdInEntityTypeProvider() {};
+			~StdErrEntityTypeProvider() {};
 
 			/// Defines the name of this entity type
-			static constexpr char TYPE_NAME[] = "CONSOLE_STDIN";
+			static constexpr char TYPE_NAME[] = "CONSOLE_STDERR";
 
-			/// The name of the attribute console_std_out
-			static constexpr char CONSOLE_STDIN[] = "console_stdin";
+			/// The name of the attribute console_stderr
+			static constexpr char CONSOLE_STDERR[] = "console_stderr";
 
 	};
 
