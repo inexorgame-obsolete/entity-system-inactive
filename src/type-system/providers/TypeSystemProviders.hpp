@@ -3,6 +3,7 @@
 #include "entity-system/factories/entities/entity-type-builder-factory/EntityTypeBuilderFactory.hpp"
 
 #include "type-system/providers/arithmetic/ArithmeticProviders.hpp"
+#include "type-system/providers/comparison/ComparisonProviders.hpp"
 #include "type-system/providers/console/ConsoleProviders.hpp"
 #include "type-system/providers/constants/ConstantProviders.hpp"
 #include "type-system/providers/converters/ConverterProviders.hpp"
@@ -17,6 +18,7 @@ namespace type_system {
 
 	using EntityTypeBuilderFactoryPtr = std::shared_ptr<EntityTypeBuilderFactory>;
 	using ArithmeticProvidersPtr = std::shared_ptr<ArithmeticProviders>;
+	using ComparisonProvidersPtr = std::shared_ptr<ComparisonProviders>;
 	using ConsoleProvidersPtr = std::shared_ptr<ConsoleProviders>;
 	using ConstantProvidersPtr = std::shared_ptr<ConstantProviders>;
 	using ConverterProvidersPtr = std::shared_ptr<ConverterProviders>;
@@ -34,6 +36,7 @@ namespace type_system {
 			TypeSystemProviders(
 				EntityTypeBuilderFactoryPtr entity_type_builder_factory,
 				ArithmeticProvidersPtr arithmetic_providers,
+				ComparisonProvidersPtr comparison_providers,
 				ConsoleProvidersPtr console_providers,
 				ConstantProvidersPtr constant_providers,
 				ConverterProvidersPtr converter_providers,
@@ -55,6 +58,9 @@ namespace type_system {
 
 			/// The providers for arithmetic operations.
 			ArithmeticProvidersPtr arithmetic_providers;
+
+			/// The providers for the comparison operations.
+			ComparisonProvidersPtr comparison_providers;
 
 			/// The providers for the console.
 			ConsoleProvidersPtr console_providers;

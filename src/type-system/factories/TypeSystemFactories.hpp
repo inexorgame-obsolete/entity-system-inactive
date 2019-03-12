@@ -1,6 +1,7 @@
 #pragma once
 
 #include "type-system/factories/arithmetic/ArithmeticFactories.hpp"
+#include "type-system/factories/comparison/ComparisonFactories.hpp"
 #include "type-system/factories/constants/ConstantFactories.hpp"
 #include "type-system/factories/converters/ConverterFactories.hpp"
 #include "type-system/factories/logger/LoggerFactories.hpp"
@@ -13,6 +14,7 @@ namespace entity_system {
 namespace type_system {
 
 	using ArithmeticFactoriesPtr = std::shared_ptr<ArithmeticFactories>;
+	using ComparisonFactoriesPtr = std::shared_ptr<ComparisonFactories>;
 	using ConstantFactoriesPtr = std::shared_ptr<ConstantFactories>;
 	using ConverterFactoriesPtr = std::shared_ptr<ConverterFactories>;
 	using LoggerFactoriesPtr = std::shared_ptr<LoggerFactories>;
@@ -28,6 +30,7 @@ namespace type_system {
 			/// Constructs the factories of the type system.
 			TypeSystemFactories(
 				ArithmeticFactoriesPtr arithmetic_factories,
+				ComparisonFactoriesPtr comparison_factories,
 				ConstantFactoriesPtr constant_factories,
 				ConverterFactoriesPtr converter_factories,
 				LoggerFactoriesPtr logger_factories,
@@ -45,6 +48,9 @@ namespace type_system {
 
 			/// The factories for arithmetic operations.
 			ArithmeticFactoriesPtr arithmetic_factories;
+
+			/// The factories for constants.
+			ComparisonFactoriesPtr comparison_factories;
 
 			/// The factories for constants.
 			ConstantFactoriesPtr constant_factories;

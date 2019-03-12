@@ -6,6 +6,7 @@ namespace type_system {
 
 	TypeSystemFactories::TypeSystemFactories(
 		ArithmeticFactoriesPtr arithmetic_factories,
+		ComparisonFactoriesPtr comparison_factories,
 		ConstantFactoriesPtr constant_factories,
 		ConverterFactoriesPtr converter_factories,
 		LoggerFactoriesPtr logger_factories,
@@ -15,6 +16,7 @@ namespace type_system {
 	)
 	{
 		this->arithmetic_factories = arithmetic_factories;
+		this->comparison_factories = comparison_factories;
 		this->constant_factories = constant_factories;
 		this->converter_factories = converter_factories;
 		this->logger_factories = logger_factories;
@@ -30,6 +32,7 @@ namespace type_system {
 	void TypeSystemFactories::init()
 	{
 		arithmetic_factories->init();
+		comparison_factories->init();
 		constant_factories->init();
 		converter_factories->init();
 		logger_factories->init();

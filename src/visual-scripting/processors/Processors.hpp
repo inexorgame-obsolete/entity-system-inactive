@@ -2,6 +2,7 @@
 
 #include "visual-scripting/managers/ProcessorRegistry.hpp"
 #include "visual-scripting/processors/arithmetic/ArithmeticProcessors.hpp"
+#include "visual-scripting/processors/comparison/ComparisonProcessors.hpp"
 #include "visual-scripting/processors/console/ConsoleProcessors.hpp"
 #include "visual-scripting/processors/logger/LoggerProcessors.hpp"
 #include "visual-scripting/processors/logical/LogicalProcessors.hpp"
@@ -13,6 +14,7 @@ namespace visual_scripting {
 
 	using ProcessorRegistryPtr = std::shared_ptr<ProcessorRegistry>;
 	using ArithmeticProcessorsPtr = std::shared_ptr<ArithmeticProcessors>;
+	using ComparisonProcessorsPtr = std::shared_ptr<ComparisonProcessors>;
 	using ConsoleProcessorsPtr = std::shared_ptr<ConsoleProcessors>;
 	using LoggerProcessorsPtr = std::shared_ptr<LoggerProcessors>;
 	using LogicalProcessorsPtr = std::shared_ptr<LogicalProcessors>;
@@ -27,6 +29,7 @@ namespace visual_scripting {
 			Processors(
 				ProcessorRegistryPtr processor_registry,
 				ArithmeticProcessorsPtr arithmetic_processors,
+				ComparisonProcessorsPtr comparison_processors,
 				ConsoleProcessorsPtr console_processors,
 				LoggerProcessorsPtr logger_processors,
 				LogicalProcessorsPtr logical_processors,
@@ -45,6 +48,9 @@ namespace visual_scripting {
 
 			/// The manager for processors for arithmetic operations.
 			ArithmeticProcessorsPtr arithmetic_processors;
+
+			/// The manager for comparison processors.
+			ComparisonProcessorsPtr comparison_processors;
 
 			/// The manager for console processors.
 			ConsoleProcessorsPtr console_processors;
