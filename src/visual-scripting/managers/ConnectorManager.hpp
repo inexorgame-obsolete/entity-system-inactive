@@ -133,6 +133,10 @@ namespace visual_scripting {
 			/// @param connector A const reference to the shared pointer of the connector.
 			void delete_connector(const ConnectorPtr& connector);
 
+			/// @brief Deletes the given connector.
+			/// @param o_connector A const reference to the optional to the shared pointer of the connector.
+			void delete_connector(const ConnectorPtrOpt& o_connector);
+
 			/// @brief Returns true, if a connector exists with the given GUID.
 			/// @param connector_GUID The GUID to search for.
 			bool connector_exists(const xg::Guid& connector_GUID);
@@ -140,6 +144,14 @@ namespace visual_scripting {
 			/// @brief Returns true, if a connector already exists which occupies the given input attribute.
 			/// @param connector_GUID The GUID of the input attribute.
 			bool input_occupied(const xg::Guid& input_attr_GUID);
+
+			/// @brief Enables the debug of the given connector.
+			/// @param o_connector A const reference to the optional to the shared pointer of the connector.
+			void enable_debug(const ConnectorPtrOpt& o_connector);
+
+			/// @brief Disables the debug of the given connector.
+			/// @param o_connector A const reference to the optional to the shared pointer of the connector.
+			void disable_debug(const ConnectorPtrOpt& o_connector);
 
 		private:
 

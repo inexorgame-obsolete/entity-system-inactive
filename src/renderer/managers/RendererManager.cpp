@@ -26,6 +26,7 @@ namespace renderer {
 	RendererManager::RendererManager(
 		EntityInstanceManagerPtr entity_instance_manager,
 		ConnectorManagerPtr connector_manager,
+		CounterFloatFactoryPtr counter_float_factory,
 		SinFactoryPtr sin_factory,
 		CosFactoryPtr cos_factory,
 		RendererFactoryPtr render_factory,
@@ -33,6 +34,7 @@ namespace renderer {
 	) {
 		this->entity_instance_manager = entity_instance_manager;
 		this->connector_manager = connector_manager;
+		this->counter_float_factory = counter_float_factory;
 		this->sin_factory = sin_factory;
 		this->cos_factory = cos_factory;
 		this->renderer_factory = render_factory;
@@ -72,52 +74,83 @@ namespace renderer {
 	{
 		log_manager->register_logger(LOGGER_NAME);
 
+		EntityInstancePtrOpt o_counter = counter_float_factory->create_instance(50, 0.1);
+		EntityInstancePtrOpt o_sin = sin_factory->create_instance();
+		EntityInstancePtrOpt o_cos = cos_factory->create_instance();
 		EntityInstancePtrOpt o_renderer = renderer_factory->create_instance(0.5f, -0.5f);
-		EntityInstancePtrOpt o_sin_x = sin_factory->create_instance();
-		EntityInstancePtrOpt o_cos_y = cos_factory->create_instance();
 
-		if (o_renderer.has_value() && o_sin_x.has_value() && o_cos_y.has_value())
+		if (o_counter.has_value() && o_sin.has_value() && o_cos.has_value() && o_renderer.has_value())
 		{
+			counter = o_counter.value();
+			sin = o_sin.value();
+			cos = o_cos.value();
 			renderer = o_renderer.value();
-			sin_x = o_sin_x.value();
-			cos_y = o_cos_y.value();
-			EntityAttributeInstanceOpt o_sin_x_attr_value = sin_x->get_attribute_instance(inexor::entity_system::type_system::SinEntityTypeProvider::SIN_VALUE);
-			EntityAttributeInstanceOpt o_cos_y_attr_value = cos_y->get_attribute_instance(inexor::entity_system::type_system::CosEntityTypeProvider::COS_VALUE);
-			EntityAttributeInstanceOpt o_renderer_x_attr_value = renderer->get_attribute_instance(RendererEntityTypeProvider::RENDERER_X);
-			EntityAttributeInstanceOpt o_renderer_y_attr_value = renderer->get_attribute_instance(RendererEntityTypeProvider::RENDERER_Y);
-			if (o_sin_x_attr_value.has_value() && o_cos_y_attr_value.has_value() && o_renderer_x_attr_value.has_value() && o_renderer_y_attr_value.has_value())
-			{
-				sin_x_attr_value = o_sin_x_attr_value.value();
-				cos_y_attr_value = o_cos_y_attr_value.value();
-				renderer_x_attr_value = o_renderer_x_attr_value.value();
-				renderer_y_attr_value = o_renderer_y_attr_value.value();
-			} else {
 
+			EntityAttributeInstanceOpt o_counter_attr_count = counter->get_attribute_instance(entity_system::type_system::CounterFloatEntityTypeProvider::COUNTER_FLOAT_COUNT);
+			EntityAttributeInstanceOpt o_sin_attr_input = sin->get_attribute_instance(entity_system::type_system::SinEntityTypeProvider::SIN_INPUT);
+			EntityAttributeInstanceOpt o_sin_attr_value = sin->get_attribute_instance(entity_system::type_system::SinEntityTypeProvider::SIN_VALUE);
+			EntityAttributeInstanceOpt o_cos_attr_input = cos->get_attribute_instance(entity_system::type_system::CosEntityTypeProvider::COS_INPUT);
+			EntityAttributeInstanceOpt o_cos_attr_value = cos->get_attribute_instance(entity_system::type_system::CosEntityTypeProvider::COS_VALUE);
+			EntityAttributeInstanceOpt o_renderer_attr_x = renderer->get_attribute_instance(RendererEntityTypeProvider::RENDERER_X);
+			EntityAttributeInstanceOpt o_renderer_attr_y = renderer->get_attribute_instance(RendererEntityTypeProvider::RENDERER_Y);
+
+			if (o_counter_attr_count.has_value() && o_sin_attr_value.has_value() && o_cos_attr_value.has_value() && o_renderer_attr_x.has_value() && o_renderer_attr_y.has_value())
+			{
+				counter_attr_count = o_counter_attr_count.value();
+				sin_attr_input = o_sin_attr_input.value();
+				sin_attr_value = o_sin_attr_value.value();
+				cos_attr_input = o_cos_attr_input.value();
+				cos_attr_value = o_cos_attr_value.value();
+				renderer_attr_x = o_renderer_attr_x.value();
+				renderer_attr_y = o_renderer_attr_y.value();
+			} else {
+				spdlog::get(LOGGER_NAME)->error("Failed to get attributes");
 			}
+
 		} else {
-			spdlog::get(LOGGER_NAME)->error("Failed to create renderer instance");
+			spdlog::get(LOGGER_NAME)->error("Failed to create entity instances: SIN, COS, RENDERER");
 		}
 
 		GLFWwindow *window = create_window();
-		std::thread start_thread(&inexor::renderer::RendererManager::start_window_thread, this, window);
+		std::thread start_thread(&renderer::RendererManager::start_window_thread, this, window);
 		start_thread.detach();
 	}
 
 	void RendererManager::start_window_thread(GLFWwindow *window)
 	{
-		std::optional<std::shared_ptr<inexor::visual_scripting::Connector>> connector_x = connector_manager->create_connector(sin_x_attr_value, renderer_x_attr_value);
+		std::optional<std::shared_ptr<visual_scripting::Connector>> connector_c_sin = connector_manager->create_connector(counter_attr_count, sin_attr_input);
+		if (!connector_c_sin.has_value())
+		{
+			spdlog::get(LOGGER_NAME)->error("Failed to create connector_c_sin");
+		} else {
+			spdlog::get(LOGGER_NAME)->info("Created connector_c_sin");
+			connector_c_sin.value()->enable_debug();
+		}
+
+		std::optional<std::shared_ptr<visual_scripting::Connector>> connector_c_cos = connector_manager->create_connector(counter_attr_count, cos_attr_input);
+		if (!connector_c_cos.has_value())
+		{
+			spdlog::get(LOGGER_NAME)->error("Failed to create connector_c_cos");
+		} else {
+			spdlog::get(LOGGER_NAME)->info("Created connector_c_cos");
+			connector_c_cos.value()->enable_debug();
+		}
+
+		std::optional<std::shared_ptr<visual_scripting::Connector>> connector_x = connector_manager->create_connector(sin_attr_value, renderer_attr_x);
 		if (!connector_x.has_value())
 		{
 			spdlog::get(LOGGER_NAME)->error("Failed to create connector_x");
 		} else {
+			spdlog::get(LOGGER_NAME)->info("Created connector_x");
 			connector_x.value()->enable_debug();
 		}
 
-		std::optional<std::shared_ptr<inexor::visual_scripting::Connector>> connector_y = connector_manager->create_connector(cos_y_attr_value, renderer_y_attr_value);
+		std::optional<std::shared_ptr<visual_scripting::Connector>> connector_y = connector_manager->create_connector(cos_attr_value, renderer_attr_y);
 		if (!connector_y.has_value())
 		{
 			spdlog::get(LOGGER_NAME)->error("Failed to create connector_y");
 		} else {
+			spdlog::get(LOGGER_NAME)->info("Created connector_y");
 			connector_y.value()->enable_debug();
 		}
 
@@ -161,8 +194,8 @@ namespace renderer {
 		/* Loop until the user closes the window */
 		while(!glfwWindowShouldClose(window))
 		{
-			float x = std::get<DataType::FLOAT>(renderer_x_attr_value->value.Value());
-			float y = 0.0f - std::get<DataType::FLOAT>(renderer_y_attr_value->value.Value());
+			float x = std::get<DataType::FLOAT>(renderer_attr_x->value.Value());
+			float y = 0.0f - std::get<DataType::FLOAT>(renderer_attr_x->value.Value());
 			spdlog::get(LOGGER_NAME)->info("TranslationXY({}, {})", x, y);
 
 			Matrix3 transformation_matrix_x = Matrix3::translation(Vector2::xAxis(x));

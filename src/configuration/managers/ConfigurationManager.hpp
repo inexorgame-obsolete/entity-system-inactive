@@ -1,10 +1,10 @@
 #pragma once
 
 #include "entity-system/model/data/DataTypes.hpp"
-#include "type-system/factories/constants/BoolConstantFactory.hpp"
-#include "type-system/factories/constants/IntConstantFactory.hpp"
-#include "type-system/factories/constants/FloatConstantFactory.hpp"
-#include "type-system/factories/constants/StringConstantFactory.hpp"
+#include "type-system/factories/data/constants/BoolConstantFactory.hpp"
+#include "type-system/factories/data/constants/IntConstantFactory.hpp"
+#include "type-system/factories/data/constants/FloatConstantFactory.hpp"
+#include "type-system/factories/data/constants/StringConstantFactory.hpp"
 #include "logging/managers/LogManager.hpp"
 
 #include <unordered_map>

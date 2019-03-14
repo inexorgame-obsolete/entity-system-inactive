@@ -1,9 +1,9 @@
 #pragma once
 
 #include "entity-system/factories/entities/entity-instance-builder-factory/EntityInstanceBuilderFactory.hpp"
-#include "type-system/providers/console/StdInEntityTypeProvider.hpp"
-#include "type-system/providers/console/StdOutEntityTypeProvider.hpp"
-#include "type-system/providers/console/StdErrEntityTypeProvider.hpp"
+#include "type-system/providers/inout/console/StdInEntityTypeProvider.hpp"
+#include "type-system/providers/inout/console/StdOutEntityTypeProvider.hpp"
+#include "type-system/providers/inout/console/StdErrEntityTypeProvider.hpp"
 #include "visual-scripting/managers/ConnectorManager.hpp"
 
 namespace inexor {
@@ -39,13 +39,15 @@ namespace visual_scripting {
 
 			~ConsoleTest();
 
-			/// Initialization.
 			void init();
 
-			/// Tests for the connectors
-			void run_connector_tests();
+			void start_test();
+
+			void stop_test();
 
 		private:
+
+			bool running;
 
 			ConnectorManagerPtr connector_manager;
 			StdInEntityTypeProviderPtr stdin_entity_type_provider;
@@ -56,6 +58,9 @@ namespace visual_scripting {
 			EntityInstancePtrOpt o_stdin;
 			EntityInstancePtrOpt o_stdout;
 			EntityInstancePtrOpt o_stderr;
+
+			ConnectorPtr stdin_stdout_connector;
+			ConnectorPtr stdin_stderr_connector;
 
 	};
 

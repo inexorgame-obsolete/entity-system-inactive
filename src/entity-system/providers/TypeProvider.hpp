@@ -67,6 +67,8 @@ namespace entity_system {
 				{
 					type = o_type.value();
 					created = true;
+				} else {
+					std::cout << "ERR: " << type_name;
 				}
 				return type;
 			}

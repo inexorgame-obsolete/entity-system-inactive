@@ -4,14 +4,13 @@ namespace inexor {
 namespace entity_system {
 namespace type_system {
 
-
 	TypeSystemModule::TypeSystemModule(
-		TypeSystemFactoriesPtr type_system_factories,
-		TypeSystemProvidersPtr type_system_providers
+		TypeSystemProvidersPtr type_system_providers,
+		TypeSystemFactoriesPtr type_system_factories
 	)
 	{
-		this->type_system_factories = type_system_factories;
 		this->type_system_providers = type_system_providers;
+		this->type_system_factories = type_system_factories;
 	}
 
 	TypeSystemModule::~TypeSystemModule()
@@ -20,10 +19,9 @@ namespace type_system {
 
 	void TypeSystemModule::init()
 	{
-		type_system_factories->init();
 		type_system_providers->init();
+		type_system_factories->init();
 	}
-
 
 }
 }

@@ -6,8 +6,8 @@
 #include "entity-system/listeners/entities/EntityInstanceCreatedListener.hpp"
 #include "entity-system/listeners/entities/EntityInstanceDeletedListener.hpp"
 
-#include "type-system/factories/logger/LoggerFactory.hpp"
-#include "type-system/providers/logger/LoggerEntityTypeProvider.hpp"
+#include "type-system/factories/inout/logger/LoggerFactory.hpp"
+#include "type-system/providers/inout/logger/LoggerEntityTypeProvider.hpp"
 
 #include "spdlog/spdlog.h"
 #include "spdlog/async.h"

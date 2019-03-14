@@ -1,14 +1,14 @@
 #pragma once
 
-#include "type-system/factories/TypeSystemFactories.hpp"
 #include "type-system/providers/TypeSystemProviders.hpp"
+#include "type-system/factories/TypeSystemFactories.hpp"
 
 namespace inexor {
 namespace entity_system {
 namespace type_system {
 
-	using TypeSystemFactoriesPtr = std::shared_ptr<TypeSystemFactories>;
 	using TypeSystemProvidersPtr = std::shared_ptr<TypeSystemProviders>;
+	using TypeSystemFactoriesPtr = std::shared_ptr<TypeSystemFactories>;
 
     /// The type system module
 	class TypeSystemModule
@@ -17,8 +17,8 @@ namespace type_system {
 
 			/// Constructs the type system module.
 			TypeSystemModule(
-				TypeSystemFactoriesPtr type_system_factories,
-				TypeSystemProvidersPtr type_system_providers
+				TypeSystemProvidersPtr type_system_providers,
+				TypeSystemFactoriesPtr type_system_factories
 			);
 
 			~TypeSystemModule();
@@ -28,11 +28,11 @@ namespace type_system {
 
 		private:
 
-			/// The factories of the type system.
-			TypeSystemFactoriesPtr type_system_factories;
-
 			/// The providers of the type system.
 			TypeSystemProvidersPtr type_system_providers;
+
+			/// The factories of the type system.
+			TypeSystemFactoriesPtr type_system_factories;
 
 	};
 

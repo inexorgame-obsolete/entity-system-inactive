@@ -6,11 +6,8 @@
 #include "react/Signal.h"
 #include "react/Observer.h"
 
-#include <chrono>
 #include <iostream>
 #include <thread>
-
-using namespace std::chrono_literals;
 
 namespace inexor {
 namespace visual_scripting {
@@ -31,6 +28,7 @@ namespace visual_scripting {
 		EntityInstanceBuilderFactoryPtr entity_instance_builder_factory
 	)
 	{
+		this->running = false;
         this->connector_manager = connector_manager;
         this->stdin_entity_type_provider = stdin_entity_type_provider;
         this->stdout_entity_type_provider = stdout_entity_type_provider;
@@ -45,44 +43,63 @@ namespace visual_scripting {
 
 	void ConsoleTest::init()
 	{
-		std::thread t(&inexor::visual_scripting::ConsoleTest::run_connector_tests, this);
-		t.detach();
-	}
-
-	void ConsoleTest::run_connector_tests()
-	{
-		std::this_thread::sleep_for(2s);
-
 		// Create single instance for STDIN
 		o_stdin = entity_instance_builder_factory->get_builder()
 			->type(stdin_entity_type_provider->get_type())
 			->attribute(StdInEntityTypeProvider::CONSOLE_STDIN, std::string(""))
 			->build();
-		EntityAttributeInstancePtrOpt o_stdin_value = o_stdin.value()->get_attribute_instance(StdInEntityTypeProvider::CONSOLE_STDIN);
-		EntityAttributeInstancePtr stdin_value = o_stdin_value.value();
 
 		// Create single instance for STDOUT
 		o_stdout = entity_instance_builder_factory->get_builder()
 			->type(stdout_entity_type_provider->get_type())
 			->attribute(StdOutEntityTypeProvider::CONSOLE_STDOUT, std::string(""))
 			->build();
-		EntityAttributeInstancePtrOpt o_stdout_value = o_stdout.value()->get_attribute_instance(StdOutEntityTypeProvider::CONSOLE_STDOUT);
-		EntityAttributeInstancePtr stdout_value = o_stdout_value.value();
 
 		// Create single instance for STDERR
 		o_stderr = entity_instance_builder_factory->get_builder()
 			->type(stderr_entity_type_provider->get_type())
 			->attribute(StdErrEntityTypeProvider::CONSOLE_STDERR, std::string(""))
 			->build();
-		EntityAttributeInstancePtrOpt o_stderr_value = o_stderr.value()->get_attribute_instance(StdErrEntityTypeProvider::CONSOLE_STDERR);
-		EntityAttributeInstancePtr stderr_value = o_stderr_value.value();
 
-		ConnectorPtrOpt stdin_stdout_connector = connector_manager->create_connector(stdin_value, stdout_value);
-		stdin_stdout_connector.value()->enable_debug();
+	}
 
-		ConnectorPtrOpt stdin_stderr_connector = connector_manager->create_connector(stdin_value, stderr_value);
-		stdin_stderr_connector.value()->enable_debug();
+	void ConsoleTest::start_test()
+	{
+		if (!running && o_stdin.has_value() && o_stdout.has_value() && o_stderr.has_value())
+		{
+			EntityAttributeInstancePtr stdin_value = o_stdin.value()->get_attribute_instance(StdInEntityTypeProvider::CONSOLE_STDIN).value();
 
+			ConnectorPtrOpt o_stdin_stdout_connector = connector_manager->create_connector(
+				stdin_value,
+				o_stdout.value()->get_attribute_instance(StdOutEntityTypeProvider::CONSOLE_STDOUT).value()
+			);
+
+			ConnectorPtrOpt o_stdin_stderr_connector = connector_manager->create_connector(
+				stdin_value,
+				o_stderr.value()->get_attribute_instance(StdErrEntityTypeProvider::CONSOLE_STDERR).value()
+			);
+
+			if (o_stdin_stdout_connector.has_value() && o_stdin_stderr_connector.has_value())
+			{
+				stdin_stdout_connector = o_stdin_stdout_connector.value();
+				stdin_stdout_connector->enable_debug();
+
+				stdin_stderr_connector = o_stdin_stderr_connector.value();
+				stdin_stderr_connector->enable_debug();
+
+				running = true;
+			}
+		}
+	}
+
+	void ConsoleTest::stop_test()
+	{
+		if (running)
+		{
+			connector_manager->delete_connector(stdin_stderr_connector);
+			connector_manager->delete_connector(stdin_stdout_connector);
+			running = false;
+		}
 	}
 
 }

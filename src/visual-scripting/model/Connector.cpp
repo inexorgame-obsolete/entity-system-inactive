@@ -57,7 +57,18 @@ namespace visual_scripting {
 
 	void Connector::disconnect()
 	{
+		if (debug_enabled)
+		{
+			disable_debug();
+		}
 		input_attr->signal_wrapper <<= input_attr->own_value;
+		spdlog::get(LOGGER_NAME)->debug(
+			"Disconnected output {}.{} with input {}.{}",
+			output_attr->get_GUID().str(),
+			output_attr->get_entity_attribute_type()->get_type_name(),
+			input_attr->get_GUID().str(),
+			input_attr->get_entity_attribute_type()->get_type_name()
+		);
 	}
 
 	xg::Guid Connector::connector() const

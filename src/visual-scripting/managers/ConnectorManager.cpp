@@ -243,7 +243,16 @@ namespace visual_scripting {
 		std::vector<ConnectorPtr> output_connectors = output_to_connectors[output_GUID];
 		output_connectors.erase(remove(output_connectors.begin(), output_connectors.end(), connector), output_connectors.end());
 		input_to_connector.erase(input_GUID);
+		connectors[connector_GUID]->disconnect();
 		connectors.erase(connector_GUID);
+	}
+
+	void ConnectorManager::delete_connector(const ConnectorPtrOpt& connector)
+	{
+		if (connector.has_value())
+		{
+			delete_connector(connector.value());
+		}
 	}
 
 	bool ConnectorManager::connector_exists(const xg::Guid& connector_GUID)
@@ -254,6 +263,22 @@ namespace visual_scripting {
 	bool ConnectorManager::input_occupied(const xg::Guid& input_attr_GUID)
 	{
 		return ! (input_to_connector.end() == input_to_connector.find(input_attr_GUID));
+	}
+
+	void ConnectorManager::enable_debug(const ConnectorPtrOpt& connector)
+	{
+		if (connector.has_value())
+		{
+			connector.value()->enable_debug();
+		}
+	}
+
+	void ConnectorManager::disable_debug(const ConnectorPtrOpt& connector)
+	{
+		if (connector.has_value())
+		{
+			connector.value()->disable_debug();
+		}
 	}
 
 }

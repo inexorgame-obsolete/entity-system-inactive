@@ -2,8 +2,9 @@
 
 #include "entity-system/managers/entities/entity-instance-manager/EntityInstanceManager.hpp"
 #include "entity-system/model/data/DataTypes.hpp"
-#include "type-system/factories/trigonometric/SinFactory.hpp"
-#include "type-system/factories/trigonometric/CosFactory.hpp"
+#include "type-system/factories/generators/counters/CounterFloatFactory.hpp"
+#include "type-system/factories/math/trigonometric/SinFactory.hpp"
+#include "type-system/factories/math/trigonometric/CosFactory.hpp"
 #include "visual-scripting/managers/ConnectorManager.hpp"
 #include "visual-scripting/model/Connector.hpp"
 #include "renderer/factories/RendererFactory.hpp"
@@ -15,6 +16,7 @@ namespace inexor {
 namespace renderer {
 
 	using EntityInstanceManagerPtr = std::shared_ptr<entity_system::EntityInstanceManager>;
+	using CounterFloatFactoryPtr = std::shared_ptr<entity_system::type_system::CounterFloatFactory>;
 	using SinFactoryPtr = std::shared_ptr<entity_system::type_system::SinFactory>;
 	using CosFactoryPtr = std::shared_ptr<entity_system::type_system::CosFactory>;
 	using ConnectorManagerPtr = std::shared_ptr<visual_scripting::ConnectorManager>;
@@ -34,6 +36,7 @@ namespace renderer {
 			RendererManager(
 				EntityInstanceManagerPtr entity_instance_manager,
 				ConnectorManagerPtr connector_manager,
+				CounterFloatFactoryPtr counter_float_factory,
 				SinFactoryPtr sin_factory,
 				CosFactoryPtr cos_factory,
 				RendererFactoryPtr render_factory,
@@ -57,16 +60,19 @@ namespace renderer {
 			/// The entity instance manager
 			EntityInstanceManagerPtr entity_instance_manager;
 
-			/// The sin factory
-			SinFactoryPtr sin_factory;
-
-			/// The sin factory
-			CosFactoryPtr cos_factory;
-
 			/// The connector manager
 			ConnectorManagerPtr connector_manager;
 
-			/// The entity type provider
+			/// The factory for creating entities of type COUNTER_FLOAT.
+			CounterFloatFactoryPtr counter_float_factory;
+
+			/// The factory for creating entities of type SIN.
+			SinFactoryPtr sin_factory;
+
+			/// The factory for creating entities of type COS.
+			CosFactoryPtr cos_factory;
+
+			/// The factory for creating entities of type RENDERER.
 			RendererFactoryPtr renderer_factory;
 
 			/// The log manager
@@ -75,23 +81,35 @@ namespace renderer {
 			/// The renderer entity instance.
 			EntityInstancePtr renderer;
 
-			/// The sinus generator.
-			EntityInstancePtr sin_x;
+			/// The counter.
+			EntityInstancePtr counter;
 
-			/// The sinus generator.
-			EntityInstancePtr cos_y;
+			/// The sin operator.
+			EntityInstancePtr sin;
+
+			/// The cos operator.
+			EntityInstancePtr cos;
+
+			/// The attribute sin_input
+			EntityAttributeInstancePtr counter_attr_count;
+
+			/// The attribute sin_input
+			EntityAttributeInstancePtr sin_attr_input;
 
 			/// The attribute sin_value
-			EntityAttributeInstancePtr sin_x_attr_value;
+			EntityAttributeInstancePtr sin_attr_value;
+
+			/// The attribute cos_input
+			EntityAttributeInstancePtr cos_attr_input;
 
 			/// The attribute cos_value
-			EntityAttributeInstancePtr cos_y_attr_value;
+			EntityAttributeInstancePtr cos_attr_value;
 
 			/// The attribute renderer_x
-			EntityAttributeInstancePtr renderer_x_attr_value;
+			EntityAttributeInstancePtr renderer_attr_x;
 
 			/// The attribute renderer_x
-			EntityAttributeInstancePtr renderer_y_attr_value;
+			EntityAttributeInstancePtr renderer_attr_y;
 
     };
 

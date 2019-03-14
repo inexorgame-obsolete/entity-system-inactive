@@ -5,24 +5,18 @@ namespace entity_system {
 namespace type_system {
 
 	TypeSystemFactories::TypeSystemFactories(
-		ArithmeticFactoriesPtr arithmetic_factories,
-		ComparisonFactoriesPtr comparison_factories,
-		ConstantFactoriesPtr constant_factories,
-		ConverterFactoriesPtr converter_factories,
-		LoggerFactoriesPtr logger_factories,
+		DataFactoriesPtr data_factories,
+		InOutFactoriesPtr in_out_factories,
+		GeneratorFactoriesPtr generator_factories,
 		LogicalFactoriesPtr logical_factories,
-		StoreFactoriesPtr store_factories,
-		TrigonometricFactoriesPtr trigonometric_factories
+		MathFactoriesPtr math_factories
 	)
 	{
-		this->arithmetic_factories = arithmetic_factories;
-		this->comparison_factories = comparison_factories;
-		this->constant_factories = constant_factories;
-		this->converter_factories = converter_factories;
-		this->logger_factories = logger_factories;
+		this->data_factories = data_factories;
+		this->in_out_factories = in_out_factories;
+		this->generator_factories = generator_factories;
 		this->logical_factories = logical_factories;
-		this->store_factories = store_factories;
-		this->trigonometric_factories = trigonometric_factories;
+		this->math_factories = math_factories;
 	}
 
 	TypeSystemFactories::~TypeSystemFactories()
@@ -31,14 +25,11 @@ namespace type_system {
 
 	void TypeSystemFactories::init()
 	{
-		arithmetic_factories->init();
-		comparison_factories->init();
-		constant_factories->init();
-		converter_factories->init();
-		logger_factories->init();
+		data_factories->init();
+		in_out_factories->init();
+		generator_factories->init();
 		logical_factories->init();
-		store_factories->init();
-		trigonometric_factories->init();
+		math_factories->init();
 	}
 
 }

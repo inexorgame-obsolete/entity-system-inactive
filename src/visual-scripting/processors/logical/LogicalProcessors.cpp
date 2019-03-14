@@ -4,20 +4,12 @@ namespace inexor {
 namespace visual_scripting {
 
 	LogicalProcessors::LogicalProcessors(
-		NotProcessorPtr not_processor,
-		OrProcessorPtr or_processor,
-		AndProcessorPtr and_processor,
-		XorProcessorPtr xor_processor,
-		NorProcessorPtr nor_processor,
-		NandProcessorPtr nand_processor
+		ComparisonProcessorsPtr comparison_processors,
+		GateProcessorsPtr gate_processors
 	)
 	{
-		this->not_processor = not_processor;
-		this->or_processor = or_processor;
-		this->and_processor = and_processor;
-		this->xor_processor = xor_processor;
-		this->nor_processor = nor_processor;
-		this->nand_processor = nand_processor;
+		this->comparison_processors = comparison_processors;
+		this->gate_processors = gate_processors;
 	}
 
 	LogicalProcessors::~LogicalProcessors()
@@ -26,12 +18,8 @@ namespace visual_scripting {
 
 	void LogicalProcessors::init()
 	{
-		not_processor->init();
-		or_processor->init();
-		and_processor->init();
-		xor_processor->init();
-		nor_processor->init();
-		nand_processor->init();
+		this->comparison_processors->init();
+		this->gate_processors->init();
 	}
 
 }

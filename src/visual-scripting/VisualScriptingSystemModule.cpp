@@ -23,6 +23,7 @@ namespace visual_scripting {
 		connector_manager->init();
 		processors->init();
 		integration_tests->init();
+		integration_tests->start_tests();
 	}
 
 }

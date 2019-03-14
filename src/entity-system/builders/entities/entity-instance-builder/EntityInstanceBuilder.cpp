@@ -1,6 +1,8 @@
 #include "EntityInstanceBuilder.hpp"
 
 #include "entity-system/model/data/DataTypes.hpp"
+#include "entity-system/model/entity-attributes/entity-attribute-instances/EntityAttributeInstance.hpp"
+
 
 #include "spdlog/spdlog.h"
 
@@ -104,7 +106,6 @@ namespace entity_system {
 		if (o_entity_instance.has_value())
 		{
 			EntityInstancePtr entity_instance = o_entity_instance.value();
-			// TODO: set attribute values
 			for (auto& attr_entry : entity_instance_attributes) {
 				std::string attr_name = attr_entry.first;
 				DataContainerInitializer attr_value = attr_entry.second;
@@ -117,29 +118,30 @@ namespace entity_system {
 						{
 							case DataType::BOOL:
 								attr_inst->own_value.Set(std::get<DataType::BOOL>(data_value));
-								spdlog::debug("Set attribute {} = {}", attr_name, std::get<DataType::BOOL>(attr_inst->own_value.Value()));
+								spdlog::debug("Set {} attribute {} = {}", DataType::_from_integral(attr_inst->type)._to_string(), attr_name, std::get<DataType::BOOL>(attr_inst->own_value.Value()));
 								break;
 							case DataType::INT:
 								attr_inst->own_value.Set(std::get<DataType::INT>(data_value));
-								spdlog::debug("Set attribute {} = {}", attr_name, std::get<DataType::INT>(attr_inst->own_value.Value()));
+								spdlog::debug("Set {} attribute {} = {}", DataType::_from_integral(attr_inst->type)._to_string(), attr_name, std::get<DataType::INT>(attr_inst->own_value.Value()));
 								break;
 							case DataType::BIG_INT:
 								attr_inst->own_value.Set(std::get<DataType::BIG_INT>(data_value));
-								spdlog::debug("Set attribute {} = {}", attr_name, std::get<DataType::BIG_INT>(attr_inst->own_value.Value()));
+								spdlog::debug("Set {} attribute {} = {}", DataType::_from_integral(attr_inst->type)._to_string(), attr_name, std::get<DataType::BIG_INT>(attr_inst->own_value.Value()));
 								break;
 							case DataType::DOUBLE:
 								attr_inst->own_value.Set(std::get<DataType::DOUBLE>(data_value));
-								spdlog::debug("Set attribute {} = {}", attr_name, std::get<DataType::DOUBLE>(attr_inst->own_value.Value()));
+								spdlog::debug("Set {} attribute {} = {}", DataType::_from_integral(attr_inst->type)._to_string(), attr_name, std::get<DataType::DOUBLE>(attr_inst->own_value.Value()));
 								break;
 							case DataType::FLOAT:
 								attr_inst->own_value.Set(std::get<DataType::FLOAT>(data_value));
-								spdlog::debug("Set attribute {} = {}", attr_name, std::get<DataType::FLOAT>(attr_inst->own_value.Value()));
+								spdlog::debug("Set {} attribute {} = {}", DataType::_from_integral(attr_inst->type)._to_string(), attr_name, std::get<DataType::FLOAT>(attr_inst->own_value.Value()));
 								break;
 							case DataType::STRING:
 								attr_inst->own_value.Set(std::get<DataType::STRING>(data_value));
-								spdlog::debug("Set attribute {} = {}", attr_name, std::get<DataType::STRING>(attr_inst->own_value.Value()));
+								spdlog::debug("Set {} attribute {} = {}", DataType::_from_integral(attr_inst->type)._to_string(), attr_name, std::get<DataType::STRING>(attr_inst->own_value.Value()));
 								break;
 							default:
+								spdlog::error("Failed to set attribute {}: Unknown data type {} {}", attr_name, DataType::_from_integral(attr_inst->type)._to_string(),  attr_inst->type);
 								break;
 						}
 					} else {

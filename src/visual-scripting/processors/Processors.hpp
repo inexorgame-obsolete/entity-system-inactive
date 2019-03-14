@@ -1,26 +1,22 @@
 #pragma once
 
 #include "visual-scripting/managers/ProcessorRegistry.hpp"
-#include "visual-scripting/processors/arithmetic/ArithmeticProcessors.hpp"
-#include "visual-scripting/processors/comparison/ComparisonProcessors.hpp"
-#include "visual-scripting/processors/console/ConsoleProcessors.hpp"
-#include "visual-scripting/processors/logger/LoggerProcessors.hpp"
+#include "visual-scripting/processors/generators/GeneratorProcessors.hpp"
+#include "visual-scripting/processors/inout/InOutProcessors.hpp"
 #include "visual-scripting/processors/logical/LogicalProcessors.hpp"
-#include "visual-scripting/processors/trigonometric/TrigonometricProcessors.hpp"
+#include "visual-scripting/processors/math/MathProcessors.hpp"
 #include "visual-scripting/model/Processor.hpp"
 
 namespace inexor {
 namespace visual_scripting {
 
 	using ProcessorRegistryPtr = std::shared_ptr<ProcessorRegistry>;
-	using ArithmeticProcessorsPtr = std::shared_ptr<ArithmeticProcessors>;
-	using ComparisonProcessorsPtr = std::shared_ptr<ComparisonProcessors>;
-	using ConsoleProcessorsPtr = std::shared_ptr<ConsoleProcessors>;
-	using LoggerProcessorsPtr = std::shared_ptr<LoggerProcessors>;
+	using GeneratorProcessorsPtr = std::shared_ptr<GeneratorProcessors>;
+	using InOutProcessorsPtr = std::shared_ptr<InOutProcessors>;
 	using LogicalProcessorsPtr = std::shared_ptr<LogicalProcessors>;
-	using TrigonometricProcessorsPtr = std::shared_ptr<TrigonometricProcessors>;
+	using MathProcessorsPtr = std::shared_ptr<MathProcessors>;
 
-    /// Provides processors.
+    /// Provides the processors.
 	class Processors
 	{
 		public:
@@ -28,17 +24,15 @@ namespace visual_scripting {
 			/// Constructs the processors.
 			Processors(
 				ProcessorRegistryPtr processor_registry,
-				ArithmeticProcessorsPtr arithmetic_processors,
-				ComparisonProcessorsPtr comparison_processors,
-				ConsoleProcessorsPtr console_processors,
-				LoggerProcessorsPtr logger_processors,
+				GeneratorProcessorsPtr generator_processors,
+				InOutProcessorsPtr inout_processors,
 				LogicalProcessorsPtr logical_processors,
-				TrigonometricProcessorsPtr trigonometric_processors
+				MathProcessorsPtr math_processors
 			);
 
 			~Processors();
 
-			/// Initialization of the Processors.
+			/// Initialization of the processors.
 			void init();
 
 		private:
@@ -46,23 +40,17 @@ namespace visual_scripting {
 			/// The registry for processors.
 			ProcessorRegistryPtr processor_registry;
 
-			/// The manager for processors for arithmetic operations.
-			ArithmeticProcessorsPtr arithmetic_processors;
+			/// The processors for generators like counters and timers.
+			GeneratorProcessorsPtr generator_processors;
 
-			/// The manager for comparison processors.
-			ComparisonProcessorsPtr comparison_processors;
+			/// The processors for input and output.
+			InOutProcessorsPtr inout_processors;
 
-			/// The manager for console processors.
-			ConsoleProcessorsPtr console_processors;
-
-			/// The manager for logger processors.
-			LoggerProcessorsPtr logger_processors;
-
-			/// The manager for processors for logical operations.
+			/// The processors for logical operations.
 			LogicalProcessorsPtr logical_processors;
 
-			/// The manager for processors trigonometric operations.
-			TrigonometricProcessorsPtr trigonometric_processors;
+			/// The processors for mathematical operations.
+			MathProcessorsPtr math_processors;
 
 	};
 

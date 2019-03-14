@@ -19,7 +19,7 @@ namespace renderer {
 
 	EntityInstancePtrOpt RendererFactory::create_instance(float x, float y) {
 		return this->entity_instance_builder_factory->get_builder()
-			->type(this->renderer_entity_type_provider->get_type())
+			->type(renderer_entity_type_provider->get_type())
 			->attribute(RendererEntityTypeProvider::RENDERER_X, x)
 			->attribute(RendererEntityTypeProvider::RENDERER_Y, y)
 			->build();

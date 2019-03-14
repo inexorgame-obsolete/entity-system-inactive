@@ -5,20 +5,12 @@ namespace entity_system {
 namespace type_system {
 
 	LogicalProviders::LogicalProviders(
-		NotEntityTypeProviderPtr not_entity_type_provider,
-		OrEntityTypeProviderPtr or_entity_type_provider,
-		AndEntityTypeProviderPtr and_entity_type_provider,
-		XorEntityTypeProviderPtr xor_entity_type_provider,
-		NorEntityTypeProviderPtr nor_entity_type_provider,
-		NandEntityTypeProviderPtr nand_entity_type_provider
+		ComparisonProvidersPtr comparison_providers,
+		GateProvidersPtr gate_providers
 	)
 	{
-		this->not_entity_type_provider = not_entity_type_provider;
-		this->or_entity_type_provider = or_entity_type_provider;
-		this->and_entity_type_provider = and_entity_type_provider;
-		this->xor_entity_type_provider = xor_entity_type_provider;
-		this->nor_entity_type_provider = nor_entity_type_provider;
-		this->nand_entity_type_provider = nand_entity_type_provider;
+		this->comparison_providers = comparison_providers;
+		this->gate_providers = gate_providers;
 	}
 
 	LogicalProviders::~LogicalProviders()
@@ -27,6 +19,8 @@ namespace type_system {
 
 	void LogicalProviders::init()
 	{
+		comparison_providers->init();
+		gate_providers->init();
 	}
 
 }

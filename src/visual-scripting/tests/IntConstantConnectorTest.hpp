@@ -1,7 +1,7 @@
 #pragma once
 
-#include "type-system/factories/arithmetic/AddIntFactory.hpp"
-#include "type-system/factories/constants/IntConstantFactory.hpp"
+#include "type-system/factories/math/arithmetic/AddIntFactory.hpp"
+#include "type-system/factories/data/constants/IntConstantFactory.hpp"
 #include "visual-scripting/managers/ConnectorManager.hpp"
 #include "logging/managers/LogManager.hpp"
 
@@ -37,10 +37,15 @@ namespace visual_scripting {
 			/// Initialization.
 			void init();
 
-			/// Tests for the connectors
-			void run_connector_tests();
+			void start_test();
+
+			void stop_test();
+
+			void run_test();
 
 		private:
+
+			bool running;
 
 			/// The connector manager.
 			ConnectorManagerPtr connector_manager;
@@ -56,6 +61,28 @@ namespace visual_scripting {
 
 			/// The entity instance for the logger.
 			EntityInstancePtrOpt o_logger;
+
+			EntityInstancePtrOpt o_source;
+			EntityInstancePtrOpt o_target_1;
+			EntityInstancePtrOpt o_target_2;
+			EntityInstancePtrOpt o_target_3;
+			EntityInstancePtrOpt o_add_int;
+
+			EntityAttributeInstancePtr source_attr_value;
+			EntityAttributeInstancePtr target_1_attr_value;
+			EntityAttributeInstancePtr target_2_attr_value;
+			EntityAttributeInstancePtr target_3_attr_value;
+			EntityAttributeInstancePtr add_int_attr_augend;
+			EntityAttributeInstancePtr add_int_attr_addend;
+			EntityAttributeInstancePtr add_int_attr_sum;
+
+			ConnectorPtrOpt connector_1;
+			ConnectorPtrOpt connector_2;
+			ConnectorPtrOpt connector_3;
+			ConnectorPtrOpt connector_4;
+			ConnectorPtrOpt connector_5;
+
+			ObserverT observer;
 
 			/// The logger name of this service.
 			static constexpr char LOGGER_NAME[] = "inexor.vs.test.intconst";
@@ -79,15 +106,21 @@ namespace visual_scripting {
 			/// The name of the add int.
 			static constexpr char ADD_INT_NAME[] = "add_int";
 
+			void create_instances();
+
+			void create_connectors();
+
+			void create_observer();
+
 			void log_create_entity_instance(std::string entity_instance_name, int initial_value);
 
 			void log_create_connector(std::string output_entity_instance_name, std::string output_entity_attr_name, std::string input_entity_instance_name, std::string input_entity_attr_name);
 
+			void log_attrs(std::string message);
+
 			void log_attr(std::string entity_instance_name, std::string entity_attr_name, EntityAttributeInstancePtr entity_attribute_instance);
 
 			void log_data_value(std::string prefix, std::string entity_instance_name, std::string entity_attr_name, entity_system::DataValue data_value);
-
-			void enable_connector_debug(ConnectorPtrOpt connector);
 
 	};
 

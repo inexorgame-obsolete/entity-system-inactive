@@ -1,7 +1,7 @@
 #include "LogManager.hpp"
 
 #include "entity-system/model/entity-attributes/entity-attribute-instances/EntityAttributeInstance.hpp"
-#include "visual-scripting/processors/logger/LoggerProcessor.hpp"
+#include "visual-scripting/processors/inout/logger/LoggerProcessor.hpp"
 
 namespace inexor {
 namespace logging {
