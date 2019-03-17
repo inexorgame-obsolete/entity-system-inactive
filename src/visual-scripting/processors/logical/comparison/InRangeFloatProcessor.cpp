@@ -60,9 +60,9 @@ namespace visual_scripting {
 				),
 				[] (DataValue in_range_float_input, DataValue in_range_float_min, DataValue in_range_float_max)
 				{
-					int input = static_cast<int>(std::get<DataType::FLOAT>(in_range_float_input));
-					int min = static_cast<int>(std::get<DataType::FLOAT>(in_range_float_min));
-					int max = static_cast<int>(std::get<DataType::FLOAT>(in_range_float_max));
+					float input = std::get<DataType::FLOAT>(in_range_float_input);
+					float min = std::get<DataType::FLOAT>(in_range_float_min);
+					float max = std::get<DataType::FLOAT>(in_range_float_max);
 					return DataValue(input > min && input < max);
 				}
 			);
