@@ -74,7 +74,7 @@ namespace renderer {
 	{
 		log_manager->register_logger(LOGGER_NAME);
 
-		EntityInstancePtrOpt o_counter = counter_float_factory->create_instance(50, 0.1);
+		EntityInstancePtrOpt o_counter = counter_float_factory->create_instance(50, 0.1f);
 		EntityInstancePtrOpt o_sin = sin_factory->create_instance();
 		EntityInstancePtrOpt o_cos = cos_factory->create_instance();
 		EntityInstancePtrOpt o_renderer = renderer_factory->create_instance(0.5f, -0.5f);

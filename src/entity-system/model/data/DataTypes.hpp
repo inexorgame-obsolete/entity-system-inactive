@@ -29,7 +29,7 @@ constexpr Enum max()
 // And use that to declare a bit set template:
 
 template <typename Enum>
-using EnumSet = std::bitset<max<Enum>()._to_integral() + 1>;
+using EnumSet = std::bitset<7>;
 
 
 namespace inexor {

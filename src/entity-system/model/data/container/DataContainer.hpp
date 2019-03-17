@@ -93,7 +93,7 @@ namespace entity_system {
 		DataContainer(const DataValue& data_value)
 		{
 			/// Detect type by std::variant index()
-			this->type = DataType::_from_integral(data_value.index());
+			this->type = DataType::_from_integral(static_cast<int>(data_value.index()));
 			this->own_value = MakeVar<D>(data_value);
 			this->signal_wrapper = MakeVar<D>(this->own_value);
 			this->value = Flatten(this->signal_wrapper);
