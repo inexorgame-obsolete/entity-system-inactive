@@ -18,7 +18,8 @@ namespace inexor {
 		EntitySystemDebuggerPtr entity_system_debugger,
 		VisualScriptingSystemModulePtr visual_scripting_system_module,
 		LogManagerPtr log_manager,
-		RendererManagerPtr renderer_manager
+		RendererModulePtr renderer_module,
+		CommandModulePtr command_module
 	)
 	{
 		this->entity_system_module = entity_system_module;
@@ -28,7 +29,8 @@ namespace inexor {
 		this->entity_system_debugger = entity_system_debugger;
 		this->visual_scripting_system_module = visual_scripting_system_module;
 		this->log_manager = log_manager;
-		this->renderer_manager = renderer_manager;
+		this->renderer_module = renderer_module;
+		this->command_module = command_module;
 		this->running = false;
 	}
 	
@@ -71,7 +73,10 @@ namespace inexor {
 		visual_scripting_system_module->init();
 
 		// Initialize the rendering
-		renderer_manager->init();
+		renderer_module->init();
+
+		// Initialize the command module
+		command_module->init();
 
 		// Setup REST server
 		rest_server->set_service(rest_server);

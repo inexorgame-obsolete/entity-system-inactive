@@ -9,7 +9,8 @@
 #include "configuration/ConfigurationModule.hpp"
 #include "visual-scripting/VisualScriptingSystemModule.hpp"
 #include "logging/managers/LogManager.hpp"
-#include "renderer/managers/RendererManager.hpp"
+#include "renderer/RendererModule.hpp"
+#include "command/CommandModule.hpp"
 
 #include <memory>
 #include <cstdlib>
@@ -36,7 +37,8 @@ namespace inexor {
 	using EntitySystemDebuggerPtr = std::shared_ptr<entity_system::EntitySystemDebugger>;
 	using VisualScriptingSystemModulePtr = std::shared_ptr<visual_scripting::VisualScriptingSystemModule>;
 	using LogManagerPtr = std::shared_ptr<logging::LogManager>;
-	using RendererManagerPtr = std::shared_ptr<renderer::RendererManager>;
+	using RendererModulePtr = std::shared_ptr<renderer::RendererModule>;
+	using CommandModulePtr = std::shared_ptr<command::CommandModule>;
 
 	/// @class Inexor
 	/// @brief The application container.
@@ -63,7 +65,8 @@ namespace inexor {
 				EntitySystemDebuggerPtr entity_system_debugger,
 				VisualScriptingSystemModulePtr visual_scripting_system_module,
 				LogManagerPtr log_manager,
-				RendererManagerPtr renderer_manager
+				RendererModulePtr renderer_module,
+				CommandModulePtr command_module
 			);
 
 			/// Destructor.
@@ -114,8 +117,11 @@ namespace inexor {
             /// Management of the loggers
 			LogManagerPtr log_manager;
 
-            /// Management of the renderers
-			RendererManagerPtr renderer_manager;
+            /// The rendering system
+			RendererModulePtr renderer_module;
+
+            /// The rendering system
+			CommandModulePtr command_module;
 
 			/// The running state of the Inexor application
 			bool running;
