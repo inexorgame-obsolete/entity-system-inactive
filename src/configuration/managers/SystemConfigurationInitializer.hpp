@@ -9,24 +9,29 @@ namespace configuration {
 
 	using ConfigurationManagerPtr = std::shared_ptr<ConfigurationManager>;
 
-	/// Initializes the environment variables as configuration items.
+    /// @class SystemConfigurationInitializer
+	/// @brief Initializes the environment variables as configuration items.
 	class SystemConfigurationInitializer
 	{
 
 		public:
 
+            /// @brief Constructor.
+            /// @note The dependencies of this class will be injected automatically.
+            /// @param configuration_manager The configuration manager.
 			SystemConfigurationInitializer(
 				ConfigurationManagerPtr configuration_manager
 			);
 
+            /// Destructor.
 			~SystemConfigurationInitializer();
 
-			/// Initialization
+			/// Initialization.
 			void init();
 
 		private:
 
-			/// The configuration manager
+			/// The configuration manager.
 			ConfigurationManagerPtr configuration_manager;
 
 	};
