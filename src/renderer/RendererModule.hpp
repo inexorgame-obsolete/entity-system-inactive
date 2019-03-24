@@ -5,15 +5,19 @@
 namespace inexor {
 namespace renderer {
 
-    /// Module Renderer
+    /// @class RendererModule
+    /// @brief Rendering module.
 	class RendererModule
 	{
 		using RendererManagerPtr = std::shared_ptr<RendererManager>;
 
 		public:
 
+            /// @brief Constructor.
+            /// @note The dependencies of this class will be injected automatically.
+			/// @note The RendererManager is only an example right now.
+            /// @param renderer_manager The renderer manager.
 			RendererModule(
-				// The RendererManager is only an example right now
 				RendererManagerPtr renderer_manager
 				// WindowManager
 				// UserInterfaceRenderer
@@ -22,14 +26,15 @@ namespace renderer {
 				// ...
 			);
 
+            /// Destructor.
 			~RendererModule();
 
-			/// Initialization of the renderer module
+			/// Initialization of the renderer module.
 			void init();
 
 		private:
 
-			/// The renderer manager
+			/// The renderer manager.
 			RendererManagerPtr renderer_manager;
 
 	};
