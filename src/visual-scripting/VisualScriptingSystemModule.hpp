@@ -11,18 +11,24 @@ namespace visual_scripting {
 	using ProcessorsPtr = std::shared_ptr<Processors>;
 	using IntegrationTestsPtr = std::shared_ptr<IntegrationTests>;
 
-    /// This module provides the visual scripting system.
+    /// @class VisualScriptingSystemModule
+    /// @brief This module provides the visual scripting system.
 	class VisualScriptingSystemModule
 	{
 		public:
 
-			/// Constructs the visual scripting system.
+			/// @brief Constructs the visual scripting system.
+            /// @note The dependencies of this class will be injected automatically.
+            /// @param connector_manager Manages the connections between attribute instances.
+            /// @param processors The processors.
+            /// @param integration_tests The integration tests.
 			VisualScriptingSystemModule(
 				ConnectorManagerPtr connector_manager,
 				ProcessorsPtr processors,
 				IntegrationTestsPtr integration_tests
 			);
 
+            /// Destructor.
 			~VisualScriptingSystemModule();
 
 			/// Initializes the visual scripting system.
