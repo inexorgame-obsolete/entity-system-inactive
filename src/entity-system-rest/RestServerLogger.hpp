@@ -1,10 +1,3 @@
-/*
- * RestServerLogger.hpp
- *
- *  Created on: 19.01.2019
- *      Author: aschaeffer
- */
-
 #pragma once
 
 #include <cstdarg>
@@ -23,16 +16,37 @@ using namespace restbed;
 namespace inexor {
 namespace entity_system {
 
+    /// @class RestServerLogger
+    /// @brief The REST server logger.
 	class RestServerLogger: public Logger
     {
 		public:
-			RestServerLogger() {};
-			virtual ~RestServerLogger() {};
-			void stop( void ) { return; };
-			void start( const shared_ptr< const Settings >& ) { return; };
+            
+            /// Constructor.
+			RestServerLogger()
+            {
+            };
 
+            /// Virtual destructor.
+			virtual ~RestServerLogger()
+            {
+            };
 
-            /// Write down a server message in spdlog.
+            /// ?
+			void stop()
+            {
+                return;
+            };
+    
+            /// ?
+			void start(const shared_ptr<const Settings>&)
+            {
+                return;
+            };
+
+            /// @brief Write down a server message in spdlog.
+            /// @param level ?
+            /// @param format ?
 			void log(const Level level, const char* format, ...)
 			{
                 char spdlog_message[INEXOR_REST_API_MAX_MESSAGE_SIZE];
@@ -65,17 +79,19 @@ namespace entity_system {
                 }
 			};
 
-
+            /// @brief ?
+            /// @param expression ?
+            /// @param level ?
+            /// @param format ?
 			void log_if(bool expression, const Level level, const char* format, ...)
 			{
-				if (expression)
+				if(expression)
 				{
 					va_list arguments;
 					va_start(arguments, format);
 					log(level, format, arguments);
 					va_end(arguments);
 				}
-
 			};
 	};
 
