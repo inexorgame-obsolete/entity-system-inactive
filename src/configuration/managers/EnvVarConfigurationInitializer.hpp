@@ -14,30 +14,37 @@ namespace configuration {
 
 	using ConfigurationManagerPtr = std::shared_ptr<ConfigurationManager>;
 
-	/// Initializes the environment variables as configuration items.
+    /// @class EnvVarConfigurationInitializer
+	/// @brief Initializes the environment variables as configuration items.
 	class EnvVarConfigurationInitializer
 	{
 
 		public:
 
+            /// @brief Constructor.
+            /// @note The dependencies of this class will be injected automatically.
+            /// @param configuration_manager The configuration manager.
 			EnvVarConfigurationInitializer(
 				ConfigurationManagerPtr configuration_manager
 			);
 
+            /// Destructor.
 			~EnvVarConfigurationInitializer();
 
-			/// Initialization
+			/// Initialization.
 			void init();
 
-			/// Creates a configuration item for the environment variable
+			/// Creates a configuration item for the environment variable.
+            /// @param env_name The name of the enviroment variable.
 			void set_by_env_var(std::string env_name);
 
 		private:
 
-			/// The configuration manager
+			/// The configuration manager.
 			ConfigurationManagerPtr configuration_manager;
 
-			/// Returns the value of the environment variable if exists or nullopt
+			/// Returns the value of the environment variable if exists or nullopt.
+            /// @param env_name The name of the enviroment variable.
 			std::optional<std::string> get_env_var(std::string const& env_name);
 
 	};

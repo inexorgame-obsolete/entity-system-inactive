@@ -19,7 +19,7 @@ namespace configuration {
 
 	void EnvVarConfigurationInitializer::init()
 	{
-		for (size_t index = 0; index < EnvironmentVariables::_size(); ++index)
+		for(size_t index = 0; index < EnvironmentVariables::_size(); ++index)
 		{
 			set_by_env_var(EnvironmentVariables::_names()[index]);
 		}
@@ -28,7 +28,7 @@ namespace configuration {
 	void EnvVarConfigurationInitializer::set_by_env_var(std::string env_name)
 	{
 		std::optional<std::string> env_value = get_env_var(env_name);
-		if (env_value.has_value())
+		if(env_value.has_value())
 		{
 			configuration_manager->set("ENV_" + env_name, env_value.value());
 		}
@@ -40,7 +40,5 @@ namespace configuration {
 	    return env_value == NULL ? std::nullopt : std::optional<std::string> { std::string(env_value) };
 	}
 
-
 }
 }
-
