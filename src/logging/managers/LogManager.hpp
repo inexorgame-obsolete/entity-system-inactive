@@ -32,8 +32,12 @@ namespace logging {
 	{
 		public:
 
-			/// Constructor.
-			LogManager(
+			/// @brief Constructor.
+            /// @note The dependencies of this class will be injected automatically.
+		    /// @param logger_entity_type_provider
+		    /// @param logger_factory
+		    /// @param entity_instance_manager
+            LogManager(
 				LoggerEntityTypeProviderPtr logger_entity_type_provider,
 				LoggerFactoryPtr logger_factory,
 				EntityInstanceManagerPtr entity_instance_manager
@@ -42,50 +46,60 @@ namespace logging {
 			/// Destructor.
 			~LogManager();
 
-			/// Initialization of the loggers
+			/// Initialization of the loggers.
 			void init();
 
-			/// Registers a logger
+			/// Registers a logger.
+            /// @param logger_name The name of the logger.
 			EntityInstancePtrOpt register_logger(std::string logger_name);
 
-			/// Unregisters a logger
+			/// Unregisters a logger.
+            /// @param logger_name The name of the logger.
 			void unregister_logger(std::string logger_name);
 
 			/// Sets the log level for the given logger
+            /// @param logger_name The name of the logger.
+            /// @param level The level of the logger.
 			void set_level(std::string logger_name, spdlog::level::level_enum level);
 
-			/// Returns the log level for the given logger
+			/// Returns the log level for the given logger.
+            /// @param logger_name The name of the logger.
 			spdlog::level::level_enum get_level(std::string logger_name);
 
+            /// Get method for the logger.
+            /// @param logger_name The name of the logger.
 			EntityInstancePtrOpt get_logger(std::string logger_name);
 
-			/// Called when an entity instance of type ADD_INT has been created
+			/// Called when an entity instance of type ADD_INT has been created.
+            /// @param entity_instance The instance of the entity.
 			void on_entity_instance_created(EntityInstancePtr entity_instance);
 
-			/// Called when an entity instance of type ADD_INT has been deleted
+			/// Called when an entity instance of type ADD_INT has been deleted.
+            /// @param type_GUID The GUID of the type.
+            /// @param inst_GUID The GUID of the instance.
 			void on_entity_instance_deleted(const xg::Guid& type_GUID, const xg::Guid& inst_GUID);
 
 		private:
 
-			/// The logger sinks
+			/// The logger sinks.
 			std::vector<spdlog::sink_ptr> sinks;
 
-			/// The entity type provider
+			/// The entity type provider.
 			LoggerEntityTypeProviderPtr logger_entity_type_provider;
 
-			/// The entity type provider
+			/// The entity type provider.
 			LoggerFactoryPtr logger_factory;
 
-			/// The entity instance manager
+			/// The entity instance manager.
 			EntityInstanceManagerPtr entity_instance_manager;
 
-			/// The logger representation in the entity system
+			/// The logger representation in the entity system.
 			std::unordered_map<std::string, EntityInstancePtr> logger_instances;
 
-			/// The logger name of this service
+			/// The logger name of this service.
 			static constexpr char LOGGER_NAME[] = "inexor.logging.LogManager";
 
-			/// The log file name
+			/// The log file name.
 			static constexpr char LOG_FILE_NAME[] = "inexor.log";
 
 	};
