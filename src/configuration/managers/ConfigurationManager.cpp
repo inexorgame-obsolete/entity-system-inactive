@@ -39,40 +39,48 @@ namespace configuration {
 
 	void ConfigurationManager::set(std::string config_name, bool value)
 	{
-		if (!exists(config_name))
+		if(!exists(config_name))
 		{
 			insert(config_name, BOOL_CONSTANT_VALUE, bool_constant_factory->create_instance(config_name, value));
-		} else {
+		}
+        else
+        {
 			config_items[config_name]->own_value.Set(value);
 		}
 	}
 
 	void ConfigurationManager::set(std::string config_name, int value)
 	{
-		if (!exists(config_name))
+		if(!exists(config_name))
 		{
 			insert(config_name, INT_CONSTANT_VALUE, int_constant_factory->create_instance(config_name, value));
-		} else {
+		}
+        else
+        {
 			config_items[config_name]->own_value.Set(value);
 		}
 	}
 
 	void ConfigurationManager::set(std::string config_name, float value)
 	{
-		if (!exists(config_name))
+		if(!exists(config_name))
 		{
 			insert(config_name, FLOAT_CONSTANT_VALUE, float_constant_factory->create_instance(config_name, value));
-		} else {
+		}
+        else
+        {
 			config_items[config_name]->own_value.Set(value);
 		}
 	}
 
 	void ConfigurationManager::set(std::string config_name, std::string value)
 	{
-		if (!exists(config_name))
+		if(!exists(config_name))
 		{
 			insert(config_name, STRING_CONSTANT_VALUE, string_constant_factory->create_instance(config_name, value));
-		} else {
+		}
+        else
+        {
 			config_items[config_name]->own_value.Set(value);
 		}
 	}
@@ -105,7 +113,7 @@ namespace configuration {
 	void ConfigurationManager::list()
 	{
 		spdlog::get(LOGGER_NAME)->info("Configuration items:");
-		for (auto& it : config_items)
+		for(auto& it : config_items)
 		{
 			spdlog::get(LOGGER_NAME)->info(
 				"  [{}] [{}] [{}]",
@@ -118,11 +126,12 @@ namespace configuration {
 
 	void ConfigurationManager::insert(std::string config_name, std::string attribute_name, EntityInstancePtrOpt config_item)
 	{
-		if (config_item.has_value())
+		if(config_item.has_value())
 		{
 			EntityInstancePtr entity_instance = config_item.value();
 			EntityAttributeInstancePtrOpt o_attribute_instance = entity_instance->get_attribute_instance(attribute_name);
-			if (o_attribute_instance.has_value())
+			
+            if(o_attribute_instance.has_value())
 			{
 				config_items[config_name] = o_attribute_instance.value();
 				spdlog::get(LOGGER_NAME)->info("Added configuration: [{}] [{}] [{}]", config_name, config_items[config_name]->type._to_string(), data_value_to_string(config_items[config_name]->type, config_items[config_name]->value.Value()));
