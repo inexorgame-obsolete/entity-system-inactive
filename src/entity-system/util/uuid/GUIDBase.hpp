@@ -6,8 +6,8 @@
 namespace inexor {
 namespace entity_system {
 
-	/// @brief A base class for
-    /// globally unique identifiers (GUIDs).
+    /// @class GUIDBase
+	/// @brief A base class for globally unique identifiers (GUIDs).
     /// @note The implementation is based on crossguid.
 	class GUIDBase
 	{
