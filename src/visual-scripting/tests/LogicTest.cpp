@@ -38,7 +38,7 @@ namespace visual_scripting {
 
 	void LogicTest::start_test()
 	{
-		if (!running)
+		if(!running)
 		{
 			std::thread t(&inexor::visual_scripting::LogicTest::run_test, this);
 			t.detach();
@@ -47,7 +47,7 @@ namespace visual_scripting {
 
 	void LogicTest::stop_test()
 	{
-		if (running)
+		if(running)
 		{
 			running = false;
 		}

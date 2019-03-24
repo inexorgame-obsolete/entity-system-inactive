@@ -35,8 +35,15 @@ namespace visual_scripting {
 	{
 		public:
 
+            /// 
     		USING_REACTIVE_DOMAIN(entity_system::D)
 
+            /// @brief Constructor.
+            /// @note The dependencies of this class will be injected automatically.
+            /// @param connector_manager ?
+            /// @param stdin_entity_type_provider ?
+            /// @param equals_string_factory ?
+            /// @param entity_instance_builder_factory ?
 			LogicTest(
 				ConnectorManagerPtr connector_manager,
 				StdInEntityTypeProviderPtr stdin_entity_type_provider,
@@ -44,23 +51,36 @@ namespace visual_scripting {
 				EntityInstanceBuilderFactoryPtr entity_instance_builder_factory
 			);
 
+            /// Destructor.
 			~LogicTest();
 
+            /// ?
 			void init();
 
+            /// ?
 			void start_test();
 
+            /// ?
 			void stop_test();
 
+            /// ?
 			void run_test();
 
 		private:
 
+            /// The running state of the logic test.
 			bool running;
 
-			ConnectorManagerPtr connector_manager;
+			/// ?
+            ConnectorManagerPtr connector_manager;
+            
+            /// ?
 			StdInEntityTypeProviderPtr stdin_entity_type_provider;
+
+            /// ?
 			EqualsStringFactoryPtr equals_string_factory;
+
+            /// ?
 			EntityInstanceBuilderFactoryPtr entity_instance_builder_factory;
 
 	};
