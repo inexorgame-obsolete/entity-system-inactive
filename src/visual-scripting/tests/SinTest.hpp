@@ -22,6 +22,7 @@ namespace visual_scripting {
 	{
 		public:
 
+            /// 
     		USING_REACTIVE_DOMAIN(entity_system::D)
 
 			using ConnectorManagerPtr = std::shared_ptr<ConnectorManager>;
@@ -32,6 +33,13 @@ namespace visual_scripting {
 			using LogManagerPtr = std::shared_ptr<inexor::logging::LogManager>;
 
 			/// @brief Constructor.
+            /// @note The dependencies of this class will be injected automatically.
+            /// @param connector_manager The connector manager.
+            /// @param float_constant_factory Factory for FLOAT_CONSTANT.
+            /// @param counter_float_factory Factory for COUNTER_FLOAT.
+            /// @param sin_factory Factory for SIN.
+            /// @param add_float_factory Factory for ADD_FLOAT.
+            /// @param log_manager The log manager.
 			SinTest(
 				ConnectorManagerPtr connector_manager,
 				FloatConstantFactoryPtr float_constant_factory,
@@ -41,38 +49,42 @@ namespace visual_scripting {
 				LogManagerPtr log_manager
 			);
 
-			/// @brief Destructor.
+			/// Destructor.
 			~SinTest();
 
 			/// Initialization.
 			void init();
 
+            /// Start tests.
 			void start_test();
 
+            /// Stop tests.
 			void stop_test();
 
+            /// Run tests.
 			void run_test();
 
 		private:
 
+            /// Running state of the test.
 			bool running;
 
 			/// The connector manager.
 			ConnectorManagerPtr connector_manager;
 
-			/// Factory for FLOAT_CONSTANT
+			/// Factory for FLOAT_CONSTANT.
 			FloatConstantFactoryPtr float_constant_factory;
 
-			/// Factory for COUNTER_FLOAT
+			/// Factory for COUNTER_FLOAT.
 			CounterFloatFactoryPtr counter_float_factory;
 
-			/// Factory for SIN
+			/// Factory for SIN.
 			SinFactoryPtr sin_factory;
 
-			/// Factory for ADD_FLOAT
+			/// Factory for ADD_FLOAT.
 			AddFloatFactoryPtr add_float_factory;
 
-			/// The log manager
+			/// The log manager.
 			LogManagerPtr log_manager;
 
 			EntityInstancePtrOpt o_counter;
@@ -102,20 +114,42 @@ namespace visual_scripting {
 			static constexpr char TARGET_NAME[] = "target";
 			static float TARGET_INITIAL_VALUE;
 
+            /// ?
 			void create_instances();
 
+            /// ?
 			void create_connectors();
 
+            /// ?
 			void create_observer();
 
+            /// @brief ?
+            /// @param entity_instance_name ?
+            /// @param initial_value ?
 			void log_create_entity_instance(std::string entity_instance_name, float initial_value);
 
+            /// @brief ?
+            /// @param output_entity_instance_name ? 
+            /// @param output_entity_attr_name ? 
+            /// @param input_entity_instance_name ? 
+            /// @param input_entity_attr_name ? 
 			void log_create_connector(std::string output_entity_instance_name, std::string output_entity_attr_name, std::string input_entity_instance_name, std::string input_entity_attr_name);
 
+            /// @brief ?
+            /// @param message ?
 			void log_attrs(std::string message);
 
+            /// @brief ?
+            /// @param entity_instance_name ?
+            /// @param entity_attr_name ?
+            /// @param entity_attribute_instance ?
 			void log_attr(std::string entity_instance_name, std::string entity_attr_name, EntityAttributeInstancePtr entity_attribute_instance);
 
+            /// @brief ?
+            /// @param prefix ?
+            /// @param entity_instance_name ?
+            /// @param entity_attr_name ?
+            /// @param data_value ?
 			void log_data_value(std::string prefix, std::string entity_instance_name, std::string entity_attr_name, entity_system::DataValue data_value);
 
 	};

@@ -51,30 +51,33 @@ namespace visual_scripting {
 	void SinTest::init()
 	{
 		log_manager->register_logger(LOGGER_NAME);
-
 		create_instances();
 	}
 
 	void SinTest::start_test()
 	{
-		if (!running && o_counter.has_value() && o_sin.has_value() && o_target.has_value())
+		if(!running && o_counter.has_value() && o_sin.has_value() && o_target.has_value())
 		{
 			std::thread t(&inexor::visual_scripting::SinTest::run_test, this);
 			t.detach();
-		} else {
+		}
+        else
+        {
 			std::cout << "1" << std::endl;
 		}
 	}
 
 	void SinTest::stop_test()
 	{
-		if (running)
+		if(running)
 		{
 			connector_manager->delete_connector(connector_1);
 			connector_manager->delete_connector(connector_2);
 			observer.Detach();
 			running = false;
-		} else {
+		}
+        else
+        {
 			std::cout << "2" << std::endl;
 		}
 	}
@@ -90,7 +93,7 @@ namespace visual_scripting {
 		EntityAttributeInstancePtrOpt o_sin_attr_value = sin->get_attribute_instance(SinEntityTypeProvider::SIN_VALUE);
 		EntityAttributeInstancePtrOpt o_target_attr_value = target->get_attribute_instance(FloatConstantEntityTypeProvider::FLOAT_CONSTANT_VALUE);
 
-		if (o_counter_attr_count.has_value() && o_sin_attr_input.has_value() && o_sin_attr_value.has_value() && o_target_attr_value.has_value())
+		if(o_counter_attr_count.has_value() && o_sin_attr_input.has_value() && o_sin_attr_value.has_value() && o_target_attr_value.has_value())
 		{
 			counter_attr_count = o_counter_attr_count.value();
 			sin_attr_input = o_sin_attr_input.value();
@@ -98,21 +101,21 @@ namespace visual_scripting {
 			target_attr_value = o_target_attr_value.value();
 
 			log_attrs("The initial values BEFORE connectors are created:");
-
 			create_connectors();
 
 			log_attrs("The initial values AFTER connectors are created:");
-
 			create_observer();
 
 			running = true;
-			while (running)
+			while(running)
 			{
 				// Just keep the thread alive
 				std::this_thread::sleep_for(std::chrono::milliseconds(100));
 			}
 
-		} else {
+		}
+        else
+        {
 			std::cout << "3" << std::endl;
 		}
 	}
