@@ -47,22 +47,24 @@ namespace renderer {
 
 	GLFWwindow *create_window()
 	{
-		/* Initialize the library */
-		if(!glfwInit())
+		// Initialize the library.
+        if(!glfwInit())
 		{
 			spdlog::get(RendererManager::LOGGER_NAME)->error("Failed to initialize glfw!");
 			std::exit(1);
 		}
 
-		/* Create a windowed mode window and its OpenGL context */
-		GLFWwindow* const window = glfwCreateWindow(
+        // Create a windowed mode window and its OpenGL context.
+        GLFWwindow* const window = glfwCreateWindow(
 			800,
 			600,
 			"Inexor Renderer 1",
 			nullptr,
 			nullptr
 		);
-		if(!window) {
+
+		if(!window)
+        {
 			glfwTerminate();
 			spdlog::get(RendererManager::LOGGER_NAME)->error("Failed to create window!");
 			std::exit(1);
@@ -79,7 +81,7 @@ namespace renderer {
 		EntityInstancePtrOpt o_cos = cos_factory->create_instance();
 		EntityInstancePtrOpt o_renderer = renderer_factory->create_instance(0.5f, -0.5f);
 
-		if (o_counter.has_value() && o_sin.has_value() && o_cos.has_value() && o_renderer.has_value())
+		if(o_counter.has_value() && o_sin.has_value() && o_cos.has_value() && o_renderer.has_value())
 		{
 			counter = o_counter.value();
 			sin = o_sin.value();
@@ -94,7 +96,7 @@ namespace renderer {
 			EntityAttributeInstanceOpt o_renderer_attr_x = renderer->get_attribute_instance(RendererEntityTypeProvider::RENDERER_X);
 			EntityAttributeInstanceOpt o_renderer_attr_y = renderer->get_attribute_instance(RendererEntityTypeProvider::RENDERER_Y);
 
-			if (o_counter_attr_count.has_value() && o_sin_attr_value.has_value() && o_cos_attr_value.has_value() && o_renderer_attr_x.has_value() && o_renderer_attr_y.has_value())
+			if(o_counter_attr_count.has_value() && o_sin_attr_value.has_value() && o_cos_attr_value.has_value() && o_renderer_attr_x.has_value() && o_renderer_attr_y.has_value())
 			{
 				counter_attr_count = o_counter_attr_count.value();
 				sin_attr_input = o_sin_attr_input.value();
@@ -103,11 +105,14 @@ namespace renderer {
 				cos_attr_value = o_cos_attr_value.value();
 				renderer_attr_x = o_renderer_attr_x.value();
 				renderer_attr_y = o_renderer_attr_y.value();
-			} else {
+			}
+            else
+            {
 				spdlog::get(LOGGER_NAME)->error("Failed to get attributes");
 			}
-
-		} else {
+		}
+        else
+        {
 			spdlog::get(LOGGER_NAME)->error("Failed to create entity instances: SIN, COS, RENDERER");
 		}
 
@@ -119,49 +124,56 @@ namespace renderer {
 	void RendererManager::start_window_thread(GLFWwindow *window)
 	{
 		std::optional<std::shared_ptr<visual_scripting::Connector>> connector_c_sin = connector_manager->create_connector(counter_attr_count, sin_attr_input);
-		if (!connector_c_sin.has_value())
+		if(!connector_c_sin.has_value())
 		{
 			spdlog::get(LOGGER_NAME)->error("Failed to create connector_c_sin");
-		} else {
+		}
+        else
+        {
 			spdlog::get(LOGGER_NAME)->info("Created connector_c_sin");
 			connector_c_sin.value()->enable_debug();
 		}
 
 		std::optional<std::shared_ptr<visual_scripting::Connector>> connector_c_cos = connector_manager->create_connector(counter_attr_count, cos_attr_input);
-		if (!connector_c_cos.has_value())
+		if(!connector_c_cos.has_value())
 		{
 			spdlog::get(LOGGER_NAME)->error("Failed to create connector_c_cos");
-		} else {
+		}
+        else
+        {
 			spdlog::get(LOGGER_NAME)->info("Created connector_c_cos");
 			connector_c_cos.value()->enable_debug();
 		}
 
 		std::optional<std::shared_ptr<visual_scripting::Connector>> connector_x = connector_manager->create_connector(sin_attr_value, renderer_attr_x);
-		if (!connector_x.has_value())
+		if(!connector_x.has_value())
 		{
 			spdlog::get(LOGGER_NAME)->error("Failed to create connector_x");
-		} else {
+		}
+        else
+        {
 			spdlog::get(LOGGER_NAME)->info("Created connector_x");
 			connector_x.value()->enable_debug();
 		}
 
 		std::optional<std::shared_ptr<visual_scripting::Connector>> connector_y = connector_manager->create_connector(cos_attr_value, renderer_attr_y);
-		if (!connector_y.has_value())
+		if(!connector_y.has_value())
 		{
 			spdlog::get(LOGGER_NAME)->error("Failed to create connector_y");
-		} else {
+		}
+        else
+        {
 			spdlog::get(LOGGER_NAME)->info("Created connector_y");
 			connector_y.value()->enable_debug();
 		}
 
-		/* Make the window's context current */
+        // Make the window's context current.
 		glfwMakeContextCurrent(window);
 
-		/* Create Magnum context in an isolated scope */
-		// argc, argv
+        // Create Magnum context in an isolated scope.
 		Platform::GLContext ctx{};
 
-		/* Setup the colored triangle */
+	    // Setup the colored triangle.
 		using namespace Math::Literals;
 
 		struct TriangleVertex {
@@ -170,9 +182,9 @@ namespace renderer {
 		};
 
 		const TriangleVertex data[] {
-			{{-0.5f, -0.5f}, 0xff0000_rgbf},    /* Left vertex, red color */
-			{{ 0.5f, -0.5f}, 0x00ff00_rgbf},    /* Right vertex, green color */
-			{{ 0.0f,  0.5f}, 0x0000ff_rgbf}     /* Top vertex, blue color */
+			{{-0.5f, -0.5f}, 0xff0000_rgbf}, // Left vertex, red color
+			{{ 0.5f, -0.5f}, 0x00ff00_rgbf}, // Right vertex, green color
+			{{ 0.0f,  0.5f}, 0x0000ff_rgbf}  // Top vertex, blue color
 		};
 
 		GL::Buffer buffer;
@@ -188,10 +200,10 @@ namespace renderer {
 				Shaders::VertexColor2D::Color3{}
 			);
 
-		/// The shader
+		// The shader.
 		Shaders::VertexColor2D shader;
 
-		/* Loop until the user closes the window */
+		// Loop until the user closes the window.
 		while(!glfwWindowShouldClose(window))
 		{
 			float x = std::get<DataType::FLOAT>(renderer_attr_x->value.Value());
@@ -203,11 +215,11 @@ namespace renderer {
 
 			shader.setTransformationProjectionMatrix(transformation_matrix_x * transformation_matrix_y);
 
-			/* Render here */
+			// Render here.
 			GL::defaultFramebuffer.clear(GL::FramebufferClear::Color);
 			mesh.draw(shader);
 
-			/* Swap front and back buffers */
+			// Swap front and back buffers.
 			glfwSwapBuffers(window);
 
 			std::this_thread::sleep_for(50ms);

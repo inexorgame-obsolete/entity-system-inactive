@@ -32,7 +32,15 @@ namespace renderer {
     {
 		public:
 
-			/// Constructor.
+			/// @brief Constructor.
+            /// @note The dependencies of this class will be injected automatically.
+            /// @param entity_instance_manager The entity instance manager.
+            /// @param connector_manager The connector manager.
+            /// @param counter_float_factory The factory for creating entities of type COUNTER_FLOAT.
+            /// @param sin_factory The factory for creating entities of type SIN.
+            /// @param cos_factory The factory for creating entities of type COS.
+            /// @param render_factory The factory for creating entities of type RENDERER.
+            /// @param log_manager The log manager.
 			RendererManager(
 				EntityInstanceManagerPtr entity_instance_manager,
 				ConnectorManagerPtr connector_manager,
@@ -49,7 +57,8 @@ namespace renderer {
 			/// Initialize renderer.
 			void init();
 
-			/// Starts the window thread.
+			/// @brief Starts the window thread.
+            /// @param windows The GLFWwindow instance.
 			void start_window_thread(GLFWwindow *windows);
 
 			/// The logger name of this service.
@@ -57,10 +66,10 @@ namespace renderer {
 
 		private:
 
-			/// The entity instance manager
+			/// The entity instance manager.
 			EntityInstanceManagerPtr entity_instance_manager;
 
-			/// The connector manager
+			/// The connector manager.
 			ConnectorManagerPtr connector_manager;
 
 			/// The factory for creating entities of type COUNTER_FLOAT.
@@ -75,7 +84,7 @@ namespace renderer {
 			/// The factory for creating entities of type RENDERER.
 			RendererFactoryPtr renderer_factory;
 
-			/// The log manager
+			/// The log manager.
 			LogManagerPtr log_manager;
 
 			/// The renderer entity instance.
@@ -90,25 +99,25 @@ namespace renderer {
 			/// The cos operator.
 			EntityInstancePtr cos;
 
-			/// The attribute sin_input
+			/// The attribute sin_input.
 			EntityAttributeInstancePtr counter_attr_count;
 
-			/// The attribute sin_input
+			/// The attribute sin_input.
 			EntityAttributeInstancePtr sin_attr_input;
 
-			/// The attribute sin_value
+			/// The attribute sin_value.
 			EntityAttributeInstancePtr sin_attr_value;
 
-			/// The attribute cos_input
+			/// The attribute cos_input.
 			EntityAttributeInstancePtr cos_attr_input;
 
-			/// The attribute cos_value
+			/// The attribute cos_value.
 			EntityAttributeInstancePtr cos_attr_value;
 
-			/// The attribute renderer_x
+			/// The attribute renderer_x.
 			EntityAttributeInstancePtr renderer_attr_x;
 
-			/// The attribute renderer_x
+			/// The attribute renderer_x.
 			EntityAttributeInstancePtr renderer_attr_y;
 
     };
