@@ -19,7 +19,8 @@ namespace configuration {
 	void CommandLineArgumentsConfigurationInitializer::init(int argc, char* argv[])
 	{
 		configuration_manager->set("CMD_ARGC", argc);
-		for (int i = 0; i < argc; i++)
+		
+        for(int i = 0; i < argc; i++)
 		{
 			std::string config_name = fmt::format("CMD_ARGV_{}", i);
 			std::string config_value = std::string(argv[i]);
