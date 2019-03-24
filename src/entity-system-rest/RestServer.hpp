@@ -36,10 +36,16 @@ namespace entity_system {
 	{
 		public:
 
+            /// @brief Constructor.
+            /// @note The dependencies of this class will be injected automatically.
+            /// @param log_manager Management of the loggers.
+            /// @param entity_type_api The REST API for entity types.
+            /// @param relation_type_api The REST API for relation types.
+            /// @param entity_instance_api The REST API for entity instances.
+            /// @param relation_instance_api The REST API for relation instance.
+            /// @param attribute_api The REST API for attributes.
 			RestServer(
 				std::shared_ptr<inexor::logging::LogManager> log_manager,
-
-				// Inject the REST APIs from dedicated classes
 				std::shared_ptr<EntityTypeApi> entity_type_api,
 				std::shared_ptr<RelationTypeApi> relation_type_api,
 				std::shared_ptr<EntityInstanceApi> entity_instance_api,
@@ -47,50 +53,57 @@ namespace entity_system {
 				std::shared_ptr<AttributeApi> attribute_api
 			);
 
+            /// Destructor.
 			~RestServer();
 
+            /// ?
 			void init();
 
-			/// Start the server on a specific port (in a dedicated thread)
+			/// Start the server on a specific port (in a dedicated thread).
+            /// @note The standard port is 8080.
+            /// @param port The port of the REST API server.
 			void startService(uint16_t port = 8080);
-			void stopService();
+			
+            /// ?
+            void stopService();
 
-			/// Getter for the service
+			/// Get method for the service.
 			std::shared_ptr<Service> get_service();
 
-			/// Setter for the service
+			/// Set method for the service.
 			void set_service(std::shared_ptr<restbed::Service> service);
 
-			/// Getter for the REST server settings
+			/// Get method for the REST server settings.
 			std::shared_ptr<Settings> get_settings();
 
 		private:
 
-            /// Management of the loggers
+            /// Management of the loggers.
 			std::shared_ptr<inexor::logging::LogManager> log_manager;
 
-			/// The REST API for entity types
+			/// The REST API for entity types.
 			std::shared_ptr<EntityTypeApi> entity_type_api;
 
-			/// The REST API for relation types
+			/// The REST API for relation types.
 			std::shared_ptr<RelationTypeApi> relation_type_api;
 
-			/// The REST API for entity instances
+			/// The REST API for entity instances.
 			std::shared_ptr<EntityInstanceApi> entity_instance_api;
 
-			/// The REST API for relation instance
+			/// The REST API for relation instance.
 			std::shared_ptr<RelationInstanceApi> relation_instance_api;
 
-			/// The REST API for attributes
+			/// The REST API for attributes.
 			std::shared_ptr<AttributeApi> attribute_api;
 
-			// TODO: Get rid of this tight coupling
+			// TODO: Get rid of this tight coupling.
+            /// ?
 			std::shared_ptr<restbed::Service> service;
 
-			/// The settings of the REST server
+			/// The settings of the REST server.
 			std::shared_ptr<Settings> settings;
 
-			/// The dedicated thread running the service (because the restbed service is blocking)
+			/// The dedicated thread running the service (because the restbed service is blocking).
 			std::thread service_thread;
 	};
 

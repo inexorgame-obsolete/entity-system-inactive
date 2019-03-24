@@ -39,7 +39,10 @@ namespace entity_system {
 
 	RestServer::~RestServer()
 	{
-		if(service_thread.joinable()) service_thread.join();
+		if(service_thread.joinable())
+        {
+            service_thread.join();
+        }
 	}
 
 	std::shared_ptr<Service> RestServer::get_service()
@@ -70,7 +73,8 @@ namespace entity_system {
 		return this->settings;
 	}
 
-	void RestServer::startService(uint16_t port) {
+	void RestServer::startService(uint16_t port)
+    {
 		settings->set_port(port);
         service_thread = std::thread([this]() {
 			// This is blocking for ever, so start it in own thread.
@@ -80,7 +84,8 @@ namespace entity_system {
 	    spdlog::get(LOGGER_ENTITY_REST)->info("Starting REST server on http://localhost:{}/{}", this->settings->get_port(), this->settings->get_root());
 	}
 
-	void RestServer::stopService() {
+	void RestServer::stopService()
+    {
 	    spdlog::get(LOGGER_ENTITY_REST)->info("Stopping REST server on http://localhost:{}/{}", this->settings->get_port(), this->settings->get_root());
 		service->stop();
 	    spdlog::get(LOGGER_ENTITY_REST)->info("REST server stopped");
