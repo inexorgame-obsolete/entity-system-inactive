@@ -16,9 +16,15 @@ namespace renderer {
 
     /// @class RenderFactory
     /// @brief Factory of the renderers.
-    class RendererFactory {
+    class RendererFactory
+    {
         public:
-            /// Constructor.
+
+            /// @brief Constructor.
+            /// @note The dependencies of this class will be injected automatically.
+            /// @param renderer_entity_type_provider The entity type provider.
+            /// @param entity_instance_builder_factory The entity instance builder factory.
+            /// @param entity_instance_manager The entity instance manager.
             RendererFactory(
             	RendererEntityTypeProviderPtr renderer_entity_type_provider,
 				EntityInstanceBuilderFactoryPtr entity_instance_builder_factory,
@@ -29,17 +35,19 @@ namespace renderer {
             ~RendererFactory();
 
             /// Creates a new renderer with the given coordinates.
+            /// @param x ?
+            /// @param y ?
             EntityInstancePtrOpt create_instance(float x, float y);
 
         private:
 
-            /// The entity type provider
+            /// The entity type provider.
             RendererEntityTypeProviderPtr renderer_entity_type_provider;
 
-            /// The entity instance builder factory
+            /// The entity instance builder factory.
             EntityInstanceBuilderFactoryPtr entity_instance_builder_factory;
-
-            /// The entity instance manager
+            
+            /// The entity instance manager.
             EntityInstanceManagerPtr entity_instance_manager;
     };
 

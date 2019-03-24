@@ -14,10 +14,12 @@ namespace renderer {
 		this->entity_instance_manager = entity_instance_manager;
 	}
 
-	RendererFactory::~RendererFactory() {
+	RendererFactory::~RendererFactory()
+    {
 	}
 
-	EntityInstancePtrOpt RendererFactory::create_instance(float x, float y) {
+    EntityInstancePtrOpt RendererFactory::create_instance(float x, float y)
+    {
 		return this->entity_instance_builder_factory->get_builder()
 			->type(renderer_entity_type_provider->get_type())
 			->attribute(RendererEntityTypeProvider::RENDERER_X, x)
