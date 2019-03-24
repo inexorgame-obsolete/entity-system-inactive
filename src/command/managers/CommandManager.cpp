@@ -33,7 +33,7 @@ namespace command {
 	void CommandManager::list()
 	{
 		spdlog::get(LOGGER_NAME)->info("Commands:");
-		for (auto& it : commands)
+		for(auto& it : commands)
 		{
 			spdlog::get(LOGGER_NAME)->info(
 				"  [{}]",
