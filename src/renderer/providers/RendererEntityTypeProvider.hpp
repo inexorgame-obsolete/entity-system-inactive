@@ -8,12 +8,14 @@ namespace renderer {
 
 	using namespace inexor::entity_system;
 
-	/// Provides an entity type "RENDERER".
+    /// @class RendererEntityTypeProvider
+	/// @brief Provides an entity type "RENDERER".
 	class RendererEntityTypeProvider : public EntityTypeProvider
 	{
 		public:
 
-			/// Constructs the specialized provider for the RENERER entity type
+        	/// @brief Constructs the specialized provider for the RENERER entity type.
+            /// @note The dependencies of this class will be injected automatically.
 			RendererEntityTypeProvider(
 				std::shared_ptr<EntityTypeBuilderFactory> entity_type_builder_factory
 			) : EntityTypeProvider(
@@ -25,6 +27,7 @@ namespace renderer {
 				}
 			) {};
 
+            /// Destructor.
 			~RendererEntityTypeProvider() {};
 
 			/// Defines the name of this entity type
