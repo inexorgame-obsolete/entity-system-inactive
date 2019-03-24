@@ -18,11 +18,6 @@ namespace entity_system {
 	{
 	}
 
-    // Order of destruction:
-    // <ul>
-    // <li> Relations
-	// <li> Entities
-    // </ul>
 	void EntitySystemModule::reset_entity_system()
 	{
 		// Reset relations
