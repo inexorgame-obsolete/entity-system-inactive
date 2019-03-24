@@ -47,16 +47,17 @@ namespace inexor {
 
 		public:
 
-			/// Constructs the inexor application. The dependencies
-			/// defined are automatically injected!
-			/// @param entity_system_module
-			/// @param type_system_module
-			/// @param configuration_module
-			/// @param rest_server
-			/// @param entity_system_debugger
-			/// @param visual_scripting_system_module
-			/// @param log_manager
-			/// @param renderer_manager
+			/// @brief Constructs the Inexor application.
+            /// @note The dependencies of this class will be injected automatically.
+			/// @param entity_system_module The entity system of Inexor.
+			/// @param type_system_module The type system manager.
+			/// @param configuration_module The configuration manager.
+			/// @param rest_server The REST server of the entity system.
+			/// @param entity_system_debugger The debugger of the entity system.
+			/// @param visual_scripting_system_module The visual scripting system.
+			/// @param log_manager The log system.
+			/// @param renderer_manager The rendering system.
+            /// @param CommandModulePtr The command system.
 			InexorApplication(
 				EntitySystemModulePtr entity_system_module,
 				TypeSystemModulePtr type_system_module,
@@ -70,33 +71,36 @@ namespace inexor {
 			);
 
 			/// Destructor.
-			/// Calls shutdown()
 			~InexorApplication();
 
 			/// Initializes the Inexor application.
+            /// @param argc The total number of parameters given to the application.
+            /// @param argv An array of parameters given to the application.
 			void init(int argc, char* argv[]);
 
-			/// Run loop of the Inexor application. Blocks for ever (or until this->running was set to false)
+            /// Runs the application's main loop.
+            /// @note The main loop will be aborted when this->running is set to false.
 			void run();
 
 			/// Shuts down the Inexor application.
 			void shutdown();
 
-			/// Restarts the Inexor application, i.e. slightly improved wrapper around shutdown() and init();
+			/// Restarts the Inexor application.
 			void restart();
 
-			/// Registers a logger
+			/// Registers a logger.
+            /// @param logger_name The name of the logger.
 			void register_logger(std::string logger_name);
 
-			/// Getter for the entity system
+			/// Get method for the entity system.
 			std::shared_ptr<entity_system::EntitySystemModule> get_entity_system();
 
-			/// Getter for the rest server
+			/// Get method for the rest server.
 			std::shared_ptr<entity_system::RestServer> get_rest_server();
 
 		private:
 
-            /// The entity system of Inexor
+            /// The entity system of Inexor.
 			EntitySystemModulePtr entity_system_module;
 
             /// The type system manager.
@@ -105,32 +109,40 @@ namespace inexor {
             /// The configuration manager.
 			ConfigurationModulePtr configuration_module;
 
-            /// The REST server of the entity system
+            /// The REST server of the entity system.
 			RestServerPtr rest_server;
 
-            /// The debugger of the entity system
+            /// The debugger of the entity system.
 			EntitySystemDebuggerPtr entity_system_debugger;
 
-			/// The visual scripting system
+			/// The visual scripting system.
 			VisualScriptingSystemModulePtr visual_scripting_system_module;
 
-            /// Management of the loggers
+            /// The log system.
 			LogManagerPtr log_manager;
 
-            /// The rendering system
+            /// The rendering system.
 			RendererModulePtr renderer_module;
 
-            /// The rendering system
+            /// The command system.
 			CommandModulePtr command_module;
 
-			/// The running state of the Inexor application
+			/// The running state of the Inexor application.
 			bool running;
 
-            /// Signal handlers
+            /// Signal handler.
+            /// @param signal_number ?
             void sighup_handler(const int signal_number);
+
+            /// Signal handler.
+            /// @param signal_number ?
             void sigterm_handler(const int signal_number);
+
+            /// ?
             void ready_handler(Service&);
 
+            /// ?
+            /// @param signal_number ?
             static void call_sighup_handlers(int signal_number)
             {
             	for (InexorApplication* instance : InexorApplication::instances)
@@ -139,6 +151,8 @@ namespace inexor {
             	}
 			}
 
+            /// ?
+            /// @param signal_number ?
             static void call_sigterm_handlers(int signal_number)
             {
             	for (InexorApplication* instance : InexorApplication::instances)
@@ -146,7 +160,9 @@ namespace inexor {
             		std::mem_fn(&InexorApplication::sigterm_handler)(instance, signal_number);
             	}
 			}
-
+            
+            /// ?
+            /// @param service ?
             static void call_ready_handlers(Service& service)
             {
             	for (InexorApplication* instance : InexorApplication::instances)
@@ -155,10 +171,10 @@ namespace inexor {
             	}
 			}
 
-			/// Static instances of the Inexor application
+			/// Static instances of the Inexor application.
 			static std::vector<InexorApplication *> instances;
 
-			/// The logger name of this service
+			/// The logger name of this service.
 			static constexpr char LOGGER_NAME[] = "inexor.app";
 
 	};

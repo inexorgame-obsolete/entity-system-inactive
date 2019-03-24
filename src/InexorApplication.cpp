@@ -41,7 +41,6 @@ namespace inexor {
 
 	void InexorApplication::init(int argc, char* argv[])
 	{
-
 		// Register application instance in static vector
 		// You can't do this in the constructor
 		InexorApplication::instances.push_back(this);
@@ -93,7 +92,8 @@ namespace inexor {
 		rest_server->startService();
 
 	    spdlog::get(LOGGER_NAME)->info("Waiting for REST service being started");
-		while (!running) {
+		while(!running)
+        {
 			// wait until the rest server started up
 			// which calls ready_handlers() as soon as it is.
 			// Then running becomes true and we leave
@@ -101,7 +101,8 @@ namespace inexor {
 		}
 
 	    spdlog::get(LOGGER_NAME)->info("Inexor is running");
-		while (running) {
+		while(running)
+        {
 			// everything else happens in the execution graph or in threads for the ES instances.
 			std::this_thread::sleep_for(50ms);
 			// spdlog::get(LOGGER_NAME)->info("Uptime: {} s", rest_server->get_uptime().count());
@@ -113,7 +114,8 @@ namespace inexor {
 
 	void InexorApplication::shutdown()
 	{
-		if (running) {
+		if(running)
+        {
 			spdlog::get(LOGGER_NAME)->info("Not running");
 			return;
 		}
@@ -133,7 +135,8 @@ namespace inexor {
 	    spdlog::get(LOGGER_NAME)->info("Restart completed");
 	}
 
-	void InexorApplication::register_logger(std::string logger_name) {
+	void InexorApplication::register_logger(std::string logger_name)
+    {
 		log_manager->register_logger(logger_name);
 	}
 
@@ -163,10 +166,7 @@ namespace inexor {
 	void InexorApplication::ready_handler(Service&)
 	{
 	    spdlog::get(LOGGER_NAME)->info("REST server is running on http://localhost:{}/{}", rest_server->get_settings()->get_port(), rest_server->get_settings()->get_root());
-
-		// Set running state
 		running = true;
-
 	}
 
 }
