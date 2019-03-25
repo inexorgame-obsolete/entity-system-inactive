@@ -155,13 +155,13 @@ namespace visual_scripting {
 
 		private:
 
-			/// The entity instance manager
+			/// The entity instance manager.
 			EntityInstanceManagerPtr entity_instance_manager;
 
-			/// The relation instance manager
+			/// The relation instance manager.
 			RelationInstanceManagerPtr relation_instance_manager;
 
-			/// The log manager
+			/// The log manager.
 			LogManagerPtr log_manager;
 
 			/// Stores the connectors to search by GUID of the connector.
