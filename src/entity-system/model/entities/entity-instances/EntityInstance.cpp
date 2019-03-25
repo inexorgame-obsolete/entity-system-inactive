@@ -43,9 +43,9 @@ namespace entity_system {
 
 	EntityAttributeInstancePtrOpt EntityInstance::get_attribute_instance(const std::string& attr_name)
 	{
-		for (auto& ent_attr_entry : instances)
+		for(auto& ent_attr_entry : instances)
 		{
-			if (attr_name == ent_attr_entry.first->get_type_name())
+			if(attr_name == ent_attr_entry.first->get_type_name())
 			{
 				return EntityAttributeInstancePtrOpt { ent_attr_entry.second };
 			}
