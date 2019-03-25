@@ -7,19 +7,23 @@ namespace visual_scripting {
 
 	using EntityTypePtr = std::shared_ptr<entity_system::EntityType>;
 
-	/// This is the base class for processors.
+    /// @class Processor
+	/// @brief This is the base class for processors.
     class Processor
     {
-
 		public:
 
+            /// 
     		USING_REACTIVE_DOMAIN(inexor::entity_system::D)
 
-    		/// Constructs a new processor for the given entity type.
+    		/// @brief Constructs a new processor for the given entity type.
+            /// @note The dependencies of this class will be injected automatically.
+            /// @param entity_type The entity type for this processor.
     		Processor(
     			EntityTypePtr entity_type
     		);
 
+            /// Virtual Destructor.
 			virtual ~Processor();
 
 			/// Returns the entity type for this processor.
