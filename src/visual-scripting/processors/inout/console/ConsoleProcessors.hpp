@@ -17,13 +17,18 @@ namespace visual_scripting {
 	{
 		public:
 
-			/// Constructs the logger processors.
+			/// @brief Constructs the logger processors.
+            /// @note The dependencies of this class will be injected automatically.
+            /// @param stdin_processor Processor for the entity type CONSOLE_STDIN.
+            /// @param stdout_processor Processor for the entity type CONSOLE_STDOUT.
+            /// @param stderr_processor Processor for the entity type CONSOLE_STDERR.
 			ConsoleProcessors(
 				StdInProcessorPtr stdin_processor,
 				StdOutProcessorPtr stdout_processor,
 				StdErrProcessorPtr stderr_processor
 			);
 
+            /// Destructor.
 			~ConsoleProcessors();
 
 			/// Initialization of the logger processors.
@@ -31,13 +36,13 @@ namespace visual_scripting {
 
 		private:
 
-			// Processor for the entity type CONSOLE_STDIN
+			/// Processor for the entity type CONSOLE_STDIN.
 			StdInProcessorPtr stdin_processor;
 
-			// Processor for the entity type CONSOLE_STDOUT
+			/// Processor for the entity type CONSOLE_STDOUT.
 			StdOutProcessorPtr stdout_processor;
 
-			// Processor for the entity type CONSOLE_STDERR
+			/// Processor for the entity type CONSOLE_STDERR.
 			StdErrProcessorPtr stderr_processor;
 
 	};
