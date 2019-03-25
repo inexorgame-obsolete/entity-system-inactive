@@ -46,10 +46,12 @@ namespace visual_scripting {
 	void GreaterThanFloatProcessor::make_signals(const EntityInstancePtr& entity_instance)
 	{
 		spdlog::get(LOGGER_NAME)->debug("Initializing processor GREATER_THAN_FLOAT for newly created entity instance {} of type {}", entity_instance->get_GUID().str(), entity_instance->get_entity_type()->get_type_name());
-		auto o_greater_than_float_input_1 = entity_instance->get_attribute_instance(GreaterThanFloatEntityTypeProvider::GREATER_THAN_FLOAT_INPUT_1);
+		
+        auto o_greater_than_float_input_1 = entity_instance->get_attribute_instance(GreaterThanFloatEntityTypeProvider::GREATER_THAN_FLOAT_INPUT_1);
 		auto o_greater_than_float_input_2 = entity_instance->get_attribute_instance(GreaterThanFloatEntityTypeProvider::GREATER_THAN_FLOAT_INPUT_2);
 		auto o_greater_than_float_result = entity_instance->get_attribute_instance(GreaterThanFloatEntityTypeProvider::GREATER_THAN_FLOAT_RESULT);
-		if (o_greater_than_float_input_1.has_value() && o_greater_than_float_input_2.has_value() && o_greater_than_float_result.has_value())
+		
+        if(o_greater_than_float_input_1.has_value() && o_greater_than_float_input_2.has_value() && o_greater_than_float_result.has_value())
 		{
 			signals[entity_instance->get_GUID()] = MakeSignal(
 				With(
@@ -62,7 +64,9 @@ namespace visual_scripting {
 				}
 			);
 			o_greater_than_float_result.value()->value = signals[entity_instance->get_GUID()];
-		} else {
+		}
+        else
+        {
 			spdlog::get(LOGGER_NAME)->error("Failed to initialize processor signals for entity instance {} of type {}: Missing one of these attributes: {} {} {}", entity_instance->get_GUID().str(), entity_instance->get_entity_type()->get_type_name(), GreaterThanFloatEntityTypeProvider::GREATER_THAN_FLOAT_INPUT_1, GreaterThanFloatEntityTypeProvider::GREATER_THAN_FLOAT_INPUT_2, GreaterThanFloatEntityTypeProvider::GREATER_THAN_FLOAT_RESULT);
 		}
 	}
