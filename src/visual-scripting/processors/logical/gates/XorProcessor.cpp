@@ -46,10 +46,12 @@ namespace visual_scripting {
 	void XorProcessor::make_signals(const EntityInstancePtr& entity_instance)
 	{
 		spdlog::get(LOGGER_NAME)->debug("Initializing processor XOR for newly created entity instance {} of type {}", entity_instance->get_GUID().str(), entity_instance->get_entity_type()->get_type_name());
-		auto o_xor_input_1 = entity_instance->get_attribute_instance(XorEntityTypeProvider::XOR_INPUT_1);
+		
+        auto o_xor_input_1 = entity_instance->get_attribute_instance(XorEntityTypeProvider::XOR_INPUT_1);
 		auto o_xor_input_2 = entity_instance->get_attribute_instance(XorEntityTypeProvider::XOR_INPUT_2);
 		auto o_xor_result = entity_instance->get_attribute_instance(XorEntityTypeProvider::XOR_RESULT);
-		if (o_xor_input_1.has_value() && o_xor_input_2.has_value() && o_xor_result.has_value())
+		
+        if(o_xor_input_1.has_value() && o_xor_input_2.has_value() && o_xor_result.has_value())
 		{
 			signals[entity_instance->get_GUID()] = MakeSignal(
 				With(
@@ -62,7 +64,9 @@ namespace visual_scripting {
 				}
 			);
 			o_xor_result.value()->value = signals[entity_instance->get_GUID()];
-		} else {
+		}
+        else
+        {
 			spdlog::get(LOGGER_NAME)->error("Failed to initialize processor signals for entity instance {} of type {}: Missing one of these attributes: {} {} {}", entity_instance->get_GUID().str(), entity_instance->get_entity_type()->get_type_name(), XorEntityTypeProvider::XOR_INPUT_1, XorEntityTypeProvider::XOR_INPUT_2, XorEntityTypeProvider::XOR_RESULT);
 		}
 	}
