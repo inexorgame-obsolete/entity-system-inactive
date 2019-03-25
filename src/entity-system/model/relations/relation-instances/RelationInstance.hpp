@@ -15,7 +15,8 @@ namespace entity_system {
 	using RelationAttributeTypePtr = std::shared_ptr<RelationAttributeType>;
 	using RelationAttributeInstancePtr = std::shared_ptr<RelationAttributeInstance>;
 
-	/// A base class for entity relation type instances.
+    /// @class RelationInstance
+	/// @brief A base class for entity relation type instances.
 	class RelationInstance : public InstanceBase<RelationType>, public GUIDBase
 	{
 		private:
@@ -34,31 +35,24 @@ namespace entity_system {
 
 		public:
 
-			/// Constructor.
-			/// @param ent_rel_type A const reference to a shared pointer of
-			/// an entity relation type of which an instance will be created.
-			/// @param ent_type_inst_source A const reference to a shared pointer of
-			/// an entity type instance which will be used as source entity instance.
-			/// @param ent_type_inst_target A const reference to a shared pointer of
-			/// an entity type instance which will be used as target entity instance.
-			/// @note The GUID of the new entity relation type instance will
-			/// be created automatically by the inheritance of GUIDBase!
-			RelationInstance(const RelationTypePtr&, const EntityInstancePtr&, const EntityInstancePtr&);
+			/// @brief Constructor.
+			/// @note The GUID of the new entity relation type instance will be created automatically by the inheritance of GUIDBase!
+			/// @param rel_type A const reference to a shared pointer of an entity relation type of which an instance will be created.
+			/// @param ent_inst_source A const reference to a shared pointer of an entity type instance which will be used as source entity instance.
+			/// @param ent_inst_target A const reference to a shared pointer of an entity type instance which will be used as target entity instance.
+			RelationInstance(const RelationTypePtr& rel_type, const EntityInstancePtr& ent_inst_source, const EntityInstancePtr& ent_inst_target);
 
-			/// Constructor.
-            /// @param rel_inst_GUID The GUID of the relation instance which will be created.
-			/// @param rel_type A const reference to a shared pointer of
-			/// an relation type of which an instance will be created.
-			/// @param ent_inst_source A const reference to a shared pointer of
-			/// an entity instance which will be used as source entity instance.
-			/// @param ent_inst_target A const reference to a shared pointer of
-			/// an entity instance which will be used as target entity instance.
-			RelationInstance(const xg::Guid&, const RelationTypePtr&, const EntityInstancePtr&, const EntityInstancePtr&);
+			/// @brief Constructor.
+            /// @param inst_GUID The GUID of the relation instance which will be created.
+			/// @param rel_type A const reference to a shared pointer of an relation type of which an instance will be created.
+			/// @param ent_inst_source A const reference to a shared pointer of an entity instance which will be used as source entity instance.
+			/// @param ent_inst_target A const reference to a shared pointer of an entity instance which will be used as target entity instance.
+			RelationInstance(const xg::Guid& inst_GUID, const RelationTypePtr& rel_type, const EntityInstancePtr& ent_inst_source, const EntityInstancePtr& ent_inst_target);
 
 			/// Destructor.
 			~RelationInstance();
 
-			/// Returns all entity relation attribute instances.
+			/// @brief Returns all entity relation attribute instances.
 			/// @return A std::unordered_map of shared pointers of entity relation attribute type.
 			std::unordered_map<RelationAttributeTypePtr, RelationAttributeInstancePtr> get_relation_attribute_instances() const;
 
