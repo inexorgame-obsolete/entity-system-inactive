@@ -31,47 +31,44 @@ namespace entity_system {
         public:
 
 			/// @brief Constructor.
-			/// @param ent_type_name The unique name of the entity type which will be created.
 			/// @note The GUID of the new entity type will be created automatically by the inheritance of GUIDBase!
-			EntityType(const std::string&);
+			/// @param ent_type_name The unique name of the entity type which will be created.
+			EntityType(const std::string& ent_type_name);
 
 
             /// @brief Constructor.
             /// @param ent_type_GUID The GUID of the entity type which will be created.
             /// @param ent_type_name The unique name of the entity type which will be created.
-            EntityType(const xg::Guid&, const std::string&);
+            EntityType(const xg::Guid& ent_type_GUID, const std::string& ent_type_name);
 
 
-			/// @brief Destructor.
+			/// Destructor.
 			~EntityType();
 
 
 			/// @brief Check if an entity attribute type is already linked to this entity type.
 			/// @param ent_attr_type_name The name of the entity attribute type of which will be checked if it is associated with this entity type.
 			/// @return True if this entity attribute type is already linked, false otherwise.
-			bool has_attribute_type(const std::string&);
+			bool has_attribute_type(const std::string& ent_attr_type_name);
 
 
 			/// @brief Check if an entity attribute type is already linked to this entity type.
 			/// @param ent_attr_type_GUID The GUID of the entity attribute type of which will be checked if it is associated with this entity type.
 			/// @return True if this entity attribute type is already linked, false otherwise.
-            bool has_attribute_type(const xg::Guid&);
+            bool has_attribute_type(const xg::Guid& ent_attr_type_GUID);
 
 
-			/// Check if an entity attribute type is already linked to this entity type.
-			/// @param ent_attr_type A const reference of a shared pointer to the
-			/// entity attribute type of which will be checked if it is linked
-			/// with this entity type.
-			/// @return True if this entity attribute type is already associated,
-			/// false otherwise.
-			bool has_attribute_type(const EntityAttributeTypePtr&);
+			/// @brief Check if an entity attribute type is already linked to this entity type.
+			/// @param ent_attr_type A const reference of a shared pointer to the entity attribute type
+            /// of which will be checked if it is linked with this entity type.
+			/// @return True if this entity attribute type is already associated, false otherwise.
+			bool has_attribute_type(const EntityAttributeTypePtr& ent_attr_type);
         
 
-			/// Links an entity attribute type to this entity type.
-			/// @param ent_attr_type A const reference of a shared pointer to
-			/// an entity attribute type which will be linked to this entity type.
+			/// @brief Links an entity attribute type to this entity type.
+			/// @param ent_attr_type A const reference of a shared pointer to an entity attribute type which will be linked to this entity type.
 			/// @return ENTSYS_SUCCESS if linking succeeded, ENTSYS_ERROR otherwise.
-			ENTSYS_RESULT link_attribute_type(const EntityAttributeTypePtr&);
+			ENTSYS_RESULT link_attribute_type(const EntityAttributeTypePtr& ent_attr_type);
 
             
             /// TODO!
@@ -82,12 +79,12 @@ namespace entity_system {
             ENTSYS_RESULT link_attribute_type(const std::string&);
 	
 
-			/// Returns the number of entity attribute types which are linked to this entity type.
+			/// @brief Returns the number of entity attribute types which are linked to this entity type.
 			/// @return The number of entity attribute types which are linked to this entity type.
 			std::size_t get_linked_attributes_count() const;
 
 
-			/// Returns a vector of entity attribute types which are linked to this entity type.
+			/// @brief Returns a vector of entity attribute types which are linked to this entity type.
 			/// @return a vector of entity attribute types which are linked to this entity type.
 			std::optional<EntityAttributeTypePtrList> get_linked_attribute_types() const;
 			
@@ -96,8 +93,7 @@ namespace entity_system {
 			void reset_linked_attribute_types();
 
 
-			/// Implement a data validation method as
-			/// required by class inheritance of DataValidation
+			/// Implement a data validation method as required by class inheritance of DataValidation.
 			virtual ENTSYS_DATA_VALIDATION_RESULT validate() override;
 
     };
