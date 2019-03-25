@@ -46,10 +46,12 @@ namespace visual_scripting {
 	void NorProcessor::make_signals(const EntityInstancePtr& entity_instance)
 	{
 		spdlog::get(LOGGER_NAME)->debug("Initializing processor NOR for newly created entity instance {} of type {}", entity_instance->get_GUID().str(), entity_instance->get_entity_type()->get_type_name());
-		auto o_nor_input_1 = entity_instance->get_attribute_instance(NorEntityTypeProvider::NOR_INPUT_1);
+		
+        auto o_nor_input_1 = entity_instance->get_attribute_instance(NorEntityTypeProvider::NOR_INPUT_1);
 		auto o_nor_input_2 = entity_instance->get_attribute_instance(NorEntityTypeProvider::NOR_INPUT_2);
 		auto o_nor_result = entity_instance->get_attribute_instance(NorEntityTypeProvider::NOR_RESULT);
-		if (o_nor_input_1.has_value() && o_nor_input_2.has_value() && o_nor_result.has_value())
+		
+        if(o_nor_input_1.has_value() && o_nor_input_2.has_value() && o_nor_result.has_value())
 		{
 			signals[entity_instance->get_GUID()] = MakeSignal(
 				With(
@@ -62,7 +64,9 @@ namespace visual_scripting {
 				}
 			);
 			o_nor_result.value()->value = signals[entity_instance->get_GUID()];
-		} else {
+		}
+        else
+        {
 			spdlog::get(LOGGER_NAME)->error("Failed to initialize processor signals for entity instance {} of type {}: Missing one of these attributes: {} {} {}", entity_instance->get_GUID().str(), entity_instance->get_entity_type()->get_type_name(), NorEntityTypeProvider::NOR_INPUT_1, NorEntityTypeProvider::NOR_INPUT_2, NorEntityTypeProvider::NOR_RESULT);
 		}
 	}

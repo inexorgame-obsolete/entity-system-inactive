@@ -14,7 +14,8 @@ namespace visual_scripting {
 
 	using namespace react;
 
-	/// Processor for entity instances of type NOR.
+    /// @class NorProcessor
+	/// @brief Processor for entity instances of type NOR.
     class NorProcessor
     	: public Processor,
 		  public entity_system::EntityInstanceCreatedListener,
@@ -29,27 +30,37 @@ namespace visual_scripting {
 
 		public:
 
+            /// 
     		USING_REACTIVE_DOMAIN(entity_system::D)
 
     		/// @brief Constructs a new entity instance of type NOR.
+            /// @note The dependencies of this class will be injected automatically.
+            /// @param entity_type_provider ?
+            /// @param entity_instance_manager ?
+            /// @param log_manager ?
 			NorProcessor(
 				NorEntityTypeProviderPtr entity_type_provider,
 				EntityInstanceManagerPtr entity_instance_manager,
 				LogManagerPtr log_manager
 			);
 
+            /// Destructor.
 			~NorProcessor();
 
 			/// Initialization of the processor.
 			void init();
 
-			/// Called when an entity instance of type NOR has been created
+			/// @brief Called when an entity instance of type NOR has been created.
+            /// @param entity_instance ?
 			void on_entity_instance_created(EntityInstancePtr entity_instance);
 
-			/// Called when an entity instance of type NOR has been deleted
+			/// @brief Called when an entity instance of type NOR has been deleted.
+			/// @param type_GUID ?
+			/// @param inst_GUID ?
 			void on_entity_instance_deleted(const xg::Guid& type_GUID, const xg::Guid& inst_GUID);
 
-			/// Initialization of the processor signals.
+			/// @brief Initialization of the processor signals.
+            /// @param entity_instance ?
 			void make_signals(const EntityInstancePtr& entity_instance);
 
 		private:
@@ -57,14 +68,14 @@ namespace visual_scripting {
 			/// The entity type provider for this active component.
 			NorEntityTypeProviderPtr entity_type_provider;
 
-			/// The entity instance manager
+			/// The entity instance manager.
 			EntityInstanceManagerPtr entity_instance_manager;
 
-			/// The log manager
+			/// The log manager.
 			LogManagerPtr log_manager;
 
 			/// The signals per entity instance.
-			std::unordered_map<xg::Guid, SignalT<entity_system::DataValue> > signals;
+			std::unordered_map<xg::Guid, SignalT<entity_system::DataValue>> signals;
 
 			/// The logger name of this processor.
 			static constexpr char LOGGER_NAME[] = "inexor.vs.p.l.nor";
