@@ -23,12 +23,23 @@ namespace visual_scripting {
 	using InRangeIntProcessorPtr = std::shared_ptr<InRangeIntProcessor>;
 	using InRangeFloatProcessorPtr = std::shared_ptr<InRangeFloatProcessor>;
 
-    /// Provides the processors for comparison operations.
+    /// @class ComparisonProcessors
+    /// @brief Provides the processors for comparison operations.
 	class ComparisonProcessors
 	{
 		public:
 
-			/// Constructs the processors for comparison operations.
+			/// @brief Constructs the processors for comparison operations.
+            /// @note The dependencies of this class will be injected automatically.
+            /// @param equals_bool_processor Processor for the entity type EQUALS_BOOL.
+            /// @param equals_int_processor Processor for the entity type EQUALS_INT.
+            /// @param equals_string_processor Processor for the entity type EQUALS_STRING.
+            /// @param greater_than_int_processor Processor for the entity type GREATER_THAN_INT.
+            /// @param greater_than_float_processor Processor for the entity type GREATER_THAN_FLOAT.
+            /// @param lower_than_int_processor Processor for the entity type LOWER_THAN_INT.
+            /// @param lower_than_float_processor Processor for the entity type LOWER_THAN_FLOAT.
+            /// @param in_range_int_processor Processor for the entity type IN_RANGE_INT.
+            /// @param in_range_float_processor Processor for the entity type IN_RANGE_FLOAT.
 			ComparisonProcessors(
 				EqualsBoolProcessorPtr equals_bool_processor,
 				EqualsIntProcessorPtr equals_int_processor,
@@ -41,6 +52,7 @@ namespace visual_scripting {
 				InRangeFloatProcessorPtr in_range_float_processor
 			);
 
+            /// Destructor.
 			~ComparisonProcessors();
 
 			/// Initialization of the processors for comparison operations.
@@ -48,31 +60,31 @@ namespace visual_scripting {
 
 		private:
 
-			// Processor for the entity type EQUALS_BOOL
+			/// Processor for the entity type EQUALS_BOOL.
 			EqualsBoolProcessorPtr equals_bool_processor;
 
-			// Processor for the entity type EQUALS_INT
+			/// Processor for the entity type EQUALS_INT.
 			EqualsIntProcessorPtr equals_int_processor;
 
-			// Processor for the entity type EQUALS_STRING
+			/// Processor for the entity type EQUALS_STRING.
 			EqualsStringProcessorPtr equals_string_processor;
 
-			// Processor for the entity type GREATER_THAN_INT
+			/// Processor for the entity type GREATER_THAN_INT.
 			GreaterThanIntProcessorPtr greater_than_int_processor;
 
-			// Processor for the entity type GREATER_THAN_FLOAT
+			/// Processor for the entity type GREATER_THAN_FLOAT.
 			GreaterThanFloatProcessorPtr greater_than_float_processor;
 
-			// Processor for the entity type LOWER_THAN_INT
+			/// Processor for the entity type LOWER_THAN_INT.
 			LowerThanIntProcessorPtr lower_than_int_processor;
 
-			// Processor for the entity type LOWER_THAN_FLOAT
+			/// Processor for the entity type LOWER_THAN_FLOAT.
 			LowerThanFloatProcessorPtr lower_than_float_processor;
 
-			// Processor for the entity type IN_RANGE_INT
+			/// Processor for the entity type IN_RANGE_INT.
 			InRangeIntProcessorPtr in_range_int_processor;
 
-			// Processor for the entity type IN_RANGE_FLOAT
+			/// Processor for the entity type IN_RANGE_FLOAT.
 			InRangeFloatProcessorPtr in_range_float_processor;
 
 	};
