@@ -13,11 +13,14 @@ namespace visual_scripting {
 	{
 		public:
 
-			/// Constructs the logger processors.
+			/// @brief Constructs the logger processors.
+            /// @note The dependencies of this class will be injected automatically.
+            /// @param logger_processor Processor for the entity type LOGGER.
 			LoggerProcessors(
 				LoggerProcessorPtr logger_processor
 			);
 
+            /// Destructor.
 			~LoggerProcessors();
 
 			/// Initialization of the logger processors.
@@ -25,7 +28,7 @@ namespace visual_scripting {
 
 		private:
 
-			// Processor for the entity type LOGGER
+			/// Processor for the entity type LOGGER.
 			LoggerProcessorPtr logger_processor;
 
 	};
