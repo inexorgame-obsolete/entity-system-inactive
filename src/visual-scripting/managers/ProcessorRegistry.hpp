@@ -29,12 +29,15 @@ namespace visual_scripting {
 			void init();
 
 			/// @brief Registers an processor.
+            /// @param processor ?
 			void register_processor(const ProcessorPtr& processor);
 
 			/// @brief Returns the processor by entity type.
+            /// @param entity_type ?
 			ProcessorPtrOpt get_processor(const EntityTypePtr& entity_type);
 
 			/// @brief Returns true, if a processor is mapped to the given entity type.
+            /// @param entity_type ?
 			bool has_processor(const EntityTypePtr& entity_type);
 
 		private:

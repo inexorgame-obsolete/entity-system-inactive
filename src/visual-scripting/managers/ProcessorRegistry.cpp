@@ -22,7 +22,7 @@ namespace visual_scripting {
 
 	ProcessorPtrOpt ProcessorRegistry::get_processor(const EntityTypePtr& entity_type)
 	{
-		if (!(processors.end() == processors.find(entity_type)))
+		if(!(processors.end() == processors.find(entity_type)))
 		{
 			return ProcessorPtrOpt { processors[entity_type] };
 		}
