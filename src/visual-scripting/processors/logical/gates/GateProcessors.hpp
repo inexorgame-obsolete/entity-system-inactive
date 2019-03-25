@@ -23,7 +23,14 @@ namespace visual_scripting {
 	{
 		public:
 
-			/// Constructs the processors for logical operations.
+			/// @brief Constructs the processors for logical operations.
+            /// @note The dependencies of this class will be injected automatically.
+            /// @param not_processor Processor for the entity type NOT.
+            /// @param or_processor Processor for the entity type OR.
+            /// @param and_processor Processor for the entity type AND.
+            /// @param xor_processor Processor for the entity type XOR.
+            /// @param nor_processor Processor for the entity type NOR.
+            /// @param nand_processor Processor for the entity type NAND.
 			GateProcessors(
 				NotProcessorPtr not_processor,
 				OrProcessorPtr or_processor,
@@ -33,6 +40,7 @@ namespace visual_scripting {
 				NandProcessorPtr nand_processor
 			);
 
+            /// Destructor.
 			~GateProcessors();
 
 			/// Initialization of the processors for logical operations.
@@ -40,22 +48,22 @@ namespace visual_scripting {
 
 		private:
 
-			// Processor for the entity type NOT
+			/// Processor for the entity type NOT.
 			NotProcessorPtr not_processor;
 
-			// Processor for the entity type OR
+			/// Processor for the entity type OR.
 			OrProcessorPtr or_processor;
 
-			// Processor for the entity type AND
+			/// Processor for the entity type AND.
 			AndProcessorPtr and_processor;
 
-			// Processor for the entity type XOR
+			/// Processor for the entity type XOR.
 			XorProcessorPtr xor_processor;
 
-			// Processor for the entity type NOR
+			/// Processor for the entity type NOR.
 			NorProcessorPtr nor_processor;
 
-			// Processor for the entity type NAND
+			/// Processor for the entity type NAND.
 			NandProcessorPtr nand_processor;
 
 	};
