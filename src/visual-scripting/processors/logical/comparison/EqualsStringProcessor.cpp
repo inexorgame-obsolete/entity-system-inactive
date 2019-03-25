@@ -46,10 +46,12 @@ namespace visual_scripting {
 	void EqualsStringProcessor::make_signals(const EntityInstancePtr& entity_instance)
 	{
 		spdlog::get(LOGGER_NAME)->debug("Initializing processor EQUALS_STRING for newly created entity instance {} of type {}", entity_instance->get_GUID().str(), entity_instance->get_entity_type()->get_type_name());
-		auto o_equals_string_input_1 = entity_instance->get_attribute_instance(EqualsStringEntityTypeProvider::EQUALS_STRING_INPUT_1);
+		
+        auto o_equals_string_input_1 = entity_instance->get_attribute_instance(EqualsStringEntityTypeProvider::EQUALS_STRING_INPUT_1);
 		auto o_equals_string_input_2 = entity_instance->get_attribute_instance(EqualsStringEntityTypeProvider::EQUALS_STRING_INPUT_2);
 		auto o_equals_string_result = entity_instance->get_attribute_instance(EqualsStringEntityTypeProvider::EQUALS_STRING_RESULT);
-		if (o_equals_string_input_1.has_value() && o_equals_string_input_2.has_value() && o_equals_string_result.has_value())
+		
+        if(o_equals_string_input_1.has_value() && o_equals_string_input_2.has_value() && o_equals_string_result.has_value())
 		{
 			signals[entity_instance->get_GUID()] = MakeSignal(
 				With(
@@ -62,7 +64,9 @@ namespace visual_scripting {
 				}
 			);
 			o_equals_string_result.value()->value = signals[entity_instance->get_GUID()];
-		} else {
+		}
+        else
+        {
 			spdlog::get(LOGGER_NAME)->error("Failed to initialize processor signals for entity instance {} of type {}: Missing one of these attributes: {} {} {}", entity_instance->get_GUID().str(), entity_instance->get_entity_type()->get_type_name(), EqualsStringEntityTypeProvider::EQUALS_STRING_INPUT_1, EqualsStringEntityTypeProvider::EQUALS_STRING_INPUT_2, EqualsStringEntityTypeProvider::EQUALS_STRING_RESULT);
 		}
 	}
