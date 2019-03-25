@@ -9,11 +9,12 @@ namespace inexor {
 namespace visual_scripting {
 
 	/// @class IntConstantConnectorTest
-    /// @brief Tests for connecting INT_CONSTANT entity instances
+    /// @brief Tests for connecting INT_CONSTANT entity instances.
 	class IntConstantConnectorTest
 	{
 		public:
 
+            /// 
     		USING_REACTIVE_DOMAIN(entity_system::D)
 
 			using ConnectorManagerPtr = std::shared_ptr<ConnectorManager>;
@@ -24,6 +25,11 @@ namespace visual_scripting {
 			using EntityInstancePtrOpt = std::optional<EntityInstancePtr>;
 
 			/// @brief Constructor.
+            /// @note The dependencies of this class will be injected automatically.
+            /// @param connector_manager The connector manager.
+            /// @param int_constant_factory Factory for INT_CONSTANT.
+            /// @param add_int_factory Factory for ADD_INT.
+            /// @param log_manager The log manager.
 			IntConstantConnectorTest(
 				ConnectorManagerPtr connector_manager,
 				IntConstantFactoryPtr int_constant_factory,
@@ -31,32 +37,36 @@ namespace visual_scripting {
 				LogManagerPtr log_manager
 			);
 
-			/// @brief Destructor.
+			/// Destructor.
 			~IntConstantConnectorTest();
 
 			/// Initialization.
 			void init();
 
+            /// Start test.
 			void start_test();
 
+            /// Stop test.
 			void stop_test();
 
+            /// Run test.
 			void run_test();
 
 		private:
 
+            /// The running state of the int constant test.
 			bool running;
 
 			/// The connector manager.
 			ConnectorManagerPtr connector_manager;
 
-			/// Factory for INT_CONSTANT
+			/// Factory for INT_CONSTANT.
 			IntConstantFactoryPtr int_constant_factory;
 
-			/// Factory for ADD_INT
+			/// Factory for ADD_INT.
 			AddIntFactoryPtr add_int_factory;
 
-			/// The log manager
+			/// The log manager.
 			LogManagerPtr log_manager;
 
 			/// The entity instance for the logger.
@@ -106,20 +116,42 @@ namespace visual_scripting {
 			/// The name of the add int.
 			static constexpr char ADD_INT_NAME[] = "add_int";
 
+            /// ?
 			void create_instances();
 
+            /// ?
 			void create_connectors();
 
+            /// ?
 			void create_observer();
 
+            /// @brief ?
+            /// @param entity_instance_name ?
+            /// @param initial_value ?
 			void log_create_entity_instance(std::string entity_instance_name, int initial_value);
 
+            /// @brief ?
+            /// @param output_entity_instance_name ?
+            /// @param output_entity_attr_name ?
+            /// @param input_entity_instance_name ?
+            /// @param input_entity_attr_name ?
 			void log_create_connector(std::string output_entity_instance_name, std::string output_entity_attr_name, std::string input_entity_instance_name, std::string input_entity_attr_name);
 
+            /// @brief ?
+            /// @param message ?
 			void log_attrs(std::string message);
 
+            /// @brief ?
+            /// @param entity_instance_name ?
+            /// @param entity_attr_name ?
+            /// @param entity_attribute_instance ?
 			void log_attr(std::string entity_instance_name, std::string entity_attr_name, EntityAttributeInstancePtr entity_attribute_instance);
 
+            /// @brief ?
+            /// @param prefix ?
+            /// @param entity_instance_name ?
+            /// @param entity_attr_name ?
+            /// @param data_value ?
 			void log_data_value(std::string prefix, std::string entity_instance_name, std::string entity_attr_name, entity_system::DataValue data_value);
 
 	};

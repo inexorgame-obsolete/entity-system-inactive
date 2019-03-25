@@ -56,13 +56,12 @@ namespace visual_scripting {
 	void IntConstantConnectorTest::init()
 	{
 		o_logger = log_manager->register_logger(LOGGER_NAME);
-
 		create_instances();
 	}
 
 	void IntConstantConnectorTest::start_test()
 	{
-		if (!running && o_source.has_value() && o_target_1.has_value() && o_target_2.has_value() && o_target_3.has_value())
+		if(!running && o_source.has_value() && o_target_1.has_value() && o_target_2.has_value() && o_target_3.has_value())
 		{
 			std::thread t(&inexor::visual_scripting::IntConstantConnectorTest::run_test, this);
 			t.detach();
@@ -71,7 +70,7 @@ namespace visual_scripting {
 
 	void IntConstantConnectorTest::stop_test()
 	{
-		if (running)
+		if(running)
 		{
 			connector_manager->delete_connector(connector_1);
 			connector_manager->delete_connector(connector_2);
@@ -99,7 +98,7 @@ namespace visual_scripting {
 		EntityAttributeInstancePtrOpt o_add_int_attr_addend = add_int->get_attribute_instance(AddIntEntityTypeProvider::ADD_INT_ADDEND);
 		EntityAttributeInstancePtrOpt o_add_int_attr_sum = add_int->get_attribute_instance(AddIntEntityTypeProvider::ADD_INT_SUM);
 
-		if (o_source_attr_value.has_value() && o_target_1_attr_value.has_value() && o_target_2_attr_value.has_value() && o_target_3_attr_value.has_value() && o_add_int_attr_augend.has_value() && o_add_int_attr_addend.has_value() && o_add_int_attr_sum.has_value())
+		if(o_source_attr_value.has_value() && o_target_1_attr_value.has_value() && o_target_2_attr_value.has_value() && o_target_3_attr_value.has_value() && o_add_int_attr_augend.has_value() && o_add_int_attr_addend.has_value() && o_add_int_attr_sum.has_value())
 		{
 			source_attr_value = o_source_attr_value.value();
 			target_1_attr_value = o_target_1_attr_value.value();
@@ -110,11 +109,9 @@ namespace visual_scripting {
 			add_int_attr_sum = o_add_int_attr_sum.value();
 
 			log_attrs("The initial values BEFORE connectors are created:");
-
 			create_connectors();
 
 			create_observer();
-
 			log_attrs("The initial values AFTER connectors are created:");
 
 			// Random
@@ -124,7 +121,7 @@ namespace visual_scripting {
 
 			running = true;
 			int i = 0;
-			while (running)
+			while(running)
 			{
 				// Generate new random value every 2 seconds
 				std::this_thread::sleep_for(std::chrono::seconds(2));
@@ -187,7 +184,7 @@ namespace visual_scripting {
 
 	void IntConstantConnectorTest::create_observer()
 	{
-		if (o_logger.has_value())
+		if(o_logger.has_value())
 		{
 			spdlog::get(LOGGER_NAME)->info("Create observer for {}.{} which logs to {}", ADD_INT_NAME, AddIntEntityTypeProvider::ADD_INT_ADDEND, LOGGER_NAME);
 			observer = Observe(add_int_attr_sum->value, [this] (DataValue add_int_sum) {
