@@ -27,10 +27,11 @@ namespace entity_system {
 	// using DataValue = std::variant<bool, int, std::int64_t, double, float, std::string, glm::vec3, glm::vec4>;
 	using DataValue = std::variant<bool, int, std::int64_t, double, float, std::string>;
 
-	/// A data container which can hold data of various types.
-	struct DataContainer {
-
-		/// The data type.
+    /// @class DataContainer
+	/// @brief A data container which can hold data of various types.
+	struct DataContainer
+    {
+    	/// The data type.
 		DataType type;
 
 		/// The own value.
@@ -45,8 +46,7 @@ namespace entity_system {
 		// No default constructor because we don't have and cannot detect the data type
 		// DataContainer() {};
 
-		/// Constructs a new data container using the given data type
-		/// and the default value of the data type.
+		/// @brief Constructs a new data container using the given data type and the default value of the data type.
 		/// @param type The data type.
 		DataContainer(const DataType& type)
 			: type(type)
@@ -90,6 +90,8 @@ namespace entity_system {
 			this->value = Flatten(this->signal_wrapper);
 		};
 
+		/// @brief Constructs a new data container using the given data type and the default value of the data type.
+        /// @param data_value The value of the data container.
 		DataContainer(const DataValue& data_value)
 		{
 			/// Detect type by std::variant index()
@@ -98,7 +100,10 @@ namespace entity_system {
 			this->signal_wrapper = MakeVar<D>(this->own_value);
 			this->value = Flatten(this->signal_wrapper);
 		};
-
+        
+		/// @brief Constructs a new data container using the given data type and the default value of the data type.
+        /// @param type The data type of the data container.
+        /// @param data_value The value of the data container.
 		DataContainer(const DataType& type, const DataValue& data_value)
 			: type(type)
 		{
@@ -109,11 +114,16 @@ namespace entity_system {
 
 	};
 
-	struct DataContainerInitializer {
+    /// ?
+	struct DataContainerInitializer
+    {
 		DataType type;
 		DataValue value;
 	};
 
+    /// @brief ?
+    /// @param type ?
+    /// @param value ?
 	static inline std::string data_value_to_string(DataType type, DataValue value)
 	{
 		switch (type)
