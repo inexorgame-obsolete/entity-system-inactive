@@ -15,12 +15,16 @@ namespace visual_scripting {
 	{
 		public:
 
-			/// Constructs the arithmetic processors.
+			/// @brief Constructs the arithmetic processors.
+            /// @note The dependencies of this class will be injected automatically.
+            /// @param add_int_processor Addition for integers.
+            /// @param add_float_processor Addition for floating point numbers.
 			ArithmeticProcessors(
 				AddIntProcessorPtr add_int_processor,
 				AddFloatProcessorPtr add_float_processor
 			);
 
+            /// Destructor.
 			~ArithmeticProcessors();
 
 			/// Initialization of the arithmetic processors.
@@ -28,10 +32,10 @@ namespace visual_scripting {
 
 		private:
 
-			// Addition for integers.
+			/// Addition for integers.
 			AddIntProcessorPtr add_int_processor;
 
-			// Addition for floating point numbers.
+			/// Addition for floating point numbers.
 			AddFloatProcessorPtr add_float_processor;
 
 	};
