@@ -46,10 +46,12 @@ namespace visual_scripting {
 	void AddFloatProcessor::make_signals(const EntityInstancePtr& entity_instance)
 	{
 		spdlog::get(LOGGER_NAME)->debug("Initializing processor ADD_FLOAT for newly created entity instance {} of type {}", entity_instance->get_GUID().str(), entity_instance->get_entity_type()->get_type_name());
-		auto o_augend = entity_instance->get_attribute_instance(AddFloatEntityTypeProvider::ADD_FLOAT_AUGEND);
+		
+        auto o_augend = entity_instance->get_attribute_instance(AddFloatEntityTypeProvider::ADD_FLOAT_AUGEND);
 		auto o_addend = entity_instance->get_attribute_instance(AddFloatEntityTypeProvider::ADD_FLOAT_ADDEND);
 		auto o_sum = entity_instance->get_attribute_instance(AddFloatEntityTypeProvider::ADD_FLOAT_SUM);
-		if (o_augend.has_value() && o_addend.has_value() && o_sum.has_value())
+		
+        if(o_augend.has_value() && o_addend.has_value() && o_sum.has_value())
 		{
 			signals[entity_instance->get_GUID()] = MakeSignal(
 				With(
@@ -62,7 +64,9 @@ namespace visual_scripting {
 				}
 			);
 			o_sum.value()->value = signals[entity_instance->get_GUID()];
-		} else {
+		}
+        else
+        {
 			spdlog::get(LOGGER_NAME)->error("Failed to initialize processor signals for entity instance {} of type {}: Missing one of these attributes: {} {} {}", entity_instance->get_GUID().str(), entity_instance->get_entity_type()->get_type_name(), AddFloatEntityTypeProvider::ADD_FLOAT_AUGEND, AddFloatEntityTypeProvider::ADD_FLOAT_ADDEND, AddFloatEntityTypeProvider::ADD_FLOAT_SUM);
 		}
 	}
