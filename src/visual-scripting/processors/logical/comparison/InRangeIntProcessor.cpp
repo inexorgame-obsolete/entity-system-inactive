@@ -46,11 +46,13 @@ namespace visual_scripting {
 	void InRangeIntProcessor::make_signals(const EntityInstancePtr& entity_instance)
 	{
 		spdlog::get(LOGGER_NAME)->debug("Initializing processor IN_RANGE_INT for newly created entity instance {} of type {}", entity_instance->get_GUID().str(), entity_instance->get_entity_type()->get_type_name());
-		auto o_in_range_int_input = entity_instance->get_attribute_instance(InRangeIntEntityTypeProvider::IN_RANGE_INT_INPUT);
+		
+        auto o_in_range_int_input = entity_instance->get_attribute_instance(InRangeIntEntityTypeProvider::IN_RANGE_INT_INPUT);
 		auto o_in_range_int_min = entity_instance->get_attribute_instance(InRangeIntEntityTypeProvider::IN_RANGE_INT_MIN);
 		auto o_in_range_int_max = entity_instance->get_attribute_instance(InRangeIntEntityTypeProvider::IN_RANGE_INT_MAX);
 		auto o_in_range_int_result = entity_instance->get_attribute_instance(InRangeIntEntityTypeProvider::IN_RANGE_INT_RESULT);
-		if (o_in_range_int_input.has_value() && o_in_range_int_min.has_value() && o_in_range_int_max.has_value() && o_in_range_int_result.has_value())
+		
+        if(o_in_range_int_input.has_value() && o_in_range_int_min.has_value() && o_in_range_int_max.has_value() && o_in_range_int_result.has_value())
 		{
 			signals[entity_instance->get_GUID()] = MakeSignal(
 				With(
@@ -67,7 +69,9 @@ namespace visual_scripting {
 				}
 			);
 			o_in_range_int_result.value()->value = signals[entity_instance->get_GUID()];
-		} else {
+		}
+        else
+        {
 			spdlog::get(LOGGER_NAME)->error("Failed to initialize processor signals for entity instance {} of type {}: Missing one of these attributes: {} {} {} {}", entity_instance->get_GUID().str(), entity_instance->get_entity_type()->get_type_name(), InRangeIntEntityTypeProvider::IN_RANGE_INT_INPUT, InRangeIntEntityTypeProvider::IN_RANGE_INT_MIN, InRangeIntEntityTypeProvider::IN_RANGE_INT_MAX, InRangeIntEntityTypeProvider::IN_RANGE_INT_RESULT);
 		}
 	}
