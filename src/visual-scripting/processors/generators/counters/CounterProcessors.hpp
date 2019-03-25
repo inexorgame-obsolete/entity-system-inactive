@@ -9,17 +9,22 @@ namespace visual_scripting {
 	using CounterIntProcessorPtr = std::shared_ptr<CounterIntProcessor>;
 	using CounterFloatProcessorPtr = std::shared_ptr<CounterFloatProcessor>;
 
-	/// Provides processors for time based counters.
+    /// @class CounterProcessors
+	/// @brief Provides processors for time based counters.
 	class CounterProcessors
 	{
 		public:
 
-			/// Constructs the processors for time based counters.
+			/// @brief Constructs the processors for time based counters.
+            /// @note The dependencies of this class will be injected automatically.
+            /// @param counter_int_processor Processor for the entity type COUNTER_INT.
+            /// @param counter_float_processor Processor for the entity type COUNTER_FLOAT.
 			CounterProcessors(
 				CounterIntProcessorPtr counter_int_processor,
 				CounterFloatProcessorPtr counter_float_processor
 			);
 
+            /// Destructor.
 			~CounterProcessors();
 
 			/// Initialization of the processors for time based counters.
@@ -27,10 +32,10 @@ namespace visual_scripting {
 
 		private:
 
-			// Processor for the entity type COUNTER_INT
+			/// Processor for the entity type COUNTER_INT.
 			CounterIntProcessorPtr counter_int_processor;
 
-			// Processor for the entity type COUNTER_FLOAT
+			/// Processor for the entity type COUNTER_FLOAT.
 			CounterFloatProcessorPtr counter_float_processor;
 
 	};
