@@ -58,11 +58,13 @@ namespace visual_scripting {
 	void RandomNextFloatProcessor::make_signals(const std::shared_ptr<inexor::entity_system::EntityInstance>& entity_instance)
 	{
 		spdlog::get(LOGGER_NAME)->debug("Initializing processor RANDOM_NEXT_FLOAT for newly created entity instance {} of type {}", entity_instance->get_GUID().str(), entity_instance->get_entity_type()->get_type_name());
-		EntityAttributeInstancePtrOpt o_attr_random_next_float_on_activation = entity_instance->get_attribute_instance(RandomNextFloatEntityTypeProvider::RANDOM_NEXT_FLOAT_ON_ACTIVATION);
+		
+        EntityAttributeInstancePtrOpt o_attr_random_next_float_on_activation = entity_instance->get_attribute_instance(RandomNextFloatEntityTypeProvider::RANDOM_NEXT_FLOAT_ON_ACTIVATION);
 		EntityAttributeInstancePtrOpt o_attr_random_next_float_min = entity_instance->get_attribute_instance(RandomNextFloatEntityTypeProvider::RANDOM_NEXT_FLOAT_MIN);
 		EntityAttributeInstancePtrOpt o_attr_random_next_float_max = entity_instance->get_attribute_instance(RandomNextFloatEntityTypeProvider::RANDOM_NEXT_FLOAT_MAX);
 		EntityAttributeInstancePtrOpt o_attr_random_next_float_value = entity_instance->get_attribute_instance(RandomNextFloatEntityTypeProvider::RANDOM_NEXT_FLOAT_VALUE);
-		if (o_attr_random_next_float_on_activation.has_value() && o_attr_random_next_float_min.has_value() && o_attr_random_next_float_max.has_value() && o_attr_random_next_float_value.has_value())
+		
+        if(o_attr_random_next_float_on_activation.has_value() && o_attr_random_next_float_min.has_value() && o_attr_random_next_float_max.has_value() && o_attr_random_next_float_value.has_value())
 		{
 			xg::Guid guid = entity_instance->get_GUID();
 
@@ -85,7 +87,9 @@ namespace visual_scripting {
 			// o_attr_random_next_float_value.value()->value = signals[guid];
 		    o_attr_random_next_float_value.value()->signal_wrapper <<= signals[guid];
 
-		} else {
+		}
+        else
+        {
 			spdlog::get(LOGGER_NAME)->error("Failed to initialize processor signals for entity instance {} of type {}: Missing one of these attributes {} {} {} {}", entity_instance->get_GUID().str(), entity_instance->get_entity_type()->get_type_name(), RandomNextFloatEntityTypeProvider::RANDOM_NEXT_FLOAT_ON_ACTIVATION, RandomNextFloatEntityTypeProvider::RANDOM_NEXT_FLOAT_MIN, RandomNextFloatEntityTypeProvider::RANDOM_NEXT_FLOAT_MAX, RandomNextFloatEntityTypeProvider::RANDOM_NEXT_FLOAT_VALUE);
 		}
 	}
