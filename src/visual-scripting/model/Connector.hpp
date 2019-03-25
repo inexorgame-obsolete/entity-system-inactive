@@ -13,28 +13,29 @@ namespace visual_scripting {
 
 	using EntityAttributeInstancePtr = std::shared_ptr<entity_system::EntityAttributeInstance>;
 
-	/// A connector propagates the value of an output-attribute to
-	/// an input-attribute.
+    /// @class Connector
+	/// @brief A connector propagates the value of an output-attribute to an input-attribute.
     class Connector : public entity_system::GUIDBase
     {
 		public:
 
+            /// 
 			USING_REACTIVE_DOMAIN(entity_system::D)
 
-			/// Constructor.
-			/// @param output_attribute_GUID GUID of the output attribute.
-			/// @param input_attribute_GUID GUID of the input attribute.
-			/// @note The GUID of the connector.
+			/// @brief Constructor.
+            /// @note The dependencies of this class will be injected automatically.
+			/// @param output_attr GUID of the output attribute.
+			/// @param input_attr GUID of the input attribute.
 			Connector(
 				const EntityAttributeInstancePtr& output_attr,
 				const EntityAttributeInstancePtr & input_attr
 			);
 
             /// @brief Constructor.
+            /// @note The dependencies of this class will be injected automatically.
 			/// @param connector_GUID GUID of the connector.
-			/// @param output_attribute_GUID GUID of the output attribute.
-			/// @param input_attribute_GUID GUID of the input attribute.
-			/// @note The GUID of the connector.
+			/// @param output_attr GUID of the output attribute.
+			/// @param input_attr GUID of the input attribute.
 			Connector(
 				const xg::Guid& connector_GUID,
 				const EntityAttributeInstancePtr & output_attr,
@@ -44,10 +45,10 @@ namespace visual_scripting {
 			/// Destructor.
 			~Connector();
 
-            /// @brief Connects the output with the input.
+            /// Connects the output with the input.
 			void connect();
 
-            /// @brief Disconnects the output from the input and reconnects the input's own value again.
+            /// Disconnects the output from the input and reconnects the input's own value again.
 			void disconnect();
 
             /// @brief Get the GUID of the connector.
@@ -62,13 +63,13 @@ namespace visual_scripting {
             /// @return GUID of the input attribute.
 			xg::Guid input() const;
 
-			/// @brief Enables the debugging mode.
+			/// Enables the debugging mode.
 			void enable_debug();
 
-			/// @brief Disables the debugging mode.
+			/// Disables the debugging mode.
 			void disable_debug();
 
-			/// @brief Returns true, if the connector is in debugging mode.
+			/// Returns true, if the connector is in debugging mode.
 			bool is_debug_enabled();
 
 			/// The logger name of this processor.

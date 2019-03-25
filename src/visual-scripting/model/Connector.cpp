@@ -57,7 +57,7 @@ namespace visual_scripting {
 
 	void Connector::disconnect()
 	{
-		if (debug_enabled)
+		if(debug_enabled)
 		{
 			disable_debug();
 		}
@@ -106,7 +106,7 @@ namespace visual_scripting {
 
 	void Connector::disable_debug()
 	{
-		if (debug_enabled)
+		if(debug_enabled)
 		{
 			this->observer.Detach();
 			debug_enabled = false;
