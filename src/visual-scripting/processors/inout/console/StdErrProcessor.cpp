@@ -53,12 +53,15 @@ namespace visual_scripting {
 	{
 		std::cout << "Initializing processor CONSOLE_STDERR for newly created entity instance " << entity_instance->get_GUID().str() << " of type " << entity_instance->get_entity_type()->get_type_name() << std::endl;
 		auto o_console_stderr = entity_instance->get_attribute_instance(StdErrEntityTypeProvider::CONSOLE_STDERR);
-		if (o_console_stderr.has_value())
+		
+        if(o_console_stderr.has_value())
 		{
 			observers[entity_instance->get_GUID()] = Observe(o_console_stderr.value()->value, [] (DataValue console_stderr) {
 				std::cout << std::get<DataType::STRING>(console_stderr) << std::endl;
 			});
-		} else {
+		}
+        else
+        {
 			std::cout << "Failed to initialize processor signals for entity instance " << entity_instance->get_GUID().str() << " of type " << entity_instance->get_entity_type()->get_type_name() << ": Missing attribute" << StdErrEntityTypeProvider::CONSOLE_STDERR << std::endl;
 		}
 	}
