@@ -17,13 +17,18 @@ namespace visual_scripting {
 	{
 		public:
 
-			/// Constructs the trigonometric processors.
+			/// @brief Constructs the trigonometric processors.
+            /// @note The dependencies of this class will be injected automatically.
+            /// @param sin_processor The sin generator.
+            /// @param cos_processor The cos generator.
+            /// @param tan_processor The tan generator.
 			TrigonometricProcessors(
 				SinProcessorPtr sin_processor,
 				CosProcessorPtr cos_processor,
 				TanProcessorPtr tan_processor
 			);
 
+            /// Destructor.
 			~TrigonometricProcessors();
 
 			/// Initialization of the processors.
@@ -31,13 +36,13 @@ namespace visual_scripting {
 
 		private:
 
-			// The sin generator.
+			/// The sin generator.
 			SinProcessorPtr sin_processor;
 
-			// The cos generator.
+			/// The cos generator.
 			CosProcessorPtr cos_processor;
 
-			// The tan generator.
+			/// The tan generator.
 			TanProcessorPtr tan_processor;
 
 	};
