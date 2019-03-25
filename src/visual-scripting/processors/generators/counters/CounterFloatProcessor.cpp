@@ -58,11 +58,13 @@ namespace visual_scripting {
 	void CounterFloatProcessor::make_signals(const std::shared_ptr<inexor::entity_system::EntityInstance>& entity_instance)
 	{
 		spdlog::get(LOGGER_NAME)->debug("Initializing processor COUNTER_FLOAT for newly created entity instance {} of type {}", entity_instance->get_GUID().str(), entity_instance->get_entity_type()->get_type_name());
-		EntityAttributeInstancePtrOpt o_attr_counter_float_millis = entity_instance->get_attribute_instance(CounterFloatEntityTypeProvider::COUNTER_FLOAT_MILLIS);
+		
+        EntityAttributeInstancePtrOpt o_attr_counter_float_millis = entity_instance->get_attribute_instance(CounterFloatEntityTypeProvider::COUNTER_FLOAT_MILLIS);
 		EntityAttributeInstancePtrOpt o_attr_counter_float_step = entity_instance->get_attribute_instance(CounterFloatEntityTypeProvider::COUNTER_FLOAT_STEP);
 		EntityAttributeInstancePtrOpt o_attr_counter_float_reset = entity_instance->get_attribute_instance(CounterFloatEntityTypeProvider::COUNTER_FLOAT_RESET);
 		EntityAttributeInstancePtrOpt o_attr_counter_float_count = entity_instance->get_attribute_instance(CounterFloatEntityTypeProvider::COUNTER_FLOAT_COUNT);
-		if (o_attr_counter_float_millis.has_value() && o_attr_counter_float_step.has_value() && o_attr_counter_float_reset.has_value() && o_attr_counter_float_count.has_value())
+		
+        if(o_attr_counter_float_millis.has_value() && o_attr_counter_float_step.has_value() && o_attr_counter_float_reset.has_value() && o_attr_counter_float_count.has_value())
 		{
 			xg::Guid guid = entity_instance->get_GUID();
 			EntityAttributeInstancePtr attr_counter_float_millis = o_attr_counter_float_millis.value();
@@ -119,7 +121,9 @@ namespace visual_scripting {
 			});
 		    start_thread.detach();
 
-		} else {
+		}
+        else
+        {
 			spdlog::get(LOGGER_NAME)->error("Failed to initialize processor signals for entity instance {} of type {}: Missing one of these attributes {} {} {} {}", entity_instance->get_GUID().str(), entity_instance->get_entity_type()->get_type_name(), CounterFloatEntityTypeProvider::COUNTER_FLOAT_COUNT, CounterFloatEntityTypeProvider::COUNTER_FLOAT_MILLIS, CounterFloatEntityTypeProvider::COUNTER_FLOAT_RESET, CounterFloatEntityTypeProvider::COUNTER_FLOAT_STEP);
 		}
 	}
