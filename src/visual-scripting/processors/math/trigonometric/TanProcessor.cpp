@@ -48,9 +48,11 @@ namespace visual_scripting {
 	void TanProcessor::make_signals(const EntityInstancePtr& entity_instance)
 	{
 		spdlog::get(LOGGER_NAME)->debug("Initializing processor TAN for newly created entity instance {} of type {}", entity_instance->get_GUID().str(), entity_instance->get_entity_type()->get_type_name());
-		EntityAttributeInstancePtrOpt o_attr_tan_input = entity_instance->get_attribute_instance(TanEntityTypeProvider::TAN_INPUT);
+		
+        EntityAttributeInstancePtrOpt o_attr_tan_input = entity_instance->get_attribute_instance(TanEntityTypeProvider::TAN_INPUT);
 		EntityAttributeInstancePtrOpt o_attr_tan_value = entity_instance->get_attribute_instance(TanEntityTypeProvider::TAN_VALUE);
-		if (o_attr_tan_input.has_value() && o_attr_tan_value.has_value())
+		
+        if(o_attr_tan_input.has_value() && o_attr_tan_value.has_value())
 		{
 		    signals[entity_instance->get_GUID()] = MakeSignal(
 	    		o_attr_tan_input.value()->value,
@@ -61,7 +63,9 @@ namespace visual_scripting {
 			);
 		    o_attr_tan_value.value()->signal_wrapper <<= signals[entity_instance->get_GUID()];
 		    // o_attr_tan_value.value()->value = signals[entity_instance->get_GUID()];
-		} else {
+		}
+        else
+        {
 			spdlog::get(LOGGER_NAME)->error("Failed to initialize processor signals for entity instance {} of type {}: Missing one of these attributes: {} {}", entity_instance->get_GUID().str(), entity_instance->get_entity_type()->get_type_name(), TanEntityTypeProvider::TAN_INPUT, TanEntityTypeProvider::TAN_VALUE);
 		}
 	}
