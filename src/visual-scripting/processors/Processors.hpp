@@ -16,12 +16,19 @@ namespace visual_scripting {
 	using LogicalProcessorsPtr = std::shared_ptr<LogicalProcessors>;
 	using MathProcessorsPtr = std::shared_ptr<MathProcessors>;
 
-    /// Provides the processors.
+    /// @class Processors
+    /// @brief Provides the processors.
 	class Processors
 	{
 		public:
 
-			/// Constructs the processors.
+            /// @brief Constructs the processors.
+            /// @note The dependencies of this class will be injected automatically.
+            /// @param processor_registry The registry for processors.
+            /// @param generator_processors The processors for generators like counters and timers.
+            /// @param inout_processors The processors for input and output.
+            /// @param logical_processors The processors for logical operations.
+            /// @param math_processors The processors for mathematical operations.
 			Processors(
 				ProcessorRegistryPtr processor_registry,
 				GeneratorProcessorsPtr generator_processors,
@@ -30,6 +37,7 @@ namespace visual_scripting {
 				MathProcessorsPtr math_processors
 			);
 
+            /// Destructor.
 			~Processors();
 
 			/// Initialization of the processors.
