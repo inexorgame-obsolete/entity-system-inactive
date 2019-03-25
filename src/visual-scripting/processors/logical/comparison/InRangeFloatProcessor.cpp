@@ -46,11 +46,13 @@ namespace visual_scripting {
 	void InRangeFloatProcessor::make_signals(const EntityInstancePtr& entity_instance)
 	{
 		spdlog::get(LOGGER_NAME)->debug("Initializing processor IN_RANGE_FLOAT for newly created entity instance {} of type {}", entity_instance->get_GUID().str(), entity_instance->get_entity_type()->get_type_name());
-		auto o_in_range_float_input = entity_instance->get_attribute_instance(InRangeFloatEntityTypeProvider::IN_RANGE_FLOAT_INPUT);
+		
+        auto o_in_range_float_input = entity_instance->get_attribute_instance(InRangeFloatEntityTypeProvider::IN_RANGE_FLOAT_INPUT);
 		auto o_in_range_float_min = entity_instance->get_attribute_instance(InRangeFloatEntityTypeProvider::IN_RANGE_FLOAT_MIN);
 		auto o_in_range_float_max = entity_instance->get_attribute_instance(InRangeFloatEntityTypeProvider::IN_RANGE_FLOAT_MAX);
 		auto o_in_range_float_result = entity_instance->get_attribute_instance(InRangeFloatEntityTypeProvider::IN_RANGE_FLOAT_RESULT);
-		if (o_in_range_float_input.has_value() && o_in_range_float_min.has_value() && o_in_range_float_max.has_value() && o_in_range_float_result.has_value())
+		
+        if(o_in_range_float_input.has_value() && o_in_range_float_min.has_value() && o_in_range_float_max.has_value() && o_in_range_float_result.has_value())
 		{
 			signals[entity_instance->get_GUID()] = MakeSignal(
 				With(
@@ -67,7 +69,9 @@ namespace visual_scripting {
 				}
 			);
 			o_in_range_float_result.value()->value = signals[entity_instance->get_GUID()];
-		} else {
+		}
+        else
+        {
 			spdlog::get(LOGGER_NAME)->error("Failed to initialize processor signals for entity instance {} of type {}: Missing one of these attributes: {} {} {} {}", entity_instance->get_GUID().str(), entity_instance->get_entity_type()->get_type_name(), InRangeFloatEntityTypeProvider::IN_RANGE_FLOAT_INPUT, InRangeFloatEntityTypeProvider::IN_RANGE_FLOAT_MIN, InRangeFloatEntityTypeProvider::IN_RANGE_FLOAT_MAX, InRangeFloatEntityTypeProvider::IN_RANGE_FLOAT_RESULT);
 		}
 	}
