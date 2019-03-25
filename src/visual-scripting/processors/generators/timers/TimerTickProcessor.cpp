@@ -58,9 +58,11 @@ namespace visual_scripting {
 	void TimerTickProcessor::make_signals(const std::shared_ptr<inexor::entity_system::EntityInstance>& entity_instance)
 	{
 		spdlog::get(LOGGER_NAME)->debug("Initializing processor TIMER_TICK for newly created entity instance {} of type {}", entity_instance->get_GUID().str(), entity_instance->get_entity_type()->get_type_name());
-		EntityAttributeInstancePtrOpt o_attr_timer_tick_millis = entity_instance->get_attribute_instance(TimerTickEntityTypeProvider::TIMER_TICK_MILLIS);
+		
+        EntityAttributeInstancePtrOpt o_attr_timer_tick_millis = entity_instance->get_attribute_instance(TimerTickEntityTypeProvider::TIMER_TICK_MILLIS);
 		EntityAttributeInstancePtrOpt o_attr_timer_tick_value = entity_instance->get_attribute_instance(TimerTickEntityTypeProvider::TIMER_TICK_VALUE);
-		if (o_attr_timer_tick_millis.has_value() && o_attr_timer_tick_value.has_value())
+		
+        if(o_attr_timer_tick_millis.has_value() && o_attr_timer_tick_value.has_value())
 		{
 			xg::Guid guid = entity_instance->get_GUID();
 			EntityAttributeInstancePtr attr_timer_tick_millis = o_attr_timer_tick_millis.value();
@@ -105,7 +107,9 @@ namespace visual_scripting {
 			});
 		    start_thread.detach();
 
-		} else {
+		}
+        else
+        {
 			spdlog::get(LOGGER_NAME)->error("Failed to initialize processor signals for entity instance {} of type {}: Missing one of these attributes {} {}", entity_instance->get_GUID().str(), entity_instance->get_entity_type()->get_type_name(), TimerTickEntityTypeProvider::TIMER_TICK_VALUE, TimerTickEntityTypeProvider::TIMER_TICK_MILLIS);
 		}
 	}
