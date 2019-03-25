@@ -9,17 +9,22 @@ namespace visual_scripting {
 	using ComparisonProcessorsPtr = std::shared_ptr<ComparisonProcessors>;
 	using GateProcessorsPtr = std::shared_ptr<GateProcessors>;
 
-    /// Provides processors.
+    /// @class LogicalProcessors
+    /// @brief Provides processors.
 	class LogicalProcessors
 	{
 		public:
 
-			/// Constructs the processors for logical operations.
+			/// @brief Constructs the processors for logical operations.
+            /// @note The dependencies of this class will be injected automatically.
+            /// @param comparison_processors The processors for comparison operations.
+            /// @param gate_processors The processors logical gates.
 			LogicalProcessors(
 				ComparisonProcessorsPtr comparison_processors,
 				GateProcessorsPtr gate_processors
 			);
 
+            /// Destructor.
 			~LogicalProcessors();
 
 			/// Initialization of the processors for logical operations.
