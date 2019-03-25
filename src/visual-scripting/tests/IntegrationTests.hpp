@@ -13,12 +13,18 @@ namespace visual_scripting {
 	using SinTestPtr = std::shared_ptr<SinTest>;
 	using LogicTestPtr = std::shared_ptr<LogicTest>;
 
-    /// The integration tests.
+    /// @class IntegrationTests
+    /// @brief The integration tests.
 	class IntegrationTests
 	{
 		public:
 
-			/// Constructs the integration tests
+			/// @brief Constructs the integration tests
+            /// @note The dependencies of this class will be injected automatically.
+            /// @param console_test The test case for CONSOLE_STDIN and CONSOLE_STDOUT.
+            /// @param int_constant_connector_test The test case for connecting INT_CONSTANTs.
+            /// @param sin_test The test case for SIN.
+            /// @param logic_test The test case for logical operations.
 			IntegrationTests(
 				ConsoleTestPtr console_test,
 				IntConstantConnectorTestPtr int_constant_connector_test,
@@ -26,6 +32,7 @@ namespace visual_scripting {
 				LogicTestPtr logic_test
 			);
 
+            /// Destructor.
 			~IntegrationTests();
 
 			/// Initialization of the integration tests.
