@@ -9,8 +9,8 @@
 namespace inexor {
 namespace entity_system {
 
-
-    /// A base class for data validation in entity system classes.
+    /// @class DataValidationBase
+    /// @brief A base class for data validation in entity system classes.
 	class DataValidationBase
     {
 
@@ -22,8 +22,7 @@ namespace entity_system {
 			/// Destructor.
 			~DataValidationBase();
 
-			/// This data validation method must be implemented
-			/// by every class which inherits from this base class!
+			/// This data validation method must be implemented by every class which inherits from this base class!
             virtual ENTSYS_DATA_VALIDATION_RESULT validate() = 0;
 
     };
