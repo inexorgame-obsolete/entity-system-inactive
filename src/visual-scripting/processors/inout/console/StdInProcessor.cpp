@@ -52,8 +52,9 @@ namespace visual_scripting {
 	void StdInProcessor::make_signals(const EntityInstancePtr& entity_instance)
 	{
 		std::cout << "Initializing processor CONSOLE_STDIN for newly created entity instance " << entity_instance->get_GUID().str() << " of type " << entity_instance->get_entity_type()->get_type_name() << std::endl;
-		auto o_console_stdin = entity_instance->get_attribute_instance(StdInEntityTypeProvider::CONSOLE_STDIN);
-		if (o_console_stdin.has_value())
+        auto o_console_stdin = entity_instance->get_attribute_instance(StdInEntityTypeProvider::CONSOLE_STDIN);
+		
+        if(o_console_stdin.has_value())
 		{
 			xg::Guid guid = entity_instance->get_GUID();
 			std::shared_ptr<inexor::entity_system::EntityAttributeInstance> attr_console_stdin = o_console_stdin.value();
@@ -87,7 +88,9 @@ namespace visual_scripting {
 				}
 			});
 		    start_thread.detach();
-		} else {
+		}
+        else
+        {
 			std::cout << "Failed to initialize processor signals for entity instance " << entity_instance->get_GUID().str() << " of type " << entity_instance->get_entity_type()->get_type_name() << ": Missing attribute" << StdInEntityTypeProvider::CONSOLE_STDIN << std::endl;
 		}
 	}
