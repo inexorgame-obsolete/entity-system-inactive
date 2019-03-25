@@ -58,11 +58,13 @@ namespace visual_scripting {
 	void CounterIntProcessor::make_signals(const std::shared_ptr<inexor::entity_system::EntityInstance>& entity_instance)
 	{
 		spdlog::get(LOGGER_NAME)->debug("Initializing processor COUNTER_INT for newly created entity instance {} of type {}", entity_instance->get_GUID().str(), entity_instance->get_entity_type()->get_type_name());
-		EntityAttributeInstancePtrOpt o_attr_counter_int_millis = entity_instance->get_attribute_instance(CounterIntEntityTypeProvider::COUNTER_INT_MILLIS);
+		
+        EntityAttributeInstancePtrOpt o_attr_counter_int_millis = entity_instance->get_attribute_instance(CounterIntEntityTypeProvider::COUNTER_INT_MILLIS);
 		EntityAttributeInstancePtrOpt o_attr_counter_int_step = entity_instance->get_attribute_instance(CounterIntEntityTypeProvider::COUNTER_INT_STEP);
 		EntityAttributeInstancePtrOpt o_attr_counter_int_reset = entity_instance->get_attribute_instance(CounterIntEntityTypeProvider::COUNTER_INT_RESET);
 		EntityAttributeInstancePtrOpt o_attr_counter_int_count = entity_instance->get_attribute_instance(CounterIntEntityTypeProvider::COUNTER_INT_COUNT);
-		if (o_attr_counter_int_millis.has_value() && o_attr_counter_int_step.has_value() && o_attr_counter_int_reset.has_value() && o_attr_counter_int_count.has_value())
+		
+        if(o_attr_counter_int_millis.has_value() && o_attr_counter_int_step.has_value() && o_attr_counter_int_reset.has_value() && o_attr_counter_int_count.has_value())
 		{
 			xg::Guid guid = entity_instance->get_GUID();
 			EntityAttributeInstancePtr attr_counter_int_millis = o_attr_counter_int_millis.value();
@@ -106,7 +108,7 @@ namespace visual_scripting {
 		    	int tick = 0;
 
 				// Loop while TODO
-				while (true)
+				while(true)
 				{
 					// Wait for counter_int_millis milliseconds
 					int millis = std::get<DataType::INT>(attr_counter_int_millis->value.Value());
@@ -119,7 +121,9 @@ namespace visual_scripting {
 			});
 		    start_thread.detach();
 
-		} else {
+		}
+        else
+        {
 			spdlog::get(LOGGER_NAME)->error("Failed to initialize processor signals for entity instance {} of type {}: Missing one of these attributes {} {} {} {}", entity_instance->get_GUID().str(), entity_instance->get_entity_type()->get_type_name(), CounterIntEntityTypeProvider::COUNTER_INT_COUNT, CounterIntEntityTypeProvider::COUNTER_INT_MILLIS, CounterIntEntityTypeProvider::COUNTER_INT_RESET, CounterIntEntityTypeProvider::COUNTER_INT_STEP);
 		}
 	}
