@@ -65,7 +65,7 @@ namespace visual_scripting {
 
 	void ConsoleTest::start_test()
 	{
-		if (!running && o_stdin.has_value() && o_stdout.has_value() && o_stderr.has_value())
+		if(!running && o_stdin.has_value() && o_stdout.has_value() && o_stderr.has_value())
 		{
 			EntityAttributeInstancePtr stdin_value = o_stdin.value()->get_attribute_instance(StdInEntityTypeProvider::CONSOLE_STDIN).value();
 
@@ -79,7 +79,7 @@ namespace visual_scripting {
 				o_stderr.value()->get_attribute_instance(StdErrEntityTypeProvider::CONSOLE_STDERR).value()
 			);
 
-			if (o_stdin_stdout_connector.has_value() && o_stdin_stderr_connector.has_value())
+			if(o_stdin_stdout_connector.has_value() && o_stdin_stderr_connector.has_value())
 			{
 				stdin_stdout_connector = o_stdin_stdout_connector.value();
 				stdin_stdout_connector->enable_debug();
@@ -94,7 +94,7 @@ namespace visual_scripting {
 
 	void ConsoleTest::stop_test()
 	{
-		if (running)
+		if(running)
 		{
 			connector_manager->delete_connector(stdin_stderr_connector);
 			connector_manager->delete_connector(stdin_stdout_connector);

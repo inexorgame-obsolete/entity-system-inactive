@@ -27,8 +27,16 @@ namespace visual_scripting {
 	{
 		public:
 
+            /// 
     		USING_REACTIVE_DOMAIN(entity_system::D)
 
+            /// @brief Constructor.
+            /// @note The dependencies of this class will be injected automatically.
+            /// @param connector_manager ?
+            /// @param stdin_entity_type_provider ?
+            /// @param stdout_entity_type_provider ?
+            /// @param stderr_entity_type_provider ?
+            /// @param entity_instance_builder_factory ?
 			ConsoleTest(
 				ConnectorManagerPtr connector_manager,
 				StdInEntityTypeProviderPtr stdin_entity_type_provider,
@@ -37,16 +45,21 @@ namespace visual_scripting {
 				EntityInstanceBuilderFactoryPtr entity_instance_builder_factory
 			);
 
+            /// Destructor.
 			~ConsoleTest();
 
+            /// Initialisation.
 			void init();
 
+            /// Start test.
 			void start_test();
 
+            /// Stop test.
 			void stop_test();
 
 		private:
-
+            
+            /// Running state of the console test.
 			bool running;
 
 			ConnectorManagerPtr connector_manager;
