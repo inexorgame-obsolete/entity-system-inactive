@@ -9,17 +9,22 @@ namespace visual_scripting {
 	using ConsoleProcessorsPtr = std::shared_ptr<ConsoleProcessors>;
 	using LoggerProcessorsPtr = std::shared_ptr<LoggerProcessors>;
 
-    /// Provides processors for input and output.
+    /// @class InOutProcessors
+    /// @brief Provides processors for input and output.
 	class InOutProcessors
 	{
 		public:
 
-			/// Constructs the processors for input and output.
+			/// @brief Constructs the processors for input and output.
+            /// @note The dependencies of this class will be injected automatically.
+            /// @param console_processors The processors for console handling.
+            /// @param logger_processors The processors for logging.
 			InOutProcessors(
 				ConsoleProcessorsPtr console_processors,
 				LoggerProcessorsPtr logger_processors
 			);
 
+            /// Destructor.
 			~InOutProcessors();
 
 			/// Initialization of the processors for input and output.
