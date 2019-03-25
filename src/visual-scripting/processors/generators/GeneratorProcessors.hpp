@@ -11,18 +11,24 @@ namespace visual_scripting {
 	using TimerProcessorsPtr = std::shared_ptr<TimerProcessors>;
 	using RandomProcessorsPtr = std::shared_ptr<RandomProcessors>;
 
-    /// Provides processors for generators like counters and timers.
+    /// @class GeneratorProcessors
+    /// @brief Provides processors for generators like counters and timers.
 	class GeneratorProcessors
 	{
 		public:
 
-			/// Constructs the processors for generators like counters and timers.
+			/// @brief Constructs the processors for generators like counters and timers.
+            /// @note The dependencies of this class will be injected automatically.
+            /// @param counter_processors Processors for counters.
+            /// @param timer_processors Processors for counters.
+            /// @param random_processors Processors for random number generators.
 			GeneratorProcessors(
 				CounterProcessorsPtr counter_processors,
 				TimerProcessorsPtr timer_processors,
 				RandomProcessorsPtr random_processors
 			);
 
+            /// Destructor.
 			~GeneratorProcessors();
 
 			/// Initialization of the processors for generators like counters and timers.
