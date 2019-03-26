@@ -7,12 +7,15 @@ namespace inexor {
 namespace entity_system {
 namespace type_system {
 
-	/// Provides an entity type "LOWER_THAN_FLOAT".
+    /// @class LowerThanFloatEntityTypeProvider
+	/// @brief Provides an entity type "LOWER_THAN_FLOAT".
 	class LowerThanFloatEntityTypeProvider : public EntityTypeProvider
 	{
 		public:
 
-			/// Constructs the specialized provider for the entity type LOWER_THAN_FLOAT
+			/// @brief Constructs the specialized provider for the entity type LOWER_THAN_FLOAT.
+            /// @note The dependencies of this class will be injected automatically.
+            /// @param entity_type_builder_manager The entity type builder manager.
 			LowerThanFloatEntityTypeProvider(
 				std::shared_ptr<EntityTypeBuilderFactory> entity_type_builder_manager
 			) : EntityTypeProvider(
@@ -25,18 +28,19 @@ namespace type_system {
 				}
 			) {};
 
+            /// Destructor.
 			~LowerThanFloatEntityTypeProvider() {};
 
-			/// Defines the name of this entity type
+			/// Defines the name of this entity type.
 			static constexpr char TYPE_NAME[] = "LOWER_THAN_FLOAT";
 
-			/// The name of the attribute lower_than_float_input_1
+			/// The name of the attribute lower_than_float_input_1.
 			static constexpr char LOWER_THAN_FLOAT_INPUT_1[] = "lower_than_float_input_1";
 
-			/// The name of the attribute lower_than_float_input_1
+			/// The name of the attribute lower_than_float_input_1.
 			static constexpr char LOWER_THAN_FLOAT_INPUT_2[] = "lower_than_float_input_2";
 
-			/// The name of the attribute lower_than_float_result
+			/// The name of the attribute lower_than_float_result.
 			static constexpr char LOWER_THAN_FLOAT_RESULT[] = "lower_than_float_result";
 
 	};
