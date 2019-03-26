@@ -20,12 +20,20 @@ namespace type_system {
 	using NorFactoryPtr = std::shared_ptr<NorFactory>;
 	using NandFactoryPtr = std::shared_ptr<NandFactory>;
 
-	/// The factories for logical operations.
+    /// @class GateFactories
+	/// @brief The factories for logical operations.
 	class GateFactories
 	{
 		public:
 
-			/// Constructs the factories for logical operations.
+			/// @brief Constructs the factories for logical operations.
+            /// @note The dependencies of this class will be injected automatically.
+            /// @param not_factory Factory for creating entity instances of type NOT.
+            /// @param or_factory Factory for creating entity instances of type OR.
+            /// @param and_factory Factory for creating entity instances of type AND.
+            /// @param xor_factory Factory for creating entity instances of type XOR.
+            /// @param nor_factory Factory for creating entity instances of type NOR.
+            /// @param nand_factory Factory for creating entity instances of type NAND.
 			GateFactories(
 				NotFactoryPtr not_factory,
 				OrFactoryPtr or_factory,
@@ -35,6 +43,7 @@ namespace type_system {
 				NandFactoryPtr nand_factory
 			);
 
+            /// Destructor.
 			~GateFactories();
 
 			/// Initializes the factories for logical operations.
