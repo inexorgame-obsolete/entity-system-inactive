@@ -12,18 +12,24 @@ namespace type_system {
 	using ConverterFactoriesPtr = std::shared_ptr<ConverterFactories>;
 	using StoreFactoriesPtr = std::shared_ptr<StoreFactories>;
 
-	/// The factories for constants and stores.
+    /// @class DataFactories
+	/// @brief The factories for constants and stores.
 	class DataFactories
 	{
 		public:
 
-			/// Constructs the factories for constants and stores.
+			/// @brief Constructs the factories for constants and stores.
+            /// @note The dependencies of this class will be injected automatically.
+            /// @param constant_factories The factories for constants.
+            /// @param converter_factories The factories for converters.
+            /// @param store_factories The factories for stores.
 			DataFactories(
 				ConstantFactoriesPtr constant_factories,
 				ConverterFactoriesPtr converter_factories,
 				StoreFactoriesPtr store_factories
 			);
 
+            /// Destructor.
 			~DataFactories();
 
 			/// Initializes the factories for constants and stores.
