@@ -10,7 +10,8 @@ namespace type_system {
 
 	using EntityInstancePtrOpt = std::optional<std::shared_ptr<EntityInstance>>;
 
-    /// Factory for creating entity instances of type XOR.
+    /// @class XorFactory
+    /// @brief Factory for creating entity instances of type XOR.
 	class XorFactory
 	{
 		public:
@@ -18,12 +19,16 @@ namespace type_system {
 			using XorEntityTypeProviderPtr = std::shared_ptr<XorEntityTypeProvider>;
 			using EntityInstanceBuilderFactoryPtr = std::shared_ptr<EntityInstanceBuilderFactory>;
 
-			/// Constructs a factory for creating entity instances of type XOR.
+			/// @brief Constructs a factory for creating entity instances of type XOR.
+            /// @note The dependencies of this class will be injected automatically.
+            /// @param entity_type_provider Provides the entity type XOR.
+            /// @param entity_instance_builder_factory Factory for creating entity instance builders.
 			XorFactory(
 				XorEntityTypeProviderPtr entity_type_provider,
 				EntityInstanceBuilderFactoryPtr entity_instance_builder_factory
 			);
 
+            /// Destructor.
 			~XorFactory();
 
 			/// Initializes the factory.
