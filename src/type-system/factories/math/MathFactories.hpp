@@ -10,17 +10,22 @@ namespace type_system {
 	using ArithmeticFactoriesPtr = std::shared_ptr<ArithmeticFactories>;
 	using TrigonometricFactoriesPtr = std::shared_ptr<TrigonometricFactories>;
 
-	/// The factories for mathematical operations.
+    /// @class MathFactories
+	/// @brief The factories for mathematical operations.
 	class MathFactories
 	{
 		public:
 
-			/// Constructs the factories for mathematical operations.
+			/// @brief Constructs the factories for mathematical operations.
+            /// @note The dependencies of this class will be injected automatically.
+            /// @param arithmetic_factories The factories for arithmetic operations.
+            /// @param trigonometric_factories The factories for trigonometric operations.
 			MathFactories(
 				ArithmeticFactoriesPtr arithmetic_factories,
 				TrigonometricFactoriesPtr trigonometric_factories
 			);
 
+            /// Destructor.
 			~MathFactories();
 
 			/// Initializes the factories for mathematical operations.
