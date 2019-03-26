@@ -7,12 +7,15 @@ namespace inexor {
 namespace entity_system {
 namespace type_system {
 
-	/// Provides an entity type "LOGGER". The LOGGER logs
+    /// @class LoggerEntityTypeProvider
+	/// Provides an entity type "LOGGER". The LOGGER logs.
 	class LoggerEntityTypeProvider : public EntityTypeProvider
 	{
 		public:
 
-			/// Constructs the specialized provider for the LOGGER entity type
+			/// @brief Constructs the specialized provider for the LOGGER entity type.
+            /// @note The dependencies of this class will be injected automatically.
+            /// @param entity_type_builder_manager The entity type builder manager.
 			LoggerEntityTypeProvider(
 				std::shared_ptr<EntityTypeBuilderFactory> entity_type_builder_manager
 			) : EntityTypeProvider(
@@ -25,18 +28,19 @@ namespace type_system {
 				}
 			) {};
 
+            /// Destructor.
 			~LoggerEntityTypeProvider() {};
 
-			/// Defines the name of this entity type
+			/// Defines the name of this entity type.
 			static constexpr char TYPE_NAME[] = "LOGGER";
 
-			/// The name of the attribute logger_name
+			/// The name of the attribute logger_name.
 			static constexpr char LOGGER_NAME[] = "logger_name";
 
-			/// The name of the attribute log_level
+			/// The name of the attribute log_level.
 			static constexpr char LOG_LEVEL[] = "log_level";
 
-			/// The name of the attribute log_message
+			/// The name of the attribute log_message.
 			static constexpr char LOG_MESSAGE[] = "log_message";
 
 	};
