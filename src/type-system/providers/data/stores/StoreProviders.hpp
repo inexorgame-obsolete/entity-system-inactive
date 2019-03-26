@@ -14,18 +14,24 @@ namespace type_system {
 	using IntStoreEntityTypeProviderPtr = std::shared_ptr<IntStoreEntityTypeProvider>;
 	using StringStoreEntityTypeProviderPtr = std::shared_ptr<StringStoreEntityTypeProvider>;
 
-	/// The store entity type providers.
+    /// @class StoreProviders
+	/// @brief The store entity type providers.
 	class StoreProviders
 	{
 		public:
 
-			/// Constructs the store entity type providers.
+			/// @brief Constructs the store entity type providers.
+            /// @note The dependencies of this class will be injected automatically.
+            /// @param float_store_entity_type_provider Provides the entity type FLOAT_STORE.
+            /// @param int_store_entity_type_provider Provides the entity type INT_STORE.
+            /// @param string_store_entity_type_provider Provides the entity type STRING_STORE.
 			StoreProviders(
 				FloatStoreEntityTypeProviderPtr float_store_entity_type_provider,
 				IntStoreEntityTypeProviderPtr int_store_entity_type_provider,
 				StringStoreEntityTypeProviderPtr string_store_entity_type_provider
 			);
 
+            /// Destructor.
 			~StoreProviders();
 
 			/// Initializes the store entity type providers.
