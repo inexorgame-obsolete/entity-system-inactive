@@ -10,7 +10,8 @@ namespace type_system {
 
 	using EntityInstancePtrOpt = std::optional<std::shared_ptr<EntityInstance>>;
 
-    /// Factory for creating entity instances of type LOWER_THAN_FLOAT.
+    /// @class LowerThanFloatFactory
+    /// @brief Factory for creating entity instances of type LOWER_THAN_FLOAT.
 	class LowerThanFloatFactory
 	{
 		public:
@@ -18,12 +19,16 @@ namespace type_system {
 			using LowerThanFloatEntityTypeProviderPtr = std::shared_ptr<LowerThanFloatEntityTypeProvider>;
 			using EntityInstanceBuilderFactoryPtr = std::shared_ptr<EntityInstanceBuilderFactory>;
 
-			/// Constructs a factory for creating entity instances of type LOWER_THAN_FLOAT.
+			/// @brief Constructs a factory for creating entity instances of type LOWER_THAN_FLOAT.
+            /// @note The dependencies of this class will be injected automatically.
+            /// @param entity_type_provider Provides the entity type LOWER_THAN_FLOAT.
+            /// @param entity_instance_builder_factory Factory for creating entity instance builders.
 			LowerThanFloatFactory(
 				LowerThanFloatEntityTypeProviderPtr entity_type_provider,
 				EntityInstanceBuilderFactoryPtr entity_instance_builder_factory
 			);
 
+            /// Destructor.
 			~LowerThanFloatFactory();
 
 			/// Initializes the factory.
