@@ -7,12 +7,15 @@ namespace inexor {
 namespace entity_system {
 namespace type_system {
 
-	/// Provides an entity type "CONSOLE_STDOUT".
+    /// @class StdOutEntityTypeProvider
+	/// @brief Provides an entity type "CONSOLE_STDOUT".
 	class StdOutEntityTypeProvider : public EntityTypeProvider
 	{
 		public:
 
-			/// Constructs the specialized provider for the entity type CONSOLE_STDOUT
+			/// @brief Constructs the specialized provider for the entity type CONSOLE_STDOUT.
+            /// @note The dependencies of this class will be injected automatically.
+            /// @param entity_type_builder_manager The entity type builder manager.
 			StdOutEntityTypeProvider(
 				std::shared_ptr<EntityTypeBuilderFactory> entity_type_builder_manager
 			) : EntityTypeProvider(
@@ -23,6 +26,7 @@ namespace type_system {
 				}
 			) {};
 
+            /// Destructor.
 			~StdOutEntityTypeProvider() {};
 
 			/// Defines the name of this entity type
