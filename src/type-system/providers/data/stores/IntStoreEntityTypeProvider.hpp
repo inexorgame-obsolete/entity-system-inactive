@@ -7,12 +7,15 @@ namespace inexor {
 namespace entity_system {
 namespace type_system {
 
-	/// Provides an entity type "INT_STORE".
+    /// @class IntStoreEntityTypeProvider
+	/// @brief Provides an entity type "INT_STORE".
 	class IntStoreEntityTypeProvider : public EntityTypeProvider
 	{
 		public:
 
-			/// Constructs the specialized provider for the INT_STORE entity type
+			/// @brief Constructs the specialized provider for the INT_STORE entity type.
+            /// @note The dependencies of this class will be injected automatically.
+            /// @param entity_type_builder_manager The entity type builder manager.
 			IntStoreEntityTypeProvider(
 				std::shared_ptr<EntityTypeBuilderFactory> entity_type_builder_manager
 			) : EntityTypeProvider(
@@ -26,21 +29,22 @@ namespace type_system {
 				}
 			) {};
 
+            /// Destructor.
 			~IntStoreEntityTypeProvider() {};
 
-			/// Defines the name of this entity type
+			/// Defines the name of this entity type.
 			static constexpr char TYPE_NAME[] = "INT_STORE";
 
-			/// The name of the store
+			/// The name of the store.
 			static constexpr char INT_STORE_NAME[] = "int_store_name";
 
-			/// The name of the input attribute
+			/// The name of the input attribute.
 			static constexpr char INT_STORE_INPUT_VALUE[] = "int_store_input_value";
 
-			/// The name of the default value attribute
+			/// The name of the default value attribute.
 			static constexpr char INT_STORE_DEFAULT_VALUE[] = "int_store_default_value";
 
-			/// The name of the output value attribute
+			/// The name of the output value attribute.
 			static constexpr char INT_STORE_OUTPUT_VALUE[] = "int_store_output_value";
 
 	};
