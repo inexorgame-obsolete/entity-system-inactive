@@ -7,12 +7,15 @@ namespace inexor {
 namespace entity_system {
 namespace type_system {
 
-	/// Provides an entity type "EQUALS_BOOL".
+    /// @class EqualsBoolEntityTypeProvider
+	/// @brief Provides an entity type "EQUALS_BOOL".
 	class EqualsBoolEntityTypeProvider : public EntityTypeProvider
 	{
 		public:
 
-			/// Constructs the specialized provider for the entity type EQUALS_BOOL
+			/// Constructs the specialized provider for the entity type EQUALS_BOOL.
+            /// @note The dependencies of this class will be injected automatically.
+            /// @param entity_type_builder_manager The entity type builder manager.
 			EqualsBoolEntityTypeProvider(
 				std::shared_ptr<EntityTypeBuilderFactory> entity_type_builder_manager
 			) : EntityTypeProvider(
@@ -25,18 +28,19 @@ namespace type_system {
 				}
 			) {};
 
+            /// Destructor.
 			~EqualsBoolEntityTypeProvider() {};
 
-			/// Defines the name of this entity type
+			/// Defines the name of this entity type.
 			static constexpr char TYPE_NAME[] = "EQUALS_BOOL";
 
-			/// The name of the attribute equals_bool_input_1
+			/// The name of the attribute equals_bool_input_1.
 			static constexpr char EQUALS_BOOL_INPUT_1[] = "equals_bool_input_1";
 
-			/// The name of the attribute equals_bool_input_1
+			/// The name of the attribute equals_bool_input_1.
 			static constexpr char EQUALS_BOOL_INPUT_2[] = "equals_bool_input_2";
 
-			/// The name of the attribute equals_bool_result
+			/// The name of the attribute equals_bool_result.
 			static constexpr char EQUALS_BOOL_RESULT[] = "equals_bool_result";
 
 	};
