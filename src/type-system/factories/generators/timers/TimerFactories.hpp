@@ -10,16 +10,20 @@ namespace type_system {
 
 	using TimerTickFactoryPtr = std::shared_ptr<TimerTickFactory>;
 
-	/// Provides the factories for timers.
+    /// @class TimerFactories
+	/// @brief Provides the factories for timers.
 	class TimerFactories
 	{
 		public:
 
-			/// Constructs the factories for timers.
+			/// @brief Constructs the factories for timers.
+            /// @note The dependencies of this class will be injected automatically.
+            /// @param timer_tick_factory Factory for creating entity instances of type TIMER_TICK.
 			TimerFactories(
 				TimerTickFactoryPtr timer_tick_factory
 			);
 
+            /// Destructor.
 			~TimerFactories();
 
 			/// Initializes the factories for timers.
