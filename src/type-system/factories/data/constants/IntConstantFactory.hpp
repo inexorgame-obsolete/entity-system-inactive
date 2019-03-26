@@ -15,26 +15,33 @@ namespace type_system {
 	using IntConstantEntityTypeProviderPtr = std::shared_ptr<IntConstantEntityTypeProvider>;
 	using EntityInstanceBuilderFactoryPtr = std::shared_ptr<EntityInstanceBuilderFactory>;
 
-    /// Factory for creating entity instances of type INT_CONSTANT.
+    /// @class IntConstantFactory
+    /// @brief Factory for creating entity instances of type INT_CONSTANT.
 	class IntConstantFactory
 	{
 		public:
 
-			/// Constructs a factory for creating entity instances of type INT_CONSTANT.
+			/// @brief Constructs a factory for creating entity instances of type INT_CONSTANT.
+            /// @note The dependencies of this class will be injected automatically.
+            /// @param entity_type_provider Provides the entity type INT_CONSTANT.
+            /// @param entity_instance_builder_factory Factory for creating entity instance builders.
 			IntConstantFactory(
 				IntConstantEntityTypeProviderPtr entity_type_provider,
 				EntityInstanceBuilderFactoryPtr entity_instance_builder_factory
 			);
 
+            /// Destructor.
 			~IntConstantFactory();
 
 			/// Initializes the factory.
 			void init();
 
-			/// Creates an instance with default values
+			/// Creates an instance with default values.
 			EntityInstancePtrOpt create_instance();
 
-			/// Creates an INT_CONSTANT with the given constant name and the given value.
+			/// @brief Creates an INT_CONSTANT with the given constant name and the given value.
+            /// @param name ?
+            /// @param value ?
 			EntityInstancePtrOpt create_instance(const std::string& name, const int& value);
 
 		private:
