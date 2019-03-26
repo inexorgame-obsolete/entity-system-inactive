@@ -16,12 +16,15 @@ namespace type_system {
 //	using IntConstantEntityTypeProviderPtr = std::shared_ptr<IntConstantEntityTypeProvider>;
 //	using StringConstantEntityTypeProviderPtr = std::shared_ptr<StringConstantEntityTypeProvider>;
 
-	/// The constant entity type providers.
+    /// @class ConstantProviders
+	/// @brief The constant entity type providers.
 	class ConstantProviders
 	{
 		public:
 
-			/// Constructs the constant entity type providers.
+			/// @brief Constructs the constant entity type providers.
+            /// @note The dependencies of this class will be injected automatically.
+            /// @param bool_constant_entity_type_provider The entity type BOOL_CONSTANT.
 			ConstantProviders(
 				BoolConstantEntityTypeProviderPtr bool_constant_entity_type_provider
 //				FloatConstantEntityTypeProvider float_constant_entity_type_provider,
@@ -29,6 +32,7 @@ namespace type_system {
 //				StringConstantEntityTypeProvider string_constant_entity_type_provider
 			);
 
+            /// Destructor.
 			~ConstantProviders();
 
 			/// Initializes the constant entity type providers.
