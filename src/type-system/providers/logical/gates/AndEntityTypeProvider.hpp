@@ -7,12 +7,15 @@ namespace inexor {
 namespace entity_system {
 namespace type_system {
 
-	/// Provides an entity type "AND".
+    /// @class AndEntityTypeProvider
+	/// @brief Provides an entity type "AND".
 	class AndEntityTypeProvider : public EntityTypeProvider
 	{
 		public:
 
-			/// Constructs the specialized provider for the entity type AND
+			/// Constructs the specialized provider for the entity type AND.
+            /// @note The dependencies of this class will be injected automatically.
+            /// @param entity_type_builder_manager The entity type builder manager.
 			AndEntityTypeProvider(
 				std::shared_ptr<EntityTypeBuilderFactory> entity_type_builder_manager
 			) : EntityTypeProvider(
@@ -25,18 +28,19 @@ namespace type_system {
 				}
 			) {};
 
+            /// Destructor.
 			~AndEntityTypeProvider() {};
 
-			/// Defines the name of this entity type
+			/// Defines the name of this entity type.
 			static constexpr char TYPE_NAME[] = "AND";
 
-			/// The name of the attribute and_input_1
+			/// The name of the attribute and_input_1.
 			static constexpr char AND_INPUT_1[] = "and_input_1";
 
-			/// The name of the attribute and_input_1
+			/// The name of the attribute and_input_1.
 			static constexpr char AND_INPUT_2[] = "and_input_2";
 
-			/// The name of the attribute and_result
+			/// The name of the attribute and_result.
 			static constexpr char AND_RESULT[] = "and_result";
 
 	};
