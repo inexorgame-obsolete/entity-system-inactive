@@ -26,12 +26,23 @@ namespace type_system {
 	using InRangeIntEntityTypeProviderPtr = std::shared_ptr<InRangeIntEntityTypeProvider>;
 	using InRangeFloatEntityTypeProviderPtr = std::shared_ptr<InRangeFloatEntityTypeProvider>;
 
-	/// The entity type providers for comparison operations.
+    /// @class ComparisonProviders
+	/// @brief The entity type providers for comparison operations.
 	class ComparisonProviders
 	{
 		public:
 
-			/// Constructs the entity type providers for comparison operations.
+			/// @brief Constructs the entity type providers for comparison operations.
+            /// @note The dependencies of this class will be injected automatically.
+            /// @param equals_bool_entity_type_provider Provides the entity type EQUALS_BOOL.
+            /// @param equals_int_entity_type_provider Provides the entity type EQUALS_INT.
+            /// @param equals_string_entity_type_provider Provides the entity type EQUALS_STRING.
+            /// @param greater_than_int_entity_type_provider Provides the entity type GREATER_THAN_INT.
+            /// @param greater_than_float_entity_type_provider Provides the entity type GREATER_THAN_FLOAT.
+            /// @param lower_than_int_entity_type_provider Provides the entity type LOWER_THAN_INT.
+            /// @param lower_than_float_entity_type_provider Provides the entity type LOWER_THAN_FLOAT.
+            /// @param in_range_int_entity_type_provider Provides the entity type IN_RANGE_INT.
+            /// @param in_range_float_entity_type_provider Provides the entity type IN_RANGE_FLOAT.
 			ComparisonProviders(
 				EqualsBoolEntityTypeProviderPtr equals_bool_entity_type_provider,
 				EqualsIntEntityTypeProviderPtr equals_int_entity_type_provider,
@@ -44,6 +55,7 @@ namespace type_system {
 				InRangeFloatEntityTypeProviderPtr in_range_float_entity_type_provider
 			);
 
+            /// Destructor.
 			~ComparisonProviders();
 
 			/// Initializes the entity type providers for comparison operations.
