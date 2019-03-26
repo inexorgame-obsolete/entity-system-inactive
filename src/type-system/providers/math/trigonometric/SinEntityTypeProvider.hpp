@@ -7,12 +7,15 @@ namespace inexor {
 namespace entity_system {
 namespace type_system {
 
-	/// Provides an entity type "SIN": sin_value = sin(sin_input)
+    /// @class SinEntityTypeProvider
+	/// @brief Provides an entity type "SIN": sin_value = sin(sin_input).
 	class SinEntityTypeProvider : public EntityTypeProvider
 	{
 		public:
 
-			/// Constructs the specialized provider for the entity type SIN.
+			/// @brief Constructs the specialized provider for the entity type SIN.
+            /// @note The dependencies of this class will be injected automatically.
+            /// @param entity_type_builder_manager The entity type builder manager.
 			SinEntityTypeProvider(
 				std::shared_ptr<EntityTypeBuilderFactory> entity_type_builder_manager
 			) : EntityTypeProvider(
@@ -24,9 +27,10 @@ namespace type_system {
 				}
 			) {};
 
+            /// Destructor.
 			~SinEntityTypeProvider() {};
 
-			/// Defines the name of this entity type
+			/// Defines the name of this entity type.
 			static constexpr char TYPE_NAME[] = "SIN";
 
 			/// The name for the attribute sin_input.
