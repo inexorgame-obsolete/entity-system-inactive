@@ -10,16 +10,20 @@ namespace type_system {
 
 	using LoggerFactoryPtr = std::shared_ptr<LoggerFactory>;
 
-	/// The logger factories.
+    /// @class LoggerFactories
+	/// @brief The logger factories.
 	class LoggerFactories
 	{
 		public:
 
-			/// Constructs the logger factories.
+			/// @brief Constructs the logger factories.
+            /// @note The dependencies of this class will be injected automatically.
+            /// @param logger_factory Factory for creating entity instances of type LOGGER.
 			LoggerFactories(
 				LoggerFactoryPtr logger_factory
 			);
 
+            /// Destructor.
 			~LoggerFactories();
 
 			/// Initializes the logger factories.
