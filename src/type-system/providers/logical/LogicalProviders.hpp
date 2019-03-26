@@ -12,17 +12,22 @@ namespace type_system {
 	using ComparisonProvidersPtr = std::shared_ptr<ComparisonProviders>;
 	using GateProvidersPtr = std::shared_ptr<GateProviders>;
 
-	/// The entity type providers for logical operations.
+    /// @class LogicalProviders
+	/// @brief The entity type providers for logical operations.
 	class LogicalProviders
 	{
 		public:
 
-			/// Constructs the entity type providers for logical operations.
+			/// @brief Constructs the entity type providers for logical operations.
+            /// @note The dependencies of this class will be injected automatically.
+            /// @param comparison_providers The providers for the comparison operations.
+            /// @param gate_providers The providers for the logical gates.
 			LogicalProviders(
 				ComparisonProvidersPtr comparison_providers,
 				GateProvidersPtr gate_providers
 			);
 
+            /// Destructor.
 			~LogicalProviders();
 
 			/// Initializes the providers for logical operations.
