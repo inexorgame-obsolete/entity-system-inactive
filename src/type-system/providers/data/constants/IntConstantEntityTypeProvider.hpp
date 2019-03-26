@@ -7,12 +7,15 @@ namespace inexor {
 namespace entity_system {
 namespace type_system {
 
-	/// Provides an entity type "INT_CONSTANT" which is a pure int constant variable.
+    /// @class IntConstantEntityTypeProvider
+	/// @brief Provides an entity type "INT_CONSTANT" which is a pure int constant variable.
 	class IntConstantEntityTypeProvider : public EntityTypeProvider
 	{
 		public:
 
-			/// Constructs the specialized provider for the INT_CONSTANT entity type
+			/// @brief Constructs the specialized provider for the INT_CONSTANT entity type.
+            /// @note The dependencies of this class will be injected automatically.
+            /// @param entity_type_builder_manager The entity type builder manager.
 			IntConstantEntityTypeProvider(
 				std::shared_ptr<EntityTypeBuilderFactory> entity_type_builder_manager
 			) : EntityTypeProvider(
@@ -24,15 +27,16 @@ namespace type_system {
 				}
 			) {};
 
+            /// Destructor.
 			~IntConstantEntityTypeProvider() {};
 
-			/// Defines the name of this entity type
+			/// Defines the name of this entity type.
 			static constexpr char TYPE_NAME[] = "INT_CONSTANT";
 
-			/// The name of the output attribute int_constant_name
+			/// The name of the output attribute int_constant_name.
 			static constexpr char INT_CONSTANT_NAME[] = "int_constant_name";
 
-			/// The name of the output attribute int_constant_value
+			/// The name of the output attribute int_constant_value.
 			static constexpr char INT_CONSTANT_VALUE[] = "int_constant_value";
 
 	};
