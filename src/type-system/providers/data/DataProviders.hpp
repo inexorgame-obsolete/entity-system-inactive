@@ -12,18 +12,24 @@ namespace type_system {
 	using ConverterProvidersPtr = std::shared_ptr<ConverterProviders>;
 	using StoreProvidersPtr = std::shared_ptr<StoreProviders>;
 
-	/// The providers of the type system.
+    /// @class DataProviders
+	/// @brief The providers of the type system.
 	class DataProviders
 	{
 		public:
 
-			/// Constructs the providers of the type system.
+			/// @brief Constructs the providers of the type system.
+            /// @note The dependencies of this class will be injected automatically.
+            /// @param constant_providers The providers for constants.
+            /// @param converter_providers The providers for converters.
+            /// @param store_providers The providers for stores.
 			DataProviders(
 				ConstantProvidersPtr constant_providers,
 				ConverterProvidersPtr converter_providers,
 				StoreProvidersPtr store_providers
 			);
 
+            /// Destructor.
 			~DataProviders();
 
 			/// Initializes the providers of the type system.
