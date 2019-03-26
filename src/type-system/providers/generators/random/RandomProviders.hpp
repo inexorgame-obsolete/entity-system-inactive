@@ -10,17 +10,22 @@ namespace type_system {
 	using RandomNextIntEntityTypeProviderPtr = std::shared_ptr<RandomNextIntEntityTypeProvider>;
 	using RandomNextFloatEntityTypeProviderPtr = std::shared_ptr<RandomNextFloatEntityTypeProvider>;
 
-	/// Provides entity type providers for random number generators.
+    /// @class RandomProviders
+	/// @brief Provides entity type providers for random number generators.
 	class RandomProviders
 	{
 		public:
 
-			/// Constructs the entity type providers for random number generators.
+			/// @brief Constructs the entity type providers for random number generators.
+            /// @note The dependencies of this class will be injected automatically.
+            /// @param random_next_int_entity_type_provider Provides the entity type RANDOM_NEXT_INT.
+            /// @param random_next_float_entity_type_provider Provides the entity type RANDOM_NEXT_FLOAT.
 			RandomProviders(
 				RandomNextIntEntityTypeProviderPtr random_next_int_entity_type_provider,
 				RandomNextFloatEntityTypeProviderPtr random_next_float_entity_type_provider
 			);
 
+            /// Destructor.
 			~RandomProviders();
 
 			/// Initializes the entity type providers for random number generators.
