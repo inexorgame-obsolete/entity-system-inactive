@@ -7,12 +7,15 @@ namespace inexor {
 namespace entity_system {
 namespace type_system {
 
-	/// Provides an entity type "CONSOLE_STDERR".
+    /// @class StdErrEntityTypeProvider
+	/// @brief Provides an entity type "CONSOLE_STDERR".
 	class StdErrEntityTypeProvider : public EntityTypeProvider
 	{
 		public:
 
-			/// Constructs the specialized provider for the entity type CONSOLE_STDERR
+			/// @brief Constructs the specialized provider for the entity type CONSOLE_STDERR.
+            /// @note The dependencies of this class will be injected automatically.
+            /// @param entity_type_builder_manager The entity type builder manager.
 			StdErrEntityTypeProvider(
 				std::shared_ptr<EntityTypeBuilderFactory> entity_type_builder_manager
 			) : EntityTypeProvider(
@@ -23,12 +26,13 @@ namespace type_system {
 				}
 			) {};
 
+            /// Destructor.
 			~StdErrEntityTypeProvider() {};
 
-			/// Defines the name of this entity type
+			/// Defines the name of this entity type.
 			static constexpr char TYPE_NAME[] = "CONSOLE_STDERR";
 
-			/// The name of the attribute console_stderr
+			/// The name of the attribute console_stderr.
 			static constexpr char CONSOLE_STDERR[] = "console_stderr";
 
 	};
