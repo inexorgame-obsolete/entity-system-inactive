@@ -15,12 +15,16 @@ namespace type_system {
 	using EntityInstanceBuilderFactoryPtr = std::shared_ptr<EntityInstanceBuilderFactory>;
 	using LoggerEntityTypeProviderPtr = std::shared_ptr<LoggerEntityTypeProvider>;
 
-    /// Factory for creating entity instances of type LOGGER.
+    /// @class LoggerFactory
+    /// @brief Factory for creating entity instances of type LOGGER.
 	class LoggerFactory
 	{
 		public:
 
-			/// Constructor.
+			/// @brief Constructor.
+            /// @note The dependencies of this class will be injected automatically.
+            /// @param entity_type_provider Provides the entity type LOGGER.
+            /// @param entity_instance_builder_factory Factory for creating entity instance builders.
 			LoggerFactory(
 				LoggerEntityTypeProviderPtr entity_type_provider,
 				EntityInstanceBuilderFactoryPtr entity_instance_builder_factory
@@ -32,16 +36,20 @@ namespace type_system {
 			/// Initializes the factory.
 			void init();
 
-			/// Initialization of the loggers
+			/// Initialization of the loggers.
 			EntityInstancePtrOpt create_instance();
 
-			/// Creates an instance and sets the given name
+			/// @brief Creates an instance and sets the given name.
+            /// @param logger_name The name of the logger instance.
 			EntityInstancePtrOpt create_instance(std::string logger_name);
 
-			/// Creates an instance and sets the given name
+			/// @brief Creates an instance and sets the given name.
+            /// @param logger_name The name of the logger instance.
+            /// @param log_level The level of the logger instance.
 			EntityInstancePtrOpt create_instance(std::string logger_name, spdlog::level::level_enum log_level);
 
-			/// Creates multiple instances
+			/// @brief Creates multiple instances.
+            /// @param count The number of logger instances to create.
 			std::vector<EntityInstancePtr> create_instances(int count);
 
 		private:
