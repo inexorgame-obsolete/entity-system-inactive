@@ -10,7 +10,8 @@ namespace type_system {
 
 	using EntityInstancePtrOpt = std::optional<std::shared_ptr<EntityInstance>>;
 
-    /// Factory for creating entity instances of type EQUALS_BOOL.
+    /// @class EqualsBoolFactory
+    /// @brief Factory for creating entity instances of type EQUALS_BOOL.
 	class EqualsBoolFactory
 	{
 		public:
@@ -18,18 +19,22 @@ namespace type_system {
 			using EqualsBoolEntityTypeProviderPtr = std::shared_ptr<EqualsBoolEntityTypeProvider>;
 			using EntityInstanceBuilderFactoryPtr = std::shared_ptr<EntityInstanceBuilderFactory>;
 
-			/// Constructs a factory for creating entity instances of type EQUALS_BOOL.
-			EqualsBoolFactory(
+			/// @brief Constructs a factory for creating entity instances of type EQUALS_BOOL.
+			/// @note The dependencies of this class will be injected automatically.
+            /// @param entity_type_provider Provides the entity type EQUALS_BOOL.
+            /// @param entity_instance_builder_factory Factory for creating entity instance builders.
+            EqualsBoolFactory(
 				EqualsBoolEntityTypeProviderPtr entity_type_provider,
 				EntityInstanceBuilderFactoryPtr entity_instance_builder_factory
 			);
 
+            /// Destructor.
 			~EqualsBoolFactory();
 
 			/// Initializes the factory.
 			void init();
 
-			/// Creates an instance with default values
+			/// Creates an instance with default values.
 			EntityInstancePtrOpt create_instance();
 
 		private:
