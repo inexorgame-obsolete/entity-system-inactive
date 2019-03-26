@@ -16,19 +16,26 @@ namespace type_system {
 	using IntConstantFactoryPtr = std::shared_ptr<IntConstantFactory>;
 	using StringConstantFactoryPtr = std::shared_ptr<StringConstantFactory>;
 
-	/// The constant factories.
+    /// @class ConstantFactories
+	/// @brief The constant factories.
 	class ConstantFactories
 	{
 		public:
 
-			/// Constructs the constant factories.
+			/// @brief Constructs the constant factories.
+            /// @note The dependencies of this class will be injected automatically.
+            /// @param bool_constant_factory Factory for creating entity instances of type BOOL_CONSTANT.
+            /// @param float_constant_factory Factory for creating entity instances of type FLOAT_CONSTANT.
+            /// @param int_constant_factory Factory for creating entity instances of type INT_CONSTANT.
+            /// @param string_constant_factory Factory for creating entity instances of type STRING_CONSTANT.
 			ConstantFactories(
 				BoolConstantFactoryPtr bool_constant_factory,
 				FloatConstantFactoryPtr float_constant_factory,
 				IntConstantFactoryPtr int_constant_factory,
 				StringConstantFactoryPtr string_constant_factory
 			);
-
+            
+            /// Destructor.
 			~ConstantFactories();
 
 			/// Initializes the constant factories.
