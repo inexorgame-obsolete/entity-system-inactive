@@ -10,16 +10,20 @@ namespace type_system {
 
 	using IntToFloatEntityTypeProviderPtr = std::shared_ptr<IntToFloatEntityTypeProvider>;
 
-	/// The converter entity type providers.
+    /// @class ConverterProviders
+	/// @brief The converter entity type providers.
 	class ConverterProviders
 	{
 		public:
 
-			/// Constructs the converter entity type providers.
+			/// @brief Constructs the converter entity type providers.
+            /// @note The dependencies of this class will be injected automatically.
+            /// @param int_to_float_entity_type_provider Provides the entity type INT_TO_FLOAT.
 			ConverterProviders(
 				IntToFloatEntityTypeProviderPtr int_to_float_entity_type_provider
 			);
 
+            /// Destructor.
 			~ConverterProviders();
 
 			/// Initializes the converter entity type providers.
