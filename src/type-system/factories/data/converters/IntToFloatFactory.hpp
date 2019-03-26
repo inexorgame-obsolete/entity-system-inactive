@@ -12,17 +12,22 @@ namespace type_system {
 	using EntityInstancePtrOpt = std::optional<std::shared_ptr<EntityInstance>>;
 	using EntityInstanceBuilderFactoryPtr = std::shared_ptr<EntityInstanceBuilderFactory>;
 
-    /// Factory for creating entity instances of type INT_TO_FLOAT.
+    /// @class IntToFloatFactory
+    /// @brief Factory for creating entity instances of type INT_TO_FLOAT.
 	class IntToFloatFactory
 	{
 		public:
 
-			/// Constructs a factory for creating entity instances of type INT_TO_FLOAT.
+			/// @brief Constructs a factory for creating entity instances of type INT_TO_FLOAT.
+            /// @note The dependencies of this class will be injected automatically.
+            /// @param entity_type_provider Provides the entity type INT_TO_FLOAT.
+            /// @param entity_instance_builder_factory Factory for creating entity instance builders.
 			IntToFloatFactory(
 				IntToFloatEntityTypeProviderPtr entity_type_provider,
 				EntityInstanceBuilderFactoryPtr entity_instance_builder_factory
 			);
 
+            /// Destructor.
 			~IntToFloatFactory();
 
 			/// Initializes the factory.
@@ -32,6 +37,9 @@ namespace type_system {
 			EntityInstancePtrOpt create_instance();
 
 			/// Creates an INT_TO_FLOAT.
+            /// @param name ?
+            /// @param int_value ?
+            /// @param float_value ?
 			EntityInstancePtrOpt create_instance(const string& name, const int& int_value, const float& float_value);
 
 		private:
