@@ -10,16 +10,20 @@ namespace type_system {
 
 	using IntToFloatFactoryPtr = std::shared_ptr<IntToFloatFactory>;
 
-	/// The converter factories.
+    /// @class ConverterFactories
+	/// @brief The converter factories.
 	class ConverterFactories
 	{
 		public:
 
-			/// Constructs the converter factories.
+			/// @brief Constructs the converter factories.
+            /// @note The dependencies of this class will be injected automatically.
+            /// @param int_to_float_factory Factory for creating entity instances of type INT_TO_FLOAT.
 			ConverterFactories(
 				IntToFloatFactoryPtr int_to_float_factory
 			);
 
+            /// Destructor.
 			~ConverterFactories();
 
 			/// Initializes the converter factories.
