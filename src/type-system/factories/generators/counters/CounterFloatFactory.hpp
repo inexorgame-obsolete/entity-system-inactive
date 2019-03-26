@@ -13,17 +13,22 @@ namespace type_system {
 	using EntityInstanceBuilderFactoryPtr = std::shared_ptr<EntityInstanceBuilderFactory>;
 	using CounterFloatEntityTypeProviderPtr = std::shared_ptr<CounterFloatEntityTypeProvider>;
 
-    /// Factory for creating entity instances of type COUNTER_FLOAT.
+    /// @class CounterFloatFactory
+    /// @brief Factory for creating entity instances of type COUNTER_FLOAT.
 	class CounterFloatFactory
 	{
 		public:
 
-			/// Constructs a factory for creating entity instances of type COUNTER_FLOAT.
+			/// @brief Constructs a factory for creating entity instances of type COUNTER_FLOAT.
+            /// @note The dependencies of this class will be injected automatically.
+            /// @param entity_type_provider Provides the entity type COUNTER_FLOAT.
+            /// @param entity_instance_builder_factory Factory for creating entity instance builders.
 			CounterFloatFactory(
 				CounterFloatEntityTypeProviderPtr entity_type_provider,
 				EntityInstanceBuilderFactoryPtr entity_instance_builder_factory
 			);
 
+            /// Destructor.
 			~CounterFloatFactory();
 
 			/// Initializes the factory.
@@ -32,10 +37,15 @@ namespace type_system {
 			/// Creates a counter with the default values: millis = 1000, step = 1.0f, start_value = 0.0f.
 			EntityInstancePtrOpt create_instance();
 
-			/// Creates an counter with the specified
+			/// @brief Creates an counter with the specified.
+            /// @param millis ?
+            /// @param step ?
 			EntityInstancePtrOpt create_instance(int millis, float step);
 
-			/// Creates an counter with the specified
+			/// @brief Creates an counter with the specified.
+            /// @param millis ?
+            /// @param step ?
+            /// @param start_value ?
 			EntityInstancePtrOpt create_instance(int millis, float step, float start_value);
 
 		private:
