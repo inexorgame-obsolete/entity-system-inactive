@@ -15,26 +15,33 @@ namespace type_system {
 	using FloatConstantEntityTypeProviderPtr = std::shared_ptr<FloatConstantEntityTypeProvider>;
 	using EntityInstanceBuilderFactoryPtr = std::shared_ptr<EntityInstanceBuilderFactory>;
 
-    /// Factory for creating entity instances of type FLOAT_CONSTANT.
+    /// @class FloatConstantFactory
+    /// @brief Factory for creating entity instances of type FLOAT_CONSTANT.
 	class FloatConstantFactory
 	{
 		public:
 
-			/// Constructs a factory for creating entity instances of type FLOAT_CONSTANT.
+			/// @brief Constructs a factory for creating entity instances of type FLOAT_CONSTANT.
+            /// @note The dependencies of this class will be injected automatically.
+            /// @param entity_type_provider Provides the entity type FLOAT_CONSTANT.
+            /// @param entity_instance_builder_factory Factory for creating entity instance builders.
 			FloatConstantFactory(
 				FloatConstantEntityTypeProviderPtr entity_type_provider,
 				EntityInstanceBuilderFactoryPtr entity_instance_builder_factory
 			);
 
+            /// Destructor.
 			~FloatConstantFactory();
 
 			/// Initializes the factory.
 			void init();
 
-			/// Creates an instance with default values
+			/// Creates an instance with default values.
 			EntityInstancePtrOpt create_instance();
 
-			/// Creates an FLOAT_CONSTANT with the given constant name and the given value.
+			/// @brief Creates an FLOAT_CONSTANT with the given constant name and the given value.
+            /// @param name ?
+            /// @param value ?
 			EntityInstancePtrOpt create_instance(const std::string& name, const float& value);
 
 		private:
