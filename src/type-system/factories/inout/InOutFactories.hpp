@@ -8,16 +8,20 @@ namespace type_system {
 
 	using LoggerFactoriesPtr = std::shared_ptr<LoggerFactories>;
 
-	/// The factories for input and output.
+    /// @class InOutFactories
+	/// @brief The factories for input and output.
 	class InOutFactories
 	{
 		public:
 
-			/// Constructs the factories for input and output.
+			/// @brief Constructs the factories for input and output.
+            /// @note The dependencies of this class will be injected automatically.
+            /// @param logger_factories The factories for loggers.
 			InOutFactories(
 				LoggerFactoriesPtr logger_factories
 			);
 
+            /// Destructor.
 			~InOutFactories();
 
 			/// Initializes the factories for input and output.
