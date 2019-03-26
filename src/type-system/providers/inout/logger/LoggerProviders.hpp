@@ -10,16 +10,20 @@ namespace type_system {
 
 	using LoggerEntityTypeProviderPtr = std::shared_ptr<LoggerEntityTypeProvider>;
 
-	/// The logger entity type providers.
+    /// @class LoggerProviders
+	/// @brief The logger entity type providers.
 	class LoggerProviders
 	{
 		public:
 
-			/// Constructs the logger entity type providers.
+			/// @brief Constructs the logger entity type providers.
+            /// @note The dependencies of this class will be injected automatically.
+            /// @param logger_entity_type_provider The entity type LOGGER.
 			LoggerProviders(
 				LoggerEntityTypeProviderPtr logger_entity_type_provider
 			);
 
+            /// Destructor.
 			~LoggerProviders();
 
 			/// Initializes the logger entity type providers.
