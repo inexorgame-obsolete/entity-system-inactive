@@ -7,12 +7,15 @@ namespace inexor {
 namespace entity_system {
 namespace type_system {
 
-	/// Provides an entity type "IN_RANGE_FLOAT".
+    /// @class InRangeFloatEntityTypeProvider
+	/// @brief Provides an entity type "IN_RANGE_FLOAT".
 	class InRangeFloatEntityTypeProvider : public EntityTypeProvider
 	{
 		public:
 
-			/// Constructs the specialized provider for the entity type IN_RANGE_FLOAT
+			/// @brief Constructs the specialized provider for the entity type IN_RANGE_FLOAT.
+            /// @note The dependencies of this class will be injected automatically.
+            /// @param entity_type_builder_manager The entity type builder manager.
 			InRangeFloatEntityTypeProvider(
 				std::shared_ptr<EntityTypeBuilderFactory> entity_type_builder_manager
 			) : EntityTypeProvider(
@@ -26,21 +29,22 @@ namespace type_system {
 				}
 			) {};
 
+            /// Destructor.
 			~InRangeFloatEntityTypeProvider() {};
 
-			/// Defines the name of this entity type
+			/// Defines the name of this entity type.
 			static constexpr char TYPE_NAME[] = "IN_RANGE_FLOAT";
 
-			/// The name of the attribute in_range_float_input
+			/// The name of the attribute in_range_float_input.
 			static constexpr char IN_RANGE_FLOAT_INPUT[] = "in_range_float_input";
 
-			/// The name of the attribute in_range_float_min
+			/// The name of the attribute in_range_float_min.
 			static constexpr char IN_RANGE_FLOAT_MIN[] = "in_range_float_min";
 
-			/// The name of the attribute in_range_float_max
+			/// The name of the attribute in_range_float_max.
 			static constexpr char IN_RANGE_FLOAT_MAX[] = "in_range_float_max";
 
-			/// The name of the attribute in_range_float_result
+			/// The name of the attribute in_range_float_result.
 			static constexpr char IN_RANGE_FLOAT_RESULT[] = "in_range_float_result";
 
 	};
