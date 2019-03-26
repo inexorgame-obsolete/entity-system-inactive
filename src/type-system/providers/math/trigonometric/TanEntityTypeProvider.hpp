@@ -7,12 +7,15 @@ namespace inexor {
 namespace entity_system {
 namespace type_system {
 
-	/// Provides an entity type "TAN": tan_value = tan(tan_input)
+    /// @class TanEntityTypeProvider
+	/// @brief Provides an entity type "TAN": tan_value = tan(tan_input).
 	class TanEntityTypeProvider : public EntityTypeProvider
 	{
 		public:
 
-			/// Constructs the specialized provider for the entity type TAN.
+			/// @brief Constructs the specialized provider for the entity type TAN.
+            /// @note The dependencies of this class will be injected automatically.
+            /// @param entity_type_builder_manager The entity type builder manager.
 			TanEntityTypeProvider(
 				std::shared_ptr<EntityTypeBuilderFactory> entity_type_builder_manager
 			) : EntityTypeProvider(
@@ -24,9 +27,10 @@ namespace type_system {
 				}
 			) {};
 
+            /// Destructor.
 			~TanEntityTypeProvider() {};
 
-			/// Defines the name of this entity type
+			/// Defines the name of this entity type.
 			static constexpr char TYPE_NAME[] = "TAN";
 
 			/// The name for the attribute tan_input.
