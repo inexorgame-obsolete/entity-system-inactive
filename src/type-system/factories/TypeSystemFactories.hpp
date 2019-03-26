@@ -16,12 +16,19 @@ namespace type_system {
 	using LogicalFactoriesPtr = std::shared_ptr<LogicalFactories>;
 	using MathFactoriesPtr = std::shared_ptr<MathFactories>;
 
-	/// The factories of the type system-
+    /// @class TypeSystemFactories
+	/// @brief The factories of the type system.
 	class TypeSystemFactories
 	{
 		public:
 
-			/// Constructs the factories of the type system.
+			/// @brief Constructs the factories of the type system.
+            /// @note The dependencies of this class will be injected automatically.
+            /// @param data_factories The factories for data objects like constants and stores.
+            /// @param in_out_factories The factories for input and output like console and loggers.
+            /// @param generator_factories The factories for generators like counters and timers.
+            /// @param logical_factories The factories for the logical operations like comparisons and gates.
+            /// @param math_factories The factories for mathematical operations like arithmetic and trigonometric operations.
 			TypeSystemFactories(
 				DataFactoriesPtr data_factories,
 				InOutFactoriesPtr in_out_factories,
@@ -30,6 +37,7 @@ namespace type_system {
 				MathFactoriesPtr math_factories
 			);
 
+            /// Destructor.
 			~TypeSystemFactories();
 
 			/// Initializes the factories of the type system.
