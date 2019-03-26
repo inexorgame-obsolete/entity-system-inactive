@@ -7,12 +7,15 @@ namespace inexor {
 namespace entity_system {
 namespace type_system {
 
-	/// Provides an entity type "BOOL_CONSTANT" which is a pure bool constant variable.
+    /// @class BoolConstantEntityTypeProvider
+	/// @brief Provides an entity type "BOOL_CONSTANT" which is a pure bool constant variable.
 	class BoolConstantEntityTypeProvider : public EntityTypeProvider
 	{
 		public:
 
-			/// Constructs the specialized provider for the BOOL_CONSTANT entity type
+			/// @brief Constructs the specialized provider for the BOOL_CONSTANT entity type.
+            /// @note The dependencies of this class will be injected automatically.
+            /// @param entity_type_builder_manager The entity type builder manager.
 			BoolConstantEntityTypeProvider(
 				std::shared_ptr<EntityTypeBuilderFactory> entity_type_builder_manager
 			) : EntityTypeProvider(
@@ -24,15 +27,16 @@ namespace type_system {
 				}
 			) {};
 
+            /// Destructor.
 			~BoolConstantEntityTypeProvider() {};
 
-			/// Defines the name of this entity type
+			/// Defines the name of this entity type.
 			static constexpr char TYPE_NAME[] = "BOOL_CONSTANT";
 
-			/// The name of the output attribute bool_constant_name
+			/// The name of the output attribute bool_constant_name.
 			static constexpr char BOOL_CONSTANT_NAME[] = "bool_constant_name";
 
-			/// The name of the output attribute bool_constant_value
+			/// The name of the output attribute bool_constant_value.
 			static constexpr char BOOL_CONSTANT_VALUE[] = "bool_constant_value";
 
 	};
