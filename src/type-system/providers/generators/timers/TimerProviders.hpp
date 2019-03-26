@@ -10,16 +10,20 @@ namespace type_system {
 
 	using TimerTickEntityTypeProviderPtr = std::shared_ptr<TimerTickEntityTypeProvider>;
 
-	/// The entity type providers for counters.
+    /// @class TimerProviders
+	/// @brief The entity type providers for counters.
 	class TimerProviders
 	{
 		public:
 
-			/// Constructs the entity type providers for timers.
+			/// @brief Constructs the entity type providers for timers.
+            /// @note The dependencies of this class will be injected automatically.
+            /// @param timer_tick_entity_type_provider Provides the entity type TIMER_TICK.
 			TimerProviders(
 				TimerTickEntityTypeProviderPtr timer_tick_entity_type_provider
 			);
 
+            /// Destructor.
 			~TimerProviders();
 
 			/// Initializes the providers for timers.
