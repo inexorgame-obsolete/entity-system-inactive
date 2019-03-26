@@ -20,12 +20,20 @@ namespace type_system {
 	using NorEntityTypeProviderPtr = std::shared_ptr<NorEntityTypeProvider>;
 	using NandEntityTypeProviderPtr = std::shared_ptr<NandEntityTypeProvider>;
 
-	/// The entity type providers for logical gates.
+    /// @class GateProviders
+	/// @brief The entity type providers for logical gates.
 	class GateProviders
 	{
 		public:
 
-			/// Constructs the entity type providers for logical gates.
+			/// @brief Constructs the entity type providers for logical gates.
+            /// @note The dependencies of this class will be injected automatically.
+            /// @param not_entity_type_provider Provides the entity type NOT.
+            /// @param or_entity_type_provider Provides the entity type OR.
+            /// @param and_entity_type_provider Provides the entity type AND.
+            /// @param xor_entity_type_provider Provides the entity type XOR.
+            /// @param nor_entity_type_provider Provides the entity type NOR.
+            /// @param nand_entity_type_provider Provides the entity type NAND.
 			GateProviders(
 				NotEntityTypeProviderPtr not_entity_type_provider,
 				OrEntityTypeProviderPtr or_entity_type_provider,
@@ -35,6 +43,7 @@ namespace type_system {
 				NandEntityTypeProviderPtr nand_entity_type_provider
 			);
 
+            /// Destructor.
 			~GateProviders();
 
 			/// Initializes the providers for logical gates.
