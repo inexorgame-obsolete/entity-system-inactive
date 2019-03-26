@@ -10,12 +10,16 @@ namespace type_system {
 	using AddIntFactoryPtr = std::shared_ptr<AddIntFactory>;
 	using AddFloatFactoryPtr = std::shared_ptr<AddFloatFactory>;
 
-	/// The arithmetic factories.
+    /// @class ArithmeticFactories
+	/// @brief The arithmetic factories.
 	class ArithmeticFactories
 	{
 		public:
 
-			/// Constructs the arithmetic factories.
+			/// @brief Constructs the arithmetic factories.
+            /// @note The dependencies of this class will be injected automatically.
+            /// @param add_int_factory Factory for creating entity instances of type ADD_INT.
+            /// @param add_float_factory Factory for creating entity instances of type ADD_FLOAT.
 			ArithmeticFactories(
 				AddIntFactoryPtr add_int_factory,
 				AddFloatFactoryPtr add_float_factory
