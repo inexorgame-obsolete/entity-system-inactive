@@ -10,7 +10,8 @@ namespace type_system {
 
 	using EntityInstancePtrOpt = std::optional<std::shared_ptr<EntityInstance>>;
 
-    /// Factory for creating entity instances of type GREATER_THAN_INT.
+    /// @class GreaterThanIntFactory
+    /// @brief Factory for creating entity instances of type GREATER_THAN_INT.
 	class GreaterThanIntFactory
 	{
 		public:
@@ -18,18 +19,22 @@ namespace type_system {
 			using GreaterThanIntEntityTypeProviderPtr = std::shared_ptr<GreaterThanIntEntityTypeProvider>;
 			using EntityInstanceBuilderFactoryPtr = std::shared_ptr<EntityInstanceBuilderFactory>;
 
-			/// Constructs a factory for creating entity instances of type GREATER_THAN_INT.
+			/// @brief Constructs a factory for creating entity instances of type GREATER_THAN_INT.
+            /// @note The dependencies of this class will be injected automatically.
+            /// @param entity_type_provider Provides the entity type GREATER_THAN_INT.
+            /// @param entity_instance_builder_factory Factory for creating entity instance builders.
 			GreaterThanIntFactory(
 				GreaterThanIntEntityTypeProviderPtr entity_type_provider,
 				EntityInstanceBuilderFactoryPtr entity_instance_builder_factory
 			);
 
+            /// Destructor.
 			~GreaterThanIntFactory();
 
 			/// Initializes the factory.
 			void init();
 
-			/// Creates an instance with default values
+			/// Creates an instance with default values.
 			EntityInstancePtrOpt create_instance();
 
 		private:
