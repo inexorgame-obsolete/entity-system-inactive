@@ -10,7 +10,8 @@ namespace type_system {
 
 	using EntityInstancePtrOpt = std::optional<std::shared_ptr<EntityInstance>>;
 
-    /// Factory for creating entity instances of type COS.
+    /// @class CosFactory
+    /// @brief Factory for creating entity instances of type COS.
 	class CosFactory
 	{
 		public:
@@ -18,12 +19,16 @@ namespace type_system {
 			using CosEntityTypeProviderPtr = std::shared_ptr<CosEntityTypeProvider>;
 			using EntityInstanceBuilderFactoryPtr = std::shared_ptr<EntityInstanceBuilderFactory>;
 
-			/// Constructs a factory for creating entity instances of type COS.
+            /// @brief Constructs a factory for creating entity instances of type COS.
+            /// @note The dependencies of this class will be injected automatically.
+            /// @param entity_type_provider Provides the entity type COS.
+            /// @param Factory for creating entity instance builders.
 			CosFactory(
 				CosEntityTypeProviderPtr entity_type_provider,
 				EntityInstanceBuilderFactoryPtr entity_instance_builder_factory
 			);
 
+            /// Destructor.
 			~CosFactory();
 
 			/// Initializes the factory.
@@ -32,7 +37,8 @@ namespace type_system {
 			/// Creates an instance with default value.
 			EntityInstancePtrOpt create_instance();
 
-			/// Creates an instance with the given input value.
+			/// @brief Creates an instance with the given input value.
+            /// @param input The given input value of type float.
 			EntityInstancePtrOpt create_instance(float input);
 
 		private:
