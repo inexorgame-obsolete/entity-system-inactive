@@ -10,7 +10,8 @@ namespace type_system {
 
 	using EntityInstancePtrOpt = std::optional<std::shared_ptr<EntityInstance>>;
 
-    /// Factory for creating entity instances of type IN_RANGE_INT.
+    /// @class InRangeIntFactory
+    /// @brief Factory for creating entity instances of type IN_RANGE_INT.
 	class InRangeIntFactory
 	{
 		public:
@@ -18,18 +19,22 @@ namespace type_system {
 			using InRangeIntEntityTypeProviderPtr = std::shared_ptr<InRangeIntEntityTypeProvider>;
 			using EntityInstanceBuilderFactoryPtr = std::shared_ptr<EntityInstanceBuilderFactory>;
 
-			/// Constructs a factory for creating entity instances of type IN_RANGE_INT.
+			/// @brief Constructs a factory for creating entity instances of type IN_RANGE_INT.
+            /// @note The dependencies of this class will be injected automatically.
+            /// @param Provides entity_type_provider Provides the entity type IN_RANGE_INT.
+            /// @param Provides entity_instance_builder_factory Factory for creating entity instance builders.
 			InRangeIntFactory(
 				InRangeIntEntityTypeProviderPtr entity_type_provider,
 				EntityInstanceBuilderFactoryPtr entity_instance_builder_factory
 			);
 
+            /// Destructor.
 			~InRangeIntFactory();
 
 			/// Initializes the factory.
 			void init();
 
-			/// Creates an instance with default values
+			/// Creates an instance with default values.
 			EntityInstancePtrOpt create_instance();
 
 		private:
