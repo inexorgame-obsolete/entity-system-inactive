@@ -19,12 +19,20 @@ namespace type_system {
 	using MathProvidersPtr = std::shared_ptr<MathProviders>;
 	using LogicalProvidersPtr = std::shared_ptr<LogicalProviders>;
 
-	/// The providers of the type system.
+    /// @class TypeSystemProviders
+	/// @brief The providers of the type system.
 	class TypeSystemProviders
 	{
 		public:
 
-			/// Constructs the providers of the type system.
+            /// @brief Constructs the providers of the type system.
+            /// @note The dependencies of this class will be injected automatically.
+            /// @param entity_type_builder_factory Factory for creating entity types.
+            /// @param data_providers The providers for constants and stores.
+            /// @param generator_providers The providers for generators.
+            /// @param in_out_providers The providers for input and output.
+            /// @param math_providers The providers for mathematical operations.
+            /// @param logical_providers The providers for logical operations.
 			TypeSystemProviders(
 				EntityTypeBuilderFactoryPtr entity_type_builder_factory,
 				DataProvidersPtr data_providers,
@@ -34,6 +42,7 @@ namespace type_system {
 				LogicalProvidersPtr logical_providers
 			);
 
+            /// Destructor.
 			~TypeSystemProviders();
 
 			/// Initializes the providers of the type system.
