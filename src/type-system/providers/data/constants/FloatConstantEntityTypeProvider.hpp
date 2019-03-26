@@ -7,12 +7,15 @@ namespace inexor {
 namespace entity_system {
 namespace type_system {
 
-	/// Provides an entity type "FLOAT_CONSTANT" which is a pure float constant variable.
+    /// @class FloatConstantEntityTypeProvider
+	/// @brief Provides an entity type "FLOAT_CONSTANT" which is a pure float constant variable.
 	class FloatConstantEntityTypeProvider : public EntityTypeProvider
 	{
 		public:
 
-			/// Constructs the specialized provider for the FLOAT_CONSTANT entity type
+			/// @brief Constructs the specialized provider for the FLOAT_CONSTANT entity type.
+            /// @note The dependencies of this class will be injected automatically.
+            /// @param entity_type_builder_manager The entity type builder manager.
 			FloatConstantEntityTypeProvider(
 				std::shared_ptr<EntityTypeBuilderFactory> entity_type_builder_manager
 			) : EntityTypeProvider(
@@ -24,15 +27,16 @@ namespace type_system {
 				}
 			) {};
 
+            /// Destructor.
 			~FloatConstantEntityTypeProvider() {};
 
-			/// Defines the name of this entity type
+			/// Defines the name of this entity type.
 			static constexpr char TYPE_NAME[] = "FLOAT_CONSTANT";
 
-			/// The name of the output attribute float_constant_name
+			/// The name of the output attribute float_constant_name.
 			static constexpr char FLOAT_CONSTANT_NAME[] = "float_constant_name";
 
-			/// The name of the output attribute float_constant_value
+			/// The name of the output attribute float_constant_value.
 			static constexpr char FLOAT_CONSTANT_VALUE[] = "float_constant_value";
 
 	};
