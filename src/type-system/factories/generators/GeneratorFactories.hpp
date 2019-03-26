@@ -12,18 +12,24 @@ namespace type_system {
 	using TimerFactoriesPtr = std::shared_ptr<TimerFactories>;
 	using RandomFactoriesPtr = std::shared_ptr<RandomFactories>;
 
-	/// The factories for generators like counters and timers.
+    /// @class GeneratorFactories
+	/// @brief The factories for generators like counters and timers.
 	class GeneratorFactories
 	{
 		public:
 
-			/// Constructs the factories for generators like counters and timers.
+			/// @brief Constructs the factories for generators like counters and timers.
+            /// @note The dependencies of this class will be injected automatically.
+            /// @param counter_factories The factories for counters.
+            /// @param timer_factories The factories for timers.
+            /// @param random_factories The factories for random number generators.
 			GeneratorFactories(
 				CounterFactoriesPtr counter_factories,
 				TimerFactoriesPtr timer_factories,
 				RandomFactoriesPtr random_factories
 			);
 
+            /// Destructor.
 			~GeneratorFactories();
 
 			/// Initializes the factories for generators like counters and timers.
