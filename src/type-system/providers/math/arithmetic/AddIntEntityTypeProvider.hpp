@@ -7,12 +7,15 @@ namespace inexor {
 namespace entity_system {
 namespace type_system {
 
-    /// Provides an entity type "ADD_INT" which is the integer addition.
+    /// @class AddIntEntityTypeProvider
+    /// @brief Provides an entity type "ADD_INT" which is the integer addition.
 	class AddIntEntityTypeProvider : public EntityTypeProvider
 	{
 		public:
 
-			/// Constructs the specialized provider for the ADD_INT entity type
+			/// @brief Constructs the specialized provider for the ADD_INT entity type
+            /// @note The dependencies of this class will be injected automatically.
+            /// @param entity_type_builder_manager The entity type builder manager.
 			AddIntEntityTypeProvider(
 				std::shared_ptr<EntityTypeBuilderFactory> entity_type_builder_manager
 			) : EntityTypeProvider(
@@ -25,15 +28,16 @@ namespace type_system {
 				}
 			) {};
 
+            /// Destructor.
 			~AddIntEntityTypeProvider() {};
 
-			/// Defines the name of this entity type
+			/// Defines the name of this entity type.
 			static constexpr char TYPE_NAME[] = "ADD_INT";
 
-			/// The name of the input attribute augend
+			/// The name of the input attribute augend.
 			static constexpr char ADD_INT_AUGEND[] = "add_int_augend";
 
-			/// The name of the input attribute addend
+			/// The name of the input attribute addend.
 			static constexpr char ADD_INT_ADDEND[] = "add_int_addend";
 
 			/// The name of the output attribute sum
