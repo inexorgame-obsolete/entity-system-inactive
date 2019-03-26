@@ -7,12 +7,15 @@ namespace inexor {
 namespace entity_system {
 namespace type_system {
 
-	/// Provides an entity type "IN_RANGE_INT".
+    /// @class InRangeIntEntityTypeProvider
+	/// @brief Provides an entity type "IN_RANGE_INT".
 	class InRangeIntEntityTypeProvider : public EntityTypeProvider
 	{
 		public:
 
-			/// Constructs the specialized provider for the entity type IN_RANGE_INT
+			/// @brief Constructs the specialized provider for the entity type IN_RANGE_INT.
+            /// @note The dependencies of this class will be injected automatically.
+            /// @param entity_type_builder_manager The entity type builder manager.
 			InRangeIntEntityTypeProvider(
 				std::shared_ptr<EntityTypeBuilderFactory> entity_type_builder_manager
 			) : EntityTypeProvider(
@@ -26,21 +29,22 @@ namespace type_system {
 				}
 			) {};
 
+            /// Destructor.
 			~InRangeIntEntityTypeProvider() {};
 
-			/// Defines the name of this entity type
+			/// Defines the name of this entity type.
 			static constexpr char TYPE_NAME[] = "IN_RANGE_INT";
 
-			/// The name of the attribute in_range_int_input
+			/// The name of the attribute in_range_int_input.
 			static constexpr char IN_RANGE_INT_INPUT[] = "in_range_int_input";
 
-			/// The name of the attribute in_range_int_min
+			/// The name of the attribute in_range_int_min.
 			static constexpr char IN_RANGE_INT_MIN[] = "in_range_int_min";
 
-			/// The name of the attribute in_range_int_max
+			/// The name of the attribute in_range_int_max.
 			static constexpr char IN_RANGE_INT_MAX[] = "in_range_int_max";
 
-			/// The name of the attribute in_range_int_result
+			/// The name of the attribute in_range_int_result.
 			static constexpr char IN_RANGE_INT_RESULT[] = "in_range_int_result";
 
 	};
