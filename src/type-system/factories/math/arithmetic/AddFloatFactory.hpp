@@ -19,7 +19,10 @@ namespace type_system {
 	{
 		public:
 
-			/// Constructor.
+			/// @brief Constructor.
+            /// @note The dependencies of this class will be injected automatically.
+            /// @param entity_type_provider The provider for the entity type.
+            /// @param entity_instance_builder_factory The factory for creating entity instance builders.
 			AddFloatFactory(
 				AddFloatEntityTypeProviderPtr entity_type_provider,
 				EntityInstanceBuilderFactoryPtr entity_instance_builder_factory
@@ -31,7 +34,7 @@ namespace type_system {
 			/// Initializes the factory.
 			void init();
 
-			/// Creates an instance with default values
+			/// Creates an instance with default values.
 			EntityInstancePtrOpt create_instance();
 
 		private:

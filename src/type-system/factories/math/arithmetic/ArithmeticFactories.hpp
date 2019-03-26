@@ -25,6 +25,7 @@ namespace type_system {
 				AddFloatFactoryPtr add_float_factory
 			);
 
+            /// Destructor.
 			~ArithmeticFactories();
 
 			/// Initializes the arithmetic factories.
