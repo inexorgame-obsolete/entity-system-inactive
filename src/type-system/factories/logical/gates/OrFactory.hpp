@@ -10,7 +10,8 @@ namespace type_system {
 
 	using EntityInstancePtrOpt = std::optional<std::shared_ptr<EntityInstance>>;
 
-    /// Factory for creating entity instances of type OR.
+    /// @class OrFactory
+    /// @brief Factory for creating entity instances of type OR.
 	class OrFactory
 	{
 		public:
@@ -18,12 +19,16 @@ namespace type_system {
 			using OrEntityTypeProviderPtr = std::shared_ptr<OrEntityTypeProvider>;
 			using EntityInstanceBuilderFactoryPtr = std::shared_ptr<EntityInstanceBuilderFactory>;
 
-			/// Constructs a factory for creating entity instances of type OR.
+			/// @brief Constructs a factory for creating entity instances of type OR.
+            /// @note The dependencies of this class will be injected automatically.
+            /// @param entity_type_provider Provides the entity type OR.
+            /// @param entity_instance_builder_factory Factory for creating entity instance builders.
 			OrFactory(
 				OrEntityTypeProviderPtr entity_type_provider,
 				EntityInstanceBuilderFactoryPtr entity_instance_builder_factory
 			);
 
+            /// Destructor.
 			~OrFactory();
 
 			/// Initializes the factory.
