@@ -14,18 +14,24 @@ namespace type_system {
 	using IntStoreFactoryPtr = std::shared_ptr<IntStoreFactory>;
 	using StringStoreFactoryPtr = std::shared_ptr<StringStoreFactory>;
 
-	/// The store factories.
+    /// @class StoreFactories
+	/// @brief The store factories.
 	class StoreFactories
 	{
 		public:
 
-			/// Constructs the store factories.
+			/// @brief Constructs the store factories.
+            /// @note The dependencies of this class will be injected automatically.
+            /// @param float_store_factory Factory for creating entity instances of type FLOAT_STORE.
+            /// @param int_store_factory Factory for creating entity instances of type INT_STORE.
+            /// @param string_store_factory Factory for creating entity instances of type STRING_STORE.
 			StoreFactories(
 				FloatStoreFactoryPtr float_store_factory,
 				IntStoreFactoryPtr int_store_factory,
 				StringStoreFactoryPtr string_store_factory
 			);
 
+            /// Destructor.
 			~StoreFactories();
 
 			/// Initializes the store factories.
