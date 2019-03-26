@@ -26,12 +26,23 @@ namespace type_system {
 	using InRangeIntPtr = std::shared_ptr<InRangeIntFactory>;
 	using InRangeFloatPtr = std::shared_ptr<InRangeFloatFactory>;
 
-	/// The factories for comparison operations.
+    /// @class ComparisonFactories
+	/// @brief The factories for comparison operations.
 	class ComparisonFactories
 	{
 		public:
 
-			/// Constructs the factories for comparison operations.
+			/// @brief Constructs the factories for comparison operations.
+            /// @note The dependencies of this class will be injected automatically.
+            /// @param equals_bool_factory Factory for creating entity instances of type EQUALS_BOOL.
+            /// @param equals_int_factory Factory for creating entity instances of type EQUALS_INT.
+            /// @param equals_string_factory Factory for creating entity instances of type EQUALS_STRING.
+            /// @param greater_than_int_factory Factory for creating entity instances of type GREATER_THAN_INT.
+            /// @param greater_than_float_factory Factory for creating entity instances of type GREATER_THAN_FLOAT.
+            /// @param lower_than_int_factory Factory for creating entity instances of type LOWER_THAN_INT.
+            /// @param lower_than_float_factory Factory for creating entity instances of type LOWER_THAN_FLOAT.
+            /// @param in_range_int_factory Factory for creating entity instances of type IN_RANGE_INT.
+            /// @param in_range_float_factory Factory for creating entity instances of type IN_RANGE_FLOAT.
 			ComparisonFactories(
 				EqualsBoolPtr equals_bool_factory,
 				EqualsIntPtr equals_int_factory,
@@ -44,6 +55,7 @@ namespace type_system {
 				InRangeFloatPtr in_range_float_factory
 			);
 
+            /// Destructor.
 			~ComparisonFactories();
 
 			/// Initializes the factories for comparison operations.
