@@ -10,17 +10,22 @@ namespace type_system {
 	using ConsoleProvidersPtr = std::shared_ptr<ConsoleProviders>;
 	using LoggerProvidersPtr = std::shared_ptr<LoggerProviders>;
 
-	/// The providers for input and output.
+    /// @class InOutProviders
+	/// @brief The providers for input and output.
 	class InOutProviders
 	{
 		public:
 
-			/// Constructs the providers for input and output.
+			/// @brief Constructs the providers for input and output.
+            /// @note The dependencies of this class will be injected automatically.
+            /// @param console_providers The providers for the console.
+            /// @param logger_providers The providers for loggers.
 			InOutProviders(
 				ConsoleProvidersPtr console_providers,
 				LoggerProvidersPtr logger_providers
 			);
 
+            /// Destructor.
 			~InOutProviders();
 
 			/// Initializes the providers for input and output.
