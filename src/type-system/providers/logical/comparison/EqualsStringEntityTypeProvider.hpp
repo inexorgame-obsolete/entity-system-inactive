@@ -7,12 +7,15 @@ namespace inexor {
 namespace entity_system {
 namespace type_system {
 
-	/// Provides an entity type "EQUALS_STRING".
+    /// @class EqualsStringEntityTypeProvider
+	/// @brief Provides an entity type "EQUALS_STRING".
 	class EqualsStringEntityTypeProvider : public EntityTypeProvider
 	{
 		public:
 
-			/// Constructs the specialized provider for the entity type EQUALS_STRING
+			/// @brief Constructs the specialized provider for the entity type EQUALS_STRING.
+            /// @note The dependencies of this class will be injected automatically.
+            /// @param entity_type_builder_manager The entity type builder manager.
 			EqualsStringEntityTypeProvider(
 				std::shared_ptr<EntityTypeBuilderFactory> entity_type_builder_manager
 			) : EntityTypeProvider(
@@ -25,18 +28,19 @@ namespace type_system {
 				}
 			) {};
 
+            /// Destructor.
 			~EqualsStringEntityTypeProvider() {};
 
-			/// Defines the name of this entity type
+			/// Defines the name of this entity type.
 			static constexpr char TYPE_NAME[] = "EQUALS_STRING";
 
-			/// The name of the attribute equals_string_input_1
+			/// The name of the attribute equals_string_input_1.
 			static constexpr char EQUALS_STRING_INPUT_1[] = "equals_string_input_1";
 
-			/// The name of the attribute equals_string_input_1
+			/// The name of the attribute equals_string_input_1.
 			static constexpr char EQUALS_STRING_INPUT_2[] = "equals_string_input_2";
 
-			/// The name of the attribute equals_string_result
+			/// The name of the attribute equals_string_result.
 			static constexpr char EQUALS_STRING_RESULT[] = "equals_string_result";
 
 	};
