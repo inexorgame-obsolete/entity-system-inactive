@@ -13,17 +13,22 @@ namespace type_system {
 	using EntityInstanceBuilderFactoryPtr = std::shared_ptr<EntityInstanceBuilderFactory>;
 	using TimerTickEntityTypeProviderPtr = std::shared_ptr<TimerTickEntityTypeProvider>;
 
-    /// Factory for creating entity instances of type TIMER_TICK.
+    /// @class TimerTickFactory
+    /// @brief Factory for creating entity instances of type TIMER_TICK.
 	class TimerTickFactory
 	{
 		public:
 
-			/// Constructs a factory for creating entity instances of type TIMER_TICK.
+			/// @brief Constructs a factory for creating entity instances of type TIMER_TICK.
+            /// @note The dependencies of this class will be injected automatically.
+            /// @param entity_type_provider Provides the entity type TIMER_TICK.
+            /// @param entity_instance_builder_factory Factory for creating entity instance builders.
 			TimerTickFactory(
 				TimerTickEntityTypeProviderPtr entity_type_provider,
 				EntityInstanceBuilderFactoryPtr entity_instance_builder_factory
 			);
 
+            /// Destructor.
 			~TimerTickFactory();
 
 			/// Initializes the factory.
@@ -32,7 +37,8 @@ namespace type_system {
 			/// Creates a counter with the default values: millis = 1000.
 			EntityInstancePtrOpt create_instance();
 
-			/// Creates an counter with the specified
+			/// @brief Creates an counter with the specified
+            /// @param millis ?
 			EntityInstancePtrOpt create_instance(int millis);
 
 		private:
