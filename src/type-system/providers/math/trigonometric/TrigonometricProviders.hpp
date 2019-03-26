@@ -14,18 +14,24 @@ namespace type_system {
 	using CosEntityTypeProviderPtr = std::shared_ptr<CosEntityTypeProvider>;
 	using TanEntityTypeProviderPtr = std::shared_ptr<TanEntityTypeProvider>;
 
-	/// The trigonometric entity type providers.
+    /// @class TrigonometricProviders
+	/// @brief The trigonometric entity type providers.
 	class TrigonometricProviders
 	{
 		public:
 
-			/// Constructs the trigonometric entity type providers.
+			/// @brief Constructs the trigonometric entity type providers.
+            /// @note The dependencies of this class will be injected automatically.
+            /// @param sin_entity_type_provider Provides the entity type SIN.
+            /// @param cos_entity_type_provider Provides the entity type COS.
+            /// @param tan_entity_type_provider Provides the entity type TAN.
 			TrigonometricProviders(
 				SinEntityTypeProviderPtr sin_entity_type_provider,
 				CosEntityTypeProviderPtr cos_entity_type_provider,
 				TanEntityTypeProviderPtr tan_entity_type_provider
 			);
 
+            /// Destructor.
 			~TrigonometricProviders();
 
 			/// Initializes the trigonometric entity type providers.
