@@ -11,6 +11,7 @@
 #include "logging/managers/LogManager.hpp"
 #include "renderer/RendererModule.hpp"
 #include "command/CommandModule.hpp"
+#include "keyboard/KeyboardInputModule.hpp"
 
 #include <memory>
 #include <cstdlib>
@@ -39,25 +40,26 @@ namespace inexor {
 	using LogManagerPtr = std::shared_ptr<logging::LogManager>;
 	using RendererModulePtr = std::shared_ptr<renderer::RendererModule>;
 	using CommandModulePtr = std::shared_ptr<command::CommandModule>;
+    using KeyboardInputModulePtr = std::shared_ptr<input::keyboard::KeyboardInputModule>;
 
 	/// @class Inexor
 	/// @brief The application container.
 	class InexorApplication
 	{
-
 		public:
 
 			/// @brief Constructs the Inexor application.
             /// @note The dependencies of this class will be injected automatically.
 			/// @param entity_system_module The entity system of Inexor.
 			/// @param type_system_module The type system manager.
-			/// @param configuration_module The configuration manager.
-			/// @param rest_server The REST server of the entity system.
-			/// @param entity_system_debugger The debugger of the entity system.
-			/// @param visual_scripting_system_module The visual scripting system.
-			/// @param log_manager The log system.
-			/// @param renderer_manager The rendering system.
-            /// @param CommandModulePtr The command system.
+			/// @param configuration_module The configuration manager module.
+			/// @param rest_server The REST server module of the entity system.
+			/// @param entity_system_debugger The debugger of the entity system module.
+			/// @param visual_scripting_system_module The visual scripting system module.
+			/// @param log_manager The log module.
+			/// @param renderer_manager The rendering module.
+            /// @param CommandModulePtr The command module.
+            /// @param KeyboardInputModulePtr The keyboard input module.
 			InexorApplication(
 				EntitySystemModulePtr entity_system_module,
 				TypeSystemModulePtr type_system_module,
@@ -67,18 +69,19 @@ namespace inexor {
 				VisualScriptingSystemModulePtr visual_scripting_system_module,
 				LogManagerPtr log_manager,
 				RendererModulePtr renderer_module,
-				CommandModulePtr command_module
+				CommandModulePtr command_module,
+                KeyboardInputModulePtr keyboard_input_module
 			);
 
 			/// Destructor.
 			~InexorApplication();
 
-			/// Initializes the Inexor application.
+			/// @brief Initializes the Inexor application.
             /// @param argc The total number of parameters given to the application.
             /// @param argv An array of parameters given to the application.
 			void init(int argc, char* argv[]);
 
-            /// Runs the application's main loop.
+            /// @brief Runs the application's main loop.
             /// @note The main loop will be aborted when this->running is set to false.
 			void run();
 
@@ -88,7 +91,7 @@ namespace inexor {
 			/// Restarts the Inexor application.
 			void restart();
 
-			/// Registers a logger.
+			/// @brief Registers a logger.
             /// @param logger_name The name of the logger.
 			void register_logger(std::string logger_name);
 
@@ -103,38 +106,41 @@ namespace inexor {
             /// The entity system of Inexor.
 			EntitySystemModulePtr entity_system_module;
 
-            /// The type system manager.
+            /// The type system manager module.
 			TypeSystemModulePtr type_system_module;
 
-            /// The configuration manager.
+            /// The configuration manager module.
 			ConfigurationModulePtr configuration_module;
 
-            /// The REST server of the entity system.
+            /// The REST server module of the entity system.
 			RestServerPtr rest_server;
 
-            /// The debugger of the entity system.
+            /// The debugger of the entity system module.
 			EntitySystemDebuggerPtr entity_system_debugger;
 
-			/// The visual scripting system.
+			/// The visual scripting system module.
 			VisualScriptingSystemModulePtr visual_scripting_system_module;
 
-            /// The log system.
+            /// The log manager.
 			LogManagerPtr log_manager;
 
-            /// The rendering system.
+            /// The rendering module.
 			RendererModulePtr renderer_module;
-
-            /// The command system.
+            
+            /// The command module.
 			CommandModulePtr command_module;
+
+            /// The keyboard input module.
+            KeyboardInputModulePtr keyboard_input_module;
 
 			/// The running state of the Inexor application.
 			bool running;
 
-            /// Signal handler.
+            /// @brief Signal handler.
             /// @param signal_number ?
             void sighup_handler(const int signal_number);
 
-            /// Signal handler.
+            /// @brief Signal handler.
             /// @param signal_number ?
             void sigterm_handler(const int signal_number);
 
