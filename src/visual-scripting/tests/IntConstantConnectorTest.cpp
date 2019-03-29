@@ -127,7 +127,7 @@ namespace visual_scripting {
 				std::this_thread::sleep_for(std::chrono::seconds(2));
 				i = idist(rgen);
 
-				spdlog::get(LOGGER_NAME)->info("Setting {}.{} to value {}. The value should be propagated.", SOURCE_NAME, IntConstantEntityTypeProvider::INT_CONSTANT_VALUE, i);
+				//spdlog::get(LOGGER_NAME)->info("Setting {}.{} to value {}. The value should be propagated.", SOURCE_NAME, IntConstantEntityTypeProvider::INT_CONSTANT_VALUE, i);
 				source_attr_value->own_value.Set(i);
 
 				log_attrs("The propagated values:");
@@ -150,7 +150,7 @@ namespace visual_scripting {
 		log_create_entity_instance(TARGET_3_NAME, TARGET_1_INITIAL_VALUE);
 		o_target_3 = int_constant_factory->create_instance(TARGET_3_NAME, TARGET_3_INITIAL_VALUE);
 
-		spdlog::get(LOGGER_NAME)->info("Creating entity instance {} without initial values", ADD_INT_NAME);
+		//spdlog::get(LOGGER_NAME)->info("Creating entity instance {} without initial values", ADD_INT_NAME);
 		o_add_int = add_int_factory->create_instance();
 	}
 
@@ -186,7 +186,7 @@ namespace visual_scripting {
 	{
 		if(o_logger.has_value())
 		{
-			spdlog::get(LOGGER_NAME)->info("Create observer for {}.{} which logs to {}", ADD_INT_NAME, AddIntEntityTypeProvider::ADD_INT_ADDEND, LOGGER_NAME);
+			//spdlog::get(LOGGER_NAME)->info("Create observer for {}.{} which logs to {}", ADD_INT_NAME, AddIntEntityTypeProvider::ADD_INT_ADDEND, LOGGER_NAME);
 			observer = Observe(add_int_attr_sum->value, [this] (DataValue add_int_sum) {
 				this->log_data_value("SUM_OBSERVER", ADD_INT_NAME, AddIntEntityTypeProvider::ADD_INT_SUM, add_int_sum);
 			});
@@ -195,17 +195,17 @@ namespace visual_scripting {
 
 	void IntConstantConnectorTest::log_create_entity_instance(std::string entity_instance_name, int initial_value)
 	{
-		spdlog::get(LOGGER_NAME)->info("Creating entity instance {} with initial value {}", entity_instance_name, initial_value);
+		//spdlog::get(LOGGER_NAME)->info("Creating entity instance {} with initial value {}", entity_instance_name, initial_value);
 	}
 
 	void IntConstantConnectorTest::log_create_connector(std::string output_entity_instance_name, std::string output_entity_attr_name, std::string input_entity_instance_name, std::string input_entity_attr_name)
 	{
-		spdlog::get(LOGGER_NAME)->info("Create connector {}.{} ---> {}.{}", output_entity_instance_name, output_entity_attr_name, input_entity_instance_name, input_entity_attr_name);
+		//spdlog::get(LOGGER_NAME)->info("Create connector {}.{} ---> {}.{}", output_entity_instance_name, output_entity_attr_name, input_entity_instance_name, input_entity_attr_name);
 	}
 
 	void IntConstantConnectorTest::log_attrs(std::string message)
 	{
-		spdlog::get(LOGGER_NAME)->info(message);
+		//spdlog::get(LOGGER_NAME)->info(message);
 		log_attr(SOURCE_NAME, IntConstantEntityTypeProvider::INT_CONSTANT_VALUE, source_attr_value);
 		log_attr(TARGET_1_NAME, IntConstantEntityTypeProvider::INT_CONSTANT_VALUE, target_1_attr_value);
 		log_attr(TARGET_2_NAME, IntConstantEntityTypeProvider::INT_CONSTANT_VALUE, target_2_attr_value);
@@ -217,12 +217,12 @@ namespace visual_scripting {
 
 	void IntConstantConnectorTest::log_attr(std::string entity_instance_name, std::string entity_attr_name, EntityAttributeInstancePtr entity_attribute_instance)
 	{
-		spdlog::get(LOGGER_NAME)->info("{}.{} = {}", entity_instance_name, entity_attr_name, std::get<DataType::INT>(entity_attribute_instance->value.Value()));
+		//spdlog::get(LOGGER_NAME)->info("{}.{} = {}", entity_instance_name, entity_attr_name, std::get<DataType::INT>(entity_attribute_instance->value.Value()));
 	}
 
 	void IntConstantConnectorTest::log_data_value(std::string prefix, std::string entity_instance_name, std::string entity_attr_name, DataValue data_value)
 	{
-		spdlog::get(LOGGER_NAME)->info("{} {}.{} = {}", prefix, entity_instance_name, entity_attr_name, std::get<DataType::INT>(data_value));
+		//spdlog::get(LOGGER_NAME)->info("{} {}.{} = {}", prefix, entity_instance_name, entity_attr_name, std::get<DataType::INT>(data_value));
 	}
 
 }

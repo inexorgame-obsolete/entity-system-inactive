@@ -112,7 +112,6 @@ namespace visual_scripting {
 				// Just keep the thread alive
 				std::this_thread::sleep_for(std::chrono::milliseconds(100));
 			}
-
 		}
         else
         {
@@ -146,7 +145,7 @@ namespace visual_scripting {
 
 	void SinTest::create_observer()
 	{
-		spdlog::get(LOGGER_NAME)->info("Create observer for {}.{} which logs to {}", TARGET_NAME, FloatConstantEntityTypeProvider::FLOAT_CONSTANT_VALUE, LOGGER_NAME);
+		//spdlog::get(LOGGER_NAME)->info("Create observer for {}.{} which logs to {}", TARGET_NAME, FloatConstantEntityTypeProvider::FLOAT_CONSTANT_VALUE, LOGGER_NAME);
 		observer = Observe(target_attr_value->value, [this] (DataValue target_value) {
 			this->log_data_value("FLOAT_OBSERVER", TARGET_NAME, FloatConstantEntityTypeProvider::FLOAT_CONSTANT_VALUE, target_value);
 		});
@@ -154,17 +153,17 @@ namespace visual_scripting {
 
 	void SinTest::log_create_entity_instance(std::string entity_instance_name, float initial_value)
 	{
-		spdlog::get(LOGGER_NAME)->info("Creating entity instance {} with initial value {}", entity_instance_name, initial_value);
+		//spdlog::get(LOGGER_NAME)->info("Creating entity instance {} with initial value {}", entity_instance_name, initial_value);
 	}
 
 	void SinTest::log_create_connector(std::string output_entity_instance_name, std::string output_entity_attr_name, std::string input_entity_instance_name, std::string input_entity_attr_name)
 	{
-		spdlog::get(LOGGER_NAME)->info("Create connector {}.{} ---> {}.{}", output_entity_instance_name, output_entity_attr_name, input_entity_instance_name, input_entity_attr_name);
+		//spdlog::get(LOGGER_NAME)->info("Create connector {}.{} ---> {}.{}", output_entity_instance_name, output_entity_attr_name, input_entity_instance_name, input_entity_attr_name);
 	}
 
 	void SinTest::log_attrs(std::string message)
 	{
-		spdlog::get(LOGGER_NAME)->info(message);
+		//spdlog::get(LOGGER_NAME)->info(message);
 		log_attr(COUNTER_NAME, CounterFloatEntityTypeProvider::COUNTER_FLOAT_COUNT, counter_attr_count);
 		log_attr(SIN_NAME, SinEntityTypeProvider::SIN_INPUT, sin_attr_input);
 		log_attr(SIN_NAME, SinEntityTypeProvider::SIN_VALUE, sin_attr_value);
@@ -173,12 +172,12 @@ namespace visual_scripting {
 
 	void SinTest::log_attr(std::string entity_instance_name, std::string entity_attr_name, EntityAttributeInstancePtr entity_attribute_instance)
 	{
-		spdlog::get(LOGGER_NAME)->info("{}.{} = {}", entity_instance_name, entity_attr_name, std::get<DataType::FLOAT>(entity_attribute_instance->value.Value()));
+		//spdlog::get(LOGGER_NAME)->info("{}.{} = {}", entity_instance_name, entity_attr_name, std::get<DataType::FLOAT>(entity_attribute_instance->value.Value()));
 	}
 
 	void SinTest::log_data_value(std::string prefix, std::string entity_instance_name, std::string entity_attr_name, DataValue data_value)
 	{
-		spdlog::get(LOGGER_NAME)->info("{} {}.{} = {}", prefix, entity_instance_name, entity_attr_name, std::get<DataType::FLOAT>(data_value));
+		//spdlog::get(LOGGER_NAME)->info("{} {}.{} = {}", prefix, entity_instance_name, entity_attr_name, std::get<DataType::FLOAT>(data_value));
 	}
 
 }

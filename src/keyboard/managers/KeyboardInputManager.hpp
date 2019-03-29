@@ -1,6 +1,7 @@
 #pragma once
 
 #include "logging/managers/LogManager.hpp"
+struct GLFWwindow;
 
 namespace inexor {
 namespace input {
@@ -29,7 +30,15 @@ namespace keyboard {
 			void init();
 
 			/// The logger name of this service.
-			static constexpr char LOGGER_NAME[] = "inexor.i.k.manager";
+			static constexpr char LOGGER_NAME[] = "inexor.input.keyboard.manager";
+
+            /// @brief Callback method for input.
+            /// @param window 
+            /// @param key 
+            /// @param scancode 
+            /// @param action 
+            /// @param mods 
+            static void keyboard_callback(GLFWwindow* window, int key, int scancode, int action, int mods);
 
 		private:
 

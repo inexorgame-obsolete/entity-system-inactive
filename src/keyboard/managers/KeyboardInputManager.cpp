@@ -1,6 +1,7 @@
 #include "KeyboardInputManager.hpp"
-
 #include "spdlog/spdlog.h"
+
+#include <GLFW/glfw3.h>
 
 namespace inexor {
 namespace input {
@@ -16,10 +17,21 @@ namespace keyboard {
 	{
 	}
 
-	void KeyboardInputManager::init()
-	{
-        
-	}
+    void KeyboardInputManager::init()
+    {
+    }
+
+    void KeyboardInputManager::keyboard_callback(GLFWwindow* window, int key, int scancode, int action, int mods)
+    {
+        if(GLFW_PRESS == action)
+        {
+            spdlog::info("A key has been pressed!");
+        }
+        else if(GLFW_RELEASE == action)
+        {
+            spdlog::info("A key has been released!");
+        }
+    }
 
 }
 }

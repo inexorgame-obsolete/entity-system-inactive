@@ -9,6 +9,7 @@
 #include "visual-scripting/model/Connector.hpp"
 #include "renderer/factories/RendererFactory.hpp"
 #include "logging/managers/LogManager.hpp"
+#include "keyboard/managers/KeyboardInputManager.hpp"
 
 struct GLFWwindow;
 
@@ -24,6 +25,7 @@ namespace renderer {
 	using LogManagerPtr = std::shared_ptr<inexor::logging::LogManager>;
 	using EntityInstancePtr = std::shared_ptr<EntityInstance>;
 	using EntityAttributeInstancePtr = std::shared_ptr<entity_system::EntityAttributeInstance>;
+	using KeyboardInputManagerPtr = std::shared_ptr<inexor::input::keyboard::KeyboardInputManager>;
 
 	/// @class RendererManager
     /// @brief Management of the rendering.
@@ -41,6 +43,7 @@ namespace renderer {
             /// @param cos_factory The factory for creating entities of type COS.
             /// @param render_factory The factory for creating entities of type RENDERER.
             /// @param log_manager The log manager.
+            /// @param keyboard_input_manager The keyboard input manager.
 			RendererManager(
 				EntityInstanceManagerPtr entity_instance_manager,
 				ConnectorManagerPtr connector_manager,
@@ -48,7 +51,8 @@ namespace renderer {
 				SinFactoryPtr sin_factory,
 				CosFactoryPtr cos_factory,
 				RendererFactoryPtr render_factory,
-				LogManagerPtr log_manager
+				LogManagerPtr log_manager,
+                KeyboardInputManagerPtr keyboard_input_manager
 			);
 
 			/// Destructor.
@@ -86,6 +90,9 @@ namespace renderer {
 
 			/// The log manager.
 			LogManagerPtr log_manager;
+
+            /// The keyboard input manager.
+            KeyboardInputManagerPtr keyboard_input_manager;
 
 			/// The renderer entity instance.
 			EntityInstancePtr renderer;

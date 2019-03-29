@@ -30,7 +30,8 @@ namespace renderer {
 		SinFactoryPtr sin_factory,
 		CosFactoryPtr cos_factory,
 		RendererFactoryPtr render_factory,
-		LogManagerPtr log_manager
+		LogManagerPtr log_manager,
+        KeyboardInputManagerPtr keyboard_input_manager
 	) {
 		this->entity_instance_manager = entity_instance_manager;
 		this->connector_manager = connector_manager;
@@ -39,6 +40,7 @@ namespace renderer {
 		this->cos_factory = cos_factory;
 		this->renderer_factory = render_factory;
 		this->log_manager = log_manager;
+        this->keyboard_input_manager = keyboard_input_manager;
 	}
 
 	RendererManager::~RendererManager()
@@ -126,44 +128,44 @@ namespace renderer {
 		std::optional<std::shared_ptr<visual_scripting::Connector>> connector_c_sin = connector_manager->create_connector(counter_attr_count, sin_attr_input);
 		if(!connector_c_sin.has_value())
 		{
-			spdlog::get(LOGGER_NAME)->error("Failed to create connector_c_sin");
+			//spdlog::get(LOGGER_NAME)->error("Failed to create connector_c_sin");
 		}
         else
         {
-			spdlog::get(LOGGER_NAME)->info("Created connector_c_sin");
+			//spdlog::get(LOGGER_NAME)->info("Created connector_c_sin");
 			connector_c_sin.value()->enable_debug();
 		}
 
 		std::optional<std::shared_ptr<visual_scripting::Connector>> connector_c_cos = connector_manager->create_connector(counter_attr_count, cos_attr_input);
 		if(!connector_c_cos.has_value())
 		{
-			spdlog::get(LOGGER_NAME)->error("Failed to create connector_c_cos");
+			//spdlog::get(LOGGER_NAME)->error("Failed to create connector_c_cos");
 		}
         else
         {
-			spdlog::get(LOGGER_NAME)->info("Created connector_c_cos");
+			//spdlog::get(LOGGER_NAME)->info("Created connector_c_cos");
 			connector_c_cos.value()->enable_debug();
 		}
 
 		std::optional<std::shared_ptr<visual_scripting::Connector>> connector_x = connector_manager->create_connector(sin_attr_value, renderer_attr_x);
 		if(!connector_x.has_value())
 		{
-			spdlog::get(LOGGER_NAME)->error("Failed to create connector_x");
+			//spdlog::get(LOGGER_NAME)->error("Failed to create connector_x");
 		}
         else
         {
-			spdlog::get(LOGGER_NAME)->info("Created connector_x");
+			//spdlog::get(LOGGER_NAME)->info("Created connector_x");
 			connector_x.value()->enable_debug();
 		}
 
 		std::optional<std::shared_ptr<visual_scripting::Connector>> connector_y = connector_manager->create_connector(cos_attr_value, renderer_attr_y);
 		if(!connector_y.has_value())
 		{
-			spdlog::get(LOGGER_NAME)->error("Failed to create connector_y");
+			//spdlog::get(LOGGER_NAME)->error("Failed to create connector_y");
 		}
         else
         {
-			spdlog::get(LOGGER_NAME)->info("Created connector_y");
+			//spdlog::get(LOGGER_NAME)->info("Created connector_y");
 			connector_y.value()->enable_debug();
 		}
 
@@ -203,12 +205,15 @@ namespace renderer {
 		// The shader.
 		Shaders::VertexColor2D shader;
 
+        // Link keyboard input callback method.
+        glfwSetKeyCallback(window, keyboard_input_manager->keyboard_callback);
+
 		// Loop until the user closes the window.
 		while(!glfwWindowShouldClose(window))
 		{
 			float x = std::get<DataType::FLOAT>(renderer_attr_x->value.Value());
 			float y = 0.0f - std::get<DataType::FLOAT>(renderer_attr_x->value.Value());
-			spdlog::get(LOGGER_NAME)->info("TranslationXY({}, {})", x, y);
+			//spdlog::get(LOGGER_NAME)->info("TranslationXY({}, {})", x, y);
 
 			Matrix3 transformation_matrix_x = Matrix3::translation(Vector2::xAxis(x));
 			Matrix3 transformation_matrix_y = Matrix3::translation(Vector2::yAxis(y));
