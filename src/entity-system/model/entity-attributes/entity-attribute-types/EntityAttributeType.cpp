@@ -16,10 +16,6 @@ namespace entity_system {
 	EntityAttributeType::~EntityAttributeType()
 	{
 	}
-	ENTSYS_DATA_VALIDATION_RESULT EntityAttributeType::validate()
-	{
-		return ENTSYS_DATA_INVALID;
-	}
 
 }
 }

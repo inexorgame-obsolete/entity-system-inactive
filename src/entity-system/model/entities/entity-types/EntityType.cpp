@@ -100,11 +100,5 @@ namespace entity_system {
         entity_attribute_instances.clear();
 	}
 
-	ENTSYS_DATA_VALIDATION_RESULT EntityType::validate()
-	{
-		// TODO: Implement!
-		return ENTSYS_DATA_VALID;
-	}
-
 }
 }

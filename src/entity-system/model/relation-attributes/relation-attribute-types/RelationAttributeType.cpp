@@ -19,13 +19,6 @@ namespace entity_system {
 	{
 		// TODO: Implement!
 	}
-		
-	
-	ENTSYS_DATA_VALIDATION_RESULT RelationAttributeType::validate()
-	{
-		// TODO: Implement!
-		return ENTSYS_DATA_INVALID;
-	}
 
 
 };

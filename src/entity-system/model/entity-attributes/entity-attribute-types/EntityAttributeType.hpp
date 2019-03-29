@@ -35,9 +35,6 @@ namespace entity_system {
 			/// Destructor.
 			~EntityAttributeType();
 
-			/// Implement a data validation method as required by class inheritance of DataValidation!
-			virtual ENTSYS_DATA_VALIDATION_RESULT validate() override;
-
 	};
 
 }

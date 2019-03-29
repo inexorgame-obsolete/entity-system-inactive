@@ -92,10 +92,6 @@ namespace entity_system {
 			/// Deletes all entity attribute types which are linked to this entity type.
 			void reset_linked_attribute_types();
 
-
-			/// Implement a data validation method as required by class inheritance of DataValidation.
-			virtual ENTSYS_DATA_VALIDATION_RESULT validate() override;
-
     };
 
 

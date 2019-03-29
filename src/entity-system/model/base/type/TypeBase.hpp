@@ -6,7 +6,6 @@
 #include <string>
 #include <mutex>
 
-#include "entity-system/model/data/validation/DataValidationBase.hpp"
 #include "entity-system/util/uuid/GUIDBase.hpp"
 
 
@@ -19,10 +18,7 @@ namespace entity_system {
 	/// @note It does not make sense to let TypeBase inherit
     /// from GUIDBase, because then all classes which inherit
     /// from TypeBase would have multiple get_GUID() methods!
-	/// @note This base class does not implement a
-    /// data validation method. Every class which
-	/// inherits from TypeBase must do this!
-	class TypeBase : public DataValidationBase
+	class TypeBase
 	{
 		private:
 

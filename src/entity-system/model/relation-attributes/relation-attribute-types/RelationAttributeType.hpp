@@ -10,7 +10,6 @@
 #include "entity-system/model/base/attribute/AttributeBase.hpp"
 #include "entity-system/model/base/type/TypeBase.hpp"
 #include "entity-system/model/data/container/DataContainer.hpp"
-#include "entity-system/model/data/validation/DataValidationBase.hpp"
 #include "entity-system/util/return-codes/ReturnCodes.hpp"
 #include "entity-system/util/uuid/GUIDBase.hpp"
 
@@ -35,9 +34,6 @@ namespace entity_system {
 
 			/// Destructor.
 			~RelationAttributeType();
-
-			/// Implement a data validation method as required by class inheritance of DataValidation!
-			virtual ENTSYS_DATA_VALIDATION_RESULT validate() override;
 
 	};
 

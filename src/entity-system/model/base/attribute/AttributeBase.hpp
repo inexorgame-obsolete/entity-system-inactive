@@ -7,7 +7,6 @@
 #include <optional>
 
 #include "entity-system/model/data/container/DataContainer.hpp"
-#include "entity-system/model/data/validation/DataValidationBase.hpp"
 
 
 namespace inexor {
@@ -15,9 +14,6 @@ namespace entity_system {
 
 
 	/// @brief A base class for attributes.
-	/// @note This base class does not implement
-	/// a data validation method. Every class which
-	/// inherits from AttributeBase must do this!
 	/// @note We can only inherit from AttributeTypeBase
 	/// but we can't create instances of the class
 	/// directly because it is an abstract class.
@@ -25,7 +21,7 @@ namespace entity_system {
 	/// because it is an abstract base class. The
 	/// GUID is created by the classes which inherit
 	/// from AttributeBase.
-	class AttributeBase : public DataValidationBase
+	class AttributeBase
 	{
 		private:
 

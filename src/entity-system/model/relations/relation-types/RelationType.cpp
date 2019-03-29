@@ -33,11 +33,5 @@ namespace entity_system {
 		return linked_rel_attr_types;
 	}
 
-	ENTSYS_DATA_VALIDATION_RESULT RelationType::validate()
-	{
-		// TODO: Implement!
-		return ENTSYS_DATA_INVALID;
-	}
-
 }
 }
