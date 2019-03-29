@@ -28,9 +28,9 @@ namespace keyboard {
 
 			/// Initialize keyboard input module.
 			void init();
-
-			/// The logger name of this service.
-			static constexpr char LOGGER_NAME[] = "inexor.input.keyboard.manager";
+    
+            /// Linking a window.
+            void register_keyboard(GLFWwindow* window);
 
             /// @brief Callback method for keyboard input.
             /// @param window 
@@ -38,16 +38,11 @@ namespace keyboard {
             /// @param scancode 
             /// @param action 
             /// @param mods 
-            static void keyboard_callback(GLFWwindow* window, int key, int scancode, int action, int mods);
+            static void keyboard_input_callback(GLFWwindow* window, int key, int scancode, int action, int mods);
 
-            /// @brief Callback method for mouse input.
-            /// @param window 
-            /// @param key 
-            /// @param scancode 
-            /// @param action 
-            /// @param mods 
-            //static void keyboard_callback(GLFWwindow* window, int key, int scancode, int action, int mods);
-
+			/// The logger name of this service.
+            /// WARNING: We can't use LOGGER_NAME inside of a static class method because it causes runtime errors!
+			//static constexpr char LOGGER_NAME[] = "inexor.input.keyboard.manager";
 
 		private:
 

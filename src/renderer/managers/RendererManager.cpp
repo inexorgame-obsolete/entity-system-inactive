@@ -205,8 +205,8 @@ namespace renderer {
 		// The shader.
 		Shaders::VertexColor2D shader;
 
-        // Link keyboard input callback method.
-        glfwSetKeyCallback(window, keyboard_input_manager->keyboard_callback);
+        // Register keyboard handler.
+        keyboard_input_manager->register_keyboard(window);
 
 		// Loop until the user closes the window.
 		while(!glfwWindowShouldClose(window))
