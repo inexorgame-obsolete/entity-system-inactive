@@ -23,14 +23,8 @@ namespace keyboard {
 
     void KeyboardInputManager::keyboard_callback(GLFWwindow* window, int key, int scancode, int action, int mods)
     {
-        if(GLFW_PRESS == action)
-        {
-            spdlog::info("A key has been pressed!");
-        }
-        else if(GLFW_RELEASE == action)
-        {
-            spdlog::info("A key has been released!");
-        }
+        std::string key_name = glfwGetKeyName(key, 0);
+        spdlog::info("Key {} (ID {}) has been {}.", key_name, key, glfwGetKey(window, key) ? std::string("pressed") : std::string("released"));
     }
 
 }

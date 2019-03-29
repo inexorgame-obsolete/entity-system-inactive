@@ -32,13 +32,22 @@ namespace keyboard {
 			/// The logger name of this service.
 			static constexpr char LOGGER_NAME[] = "inexor.input.keyboard.manager";
 
-            /// @brief Callback method for input.
+            /// @brief Callback method for keyboard input.
             /// @param window 
             /// @param key 
             /// @param scancode 
             /// @param action 
             /// @param mods 
             static void keyboard_callback(GLFWwindow* window, int key, int scancode, int action, int mods);
+
+            /// @brief Callback method for mouse input.
+            /// @param window 
+            /// @param key 
+            /// @param scancode 
+            /// @param action 
+            /// @param mods 
+            //static void keyboard_callback(GLFWwindow* window, int key, int scancode, int action, int mods);
+
 
 		private:
 
