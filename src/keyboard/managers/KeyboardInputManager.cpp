@@ -21,7 +21,7 @@ namespace keyboard {
     {
     }
 
-    void KeyboardInputManager::register_keyboard(GLFWwindow* window)
+    void KeyboardInputManager::set_keyboard_callback(GLFWwindow* window)
     {
         glfwSetKeyCallback(window, keyboard_input_callback);
     }
@@ -34,8 +34,6 @@ namespace keyboard {
         if(get_key_name_attempt) key_name = get_key_name_attempt;
         spdlog::info("Key {} (ID {}) has been {}.", key_name, key, glfwGetKey(window, key) ? std::string("pressed") : std::string("released"));
     }
-
-
 
 }
 }

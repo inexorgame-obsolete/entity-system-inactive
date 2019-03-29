@@ -19,8 +19,7 @@ namespace inexor {
 		VisualScriptingSystemModulePtr visual_scripting_system_module,
 		LogManagerPtr log_manager,
 		RendererModulePtr renderer_module,
-		CommandModulePtr command_module,
-		KeyboardInputModulePtr keyboard_input_module
+		CommandModulePtr command_module
 	)
 	{
 		this->entity_system_module = entity_system_module;
@@ -32,7 +31,6 @@ namespace inexor {
 		this->log_manager = log_manager;
 		this->renderer_module = renderer_module;
 		this->command_module = command_module;
-        this->keyboard_input_module = keyboard_input_module;
 		this->running = false;
 	}
 	
@@ -64,23 +62,20 @@ namespace inexor {
 		spdlog::get(LOGGER_NAME)->info("PID: {}", getpid());
 #endif
 
-		// Type system initialization
+		// Type system initialization.
 		type_system_module->init();
 
-		// Configuration manager initialization
+		// Configuration manager initialization.
 		configuration_module->init(argc, argv);
 
-		// Initialize the visual scripting
+		// Initialize the visual scripting.
 		visual_scripting_system_module->init();
 
-		// Initialize the rendering
+		// Initialize the rendering.
 		renderer_module->init();
 
-		// Initialize the command module
+        // Initialize the command module
 		command_module->init();
-
-        // Initialise keyboard input module.
-        keyboard_input_module->init();
 
 		// Setup REST server
 		rest_server->set_service(rest_server);

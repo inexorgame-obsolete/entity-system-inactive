@@ -11,7 +11,6 @@
 #include "logging/managers/LogManager.hpp"
 #include "renderer/RendererModule.hpp"
 #include "command/CommandModule.hpp"
-#include "keyboard/KeyboardInputModule.hpp"
 
 #include <memory>
 #include <cstdlib>
@@ -40,7 +39,6 @@ namespace inexor {
 	using LogManagerPtr = std::shared_ptr<logging::LogManager>;
 	using RendererModulePtr = std::shared_ptr<renderer::RendererModule>;
 	using CommandModulePtr = std::shared_ptr<command::CommandModule>;
-    using KeyboardInputModulePtr = std::shared_ptr<input::keyboard::KeyboardInputModule>;
 
 	/// @class Inexor
 	/// @brief The application container.
@@ -58,8 +56,7 @@ namespace inexor {
 			/// @param visual_scripting_system_module The visual scripting system module.
 			/// @param log_manager The log module.
 			/// @param renderer_manager The rendering module.
-            /// @param CommandModulePtr The command module.
-            /// @param KeyboardInputModulePtr The keyboard input module.
+            /// @param command_module The command module.
 			InexorApplication(
 				EntitySystemModulePtr entity_system_module,
 				TypeSystemModulePtr type_system_module,
@@ -69,8 +66,7 @@ namespace inexor {
 				VisualScriptingSystemModulePtr visual_scripting_system_module,
 				LogManagerPtr log_manager,
 				RendererModulePtr renderer_module,
-				CommandModulePtr command_module,
-                KeyboardInputModulePtr keyboard_input_module
+				CommandModulePtr command_module
 			);
 
 			/// Destructor.
@@ -129,9 +125,6 @@ namespace inexor {
             
             /// The command module.
 			CommandModulePtr command_module;
-
-            /// The keyboard input module.
-            KeyboardInputModulePtr keyboard_input_module;
 
 			/// The running state of the Inexor application.
 			bool running;

@@ -31,7 +31,8 @@ namespace renderer {
 		CosFactoryPtr cos_factory,
 		RendererFactoryPtr render_factory,
 		LogManagerPtr log_manager,
-        KeyboardInputManagerPtr keyboard_input_manager
+        KeyboardInputManagerPtr keyboard_input_manager,
+        MouseInputManagerPtr mouse_input_manager
 	) {
 		this->entity_instance_manager = entity_instance_manager;
 		this->connector_manager = connector_manager;
@@ -41,6 +42,7 @@ namespace renderer {
 		this->renderer_factory = render_factory;
 		this->log_manager = log_manager;
         this->keyboard_input_manager = keyboard_input_manager;
+        this->mouse_input_manager = mouse_input_manager;
 	}
 
 	RendererManager::~RendererManager()
@@ -205,8 +207,12 @@ namespace renderer {
 		// The shader.
 		Shaders::VertexColor2D shader;
 
-        // Register keyboard handler.
-        keyboard_input_manager->register_keyboard(window);
+        // Register keyboard input handler.
+        keyboard_input_manager->set_keyboard_callback(window);
+
+        // Register mouse input handler.
+        // This takes care of both mouse buttons and mouse movement.
+        mouse_input_manager->set_mouse_callback(window);
 
 		// Loop until the user closes the window.
 		while(!glfwWindowShouldClose(window))

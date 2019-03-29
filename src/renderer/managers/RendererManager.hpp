@@ -10,6 +10,7 @@
 #include "renderer/factories/RendererFactory.hpp"
 #include "logging/managers/LogManager.hpp"
 #include "keyboard/managers/KeyboardInputManager.hpp"
+#include "mouse/managers/MouseInputManager.hpp"
 
 struct GLFWwindow;
 
@@ -26,6 +27,7 @@ namespace renderer {
 	using EntityInstancePtr = std::shared_ptr<EntityInstance>;
 	using EntityAttributeInstancePtr = std::shared_ptr<entity_system::EntityAttributeInstance>;
 	using KeyboardInputManagerPtr = std::shared_ptr<inexor::input::keyboard::KeyboardInputManager>;
+    using MouseInputManagerPtr = std::shared_ptr<inexor::input::mouse::MouseInputManager>;
 
 	/// @class RendererManager
     /// @brief Management of the rendering.
@@ -44,6 +46,7 @@ namespace renderer {
             /// @param render_factory The factory for creating entities of type RENDERER.
             /// @param log_manager The log manager.
             /// @param keyboard_input_manager The keyboard input manager.
+            /// @param mouse_input_manager The mouse input manager.
 			RendererManager(
 				EntityInstanceManagerPtr entity_instance_manager,
 				ConnectorManagerPtr connector_manager,
@@ -52,7 +55,8 @@ namespace renderer {
 				CosFactoryPtr cos_factory,
 				RendererFactoryPtr render_factory,
 				LogManagerPtr log_manager,
-                KeyboardInputManagerPtr keyboard_input_manager
+                KeyboardInputManagerPtr keyboard_input_manager,
+                MouseInputManagerPtr mouse_input_manager
 			);
 
 			/// Destructor.
@@ -93,6 +97,9 @@ namespace renderer {
 
             /// The keyboard input manager.
             KeyboardInputManagerPtr keyboard_input_manager;
+
+            /// The mouse input manager.
+            MouseInputManagerPtr mouse_input_manager;
 
 			/// The renderer entity instance.
 			EntityInstancePtr renderer;
