@@ -16,11 +16,11 @@ namespace configuration {
 
 	void SystemConfigurationInitializer::init()
 	{
-#ifdef _WIN32
-		configuration_manager->set("PID", _getpid());
-#else
-		configuration_manager->set("PID", getpid());
-#endif
+		#ifdef _WIN32
+			configuration_manager->set("PID", _getpid());
+		#else
+			configuration_manager->set("PID", getpid());
+		#endif
 		configuration_manager->set("SYS_NUM_CONCURRENT_THREADS", (int) std::thread::hardware_concurrency());
 	}
 

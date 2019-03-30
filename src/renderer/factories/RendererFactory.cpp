@@ -15,16 +15,16 @@ namespace renderer {
 	}
 
 	RendererFactory::~RendererFactory()
-    {
+	{
 	}
 
-    EntityInstancePtrOpt RendererFactory::create_instance(float x, float y)
-    {
+	EntityInstancePtrOpt RendererFactory::create_instance(float x, float y)
+	{
 		return this->entity_instance_builder_factory->get_builder()
-			->type(renderer_entity_type_provider->get_type())
-			->attribute(RendererEntityTypeProvider::RENDERER_X, x)
-			->attribute(RendererEntityTypeProvider::RENDERER_Y, y)
-			->build();
+		->type(renderer_entity_type_provider->get_type())
+		->attribute(RendererEntityTypeProvider::RENDERER_X, x)
+		->attribute(RendererEntityTypeProvider::RENDERER_Y, y)
+		->build();
 	}
 
 }

@@ -5,22 +5,22 @@
 namespace inexor {
 namespace command {
 
-    /// @class CommandModule
-    /// @brief Command module.
+	/// @class CommandModule
+	/// @brief Command module.
 	class CommandModule
 	{
 		using CommandManangerPtr = std::shared_ptr<CommandManager>;
 
 		public:
 
-            /// @brief Constructor.
-            /// @note The dependencies of this class will be injected automatically.
-            /// @param command_manager The command manager.
+			/// @brief Constructor.
+			/// @note The dependencies of this class will be injected automatically.
+			/// @param command_manager The command manager.
 			CommandModule(
-				CommandManangerPtr command_manager
+			CommandManangerPtr command_manager
 			);
 
-            /// Destructor.
+			/// Destructor.
 			~CommandModule();
 
 			/// Initialization of the command module.

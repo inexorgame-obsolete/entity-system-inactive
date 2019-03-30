@@ -5,7 +5,7 @@ namespace input {
 namespace mouse {
 
 	MouseInputModule::MouseInputModule(
-		MouseInputManagerPtr mouse_input_manager
+	MouseInputManagerPtr mouse_input_manager
 	)
 	{
 		this->mouse_input_manager = mouse_input_manager;

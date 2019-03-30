@@ -12,7 +12,7 @@ namespace keyboard {
 	/// @class KeyboardInputManager
 	/// @brief Management of the keyboard input data.
 	class KeyboardInputManager
-		: public std::enable_shared_from_this<KeyboardInputManager>
+	: public std::enable_shared_from_this<KeyboardInputManager>
 	{
 		public:
 
@@ -28,18 +28,18 @@ namespace keyboard {
 
 			/// Initialize keyboard input module.
 			void init();
-    
-            /// @brief Sets the callback function for keyboard input.
-            /// @param window
-            void set_keyboard_callback(GLFWwindow* window);
 
-            /// @brief Callback method for keyboard input.
-            /// @param window 
-            /// @param key 
-            /// @param scancode 
-            /// @param action 
-            /// @param mods 
-            static void keyboard_input_callback(GLFWwindow* window, int key, int scancode, int action, int mods);
+			/// @brief Sets the callback function for keyboard input.
+			/// @param window
+			void set_keyboard_callback(GLFWwindow* window);
+
+			/// @brief Callback method for keyboard input.
+			/// @param window
+			/// @param key
+			/// @param scancode
+			/// @param action
+			/// @param mods
+			static void keyboard_input_callback(GLFWwindow* window, int key, int scancode, int action, int mods);
 
 			/// The logger name of this service.
 			static constexpr char LOGGER_NAME[] = "inexor.input.keyboard.manager";
@@ -49,7 +49,7 @@ namespace keyboard {
 			/// The log manager.
 			LogManagerPtr log_manager;
 
-    };
+	};
 
 }
 }

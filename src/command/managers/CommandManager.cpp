@@ -8,7 +8,7 @@ namespace inexor {
 namespace command {
 
 	CommandManager::CommandManager(
-		LogManagerPtr log_manager
+	LogManagerPtr log_manager
 	)
 	{
 		this->log_manager = log_manager;
@@ -36,8 +36,8 @@ namespace command {
 		for(auto& it : commands)
 		{
 			spdlog::get(LOGGER_NAME)->info(
-				"  [{}]",
-				it.first
+			"  [{}]",
+			it.first
 			);
 		}
 	}

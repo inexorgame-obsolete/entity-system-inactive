@@ -4,7 +4,7 @@ namespace inexor {
 namespace command {
 
 	CommandModule::CommandModule(
-		CommandManangerPtr command_manager
+	CommandManangerPtr command_manager
 	)
 	{
 		this->command_manager = command_manager;

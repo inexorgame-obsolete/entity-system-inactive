@@ -36,8 +36,8 @@ namespace configuration {
 
 	std::optional<std::string> EnvVarConfigurationInitializer::get_env_var(std::string const& env_name)
 	{
-	    char const* env_value = getenv(env_name.c_str());
-	    return env_value == NULL ? std::nullopt : std::optional<std::string> { std::string(env_value) };
+		char const* env_value = getenv(env_name.c_str());
+		return env_value == NULL ? std::nullopt : std::optional<std::string> { std::string(env_value) };
 	}
 
 }

@@ -43,8 +43,8 @@ namespace configuration {
 		{
 			insert(config_name, BOOL_CONSTANT_VALUE, bool_constant_factory->create_instance(config_name, value));
 		}
-        else
-        {
+		else
+		{
 			config_items[config_name]->own_value.Set(value);
 		}
 	}
@@ -55,8 +55,8 @@ namespace configuration {
 		{
 			insert(config_name, INT_CONSTANT_VALUE, int_constant_factory->create_instance(config_name, value));
 		}
-        else
-        {
+		else
+		{
 			config_items[config_name]->own_value.Set(value);
 		}
 	}
@@ -67,8 +67,8 @@ namespace configuration {
 		{
 			insert(config_name, FLOAT_CONSTANT_VALUE, float_constant_factory->create_instance(config_name, value));
 		}
-        else
-        {
+		else
+		{
 			config_items[config_name]->own_value.Set(value);
 		}
 	}
@@ -79,8 +79,8 @@ namespace configuration {
 		{
 			insert(config_name, STRING_CONSTANT_VALUE, string_constant_factory->create_instance(config_name, value));
 		}
-        else
-        {
+		else
+		{
 			config_items[config_name]->own_value.Set(value);
 		}
 	}
@@ -116,10 +116,10 @@ namespace configuration {
 		for(auto& it : config_items)
 		{
 			spdlog::get(LOGGER_NAME)->info(
-				"  [{}] [{}] [{}]",
-				it.first,
-				it.second->type._to_string(),
-				data_value_to_string(it.second->type, it.second->value.Value())
+			"  [{}] [{}] [{}]",
+			it.first,
+			it.second->type._to_string(),
+			data_value_to_string(it.second->type, it.second->value.Value())
 			);
 		}
 	}
@@ -130,11 +130,11 @@ namespace configuration {
 		{
 			EntityInstancePtr entity_instance = config_item.value();
 			EntityAttributeInstancePtrOpt o_attribute_instance = entity_instance->get_attribute_instance(attribute_name);
-			
-            if(o_attribute_instance.has_value())
+
+			if(o_attribute_instance.has_value())
 			{
-				config_items[config_name] = o_attribute_instance.value();
-				spdlog::get(LOGGER_NAME)->info("Added configuration: [{}] [{}] [{}]", config_name, config_items[config_name]->type._to_string(), data_value_to_string(config_items[config_name]->type, config_items[config_name]->value.Value()));
+			config_items[config_name] = o_attribute_instance.value();
+			spdlog::get(LOGGER_NAME)->info("Added configuration: [{}] [{}] [{}]", config_name, config_items[config_name]->type._to_string(), data_value_to_string(config_items[config_name]->type, config_items[config_name]->value.Value()));
 			}
 		}
 	}

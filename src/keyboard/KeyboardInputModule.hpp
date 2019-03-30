@@ -16,9 +16,9 @@ namespace keyboard {
 
 			/// @brief Constructor.
 			/// @note The dependencies of this class will be injected automatically.
-            /// @param keyboard_input_manager The keyboard input manager.
+			/// @param keyboard_input_manager The keyboard input manager.
 			KeyboardInputModule(
-				KeyboardInputManagerPtr keyboard_input_manager
+			KeyboardInputManagerPtr keyboard_input_manager
 			);
 
 			/// Destructor.

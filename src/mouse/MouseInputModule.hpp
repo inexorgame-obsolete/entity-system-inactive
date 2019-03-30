@@ -16,7 +16,7 @@ namespace mouse {
 
 			/// @brief Constructor.
 			/// @note The dependencies of this class will be injected automatically.
-            /// @param Mouse_input_manager The Mouse input manager.
+			/// @param Mouse_input_manager The Mouse input manager.
 			MouseInputModule(
 				MouseInputManagerPtr mouse_input_manager
 			);

@@ -5,7 +5,7 @@ namespace input {
 namespace keyboard {
 
 	KeyboardInputModule::KeyboardInputModule(
-		KeyboardInputManagerPtr keyboard_input_manager
+	KeyboardInputManagerPtr keyboard_input_manager
 	)
 	{
 		this->keyboard_input_manager = keyboard_input_manager;

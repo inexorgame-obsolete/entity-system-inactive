@@ -31,8 +31,8 @@ namespace renderer {
 		CosFactoryPtr cos_factory,
 		RendererFactoryPtr render_factory,
 		LogManagerPtr log_manager,
-        KeyboardInputManagerPtr keyboard_input_manager,
-        MouseInputManagerPtr mouse_input_manager
+		KeyboardInputManagerPtr keyboard_input_manager,
+		MouseInputManagerPtr mouse_input_manager
 	) {
 		this->entity_instance_manager = entity_instance_manager;
 		this->connector_manager = connector_manager;
@@ -41,8 +41,8 @@ namespace renderer {
 		this->cos_factory = cos_factory;
 		this->renderer_factory = render_factory;
 		this->log_manager = log_manager;
-        this->keyboard_input_manager = keyboard_input_manager;
-        this->mouse_input_manager = mouse_input_manager;
+		this->keyboard_input_manager = keyboard_input_manager;
+		this->mouse_input_manager = mouse_input_manager;
 	}
 
 	RendererManager::~RendererManager()
@@ -52,14 +52,14 @@ namespace renderer {
 	GLFWwindow *create_window()
 	{
 		// Initialize the library.
-        if(!glfwInit())
+		if(!glfwInit())
 		{
 			spdlog::get(RendererManager::LOGGER_NAME)->error("Failed to initialize glfw!");
 			std::exit(1);
 		}
 
-        // Create a windowed mode window and its OpenGL context.
-        GLFWwindow* const window = glfwCreateWindow(
+		// Create a windowed mode window and its OpenGL context.
+		GLFWwindow* const window = glfwCreateWindow(
 			800,
 			600,
 			"Inexor Renderer 1",
@@ -68,7 +68,7 @@ namespace renderer {
 		);
 
 		if(!window)
-        {
+		{
 			glfwTerminate();
 			spdlog::get(RendererManager::LOGGER_NAME)->error("Failed to create window!");
 			std::exit(1);
@@ -110,13 +110,13 @@ namespace renderer {
 				renderer_attr_x = o_renderer_attr_x.value();
 				renderer_attr_y = o_renderer_attr_y.value();
 			}
-            else
-            {
+			else
+			{
 				spdlog::get(LOGGER_NAME)->error("Failed to get attributes");
 			}
 		}
-        else
-        {
+		else
+		{
 			spdlog::get(LOGGER_NAME)->error("Failed to create entity instances: SIN, COS, RENDERER");
 		}
 
@@ -132,8 +132,8 @@ namespace renderer {
 		{
 			//spdlog::get(LOGGER_NAME)->error("Failed to create connector_c_sin");
 		}
-        else
-        {
+		else
+		{
 			//spdlog::get(LOGGER_NAME)->info("Created connector_c_sin");
 			connector_c_sin.value()->enable_debug();
 		}
@@ -143,8 +143,8 @@ namespace renderer {
 		{
 			//spdlog::get(LOGGER_NAME)->error("Failed to create connector_c_cos");
 		}
-        else
-        {
+		else
+		{
 			//spdlog::get(LOGGER_NAME)->info("Created connector_c_cos");
 			connector_c_cos.value()->enable_debug();
 		}
@@ -154,8 +154,8 @@ namespace renderer {
 		{
 			//spdlog::get(LOGGER_NAME)->error("Failed to create connector_x");
 		}
-        else
-        {
+		else
+		{
 			//spdlog::get(LOGGER_NAME)->info("Created connector_x");
 			connector_x.value()->enable_debug();
 		}
@@ -165,19 +165,19 @@ namespace renderer {
 		{
 			//spdlog::get(LOGGER_NAME)->error("Failed to create connector_y");
 		}
-        else
-        {
+		else
+		{
 			//spdlog::get(LOGGER_NAME)->info("Created connector_y");
 			connector_y.value()->enable_debug();
 		}
 
-        // Make the window's context current.
+		// Make the window's context current.
 		glfwMakeContextCurrent(window);
 
-        // Create Magnum context in an isolated scope.
+		// Create Magnum context in an isolated scope.
 		Platform::GLContext ctx{};
 
-	    // Setup the colored triangle.
+		// Setup the colored triangle.
 		using namespace Math::Literals;
 
 		struct TriangleVertex {
@@ -198,21 +198,21 @@ namespace renderer {
 		mesh.setPrimitive(GL::MeshPrimitive::Triangles)
 			.setCount(3)
 			.addVertexBuffer(
-				buffer,
-				0,
-				Shaders::VertexColor2D::Position{},
-				Shaders::VertexColor2D::Color3{}
-			);
+			buffer,
+			0,
+			Shaders::VertexColor2D::Position{},
+			Shaders::VertexColor2D::Color3{}
+		);
 
 		// The shader.
 		Shaders::VertexColor2D shader;
 
-        // Register keyboard input handler.
-        keyboard_input_manager->set_keyboard_callback(window);
+		// Register keyboard input handler.
+		keyboard_input_manager->set_keyboard_callback(window);
 
-        // Register mouse input handler.
-        // This takes care of both mouse buttons and mouse movement.
-        mouse_input_manager->set_mouse_callback(window);
+		// Register mouse input handler.
+		// This takes care of both mouse buttons and mouse movement.
+		mouse_input_manager->set_mouse_callback(window);
 
 		// Loop until the user closes the window.
 		while(!glfwWindowShouldClose(window))

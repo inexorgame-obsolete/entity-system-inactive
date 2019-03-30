@@ -7,8 +7,8 @@
 namespace inexor {
 namespace command {
 
-    /// @class CommandManager
-    /// @brief Management of the commands.
+	/// @class CommandManager
+	/// @brief Management of the commands.
 	class CommandManager
 	{
 		using LogManagerPtr = std::shared_ptr<inexor::logging::LogManager>;
@@ -19,26 +19,26 @@ namespace command {
 
 		public:
 
-            /// @brief Constructor.
-            /// @note The dependencies of this class will be injected automatically.
-            /// @param log_manager The log manager.
+			/// @brief Constructor.
+			/// @note The dependencies of this class will be injected automatically.
+			/// @param log_manager The log manager.
 			CommandManager(
 				LogManagerPtr log_manager
 			);
 
-            /// Destructor.
+			/// Destructor.
 			~CommandManager();
 
 			/// Initialization of the command manager.
 			void init();
 
 			/// Returns true, if the command exists.
-            /// @param command The name of the command.
-            /// @return <b>true</b> if the command exists, <b>false</b> otherwise.
+			/// @param command The name of the command.
+			/// @return <b>true</b> if the command exists, <b>false</b> otherwise.
 			bool exists(std::string command);
 
 			/// Creates a command.
-            /// @param command The name of the command.
+			/// @param command The name of the command.
 			// EntityInstancePtr create(std::string command);
 
 			/// Logs all commands.
