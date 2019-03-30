@@ -19,7 +19,8 @@ namespace inexor {
 		VisualScriptingSystemModulePtr visual_scripting_system_module,
 		LogManagerPtr log_manager,
 		RendererModulePtr renderer_module,
-		CommandModulePtr command_module
+		CommandModulePtr command_module,
+        AudioModulePtr audio_module
 	)
 	{
 		this->entity_system_module = entity_system_module;
@@ -31,6 +32,7 @@ namespace inexor {
 		this->log_manager = log_manager;
 		this->renderer_module = renderer_module;
 		this->command_module = command_module;
+        this->audio_module = audio_module;
 		this->running = false;
 	}
 	
@@ -76,6 +78,9 @@ namespace inexor {
 
         // Initialize the command module
 		command_module->init();
+
+        // Initialise audio module.
+        audio_module->init();
 
 		// Setup REST server
 		rest_server->set_service(rest_server);

@@ -1,7 +1,10 @@
 #pragma once
 
 #include "logging/managers/LogManager.hpp"
-struct GLFWwindow;
+
+// OpenAL
+#include <AL/al.h>
+#include <AL/alc.h>
 
 namespace inexor {
 namespace audio {
@@ -9,10 +12,20 @@ namespace audio {
 	using LogManagerPtr = std::shared_ptr<inexor::logging::LogManager>;
 
 	/// @class AudioManager
-	/// @brief Management of the keyboard input data.
-	class AudioManager
+	/// @brief Management of the audio data.
+    /// @note This implementation is based on OpenAL.<br>
+	/// https://www.openal.org/
+    class AudioManager
 	: public std::enable_shared_from_this<AudioManager>
 	{
+        private:
+
+            /// The OpenAL audio device.
+            ALCdevice *OpenAL_device;
+
+            /// The OpenAL context.
+            ALCcontext *OpenAL_context;
+
 		public:
 
 			/// @brief Constructor.

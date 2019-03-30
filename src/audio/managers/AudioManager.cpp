@@ -16,6 +16,32 @@ namespace audio {
 
 	void AudioManager::init()
 	{
+        spdlog::info("Initialising OpenAL.");
+
+        // Initialise OpenAL.
+        // TODO: Enumerate devices instead of using the default device!
+        OpenAL_device = alcOpenDevice(NULL);
+
+        if(!OpenAL_device)
+        {
+            spdlog::critical("Creating OpenAL device using alcOpenDevice method failed!");
+        }
+        else
+        {
+            // Create an OpenAL context.
+            OpenAL_context = alcCreateContext(OpenAL_device, NULL);
+
+            // Check if we can set the context.
+            if(!alcMakeContextCurrent(OpenAL_context))
+            {
+                ALenum context_creation_error = alGetError();
+                spdlog::critical("Failed to make OpenAL context current! Error code: {}", context_creation_error);
+            }
+            else
+            {
+                spdlog::info("OpenAL setup complete!");
+            }
+        }
 	}
 
 }
