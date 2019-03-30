@@ -12,7 +12,7 @@ namespace configuration {
 	/// @class CommandLineArgumentsConfigurationInitializer
 	/// @brief Initializes the environment variables as configuration items.
 	class CommandLineArgumentsConfigurationInitializer
-
+    {
 		public:
 
 			/// @brief Constructor.
