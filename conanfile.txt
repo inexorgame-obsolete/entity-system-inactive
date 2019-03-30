@@ -12,6 +12,7 @@ boost-te/19.Jan.19@inexorgame/stable
 better-enums/0.11.1@Spartan322/stable
 cpp.react/legacy1@inexorgame/stable
 magnum/2018.10@helmesjo/stable
+openal/1.19.0@bincrafters/stable
 
 [generators]
 cmake
