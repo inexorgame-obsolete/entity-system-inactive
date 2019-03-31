@@ -1,6 +1,7 @@
 # Inexor asset downloader
 
 import sys
+import os
 from urllib.request import urlretrieve
 from zipfile import ZipFile
 
@@ -28,3 +29,5 @@ print("Extracting assets")
 zip = ZipFile(ASSET_PACK_FILE_NAME, 'r')
 zip.extractall("./assets/")
 zip.close()
+
+os.remove("inexor_asset_pack_version_1.zip") 
