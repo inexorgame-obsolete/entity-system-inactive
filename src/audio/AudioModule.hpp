@@ -20,7 +20,7 @@ namespace audio {
 			/// https://boost-experimental.github.io/di/user_guide/index.html
 			/// @param audio_manager The audio manager.
 			AudioModule(
-				AudioManagerPtr audio_manager
+			AudioManagerPtr audio_manager
 			);
 
 			/// Destructor.
@@ -29,8 +29,8 @@ namespace audio {
 			/// Initialization of the audio module.
 			void init();
 
-            /// Shutdown audio module.
-            void shutdown();
+			/// Shutdown audio module.
+			void shutdown();
 
 		private:
 
