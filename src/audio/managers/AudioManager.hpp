@@ -44,6 +44,12 @@ namespace audio {
 			/// Initialize audio module.
 			void init();
 
+            /// TODO: Enumerate all available audio devices.
+            //void enumerate_audio_devices();
+
+            /// Shuts down OpenAL.
+            void shutdown();
+
 			/// The logger name of this service.
 			static constexpr char LOGGER_NAME[] = "inexor.audio.manager";
 

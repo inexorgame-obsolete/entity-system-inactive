@@ -29,6 +29,9 @@ namespace audio {
 			/// Initialization of the audio module.
 			void init();
 
+            /// Shutdown audio module.
+            void shutdown();
+
 		private:
 
 			/// The audio manager.

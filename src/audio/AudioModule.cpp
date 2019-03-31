@@ -19,5 +19,10 @@ namespace audio {
 		audio_manager->init();
 	}
 
+    void AudioModule::shutdown()
+    {
+        audio_manager->shutdown();
+    }
+
 }
 }

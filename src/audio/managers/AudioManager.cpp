@@ -12,6 +12,7 @@ namespace audio {
 
 	AudioManager::~AudioManager()
 	{
+        shutdown();
 	}
 
 	void AudioManager::init()
@@ -43,6 +44,15 @@ namespace audio {
             }
         }
 	}
+
+    void AudioManager::shutdown()
+    {
+        spdlog::info("Shutting down OpenAL.");
+        OpenAL_device = alcGetContextsDevice(OpenAL_context);
+        alcMakeContextCurrent(NULL);
+        alcDestroyContext(OpenAL_context);
+        alcCloseDevice(OpenAL_device);
+    }
 
 }
 }

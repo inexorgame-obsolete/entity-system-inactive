@@ -38,7 +38,7 @@ namespace inexor {
 	
 	InexorApplication::~InexorApplication()
 	{
-		// shutdown();
+        // shutdown();
 	}
 
 	void InexorApplication::init(int argc, char* argv[])
@@ -126,8 +126,16 @@ namespace inexor {
 		}
 
 		spdlog::get(LOGGER_NAME)->info("Shutting down Inexor...");
+
+        // TODO: Why do we need this?
 		std::this_thread::sleep_for(1s);
+
+        // Shutdown REST server.
 		rest_server->stopService();
+
+        // Shutdown audio module.
+        audio_module->shutdown();
+
 		running = false;
 		spdlog::get(LOGGER_NAME)->info("Shutdown completed");
 	}
