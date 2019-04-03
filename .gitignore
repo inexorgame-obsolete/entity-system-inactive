@@ -35,6 +35,7 @@
 bin/
 build/
 documentation/
+assets/
 
 /desktop.ini
 /dependencies
