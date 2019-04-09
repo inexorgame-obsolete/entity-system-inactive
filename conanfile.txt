@@ -23,3 +23,4 @@ lib, *.dylib* -> ./bin
 [options]
 magnum:with_glfwapplication=True
 magnum:with_sdl2application=False
+TBB:shared=True
