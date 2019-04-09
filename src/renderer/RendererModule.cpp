@@ -1,16 +1,22 @@
 #include "RendererModule.hpp"
 
+#include <Magnum/Tags.h>
+
 #include <GLFW/glfw3.h>
 
 namespace inexor {
 namespace renderer {
 
 	RendererModule::RendererModule(
+		MonitorManagerPtr monitor_manager,
 		WindowManagerPtr window_manager,
+		LoadingScreenPtr loading_screen,
 		TriangleExamplePtr triangle_example
 	)
 	{
+		this->monitor_manager = monitor_manager;
 		this->window_manager = window_manager;
+		this->loading_screen = loading_screen;
 		this->triangle_example = triangle_example;
 	}
 
@@ -32,7 +38,9 @@ namespace renderer {
 			std::exit(1);
 		}
 
+		monitor_manager->init();
 		window_manager->init();
+		loading_screen->init();
 		triangle_example->init();
 	}
 
@@ -40,6 +48,7 @@ namespace renderer {
 	{
 		triangle_example->shutdown();
 		window_manager->shutdown();
+		monitor_manager->shutdown();
 
 		glfwTerminate();
 	}

@@ -1,6 +1,8 @@
 #pragma once
 
+#include "renderer/managers/MonitorManager.hpp"
 #include "renderer/managers/WindowManager.hpp"
+#include "renderer/managers/LoadingScreen.hpp"
 #include "renderer/managers/TriangleExample.hpp"
 
 namespace inexor {
@@ -12,7 +14,9 @@ namespace renderer {
 	/// interface.
 	class RendererModule
 	{
+		using MonitorManagerPtr = std::shared_ptr<MonitorManager>;
 		using WindowManagerPtr = std::shared_ptr<WindowManager>;
+		using LoadingScreenPtr = std::shared_ptr<LoadingScreen>;
 		using TriangleExamplePtr = std::shared_ptr<TriangleExample>;
 
 		public:
@@ -20,10 +24,14 @@ namespace renderer {
 			/// @brief Constructor.
 			/// @note The dependencies of this class will be injected automatically.
 			/// @note The TriangleExample is only an example right now.
+			/// @param monitor_manager The monitor manager.
 			/// @param window_manager The window manager.
-		/// @param triangle_example The triangle example.
+			/// @param loading_screen The loading screen.
+			/// @param triangle_example The triangle example.
 			RendererModule(
+				MonitorManagerPtr monitor_manager,
 				WindowManagerPtr window_manager,
+				LoadingScreenPtr loading_screen,
 				TriangleExamplePtr triangle_example
 				// UserInterfaceRenderer
 				// WorldRenderer
@@ -47,8 +55,14 @@ namespace renderer {
 
 		private:
 
+			/// The monitor manager.
+			MonitorManagerPtr monitor_manager;
+
 			/// The window manager.
 			WindowManagerPtr window_manager;
+
+			/// The loading screen.
+			LoadingScreenPtr loading_screen;
 
 			/// The triangle example.
 			TriangleExamplePtr triangle_example;

@@ -82,7 +82,7 @@ namespace renderer {
 //			void start_window_thread(GLFWwindow *windows);
 
 			/// The logger name of this service.
-			static constexpr char LOGGER_NAME[] = "inexor.r.manager";
+			static constexpr char LOGGER_NAME[] = "inexor.renderer.triangleexample";
 
 		private:
 

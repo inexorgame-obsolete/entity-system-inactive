@@ -102,7 +102,7 @@ namespace renderer {
 			GLFWwindow* get_window_handle(EntityInstancePtr window);
 
 			/// The logger name of this service.
-			static constexpr char LOGGER_NAME[] = "inexor.rendering.window";
+			static constexpr char LOGGER_NAME[] = "inexor.renderer.window";
 
 		private:
 
