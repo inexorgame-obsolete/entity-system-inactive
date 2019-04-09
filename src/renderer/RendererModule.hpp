@@ -1,28 +1,32 @@
 #pragma once
 
-#include "renderer/managers/RendererManager.hpp"
+#include "renderer/managers/WindowManager.hpp"
+#include "renderer/managers/TriangleExample.hpp"
 
 namespace inexor {
 namespace renderer {
 
 	/// @class RendererModule
-	/// @brief Rendering module.
+	/// @brief This module is responsible for the management of the windows,
+	/// the rendering of the world (octree) and the rendering of the user
+	/// interface.
 	class RendererModule
 	{
-		using RendererManagerPtr = std::shared_ptr<RendererManager>;
+		using WindowManagerPtr = std::shared_ptr<WindowManager>;
+		using TriangleExamplePtr = std::shared_ptr<TriangleExample>;
 
 		public:
 
 			/// @brief Constructor.
 			/// @note The dependencies of this class will be injected automatically.
-			/// @note The RendererManager is only an example right now.
-			/// @param renderer_manager The renderer manager.
+			/// @note The TriangleExample is only an example right now.
+			/// @param window_manager The window manager.
+		/// @param triangle_example The triangle example.
 			RendererModule(
-				RendererManagerPtr renderer_manager
-				// WindowManager
+				WindowManagerPtr window_manager,
+				TriangleExamplePtr triangle_example
 				// UserInterfaceRenderer
 				// WorldRenderer
-				// WindowInputHandler
 				// ...
 			);
 
@@ -32,10 +36,22 @@ namespace renderer {
 			/// Initialization of the renderer module.
 			void init();
 
+			/// Shutdown of the renderer module.
+			void shutdown();
+
+			/// Updates the frame in main thread.
+			void update();
+
+			/// Returns the window manager.
+			WindowManagerPtr get_window_manager();
+
 		private:
 
-				/// The renderer manager.
-				RendererManagerPtr renderer_manager;
+			/// The window manager.
+			WindowManagerPtr window_manager;
+
+			/// The triangle example.
+			TriangleExamplePtr triangle_example;
 
 	};
 

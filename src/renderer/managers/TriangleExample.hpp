@@ -7,10 +7,18 @@
 #include "type-system/factories/math/trigonometric/CosFactory.hpp"
 #include "visual-scripting/managers/ConnectorManager.hpp"
 #include "visual-scripting/model/Connector.hpp"
-#include "renderer/factories/RendererFactory.hpp"
+#include "renderer/factories/TriangleFactory.hpp"
+#include "renderer/managers/WindowManager.hpp"
 #include "logging/managers/LogManager.hpp"
-#include "keyboard/managers/KeyboardInputManager.hpp"
-#include "mouse/managers/MouseInputManager.hpp"
+
+#include <Magnum/GL/Mesh.h>
+#include <Magnum/Math/Color.h>
+#include <Magnum/Shaders/VertexColor.h>
+#include <Magnum/GL/Buffer.h>
+#include <Magnum/GL/DefaultFramebuffer.h>
+#include <Magnum/GL/Renderer.h>
+#include <Magnum/Platform/GLContext.h>
+#include <Magnum/Math/Matrix3.h>
 
 struct GLFWwindow;
 
@@ -22,17 +30,21 @@ namespace renderer {
 	using SinFactoryPtr = std::shared_ptr<entity_system::type_system::SinFactory>;
 	using CosFactoryPtr = std::shared_ptr<entity_system::type_system::CosFactory>;
 	using ConnectorManagerPtr = std::shared_ptr<visual_scripting::ConnectorManager>;
-	using RendererFactoryPtr = std::shared_ptr<RendererFactory>;
+	using TriangleFactoryPtr = std::shared_ptr<TriangleFactory>;
+	using WindowManagerPtr = std::shared_ptr<WindowManager>;
 	using LogManagerPtr = std::shared_ptr<inexor::logging::LogManager>;
 	using EntityInstancePtr = std::shared_ptr<EntityInstance>;
 	using EntityAttributeInstancePtr = std::shared_ptr<entity_system::EntityAttributeInstance>;
-	using KeyboardInputManagerPtr = std::shared_ptr<inexor::input::keyboard::KeyboardInputManager>;
-	using MouseInputManagerPtr = std::shared_ptr<inexor::input::mouse::MouseInputManager>;
 
-	/// @class RendererManager
+	struct TriangleVertex {
+		Magnum::Vector2 position;
+		Magnum::Color3 color;
+	};
+
+	/// @class TriangleExample
 	/// @brief Management of the rendering.
-	class RendererManager
-	: public std::enable_shared_from_this<RendererManager>
+	class TriangleExample
+	: public std::enable_shared_from_this<TriangleExample>
 	{
 		public:
 
@@ -43,36 +55,43 @@ namespace renderer {
 			/// @param counter_float_factory The factory for creating entities of type COUNTER_FLOAT.
 			/// @param sin_factory The factory for creating entities of type SIN.
 			/// @param cos_factory The factory for creating entities of type COS.
-			/// @param render_factory The factory for creating entities of type RENDERER.
+			/// @param render_factory The factory for creating entities of type TRIANGLE.
 			/// @param log_manager The log manager.
-			/// @param keyboard_input_manager The keyboard input manager.
-			/// @param mouse_input_manager The mouse input manager.
-			RendererManager(
+			TriangleExample(
 				EntityInstanceManagerPtr entity_instance_manager,
 				ConnectorManagerPtr connector_manager,
 				CounterFloatFactoryPtr counter_float_factory,
 				SinFactoryPtr sin_factory,
 				CosFactoryPtr cos_factory,
-				RendererFactoryPtr render_factory,
-				LogManagerPtr log_manager,
-				KeyboardInputManagerPtr keyboard_input_manager,
-				MouseInputManagerPtr mouse_input_manager
+				TriangleFactoryPtr render_factory,
+				WindowManagerPtr window_manager,
+				LogManagerPtr log_manager
 			);
 
 			/// Destructor.
-			~RendererManager();
+			~TriangleExample();
 
-			/// Initialize renderer.
+			/// Initialize triangle manager.
 			void init();
 
-			/// @brief Starts the window thread.
-			/// @param windows The GLFWwindow instance.
-			void start_window_thread(GLFWwindow *windows);
+			/// Shut down the triangle manager.
+			void shutdown();
+
+//			/// @brief Starts the window thread.
+//			/// @param windows The GLFWwindow instance.
+//			void start_window_thread(GLFWwindow *windows);
 
 			/// The logger name of this service.
 			static constexpr char LOGGER_NAME[] = "inexor.r.manager";
 
 		private:
+
+			void create_entity_instances();
+			void create_connectors();
+			void create_mesh(EntityInstancePtr, GLFWwindow*);
+
+			/// Renders the triangle.
+			void render_triangle(EntityInstancePtr, GLFWwindow*);
 
 			/// The entity instance manager.
 			EntityInstanceManagerPtr entity_instance_manager;
@@ -89,20 +108,20 @@ namespace renderer {
 			/// The factory for creating entities of type COS.
 			CosFactoryPtr cos_factory;
 
-			/// The factory for creating entities of type RENDERER.
-			RendererFactoryPtr renderer_factory;
+			/// The factory for creating entities of type TRIANGLE.
+			TriangleFactoryPtr triangle_factory;
+
+			/// The window manager
+			WindowManagerPtr window_manager;
 
 			/// The log manager.
 			LogManagerPtr log_manager;
 
-			/// The keyboard input manager.
-			KeyboardInputManagerPtr keyboard_input_manager;
+			/// The window entity instance.
+			EntityInstancePtr window;
 
-			/// The mouse input manager.
-			MouseInputManagerPtr mouse_input_manager;
-
-			/// The renderer entity instance.
-			EntityInstancePtr renderer;
+			/// The triangle entity instance.
+			EntityInstancePtr triangle;
 
 			/// The counter.
 			EntityInstancePtr counter;
@@ -128,11 +147,17 @@ namespace renderer {
 			/// The attribute cos_value.
 			EntityAttributeInstancePtr cos_attr_value;
 
-			/// The attribute renderer_x.
-			EntityAttributeInstancePtr renderer_attr_x;
+			/// The attribute triangle_x.
+			EntityAttributeInstancePtr triangle_attr_x;
 
-			/// The attribute renderer_x.
-			EntityAttributeInstancePtr renderer_attr_y;
+			/// The attribute triangle_x.
+			EntityAttributeInstancePtr triangle_attr_y;
+
+			std::shared_ptr<Magnum::GL::Buffer> buffer;
+			std::shared_ptr<Magnum::GL::Mesh> mesh;
+			std::shared_ptr<Magnum::Shaders::VertexColor2D> shader;
+
+			bool initialized;
 
 	};
 

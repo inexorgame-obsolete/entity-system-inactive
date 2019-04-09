@@ -1,7 +1,6 @@
 #include "InexorApplication.hpp"
 
 #include "spdlog/spdlog.h"
-#include <GLFW/glfw3.h>
 
 using namespace spdlog;
 
@@ -111,15 +110,20 @@ namespace inexor {
 			// everything else happens in the execution graph or in threads for the ES instances.
 			std::this_thread::sleep_for(50ms);
 			// spdlog::get(LOGGER_NAME)->info("Uptime: {} s", rest_server->get_uptime().count());
-			// Poll for and process events
-			// TODO: this doesn't work well
-			glfwPollEvents();
+
+			renderer_module->update();
+
+			if (renderer_module->get_window_manager()->get_window_count() == 0)
+			{
+				spdlog::get(LOGGER_NAME)->info("Last window closed");
+				shutdown();
+			}
 		}
 	}
 
 	void InexorApplication::shutdown()
 	{
-		if(running)
+		if(!running)
         {
 			spdlog::get(LOGGER_NAME)->info("Not running");
 			return;
@@ -133,7 +137,10 @@ namespace inexor {
         // Shutdown REST server.
 		rest_server->stopService();
 
-        // Shutdown audio module.
+		// Shutdown the renderer module.
+		renderer_module->shutdown();
+
+		// Shutdown audio module.
         audio_module->shutdown();
 
 		running = false;
