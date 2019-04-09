@@ -58,7 +58,7 @@ namespace renderer {
 	EntityInstancePtr WindowManager::create_window(std::string title, int x, int y, int width, int height)
 	{
 
-		spdlog::get(WindowManager::LOGGER_NAME)->info("Creating window!");
+		spdlog::get(WindowManager::LOGGER_NAME)->info("Creating window: '{}' ({}, {}) ({}x{})", title, x, y, width, height);
 
 		// Create a windowed mode window and its OpenGL context.
 		glfwWindowHint(GLFW_VISIBLE, GLFW_FALSE);
@@ -121,7 +121,7 @@ namespace renderer {
 				mouse_input_manager->set_mouse_callback(glfw_window);
 
 				// TEST!
-				glfwSetWindowOpacity(glfw_window, 0.5f);
+				// glfwSetWindowOpacity(glfw_window, 0.5f);
 
 				glfwShowWindow(glfw_window);
 
