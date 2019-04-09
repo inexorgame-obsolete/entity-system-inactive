@@ -1,104 +1,75 @@
 #include "AudioManager.hpp"
 #include "spdlog/spdlog.h"
 
+#include <string.h>
+#include <iostream>
+#include <iomanip>
+#include <thread>
+#include <chrono>
+
 namespace inexor {
 namespace audio {
 
 	AudioManager::AudioManager(
-	LogManagerPtr log_manager
+		LogManagerPtr log_manager
 	) {
 		this->log_manager = log_manager;
 	}
 
 	AudioManager::~AudioManager()
 	{
-        shutdown();
+		shutdown();
 	}
 
-	void AudioManager::init()
+	int AudioManager::init()
 	{
-        spdlog::info("Initialising OpenAL.");
+		// Initialise an OpenAL device.
+		device = alcOpenDevice(NULL);
+		if(!device)
+		{
+			spdlog::get(LOGGER_NAME)->critical("Failed to create an OpenAL device!");
+			return -1;
+		}
 
-        // Initialise OpenAL.
-        // TODO: Enumerate devices instead of using the default device!
-        OpenAL_device = alcOpenDevice(NULL);
-
-        if(!OpenAL_device)
-        {
-            spdlog::critical("Creating OpenAL device using alcOpenDevice method failed!");
-        }
-        else
-        {
-            // Create an OpenAL context.
-            OpenAL_context = alcCreateContext(OpenAL_device, NULL);
-
-            // Check if we can set the context.
-            if(!alcMakeContextCurrent(OpenAL_context))
-            {
-                ALenum context_creation_error = alGetError();
-                spdlog::critical("Failed to make OpenAL context current! Error code: {}", context_creation_error);
-            }
-            else
-            {
-                spdlog::info("OpenAL setup complete!");
-            }
-        }
-	}
-
-	void AudioManager::set_listener_position(glm::vec3 listener_position)
-	{
-		alListener3f(AL_POSITION, listener_position.x, listener_position.y, listener_position.z);
-	}
-	
-	void AudioManager::set_listener_velocity(glm::vec3 listener_velocity)
-	{
-		alListener3f(AL_VELOCITY, listener_velocity.x, listener_velocity.y, listener_velocity.z);
-	}
-
-	void AudioManager::set_listener_orientation(glm::vec3 at, glm::vec3 up)
-	{
-		ALfloat listener_orientation[] = { at.x, at.y, at.z, up.x, up.y, up.z };
-		alListenerfv(AL_ORIENTATION, listener_orientation);
-	}
-
-	void AudioManager::set_listener_settings_to_standard()
-	{
-		set_listener_position(glm::vec3(0.0f, 0.0f, 0.0f));
-		set_listener_velocity(glm::vec3(0.0f, 0.0f, 0.0f));
-		set_listener_orientation(glm::vec3(0.0f, 0.0f, 1.0f), glm::vec3(0.0f, 1.0f, 0.0f));
-	}
-
-	void AudioManager::create_sound_source(glm::vec3 position, glm::vec3 velocity, bool looping, float pitch, float gain)
-	{
-		spdlog::info("Creating sound source at position {}, {}, {}, velocity {}, {}, {}, looping: {}, pitch: {}, gain: {}",
-					position.x, position.y, position.z, (looping) ? std::string("true") : std::string("false"), pitch, gain);
+		// Create context.
+		context = alcCreateContext(device, NULL);
+		if(!alcMakeContextCurrent(context))
+		{
+			spdlog::get(LOGGER_NAME)->critical("Failed to set the current OpenAL context!");
+			return -1;
+		}
 		
-		// Generate a sound source.
-		ALuint sound_source;
-		alGenSources((ALuint)1, &sound_source);
-		
-		// Set options for the sound source.
-		alSource3f(sound_source, AL_POSITION, position.x, position.y, position.z);
-		alSource3f(sound_source, AL_VELOCITY, velocity.x, velocity.y, velocity.z);
-		alSourcei(sound_source, AL_LOOPING, looping);
-		alSourcef(sound_source, AL_PITCH, pitch);
-		alSourcef(sound_source, AL_GAIN, gain);
+		// TODO: Do proper error handling!
+		// TODO: Make the listener more dynamic!
+		// TODO: Link listener to the entity-system!
+		ALfloat listenerOri[] = { 0.0f, 0.0f, 1.0f, 0.0f, 1.0f, 0.0f };
+		alListener3f(AL_POSITION, 0, 0, 1.0f);
+		alListener3f(AL_VELOCITY, 0, 0, 0);
+		alListenerfv(AL_ORIENTATION, listenerOri);
 
-		// Generate a buffer for the sound source.
+		// TODO: Link sources to the entity-system!
+		ALuint source;
+		alGenSources((ALuint)1, &source);
+		alSourcef(source, AL_PITCH, 1);
+		alSourcef(source, AL_GAIN, 1);
+		alSource3f(source, AL_POSITION, 0, 0, 0);
+		alSource3f(source, AL_VELOCITY, 0, 0, 0);
+		alSourcei(source, AL_LOOPING, AL_FALSE);
+
+		// TODO: Write a manager for buffers!
+		// TODO: Link buffers to entity-system!
 		ALuint buffer;
 		alGenBuffers((ALuint)1, &buffer);
-		
-		// Add sound source to vector
-		OpenAL_sound_sources.push_back(sound_source);
-	}
 
+		// Load audio file.
+		
+
+		// Success!
+		return 1;
+	}
+	
     void AudioManager::shutdown()
     {
-        spdlog::info("Shutting down OpenAL.");
-        OpenAL_device = alcGetContextsDevice(OpenAL_context);
-        alcMakeContextCurrent(NULL);
-        alcDestroyContext(OpenAL_context);
-        alcCloseDevice(OpenAL_device);
     }
 
 }

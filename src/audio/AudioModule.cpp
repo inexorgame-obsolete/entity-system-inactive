@@ -4,7 +4,7 @@ namespace inexor {
 namespace audio {
 
 	AudioModule::AudioModule(
-	AudioManagerPtr audio_manager
+		AudioManagerPtr audio_manager
 	)
 	{
 		this->audio_manager = audio_manager;
