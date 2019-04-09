@@ -47,8 +47,9 @@ namespace renderer {
 
 	void WindowManager::shutdown()
 	{
-		log_manager->register_logger(LOGGER_NAME);
+		spdlog::info("Shutting down {} open windows", windows.size());
 		for (auto& kv : windows) {
+			spdlog::info("shutting down window {}", std::get<DataType::STRING>(kv.first->get_attribute_instance(WindowEntityTypeProvider::WINDOW_TITLE).value()->own_value.Value()));
 			destroy_window(kv.first);
 		}
 	}
@@ -266,17 +267,24 @@ namespace renderer {
 
 		spdlog::get(WindowManager::LOGGER_NAME)->info("Window has been closed!");
 
-		// Untrack the glfw window
-		window_entities.erase(glfw_window);
-
 		// Destroy the glfw window object
 		glfwDestroyWindow(glfw_window);
 
+		// Untrack the glfw window
+		window_entities.erase(glfw_window);
+		spdlog::info("window_entities count: {}", window_entities.size());
+
 		// Remove render functions
 		window_render_functions.erase(window);
+		spdlog::info("window_render_functions count: {}", window_render_functions.size());
 
 		// Untrack the entity instance
 		windows.erase(window);
+		spdlog::info("windows count: {}", windows.size());
+
+		// Untrack the thread state
+		window_thread_state.erase(window);
+		spdlog::info("window_thread_state count: {}", window_thread_state.size());
 
 		// Delete entity instance
 		entity_instance_manager->delete_entity_instance(window);
@@ -289,9 +297,6 @@ namespace renderer {
 	void WindowManager::make_current(EntityInstancePtr window)
 	{
 		glfwMakeContextCurrent(windows[window].first);
-
-		// Create Magnum context in an isolated scope.
-		Magnum::Platform::GLContext ctx{};
 	}
 
 	void WindowManager::register_render_function(EntityInstancePtr window, std::function<void(EntityInstancePtr, GLFWwindow*)> render_function)
@@ -302,6 +307,11 @@ namespace renderer {
 	int WindowManager::get_window_count()
 	{
 		return window_count;
+	}
+
+	GLFWwindow* WindowManager::get_window_handle(EntityInstancePtr window)
+	{
+		return windows[window].first;
 	}
 
 }

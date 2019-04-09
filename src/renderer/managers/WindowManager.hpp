@@ -97,6 +97,10 @@ namespace renderer {
 			/// @brief Returns the number of windows.
 			int get_window_count();
 
+			/// @brief Returns the window handle for the entity instance.
+			/// @param window The entity instance of type WINDOW.
+			GLFWwindow* get_window_handle(EntityInstancePtr window);
+
 			/// The logger name of this service.
 			static constexpr char LOGGER_NAME[] = "inexor.rendering.window";
 
