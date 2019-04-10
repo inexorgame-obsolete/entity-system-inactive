@@ -19,12 +19,20 @@ namespace entity_system {
 			using RelationTypeBuilderFactoryPtr = std::shared_ptr<RelationTypeBuilderFactory>;
 			using RelationInstanceBuilderFactoryPtr = std::shared_ptr<RelationInstanceBuilderFactory>;
 
-			/// Constructor.
+			/// @brief Constructor.
+			/// @note The dependencies of this class will be injected automatically.<br>
+			/// BOOST_DI_INJECT constructor parameters is limited to BOOST_DI_CFG_CTOR_LIMIT_SIZE,<br>
+			/// which by default is set to 10. Not more than 10 arguments can be passed to the DI constructor!<br>
+			/// https://boost-experimental.github.io/di/user_guide/index.html
+			/// @param entity_type_builder_factory The entity type builder factory.
+			/// @param entity_instance_builder_factory The entity instance builder factory.
+			/// @param relation_type_builder_factory The relation type builder factory.
+			/// @param relation_instance_builder_factory The relation instance builder factory.
 			BuilderFactoryManager(
-			EntityTypeBuilderFactoryPtr entity_type_builder_factory,
-			EntityInstanceBuilderFactoryPtr entity_instance_builder_factory,
-			RelationTypeBuilderFactoryPtr relation_type_builder_factory,
-			RelationInstanceBuilderFactoryPtr relation_instance_builder_factory
+				EntityTypeBuilderFactoryPtr entity_type_builder_factory,
+				EntityInstanceBuilderFactoryPtr entity_instance_builder_factory,
+				RelationTypeBuilderFactoryPtr relation_type_builder_factory,
+				RelationInstanceBuilderFactoryPtr relation_instance_builder_factory
 			);
 
 			/// Destructor.

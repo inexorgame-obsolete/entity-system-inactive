@@ -31,21 +31,30 @@ namespace entity_system {
 	using RelationInstancePtr = std::shared_ptr<RelationInstance>;
 
 	/// @class EntitySystemDebugger
-	/// @brief Debugger for the entity system
+	/// @brief Debugger for the entity system.
 	class EntitySystemDebugger
-	: public EntityTypeCreatedListener,
-	public EntityTypeDeletedListener,
-	public EntityInstanceCreatedListener,
-	public EntityInstanceDeletedListener,
-	public RelationTypeCreatedListener,
-	public RelationTypeDeletedListener,
-	public RelationInstanceCreatedListener,
-	public RelationInstanceDeletedListener,
-	public std::enable_shared_from_this<EntitySystemDebugger>
+		: public EntityTypeCreatedListener,
+		public EntityTypeDeletedListener,
+		public EntityInstanceCreatedListener,
+		public EntityInstanceDeletedListener,
+		public RelationTypeCreatedListener,
+		public RelationTypeDeletedListener,
+		public RelationInstanceCreatedListener,
+		public RelationInstanceDeletedListener,
+		public std::enable_shared_from_this<EntitySystemDebugger>
 	{
 		public:
 
-			/// Constructor.
+			/// @brief Constructor.
+			/// @note The dependencies of this class will be injected automatically.<br>
+			/// BOOST_DI_INJECT constructor parameters is limited to BOOST_DI_CFG_CTOR_LIMIT_SIZE,<br>
+			/// which by default is set to 10. Not more than 10 arguments can be passed to the DI constructor!<br>
+			/// https://boost-experimental.github.io/di/user_guide/index.html
+			/// @param entity_type_manager The entity type manager.
+			/// @param entity_instance_manager The entity instance manager.
+			/// @param relation_type_manager The relation type manager.
+			/// @param relation_instance_manager The relation instance manager.
+			/// @param log_manager The log manager.
 			EntitySystemDebugger(
 				EntityTypeManagerPtr entity_type_manager,
 				EntityInstanceManagerPtr entity_instance_manager,
@@ -57,10 +66,10 @@ namespace entity_system {
 			/// Destructor.
 			~EntitySystemDebugger();
 
-			/// Initialization
+			/// Initialization.
 			void init();
 
-			/// Initialization
+			/// Initialization.
 			void init_logger();
 
 			void on_entity_type_created(EntityTypePtr entity_type);
@@ -77,22 +86,22 @@ namespace entity_system {
 
 		private:
 
-			/// The entity type manager
+			/// The entity type manager.
 			EntityTypeManagerPtr entity_type_manager;
 
-			/// The entity instance manager
+			/// The entity instance manager.
 			EntityInstanceManagerPtr entity_instance_manager;
 
-			/// The relation type manager
+			/// The relation type manager.
 			RelationTypeManagerPtr relation_type_manager;
 
-			/// The relation instance manager
+			/// The relation instance manager.
 			RelationInstanceManagerPtr relation_instance_manager;
 
-			/// The log manager
+			/// The log manager.
 			LogManagerPtr log_manager;
 
-			/// Logger
+			/// Logger.
 			std::shared_ptr<spdlog::logger> logger;
 
 			/// The logger name of this processor.

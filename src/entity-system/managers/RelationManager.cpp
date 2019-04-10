@@ -23,26 +23,13 @@ namespace entity_system {
 	{
 	}
 
-	// Order of destruction:
-	// <ul>
-	// <li> Attributes first, then the container which owns the attribute
-	// <li> Instances first, then types
-	// </ul>
 	void RelationManager::reset_entity_system()
 	{
-		// Attribute instances
 		relation_attribute_instance_manager->delete_all_relation_attribute_instances();
-
-		// Attribute types
 		relation_attribute_type_manager->delete_all_relation_attribute_types();
-
-		// Instances
 		relation_instance_manager->delete_all_relation_instances();
-
-		// Types
 		relation_type_manager->delete_all_relation_types();
 	}
 
-
-};
-};
+}
+}
