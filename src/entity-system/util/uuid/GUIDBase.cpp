@@ -5,16 +5,14 @@ namespace entity_system {
 
 	GUIDBase::GUIDBase()
 	{
-		// Use lock guard to ensure thread safety for this write operation!
-		std::lock_guard<std::mutex> lock(guid_base_mutex);
-		globally_unique_identifier = xg::newGuid();
+		generate_new_GUID();
 	}
 
 	GUIDBase::GUIDBase(const xg::Guid& param_GUID)
 	{
 		// Use lock guard to ensure thread safety for this write operation!
 		std::lock_guard<std::mutex> lock(guid_base_mutex);
-		// Store the GUID which was given to us.
+		// Copy the GUID which is given as parameter.
 		globally_unique_identifier = param_GUID;
 	}
 
@@ -24,7 +22,7 @@ namespace entity_system {
 
 	xg::Guid GUIDBase::get_GUID() const
 	{
-		// Read only, no mutex required.
+		// No mutex required as this is a read only operation.
 		return globally_unique_identifier;
 	}
 
