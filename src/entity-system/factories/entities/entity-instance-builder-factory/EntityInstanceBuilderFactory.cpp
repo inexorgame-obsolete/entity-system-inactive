@@ -20,7 +20,8 @@ namespace entity_system {
 	{
 	}
 
-	EntityInstanceBuilderPtr EntityInstanceBuilderFactory::get_builder() {
+	EntityInstanceBuilderPtr EntityInstanceBuilderFactory::get_builder()
+	{
 		return std::make_shared<EntityInstanceBuilder>(entity_instance_manager, entity_type_manager);
 	}
 

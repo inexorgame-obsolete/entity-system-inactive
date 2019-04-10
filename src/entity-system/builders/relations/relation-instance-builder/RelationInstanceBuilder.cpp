@@ -74,13 +74,13 @@ namespace entity_system {
 		return shared_from_this();
 	}
 
-    RelationInstanceBuilderPtr RelationInstanceBuilder::attribute(const std::string& attribute_name, const float& value)
+	RelationInstanceBuilderPtr RelationInstanceBuilder::attribute(const std::string& attribute_name, const float& value)
 	{
 		relation_instance_attributes[attribute_name] = {DataType::FLOAT, value};
 		return shared_from_this();
 	}
 
-    RelationInstanceBuilderPtr RelationInstanceBuilder::attribute(const std::string& attribute_name, const double& value)
+	RelationInstanceBuilderPtr RelationInstanceBuilder::attribute(const std::string& attribute_name, const double& value)
 	{
 		relation_instance_attributes[attribute_name] = {DataType::DOUBLE, value};
 		return shared_from_this();
@@ -95,16 +95,18 @@ namespace entity_system {
 	RelationInstancePtrOpt RelationInstanceBuilder::build()
 	{
 		RelationInstancePtrOpt o_relation_instance = std::nullopt;
-		if (!o_relation_type.has_value() && !relation_type_name.empty())
+		if(!o_relation_type.has_value() && !relation_type_name.empty())
 		{
 			o_relation_type = relation_type_manager->get_relation_type(relation_type_name);
 		}
-		if (o_relation_type.has_value())
+		if(o_relation_type.has_value())
 		{
-			if (!relation_instance_uuid.empty())
+			if(!relation_instance_uuid.empty())
 			{
 				o_relation_instance = relation_instance_manager->create_relation_instance(xg::Guid(relation_instance_uuid), o_relation_type.value(), ent_instance_source, ent_instance_target);
-			} else {
+			}
+			else
+			{
 				o_relation_instance = relation_instance_manager->create_relation_instance(o_relation_type.value(), ent_instance_source, ent_instance_target);
 			}
 		}
@@ -112,38 +114,41 @@ namespace entity_system {
 		{
 			RelationInstancePtr relation_instance = o_relation_instance.value();
 			// TODO: set attribute values
-			for (auto& attr_entry : relation_instance_attributes) {
+			for(auto& attr_entry : relation_instance_attributes)
+			{
 				std::string attr_name = attr_entry.first;
 				DataContainerInitializer attr_value = attr_entry.second;
-//				O_REL_ATTR_INST o_attr_inst = relation_instance->get_attribute_instance(attr_entry.first);
-//				if (o_attr_inst.has_value()) {
-//					REL_ATTR_INST attr_inst = o_attr_inst.value();
-//					if (attr_inst->type == attr_value.type) {
-//						attr_inst->value.Set(attr_value.value.Value());
-//						switch (attr_inst->type)
-//						{
-//							case DataType::INT:
-//								spdlog::debug("Set attribute {} = {}", attr_name, std::get<DataType::INT>(attr_inst->value.Value()));
-//								break;
-//							case DataType::STRING:
-//								spdlog::debug("Set attribute {} = {}", attr_name, std::get<DataType::STRING>(attr_inst->value.Value()));
-//								break;
-//							default:
-//								break;
-//						}
-//					} else {
-//						// Error: Wrong datatype
-//						spdlog::error("Wrong datatype for attribute {}: {} != {}", attr_name, attr_inst->type, attr_value.type);
-//						return std::nullopt;
-//					}
-//				} else {
-//					// Error: Attribute not found by name
-//					spdlog::error("Relation instance attribute {} not found", attr_name);
-//					return std::nullopt;
-//				}
+			//				O_REL_ATTR_INST o_attr_inst = relation_instance->get_attribute_instance(attr_entry.first);
+			//				if (o_attr_inst.has_value()) {
+			//					REL_ATTR_INST attr_inst = o_attr_inst.value();
+			//					if (attr_inst->type == attr_value.type) {
+			//						attr_inst->value.Set(attr_value.value.Value());
+			//						switch (attr_inst->type)
+			//						{
+			//							case DataType::INT:
+			//								spdlog::debug("Set attribute {} = {}", attr_name, std::get<DataType::INT>(attr_inst->value.Value()));
+			//								break;
+			//							case DataType::STRING:
+			//								spdlog::debug("Set attribute {} = {}", attr_name, std::get<DataType::STRING>(attr_inst->value.Value()));
+			//								break;
+			//							default:
+			//								break;
+			//						}
+			//					} else {
+			//						// Error: Wrong datatype
+			//						spdlog::error("Wrong datatype for attribute {}: {} != {}", attr_name, attr_inst->type, attr_value.type);
+			//						return std::nullopt;
+			//					}
+			//				} else {
+			//					// Error: Attribute not found by name
+			//					spdlog::error("Relation instance attribute {} not found", attr_name);
+			//					return std::nullopt;
+			//				}
 			}
 			return o_relation_instance;
-		} else {
+		}
+		else
+		{
 			spdlog::error("Failed to create relation instance");
 			return std::nullopt;
 		}

@@ -17,7 +17,7 @@ namespace entity_system {
 	using EntityTypePtrOpt = std::optional<EntityTypePtr>;
 
 	/// @class EntityTypeBuilder
-    /// @brief Management of the loggers.
+	/// @brief Management of the loggers.
 	class EntityTypeBuilder : public std::enable_shared_from_this<EntityTypeBuilder>
 	{
 		public:

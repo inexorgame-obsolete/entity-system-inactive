@@ -1,6 +1,3 @@
-// Inexor entity system
-// (c)2018-2019 Inexor
-
 #pragma once
 
 #include <string>
@@ -8,16 +5,14 @@
 
 #include "entity-system/util/uuid/GUIDBase.hpp"
 
-
 namespace inexor {
 namespace entity_system {
 
-
-    /// @class TypeBase
+	/// @class TypeBase
 	/// @brief A template base class for types.
 	/// @note It does not make sense to let TypeBase inherit
-    /// from GUIDBase, because then all classes which inherit
-    /// from TypeBase would have multiple get_GUID() methods!
+	/// from GUIDBase, because then all classes which inherit
+	/// from TypeBase would have multiple get_GUID() methods!
 	class TypeBase
 	{
 		private:
@@ -25,8 +20,8 @@ namespace entity_system {
 			/// Unique name of this type.
 			std::string type_title;
 
-            /// Mutex for this base class.
-            std::mutex type_base_mutex;
+			/// Mutex for this base class.
+			std::mutex type_base_mutex;
 
 		protected:
 
@@ -41,7 +36,6 @@ namespace entity_system {
 			/// @brief Returns the name of this type.
 			/// @return The name of this type.
 			std::string get_type_name() const;
-
 
 	};
 

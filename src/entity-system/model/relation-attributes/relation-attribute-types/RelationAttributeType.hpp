@@ -1,6 +1,3 @@
-// Inexor entity system
-// (c)2018-2019 Inexor
-
 #pragma once
 
 #include <string>
@@ -16,16 +13,16 @@
 
 namespace inexor {
 namespace entity_system {
-    
 
-    /// @class RelationAttributeType
+
+	/// @class RelationAttributeType
 	/// @brief A base class for entity relation attribute types.
-    class RelationAttributeType : public TypeBase, public AttributeBase, public GUIDBase
-    {
-        public:
+	class RelationAttributeType : public TypeBase, public AttributeBase, public GUIDBase
+	{
+		public:
 
 			/// @brief Constructor.
-            /// @note The dependencies of this class will be injected automatically.
+			/// @note The dependencies of this class will be injected automatically.
 			/// @note The GUID of the new relation attribute type will be created automatically by the inheritance of GUIDBase!
 			/// @param rel_attr_type_name The name of the new relation attribute type.
 			/// @param rel_attr_type_data_type The data type of the new relation attribute type.

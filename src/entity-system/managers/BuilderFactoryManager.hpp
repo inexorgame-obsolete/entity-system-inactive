@@ -8,25 +8,24 @@
 namespace inexor {
 namespace entity_system {
 
-    /// @class BuilderFactoryManager
-    /// @brief The builder factory manager manages the builder factories.
-    class BuilderFactoryManager
-    {
-
+	/// @class BuilderFactoryManager
+	/// @brief The builder factory manager manages the builder factories.
+	class BuilderFactoryManager
+	{
 		public:
 
-    		using EntityTypeBuilderFactoryPtr = std::shared_ptr<EntityTypeBuilderFactory>;
-    		using EntityInstanceBuilderFactoryPtr = std::shared_ptr<EntityInstanceBuilderFactory>;
-    		using RelationTypeBuilderFactoryPtr = std::shared_ptr<RelationTypeBuilderFactory>;
-    		using RelationInstanceBuilderFactoryPtr = std::shared_ptr<RelationInstanceBuilderFactory>;
+			using EntityTypeBuilderFactoryPtr = std::shared_ptr<EntityTypeBuilderFactory>;
+			using EntityInstanceBuilderFactoryPtr = std::shared_ptr<EntityInstanceBuilderFactory>;
+			using RelationTypeBuilderFactoryPtr = std::shared_ptr<RelationTypeBuilderFactory>;
+			using RelationInstanceBuilderFactoryPtr = std::shared_ptr<RelationInstanceBuilderFactory>;
 
 			/// Constructor.
-		    BuilderFactoryManager(
-				EntityTypeBuilderFactoryPtr entity_type_builder_factory,
-				EntityInstanceBuilderFactoryPtr entity_instance_builder_factory,
-				RelationTypeBuilderFactoryPtr relation_type_builder_factory,
-				RelationInstanceBuilderFactoryPtr relation_instance_builder_factory
-		    );
+			BuilderFactoryManager(
+			EntityTypeBuilderFactoryPtr entity_type_builder_factory,
+			EntityInstanceBuilderFactoryPtr entity_instance_builder_factory,
+			RelationTypeBuilderFactoryPtr relation_type_builder_factory,
+			RelationInstanceBuilderFactoryPtr relation_instance_builder_factory
+			);
 
 			/// Destructor.
 			~BuilderFactoryManager();
@@ -45,7 +44,7 @@ namespace entity_system {
 			/// The entity relation instance builder factory.
 			RelationInstanceBuilderFactoryPtr relation_instance_builder_factory;
 
-    };
+	};
 
 }
 }

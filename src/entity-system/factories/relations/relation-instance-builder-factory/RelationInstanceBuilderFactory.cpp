@@ -20,7 +20,8 @@ namespace entity_system {
 	{
 	}
 
-	RelationInstanceBuilderPtr RelationInstanceBuilderFactory::get_builder() {
+	RelationInstanceBuilderPtr RelationInstanceBuilderFactory::get_builder()
+	{
 		return std::make_shared<RelationInstanceBuilder>(relation_instance_manager, relation_type_manager);
 	}
 

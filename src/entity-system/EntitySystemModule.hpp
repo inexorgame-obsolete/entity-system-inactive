@@ -7,7 +7,7 @@
 namespace inexor {
 namespace entity_system {
 
-    /// @class EntitySystemModule
+	/// @class EntitySystemModule
 	/// @brief The entity system module.
 	class EntitySystemModule
 	{
@@ -18,25 +18,25 @@ namespace entity_system {
 			using BuilderFactoryManagerPtr = std::shared_ptr<BuilderFactoryManager>;
 
 			/// @brief Constructs the entity system module.
-            /// @note The dependencies of this class will be injected automatically.
-            /// @param entity_manager The manager for entity types and entity instances.
-            /// @param relation_manager The manager for relation types and relation instances.
-            /// @param builder_factory_manager The manager for the builder factories.
+			/// @note The dependencies of this class will be injected automatically.
+			/// @param entity_manager The manager for entity types and entity instances.
+			/// @param relation_manager The manager for relation types and relation instances.
+			/// @param builder_factory_manager The manager for the builder factories.
 			EntitySystemModule(
 				EntityManagerPtr entity_manager,
 				RelationManagerPtr relation_manager,
 				BuilderFactoryManagerPtr builder_factory_manager
 			);
 
-            /// Destructor.
+			/// Destructor.
 			~EntitySystemModule();
 
 			/// Resets the entire entity system.
-            /// @note Order of destruction:
-            /// <ul>
-            ///   <li> Relations
-	        ///   <li> Entities
-            /// </ul>
+			/// @note Order of destruction:
+			/// <ul>
+			///   <li> Relations
+			///   <li> Entities
+			/// </ul>
 			void reset_entity_system();
 
 		private:

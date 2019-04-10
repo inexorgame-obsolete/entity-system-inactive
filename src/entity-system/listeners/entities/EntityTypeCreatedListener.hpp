@@ -6,7 +6,7 @@ namespace inexor {
 namespace entity_system {
 
 	/// @class EntityTypeCreatedListener
-    /// @brief Listener for newly created entity types.
+	/// @brief Listener for newly created entity types.
 	class EntityTypeCreatedListener
 	{
 		public:

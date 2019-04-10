@@ -17,9 +17,9 @@ namespace entity_system {
 	using RelationTypePtrOpt = std::optional<RelationTypePtr>;
 
 	/// A manager class for entity relation types.
-    class RelationTypeManager : public TypeManagerTemplate<RelationType>
-    {
-        public:
+	class RelationTypeManager : public TypeManagerTemplate<RelationType>
+	{
+		public:
 
 			/// Constructor.
 			RelationTypeManager();
@@ -36,7 +36,7 @@ namespace entity_system {
 			RelationTypePtrOpt create_relation_type(const std::string&, const EntityTypePtr&, const EntityTypePtr&);
 
 			/// Creates a new relation type and store it in the entity system.
-            /// @param rel_type_GUID The GUID of the new relation type.
+			/// @param rel_type_GUID The GUID of the new relation type.
 			/// @param rel_type_name The name of the new relation type.
 			/// @param ent_type_source A const reference of a shared pointer to
 			/// an entity type which will act as <b>source</b> entity type.
@@ -44,7 +44,7 @@ namespace entity_system {
 			/// an entity type which will act as <b>target</b> entity type.
 			RelationTypePtrOpt create_relation_type(const xg::Guid&, const std::string&, const EntityTypePtr&, const EntityTypePtr&);
 
-            ///
+			///
 			bool does_relation_type_exist(const xg::Guid&);
 
 			/// Checks if an relation type does already exist.
@@ -64,18 +64,18 @@ namespace entity_system {
 			/// @return The number of available relation types.
 			std::size_t get_relation_types_count() const;
 
-            /// @brief Returns an relation type.
-            /// @param ent_type_GUID The GUID of the relation type.
-            /// @return A std::optional<REL_TYPE> of the relation type.
+			/// @brief Returns an relation type.
+			/// @param ent_type_GUID The GUID of the relation type.
+			/// @return A std::optional<REL_TYPE> of the relation type.
 			RelationTypePtrOpt get_relation_type(const xg::Guid&);
 
-            /// @brief Returns an relation type.
-            /// @param ent_type_name The name of the relation type.
-            /// @return A std::optional<REL_TYPE> of the relation type.
+			/// @brief Returns an relation type.
+			/// @param ent_type_name The name of the relation type.
+			/// @return A std::optional<REL_TYPE> of the relation type.
 			RelationTypePtrOpt get_relation_type(const std::string&);
 
 			/// @brief Deletes an relation type by GUID.
-            /// @param rel_type_guid The GUID of the relation type which will be deleted.
+			/// @param rel_type_guid The GUID of the relation type which will be deleted.
 			std::size_t delete_relation_type(const xg::Guid&);
 
 			/// Deletes an entity relation type.
@@ -95,7 +95,6 @@ namespace entity_system {
 
 			/// @brief Registers a new listener
 			void register_on_deleted(std::shared_ptr<RelationTypeDeletedListener> listener);
-
 
 		private:
 

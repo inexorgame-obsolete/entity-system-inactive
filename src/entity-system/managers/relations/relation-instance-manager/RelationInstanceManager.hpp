@@ -21,14 +21,14 @@ namespace entity_system {
 	using EntityInstancePtr = std::shared_ptr<EntityInstance>;
 
 	/// A manager class for relation instances.
-    class RelationInstanceManager : public InstanceManagerTemplate<RelationInstance>
-    {
-        public:
-            
+	class RelationInstanceManager : public InstanceManagerTemplate<RelationInstance>
+	{
+		public:
+
 			/// Constructor.
-            RelationInstanceManager(
-            	std::shared_ptr<RelationAttributeInstanceManager> relation_attribute_instance_manager
-            );
+			RelationInstanceManager(
+				std::shared_ptr<RelationAttributeInstanceManager> relation_attribute_instance_manager
+			);
 
 			/// Destructor.
 			~RelationInstanceManager();
@@ -44,7 +44,7 @@ namespace entity_system {
 			RelationInstancePtrOpt create_relation_instance(const RelationTypePtr&, const EntityInstancePtr&, const EntityInstancePtr&);
 
 			/// Creates a new entity relation instance.
-            /// @param rel_inst_GUID The GUID of the new relation instance.
+			/// @param rel_inst_GUID The GUID of the new relation instance.
 			/// @param rel_type A const reference to a shared pointer of
 			/// a relation type of which an instance will be created.
 			/// @param ent_inst_source A const reference to a shared pointer of
@@ -55,25 +55,25 @@ namespace entity_system {
 			RelationInstancePtrOpt create_relation_instance(const xg::Guid&, const RelationTypePtr&, const EntityInstancePtr&, const EntityInstancePtr&);
 
 			/// @brief Checks if an relation instance does already exist.
-            /// @return True if the relation instance already exists, false otherwise.
+			/// @return True if the relation instance already exists, false otherwise.
 			bool does_relation_instance_exist(const xg::Guid);
 
-            ///
-            ///
+			///
+			///
 			RelationInstancePtrOpt get_relation_instance(const xg::Guid&);
 
-            /// TODO: what's the parameter meaning?
+			/// TODO: what's the parameter meaning?
 			/// TODO: implement
 			RelationInstancePtrOpt get_relation_instance(const std::string&);
 
-            // TODO: get_all_relation_instances_of_type() const;
+			// TODO: get_all_relation_instances_of_type() const;
 
-            /// Returns all relation instances.
+			/// Returns all relation instances.
 			/// @return All relation instances which exist in the entity system.
 			/// TODO: implement
 			std::vector<RelationInstancePtr> get_all_relation_instances() const;
 
-            // TODO: get_relation_instance_count_of_type() const;
+			// TODO: get_relation_instance_count_of_type() const;
 
 			/// Returns the number of relation instances.
 			/// @return The number of existing relation instances.
@@ -108,10 +108,10 @@ namespace entity_system {
 			/// @brief Registers a new listener
 			void register_on_deleted(const xg::Guid&, std::shared_ptr<RelationInstanceDeletedListener> listener);
 
-        private:
+		private:
 
-    		/// The entity relation attribute instance manager
-    		std::shared_ptr<RelationAttributeInstanceManager> relation_attribute_instance_manager;
+			/// The entity relation attribute instance manager
+			std::shared_ptr<RelationAttributeInstanceManager> relation_attribute_instance_manager;
 
 			/// Notifies all listeners that a new relation instance has been created.
 			void notify_relation_instance_created(RelationInstancePtr new_entity_instance);
@@ -129,7 +129,7 @@ namespace entity_system {
 			/// Value is a signal with two parameters: the GUID of the relation type, the GUID of the relation instance
 			std::unordered_map<xg::Guid, std::shared_ptr<boost::signals2::signal<void(const xg::Guid& type_GUID, const xg::Guid& instance_GUID)> > > signals_relation_instance_deleted;
 
-    };
+	};
 
 }
 }

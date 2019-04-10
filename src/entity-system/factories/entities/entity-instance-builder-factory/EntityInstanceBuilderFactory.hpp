@@ -13,15 +13,15 @@ namespace entity_system {
 	using EntityTypeManagerPtr = std::shared_ptr<EntityTypeManager>;
 
 	/// @class EntityTypeBuilder
-    /// @brief Management of the loggers.
+	/// @brief Management of the loggers.
 	class EntityInstanceBuilderFactory
 	{
 		public:
 
 			/// Constructor.
 			EntityInstanceBuilderFactory(
-				EntityInstanceManagerPtr entity_instance_manager,
-				EntityTypeManagerPtr entity_type_manager
+			EntityInstanceManagerPtr entity_instance_manager,
+			EntityTypeManagerPtr entity_type_manager
 			);
 
 			/// Destructor.

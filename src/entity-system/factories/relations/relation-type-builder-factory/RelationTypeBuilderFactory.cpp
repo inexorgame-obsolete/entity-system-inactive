@@ -27,5 +27,5 @@ namespace entity_system {
 		return std::make_shared<RelationTypeBuilder>(relation_type_manager, relation_attribute_type_manager, relation_attribute_instance_manager);
 	}
 
-}
+	}
 }

@@ -6,19 +6,19 @@ namespace entity_system {
 	using RelationAttributeTypePtr = std::shared_ptr<RelationAttributeType>;
 	using RelationAttributeInstancePtr = std::shared_ptr<RelationAttributeInstance>;
 
-    RelationInstanceManager::RelationInstanceManager(
-    	std::shared_ptr<RelationAttributeInstanceManager> relation_attribute_instance_manager
-    ) : InstanceManagerTemplate()
-    {
-    	// Store pointer to the entity relation attribute instance manager.
-        this->relation_attribute_instance_manager = relation_attribute_instance_manager;
-    }
+	RelationInstanceManager::RelationInstanceManager(
+		std::shared_ptr<RelationAttributeInstanceManager> relation_attribute_instance_manager
+	) : InstanceManagerTemplate()
+	{
+		// Store pointer to the entity relation attribute instance manager.
+		this->relation_attribute_instance_manager = relation_attribute_instance_manager;
+	}
 
-    RelationInstanceManager::~RelationInstanceManager()
-    {
-    }
+	RelationInstanceManager::~RelationInstanceManager()
+	{
+	}
 
-    RelationInstancePtrOpt RelationInstanceManager::create_relation_instance(const RelationTypePtr& rel_type, const EntityInstancePtr& ent_type_inst_source, const EntityInstancePtr& ent_type_inst_target)
+	RelationInstancePtrOpt RelationInstanceManager::create_relation_instance(const RelationTypePtr& rel_type, const EntityInstancePtr& ent_type_inst_source, const EntityInstancePtr& ent_type_inst_target)
 	{
 		// Create a new entity relation type instance.
 		RelationInstancePtr new_relation_instance = std::make_shared<RelationInstance>(rel_type, ent_type_inst_source, ent_type_inst_target);
@@ -41,17 +41,17 @@ namespace entity_system {
 		// Signal that the relation type has been created.
 		notify_relation_instance_created(new_relation_instance);
 
-        // Read only, no mutex required.
-        return RelationInstancePtrOpt { new_relation_instance };
+		// Read only, no mutex required.
+		return RelationInstancePtrOpt { new_relation_instance };
 	}
 
-    RelationInstancePtrOpt RelationInstanceManager::create_relation_instance(const xg::Guid& rel_inst_GUID, const RelationTypePtr& rel_type, const EntityInstancePtr& ent_type_inst_source, const EntityInstancePtr& ent_type_inst_target)
+	RelationInstancePtrOpt RelationInstanceManager::create_relation_instance(const xg::Guid& rel_inst_GUID, const RelationTypePtr& rel_type, const EntityInstancePtr& ent_type_inst_source, const EntityInstancePtr& ent_type_inst_target)
 	{
 		// Check if a relation instance with this GUID does already exist.
-        if(does_relation_instance_exist(rel_inst_GUID))
-        {
-            return std::nullopt;
-        }
+		if(does_relation_instance_exist(rel_inst_GUID))
+		{
+			return std::nullopt;
+		}
 
 		// Create a new entity relation type instance.
 		RelationInstancePtr new_relation_instance = std::make_shared<RelationInstance>(rel_inst_GUID, rel_type, ent_type_inst_source, ent_type_inst_target);
@@ -74,11 +74,11 @@ namespace entity_system {
 		// Signal that the relation type has been created.
 		notify_relation_instance_created(new_relation_instance);
 
-        // Read only, no mutex required.
-        return RelationInstancePtrOpt { new_relation_instance };
+		// Read only, no mutex required.
+		return RelationInstancePtrOpt { new_relation_instance };
 	}
 
-    bool RelationInstanceManager::does_relation_instance_exist(const xg::Guid instance_GUID)
+	bool RelationInstanceManager::does_relation_instance_exist(const xg::Guid instance_GUID)
 	{
 		return does_instance_exist(instance_GUID);
 	}
@@ -90,21 +90,23 @@ namespace entity_system {
 
 	std::size_t RelationInstanceManager::get_relation_instances_count() const
 	{
-        // Read only, no mutex required.
+		// Read only, no mutex required.
 		return get_instance_count();
 	}
 
 	std::size_t RelationInstanceManager::delete_relation_instance(const xg::Guid& instance_GUID)
 	{
 		RelationInstancePtrOpt o_rel_inst = get_relation_instance(instance_GUID);
-		if (o_rel_inst.has_value())
+		if(o_rel_inst.has_value())
 		{
 			RelationInstancePtr rel_inst = o_rel_inst.value();
 			xg::Guid type_GUID = rel_inst->get_relation_type()->get_GUID();
 			std::size_t deleted_instances_count = delete_instance(instance_GUID);
 			notify_relation_instance_deleted(type_GUID, instance_GUID);
 			return deleted_instances_count;
-		} else {
+		}
+		else
+		{
 			return 0;
 		}
 	}
@@ -126,7 +128,7 @@ namespace entity_system {
 
 	void RelationInstanceManager::register_on_created(const xg::Guid& type_GUID, std::shared_ptr<RelationInstanceCreatedListener> listener)
 	{
-		if (signals_relation_instance_created.end() == signals_relation_instance_created.find(type_GUID))
+		if(signals_relation_instance_created.end() == signals_relation_instance_created.find(type_GUID))
 		{
 			auto signal = std::make_shared<boost::signals2::signal<void(RelationInstancePtr)>>();
 			signals_relation_instance_created.insert(std::make_pair(type_GUID, signal));
@@ -136,7 +138,7 @@ namespace entity_system {
 
 	void RelationInstanceManager::register_on_deleted(const xg::Guid& type_GUID, std::shared_ptr<RelationInstanceDeletedListener> listener)
 	{
-		if (signals_relation_instance_deleted.end() == signals_relation_instance_deleted.find(type_GUID))
+		if(signals_relation_instance_deleted.end() == signals_relation_instance_deleted.find(type_GUID))
 		{
 			auto signal = std::make_shared<boost::signals2::signal<void(const xg::Guid&, const xg::Guid&)>>();
 			signals_relation_instance_deleted.insert(std::make_pair(type_GUID, signal));
@@ -155,7 +157,7 @@ namespace entity_system {
 
 	void RelationInstanceManager::notify_relation_instance_deleted(const xg::Guid& type_GUID, const xg::Guid& inst_GUID)
 	{
-		if (!(signals_relation_instance_deleted.end() == signals_relation_instance_deleted.find(type_GUID)))
+		if(!(signals_relation_instance_deleted.end() == signals_relation_instance_deleted.find(type_GUID)))
 		{
 			signals_relation_instance_deleted[type_GUID]->operator ()(type_GUID, inst_GUID);
 		}

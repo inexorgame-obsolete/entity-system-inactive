@@ -1,6 +1,3 @@
-// Inexor entity system
-// (c)2018-2019 Inexor
-
 #pragma once
 
 #include <mutex>
@@ -8,10 +5,8 @@
 
 #include "entity-system/model/data/container/DataContainer.hpp"
 
-
 namespace inexor {
 namespace entity_system {
-
 
 	/// @brief A base class for attributes.
 	/// @note We can only inherit from AttributeTypeBase
@@ -27,17 +22,17 @@ namespace entity_system {
 
 			/// The data type of the attribute.
 			/// @note The data is only managed in
-            /// the instance, not in this base class.
+			/// the instance, not in this base class.
 			DataType attribute_data_type;
 
 			/// The features of the attribute.
 			EnumSet<Feature> features;
 
-            /// Mutex for this base class.
-            std::mutex attribute_type_base_mutex;
+			/// Mutex for this base class.
+			std::mutex attribute_type_base_mutex;
 
 		protected:
-			
+
 			/// Constructor.
 			/// @param attr_data_type The data type
 			/// of the attribute.
@@ -45,13 +40,13 @@ namespace entity_system {
 
 			/// Destructor.
 			~AttributeBase();
-			
+
 		public:
 
-            /// @brief Returns the data type of the attribute.
+			/// @brief Returns the data type of the attribute.
 			/// @note Since the data type must be set when
-            /// the constructor is called, we do not
-            /// implement std::optional here.
+			/// the constructor is called, we do not
+			/// implement std::optional here.
 			/// @return The data type of the attribute.
 			DataType get_attribute_data_type() const;
 

@@ -10,7 +10,7 @@ namespace entity_system {
 
 	using EntityAttributeTypePtr = std::shared_ptr<EntityAttributeType>;
 
-    /// @class EntityAttributeInstance
+	/// @class EntityAttributeInstance
 	/// @brief A base class for entity attribute type instances.
 	class EntityAttributeInstance : public InstanceBase<EntityAttributeType>, public DataContainer, public GUIDBase
 	{
@@ -24,11 +24,9 @@ namespace entity_system {
 			/// Destructor.
 			~EntityAttributeInstance();
 
-            /// @brief Get the entity attribute type.
-            /// @return The type of the attribute.
+			/// @brief Get the entity attribute type.
+			/// @return The type of the attribute.
 			EntityAttributeTypePtr get_entity_attribute_type() const;
-
-			// Note: Set and get methods are already implemented by inheriting from DataContainer.
 
 	};
 

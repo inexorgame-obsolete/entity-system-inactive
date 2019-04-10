@@ -1,11 +1,8 @@
-// Inexor entity system
-// (c)2018-2019 Inexor
-
 #pragma once
 
 #define BETTER_ENUMS_DEFAULT_CONSTRUCTOR(Enum) \
-  public:                                      \
-    Enum() = default;
+	public:                                     \
+	Enum() = default;
 
 #include <bitset>
 #include <better-enums/enum.h>
@@ -13,24 +10,23 @@
 template <typename Enum>
 constexpr Enum max_loop(Enum accumulator, size_t index)
 {
-    return
-        index >= Enum::_size() ? accumulator :
-        Enum::_values()[index] > accumulator ?
-            max_loop<Enum>(Enum::_values()[index], index + 1) :
-            max_loop<Enum>(accumulator, index + 1);
+	return
+		index >= Enum::_size() ? accumulator :
+		Enum::_values()[index] > accumulator ?
+		max_loop<Enum>(Enum::_values()[index], index + 1) :
+		max_loop<Enum>(accumulator, index + 1);
 }
 
 template <typename Enum>
 constexpr Enum max()
 {
-    return max_loop<Enum>(Enum::_values()[0], 1);
+	return max_loop<Enum>(Enum::_values()[0], 1);
 }
 
 // And use that to declare a bit set template:
 
 template <typename Enum>
 using EnumSet = std::bitset<7>;
-
 
 namespace inexor {
 namespace entity_system {

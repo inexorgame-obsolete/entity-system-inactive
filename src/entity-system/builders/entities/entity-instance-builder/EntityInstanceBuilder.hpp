@@ -17,16 +17,16 @@ namespace entity_system {
 	using EntityInstancePtrOpt = std::optional<EntityInstancePtr>;
 
 	/// @class EntityInstanceBuilder
-    /// @brief Management of the loggers.
+	/// @brief Management of the loggers.
 	class EntityInstanceBuilder
-		: public std::enable_shared_from_this<EntityInstanceBuilder>
+	: public std::enable_shared_from_this<EntityInstanceBuilder>
 	{
 		public:
 
 			/// Constructor.
 			EntityInstanceBuilder(
-				EntityInstanceManagerPtr entity_instance_manager,
-				EntityTypeManagerPtr entity_type_manager
+			EntityInstanceManagerPtr entity_instance_manager,
+			EntityTypeManagerPtr entity_type_manager
 			);
 
 			/// Destructor.
@@ -50,9 +50,9 @@ namespace entity_system {
 
 			EntityInstanceBuilderPtr attribute(const std::string& attribute_name, const int64_t& value);
 
-            EntityInstanceBuilderPtr attribute(const std::string& attribute_name, const float& value);
+			EntityInstanceBuilderPtr attribute(const std::string& attribute_name, const float& value);
 
-            EntityInstanceBuilderPtr attribute(const std::string& attribute_name, const double& value);
+			EntityInstanceBuilderPtr attribute(const std::string& attribute_name, const double& value);
 
 			EntityInstanceBuilderPtr attribute(const std::string& attribute_name, const std::string& value);
 

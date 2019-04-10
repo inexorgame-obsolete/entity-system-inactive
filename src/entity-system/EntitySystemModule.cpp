@@ -9,8 +9,8 @@ namespace entity_system {
 		BuilderFactoryManagerPtr builder_factory_manager
 	)
 		: entity_manager(entity_manager),
-		  relation_manager(relation_manager),
-		  builder_factory_manager(builder_factory_manager)
+		relation_manager(relation_manager),
+		builder_factory_manager(builder_factory_manager)
 	{
 	}
 

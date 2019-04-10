@@ -31,17 +31,17 @@ namespace entity_system {
 	using RelationInstancePtr = std::shared_ptr<RelationInstance>;
 
 	/// @class EntitySystemDebugger
-    /// @brief Debugger for the entity system
+	/// @brief Debugger for the entity system
 	class EntitySystemDebugger
-		: public EntityTypeCreatedListener,
-		  public EntityTypeDeletedListener,
-		  public EntityInstanceCreatedListener,
-		  public EntityInstanceDeletedListener,
-		  public RelationTypeCreatedListener,
-		  public RelationTypeDeletedListener,
-		  public RelationInstanceCreatedListener,
-		  public RelationInstanceDeletedListener,
-		  public std::enable_shared_from_this<EntitySystemDebugger>
+	: public EntityTypeCreatedListener,
+	public EntityTypeDeletedListener,
+	public EntityInstanceCreatedListener,
+	public EntityInstanceDeletedListener,
+	public RelationTypeCreatedListener,
+	public RelationTypeDeletedListener,
+	public RelationInstanceCreatedListener,
+	public RelationInstanceDeletedListener,
+	public std::enable_shared_from_this<EntitySystemDebugger>
 	{
 		public:
 

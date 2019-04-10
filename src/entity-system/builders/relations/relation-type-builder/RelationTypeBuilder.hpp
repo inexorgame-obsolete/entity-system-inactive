@@ -16,7 +16,7 @@ namespace entity_system {
 	using RelationTypePtrOpt = std::optional<std::shared_ptr<RelationType>>;
 
 	/// @class RelationTypeBuilder
-    /// @brief Builder for relation types.
+	/// @brief Builder for relation types.
 	class RelationTypeBuilder : public std::enable_shared_from_this<RelationTypeBuilder>
 	{
 		public:

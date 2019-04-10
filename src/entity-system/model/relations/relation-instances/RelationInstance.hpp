@@ -15,7 +15,7 @@ namespace entity_system {
 	using RelationAttributeTypePtr = std::shared_ptr<RelationAttributeType>;
 	using RelationAttributeInstancePtr = std::shared_ptr<RelationAttributeInstance>;
 
-    /// @class RelationInstance
+	/// @class RelationInstance
 	/// @brief A base class for entity relation type instances.
 	class RelationInstance : public InstanceBase<RelationType>, public GUIDBase
 	{
@@ -29,7 +29,7 @@ namespace entity_system {
 
 			/// The target entity type instance.
 			EntityInstancePtr destination_entity_instance;
-			
+
 			/// Entity relation attribute type instances stored by entity relation attribute types.
 			std::unordered_map<RelationAttributeTypePtr, RelationAttributeInstancePtr> relation_attribute_instances;
 
@@ -43,7 +43,7 @@ namespace entity_system {
 			RelationInstance(const RelationTypePtr& rel_type, const EntityInstancePtr& ent_inst_source, const EntityInstancePtr& ent_inst_target);
 
 			/// @brief Constructor.
-            /// @param inst_GUID The GUID of the relation instance which will be created.
+			/// @param inst_GUID The GUID of the relation instance which will be created.
 			/// @param rel_type A const reference to a shared pointer of an relation type of which an instance will be created.
 			/// @param ent_inst_source A const reference to a shared pointer of an entity instance which will be used as source entity instance.
 			/// @param ent_inst_target A const reference to a shared pointer of an entity instance which will be used as target entity instance.
@@ -56,14 +56,14 @@ namespace entity_system {
 			/// @return A std::unordered_map of shared pointers of entity relation attribute type.
 			std::unordered_map<RelationAttributeTypePtr, RelationAttributeInstancePtr> get_relation_attribute_instances() const;
 
-            /// @brief Get the relation type.
-            /// @return The relation type of the relation instance.
+			/// @brief Get the relation type.
+			/// @return The relation type of the relation instance.
 			RelationTypePtr get_relation_type() const;
 
-            /// Returns the entity instance on the source side.
+			/// Returns the entity instance on the source side.
 			EntityInstancePtr get_source_entity_instance() const;
 
-            /// Returns the entity instance on the target side.
+			/// Returns the entity instance on the target side.
 			EntityInstancePtr get_target_entity_instance() const;
 
 			// TODO: Set data !

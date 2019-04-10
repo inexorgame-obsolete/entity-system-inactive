@@ -15,12 +15,12 @@ namespace entity_system {
 	{
 		// Creates a new relation attribute type instance.
 		RelationAttributeInstancePtr new_rel_attr_inst = std::make_shared<RelationAttributeInstance>(rel_attr_type);
-		
+
 		// Call base template class method.
 		add_instance(new_rel_attr_inst->get_GUID(), new_rel_attr_inst);
 
-        // Read only, no mutex required.
-        return RelationAttributeInstancePtrOpt { new_rel_attr_inst };
+		// Read only, no mutex required.
+		return RelationAttributeInstancePtrOpt { new_rel_attr_inst };
 	}
 
 	std::size_t RelationAttributeInstanceManager::get_relation_attribute_instance_count() const

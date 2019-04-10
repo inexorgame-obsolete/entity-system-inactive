@@ -21,7 +21,7 @@ namespace entity_system {
 	using RelationInstancePtrOpt = std::optional<RelationInstancePtr>;
 
 	/// @class RelationInstanceBuilder
-    /// @brief Builder for relation instances.
+	/// @brief Builder for relation instances.
 	class RelationInstanceBuilder : public std::enable_shared_from_this<RelationInstanceBuilder>
 	{
 		public:
@@ -59,9 +59,9 @@ namespace entity_system {
 
 			RelationInstanceBuilderPtr attribute(const std::string& attribute_name, const int64_t& value);
 
-            RelationInstanceBuilderPtr attribute(const std::string& attribute_name, const float& value);
+			RelationInstanceBuilderPtr attribute(const std::string& attribute_name, const float& value);
 
-            RelationInstanceBuilderPtr attribute(const std::string& attribute_name, const double& value);
+			RelationInstanceBuilderPtr attribute(const std::string& attribute_name, const double& value);
 
 			RelationInstanceBuilderPtr attribute(const std::string& attribute_name, const std::string& value);
 

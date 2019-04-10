@@ -6,7 +6,7 @@ namespace inexor {
 namespace entity_system {
 
 	/// @class EntityInstanceDeletedListener
-    /// @brief Listener for deleted entity instances.
+	/// @brief Listener for deleted entity instances.
 	class EntityInstanceDeletedListener
 	{
 		public:

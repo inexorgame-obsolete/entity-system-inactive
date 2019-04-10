@@ -19,10 +19,10 @@ namespace entity_system {
 			// This entity type does already exist.
 			// TODO: Notify error handler about this!
 
-            // Since we've not created a new entity type we can 
-            // now return std::nullopt thanks to std::optional.
-            return std::nullopt;
-        }
+			// Since we've not created a new entity type we can
+			// now return std::nullopt thanks to std::optional.
+			return std::nullopt;
+		}
 
 		// Add more validation here if neccesary.
 
@@ -30,32 +30,33 @@ namespace entity_system {
 		EntityTypePtr new_entity_type = std::make_shared<EntityType>(ent_type_name);
 
 		// Call method of the template base class
-        // to add the new instance to the type map.
+		// to add the new instance to the type map.
 		add_type(ent_type_name, new_entity_type->get_GUID(), new_entity_type);
 
 		// Signal that the entity type has been created.
 		notify_entity_type_created(new_entity_type);
 
-        // Return the entity type we've just created.
-        return EntityTypePtrOpt{ new_entity_type };
+		// Return the entity type we've just created.
+		return EntityTypePtrOpt{ new_entity_type };
 	}
+
 	EntityTypePtrOpt EntityTypeManager::create_entity_type(const xg::Guid& ent_type_GUID, const std::string& ent_type_name)
-    {
+	{
 		// Check if an entity type with this name does already exist.
 		if(! is_type_name_valid(ent_type_name))
 		{
 			// This entity type does already exist.
 			// TODO: Notify error handler about this!
 
-            // Since we've not created a new entity type we can 
-            // now return std::nullopt thanks to std::optional.
-            return std::nullopt;
-        }
+			// Since we've not created a new entity type we can
+			// now return std::nullopt thanks to std::optional.
+			return std::nullopt;
+		}
 		// Check if an entity type with this GUID does already exist.
-        if(does_entity_type_exist(ent_type_GUID))
-        {
-            return std::nullopt;
-        }
+		if(does_entity_type_exist(ent_type_GUID))
+		{
+			return std::nullopt;
+		}
 
 		// Add more validation here if neccesary.
 
@@ -63,22 +64,22 @@ namespace entity_system {
 		EntityTypePtr new_entity_type = std::make_shared<EntityType>(ent_type_GUID, ent_type_name);
 
 		// Call method of the template base class
-        // to add the new instance to the type map.
+		// to add the new instance to the type map.
 		add_type(ent_type_name, new_entity_type->get_GUID(), new_entity_type);
 
 		// Signal that the entity type has been created.
 		notify_entity_type_created(new_entity_type);
 
-        // Return the entity type we've just created.
-        return EntityTypePtrOpt{ new_entity_type };
-    }
+		// Return the entity type we've just created.
+		return EntityTypePtrOpt{ new_entity_type };
+	}
 
-    bool EntityTypeManager::does_entity_type_exist(const xg::Guid& ent_type_GUID)
-    {
-        return does_entity_type_exist(get_type(ent_type_GUID)->get_type_name());
-    }
+	bool EntityTypeManager::does_entity_type_exist(const xg::Guid& ent_type_GUID)
+	{
+		return does_entity_type_exist(get_type(ent_type_GUID)->get_type_name());
+	}
 
-    bool EntityTypeManager::does_entity_type_exist(const std::string& ent_type_name)
+	bool EntityTypeManager::does_entity_type_exist(const std::string& ent_type_name)
 	{
 		return does_type_exist(ent_type_name);
 	}
@@ -94,29 +95,29 @@ namespace entity_system {
 	}
 
 	EntityTypePtrOpt EntityTypeManager::get_entity_type(const xg::Guid& ent_type_GUID)
-    {
-        if(does_type_exist(ent_type_GUID))
-        {
-            return EntityTypePtrOpt { get_type(ent_type_GUID) };
-        }
-        return std::nullopt;
-    }
+	{
+		if(does_type_exist(ent_type_GUID))
+		{
+			return EntityTypePtrOpt { get_type(ent_type_GUID) };
+		}
+		return std::nullopt;
+	}
 
 	EntityTypePtrOpt EntityTypeManager::get_entity_type(const std::string& ent_type_name)
-    {
-        if(does_type_exist(ent_type_name))
-        {
-            return EntityTypePtrOpt { get_type(ent_type_name) };
-        }
-        return std::nullopt;
-    }
+	{
+		if(does_type_exist(ent_type_name))
+		{
+			return EntityTypePtrOpt { get_type(ent_type_name) };
+		}
+		return std::nullopt;
+	}
 
 	std::size_t EntityTypeManager::delete_entity_type(const xg::Guid& type_GUID)
-    {
+	{
 		std::size_t deleted_types_count = delete_type(type_GUID);
 		notify_entity_type_deleted(type_GUID);
 		return deleted_types_count;
-    }
+	}
 
 	std::size_t EntityTypeManager::delete_entity_type(const std::string& ent_type_name)
 	{

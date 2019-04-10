@@ -6,7 +6,7 @@ namespace entity_system {
 	using EntityAttributeTypePtr = std::shared_ptr<EntityAttributeType>;
 	using EntityAttributeInstancePtr = std::shared_ptr<EntityAttributeInstance>;
 	using EntityAttributeInstancePtrOpt = std::optional<EntityAttributeInstancePtr>;
-    
+
 	EntityInstanceManager::EntityInstanceManager(
 		std::shared_ptr<EntityAttributeInstanceManager> entity_attribute_instance_manager
 	) : InstanceManagerTemplate()
@@ -14,10 +14,9 @@ namespace entity_system {
 		this->entity_attribute_instance_manager = entity_attribute_instance_manager;
 	}
 
-	
+
 	EntityInstanceManager::~EntityInstanceManager()
 	{
-		// TODO: Implement!
 	}
 
 
@@ -28,14 +27,15 @@ namespace entity_system {
 
 		// Create all entity attribute type instances for this entity type instance.
 		std::optional<std::vector<EntityAttributeTypePtr>> o_ent_type_attributes = ent_type->get_linked_attribute_types();
-		if (o_ent_type_attributes.has_value())
+		if(o_ent_type_attributes.has_value())
 		{
 			std::vector<EntityAttributeTypePtr> ent_type_attributes = o_ent_type_attributes.value();
 			for(std::size_t i=0; i<ent_type_attributes.size(); i++)
 			{
 				// Create an entity attribute type instance and store it in the map.
 				EntityAttributeInstancePtrOpt o_new_ent_attr_inst = entity_attribute_instance_manager->create_entity_attribute_instance(ent_type_attributes[i]);
-				if (o_new_ent_attr_inst.has_value()) {
+				if(o_new_ent_attr_inst.has_value())
+				{
 					EntityAttributeInstancePtr new_ent_attr_inst = o_new_ent_attr_inst.value();
 					new_ent_instance->add_entity_attribute_instance(ent_type_attributes[i], new_ent_attr_inst);
 				}
@@ -56,41 +56,42 @@ namespace entity_system {
 		// Signal that the entity type has been created.
 		notify_entity_instance_created(new_ent_instance);
 
-        return EntityInstancePtrOpt { new_ent_instance };
+		return EntityInstancePtrOpt { new_ent_instance };
 	}
 
 	EntityInstancePtrOpt EntityInstanceManager::create_entity_instance(const xg::Guid& ent_inst_GUID, const EntityTypePtr& ent_type)
 	{
 		// Check if an entity instance with this GUID does already exist.
-        if(does_entity_instance_exist(ent_inst_GUID))
-        {
-            return std::nullopt;
-        }
+		if(does_entity_instance_exist(ent_inst_GUID))
+		{
+			return std::nullopt;
+		}
 
 		// Create a new entity type instance with GUID.
-        EntityInstancePtr new_ent_instance = std::make_shared<EntityInstance>(ent_inst_GUID, ent_type);
+		EntityInstancePtr new_ent_instance = std::make_shared<EntityInstance>(ent_inst_GUID, ent_type);
 
 		// Create all entity attribute type instances for this entity type instance.
 		std::optional<std::vector<EntityAttributeTypePtr>> o_ent_type_attributes = ent_type->get_linked_attribute_types();
-		if (o_ent_type_attributes.has_value())
+		if(o_ent_type_attributes.has_value())
 		{
 			std::vector<EntityAttributeTypePtr> ent_type_attributes = o_ent_type_attributes.value();
 			for(std::size_t i=0; i<ent_type_attributes.size(); i++)
 			{
-				// Create an entity attribute type instance and store it in the map.
-				EntityAttributeInstancePtrOpt o_new_ent_attr_inst = entity_attribute_instance_manager->create_entity_attribute_instance(ent_type_attributes[i]);
-				if (o_new_ent_attr_inst.has_value()) {
-					EntityAttributeInstancePtr new_ent_attr_inst = o_new_ent_attr_inst.value();
-					new_ent_instance->add_entity_attribute_instance(ent_type_attributes[i], new_ent_attr_inst);
-				}
-				// Use the entity system's EntityAttributeInstanceManager method!
-				// TODO: FIX: Create instances!
-				//ENT_ATTR_INST new_ent_attr_instance = ?->create_entity_attribute_instance(ent_type_attributes[i]);
-				// create_entity_attribute_instance
+			// Create an entity attribute type instance and store it in the map.
+			EntityAttributeInstancePtrOpt o_new_ent_attr_inst = entity_attribute_instance_manager->create_entity_attribute_instance(ent_type_attributes[i]);
+			if(o_new_ent_attr_inst.has_value())
+			{
+				EntityAttributeInstancePtr new_ent_attr_inst = o_new_ent_attr_inst.value();
+				new_ent_instance->add_entity_attribute_instance(ent_type_attributes[i], new_ent_attr_inst);
+			}
+			// Use the entity system's EntityAttributeInstanceManager method!
+			// TODO: FIX: Create instances!
+			//ENT_ATTR_INST new_ent_attr_instance = ?->create_entity_attribute_instance(ent_type_attributes[i]);
+			// create_entity_attribute_instance
 
-				// Call template base class method.
-				// FIX!
-				//new_ent_instance->add_entity_attribute_instance(ent_type_attributes[i], new_ent_attr_instance);
+			// Call template base class method.
+			// FIX!
+			//new_ent_instance->add_entity_attribute_instance(ent_type_attributes[i], new_ent_attr_instance);
 			}
 		}
 
@@ -100,7 +101,7 @@ namespace entity_system {
 		// Signal that the entity type has been created.
 		notify_entity_instance_created(new_ent_instance);
 
-        return EntityInstancePtrOpt { new_ent_instance };
+		return EntityInstancePtrOpt { new_ent_instance };
 	}
 
 
@@ -130,7 +131,9 @@ namespace entity_system {
 			std::size_t deleted_instances_count = delete_instance(instance_GUID);
 			notify_entity_instance_deleted(type_GUID, instance_GUID);
 			return deleted_instances_count;
-		} else {
+		}
+		else
+		{
 			return 0;
 		}
 	}
@@ -150,21 +153,21 @@ namespace entity_system {
 		delete_all_instances();
 	}
 
-    // TODO: Implement!
-    /*
+	// TODO: Implement!
+	/*
 	const std::size_t EntityInstanceManager::get_entity_instances_count_of_type(const EntityTypePtr&)
 	{
-		// Call template base class method.
+	// Call template base class method.
 	}
 
 	const std::vector<ENT_INST> EntityInstanceManager::get_all_entity_instances() const
 	{
-		// Call template base class method.
+	// Call template base class method.
 	}
 
 	const std::vector<ENT_INST> EntityInstanceManager::get_all_entity_instances_of_type(const EntityTypePtr&)
 	{
-		// Call template base class method.
+	// Call template base class method.
 	}
 	*/
 

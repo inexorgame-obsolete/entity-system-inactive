@@ -65,28 +65,36 @@ namespace entity_system {
 	RelationTypePtrOpt RelationTypeBuilder::build()
 	{
 		RelationTypePtrOpt o_relation_type;
-		if (!relation_type_uuid.empty())
+		if(!relation_type_uuid.empty())
 		{
 			o_relation_type = relation_type_manager->create_relation_type(xg::Guid(relation_type_uuid), relation_type_name, ent_type_source, ent_type_target);
-		} else {
+		}
+		else
+		{
 			o_relation_type = relation_type_manager->create_relation_type(relation_type_name, ent_type_source, ent_type_target);
 		}
-		if (o_relation_type.has_value())
+		if(o_relation_type.has_value())
 		{
 			std::shared_ptr<RelationType> relation_type = o_relation_type.value();
-			for (auto& attribute_entry : relation_type_attributes) {
+			for(auto& attribute_entry : relation_type_attributes)
+			{
 				RelationAttributeTypePtrOpt o_attribute_type = relation_attribute_type_manager->create_relation_attribute_type(attribute_entry.first, attribute_entry.second.first, attribute_entry.second.second);
-				if (o_attribute_type.has_value()) {
+				if(o_attribute_type.has_value())
+				{
 					RelationAttributeTypePtr attribute_type = o_attribute_type.value();
 					relation_type->link_relation_attribute_type(attribute_type);
 					spdlog::debug("Created relation type attribute {} of data type {}", attribute_entry.first, attribute_entry.second.first);
-				} else {
+				}
+				else
+				{
 					spdlog::error("Failed to create relation type attribute {} of data type {}", attribute_entry.first, attribute_entry.second.first);
 					return std::nullopt;
 				}
 			}
 			return relation_type;
-		} else {
+		}
+		else
+		{
 			spdlog::error("Failed to create relation type {}", relation_type_name);
 			return std::nullopt;
 		}

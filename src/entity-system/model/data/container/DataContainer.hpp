@@ -27,11 +27,11 @@ namespace entity_system {
 	// using DataValue = std::variant<bool, int, std::int64_t, double, float, std::string, glm::vec3, glm::vec4>;
 	using DataValue = std::variant<bool, int, std::int64_t, double, float, std::string>;
 
-    /// @class DataContainer
+	/// @class DataContainer
 	/// @brief A data container which can hold data of various types.
 	struct DataContainer
-    {
-    	/// The data type.
+	{
+		/// The data type.
 		DataType type;
 
 		/// The own value.
@@ -51,79 +51,79 @@ namespace entity_system {
 		DataContainer(const DataType& type)
 			: type(type)
 		{
-    		switch (type)
-    		{
-    			case DataType::BOOL:
-    			{
-    				DataValue bool_value = false;
-    				this->own_value = MakeVar<D>(bool_value);
-    				break;
-    			}
-    			case DataType::DOUBLE:
-    			{
-    				DataValue double_value = 0.0;
-    				this->own_value = MakeVar<D>(double_value);
-    				break;
-    			}
-    			case DataType::FLOAT:
-    			{
-    				DataValue float_value = 0.0f;
-    				this->own_value = MakeVar<D>(float_value);
-    				break;
-    			}
-    			case DataType::STRING:
-    			{
-    				DataValue string_value = std::string("");
-    				this->own_value = MakeVar<D>(string_value);
-    				break;
-    			}
-    			// TODO: Add other data types!
-    			default:
-    			case DataType::INT:
-    			{
-    				DataValue int_value = 0;
-    				this->own_value = MakeVar<D>(int_value);
-    				break;
-    			}
-    		}
+			switch (type)
+			{
+				case DataType::BOOL:
+				{
+					DataValue bool_value = false;
+					this->own_value = MakeVar<D>(bool_value);
+					break;
+				}
+				case DataType::DOUBLE:
+				{
+					DataValue double_value = 0.0;
+					this->own_value = MakeVar<D>(double_value);
+					break;
+				}
+				case DataType::FLOAT:
+				{
+					DataValue float_value = 0.0f;
+					this->own_value = MakeVar<D>(float_value);
+					break;
+				}
+				case DataType::STRING:
+				{
+					DataValue string_value = std::string("");
+					this->own_value = MakeVar<D>(string_value);
+					break;
+				}
+				// TODO: Add other data types!
+				default:
+				case DataType::INT:
+				{
+					DataValue int_value = 0;
+					this->own_value = MakeVar<D>(int_value);
+					break;
+				}
+			}
 			this->signal_wrapper = MakeVar<D>(this->own_value);
 			this->value = Flatten(this->signal_wrapper);
-		};
+	};
 
-		/// @brief Constructs a new data container using the given data type and the default value of the data type.
-        /// @param data_value The value of the data container.
-		DataContainer(const DataValue& data_value)
-		{
-			/// Detect type by std::variant index()
-			this->type = DataType::_from_integral(static_cast<int>(data_value.index()));
-			this->own_value = MakeVar<D>(data_value);
-			this->signal_wrapper = MakeVar<D>(this->own_value);
-			this->value = Flatten(this->signal_wrapper);
-		};
-        
-		/// @brief Constructs a new data container using the given data type and the default value of the data type.
-        /// @param type The data type of the data container.
-        /// @param data_value The value of the data container.
-		DataContainer(const DataType& type, const DataValue& data_value)
-			: type(type)
-		{
-			this->own_value = MakeVar<D>(data_value);
-			this->signal_wrapper = MakeVar<D>(this->own_value);
-			this->value = Flatten(this->signal_wrapper);
-		};
+	/// @brief Constructs a new data container using the given data type and the default value of the data type.
+	/// @param data_value The value of the data container.
+	DataContainer(const DataValue& data_value)
+	{
+		/// Detect type by std::variant index()
+		this->type = DataType::_from_integral(static_cast<int>(data_value.index()));
+		this->own_value = MakeVar<D>(data_value);
+		this->signal_wrapper = MakeVar<D>(this->own_value);
+		this->value = Flatten(this->signal_wrapper);
+	};
+
+	/// @brief Constructs a new data container using the given data type and the default value of the data type.
+	/// @param type The data type of the data container.
+	/// @param data_value The value of the data container.
+	DataContainer(const DataType& type, const DataValue& data_value)
+		: type(type)
+	{
+		this->own_value = MakeVar<D>(data_value);
+		this->signal_wrapper = MakeVar<D>(this->own_value);
+		this->value = Flatten(this->signal_wrapper);
+	};
 
 	};
 
-    /// ?
+	/// ?
 	struct DataContainerInitializer
-    {
+	{
 		DataType type;
 		DataValue value;
 	};
 
-    /// @brief ?
-    /// @param type ?
-    /// @param value ?
+	/// @brief ?
+	/// @param type ?
+	/// @param value ?
 	static inline std::string data_value_to_string(DataType type, DataValue value)
 	{
 		switch (type)

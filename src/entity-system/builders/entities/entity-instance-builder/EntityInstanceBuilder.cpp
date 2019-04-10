@@ -3,7 +3,6 @@
 #include "entity-system/model/data/DataTypes.hpp"
 #include "entity-system/model/entity-attributes/entity-attribute-instances/EntityAttributeInstance.hpp"
 
-
 #include "spdlog/spdlog.h"
 
 namespace inexor {
@@ -69,13 +68,13 @@ namespace entity_system {
 		return shared_from_this();
 	}
 
-    EntityInstanceBuilderPtr EntityInstanceBuilder::attribute(const std::string& attribute_name, const float& value)
+	EntityInstanceBuilderPtr EntityInstanceBuilder::attribute(const std::string& attribute_name, const float& value)
 	{
 		entity_instance_attributes[attribute_name] = {DataType::FLOAT, value};
 		return shared_from_this();
 	}
 
-    EntityInstanceBuilderPtr EntityInstanceBuilder::attribute(const std::string& attribute_name, const double& value)
+	EntityInstanceBuilderPtr EntityInstanceBuilder::attribute(const std::string& attribute_name, const double& value)
 	{
 		entity_instance_attributes[attribute_name] = {DataType::DOUBLE, value};
 		return shared_from_this();
@@ -90,31 +89,36 @@ namespace entity_system {
 	EntityInstancePtrOpt EntityInstanceBuilder::build()
 	{
 		EntityInstancePtrOpt o_entity_instance = std::nullopt;
-		if (!o_entity_type.has_value() && !entity_type_name.empty())
+		if(!o_entity_type.has_value() && !entity_type_name.empty())
 		{
 			o_entity_type = entity_type_manager->get_entity_type(entity_type_name);
 		}
-		if (o_entity_type.has_value())
+		if(o_entity_type.has_value())
 		{
-			if (!entity_instance_uuid.empty())
+			if(!entity_instance_uuid.empty())
 			{
 				o_entity_instance = entity_instance_manager->create_entity_instance(xg::Guid(entity_instance_uuid), o_entity_type.value());
-			} else {
+			}
+			else
+			{
 				o_entity_instance = entity_instance_manager->create_entity_instance(o_entity_type.value());
 			}
 		}
-		if (o_entity_instance.has_value())
+		if(o_entity_instance.has_value())
 		{
 			EntityInstancePtr entity_instance = o_entity_instance.value();
-			for (auto& attr_entry : entity_instance_attributes) {
+			for(auto& attr_entry : entity_instance_attributes)
+			{
 				std::string attr_name = attr_entry.first;
 				DataContainerInitializer attr_value = attr_entry.second;
 				EntityAttributeInstancePtrOpt o_attr_inst = entity_instance->get_attribute_instance(attr_entry.first);
-				if (o_attr_inst.has_value()) {
+				if (o_attr_inst.has_value())
+				{
 					EntityAttributeInstancePtr attr_inst = o_attr_inst.value();
-					if (attr_inst->type == attr_value.type) {
+					if(attr_inst->type == attr_value.type)
+					{
 						DataValue data_value = attr_value.value;
-						switch (attr_inst->type)
+						switch(attr_inst->type)
 						{
 							case DataType::BOOL:
 								attr_inst->own_value.Set(std::get<DataType::BOOL>(data_value));
@@ -144,19 +148,25 @@ namespace entity_system {
 								spdlog::error("Failed to set attribute {}: Unknown data type {} {}", attr_name, DataType::_from_integral(attr_inst->type)._to_string(),  attr_inst->type);
 								break;
 						}
-					} else {
+					}
+					else
+					{
 						// Error: Wrong datatype
 						spdlog::error("Wrong datatype for attribute {} of new entity instance of type {}: {} != {}", attr_name, o_entity_type.value()->get_type_name(), attr_inst->type._to_string(), attr_value.type._to_string());
 						return std::nullopt;
 					}
-				} else {
+				}
+				else
+				{
 					// Error: Attribute not found by name
 					spdlog::error("Entity instance attribute {} not found", attr_name);
 					return std::nullopt;
 				}
 			}
 			return o_entity_instance;
-		} else {
+		}
+		else
+		{
 			spdlog::error("Failed to create entity instance");
 			return std::nullopt;
 		}

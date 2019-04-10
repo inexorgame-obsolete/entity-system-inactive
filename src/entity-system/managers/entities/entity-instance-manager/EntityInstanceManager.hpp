@@ -19,9 +19,9 @@ namespace entity_system {
 	using EntityInstancePtrOpt = std::optional<EntityInstancePtr>;
 
 	/// A manager class for entity instances.
-    class EntityInstanceManager : public InstanceManagerTemplate<EntityInstance>
+	class EntityInstanceManager : public InstanceManagerTemplate<EntityInstance>
 	{
-        public:
+		public:
 
 			/// Constructor
 			EntityInstanceManager(
@@ -40,7 +40,7 @@ namespace entity_system {
 
 
 			/// Create an entity instance.
-            /// @param ent_inst_GUID The GUID of the new entity instance.
+			/// @param ent_inst_GUID The GUID of the new entity instance.
 			/// @param ent_type A const reference of a shared pointer
 			/// to an entity type of which an instance will be created.
 			/// @return A shared pointer to the entity instance which was created.
@@ -48,30 +48,30 @@ namespace entity_system {
 
 
 			/// @brief Checks if an entity instance does already exist.
-            /// @return True if the entity instance already exists, false otherwise.
+			/// @return True if the entity instance already exists, false otherwise.
 			bool does_entity_instance_exist(const xg::Guid);
 
 
-            /// 
-            /// 
+			///
+			///
 			EntityInstancePtrOpt get_entity_instance(const xg::Guid&);
 
 
-            /// TODO: what's the parameter meaning?
+			/// TODO: what's the parameter meaning?
 			/// TODO: implement
 			EntityInstancePtrOpt get_entity_instance(const std::string&);
 
 
-            // TODO: get_all_entity_instances_of_type() const;
+			// TODO: get_all_entity_instances_of_type() const;
 
 
-            /// Returns all entity instances.
+			/// Returns all entity instances.
 			/// @return All entity instances which exist in the entity system.
 			/// TODO: implement
 			std::vector<EntityInstancePtr> get_all_entity_instances() const;
 
 
-            // TODO: get_entity_instance_count_of_type() const;
+			// TODO: get_entity_instance_count_of_type() const;
 
 
 			/// Returns the number of existing entity instances.
@@ -99,10 +99,10 @@ namespace entity_system {
 			void register_on_deleted(const xg::Guid&, std::shared_ptr<EntityInstanceDeletedListener> listener);
 
 
-        private:
+		private:
 
 			/// The entity attribute instance manager
-    		std::shared_ptr<EntityAttributeInstanceManager> entity_attribute_instance_manager;
+			std::shared_ptr<EntityAttributeInstanceManager> entity_attribute_instance_manager;
 
 
 			/// Notifies all listeners that a new entity instance has been created.

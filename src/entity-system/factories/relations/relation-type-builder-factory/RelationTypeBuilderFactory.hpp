@@ -11,7 +11,7 @@ namespace entity_system {
 	using RelationTypeBuilderPtr = std::shared_ptr<RelationTypeBuilder>;
 
 	/// @class RelationTypeBuilder
-    /// @brief Manages the builders for the relation type.
+	/// @brief Manages the builders for the relation type.
 	class RelationTypeBuilderFactory
 	{
 		public:
@@ -22,9 +22,9 @@ namespace entity_system {
 
 			/// Constructor.
 			RelationTypeBuilderFactory(
-				RelationTypeManagerPtr relation_type_manager,
-				RelationAttributeTypeManagerPtr relation_attribute_type_manager,
-				RelationAttributeInstanceManagerPtr relation_attribute_instance_manager
+			RelationTypeManagerPtr relation_type_manager,
+			RelationAttributeTypeManagerPtr relation_attribute_type_manager,
+			RelationAttributeInstanceManagerPtr relation_attribute_instance_manager
 			);
 
 			/// Destructor.

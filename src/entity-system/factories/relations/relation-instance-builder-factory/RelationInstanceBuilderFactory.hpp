@@ -10,7 +10,7 @@ namespace entity_system {
 	using RelationInstanceBuilderPtr = std::shared_ptr<RelationInstanceBuilder>;
 
 	/// @class RelationInstanceBuilder
-    /// @brief Manages the relation instance builders.
+	/// @brief Manages the relation instance builders.
 	class RelationInstanceBuilderFactory
 	{
 		public:
@@ -43,5 +43,5 @@ namespace entity_system {
 
 	};
 
-}
+	}
 }

@@ -6,15 +6,15 @@
 namespace inexor {
 namespace entity_system {
 
-    /// @class GUIDBase
+	/// @class GUIDBase
 	/// @brief A base class for globally unique identifiers (GUIDs).
-    /// @note The implementation is based on crossguid.
+	/// @note The implementation is based on crossguid.
 	class GUIDBase
 	{
 		private:
 
-            /// Mutex for this GUID base class.
-            std::mutex guid_base_mutex;
+			/// Mutex for this GUID base class.
+			std::mutex guid_base_mutex;
 
 			/// GUID of the class.
 			xg::Guid globally_unique_identifier;

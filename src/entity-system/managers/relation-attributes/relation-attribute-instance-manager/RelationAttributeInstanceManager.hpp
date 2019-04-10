@@ -28,11 +28,11 @@ namespace entity_system {
 			/// Creates an relation attribute instance.
 			/// @param ent_rel_attr_type A const reference to a shared pointer of
 			/// an relation attribute type of which an instance will be created.
-		    /// @return A shared pointer to the relation attribute instance which was created.
-            /// <br>If the creation fails std::nullopt will be returned.
+			/// @return A shared pointer to the relation attribute instance which was created.
+			/// <br>If the creation fails std::nullopt will be returned.
 			RelationAttributeInstancePtrOpt create_relation_attribute_instance(const RelationAttributeTypePtr&);
 
-            // TODO!
+			// TODO!
 			RelationAttributeInstancePtrOpt get_relation_attribute_instance(const xg::Guid&);
 
 			/// Returns the number of existing relation attribute type instances.
