@@ -31,7 +31,7 @@ namespace entity_system {
 			/// Destructor.
 			~EntitySystemModule();
 
-			/// Resets the entire entity system.
+			/// @brief Resets the entire entity system.
 			/// @note Order of destruction:
 			/// <ul>
 			///   <li> Relations

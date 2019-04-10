@@ -16,9 +16,9 @@ namespace entity_system {
 
 	std::string TypeBase::get_type_name() const
 	{
-		// Read only, no mutex required.
+		// No mutex required as this is a read-only operation.
 		return type_title;
 	}
 
-};
-};
+}
+}

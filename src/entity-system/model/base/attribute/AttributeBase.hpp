@@ -9,33 +9,28 @@ namespace inexor {
 namespace entity_system {
 
 	/// @brief A base class for attributes.
-	/// @note We can only inherit from AttributeTypeBase
-	/// but we can't create instances of the class
-	/// directly because it is an abstract class.
-	/// @note AttributeBase does not have a GUID,
-	/// because it is an abstract base class. The
-	/// GUID is created by the classes which inherit
-	/// from AttributeBase.
+	/// @note We can't directly instantiate this class because it is an abstract class.
+	/// @note AttributeBase does not have a GUID, because it is an abstract base class.
+	/// The GUID is created by the classes which inherit from AttributeBase.
 	class AttributeBase
 	{
 		private:
 
 			/// The data type of the attribute.
-			/// @note The data is only managed in
-			/// the instance, not in this base class.
+			/// The data is exclusively managed in the instance, not in this base class.
 			DataType attribute_data_type;
 
 			/// The features of the attribute.
 			EnumSet<Feature> features;
 
-			/// Mutex for this base class.
+			/// The mutex of this class.
 			std::mutex attribute_type_base_mutex;
 
 		protected:
 
 			/// Constructor.
-			/// @param attr_data_type The data type
-			/// of the attribute.
+			/// @param attr_data_type The data type of the attribute.
+			/// @param features A const EnumSet of the features.
 			AttributeBase(const DataType&, const EnumSet<Feature>& features);
 
 			/// Destructor.
@@ -44,13 +39,10 @@ namespace entity_system {
 		public:
 
 			/// @brief Returns the data type of the attribute.
-			/// @note Since the data type must be set when
-			/// the constructor is called, we do not
-			/// implement std::optional here.
 			/// @return The data type of the attribute.
 			DataType get_attribute_data_type() const;
 
-			/// @brief Returns the features of the attribute.
+			/// Returns the features of the attribute.
 			EnumSet<Feature> get_attribute_features() const;
 
 	};

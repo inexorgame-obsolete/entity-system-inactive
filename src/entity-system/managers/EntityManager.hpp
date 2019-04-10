@@ -28,10 +28,10 @@ namespace entity_system {
 
 			/// Constructor.
 			EntityManager(
-			shared_ptr<EntityTypeManager> entity_type_manager,
-			shared_ptr<EntityInstanceManager> entity_instance_manager,
-			shared_ptr<EntityAttributeTypeManager> entity_attribute_type_manager,
-			shared_ptr<EntityAttributeInstanceManager> entity_attribute_instance_manager
+				shared_ptr<EntityTypeManager> entity_type_manager,
+				shared_ptr<EntityInstanceManager> entity_instance_manager,
+				shared_ptr<EntityAttributeTypeManager> entity_attribute_type_manager,
+				shared_ptr<EntityAttributeInstanceManager> entity_attribute_instance_manager
 			);
 
 			/// Destructor.

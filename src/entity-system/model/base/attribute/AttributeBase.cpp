@@ -17,13 +17,13 @@ namespace entity_system {
 
 	DataType AttributeBase::get_attribute_data_type() const
 	{
-		// Read only, no mutex required.
+		// No mutex required as this is a read-only operation.
 		return attribute_data_type;
 	}
 
 	EnumSet<Feature> AttributeBase::get_attribute_features() const
 	{
-		// Read only, no mutex required.
+		// No mutex required as this is a read-only operation.
 		return features;
 	}
 

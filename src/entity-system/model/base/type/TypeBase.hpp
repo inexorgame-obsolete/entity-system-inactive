@@ -10,25 +10,23 @@ namespace entity_system {
 
 	/// @class TypeBase
 	/// @brief A template base class for types.
-	/// @note It does not make sense to let TypeBase inherit
-	/// from GUIDBase, because then all classes which inherit
-	/// from TypeBase would have multiple get_GUID() methods!
 	class TypeBase
 	{
 		private:
 
-			/// Unique name of this type.
+			/// The unique name of this type.
 			std::string type_title;
 
-			/// Mutex for this base class.
+			/// The mutex of this class.
 			std::mutex type_base_mutex;
 
 		protected:
 
 			/// @brief Constructor.
-			TypeBase(const std::string&);
+			/// @param type_name The unique name of this type.
+			TypeBase(const std::string& type_name);
 
-			/// @brief Destructor.
+			/// Destructor.
 			~TypeBase();
 
 		public:
@@ -39,5 +37,5 @@ namespace entity_system {
 
 	};
 
-};
-};
+}
+}

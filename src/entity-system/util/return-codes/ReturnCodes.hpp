@@ -3,12 +3,12 @@
 namespace inexor {
 namespace entity_system {
 
-	/// @brief Entity system return codes.
+	///  Entity system return codes.
 	enum ENTSYS_RESULT
 	{
 		ENTSYS_ERROR = -1,
 		ENTSYS_SUCCESS = 1,
 	};
 
-};
-};
+}
+}
