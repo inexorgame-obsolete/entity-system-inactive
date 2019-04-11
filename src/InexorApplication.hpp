@@ -40,7 +40,7 @@ namespace inexor {
 	using LogManagerPtr = std::shared_ptr<logging::LogManager>;
 	using RendererModulePtr = std::shared_ptr<renderer::RendererModule>;
 	using CommandModulePtr = std::shared_ptr<command::CommandModule>;
-    using AudioModulePtr = std::shared_ptr<inexor::audio::AudioModule>;
+	using AudioModulePtr = std::shared_ptr<inexor::audio::AudioModule>;
 
 	/// @class Inexor
 	/// @brief The application container.
@@ -49,7 +49,7 @@ namespace inexor {
 		public:
 
 			/// @brief Constructs the Inexor application.
-            /// @note The dependencies of this class will be injected automatically.
+			/// @note The dependencies of this class will be injected automatically.
 			/// @param entity_system_module The entity system of Inexor.
 			/// @param type_system_module The type system manager.
 			/// @param configuration_module The configuration manager module.
@@ -58,8 +58,8 @@ namespace inexor {
 			/// @param visual_scripting_system_module The visual scripting system module.
 			/// @param log_manager The log module.
 			/// @param renderer_manager The rendering module.
-            /// @param command_module The command module.
-            /// @param audio_module The audio module.
+			/// @param command_module The command module.
+			/// @param audio_module The audio module.
 			InexorApplication(
 				EntitySystemModulePtr entity_system_module,
 				TypeSystemModulePtr type_system_module,
@@ -70,19 +70,19 @@ namespace inexor {
 				LogManagerPtr log_manager,
 				RendererModulePtr renderer_module,
 				CommandModulePtr command_module,
-                AudioModulePtr audio_module
+				AudioModulePtr audio_module
 			);
 
 			/// Destructor.
 			~InexorApplication();
 
 			/// @brief Initializes the Inexor application.
-            /// @param argc The total number of parameters given to the application.
-            /// @param argv An array of parameters given to the application.
+			/// @param argc The total number of parameters given to the application.
+			/// @param argv An array of parameters given to the application.
 			void init(int argc, char* argv[]);
 
-            /// @brief Runs the application's main loop.
-            /// @note The main loop will be aborted when this->running is set to false.
+			/// @brief Runs the application's main loop.
+			/// @note The main loop will be aborted when this->running is set to false.
 			void run();
 
 			/// Shuts down the Inexor application.
@@ -92,7 +92,7 @@ namespace inexor {
 			void restart();
 
 			/// @brief Registers a logger.
-            /// @param logger_name The name of the logger.
+			/// @param logger_name The name of the logger.
 			void register_logger(std::string logger_name);
 
 			/// Get method for the entity system.
@@ -103,78 +103,78 @@ namespace inexor {
 
 		private:
 
-            /// The entity system of Inexor.
+			/// The entity system of Inexor.
 			EntitySystemModulePtr entity_system_module;
 
-            /// The type system manager module.
+			/// The type system manager module.
 			TypeSystemModulePtr type_system_module;
 
-            /// The configuration manager module.
+			/// The configuration manager module.
 			ConfigurationModulePtr configuration_module;
 
-            /// The REST server module of the entity system.
+			/// The REST server module of the entity system.
 			RestServerPtr rest_server;
 
-            /// The debugger of the entity system module.
+			/// The debugger of the entity system module.
 			EntitySystemDebuggerPtr entity_system_debugger;
 
 			/// The visual scripting system module.
 			VisualScriptingSystemModulePtr visual_scripting_system_module;
 
-            /// The log manager.
+			/// The log manager.
 			LogManagerPtr log_manager;
 
-            /// The rendering module.
+			/// The rendering module.
 			RendererModulePtr renderer_module;
-            
-            /// The command module.
+
+			/// The command module.
 			CommandModulePtr command_module;
 
-            /// The audio module.
-            AudioModulePtr audio_module;
+			/// The audio module.
+			AudioModulePtr audio_module;
 
 			/// The running state of the Inexor application.
 			bool running;
 
-            /// @brief Signal handler.
-            /// @param signal_number ?
-            void sighup_handler(const int signal_number);
+			/// @brief Signal handler.
+			/// @param signal_number ?
+			void sighup_handler(const int signal_number);
 
-            /// @brief Signal handler.
-            /// @param signal_number ?
-            void sigterm_handler(const int signal_number);
+			/// @brief Signal handler.
+			/// @param signal_number ?
+			void sigterm_handler(const int signal_number);
 
-            /// ?
-            void ready_handler(Service&);
+			/// ?
+			void ready_handler(Service&);
 
-            /// ?
-            /// @param signal_number ?
-            static void call_sighup_handlers(int signal_number)
-            {
-            	for (InexorApplication* instance : InexorApplication::instances)
-            	{
-            		std::mem_fn(&InexorApplication::sighup_handler)(instance, signal_number);
-            	}
+			/// ?
+			/// @param signal_number ?
+			static void call_sighup_handlers(int signal_number)
+			{
+				for (InexorApplication* instance : InexorApplication::instances)
+				{
+					std::mem_fn(&InexorApplication::sighup_handler)(instance, signal_number);
+				}
 			}
 
-            /// ?
-            /// @param signal_number ?
-            static void call_sigterm_handlers(int signal_number)
-            {
-            	for (InexorApplication* instance : InexorApplication::instances)
-            	{
-            		std::mem_fn(&InexorApplication::sigterm_handler)(instance, signal_number);
-            	}
+			/// ?
+			/// @param signal_number ?
+			static void call_sigterm_handlers(int signal_number)
+			{
+				for (InexorApplication* instance : InexorApplication::instances)
+				{
+					std::mem_fn(&InexorApplication::sigterm_handler)(instance, signal_number);
+				}
 			}
-            
-            /// ?
-            /// @param service ?
-            static void call_ready_handlers(Service& service)
-            {
-            	for (InexorApplication* instance : InexorApplication::instances)
-            	{
-            		std::mem_fn(&InexorApplication::ready_handler)(instance, service);
-            	}
+
+			/// ?
+			/// @param service ?
+			static void call_ready_handlers(Service& service)
+			{
+				for (InexorApplication* instance : InexorApplication::instances)
+				{
+					std::mem_fn(&InexorApplication::ready_handler)(instance, service);
+				}
 			}
 
 			/// Static instances of the Inexor application.
