@@ -50,7 +50,7 @@ namespace entity_system {
 			}
 
 			/// Returns the type itself.
-			std::shared_ptr<T> get_type() const
+			std::shared_ptr<T> get_type()
 			{
 				if(created)
 				{
