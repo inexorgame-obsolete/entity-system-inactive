@@ -20,6 +20,8 @@ namespace renderer {
 		MouseInputManagerPtr mouse_input_manager,
 		EntityInstanceManagerPtr entity_instance_manager,
 		ConnectorManagerPtr connector_manager,
+		WorldRendererPtr world_renderer,
+		UserInterfaceRendererPtr user_interface_renderer,
 		LogManagerPtr log_manager
 	) {
 		this->window_factory = window_factory;
@@ -27,6 +29,8 @@ namespace renderer {
 		this->mouse_input_manager = mouse_input_manager;
 		this->entity_instance_manager = entity_instance_manager;
 		this->connector_manager = connector_manager;
+		this->world_renderer = world_renderer;
+		this->user_interface_renderer = user_interface_renderer;
 		this->log_manager = log_manager;
 		this->window_count = 0;
 	}
@@ -38,6 +42,12 @@ namespace renderer {
 	void WindowManager::init()
 	{
 		log_manager->register_logger(LOGGER_NAME);
+
+		// Initialize the world renderer
+		world_renderer->init();
+
+		// TODO: Initialize the user interface renderer
+		user_interface_renderer->init();
 
 		create_window("Test 1", 0, 0, 300, 300);
 		create_window("Test 2", 300, 0, 300, 300);
@@ -60,6 +70,9 @@ namespace renderer {
 			spdlog::info("shutting down window {}", std::get<DataType::STRING>(kv.first->get_attribute_instance(WindowEntityTypeProvider::WINDOW_TITLE).value()->own_value.Value()));
 			destroy_window(kv.first);
 		}
+
+		user_interface_renderer->shutdown();
+		world_renderer->shutdown();
 	}
 
 	/// @brief Creates a new window with the given title, position and dimensions.
@@ -273,10 +286,11 @@ namespace renderer {
 		// Loop until the user closes the window.
 		while(!glfwWindowShouldClose(glfw_window))
 		{
-
-			// TODO: render worlds
+			// Render worlds
+			world_renderer->render_worlds(window, glfw_window);
 
 			// TODO: render user interfaces
+			user_interface_renderer->render_user_interfaces(window, glfw_window);
 
 			// Render custom on front
 			for (std::function renderer_function : window_render_functions[window])

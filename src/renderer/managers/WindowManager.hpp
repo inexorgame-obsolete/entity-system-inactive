@@ -1,5 +1,7 @@
 #pragma once
 
+#include "WorldRenderer.hpp"
+#include "UserInterfaceRenderer.hpp"
 #include "entity-system/managers/entities/entity-instance-manager/EntityInstanceManager.hpp"
 #include "entity-system/model/data/DataTypes.hpp"
 #include "visual-scripting/managers/ConnectorManager.hpp"
@@ -22,6 +24,8 @@ namespace renderer {
 	using MouseInputManagerPtr = std::shared_ptr<inexor::input::mouse::MouseInputManager>;
 	using EntityInstanceManagerPtr = std::shared_ptr<entity_system::EntityInstanceManager>;
 	using ConnectorManagerPtr = std::shared_ptr<visual_scripting::ConnectorManager>;
+	using WorldRendererPtr = std::shared_ptr<WorldRenderer>;
+	using UserInterfaceRendererPtr = std::shared_ptr<UserInterfaceRenderer>;
 	using LogManagerPtr = std::shared_ptr<inexor::logging::LogManager>;
 
 	using EntityInstancePtr = std::shared_ptr<EntityInstance>;
@@ -51,6 +55,8 @@ namespace renderer {
 				MouseInputManagerPtr mouse_input_manager,
 				EntityInstanceManagerPtr entity_instance_manager,
 				ConnectorManagerPtr connector_manager,
+				WorldRendererPtr world_renderer,
+				UserInterfaceRendererPtr user_interface_renderer,
 				LogManagerPtr log_manager
 			);
 
@@ -150,6 +156,12 @@ namespace renderer {
 
 			/// The connector manager.
 			ConnectorManagerPtr connector_manager;
+
+			/// The world renderer.
+			WorldRendererPtr world_renderer;
+
+			/// The user interface renderer.
+			UserInterfaceRendererPtr user_interface_renderer;
 
 			/// The log manager.
 			LogManagerPtr log_manager;
