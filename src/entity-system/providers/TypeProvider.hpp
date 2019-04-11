@@ -44,19 +44,19 @@ namespace entity_system {
 			}
 
 			/// Returns the name of the type.
-			std::string get_type_name()
+			std::string get_type_name() const
 			{
 				return type_name;
 			}
 
 			/// Returns the type itself.
-			std::shared_ptr<T> get_type()
+			std::shared_ptr<T> get_type() const
 			{
 				if(created)
 				{
 					return type;
 				}
-			
+
 				auto builder = type_builder_manager->get_builder();
 				builder->name(type_name);
 
