@@ -1,16 +1,15 @@
 #include "RelationManager.hpp"
 
 using namespace inexor::entity_system;
-using namespace std;
 
 namespace inexor {
 namespace entity_system {
 
 	RelationManager::RelationManager(
-		shared_ptr<RelationTypeManager> relation_type_manager,
-		shared_ptr<RelationInstanceManager> relation_instance_manager,
-		shared_ptr<RelationAttributeTypeManager> relation_attribute_type_manager,
-		shared_ptr<RelationAttributeInstanceManager> relation_attribute_instance_manager
+		std::shared_ptr<RelationTypeManager> relation_type_manager,
+		std::shared_ptr<RelationInstanceManager> relation_instance_manager,
+		std::shared_ptr<RelationAttributeTypeManager> relation_attribute_type_manager,
+		std::shared_ptr<RelationAttributeInstanceManager> relation_attribute_instance_manager
 	)
 	{
 		this->relation_type_manager = relation_type_manager;
