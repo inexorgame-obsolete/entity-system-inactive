@@ -1,19 +1,17 @@
 #pragma once
 
-#include <string>
-#include <vector>
-#include <unordered_map>
-
 #include "entity-system/model/base/attribute/AttributeBase.hpp"
 #include "entity-system/model/base/type/TypeBase.hpp"
 #include "entity-system/model/data/container/DataContainer.hpp"
 #include "entity-system/util/return-codes/ReturnCodes.hpp"
 #include "entity-system/util/uuid/GUIDBase.hpp"
 
+#include <string>
+#include <vector>
+#include <unordered_map>
 
 namespace inexor {
 namespace entity_system {
-
 
 	/// @class RelationAttributeType
 	/// @brief A base class for entity relation attribute types.
@@ -34,6 +32,5 @@ namespace entity_system {
 
 	};
 
-
-};
-};
+}
+}

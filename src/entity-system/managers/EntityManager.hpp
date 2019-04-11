@@ -1,23 +1,16 @@
 #pragma once
 
-#include <vector>
-
 #include "entity-system/managers/entities/entity-instance-manager/EntityInstanceManager.hpp"
 #include "entity-system/managers/entities/entity-type-manager/EntityTypeManager.hpp"
 #include "entity-system/managers/entity-attributes/entity-attribute-instance-manager/EntityAttributeInstanceManager.hpp"
 #include "entity-system/managers/entity-attributes/entity-attribute-type-manager/EntityAttributeTypeManager.hpp"
 
+#include <vector>
+
 using namespace inexor::entity_system;
 
 namespace inexor {
 namespace entity_system {
-
-	// TODO: Implement EntityEditor
-	// TODO: Implement EntityEditorRenderer
-	// TODO: Implement EntityGameSceneRenderer
-	// TODO: Implement EntitySync
-	// TODO: Implement EntityImporter
-	// TODO: Implement EntityExporter
 
 	/// @class EntityManager
 	/// @brief The entity manager manages the entity managers.
@@ -63,5 +56,5 @@ namespace entity_system {
 
 	};
 
-};
-};
+}
+}

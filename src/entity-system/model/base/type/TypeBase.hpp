@@ -1,9 +1,9 @@
 #pragma once
 
+#include "entity-system/util/uuid/GUIDBase.hpp"
+
 #include <string>
 #include <mutex>
-
-#include "entity-system/util/uuid/GUIDBase.hpp"
 
 namespace inexor {
 namespace entity_system {

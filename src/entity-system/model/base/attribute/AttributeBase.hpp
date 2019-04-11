@@ -1,9 +1,9 @@
 #pragma once
 
+#include "entity-system/model/data/container/DataContainer.hpp"
+
 #include <mutex>
 #include <optional>
-
-#include "entity-system/model/data/container/DataContainer.hpp"
 
 namespace inexor {
 namespace entity_system {
@@ -47,5 +47,5 @@ namespace entity_system {
 
 	};
 
-};
-};
+}
+}
