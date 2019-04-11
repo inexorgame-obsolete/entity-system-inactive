@@ -5,8 +5,6 @@
 #include "relation-attributes/relation-attribute-instance-manager/RelationAttributeInstanceManager.hpp"
 #include "relation-attributes/relation-attribute-type-manager/RelationAttributeTypeManager.hpp"
 
-#include <vector>
-
 using namespace inexor::entity_system;
 
 namespace inexor {

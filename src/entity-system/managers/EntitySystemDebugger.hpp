@@ -15,8 +15,6 @@
 #include "entity-system/model/data/DataTypes.hpp"
 #include "logging/managers/LogManager.hpp"
 
-#include <crossguid/guid.hpp>
-
 namespace inexor {
 namespace entity_system {
 

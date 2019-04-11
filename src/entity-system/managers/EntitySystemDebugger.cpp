@@ -1,5 +1,4 @@
 #include "EntitySystemDebugger.hpp"
-#include "spdlog/spdlog.h"
 
 namespace inexor {
 namespace entity_system {

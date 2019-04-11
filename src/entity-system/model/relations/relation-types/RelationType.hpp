@@ -2,8 +2,6 @@
 
 #include "entity-system/model/relation-attributes/relation-attribute-types/RelationAttributeType.hpp"
 #include "entity-system/model/entities/entity-types/EntityType.hpp"
-#include "entity-system/model/base/type/TypeBase.hpp"
-#include "entity-system/util/uuid/GUIDBase.hpp"
 
 namespace inexor {
 namespace entity_system {

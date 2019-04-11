@@ -5,8 +5,6 @@
 #include "entity-system/managers/entity-attributes/entity-attribute-instance-manager/EntityAttributeInstanceManager.hpp"
 #include "entity-system/managers/entity-attributes/entity-attribute-type-manager/EntityAttributeTypeManager.hpp"
 
-#include <vector>
-
 using namespace inexor::entity_system;
 
 namespace inexor {

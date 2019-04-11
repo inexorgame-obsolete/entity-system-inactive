@@ -3,7 +3,6 @@
 #include "entity-system/util/uuid/GUIDBase.hpp"
 
 #include <string>
-#include <mutex>
 
 namespace inexor {
 namespace entity_system {

@@ -1,13 +1,10 @@
 #include "RelationTypeBuilder.hpp"
 
-#include "entity-system/model/data/DataTypes.hpp"
 #include "entity-system/model/entities/entity-types/EntityType.hpp"
 #include "entity-system/model/relations/relation-types/RelationType.hpp"
 #include "entity-system/model/relation-attributes/relation-attribute-types/RelationAttributeType.hpp"
 
 #include "spdlog/spdlog.h"
-
-#include <crossguid/guid.hpp>
 
 namespace inexor {
 namespace entity_system {

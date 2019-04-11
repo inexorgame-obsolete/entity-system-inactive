@@ -54,7 +54,7 @@ namespace entity_system {
 			/// The manager for the builder factories.
 			BuilderFactoryManagerPtr builder_factory_manager;
 
-			// The log manager.
+			/// The log manager.
 			LogManagerPtr log_manager;
 
 			/// The logger name of this service.

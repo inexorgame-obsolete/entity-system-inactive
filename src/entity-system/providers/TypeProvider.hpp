@@ -43,13 +43,15 @@ namespace entity_system {
 			{
 			}
 
-			/// Returns the name of the type.
+			/// @brief Returns the name of the type.
+			/// @return The name of the type.
 			std::string get_type_name() const
 			{
 				return type_name;
 			}
 
-			/// Returns the type itself.
+			/// @brief Returns a shared pointer to the type.
+			/// @return A shared pointer to the type.
 			std::shared_ptr<T> get_type()
 			{
 				if(created)

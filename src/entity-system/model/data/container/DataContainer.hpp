@@ -11,6 +11,7 @@
 #include <variant>
 #include <cstdint>
 #include <glm/glm.hpp>
+#include <mutex>
 
 using namespace react;
 
@@ -88,29 +89,29 @@ namespace entity_system {
 			}
 			this->signal_wrapper = MakeVar<D>(this->own_value);
 			this->value = Flatten(this->signal_wrapper);
-	};
+		}
 
-	/// @brief Constructs a new data container using the given data type and the default value of the data type.
-	/// @param data_value The value of the data container.
-	DataContainer(const DataValue& data_value)
-	{
-		/// Detect type by std::variant index()
-		this->type = DataType::_from_integral(static_cast<int>(data_value.index()));
-		this->own_value = MakeVar<D>(data_value);
-		this->signal_wrapper = MakeVar<D>(this->own_value);
-		this->value = Flatten(this->signal_wrapper);
-	};
+		/// @brief Constructs a new data container using the given data type and the default value of the data type.
+		/// @param data_value The value of the data container.
+		DataContainer(const DataValue& data_value)
+		{
+			/// Detect type by std::variant index()
+			this->type = DataType::_from_integral(static_cast<int>(data_value.index()));
+			this->own_value = MakeVar<D>(data_value);
+			this->signal_wrapper = MakeVar<D>(this->own_value);
+			this->value = Flatten(this->signal_wrapper);
+		};
 
-	/// @brief Constructs a new data container using the given data type and the default value of the data type.
-	/// @param type The data type of the data container.
-	/// @param data_value The value of the data container.
-	DataContainer(const DataType& type, const DataValue& data_value)
-		: type(type)
-	{
-		this->own_value = MakeVar<D>(data_value);
-		this->signal_wrapper = MakeVar<D>(this->own_value);
-		this->value = Flatten(this->signal_wrapper);
-	};
+		/// @brief Constructs a new data container using the given data type and the default value of the data type.
+		/// @param type The data type of the data container.
+		/// @param data_value The value of the data container.
+		DataContainer(const DataType& type, const DataValue& data_value)
+			: type(type)
+		{
+			this->own_value = MakeVar<D>(data_value);
+			this->signal_wrapper = MakeVar<D>(this->own_value);
+			this->value = Flatten(this->signal_wrapper);
+		};
 
 	};
 

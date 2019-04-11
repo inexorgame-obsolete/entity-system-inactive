@@ -2,11 +2,6 @@
 
 #include "entity-system/model/base/attribute/AttributeBase.hpp"
 #include "entity-system/model/base/type/TypeBase.hpp"
-#include "entity-system/model/data/DataTypes.hpp"
-#include "entity-system/util/return-codes/ReturnCodes.hpp"
-#include "entity-system/util/uuid/GUIDBase.hpp"
-
-#include <string>
 
 namespace inexor {
 namespace entity_system {

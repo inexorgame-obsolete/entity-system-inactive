@@ -2,7 +2,6 @@
 
 #include "entity-system/model/data/container/DataContainer.hpp"
 
-#include <mutex>
 #include <optional>
 
 namespace inexor {
