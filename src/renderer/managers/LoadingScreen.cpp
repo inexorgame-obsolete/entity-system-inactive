@@ -1,12 +1,10 @@
 #include "LoadingScreen.hpp"
 
-#include <GLFW/glfw3.h>
-
 #include <Magnum/Primitives/Square.h>
 
-#include "spdlog/spdlog.h"
+#include <GLFW/glfw3.h>
 
-#include <iomanip>
+#include "spdlog/spdlog.h"
 
 using namespace Magnum::Math::Literals;
 
@@ -50,8 +48,8 @@ namespace renderer {
 		{
 			spdlog::info("create logo");
 			const QuadVertex quad_vertex[] {
-				{{-0.5f, -0.5f}, 0xffffff_rgbf},
 				{{ 0.5f, -0.5f}, 0xffff00_rgbf},
+				{{-0.5f, -0.5f}, 0xffffff_rgbf},
 				{{ 0.5f,  0.5f}, 0x00ffff_rgbf},
 				{{-0.5f,  0.5f}, 0xff00ff_rgbf}
 			};
@@ -80,7 +78,7 @@ namespace renderer {
 
 	void LoadingScreen::render_logo(EntityInstancePtr window, GLFWwindow* glfw_window)
 	{
-		spdlog::info("render_logo");
+		// spdlog::info("render_logo");
 
 		shader = std::make_shared<Magnum::Shaders::VertexColor2D>();
 

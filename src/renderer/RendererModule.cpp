@@ -1,7 +1,5 @@
 #include "RendererModule.hpp"
 
-#include <Magnum/Tags.h>
-
 #include <GLFW/glfw3.h>
 
 namespace inexor {

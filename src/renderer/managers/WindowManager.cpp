@@ -1,9 +1,7 @@
 #include "WindowManager.hpp"
 
-//#include <Magnum/GL/Buffer.h>
-//#include <Magnum/GL/DefaultFramebuffer.h>
-//#include <Magnum/GL/Renderer.h>
 #include <Magnum/Platform/GLContext.h>
+
 #include <GLFW/glfw3.h>
 
 #include "spdlog/spdlog.h"

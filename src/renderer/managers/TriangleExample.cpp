@@ -182,10 +182,9 @@ namespace renderer {
 
 	void TriangleExample::render_triangle(EntityInstancePtr window, GLFWwindow* glfw_window)
 	{
-		spdlog::info("render_triangle");
 		float x = std::get<DataType::FLOAT>(triangle_attr_x->value.Value());
 		float y = 0.0f - std::get<DataType::FLOAT>(triangle_attr_x->value.Value());
-		spdlog::info("TranslationXY({}, {})", x, y);
+		// spdlog::info("TranslationXY({}, {})", x, y);
 
 		Magnum::Matrix3 transformation_matrix_x = Magnum::Matrix3::translation(Magnum::Vector2::xAxis(x));
 		Magnum::Matrix3 transformation_matrix_y = Magnum::Matrix3::translation(Magnum::Vector2::yAxis(y));
