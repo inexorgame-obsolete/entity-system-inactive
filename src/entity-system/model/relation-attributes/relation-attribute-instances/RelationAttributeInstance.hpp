@@ -1,7 +1,7 @@
 #pragma once
 
 #include "entity-system/model/relation-attributes/relation-attribute-types/RelationAttributeType.hpp"
-#include "entity-system/model/base/instance/Instance.hpp"
+#include "entity-system/model/base/instance/InstanceBase.hpp"
 #include "entity-system/model/data/container/DataContainer.hpp"
 #include "entity-system/util/uuid/GUIDBase.hpp"
 
