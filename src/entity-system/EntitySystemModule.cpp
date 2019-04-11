@@ -23,8 +23,12 @@ namespace entity_system {
 	void EntitySystemModule::reset_entity_system()
 	{
 		spdlog::get(LOGGER_NAME)->debug("Resetting entity system.");
-		relation_manager->reset_entity_system();
-		entity_manager->reset_entity_system();
+		
+		// Reset relations, relation instances, relation attributes and relation attribute instances.
+		relation_manager->reset_relations_and_relation_attributes();
+
+		// Reset types, instances, attribute types and attribute instances.
+		entity_manager->reset_attributes_and_types();
 	}
 
 }

@@ -37,7 +37,7 @@ namespace entity_system {
 			/// Destructor.
 			~RelationManager();
 
-			/// Resets the entire entity system.
+			/// @brief Resets relations, relation instances, relation attributes and relation attribute instances.
 			/// @note Order of destruction:
 			/// <ul>
 			///		<li> relation attribute instances
@@ -45,7 +45,7 @@ namespace entity_system {
 			///		<li> relation instances
 			///		<li> relation types
 			/// </ul>
-			void reset_entity_system();
+			void reset_relations_and_relation_attributes();
 
 		private:
 

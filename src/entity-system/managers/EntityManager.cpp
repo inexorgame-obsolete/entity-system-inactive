@@ -20,7 +20,7 @@ namespace entity_system {
 	{
 	}
 
-	void EntityManager::reset_entity_system()
+	void EntityManager::reset_attributes_and_types()
 	{
 		entity_attribute_instance_manager->delete_all_entity_attribute_instances();
 		entity_attribute_type_manager->delete_all_entity_attribute_types();

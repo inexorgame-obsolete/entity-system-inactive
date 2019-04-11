@@ -37,8 +37,15 @@ namespace entity_system {
 			/// Destructor.
 			~EntityManager();
 
-			/// Resets the entire entity system.
-			void reset_entity_system();
+			/// Resets types, instances, attribute types and attribute instances.
+			/// @note Order of destruction:
+			/// <ul>
+			///		<li> entity attribute instances
+			///		<li> entity attribute types
+			///		<li> entity instances
+			///		<li> entity types
+			/// </ul>
+			void reset_attributes_and_types();
 
 		private:
 

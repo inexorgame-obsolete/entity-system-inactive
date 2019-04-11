@@ -22,7 +22,7 @@ namespace entity_system {
 	{
 	}
 
-	void RelationManager::reset_entity_system()
+	void RelationManager::reset_relations_and_relation_attributes()
 	{
 		relation_attribute_instance_manager->delete_all_relation_attribute_instances();
 		relation_attribute_type_manager->delete_all_relation_attribute_types();
