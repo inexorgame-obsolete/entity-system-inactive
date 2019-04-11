@@ -3,6 +3,8 @@
 #include <mutex>
 #include <crossguid/guid.hpp>
 
+using namespace std;
+
 namespace inexor {
 namespace entity_system {
 
@@ -14,7 +16,7 @@ namespace entity_system {
 		private:
 
 			/// The mutex of this class.
-			std::mutex guid_base_mutex;
+			mutex guid_base_mutex;
 
 			/// GUID of the class.
 			xg::Guid globally_unique_identifier;
@@ -33,8 +35,8 @@ namespace entity_system {
 
 		public:
 
-			/// @brief Returns the GUID of the class instance.
-			/// @return The GUID of the class instance.
+			/// @brief Returns the GUID.
+			/// @return The GUID.
 			xg::Guid get_GUID() const;
 
 			/// Generates a new GUID.
