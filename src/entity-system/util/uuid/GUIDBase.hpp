@@ -3,10 +3,10 @@
 #include <mutex>
 #include <crossguid/guid.hpp>
 
-using namespace std;
-
 namespace inexor {
 namespace entity_system {
+
+	using namespace std;
 
 	/// @class GUIDBase
 	/// @brief A base class for globally unique identifiers (GUIDs).
