@@ -5,7 +5,6 @@
 
 namespace inexor {
 namespace input {
-namespace keyboard {
 
 	KeyboardInputManager::KeyboardInputManager(
 		LogManagerPtr log_manager
@@ -35,6 +34,5 @@ namespace keyboard {
 		spdlog::info("Key {} (ID {}) has been {}.", key_name, key, glfwGetKey(window, key) ? std::string("pressed") : std::string("released"));
 	}
 
-}
 }
 }

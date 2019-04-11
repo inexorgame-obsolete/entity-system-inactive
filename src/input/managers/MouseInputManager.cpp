@@ -5,7 +5,6 @@
 
 namespace inexor {
 namespace input {
-namespace mouse {
 
 	MouseInputManager::MouseInputManager(
 		LogManagerPtr log_manager
@@ -43,6 +42,5 @@ namespace mouse {
 		spdlog::info("Mouse scroll: {}, {}", xoffset, yoffset);
 	}
 
-}
 }
 }

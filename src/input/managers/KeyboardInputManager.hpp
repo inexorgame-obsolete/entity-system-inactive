@@ -1,11 +1,11 @@
 #pragma once
 
 #include "logging/managers/LogManager.hpp"
+
 struct GLFWwindow;
 
 namespace inexor {
 namespace input {
-namespace keyboard {
 
 	using LogManagerPtr = std::shared_ptr<inexor::logging::LogManager>;
 
@@ -51,6 +51,5 @@ namespace keyboard {
 
 	};
 
-}
 }
 }

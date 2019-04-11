@@ -7,8 +7,8 @@
 #include "visual-scripting/managers/ConnectorManager.hpp"
 #include "visual-scripting/model/Connector.hpp"
 #include "renderer/factories/WindowFactory.hpp"
-#include "keyboard/managers/KeyboardInputManager.hpp"
-#include "mouse/managers/MouseInputManager.hpp"
+#include "input/managers/KeyboardInputManager.hpp"
+#include "input/managers/MouseInputManager.hpp"
 #include "logging/managers/LogManager.hpp"
 
 #include <list>
@@ -20,13 +20,13 @@ namespace inexor {
 namespace renderer {
 
 	using WindowFactoryPtr = std::shared_ptr<WindowFactory>;
-	using KeyboardInputManagerPtr = std::shared_ptr<inexor::input::keyboard::KeyboardInputManager>;
-	using MouseInputManagerPtr = std::shared_ptr<inexor::input::mouse::MouseInputManager>;
+	using KeyboardInputManagerPtr = std::shared_ptr<input::KeyboardInputManager>;
+	using MouseInputManagerPtr = std::shared_ptr<input::MouseInputManager>;
 	using EntityInstanceManagerPtr = std::shared_ptr<entity_system::EntityInstanceManager>;
 	using ConnectorManagerPtr = std::shared_ptr<visual_scripting::ConnectorManager>;
 	using WorldRendererPtr = std::shared_ptr<WorldRenderer>;
 	using UserInterfaceRendererPtr = std::shared_ptr<UserInterfaceRenderer>;
-	using LogManagerPtr = std::shared_ptr<inexor::logging::LogManager>;
+	using LogManagerPtr = std::shared_ptr<logging::LogManager>;
 
 	using EntityInstancePtr = std::shared_ptr<EntityInstance>;
 	using EntityAttributeInstancePtr = std::shared_ptr<entity_system::EntityAttributeInstance>;
