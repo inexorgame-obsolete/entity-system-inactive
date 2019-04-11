@@ -27,6 +27,7 @@ namespace renderer {
 		->attribute(WindowEntityTypeProvider::WINDOW_POSITION_Y, y)
 		->attribute(WindowEntityTypeProvider::WINDOW_WIDTH, width)
 		->attribute(WindowEntityTypeProvider::WINDOW_HEIGHT, height)
+		->attribute(WindowEntityTypeProvider::WINDOW_OPACITY, 1.0f)
 		->attribute(WindowEntityTypeProvider::WINDOW_FULLSCREEN, false)
 		->attribute(WindowEntityTypeProvider::WINDOW_ICONIFIED, false)
 		->attribute(WindowEntityTypeProvider::WINDOW_MAXIMIZED, false)

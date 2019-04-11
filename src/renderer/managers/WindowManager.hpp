@@ -114,6 +114,10 @@ namespace renderer {
 			/// @param window The entity instance of type WINDOW.
 			void stop_window_thread(EntityInstancePtr window);
 
+			/// @brief Initializes observers on the attributes of the entity instance of type WINDOW.
+			/// @param window The entity instance of type WINDOW.
+			void initialize_window_observers(EntityInstancePtr window);
+
 			/// This callback is called if a window has been closed.
 			void window_closed(GLFWwindow* glfw_window);
 

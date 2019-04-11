@@ -4,6 +4,8 @@
 
 #include <GLFW/glfw3.h>
 
+#include "react/Observer.h"
+
 #include "spdlog/spdlog.h"
 
 namespace inexor {
@@ -41,6 +43,14 @@ namespace renderer {
 		create_window("Test 2", 300, 0, 300, 300);
 		create_window("Test 3", 0, 300, 300, 300);
 		create_window("Test 4", 300, 300, 300, 300);
+//		create_window("Test 5", 0, 0, 300, 300);
+//		create_window("Test 6", 300, 0, 300, 300);
+//		create_window("Test 7", 0, 300, 300, 300);
+//		create_window("Test 8", 300, 300, 300, 300);
+//		create_window("Test 9", 0, 0, 300, 300);
+//		create_window("Test 10", 300, 0, 300, 300);
+//		create_window("Test 11", 0, 300, 300, 300);
+//		create_window("Test 12", 300, 300, 300, 300);
 	}
 
 	void WindowManager::shutdown()
@@ -119,6 +129,9 @@ namespace renderer {
 				// This takes care of both mouse buttons and mouse movement.
 				mouse_input_manager->set_mouse_callback(glfw_window);
 
+				///
+				initialize_window_observers(window);
+
 				// TEST!
 				// glfwSetWindowOpacity(glfw_window, 0.5f);
 
@@ -184,6 +197,21 @@ namespace renderer {
 		glfwSetWindowSize(glfw_window, width, height);
 	}
 
+	void WindowManager::initialize_window_observers(EntityInstancePtr window)
+	{
+		GLFWwindow *glfw_window = windows[window].first;
+		Observe(
+			window->get_attribute_instance(WindowEntityTypeProvider::WINDOW_ICONIFIED).value()->value,
+			[glfw_window] (DataValue focus) {
+				if (std::get<DataType::BOOL>(focus)) {
+					glfwIconifyWindow(glfw_window);
+				} else {
+					glfwRestoreWindow(glfw_window);
+				}
+			}
+		);
+	}
+
 	void WindowManager::window_closed(GLFWwindow* glfw_window)
 	{
 		spdlog::get(WindowManager::LOGGER_NAME)->info("EVT: Window closed!");
@@ -214,16 +242,20 @@ namespace renderer {
 	{
 		spdlog::get(WindowManager::LOGGER_NAME)->info("EVT: Window position changed: {}:{}", x, y);
 		EntityInstancePtr window = window_entities[glfw_window];
-		window->get_attribute_instance(WindowEntityTypeProvider::WINDOW_POSITION_X).value()->own_value.Set(x);
-		window->get_attribute_instance(WindowEntityTypeProvider::WINDOW_POSITION_Y).value()->own_value.Set(y);
+		DoTransaction<D>([window, x, y] {
+			window->get_attribute_instance(WindowEntityTypeProvider::WINDOW_POSITION_X).value()->own_value.Set(x);
+			window->get_attribute_instance(WindowEntityTypeProvider::WINDOW_POSITION_Y).value()->own_value.Set(y);
+		});
 	}
 
 	void WindowManager::window_size_changed(GLFWwindow* glfw_window, int width, int height)
 	{
 		spdlog::get(WindowManager::LOGGER_NAME)->info("EVT: Window size changed: {}:{}", width, height);
 		EntityInstancePtr window = window_entities[glfw_window];
-		window->get_attribute_instance(WindowEntityTypeProvider::WINDOW_WIDTH).value()->own_value.Set(width);
-		window->get_attribute_instance(WindowEntityTypeProvider::WINDOW_HEIGHT).value()->own_value.Set(height);
+		DoTransaction<D>([window, width, height] {
+			window->get_attribute_instance(WindowEntityTypeProvider::WINDOW_WIDTH).value()->own_value.Set(width);
+			window->get_attribute_instance(WindowEntityTypeProvider::WINDOW_HEIGHT).value()->own_value.Set(height);
+		});
 	}
 
 	void WindowManager::start_window_thread(EntityInstancePtr window)
