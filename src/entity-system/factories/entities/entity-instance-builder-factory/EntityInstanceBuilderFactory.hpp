@@ -2,7 +2,6 @@
 
 #include "entity-system/managers/entities/entity-instance-manager/EntityInstanceManager.hpp"
 #include "entity-system/managers/entities/entity-type-manager/EntityTypeManager.hpp"
-
 #include "entity-system/builders/entities/entity-instance-builder/EntityInstanceBuilder.hpp"
 
 namespace inexor {
@@ -20,8 +19,8 @@ namespace entity_system {
 
 			/// Constructor.
 			EntityInstanceBuilderFactory(
-			EntityInstanceManagerPtr entity_instance_manager,
-			EntityTypeManagerPtr entity_type_manager
+				EntityInstanceManagerPtr entity_instance_manager,
+				EntityTypeManagerPtr entity_type_manager
 			);
 
 			/// Destructor.
@@ -43,6 +42,5 @@ namespace entity_system {
 
 	};
 
-
-};
-};
+}
+}

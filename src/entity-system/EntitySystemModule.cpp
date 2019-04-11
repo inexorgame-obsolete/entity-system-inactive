@@ -20,10 +20,7 @@ namespace entity_system {
 
 	void EntitySystemModule::reset_entity_system()
 	{
-		// Reset relations.
 		relation_manager->reset_entity_system();
-
-		// Reset entities.
 		entity_manager->reset_entity_system();
 	}
 

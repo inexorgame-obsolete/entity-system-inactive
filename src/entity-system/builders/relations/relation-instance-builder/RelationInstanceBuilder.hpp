@@ -10,6 +10,7 @@ namespace inexor {
 namespace entity_system {
 
 	class RelationInstanceBuilder;
+
 	using RelationInstanceBuilderPtr = std::shared_ptr<RelationInstanceBuilder>;
 	using RelationInstanceManagerPtr = std::shared_ptr<RelationInstanceManager>;
 	using RelationTypeManagerPtr = std::shared_ptr<RelationTypeManager>;
@@ -95,7 +96,6 @@ namespace entity_system {
 			std::unordered_map<std::string, DataContainerInitializer> relation_instance_attributes;
 
 	};
-
 
 }
 }

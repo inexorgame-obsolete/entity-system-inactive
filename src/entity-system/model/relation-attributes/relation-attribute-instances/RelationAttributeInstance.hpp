@@ -29,8 +29,6 @@ namespace entity_system {
 			/// @return The type of the attribute.
 			RelationAttributeTypePtr get_relation_attribute_type() const;
 
-			// Note: Set and get methods are already implemented by inheriting from DataContainer.
-
 	};
 
 }

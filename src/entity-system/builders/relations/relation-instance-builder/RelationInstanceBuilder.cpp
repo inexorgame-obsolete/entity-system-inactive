@@ -1,5 +1,4 @@
 #include "RelationInstanceBuilder.hpp"
-
 #include "entity-system/model/data/DataTypes.hpp"
 
 namespace inexor {

@@ -8,6 +8,7 @@ namespace inexor {
 namespace entity_system {
 
 	class EntityInstanceBuilder;
+
 	using EntityInstanceBuilderPtr = std::shared_ptr<EntityInstanceBuilder>;
 	using EntityInstanceManagerPtr = std::shared_ptr<EntityInstanceManager>;
 	using EntityTypeManagerPtr = std::shared_ptr<EntityTypeManager>;
@@ -19,14 +20,14 @@ namespace entity_system {
 	/// @class EntityInstanceBuilder
 	/// @brief Management of the loggers.
 	class EntityInstanceBuilder
-	: public std::enable_shared_from_this<EntityInstanceBuilder>
+		: public std::enable_shared_from_this<EntityInstanceBuilder>
 	{
 		public:
 
 			/// Constructor.
 			EntityInstanceBuilder(
-			EntityInstanceManagerPtr entity_instance_manager,
-			EntityTypeManagerPtr entity_type_manager
+				EntityInstanceManagerPtr entity_instance_manager,
+				EntityTypeManagerPtr entity_type_manager
 			);
 
 			/// Destructor.

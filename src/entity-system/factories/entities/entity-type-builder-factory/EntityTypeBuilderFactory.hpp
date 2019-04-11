@@ -11,7 +11,7 @@ namespace entity_system {
 	using EntityTypeBuilderPtr = std::shared_ptr<EntityTypeBuilder>;
 
 	/// @class EntityTypeBuilder
-    /// @brief Management of the loggers.
+	/// @brief Management of the loggers.
 	class EntityTypeBuilderFactory
 	{
 		public:
@@ -48,6 +48,5 @@ namespace entity_system {
 			EntityAttributeInstanceManagerPtr entity_attribute_instance_manager;
 	};
 
-
-};
-};
+}
+}

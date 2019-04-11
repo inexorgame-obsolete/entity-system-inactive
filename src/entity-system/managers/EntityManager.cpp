@@ -28,5 +28,5 @@ namespace entity_system {
 		entity_type_manager->delete_all_entity_types();
 	}
 
-};
-};
+}
+}

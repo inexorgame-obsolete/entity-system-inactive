@@ -82,6 +82,5 @@ namespace entity_system {
 
 	};
 
-
 }
 }

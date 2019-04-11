@@ -22,9 +22,9 @@ namespace entity_system {
 
 			/// Constructor.
 			RelationTypeBuilderFactory(
-			RelationTypeManagerPtr relation_type_manager,
-			RelationAttributeTypeManagerPtr relation_attribute_type_manager,
-			RelationAttributeInstanceManagerPtr relation_attribute_instance_manager
+				RelationTypeManagerPtr relation_type_manager,
+				RelationAttributeTypeManagerPtr relation_attribute_type_manager,
+				RelationAttributeInstanceManagerPtr relation_attribute_instance_manager
 			);
 
 			/// Destructor.
@@ -47,7 +47,6 @@ namespace entity_system {
 			/// The relation attribute instance manager
 			RelationAttributeInstanceManagerPtr relation_attribute_instance_manager;
 	};
-
 
 }
 }

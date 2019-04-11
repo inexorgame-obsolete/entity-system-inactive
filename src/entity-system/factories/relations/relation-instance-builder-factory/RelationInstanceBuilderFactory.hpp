@@ -43,5 +43,5 @@ namespace entity_system {
 
 	};
 
-	}
+}
 }

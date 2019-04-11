@@ -6,11 +6,9 @@
 #include <mutex>
 #include <crossguid/guid.hpp>
 
-
 // When using template classes it is not possible
 // to separate definitions of class methods from their declaration.
 // This is the reason why there is no cpp file for this header file!
-
 
 namespace inexor {
 namespace entity_system {
@@ -60,7 +58,6 @@ namespace entity_system {
 		{
 			// Get the GUID of this type by name.
 			xg::Guid type_GUID = get_GUID_by_type_name(type_name);
-
 			// Read only, no mutex required.
 			return ! (stored_types.end() == stored_types.find(type_GUID));
 		}
@@ -127,7 +124,6 @@ namespace entity_system {
 		{
 			// Get the GUID of this type by name.
 			xg::Guid type_GUID = get_GUID_by_type_name(type_name);
-
 			// Read only, no mutex required.
 			return stored_types[type_name];
 		}
@@ -210,5 +206,5 @@ namespace entity_system {
 
 	};
 
-};
-};
+}
+}

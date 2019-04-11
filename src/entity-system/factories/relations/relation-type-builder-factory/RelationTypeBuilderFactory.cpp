@@ -3,7 +3,6 @@
 namespace inexor {
 namespace entity_system {
 
-
 	RelationTypeBuilderFactory::RelationTypeBuilderFactory(
 		RelationTypeManagerPtr relation_type_manager,
 		RelationAttributeTypeManagerPtr relation_attribute_type_manager,
@@ -27,5 +26,5 @@ namespace entity_system {
 		return std::make_shared<RelationTypeBuilder>(relation_type_manager, relation_attribute_type_manager, relation_attribute_instance_manager);
 	}
 
-	}
+}
 }

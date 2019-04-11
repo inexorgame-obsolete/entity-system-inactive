@@ -124,9 +124,7 @@ namespace entity_system {
 			/// Value is a signal with two parameters: the GUID of the entity type, the GUID of the entity instance
 			std::unordered_map<xg::Guid, std::shared_ptr<boost::signals2::signal<void(const xg::Guid& type_GUID, const xg::Guid& instance_GUID)> > > signals_entity_instance_deleted;
 
-
 	};
 
-
-};
-};
+}
+}

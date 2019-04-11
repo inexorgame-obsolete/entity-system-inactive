@@ -9,9 +9,10 @@
 namespace inexor {
 namespace entity_system {
 
+	class EntityTypeBuilder;
+
 	using string = std::string;
 	using AttributeList = std::unordered_map<string, std::pair<DataType, EnumSet<Feature>>>;
-	class EntityTypeBuilder;
 	using EntityTypeBuilderPtr = std::shared_ptr<EntityTypeBuilder>;
 	using EntityTypePtr = std::shared_ptr<EntityType>;
 	using EntityTypePtrOpt = std::optional<EntityTypePtr>;
@@ -78,7 +79,6 @@ namespace entity_system {
 			AttributeList entity_type_attributes;
 
 	};
-
 
 }
 }

@@ -7,7 +7,6 @@
 #include <unordered_map>
 #include <crossguid/guid.hpp>
 
-
 // When using template classes it is not possible
 // to separate definitions of class methods from their declaration.
 // This is the reason why there is no cpp file for this header file!
@@ -143,6 +142,5 @@ namespace entity_system {
 
 	};
 
-
-};
-};
+}
+}

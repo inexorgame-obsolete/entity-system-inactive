@@ -12,5 +12,5 @@ namespace entity_system {
 	{
 	}
 
-};
-};
+}
+}

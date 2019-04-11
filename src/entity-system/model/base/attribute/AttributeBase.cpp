@@ -27,5 +27,5 @@ namespace entity_system {
 		return features;
 	}
 
-};
-};
+}
+}

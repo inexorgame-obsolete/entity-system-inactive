@@ -40,5 +40,5 @@ namespace entity_system {
 	/// @brief The features on a attribute.
 	BETTER_ENUM(Feature, int, ENGINE_INPUT = 0, INPUT, OUTPUT, SYNC_SERVER, SYNC_BROADCAST_CLIENTS, SERVER_CONFIG, CLIENT_CONFIG)
 
-};
-};
+}
+}
