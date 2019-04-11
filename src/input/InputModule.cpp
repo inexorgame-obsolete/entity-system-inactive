@@ -22,5 +22,11 @@ namespace input {
 		mouse_input_manager->init();
 	}
 
+	void InputModule::shutdown()
+	{
+		keyboard_input_manager->shutdown();
+		mouse_input_manager->shutdown();
+	}
+
 }
 }

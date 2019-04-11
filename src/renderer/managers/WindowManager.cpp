@@ -135,12 +135,32 @@ namespace renderer {
 					((WindowManager*) glfwGetWindowUserPointer(_glfw_window))->window_size_changed(_glfw_window, width, height);
 				});
 
-				// Register keyboard input handler.
-				keyboard_input_manager->set_keyboard_callback(glfw_window);
+				// Register the key callback
+				glfwSetKeyCallback(glfw_window, [] (GLFWwindow* _glfw_window, int key, int scancode, int action, int mods) {
+					((WindowManager*) glfwGetWindowUserPointer(_glfw_window))->window_key_changed(_glfw_window, key, scancode, action, mods);
+				});
 
-				// Register mouse input handler.
-				// This takes care of both mouse buttons and mouse movement.
-				mouse_input_manager->set_mouse_callback(glfw_window);
+				// Register the mouse position callback
+				glfwSetCursorPosCallback(glfw_window, [] (GLFWwindow* _glfw_window, double xpos, double ypos) {
+					((WindowManager*) glfwGetWindowUserPointer(_glfw_window))->window_mouse_position_changed(_glfw_window, xpos, ypos);
+				});
+
+				// Register the mouse button callback
+				glfwSetMouseButtonCallback(glfw_window, [] (GLFWwindow* _glfw_window, int button, int action, int mods) {
+					((WindowManager*) glfwGetWindowUserPointer(_glfw_window))->window_mouse_button_changed(_glfw_window, button, action, mods);
+				});
+
+				// Register the mouse scroll callback
+				glfwSetScrollCallback(glfw_window, [] (GLFWwindow* _glfw_window, double xoffset, double yoffset) {
+					((WindowManager*) glfwGetWindowUserPointer(_glfw_window))->window_mouse_scroll_changed(_glfw_window, xoffset, yoffset);
+				});
+
+//				// Register keyboard input handler.
+//				keyboard_input_manager->set_keyboard_callback(glfw_window);
+//
+//				// Register mouse input handler.
+//				// This takes care of both mouse buttons and mouse movement.
+//				mouse_input_manager->set_mouse_callback(glfw_window);
 
 				///
 				initialize_window_observers(window);
@@ -269,6 +289,26 @@ namespace renderer {
 			window->get_attribute_instance(WindowEntityTypeProvider::WINDOW_WIDTH).value()->own_value.Set(width);
 			window->get_attribute_instance(WindowEntityTypeProvider::WINDOW_HEIGHT).value()->own_value.Set(height);
 		});
+	}
+
+	void WindowManager::window_key_changed(GLFWwindow* glfw_window, int key, int scancode, int action, int mods)
+	{
+		keyboard_input_manager->key_changed(window_entities[glfw_window], key, scancode, action, mods);
+	}
+
+	void WindowManager::window_mouse_position_changed(GLFWwindow* glfw_window, double xpos, double ypos)
+	{
+		mouse_input_manager->mouse_position_changed(window_entities[glfw_window], xpos, ypos);
+	}
+
+	void WindowManager::window_mouse_button_changed(GLFWwindow* glfw_window, int button, int action, int mods)
+	{
+		mouse_input_manager->mouse_button_changed(window_entities[glfw_window], button, action, mods);
+	}
+
+	void WindowManager::window_mouse_scroll_changed(GLFWwindow* glfw_window, double xoffset, double yoffset)
+	{
+		mouse_input_manager->mouse_scroll_changed(window_entities[glfw_window], xoffset, yoffset);
 	}
 
 	void WindowManager::start_window_thread(EntityInstancePtr window)

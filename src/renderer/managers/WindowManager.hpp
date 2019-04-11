@@ -136,11 +136,23 @@ namespace renderer {
 			/// This callback is called if a window has been maximized / restored.
 			void window_maximized(GLFWwindow* glfw_window, bool is_maximized);
 
-			/// This callback is called if a window position has been changed.
+			/// This callback is called if the position of a window has been changed.
 			void window_position_changed(GLFWwindow* glfw_window, int x, int y);
 
-			/// This callback is called if a window size has been changed.
+			/// This callback is called if the size of a window has been changed.
 			void window_size_changed(GLFWwindow* glfw_window, int width, int height);
+
+			/// This callback is called if the state of a key has been changed.
+			void window_key_changed(GLFWwindow* glfw_window, int key, int scancode, int action, int mods);
+
+			/// This callback is called if the mouse position of a window has been changed.
+			void window_mouse_position_changed(GLFWwindow* glfw_window, double xpos, double ypos);
+
+			/// This callback is called if the state of a mouse button has been changed.
+			void window_mouse_button_changed(GLFWwindow* glfw_window, int button, int action, int mods);
+
+			/// This callback is called if the state of a mouse scroll wheel has been changed.
+			void window_mouse_scroll_changed(GLFWwindow* glfw_window, double xoffset, double yoffset);
 
 			/// The factory for creating entities of type WINDOW.
 			WindowFactoryPtr window_factory;

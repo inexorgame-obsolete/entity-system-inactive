@@ -16,10 +16,9 @@ namespace inexor {
 		RestServerPtr rest_server,
 		EntitySystemDebuggerPtr entity_system_debugger,
 		VisualScriptingSystemModulePtr visual_scripting_system_module,
-		LogManagerPtr log_manager,
-		RendererModulePtr renderer_module,
 		CommandModulePtr command_module,
-        AudioModulePtr audio_module
+		ClientModulePtr client_module,
+		LogManagerPtr log_manager
 	)
 	{
 		this->entity_system_module = entity_system_module;
@@ -28,10 +27,9 @@ namespace inexor {
 		this->rest_server = rest_server;
 		this->entity_system_debugger = entity_system_debugger;
 		this->visual_scripting_system_module = visual_scripting_system_module;
-		this->log_manager = log_manager;
-		this->renderer_module = renderer_module;
 		this->command_module = command_module;
-        this->audio_module = audio_module;
+		this->client_module = client_module;
+		this->log_manager = log_manager;
 		this->running = false;
 	}
 	
@@ -72,14 +70,11 @@ namespace inexor {
 		// Initialize the visual scripting.
 		visual_scripting_system_module->init();
 
-		// Initialize the rendering.
-		renderer_module->init();
-
         // Initialize the command module
 		command_module->init();
 
-        // Initialise audio module.
-        audio_module->init();
+		// Initialize the rendering.
+		client_module->init();
 
 		// Setup REST server
 		rest_server->set_service(rest_server);
@@ -109,13 +104,13 @@ namespace inexor {
         {
 			// everything else happens in the execution graph or in threads for the ES instances.
 			std::this_thread::sleep_for(50ms);
-			// spdlog::get(LOGGER_NAME)->info("Uptime: {} s", rest_server->get_uptime().count());
 
-			renderer_module->update();
+			// Main thread update
+			client_module->update();
 
-			if (renderer_module->get_window_manager()->get_window_count() == 0)
+			// Shall shutdown?
+			if (client_module->shall_shutdown())
 			{
-				spdlog::get(LOGGER_NAME)->info("Last window closed");
 				shutdown();
 			}
 		}
@@ -137,11 +132,8 @@ namespace inexor {
         // Shutdown REST server.
 		rest_server->stopService();
 
-		// Shutdown the renderer module.
-		renderer_module->shutdown();
-
-		// Shutdown audio module.
-        audio_module->shutdown();
+		// Shutdown the client module.
+		client_module->shutdown();
 
 		running = false;
 		spdlog::get(LOGGER_NAME)->info("Shutdown completed");

@@ -9,9 +9,8 @@
 #include "configuration/ConfigurationModule.hpp"
 #include "visual-scripting/VisualScriptingSystemModule.hpp"
 #include "logging/managers/LogManager.hpp"
-#include "renderer/RendererModule.hpp"
 #include "command/CommandModule.hpp"
-#include "audio/AudioModule.hpp"
+#include "client/ClientModule.hpp"
 
 #include <memory>
 #include <cstdlib>
@@ -37,10 +36,9 @@ namespace inexor {
 	using RestServerPtr = std::shared_ptr<entity_system::RestServer>;
 	using EntitySystemDebuggerPtr = std::shared_ptr<entity_system::EntitySystemDebugger>;
 	using VisualScriptingSystemModulePtr = std::shared_ptr<visual_scripting::VisualScriptingSystemModule>;
-	using LogManagerPtr = std::shared_ptr<logging::LogManager>;
-	using RendererModulePtr = std::shared_ptr<renderer::RendererModule>;
 	using CommandModulePtr = std::shared_ptr<command::CommandModule>;
-	using AudioModulePtr = std::shared_ptr<inexor::audio::AudioModule>;
+	using ClientModulePtr = std::shared_ptr<inexor::client::ClientModule>;
+	using LogManagerPtr = std::shared_ptr<logging::LogManager>;
 
 	/// @class Inexor
 	/// @brief The application container.
@@ -67,10 +65,9 @@ namespace inexor {
 				RestServerPtr rest_server,
 				EntitySystemDebuggerPtr entity_system_debugger,
 				VisualScriptingSystemModulePtr visual_scripting_system_module,
-				LogManagerPtr log_manager,
-				RendererModulePtr renderer_module,
 				CommandModulePtr command_module,
-				AudioModulePtr audio_module
+				ClientModulePtr client_module,
+				LogManagerPtr log_manager
 			);
 
 			/// Destructor.
@@ -121,17 +118,14 @@ namespace inexor {
 			/// The visual scripting system module.
 			VisualScriptingSystemModulePtr visual_scripting_system_module;
 
-			/// The log manager.
-			LogManagerPtr log_manager;
-
-			/// The rendering module.
-			RendererModulePtr renderer_module;
-
 			/// The command module.
 			CommandModulePtr command_module;
 
-			/// The audio module.
-			AudioModulePtr audio_module;
+			/// The client module.
+			ClientModulePtr client_module;
+
+			/// The log manager.
+			LogManagerPtr log_manager;
 
 			/// The running state of the Inexor application.
 			bool running;

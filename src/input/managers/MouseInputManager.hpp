@@ -1,18 +1,18 @@
 #pragma once
 
+#include "entity-system/model/entities/entity-instances/EntityInstance.hpp"
 #include "logging/managers/LogManager.hpp"
-
-struct GLFWwindow;
 
 namespace inexor {
 namespace input {
 
 	using LogManagerPtr = std::shared_ptr<inexor::logging::LogManager>;
+	using EntityInstancePtr = std::shared_ptr<entity_system::EntityInstance>;
 
 	/// @class MouseInputManager
 	/// @brief Management of the Mouse input data.
 	class MouseInputManager
-	: public std::enable_shared_from_this<MouseInputManager>
+		: public std::enable_shared_from_this<MouseInputManager>
 	{
 		public:
 
@@ -26,27 +26,27 @@ namespace input {
 			/// Destructor.
 			~MouseInputManager();
 
-			/// Initialize Mouse input module.
+			/// Initialize the mouse input manager.
 			void init();
 
-			/// @brief
-			/// @param
-			void set_mouse_callback(GLFWwindow* window);
+			/// Shut down the mouse input manager.
+			void shutdown();
 
-			/// @brief Callback method for mouse position.
-			static void cursor_position_callback(GLFWwindow* window, double xpos, double ypos);
+			/// @brief The mouse position has been changed.
+			void mouse_position_changed(EntityInstancePtr window, double xpos, double ypos);
 
-			/// @brief ?
-			static void mouse_button_callback(GLFWwindow* window, int button, int action, int mods);
+			/// @brief The state of the mouse button has been changed.
+			void mouse_button_changed(EntityInstancePtr window, int button, int action, int mods);
 
-			/// @brief ?
-			static void scroll_callback(GLFWwindow* window, double xoffset, double yoffset);
+			/// @brief The state of the mouse scroll has been changed.
+			void mouse_scroll_changed(EntityInstancePtr window, double xoffset, double yoffset);
 
 			/// The logger name of this service.
-			/// WARNING: We can't use LOGGER_NAME inside of a static class method because it causes runtime errors!
-			//static constexpr char LOGGER_NAME[] = "inexor.input.mouse.manager";
+			static constexpr char LOGGER_NAME[] = "inexor.input.mouse";
 
 		private:
+
+			std::string get_window_name(EntityInstancePtr window);
 
 			/// The log manager.
 			LogManagerPtr log_manager;

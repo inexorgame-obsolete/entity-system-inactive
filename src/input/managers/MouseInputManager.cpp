@@ -1,7 +1,13 @@
 #include "MouseInputManager.hpp"
+
+#include "entity-system/model/data/DataTypes.hpp"
+#include "renderer/providers/WindowEntityTypeProvider.hpp"
+
 #include "spdlog/spdlog.h"
 
 #include <GLFW/glfw3.h>
+
+#include <tuple>
 
 namespace inexor {
 namespace input {
@@ -18,28 +24,31 @@ namespace input {
 
 	void MouseInputManager::init()
 	{
+		log_manager->register_logger(LOGGER_NAME);
 	}
 
-	void MouseInputManager::set_mouse_callback(GLFWwindow* window)
+	void MouseInputManager::shutdown()
 	{
-		glfwSetCursorPosCallback(window, cursor_position_callback);
-		glfwSetMouseButtonCallback(window, mouse_button_callback);
-		glfwSetScrollCallback(window, scroll_callback);
 	}
 
-	void MouseInputManager::cursor_position_callback(GLFWwindow* window, double xpos, double ypos)
+	void MouseInputManager::mouse_position_changed(EntityInstancePtr window, double xpos, double ypos)
 	{
-		spdlog::info("Mouse movement: {}, {}", xpos, ypos);
+		spdlog::get(LOGGER_NAME)->info("Window {} Mouse movement: {}, {}", get_window_name(window), xpos, ypos);
 	}
 
-	void MouseInputManager::mouse_button_callback(GLFWwindow* window, int button, int action, int mods)
+	void MouseInputManager::mouse_button_changed(EntityInstancePtr window, int button, int action, int mods)
 	{
-		spdlog::info("Mouse button: {}", button);
+		spdlog::get(LOGGER_NAME)->info("Window {} Mouse button: {}", get_window_name(window), button);
 	}
 
-	void MouseInputManager::scroll_callback(GLFWwindow* window, double xoffset, double yoffset)
+	void MouseInputManager::mouse_scroll_changed(EntityInstancePtr window, double xoffset, double yoffset)
 	{
-		spdlog::info("Mouse scroll: {}, {}", xoffset, yoffset);
+		spdlog::get(LOGGER_NAME)->info("Window {} Mouse scroll: {}, {}", get_window_name(window), xoffset, yoffset);
+	}
+
+	std::string MouseInputManager::get_window_name(EntityInstancePtr window)
+	{
+		return std::get<entity_system::DataType::STRING>(window->get_attribute_instance(renderer::WindowEntityTypeProvider::WINDOW_TITLE).value()->own_value.Value());
 	}
 
 }

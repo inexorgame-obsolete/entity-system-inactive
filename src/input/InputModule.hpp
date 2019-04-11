@@ -29,6 +29,9 @@ namespace input {
 			/// Initialization of the input module.
 			void init();
 
+			/// Shut down the input module.
+			void shutdown();
+
 		private:
 
 			/// The keyboard input manager.

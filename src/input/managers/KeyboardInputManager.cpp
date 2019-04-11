@@ -1,4 +1,8 @@
 #include "KeyboardInputManager.hpp"
+
+#include "entity-system/model/data/DataTypes.hpp"
+#include "renderer/providers/WindowEntityTypeProvider.hpp"
+
 #include "spdlog/spdlog.h"
 
 #include <GLFW/glfw3.h>
@@ -18,20 +22,24 @@ namespace input {
 
 	void KeyboardInputManager::init()
 	{
+		log_manager->register_logger(LOGGER_NAME);
 	}
 
-	void KeyboardInputManager::set_keyboard_callback(GLFWwindow* window)
+	void KeyboardInputManager::shutdown()
 	{
-		glfwSetKeyCallback(window, keyboard_input_callback);
 	}
 
-	/// @warning We can't use LOGGER_NAME inside of a static class method because it causes runtime errors!
-	void KeyboardInputManager::keyboard_input_callback(GLFWwindow* window, int key, int scancode, int action, int mods)
+	void KeyboardInputManager::key_changed(EntityInstancePtr window, int key, int scancode, int action, int mods)
 	{
 		const char* get_key_name_attempt = glfwGetKeyName(key, 0);
 		std::string key_name = "?";
 		if(get_key_name_attempt) key_name = get_key_name_attempt;
-		spdlog::info("Key {} (ID {}) has been {}.", key_name, key, glfwGetKey(window, key) ? std::string("pressed") : std::string("released"));
+		spdlog::get(LOGGER_NAME)->info("Window {} Key {} (ID {}) has been {}.", get_window_name(window), key_name, key, action ? std::string("pressed") : std::string("released"));
+	}
+
+	std::string KeyboardInputManager::get_window_name(EntityInstancePtr window)
+	{
+		return std::get<entity_system::DataType::STRING>(window->get_attribute_instance(renderer::WindowEntityTypeProvider::WINDOW_TITLE).value()->own_value.Value());
 	}
 
 }
