@@ -1,8 +1,5 @@
 #include "EntityTypeBuilder.hpp"
 
-#include "entity-system/model/entities/entity-types/EntityType.hpp"
-#include "entity-system/model/data/DataTypes.hpp"
-
 #include "spdlog/spdlog.h"
 
 namespace inexor {
@@ -46,25 +43,22 @@ namespace entity_system {
 		return shared_from_this();
 	}
 
-	/// Adds an input attribute
 	EntityTypeBuilderPtr EntityTypeBuilder::input(const std::string& attribute_name, const DataType& attribute_datatype)
 	{
 		entity_type_attributes[attribute_name] = { attribute_datatype, { 1 << Feature::INPUT } };
 		return shared_from_this();
 	}
 
-	/// Adds an output attribute
 	EntityTypeBuilderPtr EntityTypeBuilder::output(const std::string& attribute_name, const DataType& attribute_datatype)
 	{
 		entity_type_attributes[attribute_name] = { attribute_datatype, { 1 << Feature::OUTPUT } };
 		return shared_from_this();
 	}
 
-	/// Adds an attribute which is an input and output at the same time
 	EntityTypeBuilderPtr EntityTypeBuilder::inout(const std::string& attribute_name, const DataType& attribute_datatype)
 	{
-	entity_type_attributes[attribute_name] = { attribute_datatype, { 1 << Feature::INPUT | 1 << Feature::OUTPUT } };
-	return shared_from_this();
+		entity_type_attributes[attribute_name] = { attribute_datatype, { 1 << Feature::INPUT | 1 << Feature::OUTPUT } };
+		return shared_from_this();
 	}
 
 	EntityTypePtrOpt EntityTypeBuilder::build()
