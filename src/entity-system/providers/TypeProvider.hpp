@@ -14,7 +14,7 @@ namespace entity_system {
 	/// A provider makes sure that a type is being created and can be used in the code. Other services have to
 	/// use the provider in order to get the specialized type. The type is created lazily at runtime, this means
 	/// that the first access leads to its construction.
-	///
+	/// @note This template base class is part of a software design pattern called the <b>provider pattern</b>.
 	/// @tparam T The type (e.g. EntityType or RelationType)
 	/// @tparam BUILDER_MANAGER The type of the builder manager.
 	/// @todo Remove BUILDER_MANAGER because builder manager is not yet templated.

@@ -33,7 +33,7 @@ namespace entity_system {
 				LogManagerPtr log_manager
 			);
 
-			/// @brief Destructs the entity system module.
+			/// Destructs the entity system module.
 			~EntitySystemModule();
 
 			/// @brief Completely resets the entity system.

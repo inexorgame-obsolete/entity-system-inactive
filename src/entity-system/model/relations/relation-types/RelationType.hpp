@@ -6,6 +6,7 @@
 namespace inexor {
 namespace entity_system {
 
+	/// These using instructions help to shorten the following code.
 	using EntityTypePtr = std::shared_ptr<EntityType>;
 	using RelationAttributeTypePtr = std::shared_ptr<RelationAttributeType>;
 
@@ -26,32 +27,29 @@ namespace entity_system {
 
 		public:
 
-			/// @brief Constructor.
-			/// @note The dependencies of this class will be injected automatically.
-			/// @note The GUID of the new entity relation type will be created automatically by the inheritance of GUIDBase!
-			/// @param rel_type_name The name of the new relation type name.
-			/// @param ent_type_source A const reference to a shared pointer of an entity type which is the source entity from which the relation will start.
-			/// @param ent_type_target A const reference to a shared pointer of an entity type which is the target entity to which the relation will go.
+			/// @brief Constructs the relation type.
+			/// @note The GUID of the relation type will be created automatically by inheriting from GUIDBase.
+			/// @param rel_type_name A unique name for this realtion type.
+			/// @param ent_type_source A const reference to a shared pointer of an entity type which is the source entity type from which the relation will start.
+			/// @param ent_type_target A const reference to a shared pointer of an entity type which is the target entity type to which the relation will go.
 			RelationType(const std::string& rel_type_name, const EntityTypePtr& ent_type_source, const EntityTypePtr& ent_type_target);
-
-			/// @brief Constructor.
-			/// @note The dependencies of this class will be injected automatically.
-			/// @note The GUID of the new entity relation type will be created automatically by the inheritance of GUIDBase!
-			/// @param ent_type_GUID The GUID of the entity type which will be created.
-			/// @param rel_type_name The unique name of the realtion type which will be created.
-			/// @param ent_type_source A const reference to a shared pointer of an entity type which is the source entity from which the relation will start.
-			/// @param ent_type_target A const reference to a shared pointer of an entity type which is the target entity to which the relation will go.
+			
+			/// @brief Constructs the relation type.
+			/// @param ent_type_GUID The GUID of the relation type.
+			/// @param rel_type_name A unique name for this realtion type.
+			/// @param ent_type_source A const reference to a shared pointer of an entity type which is the source entity type from which the relation will start.
+			/// @param ent_type_target A const reference to a shared pointer of an entity type which is the target entity type to which the relation will go.
 			RelationType(const xg::Guid& rel_type_GUID, const std::string& rel_type_name, const EntityTypePtr& ent_type_source, const EntityTypePtr& ent_type_target);
 
-			/// Destructor.
+			/// Destructs the relation type.
 			~RelationType();
 
-			/// @brief Links an relation attribute type to this relation type.
+			/// @brief Links a relation attribute type to this relation type.
 			/// @param ent_rel_attr_type A const reference to a shared pointer of an relation attribute type which will be linked to this relation type.
 			void link_relation_attribute_type(const RelationAttributeTypePtr& ent_rel_attr_type);
 
 			/// @brief Returns all linked relation attribute types.
-			/// @return A std::vector of shared pointers of relation attribute type.
+			/// @return A std::vector of shared pointers of linked relation attribute types.
 			std::vector<RelationAttributeTypePtr> get_linked_attribute_types() const;
 
 	};
