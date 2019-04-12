@@ -14,7 +14,7 @@ namespace input {
 		public:
 
 			/// Called if a key has been changed on a specific window.
-			virtual void on_key_changed(EntityInstancePtr window, int key, int scancode, int action, int mods) = 0;
+			virtual void on_window_key_changed(EntityInstancePtr window, int key, int scancode, int action, int mods) = 0;
 
 	};
 

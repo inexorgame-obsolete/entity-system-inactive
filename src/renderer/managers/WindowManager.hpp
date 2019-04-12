@@ -73,6 +73,10 @@ namespace renderer {
 			/// @param window The GLFWwindow instance.
 			EntityInstancePtr create_window(std::string title, int x, int y, int width, int height);
 
+			/// @brief Creates a new window with the given title, position and dimensions.
+			/// @param window The GLFWwindow instance.
+			EntityInstancePtr create_window(std::string title, int x, int y, int width, int height, float opacity);
+
 			/// @brief Destroys the given window.
 			/// @param window The entity instance of type WINDOW.
 			void destroy_window(EntityInstancePtr window);
@@ -185,6 +189,10 @@ namespace renderer {
 			/// The mapping between the pointer to the window and the
 			/// corresponding entity instance.
 			std::unordered_map<GLFWwindow*, EntityInstancePtr> window_entities;
+
+			std::unordered_map<EntityInstancePtr, SignalT<std::pair<int, int>>> signal_position_changed;
+
+			std::unordered_map<EntityInstancePtr, SignalT<std::pair<int, int>>> signal_size_changed;
 
 			std::unordered_map<EntityInstancePtr, bool> window_thread_state;
 

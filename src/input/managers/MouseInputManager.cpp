@@ -33,7 +33,7 @@ namespace input {
 
 	void MouseInputManager::mouse_position_changed(EntityInstancePtr window, double xpos, double ypos)
 	{
-		spdlog::get(LOGGER_NAME)->info("Window {} Mouse movement: {}, {}", get_window_name(window), xpos, ypos);
+		spdlog::get(LOGGER_NAME)->debug("Window {} Mouse movement: {}, {}", get_window_name(window), xpos, ypos);
 	}
 
 	void MouseInputManager::mouse_button_changed(EntityInstancePtr window, int button, int action, int mods)

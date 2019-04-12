@@ -208,5 +208,7 @@ namespace entity_system {
 		}
 	}
 
+	// TODO: if entity type has been deleted, remove the signals for this type
+
 }
 }

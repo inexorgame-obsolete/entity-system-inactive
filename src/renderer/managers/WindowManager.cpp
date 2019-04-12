@@ -5,8 +5,11 @@
 #include <GLFW/glfw3.h>
 
 #include "react/Observer.h"
+#include "react/Signal.h"
 
 #include "spdlog/spdlog.h"
+
+#include <utility>
 
 namespace inexor {
 namespace renderer {
@@ -79,18 +82,31 @@ namespace renderer {
 	/// @param window The GLFWwindow instance.
 	EntityInstancePtr WindowManager::create_window(std::string title, int x, int y, int width, int height)
 	{
+		return create_window(title, x, y, width, height, 1.0f);
+	}
+
+	/// @brief Creates a new window with the given title, position and dimensions.
+	/// @param window The GLFWwindow instance.
+	EntityInstancePtr WindowManager::create_window(std::string title, int x, int y, int width, int height, float opacity)
+	{
 
 		spdlog::get(WindowManager::LOGGER_NAME)->info("Creating window: '{}' ({}, {}) ({}x{})", title, x, y, width, height);
 
 		// Create a windowed mode window and its OpenGL context.
+		// Unlike SDL2, GLFW requires at least version 3.2 to be able to request a core profile.
+
+		glfwWindowHint(GLFW_CONTEXT_VERSION_MAJOR, 3);
+		glfwWindowHint(GLFW_CONTEXT_VERSION_MINOR, 2);
+		glfwWindowHint(GLFW_OPENGL_PROFILE, GLFW_OPENGL_CORE_PROFILE);
 		glfwWindowHint(GLFW_VISIBLE, GLFW_FALSE);
+
 		GLFWwindow* const glfw_window = glfwCreateWindow(width, height, title.c_str(), nullptr, nullptr);
 
 		if (glfw_window)
 		{
 			glfwSetWindowPos(glfw_window, x, y);
 
-			EntityInstancePtrOpt o_window = window_factory->create_instance(title, x, y, width, height);
+			EntityInstancePtrOpt o_window = window_factory->create_instance(title, x, y, width, height, opacity);
 			if (o_window.has_value())
 			{
 				EntityInstancePtr window = o_window.value();
@@ -101,6 +117,7 @@ namespace renderer {
 				// Track the glfw window and the entity instance.
 				windows[window] = std::make_pair(glfw_window, std::move(window_thread));
 				window_entities[glfw_window] = window;
+				// window_position_changed[window] = std::make_pair(x, y);
 
 				// Set the window's user pointer to the window manager
 				glfwSetWindowUserPointer(glfw_window, this);
@@ -155,18 +172,11 @@ namespace renderer {
 					((WindowManager*) glfwGetWindowUserPointer(_glfw_window))->window_mouse_scroll_changed(_glfw_window, xoffset, yoffset);
 				});
 
-//				// Register keyboard input handler.
-//				keyboard_input_manager->set_keyboard_callback(glfw_window);
-//
-//				// Register mouse input handler.
-//				// This takes care of both mouse buttons and mouse movement.
-//				mouse_input_manager->set_mouse_callback(glfw_window);
-
 				///
 				initialize_window_observers(window);
 
-				// TEST!
-				// glfwSetWindowOpacity(glfw_window, 0.5f);
+				// Set window opacity
+				glfwSetWindowOpacity(glfw_window, opacity);
 
 				glfwShowWindow(glfw_window);
 
@@ -198,20 +208,20 @@ namespace renderer {
 		spdlog::get(WindowManager::LOGGER_NAME)->info("Attempting to close window!");
 
 		// Signal window to be closed
-		glfwSetWindowShouldClose(glfw_window, GLFW_TRUE);
-
-		// Wait for window thread state being released
-		while(window_thread_state[window])
+		if (glfw_window != nullptr)
 		{
-			std::this_thread::sleep_for(std::chrono::milliseconds(10));
+			glfwSetWindowShouldClose(glfw_window, GLFW_TRUE);
+
+			// Wait for window thread state being released
+			while(window_thread_state[window])
+			{
+				std::this_thread::sleep_for(std::chrono::milliseconds(10));
+			}
+
+			spdlog::get(WindowManager::LOGGER_NAME)->info("Window thread state false!");
+		} else {
+			// TODO: kill window_thread !
 		}
-
-		spdlog::get(WindowManager::LOGGER_NAME)->info("Window thread state false!");
-
-		// Wait for the window thread being joined
-		window_thread.join();
-
-		spdlog::get(WindowManager::LOGGER_NAME)->info("Window thread joined!");
 	}
 
 
@@ -233,16 +243,95 @@ namespace renderer {
 	void WindowManager::initialize_window_observers(EntityInstancePtr window)
 	{
 		GLFWwindow *glfw_window = windows[window].first;
+
+		Observe(
+			window->get_attribute_instance(WindowEntityTypeProvider::WINDOW_FULLSCREEN).value()->value,
+			[glfw_window, window] (DataValue fullscreen) {
+				spdlog::info("fullscreen {}", std::get<DataType::BOOL>(fullscreen) ? "true" : "false");
+				if (std::get<DataType::BOOL>(fullscreen)) {
+					GLFWmonitor* glfw_monitor = glfwGetPrimaryMonitor();
+					const GLFWvidmode* glfw_mode = glfwGetVideoMode(glfw_monitor);
+					glfwSetWindowMonitor(glfw_window, glfw_monitor, 0, 0, glfw_mode->width, glfw_mode->height, glfw_mode->refreshRate);
+				} else {
+					int x = std::get<DataType::INT>(window->get_attribute_instance(WindowEntityTypeProvider::WINDOW_POSITION_X).value()->value.Value());
+					int y = std::get<DataType::INT>(window->get_attribute_instance(WindowEntityTypeProvider::WINDOW_POSITION_Y).value()->value.Value());
+					int width = std::get<DataType::INT>(window->get_attribute_instance(WindowEntityTypeProvider::WINDOW_POSITION_X).value()->value.Value());
+					int height = std::get<DataType::INT>(window->get_attribute_instance(WindowEntityTypeProvider::WINDOW_POSITION_Y).value()->value.Value());
+					glfwSetWindowMonitor(glfw_window, nullptr, x, y, width, height, 0);
+				}
+			}
+		);
+
 		Observe(
 			window->get_attribute_instance(WindowEntityTypeProvider::WINDOW_ICONIFIED).value()->value,
-			[glfw_window] (DataValue focus) {
-				if (std::get<DataType::BOOL>(focus)) {
+			[glfw_window] (DataValue iconified) {
+				spdlog::info("iconified {}", std::get<DataType::BOOL>(iconified) ? "true" : "false");
+				if (std::get<DataType::BOOL>(iconified)) {
 					glfwIconifyWindow(glfw_window);
 				} else {
 					glfwRestoreWindow(glfw_window);
 				}
 			}
 		);
+
+		Observe(
+			window->get_attribute_instance(WindowEntityTypeProvider::WINDOW_MAXIMIZED).value()->value,
+			[glfw_window] (DataValue maximized) {
+				spdlog::info("maximized {}", std::get<DataType::BOOL>(maximized) ? "true" : "false");
+				if (std::get<DataType::BOOL>(maximized)) {
+					glfwMaximizeWindow(glfw_window);
+				} else {
+					glfwRestoreWindow(glfw_window);
+				}
+			}
+		);
+
+		signal_position_changed[window] = MakeSignal<D>(
+			With(
+				window->get_attribute_instance(WindowEntityTypeProvider::WINDOW_POSITION_X).value()->value,
+				window->get_attribute_instance(WindowEntityTypeProvider::WINDOW_POSITION_Y).value()->value
+			),
+			[glfw_window, this, window] (DataValue position_x, DataValue position_y) {
+				spdlog::info("(1) position_x {} position_y {}", std::get<DataType::INT>(position_x), std::get<DataType::INT>(position_y));
+				return std::make_pair(std::get<DataType::INT>(position_x), std::get<DataType::INT>(position_y));
+			}
+		);
+
+		auto observer_position_changed = Observe(
+			signal_position_changed[window],
+			[glfw_window] (std::pair<int, int> position) {
+				spdlog::info("(2) position_x {} position_y {}", position.first, position.second);
+				glfwSetWindowPos(glfw_window, position.first, position.second);
+			}
+		);
+
+		signal_size_changed[window] = MakeSignal<D>(
+			With(
+				window->get_attribute_instance(WindowEntityTypeProvider::WINDOW_WIDTH).value()->value,
+				window->get_attribute_instance(WindowEntityTypeProvider::WINDOW_HEIGHT).value()->value
+			),
+			[glfw_window, this, window] (DataValue width, DataValue height) {
+				spdlog::info("(1) width {} height {}", std::get<DataType::INT>(width), std::get<DataType::INT>(height));
+				return std::make_pair(std::get<DataType::INT>(width), std::get<DataType::INT>(height));
+			}
+		);
+
+		auto observer_size_changed = Observe(
+			signal_size_changed[window],
+			[glfw_window] (std::pair<int, int> size) {
+				spdlog::info("(2) width {} height {}", size.first, size.second);
+				glfwSetWindowSize(glfw_window, size.first, size.second);
+			}
+		);
+
+		Observe(
+			window->get_attribute_instance(WindowEntityTypeProvider::WINDOW_OPACITY).value()->value,
+			[glfw_window] (DataValue opacity) {
+				glfwSetWindowOpacity(glfw_window, std::get<DataType::FLOAT>(opacity));
+			}
+		);
+		// TODO:
+		// WindowEntityTypeProvider::WINDOW_VISIBLE
 	}
 
 	void WindowManager::window_closed(GLFWwindow* glfw_window)
@@ -252,7 +341,7 @@ namespace renderer {
 
 	void WindowManager::window_focused(GLFWwindow* glfw_window, bool has_focus)
 	{
-		spdlog::get(WindowManager::LOGGER_NAME)->error("EVT: Window focus changed: {}", has_focus);
+		spdlog::get(WindowManager::LOGGER_NAME)->info("EVT: Window focus changed: {}", has_focus);
 		EntityInstancePtr window = window_entities[glfw_window];
 		window->get_attribute_instance(WindowEntityTypeProvider::WINDOW_FOCUSED).value()->own_value.Set(has_focus);
 	}
@@ -357,6 +446,10 @@ namespace renderer {
 		// Untrack the glfw window
 		window_entities.erase(glfw_window);
 		spdlog::info("window_entities count: {}", window_entities.size());
+
+		// Untrack the window state change signals
+		signal_position_changed.erase(window);
+		signal_size_changed.erase(window);
 
 		// Remove render functions
 		window_render_functions.erase(window);

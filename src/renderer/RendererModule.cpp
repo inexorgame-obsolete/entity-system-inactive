@@ -26,9 +26,10 @@ namespace renderer {
 	{
 		// Initialize the GLFW library.
 
-		glfwWindowHint(GLFW_CONTEXT_VERSION_MAJOR, 3);
-		glfwWindowHint(GLFW_CONTEXT_VERSION_MINOR, 0);
-		glfwWindowHint(GLFW_OPENGL_PROFILE, GLFW_OPENGL_CORE_PROFILE);
+		// Set error callback
+		glfwSetErrorCallback([] (int error_code, const char* error_message) {
+			spdlog::info("GLFW ERROR {}: {}", error_code, error_message);
+		});
 
 		if(!glfwInit())
 		{
@@ -47,6 +48,9 @@ namespace renderer {
 		triangle_example->shutdown();
 		window_manager->shutdown();
 		monitor_manager->shutdown();
+
+		// Ensure we have unset all callbacks and then terminate
+		glfwSetErrorCallback(nullptr);
 
 		glfwTerminate();
 	}

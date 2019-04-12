@@ -103,7 +103,9 @@ namespace inexor {
 		while(running)
         {
 			// everything else happens in the execution graph or in threads for the ES instances.
-			std::this_thread::sleep_for(50ms);
+
+			// main thread = poll events
+			std::this_thread::sleep_for(10ms);
 
 			// Main thread update
 			client_module->update();

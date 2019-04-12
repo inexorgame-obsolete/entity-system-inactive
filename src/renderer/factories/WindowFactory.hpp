@@ -42,6 +42,8 @@ namespace renderer {
 			/// @param height The height of the window.
 			EntityInstancePtrOpt create_instance(std::string title, int x, int y, int width, int height);
 
+			EntityInstancePtrOpt create_instance(std::string title, int x, int y, int width, int height, float opacity);
+
 		private:
 
 			/// The entity type provider.

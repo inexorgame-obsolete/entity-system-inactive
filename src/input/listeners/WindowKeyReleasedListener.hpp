@@ -14,7 +14,7 @@ namespace input {
 		public:
 
 			/// Called if a key has been released on a specific window.
-			virtual void on_key_released(EntityInstancePtr window, int key, int scancode, int mods) = 0;
+			virtual void on_window_key_released(EntityInstancePtr window, int key, int scancode, int mods) = 0;
 
 	};
 

@@ -18,7 +18,8 @@ namespace inexor {
 namespace renderer {
 
 	using WindowManagerPtr = std::shared_ptr<WindowManager>;
-	using LogManagerPtr = std::shared_ptr<inexor::logging::LogManager>;
+	using KeyboardInputManagerPtr = std::shared_ptr<input::KeyboardInputManager>;
+	using LogManagerPtr = std::shared_ptr<logging::LogManager>;
 	using EntityInstancePtr = std::shared_ptr<EntityInstance>;
 
 	struct QuadVertex {
@@ -29,7 +30,8 @@ namespace renderer {
 	/// @class LoadingScreen
 	/// @brief Shows a loading screen during startup.
 	class LoadingScreen
-	: public std::enable_shared_from_this<LoadingScreen>
+		: public input::WindowKeyReleasedListener,
+		  public std::enable_shared_from_this<LoadingScreen>
 	{
 		public:
 
@@ -39,6 +41,7 @@ namespace renderer {
 			/// @param log_manager The log manager.
 			LoadingScreen(
 				WindowManagerPtr window_manager,
+				KeyboardInputManagerPtr keyboard_input_manager,
 				LogManagerPtr log_manager
 			);
 
@@ -50,6 +53,9 @@ namespace renderer {
 
 			/// Shut down the loading screen.
 			void shutdown();
+
+			/// Window key released
+			void on_window_key_released(EntityInstancePtr window, int key, int scancode, int mods);
 
 			/// The logger name of this service.
 			static constexpr char LOGGER_NAME[] = "inexor.renderer.loading";
@@ -64,6 +70,9 @@ namespace renderer {
 
 			/// The window manager
 			WindowManagerPtr window_manager;
+
+			/// The keyboard input manager
+			KeyboardInputManagerPtr keyboard_input_manager;
 
 			/// The log manager.
 			LogManagerPtr log_manager;

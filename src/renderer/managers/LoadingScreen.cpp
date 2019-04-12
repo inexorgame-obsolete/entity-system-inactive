@@ -1,21 +1,30 @@
 #include "LoadingScreen.hpp"
 
+#include "entity-system/model/entity-attributes/entity-attribute-instances/EntityAttributeInstance.hpp"
+
 #include <Magnum/Primitives/Square.h>
 
 #include <GLFW/glfw3.h>
 
 #include "spdlog/spdlog.h"
 
+#include <algorithm>
+
 using namespace Magnum::Math::Literals;
 
 namespace inexor {
 namespace renderer {
 
+	using EntityAttributeInstancePtr = std::shared_ptr<EntityAttributeInstance>;
+	using EntityAttributeInstancePtrOpt = std::optional<EntityAttributeInstancePtr>;
+
 	LoadingScreen::LoadingScreen(
 		WindowManagerPtr window_manager,
+		KeyboardInputManagerPtr keyboard_input_manager,
 		LogManagerPtr log_manager
 	) {
 		this->window_manager = window_manager;
+		this->keyboard_input_manager = keyboard_input_manager;
 		this->log_manager = log_manager;
 		this->initialized = false;
 	}
@@ -29,11 +38,13 @@ namespace renderer {
 		log_manager->register_logger(LOGGER_NAME);
 
 		// Creates the window
-		window = window_manager->create_window("Inexor", 0, 0, 800, 600);
+		window = window_manager->create_window("Inexor Logo", 0, 0, 800, 600, 0.8f);
 		// The first render function is the initialization function which is executed only once
 		window_manager->register_render_function(window, std::bind(&LoadingScreen::create_logo, this, std::placeholders::_1, std::placeholders::_2));
 		// The second render function is for rendering the inexor logo
 		window_manager->register_render_function(window, std::bind(&LoadingScreen::render_logo, this, std::placeholders::_1, std::placeholders::_2));
+
+		keyboard_input_manager->register_on_window_key_released(window, shared_from_this());
 	}
 
 	void LoadingScreen::shutdown()
@@ -41,6 +52,79 @@ namespace renderer {
 		window_manager->destroy_window(window);
 	}
 
+	void toggle(EntityInstancePtr entity_instance, std::string name)
+	{
+		EntityAttributeInstancePtr attr =  entity_instance->get_attribute_instance(name).value();
+		attr->own_value.Set(!std::get<entity_system::DataType::BOOL>(attr->value.Value()));
+	}
+
+	void increase(EntityInstancePtr entity_instance, std::string name, float step, float max)
+	{
+		EntityAttributeInstancePtr attr =  entity_instance->get_attribute_instance(name).value();
+		attr->own_value.Set(std::min(max, std::get<entity_system::DataType::FLOAT>(attr->value.Value()) + step));
+	}
+
+	void increase(EntityInstancePtr entity_instance, std::string name, int step, int max)
+	{
+		EntityAttributeInstancePtr attr =  entity_instance->get_attribute_instance(name).value();
+		attr->own_value.Set(std::min(max, std::get<entity_system::DataType::INT>(attr->value.Value()) + step));
+	}
+
+	void decrease(EntityInstancePtr entity_instance, std::string name, float step, float min)
+	{
+		EntityAttributeInstancePtr attr =  entity_instance->get_attribute_instance(name).value();
+		attr->own_value.Set(std::max(min, std::get<entity_system::DataType::FLOAT>(attr->value.Value()) - step));
+	}
+
+	void decrease(EntityInstancePtr entity_instance, std::string name, int step, int min)
+	{
+		EntityAttributeInstancePtr attr =  entity_instance->get_attribute_instance(name).value();
+		attr->own_value.Set(std::max(min, std::get<entity_system::DataType::INT>(attr->value.Value()) - step));
+	}
+
+	void LoadingScreen::on_window_key_released(EntityInstancePtr window, int key, int scancode, int mods)
+	{
+
+		spdlog::get(LOGGER_NAME)->info("Loading Screen {} {} {}", key, scancode, mods);
+		switch (key)
+		{
+			case GLFW_KEY_X:
+				window_manager->destroy_window(window);
+				break;
+			case GLFW_KEY_Q:
+				window_manager->shutdown();
+				break;
+			case GLFW_KEY_I:
+				toggle(window, WindowEntityTypeProvider::WINDOW_ICONIFIED);
+				break;
+			case GLFW_KEY_F:
+				toggle(window, WindowEntityTypeProvider::WINDOW_FULLSCREEN);
+				break;
+			case GLFW_KEY_M:
+				toggle(window, WindowEntityTypeProvider::WINDOW_MAXIMIZED);
+				break;
+			case GLFW_KEY_W:
+				decrease(window, WindowEntityTypeProvider::WINDOW_POSITION_Y, 5, 0);
+				break;
+			case GLFW_KEY_A:
+				decrease(window, WindowEntityTypeProvider::WINDOW_POSITION_X, 5, 0);
+				break;
+			case GLFW_KEY_S:
+				increase(window, WindowEntityTypeProvider::WINDOW_POSITION_Y, 5, 800);
+				break;
+			case GLFW_KEY_D:
+				increase(window, WindowEntityTypeProvider::WINDOW_POSITION_X, 5, 600);
+				break;
+			case GLFW_KEY_KP_ADD:
+				increase(window, WindowEntityTypeProvider::WINDOW_OPACITY, 0.05f, 1.0f);
+				break;
+			case GLFW_KEY_KP_SUBTRACT:
+				decrease(window, WindowEntityTypeProvider::WINDOW_OPACITY, 0.05f, 0.1f);
+				break;
+			default:
+				break;
+		}
+	}
 
 	void LoadingScreen::create_logo(EntityInstancePtr window, GLFWwindow* glfw_window)
 	{
