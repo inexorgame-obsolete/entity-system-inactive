@@ -1,6 +1,5 @@
 #include "EntityInstanceBuilder.hpp"
 
-#include "entity-system/model/data/DataTypes.hpp"
 #include "entity-system/model/entity-attributes/entity-attribute-instances/EntityAttributeInstance.hpp"
 
 #include "spdlog/spdlog.h"
@@ -8,6 +7,7 @@
 namespace inexor {
 namespace entity_system {
 
+	/// These using instructions help to shorten the following code.
 	using EntityAttributeInstancePtr = std::shared_ptr<EntityAttributeInstance>;
 	using EntityAttributeInstancePtrOpt = std::optional<EntityAttributeInstancePtr>;
 
