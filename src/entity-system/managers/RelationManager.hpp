@@ -37,12 +37,12 @@ namespace entity_system {
 
 			/// @brief Resets relations, relation instances, relation attributes and relation attribute instances.
 			/// @note Order of destruction:
-			/// <ul>
+			/// <ol>
 			///		<li> relation attribute instances
 			///		<li> relation attribute types
 			///		<li> relation instances
 			///		<li> relation types
-			/// </ul>
+			/// </ol>
 			void reset_relations_and_relation_attributes();
 
 		private:

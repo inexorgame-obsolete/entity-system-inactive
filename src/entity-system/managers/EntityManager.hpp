@@ -37,12 +37,12 @@ namespace entity_system {
 
 			/// Resets types, instances, attribute types and attribute instances.
 			/// @note Order of destruction:
-			/// <ul>
+			/// <ol>
 			///		<li> entity attribute instances
 			///		<li> entity attribute types
 			///		<li> entity instances
 			///		<li> entity types
-			/// </ul>
+			/// </ol>
 			void reset_attributes_and_types();
 
 		private:

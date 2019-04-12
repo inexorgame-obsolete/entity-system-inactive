@@ -38,7 +38,7 @@ namespace entity_system {
 
 			/// @brief Completely resets the entity system.
 			/// @note Order of destruction:
-			/// <ul>
+			/// <ol>
 			///   <li> relation attribute instances
 			///   <li> relation attribute types
 			///   <li> relation instances
@@ -47,7 +47,7 @@ namespace entity_system {
 			///   <li> entity attribute types
 			///   <li> entity instances
 			///   <li> entity types
-			/// </ul>
+			/// </ol>
 			void reset_entity_system();
 
 		private:
