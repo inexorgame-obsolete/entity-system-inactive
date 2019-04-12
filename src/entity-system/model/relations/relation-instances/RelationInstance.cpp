@@ -7,8 +7,9 @@ namespace entity_system {
 		: GUIDBase(),
 		InstanceBase(rel_type)
 	{
-		// Store source and target entity instances.
+		// Store source entity instances.
 		source_entity_instance = ent_inst_source;
+		// Store target entity instances.
 		destination_entity_instance = ent_inst_target;
 	}
 
@@ -16,14 +17,14 @@ namespace entity_system {
 		: GUIDBase(inst_GUID),
 		InstanceBase(rel_type)
 	{
-		// Store source and target entity instances.
+		// Store source entity instances.
 		source_entity_instance = ent_inst_source;
+		// Store target entity instances.
 		destination_entity_instance = ent_inst_target;
 	}
 
 	RelationInstance::~RelationInstance()
 	{
-		// TODO: Delete all entity relation attribute type instances!
 	}
 
 	RelationTypePtr RelationInstance::get_relation_type() const
@@ -34,6 +35,16 @@ namespace entity_system {
 	std::unordered_map<RelationAttributeTypePtr, RelationAttributeInstancePtr> RelationInstance::get_relation_attribute_instances() const
 	{
 		return relation_attribute_instances;
+	}
+
+	EntityInstancePtr RelationInstance::get_source_entity_instance() const
+	{
+		return source_entity_instance;
+	}
+
+	EntityInstancePtr RelationInstance::get_target_entity_instance() const
+	{
+		return destination_entity_instance;
 	}
 
 }
