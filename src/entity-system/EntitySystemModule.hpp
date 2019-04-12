@@ -14,6 +14,7 @@ namespace entity_system {
 	{
 		public:
 
+			/// These using instructions help to shorten the following code.
 			using EntityManagerPtr = std::shared_ptr<EntityManager>;
 			using RelationManagerPtr = std::shared_ptr<RelationManager>;
 			using BuilderFactoryManagerPtr = std::shared_ptr<BuilderFactoryManager>;
@@ -21,8 +22,8 @@ namespace entity_system {
 
 			/// @brief Constructs the entity system module.
 			/// @note The dependencies of this class will be injected automatically.
-			/// @param entity_manager The manager for entity types and entity instances.
-			/// @param relation_manager The manager for relation types and relation instances.
+			/// @param entity_manager The manager for entity types, entity instances, attribute types and attribute instances.
+			/// @param relation_manager The manager for relation types, relation instances, relation attribute types and relation attribute instances.
 			/// @param builder_factory_manager The manager for the builder factories.
 			/// @param log_manager The log manager.
 			EntitySystemModule(
@@ -32,23 +33,29 @@ namespace entity_system {
 				LogManagerPtr log_manager
 			);
 
-			/// Destructor.
+			/// @brief Destructs the entity system module.
 			~EntitySystemModule();
 
-			/// @brief Resets the entire entity system.
+			/// @brief Completely resets the entity system.
 			/// @note Order of destruction:
 			/// <ul>
-			///   <li> Relations
-			///   <li> Entities
+			///   <li> relation attribute instances
+			///   <li> relation attribute types
+			///   <li> relation instances
+			///   <li> relation types
+			///   <li> entity attribute instances
+			///   <li> entity attribute types
+			///   <li> entity instances
+			///   <li> entity types
 			/// </ul>
 			void reset_entity_system();
 
 		private:
 
-			/// The manager for entity types and entity instances.
+			/// The manager for entity types, entity instances, attribute types and attribute instances.
 			EntityManagerPtr entity_manager;
 
-			/// The manager for relation types and relation instances.
+			/// The manager for relation types, relation instances, relation attribute types and relation attribute instances.
 			RelationManagerPtr relation_manager;
 
 			/// The manager for the builder factories.
