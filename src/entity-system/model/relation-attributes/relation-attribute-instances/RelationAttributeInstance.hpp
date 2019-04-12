@@ -6,25 +6,26 @@
 namespace inexor {
 namespace entity_system {
 
+	/// This using instruction helps to shorten the following code.
 	using RelationAttributeTypePtr = std::shared_ptr<RelationAttributeType>;
 
 	/// @class RelationAttributeInstance
-	/// @brief A base class for relation attribute type instances
+	/// @brief A base class for relation attribute instances.
 	class RelationAttributeInstance : public InstanceBase<RelationAttributeType>, public DataContainer, public GUIDBase
 	{
 		public:
 
-			/// @brief Constructor.
-			/// @note The dependencies of this class will be injected automatically.
-			/// @note the GUID of the new relation attribute instance will be created automatically by the inheritance of GUIDBase!
-			/// @param rel_attr_type A const reference to a shared pointer of an relation attribute type of which an instance will be created.
+			/// @brief Constructs the relation attribute instance.
+			/// @note The GUID of this relation attribute instance will be created automatically by inheriting from GUIDBase!
+			/// @param rel_attr_type A const reference to a shared pointer of a relation attribute type of which an instance will be created.
+			/// @todo Add a mutex to ensure thread-safety!
 			RelationAttributeInstance(const RelationAttributeTypePtr& rel_attr_type);
 
-			/// Destructor.
+			/// Destructs the relation attribute instance.
 			~RelationAttributeInstance();
 
-			/// @brief Get the relation attribute type.
-			/// @return The type of the attribute.
+			/// @brief Returns the relation attribute type.
+			/// @return The attribte type.
 			RelationAttributeTypePtr get_relation_attribute_type() const;
 
 	};

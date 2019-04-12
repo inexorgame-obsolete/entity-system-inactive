@@ -15,15 +15,14 @@ namespace entity_system {
 	{
 		public:
 
-			/// @brief Constructor.
-			/// @note The dependencies of this class will be injected automatically.
-			/// @note The GUID of the new relation attribute type will be created automatically by the inheritance of GUIDBase!
-			/// @param rel_attr_type_name The name of the new relation attribute type.
-			/// @param rel_attr_type_data_type The data type of the new relation attribute type.
-			/// @param rel_attr_type_features The features of the new relation attribute type.
+			/// @brief Constructs the relation attribute type.
+			/// @note The GUID of this relation attribute type will be created automatically by inheriting from GUIDBase!
+			/// @param rel_attr_type_name The name of this relation attribute type.
+			/// @param rel_attr_type_data_type The data type of this relation attribute type.
+			/// @param rel_attr_type_features The features of this relation attribute type.
 			RelationAttributeType(const std::string& rel_attr_type_name, const DataType& rel_attr_type_data_type, const EnumSet<Feature>& rel_attr_type_features);
 
-			/// Destructor.
+			/// Destructs the relation attribute type.
 			~RelationAttributeType();
 
 	};
