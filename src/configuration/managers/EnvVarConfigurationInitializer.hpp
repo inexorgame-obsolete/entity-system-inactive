@@ -24,7 +24,7 @@ namespace configuration {
 			/// @note The dependencies of this class will be injected automatically.
 			/// @param configuration_manager The configuration manager.
 			EnvVarConfigurationInitializer(
-			ConfigurationManagerPtr configuration_manager
+				ConfigurationManagerPtr configuration_manager
 			);
 
 			/// Destructor.
