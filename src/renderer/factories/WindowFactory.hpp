@@ -35,14 +35,17 @@ namespace renderer {
 			~WindowFactory();
 
 			/// Creates a new window with the given title, coordinates and dimensions.
+			/// @param id The id of the window.
 			/// @param title The title of the window.
 			/// @param x The x position of the window.
 			/// @param y The y position of the window.
 			/// @param width The width of the window.
 			/// @param height The height of the window.
-			EntityInstancePtrOpt create_instance(std::string title, int x, int y, int width, int height);
+			EntityInstancePtrOpt create_instance(int id, std::string title, int x, int y, int width, int height);
 
-			EntityInstancePtrOpt create_instance(std::string title, int x, int y, int width, int height, float opacity);
+			EntityInstancePtrOpt create_instance(int id, std::string title, int x, int y, int width, int height, float opacity);
+
+			EntityInstancePtrOpt create_instance(int id, std::string title, int x, int y, int width, int height, float opacity, bool visible, bool fullscreen, bool iconified, bool maximized, bool focused);
 
 		private:
 

@@ -31,6 +31,44 @@ namespace renderer {
 	using EntityInstancePtr = std::shared_ptr<EntityInstance>;
 	using EntityAttributeInstancePtr = std::shared_ptr<entity_system::EntityAttributeInstance>;
 
+	/// @class ManagedWindow
+	/// @brief Represents a window, which is managed by the WindowManager.
+	struct ManagedWindow
+	{
+		/// Creates a new ManagedWindow.
+		ManagedWindow(int _id, std::string _title, EntityInstancePtr _window, GLFWwindow* _glfw_window)
+			: id(_id), title(_title), window(_window), glfw_window(_glfw_window), thread_running(false) {};
+
+		/// The id of the window.
+		int id;
+
+		/// The initial title of the window.
+		std::string title;
+
+		/// The entity instance.
+		EntityInstancePtr window;
+
+		/// The GLFW window handle.
+		GLFWwindow* glfw_window;
+
+		/// The thread controls the window.
+		std::thread thread;
+
+		/// If true, the window thread is running
+		bool thread_running;
+
+		/// A signal that the position of the window has been changed.
+		SignalT<std::pair<int, int>> signal_position_changed;
+
+		/// A signal that the size of the window has been changed.
+		SignalT<std::pair<int, int>> signal_size_changed;
+
+		// TODO: list of observers for shutting down the observers during destroy
+
+		/// A list of functions to call during rendering. The order of these functions is important.
+		std::list<std::function<void(EntityInstancePtr, GLFWwindow*)>> render_functions;
+	};
+
 	/// @class WindowManager
 	/// @brief The WindowManager manages the windows of the application.
 	class WindowManager
@@ -75,7 +113,7 @@ namespace renderer {
 
 			/// @brief Creates a new window with the given title, position and dimensions.
 			/// @param window The GLFWwindow instance.
-			EntityInstancePtr create_window(std::string title, int x, int y, int width, int height, float opacity);
+			EntityInstancePtr create_window(std::string title, int x, int y, int width, int height, float opacity, bool visible, bool fullscreen, bool iconified, bool maximized, bool focused);
 
 			/// @brief Destroys the given window.
 			/// @param window The entity instance of type WINDOW.
@@ -108,7 +146,7 @@ namespace renderer {
 			int get_window_count();
 
 			/// @brief Returns the window handle for the entity instance.
-			/// @param window The entity instance of type WINDOW.
+			/// @param window The entity instance of type 'WINDOW'.
 			GLFWwindow* get_window_handle(EntityInstancePtr window);
 
 			/// The logger name of this service.
@@ -121,41 +159,75 @@ namespace renderer {
 			void start_window_thread(EntityInstancePtr window);
 
 			/// @brief Stops the window thread.
-			/// @param window The entity instance of type WINDOW.
+			/// @param window The entity instance of type 'WINDOW'.
 			void stop_window_thread(EntityInstancePtr window);
 
+			/// @brief Returns true, if the given entity instance of type WINDOW is managed.
+			/// @param window The entity instance of type 'WINDOW'.
+			bool is_window_managed(EntityInstancePtr window);
+
+			/// @brief Returns true, if the given entity instance of type WINDOW is available.
+			/// @param window The entity instance of type 'WINDOW'.
+			bool is_window_available(EntityInstancePtr window);
+
+			/// @brief Returns true, if the thread is managed for the given entity instance of type 'WINDOW'.
+			/// @param window The entity instance of type 'WINDOW'.
+			bool is_thread_managed(EntityInstancePtr window);
+
+			/// @brief Returns true, if the thread is running for the given entity instance of type 'WINDOW'.
+			/// @param window The entity instance of type 'WINDOW'.
+			bool is_thread_running(EntityInstancePtr window);
+
+			/// @brief Initializes the callbacks on window state changes.
+			/// @param glfw_window The window handle.
+			void initialize_window_callbacks(GLFWwindow* glfw_window);
+
+			/// @brief Removes the callbacks on window state changes.
+			/// @param glfw_window The window handle.
+			void destroy_window_callbacks(GLFWwindow* glfw_window);
+
 			/// @brief Initializes observers on the attributes of the entity instance of type WINDOW.
-			/// @param window The entity instance of type WINDOW.
-			void initialize_window_observers(EntityInstancePtr window);
+			/// @param window The entity instance of type 'WINDOW'.
+			void initialize_window_observers(EntityInstancePtr window, GLFWwindow* glfw_window);
 
 			/// This callback is called if a window has been closed.
+			/// @param glfw_window The window handle.
 			void window_closed(GLFWwindow* glfw_window);
 
 			/// This callback is called if a window has been focused / has lost the focus.
+			/// @param glfw_window The window handle.
 			void window_focused(GLFWwindow* glfw_window, bool has_focus);
 
 			/// This callback is called if a window has been iconified / restored.
+			/// @param glfw_window The window handle.
 			void window_iconified(GLFWwindow* glfw_window, bool is_iconified);
 
 			/// This callback is called if a window has been maximized / restored.
+			/// @param glfw_window The window handle.
 			void window_maximized(GLFWwindow* glfw_window, bool is_maximized);
 
 			/// This callback is called if the position of a window has been changed.
+			/// @param glfw_window The window handle.
 			void window_position_changed(GLFWwindow* glfw_window, int x, int y);
 
 			/// This callback is called if the size of a window has been changed.
+			/// @param glfw_window The window handle.
 			void window_size_changed(GLFWwindow* glfw_window, int width, int height);
 
 			/// This callback is called if the state of a key has been changed.
+			/// @param glfw_window The window handle.
 			void window_key_changed(GLFWwindow* glfw_window, int key, int scancode, int action, int mods);
 
 			/// This callback is called if the mouse position of a window has been changed.
+			/// @param glfw_window The window handle.
 			void window_mouse_position_changed(GLFWwindow* glfw_window, double xpos, double ypos);
 
 			/// This callback is called if the state of a mouse button has been changed.
+			/// @param glfw_window The window handle.
 			void window_mouse_button_changed(GLFWwindow* glfw_window, int button, int action, int mods);
 
 			/// This callback is called if the state of a mouse scroll wheel has been changed.
+			/// @param glfw_window The window handle.
 			void window_mouse_scroll_changed(GLFWwindow* glfw_window, double xoffset, double yoffset);
 
 			/// The factory for creating entities of type WINDOW.
@@ -183,22 +255,20 @@ namespace renderer {
 			LogManagerPtr log_manager;
 
 			/// The mapping between the entity instance and the pointer to the
-			/// corresponding window and the window thread.
-			std::unordered_map<EntityInstancePtr, std::pair<GLFWwindow*, std::thread>> windows;
+			/// corresponding ManagedWindow.
+			/// @see ManagedWindow
+			std::unordered_map<EntityInstancePtr, std::shared_ptr<ManagedWindow>> windows;
 
 			/// The mapping between the pointer to the window and the
 			/// corresponding entity instance.
 			std::unordered_map<GLFWwindow*, EntityInstancePtr> window_entities;
 
-			std::unordered_map<EntityInstancePtr, SignalT<std::pair<int, int>>> signal_position_changed;
-
-			std::unordered_map<EntityInstancePtr, SignalT<std::pair<int, int>>> signal_size_changed;
-
-			std::unordered_map<EntityInstancePtr, bool> window_thread_state;
-
-			std::unordered_map<EntityInstancePtr, std::list<std::function<void(EntityInstancePtr, GLFWwindow*)>>> window_render_functions;
-
+			/// The number of windows managed by the WindowManager.
 			int window_count;
+
+			/// The current window id.
+			int current_window_id;
+
 	};
 
 }

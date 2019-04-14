@@ -36,6 +36,7 @@ namespace renderer {
 		this->user_interface_renderer = user_interface_renderer;
 		this->log_manager = log_manager;
 		this->window_count = 0;
+		this->current_window_id = 0;
 	}
 
 	WindowManager::~WindowManager()
@@ -49,28 +50,20 @@ namespace renderer {
 		// Initialize the world renderer
 		world_renderer->init();
 
-		// TODO: Initialize the user interface renderer
+		// Initialize the user interface renderer
 		user_interface_renderer->init();
 
 		create_window("Test 1", 0, 0, 300, 300);
 		create_window("Test 2", 300, 0, 300, 300);
-		create_window("Test 3", 0, 300, 300, 300);
-		create_window("Test 4", 300, 300, 300, 300);
-//		create_window("Test 5", 0, 0, 300, 300);
-//		create_window("Test 6", 300, 0, 300, 300);
-//		create_window("Test 7", 0, 300, 300, 300);
-//		create_window("Test 8", 300, 300, 300, 300);
-//		create_window("Test 9", 0, 0, 300, 300);
-//		create_window("Test 10", 300, 0, 300, 300);
-//		create_window("Test 11", 0, 300, 300, 300);
-//		create_window("Test 12", 300, 300, 300, 300);
+		create_window("Test 3", 0, 300, 300, 300, 1.0f, true, false, false, false, false);
+		create_window("Test 4", 300, 300, 300, 300, 1.0f, true, false, false, false, false);
 	}
 
 	void WindowManager::shutdown()
 	{
 		spdlog::info("Shutting down {} open windows", windows.size());
 		for (auto& kv : windows) {
-			spdlog::info("shutting down window {}", std::get<DataType::STRING>(kv.first->get_attribute_instance(WindowEntityTypeProvider::WINDOW_TITLE).value()->own_value.Value()));
+			spdlog::info("Shutting down window {} ", kv.second->id);
 			destroy_window(kv.first);
 		}
 
@@ -82,103 +75,100 @@ namespace renderer {
 	/// @param window The GLFWwindow instance.
 	EntityInstancePtr WindowManager::create_window(std::string title, int x, int y, int width, int height)
 	{
-		return create_window(title, x, y, width, height, 1.0f);
+		return create_window(title, x, y, width, height, 1.0f, true, false, false, false, true);
 	}
 
 	/// @brief Creates a new window with the given title, position and dimensions.
 	/// @param window The GLFWwindow instance.
-	EntityInstancePtr WindowManager::create_window(std::string title, int x, int y, int width, int height, float opacity)
+	EntityInstancePtr WindowManager::create_window(std::string title, int x, int y, int width, int height, float opacity, bool visible, bool fullscreen, bool iconified, bool maximized, bool focused)
 	{
+		// TODO: lock guard
+		current_window_id++;
+		int id = current_window_id;
+		// TODO: end lock guard
 
-		spdlog::get(WindowManager::LOGGER_NAME)->info("Creating window: '{}' ({}, {}) ({}x{})", title, x, y, width, height);
+		spdlog::get(WindowManager::LOGGER_NAME)->info(
+			"Creating window {}: '{}' ({}, {}) ({}x{}) Opacity: {} Flags:{}{}{}{}{}",
+			id, title, x, y, width, height, opacity,
+			visible ? " Visible" : "",
+			fullscreen ? " Fullscreen" : "",
+			iconified ? " Iconified" : "",
+			maximized ? " Maximized" : "",
+			focused ? " Focused" : ""
+		);
 
-		// Create a windowed mode window and its OpenGL context.
 		// Unlike SDL2, GLFW requires at least version 3.2 to be able to request a core profile.
 
 		glfwWindowHint(GLFW_CONTEXT_VERSION_MAJOR, 3);
 		glfwWindowHint(GLFW_CONTEXT_VERSION_MINOR, 2);
 		glfwWindowHint(GLFW_OPENGL_PROFILE, GLFW_OPENGL_CORE_PROFILE);
-		glfwWindowHint(GLFW_VISIBLE, GLFW_FALSE);
 
+		// Set the initial states of the newly created window
+		glfwWindowHint(GLFW_VISIBLE, GLFW_FALSE);
+		glfwWindowHint(GLFW_MAXIMIZED, maximized);
+		glfwWindowHint(GLFW_FOCUSED, focused);
+		glfwWindowHint(GLFW_AUTO_ICONIFY, GLFW_FALSE);
+
+//		GLFWwindow* glfw_window;
+//		if (fullscreen)
+//		{
+//			GLFWmonitor* glfw_monitor = glfwGetPrimaryMonitor();
+//			const GLFWvidmode* glfw_mode = glfwGetVideoMode(glfw_monitor);
+//			glfw_window = glfwCreateWindow(glfw_mode->width, glfw_mode->height, title.c_str(), glfw_monitor, nullptr);
+//		} else {
+//			glfw_window = glfwCreateWindow(width, height, title.c_str(), nullptr, nullptr);
+//		}
 		GLFWwindow* const glfw_window = glfwCreateWindow(width, height, title.c_str(), nullptr, nullptr);
 
 		if (glfw_window)
 		{
 			glfwSetWindowPos(glfw_window, x, y);
 
-			EntityInstancePtrOpt o_window = window_factory->create_instance(title, x, y, width, height, opacity);
+			EntityInstancePtrOpt o_window = window_factory->create_instance(id, title, x, y, width, height, opacity, visible, fullscreen, iconified, maximized, focused);
 			if (o_window.has_value())
 			{
 				EntityInstancePtr window = o_window.value();
 
+				// Track the glfw window and the entity instance.
+				windows[window] = std::make_shared<ManagedWindow>(id, title, window, glfw_window);
+				window_entities[glfw_window] = window;
+
 				std::thread window_thread(&renderer::WindowManager::start_window_thread, this, window);
 				window_thread.detach();
+				windows[window]->thread = std::move(window_thread);
+				spdlog::get(WindowManager::LOGGER_NAME)->info("Started thread for window id {}", id);
 
-				// Track the glfw window and the entity instance.
-				windows[window] = std::make_pair(glfw_window, std::move(window_thread));
-				window_entities[glfw_window] = window;
-				// window_position_changed[window] = std::make_pair(x, y);
+				// Initialize the callbacks for the given window.
+				initialize_window_callbacks(glfw_window);
 
-				// Set the window's user pointer to the window manager
-				glfwSetWindowUserPointer(glfw_window, this);
+				// Observe the attributes of the entity instance of type 'WINDOW'.
+				initialize_window_observers(window, glfw_window);
 
-				// Register the close callback
-				glfwSetWindowCloseCallback(glfw_window, [] (GLFWwindow* _glfw_window) {
-					((WindowManager*) glfwGetWindowUserPointer(_glfw_window))->window_closed(_glfw_window);
-				});
-
-				// Register the focus callback
-				glfwSetWindowFocusCallback(glfw_window, [] (GLFWwindow* _glfw_window, int has_focus) {
-					((WindowManager*) glfwGetWindowUserPointer(_glfw_window))->window_focused(_glfw_window, has_focus == GLFW_TRUE);
-				});
-
-				// Register the iconify callback
-				glfwSetWindowIconifyCallback(glfw_window, [] (GLFWwindow* _glfw_window, int is_iconified) {
-					((WindowManager*) glfwGetWindowUserPointer(_glfw_window))->window_iconified(_glfw_window, is_iconified == GLFW_TRUE);
-				});
-
-				// Register the maximize callback
-				glfwSetWindowMaximizeCallback(glfw_window, [] (GLFWwindow* _glfw_window, int is_maximized) {
-					((WindowManager*) glfwGetWindowUserPointer(_glfw_window))->window_maximized(_glfw_window, is_maximized == GLFW_TRUE);
-				});
-
-				// Register the window size callback
-				glfwSetWindowPosCallback(glfw_window, [] (GLFWwindow* _glfw_window, int x, int y) {
-					((WindowManager*) glfwGetWindowUserPointer(_glfw_window))->window_position_changed(_glfw_window, x, y);
-				});
-
-				// Register the window size callback
-				glfwSetWindowSizeCallback(glfw_window, [] (GLFWwindow* _glfw_window, int width, int height) {
-					((WindowManager*) glfwGetWindowUserPointer(_glfw_window))->window_size_changed(_glfw_window, width, height);
-				});
-
-				// Register the key callback
-				glfwSetKeyCallback(glfw_window, [] (GLFWwindow* _glfw_window, int key, int scancode, int action, int mods) {
-					((WindowManager*) glfwGetWindowUserPointer(_glfw_window))->window_key_changed(_glfw_window, key, scancode, action, mods);
-				});
-
-				// Register the mouse position callback
-				glfwSetCursorPosCallback(glfw_window, [] (GLFWwindow* _glfw_window, double xpos, double ypos) {
-					((WindowManager*) glfwGetWindowUserPointer(_glfw_window))->window_mouse_position_changed(_glfw_window, xpos, ypos);
-				});
-
-				// Register the mouse button callback
-				glfwSetMouseButtonCallback(glfw_window, [] (GLFWwindow* _glfw_window, int button, int action, int mods) {
-					((WindowManager*) glfwGetWindowUserPointer(_glfw_window))->window_mouse_button_changed(_glfw_window, button, action, mods);
-				});
-
-				// Register the mouse scroll callback
-				glfwSetScrollCallback(glfw_window, [] (GLFWwindow* _glfw_window, double xoffset, double yoffset) {
-					((WindowManager*) glfwGetWindowUserPointer(_glfw_window))->window_mouse_scroll_changed(_glfw_window, xoffset, yoffset);
-				});
-
-				///
-				initialize_window_observers(window);
-
-				// Set window opacity
+				// Set the initial window opacity
 				glfwSetWindowOpacity(glfw_window, opacity);
 
-				glfwShowWindow(glfw_window);
+				if (visible)
+				{
+					// Show window
+					glfwShowWindow(glfw_window);
+				} else {
+					spdlog::get(WindowManager::LOGGER_NAME)->info("Window {} initially hidden!", id);
+				}
+
+				if (iconified)
+				{
+					spdlog::get(WindowManager::LOGGER_NAME)->info("Window {} initially iconified!", id);
+					glfwIconifyWindow(glfw_window);
+				}
+
+				if (fullscreen)
+				{
+					// TODO: get monitor from relationship --[FULLSCREEN_ON]--> (MonitorManager)
+					GLFWmonitor* glfw_monitor = glfwGetPrimaryMonitor();
+					const GLFWvidmode* glfw_mode = glfwGetVideoMode(glfw_monitor);
+					spdlog::get(WindowManager::LOGGER_NAME)->info("Window {} initially fullscreen ({}x{})!", id, glfw_mode->width, glfw_mode->height);
+					glfwSetWindowMonitor(glfw_window, glfw_monitor, 0, 0, glfw_mode->width, glfw_mode->height, glfw_mode->refreshRate);
+				}
 
 				window_count++;
 				spdlog::get(WindowManager::LOGGER_NAME)->info("Window count: {}", window_count);
@@ -202,37 +192,47 @@ namespace renderer {
 	/// @param window The entity instance of type WINDOW.
 	void WindowManager::destroy_window(EntityInstancePtr window)
 	{
-		std::thread window_thread = std::move(windows[window].second);
-		GLFWwindow *glfw_window = windows[window].first;
-
-		spdlog::info("Attempting to close window!");
-
-		// Signal window to be closed
-		if (glfw_window != nullptr)
+		if (is_window_managed(window))
 		{
-			glfwSetWindowShouldClose(glfw_window, GLFW_TRUE);
-
-			// Wait for window thread state being released
-			while(window_thread_state[window])
+			std::thread window_thread = std::move(windows[window]->thread);
+			GLFWwindow *glfw_window = windows[window]->glfw_window;
+			if (glfw_window != nullptr)
 			{
-				std::this_thread::sleep_for(std::chrono::milliseconds(10));
-			}
+				spdlog::info("Trying to close managed window");
+				glfwSetWindowShouldClose(glfw_window, GLFW_TRUE);
 
-			spdlog::info("Window thread state false!");
+				// Wait for window thread state being released
+				spdlog::info("Waiting for managed window thread being stopped");
+				// TODO: add timeout!
+				while (is_thread_running(window))
+				{
+					std::this_thread::sleep_for(std::chrono::milliseconds(10));
+				}
+				spdlog::info("Managed window thread has been released (which means the window is closed)!");
+			} else {
+				spdlog::info("Trying to stop managed window thread");
+				windows[window]->thread_running = false;
+			}
 		} else {
-			// TODO: kill window_thread !
+			// No managed window, but shut down the window thread!
+			spdlog::info("Entity instance of type 'WINDOW' and thread are no more managed by WindowManager!");
 		}
 	}
 
-
 	void WindowManager::close_window(EntityInstancePtr window)
 	{
-		glfwSetWindowShouldClose(windows[window].first, GLFW_TRUE);
+		if (is_window_available(window))
+		{
+			glfwSetWindowShouldClose(windows[window]->glfw_window, GLFW_TRUE);
+		}
 	}
 
 	void WindowManager::set_window_size(EntityInstancePtr window, int width, int height)
 	{
-		set_window_size(windows[window].first, width, height);
+		if (is_window_available(window))
+		{
+			set_window_size(windows[window]->glfw_window, width, height);
+		}
 	}
 
 	void WindowManager::set_window_size(GLFWwindow* glfw_window, int width, int height)
@@ -240,9 +240,107 @@ namespace renderer {
 		glfwSetWindowSize(glfw_window, width, height);
 	}
 
-	void WindowManager::initialize_window_observers(EntityInstancePtr window)
+	bool WindowManager::is_window_managed(EntityInstancePtr window)
 	{
-		GLFWwindow *glfw_window = windows[window].first;
+		return windows.find(window) != windows.end();
+	}
+
+	bool WindowManager::is_window_available(EntityInstancePtr window)
+	{
+		return is_window_managed(window) && windows[window]->glfw_window != nullptr;
+	}
+
+	bool WindowManager::is_thread_running(EntityInstancePtr window)
+	{
+		return is_window_managed(window) && windows[window]->thread_running;
+	}
+
+	void WindowManager::initialize_window_callbacks(GLFWwindow* glfw_window)
+	{
+
+		// Set the window's user pointer to the window manager
+		glfwSetWindowUserPointer(glfw_window, this);
+
+		// Register the close callback
+		glfwSetWindowCloseCallback(glfw_window, [] (GLFWwindow* _glfw_window) {
+			((WindowManager*) glfwGetWindowUserPointer(_glfw_window))->window_closed(_glfw_window);
+		});
+
+		// Register the focus callback
+		glfwSetWindowFocusCallback(glfw_window, [] (GLFWwindow* _glfw_window, int has_focus) {
+			((WindowManager*) glfwGetWindowUserPointer(_glfw_window))->window_focused(_glfw_window, has_focus == GLFW_TRUE);
+		});
+
+		// Register the iconify callback
+		glfwSetWindowIconifyCallback(glfw_window, [] (GLFWwindow* _glfw_window, int is_iconified) {
+			((WindowManager*) glfwGetWindowUserPointer(_glfw_window))->window_iconified(_glfw_window, is_iconified == GLFW_TRUE);
+		});
+
+		// Register the maximize callback
+		glfwSetWindowMaximizeCallback(glfw_window, [] (GLFWwindow* _glfw_window, int is_maximized) {
+			((WindowManager*) glfwGetWindowUserPointer(_glfw_window))->window_maximized(_glfw_window, is_maximized == GLFW_TRUE);
+		});
+
+		// Register the window size callback
+		glfwSetWindowPosCallback(glfw_window, [] (GLFWwindow* _glfw_window, int x, int y) {
+			((WindowManager*) glfwGetWindowUserPointer(_glfw_window))->window_position_changed(_glfw_window, x, y);
+		});
+
+		// Register the window size callback
+		glfwSetWindowSizeCallback(glfw_window, [] (GLFWwindow* _glfw_window, int width, int height) {
+			((WindowManager*) glfwGetWindowUserPointer(_glfw_window))->window_size_changed(_glfw_window, width, height);
+		});
+
+		// Register the key callback
+		glfwSetKeyCallback(glfw_window, [] (GLFWwindow* _glfw_window, int key, int scancode, int action, int mods) {
+			((WindowManager*) glfwGetWindowUserPointer(_glfw_window))->window_key_changed(_glfw_window, key, scancode, action, mods);
+		});
+
+		// Register the mouse position callback
+		glfwSetCursorPosCallback(glfw_window, [] (GLFWwindow* _glfw_window, double xpos, double ypos) {
+			((WindowManager*) glfwGetWindowUserPointer(_glfw_window))->window_mouse_position_changed(_glfw_window, xpos, ypos);
+		});
+
+		// Register the mouse button callback
+		glfwSetMouseButtonCallback(glfw_window, [] (GLFWwindow* _glfw_window, int button, int action, int mods) {
+			((WindowManager*) glfwGetWindowUserPointer(_glfw_window))->window_mouse_button_changed(_glfw_window, button, action, mods);
+		});
+
+		// Register the mouse scroll callback
+		glfwSetScrollCallback(glfw_window, [] (GLFWwindow* _glfw_window, double xoffset, double yoffset) {
+			((WindowManager*) glfwGetWindowUserPointer(_glfw_window))->window_mouse_scroll_changed(_glfw_window, xoffset, yoffset);
+		});
+	}
+
+	void WindowManager::destroy_window_callbacks(GLFWwindow *glfw_window)
+	{
+		glfwSetWindowCloseCallback(glfw_window, nullptr);
+		glfwSetWindowFocusCallback(glfw_window, nullptr);
+		glfwSetWindowIconifyCallback(glfw_window, nullptr);
+		glfwSetWindowMaximizeCallback(glfw_window, nullptr);
+		glfwSetWindowPosCallback(glfw_window, nullptr);
+		glfwSetWindowSizeCallback(glfw_window, nullptr);
+		glfwSetKeyCallback(glfw_window, nullptr);
+		glfwSetCursorPosCallback(glfw_window, nullptr);
+		glfwSetMouseButtonCallback(glfw_window, nullptr);
+		glfwSetScrollCallback(glfw_window, nullptr);
+		glfwSetWindowUserPointer(glfw_window, nullptr);
+	}
+
+	void WindowManager::initialize_window_observers(EntityInstancePtr window, GLFWwindow *glfw_window)
+	{
+
+		Observe(
+			window->get_attribute_instance(WindowEntityTypeProvider::WINDOW_VISIBLE).value()->value,
+			[glfw_window] (DataValue visible) {
+				spdlog::info("visible {}", std::get<DataType::BOOL>(visible) ? "true" : "false");
+				if (std::get<DataType::BOOL>(visible)) {
+					glfwShowWindow(glfw_window);
+				} else {
+					glfwHideWindow(glfw_window);
+				}
+			}
+		);
 
 		Observe(
 			window->get_attribute_instance(WindowEntityTypeProvider::WINDOW_FULLSCREEN).value()->value,
@@ -286,7 +384,7 @@ namespace renderer {
 			}
 		);
 
-		signal_position_changed[window] = MakeSignal<D>(
+		windows[window]->signal_position_changed = MakeSignal<D>(
 			With(
 				window->get_attribute_instance(WindowEntityTypeProvider::WINDOW_POSITION_X).value()->value,
 				window->get_attribute_instance(WindowEntityTypeProvider::WINDOW_POSITION_Y).value()->value
@@ -298,14 +396,21 @@ namespace renderer {
 		);
 
 		auto observer_position_changed = Observe(
-			signal_position_changed[window],
+			windows[window]->signal_position_changed,
 			[glfw_window] (std::pair<int, int> position) {
 				spdlog::info("(2) position_x {} position_y {}", position.first, position.second);
-				glfwSetWindowPos(glfw_window, position.first, position.second);
+				// Avoid feedback loops
+				int xpos = 0;
+				int ypos = 0;
+				glfwGetWindowPos(glfw_window, &xpos, &ypos);
+				if (abs(xpos - position.first) > 1 || abs(ypos - position.second) > 1)
+				{
+					glfwSetWindowPos(glfw_window, position.first, position.second);
+				}
 			}
 		);
 
-		signal_size_changed[window] = MakeSignal<D>(
+		windows[window]->signal_size_changed = MakeSignal<D>(
 			With(
 				window->get_attribute_instance(WindowEntityTypeProvider::WINDOW_WIDTH).value()->value,
 				window->get_attribute_instance(WindowEntityTypeProvider::WINDOW_HEIGHT).value()->value
@@ -317,10 +422,17 @@ namespace renderer {
 		);
 
 		auto observer_size_changed = Observe(
-			signal_size_changed[window],
+			windows[window]->signal_size_changed,
 			[glfw_window] (std::pair<int, int> size) {
 				spdlog::info("(2) width {} height {}", size.first, size.second);
-				glfwSetWindowSize(glfw_window, size.first, size.second);
+				// Avoid feedback loops
+				int current_width = 0;
+				int current_height = 0;
+				glfwGetWindowSize(glfw_window, &current_width, &current_height);
+				if (abs(current_width - size.first) > 5 || abs(current_height - size.second) > 5)
+				{
+					glfwSetWindowSize(glfw_window, size.first, size.second);
+				}
 			}
 		);
 
@@ -330,8 +442,6 @@ namespace renderer {
 				glfwSetWindowOpacity(glfw_window, std::get<DataType::FLOAT>(opacity));
 			}
 		);
-		// TODO:
-		// WindowEntityTypeProvider::WINDOW_VISIBLE
 	}
 
 	void WindowManager::window_closed(GLFWwindow* glfw_window)
@@ -402,9 +512,9 @@ namespace renderer {
 
 	void WindowManager::start_window_thread(EntityInstancePtr window)
 	{
-		window_thread_state[window] = true;
+		windows[window]->thread_running = true;
 
-		GLFWwindow *glfw_window = windows[window].first;
+		GLFWwindow *glfw_window = windows[window]->glfw_window;
 
 		// Make the window's context current.
 		glfwMakeContextCurrent(glfw_window);
@@ -413,7 +523,7 @@ namespace renderer {
 		Magnum::Platform::GLContext ctx{};
 
 		// Loop until the user closes the window.
-		while(!glfwWindowShouldClose(glfw_window))
+		while(!glfwWindowShouldClose(glfw_window) && windows[window]->thread_running)
 		{
 			// Render worlds
 			world_renderer->render_worlds(window, glfw_window);
@@ -422,9 +532,9 @@ namespace renderer {
 			user_interface_renderer->render_user_interfaces(window, glfw_window);
 
 			// Render custom on front
-			for (std::function renderer_function : window_render_functions[window])
+			for (std::function render_function : windows[window]->render_functions)
 			{
-				renderer_function(window, glfw_window);
+				render_function(window, glfw_window);
 			}
 
 			// Swap front and back buffers.
@@ -436,9 +546,19 @@ namespace renderer {
 		// Detach the window's current context.
 		glfwMakeContextCurrent(nullptr);
 
-		window_thread_state[window] = false;
+		windows[window]->thread_running = false;
 
-		spdlog::get(WindowManager::LOGGER_NAME)->info("Window has been closed!");
+		spdlog::get(WindowManager::LOGGER_NAME)->info("Window {} has been closed!", windows[window]->id);
+
+		// Remove window render functions
+		windows[window]->render_functions.clear();
+		spdlog::info("window {} render_functions count: {}", windows[window]->id, windows[window]->render_functions.size());
+
+		// Remove the callbacks
+		this->destroy_window_callbacks(glfw_window);
+
+		// TODO: Remove the observers (and signals)
+		// this->destroy_window_observers(window, glfw_window);
 
 		// Destroy the glfw window object
 		glfwDestroyWindow(glfw_window);
@@ -447,21 +567,9 @@ namespace renderer {
 		window_entities.erase(glfw_window);
 		spdlog::info("window_entities count: {}", window_entities.size());
 
-		// Untrack the window state change signals
-		signal_position_changed.erase(window);
-		signal_size_changed.erase(window);
-
-		// Remove render functions
-		window_render_functions.erase(window);
-		spdlog::info("window_render_functions count: {}", window_render_functions.size());
-
 		// Untrack the entity instance
 		windows.erase(window);
 		spdlog::info("windows count: {}", windows.size());
-
-		// Untrack the thread state
-		window_thread_state.erase(window);
-		spdlog::info("window_thread_state count: {}", window_thread_state.size());
 
 		// Delete entity instance
 		entity_instance_manager->delete_entity_instance(window);
@@ -473,12 +581,12 @@ namespace renderer {
 
 	void WindowManager::make_current(EntityInstancePtr window)
 	{
-		glfwMakeContextCurrent(windows[window].first);
+		glfwMakeContextCurrent(windows[window]->glfw_window);
 	}
 
 	void WindowManager::register_render_function(EntityInstancePtr window, std::function<void(EntityInstancePtr, GLFWwindow*)> render_function)
 	{
-		window_render_functions[window].push_back(render_function);
+		windows[window]->render_functions.push_back(render_function);
 	}
 
 	int WindowManager::get_window_count()
@@ -488,7 +596,7 @@ namespace renderer {
 
 	GLFWwindow* WindowManager::get_window_handle(EntityInstancePtr window)
 	{
-		return windows[window].first;
+		return windows[window]->glfw_window;
 	}
 
 }

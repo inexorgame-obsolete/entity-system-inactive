@@ -38,7 +38,7 @@ namespace renderer {
 		log_manager->register_logger(LOGGER_NAME);
 
 		// Creates the window
-		window = window_manager->create_window("Inexor Logo", 0, 0, 800, 600, 0.8f);
+		window = window_manager->create_window("Inexor Logo", 0, 0, 800, 600, 0.8f, true, true, false, false, true);
 		// The first render function is the initialization function which is executed only once
 		window_manager->register_render_function(window, std::bind(&LoadingScreen::create_logo, this, std::placeholders::_1, std::placeholders::_2));
 		// The second render function is for rendering the inexor logo

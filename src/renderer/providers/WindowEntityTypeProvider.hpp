@@ -22,12 +22,14 @@ namespace renderer {
 				entity_type_builder_factory,
 				TYPE_NAME,
 				{
+					{ WINDOW_ID, { DataType::INT, 1 << Feature::OUTPUT } },
 					{ WINDOW_TITLE, { DataType::STRING, 1 << Feature::INPUT | 1 << Feature::OUTPUT } },
 					{ WINDOW_POSITION_X, { DataType::INT, 1 << Feature::INPUT | 1 << Feature::OUTPUT } },
 					{ WINDOW_POSITION_Y, { DataType::INT, 1 << Feature::INPUT | 1 << Feature::OUTPUT } },
 					{ WINDOW_WIDTH, { DataType::INT, 1 << Feature::INPUT | 1 << Feature::OUTPUT } },
 					{ WINDOW_HEIGHT, { DataType::INT, 1 << Feature::INPUT | 1 << Feature::OUTPUT } },
 					{ WINDOW_OPACITY, { DataType::FLOAT, 1 << Feature::INPUT | 1 << Feature::OUTPUT } },
+					{ WINDOW_VISIBLE, { DataType::BOOL, 1 << Feature::INPUT | 1 << Feature::OUTPUT } },
 					{ WINDOW_FULLSCREEN, { DataType::BOOL, 1 << Feature::INPUT | 1 << Feature::OUTPUT } },
 					{ WINDOW_ICONIFIED, { DataType::BOOL, 1 << Feature::INPUT | 1 << Feature::OUTPUT } },
 					{ WINDOW_MAXIMIZED, { DataType::BOOL, 1 << Feature::INPUT | 1 << Feature::OUTPUT } },
@@ -40,6 +42,9 @@ namespace renderer {
 
 			/// Defines the name of this entity type
 			static constexpr char TYPE_NAME[] = "WINDOW";
+
+			/// The name of the attribute window id.
+			static constexpr char WINDOW_ID[] = "window_id";
 
 			/// The name of the attribute window title.
 			static constexpr char WINDOW_TITLE[] = "window_title";
@@ -61,6 +66,9 @@ namespace renderer {
 
 			/// The name of the attribute window fullscreen.
 			static constexpr char WINDOW_FULLSCREEN[] = "window_fullscreen";
+
+			/// The name of the attribute window visible.
+			static constexpr char WINDOW_VISIBLE[] = "window_visible";
 
 			/// The name of the attribute window iconified.
 			static constexpr char WINDOW_ICONIFIED[] = "window_iconified";
