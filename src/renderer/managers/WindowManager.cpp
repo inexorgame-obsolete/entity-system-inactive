@@ -205,7 +205,7 @@ namespace renderer {
 		std::thread window_thread = std::move(windows[window].second);
 		GLFWwindow *glfw_window = windows[window].first;
 
-		spdlog::get(WindowManager::LOGGER_NAME)->info("Attempting to close window!");
+		spdlog::info("Attempting to close window!");
 
 		// Signal window to be closed
 		if (glfw_window != nullptr)
@@ -218,7 +218,7 @@ namespace renderer {
 				std::this_thread::sleep_for(std::chrono::milliseconds(10));
 			}
 
-			spdlog::get(WindowManager::LOGGER_NAME)->info("Window thread state false!");
+			spdlog::info("Window thread state false!");
 		} else {
 			// TODO: kill window_thread !
 		}
