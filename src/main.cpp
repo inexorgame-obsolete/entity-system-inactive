@@ -58,42 +58,49 @@ struct ColoredVertex {
     Magnum::Color3 color;
 };
 
-std::shared_ptr<Magnum::GL::Buffer> buffer;
-std::shared_ptr<Magnum::GL::Mesh> mesh;
-std::shared_ptr<Magnum::Shaders::VertexColor2D> shader;
+struct Triangle {
+    std::shared_ptr<Magnum::GL::Buffer> buffer;
+    std::shared_ptr<Magnum::GL::Mesh> mesh;
+    std::shared_ptr<Magnum::Shaders::VertexColor2D> shader;
 
-void create_mesh(GLFWwindow *const glfw_window)
-{
-    const ColoredVertex data[]{
-            {{-0.5f, -0.5f}, 0xff0000_rgbf}, // Left vertex, red color
-            {{0.5f,  -0.5f}, 0x00ff00_rgbf}, // Right vertex, green color
-            {{0.0f,  0.5f},  0x0000ff_rgbf}  // Top vertex, blue color
-    };
-    buffer = std::make_shared<Magnum::GL::Buffer>();
-    buffer->setData(data);
-    mesh = std::make_shared<Magnum::GL::Mesh>();
-    mesh->setPrimitive(Magnum::GL::MeshPrimitive::Triangles)
-            .setCount(3)
-            .addVertexBuffer(*buffer, 0,
-                             Magnum::Shaders::VertexColor2D::Position{},
-                             Magnum::Shaders::VertexColor2D::Color3{}
-            );
-    spdlog::info("created mesh");
+    Triangle()
+    {
+        const ColoredVertex data[]{
+                {{-0.5f, -0.5f}, 0xff0000_rgbf}, // Left vertex, red color
+                {{0.5f,  -0.5f}, 0x00ff00_rgbf}, // Right vertex, green color
+                {{0.0f,  0.5f},  0x0000ff_rgbf}  // Top vertex, blue color
+        };
+        buffer = std::make_shared<Magnum::GL::Buffer>();
+        buffer->setData(data);
+        mesh = std::make_shared<Magnum::GL::Mesh>();
+        mesh->setPrimitive(Magnum::GL::MeshPrimitive::Triangles)
+                .setCount(3)
+                .addVertexBuffer(*buffer, 0,
+                                 Magnum::Shaders::VertexColor2D::Position{},
+                                 Magnum::Shaders::VertexColor2D::Color3{}
+                );
+        spdlog::info("created mesh");
 
-    // actually not "mesh", but more generic
-    shader = std::make_shared<Magnum::Shaders::VertexColor2D>();
-}
+        // actually not "mesh", but more generic
+        shader = std::make_shared<Magnum::Shaders::VertexColor2D>();
+    }
 
-void render_triangle(float x, float y)
-{
-    // update position
-    Magnum::Matrix3 transformation_matrix_x = Magnum::Matrix3::translation(Magnum::Vector2::xAxis(x));
-    Magnum::Matrix3 transformation_matrix_y = Magnum::Matrix3::translation(Magnum::Vector2::yAxis(y));
-    shader->setTransformationProjectionMatrix(transformation_matrix_x * transformation_matrix_y);
+    void render(float x, float y)
+    {
+        // update position
+        Magnum::Matrix3 transformation_matrix_x = Magnum::Matrix3::translation(Magnum::Vector2::xAxis(x));
+        Magnum::Matrix3 transformation_matrix_y = Magnum::Matrix3::translation(Magnum::Vector2::yAxis(y));
+        shader->setTransformationProjectionMatrix(transformation_matrix_x * transformation_matrix_y);
 
-    // render
-    mesh->draw(*shader);
-}
+        // render
+        // if (x > 4)
+        // Magnum::GL::defaultFramebuffer.clear(Magnum::GL::FramebufferClear::Color);
+        // else
+        mesh->draw(*shader);
+    }
+};
+
+///// Different Components (formerly known as "attributes")
 
 struct Position {
     float x;
@@ -105,13 +112,13 @@ struct Velocity {
     float dy;
 };
 
-void render_entities(entt::registry<> &registry) {
+void render_entities(entt::registry<> &registry, Triangle &triangle) {
 
     Magnum::GL::defaultFramebuffer.clear(Magnum::GL::FramebufferClear::Color);
     auto const_view = std::as_const(registry).view<const Position, const Velocity>();
 
-    const_view.each([](const auto, const Position &pos, const auto) {
-        render_triangle(pos.x, pos.y);
+    const_view.each([&triangle](const auto, const Position &pos, const auto) {
+        triangle.render(pos.x, pos.y);
     });
 }
 
@@ -128,29 +135,16 @@ void update_positions(std::uint64_t dt, entt::registry<> &registry) {
 
 int main(int argc, char *argv[]) {
     entt::registry registry;
-    std::uint64_t dt = 16;
 
-    for (auto i = 0; i < 10; ++i) {
-        auto entity = registry.create();
-        registry.assign<Position>(entity, i * 1.f, i * 1.f);
-        if (i % 2 == 0) {
-            registry.assign<Velocity>(entity, i * .1f, i * .1f);
-        }
-    }
+    // delta time. hardcoded, but exemplary for how to get timings right here.
+    std::uint64_t dt = 1;
 
-/*
-    {
-        auto entity = registry.create();
-        registry.assign<Position>(entity, 80.0f, 80.0f);
-        registry.assign<Velocity>(entity, 10.0f, 2.0f);
-    }
     {
         auto entity = registry.create();
         registry.assign<Position>(entity, 0.0f, 0.0f);
-        registry.assign<Velocity>(entity, 0.5f, 0.5f);
+        registry.assign<Velocity>(entity, 0.005f, 0.005f);
     }
 
-*/
     // Start up window and opengl context
     if (!glfwInit())
     {
@@ -162,7 +156,7 @@ int main(int argc, char *argv[]) {
     // Create Magnum context in an isolated scope.
     Magnum::Platform::GLContext ctx{};
 
-    create_mesh(glfw_window);
+    Triangle triangle;
     // Loop until the user closes the window.
     while(!glfwWindowShouldClose(glfw_window))
     {
@@ -172,7 +166,7 @@ int main(int argc, char *argv[]) {
 
         std::this_thread::sleep_for(std::chrono::milliseconds(50));
         update_positions(dt, registry);
-        render_entities(registry);
+        render_entities(registry, triangle);
     }
     return EXIT_SUCCESS;
 
