@@ -5,7 +5,6 @@
 #include "react/Event.h"
 #include "react/Observer.h"
 
-#include <iostream>
 
 namespace inexor {
 namespace visual_scripting {
@@ -18,7 +17,8 @@ namespace visual_scripting {
 
 	StdErrProcessor::StdErrProcessor(
 		StdErrEntityTypeProviderPtr entity_type_provider,
-		EntityInstanceManagerPtr entity_instance_manager
+		EntityInstanceManagerPtr entity_instance_manager,
+		LogManagerPtr log_manager
 	)
 		: Processor(entity_type_provider->get_type()),
 		  entity_type_provider(entity_type_provider),
@@ -51,7 +51,7 @@ namespace visual_scripting {
 
 	void StdErrProcessor::make_signals(const EntityInstancePtr& entity_instance)
 	{
-		std::cout << "Initializing processor CONSOLE_STDERR for newly created entity instance " << entity_instance->get_GUID().str() << " of type " << entity_instance->get_entity_type()->get_type_name() << std::endl;
+		spdlog::info("Initializing processor CONSOLE_STDERR for newly created entity instance {} of type {}", entity_instance->get_GUID().str(), entity_instance->get_entity_type()->get_type_name());
 		auto o_console_stderr = entity_instance->get_attribute_instance(StdErrEntityTypeProvider::CONSOLE_STDERR);
 		
         if(o_console_stderr.has_value())
@@ -62,7 +62,7 @@ namespace visual_scripting {
 		}
         else
         {
-			std::cout << "Failed to initialize processor signals for entity instance " << entity_instance->get_GUID().str() << " of type " << entity_instance->get_entity_type()->get_type_name() << ": Missing attribute" << StdErrEntityTypeProvider::CONSOLE_STDERR << std::endl;
+			spdlog::info("Failed to initialize processor signals for entity instance {} of type {}: Missing attribute {}", entity_instance->get_GUID().str(), entity_instance->get_entity_type()->get_type_name(), StdErrEntityTypeProvider::CONSOLE_STDERR);
 		}
 	}
 

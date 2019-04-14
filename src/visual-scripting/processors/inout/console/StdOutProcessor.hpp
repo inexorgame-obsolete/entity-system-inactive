@@ -6,6 +6,7 @@
 #include "entity-system/managers/entities/entity-instance-manager/EntityInstanceManager.hpp"
 #include "type-system/providers/inout/console/StdOutEntityTypeProvider.hpp"
 #include "visual-scripting/model/Processor.hpp"
+#include "logging/managers/LogManager.hpp"
 
 namespace inexor {
 namespace visual_scripting {
@@ -24,6 +25,7 @@ namespace visual_scripting {
     	using StdOutEntityTypeProviderPtr = std::shared_ptr<entity_system::type_system::StdOutEntityTypeProvider>;
     	using EntityInstanceManagerPtr = std::shared_ptr<entity_system::EntityInstanceManager>;
     	using EntityInstancePtr = std::shared_ptr<entity_system::EntityInstance>;
+		using LogManagerPtr = std::shared_ptr<inexor::logging::LogManager>;
 
 		public:
 
@@ -36,7 +38,8 @@ namespace visual_scripting {
             /// @param entity_instance_manager The entity instance manager.
 			StdOutProcessor(
 				StdOutEntityTypeProviderPtr entity_type_provider,
-				EntityInstanceManagerPtr entity_instance_manager
+				EntityInstanceManagerPtr entity_instance_manager,
+				LogManagerPtr log_manager
 			);
 
             /// Destructor
@@ -68,6 +71,9 @@ namespace visual_scripting {
 
 			/// The signals per entity instance.
 			std::unordered_map<xg::Guid, ObserverT> observers;
+			
+			/// The log manager.
+			LogManagerPtr log_manager;
 
     };
 

@@ -6,6 +6,7 @@
 #include "entity-system/managers/entities/entity-instance-manager/EntityInstanceManager.hpp"
 #include "type-system/providers/inout/console/StdInEntityTypeProvider.hpp"
 #include "visual-scripting/model/Processor.hpp"
+#include "logging/managers/LogManager.hpp"
 
 #include "react/Event.h"
 
@@ -26,6 +27,7 @@ namespace visual_scripting {
     	using StdInEntityTypeProviderPtr = std::shared_ptr<entity_system::type_system::StdInEntityTypeProvider>;
     	using EntityInstanceManagerPtr = std::shared_ptr<entity_system::EntityInstanceManager>;
     	using EntityInstancePtr = std::shared_ptr<entity_system::EntityInstance>;
+		using LogManagerPtr = std::shared_ptr<inexor::logging::LogManager>;
 
 		public:
             
@@ -35,7 +37,8 @@ namespace visual_scripting {
     		/// @brief Constructs a new entity instance of type CONSOLE_STDIN.
 			StdInProcessor(
 				StdInEntityTypeProviderPtr entity_type_provider,
-				EntityInstanceManagerPtr entity_instance_manager
+				EntityInstanceManagerPtr entity_instance_manager,
+				LogManagerPtr log_manager
 			);
 
             /// Destructor.
@@ -73,6 +76,9 @@ namespace visual_scripting {
 
 			/// The event sources per entity instance.
 			std::unordered_map<xg::Guid, SignalT<std::string>> last_event_signals;
+			
+			/// The log manager.
+			LogManagerPtr log_manager;
 
     };
 

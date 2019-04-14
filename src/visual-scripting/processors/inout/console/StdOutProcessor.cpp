@@ -5,8 +5,6 @@
 #include "react/Event.h"
 #include "react/Observer.h"
 
-#include <iostream>
-
 namespace inexor {
 namespace visual_scripting {
 
@@ -18,12 +16,14 @@ namespace visual_scripting {
 
 	StdOutProcessor::StdOutProcessor(
 		StdOutEntityTypeProviderPtr entity_type_provider,
-		EntityInstanceManagerPtr entity_instance_manager
+		EntityInstanceManagerPtr entity_instance_manager,
+		LogManagerPtr log_manager
 	)
-		: Processor(entity_type_provider->get_type()),
-		  entity_type_provider(entity_type_provider),
-		  entity_instance_manager(entity_instance_manager)
+		: Processor(entity_type_provider->get_type())
 	{
+		this->entity_type_provider = entity_type_provider;
+		this->entity_instance_manager = entity_instance_manager;
+		this->log_manager = log_manager;
 	}
 
 	StdOutProcessor::~StdOutProcessor()
@@ -51,7 +51,9 @@ namespace visual_scripting {
 
 	void StdOutProcessor::make_signals(const EntityInstancePtr& entity_instance)
 	{
-		std::cout << "Initializing processor CONSOLE_STDOUT for newly created entity instance " << entity_instance->get_GUID().str() << " of type " << entity_instance->get_entity_type()->get_type_name() << std::endl;
+		spdlog::info("Initializing processor CONSOLE_STDOUT for newly created entity instance {} of type {}",
+			entity_instance->get_GUID().str(), entity_instance->get_entity_type()->get_type_name());
+
 		auto o_console_stdout = entity_instance->get_attribute_instance(StdOutEntityTypeProvider::CONSOLE_STDOUT);
 		
         if(o_console_stdout.has_value())
@@ -62,7 +64,8 @@ namespace visual_scripting {
 		}
         else
         {
-			std::cout << "Failed to initialize processor signals for entity instance " << entity_instance->get_GUID().str() << " of type " << entity_instance->get_entity_type()->get_type_name() << ": Missing attribute" << StdOutEntityTypeProvider::CONSOLE_STDOUT << std::endl;
+			spdlog::error("Failed to initialize processor signals for entity instance {} of type {}: Missing attribute {}",
+				entity_instance->get_GUID().str(), entity_instance->get_entity_type()->get_type_name(), StdOutEntityTypeProvider::CONSOLE_STDOUT);
 		}
 	}
 
