@@ -28,7 +28,7 @@ namespace renderer {
 
 		// Set error callback
 		glfwSetErrorCallback([] (int error_code, const char* error_message) {
-			spdlog::info("GLFW ERROR {}: {}", error_code, error_message);
+			spdlog::error("GLFW ERROR {}: {}", error_code, error_message);
 		});
 
 		if(!glfwInit())
