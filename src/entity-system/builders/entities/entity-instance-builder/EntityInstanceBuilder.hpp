@@ -142,6 +142,8 @@ namespace entity_system {
 
 		private:
 
+			bool initialize_instance(EntityInstancePtr entity_instance);
+
 			/// The entity instance manager.
 			EntityInstanceManagerPtr entity_instance_manager;
 

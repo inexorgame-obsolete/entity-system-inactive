@@ -36,7 +36,15 @@ namespace entity_system {
 			/// @param ent_type A const reference of a shared pointer
 			/// to an entity type of which an instance will be created.
 			/// @return A shared pointer to the entity instance which was created.
-			EntityInstancePtrOpt create_entity_instance(const EntityTypePtr&);
+			EntityInstancePtrOpt create_entity_instance(const EntityTypePtr& ent_type);
+
+
+			/// Create an entity instance.
+			/// @param ent_type A const reference of a shared pointer
+			/// to an entity type of which an instance will be created.
+			/// @param instance_initializer Function for initializing the attributes.
+			/// @return A shared pointer to the entity instance which was created.
+			EntityInstancePtrOpt create_entity_instance(const EntityTypePtr& ent_type, std::function<bool (EntityInstancePtr)> instance_initializer);
 
 
 			/// Create an entity instance.
@@ -44,7 +52,15 @@ namespace entity_system {
 			/// @param ent_type A const reference of a shared pointer
 			/// to an entity type of which an instance will be created.
 			/// @return A shared pointer to the entity instance which was created.
-			EntityInstancePtrOpt create_entity_instance(const xg::Guid&, const EntityTypePtr&);
+			EntityInstancePtrOpt create_entity_instance(const xg::Guid&, const EntityTypePtr& ent_type);
+
+
+			/// Create an entity instance.
+			/// @param ent_inst_GUID The GUID of the new entity instance.
+			/// @param ent_type A const reference of a shared pointer
+			/// to an entity type of which an instance will be created.
+			/// @return A shared pointer to the entity instance which was created.
+			EntityInstancePtrOpt create_entity_instance(const xg::Guid&, const EntityTypePtr& ent_type, std::function<bool (EntityInstancePtr)> instance_initializer);
 
 
 			/// @brief Checks if an entity instance does already exist.

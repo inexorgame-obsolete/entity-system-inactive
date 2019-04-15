@@ -22,6 +22,11 @@ namespace entity_system {
 
 	EntityInstancePtrOpt EntityInstanceManager::create_entity_instance(const EntityTypePtr& ent_type)
 	{
+		return create_entity_instance(ent_type, [] (EntityInstancePtr ent_inst) { return true; });
+	}
+
+	EntityInstancePtrOpt EntityInstanceManager::create_entity_instance(const EntityTypePtr& ent_type, std::function<bool (EntityInstancePtr)> instance_initializer)
+	{
 		// Create a new entity type instance without GUID.
 		EntityInstancePtr new_ent_instance = std::make_shared<EntityInstance>(ent_type);
 
@@ -53,6 +58,12 @@ namespace entity_system {
 		// Call template base class method.
 		add_instance(new_ent_instance->get_GUID(), new_ent_instance);
 
+		// Call instance initializer function.
+		if (!instance_initializer(new_ent_instance))
+		{
+			return std::nullopt;
+		}
+
 		// Signal that the entity type has been created.
 		notify_entity_instance_created(new_ent_instance);
 
@@ -60,6 +71,11 @@ namespace entity_system {
 	}
 
 	EntityInstancePtrOpt EntityInstanceManager::create_entity_instance(const xg::Guid& ent_inst_GUID, const EntityTypePtr& ent_type)
+	{
+		return create_entity_instance(ent_inst_GUID, ent_type, [] (EntityInstancePtr ent_inst) { return true; });
+	}
+
+	EntityInstancePtrOpt EntityInstanceManager::create_entity_instance(const xg::Guid& ent_inst_GUID, const EntityTypePtr& ent_type, std::function<bool (EntityInstancePtr)> instance_initializer)
 	{
 		// Check if an entity instance with this GUID does already exist.
 		if(does_entity_instance_exist(ent_inst_GUID))
@@ -97,6 +113,12 @@ namespace entity_system {
 
 		// Call template base class method.
 		add_instance(new_ent_instance->get_GUID(), new_ent_instance);
+
+		// Call instance initializer function.
+		if (!instance_initializer(new_ent_instance))
+		{
+			return std::nullopt;
+		}
 
 		// Signal that the entity type has been created.
 		notify_entity_instance_created(new_ent_instance);
