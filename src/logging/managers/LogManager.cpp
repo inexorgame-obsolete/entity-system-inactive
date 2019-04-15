@@ -29,6 +29,9 @@ namespace logging {
 		spdlog::init_thread_pool(8192, 4);
 		sinks.push_back(std::make_shared<spdlog::sinks::stdout_color_sink_mt>());
 		sinks.push_back(std::make_shared<spdlog::sinks::rotating_file_sink_mt>(LOG_FILE_NAME, 1024 * 1024 * 10, 3));
+
+		spdlog::set_pattern("%H:%M:%S.%e [%-5t] %^%-5l%$ %-40n %v");
+
 		spdlog::register_logger(std::make_shared<spdlog::async_logger>(LOGGER_NAME, sinks.begin(), sinks.end(), spdlog::thread_pool(), spdlog::async_overflow_policy::block));
 		spdlog::register_logger(std::make_shared<spdlog::async_logger>(visual_scripting::LoggerProcessor::LOGGER_NAME, sinks.begin(), sinks.end(), spdlog::thread_pool(), spdlog::async_overflow_policy::block));
 		spdlog::get(LOGGER_NAME)->info("Asynchronous logging initialized");
@@ -37,7 +40,8 @@ namespace logging {
 	EntityInstancePtrOpt LogManager::register_logger(std::string logger_name)
 	{
 		spdlog::register_logger(std::make_shared<spdlog::async_logger>(logger_name, sinks.begin(), sinks.end(), spdlog::thread_pool(), spdlog::async_overflow_policy::block));
-		spdlog::get(LOGGER_NAME)->info("Registered logger {}", logger_name);
+		spdlog::get(logger_name)->set_pattern("%H:%M:%S.%e [%-5t] %^%-5l%$ %-40n %v");
+		spdlog::get(LOGGER_NAME)->debug("Registered logger {}", logger_name);
 
 		EntityInstancePtrOpt o_logger_instance = logger_factory->create_instance(logger_name, spdlog::level::level_enum::info);
 		if(o_logger_instance.has_value())
@@ -55,7 +59,7 @@ namespace logging {
 		}
 		else
 		{
-			spdlog::get(LOGGER_NAME)->info("Failed to create entity instance of type {}", logger_entity_type_provider->get_type()->get_type_name());
+			spdlog::get(LOGGER_NAME)->error("Failed to create entity instance of type {}", logger_entity_type_provider->get_type()->get_type_name());
 			return std::nullopt;
 		}
 	}
