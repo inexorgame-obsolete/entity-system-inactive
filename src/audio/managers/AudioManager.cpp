@@ -1,6 +1,14 @@
 #include "AudioManager.hpp"
 #include "spdlog/spdlog.h"
 
+#include <Magnum/Audio/AbstractImporter.h>
+#include <Magnum/Audio/Buffer.h>
+#include <Magnum/Audio/Context.h>
+#include <Magnum/Audio/Listener.h>
+#include <Magnum/Audio/Playable.h>
+#include <Magnum/Audio/PlayableGroup.h>
+#include <Magnum/Audio/Source.h>
+
 #include <string.h>
 #include <iostream>
 #include <iomanip>
