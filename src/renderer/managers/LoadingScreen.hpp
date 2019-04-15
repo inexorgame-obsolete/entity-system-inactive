@@ -1,6 +1,7 @@
 #pragma once
 
 #include "renderer/managers/WindowManager.hpp"
+#include "visual-scripting/managers/ConnectorManager.hpp"
 #include "logging/managers/LogManager.hpp"
 
 #include <Magnum/GL/Mesh.h>
@@ -19,6 +20,7 @@ namespace renderer {
 
 	using WindowManagerPtr = std::shared_ptr<WindowManager>;
 	using KeyboardInputManagerPtr = std::shared_ptr<input::KeyboardInputManager>;
+	using ConnectorManagerPtr = std::shared_ptr<visual_scripting::ConnectorManager>;
 	using LogManagerPtr = std::shared_ptr<logging::LogManager>;
 	using EntityInstancePtr = std::shared_ptr<EntityInstance>;
 
@@ -42,6 +44,7 @@ namespace renderer {
 			LoadingScreen(
 				WindowManagerPtr window_manager,
 				KeyboardInputManagerPtr keyboard_input_manager,
+				ConnectorManagerPtr connector_manager,
 				LogManagerPtr log_manager
 			);
 
@@ -73,6 +76,9 @@ namespace renderer {
 
 			/// The keyboard input manager
 			KeyboardInputManagerPtr keyboard_input_manager;
+
+			/// The connector manager
+			ConnectorManagerPtr connector_manager;
 
 			/// The log manager.
 			LogManagerPtr log_manager;

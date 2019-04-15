@@ -8,6 +8,7 @@
 #include "input/listeners/WindowKeyReleasedListener.hpp"
 
 #include "entity-system/model/entities/entity-instances/EntityInstance.hpp"
+#include "type-system/factories/inout/keyboard/GlobalKeyFactory.hpp"
 #include "logging/managers/LogManager.hpp"
 
 #include <boost/signals2.hpp>
@@ -15,8 +16,12 @@
 namespace inexor {
 namespace input {
 
-	using LogManagerPtr = std::shared_ptr<inexor::logging::LogManager>;
+	using LogManagerPtr = std::shared_ptr<logging::LogManager>;
+	using GlobalKeyFactoryPtr = std::shared_ptr<entity_system::type_system::GlobalKeyFactory>;
+
 	using EntityInstancePtr = std::shared_ptr<entity_system::EntityInstance>;
+	using EntityInstancePtrOpt = std::optional<EntityInstancePtr>;
+
 	using SignalKeyChanged = boost::signals2::signal<void(EntityInstancePtr window, int key, int scancode, int action, int mods)>;
 	using SignalKeyChangedPtr = std::shared_ptr<SignalKeyChanged>;
 	using SignalKeyPressed = boost::signals2::signal<void(EntityInstancePtr window, int key, int scancode, int mods)>;
@@ -33,8 +38,10 @@ namespace input {
 
 			/// @brief Constructor.
 			/// @note The dependencies of this class will be injected automatically.
+			/// @param global_key_factory The factory for creating instances of type 'GLOBAL_KEY'.
 			/// @param log_manager The log manager.
 			KeyboardInputManager(
+				GlobalKeyFactoryPtr global_key_factory,
 				LogManagerPtr log_manager
 			);
 
@@ -46,6 +53,10 @@ namespace input {
 
 			/// Shut down the keyboard input manager.
 			void shutdown();
+
+			/// @brief Creates a new entity instance of type 'GLOBAL_KEY'.
+			/// @param key The key code.
+			EntityInstancePtrOpt create_key(const int& key);
 
 			/// @brief Called if the state of a key has been changed.
 			/// @param window The entity instance of type 'WINDOW'.
@@ -79,6 +90,9 @@ namespace input {
 		private:
 
 			std::string get_window_name(EntityInstancePtr window);
+
+			/// The factory for creating entity instance of type 'GLOBAL_KEY'.
+			GlobalKeyFactoryPtr global_key_factory;
 
 			/// The log manager.
 			LogManagerPtr log_manager;

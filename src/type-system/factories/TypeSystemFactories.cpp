@@ -32,6 +32,11 @@ namespace type_system {
 		math_factories->init();
 	}
 
+	InOutFactoriesPtr TypeSystemFactories::get_in_out_factories()
+	{
+		return in_out_factories;
+	}
+
 }
 }
 }

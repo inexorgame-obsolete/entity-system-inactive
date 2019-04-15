@@ -43,6 +43,9 @@ namespace type_system {
 			/// Initializes the factories of the type system.
 			void init();
 
+			/// Returns the factories for input and output like console and loggers.
+			InOutFactoriesPtr get_in_out_factories();
+
 		private:
 
 			/// The factories for data objects like constants and stores.

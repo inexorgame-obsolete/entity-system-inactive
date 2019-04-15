@@ -1,6 +1,7 @@
 #include "LoadingScreen.hpp"
 
 #include "entity-system/model/entity-attributes/entity-attribute-instances/EntityAttributeInstance.hpp"
+#include "type-system/providers/inout/keyboard/GlobalKeyEntityTypeProvider.hpp"
 
 #include <Magnum/Primitives/Square.h>
 
@@ -21,10 +22,12 @@ namespace renderer {
 	LoadingScreen::LoadingScreen(
 		WindowManagerPtr window_manager,
 		KeyboardInputManagerPtr keyboard_input_manager,
+		ConnectorManagerPtr connector_manager,
 		LogManagerPtr log_manager
 	) {
 		this->window_manager = window_manager;
 		this->keyboard_input_manager = keyboard_input_manager;
+		this->connector_manager = connector_manager;
 		this->log_manager = log_manager;
 		this->initialized = false;
 	}
@@ -45,6 +48,26 @@ namespace renderer {
 		window_manager->register_render_function(window, std::bind(&LoadingScreen::render_logo, this, std::placeholders::_1, std::placeholders::_2));
 
 		keyboard_input_manager->register_on_window_key_released(window, shared_from_this());
+
+		EntityInstancePtrOpt o_key_b = keyboard_input_manager->create_key(GLFW_KEY_B);
+		if (o_key_b.has_value())
+		{
+			EntityInstancePtr key_b = o_key_b.value();
+			EntityAttributeInstancePtrOpt o_key_b_key = key_b->get_attribute_instance(entity_system::type_system::GlobalKeyEntityTypeProvider::GLOBAL_KEY_KEYCODE);
+			EntityAttributeInstancePtrOpt o_key_b_action = key_b->get_attribute_instance(entity_system::type_system::GlobalKeyEntityTypeProvider::GLOBAL_KEY_ACTION);
+			if (o_key_b_key.has_value() && o_key_b_action.has_value())
+			{
+				EntityAttributeInstancePtr key_b_key = o_key_b_key.value();
+				EntityAttributeInstancePtr key_b_action = o_key_b_action.value();
+				spdlog::info("Creating observer for GLOBAL KEY {} {}", std::get<entity_system::DataType::INT>(key_b_key->value.Value()), std::get<entity_system::DataType::INT>(key_b_action->value.Value()));
+				Observe(
+					key_b_action->value,
+					[] (DataValue action) {
+						spdlog::info("GLOBAL KEY B {}", std::get<entity_system::DataType::INT>(action));
+					}
+				);
+			}
+		}
 	}
 
 	void LoadingScreen::shutdown()

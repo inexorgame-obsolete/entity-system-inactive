@@ -11,8 +11,10 @@ namespace inexor {
 namespace input {
 
 	KeyboardInputManager::KeyboardInputManager(
+		GlobalKeyFactoryPtr global_key_factory,
 		LogManagerPtr log_manager
 	) {
+		this->global_key_factory = global_key_factory;
 		this->log_manager = log_manager;
 	}
 
@@ -27,6 +29,12 @@ namespace input {
 
 	void KeyboardInputManager::shutdown()
 	{
+	}
+
+	EntityInstancePtrOpt KeyboardInputManager::create_key(const int& key)
+	{
+		spdlog::get(LOGGER_NAME)->info("Create entity instance for GLOBAL_KEY {}", key);
+		return global_key_factory->create_instance(key);
 	}
 
 	void KeyboardInputManager::key_changed(EntityInstancePtr window, int key, int scancode, int action, int mods)
