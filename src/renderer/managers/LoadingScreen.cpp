@@ -7,7 +7,10 @@
 
 #include <GLFW/glfw3.h>
 
+#include <boost/stacktrace.hpp>
+
 #include "spdlog/spdlog.h"
+#include <spdlog/fmt/ostr.h>
 
 #include <algorithm>
 
@@ -64,6 +67,7 @@ namespace renderer {
 					key_b_action->value,
 					[] (DataValue action) {
 						spdlog::info("GLOBAL KEY B {}", std::get<entity_system::DataType::INT>(action));
+						spdlog::info("Stacktrace {}", boost::stacktrace::stacktrace());
 					}
 				);
 			}
