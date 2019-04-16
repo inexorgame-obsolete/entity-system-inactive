@@ -53,14 +53,14 @@ namespace input {
 	{
 		if (global_key_signals.find(key) != global_key_signals.end())
 		{
-			spdlog::get(LOGGER_NAME)->info("on key changed {}: signal!", key);
+			spdlog::get(LOGGER_NAME)->debug("Signal GLOBAL_KEY {}", key);
 			// Change both signals at the same time!
 			DoTransaction<D>([this, key, action, mods] {
 				global_key_signals[key]->action.Set(action);
 				global_key_signals[key]->mods.Set(mods);
 			});
 		} else {
-			spdlog::get(LOGGER_NAME)->info("on key changed {}: no signal", key);
+			spdlog::get(LOGGER_NAME)->trace("No signal for key code {}", key);
 		}
 	}
 
@@ -75,13 +75,11 @@ namespace input {
         if(o_keycode.has_value() && o_action.has_value() && o_mods.has_value())
 		{
         	EntityAttributeInstancePtr keycode = o_keycode.value();
-			spdlog::info("Making signals for GLOBAL KEY {}", std::get<entity_system::DataType::INT>(keycode->value.Value()));
 			int key = std::get<DataType::INT>(o_keycode.value()->value.Value());
-			spdlog::get(LOGGER_NAME)->info("make_signals GLOBAL_KEY {}", key);
+			spdlog::get(LOGGER_NAME)->debug("Reactively connect source signals for key code {} with entity attributes", key);
 			GlobalKeySignalsPtr global_key_signals = get_or_create_global_key_signals(key);
 			o_action.value()->signal_wrapper <<= global_key_signals->action;
 			o_mods.value()->signal_wrapper <<= global_key_signals->mods;
-			spdlog::get(LOGGER_NAME)->info("Connected GLOBAL_KEY {}", key);
 		} else {
         	spdlog::get(LOGGER_NAME)->error("Failed to initialize processor signals for entity instance {} of type {}: Missing one of these attributes {} {} {}", entity_instance->get_GUID().str(), entity_instance->get_entity_type()->get_type_name(), GlobalKeyEntityTypeProvider::GLOBAL_KEY_KEYCODE, GlobalKeyEntityTypeProvider::GLOBAL_KEY_ACTION, GlobalKeyEntityTypeProvider::GLOBAL_KEY_MODS);
 		}
@@ -91,8 +89,8 @@ namespace input {
 	{
 		if (global_key_signals.find(key) == global_key_signals.end())
 		{
+			spdlog::get(LOGGER_NAME)->debug("Create source signals for key code {}", key);
 			global_key_signals[key] = std::make_shared<GlobalKeySignals>(key, MakeVar<D>(DataValue(0)), MakeVar<D>(DataValue(0)));
-			spdlog::get(LOGGER_NAME)->info("Created Signal for GLOBAL_KEY {}", key);
 		}
 		return global_key_signals[key];
 	}
