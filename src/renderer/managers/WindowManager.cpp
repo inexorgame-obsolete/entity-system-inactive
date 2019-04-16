@@ -56,9 +56,9 @@ namespace renderer {
 
 	void WindowManager::shutdown()
 	{
-		spdlog::info("Shutting down {} open windows", windows.size());
+		spdlog::debug("Shutting down {} open windows", windows.size());
 		for (auto& kv : windows) {
-			spdlog::info("Shutting down window {} ", kv.second->id);
+			spdlog::debug("Shutting down window {} ", kv.second->id);
 			destroy_window(kv.first);
 		}
 
@@ -82,7 +82,7 @@ namespace renderer {
 		int id = current_window_id;
 		// TODO: end lock guard
 
-		spdlog::get(WindowManager::LOGGER_NAME)->info(
+		spdlog::get(WindowManager::LOGGER_NAME)->debug(
 			"Creating window {}: '{}' ({}, {}) ({}x{}) Opacity: {} Flags:{}{}{}{}{}",
 			id, title, x, y, width, height, opacity,
 			visible ? " Visible" : "",
@@ -131,7 +131,7 @@ namespace renderer {
 				std::thread window_thread(&renderer::WindowManager::start_window_thread, this, window);
 				window_thread.detach();
 				windows[window]->thread = std::move(window_thread);
-				spdlog::get(WindowManager::LOGGER_NAME)->info("Started thread for window id {}", id);
+				spdlog::get(WindowManager::LOGGER_NAME)->debug("Started thread for window id {}", id);
 
 				// Initialize the callbacks for the given window.
 				initialize_window_callbacks(glfw_window);
@@ -147,12 +147,12 @@ namespace renderer {
 					// Show window
 					glfwShowWindow(glfw_window);
 				} else {
-					spdlog::get(WindowManager::LOGGER_NAME)->info("Window {} initially hidden!", id);
+					spdlog::get(WindowManager::LOGGER_NAME)->warn("Window {} initially hidden!", id);
 				}
 
 				if (iconified)
 				{
-					spdlog::get(WindowManager::LOGGER_NAME)->info("Window {} initially iconified!", id);
+					spdlog::get(WindowManager::LOGGER_NAME)->warn("Window {} initially iconified!", id);
 					glfwIconifyWindow(glfw_window);
 				}
 
@@ -193,11 +193,11 @@ namespace renderer {
 			GLFWwindow *glfw_window = windows[window]->glfw_window;
 			if (glfw_window != nullptr)
 			{
-				spdlog::info("Trying to close managed window");
+				spdlog::debug("Trying to close managed window");
 				glfwSetWindowShouldClose(glfw_window, GLFW_TRUE);
 
 				// Wait for window thread state being released
-				spdlog::info("Waiting for managed window thread being stopped");
+				spdlog::debug("Waiting for managed window thread being stopped");
 				// TODO: add timeout!
 				while (is_thread_running(window))
 				{
@@ -205,12 +205,12 @@ namespace renderer {
 				}
 				spdlog::info("Managed window thread has been released (which means the window is closed)!");
 			} else {
-				spdlog::info("Trying to stop managed window thread");
+				spdlog::debug("Trying to stop managed window thread");
 				windows[window]->thread_running = false;
 			}
 		} else {
 			// No managed window, but shut down the window thread!
-			spdlog::info("Entity instance of type 'WINDOW' and thread are no more managed by WindowManager!");
+			spdlog::warn("Entity instance of type 'WINDOW' and thread are no more managed by WindowManager!");
 		}
 	}
 
@@ -264,12 +264,12 @@ namespace renderer {
 			Dimensions windowd;
 			glfwGetWindowPos(glfw_window, &windowd.x, &windowd.y);
 			glfwGetWindowSize(glfw_window, &windowd.width, &windowd.height);
-			spdlog::info("window current {},{} {}x{}", windowd.x, windowd.y, windowd.width, windowd.height);
+			spdlog::debug("window current {},{} {}x{}", windowd.x, windowd.y, windowd.width, windowd.height);
 			windowd.width *= 0.5;
 			windowd.height *= 0.5;
 			windowd.x += windowd.width;
 			windowd.y += windowd.height;
-			spdlog::info("window center {},{} {}x{}", windowd.x, windowd.y, windowd.width, windowd.height);
+			spdlog::debug("window center {},{} {}x{}", windowd.x, windowd.y, windowd.width, windowd.height);
 
 			std::optional<WindowOwner> owner = get_window_owner(windowd);
 			if (owner.has_value())
@@ -307,13 +307,12 @@ namespace renderer {
 			}
 
 			// Set the owner to this monitor if the center of the window is within its bounding box
-			spdlog::info("window {},{} monitor {},{} {}x{}", window.x, window.y, monitor.x, monitor.y, monitor.width, monitor.height);
+			spdlog::debug("window {},{} monitor {},{} {}x{}", window.x, window.y, monitor.x, monitor.y, monitor.width, monitor.height);
 			if(
 				(window.x > monitor.x && window.x < (monitor.x + monitor.width)) &&
 				(window.y > monitor.y && window.y < (monitor.y + monitor.height))
 			)
 			{
-				spdlog::info("found owner");
 				owner = { monitors[i], monitor.x, monitor.y, monitor.width, monitor.height };
 			}
 		}
@@ -413,7 +412,7 @@ namespace renderer {
 		Observe(
 			window->get_attribute_instance(WindowEntityTypeProvider::WINDOW_TITLE).value()->value,
 			[glfw_window] (DataValue visible) {
-				spdlog::info("title {}", std::get<DataType::STRING>(visible));
+				spdlog::debug("title {}", std::get<DataType::STRING>(visible));
 				glfwSetWindowTitle(glfw_window, std::get<DataType::STRING>(visible).c_str());
 			}
 		);
@@ -421,7 +420,7 @@ namespace renderer {
 		Observe(
 			window->get_attribute_instance(WindowEntityTypeProvider::WINDOW_VISIBLE).value()->value,
 			[glfw_window] (DataValue visible) {
-				spdlog::info("visible {}", std::get<DataType::BOOL>(visible) ? "true" : "false");
+				spdlog::debug("visible {}", std::get<DataType::BOOL>(visible) ? "true" : "false");
 				if (std::get<DataType::BOOL>(visible)) {
 					glfwShowWindow(glfw_window);
 				} else {
@@ -433,7 +432,7 @@ namespace renderer {
 		Observe(
 			window->get_attribute_instance(WindowEntityTypeProvider::WINDOW_FULLSCREEN).value()->value,
 			[glfw_window, window] (DataValue fullscreen) {
-				spdlog::info("fullscreen {}", std::get<DataType::BOOL>(fullscreen) ? "true" : "false");
+				spdlog::debug("fullscreen {}", std::get<DataType::BOOL>(fullscreen) ? "true" : "false");
 				if (std::get<DataType::BOOL>(fullscreen)) {
 					GLFWmonitor* glfw_monitor = glfwGetPrimaryMonitor();
 					const GLFWvidmode* glfw_mode = glfwGetVideoMode(glfw_monitor);
@@ -451,7 +450,7 @@ namespace renderer {
 		Observe(
 			window->get_attribute_instance(WindowEntityTypeProvider::WINDOW_ICONIFIED).value()->value,
 			[glfw_window] (DataValue iconified) {
-				spdlog::info("iconified {}", std::get<DataType::BOOL>(iconified) ? "true" : "false");
+				spdlog::debug("iconified {}", std::get<DataType::BOOL>(iconified) ? "true" : "false");
 				if (std::get<DataType::BOOL>(iconified)) {
 					glfwIconifyWindow(glfw_window);
 				} else {
@@ -463,7 +462,7 @@ namespace renderer {
 		Observe(
 			window->get_attribute_instance(WindowEntityTypeProvider::WINDOW_MAXIMIZED).value()->value,
 			[glfw_window] (DataValue maximized) {
-				spdlog::info("maximized {}", std::get<DataType::BOOL>(maximized) ? "true" : "false");
+				spdlog::debug("maximized {}", std::get<DataType::BOOL>(maximized) ? "true" : "false");
 				if (std::get<DataType::BOOL>(maximized)) {
 					glfwMaximizeWindow(glfw_window);
 				} else {
@@ -478,7 +477,7 @@ namespace renderer {
 				window->get_attribute_instance(WindowEntityTypeProvider::WINDOW_POSITION_Y).value()->value
 			),
 			[glfw_window, this, window] (DataValue position_x, DataValue position_y) {
-				spdlog::info("(1) position_x {} position_y {}", std::get<DataType::INT>(position_x), std::get<DataType::INT>(position_y));
+				spdlog::debug("(1) position_x {} position_y {}", std::get<DataType::INT>(position_x), std::get<DataType::INT>(position_y));
 				return std::make_pair(std::get<DataType::INT>(position_x), std::get<DataType::INT>(position_y));
 			}
 		);
@@ -486,7 +485,7 @@ namespace renderer {
 		auto observer_position_changed = Observe(
 			windows[window]->signal_position_changed,
 			[glfw_window] (std::pair<int, int> position) {
-				spdlog::info("(2) position_x {} position_y {}", position.first, position.second);
+				spdlog::debug("(2) position_x {} position_y {}", position.first, position.second);
 				// Avoid feedback loops
 				int xpos = 0;
 				int ypos = 0;
@@ -504,7 +503,7 @@ namespace renderer {
 				window->get_attribute_instance(WindowEntityTypeProvider::WINDOW_HEIGHT).value()->value
 			),
 			[glfw_window, this, window] (DataValue width, DataValue height) {
-				spdlog::info("(1) width {} height {}", std::get<DataType::INT>(width), std::get<DataType::INT>(height));
+				spdlog::debug("(1) width {} height {}", std::get<DataType::INT>(width), std::get<DataType::INT>(height));
 				return std::make_pair(std::get<DataType::INT>(width), std::get<DataType::INT>(height));
 			}
 		);
@@ -512,7 +511,7 @@ namespace renderer {
 		auto observer_size_changed = Observe(
 			windows[window]->signal_size_changed,
 			[glfw_window] (std::pair<int, int> size) {
-				spdlog::info("(2) width {} height {}", size.first, size.second);
+				spdlog::debug("(2) width {} height {}", size.first, size.second);
 				// Avoid feedback loops
 				int current_width = 0;
 				int current_height = 0;
@@ -534,33 +533,33 @@ namespace renderer {
 
 	void WindowManager::window_closed(GLFWwindow* glfw_window)
 	{
-		spdlog::get(WindowManager::LOGGER_NAME)->info("EVT: Window closed!");
+		spdlog::get(WindowManager::LOGGER_NAME)->debug("Window closed!");
 	}
 
 	void WindowManager::window_focused(GLFWwindow* glfw_window, bool has_focus)
 	{
-		spdlog::get(WindowManager::LOGGER_NAME)->info("EVT: Window focus changed: {}", has_focus);
+		spdlog::get(WindowManager::LOGGER_NAME)->debug("Window focus changed: {}", has_focus);
 		EntityInstancePtr window = window_entities[glfw_window];
 		window->get_attribute_instance(WindowEntityTypeProvider::WINDOW_FOCUSED).value()->own_value.Set(has_focus);
 	}
 
 	void WindowManager::window_iconified(GLFWwindow* glfw_window, bool is_iconified)
 	{
-		spdlog::get(WindowManager::LOGGER_NAME)->info("EVT: Window iconification state changed: {}", is_iconified);
+		spdlog::get(WindowManager::LOGGER_NAME)->debug("Window iconification state changed: {}", is_iconified);
 		EntityInstancePtr window = window_entities[glfw_window];
 		window->get_attribute_instance(WindowEntityTypeProvider::WINDOW_ICONIFIED).value()->own_value.Set(is_iconified);
 	}
 
 	void WindowManager::window_maximized(GLFWwindow* glfw_window, bool is_maximized)
 	{
-		spdlog::get(WindowManager::LOGGER_NAME)->info("EVT: Window maximize state changed: {}", is_maximized);
+		spdlog::get(WindowManager::LOGGER_NAME)->debug("Window maximize state changed: {}", is_maximized);
 		EntityInstancePtr window = window_entities[glfw_window];
 		window->get_attribute_instance(WindowEntityTypeProvider::WINDOW_MAXIMIZED).value()->own_value.Set(is_maximized);
 	}
 
 	void WindowManager::window_position_changed(GLFWwindow* glfw_window, int x, int y)
 	{
-		spdlog::get(WindowManager::LOGGER_NAME)->info("EVT: Window position changed: {}:{}", x, y);
+		spdlog::get(WindowManager::LOGGER_NAME)->debug("Window position changed: {}:{}", x, y);
 		EntityInstancePtr window = window_entities[glfw_window];
 		DoTransaction<D>([window, x, y] {
 			window->get_attribute_instance(WindowEntityTypeProvider::WINDOW_POSITION_X).value()->own_value.Set(x);
@@ -570,7 +569,7 @@ namespace renderer {
 
 	void WindowManager::window_size_changed(GLFWwindow* glfw_window, int width, int height)
 	{
-		spdlog::get(WindowManager::LOGGER_NAME)->info("EVT: Window size changed: {}:{}", width, height);
+		spdlog::get(WindowManager::LOGGER_NAME)->debug("Window size changed: {}:{}", width, height);
 		EntityInstancePtr window = window_entities[glfw_window];
 		DoTransaction<D>([window, width, height] {
 			window->get_attribute_instance(WindowEntityTypeProvider::WINDOW_WIDTH).value()->own_value.Set(width);
@@ -648,7 +647,7 @@ namespace renderer {
 
 		// Remove window render functions
 		windows[window]->render_functions.clear();
-		spdlog::info("window {} render_functions count: {}", windows[window]->id, windows[window]->render_functions.size());
+		spdlog::debug("window {} render_functions count: {}", windows[window]->id, windows[window]->render_functions.size());
 
 		// Remove the callbacks
 		this->destroy_window_callbacks(glfw_window);
@@ -661,11 +660,11 @@ namespace renderer {
 
 		// Untrack the glfw window
 		window_entities.erase(glfw_window);
-		spdlog::info("window_entities count: {}", window_entities.size());
+		spdlog::debug("window_entities count: {}", window_entities.size());
 
 		// Untrack the entity instance
 		windows.erase(window);
-		spdlog::info("windows count: {}", windows.size());
+		spdlog::debug("windows count: {}", windows.size());
 
 		// Delete entity instance
 		entity_instance_manager->delete_entity_instance(window);
