@@ -227,6 +227,14 @@ namespace renderer {
 		}
 	}
 
+	void WindowManager::set_window_title(EntityInstancePtr window, std::string title)
+	{
+		if (is_window_available(window))
+		{
+			window->get_attribute_instance(WindowEntityTypeProvider::WINDOW_TITLE).value()->own_value.Set(title);
+		}
+	}
+
 	void WindowManager::set_window_position(EntityInstancePtr window, int x, int y)
 	{
 		if (is_window_available(window))
@@ -342,6 +350,14 @@ namespace renderer {
 
 	void WindowManager::initialize_window_observers(EntityInstancePtr window, GLFWwindow *glfw_window)
 	{
+
+		Observe(
+			window->get_attribute_instance(WindowEntityTypeProvider::WINDOW_TITLE).value()->value,
+			[glfw_window] (DataValue visible) {
+				spdlog::info("title {}", std::get<DataType::STRING>(visible));
+				glfwSetWindowTitle(glfw_window, std::get<DataType::STRING>(visible).c_str());
+			}
+		);
 
 		Observe(
 			window->get_attribute_instance(WindowEntityTypeProvider::WINDOW_VISIBLE).value()->value,

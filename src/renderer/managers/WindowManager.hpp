@@ -122,6 +122,11 @@ namespace renderer {
 			/// @param window The entity instance of type WINDOW.
 			void close_window(EntityInstancePtr window);
 
+			/// @brief Sets the title of the given window.
+			/// @param window The entity instance of type WINDOW.
+			/// @param title The new title of the window.
+			void set_window_title(EntityInstancePtr window, std::string title);
+
 			/// @brief Sets the position of the given window.
 			/// @param window The entity instance of type WINDOW.
 			/// @param x The new x position of the window.

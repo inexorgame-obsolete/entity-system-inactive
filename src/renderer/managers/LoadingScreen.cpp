@@ -127,6 +127,9 @@ namespace renderer {
 			case GLFW_KEY_END:
 				window_manager->set_window_size(window, 800, 600);
 				break;
+			case GLFW_KEY_T:
+				window_manager->set_window_title(window, "Please wait...");
+				break;
 			case GLFW_KEY_I:
 				toggle(window, WindowEntityTypeProvider::WINDOW_ICONIFIED);
 				break;
