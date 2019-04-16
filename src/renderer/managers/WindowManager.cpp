@@ -52,11 +52,6 @@ namespace renderer {
 
 		// Initialize the user interface renderer
 		user_interface_renderer->init();
-
-		create_window("Test 1", 0, 0, 300, 300);
-		create_window("Test 2", 300, 0, 300, 300);
-		create_window("Test 3", 0, 300, 300, 300, 1.0f, true, false, false, false, false);
-		create_window("Test 4", 300, 300, 300, 300, 1.0f, true, false, false, false, false);
 	}
 
 	void WindowManager::shutdown()

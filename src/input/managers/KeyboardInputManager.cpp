@@ -48,37 +48,34 @@ namespace input {
 		{
 			case GLFW_PRESS:
 				signal_key_pressed(window, key, scancode, mods);
-				// TODO: add event signal_key_pressed_or_repeated
-				// signal_key_pressed_or_repeated(window, key, scancode, mods);
+				signal_key_pressed_or_repeated(window, key, scancode, mods);
 				break;
 			case GLFW_RELEASE:
 				signal_key_released(window, key, scancode, mods);
 				break;
 			case GLFW_REPEAT:
-				// TODO: add event signal_key_pressed_or_repeated
-				// signal_key_pressed_or_repeated(window, key, scancode, mods);
-				// break;
+				signal_key_pressed_or_repeated(window, key, scancode, mods);
+				break;
 			default:
 				break;
 		}
 		if (!(signal_window_key_changed.end() == signal_window_key_changed.find(window)))
 		{
 			signal_window_key_changed[window]->operator ()(window, key, scancode, action, mods);
-			// TODO: add event signal_window_key_pressed_or_repeated
-			// signal_window_key_pressed_or_repeated[window]->operator ()(window, key, scancode, mods);
 		}
 		if (GLFW_PRESS == action && !(signal_window_key_pressed.end() == signal_window_key_pressed.find(window)))
 		{
 			signal_window_key_pressed[window]->operator ()(window, key, scancode, mods);
+			signal_window_key_pressed_or_repeated[window]->operator ()(window, key, scancode, mods);
 		}
 		if (GLFW_RELEASE == action && !(signal_window_key_released.end() == signal_window_key_released.find(window)))
 		{
 			signal_window_key_released[window]->operator ()(window, key, scancode, mods);
 		}
-		// TODO: add event signal_window_key_pressed_or_repeated
-		// if (GLFW_REPEAT == action && !(signal_window_key_pressed_or_repeated.end() == signal_window_key_pressed_or_repeated.find(window)))
-		//	signal_window_key_pressed_or_repeated[window]->operator ()(window, key, scancode, mods);
-		// }
+		if (GLFW_REPEAT == action && !(signal_window_key_pressed_or_repeated.end() == signal_window_key_pressed_or_repeated.find(window)))
+		{
+			signal_window_key_pressed_or_repeated[window]->operator ()(window, key, scancode, mods);
+		}
 
 	}
 
@@ -90,6 +87,11 @@ namespace input {
 	void KeyboardInputManager::register_on_key_pressed(std::shared_ptr<KeyPressedListener> key_pressed_listener)
 	{
 		signal_key_pressed.connect(std::bind(&KeyPressedListener::on_key_pressed, key_pressed_listener.get(), std::placeholders::_1, std::placeholders::_2, std::placeholders::_3, std::placeholders::_4));
+	}
+
+	void KeyboardInputManager::register_on_key_pressed_or_repeated(std::shared_ptr<KeyPressedOrRepeatedListener> key_pressed_or_repeated_listener)
+	{
+		signal_key_pressed_or_repeated.connect(std::bind(&KeyPressedOrRepeatedListener::on_key_pressed_or_repeated, key_pressed_or_repeated_listener.get(), std::placeholders::_1, std::placeholders::_2, std::placeholders::_3, std::placeholders::_4));
 	}
 
 	void KeyboardInputManager::register_on_key_released(std::shared_ptr<KeyReleasedListener> key_released_listener)
@@ -115,6 +117,16 @@ namespace input {
 			signal_window_key_pressed.insert(std::make_pair(window, signal));
 		}
 		signal_window_key_pressed[window]->connect(std::bind(&WindowKeyPressedListener::on_window_key_pressed, window_key_pressed_listener.get(), std::placeholders::_1, std::placeholders::_2, std::placeholders::_3, std::placeholders::_4));
+	}
+
+	void KeyboardInputManager::register_on_window_key_pressed_or_repeated(EntityInstancePtr window, std::shared_ptr<WindowKeyPressedOrRepeatedListener> window_key_pressed_or_repeated_listener)
+	{
+		if (signal_window_key_pressed_or_repeated.end() == signal_window_key_pressed_or_repeated.find(window))
+		{
+			auto signal = std::make_shared<SignalKeyPressedOrRepeated>();
+			signal_window_key_pressed_or_repeated.insert(std::make_pair(window, signal));
+		}
+		signal_window_key_pressed_or_repeated[window]->connect(std::bind(&WindowKeyPressedOrRepeatedListener::on_window_key_pressed_or_repeated, window_key_pressed_or_repeated_listener.get(), std::placeholders::_1, std::placeholders::_2, std::placeholders::_3, std::placeholders::_4));
 	}
 
 	void KeyboardInputManager::register_on_window_key_released(EntityInstancePtr window, std::shared_ptr<WindowKeyReleasedListener> window_key_released_listener)

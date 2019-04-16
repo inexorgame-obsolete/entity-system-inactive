@@ -63,6 +63,18 @@ namespace renderer {
 		monitors.erase(monitor);
 	}
 
+	std::optional<EntityInstancePtr> MonitorManager::get_primary()
+	{
+		for (auto monitor : monitors)
+		{
+			if (is_primary(monitor.second))
+			{
+				return monitor.first;
+			}
+		}
+		return std::nullopt;
+	}
+
 	bool MonitorManager::is_primary(EntityInstancePtr monitor)
 	{
 		return is_primary(monitors[monitor]);

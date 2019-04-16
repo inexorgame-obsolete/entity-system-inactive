@@ -45,6 +45,10 @@ namespace renderer {
 			/// Detects the video modes.
 			void detect_video_modes(EntityInstancePtr monitor);
 
+			/// Returns the primary monitor.
+			std::optional<EntityInstancePtr> get_primary();
+
+			/// Returns true, if the given monitor is the primary monitor.
 			bool is_primary(EntityInstancePtr monitor);
 
 			/// The logger name of this service.

@@ -24,11 +24,13 @@ namespace renderer {
 
 	LoadingScreen::LoadingScreen(
 		WindowManagerPtr window_manager,
+		MonitorManagerPtr monitor_manager,
 		KeyboardInputManagerPtr keyboard_input_manager,
 		ConnectorManagerPtr connector_manager,
 		LogManagerPtr log_manager
 	) {
 		this->window_manager = window_manager;
+		this->monitor_manager = monitor_manager;
 		this->keyboard_input_manager = keyboard_input_manager;
 		this->connector_manager = connector_manager;
 		this->log_manager = log_manager;
@@ -45,12 +47,14 @@ namespace renderer {
 
 		// Creates the window
 		window = window_manager->create_window("Inexor Logo", 0, 0, 800, 600, 0.8f, true, false, false, false, true);
+		window_manager->center_window(window);
 		// The first render function is the initialization function which is executed only once
 		window_manager->register_render_function(window, std::bind(&LoadingScreen::create_logo, this, std::placeholders::_1, std::placeholders::_2));
 		// The second render function is for rendering the inexor logo
 		window_manager->register_render_function(window, std::bind(&LoadingScreen::render_logo, this, std::placeholders::_1, std::placeholders::_2));
 
 		keyboard_input_manager->register_on_window_key_released(window, shared_from_this());
+		keyboard_input_manager->register_on_window_key_pressed_or_repeated(window, shared_from_this());
 
 		EntityInstancePtrOpt o_key_b = keyboard_input_manager->create_key(GLFW_KEY_B);
 		if (o_key_b.has_value())
@@ -111,8 +115,7 @@ namespace renderer {
 
 	void LoadingScreen::on_window_key_released(EntityInstancePtr window, int key, int scancode, int mods)
 	{
-
-		spdlog::get(LOGGER_NAME)->info("Loading Screen {} {} {}", key, scancode, mods);
+		spdlog::get(LOGGER_NAME)->info("Key released {} {} {}", key, scancode, mods);
 		switch (key)
 		{
 			case GLFW_KEY_X:
@@ -121,11 +124,14 @@ namespace renderer {
 			case GLFW_KEY_Q:
 				window_manager->shutdown();
 				break;
-			case GLFW_KEY_HOME:
+			case GLFW_KEY_V:
 				window_manager->set_window_position(window, 100, 100);
 				break;
-			case GLFW_KEY_END:
+			case GLFW_KEY_G:
 				window_manager->set_window_size(window, 800, 600);
+				break;
+			case GLFW_KEY_H:
+				window_manager->set_window_size(window, 1024, 768);
 				break;
 			case GLFW_KEY_C:
 				window_manager->center_window(window);
@@ -142,17 +148,27 @@ namespace renderer {
 			case GLFW_KEY_M:
 				toggle(window, WindowEntityTypeProvider::WINDOW_MAXIMIZED);
 				break;
+			default:
+				break;
+		}
+	}
+
+	void LoadingScreen::on_window_key_pressed_or_repeated(EntityInstancePtr window, int key, int scancode, int mods)
+	{
+		spdlog::get(LOGGER_NAME)->info("Key pressed / repeated {} {} {}", key, scancode, mods);
+		switch (key)
+		{
 			case GLFW_KEY_W:
-				decrease(window, WindowEntityTypeProvider::WINDOW_POSITION_Y, 5, 0);
+				decrease(window, WindowEntityTypeProvider::WINDOW_POSITION_Y, 10, 0);
 				break;
 			case GLFW_KEY_A:
-				decrease(window, WindowEntityTypeProvider::WINDOW_POSITION_X, 5, 0);
+				decrease(window, WindowEntityTypeProvider::WINDOW_POSITION_X, 10, 0);
 				break;
 			case GLFW_KEY_S:
-				increase(window, WindowEntityTypeProvider::WINDOW_POSITION_Y, 5, 800);
+				increase(window, WindowEntityTypeProvider::WINDOW_POSITION_Y, 10, 3840);
 				break;
 			case GLFW_KEY_D:
-				increase(window, WindowEntityTypeProvider::WINDOW_POSITION_X, 5, 600);
+				increase(window, WindowEntityTypeProvider::WINDOW_POSITION_X, 10, 2160);
 				break;
 			case GLFW_KEY_KP_ADD:
 				increase(window, WindowEntityTypeProvider::WINDOW_OPACITY, 0.05f, 1.0f);

@@ -13,7 +13,7 @@ namespace input {
 	{
 		public:
 
-			/// Called if a key has been released.
+			/// Called if a key has been released on any window.
 			virtual void on_key_released(EntityInstancePtr window, int key, int scancode, int mods) = 0;
 
 	};

@@ -1,6 +1,7 @@
 #pragma once
 
 #include "renderer/managers/WindowManager.hpp"
+#include "renderer/managers/MonitorManager.hpp"
 #include "visual-scripting/managers/ConnectorManager.hpp"
 #include "logging/managers/LogManager.hpp"
 
@@ -19,6 +20,7 @@ namespace inexor {
 namespace renderer {
 
 	using WindowManagerPtr = std::shared_ptr<WindowManager>;
+	using MonitorManagerPtr = std::shared_ptr<MonitorManager>;
 	using KeyboardInputManagerPtr = std::shared_ptr<input::KeyboardInputManager>;
 	using ConnectorManagerPtr = std::shared_ptr<visual_scripting::ConnectorManager>;
 	using LogManagerPtr = std::shared_ptr<logging::LogManager>;
@@ -33,6 +35,7 @@ namespace renderer {
 	/// @brief Shows a loading screen during startup.
 	class LoadingScreen
 		: public input::WindowKeyReleasedListener,
+		  public input::WindowKeyPressedOrRepeatedListener,
 		  public std::enable_shared_from_this<LoadingScreen>
 	{
 		public:
@@ -40,9 +43,11 @@ namespace renderer {
 			/// @brief Constructor.
 			/// @note The dependencies of this class will be injected automatically.
 			/// @param window_manager The window manager.
+			/// @param monitor_manager The monitor manager.
 			/// @param log_manager The log manager.
 			LoadingScreen(
 				WindowManagerPtr window_manager,
+				MonitorManagerPtr monitor_manager,
 				KeyboardInputManagerPtr keyboard_input_manager,
 				ConnectorManagerPtr connector_manager,
 				LogManagerPtr log_manager
@@ -60,6 +65,9 @@ namespace renderer {
 			/// Window key released
 			void on_window_key_released(EntityInstancePtr window, int key, int scancode, int mods);
 
+			/// Window key pressed or repeated
+			void on_window_key_pressed_or_repeated(EntityInstancePtr window, int key, int scancode, int mods);
+
 			/// The logger name of this service.
 			static constexpr char LOGGER_NAME[] = "inexor.renderer.loading";
 
@@ -73,6 +81,9 @@ namespace renderer {
 
 			/// The window manager
 			WindowManagerPtr window_manager;
+
+			/// The monitor manager
+			MonitorManagerPtr monitor_manager;
 
 			/// The keyboard input manager
 			KeyboardInputManagerPtr keyboard_input_manager;
