@@ -46,13 +46,13 @@ namespace visual_scripting {
 	void Connector::connect()
 	{
 		input_attr->signal_wrapper <<= output_attr->value;
-		/*spdlog::get(LOGGER_NAME)->debug(
+		spdlog::get(LOGGER_NAME)->debug(
 			"Connect output {}.{} with input {}.{}",
 			output_attr->get_GUID().str(),
 			output_attr->get_entity_attribute_type()->get_type_name(),
 			input_attr->get_GUID().str(),
 			input_attr->get_entity_attribute_type()->get_type_name()
-		);*/
+		);
 	}
 
 	void Connector::disconnect()
@@ -62,13 +62,13 @@ namespace visual_scripting {
 			disable_debug();
 		}
 		input_attr->signal_wrapper <<= input_attr->own_value;
-		/*spdlog::get(LOGGER_NAME)->debug(
+		spdlog::get(LOGGER_NAME)->debug(
 			"Disconnected output {}.{} with input {}.{}",
 			output_attr->get_GUID().str(),
 			output_attr->get_entity_attribute_type()->get_type_name(),
 			input_attr->get_GUID().str(),
 			input_attr->get_entity_attribute_type()->get_type_name()
-		);*/
+		);
 	}
 
 	xg::Guid Connector::connector() const
@@ -91,7 +91,7 @@ namespace visual_scripting {
 		if (!debug_enabled)
 		{
 			this->observer = Observe(output_attr->value, [this] (DataValue value) {
-				/*spdlog::get(LOGGER_NAME)->info(
+				spdlog::get(LOGGER_NAME)->info(
 					"{}.{} ---[{}]---> {}.{}",
 					output_attr->get_GUID().str(),
 					output_attr->get_entity_attribute_type()->get_type_name(),
@@ -99,7 +99,6 @@ namespace visual_scripting {
 					input_attr->get_GUID().str(),
 					input_attr->get_entity_attribute_type()->get_type_name()
 				);
-                */
 			});
 			debug_enabled = true;
 		}

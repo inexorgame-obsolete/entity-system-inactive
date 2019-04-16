@@ -22,6 +22,7 @@ namespace renderer {
 		CosFactoryPtr cos_factory,
 		TriangleFactoryPtr triangle_factory,
 		WindowManagerPtr window_manager,
+		KeyboardInputManagerPtr keyboard_input_manager,
 		LogManagerPtr log_manager
 	) {
 		this->entity_instance_manager = entity_instance_manager;
@@ -31,8 +32,14 @@ namespace renderer {
 		this->cos_factory = cos_factory;
 		this->triangle_factory = triangle_factory;
 		this->window_manager = window_manager;
+		this->keyboard_input_manager = keyboard_input_manager;
 		this->log_manager = log_manager;
 		this->initialized = false;
+		this->debug_enabled = false;
+		this->connector_c_sin = std::nullopt;
+		this->connector_c_cos = std::nullopt;
+		this->connector_x = std::nullopt;
+		this->connector_y = std::nullopt;
 	}
 
 	TriangleExample::~TriangleExample()
@@ -53,6 +60,9 @@ namespace renderer {
 		window_manager->register_render_function(window, std::bind(&TriangleExample::create_mesh, this, std::placeholders::_1, std::placeholders::_2));
 		// The second render function is for rendering the triangle
 		window_manager->register_render_function(window, std::bind(&TriangleExample::render_triangle, this, std::placeholders::_1, std::placeholders::_2));
+
+		keyboard_input_manager->register_on_window_key_released(window, shared_from_this());
+
 	}
 
 	void TriangleExample::shutdown()
@@ -60,22 +70,59 @@ namespace renderer {
 		window_manager->destroy_window(window);
 	}
 
+	void TriangleExample::on_window_key_released(EntityInstancePtr window, int key, int scancode, int mods)
+	{
+
+		spdlog::get(LOGGER_NAME)->info("Triangle Example Key Released {} {} {}", key, scancode, mods);
+		switch (key)
+		{
+			case GLFW_KEY_V:
+				toggle_connector_debug();
+				break;
+			default:
+				break;
+		}
+	}
+
+	void TriangleExample::toggle_connector_debug()
+	{
+		if (debug_enabled)
+		{
+			spdlog::get(LOGGER_NAME)->info("Disable connector debug");
+			if(connector_c_sin.has_value()) connector_c_sin.value()->disable_debug();
+			if(connector_c_cos.has_value()) connector_c_cos.value()->disable_debug();
+			if(connector_x.has_value()) connector_x.value()->disable_debug();
+			if(connector_y.has_value()) connector_y.value()->disable_debug();
+		} else {
+			spdlog::get(LOGGER_NAME)->info("Enable connector debug");
+			if(connector_c_sin.has_value()) connector_c_sin.value()->enable_debug();
+			if(connector_c_cos.has_value()) connector_c_cos.value()->enable_debug();
+			if(connector_x.has_value()) connector_x.value()->enable_debug();
+			if(connector_y.has_value()) connector_y.value()->enable_debug();
+		}
+		debug_enabled = !debug_enabled;
+
+	}
+
 	void TriangleExample::create_entity_instances()
 	{
 		spdlog::info("create_entity_instances");
-		EntityInstancePtrOpt o_counter = counter_float_factory->create_instance(50, 0.1f);
+		EntityInstancePtrOpt o_counter_1 = counter_float_factory->create_instance(50, 0.1f);
+		EntityInstancePtrOpt o_counter_2 = counter_float_factory->create_instance(30, 0.05f);
 		EntityInstancePtrOpt o_sin = sin_factory->create_instance();
 		EntityInstancePtrOpt o_cos = cos_factory->create_instance();
 		EntityInstancePtrOpt o_triangle = triangle_factory->create_instance(0.5f, -0.5f);
 
-		if(o_counter.has_value() && o_sin.has_value() && o_cos.has_value() && o_triangle.has_value())
+		if(o_counter_1.has_value() && o_counter_2.has_value() && o_sin.has_value() && o_cos.has_value() && o_triangle.has_value())
 		{
-			counter = o_counter.value();
+			counter_1 = o_counter_1.value();
+			counter_2 = o_counter_2.value();
 			sin = o_sin.value();
 			cos = o_cos.value();
 			triangle = o_triangle.value();
 
-			EntityAttributeInstanceOpt o_counter_attr_count = counter->get_attribute_instance(entity_system::type_system::CounterFloatEntityTypeProvider::COUNTER_FLOAT_COUNT);
+			EntityAttributeInstanceOpt o_counter_1_attr_count = counter_1->get_attribute_instance(entity_system::type_system::CounterFloatEntityTypeProvider::COUNTER_FLOAT_COUNT);
+			EntityAttributeInstanceOpt o_counter_2_attr_count = counter_2->get_attribute_instance(entity_system::type_system::CounterFloatEntityTypeProvider::COUNTER_FLOAT_COUNT);
 			EntityAttributeInstanceOpt o_sin_attr_input = sin->get_attribute_instance(entity_system::type_system::SinEntityTypeProvider::SIN_INPUT);
 			EntityAttributeInstanceOpt o_sin_attr_value = sin->get_attribute_instance(entity_system::type_system::SinEntityTypeProvider::SIN_VALUE);
 			EntityAttributeInstanceOpt o_cos_attr_input = cos->get_attribute_instance(entity_system::type_system::CosEntityTypeProvider::COS_INPUT);
@@ -83,9 +130,10 @@ namespace renderer {
 			EntityAttributeInstanceOpt o_triangle_attr_x = triangle->get_attribute_instance(TriangleEntityTypeProvider::TRIANGLE_X);
 			EntityAttributeInstanceOpt o_triangle_attr_y = triangle->get_attribute_instance(TriangleEntityTypeProvider::TRIANGLE_Y);
 
-			if(o_counter_attr_count.has_value() && o_sin_attr_value.has_value() && o_cos_attr_value.has_value() && o_triangle_attr_x.has_value() && o_triangle_attr_y.has_value())
+			if(o_counter_1_attr_count.has_value() && o_counter_2_attr_count.has_value() && o_sin_attr_value.has_value() && o_cos_attr_value.has_value() && o_triangle_attr_x.has_value() && o_triangle_attr_y.has_value())
 			{
-				counter_attr_count = o_counter_attr_count.value();
+				counter_1_attr_count = o_counter_1_attr_count.value();
+				counter_2_attr_count = o_counter_2_attr_count.value();
 				sin_attr_input = o_sin_attr_input.value();
 				sin_attr_value = o_sin_attr_value.value();
 				cos_attr_input = o_cos_attr_input.value();
@@ -108,49 +156,10 @@ namespace renderer {
 	void TriangleExample::create_connectors()
 	{
 		spdlog::info("create_connectors");
-		std::optional<std::shared_ptr<visual_scripting::Connector>> connector_c_sin = connector_manager->create_connector(counter_attr_count, sin_attr_input);
-		if(!connector_c_sin.has_value())
-		{
-			//spdlog::get(LOGGER_NAME)->error("Failed to create connector_c_sin");
-		}
-		else
-		{
-			//spdlog::get(LOGGER_NAME)->info("Created connector_c_sin");
-			connector_c_sin.value()->enable_debug();
-		}
-
-		std::optional<std::shared_ptr<visual_scripting::Connector>> connector_c_cos = connector_manager->create_connector(counter_attr_count, cos_attr_input);
-		if(!connector_c_cos.has_value())
-		{
-			//spdlog::get(LOGGER_NAME)->error("Failed to create connector_c_cos");
-		}
-		else
-		{
-			//spdlog::get(LOGGER_NAME)->info("Created connector_c_cos");
-			connector_c_cos.value()->enable_debug();
-		}
-
-		std::optional<std::shared_ptr<visual_scripting::Connector>> connector_x = connector_manager->create_connector(sin_attr_value, triangle_attr_x);
-		if(!connector_x.has_value())
-		{
-			//spdlog::get(LOGGER_NAME)->error("Failed to create connector_x");
-		}
-		else
-		{
-			//spdlog::get(LOGGER_NAME)->info("Created connector_x");
-			connector_x.value()->enable_debug();
-		}
-
-		std::optional<std::shared_ptr<visual_scripting::Connector>> connector_y = connector_manager->create_connector(cos_attr_value, triangle_attr_y);
-		if(!connector_y.has_value())
-		{
-			//spdlog::get(LOGGER_NAME)->error("Failed to create connector_y");
-		}
-		else
-		{
-			//spdlog::get(LOGGER_NAME)->info("Created connector_y");
-			connector_y.value()->enable_debug();
-		}
+		connector_c_sin = connector_manager->create_connector(counter_1_attr_count, sin_attr_input);
+		connector_c_cos = connector_manager->create_connector(counter_2_attr_count, cos_attr_input);
+		connector_x = connector_manager->create_connector(sin_attr_value, triangle_attr_x);
+		connector_y = connector_manager->create_connector(cos_attr_value, triangle_attr_y);
 	}
 
 	void TriangleExample::create_mesh(EntityInstancePtr window, GLFWwindow* glfw_window)
@@ -188,7 +197,7 @@ namespace renderer {
 		// Get position from the entity instance
 		// The entity instance is modified by the visual scripting system (see above!)
 		float x = std::get<DataType::FLOAT>(triangle_attr_x->value.Value());
-		float y = 0.0f - std::get<DataType::FLOAT>(triangle_attr_x->value.Value());
+		float y = std::get<DataType::FLOAT>(triangle_attr_y->value.Value());
 
 		// Create two transformation matrices
 		Magnum::Matrix3 transformation_matrix_x = Magnum::Matrix3::translation(Magnum::Vector2::xAxis(x));

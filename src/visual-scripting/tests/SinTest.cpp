@@ -136,11 +136,11 @@ namespace visual_scripting {
 	{
 		log_create_connector(COUNTER_NAME, CounterFloatEntityTypeProvider::COUNTER_FLOAT_COUNT, SIN_NAME, SinEntityTypeProvider::SIN_INPUT);
 		connector_1 = connector_manager->create_connector(counter_attr_count, sin_attr_input);
-		connector_manager->enable_debug(connector_1);
+		// connector_manager->enable_debug(connector_1);
 
 		log_create_connector(SIN_NAME, SinEntityTypeProvider::SIN_VALUE, TARGET_NAME, FloatConstantEntityTypeProvider::FLOAT_CONSTANT_VALUE);
 		connector_2 = connector_manager->create_connector(sin_attr_value, target_attr_value);
-		connector_manager->enable_debug(connector_2);
+		// connector_manager->enable_debug(connector_2);
 	}
 
 	void SinTest::create_observer()

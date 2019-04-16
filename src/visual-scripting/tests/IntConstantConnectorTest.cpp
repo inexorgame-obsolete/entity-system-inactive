@@ -159,27 +159,27 @@ namespace visual_scripting {
 		// source --> target_1
 		log_create_connector(SOURCE_NAME, IntConstantEntityTypeProvider::INT_CONSTANT_VALUE, TARGET_1_NAME, IntConstantEntityTypeProvider::INT_CONSTANT_VALUE);
 		connector_1 = connector_manager->create_connector(source_attr_value, target_1_attr_value);
-		connector_manager->enable_debug(connector_1);
+		// connector_manager->enable_debug(connector_1);
 
 		// source --> target_2
 		log_create_connector(SOURCE_NAME, IntConstantEntityTypeProvider::INT_CONSTANT_VALUE, TARGET_2_NAME, IntConstantEntityTypeProvider::INT_CONSTANT_VALUE);
 		connector_2 = connector_manager->create_connector(source_attr_value, target_2_attr_value);
-		connector_manager->enable_debug(connector_2);
+		// connector_manager->enable_debug(connector_2);
 
 		// target_1 --> target_3
 		log_create_connector(TARGET_1_NAME, IntConstantEntityTypeProvider::INT_CONSTANT_VALUE, TARGET_3_NAME, IntConstantEntityTypeProvider::INT_CONSTANT_VALUE);
 		connector_3 = connector_manager->create_connector(target_1_attr_value, target_3_attr_value);
-		connector_manager->enable_debug(connector_3);
+		// connector_manager->enable_debug(connector_3);
 
 		// target_2 --> add_int_augend
 		log_create_connector(TARGET_2_NAME, IntConstantEntityTypeProvider::INT_CONSTANT_VALUE, ADD_INT_NAME, AddIntEntityTypeProvider::ADD_INT_AUGEND);
 		connector_4 = connector_manager->create_connector(target_2_attr_value, add_int_attr_augend);
-		connector_manager->enable_debug(connector_4);
+		// connector_manager->enable_debug(connector_4);
 
 		// target_3 --> add_int_addend
 		log_create_connector(TARGET_3_NAME, IntConstantEntityTypeProvider::INT_CONSTANT_VALUE, ADD_INT_NAME, AddIntEntityTypeProvider::ADD_INT_ADDEND);
 		connector_5 = connector_manager->create_connector(target_3_attr_value, add_int_attr_addend);
-		connector_manager->enable_debug(connector_5);
+		// connector_manager->enable_debug(connector_5);
 	}
 
 	void IntConstantConnectorTest::create_observer()

@@ -32,6 +32,7 @@ namespace renderer {
 	using ConnectorManagerPtr = std::shared_ptr<visual_scripting::ConnectorManager>;
 	using TriangleFactoryPtr = std::shared_ptr<TriangleFactory>;
 	using WindowManagerPtr = std::shared_ptr<WindowManager>;
+	using KeyboardInputManagerPtr = std::shared_ptr<input::KeyboardInputManager>;
 	using LogManagerPtr = std::shared_ptr<inexor::logging::LogManager>;
 	using EntityInstancePtr = std::shared_ptr<EntityInstance>;
 	using EntityAttributeInstancePtr = std::shared_ptr<entity_system::EntityAttributeInstance>;
@@ -44,7 +45,8 @@ namespace renderer {
 	/// @class TriangleExample
 	/// @brief Management of the rendering.
 	class TriangleExample
-	: public std::enable_shared_from_this<TriangleExample>
+		: public input::WindowKeyReleasedListener,
+		  public std::enable_shared_from_this<TriangleExample>
 	{
 		public:
 
@@ -65,6 +67,7 @@ namespace renderer {
 				CosFactoryPtr cos_factory,
 				TriangleFactoryPtr render_factory,
 				WindowManagerPtr window_manager,
+				KeyboardInputManagerPtr keyboard_input_manager,
 				LogManagerPtr log_manager
 			);
 
@@ -76,6 +79,9 @@ namespace renderer {
 
 			/// Shut down the triangle manager.
 			void shutdown();
+
+			/// Window key released
+			void on_window_key_released(EntityInstancePtr window, int key, int scancode, int mods);
 
 //			/// @brief Starts the window thread.
 //			/// @param windows The GLFWwindow instance.
@@ -92,6 +98,9 @@ namespace renderer {
 
 			/// Renders the triangle.
 			void render_triangle(EntityInstancePtr, GLFWwindow*);
+
+			/// Toggles the connector debugging
+			void toggle_connector_debug();
 
 			/// The entity instance manager.
 			EntityInstanceManagerPtr entity_instance_manager;
@@ -114,6 +123,9 @@ namespace renderer {
 			/// The window manager
 			WindowManagerPtr window_manager;
 
+			/// The keyboard input manager
+			KeyboardInputManagerPtr keyboard_input_manager;
+
 			/// The log manager.
 			LogManagerPtr log_manager;
 
@@ -123,8 +135,11 @@ namespace renderer {
 			/// The triangle entity instance.
 			EntityInstancePtr triangle;
 
-			/// The counter.
-			EntityInstancePtr counter;
+			/// The first counter.
+			EntityInstancePtr counter_1;
+
+			/// The second counter.
+			EntityInstancePtr counter_2;
 
 			/// The sin operator.
 			EntityInstancePtr sin;
@@ -132,8 +147,11 @@ namespace renderer {
 			/// The cos operator.
 			EntityInstancePtr cos;
 
-			/// The attribute sin_input.
-			EntityAttributeInstancePtr counter_attr_count;
+			/// The attribute count of the first counter.
+			EntityAttributeInstancePtr counter_1_attr_count;
+
+			/// The attribute count of the second counter.
+			EntityAttributeInstancePtr counter_2_attr_count;
 
 			/// The attribute sin_input.
 			EntityAttributeInstancePtr sin_attr_input;
@@ -153,11 +171,18 @@ namespace renderer {
 			/// The attribute triangle_x.
 			EntityAttributeInstancePtr triangle_attr_y;
 
+			std::optional<std::shared_ptr<visual_scripting::Connector>> connector_c_sin;
+			std::optional<std::shared_ptr<visual_scripting::Connector>> connector_c_cos;
+			std::optional<std::shared_ptr<visual_scripting::Connector>> connector_x;
+			std::optional<std::shared_ptr<visual_scripting::Connector>> connector_y;
+
 			std::shared_ptr<Magnum::GL::Buffer> buffer;
 			std::shared_ptr<Magnum::GL::Mesh> mesh;
 			std::shared_ptr<Magnum::Shaders::VertexColor2D> shader;
 
 			bool initialized;
+
+			bool debug_enabled;
 
 	};
 
