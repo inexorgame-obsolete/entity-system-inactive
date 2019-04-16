@@ -150,8 +150,14 @@ namespace renderer {
 			/// The attribute count of the first counter.
 			EntityAttributeInstancePtr counter_1_attr_count;
 
+			/// The attribute step of the first counter.
+			EntityAttributeInstancePtr counter_1_attr_step;
+
 			/// The attribute count of the second counter.
 			EntityAttributeInstancePtr counter_2_attr_count;
+
+			/// The attribute step of the second counter.
+			EntityAttributeInstancePtr counter_2_attr_step;
 
 			/// The attribute sin_input.
 			EntityAttributeInstancePtr sin_attr_input;
@@ -179,6 +185,8 @@ namespace renderer {
 			std::shared_ptr<Magnum::GL::Buffer> buffer;
 			std::shared_ptr<Magnum::GL::Mesh> mesh;
 			std::shared_ptr<Magnum::Shaders::VertexColor2D> shader;
+
+			TriangleVertex data[3];
 
 			bool initialized;
 

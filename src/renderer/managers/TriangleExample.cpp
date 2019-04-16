@@ -70,12 +70,37 @@ namespace renderer {
 		window_manager->destroy_window(window);
 	}
 
+	void increase(EntityAttributeInstancePtr attr, float step, float max)
+	{
+		attr->own_value.Set(std::min(max, std::get<entity_system::DataType::FLOAT>(attr->value.Value()) + step));
+	}
+
+	void decrease(EntityAttributeInstancePtr attr, float step, float min)
+	{
+		attr->own_value.Set(std::max(min, std::get<entity_system::DataType::FLOAT>(attr->value.Value()) - step));
+	}
+
 	void TriangleExample::on_window_key_released(EntityInstancePtr window, int key, int scancode, int mods)
 	{
 
 		spdlog::get(LOGGER_NAME)->info("Triangle Example Key Released {} {} {}", key, scancode, mods);
 		switch (key)
 		{
+			case GLFW_KEY_X:
+				window_manager->destroy_window(window);
+				break;
+			case GLFW_KEY_LEFT:
+				decrease(counter_1_attr_step, 0.01f, 0.01f);
+				break;
+			case GLFW_KEY_RIGHT:
+				increase(counter_1_attr_step, 0.01f, 0.99f);
+				break;
+			case GLFW_KEY_UP:
+				increase(counter_2_attr_step, 0.01f, 0.99f);
+				break;
+			case GLFW_KEY_DOWN:
+				decrease(counter_2_attr_step, 0.01f, 0.01f);
+				break;
 			case GLFW_KEY_V:
 				toggle_connector_debug();
 				break;
@@ -122,7 +147,9 @@ namespace renderer {
 			triangle = o_triangle.value();
 
 			EntityAttributeInstanceOpt o_counter_1_attr_count = counter_1->get_attribute_instance(entity_system::type_system::CounterFloatEntityTypeProvider::COUNTER_FLOAT_COUNT);
+			EntityAttributeInstanceOpt o_counter_1_attr_step = counter_1->get_attribute_instance(entity_system::type_system::CounterFloatEntityTypeProvider::COUNTER_FLOAT_STEP);
 			EntityAttributeInstanceOpt o_counter_2_attr_count = counter_2->get_attribute_instance(entity_system::type_system::CounterFloatEntityTypeProvider::COUNTER_FLOAT_COUNT);
+			EntityAttributeInstanceOpt o_counter_2_attr_step = counter_2->get_attribute_instance(entity_system::type_system::CounterFloatEntityTypeProvider::COUNTER_FLOAT_STEP);
 			EntityAttributeInstanceOpt o_sin_attr_input = sin->get_attribute_instance(entity_system::type_system::SinEntityTypeProvider::SIN_INPUT);
 			EntityAttributeInstanceOpt o_sin_attr_value = sin->get_attribute_instance(entity_system::type_system::SinEntityTypeProvider::SIN_VALUE);
 			EntityAttributeInstanceOpt o_cos_attr_input = cos->get_attribute_instance(entity_system::type_system::CosEntityTypeProvider::COS_INPUT);
@@ -130,10 +157,12 @@ namespace renderer {
 			EntityAttributeInstanceOpt o_triangle_attr_x = triangle->get_attribute_instance(TriangleEntityTypeProvider::TRIANGLE_X);
 			EntityAttributeInstanceOpt o_triangle_attr_y = triangle->get_attribute_instance(TriangleEntityTypeProvider::TRIANGLE_Y);
 
-			if(o_counter_1_attr_count.has_value() && o_counter_2_attr_count.has_value() && o_sin_attr_value.has_value() && o_cos_attr_value.has_value() && o_triangle_attr_x.has_value() && o_triangle_attr_y.has_value())
+			if(o_counter_1_attr_count.has_value() && o_counter_1_attr_step.has_value() && o_counter_2_attr_count.has_value() && o_counter_2_attr_step.has_value() && o_sin_attr_value.has_value() && o_cos_attr_value.has_value() && o_triangle_attr_x.has_value() && o_triangle_attr_y.has_value())
 			{
 				counter_1_attr_count = o_counter_1_attr_count.value();
+				counter_1_attr_step = o_counter_1_attr_step.value();
 				counter_2_attr_count = o_counter_2_attr_count.value();
+				counter_2_attr_step = o_counter_2_attr_step.value();
 				sin_attr_input = o_sin_attr_input.value();
 				sin_attr_value = o_sin_attr_value.value();
 				cos_attr_input = o_cos_attr_input.value();
@@ -167,11 +196,9 @@ namespace renderer {
 		if (!initialized)
 		{
 			spdlog::info("create_mesh");
-			const TriangleVertex data[] {
-				{{-0.5f, -0.5f}, 0xff0000_rgbf}, // Left vertex, red color
-				{{ 0.5f, -0.5f}, 0x00ff00_rgbf}, // Right vertex, green color
-				{{ 0.0f,  0.5f}, 0x0000ff_rgbf}  // Top vertex, blue color
-			};
+			data[0] = {{-0.5f, -0.5f}, 0xff0000_rgbf}; // Left vertex, red color
+			data[1] = {{ 0.5f, -0.5f}, 0x00ff00_rgbf}; // Right vertex, green color
+			data[2] = {{ 0.0f,  0.5f}, 0x0000ff_rgbf};  // Top vertex, blue color
 			// window_manager->make_current(window);
 			buffer = std::make_shared<Magnum::GL::Buffer>();
 			buffer->setData(data);
@@ -198,6 +225,11 @@ namespace renderer {
 		// The entity instance is modified by the visual scripting system (see above!)
 		float x = std::get<DataType::FLOAT>(triangle_attr_x->value.Value());
 		float y = std::get<DataType::FLOAT>(triangle_attr_y->value.Value());
+
+//		data[0] = {{-0.5f, -0.5f}, 0xff0000_rgbf}; // Left vertex, red color
+//		data[1] = {{ 0.5f, -0.5f}, 0xff0000_rgbf}; // Right vertex, green color
+//		data[2] = {{ 0.0f,  0.5f}, 0xff0000_rgbf};  // Top vertex, blue color
+//		buffer->setData(data);
 
 		// Create two transformation matrices
 		Magnum::Matrix3 transformation_matrix_x = Magnum::Matrix3::translation(Magnum::Vector2::xAxis(x));
