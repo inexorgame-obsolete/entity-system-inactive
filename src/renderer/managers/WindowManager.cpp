@@ -227,6 +227,19 @@ namespace renderer {
 		}
 	}
 
+	void WindowManager::set_window_position(EntityInstancePtr window, int x, int y)
+	{
+		if (is_window_available(window))
+		{
+			set_window_position(windows[window]->glfw_window, x, y);
+		}
+	}
+
+	void WindowManager::set_window_position(GLFWwindow* glfw_window, int x, int y)
+	{
+		glfwSetWindowPos(glfw_window, x, y);
+	}
+
 	void WindowManager::set_window_size(EntityInstancePtr window, int width, int height)
 	{
 		if (is_window_available(window))

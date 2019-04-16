@@ -121,6 +121,12 @@ namespace renderer {
 			case GLFW_KEY_Q:
 				window_manager->shutdown();
 				break;
+			case GLFW_KEY_HOME:
+				window_manager->set_window_position(window, 100, 100);
+				break;
+			case GLFW_KEY_END:
+				window_manager->set_window_size(window, 800, 600);
+				break;
 			case GLFW_KEY_I:
 				toggle(window, WindowEntityTypeProvider::WINDOW_ICONIFIED);
 				break;

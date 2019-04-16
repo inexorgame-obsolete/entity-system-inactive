@@ -78,15 +78,14 @@ namespace renderer {
 
 			/// @brief Constructor.
 			/// @note The dependencies of this class will be injected automatically.
-			/// @param entity_instance_manager The entity instance manager.
-			/// @param connector_manager The connector manager.
-			/// @param counter_float_factory The factory for creating entities of type COUNTER_FLOAT.
-			/// @param sin_factory The factory for creating entities of type SIN.
-			/// @param cos_factory The factory for creating entities of type COS.
-			/// @param render_factory The factory for creating entities of type RENDERER.
-			/// @param log_manager The log manager.
+			/// @param window_factory Factory for creating instances of type 'WINDOW'.
 			/// @param keyboard_input_manager The keyboard input manager.
 			/// @param mouse_input_manager The mouse input manager.
+			/// @param entity_instance_manager The entity instance manager.
+			/// @param connector_manager The connector manager.
+			/// @param world_renderer Service, which renders the world on a window.
+			/// @param user_interface_renderer Service, which renders the user interface on a window.
+			/// @param log_manager The log manager.
 			WindowManager(
 				WindowFactoryPtr window_factory,
 				KeyboardInputManagerPtr keyboard_input_manager,
@@ -123,23 +122,24 @@ namespace renderer {
 			/// @param window The entity instance of type WINDOW.
 			void close_window(EntityInstancePtr window);
 
+			/// @brief Sets the position of the given window.
+			/// @param window The entity instance of type WINDOW.
+			/// @param x The new x position of the window.
+			/// @param y The new y position of the window.
+			void set_window_position(EntityInstancePtr window, int x, int y);
+
 			/// @brief Sets the size of the given window.
 			/// @param window The entity instance of type WINDOW.
 			/// @param width The new width of the window.
 			/// @param height The new height of the window.
 			void set_window_size(EntityInstancePtr window, int width, int height);
 
-			/// @brief Sets the size of the given window.
-			/// @param glfw_window The glfw window.
-			/// @param width The new width of the window.
-			/// @param height The new height of the window.
-			void set_window_size(GLFWwindow* glfw_window, int width, int height);
-
+			// TODO: document
 			void make_current(EntityInstancePtr window);
 
 			/// @brief Sets the size of the given window.
 			/// @param window The entity instance of type WINDOW.
-			/// @param window The entity instance of type WINDOW.
+			/// @param render_function The render function to register.
 			void register_render_function(EntityInstancePtr window, std::function<void(EntityInstancePtr, GLFWwindow*)> render_function);
 
 			/// @brief Returns the number of windows.
@@ -153,6 +153,9 @@ namespace renderer {
 			static constexpr char LOGGER_NAME[] = "inexor.renderer.window";
 
 		private:
+
+			// State management
+
 
 			/// @brief Starts the window thread.
 			/// @param window The entity instance of type WINDOW.
@@ -178,6 +181,26 @@ namespace renderer {
 			/// @param window The entity instance of type 'WINDOW'.
 			bool is_thread_running(EntityInstancePtr window);
 
+
+			// Internal window API
+
+
+			/// @brief Sets the position of the given window.
+			/// @param glfw_window The glfw window.
+			/// @param x The new x position of the window.
+			/// @param y The new y position of the window.
+			void set_window_position(GLFWwindow* glfw_window, int x, int y);
+
+			/// @brief Sets the size of the given window.
+			/// @param glfw_window The glfw window.
+			/// @param width The new width of the window.
+			/// @param height The new height of the window.
+			void set_window_size(GLFWwindow* glfw_window, int width, int height);
+
+
+			// Window initialization
+
+
 			/// @brief Initializes the callbacks on window state changes.
 			/// @param glfw_window The window handle.
 			void initialize_window_callbacks(GLFWwindow* glfw_window);
@@ -189,6 +212,10 @@ namespace renderer {
 			/// @brief Initializes observers on the attributes of the entity instance of type WINDOW.
 			/// @param window The entity instance of type 'WINDOW'.
 			void initialize_window_observers(EntityInstancePtr window, GLFWwindow* glfw_window);
+
+
+			// Event handling
+
 
 			/// This callback is called if a window has been closed.
 			/// @param glfw_window The window handle.
@@ -230,6 +257,10 @@ namespace renderer {
 			/// @param glfw_window The window handle.
 			void window_mouse_scroll_changed(GLFWwindow* glfw_window, double xoffset, double yoffset);
 
+
+			// Services
+
+
 			/// The factory for creating entities of type WINDOW.
 			WindowFactoryPtr window_factory;
 
@@ -253,6 +284,10 @@ namespace renderer {
 
 			/// The log manager.
 			LogManagerPtr log_manager;
+
+
+			// Managed windows and states
+
 
 			/// The mapping between the entity instance and the pointer to the
 			/// corresponding ManagedWindow.
