@@ -33,7 +33,7 @@ namespace input {
 
 	EntityInstancePtrOpt KeyboardInputManager::create_key(const int& key)
 	{
-		spdlog::get(LOGGER_NAME)->info("Create entity instance for GLOBAL_KEY {}", key);
+		spdlog::get(LOGGER_NAME)->debug("Create entity instance for GLOBAL_KEY {}", key);
 		return global_key_factory->create_instance(key);
 	}
 
@@ -42,7 +42,7 @@ namespace input {
 		const char* get_key_name_attempt = glfwGetKeyName(key, 0);
 		std::string key_name = "?";
 		if(get_key_name_attempt) key_name = get_key_name_attempt;
-		spdlog::get(LOGGER_NAME)->info("Window {} Key {} (ID {}) has been {}.", get_window_name(window), key_name, key, action ? std::string("pressed") : std::string("released"));
+		spdlog::get(LOGGER_NAME)->debug("Window {} Key {} (ID {}) has been {}.", get_window_name(window), key_name, key, action ? std::string("pressed") : std::string("released"));
 		signal_key_changed(window, key, scancode, action, mods);
 		switch (action)
 		{
