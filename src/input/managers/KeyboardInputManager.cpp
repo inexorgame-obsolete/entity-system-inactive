@@ -59,20 +59,19 @@ namespace input {
 			default:
 				break;
 		}
-		if (!(signal_window_key_changed.end() == signal_window_key_changed.find(window)))
+		if (signal_window_key_changed.end() != signal_window_key_changed.find(window))
 		{
 			signal_window_key_changed[window]->operator ()(window, key, scancode, action, mods);
 		}
-		if (GLFW_PRESS == action && !(signal_window_key_pressed.end() == signal_window_key_pressed.find(window)))
+		if (GLFW_PRESS == action && signal_window_key_pressed.find(window) != signal_window_key_pressed.end())
 		{
 			signal_window_key_pressed[window]->operator ()(window, key, scancode, mods);
-			signal_window_key_pressed_or_repeated[window]->operator ()(window, key, scancode, mods);
 		}
-		if (GLFW_RELEASE == action && !(signal_window_key_released.end() == signal_window_key_released.find(window)))
+		if (GLFW_RELEASE == action && signal_window_key_released.find(window) != signal_window_key_released.end())
 		{
 			signal_window_key_released[window]->operator ()(window, key, scancode, mods);
 		}
-		if (GLFW_REPEAT == action && !(signal_window_key_pressed_or_repeated.end() == signal_window_key_pressed_or_repeated.find(window)))
+		if ((GLFW_REPEAT == action || GLFW_PRESS == action) && signal_window_key_pressed_or_repeated.find(window) != signal_window_key_pressed_or_repeated.end())
 		{
 			signal_window_key_pressed_or_repeated[window]->operator ()(window, key, scancode, mods);
 		}
