@@ -15,6 +15,7 @@
 #include <functional>
 
 struct GLFWwindow;
+struct GLFWmonitor;
 
 namespace inexor {
 namespace renderer {
@@ -67,6 +68,27 @@ namespace renderer {
 
 		/// A list of functions to call during rendering. The order of these functions is important.
 		std::list<std::function<void(EntityInstancePtr, GLFWwindow*)>> render_functions;
+	};
+
+	struct WindowOwner {
+		WindowOwner(GLFWmonitor* monitor, int x, int y, int width, int height)
+			: monitor(monitor), x(x), y(y), width(width), height(height) {};
+		GLFWmonitor* monitor;
+		int x;
+		int y;
+		int width;
+		int height;
+	};
+
+	struct Dimensions {
+		Dimensions()
+			: x(0), y(0), width(0), height(0) {};
+		Dimensions(int x, int y, int width, int height)
+			: x(x), y(y), width(width), height(height) {};
+		int x;
+		int y;
+		int width;
+		int height;
 	};
 
 	/// @class WindowManager
@@ -139,6 +161,10 @@ namespace renderer {
 			/// @param height The new height of the window.
 			void set_window_size(EntityInstancePtr window, int width, int height);
 
+			/// @brief Sets the position of the given window.
+			/// @param window The entity instance of type WINDOW.
+			void center_window(EntityInstancePtr window);
+
 			// TODO: document
 			void make_current(EntityInstancePtr window);
 
@@ -201,6 +227,9 @@ namespace renderer {
 			/// @param width The new width of the window.
 			/// @param height The new height of the window.
 			void set_window_size(GLFWwindow* glfw_window, int width, int height);
+
+			// TODO: document
+			std::optional<WindowOwner> get_window_owner(Dimensions window);
 
 
 			// Window initialization

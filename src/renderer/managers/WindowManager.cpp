@@ -261,6 +261,70 @@ namespace renderer {
 		glfwSetWindowSize(glfw_window, width, height);
 	}
 
+	void WindowManager::center_window(EntityInstancePtr window)
+	{
+		if (is_window_available(window))
+		{
+			GLFWwindow* glfw_window = windows[window]->glfw_window;
+			Dimensions windowd;
+			glfwGetWindowPos(glfw_window, &windowd.x, &windowd.y);
+			glfwGetWindowSize(glfw_window, &windowd.width, &windowd.height);
+			spdlog::info("window current {},{} {}x{}", windowd.x, windowd.y, windowd.width, windowd.height);
+			windowd.width *= 0.5;
+			windowd.height *= 0.5;
+			windowd.x += windowd.width;
+			windowd.y += windowd.height;
+			spdlog::info("window center {},{} {}x{}", windowd.x, windowd.y, windowd.width, windowd.height);
+
+			std::optional<WindowOwner> owner = get_window_owner(windowd);
+			if (owner.has_value())
+			{
+				glfwSetWindowPos(
+					glfw_window,
+					(*owner).x + ((*owner).width * 0.5) - windowd.width,
+					(*owner).y + ((*owner).height * 0.5) - windowd.height
+				);
+			}
+		}
+	}
+
+	std::optional<WindowOwner> WindowManager::get_window_owner(Dimensions window)
+	{
+		int monitors_length;
+		GLFWmonitor **monitors = glfwGetMonitors(&monitors_length);
+		if (monitors == nullptr) return std::nullopt;
+		std::optional<WindowOwner> owner = std::nullopt;
+		for (int i = 0; i < monitors_length; i++)
+		{
+			// Get the monitor position and size
+			// int monitor_x, monitor_y, monitor_width, monitor_height;
+			Dimensions monitor = {};
+			glfwGetMonitorPos(monitors[i], &monitor.x, &monitor.y);
+			GLFWvidmode *mode = (GLFWvidmode*) glfwGetVideoMode(monitors[i]);
+
+			if (mode == nullptr)
+			{
+				// Video mode is required for width and height, so skip this monitor
+				continue;
+			} else {
+				monitor.width = mode->width;
+				monitor.height = mode->height;
+			}
+
+			// Set the owner to this monitor if the center of the window is within its bounding box
+			spdlog::info("window {},{} monitor {},{} {}x{}", window.x, window.y, monitor.x, monitor.y, monitor.width, monitor.height);
+			if(
+				(window.x > monitor.x && window.x < (monitor.x + monitor.width)) &&
+				(window.y > monitor.y && window.y < (monitor.y + monitor.height))
+			)
+			{
+				spdlog::info("found owner");
+				owner = { monitors[i], monitor.x, monitor.y, monitor.width, monitor.height };
+			}
+		}
+		return owner;
+	}
+
 	bool WindowManager::is_window_managed(EntityInstancePtr window)
 	{
 		return windows.find(window) != windows.end();
