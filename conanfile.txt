@@ -24,9 +24,10 @@ lib, *.dylib* -> ./bin
 [options]
 magnum:with_glfwapplication=True
 magnum:with_sdl2application=False
-magnum:with_audio=True
-magnum:with_anyaudioimporter=True
-magnum:with_wavaudioimporter=True
+# TODO: enable magnum audio support as soon as there is an magnum package with audio support (1/2)
+#magnum:with_audio=True
+#magnum:with_anyaudioimporter=True
+#magnum:with_wavaudioimporter=True
 magnum:with_anyimageimporter=True
 magnum:with_anyimageconverter=True
 TBB:shared=True
