@@ -26,7 +26,7 @@ namespace renderer {
 	{
 	}
 
-	void UserInterfaceRenderer::render_user_interfaces(EntityInstancePtr window, GLFWwindow* glfw_window)
+	void UserInterfaceRenderer::render_user_interfaces(EntityInstancePtr window, GLFWwindow* glfw_window, Magnum::Timeline timeline)
 	{
 	}
 

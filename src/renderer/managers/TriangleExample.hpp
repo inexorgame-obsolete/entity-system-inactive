@@ -19,6 +19,7 @@
 #include <Magnum/GL/Renderer.h>
 #include <Magnum/Platform/GLContext.h>
 #include <Magnum/Math/Matrix3.h>
+#include <Magnum/Timeline.h>
 
 struct GLFWwindow;
 
@@ -94,10 +95,12 @@ namespace renderer {
 
 			void create_entity_instances();
 			void create_connectors();
-			void create_mesh(EntityInstancePtr, GLFWwindow*);
+
+			/// Initializes the triangle.
+			void create_mesh(EntityInstancePtr, GLFWwindow*, Magnum::Timeline timeline);
 
 			/// Renders the triangle.
-			void render_triangle(EntityInstancePtr, GLFWwindow*);
+			void render_triangle(EntityInstancePtr, GLFWwindow*, Magnum::Timeline timeline);
 
 			/// Toggles the connector debugging
 			void toggle_connector_debug();

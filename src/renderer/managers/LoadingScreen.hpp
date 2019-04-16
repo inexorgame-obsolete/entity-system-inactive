@@ -13,6 +13,7 @@
 #include <Magnum/GL/Renderer.h>
 #include <Magnum/Platform/GLContext.h>
 #include <Magnum/Math/Matrix3.h>
+#include <Magnum/Timeline.h>
 
 struct GLFWwindow;
 
@@ -74,10 +75,10 @@ namespace renderer {
 		private:
 
 			/// Creates the inexor logo.
-			void create_logo(EntityInstancePtr, GLFWwindow*);
+			void create_logo(EntityInstancePtr, GLFWwindow*, Magnum::Timeline timeline);
 
 			/// Renders the inexor logo.
-			void render_logo(EntityInstancePtr, GLFWwindow*);
+			void render_logo(EntityInstancePtr, GLFWwindow*, Magnum::Timeline timeline);
 
 			/// The window manager
 			WindowManagerPtr window_manager;
@@ -103,6 +104,7 @@ namespace renderer {
 
 			bool initialized;
 
+			bool show_fps;
 	};
 
 }

@@ -57,9 +57,9 @@ namespace renderer {
 		// Creates the window
 		window = window_manager->create_window("Triangle Example", 0, 0, 800, 600, 1.0f, true, false, false, false, false);
 		// The first render function is the initialization function which is executed only once
-		window_manager->register_render_function(window, std::bind(&TriangleExample::create_mesh, this, std::placeholders::_1, std::placeholders::_2));
+		window_manager->register_render_function(window, std::bind(&TriangleExample::create_mesh, this, std::placeholders::_1, std::placeholders::_2, std::placeholders::_3));
 		// The second render function is for rendering the triangle
-		window_manager->register_render_function(window, std::bind(&TriangleExample::render_triangle, this, std::placeholders::_1, std::placeholders::_2));
+		window_manager->register_render_function(window, std::bind(&TriangleExample::render_triangle, this, std::placeholders::_1, std::placeholders::_2, std::placeholders::_3));
 
 		keyboard_input_manager->register_on_window_key_released(window, shared_from_this());
 		keyboard_input_manager->register_on_window_key_pressed_or_repeated(window, shared_from_this());
@@ -142,8 +142,9 @@ namespace renderer {
 	void TriangleExample::create_entity_instances()
 	{
 		spdlog::info("create_entity_instances");
-		EntityInstancePtrOpt o_counter_1 = counter_float_factory->create_instance(50, 0.1f);
-		EntityInstancePtrOpt o_counter_2 = counter_float_factory->create_instance(30, 0.05f);
+		// 16 ms = 60 fps
+		EntityInstancePtrOpt o_counter_1 = counter_float_factory->create_instance(16, 0.03f);
+		EntityInstancePtrOpt o_counter_2 = counter_float_factory->create_instance(16, 0.012f);
 		EntityInstancePtrOpt o_sin = sin_factory->create_instance();
 		EntityInstancePtrOpt o_cos = cos_factory->create_instance();
 		EntityInstancePtrOpt o_triangle = triangle_factory->create_instance(0.5f, -0.5f);
@@ -201,7 +202,7 @@ namespace renderer {
 		connector_y = connector_manager->create_connector(cos_attr_value, triangle_attr_y);
 	}
 
-	void TriangleExample::create_mesh(EntityInstancePtr window, GLFWwindow* glfw_window)
+	void TriangleExample::create_mesh(EntityInstancePtr window, GLFWwindow* glfw_window, Magnum::Timeline timeline)
 	{
 		if (!initialized)
 		{
@@ -229,7 +230,7 @@ namespace renderer {
 		}
 	}
 
-	void TriangleExample::render_triangle(EntityInstancePtr window, GLFWwindow* glfw_window)
+	void TriangleExample::render_triangle(EntityInstancePtr window, GLFWwindow* glfw_window, Magnum::Timeline timeline)
 	{
 		// Get position from the entity instance
 		// The entity instance is modified by the visual scripting system (see above!)

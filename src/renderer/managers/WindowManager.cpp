@@ -607,29 +607,37 @@ namespace renderer {
 		// Make the window's context current.
 		glfwMakeContextCurrent(glfw_window);
 
+		// Disable FPS limit
+		// glfwSwapInterval( 0 );
+
 		// Create Magnum context in an isolated scope.
 		Magnum::Platform::GLContext ctx{};
 
 		// Loop until the user closes the window.
+		Magnum::Timeline timeline;
+		timeline.start();
 		while(!glfwWindowShouldClose(glfw_window) && windows[window]->thread_running)
 		{
 			// Render worlds
-			world_renderer->render_worlds(window, glfw_window);
+			world_renderer->render_worlds(window, glfw_window, timeline);
 
 			// TODO: render user interfaces
-			user_interface_renderer->render_user_interfaces(window, glfw_window);
+			user_interface_renderer->render_user_interfaces(window, glfw_window, timeline);
 
 			// Render custom on front
 			for (std::function render_function : windows[window]->render_functions)
 			{
-				render_function(window, glfw_window);
+				render_function(window, glfw_window, timeline);
 			}
 
 			// Swap front and back buffers.
 			glfwSwapBuffers(glfw_window);
+			timeline.nextFrame();
 
-			std::this_thread::sleep_for(std::chrono::milliseconds(50));
+			// 60 fps
+			std::this_thread::sleep_for(std::chrono::milliseconds(16));
 		}
+		timeline.stop();
 
 		// Detach the window's current context.
 		glfwMakeContextCurrent(nullptr);
@@ -672,7 +680,7 @@ namespace renderer {
 		glfwMakeContextCurrent(windows[window]->glfw_window);
 	}
 
-	void WindowManager::register_render_function(EntityInstancePtr window, std::function<void(EntityInstancePtr, GLFWwindow*)> render_function)
+	void WindowManager::register_render_function(EntityInstancePtr window, std::function<void(EntityInstancePtr, GLFWwindow*, Magnum::Timeline)> render_function)
 	{
 		windows[window]->render_functions.push_back(render_function);
 	}

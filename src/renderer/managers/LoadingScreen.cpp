@@ -35,6 +35,7 @@ namespace renderer {
 		this->connector_manager = connector_manager;
 		this->log_manager = log_manager;
 		this->initialized = false;
+		this->show_fps = false;
 	}
 
 	LoadingScreen::~LoadingScreen()
@@ -49,9 +50,9 @@ namespace renderer {
 		window = window_manager->create_window("Inexor Logo", 0, 0, 800, 600, 0.8f, true, false, false, false, true);
 		window_manager->center_window(window);
 		// The first render function is the initialization function which is executed only once
-		window_manager->register_render_function(window, std::bind(&LoadingScreen::create_logo, this, std::placeholders::_1, std::placeholders::_2));
+		window_manager->register_render_function(window, std::bind(&LoadingScreen::create_logo, this, std::placeholders::_1, std::placeholders::_2, std::placeholders::_3));
 		// The second render function is for rendering the inexor logo
-		window_manager->register_render_function(window, std::bind(&LoadingScreen::render_logo, this, std::placeholders::_1, std::placeholders::_2));
+		window_manager->register_render_function(window, std::bind(&LoadingScreen::render_logo, this, std::placeholders::_1, std::placeholders::_2, std::placeholders::_3));
 
 		keyboard_input_manager->register_on_window_key_released(window, shared_from_this());
 		keyboard_input_manager->register_on_window_key_pressed_or_repeated(window, shared_from_this());
@@ -71,11 +72,15 @@ namespace renderer {
 					key_b_action->value,
 					[] (DataValue action) {
 						spdlog::info("GLOBAL KEY B {}", std::get<entity_system::DataType::INT>(action));
-						spdlog::info("Stacktrace {}", boost::stacktrace::stacktrace());
+						if (std::get<entity_system::DataType::INT>(action) == GLFW_RELEASE)
+						{
+							spdlog::info("Stacktrace\n{}", boost::stacktrace::stacktrace());
+						}
 					}
 				);
 			}
 		}
+
 	}
 
 	void LoadingScreen::shutdown()
@@ -88,6 +93,12 @@ namespace renderer {
 		EntityAttributeInstancePtr attr =  entity_instance->get_attribute_instance(name).value();
 		attr->own_value.Set(!std::get<entity_system::DataType::BOOL>(attr->value.Value()));
 	}
+
+	void toggle_raw(GLFWwindow* glfw_window, int window_attribute)
+	{
+		glfwSetWindowAttrib(glfw_window, window_attribute, !glfwGetWindowAttrib(glfw_window, window_attribute));
+	}
+
 
 	void increase(EntityInstancePtr entity_instance, std::string name, float step, float max)
 	{
@@ -148,6 +159,12 @@ namespace renderer {
 			case GLFW_KEY_M:
 				toggle(window, WindowEntityTypeProvider::WINDOW_MAXIMIZED);
 				break;
+			case GLFW_KEY_U:
+				toggle_raw(window_manager->get_window_handle(window), GLFW_DECORATED);
+				break;
+			case GLFW_KEY_MINUS:
+				show_fps = !show_fps;
+				break;
 			default:
 				break;
 		}
@@ -181,7 +198,7 @@ namespace renderer {
 		}
 	}
 
-	void LoadingScreen::create_logo(EntityInstancePtr window, GLFWwindow* glfw_window)
+	void LoadingScreen::create_logo(EntityInstancePtr window, GLFWwindow* glfw_window, Magnum::Timeline timeline)
 	{
 		if (!initialized)
 		{
@@ -217,7 +234,7 @@ namespace renderer {
 		}
 	}
 
-	void LoadingScreen::render_logo(EntityInstancePtr window, GLFWwindow* glfw_window)
+	void LoadingScreen::render_logo(EntityInstancePtr window, GLFWwindow* glfw_window, Magnum::Timeline timeline)
 	{
 		// Set viewport
 		Magnum::Vector2i framebufferSize;
@@ -229,6 +246,11 @@ namespace renderer {
 
 		// Render logo
 		mesh->draw((*shader));
+
+		if (show_fps)
+		{
+			spdlog::info("frame time: {} frame duration: {} FPS: {}", timeline.previousFrameTime(), timeline.previousFrameDuration(), 1.0f / timeline.previousFrameDuration());
+		}
 	}
 
 }

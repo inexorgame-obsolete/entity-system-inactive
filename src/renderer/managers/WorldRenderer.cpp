@@ -26,7 +26,7 @@ namespace renderer {
 	{
 	}
 
-	void WorldRenderer::render_worlds(EntityInstancePtr window, GLFWwindow*)
+	void WorldRenderer::render_worlds(EntityInstancePtr window, GLFWwindow*, Magnum::Timeline timeline)
 	{
 	}
 

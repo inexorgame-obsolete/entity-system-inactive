@@ -3,6 +3,8 @@
 #include "entity-system/model/entities/entity-instances/EntityInstance.hpp"
 #include "logging/managers/LogManager.hpp"
 
+#include <Magnum/Timeline.h>
+
 struct GLFWwindow;
 
 namespace inexor {
@@ -35,7 +37,7 @@ namespace renderer {
 			void shutdown();
 
 			/// Renders the user interfaces.
-			void render_user_interfaces(EntityInstancePtr window, GLFWwindow* glfw_window);
+			void render_user_interfaces(EntityInstancePtr window, GLFWwindow* glfw_window, Magnum::Timeline timeline);
 
 			/// The logger name of this service.
 			static constexpr char LOGGER_NAME[] = "inexor.renderer.ui";

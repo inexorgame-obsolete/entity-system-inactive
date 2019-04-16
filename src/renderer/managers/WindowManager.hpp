@@ -11,6 +11,8 @@
 #include "input/managers/MouseInputManager.hpp"
 #include "logging/managers/LogManager.hpp"
 
+#include <Magnum/Timeline.h>
+
 #include <list>
 #include <functional>
 
@@ -67,7 +69,7 @@ namespace renderer {
 		// TODO: list of observers for shutting down the observers during destroy
 
 		/// A list of functions to call during rendering. The order of these functions is important.
-		std::list<std::function<void(EntityInstancePtr, GLFWwindow*)>> render_functions;
+		std::list<std::function<void(EntityInstancePtr, GLFWwindow*, Magnum::Timeline)>> render_functions;
 	};
 
 	struct WindowOwner {
@@ -171,7 +173,7 @@ namespace renderer {
 			/// @brief Sets the size of the given window.
 			/// @param window The entity instance of type WINDOW.
 			/// @param render_function The render function to register.
-			void register_render_function(EntityInstancePtr window, std::function<void(EntityInstancePtr, GLFWwindow*)> render_function);
+			void register_render_function(EntityInstancePtr window, std::function<void(EntityInstancePtr, GLFWwindow*, Magnum::Timeline)> render_function);
 
 			/// @brief Returns the number of windows.
 			int get_window_count();
