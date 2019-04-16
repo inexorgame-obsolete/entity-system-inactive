@@ -7,7 +7,8 @@
 
 #include <GLFW/glfw3.h>
 
-#include <boost/stacktrace.hpp>
+// TODO: enable boost stacktrace again (2/3)
+//#include <boost/stacktrace.hpp>
 
 #include "spdlog/spdlog.h"
 #include <spdlog/fmt/ostr.h>
@@ -74,7 +75,8 @@ namespace renderer {
 						spdlog::info("GLOBAL KEY B {}", std::get<entity_system::DataType::INT>(action));
 						if (std::get<entity_system::DataType::INT>(action) == GLFW_RELEASE)
 						{
-							spdlog::info("Stacktrace\n{}", boost::stacktrace::stacktrace());
+							// TODO: enable boost stacktrace again (3/3)
+							/* spdlog::info("Stacktrace\n{}", boost::stacktrace::stacktrace()); */
 						}
 					}
 				);
