@@ -62,6 +62,7 @@ namespace renderer {
 		window_manager->register_render_function(window, std::bind(&TriangleExample::render_triangle, this, std::placeholders::_1, std::placeholders::_2));
 
 		keyboard_input_manager->register_on_window_key_released(window, shared_from_this());
+		keyboard_input_manager->register_on_window_key_pressed_or_repeated(window, shared_from_this());
 
 	}
 
@@ -82,13 +83,25 @@ namespace renderer {
 
 	void TriangleExample::on_window_key_released(EntityInstancePtr window, int key, int scancode, int mods)
 	{
-
-		spdlog::get(LOGGER_NAME)->info("Triangle Example Key Released {} {} {}", key, scancode, mods);
+		spdlog::get(LOGGER_NAME)->info("Key pressed or repeated {} {} {}", key, scancode, mods);
 		switch (key)
 		{
 			case GLFW_KEY_X:
 				window_manager->destroy_window(window);
 				break;
+			case GLFW_KEY_V:
+				toggle_connector_debug();
+				break;
+			default:
+				break;
+		}
+	}
+
+	void TriangleExample::on_window_key_pressed_or_repeated(EntityInstancePtr window, int key, int scancode, int mods)
+	{
+		spdlog::get(LOGGER_NAME)->info("Key pressed or repeated {} {} {}", key, scancode, mods);
+		switch (key)
+		{
 			case GLFW_KEY_LEFT:
 				decrease(counter_1_attr_step, 0.01f, 0.01f);
 				break;
@@ -100,9 +113,6 @@ namespace renderer {
 				break;
 			case GLFW_KEY_DOWN:
 				decrease(counter_2_attr_step, 0.01f, 0.01f);
-				break;
-			case GLFW_KEY_V:
-				toggle_connector_debug();
 				break;
 			default:
 				break;

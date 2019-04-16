@@ -46,6 +46,7 @@ namespace renderer {
 	/// @brief Management of the rendering.
 	class TriangleExample
 		: public input::WindowKeyReleasedListener,
+		  public input::WindowKeyPressedOrRepeatedListener,
 		  public std::enable_shared_from_this<TriangleExample>
 	{
 		public:
@@ -83,9 +84,8 @@ namespace renderer {
 			/// Window key released
 			void on_window_key_released(EntityInstancePtr window, int key, int scancode, int mods);
 
-//			/// @brief Starts the window thread.
-//			/// @param windows The GLFWwindow instance.
-//			void start_window_thread(GLFWwindow *windows);
+			/// Window key pressed or repeated
+			void on_window_key_pressed_or_repeated(EntityInstancePtr window, int key, int scancode, int mods);
 
 			/// The logger name of this service.
 			static constexpr char LOGGER_NAME[] = "inexor.renderer.triangleexample";
