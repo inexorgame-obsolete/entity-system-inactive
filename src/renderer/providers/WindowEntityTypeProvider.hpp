@@ -33,7 +33,7 @@ namespace renderer {
 					{ WINDOW_FULLSCREEN, { DataType::BOOL, 1 << Feature::INPUT | 1 << Feature::OUTPUT } },
 					{ WINDOW_ICONIFIED, { DataType::BOOL, 1 << Feature::INPUT | 1 << Feature::OUTPUT } },
 					{ WINDOW_MAXIMIZED, { DataType::BOOL, 1 << Feature::INPUT | 1 << Feature::OUTPUT } },
-					{ WINDOW_FOCUSED, { DataType::BOOL, 1 << Feature::INPUT | 1 << Feature::OUTPUT } }
+					{ WINDOW_FOCUSED, { DataType::BOOL, 1 << Feature::OUTPUT } }
 				}
 			) {};
 
