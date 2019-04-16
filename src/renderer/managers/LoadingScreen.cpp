@@ -181,6 +181,8 @@ namespace renderer {
 					Magnum::Shaders::VertexColor2D::Color3{}
 				);
 
+			shader = std::make_shared<Magnum::Shaders::VertexColor2D>();
+
 			initialized = true;
 
 			spdlog::info("logo mesh initialized");
@@ -189,12 +191,15 @@ namespace renderer {
 
 	void LoadingScreen::render_logo(EntityInstancePtr window, GLFWwindow* glfw_window)
 	{
-		// spdlog::info("render_logo");
+		// Set viewport
+		Magnum::Vector2i framebufferSize;
+		glfwGetFramebufferSize(glfw_window, &framebufferSize.x(), &framebufferSize.y());
+		Magnum::GL::defaultFramebuffer.setViewport({ {}, framebufferSize });
 
-		shader = std::make_shared<Magnum::Shaders::VertexColor2D>();
-
-		// Render here.
+		// Reset
 		Magnum::GL::defaultFramebuffer.clear(Magnum::GL::FramebufferClear::Color);
+
+		// Render logo
 		mesh->draw((*shader));
 	}
 

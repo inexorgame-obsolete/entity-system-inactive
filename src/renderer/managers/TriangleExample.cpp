@@ -175,6 +175,9 @@ namespace renderer {
 					Magnum::Shaders::VertexColor2D::Position{},
 					Magnum::Shaders::VertexColor2D::Color3{}
 				);
+
+			shader = std::make_shared<Magnum::Shaders::VertexColor2D>();
+
 			initialized = true;
 			spdlog::info("mesh initialized");
 		}
@@ -182,83 +185,29 @@ namespace renderer {
 
 	void TriangleExample::render_triangle(EntityInstancePtr window, GLFWwindow* glfw_window)
 	{
+		// Get position from the entity instance
+		// The entity instance is modified by the visual scripting system (see above!)
 		float x = std::get<DataType::FLOAT>(triangle_attr_x->value.Value());
 		float y = 0.0f - std::get<DataType::FLOAT>(triangle_attr_x->value.Value());
-		// spdlog::info("TranslationXY({}, {})", x, y);
 
+		// Create two transformation matrices
 		Magnum::Matrix3 transformation_matrix_x = Magnum::Matrix3::translation(Magnum::Vector2::xAxis(x));
 		Magnum::Matrix3 transformation_matrix_y = Magnum::Matrix3::translation(Magnum::Vector2::yAxis(y));
 
-		shader = std::make_shared<Magnum::Shaders::VertexColor2D>();
+		// Apply both transformation matrices
 		shader->setTransformationProjectionMatrix(transformation_matrix_x * transformation_matrix_y);
 
-		// Render here.
+		// Set viewport
+		Magnum::Vector2i framebufferSize;
+		glfwGetFramebufferSize(glfw_window, &framebufferSize.x(), &framebufferSize.y());
+		Magnum::GL::defaultFramebuffer.setViewport({ {}, framebufferSize });
+
+		// Reset
 		Magnum::GL::defaultFramebuffer.clear(Magnum::GL::FramebufferClear::Color);
+
+		// Render triangle
 		mesh->draw((*shader));
 	}
-
-//	void TriangleExample::start_window_thread(GLFWwindow *window)
-//	{
-//
-//		// Make the window's context current.
-//		glfwMakeContextCurrent(window);
-//
-//		// Create Magnum context in an isolated scope.
-//		Platform::GLContext ctx{};
-//
-//		const TriangleVertex data[] {
-//			{{-0.5f, -0.5f}, 0xff0000_rgbf}, // Left vertex, red color
-//			{{ 0.5f, -0.5f}, 0x00ff00_rgbf}, // Right vertex, green color
-//			{{ 0.0f,  0.5f}, 0x0000ff_rgbf}  // Top vertex, blue color
-//		};
-//
-//		GL::Buffer buffer;
-//		buffer.setData(data);
-//
-//		GL::Mesh mesh;
-//		mesh.setPrimitive(GL::MeshPrimitive::Triangles)
-//			.setCount(3)
-//			.addVertexBuffer(
-//			buffer,
-//			0,
-//			Shaders::VertexColor2D::Position{},
-//			Shaders::VertexColor2D::Color3{}
-//		);
-//
-//
-////		// Register keyboard input handler.
-////		keyboard_input_manager->set_keyboard_callback(window);
-////
-////		// Register mouse input handler.
-////		// This takes care of both mouse buttons and mouse movement.
-////		mouse_input_manager->set_mouse_callback(window);
-//
-//		// Loop until the user closes the window.
-//		while(!glfwWindowShouldClose(window))
-//		{
-//			float x = std::get<DataType::FLOAT>(triangle_attr_x->value.Value());
-//			float y = 0.0f - std::get<DataType::FLOAT>(triangle_attr_x->value.Value());
-//			//spdlog::get(LOGGER_NAME)->info("TranslationXY({}, {})", x, y);
-//
-//			Matrix3 transformation_matrix_x = Matrix3::translation(Vector2::xAxis(x));
-//			Matrix3 transformation_matrix_y = Matrix3::translation(Vector2::yAxis(y));
-//
-//			shader.setTransformationProjectionMatrix(transformation_matrix_x * transformation_matrix_y);
-//
-//			// Render here.
-//			GL::defaultFramebuffer.clear(GL::FramebufferClear::Color);
-//			mesh.draw(shader);
-//
-//			// Swap front and back buffers.
-//			glfwSwapBuffers(window);
-//
-//			std::this_thread::sleep_for(50ms);
-//		}
-//
-//		spdlog::get(LOGGER_NAME)->info("Window closed!");
-//		glfwTerminate();
-//		std::exit(1);
-//	}
 
 }
 }
