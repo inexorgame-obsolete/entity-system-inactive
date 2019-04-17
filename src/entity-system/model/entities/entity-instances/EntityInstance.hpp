@@ -64,6 +64,19 @@ namespace entity_system {
 			/// @brief Get the attribute instance by name.
 			/// @return The attribute instance with the given name.
 			EntityAttributeInstancePtrOpt get_attribute_instance(const std::string& attr_name);
+
+			/// @brief Get the attribute instance by name.
+			/// @return The attribute instance with the given name.
+			EntityAttributeInstancePtr operator[](const std::string& attr_name);
+
+			template <std::size_t I>
+			auto get(const std::string& attr_name)
+			{
+			    return std::get<I>(get_attribute_instance(attr_name).value()->value.Value());
+			}
+
+			void toggle(const std::string& attr_name);
+
 	};
 
 }

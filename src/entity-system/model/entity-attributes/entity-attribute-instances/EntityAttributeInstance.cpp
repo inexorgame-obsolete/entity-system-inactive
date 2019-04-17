@@ -19,5 +19,15 @@ namespace entity_system {
 		return get_type();
 	}
 
+	void EntityAttributeInstance::toggle()
+	{
+		own_value.Set(!std::get<DataType::BOOL>(value.Value()));
+	}
+
+//	bool EntityAttributeInstance::operator()()
+//	{
+//		return std::get<DataType::BOOL>(value.Value());
+//	}
+
 }
 }

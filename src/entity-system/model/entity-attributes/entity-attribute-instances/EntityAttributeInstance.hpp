@@ -26,6 +26,14 @@ namespace entity_system {
 			/// @return The type of the attribute.
 			EntityAttributeTypePtr get_entity_attribute_type() const;
 
+			template <std::size_t I>
+			auto get()
+			{
+			    return std::get<I>(value.Value());
+			}
+
+			void toggle();
+
 	};
 
 }

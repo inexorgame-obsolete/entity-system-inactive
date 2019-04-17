@@ -90,12 +90,6 @@ namespace renderer {
 		window_manager->destroy_window(window);
 	}
 
-	void toggle(EntityInstancePtr entity_instance, std::string name)
-	{
-		EntityAttributeInstancePtr attr =  entity_instance->get_attribute_instance(name).value();
-		attr->own_value.Set(!std::get<entity_system::DataType::BOOL>(attr->value.Value()));
-	}
-
 	void toggle_raw(GLFWwindow* glfw_window, int window_attribute)
 	{
 		glfwSetWindowAttrib(glfw_window, window_attribute, !glfwGetWindowAttrib(glfw_window, window_attribute));
@@ -153,13 +147,13 @@ namespace renderer {
 				window_manager->set_window_title(window, "Please wait...");
 				break;
 			case GLFW_KEY_I:
-				toggle(window, WindowEntityTypeProvider::WINDOW_ICONIFIED);
+				window->toggle(WindowEntityTypeProvider::WINDOW_ICONIFIED);
 				break;
 			case GLFW_KEY_F:
-				toggle(window, WindowEntityTypeProvider::WINDOW_FULLSCREEN);
+				window->toggle(WindowEntityTypeProvider::WINDOW_FULLSCREEN);
 				break;
 			case GLFW_KEY_M:
-				toggle(window, WindowEntityTypeProvider::WINDOW_MAXIMIZED);
+				window->toggle(WindowEntityTypeProvider::WINDOW_MAXIMIZED);
 				break;
 			case GLFW_KEY_U:
 				toggle_raw(window_manager->get_window_handle(window), GLFW_DECORATED);

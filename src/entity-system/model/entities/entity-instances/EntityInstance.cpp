@@ -53,5 +53,23 @@ namespace entity_system {
 		return std::nullopt;
 	}
 
+	EntityAttributeInstancePtr EntityInstance::operator[](const std::string& attr_name)
+	{
+		for(auto& ent_attr_entry : instances)
+		{
+			if(attr_name == ent_attr_entry.first->get_type_name())
+			{
+				return ent_attr_entry.second;
+			}
+		}
+		return nullptr;
+	}
+
+	void EntityInstance::toggle(const std::string& attr_name)
+	{
+		EntityAttributeInstancePtr attr = get_attribute_instance(attr_name).value();
+		attr->own_value.Set(!attr->get<DataType::BOOL>());
+	}
+
 }
 }
