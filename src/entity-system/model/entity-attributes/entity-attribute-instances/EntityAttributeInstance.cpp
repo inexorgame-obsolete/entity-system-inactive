@@ -24,10 +24,5 @@ namespace entity_system {
 		own_value.Set(!std::get<DataType::BOOL>(value.Value()));
 	}
 
-//	bool EntityAttributeInstance::operator()()
-//	{
-//		return std::get<DataType::BOOL>(value.Value());
-//	}
-
 }
 }
