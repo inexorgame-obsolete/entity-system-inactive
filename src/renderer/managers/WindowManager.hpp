@@ -136,7 +136,7 @@ namespace renderer {
 
 			/// @brief Creates a new window with the given title, position and dimensions.
 			/// @param window The GLFWwindow instance.
-			EntityInstancePtr create_window(std::string title, int x, int y, int width, int height, float opacity, bool visible, bool fullscreen, bool iconified, bool maximized, bool focused);
+			EntityInstancePtr create_window(std::string title, int x, int y, int width, int height, float opacity, bool visible, bool fullscreen, bool iconified, bool maximized, bool focused, bool vsync, float fps);
 
 			/// @brief Destroys the given window.
 			/// @param window The entity instance of type WINDOW.

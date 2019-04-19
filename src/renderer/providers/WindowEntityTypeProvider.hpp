@@ -33,7 +33,9 @@ namespace renderer {
 					{ WINDOW_FULLSCREEN, { DataType::BOOL, 1 << Feature::INPUT | 1 << Feature::OUTPUT } },
 					{ WINDOW_ICONIFIED, { DataType::BOOL, 1 << Feature::INPUT | 1 << Feature::OUTPUT } },
 					{ WINDOW_MAXIMIZED, { DataType::BOOL, 1 << Feature::INPUT | 1 << Feature::OUTPUT } },
-					{ WINDOW_FOCUSED, { DataType::BOOL, 1 << Feature::OUTPUT } }
+					{ WINDOW_FOCUSED, { DataType::BOOL, 1 << Feature::OUTPUT } },
+					{ WINDOW_VSYNC, { DataType::BOOL, 1 << Feature::INPUT | 1 << Feature::OUTPUT } },
+					{ WINDOW_FPS, { DataType::FLOAT, 1 << Feature::INPUT | 1 << Feature::OUTPUT } }
 				}
 			) {};
 
@@ -79,6 +81,11 @@ namespace renderer {
 			/// The name of the attribute window focused.
 			static constexpr char WINDOW_FOCUSED[] = "window_focused";
 
+			/// The name of the attribute window vsync.
+			static constexpr char WINDOW_VSYNC[] = "window_vsync";
+
+			/// The name of the attribute window fps.
+			static constexpr char WINDOW_FPS[] = "window_fps";
 
 	};
 

@@ -45,7 +45,7 @@ namespace renderer {
 
 			EntityInstancePtrOpt create_instance(int id, std::string title, int x, int y, int width, int height, float opacity);
 
-			EntityInstancePtrOpt create_instance(int id, std::string title, int x, int y, int width, int height, float opacity, bool visible, bool fullscreen, bool iconified, bool maximized, bool focused);
+			EntityInstancePtrOpt create_instance(int id, std::string title, int x, int y, int width, int height, float opacity, bool visible, bool fullscreen, bool iconified, bool maximized, bool focused, bool vsync, float fps);
 
 		private:
 

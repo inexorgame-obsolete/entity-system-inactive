@@ -1,4 +1,5 @@
 #include "WindowManager.hpp"
+#include "FpsLimiter.hpp"
 
 #include <Magnum/Platform/GLContext.h>
 
@@ -16,6 +17,8 @@ namespace renderer {
 
 	using EntityInstancePtrOpt = std::optional<EntityInstancePtr>;
 	using EntityAttributeInstanceOpt = std::optional<EntityAttributeInstancePtr>;
+	using TimelinePtr = std::shared_ptr<Magnum::Timeline>;
+	using FpsLimiterPtr = std::shared_ptr<FpsLimiter>;
 
 	WindowManager::WindowManager(
 		WindowFactoryPtr window_factory,
@@ -70,12 +73,12 @@ namespace renderer {
 	/// @param window The GLFWwindow instance.
 	EntityInstancePtr WindowManager::create_window(std::string title, int x, int y, int width, int height)
 	{
-		return create_window(title, x, y, width, height, 1.0f, true, false, false, false, true);
+		return create_window(title, x, y, width, height, 1.0f, true, false, false, false, true, true, 60.0f);
 	}
 
 	/// @brief Creates a new window with the given title, position and dimensions.
 	/// @param window The GLFWwindow instance.
-	EntityInstancePtr WindowManager::create_window(std::string title, int x, int y, int width, int height, float opacity, bool visible, bool fullscreen, bool iconified, bool maximized, bool focused)
+	EntityInstancePtr WindowManager::create_window(std::string title, int x, int y, int width, int height, float opacity, bool visible, bool fullscreen, bool iconified, bool maximized, bool focused, bool vsync, float fps)
 	{
 		// TODO: lock guard
 		current_window_id++;
@@ -83,13 +86,15 @@ namespace renderer {
 		// TODO: end lock guard
 
 		spdlog::get(WindowManager::LOGGER_NAME)->debug(
-			"Creating window {}: '{}' ({}, {}) ({}x{}) Opacity: {} Flags:{}{}{}{}{}",
+			"Creating window {}: '{}' ({}, {}) ({}x{}) Opacity: {} Flags:{}{}{}{}{}{} FPS: {}",
 			id, title, x, y, width, height, opacity,
-			visible ? " Visible" : "",
-			fullscreen ? " Fullscreen" : "",
-			iconified ? " Iconified" : "",
-			maximized ? " Maximized" : "",
-			focused ? " Focused" : ""
+			visible ? " visible" : "",
+			fullscreen ? " fullscreen" : "",
+			iconified ? " iconified" : "",
+			maximized ? " maximized" : "",
+			focused ? " focused" : "",
+			vsync ? " vsync" : "",
+			fps
 		);
 
 		// Unlike SDL2, GLFW requires at least version 3.2 to be able to request a core profile.
@@ -119,7 +124,7 @@ namespace renderer {
 		{
 			glfwSetWindowPos(glfw_window, x, y);
 
-			EntityInstancePtrOpt o_window = window_factory->create_instance(id, title, x, y, width, height, opacity, visible, fullscreen, iconified, maximized, focused);
+			EntityInstancePtrOpt o_window = window_factory->create_instance(id, title, x, y, width, height, opacity, visible, fullscreen, iconified, maximized, focused, vsync, fps);
 			if (o_window.has_value())
 			{
 				EntityInstancePtr window = o_window.value();
@@ -529,6 +534,19 @@ namespace renderer {
 				glfwSetWindowOpacity(glfw_window, std::get<DataType::FLOAT>(opacity));
 			}
 		);
+
+//		Observe(
+//			window->get_attribute_instance(WindowEntityTypeProvider::WINDOW_VSYNC).value()->value,
+//			[glfw_window] (DataValue vsync) {
+//				spdlog::debug("vsync {}", std::get<DataType::BOOL>(vsync) ? "true" : "false");
+//				if (std::get<DataType::BOOL>(vsync)) {
+//					glfwSwapInterval(1);
+//				} else {
+//					glfwSwapInterval(0);
+//				}
+//			}
+//		);
+
 	}
 
 	void WindowManager::window_closed(GLFWwindow* glfw_window)
@@ -606,37 +624,43 @@ namespace renderer {
 		// Make the window's context current.
 		glfwMakeContextCurrent(glfw_window);
 
-		// Disable FPS limit
-		// glfwSwapInterval( 0 );
+		// Enable/disable vsync
+		if (window->get<DataType::BOOL>(WindowEntityTypeProvider::WINDOW_VSYNC)) {
+			spdlog::info("window {} vsync initially enabled", windows[window]->id);
+			glfwSwapInterval(1);
+		} else {
+			spdlog::info("window {} vsync initially disabled", windows[window]->id);
+			glfwSwapInterval(0);
+		}
 
-		// Create Magnum context in an isolated scope.
+		// Create Magnum context in an isolated scope
 		Magnum::Platform::GLContext ctx{};
 
-		// Loop until the user closes the window.
-		Magnum::Timeline timeline;
-		timeline.start();
+		// Fps limiter
+		FpsLimiterPtr fps_limiter = std::make_shared<FpsLimiter>(window);
+
+		fps_limiter->start();
+		// Loop until the user closes the window
 		while(!glfwWindowShouldClose(glfw_window) && windows[window]->thread_running)
 		{
 			// Render worlds
-			world_renderer->render_worlds(window, glfw_window, timeline);
+			world_renderer->render_worlds(window, glfw_window, (*fps_limiter->get_timeline()));
 
 			// TODO: render user interfaces
-			user_interface_renderer->render_user_interfaces(window, glfw_window, timeline);
+			user_interface_renderer->render_user_interfaces(window, glfw_window, (*fps_limiter->get_timeline()));
 
 			// Render custom on front
 			for (std::function render_function : windows[window]->render_functions)
 			{
-				render_function(window, glfw_window, timeline);
+				render_function(window, glfw_window, (*fps_limiter->get_timeline()));
 			}
 
 			// Swap front and back buffers.
 			glfwSwapBuffers(glfw_window);
-			timeline.nextFrame();
+			fps_limiter->limit();
 
-			// 60 fps
-			std::this_thread::sleep_for(std::chrono::milliseconds(16));
 		}
-		timeline.stop();
+		fps_limiter->stop();
 
 		// Detach the window's current context.
 		glfwMakeContextCurrent(nullptr);

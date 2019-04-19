@@ -55,7 +55,7 @@ namespace renderer {
 		create_connectors();
 
 		// Creates the window
-		window = window_manager->create_window("Triangle Example", 0, 0, 800, 600, 1.0f, true, false, false, false, false);
+		window = window_manager->create_window("Triangle Example", 0, 0, 800, 600, 1.0f, true, false, false, false, false, false, 60.0f);
 		// The first render function is the initialization function which is executed only once
 		window_manager->register_render_function(window, std::bind(&TriangleExample::create_mesh, this, std::placeholders::_1, std::placeholders::_2, std::placeholders::_3));
 		// The second render function is for rendering the triangle
