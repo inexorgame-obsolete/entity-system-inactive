@@ -29,6 +29,25 @@ namespace input {
 
 	void KeyboardInputManager::shutdown()
 	{
+		signal_key_changed.disconnect_all_slots();
+		signal_key_pressed.disconnect_all_slots();
+		signal_key_pressed_or_repeated.disconnect_all_slots();
+		for (auto kv : signal_window_key_changed)
+		{
+			kv.second->disconnect_all_slots();
+		}
+		for (auto kv : signal_window_key_pressed)
+		{
+			kv.second->disconnect_all_slots();
+		}
+		for (auto kv : signal_window_key_pressed_or_repeated)
+		{
+			kv.second->disconnect_all_slots();
+		}
+		for (auto kv : signal_window_key_released)
+		{
+			kv.second->disconnect_all_slots();
+		}
 	}
 
 	EntityInstancePtrOpt KeyboardInputManager::create_key(const int& key)
