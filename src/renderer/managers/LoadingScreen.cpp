@@ -3,6 +3,7 @@
 #include "entity-system/model/entity-attributes/entity-attribute-instances/EntityAttributeInstance.hpp"
 #include "type-system/providers/inout/keyboard/GlobalKeyEntityTypeProvider.hpp"
 
+#include <Magnum/DebugTools/Screenshot.h>
 #include <Magnum/Primitives/Square.h>
 
 #include <GLFW/glfw3.h>
@@ -163,6 +164,9 @@ namespace renderer {
 			case GLFW_KEY_MINUS:
 				show_fps = !show_fps;
 				break;
+			case GLFW_KEY_PRINT_SCREEN:
+				create_screenshot = true;
+				break;
 			default:
 				break;
 		}
@@ -254,6 +258,11 @@ namespace renderer {
 		if (show_fps)
 		{
 			spdlog::info("frame time: {} frame duration: {} FPS: {}", timeline.previousFrameTime(), timeline.previousFrameDuration(), 1.0f / timeline.previousFrameDuration());
+		}
+		if (create_screenshot)
+		{
+			Magnum::DebugTools::screenshot(Magnum::GL::defaultFramebuffer, "loading-screen.tga");
+			create_screenshot = false;
 		}
 	}
 

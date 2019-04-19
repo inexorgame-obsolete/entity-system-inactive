@@ -80,6 +80,9 @@ namespace renderer {
 			/// Renders the inexor logo.
 			void render_logo(EntityInstancePtr, GLFWwindow*, Magnum::Timeline timeline);
 
+			/// Makes a screenshot.
+			void screenshot();
+
 			/// The window manager
 			WindowManagerPtr window_manager;
 
@@ -102,9 +105,15 @@ namespace renderer {
 			std::shared_ptr<Magnum::GL::Mesh> mesh;
 			std::shared_ptr<Magnum::Shaders::VertexColor2D> shader;
 
+			/// If true, the renderer is initialized.
 			bool initialized;
 
+			/// If true, the render thread shows the frames per second.
 			bool show_fps;
+
+			/// If true, the render thread creates a screenshot.
+			bool create_screenshot;
+
 	};
 
 }
