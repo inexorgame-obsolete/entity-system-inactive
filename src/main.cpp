@@ -20,38 +20,19 @@
 using fmt::format;
 using namespace Magnum::Math::Literals;
 
+///// Different Components (formerly known as "attributes")
 
-/// Creates a new window with the given title, position and dimensions.
-GLFWwindow *create_window(std::string title, int x, int y, int width, int height) {
-    spdlog::info("Creating window: '{}' ({}, {}) ({}x{})", title, x, y, width, height);
+struct Position {
+    float x;
+    float y;
+};
 
-    // lets be notified about error information.
-    glfwSetErrorCallback([](int error_code, const char *description) {
-        throw std::runtime_error(fmt::format("GLFW error {0}: {1}.", error_code, description));
-    });
+struct Velocity {
+    float dx;
+    float dy;
+};
 
-    // Create a windowed mode window and its OpenGL context.
-    glfwWindowHint(GLFW_VISIBLE, GLFW_FALSE);
-    GLFWwindow *glfw_window = glfwCreateWindow(width, height, title.c_str(), nullptr, nullptr);
-
-    if (!glfw_window) {
-        throw std::runtime_error("window was not created correctly");
-    }
-
-    glfwSetWindowPos(glfw_window, x, y);
-
-    glfwSetWindowCloseCallback(glfw_window, [](GLFWwindow *_glfw_window) {
-        exit(EXIT_SUCCESS);
-        glfwSetWindowShouldClose(_glfw_window, GLFW_TRUE);
-    });
-
-    glfwShowWindow(glfw_window);
-
-    glfwMakeContextCurrent(glfw_window);
-    // TODO: set x and y, as they might not be the same as we requested
-    return glfw_window;
-}
-
+///// Different Systems
 
 struct ColoredVertex {
     Magnum::Vector2 position;
@@ -100,18 +81,6 @@ struct Triangle {
     }
 };
 
-///// Different Components (formerly known as "attributes")
-
-struct Position {
-    float x;
-    float y;
-};
-
-struct Velocity {
-    float dx;
-    float dy;
-};
-
 void render_entities(entt::registry<> &registry, Triangle &triangle) {
 
     Magnum::GL::defaultFramebuffer.clear(Magnum::GL::FramebufferClear::Color);
@@ -131,6 +100,37 @@ void update_positions(std::uint64_t dt, entt::registry<> &registry) {
         pos.x += vel.dx * dt;
         pos.y += vel.dy * dt;
     });
+}
+
+/// Creates a new window with the given title, position and dimensions.
+GLFWwindow *create_window(std::string title, int x, int y, int width, int height) {
+    spdlog::info("Creating window: '{}' ({}, {}) ({}x{})", title, x, y, width, height);
+
+    // lets be notified about error information.
+    glfwSetErrorCallback([](int error_code, const char *description) {
+        throw std::runtime_error(fmt::format("GLFW error {0}: {1}.", error_code, description));
+    });
+
+    // Create a windowed mode window and its OpenGL context.
+    glfwWindowHint(GLFW_VISIBLE, GLFW_FALSE);
+    GLFWwindow *glfw_window = glfwCreateWindow(width, height, title.c_str(), nullptr, nullptr);
+
+    if (!glfw_window) {
+        throw std::runtime_error("window was not created correctly");
+    }
+
+    glfwSetWindowPos(glfw_window, x, y);
+
+    glfwSetWindowCloseCallback(glfw_window, [](GLFWwindow *_glfw_window) {
+        exit(EXIT_SUCCESS);
+        glfwSetWindowShouldClose(_glfw_window, GLFW_TRUE);
+    });
+
+    glfwShowWindow(glfw_window);
+
+    glfwMakeContextCurrent(glfw_window);
+    // TODO: set x and y, as they might not be the same as we requested
+    return glfw_window;
 }
 
 int main(int argc, char *argv[]) {
