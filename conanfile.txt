@@ -30,7 +30,6 @@ magnum:with_anyaudioimporter=True
 magnum:with_wavaudioimporter=True
 magnum:with_anyimageimporter=True
 magnum:with_anyimageconverter=True
-magnum:with_imageconverter=True
 magnum:with_tgaimageconverter=True
 magnum:with_tgaimporter=True
 TBB:shared=True

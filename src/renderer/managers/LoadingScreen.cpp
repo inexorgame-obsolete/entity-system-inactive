@@ -38,6 +38,7 @@ namespace renderer {
 		this->log_manager = log_manager;
 		this->initialized = false;
 		this->show_fps = false;
+		this->create_screenshot = false;
 	}
 
 	LoadingScreen::~LoadingScreen()
