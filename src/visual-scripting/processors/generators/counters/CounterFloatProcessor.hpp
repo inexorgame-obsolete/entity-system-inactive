@@ -56,6 +56,9 @@ namespace visual_scripting {
 			/// Initializes the COUNTER_FLOAT processor by registering listeners on newly created entity instances of type COUNTER_FLOAT.
 			void init();
 
+			/// Shut down all threads of this processor.
+			void shutdown();
+
 			/// @brief Called when an entity instance of type COUNTER_FLOAT has been created.
             /// @param entity_instance ?
 			void on_entity_instance_created(EntityInstancePtr entity_instance);
@@ -79,6 +82,9 @@ namespace visual_scripting {
 
 			/// The log manager.
 			LogManagerPtr log_manager;
+
+			/// The running state of the thread.
+			std::unordered_map<xg::Guid, bool> running;
 
 			/// The signals per entity instance.
 			std::unordered_map<xg::Guid, SignalT<entity_system::DataValue>> signals;

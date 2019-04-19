@@ -30,6 +30,9 @@ namespace visual_scripting {
 			/// Initialization of the processors for time based counters.
 			void init();
 
+			/// Shut down the processors for time based counters.
+			void shutdown();
+
 		private:
 
 			/// Processor for the entity type COUNTER_INT.

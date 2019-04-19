@@ -43,6 +43,9 @@ namespace visual_scripting {
 			/// Initialization of the processors.
 			void init();
 
+			/// Shut down the processors.
+			void shutdown();
+
 		private:
 
 			/// The registry for processors.

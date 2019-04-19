@@ -56,6 +56,9 @@ namespace visual_scripting {
 			/// Initializes the COUNTER_INT processor by registering listeners on newly created entity instances of type COUNTER_INT.
 			void init();
 
+			/// Shut down all threads of this processor.
+			void shutdown();
+
 			/// @brief Called when an entity instance of type COUNTER_INT has been created.
             /// @param entity_instance ?
 			void on_entity_instance_created(EntityInstancePtr entity_instance);

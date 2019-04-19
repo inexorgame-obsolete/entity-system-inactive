@@ -34,6 +34,9 @@ namespace visual_scripting {
 			/// Initialization of the processors for generators like counters and timers.
 			void init();
 
+			/// Shut down the generator processors.
+			void shutdown();
+
 		private:
 
 			/// Processors for counters.

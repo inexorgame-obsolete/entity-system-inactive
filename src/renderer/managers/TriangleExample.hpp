@@ -97,10 +97,13 @@ namespace renderer {
 			void create_connectors();
 
 			/// Initializes the triangle.
-			void create_mesh(EntityInstancePtr, GLFWwindow*, Magnum::Timeline timeline);
+			void init_triangle(EntityInstancePtr window, GLFWwindow* glfw_window);
 
 			/// Renders the triangle.
-			void render_triangle(EntityInstancePtr, GLFWwindow*, Magnum::Timeline timeline);
+			void render_triangle(EntityInstancePtr window, GLFWwindow* glfw_window, Magnum::Timeline timeline);
+
+			/// Shutdown the triangle.
+			void shutdown_triangle(EntityInstancePtr window, GLFWwindow* glfw_window);
 
 			/// Toggles the connector debugging
 			void toggle_connector_debug();
@@ -190,8 +193,6 @@ namespace renderer {
 			std::shared_ptr<Magnum::Shaders::VertexColor2D> shader;
 
 			TriangleVertex data[3];
-
-			bool initialized;
 
 			bool debug_enabled;
 

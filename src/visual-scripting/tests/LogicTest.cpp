@@ -36,6 +36,10 @@ namespace visual_scripting {
 	{
 	}
 
+	void LogicTest::shutdown()
+	{
+	}
+
 	void LogicTest::start_test()
 	{
 		if(!running)
@@ -57,26 +61,6 @@ namespace visual_scripting {
 	{
 		std::this_thread::sleep_for(std::chrono::seconds(2));
 		running = true;
-/*
-		auto system = system();
-		using ref = system->ref;
-		auto b = builder(system)
-			.stdin()
-				.output(ref("stdin"))
-				.done()
-			.equals_str()
-				.input1(ref("stdin"))
-				.input2("")
-				.output(ref("cmd1"))
-				.done()
-			.equals_str()
-				.done()
-			.and(ref("cmd1"), )
-				.input()
-				.output(ref("cmd1"))
-				.done();
-			.done();
-*/
 	}
 
 }

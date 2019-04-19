@@ -39,8 +39,20 @@ namespace renderer {
 	struct ManagedWindow
 	{
 		/// Creates a new ManagedWindow.
-		ManagedWindow(int _id, std::string _title, EntityInstancePtr _window, GLFWwindow* _glfw_window)
-			: id(_id), title(_title), window(_window), glfw_window(_glfw_window), thread_running(false) {};
+		ManagedWindow(
+			int id,
+			std::string title,
+			EntityInstancePtr window,
+			GLFWwindow* glfw_window,
+			std::optional<std::function<void(EntityInstancePtr, GLFWwindow*)>> init_function,
+			std::optional<std::function<void(EntityInstancePtr, GLFWwindow*)>> shutdown_function
+		) : id(id),
+			title(title),
+			window(window),
+			glfw_window(glfw_window),
+			init_function(init_function),
+			shutdown_function(shutdown_function),
+			thread_running(false) {};
 
 		/// The id of the window.
 		int id;
@@ -68,8 +80,15 @@ namespace renderer {
 
 		// TODO: list of observers for shutting down the observers during destroy
 
+		/// A list of functions to call during initialization of the window thread. The order of these functions is important.
+		std::optional<std::function<void(EntityInstancePtr, GLFWwindow*)>> init_function;
+
 		/// A list of functions to call during rendering. The order of these functions is important.
 		std::list<std::function<void(EntityInstancePtr, GLFWwindow*, Magnum::Timeline)>> render_functions;
+
+		/// A list of functions to call during shut down of the window thread. The order of these functions is important.
+		std::optional<std::function<void(EntityInstancePtr, GLFWwindow*)>> shutdown_function;
+
 	};
 
 	struct WindowOwner {
@@ -138,6 +157,26 @@ namespace renderer {
 			/// @param window The GLFWwindow instance.
 			EntityInstancePtr create_window(std::string title, int x, int y, int width, int height, float opacity, bool visible, bool fullscreen, bool iconified, bool maximized, bool focused, bool vsync, float fps);
 
+			/// @brief Creates a new window with the given title, position and dimensions.
+			/// @param window The GLFWwindow instance.
+			EntityInstancePtr create_window(
+				std::string title,
+				int x,
+				int y,
+				int width,
+				int height,
+				float opacity,
+				bool visible,
+				bool fullscreen,
+				bool iconified,
+				bool maximized,
+				bool focused,
+				bool vsync,
+				float fps,
+				std::optional<std::function<void(EntityInstancePtr, GLFWwindow*)>> init_function,
+				std::optional<std::function<void(EntityInstancePtr, GLFWwindow*)>> shutdown_function
+			);
+
 			/// @brief Destroys the given window.
 			/// @param window The entity instance of type WINDOW.
 			void destroy_window(EntityInstancePtr window);
@@ -170,7 +209,7 @@ namespace renderer {
 			// TODO: document
 			void make_current(EntityInstancePtr window);
 
-			/// @brief Sets the size of the given window.
+			/// @brief Registers a function to be called at every frame.
 			/// @param window The entity instance of type WINDOW.
 			/// @param render_function The render function to register.
 			void register_render_function(EntityInstancePtr window, std::function<void(EntityInstancePtr, GLFWwindow*, Magnum::Timeline)> render_function);

@@ -22,5 +22,11 @@ namespace visual_scripting {
 		counter_float_processor->init();
 	}
 
+	void CounterProcessors::shutdown()
+	{
+		counter_int_processor->shutdown();
+		counter_float_processor->shutdown();
+	}
+
 }
 }

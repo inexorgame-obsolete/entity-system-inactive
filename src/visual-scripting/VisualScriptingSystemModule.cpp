@@ -26,5 +26,13 @@ namespace visual_scripting {
 		integration_tests->start_tests();
 	}
 
+	void VisualScriptingSystemModule::shutdown()
+	{
+		integration_tests->stop_tests();
+		// integration_tests->shutdown();
+		processors->shutdown();
+		// connector_manager->shutdown();
+	}
+
 }
 }

@@ -74,11 +74,14 @@ namespace renderer {
 
 		private:
 
-			/// Creates the inexor logo.
-			void create_logo(EntityInstancePtr, GLFWwindow*, Magnum::Timeline timeline);
+			/// Initializes the loading screen.
+			void init_loading_screen(EntityInstancePtr window, GLFWwindow* glfw_window);
 
-			/// Renders the inexor logo.
-			void render_logo(EntityInstancePtr, GLFWwindow*, Magnum::Timeline timeline);
+			/// Renders the loading screen.
+			void render_loading_screen(EntityInstancePtr window, GLFWwindow* glfw_window, Magnum::Timeline timeline);
+
+			/// Initializes the loading screen.
+			void shutdown_loading_screen(EntityInstancePtr window, GLFWwindow* glfw_window);
 
 			/// Makes a screenshot.
 			void screenshot();
@@ -104,9 +107,6 @@ namespace renderer {
 			std::shared_ptr<Magnum::GL::Buffer> buffer;
 			std::shared_ptr<Magnum::GL::Mesh> mesh;
 			std::shared_ptr<Magnum::Shaders::VertexColor2D> shader;
-
-			/// If true, the renderer is initialized.
-			bool initialized;
 
 			/// If true, the render thread shows the frames per second.
 			bool show_fps;

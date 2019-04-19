@@ -34,7 +34,6 @@ namespace renderer {
 		this->window_manager = window_manager;
 		this->keyboard_input_manager = keyboard_input_manager;
 		this->log_manager = log_manager;
-		this->initialized = false;
 		this->debug_enabled = false;
 		this->connector_c_sin = std::nullopt;
 		this->connector_c_cos = std::nullopt;
@@ -55,10 +54,15 @@ namespace renderer {
 		create_connectors();
 
 		// Creates the window
-		window = window_manager->create_window("Triangle Example", 0, 0, 800, 600, 1.0f, true, false, false, false, false, false, 60.0f);
-		// The first render function is the initialization function which is executed only once
-		window_manager->register_render_function(window, std::bind(&TriangleExample::create_mesh, this, std::placeholders::_1, std::placeholders::_2, std::placeholders::_3));
-		// The second render function is for rendering the triangle
+		window = window_manager->create_window(
+			"Triangle Example",
+			0, 0, 800, 600,
+			1.0f,
+			true, false, false, false, false, false,
+			60.0f,
+			{ std::bind(&TriangleExample::init_triangle, this, std::placeholders::_1, std::placeholders::_2) },
+			{ std::bind(&TriangleExample::shutdown_triangle, this, std::placeholders::_1, std::placeholders::_2) }
+		);
 		window_manager->register_render_function(window, std::bind(&TriangleExample::render_triangle, this, std::placeholders::_1, std::placeholders::_2, std::placeholders::_3));
 
 		keyboard_input_manager->register_on_window_key_released(window, shared_from_this());
@@ -202,32 +206,27 @@ namespace renderer {
 		connector_y = connector_manager->create_connector(cos_attr_value, triangle_attr_y);
 	}
 
-	void TriangleExample::create_mesh(EntityInstancePtr window, GLFWwindow* glfw_window, Magnum::Timeline timeline)
+	void TriangleExample::init_triangle(EntityInstancePtr window, GLFWwindow* glfw_window)
 	{
-		if (!initialized)
-		{
-			spdlog::info("create_mesh");
-			data[0] = {{-0.5f, -0.5f}, 0xff0000_rgbf}; // Left vertex, red color
-			data[1] = {{ 0.5f, -0.5f}, 0x00ff00_rgbf}; // Right vertex, green color
-			data[2] = {{ 0.0f,  0.5f}, 0x0000ff_rgbf};  // Top vertex, blue color
-			// window_manager->make_current(window);
-			buffer = std::make_shared<Magnum::GL::Buffer>();
-			buffer->setData(data);
-			mesh = std::make_shared<Magnum::GL::Mesh>();
-			mesh->setPrimitive(Magnum::GL::MeshPrimitive::Triangles)
-				.setCount(3)
-				.addVertexBuffer(
-					(*buffer),
-					0,
-					Magnum::Shaders::VertexColor2D::Position{},
-					Magnum::Shaders::VertexColor2D::Color3{}
-				);
+		spdlog::info("Initialize triangle");
+		data[0] = {{-0.5f, -0.5f}, 0xff0000_rgbf}; // Left vertex, red color
+		data[1] = {{ 0.5f, -0.5f}, 0x00ff00_rgbf}; // Right vertex, green color
+		data[2] = {{ 0.0f,  0.5f}, 0x0000ff_rgbf};  // Top vertex, blue color
+		// window_manager->make_current(window);
+		buffer = std::make_shared<Magnum::GL::Buffer>();
+		buffer->setData(data);
+		mesh = std::make_shared<Magnum::GL::Mesh>();
+		mesh->setPrimitive(Magnum::GL::MeshPrimitive::Triangles)
+			.setCount(3)
+			.addVertexBuffer(
+				(*buffer),
+				0,
+				Magnum::Shaders::VertexColor2D::Position{},
+				Magnum::Shaders::VertexColor2D::Color3{}
+			);
 
-			shader = std::make_shared<Magnum::Shaders::VertexColor2D>();
-
-			initialized = true;
-			spdlog::info("mesh initialized");
-		}
+		shader = std::make_shared<Magnum::Shaders::VertexColor2D>();
+		spdlog::info("Shader initialized");
 	}
 
 	void TriangleExample::render_triangle(EntityInstancePtr window, GLFWwindow* glfw_window, Magnum::Timeline timeline)
@@ -259,6 +258,14 @@ namespace renderer {
 
 		// Render triangle
 		mesh->draw((*shader));
+	}
+
+	void TriangleExample::shutdown_triangle(EntityInstancePtr window, GLFWwindow* glfw_window)
+	{
+		shader = nullptr;
+		mesh = nullptr;
+		buffer = nullptr;
+		spdlog::info("Shader destroyed");
 	}
 
 }

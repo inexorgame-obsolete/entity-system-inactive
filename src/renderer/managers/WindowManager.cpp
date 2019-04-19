@@ -76,9 +76,30 @@ namespace renderer {
 		return create_window(title, x, y, width, height, 1.0f, true, false, false, false, true, true, 60.0f);
 	}
 
+	EntityInstancePtr WindowManager::create_window(std::string title, int x, int y, int width, int height, float opacity, bool visible, bool fullscreen, bool iconified, bool maximized, bool focused, bool vsync, float fps)
+	{
+		return create_window(title, x, y, width, height, opacity, visible, fullscreen, iconified, maximized, focused, vsync, fps, std::nullopt, std::nullopt);
+	}
+
 	/// @brief Creates a new window with the given title, position and dimensions.
 	/// @param window The GLFWwindow instance.
-	EntityInstancePtr WindowManager::create_window(std::string title, int x, int y, int width, int height, float opacity, bool visible, bool fullscreen, bool iconified, bool maximized, bool focused, bool vsync, float fps)
+	EntityInstancePtr WindowManager::create_window(
+		std::string title,
+		int x,
+		int y,
+		int width,
+		int height,
+		float opacity,
+		bool visible,
+		bool fullscreen,
+		bool iconified,
+		bool maximized,
+		bool focused,
+		bool vsync,
+		float fps,
+		std::optional<std::function<void(EntityInstancePtr, GLFWwindow*)>> init_function,
+		std::optional<std::function<void(EntityInstancePtr, GLFWwindow*)>> shutdown_function
+	)
 	{
 		// TODO: lock guard
 		current_window_id++;
@@ -130,7 +151,7 @@ namespace renderer {
 				EntityInstancePtr window = o_window.value();
 
 				// Track the glfw window and the entity instance.
-				windows[window] = std::make_shared<ManagedWindow>(id, title, window, glfw_window);
+				windows[window] = std::make_shared<ManagedWindow>(id, title, window, glfw_window, init_function, shutdown_function);
 				window_entities[glfw_window] = window;
 
 				std::thread window_thread(&renderer::WindowManager::start_window_thread, this, window);
@@ -535,18 +556,6 @@ namespace renderer {
 			}
 		);
 
-//		Observe(
-//			window->get_attribute_instance(WindowEntityTypeProvider::WINDOW_VSYNC).value()->value,
-//			[glfw_window] (DataValue vsync) {
-//				spdlog::debug("vsync {}", std::get<DataType::BOOL>(vsync) ? "true" : "false");
-//				if (std::get<DataType::BOOL>(vsync)) {
-//					glfwSwapInterval(1);
-//				} else {
-//					glfwSwapInterval(0);
-//				}
-//			}
-//		);
-
 	}
 
 	void WindowManager::window_closed(GLFWwindow* glfw_window)
@@ -639,6 +648,12 @@ namespace renderer {
 		// Fps limiter
 		FpsLimiterPtr fps_limiter = std::make_shared<FpsLimiter>(window);
 
+		// Call custom initialization function after GL context has been created
+		if (windows[window]->init_function.has_value())
+		{
+			windows[window]->init_function.value()(window, glfw_window);
+		}
+
 		fps_limiter->start();
 		// Loop until the user closes the window
 		while(!glfwWindowShouldClose(glfw_window) && windows[window]->thread_running)
@@ -661,6 +676,12 @@ namespace renderer {
 
 		}
 		fps_limiter->stop();
+
+		// Call custom shutdown function before GL context is destroyed
+		if (windows[window]->shutdown_function.has_value())
+		{
+			windows[window]->shutdown_function.value()(window, glfw_window);
+		}
 
 		// Detach the window's current context.
 		glfwMakeContextCurrent(nullptr);

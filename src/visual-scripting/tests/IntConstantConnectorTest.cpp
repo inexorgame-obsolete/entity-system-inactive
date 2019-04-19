@@ -59,6 +59,11 @@ namespace visual_scripting {
 		create_instances();
 	}
 
+	void IntConstantConnectorTest::shutdown()
+	{
+		// TODO: shutdown this test
+	}
+
 	void IntConstantConnectorTest::start_test()
 	{
 		if(!running && o_source.has_value() && o_target_1.has_value() && o_target_2.has_value() && o_target_3.has_value())

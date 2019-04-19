@@ -36,7 +36,6 @@ namespace renderer {
 		this->keyboard_input_manager = keyboard_input_manager;
 		this->connector_manager = connector_manager;
 		this->log_manager = log_manager;
-		this->initialized = false;
 		this->show_fps = false;
 		this->create_screenshot = false;
 	}
@@ -50,12 +49,17 @@ namespace renderer {
 		log_manager->register_logger(LOGGER_NAME);
 
 		// Creates the window
-		window = window_manager->create_window("Inexor Logo", 0, 0, 800, 600, 0.8f, true, false, false, false, true, true, 60.0f);
+		window = window_manager->create_window(
+			"Loading Inexor...",
+			800, 0, 800, 600,
+			0.8f,
+			true, false, false, false, true, true,
+			60.0f,
+			{ std::bind(&LoadingScreen::init_loading_screen, this, std::placeholders::_1, std::placeholders::_2) },
+			{ std::bind(&LoadingScreen::shutdown_loading_screen, this, std::placeholders::_1, std::placeholders::_2) }
+		);
 		window_manager->center_window(window);
-		// The first render function is the initialization function which is executed only once
-		window_manager->register_render_function(window, std::bind(&LoadingScreen::create_logo, this, std::placeholders::_1, std::placeholders::_2, std::placeholders::_3));
-		// The second render function is for rendering the inexor logo
-		window_manager->register_render_function(window, std::bind(&LoadingScreen::render_logo, this, std::placeholders::_1, std::placeholders::_2, std::placeholders::_3));
+		window_manager->register_render_function(window, std::bind(&LoadingScreen::render_loading_screen, this, std::placeholders::_1, std::placeholders::_2, std::placeholders::_3));
 
 		keyboard_input_manager->register_on_window_key_released(window, shared_from_this());
 		keyboard_input_manager->register_on_window_key_pressed_or_repeated(window, shared_from_this());
@@ -145,7 +149,7 @@ namespace renderer {
 				window_manager->center_window(window);
 				break;
 			case GLFW_KEY_T:
-				window_manager->set_window_title(window, "Please wait...");
+				window_manager->set_window_title(window, "*Still* loading Inexor...");
 				break;
 			case GLFW_KEY_I:
 				window->toggle(WindowEntityTypeProvider::WINDOW_ICONIFIED);
@@ -207,43 +211,36 @@ namespace renderer {
 		}
 	}
 
-	void LoadingScreen::create_logo(EntityInstancePtr window, GLFWwindow* glfw_window, Magnum::Timeline timeline)
+	void LoadingScreen::init_loading_screen(EntityInstancePtr window, GLFWwindow* glfw_window)
 	{
-		if (!initialized)
-		{
-			spdlog::info("create logo");
-			const QuadVertex quad_vertex[] {
-				{{ 0.5f, -0.5f}, 0xffff00_rgbf},
-				{{-0.5f, -0.5f}, 0xffffff_rgbf},
-				{{ 0.5f,  0.5f}, 0x00ffff_rgbf},
-				{{-0.5f,  0.5f}, 0xff00ff_rgbf}
-			};
+		spdlog::info("init loading screen");
+		const QuadVertex quad_vertex[] {
+			{{ 0.5f, -0.5f}, 0xffff00_rgbf},
+			{{-0.5f, -0.5f}, 0xffffff_rgbf},
+			{{ 0.5f,  0.5f}, 0x00ffff_rgbf},
+			{{-0.5f,  0.5f}, 0xff00ff_rgbf}
+		};
 
-			buffer = std::make_shared<Magnum::GL::Buffer>();
-			buffer->setData(quad_vertex);
+		buffer = std::make_shared<Magnum::GL::Buffer>();
+		buffer->setData(quad_vertex);
 
-			mesh = std::make_shared<Magnum::GL::Mesh>();
+		mesh = std::make_shared<Magnum::GL::Mesh>();
 
-			// Magnum::Trade::MeshData2D square = Magnum::Primitives::squareSolid();
+		// Magnum::Trade::MeshData2D square = Magnum::Primitives::squareSolid();
 
-			mesh->setPrimitive(Magnum::GL::MeshPrimitive::TriangleStrip)
-				.setCount(4)
-				.addVertexBuffer(
-					(*buffer),
-					0,
-					Magnum::Shaders::VertexColor2D::Position{},
-					Magnum::Shaders::VertexColor2D::Color3{}
-				);
+		mesh->setPrimitive(Magnum::GL::MeshPrimitive::TriangleStrip)
+			.setCount(4)
+			.addVertexBuffer(
+				(*buffer),
+				0,
+				Magnum::Shaders::VertexColor2D::Position{},
+				Magnum::Shaders::VertexColor2D::Color3{}
+			);
 
-			shader = std::make_shared<Magnum::Shaders::VertexColor2D>();
-
-			initialized = true;
-
-			spdlog::info("logo mesh initialized");
-		}
+		shader = std::make_shared<Magnum::Shaders::VertexColor2D>();
 	}
 
-	void LoadingScreen::render_logo(EntityInstancePtr window, GLFWwindow* glfw_window, Magnum::Timeline timeline)
+	void LoadingScreen::render_loading_screen(EntityInstancePtr window, GLFWwindow* glfw_window, Magnum::Timeline timeline)
 	{
 		// Set viewport
 		Magnum::Vector2i framebufferSize;
@@ -262,9 +259,17 @@ namespace renderer {
 		}
 		if (create_screenshot)
 		{
-			Magnum::DebugTools::screenshot(Magnum::GL::defaultFramebuffer, "loading-screen.tga");
+			Magnum::DebugTools::screenshot(Magnum::GL::defaultFramebuffer, "loading-screen.png");
 			create_screenshot = false;
 		}
+	}
+
+	void LoadingScreen::shutdown_loading_screen(EntityInstancePtr window, GLFWwindow* glfw_window)
+	{
+		shader = nullptr;
+		mesh = nullptr;
+		buffer = nullptr;
+		spdlog::info("Loading screen destroyed");
 	}
 
 }

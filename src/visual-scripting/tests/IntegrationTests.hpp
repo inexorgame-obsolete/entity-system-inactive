@@ -38,6 +38,9 @@ namespace visual_scripting {
 			/// Initialization of the integration tests.
 			void init();
 
+			/// Shut down the integration tests.
+			void shutdown();
+
 			/// Starts the integration tests.
 			void start_tests();
 

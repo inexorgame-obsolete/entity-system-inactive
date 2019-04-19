@@ -28,12 +28,28 @@ namespace visual_scripting {
 		this->logic_test->init();
 	}
 
+	void IntegrationTests::shutdown()
+	{
+		this->logic_test->shutdown();
+		this->sin_test->shutdown();
+		this->int_constant_connector_test->shutdown();
+		this->console_test->shutdown();
+	}
+
 	void IntegrationTests::start_tests()
 	{
 		this->console_test->start_test();
 		this->int_constant_connector_test->start_test();
 		this->sin_test->start_test();
 		this->logic_test->start_test();
+	}
+
+	void IntegrationTests::stop_tests()
+	{
+		this->logic_test->stop_test();
+		this->sin_test->stop_test();
+		this->int_constant_connector_test->stop_test();
+		this->console_test->stop_test();
 	}
 
 }

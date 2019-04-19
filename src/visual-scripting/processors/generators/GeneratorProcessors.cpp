@@ -25,5 +25,12 @@ namespace visual_scripting {
 		random_processors->init();
 	}
 
+	void GeneratorProcessors::shutdown()
+	{
+//		random_processors->init();
+//		timer_processors->init();
+		counter_processors->shutdown();
+	}
+
 }
 }

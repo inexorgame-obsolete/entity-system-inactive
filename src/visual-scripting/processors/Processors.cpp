@@ -31,5 +31,14 @@ namespace visual_scripting {
 		this->math_processors->init();
 	}
 
+	void Processors::shutdown()
+	{
+//		this->math_processors->shutdown();
+//		this->logical_processors->shutdown();
+//		this->inout_processors->shutdown();
+		this->generator_processors->shutdown();
+//		this->processor_registry->shutdown();
+	}
+
 }
 }

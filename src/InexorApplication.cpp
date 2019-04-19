@@ -134,8 +134,11 @@ namespace inexor {
         // Shutdown REST server.
 		rest_server->stopService();
 
-		// Shutdown the client module.
+		// Shut down the client module.
 		client_module->shutdown();
+
+		// Shut down the visual scripting module.
+		visual_scripting_system_module->shutdown();
 
 		running = false;
 		spdlog::get(LOGGER_NAME)->info("Shutdown completed");

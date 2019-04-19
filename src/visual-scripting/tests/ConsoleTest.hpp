@@ -51,6 +51,9 @@ namespace visual_scripting {
             /// Initialisation.
 			void init();
 
+			/// Shutdown.
+			void shutdown();
+
             /// Start test.
 			void start_test();
 

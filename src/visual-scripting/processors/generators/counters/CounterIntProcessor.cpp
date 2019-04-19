@@ -42,6 +42,14 @@ namespace visual_scripting {
 		entity_instance_manager->register_on_deleted(entity_type_provider->get_type()->get_GUID(), shared_from_this());
 	}
 
+	void CounterIntProcessor::shutdown()
+	{
+//		for (auto kv : running)
+//		{
+//			kv.second = false;
+//		}
+	}
+
 	void CounterIntProcessor::on_entity_instance_created(std::shared_ptr<inexor::entity_system::EntityInstance> entity_instance)
 	{
 		make_signals(entity_instance);

@@ -42,6 +42,14 @@ namespace visual_scripting {
 		entity_instance_manager->register_on_deleted(entity_type_provider->get_type()->get_GUID(), shared_from_this());
 	}
 
+	void CounterFloatProcessor::shutdown()
+	{
+		for (auto kv : running)
+		{
+			kv.second = false;
+		}
+	}
+
 	void CounterFloatProcessor::on_entity_instance_created(std::shared_ptr<inexor::entity_system::EntityInstance> entity_instance)
 	{
 		make_signals(entity_instance);
@@ -73,6 +81,8 @@ namespace visual_scripting {
 			EntityAttributeInstancePtr attr_counter_float_count = o_attr_counter_float_count.value();
 
 			std::thread start_thread([this, guid, attr_counter_float_millis, attr_counter_float_step, attr_counter_float_reset, attr_counter_float_count] () {
+
+				running[guid] = true;
 
 		    	// Create event source
 				event_sources[guid] = MakeEventSource<entity_system::D, int>();
@@ -107,8 +117,7 @@ namespace visual_scripting {
 				// Initialize the tick
 		    	int tick = 0;
 
-				// Loop while TODO
-				while (true)
+				while (running[guid])
 				{
 					// Wait for counter_float_millis milliseconds
 					int millis = std::get<DataType::INT>(attr_counter_float_millis->value.Value());

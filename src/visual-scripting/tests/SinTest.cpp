@@ -54,16 +54,17 @@ namespace visual_scripting {
 		create_instances();
 	}
 
+	void SinTest::shutdown()
+	{
+		// TODO: shutdown this test
+	}
+
 	void SinTest::start_test()
 	{
 		if(!running && o_counter.has_value() && o_sin.has_value() && o_target.has_value())
 		{
 			std::thread t(&inexor::visual_scripting::SinTest::run_test, this);
 			t.detach();
-		}
-        else
-        {
-			std::cout << "1" << std::endl;
 		}
 	}
 
@@ -75,10 +76,6 @@ namespace visual_scripting {
 			connector_manager->delete_connector(connector_2);
 			observer.Detach();
 			running = false;
-		}
-        else
-        {
-			std::cout << "2" << std::endl;
 		}
 	}
 
@@ -112,10 +109,6 @@ namespace visual_scripting {
 				// Just keep the thread alive
 				std::this_thread::sleep_for(std::chrono::milliseconds(100));
 			}
-		}
-        else
-        {
-			std::cout << "3" << std::endl;
 		}
 	}
 

@@ -34,6 +34,9 @@ namespace visual_scripting {
 			/// Initializes the visual scripting system.
 			void init();
 
+			/// Shut down the visual scripting system.
+			void shutdown();
+
 		private:
 
 			/// Manages the connections between attribute instances.

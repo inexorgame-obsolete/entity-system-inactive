@@ -63,6 +63,11 @@ namespace visual_scripting {
 
 	}
 
+	void ConsoleTest::shutdown()
+	{
+		// TODO: shutdown this test
+	}
+
 	void ConsoleTest::start_test()
 	{
 		if(!running && o_stdin.has_value() && o_stdout.has_value() && o_stderr.has_value())
