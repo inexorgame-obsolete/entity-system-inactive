@@ -28,6 +28,7 @@ namespace renderer {
 		ConnectorManagerPtr connector_manager,
 		WorldRendererPtr world_renderer,
 		UserInterfaceRendererPtr user_interface_renderer,
+		ClientLifecyclePtr client_lifecycle,
 		LogManagerPtr log_manager
 	) {
 		this->window_factory = window_factory;
@@ -37,6 +38,7 @@ namespace renderer {
 		this->connector_manager = connector_manager;
 		this->world_renderer = world_renderer;
 		this->user_interface_renderer = user_interface_renderer;
+		this->client_lifecycle = client_lifecycle;
 		this->log_manager = log_manager;
 		this->window_count = 0;
 		this->current_window_id = 0;
@@ -59,14 +61,27 @@ namespace renderer {
 
 	void WindowManager::shutdown()
 	{
+
+		// Shut down the user interface renderer
+		user_interface_renderer->shutdown();
+
+		// Shut down the world renderer
+		world_renderer->shutdown();
+
+		// Shut down the windows.
 		spdlog::debug("Shutting down {} open windows", windows.size());
 		for (auto& kv : windows) {
 			spdlog::debug("Shutting down window {} ", kv.second->id);
 			destroy_window(kv.first);
 		}
 
-		user_interface_renderer->shutdown();
-		world_renderer->shutdown();
+		// Ensure the windows are gone
+		while (window_count > 0)
+		{
+			std::this_thread::sleep_for(std::chrono::milliseconds(10));
+		}
+		spdlog::info("All windows has been closed");
+
 	}
 
 	/// @brief Creates a new window with the given title, position and dimensions.
@@ -692,7 +707,6 @@ namespace renderer {
 
 		// Remove window render functions
 		windows[window]->render_functions.clear();
-		spdlog::debug("window {} render_functions count: {}", windows[window]->id, windows[window]->render_functions.size());
 
 		// Remove the callbacks
 		this->destroy_window_callbacks(glfw_window);
@@ -705,17 +719,21 @@ namespace renderer {
 
 		// Untrack the glfw window
 		window_entities.erase(glfw_window);
-		spdlog::debug("window_entities count: {}", window_entities.size());
 
 		// Untrack the entity instance
 		windows.erase(window);
-		spdlog::debug("windows count: {}", windows.size());
 
 		// Delete entity instance
 		entity_instance_manager->delete_entity_instance(window);
 
 		window_count--;
 		spdlog::get(WindowManager::LOGGER_NAME)->info("Window count: {}", window_count);
+
+		if (window_count == 0)
+		{
+			spdlog::get(WindowManager::LOGGER_NAME)->info("Last window has been closed. Initiating shutdown");
+			client_lifecycle->request_shutdown();
+		}
 
 	}
 

@@ -46,6 +46,7 @@ namespace renderer {
 	void RendererModule::shutdown()
 	{
 		triangle_example->shutdown();
+		loading_screen->shutdown();
 		window_manager->shutdown();
 		monitor_manager->shutdown();
 
@@ -58,14 +59,13 @@ namespace renderer {
 	void RendererModule::update()
 	{
 		// Poll for and process events
-		// TODO: this doesn't work well
 		glfwPollEvents();
 	}
 
-	WindowManagerPtr RendererModule::get_window_manager()
-	{
-		return window_manager;
-	}
+//	WindowManagerPtr RendererModule::get_window_manager()
+//	{
+//		return window_manager;
+//	}
 
 }
 }

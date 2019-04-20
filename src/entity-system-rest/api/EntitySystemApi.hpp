@@ -36,10 +36,13 @@ namespace api {
 
 class  EntitySystemApi
 {
-public:
-	EntitySystemApi();
-	~EntitySystemApi();
-	void publish_resources(std::shared_ptr<Service> service);
+	public:
+		EntitySystemApi();
+		~EntitySystemApi();
+
+		void publish_resources(std::shared_ptr<Service> service);
+		void suppress_resources(std::shared_ptr<Service> service);
+
 };
 
 
@@ -51,12 +54,12 @@ public:
 /// </remarks>
 class  EntitySystemApiEntitysystemResource: public restbed::Resource
 {
-public:
-	EntitySystemApiEntitysystemResource();
-    virtual ~EntitySystemApiEntitysystemResource();
-    void DELETE_method_handler(const std::shared_ptr<restbed::Session> session);
-    void GET_method_handler(const std::shared_ptr<restbed::Session> session);
-    void POST_method_handler(const std::shared_ptr<restbed::Session> session);
+	public:
+		EntitySystemApiEntitysystemResource();
+		virtual ~EntitySystemApiEntitysystemResource();
+		void DELETE_method_handler(const std::shared_ptr<restbed::Session> session);
+		void GET_method_handler(const std::shared_ptr<restbed::Session> session);
+		void POST_method_handler(const std::shared_ptr<restbed::Session> session);
 };
 
 

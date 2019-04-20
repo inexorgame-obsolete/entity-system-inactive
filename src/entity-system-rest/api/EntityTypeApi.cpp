@@ -62,6 +62,17 @@ void EntityTypeApi::publish_resources(std::shared_ptr<Service> service) {
 	service->publish(spEntityTypeApiEntitiesTypesEntity_type_uuidAttributesResource);
 }
 
+void EntityTypeApi::suppress_resources(std::shared_ptr<Service> service) {
+	service->suppress(spEntityTypeApiEntitiesTypesResource);
+	service->suppress(spEntityTypeApiEntitiesTypesEntity_type_uuidResource);
+	service->suppress(spEntityTypeApiEntitiesTypesEntity_type_uuidAttributesNameResource);
+	service->suppress(spEntityTypeApiEntitiesTypesEntity_type_uuidInstancesResource);
+	service->suppress(spEntityTypeApiEntitiesTypesEntity_type_uuidRelationsIncomingResource);
+	service->suppress(spEntityTypeApiEntitiesTypesEntity_type_uuidRelationsOutgoingResource);
+	service->suppress(spEntityTypeApiEntitiesTypesEntity_type_uuidRelationsResource);
+	service->suppress(spEntityTypeApiEntitiesTypesEntity_type_uuidAttributesResource);
+}
+
 /**
  * Defines the method handlers for route /entities/types/
  */

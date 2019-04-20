@@ -9,6 +9,7 @@
 #include "visual-scripting/model/Connector.hpp"
 #include "renderer/factories/TriangleFactory.hpp"
 #include "renderer/managers/WindowManager.hpp"
+#include "client/ClientLifecycle.hpp"
 #include "logging/managers/LogManager.hpp"
 
 #include <Magnum/GL/Mesh.h>
@@ -34,6 +35,7 @@ namespace renderer {
 	using TriangleFactoryPtr = std::shared_ptr<TriangleFactory>;
 	using WindowManagerPtr = std::shared_ptr<WindowManager>;
 	using KeyboardInputManagerPtr = std::shared_ptr<input::KeyboardInputManager>;
+	using ClientLifecyclePtr = std::shared_ptr<client::ClientLifecycle>;
 	using LogManagerPtr = std::shared_ptr<inexor::logging::LogManager>;
 	using EntityInstancePtr = std::shared_ptr<EntityInstance>;
 	using EntityAttributeInstancePtr = std::shared_ptr<entity_system::EntityAttributeInstance>;
@@ -70,6 +72,7 @@ namespace renderer {
 				TriangleFactoryPtr render_factory,
 				WindowManagerPtr window_manager,
 				KeyboardInputManagerPtr keyboard_input_manager,
+				ClientLifecyclePtr client_lifecycle,
 				LogManagerPtr log_manager
 			);
 
@@ -131,6 +134,9 @@ namespace renderer {
 
 			/// The keyboard input manager
 			KeyboardInputManagerPtr keyboard_input_manager;
+
+			/// The client lifecycle.
+			ClientLifecyclePtr client_lifecycle;
 
 			/// The log manager.
 			LogManagerPtr log_manager;

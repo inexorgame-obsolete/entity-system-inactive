@@ -9,6 +9,7 @@
 #include "renderer/factories/WindowFactory.hpp"
 #include "input/managers/KeyboardInputManager.hpp"
 #include "input/managers/MouseInputManager.hpp"
+#include "client/ClientLifecycle.hpp"
 #include "logging/managers/LogManager.hpp"
 
 #include <Magnum/Timeline.h>
@@ -29,6 +30,7 @@ namespace renderer {
 	using ConnectorManagerPtr = std::shared_ptr<visual_scripting::ConnectorManager>;
 	using WorldRendererPtr = std::shared_ptr<WorldRenderer>;
 	using UserInterfaceRendererPtr = std::shared_ptr<UserInterfaceRenderer>;
+	using ClientLifecyclePtr = std::shared_ptr<client::ClientLifecycle>;
 	using LogManagerPtr = std::shared_ptr<logging::LogManager>;
 
 	using EntityInstancePtr = std::shared_ptr<EntityInstance>;
@@ -137,6 +139,7 @@ namespace renderer {
 				ConnectorManagerPtr connector_manager,
 				WorldRendererPtr world_renderer,
 				UserInterfaceRendererPtr user_interface_renderer,
+				ClientLifecyclePtr client_lifecycle,
 				LogManagerPtr log_manager
 			);
 
@@ -356,6 +359,9 @@ namespace renderer {
 
 			/// The user interface renderer.
 			UserInterfaceRendererPtr user_interface_renderer;
+
+			/// The client lifecycle.
+			ClientLifecyclePtr client_lifecycle;
 
 			/// The log manager.
 			LogManagerPtr log_manager;

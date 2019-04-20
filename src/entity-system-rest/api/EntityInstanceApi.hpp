@@ -71,6 +71,7 @@ class  EntityInstanceApi: public Service
 		~EntityInstanceApi();
 
 		void publish_resources(shared_ptr<Service> service);
+		void suppress_resources(std::shared_ptr<Service> service);
 
 	private:
 		shared_ptr<EntityInstanceApiEntitiesInstancesResource> spEntityInstanceApiEntitiesInstancesResource;

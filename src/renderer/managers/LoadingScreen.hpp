@@ -3,6 +3,7 @@
 #include "renderer/managers/WindowManager.hpp"
 #include "renderer/managers/MonitorManager.hpp"
 #include "visual-scripting/managers/ConnectorManager.hpp"
+#include "client/ClientLifecycle.hpp"
 #include "logging/managers/LogManager.hpp"
 
 #include <Magnum/GL/Mesh.h>
@@ -24,6 +25,7 @@ namespace renderer {
 	using MonitorManagerPtr = std::shared_ptr<MonitorManager>;
 	using KeyboardInputManagerPtr = std::shared_ptr<input::KeyboardInputManager>;
 	using ConnectorManagerPtr = std::shared_ptr<visual_scripting::ConnectorManager>;
+	using ClientLifecyclePtr = std::shared_ptr<client::ClientLifecycle>;
 	using LogManagerPtr = std::shared_ptr<logging::LogManager>;
 	using EntityInstancePtr = std::shared_ptr<EntityInstance>;
 
@@ -51,6 +53,7 @@ namespace renderer {
 				MonitorManagerPtr monitor_manager,
 				KeyboardInputManagerPtr keyboard_input_manager,
 				ConnectorManagerPtr connector_manager,
+				ClientLifecyclePtr client_lifecycle,
 				LogManagerPtr log_manager
 			);
 
@@ -97,6 +100,9 @@ namespace renderer {
 
 			/// The connector manager
 			ConnectorManagerPtr connector_manager;
+
+			/// The client lifecycle.
+			ClientLifecyclePtr client_lifecycle;
 
 			/// The log manager.
 			LogManagerPtr log_manager;

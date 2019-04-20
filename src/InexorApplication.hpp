@@ -37,7 +37,7 @@ namespace inexor {
 	using EntitySystemDebuggerPtr = std::shared_ptr<entity_system::EntitySystemDebugger>;
 	using VisualScriptingSystemModulePtr = std::shared_ptr<visual_scripting::VisualScriptingSystemModule>;
 	using CommandModulePtr = std::shared_ptr<command::CommandModule>;
-	using ClientModulePtr = std::shared_ptr<inexor::client::ClientModule>;
+	using ClientModulePtr = std::shared_ptr<client::ClientModule>;
 	using LogManagerPtr = std::shared_ptr<logging::LogManager>;
 
 	/// @class Inexor
@@ -73,10 +73,13 @@ namespace inexor {
 			/// Destructor.
 			~InexorApplication();
 
-			/// @brief Initializes the Inexor application.
+			/// @brief Initializes the essential services of the Inexor application.
 			/// @param argc The total number of parameters given to the application.
 			/// @param argv An array of parameters given to the application.
-			void init(int argc, char* argv[]);
+			void pre_init(int argc, char* argv[]);
+
+			/// @brief Initializes the Inexor application.
+			void init();
 
 			/// @brief Runs the application's main loop.
 			/// @note The main loop will be aborted when this->running is set to false.
@@ -88,15 +91,15 @@ namespace inexor {
 			/// Restarts the Inexor application.
 			void restart();
 
-			/// @brief Registers a logger.
-			/// @param logger_name The name of the logger.
-			void register_logger(std::string logger_name);
-
-			/// Get method for the entity system.
-			std::shared_ptr<entity_system::EntitySystemModule> get_entity_system();
-
-			/// Get method for the rest server.
-			std::shared_ptr<entity_system::RestServer> get_rest_server();
+//			/// @brief Registers a logger.
+//			/// @param logger_name The name of the logger.
+//			void register_logger(std::string logger_name);
+//
+//			/// Get method for the entity system.
+//			EntitySystemModulePtr get_entity_system();
+//
+//			/// Get method for the rest server.
+//			RestServerPtr get_rest_server();
 
 		private:
 
@@ -139,9 +142,6 @@ namespace inexor {
 			void sigterm_handler(const int signal_number);
 
 			/// ?
-			void ready_handler(Service&);
-
-			/// ?
 			/// @param signal_number ?
 			static void call_sighup_handlers(int signal_number)
 			{
@@ -161,15 +161,15 @@ namespace inexor {
 				}
 			}
 
-			/// ?
-			/// @param service ?
-			static void call_ready_handlers(Service& service)
-			{
-				for (InexorApplication* instance : InexorApplication::instances)
-				{
-					std::mem_fn(&InexorApplication::ready_handler)(instance, service);
-				}
-			}
+//			/// ?
+//			/// @param service ?
+//			static void call_ready_handlers(Service& service)
+//			{
+//				for (InexorApplication* instance : InexorApplication::instances)
+//				{
+//					std::mem_fn(&InexorApplication::ready_handler)(instance, service);
+//				}
+//			}
 
 			/// Static instances of the Inexor application.
 			static std::vector<InexorApplication *> instances;

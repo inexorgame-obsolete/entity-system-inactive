@@ -35,6 +35,12 @@ void EntitySystemApi::publish_resources(std::shared_ptr<Service> service) {
 	
 }
 
+void EntitySystemApi::suppress_resources(std::shared_ptr<Service> service) {
+	std::shared_ptr<EntitySystemApiEntitysystemResource> spEntitySystemApiEntitysystemResource = std::make_shared<EntitySystemApiEntitysystemResource>();
+	service->suppress(spEntitySystemApiEntitysystemResource);
+
+}
+
 EntitySystemApiEntitysystemResource::EntitySystemApiEntitysystemResource()
 {
 	this->set_path("/entitysystem/");

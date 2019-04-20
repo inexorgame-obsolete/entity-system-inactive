@@ -62,6 +62,7 @@ class  RelationTypeApi
 		~RelationTypeApi();
 
 		void publish_resources(std::shared_ptr<Service> service);
+		void suppress_resources(std::shared_ptr<Service> service);
 
 	private:
 		std::shared_ptr<RelationTypeApiRelationsTypesRelation_type_uuidResource> spRelationTypeApiRelationsTypesRelation_type_uuidResource;

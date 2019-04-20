@@ -46,6 +46,13 @@ void AttributeApi::publish_resources(std::shared_ptr<Service> service) {
 	service->publish(spAttributeApiEntitiesTypesEntity_type_uuidAttributesResource);
 }
 
+void AttributeApi::suppress_resources(std::shared_ptr<Service> service) {
+	service->suppress(spAttributeApiEntitiesInstancesEntity_instance_uuidAttributesNameResource);
+	service->suppress(spAttributeApiEntitiesTypesEntity_type_uuidAttributesNameResource);
+	service->suppress(spAttributeApiEntitiesInstancesEntity_instance_uuidAttributesResource);
+	service->suppress(spAttributeApiEntitiesTypesEntity_type_uuidAttributesResource);
+}
+
 AttributeApiEntitiesInstancesEntity_instance_uuidAttributesNameResource::AttributeApiEntitiesInstancesEntity_instance_uuidAttributesNameResource(
 	std::shared_ptr<EntityAttributeInstanceManager> entity_attribute_instance_manager
 )

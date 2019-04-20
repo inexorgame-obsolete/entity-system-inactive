@@ -63,7 +63,10 @@ class  RelationInstanceApi
 			std::shared_ptr<RelationInstanceApiEntitiesInstancesEntity_instance_uuidRelationsOutgoingResource> spRelationInstanceApiEntitiesInstancesEntity_instance_uuidRelationsOutgoingResource
 		);
 		~RelationInstanceApi();
+
 		void publish_resources(std::shared_ptr<Service> service);
+		void suppress_resources(std::shared_ptr<Service> service);
+
 	private:
 		std::shared_ptr<RelationInstanceApiRelationsInstancesRelation_instance_uuidResource> spRelationInstanceApiRelationsInstancesRelation_instance_uuidResource;
 		std::shared_ptr<RelationInstanceApiRelationsInstancesResource> spRelationInstanceApiRelationsInstancesResource;

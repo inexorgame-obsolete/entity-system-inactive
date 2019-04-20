@@ -29,12 +29,14 @@ namespace renderer {
 		MonitorManagerPtr monitor_manager,
 		KeyboardInputManagerPtr keyboard_input_manager,
 		ConnectorManagerPtr connector_manager,
+		ClientLifecyclePtr client_lifecycle,
 		LogManagerPtr log_manager
 	) {
 		this->window_manager = window_manager;
 		this->monitor_manager = monitor_manager;
 		this->keyboard_input_manager = keyboard_input_manager;
 		this->connector_manager = connector_manager;
+		this->client_lifecycle = client_lifecycle;
 		this->log_manager = log_manager;
 		this->show_fps = false;
 		this->create_screenshot = false;
@@ -134,7 +136,10 @@ namespace renderer {
 				window_manager->destroy_window(window);
 				break;
 			case GLFW_KEY_Q:
-				window_manager->shutdown();
+				client_lifecycle->request_shutdown();
+				break;
+			case GLFW_KEY_R:
+				client_lifecycle->request_restart();
 				break;
 			case GLFW_KEY_V:
 				window_manager->set_window_position(window, 100, 100);

@@ -60,6 +60,17 @@ void RelationTypeApi::publish_resources(std::shared_ptr<Service> service) {
 	service->publish(spRelationTypeApiEntitiesInstancesEntity_instance_uuidRelationsRelation_type_uuidOutgoingResource);
 }
 
+void RelationTypeApi::suppress_resources(std::shared_ptr<Service> service) {
+	service->suppress(spRelationTypeApiRelationsTypesRelation_type_uuidResource);
+	service->suppress(spRelationTypeApiRelationsTypesResource);
+	service->suppress(spRelationTypeApiEntitiesTypesEntity_type_uuidRelationsIncomingResource);
+	service->suppress(spRelationTypeApiEntitiesTypesEntity_type_uuidRelationsOutgoingResource);
+	service->suppress(spRelationTypeApiEntitiesInstancesEntity_instance_uuidRelationsRelation_type_uuidResource);
+	service->suppress(spRelationTypeApiEntitiesTypesEntity_type_uuidRelationsResource);
+	service->suppress(spRelationTypeApiEntitiesInstancesEntity_instance_uuidRelationsRelation_type_uuidIncomingResource);
+	service->suppress(spRelationTypeApiEntitiesInstancesEntity_instance_uuidRelationsRelation_type_uuidOutgoingResource);
+}
+
 RelationTypeApiRelationsTypesRelation_type_uuidResource::RelationTypeApiRelationsTypesRelation_type_uuidResource(
 	std::shared_ptr<inexor::entity_system::RelationTypeManager> relation_type_manager
 )

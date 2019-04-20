@@ -54,7 +54,10 @@ class AttributeApi
 			std::shared_ptr<AttributeApiEntitiesTypesEntity_type_uuidAttributesResource> spAttributeApiEntitiesTypesEntity_type_uuidAttributesResource
 		);
 		~AttributeApi();
+
 		void publish_resources(std::shared_ptr<Service> service);
+		void suppress_resources(std::shared_ptr<Service> service);
+
 	private:
 		std::shared_ptr<AttributeApiEntitiesInstancesEntity_instance_uuidAttributesNameResource> spAttributeApiEntitiesInstancesEntity_instance_uuidAttributesNameResource;
 		std::shared_ptr<AttributeApiEntitiesTypesEntity_type_uuidAttributesNameResource> spAttributeApiEntitiesTypesEntity_type_uuidAttributesNameResource;

@@ -34,15 +34,21 @@ namespace logging {
 
 		spdlog::register_logger(std::make_shared<spdlog::async_logger>(LOGGER_NAME, sinks.begin(), sinks.end(), spdlog::thread_pool(), spdlog::async_overflow_policy::block));
 		spdlog::register_logger(std::make_shared<spdlog::async_logger>(visual_scripting::LoggerProcessor::LOGGER_NAME, sinks.begin(), sinks.end(), spdlog::thread_pool(), spdlog::async_overflow_policy::block));
+		spdlog::get(LOGGER_NAME)->set_pattern("%H:%M:%S.%e [%-5t] %^%-5l%$ %-40n %v");
 		spdlog::get(LOGGER_NAME)->info("Asynchronous logging initialized");
 	}
 
 	EntityInstancePtrOpt LogManager::register_logger(std::string logger_name)
 	{
-		spdlog::register_logger(std::make_shared<spdlog::async_logger>(logger_name, sinks.begin(), sinks.end(), spdlog::thread_pool(), spdlog::async_overflow_policy::block));
-		spdlog::get(logger_name)->set_pattern("%H:%M:%S.%e [%-5t] %^%-5l%$ %-40n %v");
-		spdlog::get(LOGGER_NAME)->debug("Registered logger {}", logger_name);
+		try {
+			spdlog::register_logger(std::make_shared<spdlog::async_logger>(logger_name, sinks.begin(), sinks.end(), spdlog::thread_pool(), spdlog::async_overflow_policy::block));
+			spdlog::get(logger_name)->set_pattern("%H:%M:%S.%e [%-5t] %^%-5l%$ %-40n %v");
+			spdlog::get(LOGGER_NAME)->debug("Registered logger {}", logger_name);
+		} catch (const spdlog::spdlog_ex&) {
+			spdlog::get(LOGGER_NAME)->warn("Logger {} already registered!", logger_name);
+		}
 
+		// TODO: check if there is a logger_with that name first
 		EntityInstancePtrOpt o_logger_instance = logger_factory->create_instance(logger_name, spdlog::level::level_enum::info);
 		if(o_logger_instance.has_value())
 		{

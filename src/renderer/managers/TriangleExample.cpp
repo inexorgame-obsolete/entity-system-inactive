@@ -23,6 +23,7 @@ namespace renderer {
 		TriangleFactoryPtr triangle_factory,
 		WindowManagerPtr window_manager,
 		KeyboardInputManagerPtr keyboard_input_manager,
+		ClientLifecyclePtr client_lifecycle,
 		LogManagerPtr log_manager
 	) {
 		this->entity_instance_manager = entity_instance_manager;
@@ -33,6 +34,7 @@ namespace renderer {
 		this->triangle_factory = triangle_factory;
 		this->window_manager = window_manager;
 		this->keyboard_input_manager = keyboard_input_manager;
+		this->client_lifecycle = client_lifecycle;
 		this->log_manager = log_manager;
 		this->debug_enabled = false;
 		this->connector_c_sin = std::nullopt;
@@ -92,6 +94,12 @@ namespace renderer {
 		{
 			case GLFW_KEY_X:
 				window_manager->destroy_window(window);
+				break;
+			case GLFW_KEY_Q:
+				client_lifecycle->request_shutdown();
+				break;
+			case GLFW_KEY_R:
+				client_lifecycle->request_restart();
 				break;
 			case GLFW_KEY_V:
 				toggle_connector_debug();

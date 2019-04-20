@@ -58,6 +58,20 @@ void EntityInstanceApi::publish_resources(shared_ptr<Service> service) {
 //	service->publish(spEntityInstanceApiEntitiesInstancesEntity_instance_uuidRelationsOutgoingResource);
 }
 
+void EntityInstanceApi::suppress_resources(shared_ptr<Service> service) {
+	service->suppress(spEntityInstanceApiEntitiesInstancesResource);
+	service->suppress(spEntityInstanceApiEntitiesInstancesEntity_instance_uuidResource);
+	service->suppress(spEntityInstanceApiEntitiesInstancesEntity_instance_uuidAttributesNameResource);
+	service->suppress(spEntityInstanceApiRelationsInstancesStartStart_entity_instance_uuidEndEnd_entity_instance_uuidResource);
+	service->suppress(spEntityInstanceApiEntitiesInstancesEntity_instance_uuidRelationsRelation_type_uuidResource);
+	service->suppress(spEntityInstanceApiEntitiesInstancesEntity_instance_uuidRelationsResource);
+	service->suppress(spEntityInstanceApiEntitiesInstancesEntity_instance_uuidAttributesResource);
+//	service->suppress(spEntityInstanceApiEntitiesInstancesEntity_instance_uuidRelationsRelation_type_uuidIncomingResource);
+//	service->suppress(spEntityInstanceApiEntitiesInstancesEntity_instance_uuidRelationsIncomingResource);
+//	service->suppress(spEntityInstanceApiEntitiesInstancesEntity_instance_uuidRelationsRelation_type_uuidOutgoingResource);
+//	service->suppress(spEntityInstanceApiEntitiesInstancesEntity_instance_uuidRelationsOutgoingResource);
+}
+
 EntityInstanceApiEntitiesInstancesResource::EntityInstanceApiEntitiesInstancesResource(
 	shared_ptr<EntityInstanceManager> entity_instance_manager
 )

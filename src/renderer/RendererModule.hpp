@@ -50,8 +50,8 @@ namespace renderer {
 			/// Updates the frame in main thread.
 			void update();
 
-			/// Returns the window manager.
-			WindowManagerPtr get_window_manager();
+//			/// Returns the window manager.
+//			WindowManagerPtr get_window_manager();
 
 		private:
 
