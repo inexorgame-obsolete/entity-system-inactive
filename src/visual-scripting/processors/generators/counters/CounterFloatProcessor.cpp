@@ -119,13 +119,13 @@ namespace visual_scripting {
 
 				while (running[guid])
 				{
-					// Wait for counter_float_millis milliseconds
-					int millis = std::get<DataType::INT>(attr_counter_float_millis->value.Value());
-					std::this_thread::sleep_for(std::chrono::milliseconds(millis));
-
 					// Tick
 					tick++;
 					this->event_sources[guid] << tick;
+
+					// Wait for counter_float_millis milliseconds
+					int millis = std::get<DataType::INT>(attr_counter_float_millis->value.Value());
+					std::this_thread::sleep_for(std::chrono::milliseconds(millis));
 				}
 			});
 		    start_thread.detach();
