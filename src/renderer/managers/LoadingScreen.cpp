@@ -264,7 +264,10 @@ namespace renderer {
 		}
 		if (create_screenshot)
 		{
+			// Test: saving screenshot in all formats (tga included in core magnum, png and jpg needs magnum-plugins)
+			Magnum::DebugTools::screenshot(Magnum::GL::defaultFramebuffer, "loading-screen.tga");
 			Magnum::DebugTools::screenshot(Magnum::GL::defaultFramebuffer, "loading-screen.png");
+			Magnum::DebugTools::screenshot(Magnum::GL::defaultFramebuffer, "loading-screen.jpg");
 			create_screenshot = false;
 		}
 	}
