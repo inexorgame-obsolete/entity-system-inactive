@@ -15,6 +15,7 @@ better-enums/0.11.1@Spartan322/stable
 cpp.react/legacy1@inexorgame/stable
 magnum/2019.01@inexorgame/testing
 openal/1.19.0@bincrafters/stable
+magnum-plugins/2019.01@inexorgame/testing
 
 [generators]
 cmake
@@ -32,4 +33,7 @@ magnum:with_anyimageimporter=True
 magnum:with_anyimageconverter=True
 magnum:with_tgaimageconverter=True
 magnum:with_tgaimporter=True
+magnum-plugins:with_tinygltfimporter=True
+magnum-plugins:with_stbimageimporter=True
+magnum-plugins:with_stbvorbisaudioimporter=True
 TBB:shared=True
