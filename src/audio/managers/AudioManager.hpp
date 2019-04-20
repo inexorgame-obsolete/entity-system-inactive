@@ -17,19 +17,11 @@ namespace audio {
 
 	/// @class AudioManager
 	/// @brief Management of the audio data.
-    /// @note This implementation is based on OpenAL.<br>
+	/// @note This implementation is based on OpenAL.<br>
 	/// https://www.openal.org/
-    class AudioManager
-	: public std::enable_shared_from_this<AudioManager>
+	class AudioManager
+		: public std::enable_shared_from_this<AudioManager>
 	{
-        private:
-
-			/// The OpenAL device.
-			ALCdevice *device;
-
-			/// The OpenAL context.
-			ALCcontext *context;
-
 		public:
 
 			/// @brief Constructor.
@@ -48,8 +40,8 @@ namespace audio {
 			/// Initialize audio module.
 			int init();
 
-            /// Shuts down OpenAL.
-            void shutdown();
+			/// Shuts down OpenAL.
+			void shutdown();
 
 			/// The logger name of this service.
 			static constexpr char LOGGER_NAME[] = "inexor.audio.manager";
@@ -58,6 +50,12 @@ namespace audio {
 
 			/// The log manager.
 			LogManagerPtr log_manager;
+
+			/// The OpenAL device.
+			ALCdevice *device;
+
+			/// The OpenAL context.
+			ALCcontext *context;
 
 	};
 

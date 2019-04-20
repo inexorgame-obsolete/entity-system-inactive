@@ -26,7 +26,6 @@ namespace audio {
 
 	AudioManager::~AudioManager()
 	{
-		shutdown();
 	}
 
 	int AudioManager::init()
@@ -78,6 +77,10 @@ namespace audio {
 	
     void AudioManager::shutdown()
     {
+    	if(device)
+    	{
+        	alcCloseDevice(device);
+    	}
     }
 
 }
