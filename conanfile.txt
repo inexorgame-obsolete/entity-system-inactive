@@ -15,7 +15,7 @@ better-enums/0.11.1@Spartan322/stable
 cpp.react/legacy1@inexorgame/stable
 magnum/2019.01@inexorgame/testing
 openal/1.19.0@bincrafters/stable
-magnum-plugins/2019.01@inexorgame/testing
+magnum_plugins/2019.01@inexorgame/testing
 
 [generators]
 cmake
@@ -24,16 +24,15 @@ cmake
 lib, *.dylib* -> ./bin
 
 [options]
+magnum:build_plugins_static=True
 magnum:with_glfwapplication=True
 magnum:with_sdl2application=False
 magnum:with_audio=True
 magnum:with_anyaudioimporter=True
-magnum:with_wavaudioimporter=True
 magnum:with_anyimageimporter=True
-magnum:with_anyimageconverter=True
-magnum:with_tgaimageconverter=True
-magnum:with_tgaimporter=True
-magnum-plugins:with_tinygltfimporter=True
-magnum-plugins:with_stbimageimporter=True
-magnum-plugins:with_stbvorbisaudioimporter=True
+magnum:with_anysceneimporter=True
+magnum_plugins:with_tinygltfimporter=True
+magnum_plugins:with_stbimageimporter=True
+magnum_plugins:with_stbvorbisaudioimporter=True
+magnum_plugins:build_plugins_static=True
 TBB:shared=True
