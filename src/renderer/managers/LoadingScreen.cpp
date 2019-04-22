@@ -8,10 +8,6 @@
 
 #include <GLFW/glfw3.h>
 
-#include "MagnumPlugins/AnyImageConverter/importStaticPlugin.cpp"
-#include "MagnumPlugins/StbImageImporter/importStaticPlugin.cpp"
-#include "MagnumPlugins/StbImageConverter/importStaticPlugin.cpp"
-
 // TODO: enable boost stacktrace again (2/3)
 //#include <boost/stacktrace.hpp>
 
