@@ -138,19 +138,19 @@ namespace renderer {
 			/// @param window The entity instance of type WINDOW.
 			Range2Di get_window_dimensions(EntityInstancePtr window);
 
-			/// @brief Centers the window on the monitor which contains the window center.
+			/// @brief Centers the given window on the monitor which contains the window center.
 			/// @param window The entity instance of type WINDOW.
-			void center_window(EntityInstancePtr window);
+			void center_window_on_current_monitor(EntityInstancePtr window);
 
-			/// @brief Centers the window on the primary monitor.
+			/// @brief Centers the given window on the primary monitor.
 			/// @param window The entity instance of type WINDOW.
 			void center_window_on_primary_monitor(EntityInstancePtr window);
 
-			/// @brief Centers the window on the next left monitor.
+			/// @brief Centers the given window on the next left monitor.
 			/// @param window The entity instance of type WINDOW.
 			void center_window_on_next_left_monitor(EntityInstancePtr window);
 
-			/// @brief Centers the window on the next right monitor.
+			/// @brief Centers the given window on the next right monitor.
 			/// @param window The entity instance of type WINDOW.
 			void center_window_on_next_right_monitor(EntityInstancePtr window);
 
@@ -169,6 +169,27 @@ namespace renderer {
 			/// @param monitor The entity instance of type 'MONITOR'.
 			/// @return True, if the given window is centered on the given monitor.
 			bool is_window_centered_on_monitor(EntityInstancePtr window, EntityInstancePtr monitor);
+
+			/// @brief Makes the given window fullscreen on the monitor which contains the window center.
+			/// @param window The entity instance of type WINDOW.
+			void fullscreen_window_on_current_monitor(EntityInstancePtr window);
+
+			/// @brief Makes the given window fullscreen on the primary monitor.
+			/// @param window The entity instance of type WINDOW.
+			void fullscreen_window_on_primary_monitor(EntityInstancePtr window);
+
+			/// @brief Makes the given window fullscreen on the next left monitor.
+			/// @param window The entity instance of type WINDOW.
+			void fullscreen_window_on_next_left_monitor(EntityInstancePtr window);
+
+			/// @brief Makes the given window fullscreen on the next right monitor.
+			/// @param window The entity instance of type WINDOW.
+			void fullscreen_window_on_next_right_monitor(EntityInstancePtr window);
+
+			/// @brief Makes the given window fullscreen on the given monitor.
+			/// @param window The entity instance of type 'WINDOW'.
+			/// @param monitor The entity instance of type 'MONITOR'.
+			void fullscreen_window_on_monitor(EntityInstancePtr window, EntityInstancePtr monitor);
 
 			/// @brief Returns the monitor which contains the given window.
 			/// @param window The entity instance of type 'WINDOW'.

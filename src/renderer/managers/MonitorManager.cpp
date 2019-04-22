@@ -247,6 +247,25 @@ namespace renderer {
 		return next_right;
 	}
 
+	std::optional<MonitorRange> MonitorManager::get_monitor_range(EntityInstancePtr monitor)
+	{
+		if (monitors.find(monitor) != monitors.end())
+		{
+			GLFWmonitor* glfw_monitor = monitors[monitor];
+			auto monitor_dimension = get_monitor_dimensions(glfw_monitor);
+			if (monitor_dimension.has_value())
+			{
+				return std::make_pair(glfw_monitor, monitor_dimension.value());
+			}
+		}
+		return std::nullopt;
+	}
+
+	GLFWmonitor* MonitorManager::get_monitor_handle(EntityInstancePtr monitor)
+	{
+		return monitors[monitor];
+	}
+
 	std::optional<EntityInstancePtr> MonitorManager::get_by_monitor_handle(GLFWmonitor* glfw_monitor)
 	{
 		for (auto kv : monitors)

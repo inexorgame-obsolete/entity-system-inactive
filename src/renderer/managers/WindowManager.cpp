@@ -171,7 +171,7 @@ namespace renderer {
 				EntityInstancePtr window = o_window.value();
 
 				// Track the glfw window and the entity instance.
-				windows[window] = std::make_shared<ManagedWindow>(id, title, window, glfw_window, init_function, shutdown_function);
+				windows[window] = std::make_shared<ManagedWindow>(id, title, window, glfw_window, nullptr, init_function, shutdown_function);
 				window_entities[glfw_window] = window;
 
 				std::thread window_thread(&renderer::WindowManager::start_window_thread, this, window);
@@ -207,6 +207,7 @@ namespace renderer {
 					// TODO: get monitor from relationship --[FULLSCREEN_ON]--> (MonitorManager)
 					GLFWmonitor* glfw_monitor = glfwGetPrimaryMonitor();
 					const GLFWvidmode* glfw_mode = glfwGetVideoMode(glfw_monitor);
+					windows[window]->glfw_monitor = glfw_monitor;
 					spdlog::get(WindowManager::LOGGER_NAME)->info("Window {} initially fullscreen ({}x{})!", id, glfw_mode->width, glfw_mode->height);
 					glfwSetWindowMonitor(glfw_window, glfw_monitor, 0, 0, glfw_mode->width, glfw_mode->height, glfw_mode->refreshRate);
 				}
@@ -315,7 +316,7 @@ namespace renderer {
 		return Range2Di({x, y}, {x + width, y + height});
 	}
 
-	void WindowManager::center_window(EntityInstancePtr window)
+	void WindowManager::center_window_on_current_monitor(EntityInstancePtr window)
 	{
 		if (is_window_available(window))
 		{
@@ -332,35 +333,44 @@ namespace renderer {
 
 	void WindowManager::center_window_on_primary_monitor(EntityInstancePtr window)
 	{
-		auto primary_monitor = monitor_manager->get_primary();
-		if (primary_monitor.has_value())
+		if (is_window_available(window))
 		{
-			center_window_on_monitor(window, primary_monitor.value());
+			auto primary_monitor = monitor_manager->get_primary();
+			if (primary_monitor.has_value())
+			{
+				center_window_on_monitor(window, primary_monitor.value());
+			}
 		}
 	}
 
 	void WindowManager::center_window_on_next_left_monitor(EntityInstancePtr window)
 	{
-		auto current_monitor = get_current_monitor(window);
-		if (current_monitor.has_value())
+		if (is_window_available(window))
 		{
-			auto monitor_on_left = monitor_manager->get_monitor_on_left(current_monitor.value());
-			if (monitor_on_left.has_value())
+			auto current_monitor = get_current_monitor(window);
+			if (current_monitor.has_value())
 			{
-				center_window_on_monitor(window, monitor_on_left.value());
+				auto monitor_on_left = monitor_manager->get_monitor_on_left(current_monitor.value());
+				if (monitor_on_left.has_value())
+				{
+					center_window_on_monitor(window, monitor_on_left.value());
+				}
 			}
 		}
 	}
 
 	void WindowManager::center_window_on_next_right_monitor(EntityInstancePtr window)
 	{
-		auto current_monitor = get_current_monitor(window);
-		if (current_monitor.has_value())
+		if (is_window_available(window))
 		{
-			auto monitor_on_right = monitor_manager->get_monitor_on_right(current_monitor.value());
-			if (monitor_on_right.has_value())
+			auto current_monitor = get_current_monitor(window);
+			if (current_monitor.has_value())
 			{
-				center_window_on_monitor(window, monitor_on_right.value());
+				auto monitor_on_right = monitor_manager->get_monitor_on_right(current_monitor.value());
+				if (monitor_on_right.has_value())
+				{
+					center_window_on_monitor(window, monitor_on_right.value());
+				}
 			}
 		}
 	}
@@ -393,6 +403,105 @@ namespace renderer {
 			}
 		}
 		return false;
+	}
+
+	void WindowManager::fullscreen_window_on_current_monitor(EntityInstancePtr window)
+	{
+		if (is_window_available(window))
+		{
+			auto current_monitor = get_current_monitor(window);
+			if (current_monitor.has_value())
+			{
+				fullscreen_window_on_monitor(window, current_monitor.value());
+			}
+		}
+	}
+
+	void WindowManager::fullscreen_window_on_primary_monitor(EntityInstancePtr window)
+	{
+		if (is_window_available(window))
+		{
+			auto primary_monitor = monitor_manager->get_primary();
+			if (primary_monitor.has_value())
+			{
+				fullscreen_window_on_monitor(window, primary_monitor.value());
+			}
+		}
+	}
+
+	void WindowManager::fullscreen_window_on_next_left_monitor(EntityInstancePtr window)
+	{
+		if (is_window_available(window))
+		{
+			auto current_monitor = get_current_monitor(window);
+			if (current_monitor.has_value())
+			{
+				auto monitor_on_left = monitor_manager->get_monitor_on_left(current_monitor.value());
+				if (monitor_on_left.has_value())
+				{
+					fullscreen_window_on_monitor(window, monitor_on_left.value());
+				}
+			}
+		}
+	}
+
+	void WindowManager::fullscreen_window_on_next_right_monitor(EntityInstancePtr window)
+	{
+		if (is_window_available(window))
+		{
+			auto current_monitor = get_current_monitor(window);
+			if (current_monitor.has_value())
+			{
+				auto monitor_on_right = monitor_manager->get_monitor_on_right(current_monitor.value());
+				if (monitor_on_right.has_value())
+				{
+					fullscreen_window_on_monitor(window, monitor_on_right.value());
+				}
+			}
+		}
+	}
+
+	void WindowManager::fullscreen_window_on_monitor(EntityInstancePtr window, EntityInstancePtr monitor)
+	{
+		if (is_window_available(window))
+		{
+			GLFWmonitor* glfw_monitor = monitor_manager->get_monitor_handle(monitor);
+			const GLFWvidmode* glfw_mode = glfwGetVideoMode(glfw_monitor);
+
+			bool already_fullscreen = window->get<DataType::BOOL>(WindowEntityTypeProvider::WINDOW_FULLSCREEN);
+
+			if (!already_fullscreen) {
+				AsyncTransaction<D>([this, window, glfw_monitor, glfw_mode] {
+					windows[window]->glfw_monitor = glfw_monitor;
+					int restore_width = window->get<DataType::INT>(WindowEntityTypeProvider::WINDOW_WIDTH);
+					int restore_height = window->get<DataType::INT>(WindowEntityTypeProvider::WINDOW_HEIGHT);
+//					AsyncTransaction<D>([window, restore_width, restore_height] {
+						window->set_own_value(WindowEntityTypeProvider::WINDOW_FULLSCREEN, true);
+						window->set_own_value(WindowEntityTypeProvider::WINDOW_RESTORE_WIDTH, restore_width);
+						window->set_own_value(WindowEntityTypeProvider::WINDOW_RESTORE_HEIGHT, restore_height);
+//					});
+					glfwSetWindowMonitor(
+						windows[window]->glfw_window,
+						glfw_monitor,
+						0,
+						0,
+						glfw_mode->width,
+						glfw_mode->height,
+						glfw_mode->refreshRate
+					);
+				});
+			} else {
+				glfwSetWindowMonitor(
+					windows[window]->glfw_window,
+					glfw_monitor,
+					0,
+					0,
+					glfw_mode->width,
+					glfw_mode->height,
+					glfw_mode->refreshRate
+				);
+			}
+		}
 	}
 
 	std::optional<EntityInstancePtr> WindowManager::get_current_monitor(EntityInstancePtr window)
@@ -512,17 +621,40 @@ namespace renderer {
 
 		Observe(
 			window->get_attribute_instance(WindowEntityTypeProvider::WINDOW_FULLSCREEN).value()->value,
-			[glfw_window, window] (DataValue fullscreen) {
-				spdlog::debug("fullscreen {}", std::get<DataType::BOOL>(fullscreen) ? "true" : "false");
+			[this, glfw_window, window] (DataValue fullscreen) {
+				spdlog::info("fullscreen {}", std::get<DataType::BOOL>(fullscreen) ? "true" : "false");
 				if (std::get<DataType::BOOL>(fullscreen)) {
-					GLFWmonitor* glfw_monitor = glfwGetPrimaryMonitor();
+					GLFWmonitor* glfw_monitor;
+					if (windows[window]->glfw_monitor != nullptr)
+					{
+						// ManagedWindow contains a monitor handle, so use that
+						glfw_monitor = windows[window]->glfw_monitor;
+					} else {
+						// ManagedWindow contains no monitor handle, so resolve
+						// the current monitor if possible or use the primary
+						// monitor as fallback
+						auto current_monitor = get_current_monitor(window);
+						if (current_monitor.has_value())
+						{
+							glfw_monitor = monitor_manager->get_monitor_handle(current_monitor.value());
+						} else {
+							glfw_monitor = glfwGetPrimaryMonitor();
+						}
+					}
 					const GLFWvidmode* glfw_mode = glfwGetVideoMode(glfw_monitor);
+					int restore_width = window->get<DataType::INT>(WindowEntityTypeProvider::WINDOW_WIDTH);
+					int restore_height = window->get<DataType::INT>(WindowEntityTypeProvider::WINDOW_HEIGHT);
+					AsyncTransaction<D>([window, restore_width, restore_height] {
+						window->set_own_value(WindowEntityTypeProvider::WINDOW_RESTORE_WIDTH, restore_width);
+						window->set_own_value(WindowEntityTypeProvider::WINDOW_RESTORE_HEIGHT, restore_height);
+					});
 					glfwSetWindowMonitor(glfw_window, glfw_monitor, 0, 0, glfw_mode->width, glfw_mode->height, glfw_mode->refreshRate);
 				} else {
 					int x = std::get<DataType::INT>(window->get_attribute_instance(WindowEntityTypeProvider::WINDOW_POSITION_X).value()->value.Value());
 					int y = std::get<DataType::INT>(window->get_attribute_instance(WindowEntityTypeProvider::WINDOW_POSITION_Y).value()->value.Value());
-					int width = std::get<DataType::INT>(window->get_attribute_instance(WindowEntityTypeProvider::WINDOW_WIDTH).value()->value.Value());
-					int height = std::get<DataType::INT>(window->get_attribute_instance(WindowEntityTypeProvider::WINDOW_HEIGHT).value()->value.Value());
+					int width = std::get<DataType::INT>(window->get_attribute_instance(WindowEntityTypeProvider::WINDOW_RESTORE_WIDTH).value()->value.Value());
+					int height = std::get<DataType::INT>(window->get_attribute_instance(WindowEntityTypeProvider::WINDOW_RESTORE_HEIGHT).value()->value.Value());
+					windows[window]->glfw_monitor = nullptr;
 					glfwSetWindowMonitor(glfw_window, nullptr, x, y, width, height, 0);
 				}
 			}
@@ -566,7 +698,7 @@ namespace renderer {
 		auto observer_position_changed = Observe(
 			windows[window]->signal_position_changed,
 			[glfw_window] (std::pair<int, int> position) {
-				spdlog::debug("(2) position_x {} position_y {}", position.first, position.second);
+				spdlog::info("(2) position_x {} position_y {}", position.first, position.second);
 				// Avoid feedback loops
 				int xpos = 0;
 				int ypos = 0;
@@ -592,7 +724,7 @@ namespace renderer {
 		auto observer_size_changed = Observe(
 			windows[window]->signal_size_changed,
 			[glfw_window] (std::pair<int, int> size) {
-				spdlog::debug("(2) width {} height {}", size.first, size.second);
+				spdlog::info("(2) width {} height {}", size.first, size.second);
 				// Avoid feedback loops
 				int current_width = 0;
 				int current_height = 0;
@@ -627,36 +759,46 @@ namespace renderer {
 
 	void WindowManager::window_iconified(GLFWwindow* glfw_window, bool is_iconified)
 	{
-		spdlog::get(WindowManager::LOGGER_NAME)->debug("Window iconification state changed: {}", is_iconified);
+		spdlog::get(WindowManager::LOGGER_NAME)->info("Window iconification state changed: {}", is_iconified);
 		EntityInstancePtr window = window_entities[glfw_window];
-		window->get_attribute_instance(WindowEntityTypeProvider::WINDOW_ICONIFIED).value()->own_value.Set(is_iconified);
+		AsyncTransaction<D>([window, is_iconified] {
+			window->set_own_value(WindowEntityTypeProvider::WINDOW_ICONIFIED, is_iconified);
+		});
+		// window->get_attribute_instance(WindowEntityTypeProvider::WINDOW_MAXIMIZED).value()->own_value.Set(is_maximized);
 	}
 
 	void WindowManager::window_maximized(GLFWwindow* glfw_window, bool is_maximized)
 	{
-		spdlog::get(WindowManager::LOGGER_NAME)->debug("Window maximize state changed: {}", is_maximized);
+		spdlog::get(WindowManager::LOGGER_NAME)->info("Window maximize state changed: {}", is_maximized);
 		EntityInstancePtr window = window_entities[glfw_window];
-		window->get_attribute_instance(WindowEntityTypeProvider::WINDOW_MAXIMIZED).value()->own_value.Set(is_maximized);
+		AsyncTransaction<D>([window, is_maximized] {
+			window->set_own_value(WindowEntityTypeProvider::WINDOW_MAXIMIZED, is_maximized);
+		});
+		// window->get_attribute_instance(WindowEntityTypeProvider::WINDOW_MAXIMIZED).value()->own_value.Set(is_maximized);
 	}
 
 	void WindowManager::window_position_changed(GLFWwindow* glfw_window, int x, int y)
 	{
-		spdlog::get(WindowManager::LOGGER_NAME)->debug("Window position changed: {}:{}", x, y);
+		spdlog::get(WindowManager::LOGGER_NAME)->info("Window position changed: {}:{}", x, y);
 		EntityInstancePtr window = window_entities[glfw_window];
-		DoTransaction<D>([window, x, y] {
-			window->get_attribute_instance(WindowEntityTypeProvider::WINDOW_POSITION_X).value()->own_value.Set(x);
-			window->get_attribute_instance(WindowEntityTypeProvider::WINDOW_POSITION_Y).value()->own_value.Set(y);
+		AsyncTransaction<D>([window, x, y] {
+			window->set_own_value(WindowEntityTypeProvider::WINDOW_POSITION_X, x);
+			window->set_own_value(WindowEntityTypeProvider::WINDOW_POSITION_Y, y);
 		});
+		// window->get_attribute_instance(WindowEntityTypeProvider::WINDOW_POSITION_X).value()->own_value.Set(x);
+		// window->get_attribute_instance(WindowEntityTypeProvider::WINDOW_POSITION_Y).value()->own_value.Set(y);
 	}
 
 	void WindowManager::window_size_changed(GLFWwindow* glfw_window, int width, int height)
 	{
-		spdlog::get(WindowManager::LOGGER_NAME)->debug("Window size changed: {}:{}", width, height);
+		spdlog::get(WindowManager::LOGGER_NAME)->info("Window size changed: {}:{}", width, height);
 		EntityInstancePtr window = window_entities[glfw_window];
-		DoTransaction<D>([window, width, height] {
-			window->get_attribute_instance(WindowEntityTypeProvider::WINDOW_WIDTH).value()->own_value.Set(width);
-			window->get_attribute_instance(WindowEntityTypeProvider::WINDOW_HEIGHT).value()->own_value.Set(height);
+		AsyncTransaction<D>([window, width, height] {
+			window->set_own_value(WindowEntityTypeProvider::WINDOW_WIDTH, width);
+			window->set_own_value(WindowEntityTypeProvider::WINDOW_HEIGHT, height);
 		});
+		// window->get_attribute_instance(WindowEntityTypeProvider::WINDOW_WIDTH).value()->own_value.Set(width);
+		// window->get_attribute_instance(WindowEntityTypeProvider::WINDOW_HEIGHT).value()->own_value.Set(height);
 	}
 
 	void WindowManager::window_key_changed(GLFWwindow* glfw_window, int key, int scancode, int action, int mods)

@@ -27,12 +27,14 @@ namespace renderer {
 			std::string title,
 			EntityInstancePtr window,
 			GLFWwindow* glfw_window,
+			GLFWmonitor* glfw_monitor,
 			std::optional<std::function<void(EntityInstancePtr, GLFWwindow*)>> init_function,
 			std::optional<std::function<void(EntityInstancePtr, GLFWwindow*)>> shutdown_function
 		) : id(id),
 			title(title),
 			window(window),
 			glfw_window(glfw_window),
+			glfw_monitor(glfw_monitor),
 			init_function(init_function),
 			shutdown_function(shutdown_function),
 			thread_running(false) {};
@@ -48,6 +50,9 @@ namespace renderer {
 
 		/// The GLFW window handle.
 		GLFWwindow* glfw_window;
+
+		/// The GLFW monitor handle.
+		GLFWmonitor* glfw_monitor;
 
 		/// The thread controls the window.
 		std::thread thread;

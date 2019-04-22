@@ -60,7 +60,7 @@ namespace renderer {
 			{ std::bind(&LoadingScreen::init_loading_screen, this, std::placeholders::_1, std::placeholders::_2) },
 			{ std::bind(&LoadingScreen::shutdown_loading_screen, this, std::placeholders::_1, std::placeholders::_2) }
 		);
-		window_manager->center_window(window);
+		window_manager->center_window_on_current_monitor(window);
 		window_manager->register_render_function(window, std::bind(&LoadingScreen::render_loading_screen, this, std::placeholders::_1, std::placeholders::_2, std::placeholders::_3));
 
 		keyboard_input_manager->register_on_window_key_released(window, shared_from_this());
@@ -151,7 +151,7 @@ namespace renderer {
 				window_manager->set_window_size(window, 1024, 768);
 				break;
 			case GLFW_KEY_C:
-				window_manager->center_window(window);
+				window_manager->center_window_on_current_monitor(window);
 				break;
 			case GLFW_KEY_UP:
 				window_manager->center_window_on_primary_monitor(window);
@@ -161,6 +161,18 @@ namespace renderer {
 				break;
 			case GLFW_KEY_RIGHT:
 				window_manager->center_window_on_next_right_monitor(window);
+				break;
+			case GLFW_KEY_F5:
+				window_manager->fullscreen_window_on_current_monitor(window);
+				break;
+			case GLFW_KEY_F6:
+				window_manager->fullscreen_window_on_primary_monitor(window);
+				break;
+			case GLFW_KEY_F7:
+				window_manager->fullscreen_window_on_next_left_monitor(window);
+				break;
+			case GLFW_KEY_F8:
+				window_manager->fullscreen_window_on_next_right_monitor(window);
 				break;
 			case GLFW_KEY_T:
 				window_manager->set_window_title(window, "*Still* loading Inexor...");

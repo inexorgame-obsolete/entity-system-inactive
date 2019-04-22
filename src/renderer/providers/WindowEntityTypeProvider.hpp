@@ -31,6 +31,8 @@ namespace renderer {
 					{ WINDOW_OPACITY, { DataType::FLOAT, 1 << Feature::INPUT | 1 << Feature::OUTPUT } },
 					{ WINDOW_VISIBLE, { DataType::BOOL, 1 << Feature::INPUT | 1 << Feature::OUTPUT } },
 					{ WINDOW_FULLSCREEN, { DataType::BOOL, 1 << Feature::INPUT | 1 << Feature::OUTPUT } },
+					{ WINDOW_RESTORE_WIDTH, { DataType::INT, 1 << Feature::OUTPUT } },
+					{ WINDOW_RESTORE_HEIGHT, { DataType::INT, 1 << Feature::OUTPUT } },
 					{ WINDOW_ICONIFIED, { DataType::BOOL, 1 << Feature::INPUT | 1 << Feature::OUTPUT } },
 					{ WINDOW_MAXIMIZED, { DataType::BOOL, 1 << Feature::INPUT | 1 << Feature::OUTPUT } },
 					{ WINDOW_FOCUSED, { DataType::BOOL, 1 << Feature::OUTPUT } },
@@ -68,6 +70,12 @@ namespace renderer {
 
 			/// The name of the attribute window fullscreen.
 			static constexpr char WINDOW_FULLSCREEN[] = "window_fullscreen";
+
+			/// The name of the attribute window restore width.
+			static constexpr char WINDOW_RESTORE_WIDTH[] = "window_restore_width";
+
+			/// The name of the attribute window restore height.
+			static constexpr char WINDOW_RESTORE_HEIGHT[] = "window_restore_height";
 
 			/// The name of the attribute window visible.
 			static constexpr char WINDOW_VISIBLE[] = "window_visible";

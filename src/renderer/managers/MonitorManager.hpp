@@ -89,6 +89,10 @@ namespace renderer {
 			/// @param monitor The entity instance of type 'MONITOR'.
 			std::optional<EntityInstancePtr> get_monitor_on_right(EntityInstancePtr monitor);
 
+			std::optional<MonitorRange> get_monitor_range(EntityInstancePtr monitor);
+
+			GLFWmonitor* get_monitor_handle(EntityInstancePtr monitor);
+
 			/// The logger name of this service.
 			static constexpr char LOGGER_NAME[] = "inexor.renderer.monitor";
 
