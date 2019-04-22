@@ -157,6 +157,15 @@ namespace renderer {
 			case GLFW_KEY_C:
 				window_manager->center_window(window);
 				break;
+			case GLFW_KEY_UP:
+				window_manager->center_window_on_primary_monitor(window);
+				break;
+			case GLFW_KEY_LEFT:
+				window_manager->center_window_on_next_left_monitor(window);
+				break;
+			case GLFW_KEY_RIGHT:
+				window_manager->center_window_on_next_right_monitor(window);
+				break;
 			case GLFW_KEY_T:
 				window_manager->set_window_title(window, "*Still* loading Inexor...");
 				break;

@@ -1,5 +1,6 @@
 #pragma once
 
+#include "MonitorManager.hpp"
 #include "WorldRenderer.hpp"
 #include "UserInterfaceRenderer.hpp"
 #include "entity-system/managers/entities/entity-instance-manager/EntityInstanceManager.hpp"
@@ -14,6 +15,7 @@
 #include "logging/managers/LogManager.hpp"
 
 #include <Magnum/Timeline.h>
+#include <Magnum/Math/Range.h>
 
 #include <list>
 #include <functional>
@@ -25,6 +27,7 @@ namespace inexor {
 namespace renderer {
 
 	using WindowFactoryPtr = std::shared_ptr<WindowFactory>;
+	using MonitorManagerPtr = std::shared_ptr<MonitorManager>;
 	using KeyboardInputManagerPtr = std::shared_ptr<input::KeyboardInputManager>;
 	using MouseInputManagerPtr = std::shared_ptr<input::MouseInputManager>;
 	using EntityInstanceManagerPtr = std::shared_ptr<entity_system::EntityInstanceManager>;
@@ -37,26 +40,7 @@ namespace renderer {
 	using EntityInstancePtr = std::shared_ptr<EntityInstance>;
 	using EntityAttributeInstancePtr = std::shared_ptr<entity_system::EntityAttributeInstance>;
 
-	struct WindowOwner {
-		WindowOwner(GLFWmonitor* monitor, int x, int y, int width, int height)
-			: monitor(monitor), x(x), y(y), width(width), height(height) {};
-		GLFWmonitor* monitor;
-		int x;
-		int y;
-		int width;
-		int height;
-	};
-
-	struct Dimensions {
-		Dimensions()
-			: x(0), y(0), width(0), height(0) {};
-		Dimensions(int x, int y, int width, int height)
-			: x(x), y(y), width(width), height(height) {};
-		int x;
-		int y;
-		int width;
-		int height;
-	};
+	using Range2Di = Magnum::Math::Range2D<std::int32_t>;
 
 	/// @class WindowManager
 	/// @brief The WindowManager manages the windows of the application.
@@ -77,6 +61,7 @@ namespace renderer {
 			/// @param log_manager The log manager.
 			WindowManager(
 				WindowFactoryPtr window_factory,
+				MonitorManagerPtr monitor_manager,
 				KeyboardInputManagerPtr keyboard_input_manager,
 				MouseInputManagerPtr mouse_input_manager,
 				EntityInstanceManagerPtr entity_instance_manager,
@@ -149,9 +134,45 @@ namespace renderer {
 			/// @param height The new height of the window.
 			void set_window_size(EntityInstancePtr window, int width, int height);
 
-			/// @brief Sets the position of the given window.
+			/// @brief Returns the dimensions of the given window.
+			/// @param window The entity instance of type WINDOW.
+			Range2Di get_window_dimensions(EntityInstancePtr window);
+
+			/// @brief Centers the window on the monitor which contains the window center.
 			/// @param window The entity instance of type WINDOW.
 			void center_window(EntityInstancePtr window);
+
+			/// @brief Centers the window on the primary monitor.
+			/// @param window The entity instance of type WINDOW.
+			void center_window_on_primary_monitor(EntityInstancePtr window);
+
+			/// @brief Centers the window on the next left monitor.
+			/// @param window The entity instance of type WINDOW.
+			void center_window_on_next_left_monitor(EntityInstancePtr window);
+
+			/// @brief Centers the window on the next right monitor.
+			/// @param window The entity instance of type WINDOW.
+			void center_window_on_next_right_monitor(EntityInstancePtr window);
+
+			/// @brief Centers the given window to the given monitor.
+			/// @param window The entity instance of type 'WINDOW'.
+			/// @param monitor The entity instance of type 'MONITOR'.
+			void center_window_on_monitor(EntityInstancePtr window, EntityInstancePtr monitor);
+
+			/// @brief Returns true, if the given window is centered on the monitor which contains the window center.
+			/// @param window The entity instance of type WINDOW.
+			/// @return True, if the window is centered.
+			bool is_window_centered(EntityInstancePtr window);
+
+			/// @brief Returns true, if the given window is centered on the given monitor.
+			/// @param window The entity instance of type WINDOW.
+			/// @param monitor The entity instance of type 'MONITOR'.
+			/// @return True, if the given window is centered on the given monitor.
+			bool is_window_centered_on_monitor(EntityInstancePtr window, EntityInstancePtr monitor);
+
+			/// @brief Returns the monitor which contains the given window.
+			/// @param window The entity instance of type 'WINDOW'.
+			std::optional<EntityInstancePtr> get_current_monitor(EntityInstancePtr window);
 
 			// TODO: document
 			void make_current(EntityInstancePtr window);
@@ -216,8 +237,9 @@ namespace renderer {
 			/// @param height The new height of the window.
 			void set_window_size(GLFWwindow* glfw_window, int width, int height);
 
-			// TODO: document
-			std::optional<WindowOwner> get_window_owner(Dimensions window);
+			/// @brief Returns the dimensions of the given window.
+			/// @param glfw_window The glfw window.
+			Range2Di get_window_dimensions(GLFWwindow* glfw_window);
 
 
 			// Window initialization
@@ -285,6 +307,9 @@ namespace renderer {
 
 			/// The factory for creating entities of type WINDOW.
 			WindowFactoryPtr window_factory;
+
+			/// The monitor manager.
+			MonitorManagerPtr monitor_manager;
 
 			/// The keyboard input manager.
 			KeyboardInputManagerPtr keyboard_input_manager;

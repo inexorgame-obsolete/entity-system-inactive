@@ -96,5 +96,167 @@ namespace renderer {
 		}
 	}
 
+	std::optional<Range2Di> MonitorManager::get_monitor_dimensions(EntityInstancePtr monitor)
+	{
+		return get_monitor_dimensions(monitors[monitor]);
+	}
+
+	std::optional<Range2Di> MonitorManager::get_monitor_dimensions(GLFWmonitor* glfw_monitor)
+	{
+		int x, y;
+		glfwGetMonitorPos(glfw_monitor, &x, &y);
+		GLFWvidmode *mode = (GLFWvidmode*) glfwGetVideoMode(glfw_monitor);
+
+		if (mode == nullptr)
+		{
+			// Video mode is required for width and height, so skip this monitor
+			return std::nullopt;
+		} else {
+			return Range2Di({x, y}, { x + mode->width, y+ mode->height});
+		}
+	}
+
+	std::vector<MonitorRange> MonitorManager::get_all_monitors_and_dimensions()
+	{
+		std::vector<MonitorRange> monitor_dimensions;
+		int monitors_length;
+		GLFWmonitor **monitors = glfwGetMonitors(&monitors_length);
+		if (monitors != nullptr)
+		{
+			for (int i = 0; i < monitors_length; i++)
+			{
+				auto monitor_dimension = get_monitor_dimensions(monitors[i]);
+				if (monitor_dimension.has_value())
+				{
+					monitor_dimensions.push_back(std::make_pair(monitors[i], monitor_dimension.value()));
+				}
+			}
+		}
+		return monitor_dimensions;
+	}
+
+	std::optional<MonitorRange> MonitorManager::monitor_contains_window_center(Range2Di window_dimensions)
+	{
+		int monitors_length;
+		GLFWmonitor **monitors = glfwGetMonitors(&monitors_length);
+		if (monitors == nullptr) return std::nullopt;
+		for (int i = 0; i < monitors_length; i++)
+		{
+			std::optional<Range2Di> monitor_range = get_monitor_dimensions(monitors[i]);
+			// Check if monitor has video mode and the monitor range contains the window center
+			if (monitor_range.has_value() && monitor_range->contains(window_dimensions.center()))
+			{
+				return std::make_pair(monitors[i], monitor_range.value());
+			}
+		}
+		return std::nullopt;
+	}
+
+	std::optional<MonitorRange> MonitorManager::monitor_fully_contains_window(Range2Di window_dimensions)
+	{
+		int monitors_length;
+		GLFWmonitor **monitors = glfwGetMonitors(&monitors_length);
+		if (monitors == nullptr) return std::nullopt;
+		for (int i = 0; i < monitors_length; i++)
+		{
+			std::optional<Range2Di> monitor_range = get_monitor_dimensions(monitors[i]);
+			// Check if monitor has video mode and the monitor range contains the full window range
+			if (monitor_range.has_value() && monitor_range->contains(window_dimensions))
+			{
+				return std::make_pair(monitors[i], monitor_range.value());
+			}
+		}
+		return std::nullopt;
+	}
+
+	std::optional<EntityInstancePtr> MonitorManager::get_current_monitor_by_window_center(Range2Di window_dimensions)
+	{
+		int monitors_length;
+		GLFWmonitor **monitors = glfwGetMonitors(&monitors_length);
+		if (monitors == nullptr) return std::nullopt;
+		for (int i = 0; i < monitors_length; i++)
+		{
+			std::optional<Range2Di> monitor_range = get_monitor_dimensions(monitors[i]);
+			if (monitor_range.has_value() && monitor_range->contains(window_dimensions.center()))
+			{
+				return get_by_monitor_handle(monitors[i]);
+			}
+		}
+		return std::nullopt;
+	}
+
+	std::optional<EntityInstancePtr> MonitorManager::get_monitor_on_left(EntityInstancePtr monitor)
+	{
+		std::optional<EntityInstancePtr> next_left = std::nullopt;
+		Range2Di next_left_monitor_range;
+		std::optional<Range2Di> monitor_range = get_monitor_dimensions(monitor);
+		if (monitor_range.has_value())
+		{
+			int monitors_length;
+			GLFWmonitor **monitors = glfwGetMonitors(&monitors_length);
+			if (monitors == nullptr) return std::nullopt;
+			for (int i = 0; i < monitors_length; i++)
+			{
+				std::optional<EntityInstancePtr> other_monitor = get_by_monitor_handle(monitors[i]);
+				std::optional<Range2Di> other_monitor_range = get_monitor_dimensions(monitors[i]);
+				if (other_monitor.has_value()
+					&& other_monitor_range.has_value()
+					&& other_monitor_range->left() < monitor_range->left())
+				{
+					// other_monitor is left of monitor
+					if (!next_left.has_value() || next_left_monitor_range.left() < other_monitor_range->left())
+					{
+						// other_monitor more near to monitor than next_left_monitor
+						next_left = get_by_monitor_handle(monitors[i]);
+						next_left_monitor_range = other_monitor_range.value();
+					}
+				}
+			}
+		}
+		return next_left;
+	}
+
+	std::optional<EntityInstancePtr> MonitorManager::get_monitor_on_right(EntityInstancePtr monitor)
+	{
+		std::optional<EntityInstancePtr> next_right = std::nullopt;
+		Range2Di next_right_monitor_range;
+		std::optional<Range2Di> monitor_range = get_monitor_dimensions(monitor);
+		if (monitor_range.has_value())
+		{
+			int monitors_length;
+			GLFWmonitor **monitors = glfwGetMonitors(&monitors_length);
+			if (monitors == nullptr) return std::nullopt;
+			for (int i = 0; i < monitors_length; i++)
+			{
+				std::optional<EntityInstancePtr> other_monitor = get_by_monitor_handle(monitors[i]);
+				std::optional<Range2Di> other_monitor_range = get_monitor_dimensions(monitors[i]);
+				if (other_monitor.has_value()
+					&& other_monitor_range.has_value()
+					&& monitor_range->left() < other_monitor_range->left())
+				{
+					// other_monitor is right of monitor
+					if (!next_right.has_value() || other_monitor_range->left() < next_right_monitor_range.left())
+					{
+						// other_monitor more near to monitor than next_right_monitor
+						next_right = get_by_monitor_handle(monitors[i]);
+						next_right_monitor_range = other_monitor_range.value();
+					}
+				}
+			}
+		}
+		return next_right;
+	}
+
+	std::optional<EntityInstancePtr> MonitorManager::get_by_monitor_handle(GLFWmonitor* glfw_monitor)
+	{
+		for (auto kv : monitors)
+		{
+			if (kv.second == glfw_monitor) {
+				return kv.first;
+			}
+		}
+		return std::nullopt;
+	}
+
 }
 }

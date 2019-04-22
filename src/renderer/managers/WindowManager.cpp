@@ -2,6 +2,7 @@
 #include "renderer/model/FpsLimiter.hpp"
 
 #include <Magnum/Platform/GLContext.h>
+#include <Magnum/Math/Range.h>
 
 #include <GLFW/glfw3.h>
 
@@ -9,6 +10,8 @@
 #include "react/Signal.h"
 
 #include "spdlog/spdlog.h"
+
+#include "fmt/ostream.h"
 
 #include <utility>
 
@@ -22,6 +25,7 @@ namespace renderer {
 
 	WindowManager::WindowManager(
 		WindowFactoryPtr window_factory,
+		MonitorManagerPtr monitor_manager,
 		KeyboardInputManagerPtr keyboard_input_manager,
 		MouseInputManagerPtr mouse_input_manager,
 		EntityInstanceManagerPtr entity_instance_manager,
@@ -32,6 +36,7 @@ namespace renderer {
 		LogManagerPtr log_manager
 	) {
 		this->window_factory = window_factory;
+		this->monitor_manager = monitor_manager;
 		this->keyboard_input_manager = keyboard_input_manager;
 		this->mouse_input_manager = mouse_input_manager;
 		this->entity_instance_manager = entity_instance_manager;
@@ -297,67 +302,102 @@ namespace renderer {
 		glfwSetWindowSize(glfw_window, width, height);
 	}
 
+	Range2Di WindowManager::get_window_dimensions(EntityInstancePtr window)
+	{
+		return get_window_dimensions(windows[window]->glfw_window);
+	}
+
+	Range2Di WindowManager::get_window_dimensions(GLFWwindow* glfw_window)
+	{
+		int x, y, width, height;
+		glfwGetWindowPos(glfw_window, &x, &y);
+		glfwGetWindowSize(glfw_window, &width, &height);
+		return Range2Di({x, y}, {x + width, y + height});
+	}
+
 	void WindowManager::center_window(EntityInstancePtr window)
 	{
 		if (is_window_available(window))
 		{
-			GLFWwindow* glfw_window = windows[window]->glfw_window;
-			Dimensions windowd;
-			glfwGetWindowPos(glfw_window, &windowd.x, &windowd.y);
-			glfwGetWindowSize(glfw_window, &windowd.width, &windowd.height);
-			spdlog::debug("window current {},{} {}x{}", windowd.x, windowd.y, windowd.width, windowd.height);
-			windowd.width *= 0.5;
-			windowd.height *= 0.5;
-			windowd.x += windowd.width;
-			windowd.y += windowd.height;
-			spdlog::debug("window center {},{} {}x{}", windowd.x, windowd.y, windowd.width, windowd.height);
-
-			std::optional<WindowOwner> owner = get_window_owner(windowd);
-			if (owner.has_value())
+			Range2Di window_dimensions = get_window_dimensions(windows[window]->glfw_window);
+			std::optional<MonitorRange> monitor_range = monitor_manager->monitor_contains_window_center(window_dimensions);
+			if (monitor_range.has_value())
 			{
-				glfwSetWindowPos(
-					glfw_window,
-					(*owner).x + ((*owner).width * 0.5) - windowd.width,
-					(*owner).y + ((*owner).height * 0.5) - windowd.height
-				);
+				auto monitor_center = monitor_range->second.center();
+				auto window_position_new = monitor_center - (window_dimensions.size() / 2);
+				glfwSetWindowPos(windows[window]->glfw_window, window_position_new.x(), window_position_new.y());
 			}
 		}
 	}
 
-	std::optional<WindowOwner> WindowManager::get_window_owner(Dimensions window)
+	void WindowManager::center_window_on_primary_monitor(EntityInstancePtr window)
 	{
-		int monitors_length;
-		GLFWmonitor **monitors = glfwGetMonitors(&monitors_length);
-		if (monitors == nullptr) return std::nullopt;
-		std::optional<WindowOwner> owner = std::nullopt;
-		for (int i = 0; i < monitors_length; i++)
+		auto primary_monitor = monitor_manager->get_primary();
+		if (primary_monitor.has_value())
 		{
-			// Get the monitor position and size
-			// int monitor_x, monitor_y, monitor_width, monitor_height;
-			Dimensions monitor = {};
-			glfwGetMonitorPos(monitors[i], &monitor.x, &monitor.y);
-			GLFWvidmode *mode = (GLFWvidmode*) glfwGetVideoMode(monitors[i]);
+			center_window_on_monitor(window, primary_monitor.value());
+		}
+	}
 
-			if (mode == nullptr)
+	void WindowManager::center_window_on_next_left_monitor(EntityInstancePtr window)
+	{
+		auto current_monitor = get_current_monitor(window);
+		if (current_monitor.has_value())
+		{
+			auto monitor_on_left = monitor_manager->get_monitor_on_left(current_monitor.value());
+			if (monitor_on_left.has_value())
 			{
-				// Video mode is required for width and height, so skip this monitor
-				continue;
-			} else {
-				monitor.width = mode->width;
-				monitor.height = mode->height;
-			}
-
-			// Set the owner to this monitor if the center of the window is within its bounding box
-			spdlog::debug("window {},{} monitor {},{} {}x{}", window.x, window.y, monitor.x, monitor.y, monitor.width, monitor.height);
-			if(
-				(window.x > monitor.x && window.x < (monitor.x + monitor.width)) &&
-				(window.y > monitor.y && window.y < (monitor.y + monitor.height))
-			)
-			{
-				owner = { monitors[i], monitor.x, monitor.y, monitor.width, monitor.height };
+				center_window_on_monitor(window, monitor_on_left.value());
 			}
 		}
-		return owner;
+	}
+
+	void WindowManager::center_window_on_next_right_monitor(EntityInstancePtr window)
+	{
+		auto current_monitor = get_current_monitor(window);
+		if (current_monitor.has_value())
+		{
+			auto monitor_on_right = monitor_manager->get_monitor_on_right(current_monitor.value());
+			if (monitor_on_right.has_value())
+			{
+				center_window_on_monitor(window, monitor_on_right.value());
+			}
+		}
+	}
+
+	void WindowManager::center_window_on_monitor(EntityInstancePtr window, EntityInstancePtr monitor)
+	{
+		if (is_window_available(window))
+		{
+			auto monitor_dimensions = monitor_manager->get_monitor_dimensions(monitor);
+			if (monitor_dimensions.has_value())
+			{
+				auto window_dimensions = get_window_dimensions(window);
+				auto window_position_new = monitor_dimensions.value().center() - (window_dimensions.size() / 2);
+				glfwSetWindowPos(windows[window]->glfw_window, window_position_new.x(), window_position_new.y());
+			}
+		}
+	}
+
+	bool WindowManager::is_window_centered(EntityInstancePtr window)
+	{
+		if (is_window_available(window))
+		{
+			Range2Di window_dimensions = get_window_dimensions(windows[window]->glfw_window);
+			std::optional<MonitorRange> monitor_range = monitor_manager->monitor_contains_window_center(window_dimensions);
+			if (monitor_range.has_value())
+			{
+				auto monitor_center = monitor_range->second.center();
+				auto window_position_new = monitor_center - (window_dimensions.size() / 2);
+				return window_position_new == window_dimensions.topLeft();
+			}
+		}
+		return false;
+	}
+
+	std::optional<EntityInstancePtr> WindowManager::get_current_monitor(EntityInstancePtr window)
+	{
+		return monitor_manager->get_current_monitor_by_window_center(get_window_dimensions(window));
 	}
 
 	bool WindowManager::is_window_managed(EntityInstancePtr window)

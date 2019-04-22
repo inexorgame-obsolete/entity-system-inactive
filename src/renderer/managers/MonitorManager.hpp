@@ -4,6 +4,8 @@
 #include "renderer/factories/MonitorFactory.hpp"
 #include "logging/managers/LogManager.hpp"
 
+#include <Magnum/Math/Range.h>
+
 struct GLFWmonitor;
 
 namespace inexor {
@@ -14,6 +16,9 @@ namespace renderer {
 	using EntityInstancePtr = std::shared_ptr<EntityInstance>;
 	using EntityInstancePtrOpt = std::optional<EntityInstancePtr>;
 
+	using Range2Di = Magnum::Math::Range2D<std::int32_t>;
+	using MonitorRange = std::pair<GLFWmonitor*, Range2Di>;
+
 	/// @class MonitorManager
 	/// @brief Management of the monitors.
 	class MonitorManager
@@ -21,7 +26,7 @@ namespace renderer {
 	{
 		public:
 
-			/// @brief Constructor.
+			/// @brief Constructs the MonitorManager, a monitor management service.
 			/// @note The dependencies of this class will be injected automatically.
 			/// @param monitor_factory Factory for creating entity instances of type 'MONITOR'.
 			/// @param log_manager The log manager.
@@ -42,19 +47,56 @@ namespace renderer {
 			/// Detects the monitors.
 			void detect_monitors();
 
-			/// Detects the video modes.
+			/// Detects the video modes for the given monitor.
+			/// @param monitor The entity instance of type 'MONITOR'.
 			void detect_video_modes(EntityInstancePtr monitor);
 
 			/// Returns the primary monitor.
 			std::optional<EntityInstancePtr> get_primary();
 
-			/// Returns true, if the given monitor is the primary monitor.
+			/// @brief Returns true, if the given monitor is the primary monitor.
+			/// @param monitor The entity instance of type 'MONITOR'.
+			/// @return True, the given monitor is the primary monitor.
 			bool is_primary(EntityInstancePtr monitor);
+
+			/// @brief Returns the dimensions of the given monitor.
+			/// @param monitor The entity instance of type 'MONITOR'.
+			/// @return An optional with the dimension of the given monitor.
+			std::optional<Range2Di> get_monitor_dimensions(EntityInstancePtr monitor);
+
+			/// @brief Returns the monitors and their dimensions. Monitors
+			/// without video mode will not be returned.
+			/// @return A vector containing pairs of monitors and their dimensions.
+			std::vector<MonitorRange> get_all_monitors_and_dimensions();
+
+			/// @brief Returns the monitor which contains the window center.
+			/// @param window_dimensions The window dimensions.
+			std::optional<MonitorRange> monitor_contains_window_center(Range2Di window_dimensions);
+
+			/// @brief Returns the monitor which fully contains the window.
+			/// @param window_dimensions The window dimensions.
+			std::optional<MonitorRange> monitor_fully_contains_window(Range2Di window_dimensions);
+
+			/// @brief Returns the current monitor which contains the window center.
+			/// @param window_dimensions The window dimensions.
+			std::optional<EntityInstancePtr> get_current_monitor_by_window_center(Range2Di window_dimensions);
+
+			/// @brief Returns the monitor which is left of the given monitor.
+			/// @param monitor The entity instance of type 'MONITOR'.
+			std::optional<EntityInstancePtr> get_monitor_on_left(EntityInstancePtr monitor);
+
+			/// @brief Returns the monitor which is right of the given monitor.
+			/// @param monitor The entity instance of type 'MONITOR'.
+			std::optional<EntityInstancePtr> get_monitor_on_right(EntityInstancePtr monitor);
 
 			/// The logger name of this service.
 			static constexpr char LOGGER_NAME[] = "inexor.renderer.monitor";
 
 		private:
+
+			/// @brief Returns true if the the given monitor is the primary monitor.
+			/// @param glfw_monitor The glfw monitor.
+			std::optional<EntityInstancePtr> get_by_monitor_handle(GLFWmonitor* glfw_monitor);
 
 			/// Creates a monitor.
 			EntityInstancePtrOpt create_monitor(GLFWmonitor* glfw_monitor);
@@ -62,7 +104,13 @@ namespace renderer {
 			/// Destroys a monitor.
 			void destroy_monitor(EntityInstancePtr monitor);
 
+			/// @brief Returns true if the the given monitor is the primary monitor.
+			/// @param glfw_monitor The glfw monitor.
 			bool is_primary(GLFWmonitor* glfw_monitor);
+
+			/// @brief Returns the dimensions of the given monitor.
+			/// @param glfw_monitor The glfw monitor.
+			std::optional<Range2Di> get_monitor_dimensions(GLFWmonitor* glfw_monitor);
 
 			/// The monitor factory.
 			MonitorFactoryPtr monitor_factory;
