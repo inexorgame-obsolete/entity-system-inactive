@@ -66,15 +66,27 @@ namespace entity_system {
 			EntityAttributeInstancePtrOpt get_attribute_instance(const std::string& attr_name);
 
 			/// @brief Get the attribute instance by name.
+			/// @note The attribute must exist! No checks are done.
+			/// @param The name of the attribute.
 			/// @return The attribute instance with the given name.
 			EntityAttributeInstancePtr operator[](const std::string& attr_name);
 
+			/// @brief Returns the value of the attribute instance by name.
+			/// @tparam I The data type.
+			/// @param The name of the attribute.
+			/// @return The value of the attribute instance.
 			template <std::size_t I>
 			auto get(const std::string& attr_name)
 			{
 			    return std::get<I>(get_attribute_instance(attr_name).value()->value.Value());
 			}
 
+			void set_own_value(const std::string& attr_name, DataValue value);
+
+			/// @brief Toggles the own value of the attribute instance by name.
+			/// @note The attribute must exist! No checks are done.
+			/// @note The attribute have to be of data type BOOL. No checks are done.
+			/// @param The name of the attribute.
 			void toggle(const std::string& attr_name);
 
 	};

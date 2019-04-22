@@ -65,6 +65,12 @@ namespace entity_system {
 		return nullptr;
 	}
 
+	void EntityInstance::set_own_value(const std::string& attr_name, DataValue value)
+	{
+		EntityAttributeInstancePtr attr = get_attribute_instance(attr_name).value();
+		attr->own_value.Set(value);
+	}
+
 	void EntityInstance::toggle(const std::string& attr_name)
 	{
 		EntityAttributeInstancePtr attr = get_attribute_instance(attr_name).value();
