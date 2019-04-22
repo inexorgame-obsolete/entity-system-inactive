@@ -1,5 +1,5 @@
 #include "WindowManager.hpp"
-#include "FpsLimiter.hpp"
+#include "renderer/model/FpsLimiter.hpp"
 
 #include <Magnum/Platform/GLContext.h>
 
