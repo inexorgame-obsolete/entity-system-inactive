@@ -36,18 +36,22 @@ namespace input {
 		{
 			kv.second->disconnect_all_slots();
 		}
+		signal_window_key_changed.clear();
 		for (auto kv : signal_window_key_pressed)
 		{
 			kv.second->disconnect_all_slots();
 		}
+		signal_window_key_pressed.clear();
 		for (auto kv : signal_window_key_pressed_or_repeated)
 		{
 			kv.second->disconnect_all_slots();
 		}
+		signal_window_key_pressed_or_repeated.clear();
 		for (auto kv : signal_window_key_released)
 		{
 			kv.second->disconnect_all_slots();
 		}
+		signal_window_key_released.clear();
 	}
 
 	EntityInstancePtrOpt KeyboardInputManager::create_key(const int& key)
@@ -161,7 +165,7 @@ namespace input {
 
 	std::string KeyboardInputManager::get_window_name(EntityInstancePtr window)
 	{
-		return std::get<entity_system::DataType::STRING>(window->get_attribute_instance(renderer::WindowEntityTypeProvider::WINDOW_TITLE).value()->own_value.Value());
+		return window->get<entity_system::DataType::STRING>(renderer::WindowEntityTypeProvider::WINDOW_TITLE);
 	}
 
 }

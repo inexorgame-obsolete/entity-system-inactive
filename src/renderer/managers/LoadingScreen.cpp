@@ -28,6 +28,7 @@ namespace renderer {
 		WindowManagerPtr window_manager,
 		MonitorManagerPtr monitor_manager,
 		KeyboardInputManagerPtr keyboard_input_manager,
+		MouseInputManagerPtr mouse_input_manager,
 		ConnectorManagerPtr connector_manager,
 		ClientLifecyclePtr client_lifecycle,
 		LogManagerPtr log_manager
@@ -35,11 +36,15 @@ namespace renderer {
 		this->window_manager = window_manager;
 		this->monitor_manager = monitor_manager;
 		this->keyboard_input_manager = keyboard_input_manager;
+		this->mouse_input_manager = mouse_input_manager;
 		this->connector_manager = connector_manager;
 		this->client_lifecycle = client_lifecycle;
 		this->log_manager = log_manager;
 		this->show_fps = false;
 		this->create_screenshot = false;
+		this->mesh_size_x = 0.5f;
+		this->mesh_size_y = 0.5f;
+		this->mesh_factor = 0.1f;
 	}
 
 	LoadingScreen::~LoadingScreen()
@@ -65,6 +70,8 @@ namespace renderer {
 
 		keyboard_input_manager->register_on_window_key_released(window, shared_from_this());
 		keyboard_input_manager->register_on_window_key_pressed_or_repeated(window, shared_from_this());
+		mouse_input_manager->register_on_window_mouse_button_changed(window, shared_from_this());
+		mouse_input_manager->register_on_window_mouse_scrolled(window, shared_from_this());
 
 		EntityInstancePtrOpt o_key_b = keyboard_input_manager->create_key(GLFW_KEY_B);
 		if (o_key_b.has_value())
@@ -237,23 +244,65 @@ namespace renderer {
 		}
 	}
 
+	void LoadingScreen::on_window_mouse_button_changed(EntityInstancePtr window, int button, int action, int mods)
+	{
+		if (action != GLFW_RELEASE) return;
+		switch (button)
+		{
+			case GLFW_MOUSE_BUTTON_LEFT:
+				switch (mods)
+				{
+					case GLFW_MOD_SHIFT:
+						mesh_size_y = std::max(0.05f, std::min(0.95f, mesh_size_y + 0.05f));
+						break;
+					default:
+						mesh_size_x = std::max(0.05f, std::min(0.95f, mesh_size_x + 0.05f));
+						break;
+				}
+				break;
+			case GLFW_MOUSE_BUTTON_RIGHT:
+				switch (mods)
+				{
+					case GLFW_MOD_SHIFT:
+						mesh_size_y = std::max(0.05f, std::min(0.95f, mesh_size_y - 0.05f));
+						break;
+					default:
+						mesh_size_x = std::max(0.05f, std::min(0.95f, mesh_size_x - 0.05f));
+						break;
+				}
+				break;
+			default:
+				break;
+		}
+	}
+
+	/// Window mouse scrolled
+	void LoadingScreen::on_window_mouse_scrolled(EntityInstancePtr window, double xpos, double ypos)
+	{
+		mesh_factor += ((float) ypos * 0.1f);
+	}
+
+	// Thread local
 	void LoadingScreen::init_loading_screen(EntityInstancePtr window, GLFWwindow* glfw_window)
 	{
-		spdlog::info("init loading screen");
-		const QuadVertex quad_vertex[] {
-			{{ 0.5f, -0.5f}, 0xffff00_rgbf},
-			{{-0.5f, -0.5f}, 0xffffff_rgbf},
-			{{ 0.5f,  0.5f}, 0x00ffff_rgbf},
-			{{-0.5f,  0.5f}, 0xff00ff_rgbf}
-		};
-
 		buffer = std::make_shared<Magnum::GL::Buffer>();
-		buffer->setData(quad_vertex);
-
 		mesh = std::make_shared<Magnum::GL::Mesh>();
+		shader = std::make_shared<Magnum::Shaders::VertexColor2D>();
+	}
 
-		// Magnum::Trade::MeshData2D square = Magnum::Primitives::squareSolid();
+	// Thread local
+	void LoadingScreen::update_mesh(Magnum::Timeline timeline)
+	{
+		float mx = mesh_size_x + std::sin(timeline.previousFrameTime()) * mesh_factor;
+		float my = mesh_size_y + std::cos(timeline.previousFrameTime()) * mesh_factor;
 
+		const QuadVertex quad_vertex[] {
+			{{ mx, my * -1.0f}, 0xffff00_rgbf},
+			{{ mx * -1.0f, my * -1.0f}, 0xffffff_rgbf},
+			{{ mx, my}, 0x00ffff_rgbf},
+			{{ mx * -1.0f, my}, 0xff00ff_rgbf}
+		};
+		buffer->setData(quad_vertex);
 		mesh->setPrimitive(Magnum::GL::MeshPrimitive::TriangleStrip)
 			.setCount(4)
 			.addVertexBuffer(
@@ -262,10 +311,9 @@ namespace renderer {
 				Magnum::Shaders::VertexColor2D::Position{},
 				Magnum::Shaders::VertexColor2D::Color3{}
 			);
-
-		shader = std::make_shared<Magnum::Shaders::VertexColor2D>();
 	}
 
+	// Thread local
 	void LoadingScreen::render_loading_screen(EntityInstancePtr window, GLFWwindow* glfw_window, Magnum::Timeline timeline)
 	{
 		// Set viewport
@@ -275,6 +323,8 @@ namespace renderer {
 
 		// Reset
 		Magnum::GL::defaultFramebuffer.clear(Magnum::GL::FramebufferClear::Color);
+
+		update_mesh(timeline);
 
 		// Render logo
 		mesh->draw((*shader));
@@ -293,6 +343,7 @@ namespace renderer {
 		}
 	}
 
+	// Thread local
 	void LoadingScreen::shutdown_loading_screen(EntityInstancePtr window, GLFWwindow* glfw_window)
 	{
 		shader = nullptr;
