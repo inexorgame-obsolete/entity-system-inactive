@@ -13,8 +13,10 @@ namespace inexor {
 namespace input {
 
 	MouseInputManager::MouseInputManager(
+		GlobalMouseButtonFactoryPtr global_mouse_button_factory,
 		LogManagerPtr log_manager
 	) {
+		this->global_mouse_button_factory = global_mouse_button_factory;
 		this->log_manager = log_manager;
 	}
 
@@ -59,6 +61,12 @@ namespace input {
 		signal_window_mouse_scrolled.clear();
 	}
 
+	EntityInstancePtrOpt MouseInputManager::create_mouse_button(const int& button)
+	{
+		spdlog::get(LOGGER_NAME)->debug("Create entity instance of type GLOBAL_MOUSE_BUTTON {}", button);
+		return global_mouse_button_factory->create_instance(button);
+	}
+
 	void MouseInputManager::mouse_position_changed(EntityInstancePtr window, double xpos, double ypos)
 	{
 		spdlog::get(LOGGER_NAME)->debug("Window {} Mouse movement: {}, {}", get_window_name(window), xpos, ypos);
@@ -70,7 +78,7 @@ namespace input {
 
 	void MouseInputManager::mouse_button_changed(EntityInstancePtr window, int button, int action, int mods)
 	{
-		spdlog::get(LOGGER_NAME)->info("Window {} Mouse button: {} Action: {} Mods: {}", get_window_name(window), button, action, mods);
+		spdlog::get(LOGGER_NAME)->debug("Window {} Mouse button: {} Action: {} Mods: {}", get_window_name(window), button, action, mods);
 		signal_mouse_button_changed(window, button, action, mods);
 		switch (action)
 		{
@@ -108,6 +116,7 @@ namespace input {
 
 	void MouseInputManager::register_on_mouse_button_changed(std::shared_ptr<MouseButtonChangedListener> mouse_button_changed_listener)
 	{
+		spdlog::info("register_on_mouse_button_changed");
 		signal_mouse_button_changed.connect(std::bind(&MouseButtonChangedListener::on_mouse_button_changed, mouse_button_changed_listener.get(), std::placeholders::_1, std::placeholders::_2, std::placeholders::_3, std::placeholders::_4));
 	}
 

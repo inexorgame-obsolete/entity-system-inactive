@@ -55,6 +55,7 @@ namespace input {
 		{
 			spdlog::get(LOGGER_NAME)->debug("Signal GLOBAL_KEY {}", key);
 			// Change both signals at the same time!
+			// TODO: AsyncTransaction ?
 			DoTransaction<D>([this, key, action, mods] {
 				global_key_signals[key]->action.Set(action);
 				global_key_signals[key]->mods.Set(mods);
@@ -80,6 +81,7 @@ namespace input {
 			GlobalKeySignalsPtr global_key_signals = get_or_create_global_key_signals(key);
 			o_action.value()->signal_wrapper <<= global_key_signals->action;
 			o_mods.value()->signal_wrapper <<= global_key_signals->mods;
+			// TODO: observe GLOBAL_KEY_KEYCODE -> remove signal for old key code; add signal for new key code
 		} else {
         	spdlog::get(LOGGER_NAME)->error("Failed to initialize processor signals for entity instance {} of type {}: Missing one of these attributes {} {} {}", entity_instance->get_GUID().str(), entity_instance->get_entity_type()->get_type_name(), GlobalKeyEntityTypeProvider::GLOBAL_KEY_KEYCODE, GlobalKeyEntityTypeProvider::GLOBAL_KEY_ACTION, GlobalKeyEntityTypeProvider::GLOBAL_KEY_MODS);
 		}

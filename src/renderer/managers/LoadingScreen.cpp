@@ -83,13 +83,40 @@ namespace renderer {
 			{
 				EntityAttributeInstancePtr key_b_key = o_key_b_key.value();
 				EntityAttributeInstancePtr key_b_action = o_key_b_action.value();
-				spdlog::info("Creating observer for GLOBAL KEY {} {}", std::get<entity_system::DataType::INT>(key_b_key->value.Value()), std::get<entity_system::DataType::INT>(key_b_action->value.Value()));
+				spdlog::debug("Creating observer for GLOBAL KEY {} {}", std::get<entity_system::DataType::INT>(key_b_key->value.Value()), std::get<entity_system::DataType::INT>(key_b_action->value.Value()));
 				Observe(
 					key_b_action->value,
 					[] (DataValue action) {
 						spdlog::info("GLOBAL KEY B {}", std::get<entity_system::DataType::INT>(action));
 						if (std::get<entity_system::DataType::INT>(action) == GLFW_RELEASE)
 						{
+							spdlog::info("GLOBAL_KEY_B released");
+							// TODO: enable boost stacktrace again (3/3)
+							/* spdlog::info("Stacktrace\n{}", boost::stacktrace::stacktrace()); */
+						}
+					}
+				);
+			}
+		}
+
+		EntityInstancePtrOpt o_mouse_button_2 = mouse_input_manager->create_mouse_button(GLFW_MOUSE_BUTTON_MIDDLE);
+		if (o_mouse_button_2.has_value())
+		{
+			EntityInstancePtr mouse_button_2 = o_mouse_button_2.value();
+			EntityAttributeInstancePtrOpt o_mouse_button_2_number = mouse_button_2->get_attribute_instance(entity_system::type_system::GlobalMouseButtonEntityTypeProvider::GLOBAL_MOUSE_BUTTON_NUMBER);
+			EntityAttributeInstancePtrOpt o_mouse_button_2_action = mouse_button_2->get_attribute_instance(entity_system::type_system::GlobalMouseButtonEntityTypeProvider::GLOBAL_MOUSE_BUTTON_ACTION);
+			if (o_mouse_button_2_number.has_value() && o_mouse_button_2_action.has_value())
+			{
+				EntityAttributeInstancePtr mouse_button_2_number = o_mouse_button_2_number.value();
+				EntityAttributeInstancePtr mouse_button_2_action = o_mouse_button_2_action.value();
+				spdlog::debug("Creating observer for GLOBAL MOUSE_BUTTON {} {}", std::get<entity_system::DataType::INT>(mouse_button_2_number->value.Value()), std::get<entity_system::DataType::INT>(mouse_button_2_action->value.Value()));
+				Observe(
+					mouse_button_2_action->value,
+					[] (DataValue action) {
+						spdlog::info("GLOBAL MOUSE BUTTON 2: {}", std::get<entity_system::DataType::INT>(action));
+						if (std::get<entity_system::DataType::INT>(action) == GLFW_RELEASE)
+						{
+							spdlog::info("GLOBAL_MOUSE_BUTTON_2 released");
 							// TODO: enable boost stacktrace again (3/3)
 							/* spdlog::info("Stacktrace\n{}", boost::stacktrace::stacktrace()); */
 						}

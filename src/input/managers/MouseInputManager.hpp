@@ -8,7 +8,9 @@
 #include "input/listeners/WindowMouseButtonReleasedListener.hpp"
 #include "input/listeners/WindowMouseMovedListener.hpp"
 #include "input/listeners/WindowMouseScrolledListener.hpp"
+
 #include "entity-system/model/entities/entity-instances/EntityInstance.hpp"
+#include "type-system/factories/inout/mouse/GlobalMouseButtonFactory.hpp"
 #include "logging/managers/LogManager.hpp"
 
 #include <boost/signals2.hpp>
@@ -17,7 +19,10 @@ namespace inexor {
 namespace input {
 
 	using LogManagerPtr = std::shared_ptr<inexor::logging::LogManager>;
+	using GlobalMouseButtonFactoryPtr = std::shared_ptr<entity_system::type_system::GlobalMouseButtonFactory>;
+
 	using EntityInstancePtr = std::shared_ptr<entity_system::EntityInstance>;
+	using EntityInstancePtrOpt = std::optional<EntityInstancePtr>;
 
 	using SignalMouseButtonChanged = boost::signals2::signal<void(EntityInstancePtr window, int button, int action, int mods)>;
 	using SignalMouseButtonChangedPtr = std::shared_ptr<SignalMouseButtonChanged>;
@@ -41,6 +46,7 @@ namespace input {
 			/// @note The dependencies of this class will be injected automatically.
 			/// @param log_manager The log manager.
 			MouseInputManager(
+				GlobalMouseButtonFactoryPtr global_mouse_button_factory,
 				LogManagerPtr log_manager
 			);
 
@@ -52,6 +58,10 @@ namespace input {
 
 			/// Shut down the mouse input manager.
 			void shutdown();
+
+			/// @brief Creates a new entity instance of type 'GLOBAL_MOUSE_BUTTON'.
+			/// @param button The button number.
+			EntityInstancePtrOpt create_mouse_button(const int& button);
 
 			/// @brief The mouse position has been changed.
 			void mouse_position_changed(EntityInstancePtr window, double xpos, double ypos);
@@ -92,6 +102,9 @@ namespace input {
 		private:
 
 			std::string get_window_name(EntityInstancePtr window);
+
+			/// The factory for creating entity instance of type 'GLOBAL_MOUSE_BUTTON'.
+			GlobalMouseButtonFactoryPtr global_mouse_button_factory;
 
 			/// The log manager.
 			LogManagerPtr log_manager;
