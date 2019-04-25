@@ -310,6 +310,21 @@ namespace renderer {
 			/// @param glfw_window The window handle.
 			void window_key_changed(GLFWwindow* glfw_window, int key, int scancode, int action, int mods);
 
+			/// This callback is called if a character is input.
+			/// The character callback is intended for Unicode text input. As
+			/// it deals with characters, it is keyboard layout dependent,
+			/// whereas the key callback is not. Characters do not map 1:1 to
+			/// physical keys, as a key may produce zero, one or more
+			/// characters. If you want to know whether a specific physical
+			/// key was pressed or released, see the key callback instead.
+			///
+			/// The character callback behaves as system text input normally
+			/// does and will not be called if modifier keys are held down
+			/// that would prevent normal text input on that platform, for
+			/// example a Super (Command) key on macOS or Alt key on Windows.
+			/// @param glfw_window The window handle.
+			void window_char_input(GLFWwindow* glfw_window, unsigned int codepoint);
+
 			/// This callback is called if the mouse position of a window has been changed.
 			/// @param glfw_window The window handle.
 			void window_mouse_position_changed(GLFWwindow* glfw_window, double xpos, double ypos);

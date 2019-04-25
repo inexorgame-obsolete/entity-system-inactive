@@ -2,18 +2,20 @@
 
 #include "renderer/managers/WindowManager.hpp"
 #include "renderer/managers/MonitorManager.hpp"
+#include "renderer/managers/FontManager.hpp"
 #include "visual-scripting/managers/ConnectorManager.hpp"
 #include "client/ClientLifecycle.hpp"
 #include "logging/managers/LogManager.hpp"
 
 #include <Magnum/GL/Mesh.h>
-#include <Magnum/Math/Color.h>
-#include <Magnum/Shaders/VertexColor.h>
 #include <Magnum/GL/Buffer.h>
 #include <Magnum/GL/DefaultFramebuffer.h>
 #include <Magnum/GL/Renderer.h>
-#include <Magnum/Platform/GLContext.h>
+#include <Magnum/Math/Color.h>
 #include <Magnum/Math/Matrix3.h>
+#include <Magnum/Platform/GLContext.h>
+#include <Magnum/Shaders/Vector.h>
+#include <Magnum/Shaders/VertexColor.h>
 #include <Magnum/Timeline.h>
 
 struct GLFWwindow;
@@ -23,6 +25,7 @@ namespace renderer {
 
 	using WindowManagerPtr = std::shared_ptr<WindowManager>;
 	using MonitorManagerPtr = std::shared_ptr<MonitorManager>;
+	using FontManagerPtr = std::shared_ptr<FontManager>;
 	using KeyboardInputManagerPtr = std::shared_ptr<input::KeyboardInputManager>;
 	using MouseInputManagerPtr = std::shared_ptr<input::MouseInputManager>;
 	using ConnectorManagerPtr = std::shared_ptr<visual_scripting::ConnectorManager>;
@@ -35,11 +38,20 @@ namespace renderer {
 		Magnum::Color3 color;
 	};
 
+	struct Movement {
+		int mode = 0;
+		bool forward = false;
+		bool backward = false;
+		bool left = false;
+		bool right = false;
+	};
+
 	/// @class LoadingScreen
 	/// @brief Shows a loading screen during startup.
 	class LoadingScreen
 		: public input::WindowKeyReleasedListener,
 		  public input::WindowKeyPressedOrRepeatedListener,
+		  public input::WindowCharInputListener,
 		  public input::WindowMouseButtonChangedListener,
 		  public input::WindowMouseScrolledListener,
 		  public std::enable_shared_from_this<LoadingScreen>
@@ -54,6 +66,7 @@ namespace renderer {
 			LoadingScreen(
 				WindowManagerPtr window_manager,
 				MonitorManagerPtr monitor_manager,
+				FontManagerPtr font_manager,
 				KeyboardInputManagerPtr keyboard_input_manager,
 				MouseInputManagerPtr mouse_input_manager,
 				ConnectorManagerPtr connector_manager,
@@ -69,6 +82,9 @@ namespace renderer {
 
 			/// Shut down the loading screen.
 			void shutdown();
+
+			/// Window char input
+			void on_window_char_input(EntityInstancePtr window, std::string character, unsigned int codepoint);
 
 			/// Window key released
 			void on_window_key_released(EntityInstancePtr window, int key, int scancode, int mods);
@@ -99,14 +115,35 @@ namespace renderer {
 			/// Makes a screenshot.
 			void screenshot();
 
-			/// Updates the mesh.
-			void update_mesh(Magnum::Timeline timeline);
+			/// Renders the Inexor logo.
+			void render_inexor_logo(Magnum::Timeline timeline);
+
+			/// Updates the Inexor title.
+			void render_inexor_title(Magnum::Timeline timeline);
+
+			/// Renders the action.
+			void render_action(Magnum::Timeline timeline);
+
+			/// Renders the command buffer.
+			void render_command_buffer(Magnum::Timeline timeline);
+
+			/// Renders the fps counter.
+			void render_fps_counter(Magnum::Timeline timeline);
+
+			/// Moves whatever should be moved.
+			void move(EntityInstancePtr window);
+
+			/// Executes the command
+			void execute_command(EntityInstancePtr window);
 
 			/// The window manager
 			WindowManagerPtr window_manager;
 
 			/// The monitor manager
 			MonitorManagerPtr monitor_manager;
+
+			/// The font manager
+			FontManagerPtr font_manager;
 
 			/// The keyboard input manager
 			KeyboardInputManagerPtr keyboard_input_manager;
@@ -126,8 +163,13 @@ namespace renderer {
 			/// The window entity instance.
 			EntityInstancePtr window;
 
+			/// The buffer for the logo.
 			std::shared_ptr<Magnum::GL::Buffer> buffer;
+
+			/// The mesh for the logo.
 			std::shared_ptr<Magnum::GL::Mesh> mesh;
+
+			/// The shader for the logo.
 			std::shared_ptr<Magnum::Shaders::VertexColor2D> shader;
 
 			/// If true, the render thread shows the frames per second.
@@ -141,6 +183,19 @@ namespace renderer {
 
 			float mesh_factor;
 
+			FontPtr title_font;
+
+			FontPtr action_font;
+
+			FontPtr command_font;
+
+			FontPtr fps_font;
+
+			std::string action;
+
+			std::string command_buffer;
+
+			Movement movement;
 	};
 
 }

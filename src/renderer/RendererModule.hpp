@@ -2,6 +2,7 @@
 
 #include "renderer/managers/MonitorManager.hpp"
 #include "renderer/managers/WindowManager.hpp"
+#include "renderer/managers/FontManager.hpp"
 #include "renderer/managers/LoadingScreen.hpp"
 #include "renderer/managers/TriangleExample.hpp"
 
@@ -16,6 +17,7 @@ namespace renderer {
 	{
 		using MonitorManagerPtr = std::shared_ptr<MonitorManager>;
 		using WindowManagerPtr = std::shared_ptr<WindowManager>;
+		using FontManagerPtr = std::shared_ptr<FontManager>;
 		using LoadingScreenPtr = std::shared_ptr<LoadingScreen>;
 		using TriangleExamplePtr = std::shared_ptr<TriangleExample>;
 
@@ -31,6 +33,7 @@ namespace renderer {
 			RendererModule(
 				MonitorManagerPtr monitor_manager,
 				WindowManagerPtr window_manager,
+				FontManagerPtr font_manager,
 				LoadingScreenPtr loading_screen,
 				TriangleExamplePtr triangle_example
 				// UserInterfaceRenderer
@@ -60,6 +63,9 @@ namespace renderer {
 
 			/// The window manager.
 			WindowManagerPtr window_manager;
+
+			/// The font manager.
+			FontManagerPtr font_manager;
 
 			/// The loading screen.
 			LoadingScreenPtr loading_screen;

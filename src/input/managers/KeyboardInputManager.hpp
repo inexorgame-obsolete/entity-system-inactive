@@ -4,6 +4,7 @@
 #include "input/listeners/KeyPressedListener.hpp"
 #include "input/listeners/KeyPressedOrRepeatedListener.hpp"
 #include "input/listeners/KeyReleasedListener.hpp"
+#include "input/listeners/WindowCharInputListener.hpp"
 #include "input/listeners/WindowKeyChangedListener.hpp"
 #include "input/listeners/WindowKeyPressedListener.hpp"
 #include "input/listeners/WindowKeyPressedOrRepeatedListener.hpp"
@@ -24,6 +25,8 @@ namespace input {
 	using EntityInstancePtr = std::shared_ptr<entity_system::EntityInstance>;
 	using EntityInstancePtrOpt = std::optional<EntityInstancePtr>;
 
+	using SignalCharInput = boost::signals2::signal<void(EntityInstancePtr window, std::string character, unsigned int codepoint)>;
+	using SignalCharInputPtr = std::shared_ptr<SignalCharInput>;
 	using SignalKeyChanged = boost::signals2::signal<void(EntityInstancePtr window, int key, int scancode, int action, int mods)>;
 	using SignalKeyChangedPtr = std::shared_ptr<SignalKeyChanged>;
 	using SignalKeyPressed = boost::signals2::signal<void(EntityInstancePtr window, int key, int scancode, int mods)>;
@@ -62,6 +65,11 @@ namespace input {
 			/// @param key The key code.
 			EntityInstancePtrOpt create_key(const int& key);
 
+			/// @brief Called on character input.
+			/// @param window The entity instance of type 'WINDOW'.
+			/// @param codepoint The unicode codepoint.
+			void char_input(EntityInstancePtr window, unsigned int codepoint);
+
 			/// @brief Called if the state of a key has been changed.
 			/// @param window The entity instance of type 'WINDOW'.
 			/// @param key
@@ -82,6 +90,9 @@ namespace input {
 			/// @brief Registers a listener for a key has been released on any window.
 			void register_on_key_released(std::shared_ptr<KeyReleasedListener> key_released_listener);
 
+			/// @brief Registers a listener for character input on a specific window.
+			void register_on_window_char_input(EntityInstancePtr window, std::shared_ptr<WindowCharInputListener> window_char_input_listener);
+
 			/// @brief Registers a listener for the state of a key has been changed on a specific window.
 			void register_on_window_key_changed(EntityInstancePtr window, std::shared_ptr<WindowKeyChangedListener> window_key_changed_listener);
 
@@ -98,6 +109,8 @@ namespace input {
 			static constexpr char LOGGER_NAME[] = "inexor.input.keyboard";
 
 		private:
+
+			std::string codepoint2string(unsigned int codepoint);
 
 			std::string get_window_name(EntityInstancePtr window);
 
@@ -118,6 +131,9 @@ namespace input {
 
 			/// Signal, that the state of a key has been released on any window.
 			SignalKeyReleased signal_key_released;
+
+			/// Signal character input on a specific window.
+			std::unordered_map<EntityInstancePtr, SignalCharInputPtr> signal_window_char_input;
 
 			/// Signal, that the state of a key has been changed on a specific window.
 			std::unordered_map<EntityInstancePtr, SignalKeyChangedPtr> signal_window_key_changed;

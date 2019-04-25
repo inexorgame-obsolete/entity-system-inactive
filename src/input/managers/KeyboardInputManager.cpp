@@ -32,6 +32,11 @@ namespace input {
 		signal_key_changed.disconnect_all_slots();
 		signal_key_pressed.disconnect_all_slots();
 		signal_key_pressed_or_repeated.disconnect_all_slots();
+		for (auto kv : signal_window_char_input)
+		{
+			kv.second->disconnect_all_slots();
+		}
+		signal_window_char_input.clear();
 		for (auto kv : signal_window_key_changed)
 		{
 			kv.second->disconnect_all_slots();
@@ -58,6 +63,15 @@ namespace input {
 	{
 		spdlog::get(LOGGER_NAME)->debug("Create entity instance for GLOBAL_KEY {}", key);
 		return global_key_factory->create_instance(key);
+	}
+
+	void KeyboardInputManager::char_input(EntityInstancePtr window, unsigned int codepoint)
+	{
+		spdlog::get(LOGGER_NAME)->debug("codepoint: {} char: {}", codepoint, codepoint2string(codepoint));
+		if (signal_window_char_input.end() != signal_window_char_input.find(window))
+		{
+			signal_window_char_input[window]->operator ()(window, codepoint2string(codepoint), codepoint);
+		}
 	}
 
 	void KeyboardInputManager::key_changed(EntityInstancePtr window, int key, int scancode, int action, int mods)
@@ -121,6 +135,16 @@ namespace input {
 		signal_key_released.connect(std::bind(&KeyReleasedListener::on_key_released, key_released_listener.get(), std::placeholders::_1, std::placeholders::_2, std::placeholders::_3, std::placeholders::_4));
 	}
 
+	void KeyboardInputManager::register_on_window_char_input(EntityInstancePtr window, std::shared_ptr<WindowCharInputListener> window_char_input_listener)
+	{
+		if (signal_window_char_input.end() == signal_window_char_input.find(window))
+		{
+			auto signal = std::make_shared<SignalCharInput>();
+			signal_window_char_input.insert(std::make_pair(window, signal));
+		}
+		signal_window_char_input[window]->connect(std::bind(&WindowCharInputListener::on_window_char_input, window_char_input_listener.get(), std::placeholders::_1, std::placeholders::_2, std::placeholders::_3));
+	}
+
 	void KeyboardInputManager::register_on_window_key_changed(EntityInstancePtr window, std::shared_ptr<WindowKeyChangedListener> window_key_changed_listener)
 	{
 		if (signal_window_key_changed.end() == signal_window_key_changed.find(window))
@@ -162,6 +186,34 @@ namespace input {
 	}
 
 	// TODO: if the window has been destroyed, remove the signals for this window
+
+	std::string KeyboardInputManager::codepoint2string(unsigned int codepoint)
+	{
+		char c[5] = { 0x00, 0x00, 0x00, 0x00, 0x00 };
+		if (codepoint <= 0x7F)
+		{
+			c[0] = codepoint;
+		} else if (codepoint <= 0x7FF)
+		{
+			c[0] = (codepoint >> 6) + 192;
+			c[1] = (codepoint & 63) + 128;
+		} else if (0xd800 <= codepoint && codepoint <= 0xdfff)
+		{
+	    	//invalid block of utf8
+	    } else if (codepoint <= 0xFFFF)
+	    {
+	    	c[0] = (codepoint >> 12) + 224;
+	    	c[1] = ((codepoint >> 6) & 63) + 128;
+	    	c[2] = (codepoint & 63) + 128;
+	    } else if (codepoint <= 0x10FFFF)
+	    {
+	    	c[0] = (codepoint >> 18) + 240;
+	    	c[1] = ((codepoint >> 12) & 63) + 128;
+	    	c[2] = ((codepoint >> 6) & 63) + 128;
+	    	c[3] = (codepoint & 63) + 128;
+	    }
+	    return std::string(c);
+	}
 
 	std::string KeyboardInputManager::get_window_name(EntityInstancePtr window)
 	{

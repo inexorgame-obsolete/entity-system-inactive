@@ -12,12 +12,14 @@ namespace renderer {
 	RendererModule::RendererModule(
 		MonitorManagerPtr monitor_manager,
 		WindowManagerPtr window_manager,
+		FontManagerPtr font_manager,
 		LoadingScreenPtr loading_screen,
 		TriangleExamplePtr triangle_example
 	)
 	{
 		this->monitor_manager = monitor_manager;
 		this->window_manager = window_manager;
+		this->font_manager = font_manager;
 		this->loading_screen = loading_screen;
 		this->triangle_example = triangle_example;
 	}
@@ -43,6 +45,7 @@ namespace renderer {
 
 		monitor_manager->init();
 		window_manager->init();
+		font_manager->init();
 		loading_screen->init();
 		triangle_example->init();
 	}
@@ -51,6 +54,7 @@ namespace renderer {
 	{
 		triangle_example->shutdown();
 		loading_screen->shutdown();
+		font_manager->shutdown();
 		window_manager->shutdown();
 		monitor_manager->shutdown();
 
@@ -65,11 +69,6 @@ namespace renderer {
 		// Poll for and process events
 		glfwPollEvents();
 	}
-
-//	WindowManagerPtr RendererModule::get_window_manager()
-//	{
-//		return window_manager;
-//	}
 
 }
 }

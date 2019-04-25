@@ -565,6 +565,11 @@ namespace renderer {
 			((WindowManager*) glfwGetWindowUserPointer(_glfw_window))->window_key_changed(_glfw_window, key, scancode, action, mods);
 		});
 
+		// Register the key callback
+		glfwSetCharCallback(glfw_window, [] (GLFWwindow* _glfw_window, unsigned int codepoint) {
+			((WindowManager*) glfwGetWindowUserPointer(_glfw_window))->window_char_input(_glfw_window, codepoint);
+		});
+
 		// Register the mouse position callback
 		glfwSetCursorPosCallback(glfw_window, [] (GLFWwindow* _glfw_window, double xpos, double ypos) {
 			((WindowManager*) glfwGetWindowUserPointer(_glfw_window))->window_mouse_position_changed(_glfw_window, xpos, ypos);
@@ -804,6 +809,11 @@ namespace renderer {
 	void WindowManager::window_key_changed(GLFWwindow* glfw_window, int key, int scancode, int action, int mods)
 	{
 		keyboard_input_manager->key_changed(window_entities[glfw_window], key, scancode, action, mods);
+	}
+
+	void WindowManager::window_char_input(GLFWwindow* glfw_window, unsigned int codepoint)
+	{
+		keyboard_input_manager->char_input(window_entities[glfw_window], codepoint);
 	}
 
 	void WindowManager::window_mouse_position_changed(GLFWwindow* glfw_window, double xpos, double ypos)
