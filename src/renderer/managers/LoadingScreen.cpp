@@ -518,6 +518,10 @@ namespace renderer {
 		} else if (command_buffer == "/maximize 1") {
 			action = "Maximize on";
 			window->set_own_value(WindowEntityTypeProvider::WINDOW_MAXIMIZED, true);
+		} else if (command_buffer == "/license") {
+			action = "License";
+			Corrade::Utility::Resource rs{"inexor"};
+			spdlog::info("License:\n{}", rs.get("license.txt"));
 		}
 		command_buffer = "";
 	}
