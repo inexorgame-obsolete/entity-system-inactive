@@ -32,6 +32,8 @@ namespace input {
 		signal_key_changed.disconnect_all_slots();
 		signal_key_pressed.disconnect_all_slots();
 		signal_key_pressed_or_repeated.disconnect_all_slots();
+		signal_key_released.disconnect_all_slots();
+		signal_path_dropped.disconnect_all_slots();
 		for (auto kv : signal_window_char_input)
 		{
 			kv.second->disconnect_all_slots();
@@ -57,6 +59,11 @@ namespace input {
 			kv.second->disconnect_all_slots();
 		}
 		signal_window_key_released.clear();
+		for (auto kv : signal_window_path_dropped)
+		{
+			kv.second->disconnect_all_slots();
+		}
+		signal_window_path_dropped.clear();
 	}
 
 	EntityInstancePtrOpt KeyboardInputManager::create_key(const int& key)
@@ -115,6 +122,15 @@ namespace input {
 
 	}
 
+	void KeyboardInputManager::path_dropped(EntityInstancePtr window, std::vector<std::string> paths)
+	{
+		signal_path_dropped(window, paths);
+		if (signal_window_path_dropped.end() != signal_window_path_dropped.find(window))
+		{
+			signal_window_path_dropped[window]->operator ()(window, paths);
+		}
+	}
+
 	void KeyboardInputManager::register_on_key_changed(std::shared_ptr<KeyChangedListener> key_changed_listener)
 	{
 		signal_key_changed.connect(std::bind(&KeyChangedListener::on_key_changed, key_changed_listener.get(), std::placeholders::_1, std::placeholders::_2, std::placeholders::_3, std::placeholders::_4, std::placeholders::_5));
@@ -133,6 +149,11 @@ namespace input {
 	void KeyboardInputManager::register_on_key_released(std::shared_ptr<KeyReleasedListener> key_released_listener)
 	{
 		signal_key_released.connect(std::bind(&KeyReleasedListener::on_key_released, key_released_listener.get(), std::placeholders::_1, std::placeholders::_2, std::placeholders::_3, std::placeholders::_4));
+	}
+
+	void KeyboardInputManager::register_on_path_dropped(std::shared_ptr<PathDroppedListener> path_dropped_listener)
+	{
+		signal_path_dropped.connect(std::bind(&PathDroppedListener::on_path_dropped, path_dropped_listener.get(), std::placeholders::_1, std::placeholders::_2));
 	}
 
 	void KeyboardInputManager::register_on_window_char_input(EntityInstancePtr window, std::shared_ptr<WindowCharInputListener> window_char_input_listener)
@@ -183,6 +204,16 @@ namespace input {
 			signal_window_key_released.insert(std::make_pair(window, signal));
 		}
 		signal_window_key_released[window]->connect(std::bind(&WindowKeyReleasedListener::on_window_key_released, window_key_released_listener.get(), std::placeholders::_1, std::placeholders::_2, std::placeholders::_3, std::placeholders::_4));
+	}
+
+	void KeyboardInputManager::register_on_window_path_dropped(EntityInstancePtr window, std::shared_ptr<WindowPathDroppedListener> window_path_dropped_listener)
+	{
+		if (signal_window_path_dropped.end() == signal_window_path_dropped.find(window))
+		{
+			auto signal = std::make_shared<SignalPathDropped>();
+			signal_window_path_dropped.insert(std::make_pair(window, signal));
+		}
+		signal_window_path_dropped[window]->connect(std::bind(&WindowPathDroppedListener::on_window_path_dropped, window_path_dropped_listener.get(), std::placeholders::_1, std::placeholders::_2));
 	}
 
 	// TODO: if the window has been destroyed, remove the signals for this window

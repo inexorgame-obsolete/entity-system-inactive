@@ -56,6 +56,7 @@ namespace renderer {
 		  public input::WindowCharInputListener,
 		  public input::WindowMouseButtonChangedListener,
 		  public input::WindowMouseScrolledListener,
+		  public input::WindowPathDroppedListener,
 		  public std::enable_shared_from_this<LoadingScreen>
 	{
 		public:
@@ -100,6 +101,9 @@ namespace renderer {
 
 			/// Window mouse scrolled
 			void on_window_mouse_scrolled(EntityInstancePtr window, double xpos, double ypos);
+
+			/// Paths dropped
+			void on_window_path_dropped(EntityInstancePtr window, std::vector<std::string> paths);
 
 			/// The logger name of this service.
 			static constexpr char LOGGER_NAME[] = "inexor.renderer.loading";

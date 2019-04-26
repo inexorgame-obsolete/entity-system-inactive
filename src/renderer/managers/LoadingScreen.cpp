@@ -79,6 +79,8 @@ namespace renderer {
 		keyboard_input_manager->register_on_window_char_input(window, shared_from_this());
 		keyboard_input_manager->register_on_window_key_released(window, shared_from_this());
 		keyboard_input_manager->register_on_window_key_pressed_or_repeated(window, shared_from_this());
+		keyboard_input_manager->register_on_window_path_dropped(window, shared_from_this());
+
 		mouse_input_manager->register_on_window_mouse_button_changed(window, shared_from_this());
 		mouse_input_manager->register_on_window_mouse_scrolled(window, shared_from_this());
 
@@ -186,12 +188,6 @@ namespace renderer {
 				execute_command(window);
 				break;
 
-			case GLFW_KEY_C:
-				if (mods & GLFW_MOD_CONTROL) clipboard_manager->set(command_buffer);
-				break;
-			case GLFW_KEY_V:
-				if (mods & GLFW_MOD_CONTROL) command_buffer = clipboard_manager->get_value();
-				break;
 			case GLFW_KEY_X:
 				if (mods & GLFW_MOD_CONTROL) window_manager->destroy_window(window);
 				break;
@@ -333,6 +329,12 @@ namespace renderer {
 				movement.right = true;
 				break;
 
+			case GLFW_KEY_C:
+				if (mods & GLFW_MOD_CONTROL) clipboard_manager->set(command_buffer);
+				break;
+			case GLFW_KEY_V:
+				if (mods & GLFW_MOD_CONTROL) command_buffer += clipboard_manager->get_value();
+				break;
 			case GLFW_KEY_BACKSPACE:
 				command_buffer = command_buffer.substr(0, command_buffer.size() - 1);
 				break;
@@ -380,6 +382,17 @@ namespace renderer {
 	{
 		mesh_factor += ((float) ypos * 0.1f);
 		action = fmt::format("logo size {}x{} factor {}", mesh_size_x, mesh_size_y, mesh_factor);
+	}
+	void LoadingScreen::on_window_path_dropped(EntityInstancePtr window, std::vector<std::string> paths)
+	{
+		std::string suffix = ".txt";
+		for (std::string path : paths)
+		{
+			if (path.size() >= suffix.size() && 0 == path.compare(path.size()-suffix.size(), suffix.size(), suffix))
+			{
+				command_buffer += path;
+			}
+		}
 	}
 
 	void LoadingScreen::move(EntityInstancePtr window)
@@ -493,6 +506,18 @@ namespace renderer {
 		} else if (command_buffer == "/vsync 1") {
 			action = "vsync on";
 			window->set_own_value(WindowEntityTypeProvider::WINDOW_VSYNC, true);
+		} else if (command_buffer == "/fullscreen 0") {
+			action = "Fullscreen off";
+			window->set_own_value(WindowEntityTypeProvider::WINDOW_FULLSCREEN, false);
+		} else if (command_buffer == "/fullscreen 1") {
+			action = "Fullscreen on";
+			window->set_own_value(WindowEntityTypeProvider::WINDOW_FULLSCREEN, true);
+		} else if (command_buffer == "/maximize 0") {
+			action = "Maximize off";
+			window->set_own_value(WindowEntityTypeProvider::WINDOW_MAXIMIZED, false);
+		} else if (command_buffer == "/maximize 1") {
+			action = "Maximize on";
+			window->set_own_value(WindowEntityTypeProvider::WINDOW_MAXIMIZED, true);
 		}
 		command_buffer = "";
 	}
@@ -581,8 +606,8 @@ namespace renderer {
 		title_font->shader->setTransformationProjectionMatrix(translation_y)
 			.setColor(Magnum::Color4 {0.0f, 0.0f, 0.0f, 0.8f})
 			.setOutlineColor(Magnum::Color4 {1.0f, 1.0f, 1.0f, 0.8f})
-			.setOutlineRange(0.95f, 1.0f)
-			.setSmoothness(0.250f)
+			.setOutlineRange(0.5f, 0.75f)
+			.setSmoothness(0.075f)
 			.bindVectorTexture(title_font->glyph_cache->texture());
 		title_font->renderer->mesh().draw((*title_font->shader));
 	}

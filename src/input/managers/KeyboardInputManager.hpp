@@ -4,11 +4,13 @@
 #include "input/listeners/KeyPressedListener.hpp"
 #include "input/listeners/KeyPressedOrRepeatedListener.hpp"
 #include "input/listeners/KeyReleasedListener.hpp"
+#include "input/listeners/PathDroppedListener.hpp"
 #include "input/listeners/WindowCharInputListener.hpp"
 #include "input/listeners/WindowKeyChangedListener.hpp"
 #include "input/listeners/WindowKeyPressedListener.hpp"
 #include "input/listeners/WindowKeyPressedOrRepeatedListener.hpp"
 #include "input/listeners/WindowKeyReleasedListener.hpp"
+#include "input/listeners/WindowPathDroppedListener.hpp"
 
 #include "entity-system/model/entities/entity-instances/EntityInstance.hpp"
 #include "type-system/factories/inout/keyboard/GlobalKeyFactory.hpp"
@@ -35,6 +37,8 @@ namespace input {
 	using SignalKeyPressedOrRepeatedPtr = std::shared_ptr<SignalKeyPressedOrRepeated>;
 	using SignalKeyReleased = boost::signals2::signal<void(EntityInstancePtr window, int key, int scancode, int mods)>;
 	using SignalKeyReleasedPtr = std::shared_ptr<SignalKeyReleased>;
+	using SignalPathDropped = boost::signals2::signal<void(EntityInstancePtr window, std::vector<std::string> paths)>;
+	using SignalPathDroppedPtr = std::shared_ptr<SignalPathDropped>;
 
 	/// @class KeyboardInputManager
 	/// @brief Management of the keyboard input data.
@@ -78,6 +82,9 @@ namespace input {
 			/// @param mods
 			void key_changed(EntityInstancePtr window, int key, int scancode, int action, int mods);
 
+			/// @brief Called if one or multiple files has been dropped.
+			void path_dropped(EntityInstancePtr window, std::vector<std::string> paths);
+
 			/// @brief Registers a listener for the state of a key has been changed on any window.
 			void register_on_key_changed(std::shared_ptr<KeyChangedListener> key_changed_listener);
 
@@ -89,6 +96,9 @@ namespace input {
 
 			/// @brief Registers a listener for a key has been released on any window.
 			void register_on_key_released(std::shared_ptr<KeyReleasedListener> key_released_listener);
+
+			/// @brief Registers a listener for dropped paths on any window.
+			void register_on_path_dropped(std::shared_ptr<PathDroppedListener> path_dropped_listener);
 
 			/// @brief Registers a listener for character input on a specific window.
 			void register_on_window_char_input(EntityInstancePtr window, std::shared_ptr<WindowCharInputListener> window_char_input_listener);
@@ -104,6 +114,9 @@ namespace input {
 
 			/// @brief Registers a listener for a key has been released on a specific window.
 			void register_on_window_key_released(EntityInstancePtr window, std::shared_ptr<WindowKeyReleasedListener> window_key_released_listener);
+
+			/// @brief Registers a listener for dropped paths on a specific window.
+			void register_on_window_path_dropped(EntityInstancePtr window, std::shared_ptr<WindowPathDroppedListener> window_path_dropped_listener);
 
 			/// The logger name of this service.
 			static constexpr char LOGGER_NAME[] = "inexor.input.keyboard";
@@ -132,6 +145,9 @@ namespace input {
 			/// Signal, that the state of a key has been released on any window.
 			SignalKeyReleased signal_key_released;
 
+			/// Signal, that a path has been dropped on any window.
+			SignalPathDropped signal_path_dropped;
+
 			/// Signal character input on a specific window.
 			std::unordered_map<EntityInstancePtr, SignalCharInputPtr> signal_window_char_input;
 
@@ -146,6 +162,9 @@ namespace input {
 
 			/// Signal, that the state of a key has been released on a specific window.
 			std::unordered_map<EntityInstancePtr, SignalKeyReleasedPtr> signal_window_key_released;
+
+			/// Signal, that a path has been dropped on a specific window.
+			std::unordered_map<EntityInstancePtr, SignalPathDroppedPtr> signal_window_path_dropped;
 
 	};
 

@@ -337,6 +337,10 @@ namespace renderer {
 			/// @param glfw_window The window handle.
 			void window_mouse_scroll_changed(GLFWwindow* glfw_window, double xoffset, double yoffset);
 
+			/// This callback is called if files are dropped on the window.
+			/// @param glfw_window The window handle.
+			void window_path_dropped(GLFWwindow* glfw_window, int count, const char** _paths);
+
 
 			// Services
 

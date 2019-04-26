@@ -584,6 +584,11 @@ namespace renderer {
 		glfwSetScrollCallback(glfw_window, [] (GLFWwindow* _glfw_window, double xoffset, double yoffset) {
 			((WindowManager*) glfwGetWindowUserPointer(_glfw_window))->window_mouse_scroll_changed(_glfw_window, xoffset, yoffset);
 		});
+
+		// Register the path drop callback
+		glfwSetDropCallback(glfw_window, [] (GLFWwindow* _glfw_window, int count, const char** paths) {
+			((WindowManager*) glfwGetWindowUserPointer(_glfw_window))->window_path_dropped(_glfw_window, count, paths);
+		});
 	}
 
 	void WindowManager::destroy_window_callbacks(GLFWwindow *glfw_window)
@@ -595,9 +600,11 @@ namespace renderer {
 		glfwSetWindowPosCallback(glfw_window, nullptr);
 		glfwSetWindowSizeCallback(glfw_window, nullptr);
 		glfwSetKeyCallback(glfw_window, nullptr);
+		glfwSetCharCallback(glfw_window, nullptr);
 		glfwSetCursorPosCallback(glfw_window, nullptr);
 		glfwSetMouseButtonCallback(glfw_window, nullptr);
 		glfwSetScrollCallback(glfw_window, nullptr);
+		glfwSetDropCallback(glfw_window, nullptr);
 		glfwSetWindowUserPointer(glfw_window, nullptr);
 	}
 
@@ -769,7 +776,6 @@ namespace renderer {
 		AsyncTransaction<D>([window, is_iconified] {
 			window->set_own_value(WindowEntityTypeProvider::WINDOW_ICONIFIED, is_iconified);
 		});
-		// window->get_attribute_instance(WindowEntityTypeProvider::WINDOW_MAXIMIZED).value()->own_value.Set(is_maximized);
 	}
 
 	void WindowManager::window_maximized(GLFWwindow* glfw_window, bool is_maximized)
@@ -779,7 +785,6 @@ namespace renderer {
 		AsyncTransaction<D>([window, is_maximized] {
 			window->set_own_value(WindowEntityTypeProvider::WINDOW_MAXIMIZED, is_maximized);
 		});
-		// window->get_attribute_instance(WindowEntityTypeProvider::WINDOW_MAXIMIZED).value()->own_value.Set(is_maximized);
 	}
 
 	void WindowManager::window_position_changed(GLFWwindow* glfw_window, int x, int y)
@@ -790,8 +795,6 @@ namespace renderer {
 			window->set_own_value(WindowEntityTypeProvider::WINDOW_POSITION_X, x);
 			window->set_own_value(WindowEntityTypeProvider::WINDOW_POSITION_Y, y);
 		});
-		// window->get_attribute_instance(WindowEntityTypeProvider::WINDOW_POSITION_X).value()->own_value.Set(x);
-		// window->get_attribute_instance(WindowEntityTypeProvider::WINDOW_POSITION_Y).value()->own_value.Set(y);
 	}
 
 	void WindowManager::window_size_changed(GLFWwindow* glfw_window, int width, int height)
@@ -802,8 +805,6 @@ namespace renderer {
 			window->set_own_value(WindowEntityTypeProvider::WINDOW_WIDTH, width);
 			window->set_own_value(WindowEntityTypeProvider::WINDOW_HEIGHT, height);
 		});
-		// window->get_attribute_instance(WindowEntityTypeProvider::WINDOW_WIDTH).value()->own_value.Set(width);
-		// window->get_attribute_instance(WindowEntityTypeProvider::WINDOW_HEIGHT).value()->own_value.Set(height);
 	}
 
 	void WindowManager::window_key_changed(GLFWwindow* glfw_window, int key, int scancode, int action, int mods)
@@ -829,6 +830,16 @@ namespace renderer {
 	void WindowManager::window_mouse_scroll_changed(GLFWwindow* glfw_window, double xoffset, double yoffset)
 	{
 		mouse_input_manager->mouse_scroll_changed(window_entities[glfw_window], xoffset, yoffset);
+	}
+
+	void WindowManager::window_path_dropped(GLFWwindow* glfw_window, int count, const char** _paths)
+	{
+		std::vector<std::string> paths;
+		for (int i = 0; i < count; i++)
+		{
+			paths.push_back(_paths[i]);
+		}
+		keyboard_input_manager->path_dropped(window_entities[glfw_window], paths);
 	}
 
 	void WindowManager::start_window_thread(EntityInstancePtr window)
