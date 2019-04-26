@@ -53,14 +53,14 @@ endif()
 if(UNIX AND NOT APPLE)
 	conan_cmake_run(CONANFILE conanfile.txt
         	        BASIC_SETUP
-                	BUILD missing
+                	BUILD outdated
                 	PROFILE default
                 	PROFILE_AUTO build_type
 			SETTINGS compiler.libcxx=${LIBCXX})
 else()
 	conan_cmake_run(CONANFILE conanfile.txt
 			BASIC_SETUP
-			BUILD missing
+			BUILD outdated
 			PROFILE default
 			PROFILE_AUTO build_type)
 endif()
