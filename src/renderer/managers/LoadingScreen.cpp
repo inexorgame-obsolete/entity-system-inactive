@@ -32,6 +32,7 @@ namespace renderer {
 		FontManagerPtr font_manager,
 		KeyboardInputManagerPtr keyboard_input_manager,
 		MouseInputManagerPtr mouse_input_manager,
+		ClipboardManagerPtr clipboard_manager,
 		ConnectorManagerPtr connector_manager,
 		ClientLifecyclePtr client_lifecycle,
 		LogManagerPtr log_manager
@@ -41,6 +42,7 @@ namespace renderer {
 		this->font_manager = font_manager;
 		this->keyboard_input_manager = keyboard_input_manager;
 		this->mouse_input_manager = mouse_input_manager;
+		this->clipboard_manager = clipboard_manager;
 		this->connector_manager = connector_manager;
 		this->client_lifecycle = client_lifecycle;
 		this->log_manager = log_manager;
@@ -184,6 +186,12 @@ namespace renderer {
 				execute_command(window);
 				break;
 
+			case GLFW_KEY_C:
+				if (mods & GLFW_MOD_CONTROL) clipboard_manager->set(command_buffer);
+				break;
+			case GLFW_KEY_V:
+				if (mods & GLFW_MOD_CONTROL) command_buffer = clipboard_manager->get_value();
+				break;
 			case GLFW_KEY_X:
 				if (mods & GLFW_MOD_CONTROL) window_manager->destroy_window(window);
 				break;

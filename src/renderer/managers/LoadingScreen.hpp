@@ -5,6 +5,7 @@
 #include "renderer/managers/FontManager.hpp"
 #include "visual-scripting/managers/ConnectorManager.hpp"
 #include "client/ClientLifecycle.hpp"
+#include "input/managers/ClipboardManager.hpp"
 #include "logging/managers/LogManager.hpp"
 
 #include <Magnum/GL/Mesh.h>
@@ -28,6 +29,7 @@ namespace renderer {
 	using FontManagerPtr = std::shared_ptr<FontManager>;
 	using KeyboardInputManagerPtr = std::shared_ptr<input::KeyboardInputManager>;
 	using MouseInputManagerPtr = std::shared_ptr<input::MouseInputManager>;
+	using ClipboardManagerPtr = std::shared_ptr<input::ClipboardManager>;
 	using ConnectorManagerPtr = std::shared_ptr<visual_scripting::ConnectorManager>;
 	using ClientLifecyclePtr = std::shared_ptr<client::ClientLifecycle>;
 	using LogManagerPtr = std::shared_ptr<logging::LogManager>;
@@ -69,6 +71,7 @@ namespace renderer {
 				FontManagerPtr font_manager,
 				KeyboardInputManagerPtr keyboard_input_manager,
 				MouseInputManagerPtr mouse_input_manager,
+				ClipboardManagerPtr clipboard_manager,
 				ConnectorManagerPtr connector_manager,
 				ClientLifecyclePtr client_lifecycle,
 				LogManagerPtr log_manager
@@ -150,6 +153,9 @@ namespace renderer {
 
 			/// The mouse input manager
 			MouseInputManagerPtr mouse_input_manager;
+
+			/// The clipboard manager.
+			ClipboardManagerPtr clipboard_manager;
 
 			/// The connector manager
 			ConnectorManagerPtr connector_manager;

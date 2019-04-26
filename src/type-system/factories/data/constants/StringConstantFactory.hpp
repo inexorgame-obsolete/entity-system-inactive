@@ -39,9 +39,13 @@ namespace type_system {
 			/// Creates an instance with default values.
 			EntityInstancePtrOpt create_instance();
 
+			/// @brief Creates an STRING_CONSTANT with the given constant name.
+            /// @param name The name of the string constant.
+			EntityInstancePtrOpt create_instance(const std::string& name);
+
 			/// @brief Creates an STRING_CONSTANT with the given constant name and the given value.
-            /// @param name ?
-            /// @param value ?
+            /// @param name The name of the string constant.
+            /// @param value The initial value of the string constant.
 			EntityInstancePtrOpt create_instance(const std::string& name, const std::string& value);
 
 		private:

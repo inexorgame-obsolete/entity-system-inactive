@@ -2,6 +2,7 @@
 
 #include "input/managers/KeyboardInputManager.hpp"
 #include "input/managers/MouseInputManager.hpp"
+#include "input/managers/ClipboardManager.hpp"
 #include "input/processors/InputProcessors.hpp"
 
 namespace inexor {
@@ -13,6 +14,7 @@ namespace input {
 	{
 		using KeyboardInputManagerPtr = std::shared_ptr<KeyboardInputManager>;
 		using MouseInputManagerPtr = std::shared_ptr<MouseInputManager>;
+		using ClipboardManagerPtr = std::shared_ptr<ClipboardManager>;
 		using InputProcessorsPtr = std::shared_ptr<InputProcessors>;
 
 		public:
@@ -25,6 +27,7 @@ namespace input {
 			InputModule(
 				KeyboardInputManagerPtr keyboard_input_manager,
 				MouseInputManagerPtr mouse_input_manager,
+				ClipboardManagerPtr clipboard_manager,
 				InputProcessorsPtr input_processors
 			);
 
@@ -37,6 +40,9 @@ namespace input {
 			/// Shut down the input module.
 			void shutdown();
 
+			/// Updates the input module.
+			void update();
+
 		private:
 
 			/// The keyboard input manager.
@@ -44,6 +50,9 @@ namespace input {
 
 			/// The mouse input manager.
 			MouseInputManagerPtr mouse_input_manager;
+
+			/// The clipboard manager.
+			ClipboardManagerPtr clipboard_manager;
 
 			/// The input processors.
 			InputProcessorsPtr input_processors;

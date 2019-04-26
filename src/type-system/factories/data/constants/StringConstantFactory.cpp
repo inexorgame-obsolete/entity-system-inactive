@@ -30,6 +30,15 @@ namespace type_system {
 			->build();
 	}
 
+	EntityInstancePtrOpt StringConstantFactory::create_instance(const std::string& name)
+	{
+		return entity_instance_builder_factory->get_builder()
+			->type(entity_type_provider->get_type())
+			->attribute(StringConstantEntityTypeProvider::STRING_CONSTANT_NAME, name)
+			->attribute(StringConstantEntityTypeProvider::STRING_CONSTANT_VALUE, "")
+			->build();
+	}
+
 	EntityInstancePtrOpt StringConstantFactory::create_instance(const std::string& name, const std::string& value)
 	{
 		return entity_instance_builder_factory->get_builder()

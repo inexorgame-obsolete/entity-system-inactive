@@ -39,6 +39,7 @@ namespace client {
 	void ClientModule::update()
 	{
 		renderer_module->update();
+		input_module->update();
 	}
 
 	bool ClientModule::is_shutdown_requested()
