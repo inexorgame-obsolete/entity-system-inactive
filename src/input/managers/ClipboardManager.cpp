@@ -49,8 +49,13 @@ namespace input {
 			glfwSetClipboardString(nullptr, set_on_next_update.value().c_str());
 			clipboard->get_attribute_instance(StringConstant::STRING_CONSTANT_VALUE).value()->own_value.Set(set_on_next_update.value());
 			this->set_on_next_update = std::nullopt;
+			last_update = std::chrono::system_clock::now();;
 		} else {
-			clipboard->get_attribute_instance(StringConstant::STRING_CONSTANT_VALUE).value()->own_value.Set(to_string(glfwGetClipboardString(nullptr)));
+			std::chrono::duration<double> diff = std::chrono::system_clock::now() - last_update;
+			if (diff.count() > 0.2) {
+				clipboard->get_attribute_instance(StringConstant::STRING_CONSTANT_VALUE).value()->own_value.Set(to_string(glfwGetClipboardString(nullptr)));
+				last_update = std::chrono::system_clock::now();;
+			}
 		}
 	}
 

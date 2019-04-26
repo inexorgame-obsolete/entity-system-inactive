@@ -72,6 +72,8 @@ namespace input {
 
 			std::optional<std::string> set_on_next_update;
 
+			std::chrono::time_point<std::chrono::system_clock> last_update;
+
 	};
 
 }
