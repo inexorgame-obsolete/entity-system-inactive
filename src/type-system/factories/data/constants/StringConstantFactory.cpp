@@ -25,8 +25,8 @@ namespace type_system {
 	{
 		return entity_instance_builder_factory->get_builder()
 			->type(entity_type_provider->get_type())
-			->attribute(StringConstantEntityTypeProvider::STRING_CONSTANT_NAME, "")
-			->attribute(StringConstantEntityTypeProvider::STRING_CONSTANT_VALUE, "")
+			->attribute(StringConstantEntityTypeProvider::STRING_CONSTANT_NAME, std::string(""))
+			->attribute(StringConstantEntityTypeProvider::STRING_CONSTANT_VALUE, std::string(""))
 			->build();
 	}
 
@@ -35,7 +35,7 @@ namespace type_system {
 		return entity_instance_builder_factory->get_builder()
 			->type(entity_type_provider->get_type())
 			->attribute(StringConstantEntityTypeProvider::STRING_CONSTANT_NAME, name)
-			->attribute(StringConstantEntityTypeProvider::STRING_CONSTANT_VALUE, "")
+			->attribute(StringConstantEntityTypeProvider::STRING_CONSTANT_VALUE, std::string(""))
 			->build();
 	}
 
