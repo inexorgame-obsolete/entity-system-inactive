@@ -600,13 +600,15 @@ namespace renderer {
 	    } else {
 	    	spdlog::error("Failed to load and instantiate AnyImageImporter");
 	    }
+
+	    Magnum::GL::defaultFramebuffer.clearColor(Magnum::Color4 { 0.1f, 0.1f, 0.1f, 0.1f });
 	}
 
 	// Thread local
 	void LoadingScreen::render_inexor_logo(Magnum::Timeline timeline)
 	{
-		float mx = mesh_size_x + std::sin(timeline.previousFrameTime()) * mesh_factor;
-		float my = mesh_size_y + std::cos(timeline.previousFrameTime()) * mesh_factor;
+		float mx = mesh_size_x + std::sin(timeline.previousFrameTime()) * std::tan(mesh_size_y) * mesh_factor;
+		float my = mesh_size_y + std::cos(timeline.previousFrameTime()) * std::tan(mesh_size_x) * mesh_factor;
 
 		// TODO: make this more flexible
 		const QuadVertex quad_vertex[] {
@@ -636,7 +638,8 @@ namespace renderer {
 		Magnum::GL::Renderer::setBlendFunction(Magnum::GL::Renderer::BlendFunction::SourceAlpha, Magnum::GL::Renderer::BlendFunction::OneMinusSourceAlpha);
 		Magnum::GL::Renderer::setBlendEquation(Magnum::GL::Renderer::BlendEquation::Darken, Magnum::GL::Renderer::BlendEquation::Darken);
 
-		auto translation_y = Magnum::Matrix3::translation(Magnum::Vector2::yAxis(-0.3f));
+		float my = -0.8f + (mesh_size_y * (std::sin(timeline.previousFrameTime()) * 0.2f + 0.8f));
+		auto translation_y = Magnum::Matrix3::translation(Magnum::Vector2::yAxis(my)); // -0.3f
 		title_font->shader->setTransformationProjectionMatrix(translation_y)
 			.setColor(Magnum::Color4 {0.2f, 0.2f, 0.2f, 0.8f})
 			.setOutlineColor(Magnum::Color4 {1.0f, 1.0f, 1.0f, 0.8f})
