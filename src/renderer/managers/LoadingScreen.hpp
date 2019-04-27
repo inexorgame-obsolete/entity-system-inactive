@@ -16,7 +16,7 @@
 #include <Magnum/Math/Matrix3.h>
 #include <Magnum/Platform/GLContext.h>
 #include <Magnum/Shaders/Vector.h>
-#include <Magnum/Shaders/VertexColor.h>
+#include <Magnum/Shaders/Flat.h>
 #include <Magnum/Timeline.h>
 
 struct GLFWwindow;
@@ -37,7 +37,7 @@ namespace renderer {
 
 	struct QuadVertex {
 		Magnum::Vector2 position;
-		Magnum::Color3 color;
+		Magnum::Vector2 texture_coordinated;
 	};
 
 	struct Movement {
@@ -180,7 +180,9 @@ namespace renderer {
 			std::shared_ptr<Magnum::GL::Mesh> mesh;
 
 			/// The shader for the logo.
-			std::shared_ptr<Magnum::Shaders::VertexColor2D> shader;
+			std::shared_ptr<Magnum::Shaders::Flat2D> shader;
+
+			std::shared_ptr<Magnum::GL::Texture2D> texture;
 
 			/// If true, the render thread shows the frames per second.
 			bool show_fps;

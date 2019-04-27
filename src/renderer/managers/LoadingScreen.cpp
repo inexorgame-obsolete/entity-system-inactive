@@ -3,9 +3,13 @@
 #include "entity-system/model/entity-attributes/entity-attribute-instances/EntityAttributeInstance.hpp"
 #include "type-system/providers/inout/keyboard/GlobalKeyEntityTypeProvider.hpp"
 
+#include <Corrade/Containers/Optional.h>
 #include <Corrade/PluginManager/Manager.h>
 
 #include <Magnum/DebugTools/Screenshot.h>
+#include <Magnum/GL/TextureFormat.h>
+#include <Magnum/Trade/AbstractImporter.h>
+#include <Magnum/Trade/ImageData.h>
 #include <Magnum/Primitives/Square.h>
 
 #include <GLFW/glfw3.h>
@@ -48,9 +52,9 @@ namespace renderer {
 		this->log_manager = log_manager;
 		this->show_fps = true;
 		this->create_screenshot = false;
-		this->mesh_size_x = 0.5f;
-		this->mesh_size_y = 0.5f;
-		this->mesh_factor = 0.1f;
+		this->mesh_size_x = 0.3f;
+		this->mesh_size_y = 0.3f;
+		this->mesh_factor = 0.6f;
 		this->action = "";
 		this->command_buffer = "";
 	}
@@ -67,7 +71,7 @@ namespace renderer {
 		window = window_manager->create_window(
 			"Loading Inexor...",
 			800, 0, 800, 600,
-			0.8f,
+			0.95f,
 			true, false, false, false, true, true,
 			60.0f,
 			{ std::bind(&LoadingScreen::init_loading_screen, this, std::placeholders::_1, std::placeholders::_2) },
@@ -532,7 +536,7 @@ namespace renderer {
 	{
 		buffer = std::make_shared<Magnum::GL::Buffer>();
 		mesh = std::make_shared<Magnum::GL::Mesh>();
-		shader = std::make_shared<Magnum::Shaders::VertexColor2D>();
+		shader = std::make_shared<Magnum::Shaders::Flat2D>(Magnum::Shaders::Flat2D::Flag::Textured);
 
 		// TODO: Use fontconfig for resolving the font os-independently: https://www.freedesktop.org/wiki/Software/fontconfig/ https://github.com/conan-community/conan-fontconfig
 #ifdef __linux__
@@ -542,10 +546,10 @@ namespace renderer {
 #endif
 		title_font = font_manager->get_font(
 			font_path,
-			200.0f,
+			400.0f,
 			"INEXOR",
 			6,
-			0.3f,
+			0.4f,
 			Magnum::Text::Alignment::MiddleCenter
 		);
 		title_font->renderer->render("INEXOR");
@@ -573,6 +577,29 @@ namespace renderer {
 			0.05f,
 			Magnum::Text::Alignment::LineRight
 		);
+
+		// TODO: move to own service
+	    Corrade::PluginManager::Manager<Magnum::Trade::AbstractImporter> manager;
+	    Corrade::Containers::Pointer<Magnum::Trade::AbstractImporter> image_importer = manager.loadAndInstantiate("AnyImageImporter");
+	    if (image_importer)
+	    {
+		    const Corrade::Utility::Resource rs{"inexor"};
+		    if(image_importer->openData(rs.getRaw("logo.png")))
+		    {
+				// TODO: move to own service
+			    Corrade::Containers::Optional<Magnum::Trade::ImageData2D> image = image_importer->image2D(0);
+			    texture = std::make_shared<Magnum::GL::Texture2D>();
+			    texture->setWrapping(Magnum::GL::SamplerWrapping::ClampToEdge)
+					.setMagnificationFilter(Magnum::GL::SamplerFilter::Linear)
+					.setMinificationFilter(Magnum::GL::SamplerFilter::Linear)
+					.setImage(0, Magnum::GL::TextureFormat::RGBA8, (*image));
+		    	spdlog::info("Successfully opened logo.png");
+		    } else {
+		    	spdlog::error("Failed to open logo.png");
+		    }
+	    } else {
+	    	spdlog::error("Failed to load and instantiate AnyImageImporter");
+	    }
 	}
 
 	// Thread local
@@ -581,37 +608,40 @@ namespace renderer {
 		float mx = mesh_size_x + std::sin(timeline.previousFrameTime()) * mesh_factor;
 		float my = mesh_size_y + std::cos(timeline.previousFrameTime()) * mesh_factor;
 
+		// TODO: make this more flexible
 		const QuadVertex quad_vertex[] {
-			{{ mx, my * -1.0f}, 0xffff00_rgbf},
-			{{ mx * -1.0f, my * -1.0f}, 0xffffff_rgbf},
-			{{ mx, my}, 0x00ffff_rgbf},
-			{{ mx * -1.0f, my}, 0xff00ff_rgbf}
+			{{ mx, my * -1.0f}, { 0.0f, 1.0f }},
+			{{ mx * -1.0f, my * -1.0f}, { 1.0f, 1.0f }},
+			{{ mx, my}, { 0.0f, 0.0f }},
+			{{ mx * -1.0f, my}, { 1.0f, 0.0f }}
 		};
+		shader->bindTexture((*texture));
 		buffer->setData(quad_vertex);
 		mesh->setPrimitive(Magnum::GL::MeshPrimitive::TriangleStrip)
 			.setCount(4)
 			.addVertexBuffer(
 				(*buffer),
 				0,
-				Magnum::Shaders::VertexColor2D::Position{},
-				Magnum::Shaders::VertexColor2D::Color3{}
+				Magnum::Shaders::Flat2D::Position{},
+				Magnum::Shaders::Flat2D::TextureCoordinates{}
 			);
 		mesh->draw((*shader));
 	}
 
 	// Thread local
+	// TODO: move this to a service
 	void LoadingScreen::render_inexor_title(Magnum::Timeline timeline)
 	{
 		Magnum::GL::Renderer::enable(Magnum::GL::Renderer::Feature::Blending);
 		Magnum::GL::Renderer::setBlendFunction(Magnum::GL::Renderer::BlendFunction::SourceAlpha, Magnum::GL::Renderer::BlendFunction::OneMinusSourceAlpha);
-		Magnum::GL::Renderer::setBlendEquation(Magnum::GL::Renderer::BlendEquation::Difference, Magnum::GL::Renderer::BlendEquation::Difference);
+		Magnum::GL::Renderer::setBlendEquation(Magnum::GL::Renderer::BlendEquation::Darken, Magnum::GL::Renderer::BlendEquation::Darken);
 
-		auto translation_y = Magnum::Matrix3::translation(Magnum::Vector2::yAxis(-0.2f));
+		auto translation_y = Magnum::Matrix3::translation(Magnum::Vector2::yAxis(-0.3f));
 		title_font->shader->setTransformationProjectionMatrix(translation_y)
-			.setColor(Magnum::Color4 {0.0f, 0.0f, 0.0f, 0.8f})
+			.setColor(Magnum::Color4 {0.2f, 0.2f, 0.2f, 0.8f})
 			.setOutlineColor(Magnum::Color4 {1.0f, 1.0f, 1.0f, 0.8f})
-			.setOutlineRange(0.5f, 0.75f)
-			.setSmoothness(0.075f)
+			.setOutlineRange(0.2f, 2.5f)
+			.setSmoothness(0.01f)
 			.bindVectorTexture(title_font->glyph_cache->texture());
 		title_font->renderer->mesh().draw((*title_font->shader));
 	}
@@ -716,6 +746,7 @@ namespace renderer {
 		shader = nullptr;
 		mesh = nullptr;
 		buffer = nullptr;
+		texture = nullptr;
 
 		// TODO: free fonts!
 		title_font = nullptr;
