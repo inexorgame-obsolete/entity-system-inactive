@@ -632,11 +632,37 @@ namespace renderer {
 		Magnum::GL::Renderer::setBlendFunction(Magnum::GL::Renderer::BlendFunction::SourceAlpha, Magnum::GL::Renderer::BlendFunction::OneMinusSourceAlpha);
 		Magnum::GL::Renderer::setBlendEquation(Magnum::GL::Renderer::BlendEquation::Add, Magnum::GL::Renderer::BlendEquation::Add);
 
-		float my = -0.8f + (mesh_size_y * (std::sin(timeline.previousFrameTime()) * 0.2f + 0.8f));
-		auto translation_y = Magnum::Matrix3::translation(Magnum::Vector2::yAxis(my)); // -0.3f
-		title_font->shader->setTransformationProjectionMatrix(translation_y)
-			.setColor(Magnum::Color4 {0.8f, 0.8f, 0.8f, 0.8f})
+		float mx1 = (std::sin(timeline.previousFrameTime() * 1.995f) * 0.2f);
+		float my1 = -0.8f + (mesh_size_y * (std::sin(timeline.previousFrameTime()) * 0.2f + 0.8f));
+		auto translation_x1 = Magnum::Matrix3::translation(Magnum::Vector2::xAxis(mx1));
+		auto translation_y1 = Magnum::Matrix3::translation(Magnum::Vector2::yAxis(my1));
+		title_font->shader->setTransformationProjectionMatrix(translation_x1 * translation_y1)
+			.setColor(Magnum::Color4 {0.2f, 0.5f, 0.2f, 0.4f})
 			.setOutlineColor(Magnum::Color4 {1.0f, 1.0f, 1.0f, 0.8f})
+			.setOutlineRange(0.5f, 1.0f)
+			.setSmoothness(0.01f)
+			.bindVectorTexture(title_font->glyph_cache->texture());
+		title_font->renderer->mesh().draw((*title_font->shader));
+
+		float mx2 = (std::sin(timeline.previousFrameTime() * 2.005f) * 0.2f);
+		float my2 = -0.8f + (mesh_size_y * (std::sin(timeline.previousFrameTime() + 0.1f) * 0.2f + 0.8f));
+		auto translation_x2 = Magnum::Matrix3::translation(Magnum::Vector2::xAxis(mx2));
+		auto translation_y2 = Magnum::Matrix3::translation(Magnum::Vector2::yAxis(my2));
+		title_font->shader->setTransformationProjectionMatrix(translation_x2 * translation_y2)
+			.setColor(Magnum::Color4 {0.2f, 0.2f, 0.5f, 0.8f})
+			.setOutlineColor(Magnum::Color4 {1.0f, 1.0f, 1.0f, 0.4f})
+			.setOutlineRange(0.5f, 1.0f)
+			.setSmoothness(0.01f)
+			.bindVectorTexture(title_font->glyph_cache->texture());
+		title_font->renderer->mesh().draw((*title_font->shader));
+
+		float mx3 = (std::sin(timeline.previousFrameTime() * 2.0f) * 0.2f);
+		float my3 = -0.8f + (mesh_size_y * (std::sin(timeline.previousFrameTime() + 0.2f) * 0.2f + 0.8f));
+		auto translation_x3 = Magnum::Matrix3::translation(Magnum::Vector2::xAxis(mx3));
+		auto translation_y3 = Magnum::Matrix3::translation(Magnum::Vector2::yAxis(my3));
+		title_font->shader->setTransformationProjectionMatrix(translation_x3 * translation_y3)
+			.setColor(Magnum::Color4 {0.8f, 0.8f, 0.8f, 0.8f})
+			.setOutlineColor(Magnum::Color4 {1.0f, 1.0f, 1.0f, 0.4f})
 			.setOutlineRange(0.5f, 1.0f)
 			.setSmoothness(0.01f)
 			.bindVectorTexture(title_font->glyph_cache->texture());
