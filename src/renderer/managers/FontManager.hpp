@@ -13,13 +13,17 @@
 namespace inexor {
 namespace renderer {
 
+	using LogManagerPtr = std::shared_ptr<logging::LogManager>;
+	using EntityInstancePtr = std::shared_ptr<entity_system::EntityInstance>;
+
 	// TODO: Move to model
 	// TODO: Add cleanup which have to be called within render thread
 	struct Font {
 
-		std::string path;
+//		/// The name of the font.
+//		std::string name;
 
-		/// The font.
+		/// The font instance.
 		Corrade::Containers::Pointer<Magnum::Text::AbstractFont> font;
 
 		/// The cache for the glyphs.
@@ -33,9 +37,8 @@ namespace renderer {
 
 	};
 
-	using LogManagerPtr = std::shared_ptr<logging::LogManager>;
-	using EntityInstancePtr = std::shared_ptr<entity_system::EntityInstance>;
 	using FontPtr = std::shared_ptr<Font>;
+	using FontPtrOpt = std::optional<FontPtr>;
 
 	/// @class FontManager
 	/// @brief Management of fonts and text rendering.
@@ -60,19 +63,37 @@ namespace renderer {
 			/// Shut down the font manager.
 			void shutdown();
 
-			FontPtr get_font(std::string path, float size, std::string glyphs, int capacity, float render_size, Magnum::Text::Alignment alignment);
+			/// Loads a statically included font.
+			FontPtrOpt load_internal(std::string internal_filename, float size, std::string glyphs, int capacity, float render_size, Magnum::Text::Alignment alignment);
+
+			/// Loads a font from file system.
+			FontPtrOpt load(std::string path, float size, std::string glyphs, int capacity, float render_size, Magnum::Text::Alignment alignment);
+
+			/// The resource group for statically included fonts.
+			static constexpr char RESOURCE_GROUP[] = "inexor";
+
+			/// The name of the font plugin.
+			static constexpr char FONT_PLUGIN[] = "FreeTypeFont";
 
 			/// The logger name of this service.
 			static constexpr char LOGGER_NAME[] = "inexor.renderer.font";
 
 		private:
 
+			/// Instantiates a new font.
+			FontPtrOpt instantiate();
+
+			/// Creates glyphs and fills the glyph cache.
+			void create_and_fill_glyph_cache(FontPtr font, std::string glyphs);
+
+			/// Prepares the renderer.
+			void prepare_renderer_and_shader(FontPtr font, int capacity, float render_size, Magnum::Text::Alignment alignment);
+
 			/// The log manager.
 			LogManagerPtr log_manager;
 
-			std::shared_ptr<Corrade::PluginManager::Manager<Magnum::Text::AbstractFont>> font_manager;
-
-//			Corrade::PluginManager::LoadState font_plugin_state;
+			/// The font plugin manager.
+			std::shared_ptr<Corrade::PluginManager::Manager<Magnum::Text::AbstractFont>> font_plugin_manager;
 
 	};
 

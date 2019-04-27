@@ -538,45 +538,39 @@ namespace renderer {
 		mesh = std::make_shared<Magnum::GL::Mesh>();
 		shader = std::make_shared<Magnum::Shaders::Flat2D>(Magnum::Shaders::Flat2D::Flag::Textured);
 
-		// TODO: Use fontconfig for resolving the font os-independently: https://www.freedesktop.org/wiki/Software/fontconfig/ https://github.com/conan-community/conan-fontconfig
-#ifdef __linux__
-		std::string font_path = "/usr/share/fonts/truetype/msttcorefonts/Arial.ttf";
-#elif _WIN32
-		std::string font_path = "C:\\Windows\\Fonts\\arial.ttf";
-#endif
-		title_font = font_manager->get_font(
-			font_path,
+		title_font = font_manager->load_internal(
+			TITLE_FONT,
 			400.0f,
 			"INEXOR",
 			6,
 			0.4f,
 			Magnum::Text::Alignment::MiddleCenter
-		);
+		).value();
 		title_font->renderer->render("INEXOR");
-		action_font = font_manager->get_font(
-			font_path,
+		action_font = font_manager->load_internal(
+			ACTION_FONT,
 			110.0f,
 			"abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789?!:;,.+-*/=<>[](){}| ",
 			80,
 			0.05f,
 			Magnum::Text::Alignment::MiddleCenter
-		);
-		command_font = font_manager->get_font(
-			font_path,
+		).value();
+		command_font = font_manager->load_internal(
+			COMMAND_FONT,
 			110.0f,
 			"abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789?!:;,./><() ",
-			80,
+			320,
 			0.05f,
 			Magnum::Text::Alignment::LineLeft
-		);
-		fps_font = font_manager->get_font(
-			font_path,
+		).value();
+		fps_font = font_manager->load_internal(
+			FPS_FONT,
 			110.0f,
 			"fps0123456789 ",
 			16,
 			0.05f,
 			Magnum::Text::Alignment::LineRight
-		);
+		).value();
 
 		// TODO: move to own service
 	    Corrade::PluginManager::Manager<Magnum::Trade::AbstractImporter> manager;
@@ -636,14 +630,14 @@ namespace renderer {
 	{
 		Magnum::GL::Renderer::enable(Magnum::GL::Renderer::Feature::Blending);
 		Magnum::GL::Renderer::setBlendFunction(Magnum::GL::Renderer::BlendFunction::SourceAlpha, Magnum::GL::Renderer::BlendFunction::OneMinusSourceAlpha);
-		Magnum::GL::Renderer::setBlendEquation(Magnum::GL::Renderer::BlendEquation::Darken, Magnum::GL::Renderer::BlendEquation::Darken);
+		Magnum::GL::Renderer::setBlendEquation(Magnum::GL::Renderer::BlendEquation::Add, Magnum::GL::Renderer::BlendEquation::Add);
 
 		float my = -0.8f + (mesh_size_y * (std::sin(timeline.previousFrameTime()) * 0.2f + 0.8f));
 		auto translation_y = Magnum::Matrix3::translation(Magnum::Vector2::yAxis(my)); // -0.3f
 		title_font->shader->setTransformationProjectionMatrix(translation_y)
-			.setColor(Magnum::Color4 {0.2f, 0.2f, 0.2f, 0.8f})
+			.setColor(Magnum::Color4 {0.8f, 0.8f, 0.8f, 0.8f})
 			.setOutlineColor(Magnum::Color4 {1.0f, 1.0f, 1.0f, 0.8f})
-			.setOutlineRange(0.2f, 2.5f)
+			.setOutlineRange(0.5f, 1.0f)
 			.setSmoothness(0.01f)
 			.bindVectorTexture(title_font->glyph_cache->texture());
 		title_font->renderer->mesh().draw((*title_font->shader));

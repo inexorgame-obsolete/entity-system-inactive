@@ -208,6 +208,19 @@ namespace renderer {
 			std::string command_buffer;
 
 			Movement movement;
+
+			/// The name of the title font.
+			static constexpr char TITLE_FONT[] = "cabin_sketch_regular.ttf";
+
+			/// The name of the command font.
+			static constexpr char COMMAND_FONT[] = "cabin_regular.ttf";
+
+			/// The name of the action font.
+			static constexpr char ACTION_FONT[] = "cabin_italic.ttf";
+
+			/// The name of the fps counter font.
+			static constexpr char FPS_FONT[] = "cabin_regular.ttf";
+
 	};
 
 }
