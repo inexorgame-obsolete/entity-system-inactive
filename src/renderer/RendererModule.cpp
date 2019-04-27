@@ -34,6 +34,7 @@ namespace renderer {
 
 		// Set error callback
 		glfwSetErrorCallback([] (int error_code, const char* error_message) {
+			if (error_code == 65545) return;
 			spdlog::error("GLFW ERROR {}: {}", error_code, error_message);
 		});
 
