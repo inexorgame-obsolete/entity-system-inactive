@@ -1,5 +1,9 @@
 #include "AudioModule.hpp"
 
+// Statically import the magnum audio plugins
+// This is the only place to do this!
+#include "audio/plugins/AudioPlugins.cpp"
+
 namespace inexor {
 namespace audio {
 
@@ -22,6 +26,11 @@ namespace audio {
 	void AudioModule::shutdown()
 	{
 		audio_manager->shutdown();
+	}
+
+	void AudioModule::update()
+	{
+		audio_manager->update();
 	}
 
 }

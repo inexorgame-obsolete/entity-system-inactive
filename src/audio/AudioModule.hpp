@@ -32,6 +32,9 @@ namespace audio {
 			/// Shutdown audio module.
 			void shutdown();
 
+			/// Update audio module.
+			void update();
+
 		private:
 
 			/// The audio manager.

@@ -39,6 +39,7 @@ namespace client {
 	void ClientModule::update()
 	{
 		renderer_module->update();
+		audio_module->update();
 		input_module->update();
 	}
 
