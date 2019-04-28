@@ -30,6 +30,7 @@ namespace renderer {
 
 	void RendererModule::init()
 	{
+		// TODO: Move initialization of GLFW upwards (ClientModule)
 		// Initialize the GLFW library.
 
 		// Set error callback
@@ -67,8 +68,12 @@ namespace renderer {
 
 	void RendererModule::update()
 	{
-		// Poll for and process events
-		glfwPollEvents();
+		// Wrap all events in a single reactive transaction
+		// in order to avoid feedback cycles
+		DoTransaction<D>([] {
+			// Poll for and process events
+			glfwPollEvents();
+		});
 	}
 
 }
