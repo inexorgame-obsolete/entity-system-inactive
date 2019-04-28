@@ -767,45 +767,47 @@ namespace renderer {
 		spdlog::get(WindowManager::LOGGER_NAME)->debug("Window focus changed: {}", has_focus);
 		EntityInstancePtr window = window_entities[glfw_window];
 		// TODO: Did I forget an transaction here?
-		window->get_attribute_instance(WindowEntityTypeProvider::WINDOW_FOCUSED).value()->own_value.Set(has_focus);
+		AsyncTransaction<D>([window, has_focus] {
+			window->get_attribute_instance(WindowEntityTypeProvider::WINDOW_FOCUSED).value()->own_value.Set(has_focus);
+		});
 	}
 
 	void WindowManager::window_iconified(GLFWwindow* glfw_window, bool is_iconified)
 	{
 		spdlog::get(WindowManager::LOGGER_NAME)->info("Window iconification state changed: {}", is_iconified);
 		EntityInstancePtr window = window_entities[glfw_window];
-//		AsyncTransaction<D>([window, is_iconified] {
+		AsyncTransaction<D>([window, is_iconified] {
 			window->set_own_value(WindowEntityTypeProvider::WINDOW_ICONIFIED, is_iconified);
-//		});
+		});
 	}
 
 	void WindowManager::window_maximized(GLFWwindow* glfw_window, bool is_maximized)
 	{
 		spdlog::get(WindowManager::LOGGER_NAME)->info("Window maximize state changed: {}", is_maximized);
 		EntityInstancePtr window = window_entities[glfw_window];
-//		AsyncTransaction<D>([window, is_maximized] {
+		AsyncTransaction<D>([window, is_maximized] {
 			window->set_own_value(WindowEntityTypeProvider::WINDOW_MAXIMIZED, is_maximized);
-//		});
+		});
 	}
 
 	void WindowManager::window_position_changed(GLFWwindow* glfw_window, int x, int y)
 	{
 		spdlog::get(WindowManager::LOGGER_NAME)->info("Window position changed: {}:{}", x, y);
 		EntityInstancePtr window = window_entities[glfw_window];
-//		AsyncTransaction<D>([window, x, y] {
+		AsyncTransaction<D>([window, x, y] {
 			window->set_own_value(WindowEntityTypeProvider::WINDOW_POSITION_X, x);
 			window->set_own_value(WindowEntityTypeProvider::WINDOW_POSITION_Y, y);
-//		});
+		});
 	}
 
 	void WindowManager::window_size_changed(GLFWwindow* glfw_window, int width, int height)
 	{
 		spdlog::get(WindowManager::LOGGER_NAME)->info("Window size changed: {}:{}", width, height);
 		EntityInstancePtr window = window_entities[glfw_window];
-//		AsyncTransaction<D>([window, width, height] {
+		AsyncTransaction<D>([window, width, height] {
 			window->set_own_value(WindowEntityTypeProvider::WINDOW_WIDTH, width);
 			window->set_own_value(WindowEntityTypeProvider::WINDOW_HEIGHT, height);
-//		});
+		});
 	}
 
 	void WindowManager::window_key_changed(GLFWwindow* glfw_window, int key, int scancode, int action, int mods)
