@@ -39,6 +39,7 @@ namespace renderer {
 		ClipboardManagerPtr clipboard_manager,
 		ConnectorManagerPtr connector_manager,
 		ClientLifecyclePtr client_lifecycle,
+		ScriptExecutorPtr script_executor,
 		LogManagerPtr log_manager
 	) {
 		this->window_manager = window_manager;
@@ -49,6 +50,7 @@ namespace renderer {
 		this->clipboard_manager = clipboard_manager;
 		this->connector_manager = connector_manager;
 		this->client_lifecycle = client_lifecycle;
+		this->script_executor = script_executor;
 		this->log_manager = log_manager;
 		this->show_fps = true;
 		this->create_screenshot = false;
@@ -387,14 +389,40 @@ namespace renderer {
 		mesh_factor += ((float) ypos * 0.1f);
 		action = fmt::format("logo size {}x{} factor {}", mesh_size_x, mesh_size_y, mesh_factor);
 	}
+
+	static bool starts_with(const std::string str, const std::string prefix)
+	{
+		return ((prefix.size() <= str.size()) && std::equal(prefix.begin(), prefix.end(), str.begin()));
+	}
+
+	static bool ends_with(const std::string str, const std::string suffix)
+	{
+		return (str.size() >= suffix.size() && 0 == str.compare(str.size() - suffix.size(), suffix.size(), suffix));
+	}
+
+	static std::string erase_substring(const std::string& str, const std::string& to_erase)
+	{
+		size_t pos = str.find(to_erase);
+		if (pos != std::string::npos)
+		{
+			std::string copy = std::string(str);
+			copy.erase(pos, to_erase.length());
+			return copy;
+		}
+		return str;
+	}
+
 	void LoadingScreen::on_window_path_dropped(EntityInstancePtr window, std::vector<std::string> paths)
 	{
-		std::string suffix = ".txt";
 		for (std::string path : paths)
 		{
-			if (path.size() >= suffix.size() && 0 == path.compare(path.size()-suffix.size(), suffix.size(), suffix))
+			if (ends_with(path, ".txt"))
 			{
 				command_buffer += path;
+			}
+			if (ends_with(path, ".js"))
+			{
+				script_executor->execute(0, path);
 			}
 		}
 	}
@@ -494,7 +522,6 @@ namespace renderer {
 		}
 	}
 
-
 	void LoadingScreen::execute_command(EntityInstancePtr window)
 	{
 		// TODO: call CommandManager; this is a demo only
@@ -526,6 +553,10 @@ namespace renderer {
 			action = "License";
 			Corrade::Utility::Resource rs{"inexor"};
 			spdlog::info("License:\n{}", rs.get("license.txt"));
+		} else if (starts_with(command_buffer, "/execute ")) {
+			std::string path = erase_substring(command_buffer, "/execute ");
+			action = fmt::format("Executing JavaScript {}", path);
+			script_executor->execute(0, path);
 		}
 		command_buffer = "";
 	}

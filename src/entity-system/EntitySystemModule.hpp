@@ -3,6 +3,7 @@
 #include "entity-system/managers/EntityManager.hpp"
 #include "entity-system/managers/RelationManager.hpp"
 #include "entity-system/managers/BuilderFactoryManager.hpp"
+#include "entity-system/managers/EntitySystemDebugger.hpp"
 #include "logging/managers/LogManager.hpp"
 
 namespace inexor {
@@ -18,6 +19,7 @@ namespace entity_system {
 			using EntityManagerPtr = std::shared_ptr<EntityManager>;
 			using RelationManagerPtr = std::shared_ptr<RelationManager>;
 			using BuilderFactoryManagerPtr = std::shared_ptr<BuilderFactoryManager>;
+			using EntitySystemDebuggerPtr = std::shared_ptr<entity_system::EntitySystemDebugger>;
 			using LogManagerPtr = std::shared_ptr<logging::LogManager>;
 
 			/// @brief Constructs the entity system module.
@@ -30,11 +32,16 @@ namespace entity_system {
 				EntityManagerPtr entity_manager,
 				RelationManagerPtr relation_manager,
 				BuilderFactoryManagerPtr builder_factory_manager,
+				EntitySystemDebuggerPtr entity_system_debugger,
 				LogManagerPtr log_manager
 			);
 
 			/// Destructs the entity system module.
 			~EntitySystemModule();
+
+			void pre_init();
+
+			void init();
 
 			/// @brief Completely resets the entity system.
 			/// @note Order of destruction:
@@ -60,6 +67,9 @@ namespace entity_system {
 
 			/// The manager for the builder factories.
 			BuilderFactoryManagerPtr builder_factory_manager;
+
+			/// The debugger of the entity system module.
+			EntitySystemDebuggerPtr entity_system_debugger;
 
 			/// The log manager.
 			LogManagerPtr log_manager;

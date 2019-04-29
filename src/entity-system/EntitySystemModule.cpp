@@ -7,17 +7,29 @@ namespace entity_system {
 		EntityManagerPtr entity_manager,
 		RelationManagerPtr relation_manager,
 		BuilderFactoryManagerPtr builder_factory_manager,
+		EntitySystemDebuggerPtr entity_system_debugger,
 		LogManagerPtr log_manager
 	)
 	{
 		this->entity_manager = entity_manager;
 		this->relation_manager = relation_manager;
 		this->builder_factory_manager = builder_factory_manager;
+		this->entity_system_debugger = entity_system_debugger;
 		this->log_manager = log_manager;
 	}
 
 	EntitySystemModule::~EntitySystemModule()
 	{
+	}
+
+	void EntitySystemModule::pre_init()
+	{
+		entity_system_debugger->pre_init();
+	}
+
+	void EntitySystemModule::init()
+	{
+		entity_system_debugger->init();
 	}
 
 	void EntitySystemModule::reset_entity_system()

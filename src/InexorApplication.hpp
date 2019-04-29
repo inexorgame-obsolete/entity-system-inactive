@@ -1,16 +1,21 @@
 #pragma once
 
 #include "entity-system/EntitySystemModule.hpp"
-#include "entity-system/managers/EntitySystemDebugger.hpp"
 #include "entity-system-rest/RestServer.hpp"
 #include "entity-system-rest/RestServerLogger.hpp"
 
 #include "type-system/TypeSystemModule.hpp"
 #include "configuration/ConfigurationModule.hpp"
 #include "visual-scripting/VisualScriptingSystemModule.hpp"
+#include "scripting/ScriptingModule.hpp"
 #include "logging/managers/LogManager.hpp"
 #include "command/CommandModule.hpp"
+#ifndef INEXOR_WITHOUT_CLIENT
 #include "client/ClientModule.hpp"
+#endif
+#ifndef INEXOR_WITHOUT_SERVER
+#include "server/ServerModule.hpp"
+#endif
 
 #include <memory>
 #include <cstdlib>
@@ -34,10 +39,15 @@ namespace inexor {
 	using TypeSystemModulePtr = std::shared_ptr<entity_system::type_system::TypeSystemModule>;
 	using ConfigurationModulePtr = std::shared_ptr<configuration::ConfigurationModule>;
 	using RestServerPtr = std::shared_ptr<entity_system::RestServer>;
-	using EntitySystemDebuggerPtr = std::shared_ptr<entity_system::EntitySystemDebugger>;
 	using VisualScriptingSystemModulePtr = std::shared_ptr<visual_scripting::VisualScriptingSystemModule>;
+	using ScriptingModulePtr = std::shared_ptr<scripting::ScriptingModule>;
 	using CommandModulePtr = std::shared_ptr<command::CommandModule>;
+#ifndef INEXOR_WITHOUT_CLIENT
 	using ClientModulePtr = std::shared_ptr<client::ClientModule>;
+#endif
+#ifndef INEXOR_WITHOUT_SERVER
+	using ServerModulePtr = std::shared_ptr<server::ServerModule>;
+#endif
 	using LogManagerPtr = std::shared_ptr<logging::LogManager>;
 
 	/// @class Inexor
@@ -54,6 +64,7 @@ namespace inexor {
 			/// @param rest_server The REST server module of the entity system.
 			/// @param entity_system_debugger The debugger of the entity system module.
 			/// @param visual_scripting_system_module The visual scripting system module.
+			/// @param scripting_module The scripting module.
 			/// @param log_manager The log module.
 			/// @param renderer_manager The rendering module.
 			/// @param command_module The command module.
@@ -63,10 +74,15 @@ namespace inexor {
 				TypeSystemModulePtr type_system_module,
 				ConfigurationModulePtr configuration_module,
 				RestServerPtr rest_server,
-				EntitySystemDebuggerPtr entity_system_debugger,
 				VisualScriptingSystemModulePtr visual_scripting_system_module,
+				ScriptingModulePtr scripting_module,
 				CommandModulePtr command_module,
+#ifndef INEXOR_WITHOUT_CLIENT
 				ClientModulePtr client_module,
+#endif
+#ifndef INEXOR_WITHOUT_SERVER
+				ServerModulePtr server_module,
+#endif
 				LogManagerPtr log_manager
 			);
 
@@ -91,16 +107,6 @@ namespace inexor {
 			/// Restarts the Inexor application.
 			void restart();
 
-//			/// @brief Registers a logger.
-//			/// @param logger_name The name of the logger.
-//			void register_logger(std::string logger_name);
-//
-//			/// Get method for the entity system.
-//			EntitySystemModulePtr get_entity_system();
-//
-//			/// Get method for the rest server.
-//			RestServerPtr get_rest_server();
-
 		private:
 
 			/// The entity system of Inexor.
@@ -115,17 +121,23 @@ namespace inexor {
 			/// The REST server module of the entity system.
 			RestServerPtr rest_server;
 
-			/// The debugger of the entity system module.
-			EntitySystemDebuggerPtr entity_system_debugger;
-
 			/// The visual scripting system module.
 			VisualScriptingSystemModulePtr visual_scripting_system_module;
+
+			/// The scripting module.
+			ScriptingModulePtr scripting_module;
 
 			/// The command module.
 			CommandModulePtr command_module;
 
+#ifndef INEXOR_WITHOUT_CLIENT
 			/// The client module.
 			ClientModulePtr client_module;
+#endif
+#ifndef INEXOR_WITHOUT_SERVER
+			/// The server module.
+			ServerModulePtr server_module;
+#endif
 
 			/// The log manager.
 			LogManagerPtr log_manager;
@@ -160,16 +172,6 @@ namespace inexor {
 					std::mem_fn(&InexorApplication::sigterm_handler)(instance, signal_number);
 				}
 			}
-
-//			/// ?
-//			/// @param service ?
-//			static void call_ready_handlers(Service& service)
-//			{
-//				for (InexorApplication* instance : InexorApplication::instances)
-//				{
-//					std::mem_fn(&InexorApplication::ready_handler)(instance, service);
-//				}
-//			}
 
 			/// Static instances of the Inexor application.
 			static std::vector<InexorApplication *> instances;

@@ -6,6 +6,7 @@
 #include "visual-scripting/managers/ConnectorManager.hpp"
 #include "client/ClientLifecycle.hpp"
 #include "input/managers/ClipboardManager.hpp"
+#include "scripting/managers/ScriptExecutor.hpp"
 #include "logging/managers/LogManager.hpp"
 
 #include <Magnum/GL/Mesh.h>
@@ -32,6 +33,7 @@ namespace renderer {
 	using ClipboardManagerPtr = std::shared_ptr<input::ClipboardManager>;
 	using ConnectorManagerPtr = std::shared_ptr<visual_scripting::ConnectorManager>;
 	using ClientLifecyclePtr = std::shared_ptr<client::ClientLifecycle>;
+	using ScriptExecutorPtr = std::shared_ptr<scripting::ScriptExecutor>;
 	using LogManagerPtr = std::shared_ptr<logging::LogManager>;
 	using EntityInstancePtr = std::shared_ptr<EntityInstance>;
 
@@ -75,6 +77,7 @@ namespace renderer {
 				ClipboardManagerPtr clipboard_manager,
 				ConnectorManagerPtr connector_manager,
 				ClientLifecyclePtr client_lifecycle,
+				ScriptExecutorPtr script_executor,
 				LogManagerPtr log_manager
 			);
 
@@ -166,6 +169,9 @@ namespace renderer {
 
 			/// The client lifecycle.
 			ClientLifecyclePtr client_lifecycle;
+
+			/// The script executor.
+			ScriptExecutorPtr script_executor;
 
 			/// The log manager.
 			LogManagerPtr log_manager;

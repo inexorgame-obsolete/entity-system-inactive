@@ -12,10 +12,15 @@ namespace inexor {
 		TypeSystemModulePtr type_system_module,
 		ConfigurationModulePtr configuration_module,
 		RestServerPtr rest_server,
-		EntitySystemDebuggerPtr entity_system_debugger,
 		VisualScriptingSystemModulePtr visual_scripting_system_module,
+		ScriptingModulePtr scripting_module,
 		CommandModulePtr command_module,
+#ifndef INEXOR_WITHOUT_CLIENT
 		ClientModulePtr client_module,
+#endif
+#ifndef INEXOR_WITHOUT_SERVER
+		ServerModulePtr server_module,
+#endif
 		LogManagerPtr log_manager
 	)
 	{
@@ -23,10 +28,15 @@ namespace inexor {
 		this->type_system_module = type_system_module;
 		this->configuration_module = configuration_module;
 		this->rest_server = rest_server;
-		this->entity_system_debugger = entity_system_debugger;
 		this->visual_scripting_system_module = visual_scripting_system_module;
+		this->scripting_module = scripting_module;
 		this->command_module = command_module;
+#ifndef INEXOR_WITHOUT_CLIENT
 		this->client_module = client_module;
+#endif
+#ifndef INEXOR_WITHOUT_SERVER
+		this->server_module = server_module;
+#endif
 		this->log_manager = log_manager;
 		this->running = false;
 	}
@@ -42,14 +52,16 @@ namespace inexor {
 		// You can't do this in the constructor
 		InexorApplication::instances.push_back(this);
 
-		// Debugger
-		// TODO: enable with macro
-		entity_system_debugger->init();
+		// Pre initialize of the entity system module.
+		// Logging is not yet ready.
+		entity_system_module->pre_init();
 
 		// Logging initialization
 		log_manager->init();
 		log_manager->register_logger(LOGGER_NAME);
-		entity_system_debugger->init_logger();
+
+		// Initialize the entity system module.
+		entity_system_module->init();
 
 		spdlog::get(LOGGER_NAME)->info("init()");
 
@@ -83,8 +95,18 @@ namespace inexor {
         // Initialize the command module
 		command_module->init();
 
-		// Initialize the rendering.
+		// Initialize the client module.
+#ifndef INEXOR_WITHOUT_CLIENT
 		client_module->init();
+#endif
+
+		// Initialize the server module.
+#ifndef INEXOR_WITHOUT_SERVER
+		server_module->init();
+#endif
+
+		// Initialize the scripting module.
+		scripting_module->init();
 	}
 
 	void InexorApplication::run()
@@ -105,21 +127,42 @@ namespace inexor {
 			std::this_thread::sleep_for(10ms);
 
 			// Main thread update
+#ifndef INEXOR_WITHOUT_CLIENT
 			client_module->update();
+#endif
+#ifndef INEXOR_WITHOUT_SERVER
+			server_module->update();
+#endif
 
 			// Shutdown requested?
+#ifndef INEXOR_WITHOUT_CLIENT
 			if (client_module->is_shutdown_requested())
 			{
 				shutdown();
 			}
+#endif
+#ifndef INEXOR_WITHOUT_SERVER
+			if (server_module->is_shutdown_requested())
+			{
+				shutdown();
+			}
+#endif
 
         }
 
 		// Restart requested?
+#ifndef INEXOR_WITHOUT_CLIENT
 		if (client_module->is_restart_requested())
 		{
 			restart();
 		}
+#endif
+#ifndef INEXOR_WITHOUT_SERVER
+		if (server_module->is_restart_requested())
+		{
+			restart();
+		}
+#endif
 
 	}
 
@@ -139,8 +182,17 @@ namespace inexor {
         // Shutdown REST server.
 		rest_server->shutdown();
 
+		// Shut down the scripting module.
+		scripting_module->init();
+
 		// Shut down the client module.
+#ifndef INEXOR_WITHOUT_CLIENT
 		client_module->shutdown();
+#endif
+		// Shut down the server module.
+#ifndef INEXOR_WITHOUT_SERVER
+		server_module->shutdown();
+#endif
 
 		// Shut down the visual scripting module.
 		visual_scripting_system_module->shutdown();
@@ -157,22 +209,6 @@ namespace inexor {
 		run();
 	    spdlog::get(LOGGER_NAME)->info("Restart completed");
 	}
-
-//	void InexorApplication::register_logger(std::string logger_name)
-//    {
-//		log_manager->register_logger(logger_name);
-//	}
-//
-//	EntitySystemModulePtr InexorApplication::get_entity_system()
-//	{
-//		return entity_system_module;
-//	}
-//
-//
-//	RestServerPtr InexorApplication::get_rest_server()
-//	{
-//		return rest_server;
-//	}
 
 	void InexorApplication::sighup_handler(const int signal_number)
 	{

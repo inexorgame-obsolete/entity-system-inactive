@@ -23,7 +23,7 @@ namespace entity_system {
 	{
 	}
 
-	void EntitySystemDebugger::init()
+	void EntitySystemDebugger::pre_init()
 	{
 		entity_type_manager->register_on_created(shared_from_this());
 		entity_type_manager->register_on_deleted(shared_from_this());
@@ -31,7 +31,7 @@ namespace entity_system {
 		relation_type_manager->register_on_deleted(shared_from_this());
 	}
 
-	void EntitySystemDebugger::init_logger()
+	void EntitySystemDebugger::init()
 	{
 		log_manager->register_logger(LOGGER_NAME);
 		logger = spdlog::get(LOGGER_NAME);
