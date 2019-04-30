@@ -1,6 +1,6 @@
 #include "EcmaScriptExecutor.hpp"
+#include "scripting/modules/EcmaScriptUtils.hpp"
 
-#include <v8/v8.h>
 #include <v8/libplatform/libplatform.h>
 
 #include "spdlog/spdlog.h"
@@ -16,10 +16,14 @@ namespace inexor {
 namespace scripting {
 
 	EcmaScriptExecutor::EcmaScriptExecutor(
-		EcmaScriptLoggingModuleInitializerPtr logging_module_initializer
+		LoggingModulePtr logging_module,
+		EntitySystemModulePtr entity_system_module,
+		UtilModulePtr util_module
 	)
 	{
-		this->logging_module_initializer = logging_module_initializer;
+		this->logging_module = logging_module;
+		this->entity_system_module = entity_system_module;
+		this->util_module = util_module;
 	}
 
 	EcmaScriptExecutor::~EcmaScriptExecutor()
@@ -55,23 +59,20 @@ namespace scripting {
 		v8::V8::InitializePlatform(platform.get());
 		v8::V8::Initialize();
 
-		logging_module_initializer->init();
+		logging_module->init();
+		entity_system_module->init();
+		util_module->init();
 	}
 
 	void EcmaScriptExecutor::shutdown()
 	{
-		logging_module_initializer->shutdown();
+		util_module->shutdown();
+		entity_system_module->shutdown();
+		logging_module->shutdown();
 
 		// Tear down V8.
 		v8::V8::Dispose();
 		v8::V8::ShutdownPlatform();
-	}
-
-
-	// Extracts a C string from a V8 Utf8Value.
-	const char* c_str(const v8::String::Utf8Value& value)
-	{
-		return *value ? *value : "<string conversion failed>";
 	}
 
 	std::string ReportException(v8::Isolate* isolate, v8::TryCatch* try_catch)
@@ -119,9 +120,11 @@ namespace scripting {
 		return exception_message;
 	}
 
-	void require_module(const v8::FunctionCallbackInfo<v8::Value>& args)
+	void EcmaScriptExecutor::require_module(const v8::FunctionCallbackInfo<v8::Value>& args)
 	{
 		v8::Isolate* isolate = args.GetIsolate();
+		v8::Local<v8::Context> context = isolate->GetCurrentContext();
+		v8::Local<v8::Object> global = context->Global();
 
 		// Resolve "this"
 		v8::Local<v8::External> _self = args.Data().As<v8::External>();
@@ -132,7 +135,26 @@ namespace scripting {
 		spdlog::info("Loading module {}", module_name);
 		if (module_name == "logging")
 		{
-			self->logging_module_initializer->initialize_module(isolate);
+			self->logging_module->create(isolate, context, global);
+		} else if (module_name == "entity-system")
+		{
+			self->entity_system_module->create(isolate, context, global);
+		} else if (module_name == "util")
+		{
+			self->util_module->create(isolate, context, global);
+		}
+	}
+
+	void EcmaScriptExecutor::execute_once(std::string path, bool detached)
+	{
+		if (!detached)
+		{
+			execute(path);
+		} else {
+			std::thread ecma_script_thread([this, path](){
+				this->execute(path);
+			});
+			ecma_script_thread.detach();
 		}
 	}
 
@@ -155,18 +177,19 @@ namespace scripting {
 			// Create a stack-allocated handle scope.
 			v8::HandleScope handle_scope(isolate);
 
-
+			// Create a handle to "this". We need it in "require".
 			v8::Local<v8::External> self = v8::External::New(isolate, (void *) this);
-			v8::Local<v8::FunctionTemplate> _require_module = v8::FunctionTemplate::New(isolate, require_module, self.As<v8::Value>());
 
 			// Create a template for the global object and set the
 			// built-in global functions.
 			// The object template with all functions has to be created before
 			// the context is
 			v8::Local<v8::ObjectTemplate> global = v8::ObjectTemplate::New(isolate);
-			// "require" is the only what we provide in the global object by default.
-			// Everything else goes to the module initializers
-			global->Set(v8::String::NewFromUtf8(isolate, "require"), _require_module);
+
+			// Actually, "require" is the only what we provide in the global
+			// object by default. Everything else is provided by the modules
+			// itself.
+			global->Set(v8::String::NewFromUtf8(isolate, "require"), v8::FunctionTemplate::New(isolate, EcmaScriptExecutor::require_module, self.As<v8::Value>()));
 
 			// Context
 			//
@@ -175,13 +198,6 @@ namespace scripting {
 			// avoid them interfering with each other, for example by changing
 			// the builtin objects provided.
 			v8::Local<v8::Context> context = v8::Context::New(isolate, NULL, global);
-
-//			global->Set(v8::String::NewFromUtf8(isolate, "_executor"), v8::External::New(isolate, this));
-//			context->Global()->Set(v8::String::New("foo"),v8::FunctionTemplate::New(
-//			    [](const v8::Arguments  &args) -> v8::Handle<v8::Value>{
-//			         reinterpret_cast<Foo*>(reinterpret_cast<v8::External*>(*(args.This()->Get(v8::String::New("engine"))))->Value())->foo();
-//			         return v8::Undefined();
-//			})->GetFunction());
 
 			// Enter the context for compiling and running the hello world script.
 			v8::Context::Scope context_scope(context);
@@ -196,7 +212,6 @@ namespace scripting {
 				if (!o_script.IsEmpty())
 				{
 					v8::Local<v8::Script> script = o_script.ToLocalChecked();
-
 					// Run the script to get the result.
 					v8::MaybeLocal<v8::Value> o_result = script->Run(context);
 					if (!o_result.IsEmpty())
@@ -207,7 +222,6 @@ namespace scripting {
 					} else {
 						spdlog::error("Failed to execute script '{}'::\n{}", path, ReportException(isolate, &try_catch));
 					}
-
 				} else {
 					spdlog::error("Failed to compile script '{}':\n{}", path, ReportException(isolate, &try_catch));
 				}

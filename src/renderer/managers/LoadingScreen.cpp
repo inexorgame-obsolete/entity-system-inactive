@@ -422,7 +422,7 @@ namespace renderer {
 			}
 			if (ends_with(path, ".js"))
 			{
-				script_executor->execute(0, path);
+				script_executor->execute_once(0, path, true);
 			}
 		}
 	}
@@ -556,7 +556,7 @@ namespace renderer {
 		} else if (starts_with(command_buffer, "/execute ")) {
 			std::string path = erase_substring(command_buffer, "/execute ");
 			action = fmt::format("Executing JavaScript {}", path);
-			script_executor->execute(0, path);
+			script_executor->execute_once(0, path, true);
 		}
 		command_buffer = "";
 	}

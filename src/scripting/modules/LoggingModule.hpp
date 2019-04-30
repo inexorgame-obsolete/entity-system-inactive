@@ -2,6 +2,7 @@
 
 #include "logging/managers/LogManager.hpp"
 
+#include "v8/v8.h"
 #include "v8/v8-platform.h"
 
 #include <string>
@@ -11,28 +12,28 @@ namespace scripting {
 
 	using LogManagerPtr = std::shared_ptr<inexor::logging::LogManager>;
 
-	/// @class EcmaScriptLoggingModuleInitializer
-    /// @brief Service for executing ECMA scripts.
-	class EcmaScriptLoggingModuleInitializer
+	/// @class LoggingModule
+    /// @brief Module for accessing the inexor logging from ECMA-Script.
+	class LoggingModule
 	{
 		public:
 
 			/// Constructor.
-			EcmaScriptLoggingModuleInitializer(
+			LoggingModule(
 				LogManagerPtr log_manager
 			);
 
 			/// Destructor.
-			~EcmaScriptLoggingModuleInitializer();
+			~LoggingModule();
 
-			/// Initialization of the EcmaScriptLoggingModuleInitializer.
+			/// Initialization of the LoggingModule.
 			void init();
 
-			/// Shuts down the EcmaScriptLoggingModuleInitializer.
+			/// Shuts down the LoggingModule.
 			void shutdown();
 
-			/// Initializes the module.
-			void initialize_module(v8::Isolate* isolate);
+			/// Creates the EntitySystemModule.
+			void create(v8::Isolate* isolate, v8::Local<v8::Context> context, v8::Local<v8::Object> parent);
 
 		private:
 

@@ -1,6 +1,8 @@
 #pragma once
 
-#include "EcmaScriptLoggingModuleInitializer.hpp"
+#include "scripting/modules/LoggingModule.hpp"
+#include "scripting/modules/EntitySystemModule.hpp"
+#include "scripting/modules/UtilModule.hpp"
 
 #include "v8/v8.h"
 
@@ -9,7 +11,9 @@
 namespace inexor {
 namespace scripting {
 
-	using EcmaScriptLoggingModuleInitializerPtr = std::shared_ptr<EcmaScriptLoggingModuleInitializer>;
+	using LoggingModulePtr = std::shared_ptr<LoggingModule>;
+	using EntitySystemModulePtr = std::shared_ptr<EntitySystemModule>;
+	using UtilModulePtr = std::shared_ptr<UtilModule>;
 
 	/// @class EcmaScriptExecutor
     /// @brief Service for executing ECMA scripts.
@@ -20,7 +24,9 @@ namespace scripting {
 
 			/// Constructor.
 			EcmaScriptExecutor(
-				EcmaScriptLoggingModuleInitializerPtr logging_module_initializer
+				LoggingModulePtr logging_module,
+				EntitySystemModulePtr entity_system_module,
+				UtilModulePtr util_module
 			);
 
 			/// Destructor.
@@ -32,21 +38,32 @@ namespace scripting {
 			/// Shuts down the EcmaScriptExecutor.
 			void shutdown();
 
-			/// Executes the given ECMA script.
-			void execute(std::string path);
+			/// Executes the given ECMA script once.
+			/// @param path The path to the script
+			/// @param detached If true, the script is executed in it's own thread.
+			void execute_once(std::string path, bool detached);
 
-			EcmaScriptLoggingModuleInitializerPtr logging_module_initializer;
+			static void require_module(const v8::FunctionCallbackInfo<v8::Value>& args);
 
 		private:
 
-//			/// Require module.
-//			void require_module(const v8::FunctionCallbackInfo<v8::Value>& args);
+			/// Executes the given ECMA script.
+			void execute(std::string path);
 
 			/// Loads the file into a string.
 			std::string load_file(std::string path);
 
 			/// The v8 platform.
 			std::unique_ptr<v8::Platform> platform;
+
+			/// The logging module.
+			LoggingModulePtr logging_module;
+
+			/// The entity system module.
+			EntitySystemModulePtr entity_system_module;
+
+			/// The util module.
+			UtilModulePtr util_module;
 
 	};
 

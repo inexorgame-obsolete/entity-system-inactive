@@ -29,8 +29,15 @@ namespace scripting {
 			/// Shuts down the script executor service.
 			void shutdown();
 
-			/// Executes the given script
-			void execute(int script_type, std::string path);
+			/// Executes the given script.
+			// TODO: add script parameters
+			// TODO: add return value (std::optional<entity_system::DataValue>)
+			void execute_once(int script_type, std::string path);
+
+			/// Executes the given script in it's own thread.
+			// TODO: add script parameters
+			// TODO: add return value (std::optional<entity_system::DataValue>)
+			void execute_once(int script_type, std::string path, bool detached);
 
 		private:
 

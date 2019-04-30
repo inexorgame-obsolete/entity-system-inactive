@@ -24,12 +24,17 @@ namespace scripting {
 		ecma_script_executor->shutdown();
 	}
 
-	void ScriptExecutor::execute(int script_type, std::string path)
+	void ScriptExecutor::execute_once(int script_type, std::string path)
+	{
+		execute_once(script_type, path, false);
+	}
+
+	void ScriptExecutor::execute_once(int script_type, std::string path, bool detached)
 	{
 		switch (script_type)
 		{
 			case 0:
-				ecma_script_executor->execute(path);
+				ecma_script_executor->execute_once(path, detached);
 				break;
 			default:
 				break;
