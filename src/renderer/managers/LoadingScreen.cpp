@@ -40,6 +40,7 @@ namespace renderer {
 		ConnectorManagerPtr connector_manager,
 		ClientLifecyclePtr client_lifecycle,
 		ScriptExecutorPtr script_executor,
+		ConsoleManagerPtr console_manager,
 		LogManagerPtr log_manager
 	) {
 		this->window_manager = window_manager;
@@ -51,6 +52,7 @@ namespace renderer {
 		this->connector_manager = connector_manager;
 		this->client_lifecycle = client_lifecycle;
 		this->script_executor = script_executor;
+		this->console_manager = console_manager;
 		this->log_manager = log_manager;
 		this->show_fps = true;
 		this->create_screenshot = false;
@@ -58,7 +60,6 @@ namespace renderer {
 		this->mesh_size_y = 0.3f;
 		this->mesh_factor = 0.6f;
 		this->action = "";
-		this->command_buffer = "";
 	}
 
 	LoadingScreen::~LoadingScreen()
@@ -89,6 +90,8 @@ namespace renderer {
 
 		mouse_input_manager->register_on_window_mouse_button_changed(window, shared_from_this());
 		mouse_input_manager->register_on_window_mouse_scrolled(window, shared_from_this());
+
+		console = console_manager->create_console("loading_screen");
 
 		EntityInstancePtrOpt o_key_b = keyboard_input_manager->create_key(GLFW_KEY_B);
 		if (o_key_b.has_value())
@@ -181,7 +184,10 @@ namespace renderer {
 	void LoadingScreen::on_window_char_input(EntityInstancePtr window, std::string character, unsigned int codepoint)
 	{
 		spdlog::get(LOGGER_NAME)->debug("on_window_char_input({}, {})", character, codepoint);
-		command_buffer += character;
+		if (movement.mode == 0)
+		{
+			console->insert(character);
+		}
 	}
 
 	void LoadingScreen::on_window_key_released(EntityInstancePtr window, int key, int scancode, int mods)
@@ -336,13 +342,16 @@ namespace renderer {
 				break;
 
 			case GLFW_KEY_C:
-				if (mods & GLFW_MOD_CONTROL) clipboard_manager->set(command_buffer);
+				if (mods & GLFW_MOD_CONTROL) clipboard_manager->set(console->command_line);
 				break;
 			case GLFW_KEY_V:
-				if (mods & GLFW_MOD_CONTROL) command_buffer += clipboard_manager->get_value();
+				if (mods & GLFW_MOD_CONTROL) console->insert(clipboard_manager->get_value());
 				break;
 			case GLFW_KEY_BACKSPACE:
-				command_buffer = command_buffer.substr(0, command_buffer.size() - 1);
+				console->backspace();
+				break;
+			case GLFW_KEY_DELETE:
+				console->delete_char();
 				break;
 
 			default:
@@ -353,34 +362,6 @@ namespace renderer {
 
 	void LoadingScreen::on_window_mouse_button_changed(EntityInstancePtr window, int button, int action, int mods)
 	{
-//		if (action != GLFW_RELEASE) return;
-//		switch (button)
-//		{
-//			case GLFW_MOUSE_BUTTON_LEFT:
-//				switch (mods)
-//				{
-//					case GLFW_MOD_SHIFT:
-//						mesh_size_y = std::max(0.05f, std::min(0.95f, mesh_size_y + 0.05f));
-//						break;
-//					default:
-//						mesh_size_x = std::max(0.05f, std::min(0.95f, mesh_size_x + 0.05f));
-//						break;
-//				}
-//				break;
-//			case GLFW_MOUSE_BUTTON_RIGHT:
-//				switch (mods)
-//				{
-//					case GLFW_MOD_SHIFT:
-//						mesh_size_y = std::max(0.05f, std::min(0.95f, mesh_size_y - 0.05f));
-//						break;
-//					default:
-//						mesh_size_x = std::max(0.05f, std::min(0.95f, mesh_size_x - 0.05f));
-//						break;
-//				}
-//				break;
-//			default:
-//				break;
-//		}
 	}
 
 	/// Window mouse scrolled
@@ -418,11 +399,11 @@ namespace renderer {
 		{
 			if (ends_with(path, ".txt"))
 			{
-				command_buffer += path;
+				console->insert(path);
 			}
 			if (ends_with(path, ".js"))
 			{
-				script_executor->execute_once(0, path, true);
+				console->set(fmt::format("/execute {}", path));
 			}
 		}
 	}
@@ -431,6 +412,12 @@ namespace renderer {
 	{
 		switch (movement.mode)
 		{
+			case 0:
+				if (movement.forward) console->cursor_pos1();
+				if (movement.backward) console->cursor_end();
+				if (movement.left) console->cursor_left();
+				if (movement.right) console->cursor_right();
+				break;
 			case 1:
 				// Change window position
 				if (movement.forward) decrease(window, WindowEntityTypeProvider::WINDOW_POSITION_Y, 10, 0);
@@ -525,40 +512,45 @@ namespace renderer {
 	void LoadingScreen::execute_command(EntityInstancePtr window)
 	{
 		// TODO: call CommandManager; this is a demo only
-		if (command_buffer == "/quit")
+		if (console->command_line == "/quit")
 		{
 			client_lifecycle->request_shutdown();
-		} else if (command_buffer == "/screenshot") {
+		} else if (console->command_line == "/screenshot") {
 			action = "Creating screenshot";
 			create_screenshot = true;
-		} else if (command_buffer == "/vsync 0") {
+		} else if (console->command_line == "/vsync 0") {
 			action = "vsync off";
 			window->set_own_value(WindowEntityTypeProvider::WINDOW_VSYNC, false);
-		} else if (command_buffer == "/vsync 1") {
+		} else if (console->command_line == "/vsync 1") {
 			action = "vsync on";
 			window->set_own_value(WindowEntityTypeProvider::WINDOW_VSYNC, true);
-		} else if (command_buffer == "/fullscreen 0") {
+		} else if (console->command_line == "/fullscreen 0") {
 			action = "Fullscreen off";
 			window->set_own_value(WindowEntityTypeProvider::WINDOW_FULLSCREEN, false);
-		} else if (command_buffer == "/fullscreen 1") {
+		} else if (console->command_line == "/fullscreen 1") {
 			action = "Fullscreen on";
 			window->set_own_value(WindowEntityTypeProvider::WINDOW_FULLSCREEN, true);
-		} else if (command_buffer == "/maximize 0") {
+		} else if (console->command_line == "/maximize 0") {
 			action = "Maximize off";
 			window->set_own_value(WindowEntityTypeProvider::WINDOW_MAXIMIZED, false);
-		} else if (command_buffer == "/maximize 1") {
+		} else if (console->command_line == "/maximize 1") {
 			action = "Maximize on";
 			window->set_own_value(WindowEntityTypeProvider::WINDOW_MAXIMIZED, true);
-		} else if (command_buffer == "/license") {
+		} else if (console->command_line == "/license") {
 			action = "License";
 			Corrade::Utility::Resource rs{"inexor"};
 			spdlog::info("License:\n{}", rs.get("license.txt"));
-		} else if (starts_with(command_buffer, "/execute ")) {
-			std::string path = erase_substring(command_buffer, "/execute ");
-			action = fmt::format("Executing JavaScript {}", path);
-			script_executor->execute_once(0, path, true);
+		} else if (starts_with(console->command_line, "/execute ")) {
+			std::string path = erase_substring(console->command_line, "/execute ");
+			if (ends_with(path, ".js"))
+			{
+				action = fmt::format("Executing JavaScript {}", path);
+				script_executor->execute_once(0, path, true);
+			} else {
+				action = fmt::format("Unknown file type: {}", path);
+			}
 		}
-		command_buffer = "";
+		console->reset();
 	}
 
 	// Thread local ("first frame")
@@ -581,7 +573,7 @@ namespace renderer {
 		action_font = font_manager->load_internal(
 			ACTION_FONT,
 			110.0f,
-			"abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789?!:;,.+-*/=<>[](){}| ",
+			"abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789?!:;,.+-*/=<>[](){}|_ ",
 			80,
 			0.05f,
 			Magnum::Text::Alignment::MiddleCenter
@@ -589,7 +581,7 @@ namespace renderer {
 		command_font = font_manager->load_internal(
 			COMMAND_FONT,
 			110.0f,
-			"abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789?!:;,./><() ",
+			"abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789?!:;,.+-*/=<>[](){}|_ ",
 			320,
 			0.05f,
 			Magnum::Text::Alignment::LineLeft
@@ -707,34 +699,52 @@ namespace renderer {
 		Magnum::GL::Renderer::setBlendFunction(Magnum::GL::Renderer::BlendFunction::SourceAlpha, Magnum::GL::Renderer::BlendFunction::OneMinusSourceAlpha);
 		Magnum::GL::Renderer::setBlendEquation(Magnum::GL::Renderer::BlendEquation::Add, Magnum::GL::Renderer::BlendEquation::Add);
 
-		action_font->renderer->render(fmt::format(" {} ", action));
-		auto translation_y = Magnum::Matrix3::translation(Magnum::Vector2::yAxis(0.9f));
-		action_font->shader->setTransformationProjectionMatrix(translation_y)
-			.setColor(Magnum::Color4 {1.0f, 1.0f, 1.0f, 0.8f})
-			.setOutlineColor(Magnum::Color4 {0.5f, 0.5f, 0.8f, 0.8f})
-			.setOutlineRange(0.5f, 1.0f)
-			.setSmoothness(0.075f)
-			.bindVectorTexture(action_font->glyph_cache->texture());
-		action_font->renderer->mesh().draw((*action_font->shader));
+		std::string full_action = fmt::format(" {} ", action);
+		int console_width = 60;
+		int line_no = 0;
+		for (int start = 0; start < full_action.length(); start += console_width)
+		{
+			std::string line = full_action.substr(start, console_width);
+			action_font->renderer->render(line);
+			auto translation_y = Magnum::Matrix3::translation(Magnum::Vector2::yAxis(0.9f - 0.1f * line_no));
+			action_font->shader->setTransformationProjectionMatrix(translation_y)
+				.setColor(Magnum::Color4 {1.0f, 1.0f, 1.0f, 0.8f})
+				.setOutlineColor(Magnum::Color4 {0.5f, 0.5f, 0.8f, 0.8f})
+				.setOutlineRange(0.5f, 1.0f)
+				.setSmoothness(0.075f)
+				.bindVectorTexture(action_font->glyph_cache->texture());
+			action_font->renderer->mesh().draw((*action_font->shader));
+			line_no++;
+		}
 	}
 
 	// Thread local
-	void LoadingScreen::render_command_buffer(Magnum::Timeline timeline)
+	void LoadingScreen::render_console_command_line(Magnum::Timeline timeline)
 	{
 		Magnum::GL::Renderer::enable(Magnum::GL::Renderer::Feature::Blending);
 		Magnum::GL::Renderer::setBlendFunction(Magnum::GL::Renderer::BlendFunction::SourceAlpha, Magnum::GL::Renderer::BlendFunction::OneMinusSourceAlpha);
 		Magnum::GL::Renderer::setBlendEquation(Magnum::GL::Renderer::BlendEquation::Add, Magnum::GL::Renderer::BlendEquation::Add);
 
-		command_font->renderer->render(fmt::format("> {}", command_buffer));
-		auto translation_x = Magnum::Matrix3::translation(Magnum::Vector2::xAxis(-0.9f));
-		auto translation_y = Magnum::Matrix3::translation(Magnum::Vector2::yAxis(-0.9f));
-		command_font->shader->setTransformationProjectionMatrix(translation_x * translation_y)
-			.setColor(Magnum::Color4 {1.0f, 1.0f, 1.0f, 0.8f})
-			.setOutlineColor(Magnum::Color4 {0.5f, 0.5f, 0.8f, 0.8f})
-			.setOutlineRange(0.5f, 1.0f)
-			.setSmoothness(0.075f)
-			.bindVectorTexture(command_font->glyph_cache->texture());
-		command_font->renderer->mesh().draw((*command_font->shader));
+		std::string c1 = console->command_line.substr(0, console->cursor_position);
+		std::string c2 = console->command_line.substr(console->cursor_position, console->command_line.length() - console->cursor_position);
+		std::string full_command_line = fmt::format("{}{}|{}", console->command_prompt, c1, c2);
+		int console_width = 60;
+		int line_no = (full_command_line.length() / console_width) + 1;
+		for (int start = 0; start < full_command_line.length(); start += console_width)
+		{
+			line_no--;
+			std::string line = full_command_line.substr(start, console_width);
+			command_font->renderer->render(line);
+			auto translation_x = Magnum::Matrix3::translation(Magnum::Vector2::xAxis(-0.9f));
+			auto translation_y = Magnum::Matrix3::translation(Magnum::Vector2::yAxis(-0.9f + 0.1f * line_no));
+			command_font->shader->setTransformationProjectionMatrix(translation_x * translation_y)
+				.setColor(Magnum::Color4 {1.0f, 1.0f, 1.0f, 0.8f})
+				.setOutlineColor(Magnum::Color4 {0.5f, 0.5f, 0.8f, 0.8f})
+				.setOutlineRange(0.5f, 1.0f)
+				.setSmoothness(0.075f)
+				.bindVectorTexture(command_font->glyph_cache->texture());
+			command_font->renderer->mesh().draw((*command_font->shader));
+		}
 	}
 
 	// Thread local
@@ -776,7 +786,7 @@ namespace renderer {
 		render_action(timeline);
 
 		// Render text input
-		render_command_buffer(timeline);
+		render_console_command_line(timeline);
 
 		if (show_fps)
 		{

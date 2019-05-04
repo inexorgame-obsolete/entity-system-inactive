@@ -24,6 +24,33 @@ namespace console {
             /// Destructor.
 			~Console();
 
+			/// Inserts a string on the cursor position.
+			void insert(std::string str);
+
+			/// Removes the char before the cursor position.
+			void backspace();
+
+			/// Removes the char on the cursor position.
+			void delete_char();
+
+			/// Moves the cursor to the left.
+			void cursor_left();
+
+			/// Moves the cursor to the right.
+			void cursor_right();
+
+			/// Moves the cursor to the first position.
+			void cursor_pos1();
+
+			/// Moves the cursor to the end.
+			void cursor_end();
+
+			/// Resets the command line.
+			void reset();
+
+			/// Sets the command line. The former contents will be overwritten.
+			void set(std::string command_line);
+
 			/// The name of the console.
 			std::string name;
 
@@ -32,6 +59,9 @@ namespace console {
 
 			/// The command line.
 			std::string command_line;
+
+			/// The cursor position.
+			int cursor_position;
 
 			/// The command history.
 			std::vector<std::string> command_history;

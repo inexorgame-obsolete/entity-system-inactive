@@ -7,6 +7,7 @@
 #include "client/ClientLifecycle.hpp"
 #include "input/managers/ClipboardManager.hpp"
 #include "scripting/managers/ScriptExecutor.hpp"
+#include "console/managers/ConsoleManager.hpp"
 #include "logging/managers/LogManager.hpp"
 
 #include <Magnum/GL/Mesh.h>
@@ -19,6 +20,8 @@
 #include <Magnum/Shaders/Vector.h>
 #include <Magnum/Shaders/Flat.h>
 #include <Magnum/Timeline.h>
+
+#include <boost/di.hpp>
 
 struct GLFWwindow;
 
@@ -34,8 +37,10 @@ namespace renderer {
 	using ConnectorManagerPtr = std::shared_ptr<visual_scripting::ConnectorManager>;
 	using ClientLifecyclePtr = std::shared_ptr<client::ClientLifecycle>;
 	using ScriptExecutorPtr = std::shared_ptr<scripting::ScriptExecutor>;
+	using ConsoleManagerPtr = std::shared_ptr<console::ConsoleManager>;
 	using LogManagerPtr = std::shared_ptr<logging::LogManager>;
 	using EntityInstancePtr = std::shared_ptr<EntityInstance>;
+	using ConsolePtr = std::shared_ptr<console::Console>;
 
 	struct QuadVertex {
 		Magnum::Vector2 position;
@@ -78,8 +83,24 @@ namespace renderer {
 				ConnectorManagerPtr connector_manager,
 				ClientLifecyclePtr client_lifecycle,
 				ScriptExecutorPtr script_executor,
+				ConsoleManagerPtr console_manager,
 				LogManagerPtr log_manager
 			);
+
+			// This is neccessary for constructor length greater than 10
+			using boost_di_inject__ = boost::di::inject<
+				WindowManagerPtr,
+				MonitorManagerPtr,
+				FontManagerPtr,
+				KeyboardInputManagerPtr,
+				MouseInputManagerPtr,
+				ClipboardManagerPtr,
+				ConnectorManagerPtr,
+				ClientLifecyclePtr,
+				ScriptExecutorPtr,
+				ConsoleManagerPtr,
+				LogManagerPtr
+			>;
 
 			/// Destructor.
 			~LoadingScreen();
@@ -134,8 +155,8 @@ namespace renderer {
 			/// Renders the action.
 			void render_action(Magnum::Timeline timeline);
 
-			/// Renders the command buffer.
-			void render_command_buffer(Magnum::Timeline timeline);
+			/// Renders the command line of the console.
+			void render_console_command_line(Magnum::Timeline timeline);
 
 			/// Renders the fps counter.
 			void render_fps_counter(Magnum::Timeline timeline);
@@ -173,11 +194,17 @@ namespace renderer {
 			/// The script executor.
 			ScriptExecutorPtr script_executor;
 
+			/// The console manager.
+			ConsoleManagerPtr console_manager;
+
 			/// The log manager.
 			LogManagerPtr log_manager;
 
 			/// The window entity instance.
 			EntityInstancePtr window;
+
+			/// The console.
+			ConsolePtr console;
 
 			/// The buffer for the logo.
 			std::shared_ptr<Magnum::GL::Buffer> buffer;
@@ -211,7 +238,7 @@ namespace renderer {
 
 			std::string action;
 
-			std::string command_buffer;
+//			std::string command_buffer;
 
 			Movement movement;
 
