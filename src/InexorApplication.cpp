@@ -183,7 +183,7 @@ namespace inexor {
 		rest_server->shutdown();
 
 		// Shut down the scripting module.
-		scripting_module->init();
+		scripting_module->shutdown();
 
 		// Shut down the client module.
 #ifndef INEXOR_WITHOUT_CLIENT
