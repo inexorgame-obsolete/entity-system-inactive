@@ -14,6 +14,7 @@ namespace inexor {
 		RestServerPtr rest_server,
 		VisualScriptingSystemModulePtr visual_scripting_system_module,
 		ScriptingModulePtr scripting_module,
+		ConsoleModulePtr console_module,
 		CommandModulePtr command_module,
 #ifndef INEXOR_WITHOUT_CLIENT
 		ClientModulePtr client_module,
@@ -30,6 +31,7 @@ namespace inexor {
 		this->rest_server = rest_server;
 		this->visual_scripting_system_module = visual_scripting_system_module;
 		this->scripting_module = scripting_module;
+		this->console_module = console_module;
 		this->command_module = command_module;
 #ifndef INEXOR_WITHOUT_CLIENT
 		this->client_module = client_module;
@@ -91,6 +93,9 @@ namespace inexor {
 
 		// Initialize the visual scripting.
 		visual_scripting_system_module->init();
+
+        // Initialize the console module
+		console_module->init();
 
         // Initialize the command module
 		command_module->init();

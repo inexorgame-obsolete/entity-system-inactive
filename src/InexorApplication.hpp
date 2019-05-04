@@ -9,6 +9,7 @@
 #include "visual-scripting/VisualScriptingSystemModule.hpp"
 #include "scripting/ScriptingModule.hpp"
 #include "logging/managers/LogManager.hpp"
+#include "console/ConsoleModule.hpp"
 #include "command/CommandModule.hpp"
 #ifndef INEXOR_WITHOUT_CLIENT
 #include "client/ClientModule.hpp"
@@ -41,6 +42,7 @@ namespace inexor {
 	using RestServerPtr = std::shared_ptr<entity_system::RestServer>;
 	using VisualScriptingSystemModulePtr = std::shared_ptr<visual_scripting::VisualScriptingSystemModule>;
 	using ScriptingModulePtr = std::shared_ptr<scripting::ScriptingModule>;
+	using ConsoleModulePtr = std::shared_ptr<console::ConsoleModule>;
 	using CommandModulePtr = std::shared_ptr<command::CommandModule>;
 #ifndef INEXOR_WITHOUT_CLIENT
 	using ClientModulePtr = std::shared_ptr<client::ClientModule>;
@@ -62,13 +64,13 @@ namespace inexor {
 			/// @param type_system_module The type system manager.
 			/// @param configuration_module The configuration manager module.
 			/// @param rest_server The REST server module of the entity system.
-			/// @param entity_system_debugger The debugger of the entity system module.
 			/// @param visual_scripting_system_module The visual scripting system module.
 			/// @param scripting_module The scripting module.
-			/// @param log_manager The log module.
-			/// @param renderer_manager The rendering module.
+			/// @param console_module The console module.
 			/// @param command_module The command module.
-			/// @param audio_module The audio module.
+			/// @param client_module The client module.
+			/// @param server_module The server module.
+			/// @param log_manager The log module.
 			InexorApplication(
 				EntitySystemModulePtr entity_system_module,
 				TypeSystemModulePtr type_system_module,
@@ -76,6 +78,7 @@ namespace inexor {
 				RestServerPtr rest_server,
 				VisualScriptingSystemModulePtr visual_scripting_system_module,
 				ScriptingModulePtr scripting_module,
+				ConsoleModulePtr console_module,
 				CommandModulePtr command_module,
 #ifndef INEXOR_WITHOUT_CLIENT
 				ClientModulePtr client_module,
@@ -85,6 +88,25 @@ namespace inexor {
 #endif
 				LogManagerPtr log_manager
 			);
+
+			// This is neccessary for constructor length greater than 10
+			using boost_di_inject__ = boost::di::inject<
+				EntitySystemModulePtr,
+				TypeSystemModulePtr,
+				ConfigurationModulePtr,
+				RestServerPtr,
+				VisualScriptingSystemModulePtr,
+				ScriptingModulePtr,
+				ConsoleModulePtr,
+				CommandModulePtr,
+#ifndef INEXOR_WITHOUT_CLIENT
+				ClientModulePtr,
+#endif
+#ifndef INEXOR_WITHOUT_SERVER
+				ServerModulePtr,
+#endif
+				LogManagerPtr
+			>;
 
 			/// Destructor.
 			~InexorApplication();
@@ -126,6 +148,9 @@ namespace inexor {
 
 			/// The scripting module.
 			ScriptingModulePtr scripting_module;
+
+			/// The console module.
+			ConsoleModulePtr console_module;
 
 			/// The command module.
 			CommandModulePtr command_module;
