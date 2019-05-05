@@ -17,6 +17,7 @@ magnum/2019.01@inexorgame/testing
 openal/1.19.0@bincrafters/stable
 magnum_plugins/2019.01@inexorgame/testing
 freetype/2.9.1@bincrafters/stable
+v8/2019.01@inexorgame/testing
 
 [generators]
 cmake

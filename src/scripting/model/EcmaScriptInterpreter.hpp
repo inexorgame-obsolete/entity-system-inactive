@@ -2,7 +2,7 @@
 
 #include "scripting/managers/EcmaScriptPlatform.hpp"
 
-#include "v8/v8.h"
+#include "v8.h"
 
 #include <string>
 #include <vector>

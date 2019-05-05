@@ -2,7 +2,7 @@
 
 #include "scripting/model/EcmaScriptInterpreter.hpp"
 
-#include "v8/v8.h"
+#include "v8.h"
 
 #include <string>
 #include <unordered_map>

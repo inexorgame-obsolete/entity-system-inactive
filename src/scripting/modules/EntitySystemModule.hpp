@@ -1,18 +1,13 @@
 #pragma once
 
 #include "EntityInstanceManagerModule.hpp"
-#include "logging/managers/LogManager.hpp"
 
-#include "v8/v8.h"
-//#include "v8/v8-platform.h"
-
-#include <string>
+#include "v8.h"
 
 namespace inexor {
 namespace scripting {
 
 	using EntityInstanceManagerModulePtr = std::shared_ptr<EntityInstanceManagerModule>;
-	using LogManagerPtr = std::shared_ptr<logging::LogManager>;
 
 	/// @class EntitySystemModule
     /// @brief Module for accessing the entity system from ECMA-Script.

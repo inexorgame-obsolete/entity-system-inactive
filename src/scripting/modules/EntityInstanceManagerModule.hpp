@@ -1,10 +1,9 @@
 #pragma once
 
 #include "entity-system/managers/entities/entity-instance-manager/EntityInstanceManager.hpp"
-#include "logging/managers/LogManager.hpp"
 
-#include "v8/v8.h"
-#include "v8/v8-platform.h"
+#include "v8.h"
+#include "v8-platform.h"
 
 #include <string>
 
@@ -12,7 +11,6 @@ namespace inexor {
 namespace scripting {
 
 	using EntityInstanceManagerPtr = std::shared_ptr<entity_system::EntityInstanceManager>;
-	using LogManagerPtr = std::shared_ptr<logging::LogManager>;
 
 	using EntityInstance = entity_system::EntityInstance;
 	using EntityAttributeInstancePtr = std::shared_ptr<entity_system::EntityAttributeInstance>;

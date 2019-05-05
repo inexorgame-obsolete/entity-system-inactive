@@ -3,11 +3,6 @@
 
 #include "spdlog/spdlog.h"
 
-//#include <crossguid/guid.hpp>
-//
-//#include <memory>
-//#include <string>
-
 namespace inexor {
 namespace scripting {
 

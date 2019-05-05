@@ -1,7 +1,7 @@
 #include "EcmaScriptInterpreter.hpp"
 #include "scripting/managers/EcmaScriptPlatform.hpp"
 
-#include <v8/libplatform/libplatform.h>
+#include <libplatform/libplatform.h>
 
 #include "spdlog/spdlog.h"
 

@@ -2,10 +2,8 @@
 
 #include "logging/managers/LogManager.hpp"
 
-#include "v8/v8.h"
-#include "v8/v8-platform.h"
-
-#include <string>
+#include "v8.h"
+#include "v8-platform.h"
 
 namespace inexor {
 namespace scripting {

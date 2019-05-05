@@ -4,7 +4,7 @@
 #include "scripting/modules/EntitySystemModule.hpp"
 #include "scripting/modules/UtilModule.hpp"
 
-#include "v8/v8.h"
+#include "v8.h"
 
 #include <string>
 

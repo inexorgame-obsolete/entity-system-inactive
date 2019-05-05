@@ -2,7 +2,7 @@
 
 #include "entity-system/model/data/container/DataContainer.hpp"
 
-#include "v8/v8.h"
+#include "v8.h"
 
 #include <crossguid/guid.hpp>
 

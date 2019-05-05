@@ -1,10 +1,5 @@
 #include "EntitySystemModule.hpp"
 
-#include "spdlog/spdlog.h"
-
-#include <memory>
-#include <string>
-
 namespace inexor {
 namespace scripting {
 
