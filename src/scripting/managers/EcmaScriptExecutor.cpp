@@ -16,14 +16,10 @@ namespace inexor {
 namespace scripting {
 
 	EcmaScriptExecutor::EcmaScriptExecutor(
-		LoggingModulePtr logging_module,
-		EntitySystemModulePtr entity_system_module,
-		UtilModulePtr util_module
+		EcmaScriptPlatformPtr ecma_script_platform
 	)
 	{
-		this->logging_module = logging_module;
-		this->entity_system_module = entity_system_module;
-		this->util_module = util_module;
+		this->ecma_script_platform = ecma_script_platform;
 	}
 
 	EcmaScriptExecutor::~EcmaScriptExecutor()
@@ -32,117 +28,10 @@ namespace scripting {
 
 	void EcmaScriptExecutor::init()
 	{
-		// Initialize V8.
-
-		// Our library has no i18n support!
-		// v8::V8::InitializeICUDefaultLocation(pwd.c_str());
-
-		// Our static v8 library does not yet have support for builtins!
-		//
-		// But if we are going to integrate the builtins, we should load the
-		// "external startup data" from within our binary and load the data
-		// using v8::SetNativesDataBlob().
-		//
-		//
-		// You can compile V8 with external startup data ("snapshot") or without.
-		// If you compiled with snapshot data, call V8::InitializeExternalStartupData
-		// as shown in the Hello World example code. You don't call
-		// v8::SetNativesDataBlob directly.
-		//
-		// Otherwise, the solution is to compile without snapshot data. Then,
-		// you don't need to call either of the aforementioned functions at all.
-		// Here's one answer on how to configure this in your build process.
-		// Note, using snapshot data decreases process start-up time.
-		// v8::V8::InitializeExternalStartupData(pwd.c_str());
-
-		platform = v8::platform::NewDefaultPlatform();
-		v8::V8::InitializePlatform(platform.get());
-		v8::V8::Initialize();
-
-		logging_module->init();
-		entity_system_module->init();
-		util_module->init();
 	}
 
 	void EcmaScriptExecutor::shutdown()
 	{
-		util_module->shutdown();
-		entity_system_module->shutdown();
-		logging_module->shutdown();
-
-		// Tear down V8.
-		v8::V8::Dispose();
-		v8::V8::ShutdownPlatform();
-	}
-
-	std::string ReportException(v8::Isolate* isolate, v8::TryCatch* try_catch)
-	{
-		std::string exception_message = "";
-		v8::HandleScope handle_scope(isolate);
-		v8::String::Utf8Value exception(isolate, try_catch->Exception());
-		const char* exception_string = c_str(exception);
-		v8::Local<v8::Message> message = try_catch->Message();
-		if (message.IsEmpty()) {
-			// V8 didn't provide any extra information about this error; just
-			// print the exception.
-			exception_message += fmt::format("{}\n", exception_string);
-		} else {
-			// Print (filename):(line number): (message).
-			v8::String::Utf8Value filename(isolate, message->GetScriptOrigin().ResourceName());
-			v8::Local<v8::Context> context(isolate->GetCurrentContext());
-			int linenum = message->GetLineNumber(context).FromJust();
-			exception_message += fmt::format("{}:{}: {}\n", c_str(filename), linenum, exception_string);
-			// Print line of source code.
-			v8::String::Utf8Value sourceline(isolate, message->GetSourceLine(context).ToLocalChecked());
-			exception_message += fmt::format("{}\n", c_str(sourceline));
-			// Print wavy underline (GetUnderline is deprecated).
-//			int start = message->GetStartColumn(context).FromJust();
-//			for (int i = 0; i < start; i++)
-//			{
-//				fprintf(stderr, " ");
-//			}
-//			int end = message->GetEndColumn(context).FromJust();
-//			for (int i = start; i < end; i++)
-//			{
-//				fprintf(stderr, "^");
-//			}
-//			fprintf(stderr, "\n");
-			v8::Local<v8::Value> stack_trace_string;
-			if (try_catch->StackTrace(context).ToLocal(&stack_trace_string)
-				&& stack_trace_string->IsString()
-				&& v8::Local<v8::String>::Cast(stack_trace_string)->Length() > 0
-			)
-			{
-				v8::String::Utf8Value stack_trace(isolate, stack_trace_string);
-				exception_message += fmt::format("{}\n", c_str(stack_trace));
-			}
-		}
-		return exception_message;
-	}
-
-	void EcmaScriptExecutor::require_module(const v8::FunctionCallbackInfo<v8::Value>& args)
-	{
-		v8::Isolate* isolate = args.GetIsolate();
-		v8::Local<v8::Context> context = isolate->GetCurrentContext();
-		v8::Local<v8::Object> global = context->Global();
-
-		// Resolve "this"
-		v8::Local<v8::External> _self = args.Data().As<v8::External>();
-		EcmaScriptExecutor* self = static_cast<EcmaScriptExecutor*>(_self->Value());
-
-		v8::String::Utf8Value str(isolate, args[0]);
-		std::string module_name = c_str(str);
-		spdlog::info("Loading module {}", module_name);
-		if (module_name == "logging")
-		{
-			self->logging_module->create(isolate, context, global);
-		} else if (module_name == "entity-system")
-		{
-			self->entity_system_module->create(isolate, context, global);
-		} else if (module_name == "util")
-		{
-			self->util_module->create(isolate, context, global);
-		}
 	}
 
 	void EcmaScriptExecutor::execute_once(std::string path, bool detached)
@@ -177,8 +66,9 @@ namespace scripting {
 			// Create a stack-allocated handle scope.
 			v8::HandleScope handle_scope(isolate);
 
-			// Create a handle to "this". We need it in "require".
-			v8::Local<v8::External> self = v8::External::New(isolate, (void *) this);
+			// Create a handle to the EcmaScriptPlatform. We need it in "require".
+			// v8::Local<v8::External> self = v8::External::New(isolate, (void *) this);
+			v8::Local<v8::External> ext_platform = v8::External::New(isolate, (void *) ecma_script_platform.get());
 
 			// Create a template for the global object and set the
 			// built-in global functions.
@@ -189,7 +79,7 @@ namespace scripting {
 			// Actually, "require" is the only what we provide in the global
 			// object by default. Everything else is provided by the modules
 			// itself.
-			global->Set(v8::String::NewFromUtf8(isolate, "require"), v8::FunctionTemplate::New(isolate, EcmaScriptExecutor::require_module, self.As<v8::Value>()));
+			global->Set(v8::String::NewFromUtf8(isolate, "require"), v8::FunctionTemplate::New(isolate, EcmaScriptPlatform::require_module, ext_platform.As<v8::Value>()));
 
 			// Context
 			//
@@ -220,10 +110,10 @@ namespace scripting {
 						v8::String::Utf8Value utf8(isolate, o_result.ToLocalChecked());
 						spdlog::info("Result: {}", *utf8);
 					} else {
-						spdlog::error("Failed to execute script '{}'::\n{}", path, ReportException(isolate, &try_catch));
+						spdlog::error("Failed to execute script '{}'::\n{}", path, EcmaScriptPlatform::report_exception(isolate, &try_catch));
 					}
 				} else {
-					spdlog::error("Failed to compile script '{}':\n{}", path, ReportException(isolate, &try_catch));
+					spdlog::error("Failed to compile script '{}':\n{}", path, EcmaScriptPlatform::report_exception(isolate, &try_catch));
 				}
 			}
 		}

@@ -1,8 +1,6 @@
 #pragma once
 
-#include "scripting/modules/LoggingModule.hpp"
-#include "scripting/modules/EntitySystemModule.hpp"
-#include "scripting/modules/UtilModule.hpp"
+#include "EcmaScriptPlatform.hpp"
 
 #include "v8/v8.h"
 
@@ -11,9 +9,7 @@
 namespace inexor {
 namespace scripting {
 
-	using LoggingModulePtr = std::shared_ptr<LoggingModule>;
-	using EntitySystemModulePtr = std::shared_ptr<EntitySystemModule>;
-	using UtilModulePtr = std::shared_ptr<UtilModule>;
+	using EcmaScriptPlatformPtr = std::shared_ptr<EcmaScriptPlatform>;
 
 	/// @class EcmaScriptExecutor
     /// @brief Service for executing ECMA scripts.
@@ -24,9 +20,7 @@ namespace scripting {
 
 			/// Constructor.
 			EcmaScriptExecutor(
-				LoggingModulePtr logging_module,
-				EntitySystemModulePtr entity_system_module,
-				UtilModulePtr util_module
+				EcmaScriptPlatformPtr ecma_script_platform
 			);
 
 			/// Destructor.
@@ -43,8 +37,6 @@ namespace scripting {
 			/// @param detached If true, the script is executed in it's own thread.
 			void execute_once(std::string path, bool detached);
 
-			static void require_module(const v8::FunctionCallbackInfo<v8::Value>& args);
-
 		private:
 
 			/// Executes the given ECMA script.
@@ -53,17 +45,8 @@ namespace scripting {
 			/// Loads the file into a string.
 			std::string load_file(std::string path);
 
-			/// The v8 platform.
-			std::unique_ptr<v8::Platform> platform;
-
-			/// The logging module.
-			LoggingModulePtr logging_module;
-
-			/// The entity system module.
-			EntitySystemModulePtr entity_system_module;
-
-			/// The util module.
-			UtilModulePtr util_module;
+			/// The EcmaScript Platform.
+			EcmaScriptPlatformPtr ecma_script_platform;
 
 	};
 

@@ -7,6 +7,8 @@
 #include "client/ClientLifecycle.hpp"
 #include "input/managers/ClipboardManager.hpp"
 #include "scripting/managers/ScriptExecutor.hpp"
+#include "scripting/managers/EcmaScriptInterpreterManager.hpp"
+#include "scripting/model/EcmaScriptInterpreter.hpp"
 #include "console/managers/ConsoleManager.hpp"
 #include "logging/managers/LogManager.hpp"
 
@@ -37,10 +39,12 @@ namespace renderer {
 	using ConnectorManagerPtr = std::shared_ptr<visual_scripting::ConnectorManager>;
 	using ClientLifecyclePtr = std::shared_ptr<client::ClientLifecycle>;
 	using ScriptExecutorPtr = std::shared_ptr<scripting::ScriptExecutor>;
+	using EcmaScriptInterpreterManagerPtr = std::shared_ptr<scripting::EcmaScriptInterpreterManager>;
 	using ConsoleManagerPtr = std::shared_ptr<console::ConsoleManager>;
 	using LogManagerPtr = std::shared_ptr<logging::LogManager>;
 	using EntityInstancePtr = std::shared_ptr<EntityInstance>;
 	using ConsolePtr = std::shared_ptr<console::Console>;
+	using EcmaScriptInterpreterPtr = std::shared_ptr<scripting::EcmaScriptInterpreter>;
 
 	struct QuadVertex {
 		Magnum::Vector2 position;
@@ -83,6 +87,7 @@ namespace renderer {
 				ConnectorManagerPtr connector_manager,
 				ClientLifecyclePtr client_lifecycle,
 				ScriptExecutorPtr script_executor,
+				EcmaScriptInterpreterManagerPtr ecma_script_interpreter_manager,
 				ConsoleManagerPtr console_manager,
 				LogManagerPtr log_manager
 			);
@@ -98,6 +103,7 @@ namespace renderer {
 				ConnectorManagerPtr,
 				ClientLifecyclePtr,
 				ScriptExecutorPtr,
+				EcmaScriptInterpreterManagerPtr,
 				ConsoleManagerPtr,
 				LogManagerPtr
 			>;
@@ -194,6 +200,9 @@ namespace renderer {
 			/// The script executor.
 			ScriptExecutorPtr script_executor;
 
+			/// Manager for EcmaScript interpreters.
+			EcmaScriptInterpreterManagerPtr ecma_script_interpreter_manager;
+
 			/// The console manager.
 			ConsoleManagerPtr console_manager;
 
@@ -205,6 +214,9 @@ namespace renderer {
 
 			/// The console.
 			ConsolePtr console;
+
+			/// The interpreter.
+			EcmaScriptInterpreterPtr interpreter;
 
 			/// The buffer for the logo.
 			std::shared_ptr<Magnum::GL::Buffer> buffer;

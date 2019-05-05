@@ -94,6 +94,9 @@ namespace inexor {
 		// Initialize the visual scripting.
 		visual_scripting_system_module->init();
 
+		// Initialize the scripting module.
+		scripting_module->init();
+
         // Initialize the console module
 		console_module->init();
 
@@ -109,9 +112,6 @@ namespace inexor {
 #ifndef INEXOR_WITHOUT_SERVER
 		server_module->init();
 #endif
-
-		// Initialize the scripting module.
-		scripting_module->init();
 	}
 
 	void InexorApplication::run()
@@ -171,6 +171,7 @@ namespace inexor {
 
 	}
 
+	// Reverse order
 	void InexorApplication::shutdown()
 	{
 		if(!running)
@@ -187,9 +188,6 @@ namespace inexor {
         // Shutdown REST server.
 		rest_server->shutdown();
 
-		// Shut down the scripting module.
-		scripting_module->shutdown();
-
 		// Shut down the client module.
 #ifndef INEXOR_WITHOUT_CLIENT
 		client_module->shutdown();
@@ -198,6 +196,9 @@ namespace inexor {
 #ifndef INEXOR_WITHOUT_SERVER
 		server_module->shutdown();
 #endif
+
+		// Shut down the scripting module.
+		scripting_module->shutdown();
 
 		// Shut down the visual scripting module.
 		visual_scripting_system_module->shutdown();

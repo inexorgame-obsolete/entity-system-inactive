@@ -40,6 +40,7 @@ namespace renderer {
 		ConnectorManagerPtr connector_manager,
 		ClientLifecyclePtr client_lifecycle,
 		ScriptExecutorPtr script_executor,
+		EcmaScriptInterpreterManagerPtr ecma_script_interpreter_manager,
 		ConsoleManagerPtr console_manager,
 		LogManagerPtr log_manager
 	) {
@@ -52,6 +53,7 @@ namespace renderer {
 		this->connector_manager = connector_manager;
 		this->client_lifecycle = client_lifecycle;
 		this->script_executor = script_executor;
+		this->ecma_script_interpreter_manager = ecma_script_interpreter_manager;
 		this->console_manager = console_manager;
 		this->log_manager = log_manager;
 		this->show_fps = true;
@@ -92,6 +94,8 @@ namespace renderer {
 		mouse_input_manager->register_on_window_mouse_scrolled(window, shared_from_this());
 
 		console = console_manager->create_console("loading_screen");
+
+		interpreter = ecma_script_interpreter_manager->create_interpreter("loading_screen");
 
 		EntityInstancePtrOpt o_key_b = keyboard_input_manager->create_key(GLFW_KEY_B);
 		if (o_key_b.has_value())
@@ -149,6 +153,8 @@ namespace renderer {
 
 	void LoadingScreen::shutdown()
 	{
+		ecma_script_interpreter_manager->destroy_interpreter("loading_screen");
+
 		window_manager->destroy_window(window);
 	}
 
@@ -549,6 +555,15 @@ namespace renderer {
 			} else {
 				action = fmt::format("Unknown file type: {}", path);
 			}
+		} else if (starts_with(console->command_line, "/i")) {
+			EcmaScriptInterpreterPtr interpreter = ecma_script_interpreter_manager->create_interpreter("test");
+			interpreter->queue_command("var x = 10;");
+			interpreter->queue_command("var y = 20;");
+			interpreter->queue_command("var z = x + y;");
+			interpreter->queue_command("x + y;");
+			ecma_script_interpreter_manager->destroy_interpreter("test");
+		} else {
+			interpreter->queue_command(console->command_line);
 		}
 		console->reset();
 	}
