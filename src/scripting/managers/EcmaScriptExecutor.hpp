@@ -12,7 +12,7 @@ namespace scripting {
 	using EcmaScriptPlatformPtr = std::shared_ptr<EcmaScriptPlatform>;
 
 	/// @class EcmaScriptExecutor
-    /// @brief Service for executing ECMA scripts.
+	/// @brief Service for executing ECMA scripts.
 	class EcmaScriptExecutor
 		: public std::enable_shared_from_this<EcmaScriptExecutor>
 	{
