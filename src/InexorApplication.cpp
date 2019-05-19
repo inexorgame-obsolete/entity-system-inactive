@@ -45,7 +45,7 @@ namespace inexor {
 	
 	InexorApplication::~InexorApplication()
 	{
-        // shutdown();
+		// shutdown();
 	}
 
 	void InexorApplication::pre_init(int argc, char* argv[])
@@ -89,7 +89,7 @@ namespace inexor {
 
 	void InexorApplication::init()
 	{
-	    spdlog::get(LOGGER_NAME)->info("Starting Inexor...");
+		spdlog::get(LOGGER_NAME)->info("Starting Inexor...");
 
 		// Initialize the visual scripting.
 		visual_scripting_system_module->init();
@@ -97,10 +97,10 @@ namespace inexor {
 		// Initialize the scripting module.
 		scripting_module->init();
 
-        // Initialize the console module
+		// Initialize the console module
 		console_module->init();
 
-        // Initialize the command module
+		// Initialize the command module
 		command_module->init();
 
 		// Initialize the client module.
@@ -123,9 +123,9 @@ namespace inexor {
 
 		running = true;
 
-	    spdlog::get(LOGGER_NAME)->info("Inexor is running");
+		spdlog::get(LOGGER_NAME)->info("Inexor is running");
 		while(running && !client_module->is_restart_requested())
-        {
+		{
 			// everything else happens in the execution graph or in threads for the ES instances.
 
 			// main thread = poll events
@@ -153,7 +153,7 @@ namespace inexor {
 			}
 #endif
 
-        }
+		}
 
 		// Restart requested?
 #ifndef INEXOR_WITHOUT_CLIENT
@@ -175,17 +175,17 @@ namespace inexor {
 	void InexorApplication::shutdown()
 	{
 		if(!running)
-        {
+		{
 			spdlog::get(LOGGER_NAME)->info("Not running");
 			return;
 		}
 
 		spdlog::get(LOGGER_NAME)->info("Shutting down Inexor...");
 
-        // TODO: Why do we need this?
+		// TODO: Why do we need this?
 		// std::this_thread::sleep_for(1s);
 
-        // Shutdown REST server.
+		// Shutdown REST server.
 		rest_server->shutdown();
 
 		// Shut down the client module.
@@ -209,22 +209,22 @@ namespace inexor {
 
 	void InexorApplication::restart()
 	{
-	    spdlog::get(LOGGER_NAME)->info("Restarting Inexor...");
+		spdlog::get(LOGGER_NAME)->info("Restarting Inexor...");
 		shutdown();
 		init();
 		run();
-	    spdlog::get(LOGGER_NAME)->info("Restart completed");
+		spdlog::get(LOGGER_NAME)->info("Restart completed");
 	}
 
 	void InexorApplication::sighup_handler(const int signal_number)
 	{
-	    spdlog::get(LOGGER_NAME)->info("Received SIGINT signal number {}", signal_number);
-	    restart();
+		spdlog::get(LOGGER_NAME)->info("Received SIGINT signal number {}", signal_number);
+		restart();
 	}
 
 	void InexorApplication::sigterm_handler(const int signal_number)
 	{
-	    spdlog::get(LOGGER_NAME)->info("Received SIGTERM signal number {}", signal_number);
+		spdlog::get(LOGGER_NAME)->info("Received SIGTERM signal number {}", signal_number);
 		shutdown();
 	}
 
