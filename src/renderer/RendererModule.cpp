@@ -13,15 +13,19 @@ namespace renderer {
 		MonitorManagerPtr monitor_manager,
 		WindowManagerPtr window_manager,
 		FontManagerPtr font_manager,
-		LoadingScreenPtr loading_screen,
-		TriangleExamplePtr triangle_example
+		LoadingScreenPtr loading_screen
+#ifdef INEXOR_WITH_INTEGRATION_TESTS
+		, TriangleExamplePtr triangle_example
+#endif
 	)
 	{
 		this->monitor_manager = monitor_manager;
 		this->window_manager = window_manager;
 		this->font_manager = font_manager;
 		this->loading_screen = loading_screen;
+#ifdef INEXOR_WITH_INTEGRATION_TESTS
 		this->triangle_example = triangle_example;
+#endif
 	}
 
 	RendererModule::~RendererModule()
@@ -49,12 +53,16 @@ namespace renderer {
 		window_manager->init();
 		font_manager->init();
 		loading_screen->init();
+#ifdef INEXOR_WITH_INTEGRATION_TESTS
 		triangle_example->init();
+#endif
 	}
 
 	void RendererModule::shutdown()
 	{
+#ifdef INEXOR_WITH_INTEGRATION_TESTS
 		triangle_example->shutdown();
+#endif
 		loading_screen->shutdown();
 		font_manager->shutdown();
 		window_manager->shutdown();
