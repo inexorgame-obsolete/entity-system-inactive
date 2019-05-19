@@ -32,35 +32,31 @@ namespace console {
 
 	void Console::backspace()
 	{
-		if (cursor_position > 0)
-		{
-			command_line.erase(cursor_position - 1, 1);
-			cursor_position -= 1;
-		}
+		if (cursor_position <= 0)
+			return;
+		command_line.erase(cursor_position - 1, 1);
+		cursor_position -= 1;
 	}
 
 	void Console::delete_char()
 	{
-		if (cursor_position < command_line.length())
-		{
-			command_line.erase(cursor_position, 1);
-		}
+		if (cursor_position >= command_line.length())
+			return;
+		command_line.erase(cursor_position, 1);
 	}
 
 	void Console::cursor_left()
 	{
-		if (cursor_position > 0)
-		{
-			cursor_position -= 1;
-		}
+		if (cursor_position <= 0)
+			return;
+		cursor_position -= 1;
 	}
 
 	void Console::cursor_right()
 	{
-		if (cursor_position < command_line.length())
-		{
-			cursor_position += 1;
-		}
+		if (cursor_position >= command_line.length())
+			return;
+		cursor_position += 1;
 	}
 
 	void Console::cursor_pos1()
