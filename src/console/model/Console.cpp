@@ -25,7 +25,7 @@ namespace console {
 
 	void Console::insert(std::string str)
 	{
-		int len = str.length();
+		size_t len = str.length();
 		command_line.insert(cursor_position, str);
 		cursor_position += len;
 	}
