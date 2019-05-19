@@ -11,24 +11,23 @@ namespace scripting {
 	using ScriptExecutorPtr = std::shared_ptr<ScriptExecutor>;
 	using EcmaScriptInterpreterManagerPtr = std::shared_ptr<EcmaScriptInterpreterManager>;
 
-    /// @class ScriptingModule
-    /// @brief This module provides the integration of the script engines.
+	/// @class ScriptingModule
+	/// @brief This module provides the integration of the script engines.
 	class ScriptingModule
 	{
 		public:
 
 			/// @brief Constructs the scripting module.
-            /// @note The dependencies of this class will be injected automatically.
-            /// @param ecma_script_platform The EcmaScript platform.
-            /// @param script_executor Service for executing scripts.
-            /// @param ecma_script_interpreter_manager Manages the ecma script interpreters.
+			/// @param ecma_script_platform The EcmaScript platform.
+			/// @param script_executor Service for executing scripts.
+			/// @param ecma_script_interpreter_manager Manages the ecma script interpreters.
 			ScriptingModule(
 				EcmaScriptPlatformPtr ecma_script_platform,
 				ScriptExecutorPtr script_executor,
 				EcmaScriptInterpreterManagerPtr ecma_script_interpreter_manager
 			);
 
-            /// Destructor.
+			/// Destructor.
 			~ScriptingModule();
 
 			/// Initializes the scripting module.

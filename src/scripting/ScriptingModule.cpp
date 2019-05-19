@@ -9,9 +9,9 @@ namespace scripting {
 		EcmaScriptInterpreterManagerPtr ecma_script_interpreter_manager
 	)
 	{
-        this->ecma_script_platform = ecma_script_platform;
-        this->script_executor = script_executor;
-        this->ecma_script_interpreter_manager = ecma_script_interpreter_manager;
+		this->ecma_script_platform = ecma_script_platform;
+		this->script_executor = script_executor;
+		this->ecma_script_interpreter_manager = ecma_script_interpreter_manager;
 	}
 
 	ScriptingModule::~ScriptingModule()
