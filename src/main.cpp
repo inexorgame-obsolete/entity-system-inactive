@@ -166,6 +166,7 @@ int main(int argc, char *argv[]) {
         // Double buffering: one frontbuffer (shown to user), one backbuffer (rendered into).
         // swap them -> show next frame
         glfwSwapBuffers(glfw_window);
+        glfwPollEvents();
 
         std::this_thread::sleep_for(std::chrono::milliseconds(50));
         update_positions(dt, registry);
