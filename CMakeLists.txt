@@ -66,9 +66,9 @@ else()
 endif()
 
 include_directories("${CMAKE_SOURCE_DIR}/src")
-file(GLOB_RECURSE source_files
-  "src/*.hpp"
-  "src/*.cpp"
+file(GLOB_RECURSE source_files "src/main.cpp"
+  # "src/*.hpp"
+  # "src/*.cpp"
 )
 
 # Two targets: inexor-entity-system library and unit_test
@@ -104,9 +104,9 @@ if(APPLE)
     target_link_libraries(inexor-entity-system-standalone "-framework CoreFoundation")
 endif()
 
-add_executable(inexor-entity-system-tests ${TEST_SOURCE_FILES})
-target_link_libraries(inexor-entity-system-tests inexor-entity-system-lib)
-target_link_libraries(inexor-entity-system-tests ${CONAN_LIBS})
+#add_executable(inexor-entity-system-tests ${TEST_SOURCE_FILES})
+#target_link_libraries(inexor-entity-system-tests inexor-entity-system-lib)
+#target_link_libraries(inexor-entity-system-tests ${CONAN_LIBS})
 
 # Use folder structure in Visual Studio.
 assign_source_group(${NORMAL_SOURCE_FILES})
