@@ -143,6 +143,9 @@ int main(int argc, char *argv[]) {
         auto entity = registry.create();
         registry.assign<Position>(entity, 0.0f, 0.0f);
         registry.assign<Velocity>(entity, 0.005f, 0.005f);
+        auto entity2 = registry.create();
+        registry.assign<Position>(entity2, 0.2f, -0.3f);
+        registry.assign<Velocity>(entity2, -0.005f, 0.005f);
     }
 
     // Start up window and opengl context
