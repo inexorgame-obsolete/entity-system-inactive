@@ -22,9 +22,9 @@ namespace entity_system {
 	bool EntityType::has_attribute_type(const std::string& ent_attr_type_name)
 	{
 		// Look through all linked entity attribute types.
-		for(int i = 0; i < entity_attribute_instances.size(); i++)
+		for(int i = 0; i < entity_attribute_types.size(); i++)
 		{
-			if(0 == entity_attribute_instances[i]->get_type_name().compare(ent_attr_type_name))
+			if(0 == entity_attribute_types[i]->get_type_name().compare(ent_attr_type_name))
 			{
 				// Yes, this entity attribute type is
 				// already linked to this entity type.
@@ -39,10 +39,10 @@ namespace entity_system {
 	bool EntityType::has_attribute_type(const xg::Guid& ent_attr_type_GUID)
 	{
 		// Look through all linked entity attribute types.
-		for(int i = 0; i < entity_attribute_instances.size(); i++)
+		for(int i = 0; i < entity_attribute_types.size(); i++)
 		{
 			// TODO: Does this even work? DEBUG!
-			if (ent_attr_type_GUID == entity_attribute_instances[i]->get_GUID())
+			if (ent_attr_type_GUID == entity_attribute_types[i]->get_GUID())
 			{
 				// Yes, this entity attribute type is
 				// already linked to this entity type.
@@ -68,7 +68,7 @@ namespace entity_system {
 			// Link entity attribute type to this entity type.
 			// Use lock guard to ensure thread safety for this write operation!
 			std::lock_guard<std::mutex> lock(entity_type_mutex);
-			entity_attribute_instances.push_back(ent_attr_type);
+			entity_attribute_types.push_back(ent_attr_type);
 			return ENTSYS_SUCCESS;
 		}
 		return ENTSYS_ERROR;
@@ -77,26 +77,26 @@ namespace entity_system {
 	std::size_t EntityType::get_linked_attributes_count() const
 	{
 		// Read only, no mutex required.
-		return entity_attribute_instances.size();
+		return entity_attribute_types.size();
 	}
 
 	std::optional<EntityAttributeTypePtrList> EntityType::get_linked_attribute_types() const
 	{
-		if(0 == entity_attribute_instances.size())
+		if(0 == entity_attribute_types.size())
 		{
 			// There are no linked entity attribute instances.
 			return std::nullopt;
 		}
 
 		// Read only, no mutex required.
-		return std::optional<EntityAttributeTypePtrList> { entity_attribute_instances };
+		return std::optional<EntityAttributeTypePtrList> { entity_attribute_types };
 	}
 
 	void EntityType::reset_linked_attribute_types()
 	{
 		// Use lock guard to ensure thread safety for this write operation!
 		std::lock_guard<std::mutex> lock(entity_type_mutex);
-		entity_attribute_instances.clear();
+		entity_attribute_types.clear();
 	}
 
 }

@@ -19,8 +19,8 @@ namespace entity_system {
 	{
 		private:
 
-			/// A vector of stored entity attribute instances.
-			EntityAttributeTypePtrList entity_attribute_instances;
+			/// A vector of stored entity attributes.
+			EntityAttributeTypePtrList entity_attribute_types;
 
 			/// Mutex for the entity type class.
 			std::mutex entity_type_mutex;
@@ -66,14 +66,6 @@ namespace entity_system {
 			/// @param ent_attr_type A const reference of a shared pointer to an entity attribute type which will be linked to this entity type.
 			/// @return ENTSYS_SUCCESS if linking succeeded, ENTSYS_ERROR otherwise.
 			ENTSYS_RESULT link_attribute_type(const EntityAttributeTypePtr& ent_attr_type);
-
-
-			/// TODO!
-			ENTSYS_RESULT link_attribute_type(const xg::Guid&);
-
-
-			/// TODO!
-			ENTSYS_RESULT link_attribute_type(const std::string&);
 
 
 			/// @brief Returns the number of entity attribute types which are linked to this entity type.
