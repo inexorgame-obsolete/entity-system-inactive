@@ -4,7 +4,9 @@
 #include "renderer/managers/WindowManager.hpp"
 #include "renderer/managers/FontManager.hpp"
 #include "renderer/managers/LoadingScreen.hpp"
+#ifdef INEXOR_WITH_INTEGRATION_TESTS
 #include "renderer/managers/TriangleExample.hpp"
+#endif
 
 namespace inexor {
 namespace renderer {
@@ -19,7 +21,9 @@ namespace renderer {
 		using WindowManagerPtr = std::shared_ptr<WindowManager>;
 		using FontManagerPtr = std::shared_ptr<FontManager>;
 		using LoadingScreenPtr = std::shared_ptr<LoadingScreen>;
+#ifdef INEXOR_WITH_INTEGRATION_TESTS
 		using TriangleExamplePtr = std::shared_ptr<TriangleExample>;
+#endif
 
 		public:
 
@@ -34,8 +38,10 @@ namespace renderer {
 				MonitorManagerPtr monitor_manager,
 				WindowManagerPtr window_manager,
 				FontManagerPtr font_manager,
-				LoadingScreenPtr loading_screen,
-				TriangleExamplePtr triangle_example
+				LoadingScreenPtr loading_screen
+#ifdef INEXOR_WITH_INTEGRATION_TESTS
+				, TriangleExamplePtr triangle_example
+#endif
 				// UserInterfaceRenderer
 				// WorldRenderer
 				// ...
@@ -53,9 +59,6 @@ namespace renderer {
 			/// Updates the frame in main thread.
 			void update();
 
-//			/// Returns the window manager.
-//			WindowManagerPtr get_window_manager();
-
 		private:
 
 			/// The monitor manager.
@@ -71,7 +74,9 @@ namespace renderer {
 			LoadingScreenPtr loading_screen;
 
 			/// The triangle example.
+#ifdef INEXOR_WITH_INTEGRATION_TESTS
 			TriangleExamplePtr triangle_example;
+#endif
 
 	};
 

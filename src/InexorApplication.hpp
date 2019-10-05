@@ -1,16 +1,22 @@
 #pragma once
 
 #include "entity-system/EntitySystemModule.hpp"
-#include "entity-system/managers/EntitySystemDebugger.hpp"
 #include "entity-system-rest/RestServer.hpp"
 #include "entity-system-rest/RestServerLogger.hpp"
 
 #include "type-system/TypeSystemModule.hpp"
 #include "configuration/ConfigurationModule.hpp"
 #include "visual-scripting/VisualScriptingSystemModule.hpp"
+#include "scripting/ScriptingModule.hpp"
 #include "logging/managers/LogManager.hpp"
+#include "console/ConsoleModule.hpp"
 #include "command/CommandModule.hpp"
+#ifndef INEXOR_WITHOUT_CLIENT
 #include "client/ClientModule.hpp"
+#endif
+#ifndef INEXOR_WITHOUT_SERVER
+#include "server/ServerModule.hpp"
+#endif
 
 #include <memory>
 #include <cstdlib>
@@ -19,9 +25,9 @@
 #include <sys/types.h>
 
 #ifdef _WIN32
-    #include <process.h>
+	#include <process.h>
 #else
-    #include <unistd.h>
+	#include <unistd.h>
 #endif
 
 #include <boost/di.hpp>
@@ -34,10 +40,16 @@ namespace inexor {
 	using TypeSystemModulePtr = std::shared_ptr<entity_system::type_system::TypeSystemModule>;
 	using ConfigurationModulePtr = std::shared_ptr<configuration::ConfigurationModule>;
 	using RestServerPtr = std::shared_ptr<entity_system::RestServer>;
-	using EntitySystemDebuggerPtr = std::shared_ptr<entity_system::EntitySystemDebugger>;
 	using VisualScriptingSystemModulePtr = std::shared_ptr<visual_scripting::VisualScriptingSystemModule>;
+	using ScriptingModulePtr = std::shared_ptr<scripting::ScriptingModule>;
+	using ConsoleModulePtr = std::shared_ptr<console::ConsoleModule>;
 	using CommandModulePtr = std::shared_ptr<command::CommandModule>;
+#ifndef INEXOR_WITHOUT_CLIENT
 	using ClientModulePtr = std::shared_ptr<client::ClientModule>;
+#endif
+#ifndef INEXOR_WITHOUT_SERVER
+	using ServerModulePtr = std::shared_ptr<server::ServerModule>;
+#endif
 	using LogManagerPtr = std::shared_ptr<logging::LogManager>;
 
 	/// @class Inexor
@@ -52,23 +64,49 @@ namespace inexor {
 			/// @param type_system_module The type system manager.
 			/// @param configuration_module The configuration manager module.
 			/// @param rest_server The REST server module of the entity system.
-			/// @param entity_system_debugger The debugger of the entity system module.
 			/// @param visual_scripting_system_module The visual scripting system module.
-			/// @param log_manager The log module.
-			/// @param renderer_manager The rendering module.
+			/// @param scripting_module The scripting module.
+			/// @param console_module The console module.
 			/// @param command_module The command module.
-			/// @param audio_module The audio module.
+			/// @param client_module The client module.
+			/// @param server_module The server module.
+			/// @param log_manager The log module.
 			InexorApplication(
 				EntitySystemModulePtr entity_system_module,
 				TypeSystemModulePtr type_system_module,
 				ConfigurationModulePtr configuration_module,
 				RestServerPtr rest_server,
-				EntitySystemDebuggerPtr entity_system_debugger,
 				VisualScriptingSystemModulePtr visual_scripting_system_module,
+				ScriptingModulePtr scripting_module,
+				ConsoleModulePtr console_module,
 				CommandModulePtr command_module,
+#ifndef INEXOR_WITHOUT_CLIENT
 				ClientModulePtr client_module,
+#endif
+#ifndef INEXOR_WITHOUT_SERVER
+				ServerModulePtr server_module,
+#endif
 				LogManagerPtr log_manager
 			);
+
+			// This is neccessary for constructor length greater than 10
+			using boost_di_inject__ = boost::di::inject<
+				EntitySystemModulePtr,
+				TypeSystemModulePtr,
+				ConfigurationModulePtr,
+				RestServerPtr,
+				VisualScriptingSystemModulePtr,
+				ScriptingModulePtr,
+				ConsoleModulePtr,
+				CommandModulePtr,
+#ifndef INEXOR_WITHOUT_CLIENT
+				ClientModulePtr,
+#endif
+#ifndef INEXOR_WITHOUT_SERVER
+				ServerModulePtr,
+#endif
+				LogManagerPtr
+			>;
 
 			/// Destructor.
 			~InexorApplication();
@@ -91,16 +129,6 @@ namespace inexor {
 			/// Restarts the Inexor application.
 			void restart();
 
-//			/// @brief Registers a logger.
-//			/// @param logger_name The name of the logger.
-//			void register_logger(std::string logger_name);
-//
-//			/// Get method for the entity system.
-//			EntitySystemModulePtr get_entity_system();
-//
-//			/// Get method for the rest server.
-//			RestServerPtr get_rest_server();
-
 		private:
 
 			/// The entity system of Inexor.
@@ -115,17 +143,26 @@ namespace inexor {
 			/// The REST server module of the entity system.
 			RestServerPtr rest_server;
 
-			/// The debugger of the entity system module.
-			EntitySystemDebuggerPtr entity_system_debugger;
-
 			/// The visual scripting system module.
 			VisualScriptingSystemModulePtr visual_scripting_system_module;
+
+			/// The scripting module.
+			ScriptingModulePtr scripting_module;
+
+			/// The console module.
+			ConsoleModulePtr console_module;
 
 			/// The command module.
 			CommandModulePtr command_module;
 
+#ifndef INEXOR_WITHOUT_CLIENT
 			/// The client module.
 			ClientModulePtr client_module;
+#endif
+#ifndef INEXOR_WITHOUT_SERVER
+			/// The server module.
+			ServerModulePtr server_module;
+#endif
 
 			/// The log manager.
 			LogManagerPtr log_manager;
@@ -160,16 +197,6 @@ namespace inexor {
 					std::mem_fn(&InexorApplication::sigterm_handler)(instance, signal_number);
 				}
 			}
-
-//			/// ?
-//			/// @param service ?
-//			static void call_ready_handlers(Service& service)
-//			{
-//				for (InexorApplication* instance : InexorApplication::instances)
-//				{
-//					std::mem_fn(&InexorApplication::ready_handler)(instance, service);
-//				}
-//			}
 
 			/// Static instances of the Inexor application.
 			static std::vector<InexorApplication *> instances;

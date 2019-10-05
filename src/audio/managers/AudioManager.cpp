@@ -75,13 +75,13 @@ namespace audio {
 		return 1;
 	}
 	
-    void AudioManager::shutdown()
-    {
-    	if(device)
-    	{
-        	alcCloseDevice(device);
-    	}
-    }
+	void AudioManager::shutdown()
+	{
+		if(device)
+		{
+			alcCloseDevice(device);
+		}
+	}
 
 }
 }

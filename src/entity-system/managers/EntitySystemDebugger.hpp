@@ -65,10 +65,10 @@ namespace entity_system {
 			~EntitySystemDebugger();
 
 			/// Initialization.
-			void init();
+			void pre_init();
 
 			/// Initialization.
-			void init_logger();
+			void init();
 
 			void on_entity_type_created(EntityTypePtr entity_type);
 			void on_entity_type_deleted(const xg::Guid& type_GUID);

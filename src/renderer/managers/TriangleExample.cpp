@@ -93,13 +93,24 @@ namespace renderer {
 		switch (key)
 		{
 			case GLFW_KEY_X:
-				window_manager->destroy_window(window);
+				if (mods & GLFW_MOD_CONTROL) {
+					window_manager->destroy_window(window);
+				}
 				break;
 			case GLFW_KEY_Q:
-				client_lifecycle->request_shutdown();
+				if (mods & GLFW_MOD_CONTROL) {
+					client_lifecycle->request_shutdown();
+				}
 				break;
 			case GLFW_KEY_R:
-				client_lifecycle->request_restart();
+				if (mods & GLFW_MOD_CONTROL) {
+					client_lifecycle->request_restart();
+				}
+				break;
+			case GLFW_KEY_F:
+				if (mods & GLFW_MOD_CONTROL) {
+					window->toggle(WindowEntityTypeProvider::WINDOW_FULLSCREEN);
+				}
 				break;
 			case GLFW_KEY_V:
 				toggle_connector_debug();
