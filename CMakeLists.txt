@@ -82,9 +82,12 @@ file(GLOB_RECURSE source_files
 # Each file with "_test" in its name is a file added to inexor-tests
 set(NORMAL_SOURCE_FILES)
 set(TEST_SOURCE_FILES)
+set(BENCHMARK_SOURCE_FILES)
 foreach(file ${source_files} )
   if(file MATCHES ".*_test.*" )
      set(TEST_SOURCE_FILES ${TEST_SOURCE_FILES} ${file})
+  elseif(file MATCHES ".*_benchmark.*")
+	  set(BENCHMARK_SOURCE_FILES ${BENCHMARK_SOURCE_FILES} ${file})
   else()
      set(NORMAL_SOURCE_FILES ${NORMAL_SOURCE_FILES} ${file})
   endif()
@@ -103,6 +106,7 @@ corrade_add_resource(CORRADE_STANDALONE_RESOURCES standalone-resources.conf)
 # Print CMake debug messages.
 message(STATUS "NORMAL SOURCE FILES: ${NORMAL_SOURCE_FILES} + src/main.cpp")
 message(STATUS "TEST SOURCE FILES: ${TEST_SOURCE_FILES}")
+message(STATUS "BENCHMARK SOURCE FILES: ${BENCHMARK_SOURCE_FILES}")
 message(STATUS "CONAN_LIBS: ${CONAN_LIBS}")
 message(STATUS "CORRADE_STANDALONE_RESOURCES: ${CORRADE_STANDALONE_RESOURCES}")
 
@@ -114,18 +118,23 @@ target_link_libraries(inexor-entity-system-lib ${CONAN_LIBS})
 #endif()
 
 # Inexor standalone application.
-add_executable(inexor-entity-system-standalone src/main.cpp ${CORRADE_STANDALONE_RESOURCES})
-target_link_libraries(inexor-entity-system-standalone PUBLIC inexor-entity-system-lib)
-target_link_libraries(inexor-entity-system-standalone PUBLIC ${CONAN_LIBS})
-target_link_libraries(inexor-entity-system-standalone PRIVATE Corrade::Utility)
+add_executable(inexor-standalone src/main.cpp ${CORRADE_STANDALONE_RESOURCES})
+target_link_libraries(inexor-standalone PUBLIC inexor-entity-system-lib)
+target_link_libraries(inexor-standalone PUBLIC ${CONAN_LIBS})
+target_link_libraries(inexor-standalone PRIVATE Corrade::Utility)
 if(APPLE)
-    target_link_libraries(inexor-entity-system-standalone "-framework CoreFoundation")
+    target_link_libraries(inexor-standalone "-framework CoreFoundation")
 endif()
 
 # Inexor unit tests.
-add_executable(inexor-entity-system-tests ${TEST_SOURCE_FILES})
-target_link_libraries(inexor-entity-system-tests inexor-entity-system-lib)
-target_link_libraries(inexor-entity-system-tests ${CONAN_LIBS})
+add_executable(inexor-tests ${TEST_SOURCE_FILES})
+target_link_libraries(inexor-tests inexor-entity-system-lib)
+target_link_libraries(inexor-tests ${CONAN_LIBS})
+
+# Inexor benchmarks.
+add_executable(inexor-benchmarks ${BENCHMARK_SOURCE_FILES})
+target_link_libraries(inexor-benchmarks inexor-entity-system-lib)
+target_link_libraries(inexor-benchmarks ${CONAN_LIBS})
 
 # Use the folder structure in source code directory as project structure in Visual Studio.
 assign_source_group(${NORMAL_SOURCE_FILES})
