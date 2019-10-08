@@ -18,9 +18,6 @@ namespace entity_system {
 		{
 			// This relation type does already exist.
 			// TODO: Throw error message.
-
-			// Since we've not created a new relation type we can
-			// now return std::nullopt thanks to std::optional.
 			return std::nullopt;
 		}
 
@@ -43,11 +40,9 @@ namespace entity_system {
 		{
 			// This relation type does already exist.
 			// TODO: Throw error message.
-
-			// Since we've not created a new relation type we can
-			// now return std::nullopt thanks to std::optional.
 			return std::nullopt;
 		}
+
 		// Check if an relation type with this GUID does already exist.
 		if(does_relation_type_exist(rel_type_GUID))
 		{

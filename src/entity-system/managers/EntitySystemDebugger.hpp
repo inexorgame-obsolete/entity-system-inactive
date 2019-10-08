@@ -18,6 +18,7 @@
 namespace inexor {
 namespace entity_system {
 
+	/// These using instructions help to shorten the following code.
 	using EntityTypeManagerPtr = std::shared_ptr<EntityTypeManager>;
 	using EntityInstanceManagerPtr = std::shared_ptr<EntityInstanceManager>;
 	using RelationTypeManagerPtr = std::shared_ptr<RelationTypeManager>;

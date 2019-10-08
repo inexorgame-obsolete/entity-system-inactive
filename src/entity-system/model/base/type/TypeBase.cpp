@@ -5,7 +5,7 @@ namespace entity_system {
 
 	TypeBase::TypeBase(const std::string& type_name)
 	{
-		// Use lock guard to ensure thread safety for this write operation!
+		// Use lock guard to ensure thread safety during write operations!
 		std::lock_guard<std::mutex> lock(type_base_mutex);
 		type_title = type_name;
 	}

@@ -30,7 +30,7 @@ namespace entity_system {
 			/// Constructor.
 			/// @param attr_data_type The data type of the attribute.
 			/// @param features A const EnumSet of the features.
-			AttributeBase(const DataType&, const EnumSet<Feature>& features);
+			AttributeBase(const DataType& attr_data_type, const EnumSet<Feature>& features);
 
 			/// Destructor.
 			~AttributeBase();

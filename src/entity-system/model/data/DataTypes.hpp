@@ -1,7 +1,7 @@
 #pragma once
 
 #define BETTER_ENUMS_DEFAULT_CONSTRUCTOR(Enum) \
-	public:                                     \
+	public:                                    \
 	Enum() = default;
 
 #include <bitset>

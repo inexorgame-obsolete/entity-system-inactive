@@ -34,7 +34,7 @@ namespace entity_system {
 			/// @param type_ptr A shared pointer to the underlying type of this instance.
 			InstanceBase(const std::shared_ptr<T>& type_ptr)
 			{
-				// Use lock guard to ensure thread safety for this write operation!
+				// Use lock guard to ensure thread safety during write operations!
 				std::lock_guard<std::mutex> lock(instance_base_mutex);
 				type_pointer = type_ptr;
 			}
