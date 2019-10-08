@@ -56,7 +56,7 @@ namespace entity_system {
 
 	bool EntityType::has_attribute_type(const EntityAttributeTypePtr& ent_attr_type)
 	{
-		// Read only, no mutex require.
+		// No mutex required as this is a read-only operation.
 		return has_attribute_type(ent_attr_type->get_type_name());
 	}
 
@@ -76,7 +76,7 @@ namespace entity_system {
 
 	std::size_t EntityType::get_linked_attributes_count() const
 	{
-		// Read only, no mutex required.
+		// No mutex required as this is a read-only operation.
 		return entity_attribute_types.size();
 	}
 
@@ -88,13 +88,13 @@ namespace entity_system {
 			return std::nullopt;
 		}
 
-		// Read only, no mutex required.
+		// No mutex required as this is a read-only operation.
 		return std::optional<EntityAttributeTypePtrList> { entity_attribute_types };
 	}
 
 	void EntityType::reset_linked_attribute_types()
 	{
-		// Use lock guard to ensure thread safety for this write operation!
+		// Use lock guard to ensure thread safety during write operations!
 		std::lock_guard<std::mutex> lock(entity_type_mutex);
 		entity_attribute_types.clear();
 	}

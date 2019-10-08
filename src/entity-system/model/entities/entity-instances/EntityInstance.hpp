@@ -28,7 +28,7 @@ namespace entity_system {
 			std::unordered_map<EntityAttributeTypePtr, EntityAttributeInstancePtr> instances;
 
 			/// Mutex for this entity instance.
-			std::mutex entity_type_mutex;
+			std::mutex entity_instance_mutex;
 
 		public:
 
@@ -59,8 +59,6 @@ namespace entity_system {
 			/// @return All existing attribute instances.
 			std::optional<std::unordered_map<EntityAttributeTypePtr, EntityAttributeInstancePtr>> get_instances() const;
 
-			// TODO: Implement methods for setting and getting entity attribute instance data...
-
 			/// @brief Get the attribute instance by name.
 			/// @return The attribute instance with the given name.
 			EntityAttributeInstancePtrOpt get_attribute_instance(const std::string& attr_name);
@@ -69,7 +67,7 @@ namespace entity_system {
 			/// @note The attribute must exist! No checks are done.
 			/// @param The name of the attribute.
 			/// @return The attribute instance with the given name.
-			EntityAttributeInstancePtr operator[](const std::string& attr_name);
+			EntityAttributeInstancePtrOpt operator[](const std::string& attr_name);
 
 			/// @brief Returns the value of the attribute instance by name.
 			/// @tparam I The data type.
@@ -78,9 +76,13 @@ namespace entity_system {
 			template <std::size_t I>
 			auto get(const std::string& attr_name)
 			{
+				// No mutex required as this is a read-only operation.
 			    return std::get<I>(get_attribute_instance(attr_name).value()->value.Value());
 			}
 
+			/// 
+			/// 
+			/// 
 			void set_own_value(const std::string& attr_name, DataValue value);
 
 			/// @brief Toggles the own value of the attribute instance by name.
