@@ -51,6 +51,11 @@ namespace entity_system {
 			/// Destructs the relation instance.
 			~RelationInstance();
 
+			/// 
+			/// 
+			/// 
+			void register_relation_attribute_instance(const RelationAttributeTypePtr& rel_attr_type, const RelationAttributeInstancePtr& rel_attr_inst);
+
 			/// @brief Returns all entity relation attribute instances.
 			/// @return A std::unordered_map of shared pointers of entity relation attribute types.
 			std::unordered_map<RelationAttributeTypePtr, RelationAttributeInstancePtr> get_relation_attribute_instances() const;

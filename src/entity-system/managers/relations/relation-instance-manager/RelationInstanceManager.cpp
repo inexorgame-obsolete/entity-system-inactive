@@ -3,13 +3,13 @@
 namespace inexor {
 namespace entity_system {
 
-	using RelationAttributeTypePtr = std::shared_ptr<RelationAttributeType>;
-	using RelationAttributeInstancePtr = std::shared_ptr<RelationAttributeInstance>;
-
 	RelationInstanceManager::RelationInstanceManager(
 		std::shared_ptr<RelationAttributeInstanceManager> relation_attribute_instance_manager
 	) : InstanceManagerTemplate()
 	{
+		// Use lock guard to ensure thread safety during write operations!
+		std::lock_guard<std::mutex> lock(relation_instance_manager);
+
 		// Store pointer to the entity relation attribute instance manager.
 		this->relation_attribute_instance_manager = relation_attribute_instance_manager;
 	}
@@ -20,19 +20,24 @@ namespace entity_system {
 
 	RelationInstancePtrOpt RelationInstanceManager::create_relation_instance(const RelationTypePtr& rel_type, const EntityInstancePtr& ent_type_inst_source, const EntityInstancePtr& ent_type_inst_target)
 	{
-		// Create a new entity relation type instance.
+		// Create a new entity relation instance.
 		RelationInstancePtr new_relation_instance = std::make_shared<RelationInstance>(rel_type, ent_type_inst_source, ent_type_inst_target);
 
-		// Create all entity relation attribute type instances.
+		// No wit is time to create all corresponding entity relation attribute instances.
+		// Query all relation attribute types.
 		std::vector<RelationAttributeTypePtr> rel_attributes = rel_type->get_linked_attribute_types();
+		
+		// Use lock guard to ensure thread safety during write operations!
+		std::lock_guard<std::mutex> lock(relation_instance_manager);
 
-		// Get the attribute instance map
-		std::unordered_map<RelationAttributeTypePtr, RelationAttributeInstancePtr> relation_attribute_instances = new_relation_instance->get_relation_attribute_instances();
-
-		// Create the attribute instances
+		// Create relation attribute instances.
 		for(std::size_t i = 0; i < rel_attributes.size(); i++)
 		{
-			//relation_attribute_instances[ent_rel_attributes[i]] = this->entity_relation_attribute_instance_manager->create_entity_relation_attribute_instance(ent_rel_attributes[i]);
+			// Create relation attribute instance.
+			RelationAttributeInstancePtr linked_rel_attr_type_inst = relation_attribute_instance_manager->create_relation_attribute_instance(rel_attributes[i]);
+
+			// Link relation attribute instance to this relation instance.
+			new_relation_instance->register_relation_attribute_instance(rel_attributes[i], linked_rel_attr_type_inst);
 		}
 
 		// Add the relation type instance to the buffer.
@@ -41,7 +46,6 @@ namespace entity_system {
 		// Signal that the relation type has been created.
 		notify_relation_instance_created(new_relation_instance);
 
-		// Read only, no mutex required.
 		return RelationInstancePtrOpt { new_relation_instance };
 	}
 
@@ -53,19 +57,24 @@ namespace entity_system {
 			return std::nullopt;
 		}
 
-		// Create a new entity relation type instance.
-		RelationInstancePtr new_relation_instance = std::make_shared<RelationInstance>(rel_inst_GUID, rel_type, ent_type_inst_source, ent_type_inst_target);
+		// Create a new entity relation instance.
+		RelationInstancePtr new_relation_instance = std::make_shared<RelationInstance>(rel_type, ent_type_inst_source, ent_type_inst_target);
 
-		// Create all entity relation attribute type instances.
+		// No wit is time to create all corresponding entity relation attribute instances.
+		// Query all relation attribute types.
 		std::vector<RelationAttributeTypePtr> rel_attributes = rel_type->get_linked_attribute_types();
+		
+		// Use lock guard to ensure thread safety during write operations!
+		std::lock_guard<std::mutex> lock(relation_instance_manager);
 
-		// Get the attribute instance map
-		std::unordered_map<RelationAttributeTypePtr, RelationAttributeInstancePtr> relation_attribute_instances = new_relation_instance->get_relation_attribute_instances();
-
-		// Create the attribute instances
+		// Create relation attribute instances.
 		for(std::size_t i = 0; i < rel_attributes.size(); i++)
 		{
-			//relation_attribute_instances[ent_rel_attributes[i]] = this->entity_relation_attribute_instance_manager->create_entity_relation_attribute_instance(ent_rel_attributes[i]);
+			// Create relation attribute instance.
+			RelationAttributeInstancePtr linked_rel_attr_type_inst = relation_attribute_instance_manager->create_relation_attribute_instance(rel_attributes[i]);
+
+			// Link relation attribute instance to this relation instance.
+			new_relation_instance->register_relation_attribute_instance(rel_attributes[i], linked_rel_attr_type_inst);
 		}
 
 		// Add the relation type instance to the buffer.
@@ -74,17 +83,18 @@ namespace entity_system {
 		// Signal that the relation type has been created.
 		notify_relation_instance_created(new_relation_instance);
 
-		// Read only, no mutex required.
 		return RelationInstancePtrOpt { new_relation_instance };
 	}
 
 	bool RelationInstanceManager::does_relation_instance_exist(const xg::Guid instance_GUID)
 	{
+		// No mutex required as this is a read-only operation.
 		return does_instance_exist(instance_GUID);
 	}
 
 	RelationInstancePtrOpt RelationInstanceManager::get_relation_instance(const xg::Guid& instance_GUID)
 	{
+		// No mutex required as this is a read-only operation.
 		return get_instance(instance_GUID);
 	}
 

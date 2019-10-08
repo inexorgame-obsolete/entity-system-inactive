@@ -4,25 +4,27 @@ namespace inexor {
 namespace entity_system {
 
 	RelationInstance::RelationInstance(const RelationTypePtr& rel_type, const EntityInstancePtr& ent_inst_source, const EntityInstancePtr& ent_inst_target)
-		: GUIDBase(),
-		InstanceBase(rel_type)
+		: GUIDBase(), InstanceBase(rel_type)
 	{
 		// Use lock guard to ensure thread safety during write operations!
 		std::lock_guard<std::mutex> lock(relation_instance_mutex);
+
 		// Store source entity instances.
 		source_entity_instance = ent_inst_source;
+
 		// Store target entity instances.
 		destination_entity_instance = ent_inst_target;
 	}
 
 	RelationInstance::RelationInstance(const xg::Guid& inst_GUID, const RelationTypePtr& rel_type, const EntityInstancePtr& ent_inst_source, const EntityInstancePtr& ent_inst_target)
-		: GUIDBase(inst_GUID),
-		InstanceBase(rel_type)
+		: GUIDBase(inst_GUID), InstanceBase(rel_type)
 	{
 		// Use lock guard to ensure thread safety during write operations!
 		std::lock_guard<std::mutex> lock(relation_instance_mutex);
+
 		// Store source entity instances.
 		source_entity_instance = ent_inst_source;
+
 		// Store target entity instances.
 		destination_entity_instance = ent_inst_target;
 	}
@@ -30,6 +32,16 @@ namespace entity_system {
 	RelationInstance::~RelationInstance()
 	{
 	}
+
+	void RelationInstance::register_relation_attribute_instance(const RelationAttributeTypePtr& rel_attr_type, const RelationAttributeInstancePtr& rel_attr_inst)
+	{
+		// Use lock guard to ensure thread safety during write operations!
+		std::lock_guard<std::mutex> lock(relation_instance_mutex);
+
+		// Add relation attribute instance.
+		relation_attribute_instances[rel_attr_type] = rel_attr_inst;
+	}
+
 
 	RelationTypePtr RelationInstance::get_relation_type() const
 	{

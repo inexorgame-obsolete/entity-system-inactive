@@ -29,51 +29,48 @@ namespace entity_system {
 
 		protected:
 
-			/// @brief Constructor.
+			/// Constructor.
 			InstanceManagerTemplate()
 			{
 			}
 
-
-			/// @brief Destructor.
+			/// Destructor.
 			~InstanceManagerTemplate()
 			{
 			}
 
 
-			/// Adds an instance to the instance buffer.
+			/// @brief Adds an instance to the instance buffer.
 			/// @param instance_GUID The GUID of the instance.
 			/// @param instance The instance which will be added.
-			void add_instance(const xg::Guid instance_GUID, std::shared_ptr<T>& instance)
+			void add_instance(const xg::Guid instance_GUID, const std::shared_ptr<T>& instance)
 			{
-				// Use lock guard to ensure thread safety for this write operation!
+				// Use lock guard to ensure thread safety during write operations!
 				std::lock_guard<std::mutex> lock(instance_manager_mutex);
 
+				// TODO: But what if the instance does already exist?
 				stored_instances[instance_GUID] = instance;
 			}
-
+			
 
 			/// Checks if an instance does already exist.
 			/// @param instance_GUID The GUID of the instance.
 			/// @return True of the instance exists, false otherwise.
 			bool does_instance_exist(const xg::Guid instance_GUID)
 			{
-				// TODO: Refactor this when C++20 comes out!
-				// Read only, no mutex required.
+				// No mutex required as this is a read-only operation.
 				return !(stored_instances.end() == stored_instances.find(instance_GUID));
 			}
 
 
-			/// Returns the number of existing instances.
+			/// @brief Returns the number of existing instances.
 			/// @return The number of existing instances.
 			std::size_t get_instance_count() const
 			{
-				// Read only, no mutex required.
+				// No mutex required as this is a read-only operation.
 				return stored_instances.size();
 			}
 
-
-			// TODO: Get all instances of a certain type!
 
 
 			/// @brief Returns a specific instance.
@@ -89,21 +86,8 @@ namespace entity_system {
 				{
 					return std::optional<std::shared_ptr<T>>{ lookup->second };
 				}
+
 				// We've found nothing!
-				return std::nullopt;
-			}
-
-
-			/// @brief Looks up the GUID of an instance.
-			/// @param instance The instance of which we need the GUID.
-			/// @return The GUID of the instance.
-			std::optional<xg::Guid> get_GUID_from_instance(const std::shared_ptr<T>& instance)
-			{
-				if(does_instance_exist(instance))
-				{
-					// Iterate through the unordered map and find the GUID of this type.
-					// TODO: Maybe implement ->get_GUID() method for T ?
-				}
 				return std::nullopt;
 			}
 
@@ -120,15 +104,11 @@ namespace entity_system {
 			}
 
 
-			/// @brief
+			/// @brief Deletes a specific instance.
+			/// @param instance The instance which will be deleted.
 			std::size_t delete_instance(const std::shared_ptr<T>& instance)
 			{
-				// Use lock guard to ensure thread safety for this write operation!
-				std::lock_guard<std::mutex> lock(instance_manager_mutex);
-
-				// Look up the GUID of the
-				xg::Guid instance_to_delete = get_GUID_from_instance(instance);
-				return delete_instance(instance_to_delete);
+				return delete_instance(get_GUID_from_instance(instance));
 			}
 
 
@@ -139,6 +119,8 @@ namespace entity_system {
 				std::lock_guard<std::mutex> lock(instance_manager_mutex);
 				stored_instances.clear();
 			}
+
+			/// TODO: Get all instances of a certain type.
 
 	};
 

@@ -10,6 +10,7 @@
 namespace inexor {
 namespace entity_system {
 
+	/// These using instructions help to shorten the following code.
 	using RelationAttributeTypePtr = std::shared_ptr<RelationAttributeType>;
 	using RelationAttributeInstancePtr = std::shared_ptr<RelationAttributeInstance>;
 	using RelationAttributeInstancePtrOpt = std::optional<RelationAttributeInstancePtr>;
@@ -25,15 +26,15 @@ namespace entity_system {
 			/// Destructor.
 			~RelationAttributeInstanceManager();
 
-			/// Creates an relation attribute instance.
-			/// @param ent_rel_attr_type A const reference to a shared pointer of
-			/// an relation attribute type of which an instance will be created.
-			/// @return A shared pointer to the relation attribute instance which was created.
-			/// <br>If the creation fails std::nullopt will be returned.
-			RelationAttributeInstancePtrOpt create_relation_attribute_instance(const RelationAttributeTypePtr&);
+			/// @brief Creates an relation attribute instance.
+			/// @param ent_rel_attr_type A const reference to a shared pointer of an relation attribute type of which an instance will be created.
+			/// @return A shared pointer to the relation attribute instance which was created. <br>If the creation fails std::nullopt will be returned.
+			RelationAttributeInstancePtr create_relation_attribute_instance(const RelationAttributeTypePtr&);
 
-			// TODO!
-			RelationAttributeInstancePtrOpt get_relation_attribute_instance(const xg::Guid&);
+			/// 
+			/// 
+			/// 
+			std::optional<RelationAttributeInstancePtr> get_relation_attribute_instance(const xg::Guid&);
 
 			/// Returns the number of existing relation attribute type instances.
 			/// @return The number of existing relation attribute type instances.

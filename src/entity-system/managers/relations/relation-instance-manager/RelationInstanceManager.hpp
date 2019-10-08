@@ -15,10 +15,13 @@
 namespace inexor {
 namespace entity_system {
 
+	/// These using instructions help to shorten the following code.
 	using RelationTypePtr = std::shared_ptr<RelationType>;
 	using RelationInstancePtr = std::shared_ptr<RelationInstance>;
 	using RelationInstancePtrOpt = std::optional<RelationInstancePtr>;
 	using EntityInstancePtr = std::shared_ptr<EntityInstance>;
+	using RelationAttributeTypePtr = std::shared_ptr<RelationAttributeType>;
+	using RelationAttributeInstancePtr = std::shared_ptr<RelationAttributeInstance>;
 
 	/// A manager class for relation instances.
 	class RelationInstanceManager : public InstanceManagerTemplate<RelationInstance>
@@ -33,24 +36,18 @@ namespace entity_system {
 			/// Destructor.
 			~RelationInstanceManager();
 
-			/// Creates a new entity relation instance.
-			/// @param rel_type A const reference to a shared pointer of
-			/// an relation type of which an instance will be created.
-			/// @param ent_inst_source A const reference to a shared pointer of
-			/// the entity instance which will be used as <b>source</b> entity instance.
-			/// @param ent_inst_target A const reference to a shared pointer of
-			/// the entity instance which will be used as <b>target</b> entity instance.
+			/// @brief Creates a new entity relation instance.
+			/// @param rel_type A const reference to a shared pointer of an relation type of which an instance will be created.
+			/// @param ent_inst_source A const reference to a shared pointer of the entity instance which will be used as <b>source</b> entity instance.
+			/// @param ent_inst_target A const reference to a shared pointer of the entity instance which will be used as <b>target</b> entity instance.
 			/// @return A shared pointer to the new relation instance which was created.
 			RelationInstancePtrOpt create_relation_instance(const RelationTypePtr&, const EntityInstancePtr&, const EntityInstancePtr&);
 
-			/// Creates a new entity relation instance.
+			/// @brief Creates a new entity relation instance.
 			/// @param rel_inst_GUID The GUID of the new relation instance.
-			/// @param rel_type A const reference to a shared pointer of
-			/// a relation type of which an instance will be created.
-			/// @param ent_inst_source A const reference to a shared pointer of
-			/// the entity instance which will be used as <b>source</b> entity instance.
-			/// @param ent_inst_target A const reference to a shared pointer of
-			/// the entity instance which will be used as <b>target</b> entity instance.
+			/// @param rel_type A const reference to a shared pointer of a relation type of which an instance will be created.
+			/// @param ent_inst_source A const reference to a shared pointer of the entity instance which will be used as <b>source</b> entity instance.
+			/// @param ent_inst_target A const reference to a shared pointer of the entity instance which will be used as <b>target</b> entity instance.
 			/// @return A shared pointer to the new relation instance which was created.
 			RelationInstancePtrOpt create_relation_instance(const xg::Guid&, const RelationTypePtr&, const EntityInstancePtr&, const EntityInstancePtr&);
 
@@ -62,55 +59,48 @@ namespace entity_system {
 			///
 			RelationInstancePtrOpt get_relation_instance(const xg::Guid&);
 
-			/// TODO: what's the parameter meaning?
-			/// TODO: implement
-			RelationInstancePtrOpt get_relation_instance(const std::string&);
-
-			// TODO: get_all_relation_instances_of_type() const;
-
-			/// Returns all relation instances.
-			/// @return All relation instances which exist in the entity system.
-			/// TODO: implement
-			std::vector<RelationInstancePtr> get_all_relation_instances() const;
-
-			// TODO: get_relation_instance_count_of_type() const;
 
 			/// Returns the number of relation instances.
 			/// @return The number of existing relation instances.
 			std::size_t get_relation_instances_count() const;
 
-			// TODO: Get instances count.
-			// TODO: Delete instance.
-			// TODO: Get instance(s).
-			// TODO: Delete all instances.
-
-			/// Delete relation instance by GUID
+			/// @brief Deletes a relation instance.
+			/// @param instance_GUID The GUID of the relation instance.
 			std::size_t delete_relation_instance(const xg::Guid& instance_GUID);
-
-			/// Delete relation instance
+			
+			/// @brief Deletes a relation instance.
+			/// @param relation_instance The relation instance which will be deleted.
 			std::size_t delete_relation_instance(const RelationInstancePtr& relation_instance);
-
-			// TODO: Delete relation instances by source entity instance
-
-			// TODO: Delete relation instances by target entity instance
-
-			// TODO: Delete relation instances by entity instance (both: source and target)
-			// Called by delete_entity_instance() -> also delete all relation instances of the to-be-deleted entity instance!
-
-			// TODO: Delete relation instances by relation type
 
 			/// Delete all relation instances
 			void delete_all_relation_instances();
 
 			/// @brief Registers a new listener
+			/// @param type_GUID ? 
+			/// @param listener ?
 			void register_on_created(const xg::Guid&, std::shared_ptr<RelationInstanceCreatedListener> listener);
 
 			/// @brief Registers a new listener
+			/// @param type_GUID ?
+			/// @param listener ?
 			void register_on_deleted(const xg::Guid&, std::shared_ptr<RelationInstanceDeletedListener> listener);
+
+			// TODO: Get instances count.
+			// TODO: Delete instance.
+			// TODO: Get instance(s).
+			// TODO: Delete all instances.
+			// TODO: get_all_relation_instances_of_type() const;
+			// TODO: std::vector<RelationInstancePtr> get_all_relation_instances() const;
+			// TODO: get_relation_instance_count_of_type() const;
+			// TODO: Delete relation instances by source entity instance
+			// TODO: Delete relation instances by target entity instance
+			// TODO: Delete relation instances by entity instance (both: source and target)
+			//		 Called by delete_entity_instance() -> also delete all relation instances of the to-be-deleted entity instance!
+			// TODO: Delete relation instances by relation type
 
 		private:
 
-			/// The entity relation attribute instance manager
+			/// The entity relation attribute instance manager.
 			std::shared_ptr<RelationAttributeInstanceManager> relation_attribute_instance_manager;
 
 			/// Notifies all listeners that a new relation instance has been created.
@@ -128,6 +118,9 @@ namespace entity_system {
 			/// Key is the GUID of the relation type.
 			/// Value is a signal with two parameters: the GUID of the relation type, the GUID of the relation instance
 			std::unordered_map<xg::Guid, std::shared_ptr<boost::signals2::signal<void(const xg::Guid& type_GUID, const xg::Guid& instance_GUID)> > > signals_relation_instance_deleted;
+			
+			/// The mutex of this class.
+			std::mutex relation_instance_manager;
 
 	};
 

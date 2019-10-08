@@ -58,7 +58,7 @@ namespace entity_system {
 		{
 			// Get the GUID of this type by name.
 			xg::Guid type_GUID = get_GUID_by_type_name(type_name);
-			// Read only, no mutex required.
+			// No mutex required as this is a read-only operation.
 			return ! (stored_types.end() == stored_types.find(type_GUID));
 		}
 
@@ -68,7 +68,7 @@ namespace entity_system {
 		/// @return True if a type with this name already exists, false otherwise.
 		bool does_type_exist(const xg::Guid& type_GUID)
 		{
-			// Read only, no mutex required.
+			// No mutex required as this is a read-only operation.
 			return !(stored_types.end() == stored_types.find(type_GUID));
 		}
 
@@ -103,7 +103,7 @@ namespace entity_system {
 		/// @param type_name The name of the type.
 		xg::Guid get_GUID_by_type_name(const std::string& type_name)
 		{
-			// Read only, no mutex required.
+			// No mutex required as this is a read-only operation.
 			return stored_type_names[type_name];
 		}
 
@@ -112,7 +112,7 @@ namespace entity_system {
 		/// @param type_GUID The GUID of the type.
 		std::string get_type_name_by_GUID(const xg::Guid& type_GUID)
 		{
-			// Read only, no mutex required.
+			// No mutex required as this is a read-only operation.
 			return stored_type_GUIDs[type_GUID];
 		}
 
@@ -124,7 +124,7 @@ namespace entity_system {
 		{
 			// Get the GUID of this type by name.
 			xg::Guid type_GUID = get_GUID_by_type_name(type_name);
-			// Read only, no mutex required.
+			// No mutex required as this is a read-only operation.
 			return stored_types[type_name];
 		}
 
@@ -132,7 +132,7 @@ namespace entity_system {
 		/// Searches for the desired type by name.
 		std::shared_ptr<T> get_type(const xg::Guid& type_GUID)
 		{
-			// Read only, no mutex required.
+			// No mutex required as this is a read-only operation.
 			return stored_types[type_GUID];
 		}
 
@@ -141,7 +141,7 @@ namespace entity_system {
 		/// @return The number of existing types.
 		std::size_t get_type_count() const
 		{
-			// Read only, no mutex required.
+			// No mutex required as this is a read-only operation.
 			return stored_types.size();
 		}
 
@@ -150,17 +150,20 @@ namespace entity_system {
 		/// @param type_name The name of the type which will be deleted.
 		std::size_t delete_type(const std::string& type_name)
 		{
+			xg::Guid type_GUID_to_delete = get_GUID_by_type_name(type_name);
+
 			// Use lock guard to ensure thread safety for this write operation!
 			std::lock_guard<std::mutex> lock(type_manager_mutex);
 
-			xg::Guid type_GUID_to_delete = get_GUID_by_type_name(type_name);
-
 			// Erase type name
 			stored_type_names.erase(type_name);
+
 			// Erase GUID
 			stored_type_GUIDs.erase(type_GUID_to_delete);
+
 			// Erase type
 			std::size_t deleted_types = stored_types.erase(type_name);
+
 			return deleted_types;
 		}
 
@@ -179,10 +182,13 @@ namespace entity_system {
 
 			// Erase type name
 			stored_type_names.erase(type_name_to_delete);
+
 			// Erase GUID
 			stored_type_GUIDs.erase(type_GUID_to_delete);
+
 			// Erase type
 			std::size_t deleted_types = stored_types.erase(type_GUID);
+
 			return deleted_types;
 		}
 
@@ -193,14 +199,16 @@ namespace entity_system {
 		/// deleted first.
 		void delete_all_types()
 		{
-			// Use lock guard to ensure thread safety for this write operation!
+			// Use lock guard to ensure thread safety during write operations!
 			std::lock_guard<std::mutex> lock(type_manager_mutex);
 
-			// Erase type names
+			// Erase type names.
 			stored_type_names.clear();
-			// Erase GUIDs
+
+			// Erase GUIDs.
 			stored_type_GUIDs.clear();
-			// Erase types
+
+			// Erase types.
 			stored_types.clear();
 		}
 

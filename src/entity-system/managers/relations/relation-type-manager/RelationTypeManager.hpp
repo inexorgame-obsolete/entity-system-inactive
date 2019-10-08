@@ -12,6 +12,7 @@
 namespace inexor {
 namespace entity_system {
 
+	/// These using instructions help to shorten the following code.
 	using EntityTypePtr = std::shared_ptr<EntityType>;
 	using RelationTypePtr = std::shared_ptr<RelationType>;
 	using RelationTypePtrOpt = std::optional<RelationTypePtr>;
@@ -109,6 +110,9 @@ namespace entity_system {
 
 			/// Signal, that an relation type has been deleted.
 			boost::signals2::signal<void(const xg::Guid& type_GUID)> signal_relation_type_deleted;
+
+			/// The mutex of this class
+			std::mutex relation_type_manager_mutex;
 
 	};
 
