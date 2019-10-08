@@ -14,6 +14,7 @@ namespace entity_system {
 	{
 		public:
 
+			/// These using instructions help to shorten the following code.
 			using EntityTypeBuilderFactoryPtr = std::shared_ptr<EntityTypeBuilderFactory>;
 			using EntityInstanceBuilderFactoryPtr = std::shared_ptr<EntityInstanceBuilderFactory>;
 			using RelationTypeBuilderFactoryPtr = std::shared_ptr<RelationTypeBuilderFactory>;
@@ -51,6 +52,9 @@ namespace entity_system {
 
 			/// The entity relation instance builder factory.
 			RelationInstanceBuilderFactoryPtr relation_instance_builder_factory;
+
+			/// The mutex of this class
+			std::mutex builder_factory_manager_mutex;
 
 	};
 
