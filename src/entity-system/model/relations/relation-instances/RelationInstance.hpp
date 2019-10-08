@@ -29,6 +29,9 @@ namespace entity_system {
 			/// An unordered map of entity relation attribute instances (value) and entity relation attribute types (key).
 			std::unordered_map<RelationAttributeTypePtr, RelationAttributeInstancePtr> relation_attribute_instances;
 
+			/// The mutex of this class.
+			std::mutex relation_instance_mutex;
+
 		public:
 
 			/// @brief Constructs the relation instance.

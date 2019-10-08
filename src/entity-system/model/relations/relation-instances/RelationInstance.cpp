@@ -7,6 +7,8 @@ namespace entity_system {
 		: GUIDBase(),
 		InstanceBase(rel_type)
 	{
+		// Use lock guard to ensure thread safety during write operations!
+		std::lock_guard<std::mutex> lock(relation_instance_mutex);
 		// Store source entity instances.
 		source_entity_instance = ent_inst_source;
 		// Store target entity instances.
@@ -17,6 +19,8 @@ namespace entity_system {
 		: GUIDBase(inst_GUID),
 		InstanceBase(rel_type)
 	{
+		// Use lock guard to ensure thread safety during write operations!
+		std::lock_guard<std::mutex> lock(relation_instance_mutex);
 		// Store source entity instances.
 		source_entity_instance = ent_inst_source;
 		// Store target entity instances.
@@ -29,21 +33,25 @@ namespace entity_system {
 
 	RelationTypePtr RelationInstance::get_relation_type() const
 	{
+		// No mutex required as this is a read-only operation.
 		return get_type();
 	}
 
 	std::unordered_map<RelationAttributeTypePtr, RelationAttributeInstancePtr> RelationInstance::get_relation_attribute_instances() const
 	{
+		// No mutex required as this is a read-only operation.
 		return relation_attribute_instances;
 	}
 
 	EntityInstancePtr RelationInstance::get_source_entity_instance() const
 	{
+		// No mutex required as this is a read-only operation.
 		return source_entity_instance;
 	}
 
 	EntityInstancePtr RelationInstance::get_target_entity_instance() const
 	{
+		// No mutex required as this is a read-only operation.
 		return destination_entity_instance;
 	}
 
