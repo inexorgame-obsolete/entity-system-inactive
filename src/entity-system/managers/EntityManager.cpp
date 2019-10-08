@@ -10,6 +10,8 @@ namespace entity_system {
 		std::shared_ptr<inexor::entity_system::EntityAttributeInstanceManager> entity_attribute_instance_manager
 	)
 	{
+		// Use lock guard to ensure thread safety during write operations!
+		std::lock_guard<std::mutex> lock(entity_manager_mutex);
 		this->entity_type_manager = entity_type_manager;
 		this->entity_instance_manager = entity_instance_manager;
 		this->entity_attribute_type_manager = entity_attribute_type_manager;

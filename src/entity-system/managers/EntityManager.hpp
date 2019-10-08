@@ -59,6 +59,9 @@ namespace entity_system {
 			/// The entity attribute instance manager.
 			std::shared_ptr<EntityAttributeInstanceManager> entity_attribute_instance_manager;
 
+			/// The mutex of this class
+			std::mutex entity_manager_mutex;
+
 	};
 
 }
