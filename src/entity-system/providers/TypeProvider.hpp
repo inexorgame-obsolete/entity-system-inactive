@@ -69,7 +69,7 @@ namespace entity_system {
 
 				for(auto& type_attribute : type_attributes)
 				{
-					// The attribute specification contains the datatype as first and the list of features as second argument
+					// The attribute specification contains the datatype as first and the list of features as second argument.
 					auto attribute_specification = type_attribute.second;
 					builder->attribute(type_attribute.first, attribute_specification.first, attribute_specification.second);
 				}

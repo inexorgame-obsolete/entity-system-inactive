@@ -16,7 +16,7 @@ namespace entity_system {
 		private:
 
 			/// The data type of the attribute.
-			/// The data is exclusively managed in the instance, not in this base class.
+			/// @note The data is exclusively managed in the instance, not in this base class.
 			DataType attribute_data_type;
 
 			/// The features of the attribute.
@@ -37,11 +37,12 @@ namespace entity_system {
 
 		public:
 
-			/// @brief Returns the data type of the attribute.
+			/// Returns the data type of the attribute.
 			/// @return The data type of the attribute.
 			DataType get_attribute_data_type() const;
 
 			/// Returns the features of the attribute.
+			/// @return The features of the attribute.
 			EnumSet<Feature> get_attribute_features() const;
 
 	};

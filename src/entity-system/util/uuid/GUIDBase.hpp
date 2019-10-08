@@ -10,7 +10,6 @@ namespace entity_system {
 	/// @brief A base class for globally unique identifiers (GUIDs).
 	/// @note This implementation is based on crossguid.
 	/// https://github.com/graeme-hill/crossguid
-	/// @todo Maybe add a log manager for this class?
 	class GUIDBase
 	{
 		private:

@@ -34,6 +34,7 @@ namespace entity_system {
 	/// @class ENTSYS_DATA_TYPE
 	/// @brief Data container memory type.
 	/// TODO: Think about how to handle binary data
+	/// TODO: Add VEC3, VEC4...
 	BETTER_ENUM(DataType, int, BOOL = 0, INT, BIG_INT, DOUBLE, FLOAT, STRING /*, VEC3, VEC4 */)
 
 	/// @class Features

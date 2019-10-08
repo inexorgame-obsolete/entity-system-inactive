@@ -25,6 +25,9 @@ namespace entity_system {
 			/// Entity relation attribute types which are linked to this entity relation type.
 			std::vector<RelationAttributeTypePtr> linked_rel_attr_types;
 
+			/// The mutex of this class.
+			std::mutex relation_type_mutex;
+
 		public:
 
 			/// @brief Constructs the relation type.

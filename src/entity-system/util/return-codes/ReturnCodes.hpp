@@ -3,7 +3,8 @@
 namespace inexor {
 namespace entity_system {
 
-	/// Entity system return codes.
+	/// @brief Entity system return codes.
+	/// @todo Add more error codes.
 	enum ENTSYS_RESULT
 	{
 		ENTSYS_ERROR = -1,
