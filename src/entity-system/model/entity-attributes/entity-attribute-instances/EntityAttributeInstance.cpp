@@ -7,6 +7,8 @@ namespace entity_system {
 		: InstanceBase<EntityAttributeType>(ent_attr_type),
 		DataContainer(ent_attr_type->get_attribute_data_type())
 	{
+		// Use lock guard to ensure thread safety for the following write operations!
+		std::lock_guard<std::mutex> lock(entity_attribute_instance_mutex);
 		this->type = ent_attr_type->get_attribute_data_type();
 	}
 
@@ -16,16 +18,21 @@ namespace entity_system {
 
 	EntityAttributeTypePtr EntityAttributeInstance::get_entity_attribute_type() const
 	{
+		// No mutex required as this is a read-only operation.
 		return get_type();
 	}
 
 	void EntityAttributeInstance::set_own_value(DataValue value)
 	{
+		// Use lock guard to ensure thread safety for the following write operations!
+		std::lock_guard<std::mutex> lock(entity_attribute_instance_mutex);
 		own_value.Set(value);
 	}
 
 	void EntityAttributeInstance::toggle()
 	{
+		// Use lock guard to ensure thread safety for the following write operations!
+		std::lock_guard<std::mutex> lock(entity_attribute_instance_mutex);
 		own_value.Set(!std::get<DataType::BOOL>(value.Value()));
 	}
 

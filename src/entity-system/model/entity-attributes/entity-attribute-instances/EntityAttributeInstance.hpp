@@ -12,6 +12,11 @@ namespace entity_system {
 	/// @brief A base class for entity attribute type instances.
 	class EntityAttributeInstance : public InstanceBase<EntityAttributeType>, public DataContainer, public GUIDBase
 	{
+		private:
+			
+			/// The mutex of this class.
+			std::mutex entity_attribute_instance_mutex;
+
 		public:
 
 			/// @brief Constructor.
