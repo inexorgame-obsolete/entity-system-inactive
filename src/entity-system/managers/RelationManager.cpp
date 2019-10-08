@@ -12,6 +12,8 @@ namespace entity_system {
 		std::shared_ptr<RelationAttributeInstanceManager> relation_attribute_instance_manager
 	)
 	{
+		// Use lock guard to ensure thread safety during write operations!
+		std::lock_guard<std::mutex> lock(relation_manager_mutex);
 		this->relation_type_manager = relation_type_manager;
 		this->relation_instance_manager = relation_instance_manager;
 		this->relation_attribute_type_manager = relation_attribute_type_manager;
