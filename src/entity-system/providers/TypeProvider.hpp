@@ -21,10 +21,16 @@ namespace entity_system {
 	template<typename T, typename BUILDER_MANAGER>
 	class TypeProvider
 	{
-		/// This using instruction helps to shorten the following code.
-		using AttributeList = std::unordered_map<std::string, std::pair<DataType, EnumSet<Feature>>>;
+
+		private:
+
+			/// The mutex of this class.
+			std::mutex type_provider_template_mutex;
 
 		public:
+
+			/// This using instruction helps to shorten the following code.
+			using AttributeList = std::unordered_map<std::string, std::pair<DataType, EnumSet<Feature>>>;
 
 			/// @brief Constructs the type provider by using a specialized builder manager.
 			/// @param type_builder_manager The builder manager.
@@ -37,6 +43,8 @@ namespace entity_system {
 				AttributeList type_attributes
 			)
 			{
+				// Use lock guard to ensure thread safety during write operations!
+				std::lock_guard<std::mutex> lock(type_provider_template_mutex);
 				this->type_builder_manager = type_builder_manager;
 				this->type_name = type_name;
 				this->type_attributes = type_attributes;
@@ -51,6 +59,7 @@ namespace entity_system {
 			/// @return The name of the type.
 			std::string get_type_name() const
 			{
+				// No mutex required as this is a read-only operation.
 				return type_name;
 			}
 
