@@ -11,7 +11,7 @@ namespace inexor {
 namespace entity_system {
 
 	/// @class EntityManager
-	/// @brief The entity manager manages the entity managers.
+	/// 
 	class EntityManager
 	{
 		public:
