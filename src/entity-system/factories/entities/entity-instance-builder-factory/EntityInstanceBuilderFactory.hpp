@@ -6,10 +6,12 @@
 
 namespace inexor {
 namespace entity_system {
-
+	
+	/// These using instructions help to shorten the following code.
 	using EntityInstanceBuilderPtr = std::shared_ptr<EntityInstanceBuilder>;
 	using EntityInstanceManagerPtr = std::shared_ptr<EntityInstanceManager>;
 	using EntityTypeManagerPtr = std::shared_ptr<EntityTypeManager>;
+
 
 	/// @class EntityTypeBuilder
 	/// @brief Management of the loggers.
@@ -26,20 +28,22 @@ namespace entity_system {
 			/// Destructor.
 			~EntityInstanceBuilderFactory();
 
-			/// Initialization of the manager
+			/// Initialization of the manager.
 			void init();
 
-			/// Returns a new instance of a builder
+			/// Returns a new instance of a builder.
 			EntityInstanceBuilderPtr get_builder();
 
 		private:
 
-			/// The entity instance manager
+			/// The entity instance manager.
 			EntityInstanceManagerPtr entity_instance_manager;
 
-			/// The entity type manager
+			/// The entity type manager.
 			EntityTypeManagerPtr entity_type_manager;
 
+			/// The mutex of this class.
+			std::mutex entity_instance_builder_factory;
 	};
 
 }

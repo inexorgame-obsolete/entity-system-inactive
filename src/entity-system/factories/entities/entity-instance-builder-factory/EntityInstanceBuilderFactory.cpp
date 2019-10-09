@@ -8,6 +8,8 @@ namespace entity_system {
 		EntityTypeManagerPtr entity_type_manager
 	)
 	{
+		// Use lock guard to ensure thread safety during write operations!
+		std::lock_guard<std::mutex> lock(entity_instance_builder_factory);
 		this->entity_instance_manager = entity_instance_manager;
 		this->entity_type_manager = entity_type_manager;
 	}
