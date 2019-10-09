@@ -10,6 +10,7 @@
 namespace inexor {
 namespace entity_system {
 
+	/// These using instructions help to shorten the following code.
 	using AttributeList = std::unordered_map<std::string, std::pair<DataType, EnumSet<Feature>>>;
 	class RelationTypeBuilder;
 	using RelationTypeBuilderPtr = std::shared_ptr<RelationTypeBuilder>;
@@ -20,7 +21,8 @@ namespace entity_system {
 	class RelationTypeBuilder : public std::enable_shared_from_this<RelationTypeBuilder>
 	{
 		public:
-
+			
+			/// These using instructions help to shorten the following code.
 			using RelationTypeManagerPtr = std::shared_ptr<RelationTypeManager>;
 			using RelationAttributeTypeManagerPtr = std::shared_ptr<RelationAttributeTypeManager>;
 			using RelationAttributeInstanceManagerPtr = std::shared_ptr<RelationAttributeInstanceManager>;
@@ -79,6 +81,9 @@ namespace entity_system {
 
 			/// The attribute definitions.
 			AttributeList relation_type_attributes;
+
+			/// The mutex of this class.
+			std::mutex relation_type_builder_mutex;
 
 	};
 

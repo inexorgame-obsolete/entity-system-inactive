@@ -9,6 +9,7 @@
 namespace inexor {
 namespace entity_system {
 
+	/// These using instructions help to shorten the following code.
 	using RelationAttributeTypePtr = std::shared_ptr<RelationAttributeType>;
 	using RelationAttributeTypePtrOpt = std::optional<RelationAttributeTypePtr>;
 
@@ -18,6 +19,9 @@ namespace entity_system {
 		RelationAttributeInstanceManagerPtr relation_attribute_instance_manager
 	)
 	{
+		// Use lock guard to ensure thread safety during write operations!
+		std::lock_guard<std::mutex> lock(relation_type_builder_mutex);
+		
 		this->relation_type_manager = relation_type_manager;
 		this->relation_attribute_type_manager = relation_attribute_type_manager;
 		this->relation_attribute_instance_manager = relation_attribute_instance_manager;
@@ -31,37 +35,56 @@ namespace entity_system {
 
 	RelationTypeBuilderPtr RelationTypeBuilder::name(std::string relation_type_name)
 	{
+		// Use lock guard to ensure thread safety during write operations!
+		std::lock_guard<std::mutex> lock(relation_type_builder_mutex);
+
 		this->relation_type_name = relation_type_name;
 		return shared_from_this();
 	}
 
 	RelationTypeBuilderPtr RelationTypeBuilder::uuid(std::string relation_type_uuid)
 	{
+		// Use lock guard to ensure thread safety during write operations!
+		std::lock_guard<std::mutex> lock(relation_type_builder_mutex);
+
 		this->relation_type_uuid = relation_type_uuid;
 		return shared_from_this();
 	}
 
 	RelationTypeBuilderPtr RelationTypeBuilder::source(EntityTypePtr ent_type_source)
 	{
+		// Use lock guard to ensure thread safety during write operations!
+		std::lock_guard<std::mutex> lock(relation_type_builder_mutex);
+
 		this->ent_type_source = ent_type_source;
 		return shared_from_this();
 	}
 
 	RelationTypeBuilderPtr RelationTypeBuilder::target(EntityTypePtr ent_type_target)
 	{
+		// Use lock guard to ensure thread safety during write operations!
+		std::lock_guard<std::mutex> lock(relation_type_builder_mutex);
+
 		this->ent_type_target = ent_type_target;
 		return shared_from_this();
 	}
 
 	RelationTypeBuilderPtr RelationTypeBuilder::attribute(std::string attribute_name, DataType attribute_datatype, const EnumSet<Feature>& attribute_features)
 	{
+		// Use lock guard to ensure thread safety during write operations!
+		std::lock_guard<std::mutex> lock(relation_type_builder_mutex);
+
 		relation_type_attributes[attribute_name] = { attribute_datatype, attribute_features };
 		return shared_from_this();
 	}
 
 	RelationTypePtrOpt RelationTypeBuilder::build()
 	{
+		// Use lock guard to ensure thread safety during write operations!
+		std::lock_guard<std::mutex> lock(relation_type_builder_mutex);
+		
 		RelationTypePtrOpt o_relation_type;
+		
 		if(!relation_type_uuid.empty())
 		{
 			o_relation_type = relation_type_manager->create_relation_type(xg::Guid(relation_type_uuid), relation_type_name, ent_type_source, ent_type_target);
