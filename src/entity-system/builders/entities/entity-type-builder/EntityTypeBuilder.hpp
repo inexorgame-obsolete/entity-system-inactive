@@ -21,8 +21,11 @@ namespace entity_system {
 	/// @brief A builder pattern class for entity types.
 	/// @note This template base class is part of a software design pattern called the <b>builder pattern</b>.<br>
 	/// https://en.wikipedia.org/wiki/Builder_pattern
-	/// @todo Add mutex to ensure thread safety!
-	class EntityTypeBuilder : public std::enable_shared_from_this<EntityTypeBuilder>
+	/// @todo Should we lock the mutex as soon as a method gets called and unlock it
+	/// when the build() method is called ? Because otherwise multiple threads could
+	/// intercept this builder pattern and create "mixed" products.
+	class EntityTypeBuilder
+		: public std::enable_shared_from_this<EntityTypeBuilder>
 	{
 		public:
 
@@ -112,6 +115,9 @@ namespace entity_system {
 
 			/// The attribute definitions.
 			AttributeList entity_type_attributes;
+
+			/// The mutex of this class
+			std::mutex entity_type_builder_mutex;
 
 	};
 
