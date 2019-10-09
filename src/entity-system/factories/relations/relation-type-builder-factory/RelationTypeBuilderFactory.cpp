@@ -9,6 +9,8 @@ namespace entity_system {
 		RelationAttributeInstanceManagerPtr relation_attribute_instance_manager
 	)
 	{
+		// Use lock guard to ensure thread safety during write operations!
+		std::lock_guard<std::mutex> lock(relation_type_builder_factory);
 		this->relation_type_manager = relation_type_manager;
 		this->relation_attribute_type_manager = relation_attribute_type_manager;
 		this->relation_attribute_instance_manager = relation_attribute_instance_manager;
@@ -22,7 +24,9 @@ namespace entity_system {
 	{
 	}
 
-	RelationTypeBuilderPtr RelationTypeBuilderFactory::get_builder() {
+	RelationTypeBuilderPtr RelationTypeBuilderFactory::get_builder()
+	{
+		// No mutex required as this is a read-only operation.
 		return std::make_shared<RelationTypeBuilder>(relation_type_manager, relation_attribute_type_manager, relation_attribute_instance_manager);
 	}
 

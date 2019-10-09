@@ -8,14 +8,15 @@
 namespace inexor {
 namespace entity_system {
 
-	using RelationTypeBuilderPtr = std::shared_ptr<RelationTypeBuilder>;
 
 	/// @class RelationTypeBuilder
 	/// @brief Manages the builders for the relation type.
 	class RelationTypeBuilderFactory
 	{
 		public:
-
+		
+			/// These using instructions help to shorten the following code.
+			using RelationTypeBuilderPtr = std::shared_ptr<RelationTypeBuilder>;
 			using RelationTypeManagerPtr = std::shared_ptr<RelationTypeManager>;
 			using RelationAttributeTypeManagerPtr = std::shared_ptr<RelationAttributeTypeManager>;
 			using RelationAttributeInstanceManagerPtr = std::shared_ptr<RelationAttributeInstanceManager>;
@@ -46,6 +47,9 @@ namespace entity_system {
 
 			/// The relation attribute instance manager
 			RelationAttributeInstanceManagerPtr relation_attribute_instance_manager;
+
+			/// The mutex of this class.
+			std::mutex relation_type_builder_factory;
 	};
 
 }
