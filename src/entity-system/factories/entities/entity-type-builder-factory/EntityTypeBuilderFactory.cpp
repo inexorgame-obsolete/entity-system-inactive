@@ -9,6 +9,7 @@ namespace entity_system {
 		EntityAttributeInstanceManagerPtr entity_attribute_instance_manager
 	)
 	{
+		std::lock_guard<std::mutex> lock(entity_type_builder_factory);
 		this->entity_type_manager = entity_type_manager;
 		this->entity_attribute_type_manager = entity_attribute_type_manager;
 		this->entity_attribute_instance_manager = entity_attribute_instance_manager;

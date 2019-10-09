@@ -8,17 +8,18 @@
 namespace inexor {
 namespace entity_system {
 
+	/// These using instructions help to shorten the following code.
 	using EntityTypeBuilderPtr = std::shared_ptr<EntityTypeBuilder>;
+	using EntityTypeManagerPtr = std::shared_ptr<EntityTypeManager>;
+	using EntityAttributeTypeManagerPtr = std::shared_ptr<EntityAttributeTypeManager>;
+	using EntityAttributeInstanceManagerPtr = std::shared_ptr<EntityAttributeInstanceManager>;
+
 
 	/// @class EntityTypeBuilder
 	/// @brief Management of the loggers.
 	class EntityTypeBuilderFactory
 	{
 		public:
-
-			using EntityTypeManagerPtr = std::shared_ptr<EntityTypeManager>;
-			using EntityAttributeTypeManagerPtr = std::shared_ptr<EntityAttributeTypeManager>;
-			using EntityAttributeInstanceManagerPtr = std::shared_ptr<EntityAttributeInstanceManager>;
 
 			/// Constructor.
 			EntityTypeBuilderFactory(
@@ -46,6 +47,10 @@ namespace entity_system {
 
 			/// The entity attribute instance manager
 			EntityAttributeInstanceManagerPtr entity_attribute_instance_manager;
+
+			/// The mutex of this class.
+			std::mutex entity_type_builder_factory;
+
 	};
 
 }
