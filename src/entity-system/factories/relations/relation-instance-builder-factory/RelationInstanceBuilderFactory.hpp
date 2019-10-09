@@ -7,7 +7,6 @@
 namespace inexor {
 namespace entity_system {
 
-	using RelationInstanceBuilderPtr = std::shared_ptr<RelationInstanceBuilder>;
 
 	/// @class RelationInstanceBuilder
 	/// @brief Manages the relation instance builders.
@@ -15,6 +14,8 @@ namespace entity_system {
 	{
 		public:
 
+			/// These using instructions help to shorten the following code.
+			using RelationInstanceBuilderPtr = std::shared_ptr<RelationInstanceBuilder>;
 			using RelationInstanceManagerPtr = std::shared_ptr<RelationInstanceManager>;
 			using RelationTypeManagerPtr = std::shared_ptr<RelationTypeManager>;
 
@@ -40,6 +41,9 @@ namespace entity_system {
 
 			/// The relation type manager
 			RelationTypeManagerPtr relation_type_manager;
+
+			/// The mutex of this class
+			std::mutex relation_instance_builder_factory_mutex;
 
 	};
 
