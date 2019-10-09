@@ -11,7 +11,7 @@ namespace inexor {
 namespace entity_system {
 
 	/// @class RelationManager
-	/// @brief The relation manager manages the relation managers.
+	/// 
 	class RelationManager
 	{
 		public:
