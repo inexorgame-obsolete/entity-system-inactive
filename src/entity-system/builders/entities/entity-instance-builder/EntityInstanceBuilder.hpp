@@ -33,11 +33,6 @@ namespace entity_system {
 	class EntityInstanceBuilder
 		: public std::enable_shared_from_this<EntityInstanceBuilder>
 	{
-		private:
-			
-			/// The mutex of this class.
-			std::mutex entity_instance_builder_mutex;
-
 		public:
 
 			/// @brief Constructs the entity instance builder.
@@ -142,6 +137,7 @@ namespace entity_system {
 
 		private:
 
+			/// 
 			bool initialize_instance(EntityInstancePtr entity_instance);
 
 			/// The entity instance manager.
@@ -161,6 +157,9 @@ namespace entity_system {
 
 			/// The attribute definitions.
 			std::unordered_map<std::string, DataContainerInitializer> entity_instance_attributes;
+
+			/// The mutex of this class.
+			std::mutex entity_instance_builder_mutex;
 
 	};
 
