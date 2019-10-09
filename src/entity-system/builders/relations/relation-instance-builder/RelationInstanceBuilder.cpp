@@ -8,6 +8,9 @@ namespace entity_system {
 		RelationTypeManagerPtr relation_type_manager
 	)
 	{
+		// Use lock guard to ensure thread safety during write operations!
+		std::lock_guard<std::mutex> lock(relation_instance_builder_mutex);
+		
 		this->relation_instance_manager = relation_instance_manager;
 		this->relation_type_manager = relation_type_manager;
 		relation_type_name = "";
@@ -20,78 +23,117 @@ namespace entity_system {
 
 	RelationInstanceBuilderPtr RelationInstanceBuilder::type(const std::string& relation_type_name)
 	{
+		// Use lock guard to ensure thread safety during write operations!
+		std::lock_guard<std::mutex> lock(relation_instance_builder_mutex);
+
 		this->relation_type_name = relation_type_name;
 		return shared_from_this();
 	}
 
 	RelationInstanceBuilderPtr RelationInstanceBuilder::type(const RelationTypePtr& relation_type)
 	{
+		// Use lock guard to ensure thread safety during write operations!
+		std::lock_guard<std::mutex> lock(relation_instance_builder_mutex);
+
 		this->o_relation_type = { relation_type };
 		return shared_from_this();
 	}
 
 	RelationInstanceBuilderPtr RelationInstanceBuilder::uuid(const std::string& relation_instance_uuid)
 	{
+		// Use lock guard to ensure thread safety during write operations!
+		std::lock_guard<std::mutex> lock(relation_instance_builder_mutex);
+
 		this->relation_instance_uuid = relation_instance_uuid;
 		return shared_from_this();
 	}
 
 	RelationInstanceBuilderPtr RelationInstanceBuilder::source(EntityInstancePtr ent_instance_source)
 	{
+		// Use lock guard to ensure thread safety during write operations!
+		std::lock_guard<std::mutex> lock(relation_instance_builder_mutex);
+
 		this->ent_instance_source = ent_instance_source;
 		return shared_from_this();
 	}
 
 	RelationInstanceBuilderPtr RelationInstanceBuilder::target(EntityInstancePtr ent_instance_target)
 	{
+		// Use lock guard to ensure thread safety during write operations!
+		std::lock_guard<std::mutex> lock(relation_instance_builder_mutex);
+
 		this->ent_instance_target = ent_instance_target;
 		return shared_from_this();
 	}
 
 	RelationInstanceBuilderPtr RelationInstanceBuilder::attribute(const std::string& attribute_name, const DataContainerInitializer& initializer)
 	{
+		// Use lock guard to ensure thread safety during write operations!
+		std::lock_guard<std::mutex> lock(relation_instance_builder_mutex);
+
 		relation_instance_attributes[attribute_name] = {initializer.type, initializer.value };
 		return shared_from_this();
 	}
 
 	RelationInstanceBuilderPtr RelationInstanceBuilder::attribute(const std::string& attribute_name, const bool& value)
 	{
+		// Use lock guard to ensure thread safety during write operations!
+		std::lock_guard<std::mutex> lock(relation_instance_builder_mutex);
+
 		relation_instance_attributes[attribute_name] = {DataType::BOOL, value};
 		return shared_from_this();
 	}
 
 	RelationInstanceBuilderPtr RelationInstanceBuilder::attribute(const std::string& attribute_name, const int& value)
 	{
+		// Use lock guard to ensure thread safety during write operations!
+		std::lock_guard<std::mutex> lock(relation_instance_builder_mutex);
+
 		relation_instance_attributes[attribute_name] = {DataType::INT, value};
 		return shared_from_this();
 	}
 
 	RelationInstanceBuilderPtr RelationInstanceBuilder::attribute(const std::string& attribute_name, const int64_t& value)
 	{
+		// Use lock guard to ensure thread safety during write operations!
+		std::lock_guard<std::mutex> lock(relation_instance_builder_mutex);
+
 		relation_instance_attributes[attribute_name] = {DataType::BIG_INT, value};
 		return shared_from_this();
 	}
 
 	RelationInstanceBuilderPtr RelationInstanceBuilder::attribute(const std::string& attribute_name, const float& value)
 	{
+		// Use lock guard to ensure thread safety during write operations!
+		std::lock_guard<std::mutex> lock(relation_instance_builder_mutex);
+
 		relation_instance_attributes[attribute_name] = {DataType::FLOAT, value};
 		return shared_from_this();
 	}
 
 	RelationInstanceBuilderPtr RelationInstanceBuilder::attribute(const std::string& attribute_name, const double& value)
 	{
+		// Use lock guard to ensure thread safety during write operations!
+		std::lock_guard<std::mutex> lock(relation_instance_builder_mutex);
+
 		relation_instance_attributes[attribute_name] = {DataType::DOUBLE, value};
 		return shared_from_this();
 	}
 
 	RelationInstanceBuilderPtr RelationInstanceBuilder::attribute(const std::string& attribute_name, const std::string& value)
 	{
+		// Use lock guard to ensure thread safety during write operations!
+		std::lock_guard<std::mutex> lock(relation_instance_builder_mutex);
+
 		relation_instance_attributes[attribute_name] = {DataType::STRING, value};
 		return shared_from_this();
 	}
 
 	RelationInstancePtrOpt RelationInstanceBuilder::build()
 	{
+		// Use lock guard to ensure thread safety during write operations!
+		std::lock_guard<std::mutex> lock(relation_instance_builder_mutex);
+
 		RelationInstancePtrOpt o_relation_instance = std::nullopt;
 		if(!o_relation_type.has_value() && !relation_type_name.empty())
 		{

@@ -9,12 +9,11 @@
 namespace inexor {
 namespace entity_system {
 
+	/// These using instructions help to shorten the following code.
 	class RelationInstanceBuilder;
-
 	using RelationInstanceBuilderPtr = std::shared_ptr<RelationInstanceBuilder>;
 	using RelationInstanceManagerPtr = std::shared_ptr<RelationInstanceManager>;
 	using RelationTypeManagerPtr = std::shared_ptr<RelationTypeManager>;
-
 	using EntityInstancePtr = std::shared_ptr<EntityInstance>;
 	using RelationTypePtr = std::shared_ptr<RelationType>;
 	using RelationTypePtrOpt = std::optional<RelationTypePtr>;
@@ -52,18 +51,31 @@ namespace entity_system {
 			RelationInstanceBuilderPtr target(EntityInstancePtr ent_instance_target);
 
 			/// Sets the value of the attribute.
+			/// 
 			RelationInstanceBuilderPtr attribute(const std::string& attribute_name, const DataContainerInitializer& value);
 
+			/// Sets the value of the attribute.
+			/// 
 			RelationInstanceBuilderPtr attribute(const std::string& attribute_name, const bool& value);
 
+			/// Sets the value of the attribute.
+			/// 
 			RelationInstanceBuilderPtr attribute(const std::string& attribute_name, const int& value);
 
+			/// Sets the value of the attribute.
+			/// 
 			RelationInstanceBuilderPtr attribute(const std::string& attribute_name, const int64_t& value);
 
+			/// Sets the value of the attribute.
+			/// 
 			RelationInstanceBuilderPtr attribute(const std::string& attribute_name, const float& value);
 
+			/// Sets the value of the attribute.
+			/// 
 			RelationInstanceBuilderPtr attribute(const std::string& attribute_name, const double& value);
 
+			/// Sets the value of the attribute.
+			/// 
 			RelationInstanceBuilderPtr attribute(const std::string& attribute_name, const std::string& value);
 
 			/// Builds and returns the created relation instance.
@@ -95,6 +107,9 @@ namespace entity_system {
 			/// The attribute definitions.
 			std::unordered_map<std::string, DataContainerInitializer> relation_instance_attributes;
 
+			/// The mutex of this class.
+			std::mutex relation_instance_builder_mutex;
+			
 	};
 
 }
