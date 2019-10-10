@@ -1,6 +1,7 @@
 [requires]
-glm/0.9.9.1@g-truc/stable
-gtest/1.8.1@bincrafters/stable
+glm/0.9.9.5
+gtest/1.8.1
+benchmark/1.5.0
 crossguid/06-03-19@inexorgame/testing
 #jsonformoderncpp/3.5.0@vthiery/stable
 restbed/6eb385fa9051203f28bf96cc1844bbb5a9a6481f@inexorgame/stable
@@ -17,7 +18,6 @@ magnum/2019.01@inexorgame/testing
 openal/1.19.0@bincrafters/stable
 magnum_plugins/2019.01@inexorgame/testing
 freetype/2.9.1@bincrafters/stable
-google-benchmark/1.4.1@mpusz/stable
 
 [generators]
 cmake
