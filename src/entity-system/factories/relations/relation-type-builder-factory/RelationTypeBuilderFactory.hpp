@@ -9,8 +9,10 @@ namespace inexor {
 namespace entity_system {
 
 
-	/// @class RelationTypeBuilder
-	/// @brief Manages the builders for the relation type.
+	/// @class RelationTypeBuilderFactory
+	/// @brief Builder class for relation types.
+	/// @note For more information on the builder software pattern see
+	/// https://en.wikipedia.org/wiki/Builder_pattern
 	class RelationTypeBuilderFactory
 	{
 		public:
@@ -21,31 +23,39 @@ namespace entity_system {
 			using RelationAttributeTypeManagerPtr = std::shared_ptr<RelationAttributeTypeManager>;
 			using RelationAttributeInstanceManagerPtr = std::shared_ptr<RelationAttributeInstanceManager>;
 
-			/// Constructor.
+			/// @brief Constructor.
+			/// @note The dependencies of this class will be injected automatically with the help of Boost DI.<br>
+			/// For more information see https://boost-experimental.github.io/di/user_guide/index.html
+			/// BOOST_DI_INJECT constructor parameters is limited to BOOST_DI_CFG_CTOR_LIMIT_SIZE,<br>
+			/// which by default is set to 10. Not more than 10 arguments can be passed to the DI constructor!<br>
+			/// @param relation_type_manager A shared pointer to the relation type manager.
+			/// @param relation_attribute_type_manager A shared pointer to the relation attribute type manager.
+			/// @param relation_attribute_instance_manager A shared pointer to the relation attribute instance manager.
 			RelationTypeBuilderFactory(
 				RelationTypeManagerPtr relation_type_manager,
 				RelationAttributeTypeManagerPtr relation_attribute_type_manager,
 				RelationAttributeInstanceManagerPtr relation_attribute_instance_manager
 			);
 
-			/// Destructor.
+			/// @brief Destructor.
 			~RelationTypeBuilderFactory();
 
-			/// Initialization of the manager
+			/// @brief Initialization of the manager
 			void init();
 
-			/// Returns a new instance of a builder
+			/// @brief Returns a new instance of a builder.
+			/// @return A shared pointer to the relation type builder.
 			RelationTypeBuilderPtr get_builder();
 
 		private:
 
-			/// The relation type manager
+			/// The relation type manager.
 			RelationTypeManagerPtr relation_type_manager;
 
-			/// The relation attribute instance manager
+			/// The relation attribute instance manager.
 			RelationAttributeTypeManagerPtr relation_attribute_type_manager;
 
-			/// The relation attribute instance manager
+			/// The relation attribute instance manager.
 			RelationAttributeInstanceManagerPtr relation_attribute_instance_manager;
 
 			/// The mutex of this class.
