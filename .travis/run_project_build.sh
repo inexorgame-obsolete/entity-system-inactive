@@ -5,4 +5,4 @@ cmake ../
 make
 cd bin/
 ./inexor-tests
-
+./inexor-benchmarks
