@@ -11,13 +11,15 @@ namespace inexor {
 namespace entity_system {
 
 	/// These using instructions help to shorten the following code.
-	using AttributeList = std::unordered_map<std::string, std::pair<DataType, EnumSet<Feature>>>;
 	class RelationTypeBuilder;
+	using AttributeList = std::unordered_map<std::string, std::pair<DataType, EnumSet<Feature>>>;
 	using RelationTypeBuilderPtr = std::shared_ptr<RelationTypeBuilder>;
 	using RelationTypePtrOpt = std::optional<std::shared_ptr<RelationType>>;
 
 	/// @class RelationTypeBuilder
-	/// @brief Builder for relation types.
+	/// @brief Builder class for relation types.
+	/// @note For more information on the builder software pattern see
+	/// https://en.wikipedia.org/wiki/Builder_pattern
 	class RelationTypeBuilder : public std::enable_shared_from_this<RelationTypeBuilder>
 	{
 		public:
@@ -28,43 +30,59 @@ namespace entity_system {
 			using RelationAttributeInstanceManagerPtr = std::shared_ptr<RelationAttributeInstanceManager>;
 			using EntityTypePtr = std::shared_ptr<EntityType>;
 
-			/// Constructor.
+			/// @brief Constructor.
+			/// @note The dependencies of this class will be injected automatically with the help of Boost DI.<br>
+			/// For more information see https://boost-experimental.github.io/di/user_guide/index.html
+			/// BOOST_DI_INJECT constructor parameters is limited to BOOST_DI_CFG_CTOR_LIMIT_SIZE,<br>
+			/// which by default is set to 10. Not more than 10 arguments can be passed to the DI constructor!<br>
+			/// @param relation_type_manager A shared pointer to the relation type manager.
+			/// @param relation_attribute_type_manager A shared pointer to the relation attribute type manager. 
+			/// @param relation_attribute_instance_manager A shared pointer to the relation attribute instance manager.
 			RelationTypeBuilder(
 				RelationTypeManagerPtr relation_type_manager,
 				RelationAttributeTypeManagerPtr relation_attribute_type_manager,
 				RelationAttributeInstanceManagerPtr relation_attribute_instance_manager
 			);
 
-			/// Destructor.
+			/// @brief Destructor.
 			~RelationTypeBuilder();
 
-			/// Sets the name of the relation type.
+			/// @brief Sets the name of the relation type.
+			/// @param relation_type_name The name of the relation which will be build.
+			/// @return A shared pointer to the relation type builder.
 			RelationTypeBuilderPtr name(std::string relation_type_name);
 
-			/// Sets the uuid of the relation type.
+			/// @brief Sets the uuid of the relation type.
+			/// @param relation_type_uuid The GUID of the relation which will be build.
 			RelationTypeBuilderPtr uuid(std::string relation_type_uuid);
 
-			/// Sets the source entity type.
+			/// @brief Sets the source entity type.
+			/// @param ent_type_source The source entity type of the relation which will be build.
 			RelationTypeBuilderPtr source(EntityTypePtr ent_type_source);
 
-			/// Sets the target entity type.
+			/// @brief Sets the target entity type.
+			/// @param ent_type_target The target entity type of the relation which will be build.
 			RelationTypeBuilderPtr target(EntityTypePtr ent_type_target);
 
-			/// Sets the uuid of the relation type.
+			/// @brief Sets the uuid of the relation type.
+			/// @param attribute_name The name of the relation which will be build.
+			/// @param attribute_datatype The data types of the relation attribute.
+			/// @param attribute_features The features of the relation attribute.
 			RelationTypeBuilderPtr attribute(std::string attribute_name, DataType attribute_datatype, const EnumSet<Feature>& attribute_features);
 
-			/// Builds and returns the created relation type.
+			/// @brief Builds and returns the created relation type.
+			/// @return A std::optional shared pointer to the relation type which has been built.
 			RelationTypePtrOpt build();
 
 		private:
 
-			/// The relation type manager
+			/// The relation type manager.
 			RelationTypeManagerPtr relation_type_manager;
 
-			/// The relation attribute instance manager
+			/// The relation attribute instance manager.
 			RelationAttributeTypeManagerPtr relation_attribute_type_manager;
 
-			/// The relation attribute instance manager
+			/// The relation attribute instance manager.
 			RelationAttributeInstanceManagerPtr relation_attribute_instance_manager;
 
 			/// The name of the new relation type.
