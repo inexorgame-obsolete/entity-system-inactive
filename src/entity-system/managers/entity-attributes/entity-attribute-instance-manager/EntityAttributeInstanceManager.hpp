@@ -8,30 +8,32 @@
 namespace inexor {
 namespace entity_system {
 
+	/// These using instructions help to shorten the following code.
 	using EntityAttributeTypePtr = std::shared_ptr<EntityAttributeType>;
 	using EntityAttributeInstancePtr = std::shared_ptr<EntityAttributeInstance>;
 	using EntityAttributeInstancePtrOpt = std::optional<EntityAttributeInstancePtr>;
 
-	/// A manager class for entity attribute type instances.
+	/// @class EntityAttributeInstanceManager
+	/// @brief A manager class for entity attribute type instances.
 	class EntityAttributeInstanceManager : public InstanceManagerTemplate<EntityAttributeInstance>
 	{
 		public:
 
-			/// Constructor.
+			/// @brief Constructor.
 			EntityAttributeInstanceManager();
 
-			/// Destructor.
+			/// @brief Destructor.
 			~EntityAttributeInstanceManager();
 
 			/// @brief Creates an entity attribute instance.
 			/// @param ent_attr_type The entity attribute type of which an instance will be created.
 			/// @return The entity attribute instance if creating it succeeded, std::nullopt otherwise.
-			EntityAttributeInstancePtrOpt create_entity_attribute_instance(const EntityAttributeTypePtr&);
+			EntityAttributeInstancePtrOpt create_entity_attribute_instance(const EntityAttributeTypePtr& attr_type);
 
 			/// @brief Returns an entity attribute instance.
 			/// @param ent_attr_inst_GUID The GUID of the entity attribute instance.
 			/// @return The entity attribute instance if creating it succeeded, std::nullopt otherwise.
-			EntityAttributeInstancePtrOpt get_entity_attribute_instance(const xg::Guid&) const;
+			EntityAttributeInstancePtrOpt get_entity_attribute_instance(const xg::Guid& attr_type_GUID) const;
 
 			/// @brief Returns the number of existing entity attribute instances.
 			/// @return The number of existing entity attribute instances.
@@ -39,10 +41,12 @@ namespace entity_system {
 
 			/// @brief Deletes a specific entity attribute instances.
 			/// @param ent_attr_inst_GUID The GUID of the entity attribute instance which will be deleted.
-			std::size_t delete_entity_attribute_instance(const xg::Guid&);
+			/// @return The number of deleted attribute instances.
+			std::size_t delete_entity_attribute_instance(const xg::Guid& attr_type_GUID);
 
 			/// @brief Deletes a specific entity attribute instances.
 			/// @param The entity attribute instance which will be deleted.
+			/// @return The number of deleted attribute instances.
 			std::size_t delete_entity_attribute_instance(const EntityAttributeInstancePtr&);
 
 			/// @brief Deletes all entity attribute instances.
