@@ -13,8 +13,8 @@ namespace entity_system {
 		
 		this->relation_instance_manager = relation_instance_manager;
 		this->relation_type_manager = relation_type_manager;
-		relation_type_name = "";
-		o_relation_type = std::nullopt;
+		this->relation_type_name = "";
+		this->o_relation_type = std::nullopt;
 	}
 
 	RelationInstanceBuilder::~RelationInstanceBuilder()

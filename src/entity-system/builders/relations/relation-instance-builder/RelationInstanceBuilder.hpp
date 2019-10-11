@@ -26,67 +26,98 @@ namespace entity_system {
 	{
 		public:
 
-			/// Constructor.
+			/// @brief Constructor.
+			/// @note The dependencies of this class will be injected automatically with the help of Boost DI.<br>
+			/// For more information see https://boost-experimental.github.io/di/user_guide/index.html
+			/// BOOST_DI_INJECT constructor parameters is limited to BOOST_DI_CFG_CTOR_LIMIT_SIZE,<br>
+			/// which by default is set to 10. Not more than 10 arguments can be passed to the DI constructor!<br>
+			/// @param relation_instance_manager A shared pointer to the relation instance manager.
+			/// @param relation_type_manager A shared pointer to the relation type manager.
 			RelationInstanceBuilder(
 				RelationInstanceManagerPtr relation_instance_manager,
 				RelationTypeManagerPtr relation_type_manager
 			);
 
-			/// Destructor.
+			/// @brief Destructor.
 			~RelationInstanceBuilder();
 
-			/// Sets the name of the relation type to use.
+			/// @brief Sets the name of the relation type to use.
+			/// @param relation_type_name The name of the relation type.
+			/// @return A std::optional shared pointer to the relation instance builder.
 			RelationInstanceBuilderPtr type(const std::string& relation_type_name);
 
-			/// Sets the relation type to use.
+			/// @brief Sets the relation type to use.
+			/// @param relation_type The relation type of which an instance will be created.
+			/// @return A std::optional shared pointer to the relation instance builder.
 			RelationInstanceBuilderPtr type(const RelationTypePtr& relation_type);
 
-			/// Sets the uuid of the relation instance.
+			/// @brief Sets the uuid of the relation instance.
+			/// @param relation_type_uuid The GUID of the relation type of which an instance will be created.
+			/// @return A std::optional shared pointer to the relation instance builder.
 			RelationInstanceBuilderPtr uuid(const std::string& relation_type_uuid);
 
-			/// Sets the source entity instance.
+			/// @brief Sets the source entity instance.
+			/// @param ent_instance_source The source entity type of which an instance will be created.
+			/// @return A std::optional shared pointer to the relation instance builder.
 			RelationInstanceBuilderPtr source(EntityInstancePtr ent_instance_source);
 
-			/// Sets the target entity instance.
+			/// @brief Sets the target entity instance.
+			/// @param ent_instance_target The target entity type of which an instance will be created.
+			/// @return A std::optional shared pointer to the relation instance builder.
 			RelationInstanceBuilderPtr target(EntityInstancePtr ent_instance_target);
 
-			/// Sets the value of the attribute.
-			/// 
+			/// @brief Sets the value of the attribute.
+			/// @param attribute_name The name of the attribute type.
+			/// @param value The initialisation data type and data value of the attribute.
+			/// @return A std::optional shared pointer to the relation instance builder.
 			RelationInstanceBuilderPtr attribute(const std::string& attribute_name, const DataContainerInitializer& value);
 
-			/// Sets the value of the attribute.
-			/// 
+			/// @brief Sets the value of the attribute.
+			/// @param attribute_name The name of the relation instance attribute.
+			/// @param value The initialisation data type and data value of the attribute.
+			/// @return A std::optional shared pointer to the relation instance builder.
 			RelationInstanceBuilderPtr attribute(const std::string& attribute_name, const bool& value);
 
-			/// Sets the value of the attribute.
-			/// 
+			/// @brief Sets the value of the attribute.
+			/// @param attribute_name The name of the relation instance attribute.
+			/// @param value The initialisation data type and data value of the attribute.
+			/// @return A std::optional shared pointer to the relation instance builder.
 			RelationInstanceBuilderPtr attribute(const std::string& attribute_name, const int& value);
 
-			/// Sets the value of the attribute.
-			/// 
+			/// @brief Sets the value of the attribute.
+			/// @param attribute_name The name of the relation instance attribute.
+			/// @param value The initialisation data type and data value of the attribute.
+			/// @return A std::optional shared pointer to the relation instance builder.
 			RelationInstanceBuilderPtr attribute(const std::string& attribute_name, const int64_t& value);
 
-			/// Sets the value of the attribute.
-			/// 
+			/// @brief Sets the value of the attribute.
+			/// @param attribute_name The name of the relation instance attribute.
+			/// @param value The initialisation data type and data value of the attribute.
+			/// @return A std::optional shared pointer to the relation instance builder.
 			RelationInstanceBuilderPtr attribute(const std::string& attribute_name, const float& value);
 
-			/// Sets the value of the attribute.
-			/// 
+			/// @brief Sets the value of the attribute.
+			/// @param attribute_name The name of the relation instance attribute.
+			/// @param value The initialisation data type and data value of the attribute.
+			/// @return A std::optional shared pointer to the relation instance builder.
 			RelationInstanceBuilderPtr attribute(const std::string& attribute_name, const double& value);
 
-			/// Sets the value of the attribute.
-			/// 
+			/// @brief Sets the value of the attribute.
+			/// @param attribute_name The name of the relation instance attribute.
+			/// @param value The initialisation data type and data value of the attribute.
+			/// @return A std::optional shared pointer to the relation instance builder.
 			RelationInstanceBuilderPtr attribute(const std::string& attribute_name, const std::string& value);
 
-			/// Builds and returns the created relation instance.
+			/// @brief Builds and returns the created relation instance.
+			/// @return A std::optional shared pointer to the relation instance which has been created.
 			RelationInstancePtrOpt build();
 
 		private:
 
-			/// The relation instance manager
+			/// The relation instance manager.
 			RelationInstanceManagerPtr relation_instance_manager;
 
-			/// The relation type manager
+			/// The relation type manager.
 			RelationTypeManagerPtr relation_type_manager;
 
 			/// The name of the relation type to use.
