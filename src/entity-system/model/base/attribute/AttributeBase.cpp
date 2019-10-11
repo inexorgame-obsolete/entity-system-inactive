@@ -7,7 +7,8 @@ namespace entity_system {
 	{
 		// Use lock guard to ensure thread safety during write operations!
 		std::lock_guard<std::mutex> lock(attribute_type_base_mutex);
-		attribute_data_type = attr_data_type;
+
+		this->attribute_data_type = attr_data_type;
 		this->features = features;
 	}
 
