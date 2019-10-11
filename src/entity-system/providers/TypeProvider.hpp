@@ -10,33 +10,32 @@
 namespace inexor {
 namespace entity_system {
 
+	
+	/// @class TypeProvider
 	/// @brief This is the base class for type providers (e.g. entity type provider and relation type provider).
 	/// A provider makes sure that a type is being created and can be used in the code. Other services have to
 	/// use the provider in order to get the specialized type. The type is created lazily at runtime, this means
 	/// that the first access leads to its construction.
 	/// @note This template base class is part of a software design pattern called the <b>provider pattern</b>.
+	/// https://en.wikipedia.org/wiki/Provider_model
 	/// @tparam T The type (e.g. EntityType or RelationType)
 	/// @tparam BUILDER_MANAGER The type of the builder manager.
-	/// @todo Remove BUILDER_MANAGER because builder manager is not yet templated.
 	template<typename T, typename BUILDER_MANAGER>
 	class TypeProvider
 	{
-
-		private:
-
-			/// The mutex of this class.
-			std::mutex type_provider_template_mutex;
-
 		public:
 
 			/// This using instruction helps to shorten the following code.
 			using AttributeList = std::unordered_map<std::string, std::pair<DataType, EnumSet<Feature>>>;
 
 			/// @brief Constructs the type provider by using a specialized builder manager.
+			/// @note The dependencies of this class will be injected automatically with the help of Boost DI.<br>
+			/// https://boost-experimental.github.io/di/user_guide/index.html
+			/// BOOST_DI_INJECT constructor parameters is limited to BOOST_DI_CFG_CTOR_LIMIT_SIZE,<br>
+			/// which by default is set to 10. Not more than 10 arguments can be passed to the DI constructor!<br>
 			/// @param type_builder_manager The builder manager.
 			/// @param type_name The name of the type.
 			/// @param type_attributes The attributes of the type.
-			/// @todo Add mutex to ensure thread-safety!
 			TypeProvider(
 				std::shared_ptr<BUILDER_MANAGER> type_builder_manager,
 				std::string type_name,
@@ -45,12 +44,14 @@ namespace entity_system {
 			{
 				// Use lock guard to ensure thread safety during write operations!
 				std::lock_guard<std::mutex> lock(type_provider_template_mutex);
+
 				this->type_builder_manager = type_builder_manager;
 				this->type_name = type_name;
 				this->type_attributes = type_attributes;
 				this->created = false;
 			}
 
+			/// @brief Virtual Destructor.
 			virtual ~TypeProvider()
 			{
 			}
@@ -65,9 +66,11 @@ namespace entity_system {
 
 			/// @brief Returns a shared pointer to the type.
 			/// @return A shared pointer to the type.
-			/// @todo Add mutex to ensure thread-safety (there is a write operation in here)!
 			std::shared_ptr<T> get_type()
 			{
+				// Use lock guard to ensure thread safety during write operations!
+				std::lock_guard<std::mutex> lock(type_provider_template_mutex);
+
 				if(created)
 				{
 					return type;
@@ -84,6 +87,7 @@ namespace entity_system {
 				}
 
 				std::optional<std::shared_ptr<T>> o_type = builder->build();
+
 				if(o_type.has_value())
 				{
 					type = o_type.value();
@@ -91,6 +95,7 @@ namespace entity_system {
 				}
 				else
 				{
+					/// TODO: Can we use spdlog here?
 					std::cout << "ERR: " << type_name;
 				}
 				return type;
@@ -112,6 +117,9 @@ namespace entity_system {
 
 			/// This is set to true if the type has been created.
 			bool created;
+			
+			/// The mutex of this class.
+			std::mutex type_provider_template_mutex;
 
 		};
 
