@@ -60,7 +60,7 @@ namespace entity_system {
 		return has_attribute_type(ent_attr_type->get_type_name());
 	}
 
-	ENTSYS_RESULT EntityType::link_attribute_type(const EntityAttributeTypePtr& ent_attr_type)
+	bool EntityType::link_attribute_type(const EntityAttributeTypePtr& ent_attr_type)
 	{
 		// Is the entity attribute type already linked to this entity type?
 		if(!has_attribute_type(ent_attr_type->get_type_name()))
@@ -69,9 +69,9 @@ namespace entity_system {
 			// Use lock guard to ensure thread safety for this write operation!
 			std::lock_guard<std::mutex> lock(entity_type_mutex);
 			entity_attribute_types.push_back(ent_attr_type);
-			return ENTSYS_SUCCESS;
+			return true;
 		}
-		return ENTSYS_ERROR;
+		return false;
 	}
 
 	std::size_t EntityType::get_linked_attributes_count() const

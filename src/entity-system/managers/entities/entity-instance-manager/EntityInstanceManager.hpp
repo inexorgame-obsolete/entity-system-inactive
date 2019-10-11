@@ -5,7 +5,6 @@
 #include "entity-system/model/entities/entity-instances/EntityInstance.hpp"
 #include "entity-system/managers/entity-attributes/entity-attribute-instance-manager/EntityAttributeInstanceManager.hpp"
 #include "entity-system/managers/manager-templates/InstanceManagerTemplate.hpp"
-#include "entity-system/util/return-codes/ReturnCodes.hpp"
 
 #include <boost/signals2.hpp>
 #include <crossguid/guid.hpp>

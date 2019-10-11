@@ -148,6 +148,7 @@ namespace entity_system {
 
 		/// @brief Deletes a specific type.
 		/// @param type_name The name of the type which will be deleted.
+		/// @return The number of deleted types.
 		std::size_t delete_type(const std::string& type_name)
 		{
 			xg::Guid type_GUID_to_delete = get_GUID_by_type_name(type_name);

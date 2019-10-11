@@ -77,22 +77,19 @@ namespace entity_system {
 
 			/// @brief Deletes an entity type by GUID.
 			/// @param ? The GUID of the entity type which will be deleted.
-			/// @return ENTSYS_SUCCESS if deleting the entity type succeeded,
-			/// <br>ENTSYS_ERROR if deleting the entity type failed.
+			/// @return The number of deleted types.
 			std::size_t delete_entity_type(const xg::Guid&);
 
 
 			/// @brief Deletes an entity type by name.
 			/// @param ent_type_name The name of the entity type which will be deleted.
-			/// @return ENTSYS_SUCCESS if deleting the entity type succeeded,
-			/// <br>ENTSYS_ERROR if deleting the entity type failed.
+			/// @return The number of deleted types.
 			std::size_t delete_entity_type(const std::string&);
 
 
 			/// @brief Deletes an entity type by entity type.
 			/// @param ent_type A const reference of a shared pointer to the entity type which will be deleted.
-			/// @return ENTSYS_SUCCESS if deleting the entity type succeeded,
-			/// <br>ENTSYS_ERROR if deleting the entity type failed.
+			/// @return The number of deleted types.
 			std::size_t delete_entity_type(const EntityTypePtr&);
 
 
