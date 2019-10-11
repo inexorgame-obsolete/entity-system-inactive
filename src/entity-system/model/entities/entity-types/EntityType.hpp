@@ -39,7 +39,7 @@ namespace entity_system {
 			EntityType(const xg::Guid& ent_type_GUID, const std::string& ent_type_name);
 
 
-			/// Destructor.
+			/// @brief Destructor.
 			~EntityType();
 
 
@@ -78,7 +78,7 @@ namespace entity_system {
 			std::optional<EntityAttributeTypePtrList> get_linked_attribute_types() const;
 
 
-			/// Deletes all entity attribute types which are linked to this entity type.
+			/// @brief Deletes all entity attribute types which are linked to this entity type.
 			void reset_linked_attribute_types();
 
 	};

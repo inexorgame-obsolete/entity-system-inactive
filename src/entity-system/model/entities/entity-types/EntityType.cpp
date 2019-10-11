@@ -65,9 +65,10 @@ namespace entity_system {
 		// Is the entity attribute type already linked to this entity type?
 		if(!has_attribute_type(ent_attr_type->get_type_name()))
 		{
-			// Link entity attribute type to this entity type.
 			// Use lock guard to ensure thread safety for this write operation!
 			std::lock_guard<std::mutex> lock(entity_type_mutex);
+			
+			// Link entity attribute type to this entity type.
 			entity_attribute_types.push_back(ent_attr_type);
 			return ENTSYS_SUCCESS;
 		}
@@ -96,6 +97,7 @@ namespace entity_system {
 	{
 		// Use lock guard to ensure thread safety during write operations!
 		std::lock_guard<std::mutex> lock(entity_type_mutex);
+
 		entity_attribute_types.clear();
 	}
 
