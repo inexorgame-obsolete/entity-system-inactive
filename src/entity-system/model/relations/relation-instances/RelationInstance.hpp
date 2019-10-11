@@ -48,12 +48,12 @@ namespace entity_system {
 			/// @param ent_inst_target A const reference to a shared pointer of an entity instance which will be used as target entity instance.
 			RelationInstance(const xg::Guid& inst_GUID, const RelationTypePtr& rel_type, const EntityInstancePtr& ent_inst_source, const EntityInstancePtr& ent_inst_target);
 
-			/// Destructs the relation instance.
+			/// @brief Destructs the relation instance.
 			~RelationInstance();
 
-			/// 
-			/// 
-			/// 
+			/// @brief Adds a relation attribute instance to a relation instance.
+			/// @param rel_attr_type The relation attribute type.
+			/// @param rel_attr_inst The relation attribute instance.
 			void register_relation_attribute_instance(const RelationAttributeTypePtr& rel_attr_type, const RelationAttributeInstancePtr& rel_attr_inst);
 
 			/// @brief Returns all entity relation attribute instances.
@@ -64,10 +64,12 @@ namespace entity_system {
 			/// @return The relation type of the relation instance.
 			RelationTypePtr get_relation_type() const;
 
-			/// Returns the entity instance on the source side.
+			/// @brief Returns the entity instance on the source side.
+			/// @return The source entity instance.
 			EntityInstancePtr get_source_entity_instance() const;
 
-			/// Returns the entity instance on the target side.
+			/// @brief Returns the entity instance on the target side.
+			/// @return The target entity instance.
 			EntityInstancePtr get_target_entity_instance() const;
 
 	};
