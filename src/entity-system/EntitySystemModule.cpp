@@ -10,6 +10,9 @@ namespace entity_system {
 		LogManagerPtr log_manager
 	)
 	{
+		// Use lock guard to ensure thread safety during write operations!
+		std::lock_guard<std::mutex> lock(entity_system_module);
+
 		this->entity_manager = entity_manager;
 		this->relation_manager = relation_manager;
 		this->builder_factory_manager = builder_factory_manager;
@@ -22,6 +25,9 @@ namespace entity_system {
 
 	void EntitySystemModule::reset_entity_system()
 	{
+		// Use lock guard to ensure thread safety during write operations!
+		std::lock_guard<std::mutex> lock(entity_system_module);
+
 		spdlog::get(LOGGER_NAME)->debug("Resetting entity system.");
 
 		// Reset relation attribute instances, relation attribute types, relation instances and relation types.

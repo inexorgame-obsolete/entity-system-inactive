@@ -21,7 +21,10 @@ namespace entity_system {
 			using LogManagerPtr = std::shared_ptr<logging::LogManager>;
 
 			/// @brief Constructs the entity system module.
-			/// @note The dependencies of this class will be injected automatically.
+			/// @note The dependencies of this class will be injected automatically.<br>
+			/// BOOST_DI_INJECT constructor parameters is limited to BOOST_DI_CFG_CTOR_LIMIT_SIZE,<br>
+			/// which by default is set to 10. Not more than 10 arguments can be passed to the DI constructor!<br>
+			/// https://boost-experimental.github.io/di/user_guide/index.html
 			/// @param entity_manager The manager for entity types, entity instances, attribute types and attribute instances.
 			/// @param relation_manager The manager for relation types, relation instances, relation attribute types and relation attribute instances.
 			/// @param builder_factory_manager The manager for the builder factories.
@@ -33,7 +36,7 @@ namespace entity_system {
 				LogManagerPtr log_manager
 			);
 
-			/// Destructs the entity system module.
+			/// @brief Destructs the entity system module.
 			~EntitySystemModule();
 
 			/// @brief Completely resets the entity system.
@@ -66,6 +69,9 @@ namespace entity_system {
 
 			/// The logger name of this service.
 			static constexpr char LOGGER_NAME[] = "inexor.entsys";
+
+			/// The mutex of this class.
+			std::mutex entity_system_module;
 
 	};
 
