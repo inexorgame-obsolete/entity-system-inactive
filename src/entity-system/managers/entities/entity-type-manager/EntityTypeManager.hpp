@@ -13,6 +13,7 @@
 namespace inexor {
 namespace entity_system {
 
+	/// These using instructions help to shorten the following code.
 	using EntityTypePtr = std::shared_ptr<EntityType>;
 	using EntityTypePtrOpt = std::optional<EntityTypePtr>;
 
@@ -29,33 +30,34 @@ namespace entity_system {
 			~EntityTypeManager();
 
 			/// @brief Creates a new entity type.
-			/// @param ent_type_name The name of the new entity type.
-			/// @return ?
-			EntityTypePtrOpt create_entity_type(const std::string&);
+			/// @param type_name The name of the new entity type.
+			/// @return A std::optional shared pointer to the entity type which was created.
+			EntityTypePtrOpt create_entity_type(const std::string& type_name);
 
 
 			/// @brief Creates a new entity type.
-			/// @param ent_type_GUID The GUID of the new entity type.
-			/// @param ent_type_name The name of the new entity type.
-			/// @return ?
-			EntityTypePtrOpt create_entity_type(const xg::Guid&, const std::string&);
+			/// @param type_GUID The GUID of the new entity type.
+			/// @param type_name The name of the new entity type.
+			/// @return A std::optional shared pointer to the entity type which was created.
+			EntityTypePtrOpt create_entity_type(const xg::Guid& type_GUID, const std::string& type_name);
 
 
 			/// @brief Checks if an entity type does already exist.
+			/// @param type_GUID The GUID of the type.
 			/// @return True if the entity type already exists, false otherwise.
-			bool does_entity_type_exist(const xg::Guid&);
+			bool does_entity_type_exist(const xg::Guid& type_GUID);
 
 
 			/// @brief Checks if an entity type does already exist.
-			/// @param ent_type_name The name of the entity type.
+			/// @param type_name The name of the entity type.
 			/// @return True if the entity type already exists, false otherwise.
-			bool does_entity_type_exist(const std::string&);
+			bool does_entity_type_exist(const std::string& type_name);
 
 
 			/// @brief Checks if an entity type does already exist.
-			/// @param ent_type A const reference of a shared pointer to the entity type.
+			/// @param type_shared_ptr A const reference of a shared pointer to the entity type.
 			/// @return True if the entity type already exists, false otherwise.
-			bool does_entity_type_exist(const EntityTypePtr&);
+			bool does_entity_type_exist(const EntityTypePtr& type_shared_ptr);
 
 
 			/// @brief Returns the number of existing entity types.
@@ -64,36 +66,33 @@ namespace entity_system {
 
 
 			/// @brief Returns an entity type.
-			/// @param ent_type_GUID The GUID of the entity type.
+			/// @param type_GUID The GUID of the entity type.
 			/// @return A std::optional<EntityTypePtr> of the entity type.
-			EntityTypePtrOpt get_entity_type(const xg::Guid&);
+			EntityTypePtrOpt get_entity_type(const xg::Guid& type_GUID);
 
 
 			/// @brief Returns an entity type.
-			/// @param ent_type_name The name of the entity type.
+			/// @param type_name The name of the entity type.
 			/// @return A std::optional<EntityTypePtr> of the entity type.
-			EntityTypePtrOpt get_entity_type(const std::string&);
+			EntityTypePtrOpt get_entity_type(const std::string& type_name);
 
 
 			/// @brief Deletes an entity type by GUID.
-			/// @param ? The GUID of the entity type which will be deleted.
-			/// @return ENTSYS_SUCCESS if deleting the entity type succeeded,
-			/// <br>ENTSYS_ERROR if deleting the entity type failed.
-			std::size_t delete_entity_type(const xg::Guid&);
+			/// @param type_GUID The GUID of the entity type which will be deleted.
+			/// @return The number of deleted entity types.
+			std::size_t delete_entity_type(const xg::Guid& type_GUID);
 
 
 			/// @brief Deletes an entity type by name.
 			/// @param ent_type_name The name of the entity type which will be deleted.
-			/// @return ENTSYS_SUCCESS if deleting the entity type succeeded,
-			/// <br>ENTSYS_ERROR if deleting the entity type failed.
-			std::size_t delete_entity_type(const std::string&);
+			/// @return The number of deleted entity types.
+			std::size_t delete_entity_type(const std::string& type_name);
 
 
 			/// @brief Deletes an entity type by entity type.
-			/// @param ent_type A const reference of a shared pointer to the entity type which will be deleted.
-			/// @return ENTSYS_SUCCESS if deleting the entity type succeeded,
-			/// <br>ENTSYS_ERROR if deleting the entity type failed.
-			std::size_t delete_entity_type(const EntityTypePtr&);
+			/// @param type A const reference of a shared pointer to the entity type which will be deleted.
+			/// @return The number of deleted entity types.
+			std::size_t delete_entity_type(const EntityTypePtr& type);
 
 
 			/// @brief Removes all types of entities.
@@ -101,19 +100,22 @@ namespace entity_system {
 
 
 			/// @brief Registers a new listener
+			/// @param listener The listener.
 			void register_on_created(std::shared_ptr<EntityTypeCreatedListener> listener);
 
 
 			/// @brief Registers a new listener
+			/// @param listener The listener.
 			void register_on_deleted(std::shared_ptr<EntityTypeDeletedListener> listener);
 
 		private:
 
-			/// Notifies all listeners that a new entity type has been created.
+			/// @brief Notifies all listeners that a new entity type has been created.
+			/// @param new_entity_type The entity type which was created.
 			void notify_entity_type_created(EntityTypePtr new_entity_type);
 
-
-			/// Notifies all listeners that an entity type has been deleted.
+			/// @brief Notifies all listeners that an entity type has been deleted.
+			/// @param type_GUID The GUID of the type which was created.
 			void notify_entity_type_deleted(const xg::Guid& type_GUID);
 
 			/// Signal, that an entity type has been created.
