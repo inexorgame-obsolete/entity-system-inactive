@@ -14,38 +14,47 @@ namespace entity_system {
 	using EntityAttributeTypeManagerPtr = std::shared_ptr<EntityAttributeTypeManager>;
 	using EntityAttributeInstanceManagerPtr = std::shared_ptr<EntityAttributeInstanceManager>;
 
-
-	/// @class EntityTypeBuilder
-	/// @brief Management of the loggers.
+	/// @class EntityTypeBuilderFactory
+	/// @brief Builder class for entity types.
+	/// @note For more information on the builder software pattern see
+	/// https://en.wikipedia.org/wiki/Builder_pattern
 	class EntityTypeBuilderFactory
 	{
 		public:
 
-			/// Constructor.
+			/// @brief Constructor.
+			/// @note The dependencies of this class will be injected automatically with the help of Boost DI.<br>
+			/// For more information see https://boost-experimental.github.io/di/user_guide/index.html
+			/// BOOST_DI_INJECT constructor parameters is limited to BOOST_DI_CFG_CTOR_LIMIT_SIZE,<br>
+			/// which by default is set to 10. Not more than 10 arguments can be passed to the DI constructor!<br>
+			/// @param entity_type_manager A shared pointer to the entity type manager.
+			/// @param entity_attribute_type_manager A shared pointer to the entity attribute type manager.
+			/// @param entity_attribute_instance_manager A shared pointer to the entity attribute instance manager.
 			EntityTypeBuilderFactory(
 				EntityTypeManagerPtr entity_type_manager,
 				EntityAttributeTypeManagerPtr entity_attribute_type_manager,
 				EntityAttributeInstanceManagerPtr entity_attribute_instance_manager
 			);
 
-			/// Destructor.
+			/// @brief Destructor.
 			~EntityTypeBuilderFactory();
 
-			/// Initialization of the manager
+			/// @brief Initialization of the manager.
 			void init();
 
-			/// Returns a new instance of a builder
+			/// @brief Returns a new instance of a builder.
+			/// @return A shared pointer to the entity type builder.
 			EntityTypeBuilderPtr get_builder();
 
 		private:
 
-			/// The entity type manager
+			/// The entity type manager.
 			EntityTypeManagerPtr entity_type_manager;
 
-			/// The entity attribute instance manager
+			/// The entity attribute instance manager.
 			EntityAttributeTypeManagerPtr entity_attribute_type_manager;
 
-			/// The entity attribute instance manager
+			/// The entity attribute instance manager.
 			EntityAttributeInstanceManagerPtr entity_attribute_instance_manager;
 
 			/// The mutex of this class.
