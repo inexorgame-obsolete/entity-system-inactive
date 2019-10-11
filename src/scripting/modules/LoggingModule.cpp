@@ -1,5 +1,5 @@
 #include "LoggingModule.hpp"
-#include "EcmaScriptUtils.hpp"
+#include "scripting/utils/EcmaScriptUtils.hpp"
 
 #include "spdlog/spdlog.h"
 

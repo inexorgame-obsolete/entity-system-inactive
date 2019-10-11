@@ -710,7 +710,7 @@ namespace renderer {
 		auto observer_position_changed = Observe(
 			windows[window]->signal_position_changed,
 			[glfw_window] (std::pair<int, int> position) {
-				spdlog::info("(2) position_x {} position_y {}", position.first, position.second);
+				spdlog::debug("(2) position_x {} position_y {}", position.first, position.second);
 				// Avoid feedback loops
 				int xpos = 0;
 				int ypos = 0;
@@ -736,7 +736,7 @@ namespace renderer {
 		auto observer_size_changed = Observe(
 			windows[window]->signal_size_changed,
 			[glfw_window] (std::pair<int, int> size) {
-				spdlog::info("(2) width {} height {}", size.first, size.second);
+				spdlog::debug("(2) width {} height {}", size.first, size.second);
 				// Avoid feedback loops
 				int current_width = 0;
 				int current_height = 0;
@@ -783,7 +783,7 @@ namespace renderer {
 
 	void WindowManager::window_maximized(GLFWwindow* glfw_window, bool is_maximized)
 	{
-		spdlog::get(WindowManager::LOGGER_NAME)->info("Window maximize state changed: {}", is_maximized);
+		spdlog::get(WindowManager::LOGGER_NAME)->debug("Window maximize state changed: {}", is_maximized);
 		EntityInstancePtr window = window_entities[glfw_window];
 		AsyncTransaction<D>([window, is_maximized] {
 			window->set_own_value(WindowEntityTypeProvider::WINDOW_MAXIMIZED, is_maximized);
@@ -792,7 +792,7 @@ namespace renderer {
 
 	void WindowManager::window_position_changed(GLFWwindow* glfw_window, int x, int y)
 	{
-		spdlog::get(WindowManager::LOGGER_NAME)->info("Window position changed: {}:{}", x, y);
+		spdlog::get(WindowManager::LOGGER_NAME)->debug("Window position changed: {}:{}", x, y);
 		EntityInstancePtr window = window_entities[glfw_window];
 		AsyncTransaction<D>([window, x, y] {
 			window->set_own_value(WindowEntityTypeProvider::WINDOW_POSITION_X, x);
@@ -802,7 +802,7 @@ namespace renderer {
 
 	void WindowManager::window_size_changed(GLFWwindow* glfw_window, int width, int height)
 	{
-		spdlog::get(WindowManager::LOGGER_NAME)->info("Window size changed: {}:{}", width, height);
+		spdlog::get(WindowManager::LOGGER_NAME)->debug("Window size changed: {}:{}", width, height);
 		EntityInstancePtr window = window_entities[glfw_window];
 		AsyncTransaction<D>([window, width, height] {
 			window->set_own_value(WindowEntityTypeProvider::WINDOW_WIDTH, width);

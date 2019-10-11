@@ -41,6 +41,21 @@ namespace entity_system {
 		return std::optional<std::unordered_map<EntityAttributeTypePtr, EntityAttributeInstancePtr>> { instances };
 	}
 
+	std::unordered_map<EntityAttributeTypePtr, EntityAttributeInstancePtr> EntityInstance::get_instances_2() const
+	{
+		return instances;
+	}
+
+	std::vector<std::string> EntityInstance::get_attribute_names() const
+	{
+		std::vector<std::string> attribute_names;
+		for (auto& kv : instances)
+		{
+			attribute_names.push_back(kv.first->get_type_name());
+		}
+		return attribute_names;
+	}
+
 	EntityAttributeInstancePtrOpt EntityInstance::get_attribute_instance(const std::string& attr_name)
 	{
 		for(auto& ent_attr_entry : instances)
@@ -67,14 +82,19 @@ namespace entity_system {
 
 	void EntityInstance::set_own_value(const std::string& attr_name, DataValue value)
 	{
-		EntityAttributeInstancePtr attr = get_attribute_instance(attr_name).value();
-		attr->own_value.Set(value);
+		EntityAttributeInstancePtrOpt o_attr = get_attribute_instance(attr_name);
+		if (o_attr.has_value()) {
+			o_attr.value()->own_value.Set(value);
+		}
 	}
 
 	void EntityInstance::toggle(const std::string& attr_name)
 	{
-		EntityAttributeInstancePtr attr = get_attribute_instance(attr_name).value();
-		attr->own_value.Set(!attr->get<DataType::BOOL>());
+		EntityAttributeInstancePtrOpt o_attr = get_attribute_instance(attr_name);
+		if (o_attr.has_value()) {
+			EntityAttributeInstancePtr attr = o_attr.value();
+			attr->own_value.Set(!attr->get<DataType::BOOL>());
+		}
 	}
 
 }

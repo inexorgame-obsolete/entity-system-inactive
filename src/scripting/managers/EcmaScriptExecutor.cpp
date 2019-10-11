@@ -1,5 +1,5 @@
 #include "EcmaScriptExecutor.hpp"
-#include "scripting/modules/EcmaScriptUtils.hpp"
+#include "scripting/utils/EcmaScriptUtils.hpp"
 
 #include <libplatform/libplatform.h>
 

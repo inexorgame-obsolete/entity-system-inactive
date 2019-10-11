@@ -12,7 +12,10 @@ namespace scripting {
 
 	using EntityInstanceManagerPtr = std::shared_ptr<entity_system::EntityInstanceManager>;
 
+	using EntityType = entity_system::EntityType;
+	using EntityTypePtr = std::shared_ptr<EntityType>;
 	using EntityInstance = entity_system::EntityInstance;
+	using EntityInstancePtr = std::shared_ptr<EntityInstance>;
 	using EntityAttributeInstancePtr = std::shared_ptr<entity_system::EntityAttributeInstance>;
 
 	/// @class EntityInstanceManagerModule
@@ -37,6 +40,9 @@ namespace scripting {
 
 			/// Creates the EntityInstanceManagerModule.
 			void create(v8::Isolate* isolate, v8::Local<v8::Context> context, v8::Local<v8::Object> parent);
+
+			/// Creates and returns an entity instance.
+			static void create_entity_instance(const v8::FunctionCallbackInfo<v8::Value>& args);
 
 			/// Returns true, if the entity instance exists with the given uuid.
 			static void does_entity_instance_exist(const v8::FunctionCallbackInfo<v8::Value>& args);
@@ -69,15 +75,18 @@ namespace scripting {
 			static void entity_attribute_instance_set_value(v8::Isolate* isolate, EntityAttributeInstancePtr ent_attr_inst, v8::Local<v8::Value> value);
 
 			/// Returns a V8 string of the UUID of the given entity instance.
-			static v8::Local<v8::String> entity_instance_get_uuid(v8::Isolate* isolate, EntityInstance* entity_instance);
+			static v8::Local<v8::String> entity_instance_get_uuid(v8::Isolate* isolate, EntityInstancePtr entity_instance);
 
 			/// Returns a V8 string of the type name of the given entity instance.
-			static v8::Local<v8::String> entity_instance_get_type_name(v8::Isolate* isolate, EntityInstance* entity_instance);
+			static v8::Local<v8::String> entity_instance_get_type_name(v8::Isolate* isolate, EntityInstancePtr entity_instance);
 
 		private:
 
 			/// The entity instance manager.
 			EntityInstanceManagerPtr entity_instance_manager;
+
+			/// Stores entity instances which are in use by JS.
+			/// std::vector<EntityInstancePtr> entity_instances;
 
 	};
 

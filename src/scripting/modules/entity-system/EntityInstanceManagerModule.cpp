@@ -1,12 +1,11 @@
 #include "EntityInstanceManagerModule.hpp"
-#include "EcmaScriptUtils.hpp"
+#include "scripting/utils/EcmaScriptUtils.hpp"
 
 #include "spdlog/spdlog.h"
 
 namespace inexor {
 namespace scripting {
 
-	using EntityInstancePtr = std::shared_ptr<EntityInstance>;
 	using EntityInstancePtrOpt = std::optional<EntityInstancePtr>;
 
 	using EntityAttributeTypePtr = std::shared_ptr<entity_system::EntityAttributeType>;
@@ -39,11 +38,49 @@ namespace scripting {
 		// Wrap the service class pointer as v8::External, which have to be unwrapped in the function callbacks again
 		v8::Local<v8::External> entity_instance_manager_ref = v8::External::New(isolate, (void *) entity_instance_manager.get());
 		// Create module function callbacks
+		entity_instance_manager_module->Set(context, v8::String::NewFromUtf8(isolate, "create_entity_instance"), v8::Function::New(context, EntityInstanceManagerModule::create_entity_instance, entity_instance_manager_ref.As<v8::Value>()).ToLocalChecked());
 		entity_instance_manager_module->Set(context, v8::String::NewFromUtf8(isolate, "does_entity_instance_exist"), v8::Function::New(context, EntityInstanceManagerModule::does_entity_instance_exist, entity_instance_manager_ref.As<v8::Value>()).ToLocalChecked());
 		entity_instance_manager_module->Set(context, v8::String::NewFromUtf8(isolate, "get_entity_instance"), v8::Function::New(context, EntityInstanceManagerModule::get_entity_instance, entity_instance_manager_ref.As<v8::Value>()).ToLocalChecked());
 		entity_instance_manager_module->Set(context, v8::String::NewFromUtf8(isolate, "get_entity_instance_count"), v8::Function::New(context, EntityInstanceManagerModule::get_entity_instance_count, entity_instance_manager_ref.As<v8::Value>()).ToLocalChecked());
 		// Set module object in parent module object
 		parent->Set(context, v8::String::NewFromUtf8(isolate, "entityInstanceManager"), entity_instance_manager_module);
+	}
+
+	void EntityInstanceManagerModule::create_entity_instance(const v8::FunctionCallbackInfo<v8::Value>& args)
+	{
+		v8::Isolate* isolate = args.GetIsolate();
+		v8::Local<v8::Context> context = isolate->GetCurrentContext();
+		entity_system::EntityInstanceManager* entity_instance_manager = static_cast<entity_system::EntityInstanceManager*>(args.Data().As<v8::External>()->Value());
+		v8::ReturnValue<v8::Value> return_value = args.GetReturnValue();
+		if (args.Length() > 0)
+		{
+			// v8::Local<v8::Value> entity_type_object = args[0];
+			v8::Local<v8::Object> entity_type_object = args[0].As<v8::Object>();
+			EntityTypePtr* entity_type = static_cast<EntityTypePtr*>(entity_type_object->GetInternalField(0).As<v8::External>()->Value());
+
+			v8::String::Utf8Value str(isolate, args[0]);
+			EntityInstancePtrOpt o_entity_instance = entity_instance_manager->create_entity_instance((*entity_type));
+			if (o_entity_instance.has_value())
+			{
+				EntityInstancePtr* entity_instance = &o_entity_instance.value();
+
+				// Get the object template
+				v8::Local<v8::ObjectTemplate> entity_instance_template = EntityInstanceManagerModule::get_entity_instance_template(isolate);
+
+				// Create a new JS-object which represents the c++ EntityInstance
+				v8::Local<v8::Object> entity_instance_object = entity_instance_template->NewInstance(context).ToLocalChecked();
+
+				// Store the actual entity instance as "internal field",
+				// which is non-visible to the javascript, but can be
+				// unwrapped by the handlers (see also: get_entity_instance_template)
+				entity_instance_object->SetInternalField(0, v8::External::New(isolate, entity_instance));
+
+				// Return the entity instance as object
+				return_value.Set(entity_instance_object);
+				return;
+			}
+		}
+		return_value.Set(v8::Null(isolate));
 	}
 
 	void EntityInstanceManagerModule::does_entity_instance_exist(const v8::FunctionCallbackInfo<v8::Value>& args)
@@ -67,38 +104,52 @@ namespace scripting {
 	void EntityInstanceManagerModule::get_entity_instance(const v8::FunctionCallbackInfo<v8::Value>& args)
 	{
 		v8::Isolate* isolate = args.GetIsolate();
+		v8::ReturnValue<v8::Value> return_value = args.GetReturnValue();
+
+		if (args.Length() == 0)
+		{
+			return_value.Set(v8::Null(isolate));
+			return;
+		}
 		v8::Local<v8::Context> context = isolate->GetCurrentContext();
 		entity_system::EntityInstanceManager* entity_instance_manager = static_cast<entity_system::EntityInstanceManager*>(args.Data().As<v8::External>()->Value());
-		v8::ReturnValue<v8::Value> return_value = args.GetReturnValue();
-		if (args.Length() > 0)
+
+		v8::String::Utf8Value str(isolate, args[0]);
+		std::optional<xg::Guid> guid = get_guid(str);
+		if (!guid.has_value())
 		{
-			v8::String::Utf8Value str(isolate, args[0]);
-			std::optional<xg::Guid> guid = get_guid(str);
-			if (guid.has_value())
-			{
-				EntityInstancePtrOpt o_entity_instance = entity_instance_manager->get_entity_instance(guid.value());
-				if (o_entity_instance.has_value())
-				{
-					EntityInstancePtr entity_instance = o_entity_instance.value();
-
-					// Get the object template
-					v8::Local<v8::ObjectTemplate> entity_instance_template = EntityInstanceManagerModule::get_entity_instance_template(isolate);
-
-					// Create a new JS-object which represents the c++ EntityInstance
-					v8::Local<v8::Object> entity_instance_object = entity_instance_template->NewInstance(context).ToLocalChecked();
-
-					// Store the actual entity instance as "internal field",
-					// which is non-visible to the javascript, but can be
-					// unwrapped by the handlers (see also: get_entity_instance_template)
-					entity_instance_object->SetInternalField(0, v8::External::New(isolate, entity_instance.get()));
-
-					// Return the entity instance as object
-					return_value.Set(entity_instance_object);
-					return;
-				}
-			}
+			return_value.Set(v8::Null(isolate));
+			return;
 		}
-		return_value.Set(v8::Null(isolate));
+
+		EntityInstancePtrOpt o_entity_instance = entity_instance_manager->get_entity_instance(guid.value());
+		if (!o_entity_instance.has_value())
+		{
+			return_value.Set(v8::Null(isolate));
+			return;
+		}
+
+		EntityInstancePtr entity_instance = o_entity_instance.value();
+
+		// Store shared_ptr
+		// entity_instances.push_back(entity_instance);
+
+		// Pointer of shared_ptr
+		EntityInstancePtr* p_entity_instance = &entity_instance;
+
+		// Get the object template
+		v8::Local<v8::ObjectTemplate> entity_instance_template = EntityInstanceManagerModule::get_entity_instance_template(isolate);
+
+		// Create a new JS-object which represents the c++ EntityInstance
+		v8::Local<v8::Object> entity_instance_object = entity_instance_template->NewInstance(context).ToLocalChecked();
+
+		// Store the actual entity instance as "internal field",
+		// which is non-visible to the javascript, but can be
+		// unwrapped by the handlers (see also: get_entity_instance_template)
+		entity_instance_object->SetInternalField(0, v8::External::New(isolate, p_entity_instance));
+
+		// Return the entity instance as object
+		return_value.Set(entity_instance_object);
 	}
 
 	void EntityInstanceManagerModule::get_entity_instance_count(const v8::FunctionCallbackInfo<v8::Value>& args)
@@ -151,18 +202,18 @@ namespace scripting {
 		v8::Local<v8::Object> self = info.Holder();
 		v8::Local<v8::External> wrap = v8::Local<v8::External>::Cast(self->GetInternalField(0));
 		void* ptr = wrap->Value();
-		EntityInstance* entity_instance = static_cast<EntityInstance*>(ptr);
+		EntityInstancePtr* entity_instance = static_cast<EntityInstancePtr*>(ptr);
 
 		std::string attr_name = object_to_string(isolate, property);
 
 		v8::ReturnValue<v8::Value> return_value = info.GetReturnValue();
 		if (attr_name == "uuid")
 		{
-			return_value.Set(EntityInstanceManagerModule::entity_instance_get_uuid(isolate, entity_instance));
+			return_value.Set(EntityInstanceManagerModule::entity_instance_get_uuid(isolate, (*entity_instance)));
 		} else if (attr_name == "type") {
-			return_value.Set(EntityInstanceManagerModule::entity_instance_get_type_name(isolate, entity_instance));
+			return_value.Set(EntityInstanceManagerModule::entity_instance_get_type_name(isolate, (*entity_instance)));
 		} else {
-			EntityAttributeInstancePtrOpt o_attr = entity_instance->get_attribute_instance(attr_name);
+			EntityAttributeInstancePtrOpt o_attr = (*entity_instance)->get_attribute_instance(attr_name);
 			if (o_attr.has_value())
 			{
 				return_value.Set(EntityInstanceManagerModule::entity_attribute_instance_get_value(isolate, o_attr.value()));
@@ -179,7 +230,7 @@ namespace scripting {
 		v8::Local<v8::Object> self = info.Holder();
 		v8::Local<v8::External> wrap = v8::Local<v8::External>::Cast(self->GetInternalField(0));
 		void* ptr = wrap->Value();
-		EntityInstance* entity_instance = static_cast<EntityInstance*>(ptr);
+		EntityInstancePtr* entity_instance = static_cast<EntityInstancePtr*>(ptr);
 
 		std::string attr_name = object_to_string(isolate, property);
 		spdlog::debug("ei_get_attr_value: attr {}", attr_name);
@@ -188,11 +239,11 @@ namespace scripting {
 		if (attr_name == "uuid")
 		{
 			// We do not change the uuid, but we return the exiting uuid
-			return_value.Set(EntityInstanceManagerModule::entity_instance_get_uuid(isolate, entity_instance));
+			return_value.Set(EntityInstanceManagerModule::entity_instance_get_uuid(isolate, (*entity_instance)));
 		} else if (attr_name == "type") {
-			return_value.Set(EntityInstanceManagerModule::entity_instance_get_type_name(isolate, entity_instance));
+			return_value.Set(EntityInstanceManagerModule::entity_instance_get_type_name(isolate, (*entity_instance)));
 		} else {
-			EntityAttributeInstancePtrOpt o_attr = entity_instance->get_attribute_instance(attr_name);
+			EntityAttributeInstancePtrOpt o_attr = (*entity_instance)->get_attribute_instance(attr_name);
 			if (o_attr.has_value())
 			{
 				// Change the attribute value (if possible).
@@ -218,30 +269,54 @@ namespace scripting {
 		v8::Local<v8::Object> self = info.Holder();
 		v8::Local<v8::External> wrap = v8::Local<v8::External>::Cast(self->GetInternalField(0));
 		void* ptr = wrap->Value();
-		EntityInstance* entity_instance = static_cast<EntityInstance*>(ptr);
+		EntityInstancePtr* entity_instance = static_cast<EntityInstancePtr*>(ptr);
 
-		std::optional<std::unordered_map<EntityAttributeTypePtr, EntityAttributeInstancePtr>> o_attributes = entity_instance->get_instances();
-		if (o_attributes.has_value())
+		std::vector<std::string> attribute_names = entity_instance->get()->get_attribute_names();
+		// std::vector<std::string> attribute_names = (*entity_instance)->get_attribute_names();
+		v8::Local<v8::Array> attr_names = v8::Array::New(isolate, attribute_names.size() + 2);
+		attr_names->Set(0, string_to_name(isolate, "uuid"));
+		attr_names->Set(1, string_to_name(isolate, "type"));
+		int i = 2;
+		for (std::string attribute_name : attribute_names)
 		{
-			std::unordered_map<EntityAttributeTypePtr, EntityAttributeInstancePtr> attributes = o_attributes.value();
-			v8::Local<v8::Array> attr_names = v8::Array::New(isolate, attributes.size() + 2);
-			attr_names->Set(0, string_to_name(isolate, "uuid"));
-			attr_names->Set(1, string_to_name(isolate, "type"));
-			int i = 2;
-			for (auto kv : attributes)
-			{
-				attr_names->Set(i, string_to_name(isolate, kv.first->get_type_name()));
-				i++;
-			}
-			info.GetReturnValue().Set(attr_names);
-		} else {
-			// Return empty array
-			spdlog::warn("The entity instance seems to have no attributes?");
-			v8::Local<v8::Array> attr_names = v8::Array::New(isolate, 2);
-			attr_names->Set(0, string_to_name(isolate, "uuid"));
-			attr_names->Set(1, string_to_name(isolate, "type"));
-			info.GetReturnValue().Set(attr_names);
+			attr_names->Set(i, string_to_name(isolate, attribute_name));
+			i++;
 		}
+		info.GetReturnValue().Set(attr_names);
+
+//		std::unordered_map<EntityAttributeTypePtr, EntityAttributeInstancePtr> attributes = (*entity_instance)->get_instances_2();
+//		v8::Local<v8::Array> attr_names = v8::Array::New(isolate, attributes.size() + 2);
+//		attr_names->Set(0, string_to_name(isolate, "uuid"));
+//		attr_names->Set(1, string_to_name(isolate, "type"));
+//		int i = 2;
+//		for (auto kv : attributes)
+//		{
+//			attr_names->Set(i, string_to_name(isolate, kv.first->get_type_name()));
+//			i++;
+//		}
+//		info.GetReturnValue().Set(attr_names);
+//		std::optional<std::unordered_map<EntityAttributeTypePtr, EntityAttributeInstancePtr>> o_attributes = (*entity_instance)->get_instances();
+//		if (o_attributes.has_value())
+//		{
+//			std::unordered_map<EntityAttributeTypePtr, EntityAttributeInstancePtr> attributes = o_attributes.value();
+//			v8::Local<v8::Array> attr_names = v8::Array::New(isolate, attributes.size() + 2);
+//			attr_names->Set(0, string_to_name(isolate, "uuid"));
+//			attr_names->Set(1, string_to_name(isolate, "type"));
+//			int i = 2;
+//			for (auto kv : attributes)
+//			{
+//				attr_names->Set(i, string_to_name(isolate, kv.first->get_type_name()));
+//				i++;
+//			}
+//			info.GetReturnValue().Set(attr_names);
+//		} else {
+//			// Return empty array
+//			spdlog::warn("The entity instance seems to have no attributes?");
+//			v8::Local<v8::Array> attr_names = v8::Array::New(isolate, 2);
+//			attr_names->Set(0, string_to_name(isolate, "uuid"));
+//			attr_names->Set(1, string_to_name(isolate, "type"));
+//			info.GetReturnValue().Set(attr_names);
+//		}
 	}
 
 	v8::Local<v8::Value> EntityInstanceManagerModule::entity_attribute_instance_get_value(v8::Isolate* isolate, EntityAttributeInstancePtr ent_attr_inst)
@@ -263,12 +338,12 @@ namespace scripting {
 		}
 	}
 
-	v8::Local<v8::String> EntityInstanceManagerModule::entity_instance_get_uuid(v8::Isolate* isolate, EntityInstance* entity_instance)
+	v8::Local<v8::String> EntityInstanceManagerModule::entity_instance_get_uuid(v8::Isolate* isolate, EntityInstancePtr entity_instance)
 	{
 		return v8::String::NewFromUtf8(isolate, entity_instance->get_GUID().str().c_str());
 	}
 
-	v8::Local<v8::String> EntityInstanceManagerModule::entity_instance_get_type_name(v8::Isolate* isolate, EntityInstance* entity_instance)
+	v8::Local<v8::String> EntityInstanceManagerModule::entity_instance_get_type_name(v8::Isolate* isolate, EntityInstancePtr entity_instance)
 	{
 		return v8::String::NewFromUtf8(isolate, entity_instance->get_entity_type()->get_type_name().c_str());
 	}

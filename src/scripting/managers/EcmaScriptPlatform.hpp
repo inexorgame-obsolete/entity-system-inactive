@@ -1,7 +1,7 @@
 #pragma once
 
 #include "scripting/modules/LoggingModule.hpp"
-#include "scripting/modules/EntitySystemModule.hpp"
+#include "scripting/modules/entity-system/EntitySystemModule.hpp"
 #include "scripting/modules/UtilModule.hpp"
 
 #include "v8.h"

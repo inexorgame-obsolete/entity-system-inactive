@@ -4,9 +4,11 @@ namespace inexor {
 namespace scripting {
 
 	EntitySystemModule::EntitySystemModule(
+		EntityTypeManagerModulePtr entity_type_manager_module,
 		EntityInstanceManagerModulePtr entity_instance_manager_module
 	)
 	{
+		this->entity_type_manager_module = entity_type_manager_module;
 		this->entity_instance_manager_module = entity_instance_manager_module;
 	}
 
@@ -16,12 +18,14 @@ namespace scripting {
 
 	void EntitySystemModule::init()
 	{
+		entity_type_manager_module->init();
 		entity_instance_manager_module->init();
 	}
 
 	void EntitySystemModule::shutdown()
 	{
 		entity_instance_manager_module->shutdown();
+		entity_type_manager_module->shutdown();
 	}
 
 	void EntitySystemModule::create(v8::Isolate* isolate, v8::Local<v8::Context> context, v8::Local<v8::Object> parent)
@@ -31,6 +35,7 @@ namespace scripting {
 		// Create module function callbacks
 		//  None
 		// Create sub module(s)
+		entity_type_manager_module->create(isolate, context, entity_system_module);
 		entity_instance_manager_module->create(isolate, context, entity_system_module);
 		// Set module object in parent module object
 		parent->Set(context, v8::String::NewFromUtf8(isolate, "entity_system"), entity_system_module);

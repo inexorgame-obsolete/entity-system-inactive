@@ -59,6 +59,14 @@ namespace entity_system {
 			/// @return All existing attribute instances.
 			std::optional<std::unordered_map<EntityAttributeTypePtr, EntityAttributeInstancePtr>> get_instances() const;
 
+			/// @brief Get all the attribute instances.
+			/// @return All existing attribute instances.
+			std::unordered_map<EntityAttributeTypePtr, EntityAttributeInstancePtr> get_instances_2() const;
+
+			/// @brief Get all the attribute names.
+			/// @return All existing attribute names.
+			std::vector<std::string> get_attribute_names() const;
+
 			// TODO: Implement methods for setting and getting entity attribute instance data...
 
 			/// @brief Get the attribute instance by name.

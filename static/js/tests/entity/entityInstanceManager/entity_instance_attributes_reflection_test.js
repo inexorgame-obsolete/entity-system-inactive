@@ -7,7 +7,7 @@ require('util');
 require('entity-system');
 
 // Currently you have to know the uuid of the entity instance
-var uuid = '9172d4e9-80ac-4769-8a0f-b53d8b57a9d1';
+var uuid = 'f3225bb6-9ce3-443b-b075-d06d4c585673';
 
 // Request the entity instance
 var entity_instance = entity_system.entityInstanceManager.get_entity_instance(uuid);
