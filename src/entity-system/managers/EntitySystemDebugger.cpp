@@ -11,6 +11,9 @@ namespace entity_system {
 		LogManagerPtr log_manager
 	)
 	{
+		// Use lock guard to ensure thread safety during write operations!
+		std::lock_guard<std::mutex> lock(entity_system_debugger_mutex);
+		
 		this->logger = spdlog::default_logger();
 		this->entity_type_manager = entity_type_manager;
 		this->entity_instance_manager = entity_instance_manager;
@@ -25,6 +28,9 @@ namespace entity_system {
 
 	void EntitySystemDebugger::init()
 	{
+		// Use lock guard to ensure thread safety during write operations!
+		std::lock_guard<std::mutex> lock(entity_system_debugger_mutex);
+		
 		entity_type_manager->register_on_created(shared_from_this());
 		entity_type_manager->register_on_deleted(shared_from_this());
 		relation_type_manager->register_on_created(shared_from_this());
@@ -33,12 +39,18 @@ namespace entity_system {
 
 	void EntitySystemDebugger::init_logger()
 	{
+		// Use lock guard to ensure thread safety during write operations!
+		std::lock_guard<std::mutex> lock(entity_system_debugger_mutex);
+		
 		log_manager->register_logger(LOGGER_NAME);
 		logger = spdlog::get(LOGGER_NAME);
 	}
 
 	void EntitySystemDebugger::on_entity_type_created(EntityTypePtr entity_type)
 	{
+		// Use lock guard to ensure thread safety during write operations!
+		std::lock_guard<std::mutex> lock(entity_system_debugger_mutex);
+		
 		logger->info("Created entity type {} (UUID: {})", entity_type->get_type_name(), entity_type->get_GUID().str());
 		entity_instance_manager->register_on_created(entity_type->get_GUID(), shared_from_this());
 		entity_instance_manager->register_on_deleted(entity_type->get_GUID(), shared_from_this());
@@ -62,6 +74,9 @@ namespace entity_system {
 
 	void EntitySystemDebugger::on_relation_type_created(RelationTypePtr rel_type)
 	{
+		// Use lock guard to ensure thread safety during write operations!
+		std::lock_guard<std::mutex> lock(entity_system_debugger_mutex);
+		
 		logger->info("Created relation type {} (UUID: {})", rel_type->get_type_name(), rel_type->get_GUID().str());
 		relation_instance_manager->register_on_created(rel_type->get_GUID(), shared_from_this());
 		relation_instance_manager->register_on_deleted(rel_type->get_GUID(), shared_from_this());
