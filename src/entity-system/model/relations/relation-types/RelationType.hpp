@@ -44,7 +44,7 @@ namespace entity_system {
 			/// @param ent_type_target A const reference to a shared pointer of an entity type which is the target entity type to which the relation will go.
 			RelationType(const xg::Guid& rel_type_GUID, const std::string& rel_type_name, const EntityTypePtr& ent_type_source, const EntityTypePtr& ent_type_target);
 
-			/// Destructs the relation type.
+			/// @brief Destructs the relation type.
 			~RelationType();
 
 			/// @brief Links a relation attribute type to this relation type.

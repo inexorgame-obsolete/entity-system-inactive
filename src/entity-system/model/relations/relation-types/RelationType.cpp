@@ -9,6 +9,7 @@ namespace entity_system {
 	{
 		// Use lock guard to ensure thread safety during write operations!
 		std::lock_guard<std::mutex> lock(relation_type_mutex);
+
 		source_entity_type = ent_type_source;
 		target_entity_type = ent_type_target;
 	}
@@ -19,6 +20,7 @@ namespace entity_system {
 	{
 		// Use lock guard to ensure thread safety during write operations!
 		std::lock_guard<std::mutex> lock(relation_type_mutex);
+
 		source_entity_type = ent_type_source;
 		target_entity_type = ent_type_target;
 	}
@@ -31,6 +33,7 @@ namespace entity_system {
 	{
 		// Use lock guard to ensure thread safety during write operations!
 		std::lock_guard<std::mutex> lock(relation_type_mutex);
+
 		linked_rel_attr_types.push_back(ent_rel_attr_type);
 	}
 
