@@ -42,6 +42,7 @@ To build the entity-system one needs:
 - `mkdir build && cd build`
 - `cmake ..` (creates project files, can also be done via gui)
 - `cmake --build .` (compiles the project)
+    - `MAKEFLAGS=-j8 cmake --build .` (compiles the project with 8 cores)
 
 ### Documentation
 
