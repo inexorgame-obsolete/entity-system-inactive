@@ -5,8 +5,8 @@ namespace entity_system {
 
 	GUIDBase::GUIDBase()
 	{
-		// If not GUID is given to us like in the copy constructor
-		// we generate a new one in the standard constructor.
+		// If the GUID is not given to us like in the copy constructor
+		// we generate a new one in this standard constructor.
 		generate_new_GUID();
 	}
 
@@ -14,6 +14,7 @@ namespace entity_system {
 	{
 		// Use lock guard to ensure thread safety during write operations!
 		std::lock_guard<std::mutex> lock(guid_base_mutex);
+
 		// Copy the GUID which is given as parameter.
 		globally_unique_identifier = param_GUID;
 	}
@@ -32,6 +33,7 @@ namespace entity_system {
 	{
 		// Use lock guard to ensure thread safety during write operations!
 		std::lock_guard<std::mutex> lock(guid_base_mutex);
+
 		// Generate a new GUID.
 		globally_unique_identifier = xg::newGuid();
 	}

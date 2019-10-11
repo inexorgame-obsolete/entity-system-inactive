@@ -22,14 +22,14 @@ namespace entity_system {
 
 		protected:
 
-			/// Constructor.
+			/// @brief Constructor.
 			GUIDBase();
 
 			/// @brief Copy Constructor.
-			/// @param The GUID which will be copied.
+			/// @param param_GUID The GUID which will be copied.
 			GUIDBase(const xg::Guid& param_GUID);
 
-			/// Destructor.
+			/// @brief Destructor.
 			~GUIDBase();
 
 		public:
@@ -38,7 +38,7 @@ namespace entity_system {
 			/// @return The GUID.
 			xg::Guid get_GUID() const;
 
-			/// Generates a new GUID.
+			/// @brief Generates a new GUID.
 			void generate_new_GUID();
 
 	};
