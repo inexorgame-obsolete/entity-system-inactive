@@ -11,7 +11,7 @@ namespace inexor {
 namespace entity_system {
 
 	/// @class EntityManager
-	/// 
+	/// @brief 
 	class EntityManager
 	{
 		public:
@@ -32,10 +32,10 @@ namespace entity_system {
 				std::shared_ptr<EntityAttributeInstanceManager> entity_attribute_instance_manager
 			);
 
-			/// Destructor.
+			/// @brief Destructor.
 			~EntityManager();
 
-			/// Resets types, instances, attribute types and attribute instances.
+			/// @brief Resets types, instances, attribute types and attribute instances.
 			/// @note Order of destruction:
 			/// <ol>
 			///		<li> entity attribute instances
@@ -59,7 +59,7 @@ namespace entity_system {
 			/// The entity attribute instance manager.
 			std::shared_ptr<EntityAttributeInstanceManager> entity_attribute_instance_manager;
 
-			/// The mutex of this class
+			/// The mutex of this class.
 			std::mutex entity_manager_mutex;
 
 	};
