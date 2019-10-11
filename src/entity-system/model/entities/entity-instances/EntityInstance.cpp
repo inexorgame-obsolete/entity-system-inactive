@@ -29,6 +29,7 @@ namespace entity_system {
 	{
 		// Use lock guard to ensure thread safety during write operations!
 		std::lock_guard<std::mutex> lock(entity_instance_mutex);
+
 		instances[ent_attr_type] = ent_attr_inst;
 	}
 
@@ -74,17 +75,22 @@ namespace entity_system {
 	void EntityInstance::set_own_value(const std::string& attr_name, DataValue value)
 	{
 		EntityAttributeInstancePtr attr = get_attribute_instance(attr_name).value();
+
 		// Use lock guard to ensure thread safety during write operations!
 		std::lock_guard<std::mutex> lock(entity_instance_mutex);
+
 		attr->own_value.Set(value);
 	}
 
 	void EntityInstance::toggle(const std::string& attr_name)
 	{
 		EntityAttributeInstancePtr attr = get_attribute_instance(attr_name).value();
+		
 		// Use lock guard to ensure thread safety during write operations!
 		std::lock_guard<std::mutex> lock(entity_instance_mutex);
-		attr->own_value.Set(!attr->get<DataType::BOOL>());
+		
+		// Toggle the value of the bool container.
+		attr->own_value.Set(! attr->get<DataType::BOOL>());
 	}
 
 }
