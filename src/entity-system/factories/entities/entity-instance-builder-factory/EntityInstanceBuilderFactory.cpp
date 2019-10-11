@@ -10,6 +10,7 @@ namespace entity_system {
 	{
 		// Use lock guard to ensure thread safety during write operations!
 		std::lock_guard<std::mutex> lock(entity_instance_builder_factory);
+
 		this->entity_instance_manager = entity_instance_manager;
 		this->entity_type_manager = entity_type_manager;
 	}
@@ -24,6 +25,7 @@ namespace entity_system {
 
 	EntityInstanceBuilderPtr EntityInstanceBuilderFactory::get_builder()
 	{
+		// No mutex required as this is a read-only operation.
 		return std::make_shared<EntityInstanceBuilder>(entity_instance_manager, entity_type_manager);
 	}
 

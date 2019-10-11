@@ -12,26 +12,34 @@ namespace entity_system {
 	using EntityInstanceManagerPtr = std::shared_ptr<EntityInstanceManager>;
 	using EntityTypeManagerPtr = std::shared_ptr<EntityTypeManager>;
 
-
-	/// @class EntityTypeBuilder
-	/// @brief Management of the loggers.
+	/// @class EntityInstanceBuilderFactory
+	/// @brief Builder class for entity instances.
+	/// @note For more information on the builder software pattern see
+	/// https://en.wikipedia.org/wiki/Builder_pattern
 	class EntityInstanceBuilderFactory
 	{
 		public:
 
-			/// Constructor.
+			/// @brief Constructor.
+			/// @note The dependencies of this class will be injected automatically with the help of Boost DI.<br>
+			/// For more information see https://boost-experimental.github.io/di/user_guide/index.html
+			/// BOOST_DI_INJECT constructor parameters is limited to BOOST_DI_CFG_CTOR_LIMIT_SIZE,<br>
+			/// which by default is set to 10. Not more than 10 arguments can be passed to the DI constructor!<br>
+			/// @param entity_instance_manager A shared pointer entity instance manager.
+			/// @param entity_type_manager A shared pointer to the entity type manager.
 			EntityInstanceBuilderFactory(
 				EntityInstanceManagerPtr entity_instance_manager,
 				EntityTypeManagerPtr entity_type_manager
 			);
 
-			/// Destructor.
+			/// @brief Destructor.
 			~EntityInstanceBuilderFactory();
 
-			/// Initialization of the manager.
+			/// @brief Initialization of the manager.
 			void init();
 
-			/// Returns a new instance of a builder.
+			/// @brief Returns a new instance of a builder.
+			/// @return A shared pointer to the entity instance builder.
 			EntityInstanceBuilderPtr get_builder();
 
 		private:
