@@ -7,6 +7,7 @@
 namespace inexor {
 namespace entity_system {
 
+	/// @class InstanceBase
 	/// @brief A template base class for instances.
 	/// @param T The type of the instance.
 	template <typename T> class InstanceBase
@@ -21,7 +22,8 @@ namespace entity_system {
 
 		protected:
 
-			/// Returns a shared pointer to the underlying type of this instance.
+			/// @brief Returns a shared pointer to the underlying type of this instance.
+			/// @return A shared pointer to the underlying type of this instance.
 			std::shared_ptr<T> get_type() const
 			{
 				// No mutex required as this is a read-only operation.
@@ -36,10 +38,11 @@ namespace entity_system {
 			{
 				// Use lock guard to ensure thread safety during write operations!
 				std::lock_guard<std::mutex> lock(instance_base_mutex);
+
 				type_pointer = type_ptr;
 			}
 
-			/// Destructor.
+			/// @brief Destructor.
 			~InstanceBase()
 			{
 			}
