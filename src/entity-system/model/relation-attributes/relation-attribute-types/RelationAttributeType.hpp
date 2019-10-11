@@ -22,7 +22,7 @@ namespace entity_system {
 			/// @param rel_attr_type_features The features of this relation attribute type.
 			RelationAttributeType(const std::string& rel_attr_type_name, const DataType& rel_attr_type_data_type, const EnumSet<Feature>& rel_attr_type_features);
 
-			/// Destructs the relation attribute type.
+			/// @brief Destructs the relation attribute type.
 			~RelationAttributeType();
 
 	};
