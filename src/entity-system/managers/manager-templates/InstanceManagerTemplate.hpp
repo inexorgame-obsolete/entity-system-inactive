@@ -29,12 +29,12 @@ namespace entity_system {
 
 		protected:
 
-			/// Constructor.
+			/// @brief Constructor.
 			InstanceManagerTemplate()
 			{
 			}
 
-			/// Destructor.
+			/// @brief Destructor.
 			~InstanceManagerTemplate()
 			{
 			}
@@ -53,7 +53,7 @@ namespace entity_system {
 			}
 			
 
-			/// Checks if an instance does already exist.
+			/// @brief Checks if an instance does already exist.
 			/// @param instance_GUID The GUID of the instance.
 			/// @return True of the instance exists, false otherwise.
 			bool does_instance_exist(const xg::Guid instance_GUID)
@@ -92,8 +92,18 @@ namespace entity_system {
 			}
 
 
+			/// @brief Returns all instances.
+			/// @return A std::unordered_map of GUIDs (key) and stored instances (value).
+			std::unordered_map<xg::Guid, std::shared_ptr<T>> get_all_instances() const
+			{
+				// TODO: Does this make sense?
+				return stored_instances;
+			}
+
+
 			/// @brief Deletes a specific instance
 			/// @param instance_GUID The GUID of the instance which should be deleted!
+			/// @return The number of deleted instances.
 			std::size_t delete_instance(const xg::Guid& instance_GUID)
 			{
 				// Use lock guard to ensure thread safety for this write operation!
@@ -106,13 +116,14 @@ namespace entity_system {
 
 			/// @brief Deletes a specific instance.
 			/// @param instance The instance which will be deleted.
+			/// @return The numer of deleted instances.
 			std::size_t delete_instance(const std::shared_ptr<T>& instance)
 			{
 				return delete_instance(get_GUID_from_instance(instance));
 			}
 
 
-			/// Deletes all instances.
+			/// @brief Deletes all instances.
 			void delete_all_instances()
 			{
 				// Use lock guard to ensure thread safety for this write operation!
