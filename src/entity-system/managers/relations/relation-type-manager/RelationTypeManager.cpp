@@ -63,7 +63,7 @@ namespace entity_system {
 
 	bool RelationTypeManager::does_relation_type_exist(const xg::Guid& rel_type_GUID)
 	{
-		return does_relation_type_exist(get_type(rel_type_GUID)->get_type_name());
+		return does_type_exist(rel_type_GUID);
 	}
 
 	bool RelationTypeManager::does_relation_type_exist(const std::string& rel_type_name)
@@ -73,7 +73,7 @@ namespace entity_system {
 
 	bool RelationTypeManager::does_relation_type_exist(const RelationTypePtr& rel_type)
 	{
-		return does_relation_type_exist(rel_type->get_type_name());
+		return does_relation_type_exist(rel_type->get_GUID());
 	}
 
 	std::size_t RelationTypeManager::get_relation_types_count() const
@@ -117,7 +117,8 @@ namespace entity_system {
 	std::size_t RelationTypeManager::delete_relation_type(const RelationTypePtr& rel_type)
 	{
 		xg::Guid type_GUID = rel_type->get_GUID();
-		std::size_t deleted_types_count = delete_type(rel_type->get_type_name());
+		std::size_t deleted_types_count = delete_type(type_GUID);
+		// Send signal.
 		notify_relation_type_deleted(type_GUID);
 		return deleted_types_count;
 	}
