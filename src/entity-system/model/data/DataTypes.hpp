@@ -23,8 +23,7 @@ constexpr Enum max()
 	return max_loop<Enum>(Enum::_values()[0], 1);
 }
 
-// And use that to declare a bit set template:
-
+/// Declaration of bit set (bitmask) template.
 template <typename Enum>
 using EnumSet = std::bitset<7>;
 
