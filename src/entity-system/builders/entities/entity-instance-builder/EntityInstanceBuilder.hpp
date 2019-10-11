@@ -30,8 +30,7 @@ namespace entity_system {
 	/// lot of functions to pass data to the entity attribute instances.
 	/// With a builder pattern class like the EntityInstanceBuilder
 	/// the creation of entity instances becomes much simpler.
-	class EntityInstanceBuilder
-		: public std::enable_shared_from_this<EntityInstanceBuilder>
+	class EntityInstanceBuilder : public std::enable_shared_from_this<EntityInstanceBuilder>
 	{
 		public:
 
@@ -49,95 +48,73 @@ namespace entity_system {
 				EntityTypeManagerPtr entity_type_manager
 			);
 
-			/// Destructs the entity instance builder.
+			/// @brief Destructs the entity instance builder.
 			~EntityInstanceBuilder();
 
-			/// @brief Sets the name of the entity type so that the entity
-			/// instance builder knows which entity instance has to be built.
-			/// @param entity_type_name The name of the entity type of which the
-			/// entity instance builder has to build an entity instance.
-			/// @note Because this method will be used in a builder pattern
-			/// it does not make sense to rename it to "set_type_name".
+			/// @brief Sets the name of the entity type so that the entity instance builder knows which entity instance has to be built.
+			/// @param entity_type_name The name of the entity type of which the entity instance builder has to build an entity instance.
+			/// @note Because this method will be used in a builder pattern it does not make sense to rename it to "set_type_name".
 			EntityInstanceBuilderPtr type(const std::string& entity_type_name);
 
-			/// @brief Sets the pointer of the entity type so that the entity
-			/// instance builder knows which entity instance has to be built.
-			/// @param entity_type_name The pointer of the entity type of which the
-			/// entity instance builder has to build an entity instance.
-			/// @note Because this method will be used in a builder pattern
-			/// it does not make sense to rename it to "set_type".
+			/// @brief Sets the pointer of the entity type so that the entity instance builder knows which entity instance has to be built.
+			/// @param entity_type_name The pointer of the entity type of which the entity instance builder has to build an entity instance.
+			/// @note Because this method will be used in a builder pattern it does not make sense to rename it to "set_type".
 			EntityInstanceBuilderPtr type(const EntityTypePtr& entity_type);
 
-			/// @brief Sets the UUID of the entity type so that the entity
-			/// instance builder knows which entity instance has to be built.
-			/// @param entity_type_name The UUID of the entity type of which the
-			/// entity instance builder has to build an entity instance.
-			/// @note Because this method will be used in a builder pattern
-			/// it does not make sense to rename it to "set_uuid".
+			/// @brief Sets the UUID of the entity type so that the entity instance builder knows which entity instance has to be built.
+			/// @param entity_type_name The UUID of the entity type of which the entity instance builder has to build an entity instance.
+			/// @note Because this method will be used in a builder pattern it does not make sense to rename it to "set_uuid".
 			EntityInstanceBuilderPtr uuid(const std::string& entity_type_uuid);
 
-			/// @brief Sets the value of the entity instances's attribute
-			/// which will be built by the entity instance builder.
+			/// @brief Sets the value of the entity instances's attribute which will be built by the entity instance builder.
 			/// @param attribute_name The name of the entity instance's attribute.
 			/// @param value The data of the entity instance's attribute.
-			/// @note Because this method will be used in a builder pattern
-			/// it does not make sense to rename it to "set_attribute".
+			/// @note Because this method will be used in a builder pattern it does not make sense to rename it to "set_attribute".
 			EntityInstanceBuilderPtr attribute(const std::string& attribute_name, const DataContainerInitializer& value);
 
-			/// @brief Sets the bool value of the entity instance's attribute
-			/// which will be built by the entity instance builder.
+			/// @brief Sets the bool value of the entity instance's attribute which will be built by the entity instance builder.
 			/// @param attribute_name The name of the entity instance's attribute.
 			/// @param value The data of the entity instance's attribute.
-			/// @note Because this method will be used in a builder pattern
-			/// it does not make sense to rename it to "set_attribute".
+			/// @note Because this method will be used in a builder pattern it does not make sense to rename it to "set_attribute".
 			EntityInstanceBuilderPtr attribute(const std::string& attribute_name, const bool& value);
 
-			/// @brief Sets the int value of the entity instance's attribute
-			/// which will be built by the entity instance builder.
+			/// @brief Sets the int value of the entity instance's attribute which will be built by the entity instance builder.
 			/// @param attribute_name The name of the entity instance's attribute.
 			/// @param value The data of the entity instance's attribute.
-			/// @note Because this method will be used in a builder pattern
-			/// it does not make sense to rename it to "set_attribute".
+			/// @note Because this method will be used in a builder pattern it does not make sense to rename it to "set_attribute".
 			EntityInstanceBuilderPtr attribute(const std::string& attribute_name, const int& value);
 
-			/// @brief Sets the int64 value of the entity instance's attribute
-			/// which will be built by the entity instance builder.
+			/// @brief Sets the int64 value of the entity instance's attribute which will be built by the entity instance builder.
 			/// @param attribute_name The name of the entity instance's attribute.
 			/// @param value The data of the entity instance's attribute.
-			/// @note Because this method will be used in a builder pattern
-			/// it does not make sense to rename it to "set_attribute".
+			/// @note Because this method will be used in a builder pattern it does not make sense to rename it to "set_attribute".
 			EntityInstanceBuilderPtr attribute(const std::string& attribute_name, const int64_t& value);
 
-			/// @brief Sets the float value of the entity instance's attribute
-			/// which will be built by the entity instance builder.
+			/// @brief Sets the float value of the entity instance's attribute which will be built by the entity instance builder.
 			/// @param attribute_name The name of the entity instance's attribute.
 			/// @param value The data of the entity instance's attribute.
-			/// @note Because this method will be used in a builder pattern
-			/// it does not make sense to rename it to "set_attribute".
+			/// @note Because this method will be used in a builder pattern it does not make sense to rename it to "set_attribute".
 			EntityInstanceBuilderPtr attribute(const std::string& attribute_name, const float& value);
 
-			/// @brief Sets the double value of the entity instance's attribute
-			/// which will be built by the entity instance builder.
+			/// @brief Sets the double value of the entity instance's attribute which will be built by the entity instance builder.
 			/// @param attribute_name The name of the entity instance's attribute.
 			/// @param value The data of the entity instance's attribute.
-			/// @note Because this method will be used in a builder pattern
-			/// it does not make sense to rename it to "set_attribute".
+			/// @note Because this method will be used in a builder pattern it does not make sense to rename it to "set_attribute".
 			EntityInstanceBuilderPtr attribute(const std::string& attribute_name, const double& value);
 
-			/// @brief Sets the std::string value of the entity instance's attribute
-			/// which will be built by the entity instance builder.
+			/// @brief Sets the std::string value of the entity instance's attribute which will be built by the entity instance builder.
 			/// @param attribute_name The name of the entity instance's attribute.
 			/// @param value The data of the entity instance's attribute.
-			/// @note Because this method will be used in a builder pattern
-			/// it does not make sense to rename it to "set_attribute".
+			/// @note Because this method will be used in a builder pattern it does not make sense to rename it to "set_attribute".
 			EntityInstanceBuilderPtr attribute(const std::string& attribute_name, const std::string& value);
 
-			/// Builds and returns the entity instance.
+			/// @brief Builds and returns the entity instance.
+			/// @return A std::optional shared pointer to the entity instance.
 			EntityInstancePtrOpt build();
 
 		private:
 
-			/// 
+			/// ?
 			bool initialize_instance(EntityInstancePtr entity_instance);
 
 			/// The entity instance manager.
