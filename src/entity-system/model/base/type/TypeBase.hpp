@@ -25,7 +25,7 @@ namespace entity_system {
 			/// @param type_name The unique name of this type.
 			TypeBase(const std::string& type_name);
 
-			/// Destructor.
+			/// @brief Destructor.
 			~TypeBase();
 
 		public:
