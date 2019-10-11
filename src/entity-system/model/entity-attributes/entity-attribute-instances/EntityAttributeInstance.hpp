@@ -6,6 +6,7 @@
 namespace inexor {
 namespace entity_system {
 
+	/// These using instructions help to shorten the following code.
 	using EntityAttributeTypePtr = std::shared_ptr<EntityAttributeType>;
 
 	/// @class EntityAttributeInstance
@@ -22,9 +23,9 @@ namespace entity_system {
 			/// @brief Constructor.
 			/// @note the GUID of the new entity attribute instance will be created automatically by the inheritance of GUIDBase!
 			/// @param ent_attr_type A reference to a shared pointer of an entity attribute type of which an instance will be created.
-			EntityAttributeInstance(const EntityAttributeTypePtr&);
+			EntityAttributeInstance(const EntityAttributeTypePtr& ent_attr_type);
 
-			/// Destructor.
+			/// @brief Destructor.
 			~EntityAttributeInstance();
 
 			/// @brief Get the entity attribute type.
@@ -37,16 +38,17 @@ namespace entity_system {
 			template <std::size_t I>
 			auto get()
 			{
+				// No mutex required as this is a read-only operation.
 			    return std::get<I>(value.Value());
 			}
 
 			/// @brief Sets the own value of the attribute instance.
-			/// @note The given value must be of the correct data type. No checks are done.
+			/// @warning The given value must be of the correct data type. No checks are done.
 			/// @param value The data value.
 			void set_own_value(DataValue value);
 
 			/// @brief Toggles the own value of the attribute instance.
-			/// @note The attribute have to be of data type BOOL. No checks are done.
+			/// @warning The attribute have to be of data type BOOL. No checks are done.
 			void toggle();
 
 	};

@@ -9,6 +9,7 @@ namespace entity_system {
 	{
 		// Use lock guard to ensure thread safety for the following write operations!
 		std::lock_guard<std::mutex> lock(entity_attribute_instance_mutex);
+
 		this->type = ent_attr_type->get_attribute_data_type();
 	}
 
@@ -26,6 +27,7 @@ namespace entity_system {
 	{
 		// Use lock guard to ensure thread safety for the following write operations!
 		std::lock_guard<std::mutex> lock(entity_attribute_instance_mutex);
+
 		own_value.Set(value);
 	}
 
@@ -33,7 +35,8 @@ namespace entity_system {
 	{
 		// Use lock guard to ensure thread safety for the following write operations!
 		std::lock_guard<std::mutex> lock(entity_attribute_instance_mutex);
-		own_value.Set(!std::get<DataType::BOOL>(value.Value()));
+
+		own_value.Set(! std::get<DataType::BOOL>(value.Value()));
 	}
 
 }
