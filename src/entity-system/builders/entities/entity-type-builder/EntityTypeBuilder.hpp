@@ -34,7 +34,7 @@ namespace entity_system {
 			using EntityAttributeTypeManagerPtr = std::shared_ptr<EntityAttributeTypeManager>;
 			using EntityAttributeInstanceManagerPtr = std::shared_ptr<EntityAttributeInstanceManager>;
 
-			/// Constructs the entity type builder.
+			/// @brief Constructs the entity type builder.
 			/// @note The dependencies of this class will be injected automatically.<br>
 			/// BOOST_DI_INJECT constructor parameters is limited to BOOST_DI_CFG_CTOR_LIMIT_SIZE,<br>
 			/// which by default is set to 10. Not more than 10 arguments can be passed to the DI constructor!<br>
@@ -48,52 +48,45 @@ namespace entity_system {
 				EntityAttributeInstanceManagerPtr entity_attribute_instance_manager
 			);
 
-			/// Destructs the entity type builder.
+			/// @brief Destructs the entity type builder.
 			~EntityTypeBuilder();
 
 			/// @brief Sets the name of the entity type which is being built.
-			/// @note Because this method will be used in a builder pattern
-			/// it does not make sense to rename it so "set_name".
+			/// @note Because this method will be used in a builder pattern it does not make sense to rename it so "set_name".
 			/// @param entity_type_name The name of the new entity type.
 			EntityTypeBuilderPtr name(string entity_type_name);
 
 			/// @brief Sets the uuid of the entity type which is being built.
-			/// @note Because this method will be used in a builder pattern
-			/// it does not make sense to rename it so "set_uuid".
+			/// @note Because this method will be used in a builder pattern it does not make sense to rename it so "set_uuid".
 			/// @param entity_type_uuid The UUID of the new entity type.
 			EntityTypeBuilderPtr uuid(string entity_type_uuid);
 
 			/// @brief Adds an attribute to the entity type which is being built.
-			/// @note Because this method will be used in a builder pattern
-			/// it does not make sense to rename it so "set_attribute".
+			/// @note Because this method will be used in a builder pattern it does not make sense to rename it so "set_attribute".
 			/// @param attribute_name The name of the new attribute.
 			/// @param attribute_datatype The data type of the new attribute.
 			/// @param attribute_features The features of the new attribute.
 			EntityTypeBuilderPtr attribute(const string& attribute_name, const DataType& attribute_datatype, const EnumSet<Feature>& attribute_features);
 
 			/// @brief Adds an input attribute to the entity type which is being built.
-			/// @note Because this method will be used in a builder pattern
-			/// it does not make sense to rename it so "set_input".
+			/// @note Because this method will be used in a builder pattern it does not make sense to rename it so "set_input".
 			/// @param attribute_name The name of the new attribute.
 			/// @param attribute_datatype The data type of the new attribute.
 			EntityTypeBuilderPtr input(const string& attribute_name, const DataType& attribute_datatype);
 
 			/// @brief Adds an output attribute to the entity type which is being built.
-			/// @note Because this method will be used in a builder pattern
-			/// it does not make sense to rename it so "set_output".
+			/// @note Because this method will be used in a builder pattern it does not make sense to rename it so "set_output".
 			/// @param attribute_name The name of the new attribute.
 			/// @param attribute_datatype The data type of the attribute.
 			EntityTypeBuilderPtr output(const string& attribute_name, const DataType& attribute_datatype);
 
-			/// Adds an attribute which is an input and output at the same
-			/// time to the entity type which is being built.
-			/// @note Because this method will be used in a builder pattern
-			/// it does not make sense to rename it so "set_inout".
+			/// @brief Adds an attribute which is an input and output at the same time to the entity type which is being built.
+			/// @note Because this method will be used in a builder pattern it does not make sense to rename it so "set_inout".
 			/// @param attribute_name The name of the new attribute.
 			/// @param attribute_datatype The data type of the attribute.
 			EntityTypeBuilderPtr inout(const string& attribute_name, const DataType& attribute_datatype);
 
-			/// Builds and returns the created entity type.
+			/// @brief Builds and returns the created entity type.
 			EntityTypePtrOpt build();
 
 		private:
