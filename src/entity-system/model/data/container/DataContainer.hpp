@@ -18,27 +18,29 @@ using namespace react;
 namespace inexor {
 namespace entity_system {
 
-	/// The definition of the reactive domain, the mode and the engine
+	/// The definition of the reactive domain, the mode and the engine.
 	/// https://schlangster.github.io/cpp.react/reference/Domain.h/REACTIVE_DOMAIN.html
 	REACTIVE_DOMAIN(D, sequential_concurrent)
 
 	USING_REACTIVE_DOMAIN(D)
 
 	/// A data value can hold any value allowed by enum DataType.
-	// using DataValue = std::variant<bool, int, std::int64_t, double, float, std::string, glm::vec3, glm::vec4>;
 	using DataValue = std::variant<bool, int, std::int64_t, double, float, std::string>;
 
 	/// @class DataContainer
 	/// @brief A data container which can hold data of various types.
 	struct DataContainer
 	{
+		/// The mutex of this data container.
+		std::mutex data_container_mutex;
+
 		/// The data type.
 		DataType type;
 
-		/// The own value.
+		/// The own data value.
 		VarSignalT<DataValue> own_value;
 
-		/// The outer value.
+		/// The outer data value.
 		VarSignal<D, SignalT<DataValue>> signal_wrapper;
 
 		/// The flattened (output) value.
@@ -52,6 +54,9 @@ namespace entity_system {
 		DataContainer(const DataType& type)
 			: type(type)
 		{
+			// Use lock guard to ensure thread safety during write operations!
+			std::lock_guard<std::mutex> lock(data_container_mutex);
+
 			switch (type)
 			{
 				case DataType::BOOL:
@@ -95,6 +100,9 @@ namespace entity_system {
 		/// @param data_value The value of the data container.
 		DataContainer(const DataValue& data_value)
 		{
+			// Use lock guard to ensure thread safety during write operations!
+			std::lock_guard<std::mutex> lock(data_container_mutex);
+			
 			/// Detect type by std::variant index()
 			this->type = DataType::_from_integral(static_cast<int>(data_value.index()));
 			this->own_value = MakeVar<D>(data_value);
@@ -108,6 +116,9 @@ namespace entity_system {
 		DataContainer(const DataType& type, const DataValue& data_value)
 			: type(type)
 		{
+			// Use lock guard to ensure thread safety during write operations!
+			std::lock_guard<std::mutex> lock(data_container_mutex);
+			
 			this->own_value = MakeVar<D>(data_value);
 			this->signal_wrapper = MakeVar<D>(this->own_value);
 			this->value = Flatten(this->signal_wrapper);
@@ -115,16 +126,17 @@ namespace entity_system {
 
 	};
 
-	/// ?
+	/// @class DataContainerInitializer
+	/// @brief A structure for the initialisation of data containers.
 	struct DataContainerInitializer
 	{
 		DataType type;
 		DataValue value;
 	};
 
-	/// @brief ?
-	/// @param type ?
-	/// @param value ?
+	/// @brief Converts the value of the data container to a std::string.
+	/// @param type The type of the data container.
+	/// @param value The value of the data container.
 	static inline std::string data_value_to_string(DataType type, DataValue value)
 	{
 		switch (type)
