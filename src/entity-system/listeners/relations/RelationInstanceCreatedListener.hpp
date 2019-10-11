@@ -11,7 +11,8 @@ namespace entity_system {
 	{
 		public:
 
-			/// Called if a new relation instance has been created.
+			/// @brief Called if a new relation instance has been created.
+			/// @param relation_instance The relation instance which has been created.
 			virtual void on_relation_instance_created(std::shared_ptr<RelationInstance> relation_instance) = 0;
 
 	};
