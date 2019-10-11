@@ -3,6 +3,7 @@
 namespace inexor {
 namespace entity_system {
 
+	/// These using instructions help to shorten the following code.
 	using EntityAttributeTypePtr = std::shared_ptr<EntityAttributeType>;
 	using EntityAttributeInstancePtr = std::shared_ptr<EntityAttributeInstance>;
 	using EntityAttributeInstancePtrOpt = std::optional<EntityAttributeInstancePtr>;
@@ -20,18 +21,18 @@ namespace entity_system {
 	}
 
 
-	EntityInstancePtrOpt EntityInstanceManager::create_entity_instance(const EntityTypePtr& ent_type)
+	EntityInstancePtrOpt EntityInstanceManager::create_entity_instance(const EntityTypePtr& type)
 	{
-		return create_entity_instance(ent_type, [] (EntityInstancePtr ent_inst) { return true; });
+		return create_entity_instance(type, [] (EntityInstancePtr ent_inst) { return true; });
 	}
 
-	EntityInstancePtrOpt EntityInstanceManager::create_entity_instance(const EntityTypePtr& ent_type, std::function<bool (EntityInstancePtr)> instance_initializer)
+	EntityInstancePtrOpt EntityInstanceManager::create_entity_instance(const EntityTypePtr& type, std::function<bool (EntityInstancePtr)> instance_initializer)
 	{
 		// Create a new entity type instance without GUID.
-		EntityInstancePtr new_ent_instance = std::make_shared<EntityInstance>(ent_type);
+		EntityInstancePtr new_ent_instance = std::make_shared<EntityInstance>(type);
 
 		// Create all entity attribute type instances for this entity type instance.
-		std::optional<std::vector<EntityAttributeTypePtr>> o_ent_type_attributes = ent_type->get_linked_attribute_types();
+		std::optional<std::vector<EntityAttributeTypePtr>> o_ent_type_attributes = type->get_linked_attribute_types();
 		if(o_ent_type_attributes.has_value())
 		{
 			std::vector<EntityAttributeTypePtr> ent_type_attributes = o_ent_type_attributes.value();
@@ -70,24 +71,24 @@ namespace entity_system {
 		return EntityInstancePtrOpt { new_ent_instance };
 	}
 
-	EntityInstancePtrOpt EntityInstanceManager::create_entity_instance(const xg::Guid& ent_inst_GUID, const EntityTypePtr& ent_type)
+	EntityInstancePtrOpt EntityInstanceManager::create_entity_instance(const xg::Guid& inst_GUID, const EntityTypePtr& type)
 	{
-		return create_entity_instance(ent_inst_GUID, ent_type, [] (EntityInstancePtr ent_inst) { return true; });
+		return create_entity_instance(inst_GUID, type, [] (EntityInstancePtr ent_inst) { return true; });
 	}
 
-	EntityInstancePtrOpt EntityInstanceManager::create_entity_instance(const xg::Guid& ent_inst_GUID, const EntityTypePtr& ent_type, std::function<bool (EntityInstancePtr)> instance_initializer)
+	EntityInstancePtrOpt EntityInstanceManager::create_entity_instance(const xg::Guid& inst_GUID, const EntityTypePtr& type, std::function<bool (EntityInstancePtr)> instance_initializer)
 	{
 		// Check if an entity instance with this GUID does already exist.
-		if(does_entity_instance_exist(ent_inst_GUID))
+		if(does_entity_instance_exist(inst_GUID))
 		{
 			return std::nullopt;
 		}
 
 		// Create a new entity type instance with GUID.
-		EntityInstancePtr new_ent_instance = std::make_shared<EntityInstance>(ent_inst_GUID, ent_type);
+		EntityInstancePtr new_ent_instance = std::make_shared<EntityInstance>(inst_GUID, type);
 
 		// Create all entity attribute type instances for this entity type instance.
-		std::optional<std::vector<EntityAttributeTypePtr>> o_ent_type_attributes = ent_type->get_linked_attribute_types();
+		std::optional<std::vector<EntityAttributeTypePtr>> o_ent_type_attributes = type->get_linked_attribute_types();
 		if(o_ent_type_attributes.has_value())
 		{
 			std::vector<EntityAttributeTypePtr> ent_type_attributes = o_ent_type_attributes.value();
@@ -175,23 +176,10 @@ namespace entity_system {
 		delete_all_instances();
 	}
 
-	// TODO: Implement!
-	/*
-	const std::size_t EntityInstanceManager::get_entity_instances_count_of_type(const EntityTypePtr&)
+	std::unordered_map<xg::Guid, EntityInstancePtr> EntityInstanceManager::get_all_entity_instances() const
 	{
-	// Call template base class method.
+		return get_all_instances();
 	}
-
-	const std::vector<ENT_INST> EntityInstanceManager::get_all_entity_instances() const
-	{
-	// Call template base class method.
-	}
-
-	const std::vector<ENT_INST> EntityInstanceManager::get_all_entity_instances_of_type(const EntityTypePtr&)
-	{
-	// Call template base class method.
-	}
-	*/
 
 	void EntityInstanceManager::register_on_created(const xg::Guid& type_GUID, std::shared_ptr<EntityInstanceCreatedListener> listener)
 	{
@@ -230,7 +218,7 @@ namespace entity_system {
 		}
 	}
 
-	// TODO: if entity type has been deleted, remove the signals for this type
+	// TODO: if entity type has been deleted, remove the signals for this type.
 
 }
 }
