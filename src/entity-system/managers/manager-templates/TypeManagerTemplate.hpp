@@ -20,12 +20,10 @@ namespace entity_system {
 	{
 		private:
 
-			/// An unordered map which stores all available
-			/// type names as key and their corresponding GUID as value.
+			/// An unordered map which stores all available type names as key and their corresponding GUID as value.
 			std::unordered_map<std::string, xg::Guid> stored_type_names;
 
-			/// An unordered map which stored all available
-			/// GUIDs as key and their corresponding type names as value.
+			/// An unordered map which stored all available GUIDs as key and their corresponding type names as value.
 			std::unordered_map<xg::Guid, std::string> stored_type_GUIDs;
 
 			/// An unordered map which stores all available types.
@@ -58,6 +56,7 @@ namespace entity_system {
 		{
 			// Get the GUID of this type by name.
 			xg::Guid type_GUID = get_GUID_by_type_name(type_name);
+
 			// No mutex required as this is a read-only operation.
 			return ! (stored_types.end() == stored_types.find(type_GUID));
 		}
@@ -73,20 +72,21 @@ namespace entity_system {
 		}
 
 
-		/// Checks if the name of a type is valid.
+		/// @brief Checks if the name of a type is valid.
 		/// @param type_name The name of the type.
 		/// @return True if the name is valid, false otherwise.
 		bool is_type_name_valid(const std::string& type_name)
 		{
 			if(0 == type_name.compare("")) return false;
 			if(does_type_exist(type_name)) return false;
-			// TODO: Add further validation methods here.
+			// Add further validation methods here.
 			return true;
 		}
 
 
-		/// Adds a new type.
+		/// @brief Adds a new type.
 		/// @param type_name The name of the new type.
+		/// @param type_GUID The GUID of the new type.
 		/// @param new_type A shared pointer reference to the new type.
 		void add_type(const std::string& type_name, const xg::Guid& type_GUID, const std::shared_ptr<T>& new_type)
 		{
@@ -99,8 +99,9 @@ namespace entity_system {
 		}
 
 
-		/// Returns the GUID of a type by name.
+		/// @brief Returns the GUID of a type by name.
 		/// @param type_name The name of the type.
+		/// @return The GUID of the type.
 		xg::Guid get_GUID_by_type_name(const std::string& type_name)
 		{
 			// No mutex required as this is a read-only operation.
@@ -108,8 +109,9 @@ namespace entity_system {
 		}
 
 
-		/// Returns the name of a type by given GUID.
+		/// @brief Returns the name of a type by given GUID.
 		/// @param type_GUID The GUID of the type.
+		/// @return The name of the type.
 		std::string get_type_name_by_GUID(const xg::Guid& type_GUID)
 		{
 			// No mutex required as this is a read-only operation.
@@ -117,19 +119,22 @@ namespace entity_system {
 		}
 
 
-		/// Searches for the desired type by name and returns it.
+		/// @brief Searches for the desired type by name and returns it.
 		/// @param type_name the name of the type to search for.
 		/// @return A const shared pointer to the type.
 		std::shared_ptr<T> get_type(const std::string& type_name)
 		{
 			// Get the GUID of this type by name.
 			xg::Guid type_GUID = get_GUID_by_type_name(type_name);
+
 			// No mutex required as this is a read-only operation.
 			return stored_types[type_name];
 		}
 
 
-		/// Searches for the desired type by name.
+		/// @brief Searches for the desired type by name.
+		/// @param type_GUID The GUID of the type.
+		/// @return The type which has the requested GUID.
 		std::shared_ptr<T> get_type(const xg::Guid& type_GUID)
 		{
 			// No mutex required as this is a read-only operation.
@@ -148,20 +153,23 @@ namespace entity_system {
 
 		/// @brief Deletes a specific type.
 		/// @param type_name The name of the type which will be deleted.
+		/// @return The number of deleted types.
+		/// @todo Does this return type make sense?
 		std::size_t delete_type(const std::string& type_name)
 		{
+			// Look up the GUID of the type which will be deleted.
 			xg::Guid type_GUID_to_delete = get_GUID_by_type_name(type_name);
 
 			// Use lock guard to ensure thread safety for this write operation!
 			std::lock_guard<std::mutex> lock(type_manager_mutex);
 
-			// Erase type name
+			// Erase type name.
 			stored_type_names.erase(type_name);
 
-			// Erase GUID
+			// Erase GUID.
 			stored_type_GUIDs.erase(type_GUID_to_delete);
 
-			// Erase type
+			// Erase type.
 			std::size_t deleted_types = stored_types.erase(type_name);
 
 			return deleted_types;
@@ -170,33 +178,34 @@ namespace entity_system {
 
 		/// @brief Deletes a type by GUID.
 		/// @param type_GUID The GUID of the type.
+		/// @return The number of deleted types.
+		/// @todo Does this return type make sense?
 		std::size_t delete_type(const xg::Guid& type_GUID)
 		{
 			// We do not need a mutex for these read operations here.
 			std::string type_name_to_delete = get_type_name_by_GUID(type_GUID);
 
+			// Look up the GUID of the type which will be deleted.
 			xg::Guid type_GUID_to_delete = get_GUID_by_type_name(type_name_to_delete);
 
 			// Use lock guard to ensure thread safety for this write operations!
 			std::lock_guard<std::mutex> lock(type_manager_mutex);
 
-			// Erase type name
+			// Erase type name.
 			stored_type_names.erase(type_name_to_delete);
 
-			// Erase GUID
+			// Erase GUID.
 			stored_type_GUIDs.erase(type_GUID_to_delete);
 
-			// Erase type
+			// Erase type.
 			std::size_t deleted_types = stored_types.erase(type_GUID);
 
 			return deleted_types;
 		}
 
 
-		/// Deletes all types.
-		/// At this point it must be made sure
-		/// that all the type instances have been
-		/// deleted first.
+		/// @brief Deletes all types.
+		/// @note At this point it must be made sure that all the type instances have been deleted first.
 		void delete_all_types()
 		{
 			// Use lock guard to ensure thread safety during write operations!
