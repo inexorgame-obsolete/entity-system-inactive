@@ -13,6 +13,11 @@ namespace entity_system {
 	/// @brief A base class for relation attribute instances.
 	class RelationAttributeInstance : public InstanceBase<RelationAttributeType>, public DataContainer, public GUIDBase
 	{
+		private:
+
+			/// The mutex of this class
+			std::mutex relation_attribute_instance_mutex;
+		
 		public:
 
 			/// @brief Constructs the relation attribute instance.
@@ -21,7 +26,7 @@ namespace entity_system {
 			/// @todo Add a mutex to ensure thread-safety!
 			RelationAttributeInstance(const RelationAttributeTypePtr& rel_attr_type);
 
-			/// Destructs the relation attribute instance.
+			/// @brief Destructs the relation attribute instance.
 			~RelationAttributeInstance();
 
 			/// @brief Returns the relation attribute type.
