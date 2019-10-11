@@ -18,10 +18,10 @@ namespace entity_system {
 	{
 	}
 
-	RelationInstancePtrOpt RelationInstanceManager::create_relation_instance(const RelationTypePtr& rel_type, const EntityInstancePtr& ent_type_inst_source, const EntityInstancePtr& ent_type_inst_target)
+	RelationInstancePtrOpt RelationInstanceManager::create_relation_instance(const RelationTypePtr& rel_type, const EntityInstancePtr& type_inst_source, const EntityInstancePtr& type_inst_target)
 	{
 		// Create a new entity relation instance.
-		RelationInstancePtr new_relation_instance = std::make_shared<RelationInstance>(rel_type, ent_type_inst_source, ent_type_inst_target);
+		RelationInstancePtr new_relation_instance = std::make_shared<RelationInstance>(rel_type, type_inst_source, type_inst_target);
 
 		// No wit is time to create all corresponding entity relation attribute instances.
 		// Query all relation attribute types.
@@ -49,7 +49,7 @@ namespace entity_system {
 		return RelationInstancePtrOpt { new_relation_instance };
 	}
 
-	RelationInstancePtrOpt RelationInstanceManager::create_relation_instance(const xg::Guid& rel_inst_GUID, const RelationTypePtr& rel_type, const EntityInstancePtr& ent_type_inst_source, const EntityInstancePtr& ent_type_inst_target)
+	RelationInstancePtrOpt RelationInstanceManager::create_relation_instance(const xg::Guid& rel_inst_GUID, const RelationTypePtr& rel_type, const EntityInstancePtr& type_inst_source, const EntityInstancePtr& type_inst_target)
 	{
 		// Check if a relation instance with this GUID does already exist.
 		if(does_relation_instance_exist(rel_inst_GUID))
@@ -58,7 +58,7 @@ namespace entity_system {
 		}
 
 		// Create a new entity relation instance.
-		RelationInstancePtr new_relation_instance = std::make_shared<RelationInstance>(rel_type, ent_type_inst_source, ent_type_inst_target);
+		RelationInstancePtr new_relation_instance = std::make_shared<RelationInstance>(rel_type, type_inst_source, type_inst_target);
 
 		// No wit is time to create all corresponding entity relation attribute instances.
 		// Query all relation attribute types.
@@ -86,7 +86,7 @@ namespace entity_system {
 		return RelationInstancePtrOpt { new_relation_instance };
 	}
 
-	bool RelationInstanceManager::does_relation_instance_exist(const xg::Guid instance_GUID)
+	bool RelationInstanceManager::does_relation_instance_exist(const xg::Guid& instance_GUID)
 	{
 		// No mutex required as this is a read-only operation.
 		return does_instance_exist(instance_GUID);

@@ -23,44 +23,51 @@ namespace entity_system {
 	using RelationAttributeTypePtr = std::shared_ptr<RelationAttributeType>;
 	using RelationAttributeInstancePtr = std::shared_ptr<RelationAttributeInstance>;
 
-	/// A manager class for relation instances.
+	/// @class RelationInstanceManager
+	/// @brief A manager class for relation instances.
 	class RelationInstanceManager : public InstanceManagerTemplate<RelationInstance>
 	{
 		public:
 
-			/// Constructor.
+			/// @brief Constructor.
+			/// @note The dependencies of this class will be injected automatically with the help of Boost DI.<br>
+			/// For more information see https://boost-experimental.github.io/di/user_guide/index.html
+			/// BOOST_DI_INJECT constructor parameters is limited to BOOST_DI_CFG_CTOR_LIMIT_SIZE,<br>
+			/// which by default is set to 10. Not more than 10 arguments can be passed to the DI constructor!<br>
+			/// @param relation_attribute_instance_manager A shared pointer to the relation attribute instance manager.
 			RelationInstanceManager(
 				std::shared_ptr<RelationAttributeInstanceManager> relation_attribute_instance_manager
 			);
 
-			/// Destructor.
+			/// @brief Destructor.
 			~RelationInstanceManager();
 
 			/// @brief Creates a new entity relation instance.
 			/// @param rel_type A const reference to a shared pointer of an relation type of which an instance will be created.
-			/// @param ent_inst_source A const reference to a shared pointer of the entity instance which will be used as <b>source</b> entity instance.
-			/// @param ent_inst_target A const reference to a shared pointer of the entity instance which will be used as <b>target</b> entity instance.
+			/// @param type_inst_source A const reference to a shared pointer of the entity instance which will be used as <b>source</b> entity instance.
+			/// @param type_inst_target A const reference to a shared pointer of the entity instance which will be used as <b>target</b> entity instance.
 			/// @return A shared pointer to the new relation instance which was created.
-			RelationInstancePtrOpt create_relation_instance(const RelationTypePtr&, const EntityInstancePtr&, const EntityInstancePtr&);
+			RelationInstancePtrOpt create_relation_instance(const RelationTypePtr& rel_type, const EntityInstancePtr& type_inst_source, const EntityInstancePtr& type_inst_target);
 
 			/// @brief Creates a new entity relation instance.
 			/// @param rel_inst_GUID The GUID of the new relation instance.
 			/// @param rel_type A const reference to a shared pointer of a relation type of which an instance will be created.
-			/// @param ent_inst_source A const reference to a shared pointer of the entity instance which will be used as <b>source</b> entity instance.
-			/// @param ent_inst_target A const reference to a shared pointer of the entity instance which will be used as <b>target</b> entity instance.
+			/// @param type_inst_source A const reference to a shared pointer of the entity instance which will be used as <b>source</b> entity instance.
+			/// @param type_inst_target A const reference to a shared pointer of the entity instance which will be used as <b>target</b> entity instance.
 			/// @return A shared pointer to the new relation instance which was created.
-			RelationInstancePtrOpt create_relation_instance(const xg::Guid&, const RelationTypePtr&, const EntityInstancePtr&, const EntityInstancePtr&);
+			RelationInstancePtrOpt create_relation_instance(const xg::Guid& rel_inst_GUID, const RelationTypePtr& rel_type, const EntityInstancePtr& type_inst_source, const EntityInstancePtr& type_inst_target);
 
-			/// @brief Checks if an relation instance does already exist.
-			/// @return True if the relation instance already exists, false otherwise.
-			bool does_relation_instance_exist(const xg::Guid);
+			/// @brief Checks if a relation instance exists.
+			/// @param instance_GUID The GUID of the relation instance.
+			/// @return True if the relation instance exists, false otherwise.
+			bool does_relation_instance_exist(const xg::Guid& instance_GUID);
 
-			///
-			///
-			RelationInstancePtrOpt get_relation_instance(const xg::Guid&);
+			/// @brief Gets a relation instance by GUID.
+			/// @param instance_GUID The GUID of the relation instance.
+			/// @return A std::optional shared pointer to the relation instance.
+			RelationInstancePtrOpt get_relation_instance(const xg::Guid& instance_GUID);
 
-
-			/// Returns the number of relation instances.
+			/// @brief Returns the number of relation instances.
 			/// @return The number of existing relation instances.
 			std::size_t get_relation_instances_count() const;
 
@@ -72,23 +79,19 @@ namespace entity_system {
 			/// @param relation_instance The relation instance which will be deleted.
 			std::size_t delete_relation_instance(const RelationInstancePtr& relation_instance);
 
-			/// Delete all relation instances
+			/// @brief Delete all relation instances
 			void delete_all_relation_instances();
 
 			/// @brief Registers a new listener
-			/// @param type_GUID ? 
-			/// @param listener ?
-			void register_on_created(const xg::Guid&, std::shared_ptr<RelationInstanceCreatedListener> listener);
+			/// @param type_GUID The GUID of the relation instance which was created.
+			/// @param listener The listener.
+			void register_on_created(const xg::Guid& type_GUID, const std::shared_ptr<RelationInstanceCreatedListener> listener);
 
 			/// @brief Registers a new listener
-			/// @param type_GUID ?
-			/// @param listener ?
-			void register_on_deleted(const xg::Guid&, std::shared_ptr<RelationInstanceDeletedListener> listener);
+			/// @param type_GUID The GUID of the relation instance which was created.
+			/// @param listener The listener.
+			void register_on_deleted(const xg::Guid& type_GUID, const std::shared_ptr<RelationInstanceDeletedListener> listener);
 
-			// TODO: Get instances count.
-			// TODO: Delete instance.
-			// TODO: Get instance(s).
-			// TODO: Delete all instances.
 			// TODO: get_all_relation_instances_of_type() const;
 			// TODO: std::vector<RelationInstancePtr> get_all_relation_instances() const;
 			// TODO: get_relation_instance_count_of_type() const;
@@ -106,7 +109,9 @@ namespace entity_system {
 			/// Notifies all listeners that a new relation instance has been created.
 			void notify_relation_instance_created(RelationInstancePtr new_entity_instance);
 
-			/// Notifies all listeners that a relation instance has been deleted.
+			/// @brief Notifies all listeners that a relation instance has been deleted.
+			/// @param type_GUID The GUID of the relation type.
+			/// @param inst_GUID The GUID of the relation instance.
 			void notify_relation_instance_deleted(const xg::Guid& type_GUID, const xg::Guid& inst_GUID);
 
 			/// The signals that an relation instance has been created.
