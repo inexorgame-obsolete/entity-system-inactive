@@ -1,5 +1,6 @@
 #pragma once
 
+#include "Reactive.hpp"
 #include "entity-system/model/data/container/DataContainer.hpp"
 #include "entity-system/model/data/DataTypes.hpp"
 #include "entity-system/model/entities/entity-instances/EntityInstance.hpp"
@@ -14,11 +15,6 @@
 
 namespace inexor {
 namespace input {
-
-	using namespace react;
-
-    ///
-	USING_REACTIVE_DOMAIN(entity_system::D)
 
 	/// Bundles the source signals of a specific mouse button.
 	struct GlobalMouseButtonSignals {
