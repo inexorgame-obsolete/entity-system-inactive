@@ -12,6 +12,7 @@ namespace entity_system {
 	{
 		// Use lock guard to ensure thread safety during write operations!
 		std::lock_guard<std::mutex> lock(builder_factory_manager_mutex);
+
 		this->entity_type_builder_factory = entity_type_builder_factory;
 		this->entity_instance_builder_factory = entity_instance_builder_factory;
 		this->relation_type_builder_factory = relation_type_builder_factory;

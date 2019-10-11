@@ -36,7 +36,7 @@ namespace entity_system {
 				RelationInstanceBuilderFactoryPtr relation_instance_builder_factory
 			);
 
-			/// Destructor.
+			/// @brief Destructor.
 			~BuilderFactoryManager();
 
 		private:
@@ -53,7 +53,7 @@ namespace entity_system {
 			/// The entity relation instance builder factory.
 			RelationInstanceBuilderFactoryPtr relation_instance_builder_factory;
 
-			/// The mutex of this class
+			/// The mutex of this class.
 			std::mutex builder_factory_manager_mutex;
 
 	};
