@@ -27,7 +27,7 @@ namespace entity_system {
 			/// @param ent_attr_type_features The features of the new entity attribute type.
 			EntityAttributeType(const xg::Guid& ent_attr_type_GUID, const std::string& ent_attr_type_name, const DataType& ent_attr_type_datatype, const EnumSet<Feature>& ent_attr_type_features);
 
-			/// Destructor.
+			/// @brief Destructor.
 			~EntityAttributeType();
 
 	};
