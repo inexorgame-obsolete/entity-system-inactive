@@ -1,12 +1,6 @@
 syntax = "proto3";
 package inexor.entity_system;
 
-enum ENTSYS_RESULT
-{
-    ENTSYS_ERROR = 0;
-    ENTSYS_SUCCESS = 1;
-}
-
 enum ENTSYS_ERROR_LEVEL
 {
     ENTSYS_LEVEL_INFO = 0;

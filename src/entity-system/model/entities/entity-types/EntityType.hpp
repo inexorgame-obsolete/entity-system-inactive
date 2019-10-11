@@ -64,8 +64,8 @@ namespace entity_system {
 
 			/// @brief Links an entity attribute type to this entity type.
 			/// @param ent_attr_type A const reference of a shared pointer to an entity attribute type which will be linked to this entity type.
-			/// @return ENTSYS_SUCCESS if linking succeeded, ENTSYS_ERROR otherwise.
-			ENTSYS_RESULT link_attribute_type(const EntityAttributeTypePtr& ent_attr_type);
+			/// @return True if linking succeeded.
+			bool link_attribute_type(const EntityAttributeTypePtr& ent_attr_type);
 
 
 			/// @brief Returns the number of entity attribute types which are linked to this entity type.
