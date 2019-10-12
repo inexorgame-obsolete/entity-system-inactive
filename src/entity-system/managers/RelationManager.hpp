@@ -35,7 +35,7 @@ namespace entity_system {
 			/// @brief Destructor.
 			~RelationManager();
 
-			/// @brief Resets relations, relation instances, relation attributes and relation attribute instances.
+			/// @brief Resets relation types, relation instances, relation attribute types and relation attribute instances.
 			/// @note Order of destruction:
 			/// <ol>
 			///		<li> relation attribute instances
@@ -47,16 +47,16 @@ namespace entity_system {
 
 		private:
 
-			/// The entity relation type manager.
+			/// The relation type manager.
 			std::shared_ptr<RelationTypeManager> relation_type_manager;
 
-			/// The entity relation instance manager.
+			/// The relation instance manager.
 			std::shared_ptr<RelationInstanceManager> relation_instance_manager;
 
-			/// The entity relation attribute type manager.
+			/// The relation attribute type manager.
 			std::shared_ptr<RelationAttributeTypeManager> relation_attribute_type_manager;
 
-			/// The entity relation attribute instance manager.
+			/// The relation attribute instance manager.
 			std::shared_ptr<RelationAttributeInstanceManager> relation_attribute_instance_manager;
 
 			/// The mutex of this class.
