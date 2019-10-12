@@ -9,7 +9,7 @@ namespace entity_system {
 
 
 	/// @class RelationInstanceBuilderFactory
-	/// @brief Builder class for relation instances.
+	/// @brief A builder class for relation instances.
 	/// @note For more information on the builder software pattern see
 	/// https://en.wikipedia.org/wiki/Builder_pattern
 	class RelationInstanceBuilderFactory
@@ -40,7 +40,7 @@ namespace entity_system {
 			void init();
 
 			/// @brief Returns a new instance of a builder.
-			/// @return A shared pointer to the relation instance builder.
+			/// @return A std::shared pointer to the relation instance builder.
 			RelationInstanceBuilderPtr get_builder();
 
 		private:
