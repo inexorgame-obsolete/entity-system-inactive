@@ -12,8 +12,8 @@ namespace entity_system {
 		public:
 
 			/// @brief Called if a entity instance has been deleted.
-			/// @param type_GUID The GUID of the entity type of which an entity instance has been created.
-			/// @param instance_GUID The GUID of the entity instance which has been created.
+			/// @param type_GUID The GUID of the entity type of which an entity instance has been deleted.
+			/// @param instance_GUID The GUID of the entity instance which has been deleted.
 			virtual void on_entity_instance_deleted(const xg::Guid& type_GUID, const xg::Guid& instance_GUID) = 0;
 
 	};
