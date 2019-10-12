@@ -16,7 +16,7 @@ namespace entity_system {
 		std::lock_guard<std::mutex> lock(guid_base_mutex);
 
 		// Copy the GUID which is given as parameter.
-		globally_unique_identifier = param_GUID;
+		this->globally_unique_identifier = param_GUID;
 	}
 
 	GUIDBase::~GUIDBase()
