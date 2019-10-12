@@ -54,23 +54,28 @@ namespace entity_system {
 
 			/// @brief Sets the uuid of the relation type.
 			/// @param relation_type_uuid The GUID of the relation which will be build.
+			/// @return A shared pointer to the relation type builder.
+			/// @TODO: Why is this not xg::guid?
 			RelationTypeBuilderPtr uuid(std::string relation_type_uuid);
 
 			/// @brief Sets the source entity type.
 			/// @param ent_type_source The source entity type of the relation which will be build.
+			/// @return A shared pointer to the relation type builder.
 			RelationTypeBuilderPtr source(EntityTypePtr ent_type_source);
 
 			/// @brief Sets the target entity type.
 			/// @param ent_type_target The target entity type of the relation which will be build.
+			/// @return A shared pointer to the relation type builder.
 			RelationTypeBuilderPtr target(EntityTypePtr ent_type_target);
 
 			/// @brief Sets the uuid of the relation type.
 			/// @param attribute_name The name of the relation which will be build.
 			/// @param attribute_datatype The data types of the relation attribute.
 			/// @param attribute_features The features of the relation attribute.
+			/// @return A shared pointer to the relation type builder.
 			RelationTypeBuilderPtr attribute(std::string attribute_name, DataType attribute_datatype, const EnumSet<Feature>& attribute_features);
 
-			/// @brief Builds and returns the created relation type.
+			/// @brief Builds the relation type.
 			/// @return A std::optional shared pointer to the relation type which has been built.
 			RelationTypePtrOpt build();
 
@@ -88,6 +93,7 @@ namespace entity_system {
 			/// The name of the new relation type.
 			std::string relation_type_name;
 
+			/// TODO: Why is this not xg::guid?
 			/// The UUID of the new relation type.
 			std::string relation_type_uuid;
 
