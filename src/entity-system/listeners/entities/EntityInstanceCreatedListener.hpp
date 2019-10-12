@@ -13,6 +13,7 @@ namespace entity_system {
 
 			/// @brief Called if a new entity instance has been created.
 			/// @param entity_instance The entity instance which has been created.
+			/// @TODO: Use const std::shared_ptr<T>& instead?
 			virtual void on_entity_instance_created(std::shared_ptr<EntityInstance> entity_instance) = 0;
 
 	};
