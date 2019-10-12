@@ -21,7 +21,7 @@ namespace entity_system {
 	using RelationInstancePtrOpt = std::optional<RelationInstancePtr>;
 
 	/// @class RelationInstanceBuilder
-	/// @brief Builder for relation instances.
+	/// @brief A builder class for relation instances.
 	class RelationInstanceBuilder : public std::enable_shared_from_this<RelationInstanceBuilder>
 	{
 		public:
