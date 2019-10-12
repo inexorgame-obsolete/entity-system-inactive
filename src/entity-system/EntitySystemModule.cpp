@@ -30,10 +30,10 @@ namespace entity_system {
 
 		spdlog::get(LOGGER_NAME)->debug("Resetting entity system.");
 
-		// Reset relation attribute instances, relation attribute types, relation instances and relation types.
+		// Reset (in order of destruction) relation attribute instances, relation attribute types, relation instances and relation types.
 		relation_manager->reset_relations_and_relation_attributes();
 
-		// Reset attribute instances, attribute types, entity instances and entity types.
+		// Reset (in order of destruction) attribute instances, attribute types, entity instances and entity types.
 		entity_manager->reset_attributes_and_types();
 	}
 
