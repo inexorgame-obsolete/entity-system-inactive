@@ -42,38 +42,38 @@ namespace entity_system {
 			/// @param ent_type_source A const reference of a shared pointer to an entity type which will act as <b>source</b> entity type.
 			/// @param ent_type_target A const reference of a shared pointer to an entity type which will act as <b>target</b> entity type.
 			/// @return A std::optional shared pointer to the relation type which was created.
-			RelationTypePtrOpt create_relation_type(const xg::Guid&, const std::string&, const EntityTypePtr&, const EntityTypePtr&);
+			RelationTypePtrOpt create_relation_type(const xg::Guid& rel_type_GUID, const std::string& rel_type_name, const EntityTypePtr& ent_type_source, const EntityTypePtr& ent_type_target);
 
 			/// @brief Checks if a relation type exists by GUID.
 			/// @param rel_type_GUID The GUID of the type.
-			/// @return true if the type exists, false otherwise.
+			/// @return True if the type exists, false otherwise.
 			bool does_relation_type_exist(const xg::Guid& rel_type_GUID);
 
-			/// @brief Checks if an relation type exists by name.
+			/// @brief Checks if a relation type exists by name.
 			/// @param rel_type_name The name of the relation type.
-			/// @return true if this relation type does already exist, false otherwise.
+			/// @return True if the type exists, false otherwise.
 			bool does_relation_type_exist(const std::string& rel_type_name);
 
-			/// @brief Checks if an relation type does already exist.
+			/// @brief Checks if a relation type does already exist.
 			/// @param rel_type A const reference of a shared pointer to an relation type.
-			/// @return true if this relation type exist, false otherwise.
+			/// @return True if this relation type exist, false otherwise.
 			bool does_relation_type_exist(const RelationTypePtr& rel_type);
 
 			/// @brief Returns the number of available relation types.
 			/// @return The number of available relation types.
 			std::size_t get_relation_types_count() const;
 
-			/// @brief Returns an relation type.
+			/// @brief Returns a relation type.
 			/// @param rel_type_GUID The GUID of the relation type.
-			/// @return A std::optional<REL_TYPE> of the relation type.
+			/// @return A std::optional shared pointer to the relation type.
 			RelationTypePtrOpt get_relation_type(const xg::Guid& rel_type_GUID);
 
-			/// @brief Returns an relation type.
+			/// @brief Returns a relation type.
 			/// @param rel_type_name The name of the relation type.
-			/// @return A std::optional<REL_TYPE> of the relation type.
+			/// @return A std::optional shared pointer to the relation type.
 			RelationTypePtrOpt get_relation_type(const std::string& rel_type_name);
 
-			/// @brief Deletes an relation type by GUID.
+			/// @brief Deletes a relation type by GUID.
 			/// @param type_GUID The GUID of the relation type which will be deleted.
 			/// @return The number of deleted types.
 			std::size_t delete_relation_type(const xg::Guid& type_GUID);
@@ -89,6 +89,7 @@ namespace entity_system {
 			std::size_t delete_relation_type(const RelationTypePtr& rel_type);
 
 			/// @brief Deletes all entity relation types.
+			/// @warning This method will delete all relation instances first!
 			void delete_all_relation_types();
 
 			/// @brief Registers a new listener.
@@ -103,16 +104,17 @@ namespace entity_system {
 
 			/// @brief Notifies all listeners that a new relation type has been created.
 			/// @param new_relation_type The new relation type which was created.
+			/// @TODO: Use const std::shared_ptr<T>& instead?
 			void notify_relation_type_created(RelationTypePtr new_relation_type);
 
 			/// @brief Notifies all listeners that an relation type has been deleted.
 			/// @param type_GUID The GUID of the new relation type which was created.
 			void notify_relation_type_deleted(const xg::Guid& type_GUID);
 
-			/// Signal, that an relation type has been created.
+			/// Send a signal: A new relation type has been created!
 			boost::signals2::signal<void(RelationTypePtr new_relation_type)> signal_relation_type_created;
 
-			/// Signal, that an relation type has been deleted.
+			/// Send a signal: A relation type has been deleted.
 			boost::signals2::signal<void(const xg::Guid& type_GUID)> signal_relation_type_deleted;
 
 			/// The mutex of this class.
