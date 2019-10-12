@@ -11,7 +11,7 @@ namespace entity_system {
 	{
 		public:
 
-			/// @brief Called if a new relation type has been deleted.
+			/// @brief Called if a relation type has been deleted.
 			/// @param type_GUID The GUID of the relation type which was deleted.
 			virtual void on_relation_type_deleted(const xg::Guid& type_GUID) = 0;
 
