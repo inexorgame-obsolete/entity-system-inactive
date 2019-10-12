@@ -13,6 +13,7 @@ namespace entity_system {
 
 			/// @brief Called if a new relation type has been created.
 			/// @param relation_type The new relation type which has been created.
+			/// @TODO Use const std::shared_ptr<T>& instead?
 			virtual void on_relation_type_created(std::shared_ptr<RelationType> relation_type) = 0;
 
 	};
