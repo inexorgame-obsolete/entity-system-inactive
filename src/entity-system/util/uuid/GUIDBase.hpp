@@ -17,7 +17,7 @@ namespace entity_system {
 			/// The mutex of this class.
 			std::mutex guid_base_mutex;
 
-			/// GUID of the class.
+			/// The GUID of this class.
 			xg::Guid globally_unique_identifier;
 
 		protected:
