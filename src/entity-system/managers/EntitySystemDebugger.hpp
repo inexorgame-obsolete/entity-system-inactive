@@ -30,17 +30,17 @@ namespace entity_system {
 	using RelationInstancePtr = std::shared_ptr<RelationInstance>;
 
 	/// @class EntitySystemDebugger
-	/// @brief Debugger for the entity system.
+	/// @brief A Debugger for the entity system.
 	class EntitySystemDebugger
 		: public EntityTypeCreatedListener,
-		public EntityTypeDeletedListener,
-		public EntityInstanceCreatedListener,
-		public EntityInstanceDeletedListener,
-		public RelationTypeCreatedListener,
-		public RelationTypeDeletedListener,
-		public RelationInstanceCreatedListener,
-		public RelationInstanceDeletedListener,
-		public std::enable_shared_from_this<EntitySystemDebugger>
+          public EntityTypeDeletedListener,
+          public EntityInstanceCreatedListener,
+          public EntityInstanceDeletedListener,
+          public RelationTypeCreatedListener,
+          public RelationTypeDeletedListener,
+          public RelationInstanceCreatedListener,
+          public RelationInstanceDeletedListener,
+          public std::enable_shared_from_this<EntitySystemDebugger>
 	{
 		public:
 
@@ -68,11 +68,12 @@ namespace entity_system {
 			/// @brief Initialization.
 			void init();
 
-			/// @brief Initialization.
+			/// @brief Logger initialization.
 			void init_logger();
 
 			/// @brief Callback for creation of entity types.
 			/// @param entity_type The entity type which was created.
+			/// @TODO Change to const EntityTypePtr& ?
 			void on_entity_type_created(EntityTypePtr entity_type);
 
 			/// @brief Callback for deletion of entity types.
@@ -81,15 +82,17 @@ namespace entity_system {
 
 			/// @brief Callback for creation of entity instances.
 			/// @param entity_instance The entity instance which was created.
+			/// @TODO Change to const EntityInstancePtr& ?
 			void on_entity_instance_created(EntityInstancePtr entity_instance);
 
 			/// @brief Callback for deletion of entity instances.
 			/// @param type_GUID The GUID of the entity type which was deleted.
-			/// @param inst_GUID The GUID of he entity instance which was deleted.
+			/// @param inst_GUID The GUID of the entity instance which was deleted.
 			void on_entity_instance_deleted(const xg::Guid& type_GUID, const xg::Guid& inst_GUID);
 
 			/// @brief Callback for creation of relation types.
 			/// @param relation_type The relation type which was created.
+			/// @TODO Change to const RelationTypePtr& ?
 			void on_relation_type_created(RelationTypePtr relation_type);
 
 			/// @brief Callback for deletion of relation types.
@@ -98,6 +101,7 @@ namespace entity_system {
 
 			/// @brief Callback for creation of relation instances.
 			/// @param relation_instance The relation instance which was created. 
+			/// @TODO Change to const RelationInstancePtr& ?
 			void on_relation_instance_created(RelationInstancePtr relation_instance);
 
 			/// @brief Callback for deletion of relation instances.
