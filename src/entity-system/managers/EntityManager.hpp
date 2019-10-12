@@ -11,7 +11,13 @@ namespace inexor {
 namespace entity_system {
 
 	/// @class EntityManager
-	/// @brief A manager class which bundles EntityTypeManager, EntityInstanceManager, EntityAttributeTypeManager and EntityAttributeInstanceManager.
+	/// @brief A manager class which bundles
+	/// <ol>
+	///		<li> EntityTypeManager
+	///		<li> EntityInstanceManager
+	///		<li> EntityAttributeTypeManager
+	///		<li> EntityAttributeInstanceManager
+	/// </ol>
 	class EntityManager
 	{
 		public:
