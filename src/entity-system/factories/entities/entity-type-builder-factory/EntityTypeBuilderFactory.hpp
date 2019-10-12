@@ -15,7 +15,7 @@ namespace entity_system {
 	using EntityAttributeInstanceManagerPtr = std::shared_ptr<EntityAttributeInstanceManager>;
 
 	/// @class EntityTypeBuilderFactory
-	/// @brief Builder class for entity types.
+	/// @brief A builder class for entity types.
 	/// @note For more information on the builder software pattern see
 	/// https://en.wikipedia.org/wiki/Builder_pattern
 	class EntityTypeBuilderFactory
@@ -43,7 +43,7 @@ namespace entity_system {
 			void init();
 
 			/// @brief Returns a new instance of a builder.
-			/// @return A shared pointer to the entity type builder.
+			/// @return A std::shared pointer to the entity type builder.
 			EntityTypeBuilderPtr get_builder();
 
 		private:
