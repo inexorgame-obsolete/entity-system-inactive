@@ -31,8 +31,8 @@ namespace entity_system {
 			/// For more information see https://boost-experimental.github.io/di/user_guide/index.html
 			/// BOOST_DI_INJECT constructor parameters is limited to BOOST_DI_CFG_CTOR_LIMIT_SIZE,<br>
 			/// which by default is set to 10. Not more than 10 arguments can be passed to the DI constructor!<br>
-			/// @param relation_instance_manager A shared pointer to the relation instance manager.
-			/// @param relation_type_manager A shared pointer to the relation type manager.
+			/// @param relation_instance_manager The relation instance manager.
+			/// @param relation_type_manager The relation type manager.
 			RelationInstanceBuilder(
 				RelationInstanceManagerPtr relation_instance_manager,
 				RelationTypeManagerPtr relation_type_manager
@@ -51,7 +51,7 @@ namespace entity_system {
 			/// @return A std::optional shared pointer to the relation instance builder.
 			RelationInstanceBuilderPtr type(const RelationTypePtr& relation_type);
 
-			/// @brief Sets the uuid of the relation instance.
+			/// @brief Sets the GUID of the relation instance.
 			/// @param relation_type_uuid The GUID of the relation type of which an instance will be created.
 			/// @return A std::optional shared pointer to the relation instance builder.
 			RelationInstanceBuilderPtr uuid(const std::string& relation_type_uuid);
