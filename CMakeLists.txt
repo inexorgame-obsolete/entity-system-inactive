@@ -57,18 +57,18 @@ if(UNIX AND NOT APPLE)
 endif()
 
 if(UNIX AND NOT APPLE)
-	conan_cmake_run(CONANFILE conanfile.py
-        	        BASIC_SETUP
-                	BUILD outdated
-                	PROFILE default
-                	PROFILE_AUTO build_type
-			SETTINGS compiler.libcxx=${LIBCXX})
+    conan_cmake_run(CONANFILE conanfile.py
+                    BASIC_SETUP
+                    BUILD outdated
+                    PROFILE default
+                    PROFILE_AUTO build_type
+                    SETTINGS compiler.libcxx=${LIBCXX})
 else()
-	conan_cmake_run(CONANFILE conanfile.py
-			BASIC_SETUP
-			BUILD outdated
-			PROFILE default
-			PROFILE_AUTO build_type)
+    conan_cmake_run(CONANFILE conanfile.py
+                    BASIC_SETUP
+                    BUILD outdated
+                    PROFILE default
+                    PROFILE_AUTO build_type)
 endif()
 
 # Automatically search for source files.
@@ -87,7 +87,7 @@ foreach(file ${source_files} )
   if(file MATCHES ".*_test.*" )
      set(TEST_SOURCE_FILES ${TEST_SOURCE_FILES} ${file})
   elseif(file MATCHES ".*_benchmark.*")
-	  set(BENCHMARK_SOURCE_FILES ${BENCHMARK_SOURCE_FILES} ${file})
+      set(BENCHMARK_SOURCE_FILES ${BENCHMARK_SOURCE_FILES} ${file})
   else()
      set(NORMAL_SOURCE_FILES ${NORMAL_SOURCE_FILES} ${file})
   endif()
