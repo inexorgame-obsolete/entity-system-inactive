@@ -57,14 +57,14 @@ if(UNIX AND NOT APPLE)
 endif()
 
 if(UNIX AND NOT APPLE)
-	conan_cmake_run(CONANFILE conanfile.txt
+	conan_cmake_run(CONANFILE conanfile.py
         	        BASIC_SETUP
                 	BUILD outdated
                 	PROFILE default
                 	PROFILE_AUTO build_type
 			SETTINGS compiler.libcxx=${LIBCXX})
 else()
-	conan_cmake_run(CONANFILE conanfile.txt
+	conan_cmake_run(CONANFILE conanfile.py
 			BASIC_SETUP
 			BUILD outdated
 			PROFILE default
