@@ -44,7 +44,7 @@ if (NOT CMAKE_BUILD_TYPE)
     set(CMAKE_BUILD_TYPE "Debug")
 endif(NOT CMAKE_BUILD_TYPE)
 
-conan_check(VERSION 1.4.0 REQUIRED)
+conan_check(VERSION 1.19.1 REQUIRED)
 conan_add_remote(NAME bincrafters INDEX 1
             URL https://api.bintray.com/conan/bincrafters/public-conan)
 conan_add_remote(NAME inexor INDEX 1
