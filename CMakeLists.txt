@@ -45,12 +45,15 @@ if (NOT CMAKE_BUILD_TYPE)
 endif(NOT CMAKE_BUILD_TYPE)
 
 conan_check(VERSION 1.19.1 REQUIRED)
-conan_add_remote(NAME bincrafters INDEX 1
-            URL https://api.bintray.com/conan/bincrafters/public-conan)
-conan_add_remote(NAME inexor INDEX 1
-            URL https://api.bintray.com/conan/inexorgame/inexor-conan)
-conan_add_remote(NAME helmesjo INDEX 1
-            URL https://api.bintray.com/conan/helmesjo/public-conan)
+conan_add_remote(NAME bincrafters
+                 INDEX 1
+                 URL https://api.bintray.com/conan/bincrafters/public-conan)
+conan_add_remote(NAME inexor
+                 INDEX 1
+                 URL https://api.bintray.com/conan/inexorgame/inexor-conan)
+conan_add_remote(NAME helmesjo
+                 INDEX 1
+                 URL https://api.bintray.com/conan/helmesjo/public-conan)
 
 if(UNIX AND NOT APPLE)
     set(LIBCXX libstdc++11)
@@ -62,13 +65,15 @@ if(UNIX AND NOT APPLE)
                     BUILD outdated
                     PROFILE default
                     PROFILE_AUTO build_type
+                    INSTALL_FOLDER build
                     SETTINGS compiler.libcxx=${LIBCXX})
 else()
     conan_cmake_run(CONANFILE conanfile.py
                     BASIC_SETUP
                     BUILD outdated
                     PROFILE default
-                    PROFILE_AUTO build_type)
+                    PROFILE_AUTO build_type
+                    INSTALL_FOLDER build)
 endif()
 
 # Automatically search for source files.
