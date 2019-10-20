@@ -65,15 +65,15 @@ if(UNIX AND NOT APPLE)
                     BUILD outdated
                     PROFILE default
                     PROFILE_AUTO build_type
-                    INSTALL_FOLDER build
-                    SETTINGS compiler.libcxx=${LIBCXX})
+                    SETTINGS compiler.libcxx=${LIBCXX}
+    )
 else()
     conan_cmake_run(CONANFILE conanfile.py
                     BASIC_SETUP
                     BUILD outdated
                     PROFILE default
                     PROFILE_AUTO build_type
-                    INSTALL_FOLDER build)
+    )
 endif()
 
 # Automatically search for source files.
