@@ -1,0 +1,24 @@
+{
+    "remotes":[
+        {
+            "name":"inexor",
+            "url":"https://api.bintray.com/conan/inexorgame/inexor-conan",
+            "verify_ssl":true
+        },
+        {
+            "name":"helmesjo",
+            "url":"https://api.bintray.com/conan/helmesjo/public-conan",
+            "verify_ssl":true
+        },
+        {
+            "name":"conan-center",
+            "url":"https://api.bintray.com/conan/conan/conan-center",
+            "verify_ssl":true
+        },
+        {
+            "name":"bincrafters",
+            "url":"https://api.bintray.com/conan/bincrafters/public-conan",
+            "verify_ssl":true
+        }
+    ]
+}
