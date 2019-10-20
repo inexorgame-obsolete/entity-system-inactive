@@ -3,7 +3,8 @@
 conan --version
 
 pwd
-cp registry.json ~/.conan/registry.json
+ll inexorgame/entity-system/.travis/registry.json
+cp inexorgame/entity-system/.travis/registry.json ~/.conan/registry.json
 rm -rf build
 conan install . --install-folder build --build=missing
 conan build . --build-folder build
