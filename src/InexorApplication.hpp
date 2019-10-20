@@ -2,8 +2,6 @@
 
 #include "entity-system/EntitySystemModule.hpp"
 #include "entity-system/managers/EntitySystemDebugger.hpp"
-#include "entity-system-rest/RestServer.hpp"
-#include "entity-system-rest/RestServerLogger.hpp"
 
 #include "type-system/TypeSystemModule.hpp"
 #include "configuration/ConfigurationModule.hpp"
@@ -14,7 +12,6 @@
 
 #include <memory>
 #include <cstdlib>
-#include <restbed>
 #include <csignal>
 #include <sys/types.h>
 
@@ -33,7 +30,6 @@ namespace inexor {
 	using EntitySystemModulePtr = std::shared_ptr<entity_system::EntitySystemModule>;
 	using TypeSystemModulePtr = std::shared_ptr<entity_system::type_system::TypeSystemModule>;
 	using ConfigurationModulePtr = std::shared_ptr<configuration::ConfigurationModule>;
-	using RestServerPtr = std::shared_ptr<entity_system::RestServer>;
 	using EntitySystemDebuggerPtr = std::shared_ptr<entity_system::EntitySystemDebugger>;
 	using VisualScriptingSystemModulePtr = std::shared_ptr<visual_scripting::VisualScriptingSystemModule>;
 	using CommandModulePtr = std::shared_ptr<command::CommandModule>;
@@ -51,7 +47,6 @@ namespace inexor {
 			/// @param entity_system_module The entity system of Inexor.
 			/// @param type_system_module The type system manager.
 			/// @param configuration_module The configuration manager module.
-			/// @param rest_server The REST server module of the entity system.
 			/// @param entity_system_debugger The debugger of the entity system module.
 			/// @param visual_scripting_system_module The visual scripting system module.
 			/// @param log_manager The log module.
@@ -62,7 +57,6 @@ namespace inexor {
 				EntitySystemModulePtr entity_system_module,
 				TypeSystemModulePtr type_system_module,
 				ConfigurationModulePtr configuration_module,
-				RestServerPtr rest_server,
 				EntitySystemDebuggerPtr entity_system_debugger,
 				VisualScriptingSystemModulePtr visual_scripting_system_module,
 				CommandModulePtr command_module,
@@ -91,16 +85,6 @@ namespace inexor {
 			/// Restarts the Inexor application.
 			void restart();
 
-//			/// @brief Registers a logger.
-//			/// @param logger_name The name of the logger.
-//			void register_logger(std::string logger_name);
-//
-//			/// Get method for the entity system.
-//			EntitySystemModulePtr get_entity_system();
-//
-//			/// Get method for the rest server.
-//			RestServerPtr get_rest_server();
-
 		private:
 
 			/// The entity system of Inexor.
@@ -111,9 +95,6 @@ namespace inexor {
 
 			/// The configuration manager module.
 			ConfigurationModulePtr configuration_module;
-
-			/// The REST server module of the entity system.
-			RestServerPtr rest_server;
 
 			/// The debugger of the entity system module.
 			EntitySystemDebuggerPtr entity_system_debugger;
