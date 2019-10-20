@@ -128,7 +128,7 @@ target_link_libraries(inexor-standalone PUBLIC inexor-entity-system-lib)
 target_link_libraries(inexor-standalone PUBLIC ${CONAN_LIBS})
 target_link_libraries(inexor-standalone PRIVATE Corrade::Utility)
 if(APPLE)
-    target_link_libraries(inexor-standalone "-framework CoreFoundation")
+    target_link_libraries(inexor-standalone PUBLIC "-framework CoreFoundation")
 endif()
 
 # Inexor unit tests.
