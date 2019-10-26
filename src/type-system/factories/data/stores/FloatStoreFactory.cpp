@@ -32,7 +32,7 @@ namespace type_system {
 			->build();
 	}
 
-	EntityInstancePtrOpt FloatStoreFactory::create_instance(const string& name, const float& input_value, const float& default_value, const float& output_value)
+	EntityInstancePtrOpt FloatStoreFactory::create_instance(const std::string& name, const float& input_value, const float& default_value, const float& output_value)
 	{
 		return entity_instance_builder_factory->get_builder()
 			->type(entity_type_provider->get_type())

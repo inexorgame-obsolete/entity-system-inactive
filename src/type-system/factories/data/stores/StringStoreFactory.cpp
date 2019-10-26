@@ -32,7 +32,7 @@ namespace type_system {
 			->build();
 	}
 
-	EntityInstancePtrOpt StringStoreFactory::create_instance(const string& name, const string& input_value, const string& default_value, const string& output_value)
+	EntityInstancePtrOpt StringStoreFactory::create_instance(const std::string& name, const std::string& input_value, const std::string& default_value, const std::string& output_value)
 	{
 		return entity_instance_builder_factory->get_builder()
 			->type(entity_type_provider->get_type())
