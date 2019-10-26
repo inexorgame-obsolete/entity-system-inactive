@@ -64,7 +64,7 @@ template <typename T> class InstanceManagerTemplate
     /// @brief Returns a specific instance.
     /// @param instance_GUID The GUID of the instance.
     /// @return If the instance exists it will be returned, std::nullopt otherwise.
-    std::optional<std::shared_ptr<T>> get_instance(const xg::Guid &instance_GUID)
+    std::optional<std::shared_ptr<T>> get_instance(const xg::Guid &instance_GUID) const
     {
         // Check if an instance with this GUID exists.
         auto lookup = stored_instances.find(instance_GUID);
@@ -104,7 +104,7 @@ template <typename T> class InstanceManagerTemplate
     /// @return The numer of deleted instances.
     std::size_t delete_instance(const std::shared_ptr<T> &instance)
     {
-        return delete_instance(get_GUID_from_instance(instance));
+        return delete_instance(instance->get_GUID());
     }
 
     /// @brief Deletes all instances.
