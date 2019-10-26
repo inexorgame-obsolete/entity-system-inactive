@@ -1,28 +1,24 @@
 #include "AudioModule.hpp"
 
-namespace inexor {
-namespace audio {
+#include <utility>
 
-	AudioModule::AudioModule(
-		AudioManagerPtr audio_manager
-	)
-	{
-		this->audio_manager = audio_manager;
-	}
+namespace inexor::audio {
 
-	AudioModule::~AudioModule()
-	{
-	}
+    AudioModule::AudioModule(AudioManagerPtr audio_manager)
+    {
+        this->audio_manager = std::move(audio_manager);
+    }
 
-	void AudioModule::init()
-	{
-		audio_manager->init();
-	}
+    AudioModule::~AudioModule() = default;
 
-	void AudioModule::shutdown()
-	{
-		audio_manager->shutdown();
-	}
+    void AudioModule::init()
+    {
+        audio_manager->init();
+    }
 
-}
-}
+    void AudioModule::shutdown()
+    {
+        audio_manager->shutdown();
+    }
+
+} // namespace inexor
