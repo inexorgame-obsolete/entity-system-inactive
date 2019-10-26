@@ -4,36 +4,29 @@
 
 #include <memory>
 
-namespace inexor {
-namespace configuration {
+namespace inexor::configuration {
 
-	using ConfigurationManagerPtr = std::shared_ptr<ConfigurationManager>;
+using ConfigurationManagerPtr = std::shared_ptr<ConfigurationManager>;
 
-	/// @class SystemConfigurationInitializer
-	/// @brief Initializes the environment variables as configuration items.
-	class SystemConfigurationInitializer
-	{
-		public:
+/// @class SystemConfigurationInitializer
+/// @brief Initializes the environment variables as configuration items.
+class SystemConfigurationInitializer
+{
+    public:
+    /// @brief Constructor.
+    /// @note The dependencies of this class will be injected automatically.
+    /// @param configuration_manager The configuration manager.
+    explicit SystemConfigurationInitializer(ConfigurationManagerPtr configuration_manager);
 
-			/// @brief Constructor.
-			/// @note The dependencies of this class will be injected automatically.
-			/// @param configuration_manager The configuration manager.
-			SystemConfigurationInitializer(
-			ConfigurationManagerPtr configuration_manager
-			);
+    /// Destructor.
+    ~SystemConfigurationInitializer();
 
-			/// Destructor.
-			~SystemConfigurationInitializer();
+    /// Initialization.
+    void init();
 
-			/// Initialization.
-			void init();
+    private:
+    /// The configuration manager.
+    ConfigurationManagerPtr configuration_manager;
+};
 
-		private:
-
-			/// The configuration manager.
-			ConfigurationManagerPtr configuration_manager;
-
-	};
-
-}
-}
+} // namespace inexor::configuration
