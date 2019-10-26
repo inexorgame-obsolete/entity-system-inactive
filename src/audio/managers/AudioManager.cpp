@@ -9,79 +9,76 @@
 #include <Magnum/Audio/PlayableGroup.h>
 #include <Magnum/Audio/Source.h>
 
-#include <string.h>
-#include <iostream>
-#include <iomanip>
-#include <thread>
 #include <chrono>
+#include <cstring>
+#include <iomanip>
+#include <iostream>
+#include <thread>
+#include <utility>
 
-namespace inexor {
-namespace audio {
+namespace inexor::audio {
 
-	AudioManager::AudioManager(
-		LogManagerPtr log_manager
-	) {
-		this->log_manager = log_manager;
-	}
+AudioManager::AudioManager(LogManagerPtr log_manager)
+{
+    this->log_manager = std::move(log_manager);
+    this->device = nullptr;
+    this->context = nullptr;
+}
 
-	AudioManager::~AudioManager()
-	{
-	}
+AudioManager::~AudioManager() = default;
 
-	int AudioManager::init()
-	{
-		// Initialise an OpenAL device.
-		device = alcOpenDevice(NULL);
-		if(!device)
-		{
-			spdlog::get(LOGGER_NAME)->critical("Failed to create an OpenAL device!");
-			return -1;
-		}
-
-		// Create context.
-		context = alcCreateContext(device, NULL);
-		if(!alcMakeContextCurrent(context))
-		{
-			spdlog::get(LOGGER_NAME)->critical("Failed to set the current OpenAL context!");
-			return -1;
-		}
-		
-		// TODO: Do proper error handling!
-		// TODO: Make the listener more dynamic!
-		// TODO: Link listener to the entity-system!
-		ALfloat listenerOri[] = { 0.0f, 0.0f, 1.0f, 0.0f, 1.0f, 0.0f };
-		alListener3f(AL_POSITION, 0, 0, 1.0f);
-		alListener3f(AL_VELOCITY, 0, 0, 0);
-		alListenerfv(AL_ORIENTATION, listenerOri);
-
-		// TODO: Link sources to the entity-system!
-		ALuint source;
-		alGenSources((ALuint)1, &source);
-		alSourcef(source, AL_PITCH, 1);
-		alSourcef(source, AL_GAIN, 1);
-		alSource3f(source, AL_POSITION, 0, 0, 0);
-		alSource3f(source, AL_VELOCITY, 0, 0, 0);
-		alSourcei(source, AL_LOOPING, AL_FALSE);
-
-		// TODO: Write a manager for buffers!
-		// TODO: Link buffers to entity-system!
-		ALuint buffer;
-		alGenBuffers((ALuint)1, &buffer);
-
-		// Load audio file.
-		
-
-		// Success!
-		return 1;
-	}
-	
-    void AudioManager::shutdown()
+int AudioManager::init()
+{
+    // Initialise an OpenAL device.
+    device = alcOpenDevice(nullptr);
+    if (!device)
     {
-    	if(device)
-    	{
-        	alcCloseDevice(device);
-    	}
+        spdlog::get(LOGGER_NAME)->critical("Failed to create an OpenAL device!");
+        return -1;
     }
 
+    // Create context.
+    context = alcCreateContext(device, nullptr);
+    if (!alcMakeContextCurrent(context))
+    {
+        spdlog::get(LOGGER_NAME)->critical("Failed to set the current OpenAL context!");
+        return -1;
+    }
+
+    // TODO: Do proper error handling!
+    // TODO: Make the listener more dynamic!
+    // TODO: Link listener to the entity-system!
+    ALfloat listenerOri[] = {0.0f, 0.0f, 1.0f, 0.0f, 1.0f, 0.0f};
+    alListener3f(AL_POSITION, 0, 0, 1.0f);
+    alListener3f(AL_VELOCITY, 0, 0, 0);
+    alListenerfv(AL_ORIENTATION, listenerOri);
+
+    // TODO: Link sources to the entity-system!
+    ALuint source;
+    alGenSources((ALuint)1, &source);
+    alSourcef(source, AL_PITCH, 1);
+    alSourcef(source, AL_GAIN, 1);
+    alSource3f(source, AL_POSITION, 0, 0, 0);
+    alSource3f(source, AL_VELOCITY, 0, 0, 0);
+    alSourcei(source, AL_LOOPING, AL_FALSE);
+
+    // TODO: Write a manager for buffers!
+    // TODO: Link buffers to entity-system!
+    ALuint buffer;
+    alGenBuffers((ALuint)1, &buffer);
+
+    // Load audio file.
+
+    // Success!
+    return 1;
 }
+
+void AudioManager::shutdown()
+{
+    if (device)
+    {
+        alcCloseDevice(device);
+    }
 }
+
+} // namespace inexor::audio
