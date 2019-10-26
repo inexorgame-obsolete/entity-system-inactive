@@ -6,8 +6,7 @@
 
 #include "spdlog/spdlog.h"
 
-namespace inexor {
-namespace entity_system {
+namespace inexor::entity_system {
 
 	/// These using instructions help to shorten the following code.
 	class RelationInstanceBuilder;
@@ -143,5 +142,4 @@ namespace entity_system {
 			
 	};
 
-}
 }

@@ -1,7 +1,10 @@
 #include "RelationInstanceBuilder.hpp"
 
-namespace inexor {
-namespace entity_system {
+#include <utility>
+
+#pragma clang diagnostic push
+#pragma clang diagnostic ignored "-Wshadow"
+namespace inexor::entity_system {
 
 	RelationInstanceBuilder::RelationInstanceBuilder(
 		RelationInstanceManagerPtr relation_instance_manager,
@@ -11,15 +14,14 @@ namespace entity_system {
 		// Use lock guard to ensure thread safety during write operations!
 		std::lock_guard<std::mutex> lock(relation_instance_builder_mutex);
 		
-		this->relation_instance_manager = relation_instance_manager;
-		this->relation_type_manager = relation_type_manager;
+		this->relation_instance_manager = std::move(relation_instance_manager);
+		this->relation_type_manager = std::move(relation_type_manager);
 		this->relation_type_name = "";
 		this->o_relation_type = std::nullopt;
 	}
 
 	RelationInstanceBuilder::~RelationInstanceBuilder()
-	{
-	}
+	= default;
 
 	RelationInstanceBuilderPtr RelationInstanceBuilder::type(const std::string& relation_type_name)
 	{
@@ -53,7 +55,7 @@ namespace entity_system {
 		// Use lock guard to ensure thread safety during write operations!
 		std::lock_guard<std::mutex> lock(relation_instance_builder_mutex);
 
-		this->ent_instance_source = ent_instance_source;
+		this->ent_instance_source = std::move(ent_instance_source);
 		return shared_from_this();
 	}
 
@@ -62,7 +64,7 @@ namespace entity_system {
 		// Use lock guard to ensure thread safety during write operations!
 		std::lock_guard<std::mutex> lock(relation_instance_builder_mutex);
 
-		this->ent_instance_target = ent_instance_target;
+		this->ent_instance_target = std::move(ent_instance_target);
 		return shared_from_this();
 	}
 
@@ -195,4 +197,5 @@ namespace entity_system {
 	}
 
 }
-}
+
+#pragma clang diagnostic pop
