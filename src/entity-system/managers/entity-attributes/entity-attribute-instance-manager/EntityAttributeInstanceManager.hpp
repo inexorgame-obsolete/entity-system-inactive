@@ -38,9 +38,9 @@ class EntityAttributeInstanceManager : public InstanceManagerTemplate<EntityAttr
     std::size_t get_entity_attribute_instance_count() const;
 
     /// @brief Deletes a specific entity attribute instances.
-    /// @param ent_attr_inst_GUID The GUID of the entity attribute instance which will be deleted.
+    /// @param attr_inst_GUID The GUID of the entity attribute instance which will be deleted.
     /// @return The number of deleted attribute instances.
-    std::size_t delete_entity_attribute_instance(const xg::Guid &attr_type_GUID);
+    std::size_t delete_entity_attribute_instance(const xg::Guid &attr_inst_GUID);
 
     /// @brief Deletes a specific entity attribute instances.
     /// @param The entity attribute instance which will be deleted.

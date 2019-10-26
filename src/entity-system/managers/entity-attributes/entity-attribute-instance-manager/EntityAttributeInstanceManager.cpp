@@ -26,9 +26,9 @@ EntityAttributeInstancePtrOpt EntityAttributeInstanceManager::get_entity_attribu
     return get_instance(attr_inst_GUID);
 }
 
-std::size_t EntityAttributeInstanceManager::delete_entity_attribute_instance(const xg::Guid &attr_type_GUID)
+std::size_t EntityAttributeInstanceManager::delete_entity_attribute_instance(const xg::Guid &attr_inst_GUID)
 {
-    return delete_instance(attr_type_GUID);
+    return delete_instance(attr_inst_GUID);
 }
 
 std::size_t EntityAttributeInstanceManager::delete_entity_attribute_instance(const EntityAttributeInstancePtr &attr_inst)
