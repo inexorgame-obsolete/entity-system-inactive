@@ -45,6 +45,27 @@ The following standard libraries will be used in the code:
 * A .clang-format file is placed in the project tree. The is some support for automatically use the code formatter:
   * [CLion](https://www.jetbrains.com/help/clion/clangformat-as-alternative-formatter.html), [code assistance](https://blog.jetbrains.com/clion/2019/05/clion-starts-2019-2-eap-parameter-hints-go-to-address-code-assistance-for-clangformat/)
 
+## Naming convention
+
+| Entity Kind | Naming Convention |
+| --- | --- |
+| Namespace | snake_case |
+| Class | PascalCase |
+| Enum | SCREAMING_SNAKE_CASE |
+| Enumerator | PascalCase |
+| Typedef | PascalCase |
+| Union | PascalCase |
+| Member Function | snake_case |
+| Member Field | snake_case |
+| Global Function | snake_case |
+| Global Variable | snake_case |
+| Method Parameter | snake_case |
+| Local Variable | snake_case |
+| Macro | SCREAMING_SNAKE_CASE |
+| | |
+| Directory Names | kebab-case |
+| Test Files | Postfix _tests |
+| Benchmark Files | Postfix _benchmark |
 
 ## Multithreading
 TODO
