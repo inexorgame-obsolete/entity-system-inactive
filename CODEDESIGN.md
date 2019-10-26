@@ -30,9 +30,6 @@ namespace entity_system {
 ```
 * Namespaces wrap the entire source file after includes and forward declarations of classes from other namespaces.
 
-## Class design
-TODO
-
 ## Standard Libraries
 The following standard libraries will be used in the code:
 
@@ -44,10 +41,10 @@ The following standard libraries will be used in the code:
 * [std::optional](https://en.cppreference.com/w/cpp/utility/optional)
 
 ## Code Formating
-We use [clang format](https://clang.llvm.org/docs/ClangFormat.html) for source code formatting.
+* We use [clang format](https://clang.llvm.org/docs/ClangFormat.html) for source code formatting ([format style options](https://clang.llvm.org/docs/ClangFormatStyleOptions.html))
+* A .clang-format file is placed in the project tree. The is some support for automatically use the code formatter:
+  * [CLion](https://www.jetbrains.com/help/clion/clangformat-as-alternative-formatter.html), [code assistance](https://blog.jetbrains.com/clion/2019/05/clion-starts-2019-2-eap-parameter-hints-go-to-address-code-assistance-for-clangformat/)
 
-A .clang-format file is placed in the project tree. The is some support for automatically use the code formatter:
-* [CLion](https://www.jetbrains.com/help/clion/clangformat-as-alternative-formatter.html), [code assistance](https://blog.jetbrains.com/clion/2019/05/clion-starts-2019-2-eap-parameter-hints-go-to-address-code-assistance-for-clangformat/)
 
 ## Multithreading
 TODO

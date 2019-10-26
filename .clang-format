@@ -1,18 +1,20 @@
 ---
 Language:        Cpp
 # BasedOnStyle:  LLVM
-AccessModifierOffset: -2
+AccessModifierOffset: 0
 AlignAfterOpenBracket: Align
 AlignConsecutiveAssignments: false
 AlignConsecutiveDeclarations: false
 AlignEscapedNewlines: Right
 AlignOperands:   true
 AlignTrailingComments: true
+AllowAllConstructorInitializersOnNextLine: true
 AllowAllParametersOfDeclarationOnNextLine: true
 AllowShortBlocksOnASingleLine: false
 AllowShortCaseLabelsOnASingleLine: false
 AllowShortFunctionsOnASingleLine: All
-AllowShortIfStatementsOnASingleLine: false
+AllowShortIfStatementsOnASingleLine: Never
+AllowShortLambdasOnASingleLine: Empty
 AllowShortLoopsOnASingleLine: false
 AlwaysBreakAfterDefinitionReturnType: None
 AlwaysBreakAfterReturnType: None
@@ -21,15 +23,15 @@ AlwaysBreakTemplateDeclarations: MultiLine
 BinPackArguments: true
 BinPackParameters: true
 BraceWrapping:
-  AfterClass:      false
-  AfterControlStatement: false
+  AfterClass:      true
+  AfterControlStatement: true
   AfterEnum:       false
-  AfterFunction:   false
+  AfterFunction:   true
   AfterNamespace:  false
-  AfterObjCDeclaration: false
-  AfterStruct:     false
-  AfterUnion:      false
-  AfterExternBlock: false
+  AfterObjCDeclaration: true
+  AfterStruct:     true
+  AfterUnion:      true
+  AfterExternBlock: true
   BeforeCatch:     false
   BeforeElse:      false
   IndentBraces:    false
@@ -37,7 +39,7 @@ BraceWrapping:
   SplitEmptyRecord: true
   SplitEmptyNamespace: true
 BreakBeforeBinaryOperators: None
-BreakBeforeBraces: Linux
+BreakBeforeBraces: Custom
 BreakBeforeInheritanceComma: false
 BreakInheritanceList: BeforeColon
 BreakBeforeTernaryOperators: true
@@ -79,7 +81,7 @@ KeepEmptyLinesAtTheStartOfBlocks: true
 MacroBlockBegin: ''
 MacroBlockEnd:   ''
 MaxEmptyLinesToKeep: 1
-NamespaceIndentation: None
+NamespaceIndentation: Inner
 ObjCBinPackProtocolList: Auto
 ObjCBlockIndentWidth: 2
 ObjCSpaceAfterProperty: false
