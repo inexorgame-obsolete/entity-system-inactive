@@ -40,7 +40,7 @@ namespace type_system {
             /// @param name ?
             /// @param int_value ?
             /// @param float_value ?
-			EntityInstancePtrOpt create_instance(const string& name, const int& int_value, const float& float_value);
+			EntityInstancePtrOpt create_instance(const std::string& name, const int& int_value, const float& float_value);
 
 		private:
 
