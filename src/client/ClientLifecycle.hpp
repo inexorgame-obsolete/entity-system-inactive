@@ -4,60 +4,53 @@
 
 #include <boost/signals2.hpp>
 
-namespace inexor {
-namespace client {
+namespace inexor::client {
 
-	using LogManagerPtr = std::shared_ptr<logging::LogManager>;
+using LogManagerPtr = std::shared_ptr<logging::LogManager>;
 
-	/// @class ClientLifecycle
-	/// @brief The life cycle of the client application.
-	class ClientLifecycle
-	{
-		public:
+/// @class ClientLifecycle
+/// @brief The life cycle of the client application.
+class ClientLifecycle
+{
+    public:
+    /// @brief Constructor.
+    /// @note The dependencies of this class will be injected automatically.
+    /// @param log_manager The log manager.
+    explicit ClientLifecycle(LogManagerPtr log_manager);
 
-			/// @brief Constructor.
-			/// @note The dependencies of this class will be injected automatically.
-			/// @param log_manager The log manager.
-			ClientLifecycle(
-				LogManagerPtr log_manager
-			);
+    /// Destructor.
+    ~ClientLifecycle();
 
-			/// Destructor.
-			~ClientLifecycle();
+    /// Initialize the application life cycle.
+    void init();
 
-			/// Initialize the application life cycle.
-			void init();
+    /// Shut down the application life cycle.
+    void shutdown();
 
-			/// Shut down the application life cycle.
-			void shutdown();
+    /// Request a shutdown.
+    void request_shutdown();
 
-			/// Request a shutdown.
-			void request_shutdown();
+    /// Request a restart.
+    void request_restart();
 
-			/// Request a restart.
-			void request_restart();
+    /// Returns true, if a shutdown has been requested.
+    bool is_shutdown_requested();
 
-			/// Returns true, if a shutdown has been requested.
-			bool is_shutdown_requested();
+    /// Returns true, if a shutdown has been requested.
+    bool is_restart_requested();
 
-			/// Returns true, if a shutdown has been requested.
-			bool is_restart_requested();
+    /// The logger name of this service.
+    static constexpr char LOGGER_NAME[] = "inexor.client.lifecycle";
 
-			/// The logger name of this service.
-			static constexpr char LOGGER_NAME[] = "inexor.client.lifecycle";
+    private:
+    /// The log manager.
+    LogManagerPtr log_manager;
 
-		private:
+    /// If true, a shutdown has been requested.
+    bool shutdown_requested;
 
-			/// The log manager.
-			LogManagerPtr log_manager;
+    /// If true, a shutdown has been requested.
+    bool restart_requested;
+};
 
-			/// If true, a shutdown has been requested.
-			bool shutdown_requested;
-
-			/// If true, a shutdown has been requested.
-			bool restart_requested;
-
-	};
-
-}
-}
+} // namespace inexor::client
