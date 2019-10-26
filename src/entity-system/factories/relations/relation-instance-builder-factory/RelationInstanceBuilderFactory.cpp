@@ -1,33 +1,28 @@
 #include "RelationInstanceBuilderFactory.hpp"
 
-namespace inexor {
-namespace entity_system {
+#include <utility>
 
-	RelationInstanceBuilderFactory::RelationInstanceBuilderFactory(
-		RelationInstanceManagerPtr relation_instance_manager,
-		RelationTypeManagerPtr relation_type_manager
-	)
-	{
-		// Use lock guard to ensure thread safety during write operations!
-		std::lock_guard<std::mutex> lock(relation_instance_builder_factory_mutex);
+namespace inexor::entity_system {
 
-		this->relation_instance_manager = relation_instance_manager;
-		this->relation_type_manager = relation_type_manager;
-	}
+RelationInstanceBuilderFactory::RelationInstanceBuilderFactory(RelationInstanceManagerPtr relation_instance_manager, RelationTypeManagerPtr relation_type_manager)
+{
+    // Use lock guard to ensure thread safety during write operations!
+    std::lock_guard<std::mutex> lock(relation_instance_builder_factory_mutex);
 
-	RelationInstanceBuilderFactory::~RelationInstanceBuilderFactory()
-	{
-	}
-
-	void RelationInstanceBuilderFactory::init()
-	{
-	}
-
-	RelationInstanceBuilderPtr RelationInstanceBuilderFactory::get_builder()
-	{
-		// No mutex required as this is a read-only operation.
-		return std::make_shared<RelationInstanceBuilder>(relation_instance_manager, relation_type_manager);
-	}
-
+    this->relation_instance_manager = std::move(relation_instance_manager);
+    this->relation_type_manager = std::move(relation_type_manager);
 }
+
+RelationInstanceBuilderFactory::~RelationInstanceBuilderFactory() = default;
+
+void RelationInstanceBuilderFactory::init()
+{
 }
+
+RelationInstanceBuilderPtr RelationInstanceBuilderFactory::get_builder()
+{
+    // No mutex required as this is a read-only operation.
+    return std::make_shared<RelationInstanceBuilder>(relation_instance_manager, relation_type_manager);
+}
+
+} // namespace inexor::entity_system
