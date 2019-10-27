@@ -1,26 +1,21 @@
 #include "InputProcessors.hpp"
 
-namespace inexor {
-namespace input {
+#include <utility>
 
-	InputProcessors::InputProcessors(
-		GlobalKeyProcessorPtr global_key_processor,
-		GlobalMouseButtonProcessorPtr global_mouse_button_processor
-	)
-	{
-		this->global_key_processor = global_key_processor;
-		this->global_mouse_button_processor = global_mouse_button_processor;
-	}
+namespace inexor::input {
 
-	InputProcessors::~InputProcessors()
-	{
-	}
-
-	void InputProcessors::init()
-	{
-		global_key_processor->init();
-		global_mouse_button_processor->init();
-	}
-
+InputProcessors::InputProcessors(GlobalKeyProcessorPtr global_key_processor, GlobalMouseButtonProcessorPtr global_mouse_button_processor)
+{
+    this->global_key_processor = std::move(global_key_processor);
+    this->global_mouse_button_processor = std::move(global_mouse_button_processor);
 }
+
+InputProcessors::~InputProcessors() = default;
+
+void InputProcessors::init()
+{
+    global_key_processor->init();
+    global_mouse_button_processor->init();
 }
+
+} // namespace inexor::input

@@ -2,13 +2,11 @@
 
 #include "entity-system/model/data/container/DataContainer.hpp"
 
-namespace inexor {
-namespace input {
+namespace inexor::input {
 
-	using namespace react;
+using namespace react;
 
-    ///
-	USING_REACTIVE_DOMAIN(entity_system::D)
+///
+USING_REACTIVE_DOMAIN(entity_system::D)
 
-}
-}
+} // namespace inexor::input
