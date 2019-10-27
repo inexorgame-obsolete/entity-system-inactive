@@ -1,28 +1,21 @@
 #include "ArithmeticFactories.hpp"
 
-namespace inexor {
-namespace entity_system {
-namespace type_system {
+#include <utility>
 
-	ArithmeticFactories::ArithmeticFactories(
-		AddIntFactoryPtr add_int_factory,
-		AddFloatFactoryPtr add_float_factory
-	)
-	{
-		this->add_int_factory = add_int_factory;
-		this->add_float_factory = add_float_factory;
-	}
+namespace inexor::entity_system::type_system {
 
-	ArithmeticFactories::~ArithmeticFactories()
-	{
-	}
-
-	void ArithmeticFactories::init()
-	{
-		add_int_factory->init();
-		add_float_factory->init();
-	}
-
+ArithmeticFactories::ArithmeticFactories(AddIntFactoryPtr add_int_factory, AddFloatFactoryPtr add_float_factory)
+{
+    this->add_int_factory = std::move(add_int_factory);
+    this->add_float_factory = std::move(add_float_factory);
 }
+
+ArithmeticFactories::~ArithmeticFactories() = default;
+
+void ArithmeticFactories::init()
+{
+    add_int_factory->init();
+    add_float_factory->init();
 }
-}
+
+} // namespace inexor::entity_system::type_system
