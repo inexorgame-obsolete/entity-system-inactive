@@ -3,9 +3,9 @@
 #include "entity-system/factories/entities/entity-type-builder-factory/EntityTypeBuilderFactory.hpp"
 #include "entity-system/providers/EntityTypeProvider.hpp"
 
-namespace inexor {
-namespace entity_system {
-namespace type_system {
+#include <utility>
+
+namespace inexor::entity_system::type_system {
 
     /// @class LowerThanIntEntityTypeProvider
 	/// @brief Provides an entity type "LOWER_THAN_INT".
@@ -16,10 +16,10 @@ namespace type_system {
 			/// @brief Constructs the specialized provider for the entity type LOWER_THAN_INT.
             /// @note The dependencies of this class will be injected automatically.
             /// @param entity_type_builder_manager The entity type builder manager.
-			LowerThanIntEntityTypeProvider(
+			explicit LowerThanIntEntityTypeProvider(
 				std::shared_ptr<EntityTypeBuilderFactory> entity_type_builder_manager
 			) : EntityTypeProvider(
-				entity_type_builder_manager,
+				std::move(entity_type_builder_manager),
 				TYPE_NAME,
 				{
 					{ LOWER_THAN_INT_INPUT_1, { DataType::INT, 1 << Feature::INPUT } },
@@ -29,7 +29,7 @@ namespace type_system {
 			) {};
 
             /// Destructor.
-			~LowerThanIntEntityTypeProvider() {};
+			~LowerThanIntEntityTypeProvider() override = default;
 
 			/// Defines the name of this entity type.
 			static constexpr char TYPE_NAME[] = "LOWER_THAN_INT";
@@ -45,6 +45,4 @@ namespace type_system {
 
 	};
 
-}
-}
 }
