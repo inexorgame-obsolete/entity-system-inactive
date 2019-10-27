@@ -3,44 +3,32 @@
 #include "entity-system/factories/entities/entity-type-builder-factory/EntityTypeBuilderFactory.hpp"
 #include "entity-system/providers/EntityTypeProvider.hpp"
 
-namespace inexor {
-namespace entity_system {
-namespace type_system {
+#include <utility>
 
-    /// @class IntToFloatEntityTypeProvider
-	/// @brief Provides an entity type "INT_TO_FLOAT" which converts int values to float values.
-	class IntToFloatEntityTypeProvider : public EntityTypeProvider
-	{
-		public:
+namespace inexor::entity_system::type_system {
 
-			/// @brief Constructs the specialized provider for the INT_TO_FLOAT entity type.
-            /// @note The dependencies of this class will be injected automatically.
-            /// @param entity_type_builder_manager The entity type builder manager.
-			IntToFloatEntityTypeProvider(
-				std::shared_ptr<EntityTypeBuilderFactory> entity_type_builder_manager
-			) : EntityTypeProvider(
-				entity_type_builder_manager,
-				TYPE_NAME,
-				{
-					{ INT_TO_FLOAT_INPUT, { DataType::INT, 1 << Feature::INPUT } },
-					{ INT_TO_FLOAT_VALUE, { DataType::FLOAT, 1 << Feature::OUTPUT } }
-				}
-			) {};
+/// @class IntToFloatEntityTypeProvider
+/// @brief Provides an entity type "INT_TO_FLOAT" which converts int values to float values.
+class IntToFloatEntityTypeProvider : public EntityTypeProvider
+{
+    public:
+    /// @brief Constructs the specialized provider for the INT_TO_FLOAT entity type.
+    /// @note The dependencies of this class will be injected automatically.
+    /// @param entity_type_builder_manager The entity type builder manager.
+    explicit IntToFloatEntityTypeProvider(std::shared_ptr<EntityTypeBuilderFactory> entity_type_builder_manager)
+        : EntityTypeProvider(std::move(entity_type_builder_manager), TYPE_NAME, {{INT_TO_FLOAT_INPUT, {DataType::INT, 1 << Feature::INPUT}}, {INT_TO_FLOAT_VALUE, {DataType::FLOAT, 1 << Feature::OUTPUT}}}){};
 
-            /// Destructor.
-			~IntToFloatEntityTypeProvider() {};
+    /// Destructor.
+    ~IntToFloatEntityTypeProvider() override = default;
 
-			/// Defines the name of this entity type.
-			static constexpr char TYPE_NAME[] = "INT_TO_FLOAT";
+    /// Defines the name of this entity type.
+    static constexpr char TYPE_NAME[] = "INT_TO_FLOAT";
 
-			/// The name of the input attribute int_to_float_input.
-			static constexpr char INT_TO_FLOAT_INPUT[] = "int_to_float_input";
+    /// The name of the input attribute int_to_float_input.
+    static constexpr char INT_TO_FLOAT_INPUT[] = "int_to_float_input";
 
-			/// The name of the output attribute int_to_float_value.
-			static constexpr char INT_TO_FLOAT_VALUE[] = "int_to_float_value";
+    /// The name of the output attribute int_to_float_value.
+    static constexpr char INT_TO_FLOAT_VALUE[] = "int_to_float_value";
+};
 
-	};
-
-}
-}
-}
+} // namespace inexor::entity_system::type_system

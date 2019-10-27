@@ -4,38 +4,29 @@
 
 #include <memory>
 
-namespace inexor {
-namespace entity_system {
-namespace type_system {
+namespace inexor::entity_system::type_system {
 
-	using IntToFloatEntityTypeProviderPtr = std::shared_ptr<IntToFloatEntityTypeProvider>;
+using IntToFloatEntityTypeProviderPtr = std::shared_ptr<IntToFloatEntityTypeProvider>;
 
-    /// @class ConverterProviders
-	/// @brief The converter entity type providers.
-	class ConverterProviders
-	{
-		public:
+/// @class ConverterProviders
+/// @brief The converter entity type providers.
+class ConverterProviders
+{
+    public:
+    /// @brief Constructs the converter entity type providers.
+    /// @note The dependencies of this class will be injected automatically.
+    /// @param int_to_float_entity_type_provider Provides the entity type INT_TO_FLOAT.
+    explicit ConverterProviders(IntToFloatEntityTypeProviderPtr int_to_float_entity_type_provider);
 
-			/// @brief Constructs the converter entity type providers.
-            /// @note The dependencies of this class will be injected automatically.
-            /// @param int_to_float_entity_type_provider Provides the entity type INT_TO_FLOAT.
-			ConverterProviders(
-				IntToFloatEntityTypeProviderPtr int_to_float_entity_type_provider
-			);
+    /// Destructor.
+    ~ConverterProviders();
 
-            /// Destructor.
-			~ConverterProviders();
+    /// Initializes the converter entity type providers.
+    void init();
 
-			/// Initializes the converter entity type providers.
-			void init();
+    private:
+    /// Provides the entity type INT_TO_FLOAT.
+    IntToFloatEntityTypeProviderPtr int_to_float_entity_type_provider;
+};
 
-		private:
-
-			/// Provides the entity type INT_TO_FLOAT.
-			IntToFloatEntityTypeProviderPtr int_to_float_entity_type_provider;
-
-	};
-
-}
-}
-}
+} // namespace inexor::entity_system::type_system
