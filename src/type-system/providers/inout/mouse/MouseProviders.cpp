@@ -1,24 +1,18 @@
 #include "MouseProviders.hpp"
 
-namespace inexor {
-namespace entity_system {
-namespace type_system {
+#include <utility>
 
-	MouseProviders::MouseProviders(
-		GlobalMouseButtonEntityTypeProviderPtr global_mouse_button_entity_type_provider
-	)
-	{
-		this->global_mouse_button_entity_type_provider = global_mouse_button_entity_type_provider;
-	}
+namespace inexor::entity_system::type_system {
 
-	MouseProviders::~MouseProviders()
-	{
-	}
-
-	void MouseProviders::init()
-	{
-	}
-
+MouseProviders::MouseProviders(GlobalMouseButtonEntityTypeProviderPtr global_mouse_button_entity_type_provider)
+{
+    this->global_mouse_button_entity_type_provider = std::move(global_mouse_button_entity_type_provider);
 }
+
+MouseProviders::~MouseProviders() = default;
+
+void MouseProviders::init()
+{
 }
-}
+
+} // namespace inexor::entity_system::type_system

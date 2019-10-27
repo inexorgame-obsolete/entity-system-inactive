@@ -4,38 +4,29 @@
 
 #include <memory>
 
-namespace inexor {
-namespace entity_system {
-namespace type_system {
+namespace inexor::entity_system::type_system {
 
-	using GlobalMouseButtonEntityTypeProviderPtr = std::shared_ptr<GlobalMouseButtonEntityTypeProvider>;
+using GlobalMouseButtonEntityTypeProviderPtr = std::shared_ptr<GlobalMouseButtonEntityTypeProvider>;
 
-    /// @class MouseProviders
-	/// @brief The entity type providers for mouse input.
-	class MouseProviders
-	{
-		public:
+/// @class MouseProviders
+/// @brief The entity type providers for mouse input.
+class MouseProviders
+{
+    public:
+    /// @brief Constructs the entity type providers for the mouse input.
+    /// @note The dependencies of this class will be injected automatically.
+    /// @param global_mouse_button_entity_type_provider Provides the entity type GLOBAL_MOUSE_BUTTON.
+    explicit MouseProviders(GlobalMouseButtonEntityTypeProviderPtr global_mouse_button_entity_type_provider);
 
-			/// @brief Constructs the entity type providers for the mouse input.
-            /// @note The dependencies of this class will be injected automatically.
-            /// @param global_mouse_button_entity_type_provider Provides the entity type GLOBAL_MOUSE_BUTTON.
-			MouseProviders(
-				GlobalMouseButtonEntityTypeProviderPtr global_mouse_button_entity_type_provider
-			);
+    /// Destructor.
+    ~MouseProviders();
 
-            /// Destructor.
-			~MouseProviders();
+    /// Initializes the entity type providers for the mouse input.
+    void init();
 
-			/// Initializes the entity type providers for the mouse input.
-			void init();
+    private:
+    /// Provides the entity type GLOBAL_MOUSE_BUTTON.
+    GlobalMouseButtonEntityTypeProviderPtr global_mouse_button_entity_type_provider;
+};
 
-		private:
-
-			/// Provides the entity type GLOBAL_MOUSE_BUTTON.
-			GlobalMouseButtonEntityTypeProviderPtr global_mouse_button_entity_type_provider;
-
-	};
-
-}
-}
-}
+} // namespace inexor::entity_system::type_system
