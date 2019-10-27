@@ -15,8 +15,7 @@
 #include "entity-system/model/data/DataTypes.hpp"
 #include "logging/managers/LogManager.hpp"
 
-namespace inexor {
-namespace entity_system {
+namespace inexor::entity_system {
 
 	/// These using instructions help to shorten the following code.
 	using EntityTypeManagerPtr = std::shared_ptr<EntityTypeManager>;
@@ -68,42 +67,42 @@ namespace entity_system {
 			void init_logger();
 
 			/// @brief Callback for creation of entity types.
-			/// @param entity_type The entity type which was created.
+			/// @param ent_type The entity type which was created.
 			/// @TODO Change to const EntityTypePtr& ?
-			void on_entity_type_created(EntityTypePtr entity_type);
+			void on_entity_type_created(EntityTypePtr ent_type) override;
 
 			/// @brief Callback for deletion of entity types.
-			/// @param type_GUID The GUID of the entity type which was deleted.
-			void on_entity_type_deleted(const xg::Guid& type_GUID);
+			/// @param ent_type_GUID The GUID of the entity type which was deleted.
+			void on_entity_type_deleted(const xg::Guid& ent_type_GUID) override;
 
 			/// @brief Callback for creation of entity instances.
-			/// @param entity_instance The entity instance which was created.
+			/// @param ent_inst The entity instance which was created.
 			/// @TODO Change to const EntityInstancePtr& ?
-			void on_entity_instance_created(EntityInstancePtr entity_instance);
+			void on_entity_instance_created(EntityInstancePtr ent_inst) override;
 
 			/// @brief Callback for deletion of entity instances.
-			/// @param type_GUID The GUID of the entity type which was deleted.
-			/// @param inst_GUID The GUID of the entity instance which was deleted.
-			void on_entity_instance_deleted(const xg::Guid& type_GUID, const xg::Guid& inst_GUID);
+			/// @param ent_type_GUID The GUID of the entity type which was deleted.
+			/// @param ent_inst_GUID The GUID of the entity instance which was deleted.
+			void on_entity_instance_deleted(const xg::Guid& ent_type_GUID, const xg::Guid& ent_inst_GUID) override;
 
 			/// @brief Callback for creation of relation types.
-			/// @param relation_type The relation type which was created.
+			/// @param rel_type The relation type which was created.
 			/// @TODO Change to const RelationTypePtr& ?
-			void on_relation_type_created(RelationTypePtr relation_type);
+			void on_relation_type_created(RelationTypePtr rel_type) override;
 
 			/// @brief Callback for deletion of relation types.
-			/// @param type_GUID The GUID of the relation type which was deleted.
-			void on_relation_type_deleted(const xg::Guid& type_GUID);
+			/// @param rel_type_GUID The GUID of the relation type which was deleted.
+			void on_relation_type_deleted(const xg::Guid& rel_type_GUID) override;
 
 			/// @brief Callback for creation of relation instances.
-			/// @param relation_instance The relation instance which was created. 
+			/// @param rel_inst The relation instance which was created.
 			/// @TODO Change to const RelationInstancePtr& ?
-			void on_relation_instance_created(RelationInstancePtr relation_instance);
+			void on_relation_instance_created(RelationInstancePtr rel_inst) override;
 
 			/// @brief Callback for deletion of relation instances.
-			/// @param type_GUID The GUID of the relation type of which a relation instance was deleted.
-			/// @param inst_GUID The GUID of the relation instance which was deleted.
-			void on_relation_instance_deleted(const xg::Guid& type_GUID, const xg::Guid& inst_GUID);
+			/// @param rel_type_GUID The GUID of the relation type of which a relation instance was deleted.
+			/// @param rel_inst_GUID The GUID of the relation instance which was deleted.
+			void on_relation_instance_deleted(const xg::Guid& rel_type_GUID, const xg::Guid& rel_inst_GUID) override;
 
 		private:
 
@@ -133,5 +132,4 @@ namespace entity_system {
 
 	};
 
-}
 }
