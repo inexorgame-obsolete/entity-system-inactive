@@ -29,10 +29,6 @@ namespace entity_system {
 			using AttributeList = std::unordered_map<std::string, std::pair<DataType, EnumSet<Feature>>>;
 
 			/// @brief Constructs the type provider by using a specialized builder manager.
-			/// @note The dependencies of this class will be injected automatically with the help of Boost DI.<br>
-			/// https://boost-experimental.github.io/di/user_guide/index.html
-			/// BOOST_DI_INJECT constructor parameters is limited to BOOST_DI_CFG_CTOR_LIMIT_SIZE,<br>
-			/// which by default is set to 10. Not more than 10 arguments can be passed to the DI constructor!<br>
 			/// @param type_builder_manager The builder manager.
 			/// @param type_name The name of the type.
 			/// @param type_attributes The attributes of the type.
