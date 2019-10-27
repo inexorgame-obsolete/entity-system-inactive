@@ -1,7 +1,6 @@
 #include "GUIDBase.hpp"
 
-namespace inexor {
-namespace entity_system {
+namespace inexor::entity_system {
 
 	GUIDBase::GUIDBase()
 	{
@@ -20,8 +19,7 @@ namespace entity_system {
 	}
 
 	GUIDBase::~GUIDBase()
-	{
-	}
+	= default;
 
 	xg::Guid GUIDBase::get_GUID() const
 	{
@@ -38,5 +36,4 @@ namespace entity_system {
 		globally_unique_identifier = xg::newGuid();
 	}
 
-}
 }
