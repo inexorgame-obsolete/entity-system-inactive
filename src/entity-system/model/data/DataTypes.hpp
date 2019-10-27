@@ -27,8 +27,7 @@ constexpr Enum max()
 template <typename Enum>
 using EnumSet = std::bitset<7>;
 
-namespace inexor {
-namespace entity_system {
+namespace inexor::entity_system {
 
 	/// @class ENTSYS_DATA_TYPE
 	/// @brief Data container memory type.
@@ -40,5 +39,4 @@ namespace entity_system {
 	/// @brief The features on a attribute.
 	BETTER_ENUM(Feature, int, ENGINE_INPUT = 0, INPUT, OUTPUT, SYNC_SERVER, SYNC_BROADCAST_CLIENTS, SERVER_CONFIG, CLIENT_CONFIG)
 
-}
 }
