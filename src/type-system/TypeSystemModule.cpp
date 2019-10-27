@@ -1,28 +1,23 @@
 #include "TypeSystemModule.hpp"
 
-namespace inexor {
-namespace entity_system {
-namespace type_system {
+#include <utility>
 
-	TypeSystemModule::TypeSystemModule(
-		TypeSystemProvidersPtr type_system_providers,
-		TypeSystemFactoriesPtr type_system_factories
-	)
-	{
-		this->type_system_providers = type_system_providers;
-		this->type_system_factories = type_system_factories;
-	}
+namespace inexor::entity_system::type_system {
 
-	TypeSystemModule::~TypeSystemModule()
-	{
-	}
-
-	void TypeSystemModule::init()
-	{
-		type_system_providers->init();
-		type_system_factories->init();
-	}
-
+TypeSystemModule::TypeSystemModule(TypeSystemProvidersPtr type_system_providers, TypeSystemFactoriesPtr type_system_factories)
+{
+    this->type_system_providers = std::move(type_system_providers);
+    this->type_system_factories = std::move(type_system_factories);
 }
+
+TypeSystemModule::~TypeSystemModule()
+{
 }
+
+void TypeSystemModule::init()
+{
+    type_system_providers->init();
+    type_system_factories->init();
 }
+
+} // namespace inexor::entity_system::type_system

@@ -1,46 +1,36 @@
 #pragma once
 
-#include "type-system/providers/TypeSystemProviders.hpp"
 #include "type-system/factories/TypeSystemFactories.hpp"
+#include "type-system/providers/TypeSystemProviders.hpp"
 
-namespace inexor {
-namespace entity_system {
-namespace type_system {
+namespace inexor::entity_system::type_system {
 
-	using TypeSystemProvidersPtr = std::shared_ptr<TypeSystemProviders>;
-	using TypeSystemFactoriesPtr = std::shared_ptr<TypeSystemFactories>;
+using TypeSystemProvidersPtr = std::shared_ptr<TypeSystemProviders>;
+using TypeSystemFactoriesPtr = std::shared_ptr<TypeSystemFactories>;
 
-    /// @class TypeSystemModule
-    /// @brief The type system module.
-	class TypeSystemModule
-	{
-		public:
+/// @class TypeSystemModule
+/// @brief The type system module.
+class TypeSystemModule
+{
+    public:
+    /// @brief Constructs the type system module.
+    /// @note The dependencies of this class will be injected automatically.
+    /// @param type_system_providers The providers of the type system.
+    /// @param type_system_factories The factories of the type system.
+    TypeSystemModule(TypeSystemProvidersPtr type_system_providers, TypeSystemFactoriesPtr type_system_factories);
 
-			/// @brief Constructs the type system module.
-            /// @note The dependencies of this class will be injected automatically.
-            /// @param type_system_providers The providers of the type system.
-            /// @param type_system_factories The factories of the type system.
-			TypeSystemModule(
-				TypeSystemProvidersPtr type_system_providers,
-				TypeSystemFactoriesPtr type_system_factories
-			);
+    /// Destructor.
+    ~TypeSystemModule();
 
-            /// Destructor.
-			~TypeSystemModule();
+    /// Initializes the type system module.
+    void init();
 
-			/// Initializes the type system module.
-			void init();
+    private:
+    /// The providers of the type system.
+    TypeSystemProvidersPtr type_system_providers;
 
-		private:
+    /// The factories of the type system.
+    TypeSystemFactoriesPtr type_system_factories;
+};
 
-			/// The providers of the type system.
-			TypeSystemProvidersPtr type_system_providers;
-
-			/// The factories of the type system.
-			TypeSystemFactoriesPtr type_system_factories;
-
-	};
-
-}
-}
-}
+} // namespace inexor::entity_system::type_system
