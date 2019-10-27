@@ -1,9 +1,9 @@
 #pragma once
 
-#include "entity-system/EntitySystemModule.hpp"
-#include "entity-system/managers/EntitySystemDebugger.hpp"
 #include "entity-system-rest/RestServer.hpp"
 #include "entity-system-rest/RestServerLogger.hpp"
+#include "entity-system/EntitySystemModule.hpp"
+#include "entity-system/debugger/EntitySystemDebugger.hpp"
 
 #include "type-system/TypeSystemModule.hpp"
 #include "configuration/ConfigurationModule.hpp"
