@@ -1,25 +1,19 @@
 #include "TimerFactories.hpp"
 
-namespace inexor {
-namespace entity_system {
-namespace type_system {
+#include <utility>
 
-	TimerFactories::TimerFactories(
-		TimerTickFactoryPtr timer_tick_factory
-	)
-	{
-		this->timer_tick_factory = timer_tick_factory;
-	}
+namespace inexor::entity_system::type_system {
 
-	TimerFactories::~TimerFactories()
-	{
-	}
-
-	void TimerFactories::init()
-	{
-		timer_tick_factory->init();
-	}
-
+TimerFactories::TimerFactories(TimerTickFactoryPtr timer_tick_factory)
+{
+    this->timer_tick_factory = std::move(timer_tick_factory);
 }
+
+TimerFactories::~TimerFactories() = default;
+
+void TimerFactories::init()
+{
+    timer_tick_factory->init();
 }
-}
+
+} // namespace inexor::entity_system::type_system

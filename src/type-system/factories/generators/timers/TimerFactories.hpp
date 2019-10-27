@@ -4,38 +4,29 @@
 
 #include <memory>
 
-namespace inexor {
-namespace entity_system {
-namespace type_system {
+namespace inexor::entity_system::type_system {
 
-	using TimerTickFactoryPtr = std::shared_ptr<TimerTickFactory>;
+using TimerTickFactoryPtr = std::shared_ptr<TimerTickFactory>;
 
-    /// @class TimerFactories
-	/// @brief Provides the factories for timers.
-	class TimerFactories
-	{
-		public:
+/// @class TimerFactories
+/// @brief Provides the factories for timers.
+class TimerFactories
+{
+    public:
+    /// @brief Constructs the factories for timers.
+    /// @note The dependencies of this class will be injected automatically.
+    /// @param timer_tick_factory Factory for creating entity instances of type TIMER_TICK.
+    explicit TimerFactories(TimerTickFactoryPtr timer_tick_factory);
 
-			/// @brief Constructs the factories for timers.
-            /// @note The dependencies of this class will be injected automatically.
-            /// @param timer_tick_factory Factory for creating entity instances of type TIMER_TICK.
-			TimerFactories(
-				TimerTickFactoryPtr timer_tick_factory
-			);
+    /// Destructor.
+    ~TimerFactories();
 
-            /// Destructor.
-			~TimerFactories();
+    /// Initializes the factories for timers.
+    void init();
 
-			/// Initializes the factories for timers.
-			void init();
+    private:
+    /// Factory for creating entity instances of type TIMER_TICK.
+    TimerTickFactoryPtr timer_tick_factory;
+};
 
-		private:
-
-			/// Factory for creating entity instances of type TIMER_TICK.
-			TimerTickFactoryPtr timer_tick_factory;
-
-	};
-
-}
-}
-}
+} // namespace inexor::entity_system::type_system
