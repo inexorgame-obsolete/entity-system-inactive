@@ -4,49 +4,43 @@
 
 #include <optional>
 
-namespace inexor {
-namespace entity_system {
+namespace inexor::entity_system {
 
-	/// @class AttributeBase
-	/// @brief A base class for attributes.
-	/// @note We can't directly instantiate this class because it is an abstract class.
-	/// @note AttributeBase does not have a GUID, because it is an abstract base class.
-	/// The GUID is created by the classes which inherits from AttributeBase.
-	class AttributeBase
-	{
-		private:
+/// @class AttributeBase
+/// @brief A base class for attributes.
+/// @note We can't directly instantiate this class because it is an abstract class.
+/// @note AttributeBase does not have a GUID, because it is an abstract base class.
+/// The GUID is created by the classes which inherits from AttributeBase.
+class AttributeBase
+{
+    private:
+    /// @brief The data type of the attribute.
+    /// @note The data is exclusively managed in the instance, not in this base class.
+    DataType attribute_data_type{};
 
-			/// @brief The data type of the attribute.
-			/// @note The data is exclusively managed in the instance, not in this base class.
-			DataType attribute_data_type;
+    /// The features of the attribute.
+    EnumSet<Feature> features;
 
-			/// The features of the attribute.
-			EnumSet<Feature> features;
+    /// The mutex of this class.
+    std::mutex attribute_type_base_mutex;
 
-			/// The mutex of this class.
-			std::mutex attribute_type_base_mutex;
+    protected:
+    /// @brief Constructor.
+    /// @param attr_data_type The data type of the attribute.
+    /// @param features A const EnumSet of the features.
+    AttributeBase(const DataType &attr_data_type, const EnumSet<Feature> &features);
 
-		protected:
+    /// @brief Destructor.
+    ~AttributeBase();
 
-			/// @brief Constructor.
-			/// @param attr_data_type The data type of the attribute.
-			/// @param features A const EnumSet of the features.
-			AttributeBase(const DataType& attr_data_type, const EnumSet<Feature>& features);
+    public:
+    /// @brief Returns the data type of the attribute.
+    /// @return The data type of the attribute.
+    [[nodiscard]] DataType get_attribute_data_type() const;
 
-			/// @brief Destructor.
-			~AttributeBase();
+    /// @brief Returns the features of the attribute.
+    /// @return The features of the attribute.
+    [[nodiscard]] EnumSet<Feature> get_attribute_features() const;
+};
 
-		public:
-
-			/// @brief Returns the data type of the attribute.
-			/// @return The data type of the attribute.
-			DataType get_attribute_data_type() const;
-
-			/// @brief Returns the features of the attribute.
-			/// @return The features of the attribute.
-			EnumSet<Feature> get_attribute_features() const;
-
-	};
-
-}
-}
+} // namespace inexor::entity_system
