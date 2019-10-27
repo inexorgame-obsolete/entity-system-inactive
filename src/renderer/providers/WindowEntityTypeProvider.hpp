@@ -7,7 +7,9 @@
 
 namespace inexor::renderer {
 
-using namespace inexor::entity_system;
+using namespace entity_system;
+
+using EntityTypeBuilderFactoryPtr = std::shared_ptr<EntityTypeBuilderFactory>;
 
 /// @class WindowEntityTypeProvider
 /// @brief Provides an entity type "WINDOW".
@@ -16,7 +18,7 @@ class WindowEntityTypeProvider : public EntityTypeProvider
     public:
     /// @brief Constructs the specialized provider for the entity type 'WINDOW'.
     /// @note The dependencies of this class will be injected automatically.
-    explicit WindowEntityTypeProvider(std::shared_ptr<EntityTypeBuilderFactory> entity_type_builder_factory)
+    explicit WindowEntityTypeProvider(EntityTypeBuilderFactoryPtr entity_type_builder_factory)
         : EntityTypeProvider(std::move(entity_type_builder_factory), TYPE_NAME,
                              {{WINDOW_ID, {DataType::INT, 1 << Feature::OUTPUT}},
                               {WINDOW_TITLE, {DataType::STRING, 1 << Feature::INPUT | 1 << Feature::OUTPUT}},

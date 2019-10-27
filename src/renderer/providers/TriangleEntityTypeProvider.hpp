@@ -7,7 +7,9 @@
 
 namespace inexor::renderer {
 
-using namespace inexor::entity_system;
+using namespace entity_system;
+
+using EntityTypeBuilderFactoryPtr = std::shared_ptr<EntityTypeBuilderFactory>;
 
 /// @class TriangleEntityTypeProvider
 /// @brief Provides an entity type 'TRIANGLE'.
@@ -16,7 +18,7 @@ class TriangleEntityTypeProvider : public EntityTypeProvider
     public:
     /// @brief Constructs the specialized provider for the entity type 'TRIANGLE'.
     /// @note The dependencies of this class will be injected automatically.
-    explicit TriangleEntityTypeProvider(std::shared_ptr<EntityTypeBuilderFactory> entity_type_builder_factory)
+    explicit TriangleEntityTypeProvider(EntityTypeBuilderFactoryPtr entity_type_builder_factory)
         : EntityTypeProvider(std::move(entity_type_builder_factory), TYPE_NAME, {{TRIANGLE_X, {DataType::FLOAT, 1 << Feature::INPUT}}, {TRIANGLE_Y, {DataType::FLOAT, 1 << Feature::INPUT}}}){};
 
     /// Destructor.
