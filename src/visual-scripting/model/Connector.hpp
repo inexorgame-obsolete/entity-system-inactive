@@ -1,6 +1,6 @@
 #pragma once
 
-#include "entity-system/model/base/uuid/GUIDBase.hpp"
+#include "entity-system/model/base/guid/GUIDBase.hpp"
 #include "entity-system/model/entity-attributes/entity-attribute-instances/EntityAttributeInstance.hpp"
 
 #include "react/Domain.h"
