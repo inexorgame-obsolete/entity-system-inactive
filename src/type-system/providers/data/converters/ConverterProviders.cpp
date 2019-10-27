@@ -1,24 +1,18 @@
 #include "ConverterProviders.hpp"
 
-namespace inexor {
-namespace entity_system {
-namespace type_system {
+#include <utility>
 
-	ConverterProviders::ConverterProviders(
-		IntToFloatEntityTypeProviderPtr int_to_float_entity_type_provider
-	)
-	{
-		this->int_to_float_entity_type_provider = int_to_float_entity_type_provider;
-	}
+namespace inexor::entity_system::type_system {
 
-	ConverterProviders::~ConverterProviders()
-	{
-	}
-
-	void ConverterProviders::init()
-	{
-	}
-
+ConverterProviders::ConverterProviders(IntToFloatEntityTypeProviderPtr int_to_float_entity_type_provider)
+{
+    this->int_to_float_entity_type_provider = std::move(int_to_float_entity_type_provider);
 }
+
+ConverterProviders::~ConverterProviders() = default;
+
+void ConverterProviders::init()
+{
 }
-}
+
+} // namespace inexor::entity_system::type_system

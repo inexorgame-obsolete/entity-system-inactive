@@ -7,53 +7,45 @@
 
 #include <memory>
 
-namespace inexor {
-namespace entity_system {
-namespace type_system {
+namespace inexor::entity_system::type_system {
 
-	using BoolConstantEntityTypeProviderPtr = std::shared_ptr<BoolConstantEntityTypeProvider>;
+using BoolConstantEntityTypeProviderPtr = std::shared_ptr<BoolConstantEntityTypeProvider>;
 //	using FloatConstantEntityTypeProviderPtr = std::shared_ptr<FloatConstantEntityTypeProvider>;
 //	using IntConstantEntityTypeProviderPtr = std::shared_ptr<IntConstantEntityTypeProvider>;
 //	using StringConstantEntityTypeProviderPtr = std::shared_ptr<StringConstantEntityTypeProvider>;
 
-    /// @class ConstantProviders
-	/// @brief The constant entity type providers.
-	class ConstantProviders
-	{
-		public:
+/// @class ConstantProviders
+/// @brief The constant entity type providers.
+class ConstantProviders
+{
+    public:
+    /// @brief Constructs the constant entity type providers.
+    /// @note The dependencies of this class will be injected automatically.
+    /// @param bool_constant_entity_type_provider The entity type BOOL_CONSTANT.
+    explicit ConstantProviders(BoolConstantEntityTypeProviderPtr bool_constant_entity_type_provider
+                               //				FloatConstantEntityTypeProvider float_constant_entity_type_provider,
+                               //				IntConstantEntityTypeProvider int_constant_entity_type_provider,
+                               //				StringConstantEntityTypeProvider string_constant_entity_type_provider
+    );
 
-			/// @brief Constructs the constant entity type providers.
-            /// @note The dependencies of this class will be injected automatically.
-            /// @param bool_constant_entity_type_provider The entity type BOOL_CONSTANT.
-			ConstantProviders(
-				BoolConstantEntityTypeProviderPtr bool_constant_entity_type_provider
-//				FloatConstantEntityTypeProvider float_constant_entity_type_provider,
-//				IntConstantEntityTypeProvider int_constant_entity_type_provider,
-//				StringConstantEntityTypeProvider string_constant_entity_type_provider
-			);
+    /// Destructor.
+    ~ConstantProviders();
 
-            /// Destructor.
-			~ConstantProviders();
+    /// Initializes the constant entity type providers.
+    void init();
 
-			/// Initializes the constant entity type providers.
-			void init();
+    private:
+    /// Provides the entity type BOOL_CONSTANT.
+    BoolConstantEntityTypeProviderPtr bool_constant_entity_type_provider;
 
-		private:
+    //			/// Provides the entity type FLOAT_CONSTANT.
+    //			FloatConstantEntityTypeProvider float_constant_entity_type_provider;
+    //
+    //			/// Provides the entity type INT_CONSTANT.
+    //			IntConstantEntityTypeProvider int_constant_entity_type_provider;
+    //
+    //			/// Provides the entity type STRING_CONSTANT.
+    //			StringConstantEntityTypeProvider string_constant_entity_type_provider;
+};
 
-			/// Provides the entity type BOOL_CONSTANT.
-			BoolConstantEntityTypeProviderPtr bool_constant_entity_type_provider;
-
-//			/// Provides the entity type FLOAT_CONSTANT.
-//			FloatConstantEntityTypeProvider float_constant_entity_type_provider;
-//
-//			/// Provides the entity type INT_CONSTANT.
-//			IntConstantEntityTypeProvider int_constant_entity_type_provider;
-//
-//			/// Provides the entity type STRING_CONSTANT.
-//			StringConstantEntityTypeProvider string_constant_entity_type_provider;
-
-	};
-
-}
-}
-}
+} // namespace inexor::entity_system::type_system
