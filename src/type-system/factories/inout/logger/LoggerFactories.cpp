@@ -1,25 +1,19 @@
 #include "LoggerFactories.hpp"
 
-namespace inexor {
-namespace entity_system {
-namespace type_system {
+#include <utility>
 
-	LoggerFactories::LoggerFactories(
-		LoggerFactoryPtr logger_factory
-	)
-	{
-		this->logger_factory = logger_factory;
-	}
+namespace inexor::entity_system::type_system {
 
-	LoggerFactories::~LoggerFactories()
-	{
-	}
-
-	void LoggerFactories::init()
-	{
-		logger_factory->init();
-	}
-
+LoggerFactories::LoggerFactories(LoggerFactoryPtr logger_factory)
+{
+    this->logger_factory = std::move(logger_factory);
 }
+
+LoggerFactories::~LoggerFactories() = default;
+
+void LoggerFactories::init()
+{
+    logger_factory->init();
 }
-}
+
+} // namespace inexor::entity_system::type_system
