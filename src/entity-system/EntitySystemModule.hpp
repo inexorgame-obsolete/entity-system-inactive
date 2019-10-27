@@ -1,8 +1,8 @@
 #pragma once
 
+#include "entity-system/factories/BuilderFactories.hpp"
 #include "entity-system/managers/EntityManager.hpp"
 #include "entity-system/managers/RelationManager.hpp"
-#include "entity-system/managers/BuilderFactoryManager.hpp"
 #include "logging/managers/LogManager.hpp"
 
 namespace inexor {
@@ -17,7 +17,7 @@ namespace entity_system {
 			/// These using instructions help to shorten the following code.
 			using EntityManagerPtr = std::shared_ptr<EntityManager>;
 			using RelationManagerPtr = std::shared_ptr<RelationManager>;
-			using BuilderFactoryManagerPtr = std::shared_ptr<BuilderFactoryManager>;
+			using BuilderFactoriesPtr = std::shared_ptr<BuilderFactories>;
 			using LogManagerPtr = std::shared_ptr<logging::LogManager>;
 
 			/// @brief Constructs the entity system module.
@@ -27,12 +27,12 @@ namespace entity_system {
 			/// https://boost-experimental.github.io/di/user_guide/index.html
 			/// @param entity_manager The manager for entity types, entity instances, attribute types and attribute instances.
 			/// @param relation_manager The manager for relation types, relation instances, relation attribute types and relation attribute instances.
-			/// @param builder_factory_manager The manager for the builder factories.
+			/// @param builder_factories The manager for the builder factories.
 			/// @param log_manager The log manager.
 			EntitySystemModule(
 				EntityManagerPtr entity_manager,
 				RelationManagerPtr relation_manager,
-				BuilderFactoryManagerPtr builder_factory_manager,
+				BuilderFactoriesPtr builder_factories,
 				LogManagerPtr log_manager
 			);
 
@@ -62,7 +62,7 @@ namespace entity_system {
 			RelationManagerPtr relation_manager;
 
 			/// The manager for the builder factories.
-			BuilderFactoryManagerPtr builder_factory_manager;
+            BuilderFactoriesPtr builder_factories;
 
 			/// The manager for logging.
 			LogManagerPtr log_manager;

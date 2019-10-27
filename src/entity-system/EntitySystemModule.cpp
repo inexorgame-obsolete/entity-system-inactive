@@ -6,7 +6,7 @@ namespace entity_system {
 	EntitySystemModule::EntitySystemModule(
 		EntityManagerPtr entity_manager,
 		RelationManagerPtr relation_manager,
-		BuilderFactoryManagerPtr builder_factory_manager,
+		BuilderFactoriesPtr builder_factories,
 		LogManagerPtr log_manager
 	)
 	{
@@ -15,7 +15,7 @@ namespace entity_system {
 
 		this->entity_manager = entity_manager;
 		this->relation_manager = relation_manager;
-		this->builder_factory_manager = builder_factory_manager;
+		this->builder_factories = builder_factories;
 		this->log_manager = log_manager;
 	}
 
