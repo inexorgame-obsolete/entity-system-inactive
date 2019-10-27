@@ -17,10 +17,6 @@ namespace entity_system {
 		public:
 
 			/// @brief Constructor.
-			/// @note The dependencies of this class will be injected automatically with the help of Boost DI.<br>
-			/// For more information see https://boost-experimental.github.io/di/user_guide/index.html
-			/// BOOST_DI_INJECT constructor parameters is limited to BOOST_DI_CFG_CTOR_LIMIT_SIZE,<br>
-			/// which by default is set to 10. Not more than 10 arguments can be passed to the DI constructor!<br>
 			/// @param entity_relation_type_manager The relation type manager.
 			/// @param entity_relation_instance_manager The relation instance manager.
 			/// @param entity_relation_attribute_type_manager The relation attribute type manager.
