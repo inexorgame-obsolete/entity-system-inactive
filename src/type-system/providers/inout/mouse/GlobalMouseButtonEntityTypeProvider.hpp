@@ -3,9 +3,9 @@
 #include "entity-system/factories/entities/entity-type-builder-factory/EntityTypeBuilderFactory.hpp"
 #include "entity-system/providers/EntityTypeProvider.hpp"
 
-namespace inexor {
-namespace entity_system {
-namespace type_system {
+#include <utility>
+
+namespace inexor::entity_system::type_system {
 
     /// @class GlobalMouseButtonEntityTypeProvider
 	/// @brief Provides an entity type "GLOBAL_MOUSE_BUTTON".
@@ -16,10 +16,10 @@ namespace type_system {
 			/// @brief Constructs the specialized provider for the entity type GLOBAL_MOUSE_BUTTON.
             /// @note The dependencies of this class will be injected automatically.
             /// @param entity_type_builder_manager The entity type builder manager.
-			GlobalMouseButtonEntityTypeProvider(
+			explicit GlobalMouseButtonEntityTypeProvider(
 				std::shared_ptr<EntityTypeBuilderFactory> entity_type_builder_manager
 			) : EntityTypeProvider(
-				entity_type_builder_manager,
+				std::move(entity_type_builder_manager),
 				TYPE_NAME,
 				{
 					{ GLOBAL_MOUSE_BUTTON_NUMBER, { DataType::INT, 1 << Feature::OUTPUT } },
@@ -29,7 +29,7 @@ namespace type_system {
 			) {};
 
             /// Destructor.
-			~GlobalMouseButtonEntityTypeProvider() {};
+			~GlobalMouseButtonEntityTypeProvider() override = default;
 
 			/// Defines the name of this entity type
 			static constexpr char TYPE_NAME[] = "GLOBAL_MOUSE_BUTTON";
@@ -45,6 +45,4 @@ namespace type_system {
 
 	};
 
-}
-}
 }
