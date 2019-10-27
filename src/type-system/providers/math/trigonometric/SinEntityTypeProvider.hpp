@@ -3,44 +3,32 @@
 #include "entity-system/factories/entities/entity-type-builder-factory/EntityTypeBuilderFactory.hpp"
 #include "entity-system/providers/EntityTypeProvider.hpp"
 
-namespace inexor {
-namespace entity_system {
-namespace type_system {
+#include <utility>
 
-    /// @class SinEntityTypeProvider
-	/// @brief Provides an entity type "SIN": sin_value = sin(sin_input).
-	class SinEntityTypeProvider : public EntityTypeProvider
-	{
-		public:
+namespace inexor::entity_system::type_system {
 
-			/// @brief Constructs the specialized provider for the entity type SIN.
-            /// @note The dependencies of this class will be injected automatically.
-            /// @param entity_type_builder_manager The entity type builder manager.
-			SinEntityTypeProvider(
-				std::shared_ptr<EntityTypeBuilderFactory> entity_type_builder_manager
-			) : EntityTypeProvider(
-				entity_type_builder_manager,
-				TYPE_NAME,
-				{
-					{ SIN_INPUT, { DataType::FLOAT, 1 << Feature::INPUT } },
-					{ SIN_VALUE, { DataType::FLOAT, 1 << Feature::OUTPUT } }
-				}
-			) {};
+/// @class SinEntityTypeProvider
+/// @brief Provides an entity type "SIN": sin_value = sin(sin_input).
+class SinEntityTypeProvider : public EntityTypeProvider
+{
+    public:
+    /// @brief Constructs the specialized provider for the entity type SIN.
+    /// @note The dependencies of this class will be injected automatically.
+    /// @param entity_type_builder_manager The entity type builder manager.
+    explicit SinEntityTypeProvider(std::shared_ptr<EntityTypeBuilderFactory> entity_type_builder_manager)
+        : EntityTypeProvider(std::move(entity_type_builder_manager), TYPE_NAME, {{SIN_INPUT, {DataType::FLOAT, 1 << Feature::INPUT}}, {SIN_VALUE, {DataType::FLOAT, 1 << Feature::OUTPUT}}}){};
 
-            /// Destructor.
-			~SinEntityTypeProvider() {};
+    /// Destructor.
+    ~SinEntityTypeProvider() override = default;
 
-			/// Defines the name of this entity type.
-			static constexpr char TYPE_NAME[] = "SIN";
+    /// Defines the name of this entity type.
+    static constexpr char TYPE_NAME[] = "SIN";
 
-			/// The name for the attribute sin_input.
-			static constexpr char SIN_INPUT[] = "sin_input";
+    /// The name for the attribute sin_input.
+    static constexpr char SIN_INPUT[] = "sin_input";
 
-			/// The name for the attribute sin_value.
-			static constexpr char SIN_VALUE[] = "sin_value";
+    /// The name for the attribute sin_value.
+    static constexpr char SIN_VALUE[] = "sin_value";
+};
 
-	};
-
-}
-}
-}
+} // namespace inexor::entity_system::type_system
