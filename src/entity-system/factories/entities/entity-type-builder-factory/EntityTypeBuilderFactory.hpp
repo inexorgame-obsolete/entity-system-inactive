@@ -14,8 +14,9 @@ using EntityAttributeTypeManagerPtr = std::shared_ptr<EntityAttributeTypeManager
 using EntityAttributeInstanceManagerPtr = std::shared_ptr<EntityAttributeInstanceManager>;
 
 /// @class EntityTypeBuilderFactory
-/// @brief A builder class for entity types.
+/// @brief A factory for getting a builder for creating entity types.
 /// @note For more information on the builder software pattern see
+/// https://en.wikipedia.org/wiki/Factory_method_pattern
 /// https://en.wikipedia.org/wiki/Builder_pattern
 class EntityTypeBuilderFactory
 {
