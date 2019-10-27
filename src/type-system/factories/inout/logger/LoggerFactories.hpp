@@ -4,38 +4,29 @@
 
 #include <memory>
 
-namespace inexor {
-namespace entity_system {
-namespace type_system {
+namespace inexor::entity_system::type_system {
 
-	using LoggerFactoryPtr = std::shared_ptr<LoggerFactory>;
+using LoggerFactoryPtr = std::shared_ptr<LoggerFactory>;
 
-    /// @class LoggerFactories
-	/// @brief The logger factories.
-	class LoggerFactories
-	{
-		public:
+/// @class LoggerFactories
+/// @brief The logger factories.
+class LoggerFactories
+{
+    public:
+    /// @brief Constructs the logger factories.
+    /// @note The dependencies of this class will be injected automatically.
+    /// @param logger_factory Factory for creating entity instances of type LOGGER.
+    explicit LoggerFactories(LoggerFactoryPtr logger_factory);
 
-			/// @brief Constructs the logger factories.
-            /// @note The dependencies of this class will be injected automatically.
-            /// @param logger_factory Factory for creating entity instances of type LOGGER.
-			LoggerFactories(
-				LoggerFactoryPtr logger_factory
-			);
+    /// Destructor.
+    ~LoggerFactories();
 
-            /// Destructor.
-			~LoggerFactories();
+    /// Initializes the logger factories.
+    void init();
 
-			/// Initializes the logger factories.
-			void init();
+    private:
+    /// Factory for creating entity instances of type LOGGER.
+    LoggerFactoryPtr logger_factory;
+};
 
-		private:
-
-			/// Factory for creating entity instances of type LOGGER.
-			LoggerFactoryPtr logger_factory;
-
-	};
-
-}
-}
-}
+} // namespace inexor::entity_system::type_system
