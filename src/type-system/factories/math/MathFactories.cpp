@@ -1,28 +1,21 @@
 #include "MathFactories.hpp"
 
-namespace inexor {
-namespace entity_system {
-namespace type_system {
+#include <utility>
 
-	MathFactories::MathFactories(
-		ArithmeticFactoriesPtr arithmetic_factories,
-		TrigonometricFactoriesPtr trigonometric_factories
-	)
-	{
-		this->arithmetic_factories = arithmetic_factories;
-		this->trigonometric_factories = trigonometric_factories;
-	}
+namespace inexor::entity_system::type_system {
 
-	MathFactories::~MathFactories()
-	{
-	}
-
-	void MathFactories::init()
-	{
-		arithmetic_factories->init();
-		trigonometric_factories->init();
-	}
-
+MathFactories::MathFactories(ArithmeticFactoriesPtr arithmetic_factories, TrigonometricFactoriesPtr trigonometric_factories)
+{
+    this->arithmetic_factories = std::move(arithmetic_factories);
+    this->trigonometric_factories = std::move(trigonometric_factories);
 }
+
+MathFactories::~MathFactories() = default;
+
+void MathFactories::init()
+{
+    arithmetic_factories->init();
+    trigonometric_factories->init();
 }
-}
+
+} // namespace inexor::entity_system::type_system
