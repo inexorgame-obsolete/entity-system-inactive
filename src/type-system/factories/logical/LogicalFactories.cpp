@@ -1,28 +1,21 @@
 #include "LogicalFactories.hpp"
 
-namespace inexor {
-namespace entity_system {
-namespace type_system {
+#include <utility>
 
-	LogicalFactories::LogicalFactories(
-		ComparisonFactoriesPtr comparison_factories,
-		GateFactoriesPtr gate_factories
-	)
-	{
-		this->comparison_factories = comparison_factories;
-		this->gate_factories = gate_factories;
-	}
+namespace inexor::entity_system::type_system {
 
-	LogicalFactories::~LogicalFactories()
-	{
-	}
-
-	void LogicalFactories::init()
-	{
-		comparison_factories->init();
-		gate_factories->init();
-	}
-
+LogicalFactories::LogicalFactories(ComparisonFactoriesPtr comparison_factories, GateFactoriesPtr gate_factories)
+{
+    this->comparison_factories = std::move(comparison_factories);
+    this->gate_factories = std::move(gate_factories);
 }
+
+LogicalFactories::~LogicalFactories() = default;
+
+void LogicalFactories::init()
+{
+    comparison_factories->init();
+    gate_factories->init();
 }
-}
+
+} // namespace inexor::entity_system::type_system
