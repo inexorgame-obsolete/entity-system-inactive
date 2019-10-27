@@ -7,7 +7,9 @@
 
 namespace inexor::renderer {
 
-using namespace inexor::entity_system;
+using namespace entity_system;
+
+using EntityTypeBuilderFactoryPtr = std::shared_ptr<EntityTypeBuilderFactory>;
 
 /// @class MonitorEntityTypeProvider
 /// @brief Provides an entity type "MONITOR".
@@ -16,7 +18,7 @@ class MonitorEntityTypeProvider : public EntityTypeProvider
     public:
     /// @brief Constructs the specialized provider for the entity type 'MONITOR'.
     /// @note The dependencies of this class will be injected automatically.
-    explicit MonitorEntityTypeProvider(std::shared_ptr<EntityTypeBuilderFactory> entity_type_builder_factory)
+    explicit MonitorEntityTypeProvider(EntityTypeBuilderFactoryPtr entity_type_builder_factory)
         : EntityTypeProvider(std::move(entity_type_builder_factory), TYPE_NAME,
                              {{MONITOR_TITLE, {DataType::STRING, 1 << Feature::INPUT | 1 << Feature::OUTPUT}},
                               {MONITOR_POSITION_X, {DataType::INT, 1 << Feature::INPUT | 1 << Feature::OUTPUT}},
