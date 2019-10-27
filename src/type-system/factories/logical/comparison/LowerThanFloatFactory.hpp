@@ -4,49 +4,39 @@
 #include "entity-system/model/entities/entity-instances/EntityInstance.hpp"
 #include "type-system/providers/logical/comparison/LowerThanFloatEntityTypeProvider.hpp"
 
-namespace inexor {
-namespace entity_system {
-namespace type_system {
+namespace inexor::entity_system::type_system {
 
-	using EntityInstancePtrOpt = std::optional<std::shared_ptr<EntityInstance>>;
+using EntityInstancePtrOpt = std::optional<std::shared_ptr<EntityInstance>>;
 
-    /// @class LowerThanFloatFactory
-    /// @brief Factory for creating entity instances of type LOWER_THAN_FLOAT.
-	class LowerThanFloatFactory
-	{
-		public:
+/// @class LowerThanFloatFactory
+/// @brief Factory for creating entity instances of type LOWER_THAN_FLOAT.
+class LowerThanFloatFactory
+{
+    public:
+    using LowerThanFloatEntityTypeProviderPtr = std::shared_ptr<LowerThanFloatEntityTypeProvider>;
+    using EntityInstanceBuilderFactoryPtr = std::shared_ptr<EntityInstanceBuilderFactory>;
 
-			using LowerThanFloatEntityTypeProviderPtr = std::shared_ptr<LowerThanFloatEntityTypeProvider>;
-			using EntityInstanceBuilderFactoryPtr = std::shared_ptr<EntityInstanceBuilderFactory>;
+    /// @brief Constructs a factory for creating entity instances of type LOWER_THAN_FLOAT.
+    /// @note The dependencies of this class will be injected automatically.
+    /// @param entity_type_provider Provides the entity type LOWER_THAN_FLOAT.
+    /// @param entity_instance_builder_factory Factory for creating entity instance builders.
+    LowerThanFloatFactory(LowerThanFloatEntityTypeProviderPtr entity_type_provider, EntityInstanceBuilderFactoryPtr entity_instance_builder_factory);
 
-			/// @brief Constructs a factory for creating entity instances of type LOWER_THAN_FLOAT.
-            /// @note The dependencies of this class will be injected automatically.
-            /// @param entity_type_provider Provides the entity type LOWER_THAN_FLOAT.
-            /// @param entity_instance_builder_factory Factory for creating entity instance builders.
-			LowerThanFloatFactory(
-				LowerThanFloatEntityTypeProviderPtr entity_type_provider,
-				EntityInstanceBuilderFactoryPtr entity_instance_builder_factory
-			);
+    /// Destructor.
+    ~LowerThanFloatFactory();
 
-            /// Destructor.
-			~LowerThanFloatFactory();
+    /// Initializes the factory.
+    void init();
 
-			/// Initializes the factory.
-			void init();
+    /// Creates an instance with default values
+    EntityInstancePtrOpt create_instance();
 
-			/// Creates an instance with default values
-			EntityInstancePtrOpt create_instance();
+    private:
+    /// Provides the entity type LOWER_THAN_FLOAT.
+    LowerThanFloatEntityTypeProviderPtr entity_type_provider;
 
-		private:
+    /// Factory for creating entity instance builders.
+    EntityInstanceBuilderFactoryPtr entity_instance_builder_factory;
+};
 
-			/// Provides the entity type LOWER_THAN_FLOAT.
-			LowerThanFloatEntityTypeProviderPtr entity_type_provider;
-
-			/// Factory for creating entity instance builders.
-			EntityInstanceBuilderFactoryPtr entity_instance_builder_factory;
-
-	};
-
-}
-}
-}
+} // namespace inexor::entity_system::type_system

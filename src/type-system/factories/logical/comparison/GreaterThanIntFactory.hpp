@@ -4,49 +4,39 @@
 #include "entity-system/model/entities/entity-instances/EntityInstance.hpp"
 #include "type-system/providers/logical/comparison/GreaterThanIntEntityTypeProvider.hpp"
 
-namespace inexor {
-namespace entity_system {
-namespace type_system {
+namespace inexor::entity_system::type_system {
 
-	using EntityInstancePtrOpt = std::optional<std::shared_ptr<EntityInstance>>;
+using EntityInstancePtrOpt = std::optional<std::shared_ptr<EntityInstance>>;
 
-    /// @class GreaterThanIntFactory
-    /// @brief Factory for creating entity instances of type GREATER_THAN_INT.
-	class GreaterThanIntFactory
-	{
-		public:
+/// @class GreaterThanIntFactory
+/// @brief Factory for creating entity instances of type GREATER_THAN_INT.
+class GreaterThanIntFactory
+{
+    public:
+    using GreaterThanIntEntityTypeProviderPtr = std::shared_ptr<GreaterThanIntEntityTypeProvider>;
+    using EntityInstanceBuilderFactoryPtr = std::shared_ptr<EntityInstanceBuilderFactory>;
 
-			using GreaterThanIntEntityTypeProviderPtr = std::shared_ptr<GreaterThanIntEntityTypeProvider>;
-			using EntityInstanceBuilderFactoryPtr = std::shared_ptr<EntityInstanceBuilderFactory>;
+    /// @brief Constructs a factory for creating entity instances of type GREATER_THAN_INT.
+    /// @note The dependencies of this class will be injected automatically.
+    /// @param entity_type_provider Provides the entity type GREATER_THAN_INT.
+    /// @param entity_instance_builder_factory Factory for creating entity instance builders.
+    GreaterThanIntFactory(GreaterThanIntEntityTypeProviderPtr entity_type_provider, EntityInstanceBuilderFactoryPtr entity_instance_builder_factory);
 
-			/// @brief Constructs a factory for creating entity instances of type GREATER_THAN_INT.
-            /// @note The dependencies of this class will be injected automatically.
-            /// @param entity_type_provider Provides the entity type GREATER_THAN_INT.
-            /// @param entity_instance_builder_factory Factory for creating entity instance builders.
-			GreaterThanIntFactory(
-				GreaterThanIntEntityTypeProviderPtr entity_type_provider,
-				EntityInstanceBuilderFactoryPtr entity_instance_builder_factory
-			);
+    /// Destructor.
+    ~GreaterThanIntFactory();
 
-            /// Destructor.
-			~GreaterThanIntFactory();
+    /// Initializes the factory.
+    void init();
 
-			/// Initializes the factory.
-			void init();
+    /// Creates an instance with default values.
+    EntityInstancePtrOpt create_instance();
 
-			/// Creates an instance with default values.
-			EntityInstancePtrOpt create_instance();
+    private:
+    /// Provides the entity type GREATER_THAN_INT.
+    GreaterThanIntEntityTypeProviderPtr entity_type_provider;
 
-		private:
+    /// Factory for creating entity instance builders.
+    EntityInstanceBuilderFactoryPtr entity_instance_builder_factory;
+};
 
-			/// Provides the entity type GREATER_THAN_INT.
-			GreaterThanIntEntityTypeProviderPtr entity_type_provider;
-
-			/// Factory for creating entity instance builders.
-			EntityInstanceBuilderFactoryPtr entity_instance_builder_factory;
-
-	};
-
-}
-}
-}
+} // namespace inexor::entity_system::type_system
