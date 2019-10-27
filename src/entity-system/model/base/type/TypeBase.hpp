@@ -1,6 +1,6 @@
 #pragma once
 
-#include "entity-system/util/uuid/GUIDBase.hpp"
+#include "entity-system/model/base/uuid/GUIDBase.hpp"
 
 #include <string>
 
