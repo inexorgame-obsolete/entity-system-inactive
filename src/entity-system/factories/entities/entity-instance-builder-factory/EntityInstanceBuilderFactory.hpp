@@ -12,8 +12,9 @@ using EntityInstanceManagerPtr = std::shared_ptr<EntityInstanceManager>;
 using EntityTypeManagerPtr = std::shared_ptr<EntityTypeManager>;
 
 /// @class EntityInstanceBuilderFactory
-/// @brief A builder class for entity instances.
+/// @brief A factory for getting a builder for creating entity instances.
 /// @note For more information on the builder software pattern see
+/// https://en.wikipedia.org/wiki/Factory_method_pattern
 /// https://en.wikipedia.org/wiki/Builder_pattern
 class EntityInstanceBuilderFactory
 {
