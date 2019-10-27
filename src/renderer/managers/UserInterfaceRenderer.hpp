@@ -7,47 +7,39 @@
 
 struct GLFWwindow;
 
-namespace inexor {
-namespace renderer {
+namespace inexor::renderer {
 
-	using LogManagerPtr = std::shared_ptr<logging::LogManager>;
-	using EntityInstancePtr = std::shared_ptr<entity_system::EntityInstance>;
+using LogManagerPtr = std::shared_ptr<logging::LogManager>;
+using EntityInstancePtr = std::shared_ptr<entity_system::EntityInstance>;
 
-	/// @class UserInterfaceRenderer
-	/// @brief Renders the user interfaces.
-	class UserInterfaceRenderer
-	: public std::enable_shared_from_this<UserInterfaceRenderer>
-	{
-		public:
+/// @class UserInterfaceRenderer
+/// @brief Renders the user interfaces.
+class UserInterfaceRenderer : public std::enable_shared_from_this<UserInterfaceRenderer>
+{
+    public:
+    /// @brief Constructor.
+    /// @note The dependencies of this class will be injected automatically.
+    /// @param log_manager The log manager.
+    explicit UserInterfaceRenderer(LogManagerPtr log_manager);
 
-			/// @brief Constructor.
-			/// @note The dependencies of this class will be injected automatically.
-			/// @param log_manager The log manager.
-			UserInterfaceRenderer(
-				LogManagerPtr log_manager
-			);
+    /// Destructor.
+    ~UserInterfaceRenderer();
 
-			/// Destructor.
-			~UserInterfaceRenderer();
+    /// Initialize the user interface renderer.
+    void init();
 
-			/// Initialize the user interface renderer.
-			void init();
+    /// Shut down the user interface renderer.
+    void shutdown();
 
-			/// Shut down the user interface renderer.
-			void shutdown();
+    /// Renders the user interfaces.
+    void render_user_interfaces(const EntityInstancePtr& window, GLFWwindow *glfw_window, Magnum::Timeline timeline);
 
-			/// Renders the user interfaces.
-			void render_user_interfaces(EntityInstancePtr window, GLFWwindow* glfw_window, Magnum::Timeline timeline);
+    /// The logger name of this service.
+    static constexpr char LOGGER_NAME[] = "inexor.renderer.ui";
 
-			/// The logger name of this service.
-			static constexpr char LOGGER_NAME[] = "inexor.renderer.ui";
+    private:
+    /// The log manager.
+    LogManagerPtr log_manager;
+};
 
-		private:
-
-			/// The log manager.
-			LogManagerPtr log_manager;
-
-	};
-
-}
-}
+} // namespace inexor::renderer

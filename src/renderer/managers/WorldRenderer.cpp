@@ -2,20 +2,20 @@
 
 #include <GLFW/glfw3.h>
 
+#include <utility>
+
 #include "spdlog/spdlog.h"
 
-namespace inexor {
-namespace renderer {
+namespace inexor::renderer {
 
 	WorldRenderer::WorldRenderer(
 		LogManagerPtr log_manager
 	) {
-		this->log_manager = log_manager;
+		this->log_manager = std::move(log_manager);
 	}
 
 	WorldRenderer::~WorldRenderer()
-	{
-	}
+	= default;
 
 	void WorldRenderer::init()
 	{
@@ -26,9 +26,8 @@ namespace renderer {
 	{
 	}
 
-	void WorldRenderer::render_worlds(EntityInstancePtr window, GLFWwindow*, Magnum::Timeline timeline)
+	void WorldRenderer::render_worlds(const EntityInstancePtr& window, GLFWwindow*, Magnum::Timeline timeline)
 	{
 	}
 
-}
 }
