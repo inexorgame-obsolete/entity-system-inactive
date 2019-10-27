@@ -1,31 +1,23 @@
 #include "DataFactories.hpp"
 
-namespace inexor {
-namespace entity_system {
-namespace type_system {
+#include <utility>
 
-	DataFactories::DataFactories(
-		ConstantFactoriesPtr constant_factories,
-		ConverterFactoriesPtr converter_factories,
-		StoreFactoriesPtr store_factories
-	)
-	{
-		this->constant_factories = constant_factories;
-		this->converter_factories = converter_factories;
-		this->store_factories = store_factories;
-	}
+namespace inexor::entity_system::type_system {
 
-	DataFactories::~DataFactories()
-	{
-	}
-
-	void DataFactories::init()
-	{
-		constant_factories->init();
-		converter_factories->init();
-		store_factories->init();
-	}
-
+DataFactories::DataFactories(ConstantFactoriesPtr constant_factories, ConverterFactoriesPtr converter_factories, StoreFactoriesPtr store_factories)
+{
+    this->constant_factories = std::move(constant_factories);
+    this->converter_factories = std::move(converter_factories);
+    this->store_factories = std::move(store_factories);
 }
+
+DataFactories::~DataFactories() = default;
+
+void DataFactories::init()
+{
+    constant_factories->init();
+    converter_factories->init();
+    store_factories->init();
 }
-}
+
+} // namespace inexor::entity_system::type_system

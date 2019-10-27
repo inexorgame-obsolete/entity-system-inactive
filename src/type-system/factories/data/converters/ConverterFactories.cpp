@@ -1,25 +1,19 @@
 #include "ConverterFactories.hpp"
 
-namespace inexor {
-namespace entity_system {
-namespace type_system {
+#include <utility>
 
-	ConverterFactories::ConverterFactories(
-		IntToFloatFactoryPtr int_to_float_factory
-	)
-	{
-		this->int_to_float_factory = int_to_float_factory;
-	}
+namespace inexor::entity_system::type_system {
 
-	ConverterFactories::~ConverterFactories()
-	{
-	}
-
-	void ConverterFactories::init()
-	{
-		int_to_float_factory->init();
-	}
-
+ConverterFactories::ConverterFactories(IntToFloatFactoryPtr int_to_float_factory)
+{
+    this->int_to_float_factory = std::move(int_to_float_factory);
 }
+
+ConverterFactories::~ConverterFactories() = default;
+
+void ConverterFactories::init()
+{
+    int_to_float_factory->init();
 }
-}
+
+} // namespace inexor::entity_system::type_system
