@@ -9,8 +9,7 @@
 #include "visual-scripting/model/Processor.hpp"
 #include "logging/managers/LogManager.hpp"
 
-namespace inexor {
-namespace visual_scripting {
+namespace inexor::visual_scripting {
 
 	using namespace react;
 
@@ -39,22 +38,22 @@ namespace visual_scripting {
             /// @param entity_instance_manager The entity instance manager.
             /// @param log_manager The log manager.
 			GreaterThanIntProcessor(
-				GreaterThanIntEntityTypeProviderPtr entity_type_provider,
+				const GreaterThanIntEntityTypeProviderPtr& entity_type_provider,
 				EntityInstanceManagerPtr entity_instance_manager,
 				LogManagerPtr log_manager
 			);
 
             /// Destructor.
-			~GreaterThanIntProcessor();
+			~GreaterThanIntProcessor() override;
 
 			/// Initialization of the processor.
 			void init();
 
 			/// Called when an entity instance of type GREATER_THAN_INT has been created.
-			void on_entity_instance_created(EntityInstancePtr entity_instance);
+			void on_entity_instance_created(EntityInstancePtr entity_instance) override;
 
 			/// Called when an entity instance of type GREATER_THAN_INT has been deleted.
-			void on_entity_instance_deleted(const xg::Guid& type_GUID, const xg::Guid& inst_GUID);
+			void on_entity_instance_deleted(const xg::Guid& type_GUID, const xg::Guid& inst_GUID) override;
 
 			/// Initialization of the processor signals.
 			void make_signals(const EntityInstancePtr& entity_instance);
@@ -78,5 +77,4 @@ namespace visual_scripting {
 
     };
 
-}
 }
