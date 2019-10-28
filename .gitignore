@@ -34,18 +34,23 @@
 # Output folders
 bin/
 build/
+cmake-build-debug/
+cmake-build-release/
 documentation/
 assets/
 
-/desktop.ini
-/dependencies
+# IDEs
 /.vs
 /EntitySystem.sln
-/EntitySystem
-/CMakeCache.txt
 /.cproject
 /.project
 /.settings
+/.idea
+
+/desktop.ini
+/dependencies
+/EntitySystem
+/CMakeCache.txt
 /inexor.log
 *.DS_STORE
 /.conan
