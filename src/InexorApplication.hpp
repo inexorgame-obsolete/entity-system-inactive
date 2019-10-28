@@ -5,23 +5,23 @@
 #include "entity-system/EntitySystemModule.hpp"
 #include "entity-system/debugger/EntitySystemDebugger.hpp"
 
-#include "type-system/TypeSystemModule.hpp"
-#include "configuration/ConfigurationModule.hpp"
-#include "visual-scripting/VisualScriptingSystemModule.hpp"
-#include "logging/managers/LogManager.hpp"
-#include "command/CommandModule.hpp"
 #include "client/ClientModule.hpp"
+#include "command/CommandModule.hpp"
+#include "configuration/ConfigurationModule.hpp"
+#include "logging/managers/LogManager.hpp"
+#include "type-system/TypeSystemModule.hpp"
+#include "visual-scripting/VisualScriptingSystemModule.hpp"
 
-#include <memory>
-#include <cstdlib>
-#include <restbed>
 #include <csignal>
+#include <cstdlib>
+#include <memory>
+#include <restbed>
 #include <sys/types.h>
 
 #ifdef _WIN32
-    #include <process.h>
+#include <process.h>
 #else
-    #include <unistd.h>
+#include <unistd.h>
 #endif
 
 #include <boost/di.hpp>
@@ -30,153 +30,131 @@
 
 namespace inexor {
 
-	using EntitySystemModulePtr = std::shared_ptr<entity_system::EntitySystemModule>;
-	using TypeSystemModulePtr = std::shared_ptr<entity_system::type_system::TypeSystemModule>;
-	using ConfigurationModulePtr = std::shared_ptr<configuration::ConfigurationModule>;
-	using RestServerPtr = std::shared_ptr<entity_system::RestServer>;
-	using EntitySystemDebuggerPtr = std::shared_ptr<entity_system::EntitySystemDebugger>;
-	using VisualScriptingSystemModulePtr = std::shared_ptr<visual_scripting::VisualScriptingSystemModule>;
-	using CommandModulePtr = std::shared_ptr<command::CommandModule>;
-	using ClientModulePtr = std::shared_ptr<client::ClientModule>;
-	using LogManagerPtr = std::shared_ptr<logging::LogManager>;
+using EntitySystemModulePtr = std::shared_ptr<entity_system::EntitySystemModule>;
+using TypeSystemModulePtr = std::shared_ptr<entity_system::type_system::TypeSystemModule>;
+using ConfigurationModulePtr = std::shared_ptr<configuration::ConfigurationModule>;
+using RestServerPtr = std::shared_ptr<entity_system::RestServer>;
+using EntitySystemDebuggerPtr = std::shared_ptr<entity_system::EntitySystemDebugger>;
+using VisualScriptingSystemModulePtr = std::shared_ptr<visual_scripting::VisualScriptingSystemModule>;
+using CommandModulePtr = std::shared_ptr<command::CommandModule>;
+using ClientModulePtr = std::shared_ptr<client::ClientModule>;
+using LogManagerPtr = std::shared_ptr<logging::LogManager>;
 
-	/// @class Inexor
-	/// @brief The application container.
-	class InexorApplication
-	{
-		public:
+/// @class Inexor
+/// @brief The application container.
+class InexorApplication
+{
+    public:
+    /// @brief Constructs the Inexor application.
+    /// @note The dependencies of this class will be injected automatically.
+    /// @param entity_system_module The entity system of Inexor.
+    /// @param type_system_module The type system manager.
+    /// @param configuration_module The configuration manager module.
+    /// @param rest_server The REST server module of the entity system.
+    /// @param entity_system_debugger The debugger of the entity system module.
+    /// @param visual_scripting_system_module The visual scripting system module.
+    /// @param log_manager The log module.
+    /// @param renderer_manager The rendering module.
+    /// @param command_module The command module.
+    /// @param audio_module The audio module.
+    InexorApplication(EntitySystemModulePtr entity_system_module, TypeSystemModulePtr type_system_module, ConfigurationModulePtr configuration_module, RestServerPtr rest_server, EntitySystemDebuggerPtr entity_system_debugger,
+                      VisualScriptingSystemModulePtr visual_scripting_system_module, CommandModulePtr command_module, ClientModulePtr client_module, LogManagerPtr log_manager);
 
-			/// @brief Constructs the Inexor application.
-			/// @note The dependencies of this class will be injected automatically.
-			/// @param entity_system_module The entity system of Inexor.
-			/// @param type_system_module The type system manager.
-			/// @param configuration_module The configuration manager module.
-			/// @param rest_server The REST server module of the entity system.
-			/// @param entity_system_debugger The debugger of the entity system module.
-			/// @param visual_scripting_system_module The visual scripting system module.
-			/// @param log_manager The log module.
-			/// @param renderer_manager The rendering module.
-			/// @param command_module The command module.
-			/// @param audio_module The audio module.
-			InexorApplication(
-				EntitySystemModulePtr entity_system_module,
-				TypeSystemModulePtr type_system_module,
-				ConfigurationModulePtr configuration_module,
-				RestServerPtr rest_server,
-				EntitySystemDebuggerPtr entity_system_debugger,
-				VisualScriptingSystemModulePtr visual_scripting_system_module,
-				CommandModulePtr command_module,
-				ClientModulePtr client_module,
-				LogManagerPtr log_manager
-			);
+    /// Destructor.
+    ~InexorApplication();
 
-			/// Destructor.
-			~InexorApplication();
+    /// @brief Initializes the essential services of the Inexor application.
+    /// @param argc The total number of parameters given to the application.
+    /// @param argv An array of parameters given to the application.
+    void pre_init(int argc, char *argv[]);
 
-			/// @brief Initializes the essential services of the Inexor application.
-			/// @param argc The total number of parameters given to the application.
-			/// @param argv An array of parameters given to the application.
-			void pre_init(int argc, char* argv[]);
+    /// @brief Initializes the Inexor application.
+    void init();
 
-			/// @brief Initializes the Inexor application.
-			void init();
+    /// @brief Runs the application's main loop.
+    /// @note The main loop will be aborted when this->running is set to false.
+    void run();
 
-			/// @brief Runs the application's main loop.
-			/// @note The main loop will be aborted when this->running is set to false.
-			void run();
+    /// Shuts down the Inexor application.
+    void shutdown();
 
-			/// Shuts down the Inexor application.
-			void shutdown();
+    /// Restarts the Inexor application.
+    void restart();
 
-			/// Restarts the Inexor application.
-			void restart();
+    private:
+    /// The entity system of Inexor.
+    EntitySystemModulePtr entity_system_module;
 
-//			/// @brief Registers a logger.
-//			/// @param logger_name The name of the logger.
-//			void register_logger(std::string logger_name);
-//
-//			/// Get method for the entity system.
-//			EntitySystemModulePtr get_entity_system();
-//
-//			/// Get method for the rest server.
-//			RestServerPtr get_rest_server();
+    /// The type system manager module.
+    TypeSystemModulePtr type_system_module;
 
-		private:
+    /// The configuration manager module.
+    ConfigurationModulePtr configuration_module;
 
-			/// The entity system of Inexor.
-			EntitySystemModulePtr entity_system_module;
+    /// The REST server module of the entity system.
+    RestServerPtr rest_server;
 
-			/// The type system manager module.
-			TypeSystemModulePtr type_system_module;
+    /// The debugger of the entity system module.
+    EntitySystemDebuggerPtr entity_system_debugger;
 
-			/// The configuration manager module.
-			ConfigurationModulePtr configuration_module;
+    /// The visual scripting system module.
+    VisualScriptingSystemModulePtr visual_scripting_system_module;
 
-			/// The REST server module of the entity system.
-			RestServerPtr rest_server;
+    /// The command module.
+    CommandModulePtr command_module;
 
-			/// The debugger of the entity system module.
-			EntitySystemDebuggerPtr entity_system_debugger;
+    /// The client module.
+    ClientModulePtr client_module;
 
-			/// The visual scripting system module.
-			VisualScriptingSystemModulePtr visual_scripting_system_module;
+    /// The log manager.
+    LogManagerPtr log_manager;
 
-			/// The command module.
-			CommandModulePtr command_module;
+    /// The running state of the Inexor application.
+    bool running;
 
-			/// The client module.
-			ClientModulePtr client_module;
+    /// @brief Signal handler.
+    /// @param signal_number ?
+    void sighup_handler(int signal_number);
 
-			/// The log manager.
-			LogManagerPtr log_manager;
+    /// @brief Signal handler.
+    /// @param signal_number ?
+    void sigterm_handler(int signal_number);
 
-			/// The running state of the Inexor application.
-			bool running;
+    /// ?
+    /// @param signal_number ?
+    static void call_sighup_handlers(int signal_number)
+    {
+        for (InexorApplication *instance : InexorApplication::instances)
+        {
+            std::mem_fn (&InexorApplication::sighup_handler)(instance, signal_number);
+        }
+    }
 
-			/// @brief Signal handler.
-			/// @param signal_number ?
-			void sighup_handler(const int signal_number);
+    /// ?
+    /// @param signal_number ?
+    static void call_sigterm_handlers(int signal_number)
+    {
+        for (InexorApplication *instance : InexorApplication::instances)
+        {
+            std::mem_fn (&InexorApplication::sigterm_handler)(instance, signal_number);
+        }
+    }
 
-			/// @brief Signal handler.
-			/// @param signal_number ?
-			void sigterm_handler(const int signal_number);
+    //			/// ?
+    //			/// @param service ?
+    //			static void call_ready_handlers(Service& service)
+    //			{
+    //				for (InexorApplication* instance : InexorApplication::instances)
+    //				{
+    //					std::mem_fn(&InexorApplication::ready_handler)(instance, service);
+    //				}
+    //			}
 
-			/// ?
-			/// @param signal_number ?
-			static void call_sighup_handlers(int signal_number)
-			{
-				for (InexorApplication* instance : InexorApplication::instances)
-				{
-					std::mem_fn(&InexorApplication::sighup_handler)(instance, signal_number);
-				}
-			}
+    /// Static instances of the Inexor application.
+    static std::vector<InexorApplication *> instances;
 
-			/// ?
-			/// @param signal_number ?
-			static void call_sigterm_handlers(int signal_number)
-			{
-				for (InexorApplication* instance : InexorApplication::instances)
-				{
-					std::mem_fn(&InexorApplication::sigterm_handler)(instance, signal_number);
-				}
-			}
+    /// The logger name of this service.
+    static constexpr char LOGGER_NAME[] = "inexor.app";
+};
 
-//			/// ?
-//			/// @param service ?
-//			static void call_ready_handlers(Service& service)
-//			{
-//				for (InexorApplication* instance : InexorApplication::instances)
-//				{
-//					std::mem_fn(&InexorApplication::ready_handler)(instance, service);
-//				}
-//			}
-
-			/// Static instances of the Inexor application.
-			static std::vector<InexorApplication *> instances;
-
-			/// The logger name of this service.
-			static constexpr char LOGGER_NAME[] = "inexor.app";
-
-	};
-
-}
+} // namespace inexor
