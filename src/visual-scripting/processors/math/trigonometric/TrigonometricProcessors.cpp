@@ -1,29 +1,23 @@
 #include "TrigonometricProcessors.hpp"
 
-namespace inexor {
-namespace visual_scripting {
+#include <utility>
 
-	TrigonometricProcessors::TrigonometricProcessors(
-		SinProcessorPtr sin_processor,
-		CosProcessorPtr cos_processor,
-		TanProcessorPtr tan_processor
-	)
-	{
-		this->sin_processor = sin_processor;
-		this->cos_processor = cos_processor;
-		this->tan_processor = tan_processor;
-	}
+namespace inexor::visual_scripting {
 
-	TrigonometricProcessors::~TrigonometricProcessors()
-	{
-	}
-
-	void TrigonometricProcessors::init()
-	{
-		sin_processor->init();
-		cos_processor->init();
-		tan_processor->init();
-	}
-
+TrigonometricProcessors::TrigonometricProcessors(SinProcessorPtr sin_processor, CosProcessorPtr cos_processor, TanProcessorPtr tan_processor)
+{
+    this->sin_processor = std::move(sin_processor);
+    this->cos_processor = std::move(cos_processor);
+    this->tan_processor = std::move(tan_processor);
 }
+
+TrigonometricProcessors::~TrigonometricProcessors() = default;
+
+void TrigonometricProcessors::init()
+{
+    sin_processor->init();
+    cos_processor->init();
+    tan_processor->init();
 }
+
+} // namespace inexor::visual_scripting
