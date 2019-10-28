@@ -28,6 +28,20 @@ set(LIBRARY_OUTPUT_PATH ${CMAKE_BINARY_DIR})
 # You have to set the C++ standard to C++17 in the project settings manually.
 set(CMAKE_CXX_STANDARD 17)
 
+# Dynamic linking
+#
+# It will work, as long as the generated bin and lib directories remain siblings.
+# The output binary contains only relative paths; no machine-specific paths.
+#
+# see: https://cmake.org/cmake/help/v3.0/variable/CMAKE_BUILD_WITH_INSTALL_RPATH.html
+# see: https://docs.conan.io/en/latest/howtos/manage_shared_libraries/rpaths.html
+if(APPLE)
+    set(CMAKE_INSTALL_RPATH "@executable_path/../lib")
+else()
+    set(CMAKE_INSTALL_RPATH "$ORIGIN/../lib")
+endif()
+set(CMAKE_BUILD_WITH_INSTALL_RPATH ON)
+
 # Dependency setup via conan.
 # Download conan executer in case it does not exists.
 if(NOT EXISTS "${CMAKE_CURRENT_BINARY_DIR}/conan.cmake")
@@ -65,6 +79,7 @@ if(UNIX AND NOT APPLE)
                     BUILD outdated
                     PROFILE default
                     PROFILE_AUTO build_type
+                    KEEP_RPATHS
                     SETTINGS compiler.libcxx=${LIBCXX}
     )
 else()
@@ -73,6 +88,7 @@ else()
                     BUILD outdated
                     PROFILE default
                     PROFILE_AUTO build_type
+                    KEEP_RPATHS
     )
 endif()
 
@@ -133,13 +149,19 @@ endif()
 
 # Inexor unit tests.
 add_executable(inexor-tests ${TEST_SOURCE_FILES})
-target_link_libraries(inexor-tests inexor-entity-system-lib)
-target_link_libraries(inexor-tests ${CONAN_LIBS})
+target_link_libraries(inexor-tests PUBLIC inexor-entity-system-lib)
+target_link_libraries(inexor-tests PUBLIC ${CONAN_LIBS})
+if(APPLE)
+    target_link_libraries(inexor-tests PUBLIC "-framework CoreFoundation")
+endif()
 
 # Inexor benchmarks.
 add_executable(inexor-benchmarks ${BENCHMARK_SOURCE_FILES})
-target_link_libraries(inexor-benchmarks inexor-entity-system-lib)
-target_link_libraries(inexor-benchmarks ${CONAN_LIBS})
+target_link_libraries(inexor-benchmarks PUBLIC inexor-entity-system-lib)
+target_link_libraries(inexor-benchmarks PUBLIC ${CONAN_LIBS})
+if(APPLE)
+    target_link_libraries(inexor-benchmarks PUBLIC "-framework CoreFoundation")
+endif()
 
 # Use the folder structure in source code directory as project structure in Visual Studio.
 assign_source_group(${NORMAL_SOURCE_FILES})
