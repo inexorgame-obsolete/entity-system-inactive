@@ -2,9 +2,35 @@ from conans import ConanFile, CMake
 
 class InexorConan(ConanFile):
 
-    settings = "os", "compiler", "build_type", "arch"
+    settings = (
+        "os",
+        "compiler",
+        "build_type",
+        "arch"
+    )
 
-    requires = "glm/0.9.9.5", "gtest/1.8.1", "benchmark/1.5.0", "crossguid/06-03-19@inexorgame/testing", "restbed/6eb385fa9051203f28bf96cc1844bbb5a9a6481f@inexorgame/stable", "boost_property_tree/1.69.0@bincrafters/stable", "boost_signals2/1.69.0@bincrafters/stable", "spdlog/1.3.0@bincrafters/stable", "boost-di/1.1.0@inexorgame/stable", "boost-te/19.Jan.19@inexorgame/stable", "better-enums/0.11.1@Spartan322/stable", "cpp.react/legacy1@inexorgame/stable", "magnum/2019.01@inexorgame/testing", "openal/1.19.0@bincrafters/stable", "magnum_plugins/2019.01@inexorgame/testing", "freetype/2.9.1@bincrafters/stable" 
+    requires = (
+        "glm/0.9.9.5",
+        "gtest/1.8.1",
+        "benchmark/1.5.0",
+
+        "boost_property_tree/1.69.0@bincrafters/stable",
+        "boost_signals2/1.69.0@bincrafters/stable",
+        "freetype/2.9.1@bincrafters/stable",
+        "openal/1.19.0@bincrafters/stable",
+        "spdlog/1.3.0@bincrafters/stable",
+
+        "better-enums/0.11.1@Spartan322/stable",
+
+        "boost-di/1.1.0@inexorgame/stable",
+        "boost-te/19.Jan.19@inexorgame/stable",
+        "cpp.react/legacy1@inexorgame/stable",
+        "restbed/6eb385fa9051203f28bf96cc1844bbb5a9a6481f@inexorgame/stable",
+
+        "crossguid/06-03-19@inexorgame/testing",
+        "magnum/2019.01@inexorgame/testing",
+        "magnum_plugins/2019.01@inexorgame/testing"
+    )
 
     generators = "cmake"
 
