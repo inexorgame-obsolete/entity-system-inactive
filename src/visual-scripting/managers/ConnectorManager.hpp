@@ -15,8 +15,7 @@
 #include "react/Signal.h"
 #include "react/Event.h"
 
-namespace inexor {
-namespace visual_scripting {
+namespace inexor::visual_scripting {
 
 	using EntityInstanceManagerPtr = std::shared_ptr<entity_system::EntityInstanceManager>;
 	using RelationInstanceManagerPtr = std::shared_ptr<entity_system::RelationInstanceManager>;
@@ -180,5 +179,4 @@ namespace visual_scripting {
 	};
 
 
-}
 }

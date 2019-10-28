@@ -6,46 +6,41 @@
 #include <crossguid/guid.hpp>
 #include <optional>
 
-namespace inexor {
-namespace visual_scripting {
+namespace inexor::visual_scripting {
 
-	using ProcessorPtr = std::shared_ptr<Processor>;
-	using ProcessorPtrOpt = std::optional<ProcessorPtr>;
-	using EntityTypePtr = std::shared_ptr<entity_system::EntityType>;
+using ProcessorPtr = std::shared_ptr<Processor>;
+using ProcessorPtrOpt = std::optional<ProcessorPtr>;
+using EntityTypePtr = std::shared_ptr<entity_system::EntityType>;
 
-	/// @class ProcessorRegistry
-    /// @brief Registry of the visual scripting processors.
-	class ProcessorRegistry
-	{
-		public:
+/// @class ProcessorRegistry
+/// @brief Registry of the visual scripting processors.
+class ProcessorRegistry
+{
+    public:
+    /// Constructor.
+    ProcessorRegistry();
 
-			/// Constructor.
-			ProcessorRegistry();
+    /// Destructor.
+    ~ProcessorRegistry();
 
-			/// Destructor.
-			~ProcessorRegistry();
+    /// Initialization of the active components.
+    void init();
 
-			/// Initialization of the active components.
-			void init();
+    /// @brief Registers an processor.
+    /// @param processor ?
+    void register_processor(const ProcessorPtr &processor);
 
-			/// @brief Registers an processor.
-            /// @param processor ?
-			void register_processor(const ProcessorPtr& processor);
+    /// @brief Returns the processor by entity type.
+    /// @param entity_type ?
+    ProcessorPtrOpt get_processor(const EntityTypePtr &entity_type);
 
-			/// @brief Returns the processor by entity type.
-            /// @param entity_type ?
-			ProcessorPtrOpt get_processor(const EntityTypePtr& entity_type);
+    /// @brief Returns true, if a processor is mapped to the given entity type.
+    /// @param entity_type ?
+    bool has_processor(const EntityTypePtr &entity_type);
 
-			/// @brief Returns true, if a processor is mapped to the given entity type.
-            /// @param entity_type ?
-			bool has_processor(const EntityTypePtr& entity_type);
+    private:
+    /// Stores the processors per entity type.
+    std::unordered_map<EntityTypePtr, ProcessorPtr> processors;
+};
 
-		private:
-
-			/// Stores the processors per entity type.
-			std::unordered_map<EntityTypePtr, ProcessorPtr> processors;
-
-	};
-
-}
-}
+} // namespace inexor::visual_scripting
