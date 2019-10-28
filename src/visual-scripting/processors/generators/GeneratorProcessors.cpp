@@ -1,36 +1,30 @@
 #include "GeneratorProcessors.hpp"
 
-namespace inexor {
-namespace visual_scripting {
+#include <utility>
 
-	GeneratorProcessors::GeneratorProcessors(
-		CounterProcessorsPtr counter_processors,
-		TimerProcessorsPtr timer_processors,
-		RandomProcessorsPtr random_processors
-	)
-	{
-		this->counter_processors = counter_processors;
-		this->timer_processors = timer_processors;
-		this->random_processors = random_processors;
-	}
+namespace inexor::visual_scripting {
 
-	GeneratorProcessors::~GeneratorProcessors()
-	{
-	}
-
-	void GeneratorProcessors::init()
-	{
-		counter_processors->init();
-		timer_processors->init();
-		random_processors->init();
-	}
-
-	void GeneratorProcessors::shutdown()
-	{
-//		random_processors->init();
-//		timer_processors->init();
-		counter_processors->shutdown();
-	}
-
+GeneratorProcessors::GeneratorProcessors(CounterProcessorsPtr counter_processors, TimerProcessorsPtr timer_processors, RandomProcessorsPtr random_processors)
+{
+    this->counter_processors = std::move(counter_processors);
+    this->timer_processors = std::move(timer_processors);
+    this->random_processors = std::move(random_processors);
 }
+
+GeneratorProcessors::~GeneratorProcessors() = default;
+
+void GeneratorProcessors::init()
+{
+    counter_processors->init();
+    timer_processors->init();
+    random_processors->init();
 }
+
+void GeneratorProcessors::shutdown()
+{
+    //		random_processors->init();
+    //		timer_processors->init();
+    counter_processors->shutdown();
+}
+
+} // namespace inexor::visual_scripting
