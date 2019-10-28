@@ -3,42 +3,34 @@
 #include "visual-scripting/processors/logical/comparison/ComparisonProcessors.hpp"
 #include "visual-scripting/processors/logical/gates/GateProcessors.hpp"
 
-namespace inexor {
-namespace visual_scripting {
+namespace inexor::visual_scripting {
 
-	using ComparisonProcessorsPtr = std::shared_ptr<ComparisonProcessors>;
-	using GateProcessorsPtr = std::shared_ptr<GateProcessors>;
+using ComparisonProcessorsPtr = std::shared_ptr<ComparisonProcessors>;
+using GateProcessorsPtr = std::shared_ptr<GateProcessors>;
 
-    /// @class LogicalProcessors
-    /// @brief Provides processors.
-	class LogicalProcessors
-	{
-		public:
+/// @class LogicalProcessors
+/// @brief Provides processors.
+class LogicalProcessors
+{
+    public:
+    /// @brief Constructs the processors for logical operations.
+    /// @note The dependencies of this class will be injected automatically.
+    /// @param comparison_processors The processors for comparison operations.
+    /// @param gate_processors The processors logical gates.
+    LogicalProcessors(ComparisonProcessorsPtr comparison_processors, GateProcessorsPtr gate_processors);
 
-			/// @brief Constructs the processors for logical operations.
-            /// @note The dependencies of this class will be injected automatically.
-            /// @param comparison_processors The processors for comparison operations.
-            /// @param gate_processors The processors logical gates.
-			LogicalProcessors(
-				ComparisonProcessorsPtr comparison_processors,
-				GateProcessorsPtr gate_processors
-			);
+    /// Destructor.
+    ~LogicalProcessors();
 
-            /// Destructor.
-			~LogicalProcessors();
+    /// Initialization of the processors for logical operations.
+    void init();
 
-			/// Initialization of the processors for logical operations.
-			void init();
+    private:
+    /// The processors for comparison operations.
+    ComparisonProcessorsPtr comparison_processors;
 
-		private:
+    /// The processors logical gates.
+    GateProcessorsPtr gate_processors;
+};
 
-			/// The processors for comparison operations.
-			ComparisonProcessorsPtr comparison_processors;
-
-			/// The processors logical gates.
-			GateProcessorsPtr gate_processors;
-
-	};
-
-}
-}
+} // namespace inexor::visual_scripting
