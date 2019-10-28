@@ -8,7 +8,28 @@ matrix:
       dist: xenial
       language: general
       env:
+        - DOCKER_IMAGE=conanio/gcc9 # GCC 9
+      services:
+        - docker
+    - os: linux
+      dist: xenial
+      language: general
+      env:
       - DOCKER_IMAGE=conanio/gcc8 # GCC 8
+      services:
+        - docker
+    - os: linux
+      dist: xenial
+      language: general
+      env:
+        - DOCKER_IMAGE=conanio/clang9 # clang 9
+      services:
+        - docker
+    - os: linux
+      dist: xenial
+      language: general
+      env:
+        - DOCKER_IMAGE=conanio/clang8 # clang 8
       services:
         - docker
     - os: linux
@@ -33,6 +54,13 @@ matrix:
       - DOCKER_IMAGE=conanio/clang7 # clang 7
       services:
         - docker
+    - os: osx
+      osx_image: xcode10.2
+      compiler: clang
+      language: cpp
+      env:
+        - CC=/usr/bin/clang
+        - CXX=/usr/bin/clang++
 
 install:
   - ./.travis/install.sh
