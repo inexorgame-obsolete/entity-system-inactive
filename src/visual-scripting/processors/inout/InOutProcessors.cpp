@@ -1,26 +1,21 @@
 #include "InOutProcessors.hpp"
 
-namespace inexor {
-namespace visual_scripting {
+#include <utility>
 
-	InOutProcessors::InOutProcessors(
-		ConsoleProcessorsPtr console_processors,
-		LoggerProcessorsPtr logger_processors
-	)
-	{
-		this->console_processors = console_processors;
-		this->logger_processors = logger_processors;
-	}
+namespace inexor::visual_scripting {
 
-	InOutProcessors::~InOutProcessors()
-	{
-	}
-
-	void InOutProcessors::init()
-	{
-		console_processors->init();
-		logger_processors->init();
-	}
-
+InOutProcessors::InOutProcessors(ConsoleProcessorsPtr console_processors, LoggerProcessorsPtr logger_processors)
+{
+    this->console_processors = std::move(console_processors);
+    this->logger_processors = std::move(logger_processors);
 }
+
+InOutProcessors::~InOutProcessors() = default;
+
+void InOutProcessors::init()
+{
+    console_processors->init();
+    logger_processors->init();
 }
+
+} // namespace inexor::visual_scripting

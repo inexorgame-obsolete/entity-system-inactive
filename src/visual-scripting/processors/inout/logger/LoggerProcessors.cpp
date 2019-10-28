@@ -1,23 +1,19 @@
 #include "LoggerProcessors.hpp"
 
-namespace inexor {
-namespace visual_scripting {
+#include <utility>
 
-	LoggerProcessors::LoggerProcessors(
-		LoggerProcessorPtr logger_processor
-	)
-	{
-		this->logger_processor = logger_processor;
-	}
+namespace inexor::visual_scripting {
 
-	LoggerProcessors::~LoggerProcessors()
-	{
-	}
-
-	void LoggerProcessors::init()
-	{
-		logger_processor->init();
-	}
-
+LoggerProcessors::LoggerProcessors(LoggerProcessorPtr logger_processor)
+{
+    this->logger_processor = std::move(logger_processor);
 }
+
+LoggerProcessors::~LoggerProcessors() = default;
+
+void LoggerProcessors::init()
+{
+    logger_processor->init();
 }
+
+} // namespace inexor::visual_scripting
