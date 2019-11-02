@@ -1,9 +1,9 @@
 os: linux
 
 sudo: required
-    
+
 matrix:
-    include:
+  include:
     - os: linux
       dist: xenial
       language: general
@@ -36,7 +36,7 @@ matrix:
       dist: xenial
       language: general
       env:
-      - DOCKER_IMAGE=conanio/clang7 # clang 7
+        - DOCKER_IMAGE=conanio/clang7 # clang 7
       services:
         - docker
     - os: osx
@@ -46,12 +46,19 @@ matrix:
       env:
         - CC=/usr/bin/clang
         - CXX=/usr/bin/clang++
-    allow_failures:
+  allow_failures:
     - os: linux
       dist: xenial
       language: general
       env:
-      - DOCKER_IMAGE=conanio/clang7 # clang 7
+        - DOCKER_IMAGE=conanio/gcc8 # GCC 8
+      services:
+        - docker
+    - os: linux
+      dist: xenial
+      language: general
+      env:
+        - DOCKER_IMAGE=conanio/clang7 # clang 7
       services:
         - docker
     - os: osx
