@@ -16,7 +16,7 @@ class StdInEntityTypeProvider : public EntityTypeProvider
     /// @note The dependencies of this class will be injected automatically.
     /// @param entity_type_builder_manager The entity type builder manager.
     explicit StdInEntityTypeProvider(std::shared_ptr<EntityTypeBuilderFactory> entity_type_builder_manager)
-        : EntityTypeProvider(std::move(entity_type_builder_manager), TYPE_NAME, {{CONSOLE_STDIN, {DataType::STRING, 1 << Feature::OUTPUT}}}){};
+        : EntityTypeProvider(std::move(entity_type_builder_manager), TYPE_NAME, {{CONSOLE_STDIN, {DataType::STRING, Features::OUTPUT}}}){};
 
     /// Destructor.
     ~StdInEntityTypeProvider() override = default;

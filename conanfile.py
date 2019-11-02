@@ -20,7 +20,6 @@ class InexorConan(ConanFile):
         "openal/1.19.0@bincrafters/stable",
         "spdlog/1.3.0@bincrafters/stable",
 
-        "better-enums/0.11.1@Spartan322/stable",
         "magic_enum/0.6.3@neargye/stable",
 
         "boost-di/1.1.0@inexorgame/stable",

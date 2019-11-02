@@ -9,6 +9,8 @@ namespace inexor::renderer {
 
 using namespace entity_system;
 
+using namespace magic_enum::bitwise_operators;
+
 using EntityTypeBuilderFactoryPtr = std::shared_ptr<EntityTypeBuilderFactory>;
 
 /// @class MonitorEntityTypeProvider
@@ -20,12 +22,12 @@ class MonitorEntityTypeProvider : public EntityTypeProvider
     /// @note The dependencies of this class will be injected automatically.
     explicit MonitorEntityTypeProvider(EntityTypeBuilderFactoryPtr entity_type_builder_factory)
         : EntityTypeProvider(std::move(entity_type_builder_factory), TYPE_NAME,
-                             {{MONITOR_TITLE, {DataType::STRING, 1 << Feature::INPUT | 1 << Feature::OUTPUT}},
-                              {MONITOR_POSITION_X, {DataType::INT, 1 << Feature::INPUT | 1 << Feature::OUTPUT}},
-                              {MONITOR_POSITION_Y, {DataType::INT, 1 << Feature::INPUT | 1 << Feature::OUTPUT}},
-                              {MONITOR_WIDTH, {DataType::INT, 1 << Feature::INPUT | 1 << Feature::OUTPUT}},
-                              {MONITOR_HEIGHT, {DataType::INT, 1 << Feature::INPUT | 1 << Feature::OUTPUT}},
-                              {MONITOR_IS_PRIMARY, {DataType::BOOL, 1 << Feature::OUTPUT}}}){};
+                             {{MONITOR_TITLE, {DataType::STRING, Features::INPUT | Features::OUTPUT}},
+                              {MONITOR_POSITION_X, {DataType::INT, Features::INPUT | Features::OUTPUT}},
+                              {MONITOR_POSITION_Y, {DataType::INT, Features::INPUT | Features::OUTPUT}},
+                              {MONITOR_WIDTH, {DataType::INT, Features::INPUT | Features::OUTPUT}},
+                              {MONITOR_HEIGHT, {DataType::INT, Features::INPUT | Features::OUTPUT}},
+                              {MONITOR_IS_PRIMARY, {DataType::BOOL, Features::OUTPUT}}}){};
 
     /// Destructor.
     ~MonitorEntityTypeProvider() override = default;

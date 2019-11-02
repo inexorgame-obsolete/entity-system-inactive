@@ -11,7 +11,7 @@ namespace inexor::entity_system {
 
 /// These using instructions help to shorten the following code.
 class RelationTypeBuilder;
-using AttributeList = std::unordered_map<std::string, std::pair<DataType, EnumSet<Feature>>>;
+using AttributeList = std::unordered_map<std::string, std::pair<DataType, Features>>;
 using RelationTypeBuilderPtr = std::shared_ptr<RelationTypeBuilder>;
 using RelationTypePtrOpt = std::optional<std::shared_ptr<RelationType>>;
 
@@ -63,7 +63,7 @@ class RelationTypeBuilder : public std::enable_shared_from_this<RelationTypeBuil
     /// @param attribute_datatype The data types of the relation attribute.
     /// @param attribute_features The features of the relation attribute.
     /// @return A shared pointer to the relation type builder.
-    RelationTypeBuilderPtr attribute(const std::string &attribute_name, DataType attribute_datatype, const EnumSet<Feature> &attribute_features);
+    RelationTypeBuilderPtr attribute(const std::string &attribute_name, DataType attribute_datatype, const Features &attribute_features);
 
     /// @brief Builds the relation type.
     /// @return A std::optional shared pointer to the relation type which has been built.

@@ -105,7 +105,7 @@ void ConfigurationManager::list()
     spdlog::get(LOGGER_NAME)->info("Configuration items:");
     for (auto &it : config_items)
     {
-        spdlog::get(LOGGER_NAME)->info("  [{}] [{}] [{}]", it.first, it.second->type._to_string(), data_value_to_string(it.second->type, it.second->value.Value()));
+        spdlog::get(LOGGER_NAME)->info("  [{}] [{}] [{}]", it.first, magic_enum::enum_name(it.second->type), data_value_to_string(it.second->type, it.second->value.Value()));
     }
 }
 
@@ -119,7 +119,7 @@ void ConfigurationManager::insert(const std::string &config_name, const std::str
         if (o_attribute_instance.has_value())
         {
             config_items[config_name] = o_attribute_instance.value();
-            spdlog::get(LOGGER_NAME)->info("Added configuration: [{}] [{}] [{}]", config_name, config_items[config_name]->type._to_string(), data_value_to_string(config_items[config_name]->type, config_items[config_name]->value.Value()));
+            spdlog::get(LOGGER_NAME)->info("Added configuration: [{}] [{}] [{}]", config_name, magic_enum::enum_name(config_items[config_name]->type), data_value_to_string(config_items[config_name]->type, config_items[config_name]->value.Value()));
         }
     }
 }

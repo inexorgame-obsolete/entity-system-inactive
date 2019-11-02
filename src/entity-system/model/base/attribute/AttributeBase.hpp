@@ -19,7 +19,7 @@ class AttributeBase
     DataType attribute_data_type{};
 
     /// The features of the attribute.
-    EnumSet<Feature> features;
+    Features features;
 
     /// The mutex of this class.
     std::mutex attribute_type_base_mutex;
@@ -28,7 +28,7 @@ class AttributeBase
     /// @brief Constructor.
     /// @param attr_data_type The data type of the attribute.
     /// @param features A const EnumSet of the features.
-    AttributeBase(const DataType &attr_data_type, const EnumSet<Feature> &features);
+    AttributeBase(const DataType &attr_data_type, const Features &features);
 
     /// @brief Destructor.
     ~AttributeBase();
@@ -40,7 +40,7 @@ class AttributeBase
 
     /// @brief Returns the features of the attribute.
     /// @return The features of the attribute.
-    [[nodiscard]] EnumSet<Feature> get_attribute_features() const;
+    [[nodiscard]] Features get_attribute_features() const;
 };
 
 } // namespace inexor::entity_system

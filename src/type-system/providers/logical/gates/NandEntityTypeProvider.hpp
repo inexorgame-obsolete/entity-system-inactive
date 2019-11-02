@@ -17,7 +17,7 @@ class NandEntityTypeProvider : public EntityTypeProvider
     /// @param entity_type_builder_manager The entity type builder manager.
     explicit NandEntityTypeProvider(std::shared_ptr<EntityTypeBuilderFactory> entity_type_builder_manager)
         : EntityTypeProvider(std::move(entity_type_builder_manager), TYPE_NAME,
-                             {{NAND_INPUT_1, {DataType::BOOL, 1 << Feature::INPUT}}, {NAND_INPUT_2, {DataType::BOOL, 1 << Feature::INPUT}}, {NAND_RESULT, {DataType::BOOL, 1 << Feature::OUTPUT}}}){};
+                             {{NAND_INPUT_1, {DataType::BOOL, Features::INPUT}}, {NAND_INPUT_2, {DataType::BOOL, Features::INPUT}}, {NAND_RESULT, {DataType::BOOL, Features::OUTPUT}}}){};
 
     /// Destructor.
     ~NandEntityTypeProvider() override = default;

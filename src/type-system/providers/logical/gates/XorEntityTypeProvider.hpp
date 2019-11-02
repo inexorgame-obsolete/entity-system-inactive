@@ -17,7 +17,7 @@ class XorEntityTypeProvider : public EntityTypeProvider
     /// @param entity_type_builder_manager The entity type builder manager.
     explicit XorEntityTypeProvider(std::shared_ptr<EntityTypeBuilderFactory> entity_type_builder_manager)
         : EntityTypeProvider(std::move(entity_type_builder_manager), TYPE_NAME,
-                             {{XOR_INPUT_1, {DataType::BOOL, 1 << Feature::INPUT}}, {XOR_INPUT_2, {DataType::BOOL, 1 << Feature::INPUT}}, {XOR_RESULT, {DataType::BOOL, 1 << Feature::OUTPUT}}}){};
+                             {{XOR_INPUT_1, {DataType::BOOL, Features::INPUT}}, {XOR_INPUT_2, {DataType::BOOL, Features::INPUT}}, {XOR_RESULT, {DataType::BOOL, Features::OUTPUT}}}){};
 
     /// Destructor.
     ~XorEntityTypeProvider() override = default;

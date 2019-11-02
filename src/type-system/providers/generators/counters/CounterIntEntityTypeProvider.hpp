@@ -17,10 +17,10 @@ class CounterIntEntityTypeProvider : public EntityTypeProvider
     /// @param entity_type_builder_manager The entity type builder manager.
     explicit CounterIntEntityTypeProvider(std::shared_ptr<EntityTypeBuilderFactory> entity_type_builder_manager)
         : EntityTypeProvider(std::move(entity_type_builder_manager), TYPE_NAME,
-                             {{COUNTER_INT_MILLIS, {DataType::INT, 1 << Feature::INPUT}},
-                              {COUNTER_INT_STEP, {DataType::INT, 1 << Feature::INPUT}},
-                              {COUNTER_INT_RESET, {DataType::BOOL, 1 << Feature::INPUT}},
-                              {COUNTER_INT_COUNT, {DataType::INT, 1 << Feature::OUTPUT}}}){};
+                             {{COUNTER_INT_MILLIS, {DataType::INT, Features::INPUT}},
+                              {COUNTER_INT_STEP, {DataType::INT, Features::INPUT}},
+                              {COUNTER_INT_RESET, {DataType::BOOL, Features::INPUT}},
+                              {COUNTER_INT_COUNT, {DataType::INT, Features::OUTPUT}}}){};
 
     /// Destructor.
     ~CounterIntEntityTypeProvider() override = default;

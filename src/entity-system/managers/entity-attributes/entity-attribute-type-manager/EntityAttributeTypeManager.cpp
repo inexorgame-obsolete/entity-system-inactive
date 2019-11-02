@@ -26,7 +26,7 @@ bool EntityAttributeTypeManager::does_entity_attribute_type_exist(const EntityAt
     return does_type_exist(attr_type->get_GUID());
 }
 
-EntityAttributeTypePtrOpt EntityAttributeTypeManager::create_entity_attribute_type(const std::string &attr_type_name, const DataType &attr_type_datatype, const EnumSet<Feature> &attr_type_features)
+EntityAttributeTypePtrOpt EntityAttributeTypeManager::create_entity_attribute_type(const std::string &attr_type_name, const DataType &attr_type_datatype, const Features &attr_type_features)
 {
     // Check if entity attribute type's name is not empty.
     if (!is_type_name_valid(attr_type_name))
@@ -48,7 +48,7 @@ EntityAttributeTypePtrOpt EntityAttributeTypeManager::create_entity_attribute_ty
     return EntityAttributeTypePtrOpt{new_ent_attr_type};
 }
 
-EntityAttributeTypePtrOpt EntityAttributeTypeManager::create_entity_attribute_type(const xg::Guid &attr_type_GUID, const std::string &attr_type_name, const DataType &attr_type_datatype, const EnumSet<Feature> &attr_type_features)
+EntityAttributeTypePtrOpt EntityAttributeTypeManager::create_entity_attribute_type(const xg::Guid &attr_type_GUID, const std::string &attr_type_name, const DataType &attr_type_datatype, const Features &attr_type_features)
 {
     if (!is_type_name_valid(attr_type_name))
     {

@@ -18,7 +18,7 @@ class RelationAttributeType : public TypeBase, public AttributeBase, public GUID
     /// @param rel_attr_type_name The name of this relation attribute type.
     /// @param rel_attr_type_data_type The data type of this relation attribute type.
     /// @param rel_attr_type_features The features of this relation attribute type.
-    RelationAttributeType(const std::string &rel_attr_type_name, const DataType &rel_attr_type_data_type, const EnumSet<Feature> &rel_attr_type_features);
+    RelationAttributeType(const std::string &rel_attr_type_name, const DataType &rel_attr_type_data_type, const Features &rel_attr_type_features);
 
     /// @brief Destructs the relation attribute type.
     ~RelationAttributeType();

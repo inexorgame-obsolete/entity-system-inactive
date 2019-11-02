@@ -1,5 +1,6 @@
 #include "EntityTypeBuilder.hpp"
 
+#include <magic_enum.hpp>
 #include <utility>
 
 #include "spdlog/spdlog.h"
@@ -35,7 +36,7 @@ EntityTypeBuilderPtr EntityTypeBuilder::uuid(const std::string &entity_type_uuid
     return shared_from_this();
 }
 
-EntityTypeBuilderPtr EntityTypeBuilder::attribute(const std::string &attribute_name, const DataType &attribute_datatype, const EnumSet<Feature> &attribute_features)
+EntityTypeBuilderPtr EntityTypeBuilder::attribute(const std::string &attribute_name, const DataType &attribute_datatype, const Features &attribute_features)
 {
     entity_type_attributes[attribute_name] = {attribute_datatype, attribute_features};
     return shared_from_this();
@@ -43,19 +44,20 @@ EntityTypeBuilderPtr EntityTypeBuilder::attribute(const std::string &attribute_n
 
 EntityTypeBuilderPtr EntityTypeBuilder::input(const std::string &attribute_name, const DataType &attribute_datatype)
 {
-    entity_type_attributes[attribute_name] = {attribute_datatype, {1 << Feature::INPUT}};
+    entity_type_attributes[attribute_name] = {attribute_datatype, Features::INPUT};
     return shared_from_this();
 }
 
 EntityTypeBuilderPtr EntityTypeBuilder::output(const std::string &attribute_name, const DataType &attribute_datatype)
 {
-    entity_type_attributes[attribute_name] = {attribute_datatype, {1 << Feature::OUTPUT}};
+    entity_type_attributes[attribute_name] = {attribute_datatype, Features::OUTPUT};
     return shared_from_this();
 }
 
 EntityTypeBuilderPtr EntityTypeBuilder::inout(const std::string &attribute_name, const DataType &attribute_datatype)
 {
-    entity_type_attributes[attribute_name] = {attribute_datatype, {1 << Feature::INPUT | 1 << Feature::OUTPUT}};
+    using namespace magic_enum::bitwise_operators;
+    entity_type_attributes[attribute_name] = {attribute_datatype, Features::INPUT | Features::OUTPUT };
     return shared_from_this();
 }
 
@@ -84,13 +86,13 @@ EntityTypePtrOpt EntityTypeBuilder::build()
                 EntityAttributeTypePtr attribute_type = o_attribute_type.value();
                 if (!entity_type->link_attribute_type(attribute_type))
                 {
-                    spdlog::error("Failed to create entity type '{}': Failed to create entity type attribute '{}' of data type '{}'", entity_type_name, attribute_entry.first, attribute_entry.second.first._to_string());
+                    spdlog::error("Failed to create entity type '{}': Failed to create entity type attribute '{}' of data type '{}'", entity_type_name, attribute_entry.first, magic_enum::enum_name(attribute_entry.second.first));
                     return std::nullopt;
                 }
-                spdlog::debug("Created entity type attribute '{}' of data type '{}'", attribute_entry.first, attribute_entry.second.first._to_string());
+                spdlog::debug("Created entity type attribute '{}' of data type '{}'", attribute_entry.first, magic_enum::enum_name(attribute_entry.second.first));
             } else
             {
-                spdlog::error("Failed to create entity type '{}': Failed to create entity type attribute '{}' of data type '{}'", entity_type_name, attribute_entry.first, attribute_entry.second.first._to_string());
+                spdlog::error("Failed to create entity type '{}': Failed to create entity type attribute '{}' of data type '{}'", entity_type_name, attribute_entry.first, magic_enum::enum_name(attribute_entry.second.first));
                 return std::nullopt;
             }
         }

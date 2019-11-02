@@ -17,7 +17,7 @@ class NorEntityTypeProvider : public EntityTypeProvider
     /// @param entity_type_builder_manager The entity type builder manager.
     explicit NorEntityTypeProvider(std::shared_ptr<EntityTypeBuilderFactory> entity_type_builder_manager)
         : EntityTypeProvider(std::move(entity_type_builder_manager), TYPE_NAME,
-                             {{NOR_INPUT_1, {DataType::BOOL, 1 << Feature::INPUT}}, {NOR_INPUT_2, {DataType::BOOL, 1 << Feature::INPUT}}, {NOR_RESULT, {DataType::BOOL, 1 << Feature::OUTPUT}}}){};
+                             {{NOR_INPUT_1, {DataType::BOOL, Features::INPUT}}, {NOR_INPUT_2, {DataType::BOOL, Features::INPUT}}, {NOR_RESULT, {DataType::BOOL, Features::OUTPUT}}}){};
 
     /// Destructor.
     ~NorEntityTypeProvider() override = default;

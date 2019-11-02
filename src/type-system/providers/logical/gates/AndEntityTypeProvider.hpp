@@ -17,7 +17,7 @@ class AndEntityTypeProvider : public EntityTypeProvider
     /// @param entity_type_builder_manager The entity type builder manager.
     explicit AndEntityTypeProvider(std::shared_ptr<EntityTypeBuilderFactory> entity_type_builder_manager)
         : EntityTypeProvider(std::move(entity_type_builder_manager), TYPE_NAME,
-                             {{AND_INPUT_1, {DataType::BOOL, 1 << Feature::INPUT}}, {AND_INPUT_2, {DataType::BOOL, 1 << Feature::INPUT}}, {AND_RESULT, {DataType::BOOL, 1 << Feature::OUTPUT}}}){};
+                             {{AND_INPUT_1, {DataType::BOOL, Features::INPUT}}, {AND_INPUT_2, {DataType::BOOL, Features::INPUT}}, {AND_RESULT, {DataType::BOOL, Features::OUTPUT}}}){};
 
     /// Destructor.
     ~AndEntityTypeProvider() override = default;

@@ -8,7 +8,7 @@ RelationAttributeTypeManager::RelationAttributeTypeManager() : TypeManagerTempla
 
 RelationAttributeTypeManager::~RelationAttributeTypeManager() = default;
 
-RelationAttributeTypePtrOpt RelationAttributeTypeManager::create_relation_attribute_type(const std::string &rel_attr_type_name, const DataType &rel_attr_type_data_type, const EnumSet<Feature> &rel_attr_type_features)
+RelationAttributeTypePtrOpt RelationAttributeTypeManager::create_relation_attribute_type(const std::string &rel_attr_type_name, const DataType &rel_attr_type_data_type, const Features &rel_attr_type_features)
 {
     // Check if an entity relation attribute type
     // with this name does already exist.

@@ -16,7 +16,7 @@ class TimerTickEntityTypeProvider : public EntityTypeProvider
     /// @note The dependencies of this class will be injected automatically.
     /// @param entity_type_builder_manager The entity type builder manager.
     explicit TimerTickEntityTypeProvider(std::shared_ptr<EntityTypeBuilderFactory> entity_type_builder_manager)
-        : EntityTypeProvider(std::move(entity_type_builder_manager), TYPE_NAME, {{TIMER_TICK_MILLIS, {DataType::INT, 1 << Feature::INPUT}}, {TIMER_TICK_VALUE, {DataType::BOOL, 1 << Feature::OUTPUT}}}){};
+        : EntityTypeProvider(std::move(entity_type_builder_manager), TYPE_NAME, {{TIMER_TICK_MILLIS, {DataType::INT, Features::INPUT}}, {TIMER_TICK_VALUE, {DataType::BOOL, Features::OUTPUT}}}){};
 
     /// Destructor.
     ~TimerTickEntityTypeProvider() override = default;

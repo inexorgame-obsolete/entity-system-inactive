@@ -31,7 +31,7 @@ class EntityAttributeTypeManager : public TypeManagerTemplate<EntityAttributeTyp
     /// @param ent_attr_type_data_type The data type of the new entity attribute type.
     /// @param ent_attr_type_features The features of the new entity attribute type.
     /// @return A std::optional shared pointer to the entity attribute type which was created.
-    EntityAttributeTypePtrOpt create_entity_attribute_type(const std::string &attr_type_name, const DataType &attr_type_datatype, const EnumSet<Feature> &attr_type_features);
+    EntityAttributeTypePtrOpt create_entity_attribute_type(const std::string &attr_type_name, const DataType &attr_type_datatype, const Features &attr_type_features);
 
     /// @brief Creates a new entity attribute type.
     /// @param attr_type_GUID The GUID of the new entity attribute type.
@@ -39,7 +39,7 @@ class EntityAttributeTypeManager : public TypeManagerTemplate<EntityAttributeTyp
     /// @param ent_attr_type_data_type The data type of the new entity attribute type.
     /// @param ent_attr_type_features The features of the new entity attribute type.
     /// @return A std::optional shared pointer to the entity attribute type which was created.
-    EntityAttributeTypePtrOpt create_entity_attribute_type(const xg::Guid &attr_type_GUID, const std::string &attr_type_name, const DataType &attr_type_datatype, const EnumSet<Feature> &attr_type_features);
+    EntityAttributeTypePtrOpt create_entity_attribute_type(const xg::Guid &attr_type_GUID, const std::string &attr_type_name, const DataType &attr_type_datatype, const Features &attr_type_features);
 
     /// @brief Checks if an entity attribute type does already exist.
     /// @param attr_type_name The name of an entity attribute type of which we will check if it does already exist.

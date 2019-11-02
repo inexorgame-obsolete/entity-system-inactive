@@ -19,7 +19,7 @@ class TriangleEntityTypeProvider : public EntityTypeProvider
     /// @brief Constructs the specialized provider for the entity type 'TRIANGLE'.
     /// @note The dependencies of this class will be injected automatically.
     explicit TriangleEntityTypeProvider(EntityTypeBuilderFactoryPtr entity_type_builder_factory)
-        : EntityTypeProvider(std::move(entity_type_builder_factory), TYPE_NAME, {{TRIANGLE_X, {DataType::FLOAT, 1 << Feature::INPUT}}, {TRIANGLE_Y, {DataType::FLOAT, 1 << Feature::INPUT}}}){};
+        : EntityTypeProvider(std::move(entity_type_builder_factory), TYPE_NAME, {{TRIANGLE_X, {DataType::FLOAT, Features::INPUT}}, {TRIANGLE_Y, {DataType::FLOAT, Features::INPUT}}}){};
 
     /// Destructor.
     ~TriangleEntityTypeProvider() override = default;

@@ -16,7 +16,7 @@ class StringConstantEntityTypeProvider : public EntityTypeProvider
     /// @note The dependencies of this class will be injected automatically.
     /// @param entity_type_builder_manager The entity type builder manager.
     explicit StringConstantEntityTypeProvider(std::shared_ptr<EntityTypeBuilderFactory> entity_type_builder_manager)
-        : EntityTypeProvider(std::move(entity_type_builder_manager), TYPE_NAME, {{STRING_CONSTANT_NAME, {DataType::STRING, 1 << Feature::OUTPUT}}, {STRING_CONSTANT_VALUE, {DataType::STRING, 1 << Feature::OUTPUT}}}){};
+        : EntityTypeProvider(std::move(entity_type_builder_manager), TYPE_NAME, {{STRING_CONSTANT_NAME, {DataType::STRING, Features::OUTPUT}}, {STRING_CONSTANT_VALUE, {DataType::STRING, Features::OUTPUT}}}){};
 
     /// Destructor.
     ~StringConstantEntityTypeProvider() override = default;

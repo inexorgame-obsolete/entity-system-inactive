@@ -17,7 +17,7 @@ class AddIntEntityTypeProvider : public EntityTypeProvider
     /// @param entity_type_builder_manager The entity type builder manager.
     explicit AddIntEntityTypeProvider(std::shared_ptr<EntityTypeBuilderFactory> entity_type_builder_manager)
         : EntityTypeProvider(std::move(entity_type_builder_manager), TYPE_NAME,
-                             {{ADD_INT_AUGEND, {DataType::INT, 1 << Feature::INPUT}}, {ADD_INT_ADDEND, {DataType::INT, 1 << Feature::INPUT}}, {ADD_INT_SUM, {DataType::INT, 1 << Feature::OUTPUT}}}){};
+                             {{ADD_INT_AUGEND, {DataType::INT, Features::INPUT}}, {ADD_INT_ADDEND, {DataType::INT, Features::INPUT}}, {ADD_INT_SUM, {DataType::INT, Features::OUTPUT}}}){};
 
     /// Destructor.
     ~AddIntEntityTypeProvider() override = default;

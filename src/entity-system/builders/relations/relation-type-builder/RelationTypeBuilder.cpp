@@ -67,7 +67,7 @@ RelationTypeBuilderPtr RelationTypeBuilder::target(EntityTypePtr ent_type_target
     return shared_from_this();
 }
 
-RelationTypeBuilderPtr RelationTypeBuilder::attribute(const std::string &attribute_name, DataType attribute_datatype, const EnumSet<Feature> &attribute_features)
+RelationTypeBuilderPtr RelationTypeBuilder::attribute(const std::string &attribute_name, DataType attribute_datatype, const Features &attribute_features)
 {
     // Use lock guard to ensure thread safety during write operations!
     std::lock_guard<std::mutex> lock(relation_type_builder_mutex);

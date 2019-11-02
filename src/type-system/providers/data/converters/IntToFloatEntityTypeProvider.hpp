@@ -16,7 +16,7 @@ class IntToFloatEntityTypeProvider : public EntityTypeProvider
     /// @note The dependencies of this class will be injected automatically.
     /// @param entity_type_builder_manager The entity type builder manager.
     explicit IntToFloatEntityTypeProvider(std::shared_ptr<EntityTypeBuilderFactory> entity_type_builder_manager)
-        : EntityTypeProvider(std::move(entity_type_builder_manager), TYPE_NAME, {{INT_TO_FLOAT_INPUT, {DataType::INT, 1 << Feature::INPUT}}, {INT_TO_FLOAT_VALUE, {DataType::FLOAT, 1 << Feature::OUTPUT}}}){};
+        : EntityTypeProvider(std::move(entity_type_builder_manager), TYPE_NAME, {{INT_TO_FLOAT_INPUT, {DataType::INT, Features::INPUT}}, {INT_TO_FLOAT_VALUE, {DataType::FLOAT, Features::OUTPUT}}}){};
 
     /// Destructor.
     ~IntToFloatEntityTypeProvider() override = default;
