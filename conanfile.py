@@ -25,7 +25,6 @@ class InexorConan(ConanFile):
         "boost-di/1.1.0@inexorgame/stable",
         "boost-te/19.Jan.19@inexorgame/stable",
         "cpp.react/legacy1@inexorgame/stable",
-        "restbed/6eb385fa9051203f28bf96cc1844bbb5a9a6481f@inexorgame/stable",
 
         "crossguid/06-03-19@inexorgame/testing",
         "magnum/2019.01@inexorgame/testing",
@@ -51,8 +50,6 @@ class InexorConan(ConanFile):
         "magnum_plugins:with_freetypefont": True,
         "magnum_plugins:build_plugins_static": True,
         "TBB:shared": True,
-        "restbed:shared": False,
-        "restbed:ssl": False
     }
 
     def imports(self):

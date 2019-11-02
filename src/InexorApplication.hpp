@@ -1,7 +1,5 @@
 #pragma once
 
-#include "entity-system-rest/RestServer.hpp"
-#include "entity-system-rest/RestServerLogger.hpp"
 #include "entity-system/EntitySystemModule.hpp"
 #include "entity-system/debugger/EntitySystemDebugger.hpp"
 
@@ -15,7 +13,6 @@
 #include <csignal>
 #include <cstdlib>
 #include <memory>
-#include <restbed>
 #include <sys/types.h>
 
 #ifdef _WIN32
@@ -33,7 +30,6 @@ namespace inexor {
 using EntitySystemModulePtr = std::shared_ptr<entity_system::EntitySystemModule>;
 using TypeSystemModulePtr = std::shared_ptr<entity_system::type_system::TypeSystemModule>;
 using ConfigurationModulePtr = std::shared_ptr<configuration::ConfigurationModule>;
-using RestServerPtr = std::shared_ptr<entity_system::RestServer>;
 using EntitySystemDebuggerPtr = std::shared_ptr<entity_system::EntitySystemDebugger>;
 using VisualScriptingSystemModulePtr = std::shared_ptr<visual_scripting::VisualScriptingSystemModule>;
 using CommandModulePtr = std::shared_ptr<command::CommandModule>;
@@ -50,14 +46,13 @@ class InexorApplication
     /// @param entity_system_module The entity system of Inexor.
     /// @param type_system_module The type system manager.
     /// @param configuration_module The configuration manager module.
-    /// @param rest_server The REST server module of the entity system.
     /// @param entity_system_debugger The debugger of the entity system module.
     /// @param visual_scripting_system_module The visual scripting system module.
     /// @param log_manager The log module.
     /// @param renderer_manager The rendering module.
     /// @param command_module The command module.
     /// @param audio_module The audio module.
-    InexorApplication(EntitySystemModulePtr entity_system_module, TypeSystemModulePtr type_system_module, ConfigurationModulePtr configuration_module, RestServerPtr rest_server, EntitySystemDebuggerPtr entity_system_debugger,
+    InexorApplication(EntitySystemModulePtr entity_system_module, TypeSystemModulePtr type_system_module, ConfigurationModulePtr configuration_module, EntitySystemDebuggerPtr entity_system_debugger,
                       VisualScriptingSystemModulePtr visual_scripting_system_module, CommandModulePtr command_module, ClientModulePtr client_module, LogManagerPtr log_manager);
 
     /// Destructor.
@@ -90,9 +85,6 @@ class InexorApplication
 
     /// The configuration manager module.
     ConfigurationModulePtr configuration_module;
-
-    /// The REST server module of the entity system.
-    RestServerPtr rest_server;
 
     /// The debugger of the entity system module.
     EntitySystemDebuggerPtr entity_system_debugger;
@@ -139,16 +131,6 @@ class InexorApplication
             std::mem_fn (&InexorApplication::sigterm_handler)(instance, signal_number);
         }
     }
-
-    //			/// ?
-    //			/// @param service ?
-    //			static void call_ready_handlers(Service& service)
-    //			{
-    //				for (InexorApplication* instance : InexorApplication::instances)
-    //				{
-    //					std::mem_fn(&InexorApplication::ready_handler)(instance, service);
-    //				}
-    //			}
 
     /// Static instances of the Inexor application.
     static std::vector<InexorApplication *> instances;

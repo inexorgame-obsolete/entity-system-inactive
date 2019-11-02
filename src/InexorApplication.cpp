@@ -9,13 +9,12 @@ namespace inexor {
 // Static instances of the Inexor application(s)
 std::vector<InexorApplication *> InexorApplication::instances;
 
-InexorApplication::InexorApplication(EntitySystemModulePtr entity_system_module, TypeSystemModulePtr type_system_module, ConfigurationModulePtr configuration_module, RestServerPtr rest_server, EntitySystemDebuggerPtr entity_system_debugger,
+InexorApplication::InexorApplication(EntitySystemModulePtr entity_system_module, TypeSystemModulePtr type_system_module, ConfigurationModulePtr configuration_module, EntitySystemDebuggerPtr entity_system_debugger,
                                      VisualScriptingSystemModulePtr visual_scripting_system_module, CommandModulePtr command_module, ClientModulePtr client_module, LogManagerPtr log_manager)
 {
     this->entity_system_module = std::move(entity_system_module);
     this->type_system_module = std::move(type_system_module);
     this->configuration_module = std::move(configuration_module);
-    this->rest_server = std::move(rest_server);
     this->entity_system_debugger = std::move(entity_system_debugger);
     this->visual_scripting_system_module = std::move(visual_scripting_system_module);
     this->command_module = std::move(command_module);
@@ -55,12 +54,6 @@ void InexorApplication::pre_init(int argc, char *argv[])
     // Configuration manager initialization.
     configuration_module->init(argc, argv);
 
-    // Initialize the REST server
-    rest_server->set_service(rest_server);
-    rest_server->set_signal_handler(SIGINT, InexorApplication::call_sighup_handlers);
-    rest_server->set_signal_handler(SIGTERM, InexorApplication::call_sigterm_handlers);
-    // rest_server->init();
-    rest_server->set_logger(std::make_shared<RestServerLogger>());
 }
 
 void InexorApplication::init()
@@ -79,10 +72,7 @@ void InexorApplication::init()
 
 void InexorApplication::run()
 {
-    // Start the REST server and just go an as soon as it is started.
-    rest_server->init();
-
-    rest_server->wait_for_being_ready();
+    using namespace std::literals::chrono_literals;
 
     running = true;
 
@@ -120,9 +110,6 @@ void InexorApplication::shutdown()
     }
 
     spdlog::get(LOGGER_NAME)->info("Shutting down Inexor...");
-
-    // Shutdown REST server.
-    rest_server->shutdown();
 
     // Shut down the client module.
     client_module->shutdown();
