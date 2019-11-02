@@ -17,10 +17,10 @@ class InRangeIntEntityTypeProvider : public EntityTypeProvider
     /// @param entity_type_builder_manager The entity type builder manager.
     explicit InRangeIntEntityTypeProvider(std::shared_ptr<EntityTypeBuilderFactory> entity_type_builder_manager)
         : EntityTypeProvider(std::move(entity_type_builder_manager), TYPE_NAME,
-                             {{IN_RANGE_INT_INPUT, {DataType::INT, 1 << Feature::INPUT}},
-                              {IN_RANGE_INT_MIN, {DataType::INT, 1 << Feature::INPUT}},
-                              {IN_RANGE_INT_MAX, {DataType::INT, 1 << Feature::INPUT}},
-                              {IN_RANGE_INT_RESULT, {DataType::BOOL, 1 << Feature::OUTPUT}}}){};
+                             {{IN_RANGE_INT_INPUT, {DataType::INT, Features::INPUT}},
+                              {IN_RANGE_INT_MIN, {DataType::INT, Features::INPUT}},
+                              {IN_RANGE_INT_MAX, {DataType::INT, Features::INPUT}},
+                              {IN_RANGE_INT_RESULT, {DataType::BOOL, Features::OUTPUT}}}){};
 
     /// Destructor.
     ~InRangeIntEntityTypeProvider() override = default;

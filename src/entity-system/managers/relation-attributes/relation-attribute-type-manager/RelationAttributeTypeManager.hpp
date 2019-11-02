@@ -27,7 +27,7 @@ class RelationAttributeTypeManager : public TypeManagerTemplate<RelationAttribut
     /// @param rel_attr_type_data_type The data type of the new relation attribute type.
     /// @param rel_attr_type_features The features of the new relation attribute type.
     /// @return A shared pointer to the relation attribute type which was created.
-    RelationAttributeTypePtrOpt create_relation_attribute_type(const std::string &rel_attr_type_name, const DataType &rel_attr_type_data_type, const EnumSet<Feature> &rel_attr_type_features);
+    RelationAttributeTypePtrOpt create_relation_attribute_type(const std::string &rel_attr_type_name, const DataType &rel_attr_type_data_type, const Features &rel_attr_type_features);
 
     /// @brief Returns the number of existing types of relation attributes.
     /// @return The number of existing types of relation attributes.

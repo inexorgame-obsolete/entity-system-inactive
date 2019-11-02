@@ -102,7 +102,7 @@ struct DataContainer
         std::lock_guard<std::mutex> lock(data_container_mutex);
 
         /// Detect type by std::variant index()
-        this->type = DataType::_from_integral(static_cast<int>(data_value.index()));
+        this->type = magic_enum::enum_value<DataType>(data_value.index());
         this->own_value = MakeVar<D>(data_value);
         this->signal_wrapper = MakeVar<D>(this->own_value);
         this->value = Flatten(this->signal_wrapper);

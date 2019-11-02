@@ -7,6 +7,8 @@
 
 namespace inexor::entity_system::type_system {
 
+using namespace magic_enum::bitwise_operators;
+
 /// @class IntConstantEntityTypeProvider
 /// @brief Provides an entity type "INT_CONSTANT" which is a pure int constant variable.
 class IntConstantEntityTypeProvider : public EntityTypeProvider
@@ -16,7 +18,7 @@ class IntConstantEntityTypeProvider : public EntityTypeProvider
     /// @note The dependencies of this class will be injected automatically.
     /// @param entity_type_builder_manager The entity type builder manager.
     explicit IntConstantEntityTypeProvider(std::shared_ptr<EntityTypeBuilderFactory> entity_type_builder_manager)
-        : EntityTypeProvider(std::move(entity_type_builder_manager), TYPE_NAME, {{INT_CONSTANT_NAME, {DataType::STRING, 1 << Feature::OUTPUT}}, {INT_CONSTANT_VALUE, {DataType::INT, 1 << Feature::INPUT | 1 << Feature::OUTPUT}}}){};
+        : EntityTypeProvider(std::move(entity_type_builder_manager), TYPE_NAME, {{INT_CONSTANT_NAME, {DataType::STRING, Features::OUTPUT}}, {INT_CONSTANT_VALUE, {DataType::INT, Features::INPUT | Features::OUTPUT}}}){};
 
     /// Destructor.
     ~IntConstantEntityTypeProvider() override = default;

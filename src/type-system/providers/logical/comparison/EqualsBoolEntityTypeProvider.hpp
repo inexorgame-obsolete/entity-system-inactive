@@ -17,7 +17,7 @@ class EqualsBoolEntityTypeProvider : public EntityTypeProvider
     /// @param entity_type_builder_manager The entity type builder manager.
     explicit EqualsBoolEntityTypeProvider(std::shared_ptr<EntityTypeBuilderFactory> entity_type_builder_manager)
         : EntityTypeProvider(std::move(entity_type_builder_manager), TYPE_NAME,
-                             {{EQUALS_BOOL_INPUT_1, {DataType::BOOL, 1 << Feature::INPUT}}, {EQUALS_BOOL_INPUT_2, {DataType::BOOL, 1 << Feature::INPUT}}, {EQUALS_BOOL_RESULT, {DataType::BOOL, 1 << Feature::OUTPUT}}}){};
+                             {{EQUALS_BOOL_INPUT_1, {DataType::BOOL, Features::INPUT}}, {EQUALS_BOOL_INPUT_2, {DataType::BOOL, Features::INPUT}}, {EQUALS_BOOL_RESULT, {DataType::BOOL, Features::OUTPUT}}}){};
 
     /// Destructor.
     ~EqualsBoolEntityTypeProvider() override = default;

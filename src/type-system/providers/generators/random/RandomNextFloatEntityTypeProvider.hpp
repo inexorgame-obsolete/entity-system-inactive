@@ -17,10 +17,10 @@ class RandomNextFloatEntityTypeProvider : public EntityTypeProvider
     /// @param entity_type_builder_manager The entity type builder manager.
     explicit RandomNextFloatEntityTypeProvider(std::shared_ptr<EntityTypeBuilderFactory> entity_type_builder_manager)
         : EntityTypeProvider(std::move(entity_type_builder_manager), TYPE_NAME,
-                             {{RANDOM_NEXT_FLOAT_ON_ACTIVATION, {DataType::BOOL, 1 << Feature::INPUT}},
-                              {RANDOM_NEXT_FLOAT_MIN, {DataType::FLOAT, 1 << Feature::INPUT}},
-                              {RANDOM_NEXT_FLOAT_MAX, {DataType::FLOAT, 1 << Feature::INPUT}},
-                              {RANDOM_NEXT_FLOAT_VALUE, {DataType::FLOAT, 1 << Feature::OUTPUT}}}){};
+                             {{RANDOM_NEXT_FLOAT_ON_ACTIVATION, {DataType::BOOL, Features::INPUT}},
+                              {RANDOM_NEXT_FLOAT_MIN, {DataType::FLOAT, Features::INPUT}},
+                              {RANDOM_NEXT_FLOAT_MAX, {DataType::FLOAT, Features::INPUT}},
+                              {RANDOM_NEXT_FLOAT_VALUE, {DataType::FLOAT, Features::OUTPUT}}}){};
 
     /// Destructor.
     ~RandomNextFloatEntityTypeProvider() override = default;

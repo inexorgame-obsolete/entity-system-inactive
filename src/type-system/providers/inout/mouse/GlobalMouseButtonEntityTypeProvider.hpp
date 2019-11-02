@@ -22,9 +22,9 @@ namespace inexor::entity_system::type_system {
 				std::move(entity_type_builder_manager),
 				TYPE_NAME,
 				{
-					{ GLOBAL_MOUSE_BUTTON_NUMBER, { DataType::INT, 1 << Feature::OUTPUT } },
-					{ GLOBAL_MOUSE_BUTTON_ACTION, { DataType::INT, 1 << Feature::OUTPUT } },
-					{ GLOBAL_MOUSE_BUTTON_MODS, { DataType::INT, 1 << Feature::OUTPUT } }
+					{ GLOBAL_MOUSE_BUTTON_NUMBER, { DataType::INT, Features::OUTPUT } },
+					{ GLOBAL_MOUSE_BUTTON_ACTION, { DataType::INT, Features::OUTPUT } },
+					{ GLOBAL_MOUSE_BUTTON_MODS, { DataType::INT, Features::OUTPUT } }
 				}
 			) {};
 

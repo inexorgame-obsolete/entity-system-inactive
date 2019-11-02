@@ -17,10 +17,10 @@ class InRangeFloatEntityTypeProvider : public EntityTypeProvider
     /// @param entity_type_builder_manager The entity type builder manager.
     explicit InRangeFloatEntityTypeProvider(std::shared_ptr<EntityTypeBuilderFactory> entity_type_builder_manager)
         : EntityTypeProvider(std::move(entity_type_builder_manager), TYPE_NAME,
-                             {{IN_RANGE_FLOAT_INPUT, {DataType::FLOAT, 1 << Feature::INPUT}},
-                              {IN_RANGE_FLOAT_MIN, {DataType::FLOAT, 1 << Feature::INPUT}},
-                              {IN_RANGE_FLOAT_MAX, {DataType::FLOAT, 1 << Feature::INPUT}},
-                              {IN_RANGE_FLOAT_RESULT, {DataType::BOOL, 1 << Feature::OUTPUT}}}){};
+                             {{IN_RANGE_FLOAT_INPUT, {DataType::FLOAT, Features::INPUT}},
+                              {IN_RANGE_FLOAT_MIN, {DataType::FLOAT, Features::INPUT}},
+                              {IN_RANGE_FLOAT_MAX, {DataType::FLOAT, Features::INPUT}},
+                              {IN_RANGE_FLOAT_RESULT, {DataType::BOOL, Features::OUTPUT}}}){};
 
     /// Destructor.
     ~InRangeFloatEntityTypeProvider() override = default;

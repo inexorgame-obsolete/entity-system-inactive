@@ -17,7 +17,7 @@ class GreaterThanIntEntityTypeProvider : public EntityTypeProvider
     /// @param entity_type_builder_manager The entity type builder manager.
     explicit GreaterThanIntEntityTypeProvider(std::shared_ptr<EntityTypeBuilderFactory> entity_type_builder_manager)
         : EntityTypeProvider(std::move(entity_type_builder_manager), TYPE_NAME,
-                             {{GREATER_THAN_INT_INPUT_1, {DataType::INT, 1 << Feature::INPUT}}, {GREATER_THAN_INT_INPUT_2, {DataType::INT, 1 << Feature::INPUT}}, {GREATER_THAN_INT_RESULT, {DataType::BOOL, 1 << Feature::OUTPUT}}}){};
+                             {{GREATER_THAN_INT_INPUT_1, {DataType::INT, Features::INPUT}}, {GREATER_THAN_INT_INPUT_2, {DataType::INT, Features::INPUT}}, {GREATER_THAN_INT_RESULT, {DataType::BOOL, Features::OUTPUT}}}){};
 
     /// Destructor.
     ~GreaterThanIntEntityTypeProvider() override = default;

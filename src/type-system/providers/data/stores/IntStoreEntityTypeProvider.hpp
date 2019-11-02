@@ -7,6 +7,8 @@
 
 namespace inexor::entity_system::type_system {
 
+using namespace magic_enum::bitwise_operators;
+
 /// @class IntStoreEntityTypeProvider
 /// @brief Provides an entity type "INT_STORE".
 class IntStoreEntityTypeProvider : public EntityTypeProvider
@@ -17,10 +19,10 @@ class IntStoreEntityTypeProvider : public EntityTypeProvider
     /// @param entity_type_builder_manager The entity type builder manager.
     explicit IntStoreEntityTypeProvider(std::shared_ptr<EntityTypeBuilderFactory> entity_type_builder_manager)
         : EntityTypeProvider(std::move(entity_type_builder_manager), TYPE_NAME,
-                             {{INT_STORE_NAME, {DataType::STRING, 1 << Feature::OUTPUT}},
-                              {INT_STORE_INPUT_VALUE, {DataType::INT, 1 << Feature::INPUT}},
-                              {INT_STORE_DEFAULT_VALUE, {DataType::INT, 1 << Feature::INPUT | 1 << Feature::OUTPUT}},
-                              {INT_STORE_OUTPUT_VALUE, {DataType::INT, 1 << Feature::OUTPUT}}}){};
+                             {{INT_STORE_NAME, {DataType::STRING, Features::OUTPUT}},
+                              {INT_STORE_INPUT_VALUE, {DataType::INT, Features::INPUT}},
+                              {INT_STORE_DEFAULT_VALUE, {DataType::INT, Features::INPUT | Features::OUTPUT}},
+                              {INT_STORE_OUTPUT_VALUE, {DataType::INT, Features::OUTPUT}}}){};
 
     /// Destructor.
     ~IntStoreEntityTypeProvider() override = default;

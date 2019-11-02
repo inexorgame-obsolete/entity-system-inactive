@@ -18,7 +18,7 @@ class GreaterThanFloatEntityTypeProvider : public EntityTypeProvider
     explicit GreaterThanFloatEntityTypeProvider(std::shared_ptr<EntityTypeBuilderFactory> entity_type_builder_manager)
         : EntityTypeProvider(
               std::move(entity_type_builder_manager), TYPE_NAME,
-              {{GREATER_THAN_FLOAT_INPUT_1, {DataType::FLOAT, 1 << Feature::INPUT}}, {GREATER_THAN_FLOAT_INPUT_2, {DataType::FLOAT, 1 << Feature::INPUT}}, {GREATER_THAN_FLOAT_RESULT, {DataType::BOOL, 1 << Feature::OUTPUT}}}){};
+              {{GREATER_THAN_FLOAT_INPUT_1, {DataType::FLOAT, Features::INPUT}}, {GREATER_THAN_FLOAT_INPUT_2, {DataType::FLOAT, Features::INPUT}}, {GREATER_THAN_FLOAT_RESULT, {DataType::BOOL, Features::OUTPUT}}}){};
 
     /// Destructor.
     ~GreaterThanFloatEntityTypeProvider() override = default;

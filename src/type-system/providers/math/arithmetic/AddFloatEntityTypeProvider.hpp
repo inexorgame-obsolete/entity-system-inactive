@@ -17,7 +17,7 @@ class AddFloatEntityTypeProvider : public EntityTypeProvider
     /// @param entity_type_builder_manager The entity type builder manager.
     explicit AddFloatEntityTypeProvider(std::shared_ptr<EntityTypeBuilderFactory> entity_type_builder_manager)
         : EntityTypeProvider(std::move(entity_type_builder_manager), TYPE_NAME,
-                             {{ADD_FLOAT_AUGEND, {DataType::FLOAT, 1 << Feature::INPUT}}, {ADD_FLOAT_ADDEND, {DataType::FLOAT, 1 << Feature::INPUT}}, {ADD_FLOAT_SUM, {DataType::FLOAT, 1 << Feature::OUTPUT}}}){};
+                             {{ADD_FLOAT_AUGEND, {DataType::FLOAT, Features::INPUT}}, {ADD_FLOAT_ADDEND, {DataType::FLOAT, Features::INPUT}}, {ADD_FLOAT_SUM, {DataType::FLOAT, Features::OUTPUT}}}){};
 
     /// Destruction.
     ~AddFloatEntityTypeProvider() override = default;

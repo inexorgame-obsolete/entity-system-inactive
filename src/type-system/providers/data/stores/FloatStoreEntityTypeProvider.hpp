@@ -7,6 +7,8 @@
 
 namespace inexor::entity_system::type_system {
 
+using namespace magic_enum::bitwise_operators;
+
 /// @class FloatStoreEntityTypeProvider
 /// @brief Provides an entity type "FLOAT_STORE".
 class FloatStoreEntityTypeProvider : public EntityTypeProvider
@@ -17,10 +19,10 @@ class FloatStoreEntityTypeProvider : public EntityTypeProvider
     /// @param entity_type_builder_manager The entity type builder manager.
     explicit FloatStoreEntityTypeProvider(std::shared_ptr<EntityTypeBuilderFactory> entity_type_builder_manager)
         : EntityTypeProvider(std::move(entity_type_builder_manager), TYPE_NAME,
-                             {{FLOAT_STORE_NAME, {DataType::STRING, 1 << Feature::OUTPUT}},
-                              {FLOAT_STORE_INPUT_VALUE, {DataType::FLOAT, 1 << Feature::INPUT}},
-                              {FLOAT_STORE_DEFAULT_VALUE, {DataType::FLOAT, 1 << Feature::INPUT | 1 << Feature::OUTPUT}},
-                              {FLOAT_STORE_OUTPUT_VALUE, {DataType::FLOAT, 1 << Feature::OUTPUT}}}){};
+                             {{FLOAT_STORE_NAME, {DataType::STRING, Features::OUTPUT}},
+                              {FLOAT_STORE_INPUT_VALUE, {DataType::FLOAT, Features::INPUT}},
+                              {FLOAT_STORE_DEFAULT_VALUE, {DataType::FLOAT, Features::INPUT | Features::OUTPUT}},
+                              {FLOAT_STORE_OUTPUT_VALUE, {DataType::FLOAT, Features::OUTPUT}}}){};
 
     /// Destructor.
     ~FloatStoreEntityTypeProvider() override{};

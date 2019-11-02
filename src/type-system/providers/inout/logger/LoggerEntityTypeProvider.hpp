@@ -7,6 +7,8 @@
 
 namespace inexor::entity_system::type_system {
 
+using namespace magic_enum::bitwise_operators;
+
 /// @class LoggerEntityTypeProvider
 /// Provides an entity type "LOGGER". The LOGGER logs.
 class LoggerEntityTypeProvider : public EntityTypeProvider
@@ -17,7 +19,7 @@ class LoggerEntityTypeProvider : public EntityTypeProvider
     /// @param entity_type_builder_manager The entity type builder manager.
     explicit LoggerEntityTypeProvider(std::shared_ptr<EntityTypeBuilderFactory> entity_type_builder_manager)
         : EntityTypeProvider(std::move(entity_type_builder_manager), TYPE_NAME,
-                             {{LOGGER_NAME, {DataType::STRING, 1 << Feature::OUTPUT}}, {LOG_LEVEL, {DataType::INT, 1 << Feature::INPUT | 1 << Feature::OUTPUT}}, {LOG_MESSAGE, {DataType::STRING, 1 << Feature::INPUT}}}){};
+                             {{LOGGER_NAME, {DataType::STRING, Features::OUTPUT}}, {LOG_LEVEL, {DataType::INT, Features::INPUT | Features::OUTPUT}}, {LOG_MESSAGE, {DataType::STRING, Features::INPUT}}}){};
 
     /// Destructor.
     ~LoggerEntityTypeProvider() override = default;

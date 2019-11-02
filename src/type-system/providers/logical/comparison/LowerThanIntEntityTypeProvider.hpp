@@ -22,9 +22,9 @@ namespace inexor::entity_system::type_system {
 				std::move(entity_type_builder_manager),
 				TYPE_NAME,
 				{
-					{ LOWER_THAN_INT_INPUT_1, { DataType::INT, 1 << Feature::INPUT } },
-					{ LOWER_THAN_INT_INPUT_2, { DataType::INT, 1 << Feature::INPUT } },
-					{ LOWER_THAN_INT_RESULT, { DataType::BOOL, 1 << Feature::OUTPUT } }
+					{ LOWER_THAN_INT_INPUT_1, { DataType::INT, Features::INPUT } },
+					{ LOWER_THAN_INT_INPUT_2, { DataType::INT, Features::INPUT } },
+					{ LOWER_THAN_INT_RESULT, { DataType::BOOL, Features::OUTPUT } }
 				}
 			) {};
 

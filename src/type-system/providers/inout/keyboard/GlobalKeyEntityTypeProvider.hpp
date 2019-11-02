@@ -17,7 +17,7 @@ class GlobalKeyEntityTypeProvider : public EntityTypeProvider
     /// @param entity_type_builder_manager The entity type builder manager.
     explicit GlobalKeyEntityTypeProvider(std::shared_ptr<EntityTypeBuilderFactory> entity_type_builder_manager)
         : EntityTypeProvider(std::move(entity_type_builder_manager), TYPE_NAME,
-                             {{GLOBAL_KEY_KEYCODE, {DataType::INT, 1 << Feature::OUTPUT}}, {GLOBAL_KEY_ACTION, {DataType::INT, 1 << Feature::OUTPUT}}, {GLOBAL_KEY_MODS, {DataType::INT, 1 << Feature::OUTPUT}}}){};
+                             {{GLOBAL_KEY_KEYCODE, {DataType::INT, Features::OUTPUT}}, {GLOBAL_KEY_ACTION, {DataType::INT, Features::OUTPUT}}, {GLOBAL_KEY_MODS, {DataType::INT, Features::OUTPUT}}}){};
 
     /// Destructor.
     ~GlobalKeyEntityTypeProvider() override = default;

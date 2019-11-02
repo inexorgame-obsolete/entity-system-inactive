@@ -135,36 +135,36 @@ bool EntityInstanceBuilder::initialize_instance(const EntityInstancePtr &entity_
                 {
                 case DataType::BOOL:
                     attr_inst->own_value.Set(std::get<DataType::BOOL>(data_value));
-                    spdlog::debug("Set {} attribute {} = {}", DataType::_from_integral(attr_inst->type)._to_string(), attr_name, std::get<DataType::BOOL>(attr_inst->own_value.Value()));
+                    spdlog::debug("Set {} attribute {} = {}", magic_enum::enum_name(attr_inst->type), attr_name, std::get<DataType::BOOL>(attr_inst->own_value.Value()));
                     break;
                 case DataType::INT:
                     attr_inst->own_value.Set(std::get<DataType::INT>(data_value));
-                    spdlog::debug("Set {} attribute {} = {}", DataType::_from_integral(attr_inst->type)._to_string(), attr_name, std::get<DataType::INT>(attr_inst->own_value.Value()));
+                    spdlog::debug("Set {} attribute {} = {}", magic_enum::enum_name(attr_inst->type), attr_name, std::get<DataType::INT>(attr_inst->own_value.Value()));
                     break;
                 case DataType::BIG_INT:
                     attr_inst->own_value.Set(std::get<DataType::BIG_INT>(data_value));
-                    spdlog::debug("Set {} attribute {} = {}", DataType::_from_integral(attr_inst->type)._to_string(), attr_name, std::get<DataType::BIG_INT>(attr_inst->own_value.Value()));
+                    spdlog::debug("Set {} attribute {} = {}", magic_enum::enum_name(attr_inst->type), attr_name, std::get<DataType::BIG_INT>(attr_inst->own_value.Value()));
                     break;
                 case DataType::DOUBLE:
                     attr_inst->own_value.Set(std::get<DataType::DOUBLE>(data_value));
-                    spdlog::debug("Set {} attribute {} = {}", DataType::_from_integral(attr_inst->type)._to_string(), attr_name, std::get<DataType::DOUBLE>(attr_inst->own_value.Value()));
+                    spdlog::debug("Set {} attribute {} = {}", magic_enum::enum_name(attr_inst->type), attr_name, std::get<DataType::DOUBLE>(attr_inst->own_value.Value()));
                     break;
                 case DataType::FLOAT:
                     attr_inst->own_value.Set(std::get<DataType::FLOAT>(data_value));
-                    spdlog::debug("Set {} attribute {} = {}", DataType::_from_integral(attr_inst->type)._to_string(), attr_name, std::get<DataType::FLOAT>(attr_inst->own_value.Value()));
+                    spdlog::debug("Set {} attribute {} = {}", magic_enum::enum_name(attr_inst->type), attr_name, std::get<DataType::FLOAT>(attr_inst->own_value.Value()));
                     break;
                 case DataType::STRING:
                     attr_inst->own_value.Set(std::get<DataType::STRING>(data_value));
-                    spdlog::debug("Set {} attribute {} = {}", DataType::_from_integral(attr_inst->type)._to_string(), attr_name, std::get<DataType::STRING>(attr_inst->own_value.Value()));
+                    spdlog::debug("Set {} attribute {} = {}", magic_enum::enum_name(attr_inst->type), attr_name, std::get<DataType::STRING>(attr_inst->own_value.Value()));
                     break;
                 default:
-                    spdlog::error("Failed to set attribute {}: Unknown data type {} {}", attr_name, DataType::_from_integral(attr_inst->type)._to_string(), attr_inst->type);
+                    spdlog::error("Failed to set attribute {}: Unknown data type {}", attr_name, attr_inst->type);
                     break;
                 }
             } else
             {
                 // Error: Wrong datatype
-                spdlog::error("Wrong datatype for attribute {} of new entity instance of type {}: {} != {}", attr_name, o_entity_type.value()->get_type_name(), attr_inst->type._to_string(), attr_value.type._to_string());
+                spdlog::error("Wrong datatype for attribute {} of new entity instance of type {}: {} != {}", attr_name, o_entity_type.value()->get_type_name(), magic_enum::enum_name(attr_inst->type), magic_enum::enum_name(attr_value.type));
                 return false;
             }
         } else

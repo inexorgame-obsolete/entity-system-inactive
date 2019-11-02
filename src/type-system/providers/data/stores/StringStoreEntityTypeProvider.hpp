@@ -7,6 +7,8 @@
 
 namespace inexor::entity_system::type_system {
 
+using namespace magic_enum::bitwise_operators;
+
 /// @class StringStoreEntityTypeProvider
 /// @brief Provides an entity type "STRING_STORE".
 class StringStoreEntityTypeProvider : public EntityTypeProvider
@@ -17,10 +19,10 @@ class StringStoreEntityTypeProvider : public EntityTypeProvider
     /// @param entity_type_builder_manager The entity type builder manager.
     explicit StringStoreEntityTypeProvider(std::shared_ptr<EntityTypeBuilderFactory> entity_type_builder_manager)
         : EntityTypeProvider(std::move(entity_type_builder_manager), TYPE_NAME,
-                             {{STRING_STORE_NAME, {DataType::STRING, 1 << Feature::OUTPUT}},
-                              {STRING_STORE_INPUT_VALUE, {DataType::STRING, 1 << Feature::INPUT}},
-                              {STRING_STORE_DEFAULT_VALUE, {DataType::STRING, 1 << Feature::INPUT | 1 << Feature::OUTPUT}},
-                              {STRING_STORE_OUTPUT_VALUE, {DataType::STRING, 1 << Feature::OUTPUT}}}){};
+                             {{STRING_STORE_NAME, {DataType::STRING, Features::OUTPUT}},
+                              {STRING_STORE_INPUT_VALUE, {DataType::STRING, Features::INPUT}},
+                              {STRING_STORE_DEFAULT_VALUE, {DataType::STRING, Features::INPUT | Features::OUTPUT}},
+                              {STRING_STORE_OUTPUT_VALUE, {DataType::STRING, Features::OUTPUT}}}){};
 
     /// Destructor.
     ~StringStoreEntityTypeProvider() override = default;

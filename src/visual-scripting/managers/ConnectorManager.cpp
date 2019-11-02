@@ -4,7 +4,9 @@
 
 namespace inexor::visual_scripting {
 
-using Feature = entity_system::Feature;
+using namespace magic_enum::bitwise_operators;
+
+using Features = entity_system::Features;
 
 ConnectorManager::ConnectorManager(EntityInstanceManagerPtr entity_instance_manager, RelationInstanceManagerPtr relation_instance_manager, LogManagerPtr log_manager)
 {
@@ -30,8 +32,11 @@ ConnectorPtrOpt ConnectorManager::create_connector(const std::shared_ptr<class i
     // Check if output attribute has feature OUTPUT
     // Check if input attribute has feature INPUT
     // Check if input is not occupied
-    if (output_attr_GUID != input_attr_GUID && output_attr->type == input_attr->type && output_attr->get_entity_attribute_type()->get_attribute_features().test(Feature::OUTPUT) &&
-        input_attr->get_entity_attribute_type()->get_attribute_features().test(Feature::INPUT) && !input_occupied(input_attr_GUID))
+    if (output_attr_GUID != input_attr_GUID
+        && output_attr->type == input_attr->type
+        && magic_enum::enum_integer(output_attr->get_entity_attribute_type()->get_attribute_features() & Features::OUTPUT)
+        && magic_enum::enum_integer(input_attr->get_entity_attribute_type()->get_attribute_features() & Features::INPUT)
+        && !input_occupied(input_attr_GUID))
     {
         ConnectorPtr connector = std::make_shared<Connector>(output_attr, input_attr);
         connectors[connector->get_GUID()] = connector;
@@ -53,8 +58,12 @@ ConnectorPtrOpt ConnectorManager::create_connector(const xg::Guid &connector_GUI
     // Check if output attribute has feature OUTPUT
     // Check if input attribute has feature INPUT
     // Check if input is not occupied
-    if (!connector_exists(connector_GUID) && output_attr_GUID != input_attr_GUID && output_attr->type == input_attr->type && output_attr->get_entity_attribute_type()->get_attribute_features().test(Feature::OUTPUT) &&
-        input_attr->get_entity_attribute_type()->get_attribute_features().test(Feature::INPUT) && !input_occupied(input_attr_GUID))
+    if (!connector_exists(connector_GUID)
+        && output_attr_GUID != input_attr_GUID
+        && output_attr->type == input_attr->type
+        && magic_enum::enum_integer(output_attr->get_entity_attribute_type()->get_attribute_features() & Features::OUTPUT)
+        && magic_enum::enum_integer(input_attr->get_entity_attribute_type()->get_attribute_features() & Features::INPUT)
+        && !input_occupied(input_attr_GUID))
     {
         ConnectorPtr connector = std::make_shared<Connector>(connector_GUID, output_attr, input_attr);
         connectors[connector->get_GUID()] = connector;

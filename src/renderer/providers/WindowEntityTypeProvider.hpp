@@ -9,6 +9,8 @@ namespace inexor::renderer {
 
 using namespace entity_system;
 
+using namespace magic_enum::bitwise_operators;
+
 using EntityTypeBuilderFactoryPtr = std::shared_ptr<EntityTypeBuilderFactory>;
 
 /// @class WindowEntityTypeProvider
@@ -20,22 +22,22 @@ class WindowEntityTypeProvider : public EntityTypeProvider
     /// @note The dependencies of this class will be injected automatically.
     explicit WindowEntityTypeProvider(EntityTypeBuilderFactoryPtr entity_type_builder_factory)
         : EntityTypeProvider(std::move(entity_type_builder_factory), TYPE_NAME,
-                             {{WINDOW_ID, {DataType::INT, 1 << Feature::OUTPUT}},
-                              {WINDOW_TITLE, {DataType::STRING, 1 << Feature::INPUT | 1 << Feature::OUTPUT}},
-                              {WINDOW_POSITION_X, {DataType::INT, 1 << Feature::INPUT | 1 << Feature::OUTPUT}},
-                              {WINDOW_POSITION_Y, {DataType::INT, 1 << Feature::INPUT | 1 << Feature::OUTPUT}},
-                              {WINDOW_WIDTH, {DataType::INT, 1 << Feature::INPUT | 1 << Feature::OUTPUT}},
-                              {WINDOW_HEIGHT, {DataType::INT, 1 << Feature::INPUT | 1 << Feature::OUTPUT}},
-                              {WINDOW_OPACITY, {DataType::FLOAT, 1 << Feature::INPUT | 1 << Feature::OUTPUT}},
-                              {WINDOW_VISIBLE, {DataType::BOOL, 1 << Feature::INPUT | 1 << Feature::OUTPUT}},
-                              {WINDOW_FULLSCREEN, {DataType::BOOL, 1 << Feature::INPUT | 1 << Feature::OUTPUT}},
-                              {WINDOW_RESTORE_WIDTH, {DataType::INT, 1 << Feature::OUTPUT}},
-                              {WINDOW_RESTORE_HEIGHT, {DataType::INT, 1 << Feature::OUTPUT}},
-                              {WINDOW_ICONIFIED, {DataType::BOOL, 1 << Feature::INPUT | 1 << Feature::OUTPUT}},
-                              {WINDOW_MAXIMIZED, {DataType::BOOL, 1 << Feature::INPUT | 1 << Feature::OUTPUT}},
-                              {WINDOW_FOCUSED, {DataType::BOOL, 1 << Feature::OUTPUT}},
-                              {WINDOW_VSYNC, {DataType::BOOL, 1 << Feature::INPUT | 1 << Feature::OUTPUT}},
-                              {WINDOW_FPS, {DataType::FLOAT, 1 << Feature::INPUT | 1 << Feature::OUTPUT}}}){};
+                             {{WINDOW_ID, {DataType::INT, Features::OUTPUT}},
+                              {WINDOW_TITLE, {DataType::STRING, Features::INPUT | Features::OUTPUT}},
+                              {WINDOW_POSITION_X, {DataType::INT, Features::INPUT | Features::OUTPUT}},
+                              {WINDOW_POSITION_Y, {DataType::INT, Features::INPUT | Features::OUTPUT}},
+                              {WINDOW_WIDTH, {DataType::INT, Features::INPUT | Features::OUTPUT}},
+                              {WINDOW_HEIGHT, {DataType::INT, Features::INPUT | Features::OUTPUT}},
+                              {WINDOW_OPACITY, {DataType::FLOAT, Features::INPUT | Features::OUTPUT}},
+                              {WINDOW_VISIBLE, {DataType::BOOL, Features::INPUT | Features::OUTPUT}},
+                              {WINDOW_FULLSCREEN, {DataType::BOOL, Features::INPUT | Features::OUTPUT}},
+                              {WINDOW_RESTORE_WIDTH, {DataType::INT, Features::OUTPUT}},
+                              {WINDOW_RESTORE_HEIGHT, {DataType::INT, Features::OUTPUT}},
+                              {WINDOW_ICONIFIED, {DataType::BOOL, Features::INPUT | Features::OUTPUT}},
+                              {WINDOW_MAXIMIZED, {DataType::BOOL, Features::INPUT | Features::OUTPUT}},
+                              {WINDOW_FOCUSED, {DataType::BOOL, Features::OUTPUT}},
+                              {WINDOW_VSYNC, {DataType::BOOL, Features::INPUT | Features::OUTPUT}},
+                              {WINDOW_FPS, {DataType::FLOAT, Features::INPUT | Features::OUTPUT}}}){};
 
     /// Destructor.
     ~WindowEntityTypeProvider() override = default;

@@ -22,7 +22,7 @@ template <typename T, typename BUILDER_MANAGER> class TypeProvider
 {
     public:
     /// This using instruction helps to shorten the following code.
-    using AttributeList = std::unordered_map<std::string, std::pair<DataType, EnumSet<Feature>>>;
+    using AttributeList = std::unordered_map<std::string, std::pair<DataType, Features>>;
 
     /// @brief Constructs the type provider by using a specialized builder manager.
     /// @param type_builder_manager The builder manager.

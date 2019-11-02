@@ -17,7 +17,7 @@ class OrEntityTypeProvider : public EntityTypeProvider
     /// @param entity_type_builder_manager The entity type builder manager.
     explicit OrEntityTypeProvider(std::shared_ptr<EntityTypeBuilderFactory> entity_type_builder_manager)
         : EntityTypeProvider(std::move(entity_type_builder_manager), TYPE_NAME,
-                             {{OR_INPUT_1, {DataType::BOOL, 1 << Feature::INPUT}}, {OR_INPUT_2, {DataType::BOOL, 1 << Feature::INPUT}}, {OR_RESULT, {DataType::BOOL, 1 << Feature::OUTPUT}}}){};
+                             {{OR_INPUT_1, {DataType::BOOL, Features::INPUT}}, {OR_INPUT_2, {DataType::BOOL, Features::INPUT}}, {OR_RESULT, {DataType::BOOL, Features::OUTPUT}}}){};
 
     /// Destructor.
     ~OrEntityTypeProvider() override = default;

@@ -10,7 +10,7 @@ namespace inexor::entity_system {
 class EntityTypeBuilder;
 
 /// These using instructions help to shorten the following code.
-using AttributeList = std::unordered_map<std::string, std::pair<DataType, EnumSet<Feature>>>;
+using AttributeList = std::unordered_map<std::string, std::pair<DataType, Features>>;
 using EntityTypeBuilderPtr = std::shared_ptr<EntityTypeBuilder>;
 using EntityTypePtr = std::shared_ptr<EntityType>;
 using EntityTypePtrOpt = std::optional<EntityTypePtr>;
@@ -58,7 +58,7 @@ class EntityTypeBuilder : public std::enable_shared_from_this<EntityTypeBuilder>
     /// @param attribute_name The name of the new attribute.
     /// @param attribute_datatype The data type of the new attribute.
     /// @param attribute_features The features of the new attribute.
-    EntityTypeBuilderPtr attribute(const std::string &attribute_name, const DataType &attribute_datatype, const EnumSet<Feature> &attribute_features);
+    EntityTypeBuilderPtr attribute(const std::string &attribute_name, const DataType &attribute_datatype, const Features &attribute_features);
 
     /// @brief Adds an input attribute to the entity type which is being built.
     /// @note Because this method will be used in a builder pattern it does not make sense to rename it so "set_input".

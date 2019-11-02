@@ -17,10 +17,10 @@ class CounterFloatEntityTypeProvider : public EntityTypeProvider
     /// @param entity_type_builder_manager The entity type builder manager.
     explicit CounterFloatEntityTypeProvider(std::shared_ptr<EntityTypeBuilderFactory> entity_type_builder_manager)
         : EntityTypeProvider(std::move(entity_type_builder_manager), TYPE_NAME,
-                             {{COUNTER_FLOAT_MILLIS, {DataType::INT, 1 << Feature::INPUT}},
-                              {COUNTER_FLOAT_STEP, {DataType::FLOAT, 1 << Feature::INPUT}},
-                              {COUNTER_FLOAT_RESET, {DataType::BOOL, 1 << Feature::INPUT}},
-                              {COUNTER_FLOAT_COUNT, {DataType::FLOAT, 1 << Feature::OUTPUT}}}){};
+                             {{COUNTER_FLOAT_MILLIS, {DataType::INT, Features::INPUT}},
+                              {COUNTER_FLOAT_STEP, {DataType::FLOAT, Features::INPUT}},
+                              {COUNTER_FLOAT_RESET, {DataType::BOOL, Features::INPUT}},
+                              {COUNTER_FLOAT_COUNT, {DataType::FLOAT, Features::OUTPUT}}}){};
 
     /// Destructor.
     ~CounterFloatEntityTypeProvider() override = default;

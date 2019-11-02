@@ -16,7 +16,7 @@ class NotEntityTypeProvider : public EntityTypeProvider
     /// @note The dependencies of this class will be injected automatically.
     /// @param entity_type_builder_manager The entity type builder manager.
     explicit NotEntityTypeProvider(std::shared_ptr<EntityTypeBuilderFactory> entity_type_builder_manager)
-        : EntityTypeProvider(std::move(entity_type_builder_manager), TYPE_NAME, {{NOT_INPUT, {DataType::BOOL, 1 << Feature::INPUT}}, {NOT_RESULT, {DataType::BOOL, 1 << Feature::OUTPUT}}}){};
+        : EntityTypeProvider(std::move(entity_type_builder_manager), TYPE_NAME, {{NOT_INPUT, {DataType::BOOL, Features::INPUT}}, {NOT_RESULT, {DataType::BOOL, Features::OUTPUT}}}){};
 
     /// Destructor.
     ~NotEntityTypeProvider() override = default;

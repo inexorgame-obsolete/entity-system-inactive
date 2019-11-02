@@ -17,7 +17,7 @@ class LowerThanFloatEntityTypeProvider : public EntityTypeProvider
     /// @param entity_type_builder_manager The entity type builder manager.
     explicit LowerThanFloatEntityTypeProvider(std::shared_ptr<EntityTypeBuilderFactory> entity_type_builder_manager)
         : EntityTypeProvider(std::move(entity_type_builder_manager), TYPE_NAME,
-                             {{LOWER_THAN_FLOAT_INPUT_1, {DataType::FLOAT, 1 << Feature::INPUT}}, {LOWER_THAN_FLOAT_INPUT_2, {DataType::FLOAT, 1 << Feature::INPUT}}, {LOWER_THAN_FLOAT_RESULT, {DataType::BOOL, 1 << Feature::OUTPUT}}}){};
+                             {{LOWER_THAN_FLOAT_INPUT_1, {DataType::FLOAT, Features::INPUT}}, {LOWER_THAN_FLOAT_INPUT_2, {DataType::FLOAT, Features::INPUT}}, {LOWER_THAN_FLOAT_RESULT, {DataType::BOOL, Features::OUTPUT}}}){};
 
     /// Destructor.
     ~LowerThanFloatEntityTypeProvider() override = default;
