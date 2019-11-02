@@ -4,12 +4,12 @@
 
 #include <string>
 
-#include <better-enums/enum.h>
+#include <magic_enum.hpp>
 
 namespace inexor::configuration {
 
 /// The environment variables to import
-BETTER_ENUM(EnvironmentVariables, int, DISPLAY = 0, SHELL, PATH, USERNAME, DESKTOP_SESSION, GDK_BACKEND, USER, PWD, HOME, LANGUAGE, LANG)
+enum EnvironmentVariables { DISPLAY = 0, SHELL, PATH, USERNAME, DESKTOP_SESSION, GDK_BACKEND, USER, PWD, HOME, LANGUAGE, LANG };
 
 using ConfigurationManagerPtr = std::shared_ptr<ConfigurationManager>;
 

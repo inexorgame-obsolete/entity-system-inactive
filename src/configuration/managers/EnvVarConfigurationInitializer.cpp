@@ -15,9 +15,9 @@ EnvVarConfigurationInitializer::~EnvVarConfigurationInitializer() = default;
 
 void EnvVarConfigurationInitializer::init()
 {
-    for (size_t index = 0; index < EnvironmentVariables::_size(); ++index)
-    {
-        set_by_env_var(EnvironmentVariables::_names()[index]);
+    constexpr auto env_vars = magic_enum::enum_names<EnvironmentVariables>();
+    for (auto env_var : env_vars) {
+        set_by_env_var(std::string(env_var));
     }
 }
 
