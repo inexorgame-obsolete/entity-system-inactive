@@ -21,6 +21,7 @@ class InexorConan(ConanFile):
         "spdlog/1.3.0@bincrafters/stable",
 
         "better-enums/0.11.1@Spartan322/stable",
+        "magic_enum/0.6.3@neargye/stable",
 
         "boost-di/1.1.0@inexorgame/stable",
         "boost-te/19.Jan.19@inexorgame/stable",
