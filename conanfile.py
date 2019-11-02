@@ -50,7 +50,9 @@ class InexorConan(ConanFile):
         "magnum_plugins:with_stbtruetypefont": True,
         "magnum_plugins:with_freetypefont": True,
         "magnum_plugins:build_plugins_static": True,
-        "TBB:shared": True
+        "TBB:shared": True,
+        "restbed:shared": False,
+        "restbed:ssl": False
     }
 
     def imports(self):
