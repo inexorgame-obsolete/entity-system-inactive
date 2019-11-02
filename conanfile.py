@@ -63,7 +63,7 @@ class InexorConan(ConanFile):
         # Copies all so files from packages lib folder to my "lib" folder (linux)
         self.copy("*.so*", dst="lib", src="lib") # From lib to lib
 
-def build(self):
+    def build(self):
         cmake = CMake(self)
         cmake.configure()
         cmake.build()
