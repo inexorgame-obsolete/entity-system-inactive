@@ -1,16 +1,16 @@
 {
   "type": "entity",
-  "name": "TAN",
+  "name": "COS",
   "attributes": [
     {
-      "name": "tan_input",
+      "name": "cos_input",
       "datatype": "FLOAT",
       "features": [
         "INPUT"
       ]
     },
     {
-      "name": "tan_value",
+      "name": "cos_value",
       "datatype": "FLOAT",
       "features": [
         "OUTPUT"
