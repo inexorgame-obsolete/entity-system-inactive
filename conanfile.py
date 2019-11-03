@@ -22,6 +22,8 @@ class InexorConan(ConanFile):
 
         "magic_enum/0.6.3@neargye/stable",
 
+        "jsonformoderncpp/3.7.0@vthiery/stable",
+
         "boost-di/1.1.0@inexorgame/stable",
         "boost-te/19.Jan.19@inexorgame/stable",
         "cpp.react/legacy1@inexorgame/stable",
