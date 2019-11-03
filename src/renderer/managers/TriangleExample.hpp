@@ -1,14 +1,13 @@
 #pragma once
 
 #include "client/ClientLifecycle.hpp"
+#include "entity-system/factories/entities/entity-instance-builder-factory/EntityInstanceBuilderFactory.hpp"
 #include "entity-system/managers/entities/entity-instance-manager/EntityInstanceManager.hpp"
 #include "entity-system/model/data/DataTypes.hpp"
 #include "logging/managers/LogManager.hpp"
 #include "renderer/factories/TriangleFactory.hpp"
 #include "renderer/managers/WindowManager.hpp"
 #include "type-system/factories/generators/counters/CounterFloatFactory.hpp"
-#include "type-system/factories/math/trigonometric/CosFactory.hpp"
-#include "type-system/factories/math/trigonometric/SinFactory.hpp"
 #include "visual-scripting/managers/ConnectorManager.hpp"
 #include "visual-scripting/model/Connector.hpp"
 
@@ -26,18 +25,17 @@ struct GLFWwindow;
 
 namespace inexor::renderer {
 
+using EntityInstancePtr = std::shared_ptr<EntityInstance>;
+using EntityAttributeInstancePtr = std::shared_ptr<entity_system::EntityAttributeInstance>;
 using EntityInstanceManagerPtr = std::shared_ptr<entity_system::EntityInstanceManager>;
+using EntityInstanceBuilderFactoryPtr = std::shared_ptr<inexor::entity_system::EntityInstanceBuilderFactory>;
 using CounterFloatFactoryPtr = std::shared_ptr<entity_system::type_system::CounterFloatFactory>;
-using SinFactoryPtr = std::shared_ptr<entity_system::type_system::SinFactory>;
-using CosFactoryPtr = std::shared_ptr<entity_system::type_system::CosFactory>;
 using ConnectorManagerPtr = std::shared_ptr<visual_scripting::ConnectorManager>;
 using TriangleFactoryPtr = std::shared_ptr<TriangleFactory>;
 using WindowManagerPtr = std::shared_ptr<WindowManager>;
 using KeyboardInputManagerPtr = std::shared_ptr<input::KeyboardInputManager>;
 using ClientLifecyclePtr = std::shared_ptr<client::ClientLifecycle>;
 using LogManagerPtr = std::shared_ptr<inexor::logging::LogManager>;
-using EntityInstancePtr = std::shared_ptr<EntityInstance>;
-using EntityAttributeInstancePtr = std::shared_ptr<entity_system::EntityAttributeInstance>;
 
 struct TriangleVertex
 {
@@ -55,11 +53,10 @@ class TriangleExample : public input::WindowKeyReleasedListener, public input::W
     /// @param entity_instance_manager The entity instance manager.
     /// @param connector_manager The connector manager.
     /// @param counter_float_factory The factory for creating entities of type COUNTER_FLOAT.
-    /// @param sin_factory The factory for creating entities of type SIN.
-    /// @param cos_factory The factory for creating entities of type COS.
+    /// @param entity_instance_builder_factory The entity instance builder factory.
     /// @param render_factory The factory for creating entities of type TRIANGLE.
     /// @param log_manager The log manager.
-    TriangleExample(EntityInstanceManagerPtr entity_instance_manager, ConnectorManagerPtr connector_manager, CounterFloatFactoryPtr counter_float_factory, SinFactoryPtr sin_factory, CosFactoryPtr cos_factory,
+    TriangleExample(EntityInstanceManagerPtr entity_instance_manager, ConnectorManagerPtr connector_manager, CounterFloatFactoryPtr counter_float_factory, EntityInstanceBuilderFactoryPtr entity_instance_builder_factory,
                     TriangleFactoryPtr render_factory, WindowManagerPtr window_manager, KeyboardInputManagerPtr keyboard_input_manager, ClientLifecyclePtr client_lifecycle, LogManagerPtr log_manager);
 
     /// Destructor.
@@ -72,10 +69,10 @@ class TriangleExample : public input::WindowKeyReleasedListener, public input::W
     void shutdown();
 
     /// Window key released
-    void on_window_key_released(EntityInstancePtr window, int key, int scancode, int mods);
+    void on_window_key_released(EntityInstancePtr window, int key, int scancode, int mods) override;
 
     /// Window key pressed or repeated
-    void on_window_key_pressed_or_repeated(EntityInstancePtr window, int key, int scancode, int mods);
+    void on_window_key_pressed_or_repeated(EntityInstancePtr window, int key, int scancode, int mods) override;
 
     /// The logger name of this service.
     static constexpr char LOGGER_NAME[] = "inexor.renderer.triangleexample";
@@ -85,13 +82,13 @@ class TriangleExample : public input::WindowKeyReleasedListener, public input::W
     void create_connectors();
 
     /// Initializes the triangle.
-    void init_triangle(const EntityInstancePtr& window, GLFWwindow *glfw_window);
+    void init_triangle(const EntityInstancePtr &window, GLFWwindow *glfw_window);
 
     /// Renders the triangle.
-    void render_triangle(const EntityInstancePtr& window, GLFWwindow *glfw_window, Magnum::Timeline timeline);
+    void render_triangle(const EntityInstancePtr &window, GLFWwindow *glfw_window, Magnum::Timeline timeline);
 
     /// Shutdown the triangle.
-    void shutdown_triangle(const EntityInstancePtr& window, GLFWwindow *glfw_window);
+    void shutdown_triangle(const EntityInstancePtr &window, GLFWwindow *glfw_window);
 
     /// Toggles the connector debugging
     void toggle_connector_debug();
@@ -106,10 +103,7 @@ class TriangleExample : public input::WindowKeyReleasedListener, public input::W
     CounterFloatFactoryPtr counter_float_factory;
 
     /// The factory for creating entities of type SIN.
-    SinFactoryPtr sin_factory;
-
-    /// The factory for creating entities of type COS.
-    CosFactoryPtr cos_factory;
+    EntityInstanceBuilderFactoryPtr entity_instance_builder_factory;
 
     /// The factory for creating entities of type TRIANGLE.
     TriangleFactoryPtr triangle_factory;
@@ -186,6 +180,24 @@ class TriangleExample : public input::WindowKeyReleasedListener, public input::W
     TriangleVertex data[3];
 
     bool debug_enabled;
+
+    /// The name for the entity type SIN.
+    static constexpr char TYPE_SIN[] = "SIN";
+
+    /// The name for the attribute sin_input.
+    static constexpr char SIN_INPUT[] = "sin_input";
+
+    /// The name for the attribute sin_value.
+    static constexpr char SIN_VALUE[] = "sin_value";
+
+    /// The name for entity type COS.
+    static constexpr char TYPE_COS[] = "COS";
+
+    /// The name for the attribute cos_input.
+    static constexpr char COS_INPUT[] = "cos_input";
+
+    /// The name for the attribute cos_value.
+    static constexpr char COS_VALUE[] = "cos_value";
 };
 
 } // namespace inexor::renderer

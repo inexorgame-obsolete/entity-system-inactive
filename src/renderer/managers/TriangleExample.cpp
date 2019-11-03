@@ -14,14 +14,13 @@ namespace inexor::renderer {
 using EntityInstancePtrOpt = std::optional<EntityInstancePtr>;
 using EntityAttributeInstanceOpt = std::optional<EntityAttributeInstancePtr>;
 
-TriangleExample::TriangleExample(EntityInstanceManagerPtr entity_instance_manager, ConnectorManagerPtr connector_manager, CounterFloatFactoryPtr counter_float_factory, SinFactoryPtr sin_factory, CosFactoryPtr cos_factory,
+TriangleExample::TriangleExample(EntityInstanceManagerPtr entity_instance_manager, ConnectorManagerPtr connector_manager, CounterFloatFactoryPtr counter_float_factory, EntityInstanceBuilderFactoryPtr entity_instance_builder_factory,
                                  TriangleFactoryPtr triangle_factory, WindowManagerPtr window_manager, KeyboardInputManagerPtr keyboard_input_manager, ClientLifecyclePtr client_lifecycle, LogManagerPtr log_manager)
 {
     this->entity_instance_manager = std::move(entity_instance_manager);
     this->connector_manager = std::move(connector_manager);
     this->counter_float_factory = std::move(counter_float_factory);
-    this->sin_factory = std::move(sin_factory);
-    this->cos_factory = std::move(cos_factory);
+    this->entity_instance_builder_factory = std::move(entity_instance_builder_factory);
     this->triangle_factory = std::move(triangle_factory);
     this->window_manager = std::move(window_manager);
     this->keyboard_input_manager = std::move(keyboard_input_manager);
@@ -146,8 +145,8 @@ void TriangleExample::create_entity_instances()
     // 16 ms = 60 fps
     EntityInstancePtrOpt o_counter_1 = counter_float_factory->create_instance(16, 0.03f);
     EntityInstancePtrOpt o_counter_2 = counter_float_factory->create_instance(16, 0.012f);
-    EntityInstancePtrOpt o_sin = sin_factory->create_instance();
-    EntityInstancePtrOpt o_cos = cos_factory->create_instance();
+    EntityInstancePtrOpt o_sin = entity_instance_builder_factory->get_builder()->type(std::string(TYPE_SIN))->attribute(SIN_INPUT, 0.0f)->attribute(SIN_VALUE, 0.0f)->build();
+    EntityInstancePtrOpt o_cos = entity_instance_builder_factory->get_builder()->type(std::string(TYPE_COS))->attribute(COS_INPUT, 0.0f)->attribute(COS_VALUE, 0.0f)->build();
     EntityInstancePtrOpt o_triangle = triangle_factory->create_instance(0.5f, -0.5f);
 
     if (o_counter_1.has_value() && o_counter_2.has_value() && o_sin.has_value() && o_cos.has_value() && o_triangle.has_value())
@@ -162,10 +161,10 @@ void TriangleExample::create_entity_instances()
         EntityAttributeInstanceOpt o_counter_1_attr_step = counter_1->get_attribute_instance(entity_system::type_system::CounterFloatEntityTypeProvider::COUNTER_FLOAT_STEP);
         EntityAttributeInstanceOpt o_counter_2_attr_count = counter_2->get_attribute_instance(entity_system::type_system::CounterFloatEntityTypeProvider::COUNTER_FLOAT_COUNT);
         EntityAttributeInstanceOpt o_counter_2_attr_step = counter_2->get_attribute_instance(entity_system::type_system::CounterFloatEntityTypeProvider::COUNTER_FLOAT_STEP);
-        EntityAttributeInstanceOpt o_sin_attr_input = sin->get_attribute_instance(entity_system::type_system::SinEntityTypeProvider::SIN_INPUT);
-        EntityAttributeInstanceOpt o_sin_attr_value = sin->get_attribute_instance(entity_system::type_system::SinEntityTypeProvider::SIN_VALUE);
-        EntityAttributeInstanceOpt o_cos_attr_input = cos->get_attribute_instance(entity_system::type_system::CosEntityTypeProvider::COS_INPUT);
-        EntityAttributeInstanceOpt o_cos_attr_value = cos->get_attribute_instance(entity_system::type_system::CosEntityTypeProvider::COS_VALUE);
+        EntityAttributeInstanceOpt o_sin_attr_input = sin->get_attribute_instance(SIN_INPUT);
+        EntityAttributeInstanceOpt o_sin_attr_value = sin->get_attribute_instance(SIN_VALUE);
+        EntityAttributeInstanceOpt o_cos_attr_input = cos->get_attribute_instance(COS_INPUT);
+        EntityAttributeInstanceOpt o_cos_attr_value = cos->get_attribute_instance(COS_VALUE);
         EntityAttributeInstanceOpt o_triangle_attr_x = triangle->get_attribute_instance(TriangleEntityTypeProvider::TRIANGLE_X);
         EntityAttributeInstanceOpt o_triangle_attr_y = triangle->get_attribute_instance(TriangleEntityTypeProvider::TRIANGLE_Y);
 
