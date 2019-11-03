@@ -34,6 +34,10 @@ class EntityInstanceBuilderFactory
     /// @return A std::shared pointer to the entity instance builder.
     EntityInstanceBuilderPtr get_builder();
 
+    /// @brief Returns a new instance of a builder.
+    /// @return A std::shared pointer to the entity instance builder.
+    EntityInstanceBuilderPtr get_builder(const std::string &entity_type_name);
+
     private:
     /// The entity instance manager.
     EntityInstanceManagerPtr entity_instance_manager;

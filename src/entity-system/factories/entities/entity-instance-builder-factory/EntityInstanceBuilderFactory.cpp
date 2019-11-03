@@ -25,4 +25,10 @@ EntityInstanceBuilderPtr EntityInstanceBuilderFactory::get_builder()
     return std::make_shared<EntityInstanceBuilder>(entity_instance_manager, entity_type_manager);
 }
 
+EntityInstanceBuilderPtr EntityInstanceBuilderFactory::get_builder(const std::string &entity_type_name)
+{
+    // No mutex required as this is a read-only operation.
+    return std::make_shared<EntityInstanceBuilder>(entity_instance_manager, entity_type_manager)->type(entity_type_name);
+}
+
 } // namespace inexor::entity_system
