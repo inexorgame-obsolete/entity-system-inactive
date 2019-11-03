@@ -5,13 +5,12 @@
 namespace inexor::entity_system::type_system {
 
 TypeSystemProviders::TypeSystemProviders(EntityTypeBuilderFactoryPtr entity_type_builder_factory, DataProvidersPtr data_providers, GeneratorProvidersPtr generator_providers, InOutProvidersPtr in_out_providers,
-                                         MathProvidersPtr math_providers, LogicalProvidersPtr logical_providers)
+                                         LogicalProvidersPtr logical_providers)
 {
     this->entity_type_builder_factory = std::move(entity_type_builder_factory);
     this->data_providers = std::move(data_providers);
     this->generator_providers = std::move(generator_providers);
     this->in_out_providers = std::move(in_out_providers);
-    this->math_providers = std::move(math_providers);
     this->logical_providers = std::move(logical_providers);
 }
 
@@ -23,7 +22,6 @@ void TypeSystemProviders::init()
     data_providers->init();
     generator_providers->init();
     in_out_providers->init();
-    math_providers->init();
     logical_providers->init();
 }
 

@@ -4,8 +4,11 @@
 
 #include "spdlog/spdlog.h"
 
+#include "type-system/types/math/trigonometric/Sin.hpp"
+
 namespace inexor::visual_scripting {
 
+using Sin = entity_system::type_system::Sin;
 using EntityAttributeInstancePtr = std::shared_ptr<entity_system::EntityAttributeInstance>;
 using EntityAttributeInstancePtrOpt = std::optional<EntityAttributeInstancePtr>;
 using EntityTypePtrOpt = std::optional<EntityTypePtr>;
@@ -25,13 +28,13 @@ void SinProcessor::init()
 
 void SinProcessor::init_processor()
 {
-    EntityTypePtrOpt o_ent_type = entity_type_manager->get_entity_type(std::string(TYPE_NAME));
+    EntityTypePtrOpt o_ent_type = entity_type_manager->get_entity_type(std::string(Sin::TYPE_NAME));
     if (o_ent_type.has_value()) {
         this->entity_type = o_ent_type.value();
         entity_instance_manager->register_on_created(this->entity_type->get_GUID(), shared_from_this());
         entity_instance_manager->register_on_deleted(this->entity_type->get_GUID(), shared_from_this());
     } else {
-        spdlog::get(LOGGER_NAME)->error("Failed to initialize processor {}: Entity type does not exist", std::string(TYPE_NAME));
+        spdlog::get(LOGGER_NAME)->error("Failed to initialize processor {}: Entity type does not exist", std::string(Sin::TYPE_NAME));
     }
 }
 
@@ -50,10 +53,10 @@ void SinProcessor::on_entity_instance_deleted(const xg::Guid &type_GUID, const x
 
 void SinProcessor::make_signals(const EntityInstancePtr &entity_instance)
 {
-    spdlog::get(LOGGER_NAME)->debug("Initializing processor {} for newly created entity instance {} of type {}", std::string(TYPE_NAME), entity_instance->get_GUID().str(), entity_instance->get_entity_type()->get_type_name());
+    spdlog::get(LOGGER_NAME)->debug("Initializing processor {} for newly created entity instance {} of type {}", std::string(Sin::TYPE_NAME), entity_instance->get_GUID().str(), entity_instance->get_entity_type()->get_type_name());
 
-    EntityAttributeInstancePtrOpt o_attr_sin_input = entity_instance->get_attribute_instance(SIN_INPUT);
-    EntityAttributeInstancePtrOpt o_attr_sin_value = entity_instance->get_attribute_instance(SIN_VALUE);
+    EntityAttributeInstancePtrOpt o_attr_sin_input = entity_instance->get_attribute_instance(Sin::INPUT);
+    EntityAttributeInstancePtrOpt o_attr_sin_value = entity_instance->get_attribute_instance(Sin::VALUE);
 
     if (o_attr_sin_input.has_value() && o_attr_sin_value.has_value())
     {
@@ -64,7 +67,7 @@ void SinProcessor::make_signals(const EntityInstancePtr &entity_instance)
     {
         spdlog::get(LOGGER_NAME)
             ->error("Failed to initialize processor signals for entity instance {} of type {}: Missing one of these attributes: {} {}", entity_instance->get_GUID().str(), entity_instance->get_entity_type()->get_type_name(),
-                    SIN_INPUT, SIN_VALUE);
+                    Sin::INPUT, Sin::VALUE);
     }
 }
 

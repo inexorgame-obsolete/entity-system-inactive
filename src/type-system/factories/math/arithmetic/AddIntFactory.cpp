@@ -2,11 +2,12 @@
 
 #include <utility>
 
+#include "type-system/types/math/arithmetic/AddInt.hpp"
+
 namespace inexor::entity_system::type_system {
 
-AddIntFactory::AddIntFactory(AddIntEntityTypeProviderPtr entity_type_provider, EntityInstanceBuilderFactoryPtr entity_instance_builder_factory)
+AddIntFactory::AddIntFactory(EntityInstanceBuilderFactoryPtr entity_instance_builder_factory)
 {
-    this->entity_type_provider = std::move(entity_type_provider);
     this->entity_instance_builder_factory = std::move(entity_instance_builder_factory);
 }
 
@@ -18,11 +19,10 @@ void AddIntFactory::init()
 
 EntityInstancePtrOpt AddIntFactory::create_instance()
 {
-    return entity_instance_builder_factory->get_builder()
-        ->type(entity_type_provider->get_type())
-        ->attribute(AddIntEntityTypeProvider::ADD_INT_AUGEND, 0)
-        ->attribute(AddIntEntityTypeProvider::ADD_INT_ADDEND, 0)
-        ->attribute(AddIntEntityTypeProvider::ADD_INT_SUM, 0)
+    return entity_instance_builder_factory->get_builder(AddInt::TYPE_NAME)
+        ->attribute(AddInt::AUGEND, 0)
+        ->attribute(AddInt::ADDEND, 0)
+        ->attribute(AddInt::SUM, 0)
         ->build();
 }
 

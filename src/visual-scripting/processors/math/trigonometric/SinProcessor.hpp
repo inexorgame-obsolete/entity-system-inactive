@@ -12,10 +12,9 @@
 
 #include "react/Domain.h"
 
-// TODO: move using namespace react into namespace inexor::visual_scripting
-using namespace react;
-
 namespace inexor::visual_scripting {
+
+using namespace react;
 
 using EntityTypeManagerPtr = std::shared_ptr<entity_system::EntityTypeManager>;
 using EntityInstanceManagerPtr = std::shared_ptr<entity_system::EntityInstanceManager>;
@@ -77,15 +76,6 @@ class SinProcessor : public Processor, public entity_system::EntityInstanceCreat
 
     /// The signals per entity instance.
     std::unordered_map<xg::Guid, SignalT<entity_system::DataValue>> signals;
-
-    /// The entity type name of this logger
-    static constexpr char TYPE_NAME[] = "SIN";
-
-    /// The name for the attribute sin_input.
-    static constexpr char SIN_INPUT[] = "sin_input";
-
-    /// The name for the attribute sin_value.
-    static constexpr char SIN_VALUE[] = "sin_value";
 
     /// The logger name of this processor.
     static constexpr char LOGGER_NAME[] = "inexor.vs.p.t.sin";

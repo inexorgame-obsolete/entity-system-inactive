@@ -2,11 +2,12 @@
 
 #include <utility>
 
+#include "type-system/types/math/arithmetic/AddFloat.hpp"
+
 namespace inexor::entity_system::type_system {
 
-AddFloatFactory::AddFloatFactory(AddFloatEntityTypeProviderPtr entity_type_provider, EntityInstanceBuilderFactoryPtr entity_instance_builder_factory)
+AddFloatFactory::AddFloatFactory(EntityInstanceBuilderFactoryPtr entity_instance_builder_factory)
 {
-    this->entity_type_provider = std::move(entity_type_provider);
     this->entity_instance_builder_factory = std::move(entity_instance_builder_factory);
 }
 
@@ -18,11 +19,10 @@ void AddFloatFactory::init()
 
 EntityInstancePtrOpt AddFloatFactory::create_instance()
 {
-    return entity_instance_builder_factory->get_builder()
-        ->type(entity_type_provider->get_type())
-        ->attribute(AddFloatEntityTypeProvider::ADD_FLOAT_AUGEND, 0)
-        ->attribute(AddFloatEntityTypeProvider::ADD_FLOAT_ADDEND, 0)
-        ->attribute(AddFloatEntityTypeProvider::ADD_FLOAT_SUM, 0)
+    return entity_instance_builder_factory->get_builder(AddFloat::TYPE_NAME)
+        ->attribute(AddFloat::AUGEND, 0)
+        ->attribute(AddFloat::ADDEND, 0)
+        ->attribute(AddFloat::SUM, 0)
         ->build();
 }
 

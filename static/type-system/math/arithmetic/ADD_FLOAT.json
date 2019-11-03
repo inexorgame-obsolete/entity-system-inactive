@@ -1,0 +1,27 @@
+{
+  "type": "entity",
+  "name": "ADD_FLOAT",
+  "attributes": [
+    {
+      "name": "add_float_augend",
+      "datatype": "FLOAT",
+      "features": [
+        "INPUT"
+      ]
+    },
+    {
+      "name": "add_float_addend",
+      "datatype": "FLOAT",
+      "features": [
+        "INPUT"
+      ]
+    },
+    {
+      "name": "add_float_sum",
+      "datatype": "FLOAT",
+      "features": [
+        "OUTPUT"
+      ]
+    }
+  ]
+}
