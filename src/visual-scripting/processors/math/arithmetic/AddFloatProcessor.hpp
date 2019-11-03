@@ -1,11 +1,12 @@
 #pragma once
 
 #include "entity-system/managers/entities/entity-instance-manager/EntityInstanceManager.hpp"
+#include "entity-system/managers/entities/entity-type-manager/EntityTypeManager.hpp"
 #include "entity-system/model/data/DataTypes.hpp"
 #include "entity-system/model/data/container/DataContainer.hpp"
 #include "entity-system/model/entities/entity-instances/EntityInstance.hpp"
+#include "entity-system/model/entities/entity-types/EntityType.hpp"
 #include "logging/managers/LogManager.hpp"
-#include "type-system/providers/math/arithmetic/AddFloatEntityTypeProvider.hpp"
 #include "visual-scripting/managers/ProcessorRegistry.hpp"
 #include "visual-scripting/model/Processor.hpp"
 
@@ -18,7 +19,7 @@ using namespace react;
 class AddFloatProcessor : public Processor, public entity_system::EntityInstanceCreatedListener, public entity_system::EntityInstanceDeletedListener, public std::enable_shared_from_this<AddFloatProcessor>
 {
 
-    using AddFloatEntityTypeProviderPtr = std::shared_ptr<inexor::entity_system::type_system::AddFloatEntityTypeProvider>;
+    using EntityTypeManagerPtr = std::shared_ptr<entity_system::EntityTypeManager>;
     using EntityInstanceManagerPtr = std::shared_ptr<inexor::entity_system::EntityInstanceManager>;
     using LogManagerPtr = std::shared_ptr<inexor::logging::LogManager>;
     using EntityInstancePtr = std::shared_ptr<inexor::entity_system::EntityInstance>;
@@ -32,13 +33,16 @@ class AddFloatProcessor : public Processor, public entity_system::EntityInstance
     /// @param entity_type_provider Provides the entity type ADD_FLOAT.
     /// @param entity_instance_manager The entity instance manager.
     /// @param log_manager The log manager.
-    AddFloatProcessor(const AddFloatEntityTypeProviderPtr& entity_type_provider, EntityInstanceManagerPtr entity_instance_manager, LogManagerPtr log_manager);
+    AddFloatProcessor(EntityTypeManagerPtr entity_type_manager, EntityInstanceManagerPtr entity_instance_manager, LogManagerPtr log_manager);
 
     /// Destructor.
     ~AddFloatProcessor() override;
 
     /// Initialization of the processor.
     void init();
+
+    /// Initializes the processor by registering listeners on newly created entity instances.
+    void init_processor();
 
     /// @brief Called when an entity instance of type ADD_FLOAT has been created.
     /// @param entity_instance ?
@@ -54,8 +58,8 @@ class AddFloatProcessor : public Processor, public entity_system::EntityInstance
     void make_signals(const EntityInstancePtr &entity_instance);
 
     private:
-    /// Provides the entity type ADD_FLOAT.
-    AddFloatEntityTypeProviderPtr entity_type_provider;
+    /// The entity type manager.
+    EntityTypeManagerPtr entity_type_manager;
 
     /// The entity instance manager.
     EntityInstanceManagerPtr entity_instance_manager;

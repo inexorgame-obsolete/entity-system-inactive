@@ -4,7 +4,7 @@
 
 namespace inexor::entity_system::type_system {
 
-MathFactories::MathFactories(ArithmeticFactoriesPtr arithmetic_factories)
+MathFactories::MathFactories(ArithmeticFactoriesPtr arithmetic_factories, TrigonometricFactoriesPtr trigonometric_factories)
 {
     this->arithmetic_factories = std::move(arithmetic_factories);
 }
