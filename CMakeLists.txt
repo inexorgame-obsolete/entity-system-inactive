@@ -71,6 +71,9 @@ conan_add_remote(NAME helmesjo
 conan_add_remote(NAME neargye
                  INDEX 1
                  URL https://api.bintray.com/conan/neargye/conan-packages)
+conan_add_remote(NAME vthiery
+                INDEX 1
+                URL https://api.bintray.com/conan/vthiery/conan-packages)
 
 if(UNIX AND NOT APPLE)
     set(LIBCXX libstdc++11)
