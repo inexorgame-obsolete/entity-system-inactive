@@ -536,7 +536,7 @@ void LoadingScreen::execute_command(const EntityInstancePtr &window)
     } else if (command_buffer == "/license")
     {
         action = "License";
-        Corrade::Utility::Resource rs{"inexor"};
+        Corrade::Utility::Resource rs{"inexor-base"};
         spdlog::info("License:\n{}", rs.get("license.txt"));
     }
     command_buffer = "";
@@ -561,7 +561,7 @@ void LoadingScreen::init_loading_screen(const EntityInstancePtr &window, GLFWwin
     Corrade::Containers::Pointer<Magnum::Trade::AbstractImporter> image_importer = manager.loadAndInstantiate("AnyImageImporter");
     if (image_importer)
     {
-        const Corrade::Utility::Resource rs{"inexor"};
+        const Corrade::Utility::Resource rs{"inexor-images"};
         if (image_importer->openData(rs.getRaw("logo.png")))
         {
             // TODO: move to own service
