@@ -145,8 +145,8 @@ void TriangleExample::create_entity_instances()
     // 16 ms = 60 fps
     EntityInstancePtrOpt o_counter_1 = counter_float_factory->create_instance(16, 0.03f);
     EntityInstancePtrOpt o_counter_2 = counter_float_factory->create_instance(16, 0.012f);
-    EntityInstancePtrOpt o_sin = entity_instance_builder_factory->get_builder()->type(std::string(TYPE_SIN))->attribute(SIN_INPUT, 0.0f)->attribute(SIN_VALUE, 0.0f)->build();
-    EntityInstancePtrOpt o_cos = entity_instance_builder_factory->get_builder()->type(std::string(TYPE_COS))->attribute(COS_INPUT, 0.0f)->attribute(COS_VALUE, 0.0f)->build();
+    EntityInstancePtrOpt o_sin = entity_instance_builder_factory->get_builder(TYPE_SIN)->attribute(SIN_INPUT, 0.0f)->attribute(SIN_VALUE, 0.0f)->build();
+    EntityInstancePtrOpt o_cos = entity_instance_builder_factory->get_builder(TYPE_COS)->attribute(COS_INPUT, 0.0f)->attribute(COS_VALUE, 0.0f)->build();
     EntityInstancePtrOpt o_triangle = triangle_factory->create_instance(0.5f, -0.5f);
 
     if (o_counter_1.has_value() && o_counter_2.has_value() && o_sin.has_value() && o_cos.has_value() && o_triangle.has_value())
