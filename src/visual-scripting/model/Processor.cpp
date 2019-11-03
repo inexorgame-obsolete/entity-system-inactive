@@ -4,6 +4,8 @@
 
 namespace inexor::visual_scripting {
 
+Processor::Processor() = default;
+
 Processor::Processor(EntityTypePtr entity_type) : entity_type(std::move(entity_type))
 {
 }

@@ -14,8 +14,10 @@ class Processor
     ///
     USING_REACTIVE_DOMAIN(inexor::entity_system::D)
 
+    /// @brief Constructs a new processor.
+    Processor();
+
     /// @brief Constructs a new processor for the given entity type.
-    /// @note The dependencies of this class will be injected automatically.
     /// @param entity_type The entity type for this processor.
     explicit Processor(EntityTypePtr entity_type);
 

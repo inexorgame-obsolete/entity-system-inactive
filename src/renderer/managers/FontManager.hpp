@@ -65,7 +65,7 @@ class FontManager : public std::enable_shared_from_this<FontManager>
     FontPtrOpt load(const std::string& path, float size, const std::string& glyphs, int capacity, float render_size, Magnum::Text::Alignment alignment);
 
     /// The resource group for statically included fonts.
-    static constexpr char RESOURCE_GROUP[] = "inexor";
+    static constexpr char RESOURCE_GROUP[] = "inexor-fonts";
 
     /// The name of the font plugin.
     static constexpr char FONT_PLUGIN[] = "FreeTypeFont";
