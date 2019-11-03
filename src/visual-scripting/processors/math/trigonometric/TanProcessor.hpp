@@ -39,8 +39,8 @@ class TanProcessor : public Processor, public entity_system::EntityInstanceCreat
     /// @note Newly created entity instances of type TAN will be initialized by connecting the input attributes
     /// with a calculation function and the result with the output attribute.
     /// @param entity_type_manager
-    /// @param entity_instance_manager
-    /// @param log_manager
+    /// @param entity_instance_manager The entity instance manager.
+    /// @param log_manager The log manager.
     TanProcessor(EntityTypeManagerPtr entity_type_manager, EntityInstanceManagerPtr entity_instance_manager, LogManagerPtr log_manager);
 
     /// Destructor.

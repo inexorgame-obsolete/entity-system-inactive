@@ -1,16 +1,16 @@
 {
   "type": "entity",
-  "name": "TAN",
+  "name": "SIN",
   "attributes": [
     {
-      "name": "tan_input",
+      "name": "sin_input",
       "datatype": "FLOAT",
       "features": [
         "INPUT"
       ]
     },
     {
-      "name": "tan_value",
+      "name": "sin_value",
       "datatype": "FLOAT",
       "features": [
         "OUTPUT"

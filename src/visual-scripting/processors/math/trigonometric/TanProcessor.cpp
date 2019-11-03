@@ -50,7 +50,7 @@ void TanProcessor::on_entity_instance_deleted(const xg::Guid &type_GUID, const x
 
 void TanProcessor::make_signals(const EntityInstancePtr &entity_instance)
 {
-    spdlog::get(LOGGER_NAME)->debug("Initializing processor TAN for newly created entity instance {} of type {}", entity_instance->get_GUID().str(), entity_instance->get_entity_type()->get_type_name());
+    spdlog::get(LOGGER_NAME)->debug("Initializing processor {} for newly created entity instance {} of type {}", std::string(TYPE_NAME), entity_instance->get_GUID().str(), entity_instance->get_entity_type()->get_type_name());
 
     EntityAttributeInstancePtrOpt o_attr_tan_input = entity_instance->get_attribute_instance(TAN_INPUT);
     EntityAttributeInstancePtrOpt o_attr_tan_value = entity_instance->get_attribute_instance(TAN_VALUE);
