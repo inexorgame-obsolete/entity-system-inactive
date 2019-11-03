@@ -1,0 +1,27 @@
+{
+  "type": "entity",
+  "name": "ADD_INT",
+  "attributes": [
+    {
+      "name": "add_int_augend",
+      "datatype": "INT",
+      "features": [
+        "INPUT"
+      ]
+    },
+    {
+      "name": "add_int_addend",
+      "datatype": "INT",
+      "features": [
+        "INPUT"
+      ]
+    },
+    {
+      "name": "add_int_sum",
+      "datatype": "INT",
+      "features": [
+        "OUTPUT"
+      ]
+    }
+  ]
+}

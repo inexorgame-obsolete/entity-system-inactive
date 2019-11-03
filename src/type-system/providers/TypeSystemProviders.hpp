@@ -6,7 +6,6 @@
 #include "type-system/providers/generators/GeneratorProviders.hpp"
 #include "type-system/providers/inout/InOutProviders.hpp"
 #include "type-system/providers/logical/LogicalProviders.hpp"
-#include "type-system/providers/math/MathProviders.hpp"
 
 namespace inexor::entity_system::type_system {
 
@@ -14,7 +13,6 @@ using EntityTypeBuilderFactoryPtr = std::shared_ptr<EntityTypeBuilderFactory>;
 using DataProvidersPtr = std::shared_ptr<DataProviders>;
 using GeneratorProvidersPtr = std::shared_ptr<GeneratorProviders>;
 using InOutProvidersPtr = std::shared_ptr<InOutProviders>;
-using MathProvidersPtr = std::shared_ptr<MathProviders>;
 using LogicalProvidersPtr = std::shared_ptr<LogicalProviders>;
 
 /// @class TypeSystemProviders
@@ -28,10 +26,8 @@ class TypeSystemProviders
     /// @param data_providers The providers for constants and stores.
     /// @param generator_providers The providers for generators.
     /// @param in_out_providers The providers for input and output.
-    /// @param math_providers The providers for mathematical operations.
     /// @param logical_providers The providers for logical operations.
-    TypeSystemProviders(EntityTypeBuilderFactoryPtr entity_type_builder_factory, DataProvidersPtr data_providers, GeneratorProvidersPtr generator_providers, InOutProvidersPtr in_out_providers, MathProvidersPtr math_providers,
-                        LogicalProvidersPtr logical_providers);
+    TypeSystemProviders(EntityTypeBuilderFactoryPtr entity_type_builder_factory, DataProvidersPtr data_providers, GeneratorProvidersPtr generator_providers, InOutProvidersPtr in_out_providers, LogicalProvidersPtr logical_providers);
 
     /// Destructor.
     ~TypeSystemProviders();
@@ -51,9 +47,6 @@ class TypeSystemProviders
 
     /// The providers for input and output.
     InOutProvidersPtr in_out_providers;
-
-    /// The providers for mathematical operations.
-    MathProvidersPtr math_providers;
 
     /// The providers for logical operations.
     LogicalProvidersPtr logical_providers;
