@@ -25,13 +25,13 @@ void TanProcessor::init()
 
 void TanProcessor::init_processor()
 {
-    EntityTypePtrOpt o_ent_type = entity_type_manager->get_entity_type(TYPE_NAME);
+    EntityTypePtrOpt o_ent_type = entity_type_manager->get_entity_type(std::string(TYPE_NAME));
     if (o_ent_type.has_value()) {
         this->entity_type = o_ent_type.value();
         entity_instance_manager->register_on_created(this->entity_type->get_GUID(), shared_from_this());
         entity_instance_manager->register_on_deleted(this->entity_type->get_GUID(), shared_from_this());
     } else {
-        spdlog::get(LOGGER_NAME)->error("Failed to initialize processor {}: Entity type does not exist", TYPE_NAME);
+        spdlog::get(LOGGER_NAME)->error("Failed to initialize processor {}: Entity type does not exist", std::string(TYPE_NAME));
     }
 }
 
