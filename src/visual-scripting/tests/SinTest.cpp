@@ -106,7 +106,7 @@ void SinTest::create_instances()
     o_counter = counter_float_factory->create_instance(50, 0.1f);
 
     log_create_entity_instance(SIN_NAME, 0.0f);
-    o_sin = entity_instance_builder_factory->get_builder()->type(std::string(TYPE_SIN))->attribute(SIN_INPUT, 0.0f)->attribute(SIN_VALUE, 0.0f)->build();
+    o_sin = entity_instance_builder_factory->get_builder(TYPE_SIN)->attribute(SIN_INPUT, 0.0f)->attribute(SIN_VALUE, 0.0f)->build();
 
     log_create_entity_instance(TARGET_NAME, TARGET_INITIAL_VALUE);
     o_target = float_constant_factory->create_instance(TARGET_NAME, TARGET_INITIAL_VALUE);
