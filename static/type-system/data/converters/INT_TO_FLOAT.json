@@ -1,0 +1,20 @@
+{
+  "type": "entity",
+  "name": "INT_TO_FLOAT",
+  "attributes": [
+    {
+      "name": "int_to_float_input",
+      "datatype": "INT",
+      "features": [
+        "INPUT"
+      ]
+    },
+    {
+      "name": "int_to_float_value",
+      "datatype": "FLOAT",
+      "features": [
+        "OUTPUT"
+      ]
+    }
+  ]
+}

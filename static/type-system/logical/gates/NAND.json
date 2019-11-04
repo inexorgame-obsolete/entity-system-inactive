@@ -1,0 +1,27 @@
+{
+  "type": "entity",
+  "name": "NAND",
+  "attributes": [
+    {
+      "name": "nand_input_1",
+      "datatype": "BOOL",
+      "features": [
+        "INPUT"
+      ]
+    },
+    {
+      "name": "nand_input_2",
+      "datatype": "BOOL",
+      "features": [
+        "INPUT"
+      ]
+    },
+    {
+      "name": "nand_result",
+      "datatype": "BOOL",
+      "features": [
+        "OUTPUT"
+      ]
+    }
+  ]
+}

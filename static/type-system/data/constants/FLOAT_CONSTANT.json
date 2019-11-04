@@ -1,0 +1,21 @@
+{
+  "type": "entity",
+  "name": "FLOAT_CONSTANT",
+  "attributes": [
+    {
+      "name": "float_constant_name",
+      "datatype": "STRING",
+      "features": [
+        "OUTPUT"
+      ]
+    },
+    {
+      "name": "float_constant_value",
+      "datatype": "FLOAT",
+      "features": [
+        "INPUT",
+        "OUTPUT"
+      ]
+    }
+  ]
+}

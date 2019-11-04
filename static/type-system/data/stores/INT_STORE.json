@@ -1,0 +1,35 @@
+{
+  "type": "entity",
+  "name": "INT_STORE",
+  "attributes": [
+    {
+      "name": "int_store_name",
+      "datatype": "STRING",
+      "features": [
+        "OUTPUT"
+      ]
+    },
+    {
+      "name": "int_store_input_value",
+      "datatype": "INT",
+      "features": [
+        "INPUT"
+      ]
+    },
+    {
+      "name": "int_store_default_value",
+      "datatype": "INT",
+      "features": [
+        "INPUT",
+        "OUTPUT"
+      ]
+    },
+    {
+      "name": "int_store_output_value",
+      "datatype": "INT",
+      "features": [
+        "OUTPUT"
+      ]
+    }
+  ]
+}
