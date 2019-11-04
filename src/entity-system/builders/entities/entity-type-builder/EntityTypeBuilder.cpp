@@ -36,6 +36,12 @@ EntityTypeBuilderPtr EntityTypeBuilder::uuid(const std::string &entity_type_uuid
     return shared_from_this();
 }
 
+EntityTypeBuilderPtr EntityTypeBuilder::uuid(const xg::Guid &entity_type_uuid)
+{
+    this->entity_type_uuid = entity_type_uuid.str();
+    return shared_from_this();
+}
+
 EntityTypeBuilderPtr EntityTypeBuilder::attribute(const std::string &attribute_name, const DataType &attribute_datatype, const Features &attribute_features)
 {
     entity_type_attributes[attribute_name] = {attribute_datatype, attribute_features};
@@ -57,7 +63,7 @@ EntityTypeBuilderPtr EntityTypeBuilder::output(const std::string &attribute_name
 EntityTypeBuilderPtr EntityTypeBuilder::inout(const std::string &attribute_name, const DataType &attribute_datatype)
 {
     using namespace magic_enum::bitwise_operators;
-    entity_type_attributes[attribute_name] = {attribute_datatype, Features::INPUT | Features::OUTPUT };
+    entity_type_attributes[attribute_name] = {attribute_datatype, Features::INPUT | Features::OUTPUT};
     return shared_from_this();
 }
 
