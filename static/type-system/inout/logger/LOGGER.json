@@ -1,0 +1,28 @@
+{
+  "type": "entity",
+  "name": "LOGGER",
+  "attributes": [
+    {
+      "name": "logger_name",
+      "datatype": "STRING",
+      "features": [
+        "OUTPUT"
+      ]
+    },
+    {
+      "name": "log_level",
+      "datatype": "INT",
+      "features": [
+        "INPUT",
+        "OUTPUT"
+      ]
+    },
+    {
+      "name": "log_message",
+      "datatype": "STRING",
+      "features": [
+        "INPUT"
+      ]
+    }
+  ]
+}

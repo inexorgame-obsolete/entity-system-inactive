@@ -1,0 +1,21 @@
+{
+  "type": "entity",
+  "name": "BOOL_CONSTANT",
+  "attributes": [
+    {
+      "name": "bool_constant_name",
+      "datatype": "STRING",
+      "features": [
+        "OUTPUT"
+      ]
+    },
+    {
+      "name": "bool_constant_value",
+      "datatype": "BOOL",
+      "features": [
+        "INPUT",
+        "OUTPUT"
+      ]
+    }
+  ]
+}

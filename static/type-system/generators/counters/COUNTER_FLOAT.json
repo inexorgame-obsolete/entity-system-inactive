@@ -1,0 +1,34 @@
+{
+  "type": "entity",
+  "name": "COUNTER_FLOAT",
+  "attributes": [
+    {
+      "name": "counter_float_millis",
+      "datatype": "INT",
+      "features": [
+        "INPUT"
+      ]
+    },
+    {
+      "name": "counter_float_step",
+      "datatype": "FLOAT",
+      "features": [
+        "INPUT"
+      ]
+    },
+    {
+      "name": "counter_float_reset",
+      "datatype": "BOOL",
+      "features": [
+        "INPUT"
+      ]
+    },
+    {
+      "name": "counter_float_count",
+      "datatype": "FLOAT",
+      "features": [
+        "OUTPUT"
+      ]
+    }
+  ]
+}

@@ -1,0 +1,27 @@
+{
+  "type": "entity",
+  "name": "EQUALS_STRING",
+  "attributes": [
+    {
+      "name": "equals_string_input_1",
+      "datatype": "STRING",
+      "features": [
+        "INPUT"
+      ]
+    },
+    {
+      "name": "equals_string_input_2",
+      "datatype": "STRING",
+      "features": [
+        "INPUT"
+      ]
+    },
+    {
+      "name": "equals_string_result",
+      "datatype": "BOOL",
+      "features": [
+        "OUTPUT"
+      ]
+    }
+  ]
+}

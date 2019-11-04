@@ -1,0 +1,35 @@
+{
+  "type": "entity",
+  "name": "FLOAT_STORE",
+  "attributes": [
+    {
+      "name": "float_store_name",
+      "datatype": "STRING",
+      "features": [
+        "OUTPUT"
+      ]
+    },
+    {
+      "name": "float_store_input_value",
+      "datatype": "FLOAT",
+      "features": [
+        "INPUT"
+      ]
+    },
+    {
+      "name": "float_store_default_value",
+      "datatype": "FLOAT",
+      "features": [
+        "INPUT",
+        "OUTPUT"
+      ]
+    },
+    {
+      "name": "float_store_output_value",
+      "datatype": "FLOAT",
+      "features": [
+        "OUTPUT"
+      ]
+    }
+  ]
+}

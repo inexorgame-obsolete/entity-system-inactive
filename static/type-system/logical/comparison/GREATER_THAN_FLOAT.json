@@ -1,0 +1,27 @@
+{
+  "type": "entity",
+  "name": "GREATER_THAN_FLOAT",
+  "attributes": [
+    {
+      "name": "greater_than_float_input_1",
+      "datatype": "FLOAT",
+      "features": [
+        "INPUT"
+      ]
+    },
+    {
+      "name": "greater_than_float_input_2",
+      "datatype": "FLOAT",
+      "features": [
+        "INPUT"
+      ]
+    },
+    {
+      "name": "greater_than_float_result",
+      "datatype": "BOOL",
+      "features": [
+        "OUTPUT"
+      ]
+    }
+  ]
+}

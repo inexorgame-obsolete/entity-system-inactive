@@ -1,0 +1,27 @@
+{
+  "type": "entity",
+  "name": "EQUALS_INT",
+  "attributes": [
+    {
+      "name": "equals_int_input_1",
+      "datatype": "INT",
+      "features": [
+        "INPUT"
+      ]
+    },
+    {
+      "name": "equals_int_input_2",
+      "datatype": "INT",
+      "features": [
+        "INPUT"
+      ]
+    },
+    {
+      "name": "equals_int_result",
+      "datatype": "BOOL",
+      "features": [
+        "OUTPUT"
+      ]
+    }
+  ]
+}

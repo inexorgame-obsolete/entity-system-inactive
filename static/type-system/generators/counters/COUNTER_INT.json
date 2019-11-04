@@ -1,0 +1,34 @@
+{
+  "type": "entity",
+  "name": "COUNTER_INT",
+  "attributes": [
+    {
+      "name": "counter_int_millis",
+      "datatype": "INT",
+      "features": [
+        "INPUT"
+      ]
+    },
+    {
+      "name": "counter_int_step",
+      "datatype": "INT",
+      "features": [
+        "INPUT"
+      ]
+    },
+    {
+      "name": "counter_int_reset",
+      "datatype": "BOOL",
+      "features": [
+        "INPUT"
+      ]
+    },
+    {
+      "name": "counter_int_count",
+      "datatype": "INT",
+      "features": [
+        "OUTPUT"
+      ]
+    }
+  ]
+}
