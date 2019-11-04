@@ -53,6 +53,11 @@ class EntityTypeBuilder : public std::enable_shared_from_this<EntityTypeBuilder>
     /// @param entity_type_uuid The UUID of the new entity type.
     EntityTypeBuilderPtr uuid(const std::string &entity_type_uuid);
 
+    /// @brief Sets the uuid of the entity type which is being built.
+    /// @note Because this method will be used in a builder pattern it does not make sense to rename it so "set_uuid".
+    /// @param entity_type_uuid The UUID of the new entity type.
+    EntityTypeBuilderPtr uuid(const xg::Guid &entity_type_uuid);
+
     /// @brief Adds an attribute to the entity type which is being built.
     /// @note Because this method will be used in a builder pattern it does not make sense to rename it so "set_attribute".
     /// @param attribute_name The name of the new attribute.
