@@ -1,0 +1,20 @@
+{
+  "type": "entity",
+  "name": "TIMER_TICK",
+  "attributes": [
+    {
+      "name": "timer_tick_millis",
+      "datatype": "INT",
+      "features": [
+        "INPUT"
+      ]
+    },
+    {
+      "name": "timer_tick_value",
+      "datatype": "BOOL",
+      "features": [
+        "OUTPUT"
+      ]
+    }
+  ]
+}

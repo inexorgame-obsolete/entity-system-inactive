@@ -1,0 +1,34 @@
+{
+  "type": "entity",
+  "name": "IN_RANGE_INT",
+  "attributes": [
+    {
+      "name": "in_range_int_input",
+      "datatype": "INT",
+      "features": [
+        "INPUT"
+      ]
+    },
+    {
+      "name": "in_range_int_min",
+      "datatype": "INT",
+      "features": [
+        "INPUT"
+      ]
+    },
+    {
+      "name": "in_range_int_max",
+      "datatype": "INT",
+      "features": [
+        "INPUT"
+      ]
+    },
+    {
+      "name": "in_range_int_result",
+      "datatype": "BOOL",
+      "features": [
+        "OUTPUT"
+      ]
+    }
+  ]
+}

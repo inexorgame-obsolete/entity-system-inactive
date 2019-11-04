@@ -1,0 +1,13 @@
+{
+  "type": "entity",
+  "name": "CONSOLE_STDIN",
+  "attributes": [
+    {
+      "name": "console_stdin",
+      "datatype": "STRING",
+      "features": [
+        "OUTPUT"
+      ]
+    }
+  ]
+}
