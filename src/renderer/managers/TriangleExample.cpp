@@ -5,11 +5,18 @@
 #include "spdlog/spdlog.h"
 
 #include <iomanip>
+#include <type-system/types/generators/counters/CounterFloat.hpp>
+#include <type-system/types/math/trigonometric/Cos.hpp>
+#include <type-system/types/math/trigonometric/Sin.hpp>
 #include <utility>
 
 using namespace Magnum::Math::Literals;
 
 namespace inexor::renderer {
+
+using CounterFloat = entity_system::type_system::CounterFloat;
+using Sin = entity_system::type_system::Sin;
+using Cos = entity_system::type_system::Cos;
 
 using EntityInstancePtrOpt = std::optional<EntityInstancePtr>;
 using EntityAttributeInstanceOpt = std::optional<EntityAttributeInstancePtr>;
@@ -145,8 +152,8 @@ void TriangleExample::create_entity_instances()
     // 16 ms = 60 fps
     EntityInstancePtrOpt o_counter_1 = counter_float_factory->create_instance(16, 0.03f);
     EntityInstancePtrOpt o_counter_2 = counter_float_factory->create_instance(16, 0.012f);
-    EntityInstancePtrOpt o_sin = entity_instance_builder_factory->get_builder(TYPE_SIN)->attribute(SIN_INPUT, 0.0f)->attribute(SIN_VALUE, 0.0f)->build();
-    EntityInstancePtrOpt o_cos = entity_instance_builder_factory->get_builder(TYPE_COS)->attribute(COS_INPUT, 0.0f)->attribute(COS_VALUE, 0.0f)->build();
+    EntityInstancePtrOpt o_sin = entity_instance_builder_factory->get_builder(Sin::TYPE_NAME)->attribute(Sin::INPUT, 0.0f)->attribute(Sin::VALUE, 0.0f)->build();
+    EntityInstancePtrOpt o_cos = entity_instance_builder_factory->get_builder(Cos::TYPE_NAME)->attribute(Cos::INPUT, 0.0f)->attribute(Cos::VALUE, 0.0f)->build();
     EntityInstancePtrOpt o_triangle = triangle_factory->create_instance(0.5f, -0.5f);
 
     if (o_counter_1.has_value() && o_counter_2.has_value() && o_sin.has_value() && o_cos.has_value() && o_triangle.has_value())
@@ -157,14 +164,14 @@ void TriangleExample::create_entity_instances()
         cos = o_cos.value();
         triangle = o_triangle.value();
 
-        EntityAttributeInstanceOpt o_counter_1_attr_count = counter_1->get_attribute_instance(entity_system::type_system::CounterFloatEntityTypeProvider::COUNTER_FLOAT_COUNT);
-        EntityAttributeInstanceOpt o_counter_1_attr_step = counter_1->get_attribute_instance(entity_system::type_system::CounterFloatEntityTypeProvider::COUNTER_FLOAT_STEP);
-        EntityAttributeInstanceOpt o_counter_2_attr_count = counter_2->get_attribute_instance(entity_system::type_system::CounterFloatEntityTypeProvider::COUNTER_FLOAT_COUNT);
-        EntityAttributeInstanceOpt o_counter_2_attr_step = counter_2->get_attribute_instance(entity_system::type_system::CounterFloatEntityTypeProvider::COUNTER_FLOAT_STEP);
-        EntityAttributeInstanceOpt o_sin_attr_input = sin->get_attribute_instance(SIN_INPUT);
-        EntityAttributeInstanceOpt o_sin_attr_value = sin->get_attribute_instance(SIN_VALUE);
-        EntityAttributeInstanceOpt o_cos_attr_input = cos->get_attribute_instance(COS_INPUT);
-        EntityAttributeInstanceOpt o_cos_attr_value = cos->get_attribute_instance(COS_VALUE);
+        EntityAttributeInstanceOpt o_counter_1_attr_count = counter_1->get_attribute_instance(CounterFloat::COUNT);
+        EntityAttributeInstanceOpt o_counter_1_attr_step = counter_1->get_attribute_instance(CounterFloat::STEP);
+        EntityAttributeInstanceOpt o_counter_2_attr_count = counter_2->get_attribute_instance(CounterFloat::COUNT);
+        EntityAttributeInstanceOpt o_counter_2_attr_step = counter_2->get_attribute_instance(CounterFloat::STEP);
+        EntityAttributeInstanceOpt o_sin_attr_input = sin->get_attribute_instance(Sin::INPUT);
+        EntityAttributeInstanceOpt o_sin_attr_value = sin->get_attribute_instance(Sin::VALUE);
+        EntityAttributeInstanceOpt o_cos_attr_input = cos->get_attribute_instance(Cos::INPUT);
+        EntityAttributeInstanceOpt o_cos_attr_value = cos->get_attribute_instance(Cos::VALUE);
         EntityAttributeInstanceOpt o_triangle_attr_x = triangle->get_attribute_instance(TriangleEntityTypeProvider::TRIANGLE_X);
         EntityAttributeInstanceOpt o_triangle_attr_y = triangle->get_attribute_instance(TriangleEntityTypeProvider::TRIANGLE_Y);
 

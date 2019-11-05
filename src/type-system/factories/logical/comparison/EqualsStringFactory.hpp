@@ -2,7 +2,6 @@
 
 #include "entity-system/factories/entities/entity-instance-builder-factory/EntityInstanceBuilderFactory.hpp"
 #include "entity-system/model/entities/entity-instances/EntityInstance.hpp"
-#include "type-system/providers/logical/comparison/EqualsStringEntityTypeProvider.hpp"
 
 namespace inexor::entity_system::type_system {
 
@@ -13,14 +12,12 @@ using EntityInstancePtrOpt = std::optional<std::shared_ptr<EntityInstance>>;
 class EqualsStringFactory
 {
     public:
-    using EqualsStringEntityTypeProviderPtr = std::shared_ptr<EqualsStringEntityTypeProvider>;
     using EntityInstanceBuilderFactoryPtr = std::shared_ptr<EntityInstanceBuilderFactory>;
 
     /// @brief Constructs a factory for creating entity instances of type EQUALS_STRING.
     /// @note The dependencies of this class will be injected automatically.
-    /// @param entity_type_provider Provides the entity type EQUALS_STRING.
     /// @param entity_instance_builder_factory Factory for creating entity instance builders.
-    EqualsStringFactory(EqualsStringEntityTypeProviderPtr entity_type_provider, EntityInstanceBuilderFactoryPtr entity_instance_builder_factory);
+    EqualsStringFactory(EntityInstanceBuilderFactoryPtr entity_instance_builder_factory);
 
     /// Destructor.
     ~EqualsStringFactory();
@@ -32,9 +29,6 @@ class EqualsStringFactory
     EntityInstancePtrOpt create_instance();
 
     private:
-    /// Provides the entity type EQUALS_STRING.
-    EqualsStringEntityTypeProviderPtr entity_type_provider;
-
     /// Factory for creating entity instance builders.
     EntityInstanceBuilderFactoryPtr entity_instance_builder_factory;
 };

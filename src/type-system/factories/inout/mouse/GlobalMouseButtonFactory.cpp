@@ -1,12 +1,12 @@
 #include "GlobalMouseButtonFactory.hpp"
 
+#include <type-system/types/inout/mouse/GlobalMouseButton.hpp>
 #include <utility>
 
 namespace inexor::entity_system::type_system {
 
-GlobalMouseButtonFactory::GlobalMouseButtonFactory(GlobalMouseButtonEntityTypeProviderPtr entity_type_provider, EntityInstanceBuilderFactoryPtr entity_instance_builder_factory)
+GlobalMouseButtonFactory::GlobalMouseButtonFactory(EntityInstanceBuilderFactoryPtr entity_instance_builder_factory)
 {
-    this->entity_type_provider = std::move(entity_type_provider);
     this->entity_instance_builder_factory = std::move(entity_instance_builder_factory);
 }
 
@@ -18,11 +18,10 @@ void GlobalMouseButtonFactory::init()
 
 EntityInstancePtrOpt GlobalMouseButtonFactory::create_instance(const int &button)
 {
-    return entity_instance_builder_factory->get_builder()
-        ->type(entity_type_provider->get_type())
-        ->attribute(GlobalMouseButtonEntityTypeProvider::GLOBAL_MOUSE_BUTTON_NUMBER, button)
-        ->attribute(GlobalMouseButtonEntityTypeProvider::GLOBAL_MOUSE_BUTTON_ACTION, 0)
-        ->attribute(GlobalMouseButtonEntityTypeProvider::GLOBAL_MOUSE_BUTTON_MODS, 0)
+    return entity_instance_builder_factory->get_builder(GlobalMouseButton::TYPE_NAME)
+        ->attribute(GlobalMouseButton::BUTTON_NUMBER, button)
+        ->attribute(GlobalMouseButton::ACTION, 0)
+        ->attribute(GlobalMouseButton::MODS, 0)
         ->build();
 }
 

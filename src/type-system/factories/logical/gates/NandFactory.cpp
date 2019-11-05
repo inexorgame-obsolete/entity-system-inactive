@@ -1,12 +1,12 @@
 #include "NandFactory.hpp"
 
+#include <type-system/types/logical/gates/Nand.hpp>
 #include <utility>
 
 namespace inexor::entity_system::type_system {
 
-NandFactory::NandFactory(NandEntityTypeProviderPtr entity_type_provider, EntityInstanceBuilderFactoryPtr entity_instance_builder_factory)
+NandFactory::NandFactory(EntityInstanceBuilderFactoryPtr entity_instance_builder_factory)
 {
-    this->entity_type_provider = std::move(entity_type_provider);
     this->entity_instance_builder_factory = std::move(entity_instance_builder_factory);
 }
 
@@ -18,11 +18,10 @@ void NandFactory::init()
 
 EntityInstancePtrOpt NandFactory::create_instance()
 {
-    return entity_instance_builder_factory->get_builder()
-        ->type(entity_type_provider->get_type())
-        ->attribute(NandEntityTypeProvider::NAND_INPUT_1, false)
-        ->attribute(NandEntityTypeProvider::NAND_INPUT_2, false)
-        ->attribute(NandEntityTypeProvider::NAND_RESULT, true)
+    return entity_instance_builder_factory->get_builder(Nand::TYPE_NAME)
+        ->attribute(Nand::INPUT_1, false)
+        ->attribute(Nand::INPUT_2, false)
+        ->attribute(Nand::RESULT, true)
         ->build();
 }
 

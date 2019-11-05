@@ -46,11 +46,13 @@ template <typename T> class TypeManagerTemplate
     /// @return True if a type with this name already exists, false otherwise.
     bool does_type_exist(const std::string &type_name)
     {
-        // Get the GUID of this type by name.
-        xg::Guid type_GUID = get_GUID_by_type_name(type_name);
-
         // No mutex required as this is a read-only operation.
-        return !(stored_types.end() == stored_types.find(type_GUID));
+        return !(stored_type_names.end() == stored_type_names.find(type_name));
+//        // Get the GUID of this type by name.
+//        xg::Guid type_GUID = get_GUID_by_type_name(type_name);
+//
+//        // No mutex required as this is a read-only operation.
+//        return !(stored_types.end() == stored_types.find(type_GUID));
     }
 
     /// @brief Checks if a type already exists.
