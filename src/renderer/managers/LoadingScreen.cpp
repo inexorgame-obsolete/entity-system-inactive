@@ -21,12 +21,15 @@
 #include <spdlog/fmt/ostr.h>
 
 #include <algorithm>
+#include <type-system/types/inout/mouse/GlobalMouseButton.hpp>
 #include <utility>
 
 using namespace Magnum::Math::Literals;
 
 namespace inexor::renderer {
 
+using DataType = entity_system::DataType;
+using GlobalMouseButton = entity_system::type_system::GlobalMouseButton;
 using EntityAttributeInstancePtr = std::shared_ptr<EntityAttributeInstance>;
 using EntityAttributeInstancePtrOpt = std::optional<EntityAttributeInstancePtr>;
 
@@ -81,10 +84,10 @@ void LoadingScreen::init()
         {
             EntityAttributeInstancePtr key_b_key = o_key_b_key.value();
             EntityAttributeInstancePtr key_b_action = o_key_b_action.value();
-            spdlog::debug("Creating observer for GLOBAL KEY {} {}", std::get<entity_system::DataType::INT>(key_b_key->value.Value()), std::get<entity_system::DataType::INT>(key_b_action->value.Value()));
+            spdlog::debug("Creating observer for GLOBAL KEY {} {}", std::get<DataType::INT>(key_b_key->value.Value()), std::get<DataType::INT>(key_b_action->value.Value()));
             Observe(key_b_action->value, [](DataValue action) {
-                spdlog::info("GLOBAL KEY B {}", std::get<entity_system::DataType::INT>(action));
-                if (std::get<entity_system::DataType::INT>(action) == GLFW_RELEASE)
+                spdlog::info("GLOBAL KEY B {}", std::get<DataType::INT>(action));
+                if (std::get<DataType::INT>(action) == GLFW_RELEASE)
                 {
                     spdlog::info("GLOBAL_KEY_B released");
                     // TODO: enable boost stacktrace again (3/3)
@@ -98,16 +101,16 @@ void LoadingScreen::init()
     if (o_mouse_button_2.has_value())
     {
         EntityInstancePtr mouse_button_2 = o_mouse_button_2.value();
-        EntityAttributeInstancePtrOpt o_mouse_button_2_number = mouse_button_2->get_attribute_instance(entity_system::type_system::GlobalMouseButtonEntityTypeProvider::GLOBAL_MOUSE_BUTTON_NUMBER);
-        EntityAttributeInstancePtrOpt o_mouse_button_2_action = mouse_button_2->get_attribute_instance(entity_system::type_system::GlobalMouseButtonEntityTypeProvider::GLOBAL_MOUSE_BUTTON_ACTION);
+        EntityAttributeInstancePtrOpt o_mouse_button_2_number = mouse_button_2->get_attribute_instance(GlobalMouseButton::BUTTON_NUMBER);
+        EntityAttributeInstancePtrOpt o_mouse_button_2_action = mouse_button_2->get_attribute_instance(GlobalMouseButton::ACTION);
         if (o_mouse_button_2_number.has_value() && o_mouse_button_2_action.has_value())
         {
             EntityAttributeInstancePtr mouse_button_2_number = o_mouse_button_2_number.value();
             EntityAttributeInstancePtr mouse_button_2_action = o_mouse_button_2_action.value();
-            spdlog::debug("Creating observer for GLOBAL MOUSE_BUTTON {} {}", std::get<entity_system::DataType::INT>(mouse_button_2_number->value.Value()), std::get<entity_system::DataType::INT>(mouse_button_2_action->value.Value()));
+            spdlog::debug("Creating observer for GLOBAL MOUSE_BUTTON {} {}", std::get<DataType::INT>(mouse_button_2_number->value.Value()), std::get<DataType::INT>(mouse_button_2_action->value.Value()));
             Observe(mouse_button_2_action->value, [](DataValue action) {
-                spdlog::info("GLOBAL MOUSE BUTTON 2: {}", std::get<entity_system::DataType::INT>(action));
-                if (std::get<entity_system::DataType::INT>(action) == GLFW_RELEASE)
+                spdlog::info("GLOBAL MOUSE BUTTON 2: {}", std::get<DataType::INT>(action));
+                if (std::get<DataType::INT>(action) == GLFW_RELEASE)
                 {
                     spdlog::info("GLOBAL_MOUSE_BUTTON_2 released");
                     // TODO: enable boost stacktrace again (3/3)
@@ -131,25 +134,25 @@ void toggle_raw(GLFWwindow *glfw_window, int window_attribute)
 void increase(const EntityInstancePtr &entity_instance, std::string name, float step, float max)
 {
     EntityAttributeInstancePtr attr = entity_instance->get_attribute_instance(name).value();
-    attr->own_value.Set(std::min(max, std::get<entity_system::DataType::FLOAT>(attr->value.Value()) + step));
+    attr->own_value.Set(std::min(max, std::get<DataType::FLOAT>(attr->value.Value()) + step));
 }
 
 void increase(const EntityInstancePtr &entity_instance, std::string name, int step, int max)
 {
     EntityAttributeInstancePtr attr = entity_instance->get_attribute_instance(name).value();
-    attr->own_value.Set(std::min(max, std::get<entity_system::DataType::INT>(attr->value.Value()) + step));
+    attr->own_value.Set(std::min(max, std::get<DataType::INT>(attr->value.Value()) + step));
 }
 
 void decrease(const EntityInstancePtr &entity_instance, std::string name, float step, float min)
 {
     EntityAttributeInstancePtr attr = entity_instance->get_attribute_instance(name).value();
-    attr->own_value.Set(std::max(min, std::get<entity_system::DataType::FLOAT>(attr->value.Value()) - step));
+    attr->own_value.Set(std::max(min, std::get<DataType::FLOAT>(attr->value.Value()) - step));
 }
 
 void decrease(const EntityInstancePtr &entity_instance, std::string name, int step, int min)
 {
     EntityAttributeInstancePtr attr = entity_instance->get_attribute_instance(name).value();
-    attr->own_value.Set(std::max(min, std::get<entity_system::DataType::INT>(attr->value.Value()) - step));
+    attr->own_value.Set(std::max(min, std::get<DataType::INT>(attr->value.Value()) - step));
 }
 
 void LoadingScreen::on_window_char_input(EntityInstancePtr window, std::string character, unsigned int codepoint)

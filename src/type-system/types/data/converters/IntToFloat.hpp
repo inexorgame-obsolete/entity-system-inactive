@@ -1,5 +1,7 @@
 #pragma once
 
+#include <string>
+
 namespace inexor::entity_system::type_system {
 
 class IntToFloat

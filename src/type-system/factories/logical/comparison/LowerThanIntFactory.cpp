@@ -1,12 +1,12 @@
 #include "LowerThanIntFactory.hpp"
 
+#include <type-system/types/logical/comparison/LowerThanInt.hpp>
 #include <utility>
 
 namespace inexor::entity_system::type_system {
 
-LowerThanIntFactory::LowerThanIntFactory(LowerThanIntEntityTypeProviderPtr entity_type_provider, EntityInstanceBuilderFactoryPtr entity_instance_builder_factory)
+LowerThanIntFactory::LowerThanIntFactory(EntityInstanceBuilderFactoryPtr entity_instance_builder_factory)
 {
-    this->entity_type_provider = std::move(entity_type_provider);
     this->entity_instance_builder_factory = std::move(entity_instance_builder_factory);
 }
 
@@ -18,11 +18,10 @@ void LowerThanIntFactory::init()
 
 EntityInstancePtrOpt LowerThanIntFactory::create_instance()
 {
-    return entity_instance_builder_factory->get_builder()
-        ->type(entity_type_provider->get_type())
-        ->attribute(LowerThanIntEntityTypeProvider::LOWER_THAN_INT_INPUT_1, 0)
-        ->attribute(LowerThanIntEntityTypeProvider::LOWER_THAN_INT_INPUT_2, 0)
-        ->attribute(LowerThanIntEntityTypeProvider::LOWER_THAN_INT_RESULT, false)
+    return entity_instance_builder_factory->get_builder(LowerThanInt::TYPE_NAME)
+        ->attribute(LowerThanInt::INPUT_1, 0)
+        ->attribute(LowerThanInt::INPUT_2, 0)
+        ->attribute(LowerThanInt::RESULT, false)
         ->build();
 }
 

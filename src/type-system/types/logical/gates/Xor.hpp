@@ -1,8 +1,10 @@
 #pragma once
 
+#include <string>
+
 namespace inexor::entity_system::type_system {
 
-class Nor
+class Xor
 {
     public:
     /// Defines the name of this entity type.
