@@ -4,9 +4,7 @@
 #include "type-system/types/math/arithmetic/AddInt.hpp"
 #include "visual-scripting/model/Connector.hpp"
 
-#include "react/Domain.h"
 #include "react/Observer.h"
-#include "react/Signal.h"
 
 #include "spdlog/spdlog.h"
 
@@ -14,6 +12,8 @@
 #include <iostream>
 #include <random>
 #include <thread>
+#include <type-system/types/data/constants/IntConstant.hpp>
+#include <utility>
 
 namespace inexor::visual_scripting {
 
@@ -27,9 +27,9 @@ using ConnectorPtrOpt = std::optional<ConnectorPtr>;
 using DataType = entity_system::DataType;
 using DataValue = entity_system::DataValue;
 
-using IntConstantEntityTypeProvider = entity_system::type_system::IntConstantEntityTypeProvider;
 using AddIntFactory = entity_system::type_system::AddIntFactory;
 using AddInt = entity_system::type_system::AddInt;
+using IntConstant = entity_system::type_system::IntConstant;
 
 int IntConstantConnectorTest::SOURCE_INITIAL_VALUE = 100;
 int IntConstantConnectorTest::TARGET_1_INITIAL_VALUE = 200;
@@ -39,15 +39,13 @@ int IntConstantConnectorTest::TARGET_3_INITIAL_VALUE = 400;
 IntConstantConnectorTest::IntConstantConnectorTest(ConnectorManagerPtr connector_manager, IntConstantFactoryPtr int_constant_factory, AddIntFactoryPtr add_int_factory, LogManagerPtr log_manager)
 {
     this->running = false;
-    this->connector_manager = connector_manager;
-    this->int_constant_factory = int_constant_factory;
-    this->add_int_factory = add_int_factory;
-    this->log_manager = log_manager;
+    this->connector_manager = std::move(connector_manager);
+    this->int_constant_factory = std::move(int_constant_factory);
+    this->add_int_factory = std::move(add_int_factory);
+    this->log_manager = std::move(log_manager);
 }
 
-IntConstantConnectorTest::~IntConstantConnectorTest()
-{
-}
+IntConstantConnectorTest::~IntConstantConnectorTest() = default;
 
 void IntConstantConnectorTest::init()
 {
@@ -91,10 +89,10 @@ void IntConstantConnectorTest::run_test()
     EntityInstancePtr target_3 = o_target_3.value();
     EntityInstancePtr add_int = o_add_int.value();
 
-    EntityAttributeInstancePtrOpt o_source_attr_value = source->get_attribute_instance(IntConstantEntityTypeProvider::INT_CONSTANT_VALUE);
-    EntityAttributeInstancePtrOpt o_target_1_attr_value = target_1->get_attribute_instance(IntConstantEntityTypeProvider::INT_CONSTANT_VALUE);
-    EntityAttributeInstancePtrOpt o_target_2_attr_value = target_2->get_attribute_instance(IntConstantEntityTypeProvider::INT_CONSTANT_VALUE);
-    EntityAttributeInstancePtrOpt o_target_3_attr_value = target_3->get_attribute_instance(IntConstantEntityTypeProvider::INT_CONSTANT_VALUE);
+    EntityAttributeInstancePtrOpt o_source_attr_value = source->get_attribute_instance(IntConstant::VALUE);
+    EntityAttributeInstancePtrOpt o_target_1_attr_value = target_1->get_attribute_instance(IntConstant::VALUE);
+    EntityAttributeInstancePtrOpt o_target_2_attr_value = target_2->get_attribute_instance(IntConstant::VALUE);
+    EntityAttributeInstancePtrOpt o_target_3_attr_value = target_3->get_attribute_instance(IntConstant::VALUE);
     EntityAttributeInstancePtrOpt o_add_int_attr_augend = add_int->get_attribute_instance(AddInt::AUGEND);
     EntityAttributeInstancePtrOpt o_add_int_attr_addend = add_int->get_attribute_instance(AddInt::ADDEND);
     EntityAttributeInstancePtrOpt o_add_int_attr_sum = add_int->get_attribute_instance(AddInt::SUM);
@@ -129,7 +127,7 @@ void IntConstantConnectorTest::run_test()
             std::this_thread::sleep_for(std::chrono::seconds(2));
             i = idist(rgen);
 
-            // spdlog::get(LOGGER_NAME)->info("Setting {}.{} to value {}. The value should be propagated.", SOURCE_NAME, IntConstantEntityTypeProvider::INT_CONSTANT_VALUE, i);
+            // spdlog::get(LOGGER_NAME)->info("Setting {}.{} to value {}. The value should be propagated.", SOURCE_NAME, IntConstant::VALUE, i);
             source_attr_value->own_value.Set(i);
 
             log_attrs("The propagated values:");
@@ -158,27 +156,27 @@ void IntConstantConnectorTest::create_instances()
 void IntConstantConnectorTest::create_connectors()
 {
     // source --> target_1
-    log_create_connector(SOURCE_NAME, IntConstantEntityTypeProvider::INT_CONSTANT_VALUE, TARGET_1_NAME, IntConstantEntityTypeProvider::INT_CONSTANT_VALUE);
+    log_create_connector(SOURCE_NAME, IntConstant::VALUE, TARGET_1_NAME, IntConstant::VALUE);
     connector_1 = connector_manager->create_connector(source_attr_value, target_1_attr_value);
     // connector_manager->enable_debug(connector_1);
 
     // source --> target_2
-    log_create_connector(SOURCE_NAME, IntConstantEntityTypeProvider::INT_CONSTANT_VALUE, TARGET_2_NAME, IntConstantEntityTypeProvider::INT_CONSTANT_VALUE);
+    log_create_connector(SOURCE_NAME, IntConstant::VALUE, TARGET_2_NAME, IntConstant::VALUE);
     connector_2 = connector_manager->create_connector(source_attr_value, target_2_attr_value);
     // connector_manager->enable_debug(connector_2);
 
     // target_1 --> target_3
-    log_create_connector(TARGET_1_NAME, IntConstantEntityTypeProvider::INT_CONSTANT_VALUE, TARGET_3_NAME, IntConstantEntityTypeProvider::INT_CONSTANT_VALUE);
+    log_create_connector(TARGET_1_NAME, IntConstant::VALUE, TARGET_3_NAME, IntConstant::VALUE);
     connector_3 = connector_manager->create_connector(target_1_attr_value, target_3_attr_value);
     // connector_manager->enable_debug(connector_3);
 
     // target_2 --> add_int_augend
-    log_create_connector(TARGET_2_NAME, IntConstantEntityTypeProvider::INT_CONSTANT_VALUE, ADD_INT_NAME, AddInt::AUGEND);
+    log_create_connector(TARGET_2_NAME, IntConstant::VALUE, ADD_INT_NAME, AddInt::AUGEND);
     connector_4 = connector_manager->create_connector(target_2_attr_value, add_int_attr_augend);
     // connector_manager->enable_debug(connector_4);
 
     // target_3 --> add_int_addend
-    log_create_connector(TARGET_3_NAME, IntConstantEntityTypeProvider::INT_CONSTANT_VALUE, ADD_INT_NAME, AddInt::ADDEND);
+    log_create_connector(TARGET_3_NAME, IntConstant::VALUE, ADD_INT_NAME, AddInt::ADDEND);
     connector_5 = connector_manager->create_connector(target_3_attr_value, add_int_attr_addend);
     // connector_manager->enable_debug(connector_5);
 }
@@ -205,10 +203,10 @@ void IntConstantConnectorTest::log_create_connector(std::string output_entity_in
 void IntConstantConnectorTest::log_attrs(std::string message)
 {
     // spdlog::get(LOGGER_NAME)->info(message);
-    log_attr(SOURCE_NAME, IntConstantEntityTypeProvider::INT_CONSTANT_VALUE, source_attr_value);
-    log_attr(TARGET_1_NAME, IntConstantEntityTypeProvider::INT_CONSTANT_VALUE, target_1_attr_value);
-    log_attr(TARGET_2_NAME, IntConstantEntityTypeProvider::INT_CONSTANT_VALUE, target_2_attr_value);
-    log_attr(TARGET_3_NAME, IntConstantEntityTypeProvider::INT_CONSTANT_VALUE, target_3_attr_value);
+    log_attr(SOURCE_NAME, IntConstant::VALUE, source_attr_value);
+    log_attr(TARGET_1_NAME, IntConstant::VALUE, target_1_attr_value);
+    log_attr(TARGET_2_NAME, IntConstant::VALUE, target_2_attr_value);
+    log_attr(TARGET_3_NAME, IntConstant::VALUE, target_3_attr_value);
     log_attr(ADD_INT_NAME, AddInt::AUGEND, add_int_attr_augend);
     log_attr(ADD_INT_NAME, AddInt::ADDEND, add_int_attr_addend);
     log_attr(ADD_INT_NAME, AddInt::SUM, add_int_attr_sum);

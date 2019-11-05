@@ -16,9 +16,9 @@ InOutProviders::~InOutProviders() = default;
 
 void InOutProviders::init()
 {
-    console_providers->init();
-    keyboard_providers->init();
-    mouse_providers->init();
+//    console_providers->init();
+//    keyboard_providers->init();
+//    mouse_providers->init();
     logger_providers->init();
 }
 

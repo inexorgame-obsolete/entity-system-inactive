@@ -102,15 +102,6 @@ class SinTest
     /// The name of the sin.
     static constexpr char SIN_NAME[] = "sin";
 
-    /// The name for the attribute sin_input.
-    static constexpr char TYPE_SIN[] = "SIN";
-
-    /// The name for the attribute sin_input.
-    static constexpr char SIN_INPUT[] = "sin_input";
-
-    /// The name for the attribute sin_value.
-    static constexpr char SIN_VALUE[] = "sin_value";
-
     /// The name of the target.
     static constexpr char TARGET_NAME[] = "target";
     static float TARGET_INITIAL_VALUE;

@@ -2,11 +2,12 @@
 
 #include <utility>
 
+#include <type-system/types/inout/logger/Logger.hpp>
+
 namespace inexor::entity_system::type_system {
 
-LoggerFactory::LoggerFactory(LoggerEntityTypeProviderPtr entity_type_provider, EntityInstanceBuilderFactoryPtr entity_instance_builder_factory)
+LoggerFactory::LoggerFactory(EntityInstanceBuilderFactoryPtr entity_instance_builder_factory)
 {
-    this->entity_type_provider = std::move(entity_type_provider);
     this->entity_instance_builder_factory = std::move(entity_instance_builder_factory);
 }
 
@@ -18,31 +19,28 @@ void LoggerFactory::init()
 
 EntityInstancePtrOpt LoggerFactory::create_instance()
 {
-    return entity_instance_builder_factory->get_builder()
-        ->type(entity_type_provider->get_type())
-        ->attribute(LoggerEntityTypeProvider::LOGGER_NAME, "")
-        ->attribute(LoggerEntityTypeProvider::LOG_LEVEL, spdlog::level::level_enum::info)
-        ->attribute(LoggerEntityTypeProvider::LOG_MESSAGE, std::string(""))
+    return entity_instance_builder_factory->get_builder(Logger::TYPE_NAME)
+        ->attribute(Logger::NAME, "")
+        ->attribute(Logger::LEVEL, spdlog::level::level_enum::info)
+        ->attribute(Logger::MESSAGE, std::string(""))
         ->build();
 }
 
 EntityInstancePtrOpt LoggerFactory::create_instance(const std::string &logger_name)
 {
-    return entity_instance_builder_factory->get_builder()
-        ->type(entity_type_provider->get_type())
-        ->attribute(LoggerEntityTypeProvider::LOGGER_NAME, logger_name)
-        ->attribute(LoggerEntityTypeProvider::LOG_LEVEL, spdlog::level::level_enum::info)
-        ->attribute(LoggerEntityTypeProvider::LOG_MESSAGE, std::string(""))
+    return entity_instance_builder_factory->get_builder(Logger::TYPE_NAME)
+        ->attribute(Logger::NAME, logger_name)
+        ->attribute(Logger::LEVEL, spdlog::level::level_enum::info)
+        ->attribute(Logger::MESSAGE, std::string(""))
         ->build();
 }
 
 EntityInstancePtrOpt LoggerFactory::create_instance(const std::string &logger_name, spdlog::level::level_enum log_level)
 {
-    return entity_instance_builder_factory->get_builder()
-        ->type(entity_type_provider->get_type())
-        ->attribute(LoggerEntityTypeProvider::LOGGER_NAME, logger_name)
-        ->attribute(LoggerEntityTypeProvider::LOG_LEVEL, log_level)
-        ->attribute(LoggerEntityTypeProvider::LOG_MESSAGE, std::string(""))
+    return entity_instance_builder_factory->get_builder(Logger::TYPE_NAME)
+        ->attribute(Logger::NAME, logger_name)
+        ->attribute(Logger::LEVEL, log_level)
+        ->attribute(Logger::MESSAGE, std::string(""))
         ->build();
 }
 

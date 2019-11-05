@@ -1,7 +1,8 @@
 #include "IntegrationTests.hpp"
 
-namespace inexor {
-namespace visual_scripting {
+#include <utility>
+
+namespace inexor::visual_scripting {
 
 	IntegrationTests::IntegrationTests(
 		ConsoleTestPtr console_test,
@@ -10,15 +11,13 @@ namespace visual_scripting {
 		LogicTestPtr logic_test
 	)
 	{
-		this->console_test = console_test;
-		this->int_constant_connector_test = int_constant_connector_test;
-		this->sin_test = sin_test;
-		this->logic_test = logic_test;
+		this->console_test = std::move(console_test);
+		this->int_constant_connector_test = std::move(int_constant_connector_test);
+		this->sin_test = std::move(sin_test);
+		this->logic_test = std::move(logic_test);
 	}
 
-	IntegrationTests::~IntegrationTests()
-	{
-	}
+	IntegrationTests::~IntegrationTests() = default;
 
 	void IntegrationTests::init()
 	{
@@ -52,5 +51,4 @@ namespace visual_scripting {
 		this->console_test->stop_test();
 	}
 
-}
 }

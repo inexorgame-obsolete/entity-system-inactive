@@ -180,24 +180,6 @@ class TriangleExample : public input::WindowKeyReleasedListener, public input::W
     TriangleVertex data[3];
 
     bool debug_enabled;
-
-    /// The name for the entity type SIN.
-    static constexpr char TYPE_SIN[] = "SIN";
-
-    /// The name for the attribute sin_input.
-    static constexpr char SIN_INPUT[] = "sin_input";
-
-    /// The name for the attribute sin_value.
-    static constexpr char SIN_VALUE[] = "sin_value";
-
-    /// The name for entity type COS.
-    static constexpr char TYPE_COS[] = "COS";
-
-    /// The name for the attribute cos_input.
-    static constexpr char COS_INPUT[] = "cos_input";
-
-    /// The name for the attribute cos_value.
-    static constexpr char COS_VALUE[] = "cos_value";
 };
 
 } // namespace inexor::renderer
