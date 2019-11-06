@@ -31,6 +31,9 @@ void InexorApplication::pre_init(int argc, char *argv[])
     // You can't do this in the constructor
     InexorApplication::instances.push_back(this);
 
+    // Type system initialization.
+    type_system_module->pre_init();
+
     // Debugger
     // TODO: enable with macro
     entity_system_debugger->init();

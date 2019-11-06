@@ -6,16 +6,9 @@
 #include "type-system/providers/inout/console/StdErrEntityTypeProvider.hpp"
 #include "visual-scripting/managers/ConnectorManager.hpp"
 
-namespace inexor {
-namespace visual_scripting {
+namespace inexor::visual_scripting {
 
 	using ConnectorManagerPtr = std::shared_ptr<ConnectorManager>;
-	using StdInEntityTypeProvider = entity_system::type_system::StdInEntityTypeProvider;
-	using StdInEntityTypeProviderPtr = std::shared_ptr<StdInEntityTypeProvider>;
-	using StdOutEntityTypeProvider = entity_system::type_system::StdOutEntityTypeProvider;
-	using StdOutEntityTypeProviderPtr = std::shared_ptr<StdOutEntityTypeProvider>;
-	using StdErrEntityTypeProvider = entity_system::type_system::StdErrEntityTypeProvider;
-	using StdErrEntityTypeProviderPtr = std::shared_ptr<StdErrEntityTypeProvider>;
 	using EntityInstanceBuilderFactoryPtr = std::shared_ptr<entity_system::EntityInstanceBuilderFactory>;
 
 	using EntityInstancePtr = std::shared_ptr<entity_system::EntityInstance>;
@@ -33,15 +26,9 @@ namespace visual_scripting {
             /// @brief Constructor.
             /// @note The dependencies of this class will be injected automatically.
             /// @param connector_manager ?
-            /// @param stdin_entity_type_provider ?
-            /// @param stdout_entity_type_provider ?
-            /// @param stderr_entity_type_provider ?
             /// @param entity_instance_builder_factory ?
 			ConsoleTest(
 				ConnectorManagerPtr connector_manager,
-				StdInEntityTypeProviderPtr stdin_entity_type_provider,
-				StdOutEntityTypeProviderPtr stdout_entity_type_provider,
-				StdErrEntityTypeProviderPtr stderr_entity_type_provider,
 				EntityInstanceBuilderFactoryPtr entity_instance_builder_factory
 			);
 
@@ -66,9 +53,6 @@ namespace visual_scripting {
 			bool running;
 
 			ConnectorManagerPtr connector_manager;
-			StdInEntityTypeProviderPtr stdin_entity_type_provider;
-			StdOutEntityTypeProviderPtr stdout_entity_type_provider;
-			StdErrEntityTypeProviderPtr stderr_entity_type_provider;
 			EntityInstanceBuilderFactoryPtr entity_instance_builder_factory;
 
 			EntityInstancePtrOpt o_stdin;
@@ -80,5 +64,4 @@ namespace visual_scripting {
 
 	};
 
-}
 }

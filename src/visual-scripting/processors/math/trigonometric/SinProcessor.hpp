@@ -48,9 +48,6 @@ class SinProcessor : public Processor, public entity_system::EntityInstanceCreat
     /// Initializes the processor.
     void init();
 
-    /// Initializes the SIN processor by registering listeners on newly created entity instances of type SIN.
-    void init_processor();
-
     /// @brief Called when an entity instance of type SIN has been created.
     /// @param entity_instance ?
     void on_entity_instance_created(EntityInstancePtr entity_instance) override;
@@ -65,6 +62,9 @@ class SinProcessor : public Processor, public entity_system::EntityInstanceCreat
     void make_signals(const EntityInstancePtr &entity_instance);
 
     private:
+    /// Initializes the SIN processor by registering listeners on newly created entity instances of type SIN.
+    void init_processor();
+
     /// The entity type manager.
     EntityTypeManagerPtr entity_type_manager;
 

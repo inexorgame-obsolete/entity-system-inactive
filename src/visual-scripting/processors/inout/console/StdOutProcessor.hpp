@@ -5,7 +5,6 @@
 #include "entity-system/model/data/container/DataContainer.hpp"
 #include "entity-system/model/entities/entity-instances/EntityInstance.hpp"
 #include "logging/managers/LogManager.hpp"
-#include "type-system/providers/inout/console/StdOutEntityTypeProvider.hpp"
 #include "visual-scripting/model/Processor.hpp"
 
 namespace inexor::visual_scripting {
@@ -17,7 +16,7 @@ using namespace react;
 class StdOutProcessor : public Processor, public entity_system::EntityInstanceCreatedListener, public entity_system::EntityInstanceDeletedListener, public std::enable_shared_from_this<StdOutProcessor>
 {
 
-    using StdOutEntityTypeProviderPtr = std::shared_ptr<entity_system::type_system::StdOutEntityTypeProvider>;
+    using EntityTypeManagerPtr = std::shared_ptr<entity_system::EntityTypeManager>;
     using EntityInstanceManagerPtr = std::shared_ptr<entity_system::EntityInstanceManager>;
     using EntityInstancePtr = std::shared_ptr<entity_system::EntityInstance>;
     using LogManagerPtr = std::shared_ptr<inexor::logging::LogManager>;
@@ -27,10 +26,9 @@ class StdOutProcessor : public Processor, public entity_system::EntityInstanceCr
     USING_REACTIVE_DOMAIN(entity_system::D)
 
     /// @brief Constructs a new entity instance of type CONSOLE_STDOUT.
-    /// @note The dependencies of this class will be injected automatically.
-    /// @param entity_type_provider Provides the entity type CONSOLE_STDOUT.
+    /// @param entity_type_manager The entity type manager.
     /// @param entity_instance_manager The entity instance manager.
-    StdOutProcessor(const StdOutEntityTypeProviderPtr& entity_type_provider, EntityInstanceManagerPtr entity_instance_manager, LogManagerPtr log_manager);
+    StdOutProcessor(EntityTypeManagerPtr entity_type_manager, EntityInstanceManagerPtr entity_instance_manager, LogManagerPtr log_manager);
 
     /// Destructor
     ~StdOutProcessor() override;
@@ -52,8 +50,11 @@ class StdOutProcessor : public Processor, public entity_system::EntityInstanceCr
     void make_signals(const EntityInstancePtr &entity_instance);
 
     private:
-    /// Provides the entity type CONSOLE_STDOUT.
-    StdOutEntityTypeProviderPtr entity_type_provider;
+    /// Initializes the processor by registering listeners on newly created entity instances.
+    void init_processor();
+
+    /// The entity type manager.
+    EntityTypeManagerPtr entity_type_manager;
 
     /// The entity instance manager.
     EntityInstanceManagerPtr entity_instance_manager;

@@ -1,15 +1,17 @@
 #pragma once
 
+#include <string>
+
 namespace inexor::entity_system::type_system {
 
-class StdOut
+class StdErr
 {
     public:
     /// Defines the name of this entity type.
-    inline static const std::string TYPE_NAME = "CONSOLE_STDOUT";
+    inline static const std::string TYPE_NAME = "CONSOLE_STDERR";
 
-    /// The name of the input attribute console_stdout.
-    inline static const std::string MILLIS = "console_stdout";
+    /// The name of the output attribute console_stderr.
+    inline static const std::string STDERR = "console_stderr";
 };
 
 } // namespace inexor::entity_system::type_system

@@ -1,5 +1,6 @@
 #include "LoggerProcessor.hpp"
 
+#include <type-system/types/inout/logger/Logger.hpp>
 #include <utility>
 
 #include "react/Algorithm.h"
@@ -10,12 +11,15 @@ namespace inexor::visual_scripting {
 
 using namespace inexor::entity_system;
 using namespace inexor::entity_system::type_system;
+
+using Logger = entity_system::type_system::Logger;
+using EntityTypePtrOpt = std::optional<EntityTypePtr>;
 using EntityAttributeInstancePtrOptional = std::optional<std::shared_ptr<EntityAttributeInstance>>;
 
 using EntityTypePtr = std::shared_ptr<entity_system::EntityType>;
 
-LoggerProcessor::LoggerProcessor(const LoggerEntityTypeProviderPtr &entity_type_provider, EntityInstanceManagerPtr entity_instance_manager, const LogManagerPtr &logger_manager)
-    : Processor(entity_type_provider->get_type()), entity_type_provider(entity_type_provider), entity_instance_manager(std::move(entity_instance_manager)), log_manager(log_manager)
+LoggerProcessor::LoggerProcessor(EntityTypeManagerPtr entity_type_manager, EntityInstanceManagerPtr entity_instance_manager, const LogManagerPtr &logger_manager)
+    : Processor(), entity_type_manager(std::move(entity_type_manager)), entity_instance_manager(std::move(entity_instance_manager)), log_manager(log_manager)
 {
     this->logger = spdlog::default_logger();
 }
@@ -24,9 +28,20 @@ LoggerProcessor::~LoggerProcessor() = default;
 
 void LoggerProcessor::init()
 {
-    logger = spdlog::get(LOGGER_NAME);
-    entity_instance_manager->register_on_created(entity_type_provider->get_type()->get_GUID(), shared_from_this());
-    entity_instance_manager->register_on_deleted(entity_type_provider->get_type()->get_GUID(), shared_from_this());
+//    log_manager->register_logger(LOGGER_NAME);
+    init_processor();
+}
+
+void LoggerProcessor::init_processor()
+{
+    EntityTypePtrOpt o_ent_type = entity_type_manager->get_entity_type(Logger::TYPE_NAME);
+    if (o_ent_type.has_value()) {
+        this->entity_type = o_ent_type.value();
+        entity_instance_manager->register_on_created(this->entity_type->get_GUID(), shared_from_this());
+        entity_instance_manager->register_on_deleted(this->entity_type->get_GUID(), shared_from_this());
+    } else {
+        spdlog::get(LOGGER_NAME)->error("Failed to initialize processor {}: Entity type does not exist", Logger::TYPE_NAME);
+    }
 }
 
 void LoggerProcessor::on_entity_instance_created(EntityInstancePtr entity_instance)
@@ -46,8 +61,8 @@ void LoggerProcessor::make_signals(const EntityInstancePtr &entity_instance)
 {
     logger->debug("Initializing processor LOGGER for newly created entity instance {} of type {}", entity_instance->get_GUID().str(), entity_instance->get_entity_type()->get_type_name());
 
-    auto o_logger_name = entity_instance->get_attribute_instance(LoggerEntityTypeProvider::LOGGER_NAME);
-    auto o_log_message = entity_instance->get_attribute_instance(LoggerEntityTypeProvider::LOG_MESSAGE);
+    auto o_logger_name = entity_instance->get_attribute_instance(Logger::NAME);
+    auto o_log_message = entity_instance->get_attribute_instance(Logger::MESSAGE);
 
     if (o_logger_name.has_value() && o_log_message.has_value())
     {
@@ -56,7 +71,7 @@ void LoggerProcessor::make_signals(const EntityInstancePtr &entity_instance)
     } else
     {
         logger->error("Failed to initialize processor signals for entity instance {} of type {}: Missing one of these attributes {} {}", entity_instance->get_GUID().str(), entity_instance->get_entity_type()->get_type_name(),
-                      LoggerEntityTypeProvider::LOGGER_NAME, LoggerEntityTypeProvider::LOG_MESSAGE);
+                      Logger::NAME, Logger::MESSAGE);
     }
 }
 

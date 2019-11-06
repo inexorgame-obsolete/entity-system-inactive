@@ -5,7 +5,6 @@
 #include "entity-system/model/data/container/DataContainer.hpp"
 #include "entity-system/model/entities/entity-instances/EntityInstance.hpp"
 #include "logging/managers/LogManager.hpp"
-#include "type-system/providers/logical/comparison/EqualsBoolEntityTypeProvider.hpp"
 #include "visual-scripting/managers/ProcessorRegistry.hpp"
 #include "visual-scripting/model/Processor.hpp"
 
@@ -18,7 +17,7 @@ using namespace react;
 class EqualsBoolProcessor : public Processor, public entity_system::EntityInstanceCreatedListener, public entity_system::EntityInstanceDeletedListener, public std::enable_shared_from_this<EqualsBoolProcessor>
 {
 
-    using EqualsBoolEntityTypeProviderPtr = std::shared_ptr<inexor::entity_system::type_system::EqualsBoolEntityTypeProvider>;
+    using EntityTypeManagerPtr = std::shared_ptr<entity_system::EntityTypeManager>;
     using EntityInstanceManagerPtr = std::shared_ptr<inexor::entity_system::EntityInstanceManager>;
     using LogManagerPtr = std::shared_ptr<inexor::logging::LogManager>;
     using EntityInstancePtr = std::shared_ptr<inexor::entity_system::EntityInstance>;
@@ -28,11 +27,10 @@ class EqualsBoolProcessor : public Processor, public entity_system::EntityInstan
     USING_REACTIVE_DOMAIN(entity_system::D)
 
     /// @brief Constructs a new entity instance of type EQUALS_BOOL.
-    /// @note The dependencies of this class will be injected automatically.
-    /// @param entity_type_provider The entity type provider for this active component.
+    /// @param entity_type_manager The entity type manager.
     /// @param entity_instance_manager The entity instance manager.
     /// @param log_manager The log manager.
-    EqualsBoolProcessor(const EqualsBoolEntityTypeProviderPtr& entity_type_provider, EntityInstanceManagerPtr entity_instance_manager, LogManagerPtr log_manager);
+    EqualsBoolProcessor(EntityTypeManagerPtr entity_type_manager, EntityInstanceManagerPtr entity_instance_manager, LogManagerPtr log_manager);
 
     /// Destructor.
     ~EqualsBoolProcessor() override;
@@ -54,8 +52,11 @@ class EqualsBoolProcessor : public Processor, public entity_system::EntityInstan
     void make_signals(const EntityInstancePtr &entity_instance);
 
     private:
-    /// The entity type provider for this active component.
-    EqualsBoolEntityTypeProviderPtr entity_type_provider;
+    /// Initializes the processor by registering listeners on newly created entity instances.
+    void init_processor();
+
+    /// The entity type manager.
+    EntityTypeManagerPtr entity_type_manager;
 
     /// The entity instance manager.
     EntityInstanceManagerPtr entity_instance_manager;
