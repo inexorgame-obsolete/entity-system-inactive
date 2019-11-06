@@ -8,7 +8,7 @@ class Logger
 {
     public:
     /// Defines the name of this entity type.
-    inline static const std::string TYPE_NAME = "GLOBAL_KEY";
+    inline static const std::string TYPE_NAME = "LOGGER";
 
     /// The name of the output attribute logger_name.
     inline static const std::string NAME = "logger_name";

@@ -7,7 +7,6 @@
 #include "entity-system/model/entities/entity-instances/EntityInstance.hpp"
 
 #include "type-system/factories/inout/logger/LoggerFactory.hpp"
-#include "type-system/providers/inout/logger/LoggerEntityTypeProvider.hpp"
 
 // clang-format off
 #include "spdlog/spdlog.h"
@@ -18,7 +17,6 @@
 
 namespace inexor::logging {
 
-using LoggerEntityTypeProviderPtr = std::shared_ptr<entity_system::type_system::LoggerEntityTypeProvider>;
 using LoggerFactoryPtr = std::shared_ptr<entity_system::type_system::LoggerFactory>;
 using EntityInstanceManagerPtr = std::shared_ptr<entity_system::EntityInstanceManager>;
 using EntityInstancePtr = std::shared_ptr<entity_system::EntityInstance>;
@@ -31,10 +29,9 @@ class LogManager : public entity_system::EntityInstanceCreatedListener, public e
     public:
     /// @brief Constructor.
     /// @note The dependencies of this class will be injected automatically.
-    /// @param logger_entity_type_provider
     /// @param logger_factory
     /// @param entity_instance_manager
-    LogManager(LoggerEntityTypeProviderPtr logger_entity_type_provider, LoggerFactoryPtr logger_factory, EntityInstanceManagerPtr entity_instance_manager);
+    LogManager(LoggerFactoryPtr logger_factory, EntityInstanceManagerPtr entity_instance_manager);
 
     /// Destructor.
     ~LogManager();
@@ -75,9 +72,6 @@ class LogManager : public entity_system::EntityInstanceCreatedListener, public e
     private:
     /// The logger sinks.
     std::vector<spdlog::sink_ptr> sinks;
-
-    /// The entity type provider.
-    LoggerEntityTypeProviderPtr logger_entity_type_provider;
 
     /// The entity type provider.
     LoggerFactoryPtr logger_factory;

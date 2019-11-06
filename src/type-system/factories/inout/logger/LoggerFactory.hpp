@@ -2,7 +2,6 @@
 
 #include "entity-system/factories/entities/entity-instance-builder-factory/EntityInstanceBuilderFactory.hpp"
 #include "entity-system/model/entities/entity-instances/EntityInstance.hpp"
-#include "type-system/providers/inout/logger/LoggerEntityTypeProvider.hpp"
 
 #include "spdlog/common.h"
 

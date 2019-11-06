@@ -8,10 +8,16 @@
 
 #include <iostream>
 #include <thread>
+#include <type-system/types/inout/console/StdErr.hpp>
+#include <type-system/types/inout/console/StdIn.hpp>
+#include <type-system/types/inout/console/StdOut.hpp>
+#include <utility>
 
-namespace inexor {
-namespace visual_scripting {
+namespace inexor::visual_scripting {
 
+using StdErr = entity_system::type_system::StdErr;
+    using StdIn = entity_system::type_system::StdIn;
+    using StdOut = entity_system::type_system::StdOut;
 	using EntityAttributeInstancePtr = std::shared_ptr<entity_system::EntityAttributeInstance>;
 	using EntityAttributeInstancePtrOpt = std::optional<EntityAttributeInstancePtr>;
 	using ConnectorPtr = std::shared_ptr<Connector>;
@@ -22,43 +28,32 @@ namespace visual_scripting {
 
 	ConsoleTest::ConsoleTest(
 		ConnectorManagerPtr connector_manager,
-		StdInEntityTypeProviderPtr stdin_entity_type_provider,
-		StdOutEntityTypeProviderPtr stdout_entity_type_provider,
-		StdErrEntityTypeProviderPtr stderr_entity_type_provider,
 		EntityInstanceBuilderFactoryPtr entity_instance_builder_factory
 	)
 	{
 		this->running = false;
-        this->connector_manager = connector_manager;
-        this->stdin_entity_type_provider = stdin_entity_type_provider;
-        this->stdout_entity_type_provider = stdout_entity_type_provider;
-        this->stderr_entity_type_provider = stderr_entity_type_provider;
-        this->entity_instance_builder_factory = entity_instance_builder_factory;
+        this->connector_manager = std::move(connector_manager);
+        this->entity_instance_builder_factory = std::move(entity_instance_builder_factory);
 	}
 
 	
-	ConsoleTest::~ConsoleTest()
-	{
-	}
+	ConsoleTest::~ConsoleTest() = default;
 
 	void ConsoleTest::init()
 	{
 		// Create single instance for STDIN
-		o_stdin = entity_instance_builder_factory->get_builder()
-			->type(stdin_entity_type_provider->get_type())
-			->attribute(StdInEntityTypeProvider::CONSOLE_STDIN, std::string(""))
+		o_stdin = entity_instance_builder_factory->get_builder(StdIn::TYPE_NAME)
+			->attribute(StdIn::STDIN, std::string(""))
 			->build();
 
 		// Create single instance for STDOUT
-		o_stdout = entity_instance_builder_factory->get_builder()
-			->type(stdout_entity_type_provider->get_type())
-			->attribute(StdOutEntityTypeProvider::CONSOLE_STDOUT, std::string(""))
+		o_stdout = entity_instance_builder_factory->get_builder(StdOut::TYPE_NAME)
+			->attribute(StdOut::STDOUT, std::string(""))
 			->build();
 
 		// Create single instance for STDERR
-		o_stderr = entity_instance_builder_factory->get_builder()
-			->type(stderr_entity_type_provider->get_type())
-			->attribute(StdErrEntityTypeProvider::CONSOLE_STDERR, std::string(""))
+		o_stderr = entity_instance_builder_factory->get_builder(StdErr::TYPE_NAME)
+			->attribute(StdErr::STDERR, std::string(""))
 			->build();
 
 	}
@@ -72,16 +67,16 @@ namespace visual_scripting {
 	{
 		if(!running && o_stdin.has_value() && o_stdout.has_value() && o_stderr.has_value())
 		{
-			EntityAttributeInstancePtr stdin_value = o_stdin.value()->get_attribute_instance(StdInEntityTypeProvider::CONSOLE_STDIN).value();
+			EntityAttributeInstancePtr stdin_value = o_stdin.value()->get_attribute_instance(StdIn::STDIN).value();
 
 			ConnectorPtrOpt o_stdin_stdout_connector = connector_manager->create_connector(
 				stdin_value,
-				o_stdout.value()->get_attribute_instance(StdOutEntityTypeProvider::CONSOLE_STDOUT).value()
+				o_stdout.value()->get_attribute_instance(StdOut::STDOUT).value()
 			);
 
 			ConnectorPtrOpt o_stdin_stderr_connector = connector_manager->create_connector(
 				stdin_value,
-				o_stderr.value()->get_attribute_instance(StdErrEntityTypeProvider::CONSOLE_STDERR).value()
+				o_stderr.value()->get_attribute_instance(StdErr::STDERR).value()
 			);
 
 			if(o_stdin_stdout_connector.has_value() && o_stdin_stderr_connector.has_value())
@@ -107,5 +102,4 @@ namespace visual_scripting {
 		}
 	}
 
-}
 }
