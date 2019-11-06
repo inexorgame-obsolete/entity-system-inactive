@@ -5,7 +5,6 @@
 #include "entity-system/model/data/container/DataContainer.hpp"
 #include "entity-system/model/entities/entity-instances/EntityInstance.hpp"
 #include "logging/managers/LogManager.hpp"
-#include "type-system/providers/logical/gates/NorEntityTypeProvider.hpp"
 #include "visual-scripting/managers/ProcessorRegistry.hpp"
 #include "visual-scripting/model/Processor.hpp"
 
@@ -18,7 +17,7 @@ using namespace react;
 class NorProcessor : public Processor, public entity_system::EntityInstanceCreatedListener, public entity_system::EntityInstanceDeletedListener, public std::enable_shared_from_this<NorProcessor>
 {
 
-    using NorEntityTypeProviderPtr = std::shared_ptr<inexor::entity_system::type_system::NorEntityTypeProvider>;
+    using EntityTypeManagerPtr = std::shared_ptr<entity_system::EntityTypeManager>;
     using EntityInstanceManagerPtr = std::shared_ptr<inexor::entity_system::EntityInstanceManager>;
     using LogManagerPtr = std::shared_ptr<inexor::logging::LogManager>;
     using EntityInstancePtr = std::shared_ptr<inexor::entity_system::EntityInstance>;
@@ -28,11 +27,10 @@ class NorProcessor : public Processor, public entity_system::EntityInstanceCreat
     USING_REACTIVE_DOMAIN(entity_system::D)
 
     /// @brief Constructs a new entity instance of type NOR.
-    /// @note The dependencies of this class will be injected automatically.
-    /// @param entity_type_provider ?
+    /// @param entity_type_manager The entity type manager.
     /// @param entity_instance_manager ?
     /// @param log_manager ?
-    NorProcessor(const NorEntityTypeProviderPtr& entity_type_provider, EntityInstanceManagerPtr entity_instance_manager, LogManagerPtr log_manager);
+    NorProcessor(EntityTypeManagerPtr entity_type_manager, EntityInstanceManagerPtr entity_instance_manager, LogManagerPtr log_manager);
 
     /// Destructor.
     ~NorProcessor() override;
@@ -54,8 +52,11 @@ class NorProcessor : public Processor, public entity_system::EntityInstanceCreat
     void make_signals(const EntityInstancePtr &entity_instance);
 
     private:
-    /// The entity type provider for this active component.
-    NorEntityTypeProviderPtr entity_type_provider;
+    /// Initializes the processor by registering listeners on newly created entity instances.
+    void init_processor();
+
+    /// The entity type manager.
+    EntityTypeManagerPtr entity_type_manager;
 
     /// The entity instance manager.
     EntityInstanceManagerPtr entity_instance_manager;

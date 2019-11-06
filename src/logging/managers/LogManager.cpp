@@ -4,15 +4,16 @@
 
 #include "entity-system/model/entity-attributes/entity-attribute-instances/EntityAttributeInstance.hpp"
 #include "visual-scripting/processors/inout/logger/LoggerProcessor.hpp"
+#include "type-system/types/inout/logger/Logger.hpp"
 
 namespace inexor::logging {
 
+using Logger = entity_system::type_system::Logger;
 using EntityAttributeInstancePtr = std::shared_ptr<entity_system::EntityAttributeInstance>;
 using EntityAttributeInstancePtrOpt = std::optional<EntityAttributeInstancePtr>;
 
-LogManager::LogManager(LoggerEntityTypeProviderPtr logger_entity_type_provider, LoggerFactoryPtr logger_factory, EntityInstanceManagerPtr entity_instance_manager)
+LogManager::LogManager(LoggerFactoryPtr logger_factory, EntityInstanceManagerPtr entity_instance_manager)
 {
-    this->logger_entity_type_provider = std::move(logger_entity_type_provider);
     this->logger_factory = std::move(logger_factory);
     this->entity_instance_manager = std::move(entity_instance_manager);
 }
@@ -39,7 +40,7 @@ EntityInstancePtrOpt LogManager::register_logger(const std::string &logger_name)
     {
         spdlog::register_logger(std::make_shared<spdlog::async_logger>(logger_name, sinks.begin(), sinks.end(), spdlog::thread_pool(), spdlog::async_overflow_policy::block));
         spdlog::get(logger_name)->set_pattern("%H:%M:%S.%e [%-5t] %^%-5l%$ %-40n %v");
-        spdlog::get(LOGGER_NAME)->debug("Registered logger {}", logger_name);
+        spdlog::get(LOGGER_NAME)->info("Registered logger {}", logger_name);
     } catch (const spdlog::spdlog_ex &)
     {
         spdlog::get(LOGGER_NAME)->warn("Logger {} already registered!", logger_name);
@@ -50,8 +51,8 @@ EntityInstancePtrOpt LogManager::register_logger(const std::string &logger_name)
     if (o_logger_instance.has_value())
     {
         EntityInstancePtr logger_instance = o_logger_instance.value();
-        EntityAttributeInstancePtrOpt o_logger_name = logger_instance->get_attribute_instance(entity_system::type_system::LoggerEntityTypeProvider::LOGGER_NAME);
-        EntityAttributeInstancePtrOpt o_log_level = logger_instance->get_attribute_instance(entity_system::type_system::LoggerEntityTypeProvider::LOG_LEVEL);
+        EntityAttributeInstancePtrOpt o_logger_name = logger_instance->get_attribute_instance(Logger::NAME);
+        EntityAttributeInstancePtrOpt o_log_level = logger_instance->get_attribute_instance(Logger::LEVEL);
 
         if (o_logger_name.has_value() && o_log_level.has_value())
         {
@@ -61,7 +62,7 @@ EntityInstancePtrOpt LogManager::register_logger(const std::string &logger_name)
         return EntityInstancePtrOpt{logger_instances[logger_name]};
     } else
     {
-        spdlog::get(LOGGER_NAME)->error("Failed to create entity instance of type {}", logger_entity_type_provider->get_type()->get_type_name());
+        spdlog::get(LOGGER_NAME)->error("Failed to create entity instance of type {}", Logger::TYPE_NAME);
         return std::nullopt;
     }
 }
@@ -76,7 +77,7 @@ void LogManager::set_level(const std::string &logger_name, spdlog::level::level_
     if (logger_instances.count(logger_name))
     {
         spdlog::get(logger_name)->set_level(level);
-        EntityAttributeInstancePtrOpt o_ent_attr_inst = logger_instances[logger_name]->get_attribute_instance(entity_system::type_system::LoggerEntityTypeProvider::LOG_LEVEL);
+        EntityAttributeInstancePtrOpt o_ent_attr_inst = logger_instances[logger_name]->get_attribute_instance(Logger::LEVEL);
         if (o_ent_attr_inst.has_value())
         {
             o_ent_attr_inst.value()->own_value.Set(level);

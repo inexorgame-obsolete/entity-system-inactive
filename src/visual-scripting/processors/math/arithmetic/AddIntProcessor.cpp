@@ -12,7 +12,7 @@ using AddInt = entity_system::type_system::AddInt;
 using EntityAttributeInstancePtrOptional = std::optional<std::shared_ptr<EntityAttributeInstance>>;
 
 AddIntProcessor::AddIntProcessor(EntityTypeManagerPtr entity_type_manager, EntityInstanceManagerPtr entity_instance_manager, LogManagerPtr log_manager)
-    : Processor(), entity_type_manager(entity_type_manager), entity_instance_manager(std::move(entity_instance_manager)), log_manager(std::move(log_manager))
+    : Processor(), entity_type_manager(std::move(entity_type_manager)), entity_instance_manager(std::move(entity_instance_manager)), log_manager(std::move(log_manager))
 {
 }
 

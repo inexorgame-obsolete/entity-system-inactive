@@ -2,14 +2,14 @@
 
 namespace inexor::entity_system::type_system {
 
-class StdErr
+class StdOut
 {
     public:
     /// Defines the name of this entity type.
-    inline static const std::string TYPE_NAME = "CONSOLE_STDERR";
+    inline static const std::string TYPE_NAME = "CONSOLE_STDOUT";
 
-    /// The name of the input attribute console_stderr.
-    inline static const std::string MILLIS = "console_stderr";
+    /// The name of the output attribute console_stdout.
+    inline static const std::string STDOUT = "console_stdout";
 };
 
 } // namespace inexor::entity_system::type_system

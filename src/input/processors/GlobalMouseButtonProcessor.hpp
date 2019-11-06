@@ -7,7 +7,6 @@
 #include "entity-system/model/entities/entity-instances/EntityInstance.hpp"
 #include "input/managers/MouseInputManager.hpp"
 #include "logging/managers/LogManager.hpp"
-#include "type-system/providers/inout/mouse/GlobalMouseButtonEntityTypeProvider.hpp"
 #include "visual-scripting/managers/ProcessorRegistry.hpp"
 #include "visual-scripting/model/Processor.hpp"
 
@@ -16,15 +15,17 @@
 
 namespace inexor::input {
 
+using DataValue = entity_system::DataValue;
+
 /// Bundles the source signals of a specific mouse button.
 struct GlobalMouseButtonSignals
 {
 
-    GlobalMouseButtonSignals(int mouse_button, VarSignalT<entity_system::DataValue> action, VarSignalT<entity_system::DataValue> mods) : button(button), action(std::move(action)), mods(std::move(mods)){};
+    GlobalMouseButtonSignals(int mouse_button, VarSignalT<DataValue> action, VarSignalT<DataValue> mods) : button(button), action(std::move(action)), mods(std::move(mods)){};
 
     int button;
-    VarSignalT<entity_system::DataValue> action;
-    VarSignalT<entity_system::DataValue> mods;
+    VarSignalT<DataValue> action;
+    VarSignalT<DataValue> mods;
 };
 
 using GlobalMouseButtonSignalsPtr = std::shared_ptr<GlobalMouseButtonSignals>;
@@ -38,7 +39,9 @@ class GlobalMouseButtonProcessor : public visual_scripting::Processor,
                                    public std::enable_shared_from_this<GlobalMouseButtonProcessor>
 {
 
-    using GlobalMouseButtonEntityTypeProviderPtr = std::shared_ptr<entity_system::type_system::GlobalMouseButtonEntityTypeProvider>;
+    USING_REACTIVE_DOMAIN(entity_system::D)
+
+    using EntityTypeManagerPtr = std::shared_ptr<entity_system::EntityTypeManager>;
     using EntityInstanceManagerPtr = std::shared_ptr<entity_system::EntityInstanceManager>;
     using MouseInputManagerPtr = std::shared_ptr<MouseInputManager>;
     using LogManagerPtr = std::shared_ptr<logging::LogManager>;
@@ -47,10 +50,10 @@ class GlobalMouseButtonProcessor : public visual_scripting::Processor,
     public:
     /// @brief Constructs a new entity instance of type GLOBAL_MOUSE_BUTTON.
     /// @note The dependencies of this class will be injected automatically.
-    /// @param entity_type_provider Provides the entity type GLOBAL_MOUSE_BUTTON.
+    /// @param entity_type_manager The entity type manager
     /// @param entity_instance_manager The entity instance manager.
     /// @param logger_manager The log manager.
-    GlobalMouseButtonProcessor(const GlobalMouseButtonEntityTypeProviderPtr& entity_type_provider, EntityInstanceManagerPtr entity_instance_manager, MouseInputManagerPtr mouse_input_manager, LogManagerPtr log_manager);
+    GlobalMouseButtonProcessor(EntityTypeManagerPtr entity_type_manager, EntityInstanceManagerPtr entity_instance_manager, MouseInputManagerPtr mouse_input_manager, LogManagerPtr log_manager);
 
     /// Destructor.
     ~GlobalMouseButtonProcessor() override;
@@ -78,6 +81,9 @@ class GlobalMouseButtonProcessor : public visual_scripting::Processor,
     static constexpr char LOGGER_NAME[] = "inexor.input.processor.globalmousebutton";
 
     private:
+    /// Initializes the processor by registering listeners on newly created entity instances.
+    void init_processor();
+
     /// @brief Creates a signal for the given button number.
     /// @param button The button number.
     GlobalMouseButtonSignalsPtr get_or_create_global_mouse_button_signals(int button);
@@ -86,8 +92,8 @@ class GlobalMouseButtonProcessor : public visual_scripting::Processor,
     /// @param entity_instance The entity instance of type GLOBAL_MOUSE_BUTTON.
     void make_signals(const EntityInstancePtr &entity_instance);
 
-    /// Provides the entity type GLOBAL_MOUSE_BUTTON.
-    GlobalMouseButtonEntityTypeProviderPtr entity_type_provider;
+    /// The entity type manager.
+    EntityTypeManagerPtr entity_type_manager;
 
     /// The entity instance manager.
     EntityInstanceManagerPtr entity_instance_manager;

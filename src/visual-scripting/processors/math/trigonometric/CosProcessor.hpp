@@ -16,20 +16,20 @@ namespace inexor::visual_scripting {
 
 using namespace react;
 
-using EntityTypeManagerPtr = std::shared_ptr<entity_system::EntityTypeManager>;
-using EntityInstanceManagerPtr = std::shared_ptr<entity_system::EntityInstanceManager>;
-using LogManagerPtr = std::shared_ptr<logging::LogManager>;
-using EntityTypePtr = std::shared_ptr<entity_system::EntityType>;
-using EntityInstancePtr = std::shared_ptr<entity_system::EntityInstance>;
-using DataType = entity_system::DataType;
-using DataValue = entity_system::DataValue;
-
 /// @class CosProcessor
 /// @brief Processor which listens on the creation of entity instances of type COS.
 /// @note Newly created entity instances of type COS will be initialized by connecting the
 /// input attributes with a calculation function and the result with the output attribute.
 class CosProcessor : public Processor, public entity_system::EntityInstanceCreatedListener, public entity_system::EntityInstanceDeletedListener, public std::enable_shared_from_this<CosProcessor>
 {
+
+    using EntityTypeManagerPtr = std::shared_ptr<entity_system::EntityTypeManager>;
+    using EntityInstanceManagerPtr = std::shared_ptr<entity_system::EntityInstanceManager>;
+    using LogManagerPtr = std::shared_ptr<logging::LogManager>;
+    using EntityTypePtr = std::shared_ptr<entity_system::EntityType>;
+    using EntityInstancePtr = std::shared_ptr<entity_system::EntityInstance>;
+    using DataType = entity_system::DataType;
+    using DataValue = entity_system::DataValue;
 
     public:
     USING_REACTIVE_DOMAIN(entity_system::D)
@@ -48,9 +48,6 @@ class CosProcessor : public Processor, public entity_system::EntityInstanceCreat
     /// Initializes the processor.
     void init();
 
-    /// Initializes the COS processor by registering listeners on newly created entity instances of type COS.
-    void init_processor();
-
     /// @brief Called when an entity instance of type SIN has been created.
     /// @param entity_instance ?
     void on_entity_instance_created(EntityInstancePtr entity_instance) override;
@@ -65,6 +62,9 @@ class CosProcessor : public Processor, public entity_system::EntityInstanceCreat
     void make_signals(const EntityInstancePtr &entity_instance);
 
     private:
+    /// Initializes the COS processor by registering listeners on newly created entity instances of type COS.
+    void init_processor();
+
     /// The entity type manager.
     EntityTypeManagerPtr entity_type_manager;
 

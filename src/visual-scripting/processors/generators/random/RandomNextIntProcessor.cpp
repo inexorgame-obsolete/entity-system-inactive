@@ -1,5 +1,6 @@
 #include "RandomNextIntProcessor.hpp"
 
+#include <type-system/types/generators/random/RandomNextInt.hpp>
 #include <utility>
 
 #include "entity-system/model/data/DataTypes.hpp"
@@ -11,15 +12,16 @@
 
 namespace inexor::visual_scripting {
 
-using RandomNextIntEntityTypeProvider = entity_system::type_system::RandomNextIntEntityTypeProvider;
+using RandomNextInt = entity_system::type_system::RandomNextInt;
+using EntityTypePtrOpt = std::optional<EntityTypePtr>;
 using EntityAttributeInstancePtr = std::shared_ptr<entity_system::EntityAttributeInstance>;
 using EntityAttributeInstancePtrOpt = std::optional<EntityAttributeInstancePtr>;
 
 using DataValue = entity_system::DataValue;
 using DataType = entity_system::DataType;
 
-RandomNextIntProcessor::RandomNextIntProcessor(const RandomNextIntEntityTypeProviderPtr &entity_type_provider, EntityInstanceManagerPtr entity_instance_manager, LogManagerPtr log_manager)
-    : Processor(entity_type_provider->get_type()), entity_type_provider(entity_type_provider), entity_instance_manager(std::move(entity_instance_manager)), log_manager(std::move(log_manager))
+RandomNextIntProcessor::RandomNextIntProcessor(EntityTypeManagerPtr entity_type_manager, EntityInstanceManagerPtr entity_instance_manager, LogManagerPtr log_manager)
+    : Processor(), entity_type_manager(std::move(entity_type_manager)), entity_instance_manager(std::move(entity_instance_manager)), log_manager(std::move(log_manager))
 {
 }
 
@@ -28,8 +30,21 @@ RandomNextIntProcessor::~RandomNextIntProcessor() = default;
 void RandomNextIntProcessor::init()
 {
     log_manager->register_logger(LOGGER_NAME);
-    entity_instance_manager->register_on_created(entity_type_provider->get_type()->get_GUID(), shared_from_this());
-    entity_instance_manager->register_on_deleted(entity_type_provider->get_type()->get_GUID(), shared_from_this());
+    init_processor();
+}
+
+void RandomNextIntProcessor::init_processor()
+{
+    EntityTypePtrOpt o_ent_type = entity_type_manager->get_entity_type(RandomNextInt::TYPE_NAME);
+    if (o_ent_type.has_value())
+    {
+        this->entity_type = o_ent_type.value();
+        entity_instance_manager->register_on_created(this->entity_type->get_GUID(), shared_from_this());
+        entity_instance_manager->register_on_deleted(this->entity_type->get_GUID(), shared_from_this());
+    } else
+    {
+        spdlog::error("Failed to initialize processor {}: Entity type does not exist", RandomNextInt::TYPE_NAME);
+    }
 }
 
 void RandomNextIntProcessor::on_entity_instance_created(std::shared_ptr<inexor::entity_system::EntityInstance> entity_instance)
@@ -49,10 +64,10 @@ void RandomNextIntProcessor::make_signals(const std::shared_ptr<inexor::entity_s
 {
     spdlog::get(LOGGER_NAME)->debug("Initializing processor RANDOM_NEXT_INT for newly created entity instance {} of type {}", entity_instance->get_GUID().str(), entity_instance->get_entity_type()->get_type_name());
 
-    EntityAttributeInstancePtrOpt o_attr_random_next_int_on_activation = entity_instance->get_attribute_instance(RandomNextIntEntityTypeProvider::RANDOM_NEXT_INT_ON_ACTIVATION);
-    EntityAttributeInstancePtrOpt o_attr_random_next_int_min = entity_instance->get_attribute_instance(RandomNextIntEntityTypeProvider::RANDOM_NEXT_INT_MIN);
-    EntityAttributeInstancePtrOpt o_attr_random_next_int_max = entity_instance->get_attribute_instance(RandomNextIntEntityTypeProvider::RANDOM_NEXT_INT_MAX);
-    EntityAttributeInstancePtrOpt o_attr_random_next_int_value = entity_instance->get_attribute_instance(RandomNextIntEntityTypeProvider::RANDOM_NEXT_INT_VALUE);
+    EntityAttributeInstancePtrOpt o_attr_random_next_int_on_activation = entity_instance->get_attribute_instance(RandomNextInt::ON_ACTIVATION);
+    EntityAttributeInstancePtrOpt o_attr_random_next_int_min = entity_instance->get_attribute_instance(RandomNextInt::MIN);
+    EntityAttributeInstancePtrOpt o_attr_random_next_int_max = entity_instance->get_attribute_instance(RandomNextInt::MAX);
+    EntityAttributeInstancePtrOpt o_attr_random_next_int_value = entity_instance->get_attribute_instance(RandomNextInt::VALUE);
 
     if (o_attr_random_next_int_on_activation.has_value() && o_attr_random_next_int_min.has_value() && o_attr_random_next_int_max.has_value() && o_attr_random_next_int_value.has_value())
     {
@@ -73,8 +88,7 @@ void RandomNextIntProcessor::make_signals(const std::shared_ptr<inexor::entity_s
     {
         spdlog::get(LOGGER_NAME)
             ->error("Failed to initialize processor signals for entity instance {} of type {}: Missing one of these attributes {} {} {} {}", entity_instance->get_GUID().str(), entity_instance->get_entity_type()->get_type_name(),
-                    RandomNextIntEntityTypeProvider::RANDOM_NEXT_INT_ON_ACTIVATION, RandomNextIntEntityTypeProvider::RANDOM_NEXT_INT_MIN, RandomNextIntEntityTypeProvider::RANDOM_NEXT_INT_MAX,
-                    RandomNextIntEntityTypeProvider::RANDOM_NEXT_INT_VALUE);
+                    RandomNextInt::ON_ACTIVATION, RandomNextInt::MIN, RandomNextInt::MAX, RandomNextInt::VALUE);
     }
 }
 
