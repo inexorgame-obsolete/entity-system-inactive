@@ -40,8 +40,7 @@ Connector::~Connector()
 void Connector::connect()
 {
     input_attr->signal_wrapper <<= output_attr->value;
-    spdlog::get(LOGGER_NAME)
-        ->debug("Connect output {}.{} with input {}.{}", output_attr->get_GUID().str(), output_attr->get_entity_attribute_type()->get_type_name(), input_attr->get_GUID().str(), input_attr->get_entity_attribute_type()->get_type_name());
+    spdlog::debug("Connect output {}.{} with input {}.{}", output_attr->get_GUID().str(), output_attr->get_entity_attribute_type()->get_type_name(), input_attr->get_GUID().str(), input_attr->get_entity_attribute_type()->get_type_name());
 }
 
 void Connector::disconnect()
@@ -51,8 +50,7 @@ void Connector::disconnect()
         disable_debug();
     }
     input_attr->signal_wrapper <<= input_attr->own_value;
-    spdlog::get(LOGGER_NAME)
-        ->debug("Disconnected output {}.{} with input {}.{}", output_attr->get_GUID().str(), output_attr->get_entity_attribute_type()->get_type_name(), input_attr->get_GUID().str(), input_attr->get_entity_attribute_type()->get_type_name());
+    spdlog::debug("Disconnected output {}.{} with input {}.{}", output_attr->get_GUID().str(), output_attr->get_entity_attribute_type()->get_type_name(), input_attr->get_GUID().str(), input_attr->get_entity_attribute_type()->get_type_name());
 }
 
 xg::Guid Connector::connector() const
@@ -75,8 +73,7 @@ void Connector::enable_debug()
     if (!debug_enabled)
     {
         this->observer = Observe(output_attr->value, [this](DataValue value) {
-            spdlog::get(LOGGER_NAME)
-                ->info("{}.{} ---[{}]---> {}.{}", output_attr->get_GUID().str(), output_attr->get_entity_attribute_type()->get_type_name(), data_value_to_string(output_attr->type, std::move(value)), input_attr->get_GUID().str(),
+            spdlog::info("{}.{} ---[{}]---> {}.{}", output_attr->get_GUID().str(), output_attr->get_entity_attribute_type()->get_type_name(), data_value_to_string(output_attr->type, std::move(value)), input_attr->get_GUID().str(),
                        input_attr->get_entity_attribute_type()->get_type_name());
         });
         debug_enabled = true;
