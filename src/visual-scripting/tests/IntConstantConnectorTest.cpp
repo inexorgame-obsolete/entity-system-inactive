@@ -185,7 +185,7 @@ void IntConstantConnectorTest::create_observer()
 {
     if (o_logger.has_value())
     {
-        // spdlog::get(LOGGER_NAME)->info("Create observer for {}.{} which logs to {}", ADD_INT_NAME, AddIntEntityTypeProvider::ADD_INT_ADDEND, LOGGER_NAME);
+        // spdlog::get(LOGGER_NAME)->info("Create observer for {}.{} which logs to {}", ADD_INT_NAME, AddInt::ADDEND, LOGGER_NAME);
         observer = Observe(add_int_attr_sum->value, [this](DataValue add_int_sum) { this->log_data_value("SUM_OBSERVER", ADD_INT_NAME, AddInt::SUM, add_int_sum); });
     }
 }

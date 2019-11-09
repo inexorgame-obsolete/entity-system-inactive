@@ -5,6 +5,7 @@
 #include "renderer/factories/MonitorFactory.hpp"
 
 #include <Magnum/Math/Range.h>
+#include <entity-system/model/entities/entity-instances/EntityInstance.hpp>
 
 struct GLFWmonitor;
 
@@ -12,7 +13,7 @@ namespace inexor::renderer {
 
 using MonitorFactoryPtr = std::shared_ptr<MonitorFactory>;
 using LogManagerPtr = std::shared_ptr<inexor::logging::LogManager>;
-using EntityInstancePtr = std::shared_ptr<EntityInstance>;
+using EntityInstancePtr = std::shared_ptr<entity_system::EntityInstance>;
 using EntityInstancePtrOpt = std::optional<EntityInstancePtr>;
 
 using Range2Di = Magnum::Math::Range2D<std::int32_t>;

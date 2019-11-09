@@ -1,10 +1,13 @@
 #include "WindowFactory.hpp"
 
+#include <type-system/types/ui/Window.hpp>
+
 namespace inexor::renderer {
 
-WindowFactory::WindowFactory(WindowEntityTypeProviderPtr window_entity_type_provider, EntityInstanceBuilderFactoryPtr entity_instance_builder_factory, EntityInstanceManagerPtr entity_instance_manager)
+using Window = entity_system::type_system::Window;
+
+WindowFactory::WindowFactory(EntityInstanceBuilderFactoryPtr entity_instance_builder_factory, EntityInstanceManagerPtr entity_instance_manager)
 {
-    this->window_entity_type_provider = std::move(window_entity_type_provider);
     this->entity_instance_builder_factory = std::move(entity_instance_builder_factory);
     this->entity_instance_manager = std::move(entity_instance_manager);
 }
@@ -15,70 +18,67 @@ WindowFactory::~WindowFactory()
 
 EntityInstancePtrOpt WindowFactory::create_instance(int id, const std::string &title, int x, int y, int width, int height)
 {
-    return this->entity_instance_builder_factory->get_builder()
-        ->type(window_entity_type_provider->get_type())
-        ->attribute(WindowEntityTypeProvider::WINDOW_ID, id)
-        ->attribute(WindowEntityTypeProvider::WINDOW_TITLE, title)
-        ->attribute(WindowEntityTypeProvider::WINDOW_POSITION_X, x)
-        ->attribute(WindowEntityTypeProvider::WINDOW_POSITION_Y, y)
-        ->attribute(WindowEntityTypeProvider::WINDOW_WIDTH, width)
-        ->attribute(WindowEntityTypeProvider::WINDOW_HEIGHT, height)
-        ->attribute(WindowEntityTypeProvider::WINDOW_OPACITY, 1.0f)
-        ->attribute(WindowEntityTypeProvider::WINDOW_VISIBLE, true)
-        ->attribute(WindowEntityTypeProvider::WINDOW_FULLSCREEN, false)
-        ->attribute(WindowEntityTypeProvider::WINDOW_RESTORE_WIDTH, width)
-        ->attribute(WindowEntityTypeProvider::WINDOW_RESTORE_HEIGHT, height)
-        ->attribute(WindowEntityTypeProvider::WINDOW_ICONIFIED, false)
-        ->attribute(WindowEntityTypeProvider::WINDOW_MAXIMIZED, false)
-        ->attribute(WindowEntityTypeProvider::WINDOW_FOCUSED, false)
-        ->attribute(WindowEntityTypeProvider::WINDOW_VSYNC, true)
-        ->attribute(WindowEntityTypeProvider::WINDOW_FPS, 60.0f)
+    return this->entity_instance_builder_factory->get_builder(Window::TYPE_NAME)
+        ->attribute(Window::ID, id)
+        ->attribute(Window::TITLE, title)
+        ->attribute(Window::POSITION_X, x)
+        ->attribute(Window::POSITION_Y, y)
+        ->attribute(Window::WIDTH, width)
+        ->attribute(Window::HEIGHT, height)
+        ->attribute(Window::OPACITY, 1.0f)
+        ->attribute(Window::VISIBLE, true)
+        ->attribute(Window::FULLSCREEN, false)
+        ->attribute(Window::RESTORE_WIDTH, width)
+        ->attribute(Window::RESTORE_HEIGHT, height)
+        ->attribute(Window::ICONIFIED, false)
+        ->attribute(Window::MAXIMIZED, false)
+        ->attribute(Window::FOCUSED, false)
+        ->attribute(Window::VSYNC, true)
+        ->attribute(Window::FPS, 60.0f)
         ->build();
 }
 
 EntityInstancePtrOpt WindowFactory::create_instance(int id, const std::string &title, int x, int y, int width, int height, float opacity)
 {
-    return this->entity_instance_builder_factory->get_builder()
-        ->type(window_entity_type_provider->get_type())
-        ->attribute(WindowEntityTypeProvider::WINDOW_ID, id)
-        ->attribute(WindowEntityTypeProvider::WINDOW_TITLE, title)
-        ->attribute(WindowEntityTypeProvider::WINDOW_POSITION_X, x)
-        ->attribute(WindowEntityTypeProvider::WINDOW_POSITION_Y, y)
-        ->attribute(WindowEntityTypeProvider::WINDOW_WIDTH, width)
-        ->attribute(WindowEntityTypeProvider::WINDOW_HEIGHT, height)
-        ->attribute(WindowEntityTypeProvider::WINDOW_OPACITY, opacity)
-        ->attribute(WindowEntityTypeProvider::WINDOW_VISIBLE, true)
-        ->attribute(WindowEntityTypeProvider::WINDOW_FULLSCREEN, false)
-        ->attribute(WindowEntityTypeProvider::WINDOW_RESTORE_WIDTH, width)
-        ->attribute(WindowEntityTypeProvider::WINDOW_RESTORE_HEIGHT, height)
-        ->attribute(WindowEntityTypeProvider::WINDOW_ICONIFIED, false)
-        ->attribute(WindowEntityTypeProvider::WINDOW_MAXIMIZED, false)
-        ->attribute(WindowEntityTypeProvider::WINDOW_FOCUSED, false)
-        ->attribute(WindowEntityTypeProvider::WINDOW_VSYNC, true)
-        ->attribute(WindowEntityTypeProvider::WINDOW_FPS, 60.0f)
+    return this->entity_instance_builder_factory->get_builder(Window::TYPE_NAME)
+        ->attribute(Window::ID, id)
+        ->attribute(Window::TITLE, title)
+        ->attribute(Window::POSITION_X, x)
+        ->attribute(Window::POSITION_Y, y)
+        ->attribute(Window::WIDTH, width)
+        ->attribute(Window::HEIGHT, height)
+        ->attribute(Window::OPACITY, opacity)
+        ->attribute(Window::VISIBLE, true)
+        ->attribute(Window::FULLSCREEN, false)
+        ->attribute(Window::RESTORE_WIDTH, width)
+        ->attribute(Window::RESTORE_HEIGHT, height)
+        ->attribute(Window::ICONIFIED, false)
+        ->attribute(Window::MAXIMIZED, false)
+        ->attribute(Window::FOCUSED, false)
+        ->attribute(Window::VSYNC, true)
+        ->attribute(Window::FPS, 60.0f)
         ->build();
 }
 
 EntityInstancePtrOpt WindowFactory::create_instance(int id, const std::string &title, int x, int y, int width, int height, float opacity, bool visible, bool fullscreen, bool iconified, bool maximized, bool focused, bool vsync, float fps)
 {
-    return this->entity_instance_builder_factory->get_builder()
-        ->type(window_entity_type_provider->get_type())
-        ->attribute(WindowEntityTypeProvider::WINDOW_ID, id)
-        ->attribute(WindowEntityTypeProvider::WINDOW_TITLE, title)
-        ->attribute(WindowEntityTypeProvider::WINDOW_POSITION_X, x)
-        ->attribute(WindowEntityTypeProvider::WINDOW_POSITION_Y, y)
-        ->attribute(WindowEntityTypeProvider::WINDOW_WIDTH, width)
-        ->attribute(WindowEntityTypeProvider::WINDOW_HEIGHT, height)
-        ->attribute(WindowEntityTypeProvider::WINDOW_OPACITY, opacity)
-        ->attribute(WindowEntityTypeProvider::WINDOW_VISIBLE, visible)
-        ->attribute(WindowEntityTypeProvider::WINDOW_FULLSCREEN, fullscreen)
-        ->attribute(WindowEntityTypeProvider::WINDOW_RESTORE_WIDTH, width)
-        ->attribute(WindowEntityTypeProvider::WINDOW_RESTORE_HEIGHT, height)
-        ->attribute(WindowEntityTypeProvider::WINDOW_ICONIFIED, iconified)
-        ->attribute(WindowEntityTypeProvider::WINDOW_MAXIMIZED, maximized)
-        ->attribute(WindowEntityTypeProvider::WINDOW_FOCUSED, focused)
-        ->attribute(WindowEntityTypeProvider::WINDOW_VSYNC, vsync)
-        ->attribute(WindowEntityTypeProvider::WINDOW_FPS, fps)
+    return this->entity_instance_builder_factory->get_builder(Window::TYPE_NAME)
+        ->attribute(Window::ID, id)
+        ->attribute(Window::TITLE, title)
+        ->attribute(Window::POSITION_X, x)
+        ->attribute(Window::POSITION_Y, y)
+        ->attribute(Window::WIDTH, width)
+        ->attribute(Window::HEIGHT, height)
+        ->attribute(Window::OPACITY, opacity)
+        ->attribute(Window::VISIBLE, visible)
+        ->attribute(Window::FULLSCREEN, fullscreen)
+        ->attribute(Window::RESTORE_WIDTH, width)
+        ->attribute(Window::RESTORE_HEIGHT, height)
+        ->attribute(Window::ICONIFIED, iconified)
+        ->attribute(Window::MAXIMIZED, maximized)
+        ->attribute(Window::FOCUSED, focused)
+        ->attribute(Window::VSYNC, vsync)
+        ->attribute(Window::FPS, fps)
         ->build();
 }
 

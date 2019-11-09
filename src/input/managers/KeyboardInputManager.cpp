@@ -1,15 +1,17 @@
 #include "KeyboardInputManager.hpp"
 
-#include "entity-system/model/data/DataTypes.hpp"
-#include "renderer/providers/WindowEntityTypeProvider.hpp"
-
-#include "spdlog/spdlog.h"
+#include <utility>
 
 #include <GLFW/glfw3.h>
 
-#include <utility>
+#include "spdlog/spdlog.h"
+
+#include "entity-system/model/data/DataTypes.hpp"
+#include "type-system/types/ui/Window.hpp"
 
 namespace inexor::input {
+
+using Window = entity_system::type_system::Window;
 
 KeyboardInputManager::KeyboardInputManager(GlobalKeyFactoryPtr global_key_factory, LogManagerPtr log_manager)
 {
@@ -248,7 +250,7 @@ std::string KeyboardInputManager::codepoint2string(unsigned int codepoint)
 
 std::string KeyboardInputManager::get_window_name(const EntityInstancePtr &window)
 {
-    return window->get<entity_system::DataType::STRING>(renderer::WindowEntityTypeProvider::WINDOW_TITLE);
+    return window->get<entity_system::DataType::STRING>(Window::TITLE);
 }
 
 } // namespace inexor::input

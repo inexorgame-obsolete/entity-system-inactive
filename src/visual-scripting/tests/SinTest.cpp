@@ -129,7 +129,7 @@ void SinTest::create_connectors()
 
 void SinTest::create_observer()
 {
-    // spdlog::get(LOGGER_NAME)->info("Create observer for {}.{} which logs to {}", TARGET_NAME, FloatConstantEntityTypeProvider::FLOAT_CONSTANT_VALUE, LOGGER_NAME);
+    // spdlog::get(LOGGER_NAME)->info("Create observer for {}.{} which logs to {}", TARGET_NAME, FloatConstant::VALUE, LOGGER_NAME);
     observer = Observe(target_attr_value->value, [this](DataValue target_value) { this->log_data_value("FLOAT_OBSERVER", TARGET_NAME, FloatConstant::VALUE, target_value); });
 }
 

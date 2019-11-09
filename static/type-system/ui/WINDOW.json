@@ -1,0 +1,130 @@
+{
+  "type": "entity",
+  "name": "WINDOW",
+  "attributes": [
+    {
+      "name": "window_id",
+      "datatype": "INT",
+      "features": [
+        "OUTPUT"
+      ]
+    },
+    {
+      "name": "window_title",
+      "datatype": "STRING",
+      "features": [
+        "INPUT",
+        "OUTPUT"
+      ]
+    },
+    {
+      "name": "window_position_x",
+      "datatype": "INT",
+      "features": [
+        "INPUT",
+        "OUTPUT"
+      ]
+    },
+    {
+      "name": "window_position_y",
+      "datatype": "INT",
+      "features": [
+        "INPUT",
+        "OUTPUT"
+      ]
+    },
+    {
+      "name": "window_width",
+      "datatype": "INT",
+      "features": [
+        "INPUT",
+        "OUTPUT"
+      ]
+    },
+    {
+      "name": "window_height",
+      "datatype": "INT",
+      "features": [
+        "INPUT",
+        "OUTPUT"
+      ]
+    },
+    {
+      "name": "window_restore_width",
+      "datatype": "INT",
+      "features": [
+        "OUTPUT"
+      ]
+    },
+    {
+      "name": "window_restore_height",
+      "datatype": "INT",
+      "features": [
+        "OUTPUT"
+      ]
+    },
+    {
+      "name": "window_opacity",
+      "datatype": "FLOAT",
+      "features": [
+        "INPUT",
+        "OUTPUT"
+      ]
+    },
+    {
+      "name": "window_visible",
+      "datatype": "BOOL",
+      "features": [
+        "INPUT",
+        "OUTPUT"
+      ]
+    },
+    {
+      "name": "window_fullscreen",
+      "datatype": "BOOL",
+      "features": [
+        "INPUT",
+        "OUTPUT"
+      ]
+    },
+    {
+      "name": "window_iconified",
+      "datatype": "BOOL",
+      "features": [
+        "INPUT",
+        "OUTPUT"
+      ]
+    },
+    {
+      "name": "window_maximized",
+      "datatype": "BOOL",
+      "features": [
+        "INPUT",
+        "OUTPUT"
+      ]
+    },
+    {
+      "name": "window_focused",
+      "datatype": "BOOL",
+      "features": [
+        "OUTPUT"
+      ]
+    },
+    {
+      "name": "window_vsync",
+      "datatype": "BOOL",
+      "features": [
+        "INPUT",
+        "OUTPUT"
+      ]
+    },
+    {
+      "name": "window_fps",
+      "datatype": "FLOAT",
+      "features": [
+        "INPUT",
+        "OUTPUT"
+      ]
+    }
+  ]
+}

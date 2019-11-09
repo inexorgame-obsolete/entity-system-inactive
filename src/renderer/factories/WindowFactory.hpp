@@ -3,14 +3,12 @@
 #include "entity-system/factories/entities/entity-instance-builder-factory/EntityInstanceBuilderFactory.hpp"
 #include "entity-system/factories/entities/entity-type-builder-factory/EntityTypeBuilderFactory.hpp"
 #include "entity-system/managers/entities/entity-instance-manager/EntityInstanceManager.hpp"
-#include "renderer/providers/WindowEntityTypeProvider.hpp"
 
 namespace inexor::renderer {
 
-using WindowEntityTypeProviderPtr = std::shared_ptr<WindowEntityTypeProvider>;
-using EntityInstanceBuilderFactoryPtr = std::shared_ptr<EntityInstanceBuilderFactory>;
-using EntityInstanceManagerPtr = std::shared_ptr<EntityInstanceManager>;
-using EntityInstancePtr = std::shared_ptr<EntityInstance>;
+using EntityInstanceBuilderFactoryPtr = std::shared_ptr<entity_system::EntityInstanceBuilderFactory>;
+using EntityInstanceManagerPtr = std::shared_ptr<entity_system::EntityInstanceManager>;
+using EntityInstancePtr = std::shared_ptr<entity_system::EntityInstance>;
 using EntityInstancePtrOpt = std::optional<EntityInstancePtr>;
 
 /// @class WindowFactory
@@ -20,10 +18,9 @@ class WindowFactory
     public:
     /// @brief Constructor.
     /// @note The dependencies of this class will be injected automatically.
-    /// @param window_entity_type_provider The entity type provider.
     /// @param entity_instance_builder_factory The entity instance builder factory.
     /// @param entity_instance_manager The entity instance manager.
-    WindowFactory(WindowEntityTypeProviderPtr window_entity_type_provider, EntityInstanceBuilderFactoryPtr entity_instance_builder_factory, EntityInstanceManagerPtr entity_instance_manager);
+    WindowFactory(EntityInstanceBuilderFactoryPtr entity_instance_builder_factory, EntityInstanceManagerPtr entity_instance_manager);
 
     /// Destructor.
     ~WindowFactory();
@@ -42,9 +39,6 @@ class WindowFactory
     EntityInstancePtrOpt create_instance(int id, const std::string &title, int x, int y, int width, int height, float opacity, bool visible, bool fullscreen, bool iconified, bool maximized, bool focused, bool vsync, float fps);
 
     private:
-    /// The entity type provider.
-    WindowEntityTypeProviderPtr window_entity_type_provider;
-
     /// The entity instance builder factory.
     EntityInstanceBuilderFactoryPtr entity_instance_builder_factory;
 

@@ -36,7 +36,7 @@ using UserInterfaceRendererPtr = std::shared_ptr<UserInterfaceRenderer>;
 using ClientLifecyclePtr = std::shared_ptr<client::ClientLifecycle>;
 using LogManagerPtr = std::shared_ptr<logging::LogManager>;
 
-using EntityInstancePtr = std::shared_ptr<EntityInstance>;
+using EntityInstancePtr = std::shared_ptr<entity_system::EntityInstance>;
 using EntityAttributeInstancePtr = std::shared_ptr<entity_system::EntityAttributeInstance>;
 
 using Range2Di = Magnum::Math::Range2D<std::int32_t>;
@@ -70,7 +70,7 @@ class WindowManager : public std::enable_shared_from_this<WindowManager>
 
     /// @brief Creates a new window with the given title, position and dimensions.
     /// @param window The GLFWwindow instance.
-    EntityInstancePtr create_window(std::string title, int x, int y, int width, int height);
+    EntityInstancePtr create_window(const std::string& title, int x, int y, int width, int height);
 
     /// @brief Creates a new window with the given title, position and dimensions.
     /// @param window The GLFWwindow instance.
