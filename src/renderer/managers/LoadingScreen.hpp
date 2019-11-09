@@ -15,16 +15,16 @@
 #include "input/managers/ClipboardManager.hpp"
 #include "logging/managers/LogManager.hpp"
 #include "renderer/managers/FontManager.hpp"
-#include "renderer/managers/MonitorManager.hpp"
-#include "renderer/managers/WindowManager.hpp"
+#include "ui/managers/MonitorManager.hpp"
+#include "ui/managers/WindowManager.hpp"
 #include "visual-scripting/managers/ConnectorManager.hpp"
 
 struct GLFWwindow;
 
 namespace inexor::renderer {
 
-using WindowManagerPtr = std::shared_ptr<WindowManager>;
-using MonitorManagerPtr = std::shared_ptr<MonitorManager>;
+using WindowManagerPtr = std::shared_ptr<ui::WindowManager>;
+using MonitorManagerPtr = std::shared_ptr<ui::MonitorManager>;
 using FontManagerPtr = std::shared_ptr<FontManager>;
 using KeyboardInputManagerPtr = std::shared_ptr<input::KeyboardInputManager>;
 using MouseInputManagerPtr = std::shared_ptr<input::MouseInputManager>;

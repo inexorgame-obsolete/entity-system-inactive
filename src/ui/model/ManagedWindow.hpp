@@ -12,7 +12,7 @@
 
 struct GLFWwindow;
 
-namespace inexor::renderer {
+namespace inexor::ui {
 
 using EntityInstancePtr = std::shared_ptr<entity_system::EntityInstance>;
 

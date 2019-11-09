@@ -2,14 +2,14 @@
 
 #include "entity-system/model/entities/entity-instances/EntityInstance.hpp"
 #include "logging/managers/LogManager.hpp"
-#include "renderer/factories/MonitorFactory.hpp"
+#include "ui/factories/MonitorFactory.hpp"
 
 #include <Magnum/Math/Range.h>
 #include <entity-system/model/entities/entity-instances/EntityInstance.hpp>
 
 struct GLFWmonitor;
 
-namespace inexor::renderer {
+namespace inexor::ui {
 
 using MonitorFactoryPtr = std::shared_ptr<MonitorFactory>;
 using LogManagerPtr = std::shared_ptr<inexor::logging::LogManager>;

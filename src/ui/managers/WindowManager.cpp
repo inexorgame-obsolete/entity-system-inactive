@@ -14,10 +14,10 @@
 
 #include "fmt/ostream.h"
 
-#include "renderer/model/FpsLimiter.hpp"
 #include "type-system/types/ui/Window.hpp"
+#include "ui/model/FpsLimiter.hpp"
 
-namespace inexor::renderer {
+namespace inexor::ui {
 
 using Window = entity_system::type_system::Window;
 using DataType = entity_system::DataType;
@@ -145,7 +145,7 @@ EntityInstancePtr WindowManager::create_window(const std::string &title, int x, 
             windows[window] = std::make_shared<ManagedWindow>(id, title, window, glfw_window, nullptr, init_function, shutdown_function);
             window_entities[glfw_window] = window;
 
-            std::thread window_thread(&renderer::WindowManager::start_window_thread, this, window);
+            std::thread window_thread(&WindowManager::start_window_thread, this, window);
             window_thread.detach();
             windows[window]->thread = std::move(window_thread);
             spdlog::get(WindowManager::LOGGER_NAME)->debug("Started thread for window id {}", id);

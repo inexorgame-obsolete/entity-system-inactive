@@ -32,6 +32,7 @@ using DataValue = entity_system::DataValue;
 using GlobalKey = entity_system::type_system::GlobalKey;
 using GlobalMouseButton = entity_system::type_system::GlobalMouseButton;
 using Window = entity_system::type_system::Window;
+using EntityInstancePtrOpt = std::optional<EntityInstancePtr>;
 using EntityAttributeInstancePtr = std::shared_ptr<entity_system::EntityAttributeInstance>;
 using EntityAttributeInstancePtrOpt = std::optional<EntityAttributeInstancePtr>;
 
