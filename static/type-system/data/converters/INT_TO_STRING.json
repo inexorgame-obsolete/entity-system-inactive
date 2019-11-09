@@ -1,0 +1,20 @@
+{
+  "type": "entity",
+  "name": "INT_TO_STRING",
+  "attributes": [
+    {
+      "name": "int_to_string_input",
+      "datatype": "INT",
+      "features": [
+        "INPUT"
+      ]
+    },
+    {
+      "name": "int_to_string_value",
+      "datatype": "STRING",
+      "features": [
+        "OUTPUT"
+      ]
+    }
+  ]
+}
