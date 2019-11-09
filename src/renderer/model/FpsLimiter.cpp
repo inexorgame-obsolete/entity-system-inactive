@@ -1,25 +1,28 @@
 #include "FpsLimiter.hpp"
 
-#include "entity-system/model/data/DataTypes.hpp"
-#include "renderer/providers/WindowEntityTypeProvider.hpp"
+#include <cmath>
+#include <thread>
 
 #include <GLFW/glfw3.h>
 
 #include "spdlog/spdlog.h"
 
-#include <cmath>
-#include <thread>
+#include "entity-system/model/data/DataTypes.hpp"
+#include "type-system/types/ui/Window.hpp"
 
 namespace inexor::renderer {
+
+using Window = entity_system::type_system::Window;
+using DataType = entity_system::DataType;
 
 FpsLimiter::FpsLimiter(const EntityInstancePtr &window)
 {
     this->window = window;
     this->timeline = std::make_shared<Magnum::Timeline>();
-    this->vsync = window->get<entity_system::DataType::BOOL>(WindowEntityTypeProvider::WINDOW_VSYNC);
+    this->vsync = window->get<DataType::BOOL>(Window::VSYNC);
     this->set_min_fps(50.0f);
     this->set_max_fps(70.0f);
-    this->set_target_fps(window->get<entity_system::DataType::FLOAT>(WindowEntityTypeProvider::WINDOW_FPS));
+    this->set_target_fps(window->get<DataType::FLOAT>(Window::FPS));
     this->last_lazy_update_frame = 0.0f;
     this->frame_id = 0;
     this->frame_rr = 0;
@@ -95,7 +98,7 @@ bool FpsLimiter::is_lazy_update_frame()
 
 void FpsLimiter::update_vsync()
 {
-    bool vsync = window->get<entity_system::DataType::BOOL>(WindowEntityTypeProvider::WINDOW_VSYNC);
+    bool vsync = window->get<DataType::BOOL>(Window::VSYNC);
     if (vsync != this->vsync)
     {
         spdlog::debug("window vsync is now {}", vsync ? "enabled" : "disabled");
@@ -106,7 +109,7 @@ void FpsLimiter::update_vsync()
 
 void FpsLimiter::update_fps()
 {
-    target_fps = window->get<entity_system::DataType::FLOAT>(WindowEntityTypeProvider::WINDOW_FPS);
+    target_fps = window->get<DataType::FLOAT>(Window::FPS);
 }
 
 float FpsLimiter::get_last_fps()

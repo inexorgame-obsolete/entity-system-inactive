@@ -1,9 +1,6 @@
 #pragma once
 
 #include "entity-system/factories/entities/entity-instance-builder-factory/EntityInstanceBuilderFactory.hpp"
-#include "type-system/providers/inout/console/StdInEntityTypeProvider.hpp"
-#include "type-system/providers/inout/console/StdOutEntityTypeProvider.hpp"
-#include "type-system/providers/inout/console/StdErrEntityTypeProvider.hpp"
 #include "visual-scripting/managers/ConnectorManager.hpp"
 
 namespace inexor::visual_scripting {

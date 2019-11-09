@@ -1,16 +1,18 @@
 #include "MouseInputManager.hpp"
 
-#include "entity-system/model/data/DataTypes.hpp"
-#include "renderer/providers/WindowEntityTypeProvider.hpp"
-
-#include "spdlog/spdlog.h"
-
-#include <GLFW/glfw3.h>
-
 #include <tuple>
 #include <utility>
 
+#include <GLFW/glfw3.h>
+
+#include "spdlog/spdlog.h"
+
+#include "entity-system/model/data/DataTypes.hpp"
+#include "type-system/types/ui/Window.hpp"
+
 namespace inexor::input {
+
+using Window = entity_system::type_system::Window;
 
 MouseInputManager::MouseInputManager(GlobalMouseButtonFactoryPtr global_mouse_button_factory, LogManagerPtr log_manager)
 {
@@ -183,7 +185,7 @@ void MouseInputManager::register_on_window_mouse_scrolled(const EntityInstancePt
 
 std::string MouseInputManager::get_window_name(const EntityInstancePtr &window)
 {
-    return window->get<entity_system::DataType::STRING>(renderer::WindowEntityTypeProvider::WINDOW_TITLE);
+    return window->get<entity_system::DataType::STRING>(Window::TITLE);
 }
 
 } // namespace inexor::input

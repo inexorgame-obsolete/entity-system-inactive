@@ -1,7 +1,7 @@
 #include "LoadingScreen.hpp"
 
-#include "entity-system/model/entity-attributes/entity-attribute-instances/EntityAttributeInstance.hpp"
-#include "type-system/providers/inout/keyboard/GlobalKeyEntityTypeProvider.hpp"
+#include <algorithm>
+#include <utility>
 
 #include <Corrade/Containers/Optional.h>
 #include <Corrade/PluginManager/Manager.h>
@@ -14,23 +14,25 @@
 
 #include <GLFW/glfw3.h>
 
-// TODO: enable boost stacktrace again (2/3)
-//#include <boost/stacktrace.hpp>
-
 #include "spdlog/spdlog.h"
 #include <spdlog/fmt/ostr.h>
 
-#include <algorithm>
-#include <type-system/types/inout/mouse/GlobalMouseButton.hpp>
-#include <utility>
+#include "entity-system/model/entity-attributes/entity-attribute-instances/EntityAttributeInstance.hpp"
+
+#include "type-system/types/inout/keyboard/GlobalKey.hpp"
+#include "type-system/types/inout/mouse/GlobalMouseButton.hpp"
+#include "type-system/types/ui/Window.hpp"
 
 using namespace Magnum::Math::Literals;
 
 namespace inexor::renderer {
 
 using DataType = entity_system::DataType;
+using DataValue = entity_system::DataValue;
+using GlobalKey = entity_system::type_system::GlobalKey;
 using GlobalMouseButton = entity_system::type_system::GlobalMouseButton;
-using EntityAttributeInstancePtr = std::shared_ptr<EntityAttributeInstance>;
+using Window = entity_system::type_system::Window;
+using EntityAttributeInstancePtr = std::shared_ptr<entity_system::EntityAttributeInstance>;
 using EntityAttributeInstancePtrOpt = std::optional<EntityAttributeInstancePtr>;
 
 LoadingScreen::LoadingScreen(WindowManagerPtr window_manager, MonitorManagerPtr monitor_manager, FontManagerPtr font_manager, KeyboardInputManagerPtr keyboard_input_manager, MouseInputManagerPtr mouse_input_manager,
@@ -78,8 +80,8 @@ void LoadingScreen::init()
     if (o_key_b.has_value())
     {
         EntityInstancePtr key_b = o_key_b.value();
-        EntityAttributeInstancePtrOpt o_key_b_key = key_b->get_attribute_instance(entity_system::type_system::GlobalKeyEntityTypeProvider::GLOBAL_KEY_KEYCODE);
-        EntityAttributeInstancePtrOpt o_key_b_action = key_b->get_attribute_instance(entity_system::type_system::GlobalKeyEntityTypeProvider::GLOBAL_KEY_ACTION);
+        EntityAttributeInstancePtrOpt o_key_b_key = key_b->get_attribute_instance(GlobalKey::KEYCODE);
+        EntityAttributeInstancePtrOpt o_key_b_action = key_b->get_attribute_instance(GlobalKey::ACTION);
         if (o_key_b_key.has_value() && o_key_b_action.has_value())
         {
             EntityAttributeInstancePtr key_b_key = o_key_b_key.value();
@@ -208,22 +210,22 @@ void LoadingScreen::on_window_key_released(EntityInstancePtr window, int key, in
     case GLFW_KEY_I:
         if (mods & GLFW_MOD_CONTROL)
         {
-            window->toggle(WindowEntityTypeProvider::WINDOW_ICONIFIED);
-            action = window->get<DataType::BOOL>(WindowEntityTypeProvider::WINDOW_ICONIFIED) ? "Iconified" : "Restored";
+            window->toggle(Window::ICONIFIED);
+            action = window->get<DataType::BOOL>(Window::ICONIFIED) ? "Iconified" : "Restored";
         }
         break;
     case GLFW_KEY_F:
         if (mods & GLFW_MOD_CONTROL)
         {
-            window->toggle(WindowEntityTypeProvider::WINDOW_FULLSCREEN);
-            action = window->get<DataType::BOOL>(WindowEntityTypeProvider::WINDOW_FULLSCREEN) ? "Fullscreen" : "Restored";
+            window->toggle(Window::FULLSCREEN);
+            action = window->get<DataType::BOOL>(Window::FULLSCREEN) ? "Fullscreen" : "Restored";
         }
         break;
     case GLFW_KEY_M:
         if (mods & GLFW_MOD_CONTROL)
         {
-            window->toggle(WindowEntityTypeProvider::WINDOW_MAXIMIZED);
-            action = window->get<DataType::BOOL>(WindowEntityTypeProvider::WINDOW_MAXIMIZED) ? "Maximized" : "Restored";
+            window->toggle(Window::MAXIMIZED);
+            action = window->get<DataType::BOOL>(Window::MAXIMIZED) ? "Maximized" : "Restored";
         }
         break;
     case GLFW_KEY_U:
@@ -241,7 +243,7 @@ void LoadingScreen::on_window_key_released(EntityInstancePtr window, int key, in
         }
         break;
     case GLFW_KEY_SCROLL_LOCK:
-        window->toggle(WindowEntityTypeProvider::WINDOW_VSYNC);
+        window->toggle(Window::VSYNC);
         action = "Toggle vsync";
         break;
     case GLFW_KEY_PRINT_SCREEN:
@@ -394,13 +396,13 @@ void LoadingScreen::move(const EntityInstancePtr &window)
     case 1:
         // Change window position
         if (movement.forward)
-            decrease(window, WindowEntityTypeProvider::WINDOW_POSITION_Y, 10, 0);
+            decrease(window, Window::POSITION_Y, 10, 0);
         if (movement.backward)
-            increase(window, WindowEntityTypeProvider::WINDOW_POSITION_Y, 10, 3840);
+            increase(window, Window::POSITION_Y, 10, 3840);
         if (movement.left)
-            decrease(window, WindowEntityTypeProvider::WINDOW_POSITION_X, 10, 0);
+            decrease(window, Window::POSITION_X, 10, 0);
         if (movement.right)
-            increase(window, WindowEntityTypeProvider::WINDOW_POSITION_X, 10, 2160);
+            increase(window, Window::POSITION_X, 10, 2160);
         break;
     case 2:
         // Center window
@@ -475,26 +477,26 @@ void LoadingScreen::move(const EntityInstancePtr &window)
         // Change window opacity
         if (movement.forward)
         {
-            increase(window, WindowEntityTypeProvider::WINDOW_OPACITY, 0.05f, 1.0f);
-            action = fmt::format("opacity = {}", window->get<DataType::FLOAT>(WindowEntityTypeProvider::WINDOW_OPACITY));
+            increase(window, Window::OPACITY, 0.05f, 1.0f);
+            action = fmt::format("opacity = {}", window->get<DataType::FLOAT>(Window::OPACITY));
         }
         if (movement.backward)
         {
-            decrease(window, WindowEntityTypeProvider::WINDOW_OPACITY, 0.05f, 0.1f);
-            action = fmt::format("opacity = {}", window->get<DataType::FLOAT>(WindowEntityTypeProvider::WINDOW_OPACITY));
+            decrease(window, Window::OPACITY, 0.05f, 0.1f);
+            action = fmt::format("opacity = {}", window->get<DataType::FLOAT>(Window::OPACITY));
         }
         break;
     case 6:
         // Change window fps
         if (movement.forward)
         {
-            increase(window, WindowEntityTypeProvider::WINDOW_FPS, 5.00f, 250.0f);
-            action = fmt::format("max fps = {}", window->get<DataType::FLOAT>(WindowEntityTypeProvider::WINDOW_FPS));
+            increase(window, Window::FPS, 5.00f, 250.0f);
+            action = fmt::format("max fps = {}", window->get<DataType::FLOAT>(Window::FPS));
         }
         if (movement.backward)
         {
-            decrease(window, WindowEntityTypeProvider::WINDOW_FPS, 5.00f, 10.0f);
-            action = fmt::format("max fps = {}", window->get<DataType::FLOAT>(WindowEntityTypeProvider::WINDOW_FPS));
+            decrease(window, Window::FPS, 5.00f, 10.0f);
+            action = fmt::format("max fps = {}", window->get<DataType::FLOAT>(Window::FPS));
         }
         break;
     default:
@@ -515,27 +517,27 @@ void LoadingScreen::execute_command(const EntityInstancePtr &window)
     } else if (command_buffer == "/vsync 0")
     {
         action = "vsync off";
-        window->set_own_value(WindowEntityTypeProvider::WINDOW_VSYNC, false);
+        window->set_own_value(Window::VSYNC, false);
     } else if (command_buffer == "/vsync 1")
     {
         action = "vsync on";
-        window->set_own_value(WindowEntityTypeProvider::WINDOW_VSYNC, true);
+        window->set_own_value(Window::VSYNC, true);
     } else if (command_buffer == "/fullscreen 0")
     {
         action = "Fullscreen off";
-        window->set_own_value(WindowEntityTypeProvider::WINDOW_FULLSCREEN, false);
+        window->set_own_value(Window::FULLSCREEN, false);
     } else if (command_buffer == "/fullscreen 1")
     {
         action = "Fullscreen on";
-        window->set_own_value(WindowEntityTypeProvider::WINDOW_FULLSCREEN, true);
+        window->set_own_value(Window::FULLSCREEN, true);
     } else if (command_buffer == "/maximize 0")
     {
         action = "Maximize off";
-        window->set_own_value(WindowEntityTypeProvider::WINDOW_MAXIMIZED, false);
+        window->set_own_value(Window::MAXIMIZED, false);
     } else if (command_buffer == "/maximize 1")
     {
         action = "Maximize on";
-        window->set_own_value(WindowEntityTypeProvider::WINDOW_MAXIMIZED, true);
+        window->set_own_value(Window::MAXIMIZED, true);
     } else if (command_buffer == "/license")
     {
         action = "License";

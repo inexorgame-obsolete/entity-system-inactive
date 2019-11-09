@@ -1,13 +1,5 @@
 #pragma once
 
-#include "client/ClientLifecycle.hpp"
-#include "input/managers/ClipboardManager.hpp"
-#include "logging/managers/LogManager.hpp"
-#include "renderer/managers/FontManager.hpp"
-#include "renderer/managers/MonitorManager.hpp"
-#include "renderer/managers/WindowManager.hpp"
-#include "visual-scripting/managers/ConnectorManager.hpp"
-
 #include <Magnum/GL/Buffer.h>
 #include <Magnum/GL/DefaultFramebuffer.h>
 #include <Magnum/GL/Mesh.h>
@@ -18,6 +10,14 @@
 #include <Magnum/Shaders/Flat.h>
 #include <Magnum/Shaders/Vector.h>
 #include <Magnum/Timeline.h>
+
+#include "client/ClientLifecycle.hpp"
+#include "input/managers/ClipboardManager.hpp"
+#include "logging/managers/LogManager.hpp"
+#include "renderer/managers/FontManager.hpp"
+#include "renderer/managers/MonitorManager.hpp"
+#include "renderer/managers/WindowManager.hpp"
+#include "visual-scripting/managers/ConnectorManager.hpp"
 
 struct GLFWwindow;
 
@@ -32,7 +32,7 @@ using ClipboardManagerPtr = std::shared_ptr<input::ClipboardManager>;
 using ConnectorManagerPtr = std::shared_ptr<visual_scripting::ConnectorManager>;
 using ClientLifecyclePtr = std::shared_ptr<client::ClientLifecycle>;
 using LogManagerPtr = std::shared_ptr<logging::LogManager>;
-using EntityInstancePtr = std::shared_ptr<EntityInstance>;
+using EntityInstancePtr = std::shared_ptr<entity_system::EntityInstance>;
 
 struct QuadVertex
 {

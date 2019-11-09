@@ -3,14 +3,12 @@
 #include "entity-system/factories/entities/entity-instance-builder-factory/EntityInstanceBuilderFactory.hpp"
 #include "entity-system/factories/entities/entity-type-builder-factory/EntityTypeBuilderFactory.hpp"
 #include "entity-system/managers/entities/entity-instance-manager/EntityInstanceManager.hpp"
-#include "renderer/providers/MonitorEntityTypeProvider.hpp"
 
 namespace inexor::renderer {
 
-using MonitorEntityTypeProviderPtr = std::shared_ptr<MonitorEntityTypeProvider>;
-using EntityInstanceBuilderFactoryPtr = std::shared_ptr<EntityInstanceBuilderFactory>;
-using EntityInstanceManagerPtr = std::shared_ptr<EntityInstanceManager>;
-using EntityInstancePtr = std::shared_ptr<EntityInstance>;
+using EntityInstanceBuilderFactoryPtr = std::shared_ptr<entity_system::EntityInstanceBuilderFactory>;
+using EntityInstanceManagerPtr = std::shared_ptr<entity_system::EntityInstanceManager>;
+using EntityInstancePtr = std::shared_ptr<entity_system::EntityInstance>;
 using EntityInstancePtrOpt = std::optional<EntityInstancePtr>;
 
 /// @class MonitorFactory
@@ -20,10 +18,9 @@ class MonitorFactory
     public:
     /// @brief Constructor.
     /// @note The dependencies of this class will be injected automatically.
-    /// @param monitor_entity_type_provider The entity type provider.
     /// @param entity_instance_builder_factory The entity instance builder factory.
     /// @param entity_instance_manager The entity instance manager.
-    MonitorFactory(MonitorEntityTypeProviderPtr monitor_entity_type_provider, EntityInstanceBuilderFactoryPtr entity_instance_builder_factory, EntityInstanceManagerPtr entity_instance_manager);
+    MonitorFactory(EntityInstanceBuilderFactoryPtr entity_instance_builder_factory, EntityInstanceManagerPtr entity_instance_manager);
 
     /// Destructor.
     ~MonitorFactory();
@@ -38,9 +35,6 @@ class MonitorFactory
     EntityInstancePtrOpt create_instance(const std::string &title, int x, int y, int width, int height, bool is_primary);
 
     private:
-    /// The entity type provider.
-    MonitorEntityTypeProviderPtr monitor_entity_type_provider;
-
     /// The entity instance builder factory.
     EntityInstanceBuilderFactoryPtr entity_instance_builder_factory;
 

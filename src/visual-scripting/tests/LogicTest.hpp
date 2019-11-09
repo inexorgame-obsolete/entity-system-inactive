@@ -2,18 +2,12 @@
 
 #include "entity-system/factories/entities/entity-instance-builder-factory/EntityInstanceBuilderFactory.hpp"
 #include "type-system/factories/logical/comparison/EqualsStringFactory.hpp"
-#include "type-system/providers/inout/console/StdInEntityTypeProvider.hpp"
-#include "type-system/providers/logical/comparison/EqualsStringEntityTypeProvider.hpp"
 #include "visual-scripting/managers/ConnectorManager.hpp"
 
 namespace inexor {
 namespace visual_scripting {
 
 	using ConnectorManagerPtr = std::shared_ptr<ConnectorManager>;
-	using StdInEntityTypeProvider = entity_system::type_system::StdInEntityTypeProvider;
-	using StdInEntityTypeProviderPtr = std::shared_ptr<StdInEntityTypeProvider>;
-	using EqualsStringEntityTypeProvider = entity_system::type_system::EqualsStringEntityTypeProvider;
-	using EqualsStringEntityTypeProviderPtr = std::shared_ptr<EqualsStringEntityTypeProvider>;
 	using EntityInstanceBuilderFactoryPtr = std::shared_ptr<entity_system::EntityInstanceBuilderFactory>;
 	using Builder = std::shared_ptr<entity_system::EntityInstanceBuilder>;
 
@@ -41,12 +35,10 @@ namespace visual_scripting {
             /// @brief Constructor.
             /// @note The dependencies of this class will be injected automatically.
             /// @param connector_manager ?
-            /// @param stdin_entity_type_provider ?
             /// @param equals_string_factory ?
             /// @param entity_instance_builder_factory ?
 			LogicTest(
 				ConnectorManagerPtr connector_manager,
-				StdInEntityTypeProviderPtr stdin_entity_type_provider,
 				EqualsStringFactoryPtr equals_string_factory,
 				EntityInstanceBuilderFactoryPtr entity_instance_builder_factory
 			);
@@ -76,9 +68,6 @@ namespace visual_scripting {
 
 			/// ?
             ConnectorManagerPtr connector_manager;
-            
-            /// ?
-			StdInEntityTypeProviderPtr stdin_entity_type_provider;
 
             /// ?
 			EqualsStringFactoryPtr equals_string_factory;

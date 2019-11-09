@@ -1,5 +1,6 @@
 #include "WindowManager.hpp"
-#include "renderer/model/FpsLimiter.hpp"
+
+#include <utility>
 
 #include <Magnum/Math/Range.h>
 #include <Magnum/Platform/GLContext.h>
@@ -13,9 +14,14 @@
 
 #include "fmt/ostream.h"
 
-#include <utility>
+#include "renderer/model/FpsLimiter.hpp"
+#include "type-system/types/ui/Window.hpp"
 
 namespace inexor::renderer {
+
+using Window = entity_system::type_system::Window;
+using DataType = entity_system::DataType;
+using DataValue = entity_system::DataValue;
 
 using EntityInstancePtrOpt = std::optional<EntityInstancePtr>;
 using EntityAttributeInstanceOpt = std::optional<EntityAttributeInstancePtr>;
@@ -79,7 +85,7 @@ void WindowManager::shutdown()
 
 /// @brief Creates a new window with the given title, position and dimensions.
 /// @param window The GLFWwindow instance.
-EntityInstancePtr WindowManager::create_window(std::string title, int x, int y, int width, int height)
+EntityInstancePtr WindowManager::create_window(const std::string& title, int x, int y, int width, int height)
 {
     return create_window(title, x, y, width, height, 1.0f, true, false, false, false, true, true, 60.0f);
 }
@@ -243,7 +249,7 @@ void WindowManager::set_window_title(const EntityInstancePtr &window, std::strin
 {
     if (is_window_available(window))
     {
-        window->get_attribute_instance(WindowEntityTypeProvider::WINDOW_TITLE).value()->own_value.Set(title);
+        window->get_attribute_instance(Window::TITLE).value()->own_value.Set(title);
     }
 }
 
@@ -438,18 +444,18 @@ void WindowManager::fullscreen_window_on_monitor(const EntityInstancePtr &window
         GLFWmonitor *glfw_monitor = monitor_manager->get_monitor_handle(monitor);
         const GLFWvidmode *glfw_mode = glfwGetVideoMode(glfw_monitor);
 
-        bool already_fullscreen = window->get<DataType::BOOL>(WindowEntityTypeProvider::WINDOW_FULLSCREEN);
+        bool already_fullscreen = window->get<DataType::BOOL>(Window::FULLSCREEN);
 
         if (!already_fullscreen)
         {
-            AsyncTransaction<D>([this, window, glfw_monitor, glfw_mode] {
+            AsyncTransaction<entity_system::D>([this, window, glfw_monitor, glfw_mode] {
                 windows[window]->glfw_monitor = glfw_monitor;
-                int restore_width = window->get<DataType::INT>(WindowEntityTypeProvider::WINDOW_WIDTH);
-                int restore_height = window->get<DataType::INT>(WindowEntityTypeProvider::WINDOW_HEIGHT);
-                //					AsyncTransaction<D>([window, restore_width, restore_height] {
-                window->set_own_value(WindowEntityTypeProvider::WINDOW_FULLSCREEN, true);
-                window->set_own_value(WindowEntityTypeProvider::WINDOW_RESTORE_WIDTH, restore_width);
-                window->set_own_value(WindowEntityTypeProvider::WINDOW_RESTORE_HEIGHT, restore_height);
+                int restore_width = window->get<DataType::INT>(Window::WIDTH);
+                int restore_height = window->get<DataType::INT>(Window::HEIGHT);
+                //					AsyncTransaction<entity_system::D>([window, restore_width, restore_height] {
+                window->set_own_value(Window::FULLSCREEN, true);
+                window->set_own_value(Window::RESTORE_WIDTH, restore_width);
+                window->set_own_value(Window::RESTORE_HEIGHT, restore_height);
                 //					});
                 glfwSetWindowMonitor(windows[window]->glfw_window, glfw_monitor, 0, 0, glfw_mode->width, glfw_mode->height, glfw_mode->refreshRate);
             });
@@ -543,12 +549,12 @@ void WindowManager::destroy_window_callbacks(GLFWwindow *glfw_window)
 void WindowManager::initialize_window_observers(const EntityInstancePtr &window, GLFWwindow *glfw_window)
 {
 
-    Observe(window->get_attribute_instance(WindowEntityTypeProvider::WINDOW_TITLE).value()->value, [glfw_window](DataValue visible) {
+    Observe(window->get_attribute_instance(Window::TITLE).value()->value, [glfw_window](DataValue visible) {
         spdlog::debug("title {}", std::get<DataType::STRING>(visible));
         glfwSetWindowTitle(glfw_window, std::get<DataType::STRING>(visible).c_str());
     });
 
-    Observe(window->get_attribute_instance(WindowEntityTypeProvider::WINDOW_VISIBLE).value()->value, [glfw_window](DataValue visible) {
+    Observe(window->get_attribute_instance(Window::VISIBLE).value()->value, [glfw_window](DataValue visible) {
         spdlog::debug("visible {}", std::get<DataType::BOOL>(visible) ? "true" : "false");
         if (std::get<DataType::BOOL>(visible))
         {
@@ -559,7 +565,7 @@ void WindowManager::initialize_window_observers(const EntityInstancePtr &window,
         }
     });
 
-    Observe(window->get_attribute_instance(WindowEntityTypeProvider::WINDOW_FULLSCREEN).value()->value, [this, glfw_window, window](DataValue fullscreen) {
+    Observe(window->get_attribute_instance(Window::FULLSCREEN).value()->value, [this, glfw_window, window](DataValue fullscreen) {
         spdlog::info("fullscreen {}", std::get<DataType::BOOL>(fullscreen) ? "true" : "false");
         if (std::get<DataType::BOOL>(fullscreen))
         {
@@ -583,25 +589,25 @@ void WindowManager::initialize_window_observers(const EntityInstancePtr &window,
                 }
             }
             const GLFWvidmode *glfw_mode = glfwGetVideoMode(glfw_monitor);
-            int restore_width = window->get<DataType::INT>(WindowEntityTypeProvider::WINDOW_WIDTH);
-            int restore_height = window->get<DataType::INT>(WindowEntityTypeProvider::WINDOW_HEIGHT);
-            AsyncTransaction<D>([window, restore_width, restore_height] {
-                window->set_own_value(WindowEntityTypeProvider::WINDOW_RESTORE_WIDTH, restore_width);
-                window->set_own_value(WindowEntityTypeProvider::WINDOW_RESTORE_HEIGHT, restore_height);
+            int restore_width = window->get<DataType::INT>(Window::WIDTH);
+            int restore_height = window->get<DataType::INT>(Window::HEIGHT);
+            AsyncTransaction<entity_system::D>([window, restore_width, restore_height] {
+                window->set_own_value(Window::RESTORE_WIDTH, restore_width);
+                window->set_own_value(Window::RESTORE_HEIGHT, restore_height);
             });
             glfwSetWindowMonitor(glfw_window, glfw_monitor, 0, 0, glfw_mode->width, glfw_mode->height, glfw_mode->refreshRate);
         } else
         {
-            int x = std::get<DataType::INT>(window->get_attribute_instance(WindowEntityTypeProvider::WINDOW_POSITION_X).value()->value.Value());
-            int y = std::get<DataType::INT>(window->get_attribute_instance(WindowEntityTypeProvider::WINDOW_POSITION_Y).value()->value.Value());
-            int width = std::get<DataType::INT>(window->get_attribute_instance(WindowEntityTypeProvider::WINDOW_RESTORE_WIDTH).value()->value.Value());
-            int height = std::get<DataType::INT>(window->get_attribute_instance(WindowEntityTypeProvider::WINDOW_RESTORE_HEIGHT).value()->value.Value());
+            int x = std::get<DataType::INT>(window->get_attribute_instance(Window::POSITION_X).value()->value.Value());
+            int y = std::get<DataType::INT>(window->get_attribute_instance(Window::POSITION_Y).value()->value.Value());
+            int width = std::get<DataType::INT>(window->get_attribute_instance(Window::RESTORE_WIDTH).value()->value.Value());
+            int height = std::get<DataType::INT>(window->get_attribute_instance(Window::RESTORE_HEIGHT).value()->value.Value());
             windows[window]->glfw_monitor = nullptr;
             glfwSetWindowMonitor(glfw_window, nullptr, x, y, width, height, 0);
         }
     });
 
-    Observe(window->get_attribute_instance(WindowEntityTypeProvider::WINDOW_ICONIFIED).value()->value, [glfw_window](DataValue iconified) {
+    Observe(window->get_attribute_instance(Window::ICONIFIED).value()->value, [glfw_window](DataValue iconified) {
         spdlog::debug("iconified {}", std::get<DataType::BOOL>(iconified) ? "true" : "false");
         if (std::get<DataType::BOOL>(iconified))
         {
@@ -612,7 +618,7 @@ void WindowManager::initialize_window_observers(const EntityInstancePtr &window,
         }
     });
 
-    Observe(window->get_attribute_instance(WindowEntityTypeProvider::WINDOW_MAXIMIZED).value()->value, [glfw_window](DataValue maximized) {
+    Observe(window->get_attribute_instance(Window::MAXIMIZED).value()->value, [glfw_window](DataValue maximized) {
         spdlog::debug("maximized {}", std::get<DataType::BOOL>(maximized) ? "true" : "false");
         if (std::get<DataType::BOOL>(maximized))
         {
@@ -624,7 +630,7 @@ void WindowManager::initialize_window_observers(const EntityInstancePtr &window,
     });
 
     windows[window]->signal_position_changed =
-        MakeSignal<D>(With(window->get_attribute_instance(WindowEntityTypeProvider::WINDOW_POSITION_X).value()->value, window->get_attribute_instance(WindowEntityTypeProvider::WINDOW_POSITION_Y).value()->value),
+        MakeSignal<entity_system::D>(With(window->get_attribute_instance(Window::POSITION_X).value()->value, window->get_attribute_instance(Window::POSITION_Y).value()->value),
                       [glfw_window, this, window](DataValue position_x, DataValue position_y) {
                           spdlog::debug("(1) position_x {} position_y {}", std::get<DataType::INT>(position_x), std::get<DataType::INT>(position_y));
                           return std::make_pair(std::get<DataType::INT>(position_x), std::get<DataType::INT>(position_y));
@@ -642,7 +648,7 @@ void WindowManager::initialize_window_observers(const EntityInstancePtr &window,
         }
     });
 
-    windows[window]->signal_size_changed = MakeSignal<D>(With(window->get_attribute_instance(WindowEntityTypeProvider::WINDOW_WIDTH).value()->value, window->get_attribute_instance(WindowEntityTypeProvider::WINDOW_HEIGHT).value()->value),
+    windows[window]->signal_size_changed = MakeSignal<entity_system::D>(With(window->get_attribute_instance(Window::WIDTH).value()->value, window->get_attribute_instance(Window::HEIGHT).value()->value),
                                                          [glfw_window, this, window](DataValue width, DataValue height) {
                                                              spdlog::debug("(1) width {} height {}", std::get<DataType::INT>(width), std::get<DataType::INT>(height));
                                                              return std::make_pair(std::get<DataType::INT>(width), std::get<DataType::INT>(height));
@@ -660,7 +666,7 @@ void WindowManager::initialize_window_observers(const EntityInstancePtr &window,
         }
     });
 
-    Observe(window->get_attribute_instance(WindowEntityTypeProvider::WINDOW_OPACITY).value()->value, [glfw_window](DataValue opacity) { glfwSetWindowOpacity(glfw_window, std::get<DataType::FLOAT>(opacity)); });
+    Observe(window->get_attribute_instance(Window::OPACITY).value()->value, [glfw_window](DataValue opacity) { glfwSetWindowOpacity(glfw_window, std::get<DataType::FLOAT>(opacity)); });
 }
 
 void WindowManager::window_closed(GLFWwindow *glfw_window)
@@ -673,30 +679,30 @@ void WindowManager::window_focused(GLFWwindow *glfw_window, bool has_focus)
     spdlog::get(WindowManager::LOGGER_NAME)->debug("Window focus changed: {}", has_focus);
     EntityInstancePtr window = window_entities[glfw_window];
     // TODO: Did I forget an transaction here?
-    AsyncTransaction<D>([window, has_focus] { window->get_attribute_instance(WindowEntityTypeProvider::WINDOW_FOCUSED).value()->own_value.Set(has_focus); });
+    AsyncTransaction<entity_system::D>([window, has_focus] { window->get_attribute_instance(Window::FOCUSED).value()->own_value.Set(has_focus); });
 }
 
 void WindowManager::window_iconified(GLFWwindow *glfw_window, bool is_iconified)
 {
     spdlog::get(WindowManager::LOGGER_NAME)->info("Window iconification state changed: {}", is_iconified);
     EntityInstancePtr window = window_entities[glfw_window];
-    AsyncTransaction<D>([window, is_iconified] { window->set_own_value(WindowEntityTypeProvider::WINDOW_ICONIFIED, is_iconified); });
+    AsyncTransaction<entity_system::D>([window, is_iconified] { window->set_own_value(Window::ICONIFIED, is_iconified); });
 }
 
 void WindowManager::window_maximized(GLFWwindow *glfw_window, bool is_maximized)
 {
     spdlog::get(WindowManager::LOGGER_NAME)->info("Window maximize state changed: {}", is_maximized);
     EntityInstancePtr window = window_entities[glfw_window];
-    AsyncTransaction<D>([window, is_maximized] { window->set_own_value(WindowEntityTypeProvider::WINDOW_MAXIMIZED, is_maximized); });
+    AsyncTransaction<entity_system::D>([window, is_maximized] { window->set_own_value(Window::MAXIMIZED, is_maximized); });
 }
 
 void WindowManager::window_position_changed(GLFWwindow *glfw_window, int x, int y)
 {
     spdlog::get(WindowManager::LOGGER_NAME)->info("Window position changed: {}:{}", x, y);
     EntityInstancePtr window = window_entities[glfw_window];
-    AsyncTransaction<D>([window, x, y] {
-        window->set_own_value(WindowEntityTypeProvider::WINDOW_POSITION_X, x);
-        window->set_own_value(WindowEntityTypeProvider::WINDOW_POSITION_Y, y);
+    AsyncTransaction<entity_system::D>([window, x, y] {
+        window->set_own_value(Window::POSITION_X, x);
+        window->set_own_value(Window::POSITION_Y, y);
     });
 }
 
@@ -704,9 +710,9 @@ void WindowManager::window_size_changed(GLFWwindow *glfw_window, int width, int 
 {
     spdlog::get(WindowManager::LOGGER_NAME)->info("Window size changed: {}:{}", width, height);
     EntityInstancePtr window = window_entities[glfw_window];
-    AsyncTransaction<D>([window, width, height] {
-        window->set_own_value(WindowEntityTypeProvider::WINDOW_WIDTH, width);
-        window->set_own_value(WindowEntityTypeProvider::WINDOW_HEIGHT, height);
+    AsyncTransaction<entity_system::D>([window, width, height] {
+        window->set_own_value(Window::WIDTH, width);
+        window->set_own_value(Window::HEIGHT, height);
     });
 }
 
@@ -755,7 +761,7 @@ void WindowManager::start_window_thread(const EntityInstancePtr &window)
     glfwMakeContextCurrent(glfw_window);
 
     // Enable/disable vsync
-    if (window->get<DataType::BOOL>(WindowEntityTypeProvider::WINDOW_VSYNC))
+    if (window->get<DataType::BOOL>(Window::VSYNC))
     {
         spdlog::info("window {} vsync initially enabled", windows[window]->id);
         glfwSwapInterval(1);
