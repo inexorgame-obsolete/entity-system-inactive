@@ -10,7 +10,7 @@
 #include "entity-system/model/data/DataTypes.hpp"
 #include "type-system/types/ui/Window.hpp"
 
-namespace inexor::renderer {
+namespace inexor::ui {
 
 using Window = entity_system::type_system::Window;
 using DataType = entity_system::DataType;

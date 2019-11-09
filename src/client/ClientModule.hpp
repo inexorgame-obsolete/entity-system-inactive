@@ -4,6 +4,7 @@
 #include "audio/AudioModule.hpp"
 #include "input/InputModule.hpp"
 #include "renderer/RendererModule.hpp"
+#include "ui/UserInterfaceModule.hpp"
 
 namespace inexor::client {
 
@@ -14,6 +15,7 @@ class ClientModule
     using ClientLifecyclePtr = std::shared_ptr<ClientLifecycle>;
     using AudioModulePtr = std::shared_ptr<audio::AudioModule>;
     using InputModulePtr = std::shared_ptr<input::InputModule>;
+    using UserInterfaceModulePtr = std::shared_ptr<ui::UserInterfaceModule>;
     using RendererModulePtr = std::shared_ptr<renderer::RendererModule>;
 
     public:
@@ -22,7 +24,7 @@ class ClientModule
     /// @param audio_module The audio module.
     /// @param input_module The input module.
     /// @param renderer_module The renderer module.
-    ClientModule(ClientLifecyclePtr client_lifecycle, AudioModulePtr audio_module, InputModulePtr input_module, RendererModulePtr renderer_module);
+    ClientModule(ClientLifecyclePtr client_lifecycle, AudioModulePtr audio_module, InputModulePtr input_module, UserInterfaceModulePtr user_interface_module, RendererModulePtr renderer_module);
 
     /// Destructor.
     ~ClientModule();
@@ -51,6 +53,9 @@ class ClientModule
 
     /// The input module.
     InputModulePtr input_module;
+
+    /// The user interface module.
+    UserInterfaceModulePtr user_interface_module;
 
     /// The renderer module.
     RendererModulePtr renderer_module;

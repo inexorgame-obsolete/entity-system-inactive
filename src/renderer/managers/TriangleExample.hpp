@@ -6,8 +6,8 @@
 #include "entity-system/model/data/DataTypes.hpp"
 #include "logging/managers/LogManager.hpp"
 #include "renderer/factories/TriangleFactory.hpp"
-#include "renderer/managers/WindowManager.hpp"
 #include "type-system/factories/generators/counters/CounterFloatFactory.hpp"
+#include "ui/managers/WindowManager.hpp"
 #include "visual-scripting/managers/ConnectorManager.hpp"
 #include "visual-scripting/model/Connector.hpp"
 
@@ -32,7 +32,7 @@ using EntityInstanceBuilderFactoryPtr = std::shared_ptr<inexor::entity_system::E
 using CounterFloatFactoryPtr = std::shared_ptr<entity_system::type_system::CounterFloatFactory>;
 using ConnectorManagerPtr = std::shared_ptr<visual_scripting::ConnectorManager>;
 using TriangleFactoryPtr = std::shared_ptr<TriangleFactory>;
-using WindowManagerPtr = std::shared_ptr<WindowManager>;
+using WindowManagerPtr = std::shared_ptr<ui::WindowManager>;
 using KeyboardInputManagerPtr = std::shared_ptr<input::KeyboardInputManager>;
 using ClientLifecyclePtr = std::shared_ptr<client::ClientLifecycle>;
 using LogManagerPtr = std::shared_ptr<inexor::logging::LogManager>;

@@ -6,7 +6,7 @@
 
 #include "spdlog/spdlog.h"
 
-namespace inexor::renderer {
+namespace inexor::ui {
 
 MonitorManager::MonitorManager(MonitorFactoryPtr monitor_factory, LogManagerPtr log_manager)
 {

@@ -4,39 +4,35 @@
 #include "entity-system/factories/entities/entity-type-builder-factory/EntityTypeBuilderFactory.hpp"
 #include "entity-system/managers/entities/entity-instance-manager/EntityInstanceManager.hpp"
 
-namespace inexor::renderer {
+namespace inexor::ui {
 
 using EntityInstanceBuilderFactoryPtr = std::shared_ptr<entity_system::EntityInstanceBuilderFactory>;
 using EntityInstanceManagerPtr = std::shared_ptr<entity_system::EntityInstanceManager>;
 using EntityInstancePtr = std::shared_ptr<entity_system::EntityInstance>;
 using EntityInstancePtrOpt = std::optional<EntityInstancePtr>;
 
-/// @class WindowFactory
-/// @brief Factory for creating windows.
-class WindowFactory
+/// @class MonitorFactory
+/// @brief Factory for creating monitors.
+class MonitorFactory
 {
     public:
     /// @brief Constructor.
     /// @note The dependencies of this class will be injected automatically.
     /// @param entity_instance_builder_factory The entity instance builder factory.
     /// @param entity_instance_manager The entity instance manager.
-    WindowFactory(EntityInstanceBuilderFactoryPtr entity_instance_builder_factory, EntityInstanceManagerPtr entity_instance_manager);
+    MonitorFactory(EntityInstanceBuilderFactoryPtr entity_instance_builder_factory, EntityInstanceManagerPtr entity_instance_manager);
 
     /// Destructor.
-    ~WindowFactory();
+    ~MonitorFactory();
 
-    /// Creates a new window with the given title, coordinates and dimensions.
-    /// @param id The id of the window.
-    /// @param title The title of the window.
-    /// @param x The x position of the window.
-    /// @param y The y position of the window.
-    /// @param width The width of the window.
-    /// @param height The height of the window.
-    EntityInstancePtrOpt create_instance(int id, const std::string &title, int x, int y, int width, int height);
-
-    EntityInstancePtrOpt create_instance(int id, const std::string &title, int x, int y, int width, int height, float opacity);
-
-    EntityInstancePtrOpt create_instance(int id, const std::string &title, int x, int y, int width, int height, float opacity, bool visible, bool fullscreen, bool iconified, bool maximized, bool focused, bool vsync, float fps);
+    /// Creates a new monitor with the given title, coordinates and dimensions.
+    /// @param title The title of the monitor.
+    /// @param x The x position of the monitor.
+    /// @param y The y position of the monitor.
+    /// @param width The width of the monitor.
+    /// @param height The height of the monitor.
+    /// @param is_primary If true, the monitor is the primary monitor.
+    EntityInstancePtrOpt create_instance(const std::string &title, int x, int y, int width, int height, bool is_primary);
 
     private:
     /// The entity instance builder factory.
@@ -46,4 +42,4 @@ class WindowFactory
     EntityInstanceManagerPtr entity_instance_manager;
 };
 
-} // namespace inexor::renderer
+} // namespace inexor::ui

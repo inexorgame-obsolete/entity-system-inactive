@@ -6,7 +6,7 @@
 
 #include <memory>
 
-namespace inexor::renderer {
+namespace inexor::ui {
 
 using EntityInstancePtr = std::shared_ptr<entity_system::EntityInstance>;
 using TimelinePtr = std::shared_ptr<Magnum::Timeline>;

@@ -2,7 +2,7 @@
 
 #include <type-system/types/ui/Window.hpp>
 
-namespace inexor::renderer {
+namespace inexor::ui {
 
 using Window = entity_system::type_system::Window;
 
@@ -82,4 +82,4 @@ EntityInstancePtrOpt WindowFactory::create_instance(int id, const std::string &t
         ->build();
 }
 
-} // namespace inexor::renderer
+} // namespace inexor::ui

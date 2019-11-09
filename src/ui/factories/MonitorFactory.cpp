@@ -3,7 +3,7 @@
 #include <type-system/types/ui/Monitor.hpp>
 #include <utility>
 
-namespace inexor::renderer {
+namespace inexor::ui {
 
 using Monitor = entity_system::type_system::Monitor;
 
@@ -27,4 +27,4 @@ EntityInstancePtrOpt MonitorFactory::create_instance(const std::string &title, i
         ->build();
 }
 
-} // namespace inexor::renderer
+} // namespace inexor::ui

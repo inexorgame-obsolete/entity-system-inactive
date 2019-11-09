@@ -1,16 +1,16 @@
 #pragma once
 
 #include "MonitorManager.hpp"
-#include "UserInterfaceRenderer.hpp"
-#include "WorldRenderer.hpp"
 #include "client/ClientLifecycle.hpp"
 #include "entity-system/managers/entities/entity-instance-manager/EntityInstanceManager.hpp"
 #include "entity-system/model/data/DataTypes.hpp"
 #include "input/managers/KeyboardInputManager.hpp"
 #include "input/managers/MouseInputManager.hpp"
 #include "logging/managers/LogManager.hpp"
-#include "renderer/factories/WindowFactory.hpp"
-#include "renderer/model/ManagedWindow.hpp"
+#include "renderer/managers/UserInterfaceRenderer.hpp"
+#include "renderer/managers/WorldRenderer.hpp"
+#include "ui/factories/WindowFactory.hpp"
+#include "ui/model/ManagedWindow.hpp"
 #include "visual-scripting/managers/ConnectorManager.hpp"
 #include "visual-scripting/model/Connector.hpp"
 
@@ -23,7 +23,7 @@
 struct GLFWwindow;
 struct GLFWmonitor;
 
-namespace inexor::renderer {
+namespace inexor::ui {
 
 using WindowFactoryPtr = std::shared_ptr<WindowFactory>;
 using MonitorManagerPtr = std::shared_ptr<MonitorManager>;
@@ -31,8 +31,8 @@ using KeyboardInputManagerPtr = std::shared_ptr<input::KeyboardInputManager>;
 using MouseInputManagerPtr = std::shared_ptr<input::MouseInputManager>;
 using EntityInstanceManagerPtr = std::shared_ptr<entity_system::EntityInstanceManager>;
 using ConnectorManagerPtr = std::shared_ptr<visual_scripting::ConnectorManager>;
-using WorldRendererPtr = std::shared_ptr<WorldRenderer>;
-using UserInterfaceRendererPtr = std::shared_ptr<UserInterfaceRenderer>;
+using WorldRendererPtr = std::shared_ptr<renderer::WorldRenderer>;
+using UserInterfaceRendererPtr = std::shared_ptr<renderer::UserInterfaceRenderer>;
 using ClientLifecyclePtr = std::shared_ptr<client::ClientLifecycle>;
 using LogManagerPtr = std::shared_ptr<logging::LogManager>;
 
