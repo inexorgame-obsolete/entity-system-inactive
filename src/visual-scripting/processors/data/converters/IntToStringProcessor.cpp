@@ -36,6 +36,10 @@ void IntToStringProcessor::init_processor()
     }
 }
 
+void IntToStringProcessor::shutdown()
+{
+}
+
 void IntToStringProcessor::on_entity_instance_created(EntityInstancePtr entity_instance)
 {
     make_signals(entity_instance);
