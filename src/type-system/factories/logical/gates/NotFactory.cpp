@@ -6,14 +6,16 @@
 namespace inexor::entity_system::type_system {
 
 NotFactory::NotFactory(EntityInstanceBuilderFactoryPtr entity_instance_builder_factory)
+    : LifeCycleComponent()
 {
     this->entity_instance_builder_factory = std::move(entity_instance_builder_factory);
 }
 
 NotFactory::~NotFactory() = default;
 
-void NotFactory::init()
+std::string NotFactory::get_component_name()
 {
+    return "NotFactory";
 }
 
 EntityInstancePtrOpt NotFactory::create_instance()

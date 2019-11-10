@@ -1,5 +1,6 @@
 #pragma once
 
+#include "base/LifeCycleComponent.hpp"
 #include "type-system/factories/math/arithmetic/AddFloatFactory.hpp"
 #include "type-system/factories/math/arithmetic/AddIntFactory.hpp"
 
@@ -10,7 +11,7 @@ using AddFloatFactoryPtr = std::shared_ptr<AddFloatFactory>;
 
 /// @class ArithmeticFactories
 /// @brief The arithmetic factories.
-class ArithmeticFactories
+class ArithmeticFactories : public LifeCycleComponent
 {
     public:
     /// @brief Constructs the arithmetic factories.
@@ -22,8 +23,8 @@ class ArithmeticFactories
     /// Destructor.
     ~ArithmeticFactories();
 
-    /// Initializes the arithmetic factories.
-    void init();
+    /// Returns the name of the component
+    std::string get_component_name() override;
 
     private:
     /// Factory for creating entity instances of type ADD_INT.

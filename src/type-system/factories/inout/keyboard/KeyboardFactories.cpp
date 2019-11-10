@@ -5,15 +5,16 @@
 namespace inexor::entity_system::type_system {
 
 KeyboardFactories::KeyboardFactories(GlobalKeyFactoryPtr global_key_factory)
+    : LifeCycleComponent(global_key_factory)
 {
     this->global_key_factory = std::move(global_key_factory);
 }
 
 KeyboardFactories::~KeyboardFactories() = default;
 
-void KeyboardFactories::init()
+std::string KeyboardFactories::get_component_name()
 {
-    global_key_factory->init();
+    return "KeyboardFactories";
 }
 
 GlobalKeyFactoryPtr KeyboardFactories::get_global_key_factory()

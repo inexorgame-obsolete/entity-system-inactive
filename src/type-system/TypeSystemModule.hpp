@@ -1,5 +1,6 @@
 #pragma once
 
+#include "base/LifeCycleComponent.hpp"
 #include "type-system/factories/TypeSystemFactories.hpp"
 #include "type-system/initializer/TypeSystemInitializer.hpp"
 
@@ -10,7 +11,7 @@ using TypeSystemFactoriesPtr = std::shared_ptr<TypeSystemFactories>;
 
 /// @class TypeSystemModule
 /// @brief The type system module.
-class TypeSystemModule
+class TypeSystemModule : public LifeCycleComponent
 {
     public:
     /// @brief Constructs the type system module.
@@ -21,11 +22,8 @@ class TypeSystemModule
     /// Destructor.
     ~TypeSystemModule();
 
-    /// Pre-Initialization of the type system module.
-    void pre_init();
-
-    /// Initializes the type system module.
-    void init();
+    /// Returns the name of the component
+    std::string get_component_name() override;
 
     private:
     /// Initializes the type system using static resources.

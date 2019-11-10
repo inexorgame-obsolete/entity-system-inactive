@@ -1,5 +1,6 @@
 #pragma once
 
+#include "base/LifeCycleComponent.hpp"
 #include "type-system/factories/generators/counters/CounterFactories.hpp"
 #include "type-system/factories/generators/random/RandomFactories.hpp"
 #include "type-system/factories/generators/timers/TimerFactories.hpp"
@@ -12,7 +13,7 @@ using RandomFactoriesPtr = std::shared_ptr<RandomFactories>;
 
 /// @class GeneratorFactories
 /// @brief The factories for generators like counters and timers.
-class GeneratorFactories
+class GeneratorFactories : public LifeCycleComponent
 {
     public:
     /// @brief Constructs the factories for generators like counters and timers.
@@ -25,8 +26,8 @@ class GeneratorFactories
     /// Destructor.
     ~GeneratorFactories();
 
-    /// Initializes the factories for generators like counters and timers.
-    void init();
+    /// Returns the name of the component
+    std::string get_component_name() override;
 
     private:
     /// The factories for counters.

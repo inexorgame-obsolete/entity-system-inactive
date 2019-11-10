@@ -6,14 +6,16 @@
 namespace inexor::entity_system::type_system {
 
 AndFactory::AndFactory(EntityInstanceBuilderFactoryPtr entity_instance_builder_factory)
+    : LifeCycleComponent()
 {
     this->entity_instance_builder_factory = std::move(entity_instance_builder_factory);
 }
 
 AndFactory::~AndFactory() = default;
 
-void AndFactory::init()
+std::string AndFactory::get_component_name()
 {
+    return "AndFactory";
 }
 
 EntityInstancePtrOpt AndFactory::create_instance()

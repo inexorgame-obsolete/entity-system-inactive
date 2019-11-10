@@ -17,6 +17,7 @@ class InexorConan(ConanFile):
 
         "boost_property_tree/1.69.0@bincrafters/stable",
         "boost_signals2/1.69.0@bincrafters/stable",
+        "boost_range/1.69.0@bincrafters/stable",
         "freetype/2.9.1@bincrafters/stable",
         "openal/1.19.0@bincrafters/stable",
 

@@ -1,5 +1,6 @@
 #pragma once
 
+#include "base/LifeCycleComponent.hpp"
 #include "entity-system/factories/entities/entity-instance-builder-factory/EntityInstanceBuilderFactory.hpp"
 #include "entity-system/model/entities/entity-instances/EntityInstance.hpp"
 
@@ -13,7 +14,7 @@ using EntityInstanceBuilderFactoryPtr = std::shared_ptr<EntityInstanceBuilderFac
 
 /// @class GlobalMouseButtonFactory
 /// @brief Factory for creating entity instances of type GLOBAL_MOUSE_BUTTON.
-class GlobalMouseButtonFactory
+class GlobalMouseButtonFactory : public LifeCycleComponent
 {
     public:
     /// @brief Constructor.
@@ -24,8 +25,8 @@ class GlobalMouseButtonFactory
     /// Destructor.
     ~GlobalMouseButtonFactory();
 
-    /// Initializes the factory.
-    void init();
+    /// Returns the name of the component
+    std::string get_component_name() override;
 
     /// @brief Creates an instance and sets the given name.
     /// @param button The mouse button number.

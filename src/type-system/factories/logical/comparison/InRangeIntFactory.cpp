@@ -6,14 +6,16 @@
 namespace inexor::entity_system::type_system {
 
 InRangeIntFactory::InRangeIntFactory(EntityInstanceBuilderFactoryPtr entity_instance_builder_factory)
+    : LifeCycleComponent()
 {
     this->entity_instance_builder_factory = std::move(entity_instance_builder_factory);
 }
 
 InRangeIntFactory::~InRangeIntFactory() = default;
 
-void InRangeIntFactory::init()
+std::string InRangeIntFactory::get_component_name()
 {
+    return "InRangeIntFactory";
 }
 
 EntityInstancePtrOpt InRangeIntFactory::create_instance()

@@ -6,14 +6,16 @@
 namespace inexor::entity_system::type_system {
 
 GreaterThanIntFactory::GreaterThanIntFactory(EntityInstanceBuilderFactoryPtr entity_instance_builder_factory)
+    : LifeCycleComponent()
 {
     this->entity_instance_builder_factory = std::move(entity_instance_builder_factory);
 }
 
 GreaterThanIntFactory::~GreaterThanIntFactory() = default;
 
-void GreaterThanIntFactory::init()
+std::string GreaterThanIntFactory::get_component_name()
 {
+    return "GreaterThanIntFactory";
 }
 
 EntityInstancePtrOpt GreaterThanIntFactory::create_instance()

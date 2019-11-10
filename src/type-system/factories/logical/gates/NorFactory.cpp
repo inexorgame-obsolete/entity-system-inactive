@@ -6,14 +6,16 @@
 namespace inexor::entity_system::type_system {
 
 NorFactory::NorFactory(EntityInstanceBuilderFactoryPtr entity_instance_builder_factory)
+    : LifeCycleComponent()
 {
     this->entity_instance_builder_factory = std::move(entity_instance_builder_factory);
 }
 
 NorFactory::~NorFactory() = default;
 
-void NorFactory::init()
+std::string NorFactory::get_component_name()
 {
+    return "NorFactory";
 }
 
 EntityInstancePtrOpt NorFactory::create_instance()

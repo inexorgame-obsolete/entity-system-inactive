@@ -5,6 +5,7 @@
 namespace inexor::entity_system::type_system {
 
 DataFactories::DataFactories(ConstantFactoriesPtr constant_factories, ConverterFactoriesPtr converter_factories, StoreFactoriesPtr store_factories)
+    : LifeCycleComponent(constant_factories, converter_factories, store_factories)
 {
     this->constant_factories = std::move(constant_factories);
     this->converter_factories = std::move(converter_factories);
@@ -13,11 +14,9 @@ DataFactories::DataFactories(ConstantFactoriesPtr constant_factories, ConverterF
 
 DataFactories::~DataFactories() = default;
 
-void DataFactories::init()
+std::string DataFactories::get_component_name()
 {
-    constant_factories->init();
-    converter_factories->init();
-    store_factories->init();
+    return "DataFactories";
 }
 
 } // namespace inexor::entity_system::type_system

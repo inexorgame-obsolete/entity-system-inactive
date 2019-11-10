@@ -6,14 +6,16 @@
 namespace inexor::entity_system::type_system {
 
 LowerThanIntFactory::LowerThanIntFactory(EntityInstanceBuilderFactoryPtr entity_instance_builder_factory)
+    : LifeCycleComponent()
 {
     this->entity_instance_builder_factory = std::move(entity_instance_builder_factory);
 }
 
 LowerThanIntFactory::~LowerThanIntFactory() = default;
 
-void LowerThanIntFactory::init()
+std::string LowerThanIntFactory::get_component_name()
 {
+    return "LowerThanIntFactory";
 }
 
 EntityInstancePtrOpt LowerThanIntFactory::create_instance()

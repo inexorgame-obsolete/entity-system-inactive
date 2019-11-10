@@ -7,14 +7,16 @@
 namespace inexor::entity_system::type_system {
 
 TanFactory::TanFactory(EntityInstanceBuilderFactoryPtr entity_instance_builder_factory)
+    : LifeCycleComponent()
 {
     this->entity_instance_builder_factory = std::move(entity_instance_builder_factory);
 }
 
 TanFactory::~TanFactory() = default;
 
-void TanFactory::init()
+std::string TanFactory::get_component_name()
 {
+    return "TanFactory";
 }
 
 EntityInstancePtrOpt TanFactory::create_instance()

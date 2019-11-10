@@ -1,5 +1,6 @@
 #pragma once
 
+#include "base/LifeCycleComponent.hpp"
 #include "entity-system/factories/entities/entity-instance-builder-factory/EntityInstanceBuilderFactory.hpp"
 #include "entity-system/model/entities/entity-instances/EntityInstance.hpp"
 
@@ -11,7 +12,7 @@ using EntityInstancePtrOpt = std::optional<EntityInstancePtr>;
 
 /// @class AddIntFactory
 /// @brief Factory for entity instances of type ADD_INT.
-class AddIntFactory
+class AddIntFactory : public LifeCycleComponent
 {
     public:
     /// @brief Constructor.
@@ -22,8 +23,8 @@ class AddIntFactory
     /// Destructor.
     ~AddIntFactory();
 
-    /// Initializes the factory.
-    void init();
+    /// Returns the name of the component
+    std::string get_component_name() override;
 
     /// Creates an instance with default values.
     EntityInstancePtrOpt create_instance();

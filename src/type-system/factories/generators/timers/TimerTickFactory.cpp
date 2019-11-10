@@ -6,14 +6,16 @@
 namespace inexor::entity_system::type_system {
 
 TimerTickFactory::TimerTickFactory(EntityInstanceBuilderFactoryPtr entity_instance_builder_factory)
+    : LifeCycleComponent()
 {
     this->entity_instance_builder_factory = std::move(entity_instance_builder_factory);
 }
 
 TimerTickFactory::~TimerTickFactory() = default;
 
-void TimerTickFactory::init()
+std::string TimerTickFactory::get_component_name()
 {
+    return "TimerTickFactory";
 }
 
 EntityInstancePtrOpt TimerTickFactory::create_instance()

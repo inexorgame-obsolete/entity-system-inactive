@@ -5,6 +5,7 @@
 namespace inexor::entity_system::type_system {
 
 StoreFactories::StoreFactories(FloatStoreFactoryPtr float_store_factory, IntStoreFactoryPtr int_store_factory, StringStoreFactoryPtr string_store_factory)
+    : LifeCycleComponent(float_store_factory, int_store_factory, string_store_factory)
 {
     this->float_store_factory = std::move(float_store_factory);
     this->int_store_factory = std::move(int_store_factory);
@@ -13,11 +14,9 @@ StoreFactories::StoreFactories(FloatStoreFactoryPtr float_store_factory, IntStor
 
 StoreFactories::~StoreFactories() = default;
 
-void StoreFactories::init()
+std::string StoreFactories::get_component_name()
 {
-    float_store_factory->init();
-    int_store_factory->init();
-    string_store_factory->init();
+    return "StoreFactories";
 }
 
 } // namespace inexor::entity_system::type_system

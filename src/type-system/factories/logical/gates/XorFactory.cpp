@@ -6,14 +6,16 @@
 namespace inexor::entity_system::type_system {
 
 XorFactory::XorFactory(EntityInstanceBuilderFactoryPtr entity_instance_builder_factory)
+    : LifeCycleComponent()
 {
     this->entity_instance_builder_factory = std::move(entity_instance_builder_factory);
 }
 
 XorFactory::~XorFactory() = default;
 
-void XorFactory::init()
+std::string XorFactory::get_component_name()
 {
+    return "XorFactory";
 }
 
 EntityInstancePtrOpt XorFactory::create_instance()

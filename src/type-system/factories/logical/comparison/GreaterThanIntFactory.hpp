@@ -1,5 +1,6 @@
 #pragma once
 
+#include "base/LifeCycleComponent.hpp"
 #include "entity-system/factories/entities/entity-instance-builder-factory/EntityInstanceBuilderFactory.hpp"
 #include "entity-system/model/entities/entity-instances/EntityInstance.hpp"
 
@@ -9,7 +10,7 @@ using EntityInstancePtrOpt = std::optional<std::shared_ptr<EntityInstance>>;
 
 /// @class GreaterThanIntFactory
 /// @brief Factory for creating entity instances of type GREATER_THAN_INT.
-class GreaterThanIntFactory
+class GreaterThanIntFactory : public LifeCycleComponent
 {
     public:
     using EntityInstanceBuilderFactoryPtr = std::shared_ptr<EntityInstanceBuilderFactory>;
@@ -22,8 +23,8 @@ class GreaterThanIntFactory
     /// Destructor.
     ~GreaterThanIntFactory();
 
-    /// Initializes the factory.
-    void init();
+    /// Returns the name of the component
+    std::string get_component_name() override;
 
     /// Creates an instance with default values.
     EntityInstancePtrOpt create_instance();

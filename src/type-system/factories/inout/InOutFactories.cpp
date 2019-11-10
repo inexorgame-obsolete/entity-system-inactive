@@ -5,6 +5,7 @@
 namespace inexor::entity_system::type_system {
 
 InOutFactories::InOutFactories(KeyboardFactoriesPtr keyboard_factories, MouseFactoriesPtr mouse_factories, LoggerFactoriesPtr logger_factories)
+    : LifeCycleComponent(keyboard_factories, mouse_factories, logger_factories)
 {
     this->keyboard_factories = std::move(keyboard_factories);
     this->mouse_factories = std::move(mouse_factories);
@@ -13,11 +14,9 @@ InOutFactories::InOutFactories(KeyboardFactoriesPtr keyboard_factories, MouseFac
 
 InOutFactories::~InOutFactories() = default;
 
-void InOutFactories::init()
+std::string InOutFactories::get_component_name()
 {
-    keyboard_factories->init();
-    mouse_factories->init();
-    logger_factories->init();
+    return "InOutFactories";
 }
 
 KeyboardFactoriesPtr InOutFactories::get_keyboard_factories()

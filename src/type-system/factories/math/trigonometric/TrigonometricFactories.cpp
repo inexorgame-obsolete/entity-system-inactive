@@ -5,6 +5,7 @@
 namespace inexor::entity_system::type_system {
 
 TrigonometricFactories::TrigonometricFactories(SinFactoryPtr sin_factory, CosFactoryPtr cos_factory, TanFactoryPtr tan_factory)
+    : LifeCycleComponent(sin_factory, cos_factory, tan_factory)
 {
     this->sin_factory = std::move(sin_factory);
     this->cos_factory = std::move(cos_factory);
@@ -13,11 +14,9 @@ TrigonometricFactories::TrigonometricFactories(SinFactoryPtr sin_factory, CosFac
 
 TrigonometricFactories::~TrigonometricFactories() = default;
 
-void TrigonometricFactories::init()
+std::string TrigonometricFactories::get_component_name()
 {
-    sin_factory->init();
-    cos_factory->init();
-    tan_factory->init();
+    return "TrigonometricFactories";
 }
 
 } // namespace inexor::entity_system::type_system

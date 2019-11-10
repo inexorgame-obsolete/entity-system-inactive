@@ -6,14 +6,16 @@
 namespace inexor::entity_system::type_system {
 
 CounterIntFactory::CounterIntFactory(EntityInstanceBuilderFactoryPtr entity_instance_builder_factory)
+    : LifeCycleComponent()
 {
     this->entity_instance_builder_factory = std::move(entity_instance_builder_factory);
 }
 
 CounterIntFactory::~CounterIntFactory() = default;
 
-void CounterIntFactory::init()
+std::string CounterIntFactory::get_component_name()
 {
+    return "CounterIntFactory";
 }
 
 EntityInstancePtrOpt CounterIntFactory::create_instance()

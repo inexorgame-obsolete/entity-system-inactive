@@ -1,5 +1,6 @@
 #pragma once
 
+#include "base/LifeCycleComponent.hpp"
 #include "type-system/factories/inout/keyboard/KeyboardFactories.hpp"
 #include "type-system/factories/inout/logger/LoggerFactories.hpp"
 #include "type-system/factories/inout/mouse/MouseFactories.hpp"
@@ -12,7 +13,7 @@ using LoggerFactoriesPtr = std::shared_ptr<LoggerFactories>;
 
 /// @class InOutFactories
 /// @brief The factories for input and output.
-class InOutFactories
+class InOutFactories : public LifeCycleComponent
 {
     public:
     /// @brief Constructs the factories for input and output.
@@ -25,8 +26,8 @@ class InOutFactories
     /// Destructor.
     ~InOutFactories();
 
-    /// Initializes the factories for input and output.
-    void init();
+    /// Returns the name of the component
+    std::string get_component_name() override;
 
     /// Returns the factories for keyboard input.
     KeyboardFactoriesPtr get_keyboard_factories();

@@ -6,14 +6,16 @@
 namespace inexor::entity_system::type_system {
 
 GreaterThanFloatFactory::GreaterThanFloatFactory(EntityInstanceBuilderFactoryPtr entity_instance_builder_factory)
+    : LifeCycleComponent()
 {
     this->entity_instance_builder_factory = std::move(entity_instance_builder_factory);
 }
 
 GreaterThanFloatFactory::~GreaterThanFloatFactory() = default;
 
-void GreaterThanFloatFactory::init()
+std::string GreaterThanFloatFactory::get_component_name()
 {
+    return "GreaterThanFloatFactory";
 }
 
 EntityInstancePtrOpt GreaterThanFloatFactory::create_instance()

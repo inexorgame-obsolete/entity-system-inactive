@@ -1,5 +1,6 @@
 #pragma once
 
+#include "base/LifeCycleComponent.hpp"
 #include "type-system/factories/inout/keyboard/GlobalKeyFactory.hpp"
 
 #include <memory>
@@ -10,7 +11,7 @@ using GlobalKeyFactoryPtr = std::shared_ptr<GlobalKeyFactory>;
 
 /// @class KeyboardFactories
 /// @brief The factories for keyboard input.
-class KeyboardFactories
+class KeyboardFactories : public LifeCycleComponent
 {
     public:
     /// @brief Constructs the factories for keyboard input.
@@ -21,8 +22,8 @@ class KeyboardFactories
     /// Destructor.
     ~KeyboardFactories();
 
-    /// Initializes the factories for keyboard input.
-    void init();
+    /// Returns the name of the component
+    std::string get_component_name() override;
 
     /// Returns the factory for entities of type 'GLOBAL_KEY'.
     GlobalKeyFactoryPtr get_global_key_factory();

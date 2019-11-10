@@ -1,5 +1,6 @@
 #pragma once
 
+#include "base/LifeCycleComponent.hpp"
 #include "type-system/factories/data/DataFactories.hpp"
 #include "type-system/factories/generators/GeneratorFactories.hpp"
 #include "type-system/factories/inout/InOutFactories.hpp"
@@ -16,7 +17,7 @@ using MathFactoriesPtr = std::shared_ptr<MathFactories>;
 
 /// @class TypeSystemFactories
 /// @brief The factories of the type system.
-class TypeSystemFactories
+class TypeSystemFactories : public LifeCycleComponent
 {
     public:
     /// @brief Constructs the factories of the type system.
@@ -31,8 +32,8 @@ class TypeSystemFactories
     /// Destructor.
     ~TypeSystemFactories();
 
-    /// Initializes the factories of the type system.
-    void init();
+    /// Returns the name of the component
+    std::string get_component_name() override;
 
     /// Returns the factories for input and output like console and loggers.
     InOutFactoriesPtr get_in_out_factories();

@@ -5,6 +5,7 @@
 namespace inexor::entity_system::type_system {
 
 CounterFactories::CounterFactories(CounterIntFactoryPtr counter_int_factory, CounterFloatFactoryPtr counter_float_factory)
+    : LifeCycleComponent(counter_int_factory, counter_float_factory)
 {
     this->counter_int_factory = std::move(counter_int_factory);
     this->counter_float_factory = std::move(counter_float_factory);
@@ -12,10 +13,9 @@ CounterFactories::CounterFactories(CounterIntFactoryPtr counter_int_factory, Cou
 
 CounterFactories::~CounterFactories() = default;
 
-void CounterFactories::init()
+std::string CounterFactories::get_component_name()
 {
-    counter_int_factory->init();
-    counter_float_factory->init();
+    return "CounterFactories";
 }
 
 } // namespace inexor::entity_system::type_system

@@ -1,5 +1,6 @@
 #pragma once
 
+#include "base/LifeCycleComponent.hpp"
 #include "entity-system/factories/entities/entity-instance-builder-factory/EntityInstanceBuilderFactory.hpp"
 #include "entity-system/model/entities/entity-instances/EntityInstance.hpp"
 
@@ -13,7 +14,7 @@ using EntityInstanceBuilderFactoryPtr = std::shared_ptr<EntityInstanceBuilderFac
 
 /// @class LoggerFactory
 /// @brief Factory for creating entity instances of type LOGGER.
-class LoggerFactory
+class LoggerFactory : public LifeCycleComponent
 {
     public:
     /// @brief Constructor.
@@ -24,8 +25,8 @@ class LoggerFactory
     /// Destructor.
     ~LoggerFactory();
 
-    /// Initializes the factory.
-    void init();
+    /// Returns the name of the component
+    std::string get_component_name() override;
 
     /// Initialization of the loggers.
     EntityInstancePtrOpt create_instance();
