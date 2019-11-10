@@ -1,5 +1,6 @@
 #pragma once
 
+#include "base/LifeCycleComponent.hpp"
 #include "type-system/factories/logical/gates/AndFactory.hpp"
 #include "type-system/factories/logical/gates/NandFactory.hpp"
 #include "type-system/factories/logical/gates/NorFactory.hpp"
@@ -20,7 +21,7 @@ using NandFactoryPtr = std::shared_ptr<NandFactory>;
 
 /// @class GateFactories
 /// @brief The factories for logical operations.
-class GateFactories
+class GateFactories : public LifeCycleComponent
 {
     public:
     /// @brief Constructs the factories for logical operations.
@@ -36,8 +37,8 @@ class GateFactories
     /// Destructor.
     ~GateFactories();
 
-    /// Initializes the factories for logical operations.
-    void init();
+    /// Returns the name of the component
+    std::string get_component_name() override;
 
     private:
     /// Factory for creating entity instances of type NOT.

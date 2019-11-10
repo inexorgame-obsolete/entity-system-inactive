@@ -1,5 +1,6 @@
 #pragma once
 
+#include "base/LifeCycleComponent.hpp"
 #include "entity-system/factories/entities/entity-instance-builder-factory/EntityInstanceBuilderFactory.hpp"
 #include "entity-system/model/entities/entity-instances/EntityInstance.hpp"
 
@@ -11,7 +12,7 @@ using EntityInstanceBuilderFactoryPtr = std::shared_ptr<EntityInstanceBuilderFac
 
 /// @class TimerTickFactory
 /// @brief Factory for creating entity instances of type TIMER_TICK.
-class TimerTickFactory
+class TimerTickFactory : public LifeCycleComponent
 {
     public:
     /// @brief Constructs a factory for creating entity instances of type TIMER_TICK.
@@ -22,8 +23,8 @@ class TimerTickFactory
     /// Destructor.
     ~TimerTickFactory();
 
-    /// Initializes the factory.
-    void init();
+    /// Returns the name of the component
+    std::string get_component_name() override;
 
     /// Creates a counter with the default values: millis = 1000.
     EntityInstancePtrOpt create_instance();

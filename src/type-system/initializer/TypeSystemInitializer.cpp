@@ -12,6 +12,7 @@ using AttributeList = std::unordered_map<std::string, std::pair<DataType, Featur
 using json = nlohmann::json;
 
 TypeSystemInitializer::TypeSystemInitializer(EntityTypeBuilderFactoryPtr entity_type_builder_factory)
+    : LifeCycleComponent()
 {
     this->entity_type_builder_factory = std::move(entity_type_builder_factory);
 }
@@ -31,6 +32,11 @@ void TypeSystemInitializer::init()
     {
         load_type_definition(rs, file);
     }
+}
+
+std::string TypeSystemInitializer::get_component_name()
+{
+    return "TypeSystemInitializer";
 }
 
 void TypeSystemInitializer::load_type_definition(Corrade::Utility::Resource rs, const std::string &file)

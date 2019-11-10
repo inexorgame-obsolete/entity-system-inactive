@@ -1,5 +1,6 @@
 #pragma once
 
+#include "base/LifeCycleComponent.hpp"
 #include "type-system/factories/logical/comparison/ComparisonFactories.hpp"
 #include "type-system/factories/logical/gates/GateFactories.hpp"
 
@@ -10,7 +11,7 @@ using GateFactoriesPtr = std::shared_ptr<GateFactories>;
 
 /// @class LogicalFactories
 /// @brief The factories for logical operations.
-class LogicalFactories
+class LogicalFactories : public LifeCycleComponent
 {
     public:
     /// @brief Constructs the factories for logical operations.
@@ -22,8 +23,8 @@ class LogicalFactories
     /// Destructor.
     ~LogicalFactories();
 
-    /// Initializes the factories for logical operations.
-    void init();
+    /// Returns the name of the component
+    std::string get_component_name() override;
 
     private:
     /// The factories for comparison operations.

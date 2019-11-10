@@ -1,5 +1,6 @@
 #pragma once
 
+#include "base/LifeCycleComponent.hpp"
 #include "entity-system/factories/entities/entity-instance-builder-factory/EntityInstanceBuilderFactory.hpp"
 #include "entity-system/model/entities/entity-instances/EntityInstance.hpp"
 
@@ -13,19 +14,18 @@ using EntityInstanceBuilderFactoryPtr = std::shared_ptr<EntityInstanceBuilderFac
 
 /// @class FloatConstantFactory
 /// @brief Factory for creating entity instances of type FLOAT_CONSTANT.
-class FloatConstantFactory
+class FloatConstantFactory : public LifeCycleComponent
 {
     public:
     /// @brief Constructs a factory for creating entity instances of type FLOAT_CONSTANT.
-    /// @note The dependencies of this class will be injected automatically.
     /// @param entity_instance_builder_factory Factory for creating entity instance builders.
     FloatConstantFactory(EntityInstanceBuilderFactoryPtr entity_instance_builder_factory);
 
     /// Destructor.
     ~FloatConstantFactory();
 
-    /// Initializes the factory.
-    void init();
+    /// Returns the name of the component
+    std::string get_component_name() override;
 
     /// Creates an instance with default values.
     EntityInstancePtrOpt create_instance();

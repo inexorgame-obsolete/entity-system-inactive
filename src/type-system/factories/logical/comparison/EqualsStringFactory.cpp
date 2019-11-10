@@ -6,14 +6,16 @@
 namespace inexor::entity_system::type_system {
 
 EqualsStringFactory::EqualsStringFactory(EntityInstanceBuilderFactoryPtr entity_instance_builder_factory)
+    : LifeCycleComponent()
 {
     this->entity_instance_builder_factory = std::move(entity_instance_builder_factory);
 }
 
 EqualsStringFactory::~EqualsStringFactory() = default;
 
-void EqualsStringFactory::init()
+std::string EqualsStringFactory::get_component_name()
 {
+    return "EqualsStringFactory";
 }
 
 EntityInstancePtrOpt EqualsStringFactory::create_instance()

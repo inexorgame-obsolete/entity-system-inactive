@@ -5,6 +5,7 @@
 namespace inexor::entity_system::type_system {
 
 TypeSystemFactories::TypeSystemFactories(DataFactoriesPtr data_factories, InOutFactoriesPtr in_out_factories, GeneratorFactoriesPtr generator_factories, LogicalFactoriesPtr logical_factories, MathFactoriesPtr math_factories)
+    : LifeCycleComponent(data_factories, in_out_factories, generator_factories, logical_factories, math_factories)
 {
     this->data_factories = std::move(data_factories);
     this->in_out_factories = std::move(in_out_factories);
@@ -15,13 +16,9 @@ TypeSystemFactories::TypeSystemFactories(DataFactoriesPtr data_factories, InOutF
 
 TypeSystemFactories::~TypeSystemFactories() = default;
 
-void TypeSystemFactories::init()
+std::string TypeSystemFactories::get_component_name()
 {
-    data_factories->init();
-    in_out_factories->init();
-    generator_factories->init();
-    logical_factories->init();
-    math_factories->init();
+    return "TypeSystemFactories";
 }
 
 InOutFactoriesPtr TypeSystemFactories::get_in_out_factories()

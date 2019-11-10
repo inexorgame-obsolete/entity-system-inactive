@@ -32,7 +32,7 @@ void InexorApplication::pre_init(int argc, char *argv[])
     InexorApplication::instances.push_back(this);
 
     // Type system initialization.
-    type_system_module->pre_init();
+    type_system_module->pre_init_components();
 
     // Debugger
     // TODO: enable with macro
@@ -52,7 +52,7 @@ void InexorApplication::pre_init(int argc, char *argv[])
 #endif
 
     // Type system initialization.
-    type_system_module->init();
+    type_system_module->init_components();
 
     // Configuration manager initialization.
     configuration_module->init(argc, argv);
@@ -119,6 +119,9 @@ void InexorApplication::shutdown()
 
     // Shut down the visual scripting module.
     visual_scripting_system_module->shutdown();
+
+    // Shut down the type system.
+    type_system_module->destroy_components();
 
     running = false;
     spdlog::get(LOGGER_NAME)->info("Shutdown completed");

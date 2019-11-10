@@ -74,7 +74,7 @@ class IntToStringProcessor : public Processor, public entity_system::EntityInsta
     std::unordered_map<xg::Guid, SignalT<entity_system::DataValue>> signals;
 
     /// The logger name of this processor.
-    static constexpr char LOGGER_NAME[] = "inexor.vs.p.d.c.inttofloat";
+    static constexpr char LOGGER_NAME[] = "inexor.vs.p.d.c.inttostring";
 };
 
 } // namespace inexor::visual_scripting

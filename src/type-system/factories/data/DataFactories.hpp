@@ -1,5 +1,8 @@
 #pragma once
 
+#include <boost/di.hpp>
+
+#include "base/LifeCycleComponent.hpp"
 #include "type-system/factories/data/constants/ConstantFactories.hpp"
 #include "type-system/factories/data/converters/ConverterFactories.hpp"
 #include "type-system/factories/data/stores/StoreFactories.hpp"
@@ -12,21 +15,23 @@ using StoreFactoriesPtr = std::shared_ptr<StoreFactories>;
 
 /// @class DataFactories
 /// @brief The factories for constants and stores.
-class DataFactories
+class DataFactories : public LifeCycleComponent
 {
     public:
     /// @brief Constructs the factories for constants and stores.
-    /// @note The dependencies of this class will be injected automatically.
     /// @param constant_factories The factories for constants.
     /// @param converter_factories The factories for converters.
     /// @param store_factories The factories for stores.
     DataFactories(ConstantFactoriesPtr constant_factories, ConverterFactoriesPtr converter_factories, StoreFactoriesPtr store_factories);
 
+    // This is necessary for constructor length greater than 10
+    using boost_di_inject__ = boost::di::inject<ConstantFactoriesPtr, ConverterFactoriesPtr, StoreFactoriesPtr>;
+
     /// Destructor.
     ~DataFactories();
 
-    /// Initializes the factories for constants and stores.
-    void init();
+    /// Returns the name of the component
+    std::string get_component_name() override;
 
     private:
     /// The factories for constants.

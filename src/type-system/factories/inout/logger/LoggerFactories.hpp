@@ -1,5 +1,6 @@
 #pragma once
 
+#include "base/LifeCycleComponent.hpp"
 #include "type-system/factories/inout/logger/LoggerFactory.hpp"
 
 #include <memory>
@@ -10,7 +11,7 @@ using LoggerFactoryPtr = std::shared_ptr<LoggerFactory>;
 
 /// @class LoggerFactories
 /// @brief The logger factories.
-class LoggerFactories
+class LoggerFactories : public LifeCycleComponent
 {
     public:
     /// @brief Constructs the logger factories.
@@ -21,8 +22,8 @@ class LoggerFactories
     /// Destructor.
     ~LoggerFactories();
 
-    /// Initializes the logger factories.
-    void init();
+    /// Returns the name of the component
+    std::string get_component_name() override;
 
     private:
     /// Factory for creating entity instances of type LOGGER.

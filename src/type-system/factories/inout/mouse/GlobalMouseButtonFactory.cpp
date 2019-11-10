@@ -6,14 +6,16 @@
 namespace inexor::entity_system::type_system {
 
 GlobalMouseButtonFactory::GlobalMouseButtonFactory(EntityInstanceBuilderFactoryPtr entity_instance_builder_factory)
+    : LifeCycleComponent()
 {
     this->entity_instance_builder_factory = std::move(entity_instance_builder_factory);
 }
 
 GlobalMouseButtonFactory::~GlobalMouseButtonFactory() = default;
 
-void GlobalMouseButtonFactory::init()
+std::string GlobalMouseButtonFactory::get_component_name()
 {
+    return "GlobalMouseButtonFactory";
 }
 
 EntityInstancePtrOpt GlobalMouseButtonFactory::create_instance(const int &button)

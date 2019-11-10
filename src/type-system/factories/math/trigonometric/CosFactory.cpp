@@ -7,14 +7,16 @@
 namespace inexor::entity_system::type_system {
 
 CosFactory::CosFactory(EntityInstanceBuilderFactoryPtr entity_instance_builder_factory)
+    : LifeCycleComponent()
 {
     this->entity_instance_builder_factory = std::move(entity_instance_builder_factory);
 }
 
 CosFactory::~CosFactory() = default;
 
-void CosFactory::init()
+std::string CosFactory::get_component_name()
 {
+    return "CosFactory";
 }
 
 EntityInstancePtrOpt CosFactory::create_instance()

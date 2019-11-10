@@ -6,14 +6,16 @@
 namespace inexor::entity_system::type_system {
 
 NandFactory::NandFactory(EntityInstanceBuilderFactoryPtr entity_instance_builder_factory)
+    : LifeCycleComponent()
 {
     this->entity_instance_builder_factory = std::move(entity_instance_builder_factory);
 }
 
 NandFactory::~NandFactory() = default;
 
-void NandFactory::init()
+std::string NandFactory::get_component_name()
 {
+    return "NandFactory";
 }
 
 EntityInstancePtrOpt NandFactory::create_instance()

@@ -6,14 +6,16 @@
 namespace inexor::entity_system::type_system {
 
 RandomNextIntFactory::RandomNextIntFactory(EntityInstanceBuilderFactoryPtr entity_instance_builder_factory)
+    : LifeCycleComponent()
 {
     this->entity_instance_builder_factory = std::move(entity_instance_builder_factory);
 }
 
 RandomNextIntFactory::~RandomNextIntFactory() = default;
 
-void RandomNextIntFactory::init()
+std::string RandomNextIntFactory::get_component_name()
 {
+    return "RandomNextIntFactory";
 }
 
 EntityInstancePtrOpt RandomNextIntFactory::create_instance()

@@ -6,14 +6,16 @@
 namespace inexor::entity_system::type_system {
 
 OrFactory::OrFactory(EntityInstanceBuilderFactoryPtr entity_instance_builder_factory)
+    : LifeCycleComponent()
 {
     this->entity_instance_builder_factory = std::move(entity_instance_builder_factory);
 }
 
 OrFactory::~OrFactory() = default;
 
-void OrFactory::init()
+std::string OrFactory::get_component_name()
 {
+    return "OrFactory";
 }
 
 EntityInstancePtrOpt OrFactory::create_instance()

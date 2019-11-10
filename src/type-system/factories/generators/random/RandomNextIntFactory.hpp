@@ -1,5 +1,6 @@
 #pragma once
 
+#include "base/LifeCycleComponent.hpp"
 #include "entity-system/factories/entities/entity-instance-builder-factory/EntityInstanceBuilderFactory.hpp"
 #include "entity-system/model/entities/entity-instances/EntityInstance.hpp"
 
@@ -11,7 +12,7 @@ using EntityInstanceBuilderFactoryPtr = std::shared_ptr<EntityInstanceBuilderFac
 
 /// @class RandomNextIntFactory
 /// @brief Factory for creating entity instances of type RANDOM_NEXT_INT.
-class RandomNextIntFactory
+class RandomNextIntFactory : public LifeCycleComponent
 {
     public:
     /// @brief Constructs a factory for creating entity instances of type RANDOM_NEXT_INT.
@@ -22,8 +23,8 @@ class RandomNextIntFactory
     /// Destructor.
     ~RandomNextIntFactory();
 
-    /// Initializes the factory.
-    void init();
+    /// Returns the name of the component
+    std::string get_component_name() override;
 
     /// Creates a counter with the default values: millis = 1000, step = 1, start_value = 0.
     EntityInstancePtrOpt create_instance();

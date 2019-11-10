@@ -1,5 +1,6 @@
 #pragma once
 
+#include "base/LifeCycleComponent.hpp"
 #include "type-system/factories/math/trigonometric/CosFactory.hpp"
 #include "type-system/factories/math/trigonometric/SinFactory.hpp"
 #include "type-system/factories/math/trigonometric/TanFactory.hpp"
@@ -14,7 +15,7 @@ using TanFactoryPtr = std::shared_ptr<TanFactory>;
 
 /// @class TrigonometricFactories
 /// @brief The trigonometric factories.
-class TrigonometricFactories
+class TrigonometricFactories : public LifeCycleComponent
 {
     public:
     /// @brief Constructs the trigonometric factories.
@@ -26,8 +27,8 @@ class TrigonometricFactories
     /// Destructor.
     ~TrigonometricFactories();
 
-    /// Initializes the trigonometric factories.
-    void init();
+    /// Returns the name of the component
+    std::string get_component_name() override;
 
     private:
     /// Factory for creating entity instances of type SIN.

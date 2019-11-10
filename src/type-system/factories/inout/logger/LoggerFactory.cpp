@@ -7,14 +7,16 @@
 namespace inexor::entity_system::type_system {
 
 LoggerFactory::LoggerFactory(EntityInstanceBuilderFactoryPtr entity_instance_builder_factory)
+    : LifeCycleComponent()
 {
     this->entity_instance_builder_factory = std::move(entity_instance_builder_factory);
 }
 
 LoggerFactory::~LoggerFactory() = default;
 
-void LoggerFactory::init()
+std::string LoggerFactory::get_component_name()
 {
+    return "LoggerFactory";
 }
 
 EntityInstancePtrOpt LoggerFactory::create_instance()
