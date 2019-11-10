@@ -57,6 +57,12 @@ void InexorApplication::pre_init(int argc, char *argv[])
     // Configuration manager initialization.
     configuration_module->init(argc, argv);
 
+    // Initialize the command module
+    command_module->pre_init_components();
+
+    // Initialize the rendering.
+//    client_module->pre_init_components();
+
 }
 
 void InexorApplication::init()
@@ -67,7 +73,7 @@ void InexorApplication::init()
     visual_scripting_system_module->init();
 
     // Initialize the command module
-    command_module->init();
+    command_module->init_components();
 
     // Initialize the rendering.
     client_module->init();
@@ -93,7 +99,7 @@ void InexorApplication::run()
         // Shutdown requested?
         if (client_module->is_shutdown_requested())
         {
-            shutdown();
+            destroy();
         }
     }
 
@@ -102,9 +108,11 @@ void InexorApplication::run()
     {
         restart();
     }
+
+    post_destroy();
 }
 
-void InexorApplication::shutdown()
+void InexorApplication::destroy()
 {
     if (!running)
     {
@@ -117,6 +125,9 @@ void InexorApplication::shutdown()
     // Shut down the client module.
     client_module->shutdown();
 
+    // Shut down the command module
+    command_module->destroy_components();
+
     // Shut down the visual scripting module.
     visual_scripting_system_module->shutdown();
 
@@ -127,10 +138,20 @@ void InexorApplication::shutdown()
     spdlog::get(LOGGER_NAME)->info("Shutdown completed");
 }
 
+
+void InexorApplication::post_destroy()
+{
+    // Shut down the command module
+    command_module->post_destroy_components();
+
+    // Shut down the type system.
+    type_system_module->post_destroy_components();
+}
+
 void InexorApplication::restart()
 {
     spdlog::get(LOGGER_NAME)->info("Restarting Inexor...");
-    shutdown();
+    destroy();
     init();
     run();
     spdlog::get(LOGGER_NAME)->info("Restart completed");
@@ -145,7 +166,8 @@ void InexorApplication::sighup_handler(const int signal_number)
 void InexorApplication::sigterm_handler(const int signal_number)
 {
     spdlog::get(LOGGER_NAME)->info("Received SIGTERM signal number {}", signal_number);
-    shutdown();
+    destroy();
+    post_destroy();
 }
 
 } // namespace inexor

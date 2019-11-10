@@ -7,11 +7,17 @@
 namespace inexor::command {
 
 CommandManager::CommandManager(LogManagerPtr log_manager)
+    : LifeCycleComponent()
 {
     this->log_manager = std::move(log_manager);
 }
 
 CommandManager::~CommandManager() = default;
+
+std::string CommandManager::get_component_name()
+{
+    return "CommandManager";
+}
 
 void CommandManager::init()
 {
