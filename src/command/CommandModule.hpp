@@ -1,12 +1,13 @@
 #pragma once
 
+#include "base/LifeCycleComponent.hpp"
 #include "command/managers/CommandManager.hpp"
 
 namespace inexor::command {
 
 /// @class CommandModule
 /// @brief The command module provides a system for executing commands.
-class CommandModule
+class CommandModule : public LifeCycleComponent
 {
     using CommandManangerPtr = std::shared_ptr<CommandManager>;
 
@@ -19,8 +20,8 @@ class CommandModule
     /// Destructor.
     ~CommandModule();
 
-    /// Initialization of the command module.
-    void init();
+    /// Returns the name of the component
+    std::string get_component_name() override;
 
     private:
     /// The command manager.
