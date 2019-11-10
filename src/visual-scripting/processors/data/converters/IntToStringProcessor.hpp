@@ -41,8 +41,8 @@ class IntToStringProcessor : public Processor, public entity_system::EntityInsta
     /// Initialization of the processor.
     void init();
 
-    /// Initializes the processor by registering listeners on newly created entity instances.
-    void init_processor();
+    /// Shut down all the processor.
+    void shutdown();
 
     /// @brief Called when an entity instance of type ADD_INT has been created.
     /// @param entity_instance ?
@@ -58,6 +58,9 @@ class IntToStringProcessor : public Processor, public entity_system::EntityInsta
     void make_signals(const EntityInstancePtr &entity_instance);
 
     private:
+    /// Initializes the processor by registering listeners on newly created entity instances.
+    void init_processor();
+
     /// The entity type manager.
     EntityTypeManagerPtr entity_type_manager;
 

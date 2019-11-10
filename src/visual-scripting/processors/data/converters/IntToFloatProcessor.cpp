@@ -36,6 +36,10 @@ void IntToFloatProcessor::init_processor()
     }
 }
 
+void IntToFloatProcessor::shutdown()
+{
+}
+
 void IntToFloatProcessor::on_entity_instance_created(EntityInstancePtr entity_instance)
 {
     make_signals(entity_instance);
