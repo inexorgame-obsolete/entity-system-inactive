@@ -1,0 +1,34 @@
+type entity_type {
+	entity_type_uuid: ID
+	name: String
+	attributes: [attribute]
+}
+
+type attribute {
+	attribute_uuid: ID
+	name: String
+	datatype: String
+	value: any
+}
+
+type entity_instance {
+	entity_instance_uuid: ID
+	entity_type: [entity_type]
+}
+
+type relationship_instance {
+	relationship_instance_uuid: ID
+	start_node_entity: entity_instance
+	end_node_entity: entity_instance
+	attributes: [attribute]
+}
+
+type relationship_type {
+	relationship_type_uuid: ID
+	name: String
+	start_node_entity_type: entity_type
+	end_node_entity_type: entity_type
+	attributes: [attribute]
+}
+
+scalar any
