@@ -58,7 +58,7 @@ std::string CounterFloatProcessor::get_component_name()
     return "CounterFloatProcessor";
 }
 
-void CounterFloatProcessor::on_entity_instance_created(std::shared_ptr<inexor::entity_system::EntityInstance> entity_instance)
+void CounterFloatProcessor::on_entity_instance_created(EntityInstancePtr entity_instance)
 {
     make_signals(entity_instance);
 }
@@ -71,7 +71,7 @@ void CounterFloatProcessor::on_entity_instance_deleted(const xg::Guid &type_GUID
     // signals[inst_GUID].clear
 }
 
-void CounterFloatProcessor::make_signals(const std::shared_ptr<inexor::entity_system::EntityInstance> &entity_instance)
+void CounterFloatProcessor::make_signals(const EntityInstancePtr &entity_instance)
 {
     spdlog::get(LOGGER_NAME)->debug("Initializing processor COUNTER_FLOAT for newly created entity instance {} of type {}", entity_instance->get_GUID().str(), entity_instance->get_entity_type()->get_type_name());
 
