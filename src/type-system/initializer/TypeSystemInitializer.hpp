@@ -3,11 +3,11 @@
 #include <Corrade/Utility/Resource.h>
 
 #include "base/LifeCycleComponent.hpp"
-#include "entity-system/factories/entities/entity-type-builder-factory/EntityTypeBuilderFactory.hpp"
+#include "entity-system/serializers/EntityTypeJsonSerializer.hpp"
 
 namespace inexor::entity_system::type_system {
 
-using EntityTypeBuilderFactoryPtr = std::shared_ptr<EntityTypeBuilderFactory>;
+using EntityTypeJsonSerializerPtr = std::shared_ptr<serializers::EntityTypeJsonSerializer>;
 
 /// @class TypeSystemInitializer
 /// @brief Initializes the type system using static resources.
@@ -15,8 +15,8 @@ class TypeSystemInitializer : public LifeCycleComponent
 {
     public:
     /// @brief Constructs the initializer of the type system.
-    /// @param entity_type_builder_factory The entity type builder factory.
-    explicit TypeSystemInitializer(EntityTypeBuilderFactoryPtr entity_type_builder_factory);
+    /// @param entity_type_json_serializer The JSON serializer for entity types.
+    explicit TypeSystemInitializer(EntityTypeJsonSerializerPtr entity_type_json_serializer);
 
     /// Destructor.
     ~TypeSystemInitializer();
@@ -31,11 +31,11 @@ class TypeSystemInitializer : public LifeCycleComponent
     std::string get_component_name() override;
 
     /// Loads a type definition
-    void load_type_definition(Corrade::Utility::Resource rs, const std::string &file);
+    void load_type_definition(const Corrade::Utility::Resource &rs, const std::string &file);
 
     private:
-    /// Factory for creating entity types.
-    EntityTypeBuilderFactoryPtr entity_type_builder_factory;
+    /// Serializer for entity types.
+    EntityTypeJsonSerializerPtr entity_type_json_serializer;
 
     /// The resource group for statically included types.
     static constexpr char RESOURCE_GROUP[] = "inexor-type-system";
