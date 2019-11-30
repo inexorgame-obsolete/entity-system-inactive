@@ -3,6 +3,7 @@
 #include "entity-system/factories/BuilderFactories.hpp"
 #include "entity-system/managers/EntityManager.hpp"
 #include "entity-system/managers/RelationManager.hpp"
+#include "entity-system/serializers/EntitySystemSerializers.hpp"
 #include "logging/managers/LogManager.hpp"
 
 namespace inexor::entity_system {
@@ -16,6 +17,7 @@ class EntitySystemModule
     using EntityManagerPtr = std::shared_ptr<EntityManager>;
     using RelationManagerPtr = std::shared_ptr<RelationManager>;
     using BuilderFactoriesPtr = std::shared_ptr<BuilderFactories>;
+    using TypeSystemSerializersPtr = std::shared_ptr<serializers::EntitySystemSerializers>;
     using LogManagerPtr = std::shared_ptr<logging::LogManager>;
 
     /// @brief Constructs the entity system module.
@@ -26,8 +28,9 @@ class EntitySystemModule
     /// @param entity_manager The manager for entity types, entity instances, attribute types and attribute instances.
     /// @param relation_manager The manager for relation types, relation instances, relation attribute types and relation attribute instances.
     /// @param builder_factories The manager for the builder factories.
+    /// @param type_system_serializers The serializers of the type system.
     /// @param log_manager The log manager.
-    EntitySystemModule(EntityManagerPtr entity_manager, RelationManagerPtr relation_manager, BuilderFactoriesPtr builder_factories, LogManagerPtr log_manager);
+    EntitySystemModule(EntityManagerPtr entity_manager, RelationManagerPtr relation_manager, BuilderFactoriesPtr builder_factories, TypeSystemSerializersPtr type_system_serializers, LogManagerPtr log_manager);
 
     /// @brief Destructs the entity system module.
     ~EntitySystemModule();
@@ -55,6 +58,9 @@ class EntitySystemModule
 
     /// The manager for the builder factories.
     BuilderFactoriesPtr builder_factories;
+
+    /// The type system serializers.
+    TypeSystemSerializersPtr type_system_serializers;
 
     /// The manager for logging.
     LogManagerPtr log_manager;

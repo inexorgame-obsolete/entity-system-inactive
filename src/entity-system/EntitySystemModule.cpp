@@ -4,7 +4,7 @@
 
 namespace inexor::entity_system {
 
-EntitySystemModule::EntitySystemModule(EntityManagerPtr entity_manager, RelationManagerPtr relation_manager, BuilderFactoriesPtr builder_factories, LogManagerPtr log_manager)
+EntitySystemModule::EntitySystemModule(EntityManagerPtr entity_manager, RelationManagerPtr relation_manager, BuilderFactoriesPtr builder_factories, TypeSystemSerializersPtr type_system_serializers, LogManagerPtr log_manager)
 {
     // Use lock guard to ensure thread safety during write operations!
     std::lock_guard<std::mutex> lock(entity_system_module);
@@ -12,6 +12,7 @@ EntitySystemModule::EntitySystemModule(EntityManagerPtr entity_manager, Relation
     this->entity_manager = std::move(entity_manager);
     this->relation_manager = std::move(relation_manager);
     this->builder_factories = std::move(builder_factories);
+    this->type_system_serializers = std::move(type_system_serializers);
     this->log_manager = std::move(log_manager);
 }
 
