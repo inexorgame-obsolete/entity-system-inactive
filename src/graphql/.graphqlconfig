@@ -1,0 +1,15 @@
+{
+  "name": "Inexor Entity System GraphQL Schema",
+  "schemaPath": "schema.entities.graphql",
+  "extensions": {
+    "endpoints": {
+      "Default GraphQL Endpoint": {
+        "url": "http://localhost:31415/graphql",
+        "headers": {
+          "user-agent": "JS GraphQL"
+        },
+        "introspect": false
+      }
+    }
+  }
+}
