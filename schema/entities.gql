@@ -14,6 +14,7 @@ type attribute {
 type entity_instance {
 	entity_instance_uuid: ID
 	entity_type: [entity_type]
+	attributes: [attribute]
 }
 
 type relationship_instance {
@@ -32,3 +33,15 @@ type relationship_type {
 }
 
 scalar any
+
+type Query {
+  	entity_types: [entity_type]
+	attributes: [attribute]
+	entity_instances: [entity_instance]
+	relationship_instances: [relationship_instance]
+	relationship_types: [relationship_type]
+}
+
+schema {
+	query: Query
+}
