@@ -41,7 +41,7 @@ void CounterFloatProcessor::init_processor()
         entity_instance_manager->register_on_created(this->entity_type->get_GUID(), shared_from_this());
         entity_instance_manager->register_on_deleted(this->entity_type->get_GUID(), shared_from_this());
     } else {
-        spdlog::get(LOGGER_NAME)->error("Failed to initialize processor {}: Entity type does not exist", CounterFloat::TYPE_NAME);
+        spdlog::get(LOGGER_NAME)->error("Failed to initialize processor {}: Entity type {} does not exist", get_component_name(), CounterFloat::TYPE_NAME);
     }
 }
 
