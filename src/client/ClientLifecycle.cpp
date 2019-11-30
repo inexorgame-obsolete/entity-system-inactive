@@ -5,6 +5,7 @@
 namespace inexor::client {
 
 ClientLifecycle::ClientLifecycle(LogManagerPtr log_manager)
+    : LifeCycleComponent()
 {
     this->log_manager = std::move(log_manager);
     this->shutdown_requested = false;
@@ -18,10 +19,6 @@ void ClientLifecycle::init()
     log_manager->register_logger(LOGGER_NAME);
     this->shutdown_requested = false;
     this->restart_requested = false;
-}
-
-void ClientLifecycle::shutdown()
-{
 }
 
 void ClientLifecycle::request_shutdown()
@@ -42,6 +39,11 @@ bool ClientLifecycle::is_shutdown_requested()
 bool ClientLifecycle::is_restart_requested()
 {
     return restart_requested;
+}
+
+std::string ClientLifecycle::get_component_name()
+{
+    return "ClientLifecycle";
 }
 
 } // namespace inexor::client

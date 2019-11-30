@@ -45,7 +45,7 @@ struct TriangleVertex
 
 /// @class TriangleExample
 /// @brief Management of the rendering.
-class TriangleExample : public input::WindowKeyReleasedListener, public input::WindowKeyPressedOrRepeatedListener, public std::enable_shared_from_this<TriangleExample>
+class TriangleExample : public LifeCycleComponent, public input::WindowKeyReleasedListener, public input::WindowKeyPressedOrRepeatedListener, public std::enable_shared_from_this<TriangleExample>
 {
     public:
     /// @brief Constructor.
@@ -63,10 +63,13 @@ class TriangleExample : public input::WindowKeyReleasedListener, public input::W
     ~TriangleExample();
 
     /// Initialize triangle manager.
-    void init();
+    void init() override;
 
     /// Shut down the triangle manager.
-    void shutdown();
+    void destroy() override;
+
+    /// Returns the name of the component
+    std::string get_component_name() override;
 
     /// Window key released
     void on_window_key_released(EntityInstancePtr window, int key, int scancode, int mods) override;

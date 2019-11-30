@@ -13,7 +13,7 @@ using namespace react;
 
 /// @class StdErrProcessor
 /// @brief Processor for entity instances of type CONSOLE_STDERR.
-class StdErrProcessor : public Processor, public entity_system::EntityInstanceCreatedListener, public entity_system::EntityInstanceDeletedListener, public std::enable_shared_from_this<StdErrProcessor>
+class StdErrProcessor : public Processor, public LifeCycleComponent, public entity_system::EntityInstanceCreatedListener, public entity_system::EntityInstanceDeletedListener, public std::enable_shared_from_this<StdErrProcessor>
 {
 
     using EntityTypeManagerPtr = std::shared_ptr<entity_system::EntityTypeManager>;
@@ -33,8 +33,11 @@ class StdErrProcessor : public Processor, public entity_system::EntityInstanceCr
     /// Destructor.
     ~StdErrProcessor() override;
 
-    /// Initialization of the processor.
-    void init();
+    /// Initializes the processor.
+    void init() override;
+
+    /// Returns the name of the component
+    std::string get_component_name() override;
 
     /// Called when an entity instance of type CONSOLE_STDERR has been created.
     /// @param entity_instance ?

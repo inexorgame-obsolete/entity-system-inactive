@@ -10,7 +10,7 @@ using GateProcessorsPtr = std::shared_ptr<GateProcessors>;
 
 /// @class LogicalProcessors
 /// @brief Provides processors.
-class LogicalProcessors
+class LogicalProcessors : public LifeCycleComponent
 {
     public:
     /// @brief Constructs the processors for logical operations.
@@ -22,8 +22,8 @@ class LogicalProcessors
     /// Destructor.
     ~LogicalProcessors();
 
-    /// Initialization of the processors for logical operations.
-    void init();
+    /// Returns the name of the component
+    std::string get_component_name() override;
 
     private:
     /// The processors for comparison operations.

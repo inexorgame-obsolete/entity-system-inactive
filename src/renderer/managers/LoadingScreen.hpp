@@ -51,7 +51,7 @@ struct Movement
 
 /// @class LoadingScreen
 /// @brief Shows a loading screen during startup.
-class LoadingScreen : public input::WindowKeyReleasedListener,
+class LoadingScreen : public LifeCycleComponent, public input::WindowKeyReleasedListener,
                       public input::WindowKeyPressedOrRepeatedListener,
                       public input::WindowCharInputListener,
                       public input::WindowMouseButtonChangedListener,
@@ -72,10 +72,13 @@ class LoadingScreen : public input::WindowKeyReleasedListener,
     ~LoadingScreen();
 
     /// Initialize the loading screen.
-    void init();
+    void init() override;
 
     /// Shut down the loading screen.
-    void shutdown();
+    void destroy() override;
+
+    /// Returns the name of the component
+    std::string get_component_name() override;
 
     /// Window char input
     void on_window_char_input(EntityInstancePtr window, std::string character, unsigned int codepoint) override;

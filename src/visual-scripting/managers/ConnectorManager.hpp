@@ -27,7 +27,7 @@ namespace inexor::visual_scripting {
 
 	/// @class ConnectorManager
     /// @brief Management of the connectors.
-	class ConnectorManager
+	class ConnectorManager : public LifeCycleComponent
 	{
 		public:
 
@@ -41,8 +41,8 @@ namespace inexor::visual_scripting {
 			/// Destructor.
 			~ConnectorManager();
 
-			/// Initialization of the ConnectionManager.
-			void init();
+        /// Returns the name of the component
+        std::string get_component_name() override;
 
 			/// @brief Creates a connector from an entity attribute instance to another.
 			/// @param output_attr A const reference to the shared pointer of the entity

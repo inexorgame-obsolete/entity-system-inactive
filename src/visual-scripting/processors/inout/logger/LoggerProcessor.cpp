@@ -19,7 +19,7 @@ using EntityAttributeInstancePtrOptional = std::optional<std::shared_ptr<EntityA
 using EntityTypePtr = std::shared_ptr<entity_system::EntityType>;
 
 LoggerProcessor::LoggerProcessor(EntityTypeManagerPtr entity_type_manager, EntityInstanceManagerPtr entity_instance_manager, const LogManagerPtr &logger_manager)
-    : Processor(), entity_type_manager(std::move(entity_type_manager)), entity_instance_manager(std::move(entity_instance_manager)), log_manager(log_manager)
+    : Processor(), LifeCycleComponent(), entity_type_manager(std::move(entity_type_manager)), entity_instance_manager(std::move(entity_instance_manager)), log_manager(log_manager)
 {
     this->logger = spdlog::default_logger();
 }
@@ -42,6 +42,11 @@ void LoggerProcessor::init_processor()
     } else {
         spdlog::get(LOGGER_NAME)->error("Failed to initialize processor {}: Entity type does not exist", Logger::TYPE_NAME);
     }
+}
+
+std::string LoggerProcessor::get_component_name()
+{
+    return "LoggerProcessor";
 }
 
 void LoggerProcessor::on_entity_instance_created(EntityInstancePtr entity_instance)

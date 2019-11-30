@@ -21,7 +21,7 @@ using DataValue = entity_system::DataValue;
 using DataType = entity_system::DataType;
 
 CounterFloatProcessor::CounterFloatProcessor(EntityTypeManagerPtr entity_type_manager, EntityInstanceManagerPtr entity_instance_manager, LogManagerPtr log_manager)
-    : Processor(), entity_type_manager(std::move(entity_type_manager)), entity_instance_manager(std::move(entity_instance_manager)), log_manager(std::move(log_manager))
+    : Processor(), LifeCycleComponent(), entity_type_manager(std::move(entity_type_manager)), entity_instance_manager(std::move(entity_instance_manager)), log_manager(std::move(log_manager))
 {
 }
 
@@ -45,12 +45,17 @@ void CounterFloatProcessor::init_processor()
     }
 }
 
-void CounterFloatProcessor::shutdown()
+void CounterFloatProcessor::destroy()
 {
     for (auto kv : running)
     {
         kv.second = false;
     }
+}
+
+std::string CounterFloatProcessor::get_component_name()
+{
+    return "CounterFloatProcessor";
 }
 
 void CounterFloatProcessor::on_entity_instance_created(std::shared_ptr<inexor::entity_system::EntityInstance> entity_instance)

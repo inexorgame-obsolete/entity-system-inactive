@@ -5,6 +5,7 @@
 namespace inexor::visual_scripting {
 
 GeneratorProcessors::GeneratorProcessors(CounterProcessorsPtr counter_processors, TimerProcessorsPtr timer_processors, RandomProcessorsPtr random_processors)
+    : LifeCycleComponent(counter_processors, timer_processors, random_processors)
 {
     this->counter_processors = std::move(counter_processors);
     this->timer_processors = std::move(timer_processors);
@@ -13,18 +14,9 @@ GeneratorProcessors::GeneratorProcessors(CounterProcessorsPtr counter_processors
 
 GeneratorProcessors::~GeneratorProcessors() = default;
 
-void GeneratorProcessors::init()
+std::string GeneratorProcessors::get_component_name()
 {
-    counter_processors->init();
-    timer_processors->init();
-    random_processors->init();
-}
-
-void GeneratorProcessors::shutdown()
-{
-    //		random_processors->init();
-    //		timer_processors->init();
-    counter_processors->shutdown();
+    return "GeneratorProcessors";
 }
 
 } // namespace inexor::visual_scripting

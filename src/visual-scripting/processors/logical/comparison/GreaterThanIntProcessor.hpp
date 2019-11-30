@@ -14,7 +14,7 @@ using namespace react;
 
 /// @class GreaterThanIntProcessor
 /// @brief Processor for entity instances of type GREATER_THAN_INT.
-class GreaterThanIntProcessor : public Processor, public entity_system::EntityInstanceCreatedListener, public entity_system::EntityInstanceDeletedListener, public std::enable_shared_from_this<GreaterThanIntProcessor>
+class GreaterThanIntProcessor : public Processor, public LifeCycleComponent, public entity_system::EntityInstanceCreatedListener, public entity_system::EntityInstanceDeletedListener, public std::enable_shared_from_this<GreaterThanIntProcessor>
 {
 
     using EntityTypeManagerPtr = std::shared_ptr<entity_system::EntityTypeManager>;
@@ -35,8 +35,11 @@ class GreaterThanIntProcessor : public Processor, public entity_system::EntityIn
     /// Destructor.
     ~GreaterThanIntProcessor() override;
 
-    /// Initialization of the processor.
-    void init();
+    /// Initializes the processor.
+    void init() override;
+
+    /// Returns the name of the component
+    std::string get_component_name() override;
 
     /// Called when an entity instance of type GREATER_THAN_INT has been created.
     void on_entity_instance_created(EntityInstancePtr entity_instance) override;

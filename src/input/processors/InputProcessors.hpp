@@ -1,5 +1,6 @@
 #pragma once
 
+#include "base/LifeCycleComponent.hpp"
 #include "input/processors/GlobalKeyProcessor.hpp"
 #include "input/processors/GlobalMouseButtonProcessor.hpp"
 
@@ -10,7 +11,7 @@ using GlobalMouseButtonProcessorPtr = std::shared_ptr<GlobalMouseButtonProcessor
 
 /// @class InputProcessors
 /// @brief Management of the processors for input handling.
-class InputProcessors
+class InputProcessors : public LifeCycleComponent
 {
     public:
     /// @brief Constructs the processors for input handling.
@@ -22,8 +23,8 @@ class InputProcessors
     /// Destructor.
     ~InputProcessors();
 
-    /// Initialization of the processors for input handling.
-    void init();
+    /// Returns the name of the component
+    std::string get_component_name() override;
 
     private:
     /// Processor for the entity type 'GLOBAL_KEY'.

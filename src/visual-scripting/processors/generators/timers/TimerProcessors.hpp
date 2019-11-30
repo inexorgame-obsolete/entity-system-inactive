@@ -8,7 +8,7 @@ using TimerTickProcessorPtr = std::shared_ptr<TimerTickProcessor>;
 
 /// @class TimerProcessors
 /// @brif Provides processors for timers.
-class TimerProcessors
+class TimerProcessors : public LifeCycleComponent
 {
     public:
     /// @brief Constructs the processors for timers.
@@ -19,8 +19,8 @@ class TimerProcessors
     /// Destructor.
     ~TimerProcessors();
 
-    /// Initialization of the processors for timers.
-    void init();
+    /// Returns the name of the component
+    std::string get_component_name() override;
 
     private:
     /// Processor for the entity type TIMER_TICK.

@@ -1,5 +1,6 @@
 #pragma once
 
+#include "base/LifeCycleComponent.hpp"
 #include "input/listeners/MouseButtonChangedListener.hpp"
 #include "input/listeners/MouseButtonPressedListener.hpp"
 #include "input/listeners/MouseButtonReleasedListener.hpp"
@@ -36,7 +37,7 @@ using SignalMouseScrolledPtr = std::shared_ptr<SignalMouseScrolled>;
 
 /// @class MouseInputManager
 /// @brief Management of the Mouse input data.
-class MouseInputManager : public std::enable_shared_from_this<MouseInputManager>
+class MouseInputManager : public LifeCycleComponent, public std::enable_shared_from_this<MouseInputManager>
 {
     public:
     /// @brief Constructor.
@@ -48,10 +49,13 @@ class MouseInputManager : public std::enable_shared_from_this<MouseInputManager>
     ~MouseInputManager();
 
     /// Initialize the mouse input manager.
-    void init();
+    void init() override;
 
     /// Shut down the mouse input manager.
-    void shutdown();
+    void destroy() override;
+
+    /// Returns the name of the component
+    std::string get_component_name() override;
 
     /// @brief Creates a new entity instance of type 'GLOBAL_MOUSE_BUTTON'.
     /// @param button The button number.

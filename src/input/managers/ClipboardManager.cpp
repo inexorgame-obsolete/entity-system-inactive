@@ -12,6 +12,7 @@ namespace inexor::input {
 using StringConstant = entity_system::type_system::StringConstant;
 
 ClipboardManager::ClipboardManager(StringConstantFactoryPtr string_constant_factory, LogManagerPtr log_manager)
+    : LifeCycleComponent()
 {
     this->string_constant_factory = std::move(string_constant_factory);
     this->log_manager = std::move(log_manager);
@@ -26,9 +27,14 @@ void ClipboardManager::init()
     this->clipboard = string_constant_factory->create_instance(CONSTANT_NAME).value();
 }
 
-void ClipboardManager::shutdown()
+void ClipboardManager::destroy()
 {
     // TODO: remove entity instance.
+}
+
+std::string ClipboardManager::get_component_name()
+{
+    return "ClipboardManager";
 }
 
 std::string to_string(const char *s)

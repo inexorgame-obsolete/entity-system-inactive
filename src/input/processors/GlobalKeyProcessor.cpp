@@ -18,7 +18,7 @@ using EntityTypePtr = std::shared_ptr<entity_system::EntityType>;
 using EntityTypePtrOpt = std::optional<EntityTypePtr>;
 
 GlobalKeyProcessor::GlobalKeyProcessor(EntityTypeManagerPtr entity_type_manager, EntityInstanceManagerPtr entity_instance_manager, KeyboardInputManagerPtr keyboard_input_manager, LogManagerPtr log_manager)
-    : Processor(), entity_type_manager(std::move(entity_type_manager)), entity_instance_manager(std::move(entity_instance_manager)), keyboard_input_manager(std::move(keyboard_input_manager)),
+    : LifeCycleComponent(), Processor(), entity_type_manager(std::move(entity_type_manager)), entity_instance_manager(std::move(entity_instance_manager)), keyboard_input_manager(std::move(keyboard_input_manager)),
       log_manager(std::move(log_manager))
 {
 }
@@ -42,6 +42,11 @@ void GlobalKeyProcessor::init_processor()
     } else {
         spdlog::get(LOGGER_NAME)->error("Failed to initialize processor {}: Entity type does not exist", GlobalKey::TYPE_NAME);
     }
+}
+
+std::string GlobalKeyProcessor::get_component_name()
+{
+    return "GlobalKeyProcessor";
 }
 
 void GlobalKeyProcessor::on_entity_instance_created(EntityInstancePtr entity_instance)

@@ -18,7 +18,7 @@ using namespace react;
 /// @brief Processor which listens on the creation of entity instances of type COUNTER_FLOAT.
 /// @note Newly created entity instances of type COUNTER_FLOAT will be initialized by connecting
 /// the input attributes with a calculation function and the result with the output attribute.
-class CounterFloatProcessor : public Processor, public entity_system::EntityInstanceCreatedListener, public entity_system::EntityInstanceDeletedListener, public std::enable_shared_from_this<CounterFloatProcessor>
+class CounterFloatProcessor : public Processor, public LifeCycleComponent, public entity_system::EntityInstanceCreatedListener, public entity_system::EntityInstanceDeletedListener, public std::enable_shared_from_this<CounterFloatProcessor>
 {
 
     using EntityTypeManagerPtr = std::shared_ptr<entity_system::EntityTypeManager>;
@@ -41,11 +41,14 @@ class CounterFloatProcessor : public Processor, public entity_system::EntityInst
     /// Destructor.
     ~CounterFloatProcessor() override;
 
-    /// Initializes the COUNTER_FLOAT processor by registering listeners on newly created entity instances of type COUNTER_FLOAT.
-    void init();
+    /// Initializes the processor.
+    void init() override;
 
     /// Shut down all threads of this processor.
-    void shutdown();
+    void destroy() override;
+
+    /// Returns the name of the component
+    std::string get_component_name() override;
 
     /// @brief Called when an entity instance of type COUNTER_FLOAT has been created.
     /// @param entity_instance ?

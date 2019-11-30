@@ -11,6 +11,7 @@
 namespace inexor::renderer {
 
 RendererModule::RendererModule(FontManagerPtr font_manager, LoadingScreenPtr loading_screen, TriangleExamplePtr triangle_example)
+    : LifeCycleComponent(font_manager, loading_screen, triangle_example)
 {
     this->font_manager = std::move(font_manager);
     this->loading_screen = std::move(loading_screen);
@@ -19,18 +20,9 @@ RendererModule::RendererModule(FontManagerPtr font_manager, LoadingScreenPtr loa
 
 RendererModule::~RendererModule() = default;
 
-void RendererModule::init()
+std::string RendererModule::get_component_name()
 {
-    font_manager->init();
-    loading_screen->init();
-    triangle_example->init();
-}
-
-void RendererModule::shutdown()
-{
-    triangle_example->shutdown();
-    loading_screen->shutdown();
-    font_manager->shutdown();
+    return "RendererModule";
 }
 
 void RendererModule::update()

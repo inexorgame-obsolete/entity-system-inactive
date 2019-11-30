@@ -19,7 +19,7 @@ using MathProcessorsPtr = std::shared_ptr<MathProcessors>;
 
 /// @class Processors
 /// @brief Provides the processors.
-class Processors
+class Processors : public LifeCycleComponent
 {
     public:
     /// @brief Constructs the processors.
@@ -35,11 +35,8 @@ class Processors
     /// Destructor.
     ~Processors();
 
-    /// Initialization of the processors.
-    void init();
-
-    /// Shut down the processors.
-    void shutdown();
+    /// Returns the name of the component
+    std::string get_component_name() override;
 
     private:
     /// The registry for processors.

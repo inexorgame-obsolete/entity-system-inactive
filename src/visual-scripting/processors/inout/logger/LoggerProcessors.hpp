@@ -8,7 +8,7 @@ using LoggerProcessorPtr = std::shared_ptr<LoggerProcessor>;
 
 /// @class LoggerProcessors
 /// @brief Management of the logger processors.
-class LoggerProcessors
+class LoggerProcessors : public LifeCycleComponent
 {
     public:
     /// @brief Constructs the logger processors.
@@ -19,8 +19,8 @@ class LoggerProcessors
     /// Destructor.
     ~LoggerProcessors();
 
-    /// Initialization of the logger processors.
-    void init();
+    /// Returns the name of the component
+    std::string get_component_name() override;
 
     private:
     /// Processor for the entity type LOGGER.

@@ -20,7 +20,7 @@ using namespace react;
 /// @brief Processor which listens on the creation of entity instances of type COS.
 /// @note Newly created entity instances of type COS will be initialized by connecting the
 /// input attributes with a calculation function and the result with the output attribute.
-class CosProcessor : public Processor, public entity_system::EntityInstanceCreatedListener, public entity_system::EntityInstanceDeletedListener, public std::enable_shared_from_this<CosProcessor>
+class CosProcessor : public Processor, public LifeCycleComponent, public entity_system::EntityInstanceCreatedListener, public entity_system::EntityInstanceDeletedListener, public std::enable_shared_from_this<CosProcessor>
 {
 
     using EntityTypeManagerPtr = std::shared_ptr<entity_system::EntityTypeManager>;
@@ -46,7 +46,10 @@ class CosProcessor : public Processor, public entity_system::EntityInstanceCreat
     ~CosProcessor() override;
 
     /// Initializes the processor.
-    void init();
+    void init() override;
+
+    /// Returns the name of the component
+    std::string get_component_name() override;
 
     /// @brief Called when an entity instance of type SIN has been created.
     /// @param entity_instance ?

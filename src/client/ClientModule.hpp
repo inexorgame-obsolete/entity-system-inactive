@@ -1,5 +1,6 @@
 #pragma once
 
+#include "base/LifeCycleComponent.hpp"
 #include "ClientLifecycle.hpp"
 #include "audio/AudioModule.hpp"
 #include "input/InputModule.hpp"
@@ -10,7 +11,7 @@ namespace inexor::client {
 
 /// @class ClientModule
 /// @brief This module contains all modules for the Inexor Client.
-class ClientModule
+class ClientModule : public LifeCycleComponent
 {
     using ClientLifecyclePtr = std::shared_ptr<ClientLifecycle>;
     using AudioModulePtr = std::shared_ptr<audio::AudioModule>;
@@ -20,7 +21,6 @@ class ClientModule
 
     public:
     /// @brief Constructor.
-    /// @note The dependencies of this class will be injected automatically.
     /// @param audio_module The audio module.
     /// @param input_module The input module.
     /// @param renderer_module The renderer module.
@@ -28,12 +28,6 @@ class ClientModule
 
     /// Destructor.
     ~ClientModule();
-
-    /// Initialization of the client module.
-    void init();
-
-    /// Shut down the client module.
-    void shutdown();
 
     /// Update the client module.
     void update();
@@ -43,6 +37,9 @@ class ClientModule
 
     /// Returns true, if the application should be restarted.
     bool is_restart_requested();
+
+    /// Returns the name of the component
+    std::string get_component_name() override;
 
     private:
     /// The client lifecycle.

@@ -61,7 +61,7 @@ void InexorApplication::pre_init(int argc, char *argv[])
     command_module->pre_init_components();
 
     // Initialize the rendering.
-//    client_module->pre_init_components();
+    client_module->pre_init_components();
 
 }
 
@@ -70,13 +70,13 @@ void InexorApplication::init()
     spdlog::get(LOGGER_NAME)->info("Starting Inexor...");
 
     // Initialize the visual scripting.
-    visual_scripting_system_module->init();
+    visual_scripting_system_module->init_components();
 
     // Initialize the command module
     command_module->init_components();
 
     // Initialize the rendering.
-    client_module->init();
+    client_module->init_components();
 }
 
 void InexorApplication::run()
@@ -123,13 +123,13 @@ void InexorApplication::destroy()
     spdlog::get(LOGGER_NAME)->info("Shutting down Inexor...");
 
     // Shut down the client module.
-    client_module->shutdown();
+    client_module->destroy_components();
 
     // Shut down the command module
     command_module->destroy_components();
 
     // Shut down the visual scripting module.
-    visual_scripting_system_module->shutdown();
+    visual_scripting_system_module->destroy_components();
 
     // Shut down the type system.
     type_system_module->destroy_components();
@@ -141,8 +141,14 @@ void InexorApplication::destroy()
 
 void InexorApplication::post_destroy()
 {
+    // Shut down the client module
+    client_module->post_destroy_components();
+
     // Shut down the command module
     command_module->post_destroy_components();
+
+    // Shut down the visual scripting module.
+    // visual_scripting_system_module->post_destroy_components();
 
     // Shut down the type system.
     type_system_module->post_destroy_components();

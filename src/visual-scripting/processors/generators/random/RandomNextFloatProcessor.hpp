@@ -20,7 +20,7 @@ namespace inexor::visual_scripting {
 /// @brief Processor which listens on the creation of entity instances of type RANDOM_NEXT_FLOAT.
 /// @note Newly created entity instances of type RANDOM_NEXT_FLOAT will be initialized by connecting the
 /// input attributes with a calculation function and the result with the output attribute.
-class RandomNextFloatProcessor : public Processor, public entity_system::EntityInstanceCreatedListener, public entity_system::EntityInstanceDeletedListener, public std::enable_shared_from_this<RandomNextFloatProcessor>
+class RandomNextFloatProcessor : public Processor, public LifeCycleComponent, public entity_system::EntityInstanceCreatedListener, public entity_system::EntityInstanceDeletedListener, public std::enable_shared_from_this<RandomNextFloatProcessor>
 {
 
     using EntityTypeManagerPtr = std::shared_ptr<entity_system::EntityTypeManager>;
@@ -43,8 +43,11 @@ class RandomNextFloatProcessor : public Processor, public entity_system::EntityI
     /// Destructor.
     ~RandomNextFloatProcessor() override;
 
-    /// Initializes the RANDOM_NEXT_FLOAT processor by registering listeners on newly created entity instances of type RANDOM_NEXT_FLOAT.
-    void init();
+    /// Initializes the processor.
+    void init() override;
+
+    /// Returns the name of the component
+    std::string get_component_name() override;
 
     /// @brief Called when an entity instance of type RANDOM_NEXT_FLOAT has been created.
     /// @param entity_instance ?

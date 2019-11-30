@@ -24,7 +24,7 @@ using InRangeFloatProcessorPtr = std::shared_ptr<InRangeFloatProcessor>;
 
 /// @class ComparisonProcessors
 /// @brief Provides the processors for comparison operations.
-class ComparisonProcessors
+class ComparisonProcessors : public LifeCycleComponent
 {
     public:
     /// @brief Constructs the processors for comparison operations.
@@ -45,8 +45,8 @@ class ComparisonProcessors
     /// Destructor.
     ~ComparisonProcessors();
 
-    /// Initialization of the processors for comparison operations.
-    void init();
+    /// Returns the name of the component
+    std::string get_component_name() override;
 
     private:
     /// Processor for the entity type EQUALS_BOOL.

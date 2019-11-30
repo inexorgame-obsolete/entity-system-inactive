@@ -124,9 +124,14 @@ void LoadingScreen::init()
     }
 }
 
-void LoadingScreen::shutdown()
+void LoadingScreen::destroy()
 {
     window_manager->destroy_window(window);
+}
+
+std::string LoadingScreen::get_component_name()
+{
+    return "LoadingScreen";
 }
 
 void toggle_raw(GLFWwindow *glfw_window, int window_attribute)

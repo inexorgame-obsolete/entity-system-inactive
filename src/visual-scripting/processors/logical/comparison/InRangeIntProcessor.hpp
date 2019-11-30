@@ -14,7 +14,7 @@ using namespace react;
 
 /// @class InRangeIntProcessor
 /// @brief Processor for entity instances of type IN_RANGE_INT.
-class InRangeIntProcessor : public Processor, public entity_system::EntityInstanceCreatedListener, public entity_system::EntityInstanceDeletedListener, public std::enable_shared_from_this<InRangeIntProcessor>
+class InRangeIntProcessor : public Processor, public LifeCycleComponent, public entity_system::EntityInstanceCreatedListener, public entity_system::EntityInstanceDeletedListener, public std::enable_shared_from_this<InRangeIntProcessor>
 {
 
     using EntityTypeManagerPtr = std::shared_ptr<entity_system::EntityTypeManager>;
@@ -35,8 +35,11 @@ class InRangeIntProcessor : public Processor, public entity_system::EntityInstan
     /// Destructor.
     ~InRangeIntProcessor() override;
 
-    /// Initialization of the processor.
-    void init();
+    /// Initializes the processor.
+    void init() override;
+
+    /// Returns the name of the component
+    std::string get_component_name() override;
 
     /// @brief Called when an entity instance of type IN_RANGE_INT has been created.
     /// @param entity_instance ?

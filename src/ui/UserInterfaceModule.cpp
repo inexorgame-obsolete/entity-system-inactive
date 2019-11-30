@@ -6,8 +6,10 @@
 
 namespace inexor::ui {
 
-UserInterfaceModule::UserInterfaceModule(MonitorManagerPtr monitor_manager, WindowManagerPtr window_manager)
+UserInterfaceModule::UserInterfaceModule(UserInterfaceFactoriesPtr user_interface_factories, MonitorManagerPtr monitor_manager, WindowManagerPtr window_manager)
+    : LifeCycleComponent(user_interface_factories, monitor_manager, window_manager)
 {
+    this->user_interface_factories = std::move(user_interface_factories);
     this->monitor_manager = std::move(monitor_manager);
     this->window_manager = std::move(window_manager);
 }
@@ -16,8 +18,7 @@ UserInterfaceModule::~UserInterfaceModule() = default;
 
 void UserInterfaceModule::init()
 {
-    // TODO: Move initialization of GLFW upwards (ClientModule)
-    // Initialize the GLFW library.
+    // Initializes the GLFW library.
 
     // Set error callback
     glfwSetErrorCallback([](int error_code, const char *error_message) {
@@ -31,16 +32,10 @@ void UserInterfaceModule::init()
         spdlog::error("Failed to initialize glfw!");
         std::exit(1);
     }
-
-    monitor_manager->init();
-    window_manager->init();
 }
 
-void UserInterfaceModule::shutdown()
+void UserInterfaceModule::destroy()
 {
-    window_manager->shutdown();
-    monitor_manager->shutdown();
-
     // Ensure we have unset all callbacks and then terminate
     glfwSetErrorCallback(nullptr);
 
@@ -55,6 +50,11 @@ void UserInterfaceModule::update()
         // Poll for and process events
         glfwPollEvents();
     });
+}
+
+std::string UserInterfaceModule::get_component_name()
+{
+    return "UserInterfaceModule";
 }
 
 } // namespace inexor::renderer

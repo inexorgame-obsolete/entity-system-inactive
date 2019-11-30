@@ -12,7 +12,7 @@ using RandomProcessorsPtr = std::shared_ptr<RandomProcessors>;
 
 /// @class GeneratorProcessors
 /// @brief Provides processors for generators like counters and timers.
-class GeneratorProcessors
+class GeneratorProcessors : public LifeCycleComponent
 {
     public:
     /// @brief Constructs the processors for generators like counters and timers.
@@ -25,8 +25,8 @@ class GeneratorProcessors
     /// Destructor.
     ~GeneratorProcessors();
 
-    /// Initialization of the processors for generators like counters and timers.
-    void init();
+    /// Returns the name of the component
+    std::string get_component_name() override;
 
     /// Shut down the generator processors.
     void shutdown();

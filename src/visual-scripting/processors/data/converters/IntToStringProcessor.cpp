@@ -12,7 +12,7 @@ using IntToString = entity_system::type_system::IntToString;
 using EntityAttributeInstancePtrOptional = std::optional<std::shared_ptr<EntityAttributeInstance>>;
 
 IntToStringProcessor::IntToStringProcessor(EntityTypeManagerPtr entity_type_manager, EntityInstanceManagerPtr entity_instance_manager, LogManagerPtr log_manager)
-    : Processor(), entity_type_manager(std::move(entity_type_manager)), entity_instance_manager(std::move(entity_instance_manager)), log_manager(std::move(log_manager))
+    : Processor(), LifeCycleComponent(), entity_type_manager(std::move(entity_type_manager)), entity_instance_manager(std::move(entity_instance_manager)), log_manager(std::move(log_manager))
 {
 }
 
@@ -36,8 +36,13 @@ void IntToStringProcessor::init_processor()
     }
 }
 
-void IntToStringProcessor::shutdown()
+void IntToStringProcessor::destroy()
 {
+}
+
+std::string IntToStringProcessor::get_component_name()
+{
+    return "IntToStringProcessor";
 }
 
 void IntToStringProcessor::on_entity_instance_created(EntityInstancePtr entity_instance)

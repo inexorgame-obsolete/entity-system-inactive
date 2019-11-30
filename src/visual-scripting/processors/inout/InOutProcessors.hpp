@@ -10,7 +10,7 @@ using LoggerProcessorsPtr = std::shared_ptr<LoggerProcessors>;
 
 /// @class InOutProcessors
 /// @brief Provides processors for input and output.
-class InOutProcessors
+class InOutProcessors : public LifeCycleComponent
 {
     public:
     /// @brief Constructs the processors for input and output.
@@ -22,8 +22,8 @@ class InOutProcessors
     /// Destructor.
     ~InOutProcessors();
 
-    /// Initialization of the processors for input and output.
-    void init();
+    /// Returns the name of the component
+    std::string get_component_name() override;
 
     private:
     /// The processors for console handling.

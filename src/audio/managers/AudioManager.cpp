@@ -19,6 +19,7 @@
 namespace inexor::audio {
 
 AudioManager::AudioManager(LogManagerPtr log_manager)
+    : LifeCycleComponent()
 {
     this->log_manager = std::move(log_manager);
     this->device = nullptr;
@@ -27,14 +28,14 @@ AudioManager::AudioManager(LogManagerPtr log_manager)
 
 AudioManager::~AudioManager() = default;
 
-int AudioManager::init()
+void AudioManager::init()
 {
     // Initialise an OpenAL device.
     device = alcOpenDevice(nullptr);
     if (!device)
     {
         spdlog::get(LOGGER_NAME)->critical("Failed to create an OpenAL device!");
-        return -1;
+        return;
     }
 
     // Create context.
@@ -42,7 +43,7 @@ int AudioManager::init()
     if (!alcMakeContextCurrent(context))
     {
         spdlog::get(LOGGER_NAME)->critical("Failed to set the current OpenAL context!");
-        return -1;
+        return;
     }
 
     // TODO: Do proper error handling!
@@ -70,15 +71,20 @@ int AudioManager::init()
     // Load audio file.
 
     // Success!
-    return 1;
+    return;
 }
 
-void AudioManager::shutdown()
+void AudioManager::destroy()
 {
     if (device)
     {
         alcCloseDevice(device);
     }
+}
+
+std::string AudioManager::get_component_name()
+{
+    return "AudioManager";
 }
 
 } // namespace inexor::audio

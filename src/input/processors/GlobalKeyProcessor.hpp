@@ -1,5 +1,9 @@
 #pragma once
 
+#include <list>
+#include <utility>
+
+#include "base/LifeCycleComponent.hpp"
 #include "Reactive.hpp"
 #include "entity-system/managers/entities/entity-instance-manager/EntityInstanceManager.hpp"
 #include "entity-system/model/data/DataTypes.hpp"
@@ -9,9 +13,6 @@
 #include "logging/managers/LogManager.hpp"
 #include "visual-scripting/managers/ProcessorRegistry.hpp"
 #include "visual-scripting/model/Processor.hpp"
-
-#include <list>
-#include <utility>
 
 namespace inexor::input {
 
@@ -32,11 +33,12 @@ using GlobalKeySignalsPtr = std::shared_ptr<GlobalKeySignals>;
 
 /// @class GlobalKeyProcessor
 /// @brief Processor for entity instances of type GLOBAL_KEY.
-class GlobalKeyProcessor : public visual_scripting::Processor,
-                           public entity_system::EntityInstanceCreatedListener,
-                           public entity_system::EntityInstanceDeletedListener,
-                           public KeyChangedListener,
-                           public std::enable_shared_from_this<GlobalKeyProcessor>
+class GlobalKeyProcessor : public LifeCycleComponent,
+    public visual_scripting::Processor,
+    public entity_system::EntityInstanceCreatedListener,
+    public entity_system::EntityInstanceDeletedListener,
+    public KeyChangedListener,
+    public std::enable_shared_from_this<GlobalKeyProcessor>
 {
 
     USING_REACTIVE_DOMAIN(entity_system::D)
@@ -59,7 +61,13 @@ class GlobalKeyProcessor : public visual_scripting::Processor,
     ~GlobalKeyProcessor() override;
 
     /// Initialization of the processor.
-    void init();
+    void init() override;
+
+    /// Shut down the processor.
+    /// void destroy() override;
+
+    /// Returns the name of the component
+    std::string get_component_name() override;
 
     /// @brief Called when an entity instance of type GLOBAL_KEY has been created.
     /// @param entity_instance ?

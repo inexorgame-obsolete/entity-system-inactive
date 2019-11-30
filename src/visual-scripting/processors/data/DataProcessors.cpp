@@ -5,20 +5,16 @@
 namespace inexor::visual_scripting {
 
 DataProcessors::DataProcessors(ConverterProcessorsPtr converter_processors)
+    : LifeCycleComponent(converter_processors)
 {
     this->converter_processors = std::move(converter_processors);
 }
 
 DataProcessors::~DataProcessors() = default;
 
-void DataProcessors::init()
+std::string DataProcessors::get_component_name()
 {
-    converter_processors->init();
-}
-
-void DataProcessors::shutdown()
-{
-    converter_processors->shutdown();
+    return "DataProcessors";
 }
 
 } // namespace inexor::visual_scripting

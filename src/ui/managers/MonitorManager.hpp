@@ -1,11 +1,11 @@
 #pragma once
 
+#include <Magnum/Math/Range.h>
+
+#include "base/LifeCycleComponent.hpp"
 #include "entity-system/model/entities/entity-instances/EntityInstance.hpp"
 #include "logging/managers/LogManager.hpp"
 #include "ui/factories/MonitorFactory.hpp"
-
-#include <Magnum/Math/Range.h>
-#include <entity-system/model/entities/entity-instances/EntityInstance.hpp>
 
 struct GLFWmonitor;
 
@@ -21,7 +21,7 @@ using MonitorRange = std::pair<GLFWmonitor *, Range2Di>;
 
 /// @class MonitorManager
 /// @brief Management of the monitors.
-class MonitorManager : public std::enable_shared_from_this<MonitorManager>
+class MonitorManager : public LifeCycleComponent, public std::enable_shared_from_this<MonitorManager>
 {
     public:
     /// @brief Constructs the MonitorManager, a monitor management service.
@@ -34,10 +34,10 @@ class MonitorManager : public std::enable_shared_from_this<MonitorManager>
     ~MonitorManager();
 
     /// Initialize the monitor manager.
-    void init();
+    void init() override;
 
-    /// Shut down the monitor manager.
-    void shutdown();
+    /// Returns the name of the component
+    std::string get_component_name() override;
 
     /// Detects the monitors.
     void detect_monitors();

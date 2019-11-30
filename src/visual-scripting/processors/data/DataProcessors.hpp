@@ -8,7 +8,7 @@ using ConverterProcessorsPtr = std::shared_ptr<ConverterProcessors>;
 
 /// @class DataProcessors
 /// @brief Provides processors for data type and values.
-class DataProcessors
+class DataProcessors : public LifeCycleComponent
 {
     public:
     /// @brief Constructs the processors for data types and values.
@@ -18,11 +18,8 @@ class DataProcessors
     /// Destructor.
     ~DataProcessors();
 
-    /// Initialization of the processors for data types and values.
-    void init();
-
-    /// Shut down the processors for data types and values.
-    void shutdown();
+    /// Returns the name of the component
+    std::string get_component_name() override;
 
     private:
     /// Processors for counters.

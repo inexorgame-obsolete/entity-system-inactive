@@ -16,7 +16,7 @@ using namespace react;
 
 /// @class AddFloatProcessor
 /// @brief Processor for entity instances of type ADD_FLOAT.
-class AddFloatProcessor : public Processor, public entity_system::EntityInstanceCreatedListener, public entity_system::EntityInstanceDeletedListener, public std::enable_shared_from_this<AddFloatProcessor>
+class AddFloatProcessor : public Processor, public LifeCycleComponent, public entity_system::EntityInstanceCreatedListener, public entity_system::EntityInstanceDeletedListener, public std::enable_shared_from_this<AddFloatProcessor>
 {
 
     using EntityTypeManagerPtr = std::shared_ptr<entity_system::EntityTypeManager>;
@@ -38,8 +38,11 @@ class AddFloatProcessor : public Processor, public entity_system::EntityInstance
     /// Destructor.
     ~AddFloatProcessor() override;
 
-    /// Initialization of the processor.
-    void init();
+    /// Initializes the processor.
+    void init() override;
+
+    /// Returns the name of the component
+    std::string get_component_name() override;
 
     /// Initializes the processor by registering listeners on newly created entity instances.
     void init_processor();

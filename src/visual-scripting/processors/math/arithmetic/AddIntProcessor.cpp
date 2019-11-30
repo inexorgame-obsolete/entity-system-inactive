@@ -12,7 +12,7 @@ using AddInt = entity_system::type_system::AddInt;
 using EntityAttributeInstancePtrOptional = std::optional<std::shared_ptr<EntityAttributeInstance>>;
 
 AddIntProcessor::AddIntProcessor(EntityTypeManagerPtr entity_type_manager, EntityInstanceManagerPtr entity_instance_manager, LogManagerPtr log_manager)
-    : Processor(), entity_type_manager(std::move(entity_type_manager)), entity_instance_manager(std::move(entity_instance_manager)), log_manager(std::move(log_manager))
+    : Processor(), LifeCycleComponent(), entity_type_manager(std::move(entity_type_manager)), entity_instance_manager(std::move(entity_instance_manager)), log_manager(std::move(log_manager))
 {
 }
 
@@ -34,6 +34,11 @@ void AddIntProcessor::init_processor()
     } else {
         spdlog::get(LOGGER_NAME)->error("Failed to initialize processor {}: Entity type does not exist", std::string(AddInt::TYPE_NAME));
     }
+}
+
+std::string AddIntProcessor::get_component_name()
+{
+    return "AddIntProcessor";
 }
 
 void AddIntProcessor::on_entity_instance_created(EntityInstancePtr entity_instance)

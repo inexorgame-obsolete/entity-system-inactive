@@ -14,7 +14,7 @@ using namespace react;
 
 /// @class EqualsBoolProcessor
 /// @brief Processor for entity instances of type EQUALS_BOOL.
-class EqualsBoolProcessor : public Processor, public entity_system::EntityInstanceCreatedListener, public entity_system::EntityInstanceDeletedListener, public std::enable_shared_from_this<EqualsBoolProcessor>
+class EqualsBoolProcessor : public Processor, public LifeCycleComponent, public entity_system::EntityInstanceCreatedListener, public entity_system::EntityInstanceDeletedListener, public std::enable_shared_from_this<EqualsBoolProcessor>
 {
 
     using EntityTypeManagerPtr = std::shared_ptr<entity_system::EntityTypeManager>;
@@ -35,8 +35,11 @@ class EqualsBoolProcessor : public Processor, public entity_system::EntityInstan
     /// Destructor.
     ~EqualsBoolProcessor() override;
 
-    /// Initialization of the processor.
-    void init();
+    /// Initializes the processor.
+    void init() override;
+
+    /// Returns the name of the component
+    std::string get_component_name() override;
 
     /// @brief Called when an entity instance of type EQUALS_BOOL has been created.
     /// @param entity_instance ?
