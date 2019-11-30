@@ -25,6 +25,7 @@ using EntityAttributeInstanceOpt = std::optional<EntityAttributeInstancePtr>;
 
 TriangleExample::TriangleExample(EntityInstanceManagerPtr entity_instance_manager, ConnectorManagerPtr connector_manager, CounterFloatFactoryPtr counter_float_factory, EntityInstanceBuilderFactoryPtr entity_instance_builder_factory,
                                  TriangleFactoryPtr triangle_factory, WindowManagerPtr window_manager, KeyboardInputManagerPtr keyboard_input_manager, ClientLifecyclePtr client_lifecycle, LogManagerPtr log_manager)
+                                 : LifeCycleComponent(triangle_factory)
 {
     this->entity_instance_manager = std::move(entity_instance_manager);
     this->connector_manager = std::move(connector_manager);

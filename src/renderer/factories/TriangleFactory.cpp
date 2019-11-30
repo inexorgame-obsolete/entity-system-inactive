@@ -8,11 +8,17 @@ namespace inexor::renderer {
 using Triangle = entity_system::type_system::Triangle;
 
 TriangleFactory::TriangleFactory(EntityInstanceBuilderFactoryPtr entity_instance_builder_factory)
+    :LifeCycleComponent()
 {
     this->entity_instance_builder_factory = std::move(entity_instance_builder_factory);
 }
 
 TriangleFactory::~TriangleFactory() = default;
+
+std::string TriangleFactory::get_component_name()
+{
+    return "TriangleFactory";
+}
 
 EntityInstancePtrOpt TriangleFactory::create_instance(float x, float y)
 {
