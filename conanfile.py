@@ -23,6 +23,7 @@ class InexorConan(ConanFile):
 
         "magic_enum/0.6.3@neargye/stable",
 
+        "cppgraphqlgen/3.0.4@inexorgame/testing",
         "jsonformoderncpp/3.7.0@vthiery/stable",
 
         "boost-di/1.1.0@inexorgame/stable",
@@ -52,7 +53,7 @@ class InexorConan(ConanFile):
         "magnum_plugins:with_stbtruetypefont": True,
         "magnum_plugins:with_freetypefont": True,
         "magnum_plugins:build_plugins_static": True,
-        "TBB:shared": True,
+        "TBB:shared": True
     }
 
     def imports(self):
