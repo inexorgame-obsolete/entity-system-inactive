@@ -1,0 +1,22 @@
+{
+  "type": "entity",
+  "name": "TRIANGLE",
+  "attributes": [
+    {
+      "name": "triangle_x",
+      "datatype": "FLOAT",
+      "features": [
+        "INPUT",
+        "OUTPUT"
+      ]
+    },
+    {
+      "name": "triangle_y",
+      "datatype": "FLOAT",
+      "features": [
+        "INPUT",
+        "OUTPUT"
+      ]
+    }
+  ]
+}

@@ -8,6 +8,7 @@
 #include <type-system/types/generators/counters/CounterFloat.hpp>
 #include <type-system/types/math/trigonometric/Cos.hpp>
 #include <type-system/types/math/trigonometric/Sin.hpp>
+#include <type-system/types/test/Triangle.hpp>
 #include <utility>
 
 using namespace Magnum::Math::Literals;
@@ -17,6 +18,7 @@ namespace inexor::renderer {
 using CounterFloat = entity_system::type_system::CounterFloat;
 using Sin = entity_system::type_system::Sin;
 using Cos = entity_system::type_system::Cos;
+using Triangle = entity_system::type_system::Triangle;
 
 using EntityInstancePtrOpt = std::optional<EntityInstancePtr>;
 using EntityAttributeInstanceOpt = std::optional<EntityAttributeInstancePtr>;
@@ -177,8 +179,8 @@ void TriangleExample::create_entity_instances()
         EntityAttributeInstanceOpt o_sin_attr_value = sin->get_attribute_instance(Sin::VALUE);
         EntityAttributeInstanceOpt o_cos_attr_input = cos->get_attribute_instance(Cos::INPUT);
         EntityAttributeInstanceOpt o_cos_attr_value = cos->get_attribute_instance(Cos::VALUE);
-        EntityAttributeInstanceOpt o_triangle_attr_x = triangle->get_attribute_instance(TriangleEntityTypeProvider::TRIANGLE_X);
-        EntityAttributeInstanceOpt o_triangle_attr_y = triangle->get_attribute_instance(TriangleEntityTypeProvider::TRIANGLE_Y);
+        EntityAttributeInstanceOpt o_triangle_attr_x = triangle->get_attribute_instance(Triangle::X);
+        EntityAttributeInstanceOpt o_triangle_attr_y = triangle->get_attribute_instance(Triangle::Y);
 
         if (o_counter_1_attr_count.has_value() && o_counter_1_attr_step.has_value() && o_counter_2_attr_count.has_value() && o_counter_2_attr_step.has_value() && o_sin_attr_value.has_value() && o_cos_attr_value.has_value() &&
             o_triangle_attr_x.has_value() && o_triangle_attr_y.has_value())
@@ -232,8 +234,10 @@ void TriangleExample::render_triangle(const EntityInstancePtr &window, GLFWwindo
 {
     // Get position from the entity instance
     // The entity instance is modified by the visual scripting system (see above!)
-    float x = std::get<DataType::FLOAT>(triangle_attr_x->value.Value());
-    float y = std::get<DataType::FLOAT>(triangle_attr_y->value.Value());
+    float x = std::get<entity_system::DataType::FLOAT>(triangle_attr_x->value.Value());
+    float y = std::get<entity_system::DataType::FLOAT>(triangle_attr_y->value.Value());
+
+    spdlog::info("x: {} y:{}", x, y);
 
     //		data[0] = {{-0.5f, -0.5f}, 0xff0000_rgbf}; // Left vertex, red color
     //		data[1] = {{ 0.5f, -0.5f}, 0xff0000_rgbf}; // Right vertex, green color

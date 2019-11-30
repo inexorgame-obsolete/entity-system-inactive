@@ -25,7 +25,7 @@ struct GLFWwindow;
 
 namespace inexor::renderer {
 
-using EntityInstancePtr = std::shared_ptr<EntityInstance>;
+using EntityInstancePtr = std::shared_ptr<entity_system::EntityInstance>;
 using EntityAttributeInstancePtr = std::shared_ptr<entity_system::EntityAttributeInstance>;
 using EntityInstanceManagerPtr = std::shared_ptr<entity_system::EntityInstanceManager>;
 using EntityInstanceBuilderFactoryPtr = std::shared_ptr<inexor::entity_system::EntityInstanceBuilderFactory>;
