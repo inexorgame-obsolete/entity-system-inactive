@@ -9,6 +9,7 @@ using namespace magic_enum::bitwise_operators;
 using Features = entity_system::Features;
 
 ConnectorManager::ConnectorManager(EntityInstanceManagerPtr entity_instance_manager, RelationInstanceManagerPtr relation_instance_manager, LogManagerPtr log_manager)
+    : LifeCycleComponent()
 {
     this->entity_instance_manager = std::move(entity_instance_manager);
     this->relation_instance_manager = std::move(relation_instance_manager);
@@ -17,10 +18,9 @@ ConnectorManager::ConnectorManager(EntityInstanceManagerPtr entity_instance_mana
 
 ConnectorManager::~ConnectorManager() = default;
 
-void ConnectorManager::init()
+std::string ConnectorManager::get_component_name()
 {
-    log_manager->register_logger(LOGGER_NAME);
-    log_manager->register_logger(Connector::LOGGER_NAME);
+    return "ConnectorManager";
 }
 
 ConnectorPtrOpt ConnectorManager::create_connector(const std::shared_ptr<class inexor::entity_system::EntityAttributeInstance> &output_attr, const std::shared_ptr<class inexor::entity_system::EntityAttributeInstance> &input_attr)
@@ -42,7 +42,10 @@ ConnectorPtrOpt ConnectorManager::create_connector(const std::shared_ptr<class i
         connectors[connector->get_GUID()] = connector;
         output_to_connectors[output_attr_GUID].push_back(connector);
         input_to_connector[input_attr_GUID] = connector;
+        spdlog::trace("Successfully created connector from {} to {}", output_attr_GUID.str(), input_attr_GUID.str());
         return ConnectorPtrOpt{connector};
+    } else {
+        spdlog::trace("Not creating connector from {} to {}", output_attr_GUID.str(), input_attr_GUID.str());
     }
     return std::nullopt;
 }
@@ -69,7 +72,10 @@ ConnectorPtrOpt ConnectorManager::create_connector(const xg::Guid &connector_GUI
         connectors[connector->get_GUID()] = connector;
         output_to_connectors[output_attr_GUID].push_back(connector);
         input_to_connector[input_attr_GUID] = connector;
+        spdlog::trace("Successfully created connector from {} to {}", output_attr_GUID.str(), input_attr_GUID.str());
         return ConnectorPtrOpt{connector};
+    } else {
+        spdlog::trace("Not creating connector from {} to {}", output_attr_GUID.str(), input_attr_GUID.str());
     }
     return std::nullopt;
 }

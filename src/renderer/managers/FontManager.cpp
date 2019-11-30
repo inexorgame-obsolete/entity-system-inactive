@@ -23,9 +23,14 @@ void FontManager::init()
     font_plugin_manager->load(FONT_PLUGIN);
 }
 
-void FontManager::shutdown()
+void FontManager::destroy()
 {
     // TODO: unload font plugin
+}
+
+std::string FontManager::get_component_name()
+{
+    return "FontManager";
 }
 
 FontPtrOpt FontManager::load_internal(const std::string &internal_filename, float size, const std::string &glyphs, int capacity, float render_size, Magnum::Text::Alignment alignment)

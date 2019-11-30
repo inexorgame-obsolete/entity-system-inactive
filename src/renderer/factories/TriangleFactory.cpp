@@ -1,21 +1,32 @@
 #include "TriangleFactory.hpp"
 
+#include <type-system/types/test/Triangle.hpp>
 #include <utility>
 
 namespace inexor::renderer {
 
-TriangleFactory::TriangleFactory(TriangleEntityTypeProviderPtr triangle_entity_type_provider, EntityInstanceBuilderFactoryPtr entity_instance_builder_factory, EntityInstanceManagerPtr entity_instance_manager)
+using Triangle = entity_system::type_system::Triangle;
+
+TriangleFactory::TriangleFactory(EntityInstanceBuilderFactoryPtr entity_instance_builder_factory)
+    :LifeCycleComponent()
 {
-    this->triangle_entity_type_provider = std::move(triangle_entity_type_provider);
     this->entity_instance_builder_factory = std::move(entity_instance_builder_factory);
-    this->entity_instance_manager = std::move(entity_instance_manager);
 }
 
 TriangleFactory::~TriangleFactory() = default;
 
+std::string TriangleFactory::get_component_name()
+{
+    return "TriangleFactory";
+}
+
 EntityInstancePtrOpt TriangleFactory::create_instance(float x, float y)
 {
-    return this->entity_instance_builder_factory->get_builder()->type(triangle_entity_type_provider->get_type())->attribute(TriangleEntityTypeProvider::TRIANGLE_X, x)->attribute(TriangleEntityTypeProvider::TRIANGLE_Y, y)->build();
+    return this->entity_instance_builder_factory
+        ->get_builder(Triangle::TYPE_NAME)
+        ->attribute(Triangle::X, x)
+        ->attribute(Triangle::Y, y)
+        ->build();
 }
 
 } // namespace inexor::renderer

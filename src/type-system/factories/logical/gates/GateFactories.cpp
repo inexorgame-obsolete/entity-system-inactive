@@ -5,6 +5,7 @@
 namespace inexor::entity_system::type_system {
 
 GateFactories::GateFactories(NotFactoryPtr not_factory, OrFactoryPtr or_factory, AndFactoryPtr and_factory, XorFactoryPtr xor_factory, NorFactoryPtr nor_factory, NandFactoryPtr nand_factory)
+    : LifeCycleComponent(not_factory, or_factory, and_factory, xor_factory, nor_factory, nand_factory)
 {
     this->not_factory = std::move(not_factory);
     this->or_factory = std::move(or_factory);
@@ -16,14 +17,9 @@ GateFactories::GateFactories(NotFactoryPtr not_factory, OrFactoryPtr or_factory,
 
 GateFactories::~GateFactories() = default;
 
-void GateFactories::init()
+std::string GateFactories::get_component_name()
 {
-    not_factory->init();
-    or_factory->init();
-    and_factory->init();
-    xor_factory->init();
-    nor_factory->init();
-    nand_factory->init();
+    return "GateFactories";
 }
 
 } // namespace inexor::entity_system::type_system

@@ -1,13 +1,5 @@
 #pragma once
 
-#include "client/ClientLifecycle.hpp"
-#include "input/managers/ClipboardManager.hpp"
-#include "logging/managers/LogManager.hpp"
-#include "renderer/managers/FontManager.hpp"
-#include "renderer/managers/MonitorManager.hpp"
-#include "renderer/managers/WindowManager.hpp"
-#include "visual-scripting/managers/ConnectorManager.hpp"
-
 #include <Magnum/GL/Buffer.h>
 #include <Magnum/GL/DefaultFramebuffer.h>
 #include <Magnum/GL/Mesh.h>
@@ -19,12 +11,20 @@
 #include <Magnum/Shaders/Vector.h>
 #include <Magnum/Timeline.h>
 
+#include "client/ClientLifecycle.hpp"
+#include "input/managers/ClipboardManager.hpp"
+#include "logging/managers/LogManager.hpp"
+#include "renderer/managers/FontManager.hpp"
+#include "ui/managers/MonitorManager.hpp"
+#include "ui/managers/WindowManager.hpp"
+#include "visual-scripting/managers/ConnectorManager.hpp"
+
 struct GLFWwindow;
 
 namespace inexor::renderer {
 
-using WindowManagerPtr = std::shared_ptr<WindowManager>;
-using MonitorManagerPtr = std::shared_ptr<MonitorManager>;
+using WindowManagerPtr = std::shared_ptr<ui::WindowManager>;
+using MonitorManagerPtr = std::shared_ptr<ui::MonitorManager>;
 using FontManagerPtr = std::shared_ptr<FontManager>;
 using KeyboardInputManagerPtr = std::shared_ptr<input::KeyboardInputManager>;
 using MouseInputManagerPtr = std::shared_ptr<input::MouseInputManager>;
@@ -32,7 +32,7 @@ using ClipboardManagerPtr = std::shared_ptr<input::ClipboardManager>;
 using ConnectorManagerPtr = std::shared_ptr<visual_scripting::ConnectorManager>;
 using ClientLifecyclePtr = std::shared_ptr<client::ClientLifecycle>;
 using LogManagerPtr = std::shared_ptr<logging::LogManager>;
-using EntityInstancePtr = std::shared_ptr<EntityInstance>;
+using EntityInstancePtr = std::shared_ptr<entity_system::EntityInstance>;
 
 struct QuadVertex
 {
@@ -51,7 +51,7 @@ struct Movement
 
 /// @class LoadingScreen
 /// @brief Shows a loading screen during startup.
-class LoadingScreen : public input::WindowKeyReleasedListener,
+class LoadingScreen : public LifeCycleComponent, public input::WindowKeyReleasedListener,
                       public input::WindowKeyPressedOrRepeatedListener,
                       public input::WindowCharInputListener,
                       public input::WindowMouseButtonChangedListener,
@@ -72,10 +72,13 @@ class LoadingScreen : public input::WindowKeyReleasedListener,
     ~LoadingScreen();
 
     /// Initialize the loading screen.
-    void init();
+    void init() override;
 
     /// Shut down the loading screen.
-    void shutdown();
+    void destroy() override;
+
+    /// Returns the name of the component
+    std::string get_component_name() override;
 
     /// Window char input
     void on_window_char_input(EntityInstancePtr window, std::string character, unsigned int codepoint) override;

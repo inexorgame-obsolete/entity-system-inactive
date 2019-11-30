@@ -12,7 +12,7 @@ using StdErrProcessorPtr = std::shared_ptr<StdErrProcessor>;
 
 /// @class ConsoleProcessors
 /// @brief Management of the logger processors.
-class ConsoleProcessors
+class ConsoleProcessors : public LifeCycleComponent
 {
     public:
     /// @brief Constructs the logger processors.
@@ -25,8 +25,8 @@ class ConsoleProcessors
     /// Destructor.
     ~ConsoleProcessors();
 
-    /// Initialization of the logger processors.
-    void init();
+    /// Returns the name of the component
+    std::string get_component_name() override;
 
     private:
     /// Processor for the entity type CONSOLE_STDIN.

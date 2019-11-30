@@ -1,24 +1,25 @@
 #pragma once
 
 #include "entity-system/managers/entities/entity-instance-manager/EntityInstanceManager.hpp"
+#include "entity-system/managers/entities/entity-type-manager/EntityTypeManager.hpp"
 #include "entity-system/model/data/DataTypes.hpp"
 #include "entity-system/model/data/container/DataContainer.hpp"
 #include "entity-system/model/entities/entity-instances/EntityInstance.hpp"
+#include "entity-system/model/entities/entity-types/EntityType.hpp"
 #include "logging/managers/LogManager.hpp"
-#include "type-system/providers/math/trigonometric/TanEntityTypeProvider.hpp"
 #include "visual-scripting/managers/ProcessorRegistry.hpp"
 #include "visual-scripting/model/Processor.hpp"
 
 #include "react/Domain.h"
 
-// TODO: move using namespace react into namespace inexor::visual_scripting
-using namespace react;
-
 namespace inexor::visual_scripting {
 
-using TanEntityTypeProviderPtr = std::shared_ptr<entity_system::type_system::TanEntityTypeProvider>;
+using namespace react;
+
+using EntityTypeManagerPtr = std::shared_ptr<entity_system::EntityTypeManager>;
 using EntityInstanceManagerPtr = std::shared_ptr<entity_system::EntityInstanceManager>;
 using LogManagerPtr = std::shared_ptr<logging::LogManager>;
+using EntityTypePtr = std::shared_ptr<entity_system::EntityType>;
 using EntityInstancePtr = std::shared_ptr<entity_system::EntityInstance>;
 using DataType = entity_system::DataType;
 using DataValue = entity_system::DataValue;
@@ -27,7 +28,7 @@ using DataValue = entity_system::DataValue;
 /// @brief Processor which listens on the creation of entity instances of type TAN.
 /// @note Newly created entity instances of type TAN will be initialized by connecting the
 /// input attributes with a calculation function and the result with the output attribute.
-class TanProcessor : public Processor, public entity_system::EntityInstanceCreatedListener, public entity_system::EntityInstanceDeletedListener, public std::enable_shared_from_this<TanProcessor>
+class TanProcessor : public Processor, public LifeCycleComponent, public entity_system::EntityInstanceCreatedListener, public entity_system::EntityInstanceDeletedListener, public std::enable_shared_from_this<TanProcessor>
 {
 
     public:
@@ -36,16 +37,19 @@ class TanProcessor : public Processor, public entity_system::EntityInstanceCreat
     /// @brief Constructs the TAN processor which listens on the creation of entity instances of type TAN.
     /// @note Newly created entity instances of type TAN will be initialized by connecting the input attributes
     /// with a calculation function and the result with the output attribute.
-    /// @param entity_type_provider
-    /// @param entity_instance_manager
-    /// @param log_manager
-    TanProcessor(const TanEntityTypeProviderPtr& entity_type_provider, EntityInstanceManagerPtr entity_instance_manager, LogManagerPtr log_manager);
+    /// @param entity_type_manager
+    /// @param entity_instance_manager The entity instance manager.
+    /// @param log_manager The log manager.
+    TanProcessor(EntityTypeManagerPtr entity_type_manager, EntityInstanceManagerPtr entity_instance_manager, LogManagerPtr log_manager);
 
     /// Destructor.
     ~TanProcessor() override;
 
-    /// Initializes the SIN processor by registering listeners on newly created entity instances of type SIN.
-    void init();
+    /// Initializes the processor.
+    void init() override;
+
+    /// Returns the name of the component
+    std::string get_component_name() override;
 
     /// @brief Called when an entity instance of type SIN has been created.
     /// @param entity_instance ?
@@ -61,8 +65,11 @@ class TanProcessor : public Processor, public entity_system::EntityInstanceCreat
     void make_signals(const EntityInstancePtr &entity_instance);
 
     private:
-    /// The entity type provider for this processor.
-    TanEntityTypeProviderPtr entity_type_provider;
+    /// Initializes the TAN processor by registering listeners on newly created entity instances of type TAN.
+    void init_processor();
+
+    /// The entity type manager.
+    EntityTypeManagerPtr entity_type_manager;
 
     /// The entity instance manager.
     EntityInstanceManagerPtr entity_instance_manager;

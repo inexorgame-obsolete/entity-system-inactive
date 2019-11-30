@@ -1,5 +1,6 @@
 #pragma once
 
+#include "base/LifeCycleComponent.hpp"
 #include "type-system/factories/data/constants/BoolConstantFactory.hpp"
 #include "type-system/factories/data/constants/FloatConstantFactory.hpp"
 #include "type-system/factories/data/constants/IntConstantFactory.hpp"
@@ -16,11 +17,10 @@ using StringConstantFactoryPtr = std::shared_ptr<StringConstantFactory>;
 
 /// @class ConstantFactories
 /// @brief The constant factories.
-class ConstantFactories
+class ConstantFactories : public LifeCycleComponent
 {
     public:
     /// @brief Constructs the constant factories.
-    /// @note The dependencies of this class will be injected automatically.
     /// @param bool_constant_factory Factory for creating entity instances of type BOOL_CONSTANT.
     /// @param float_constant_factory Factory for creating entity instances of type FLOAT_CONSTANT.
     /// @param int_constant_factory Factory for creating entity instances of type INT_CONSTANT.
@@ -30,8 +30,8 @@ class ConstantFactories
     /// Destructor.
     ~ConstantFactories();
 
-    /// Initializes the constant factories.
-    void init();
+    /// Returns the name of the component
+    std::string get_component_name() override;
 
     private:
     /// Factory for creating entity instances of type BOOL_CONSTANT.

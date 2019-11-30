@@ -31,6 +31,9 @@ void InexorApplication::pre_init(int argc, char *argv[])
     // You can't do this in the constructor
     InexorApplication::instances.push_back(this);
 
+    // Type system initialization.
+    type_system_module->pre_init_components();
+
     // Debugger
     // TODO: enable with macro
     entity_system_debugger->init();
@@ -49,10 +52,16 @@ void InexorApplication::pre_init(int argc, char *argv[])
 #endif
 
     // Type system initialization.
-    type_system_module->init();
+    type_system_module->init_components();
 
     // Configuration manager initialization.
     configuration_module->init(argc, argv);
+
+    // Initialize the command module
+    command_module->pre_init_components();
+
+    // Initialize the rendering.
+    client_module->pre_init_components();
 
 }
 
@@ -61,13 +70,13 @@ void InexorApplication::init()
     spdlog::get(LOGGER_NAME)->info("Starting Inexor...");
 
     // Initialize the visual scripting.
-    visual_scripting_system_module->init();
+    visual_scripting_system_module->init_components();
 
     // Initialize the command module
-    command_module->init();
+    command_module->init_components();
 
     // Initialize the rendering.
-    client_module->init();
+    client_module->init_components();
 }
 
 void InexorApplication::run()
@@ -90,7 +99,7 @@ void InexorApplication::run()
         // Shutdown requested?
         if (client_module->is_shutdown_requested())
         {
-            shutdown();
+            destroy();
         }
     }
 
@@ -99,9 +108,11 @@ void InexorApplication::run()
     {
         restart();
     }
+
+    post_destroy();
 }
 
-void InexorApplication::shutdown()
+void InexorApplication::destroy()
 {
     if (!running)
     {
@@ -112,19 +123,41 @@ void InexorApplication::shutdown()
     spdlog::get(LOGGER_NAME)->info("Shutting down Inexor...");
 
     // Shut down the client module.
-    client_module->shutdown();
+    client_module->destroy_components();
+
+    // Shut down the command module
+    command_module->destroy_components();
 
     // Shut down the visual scripting module.
-    visual_scripting_system_module->shutdown();
+    visual_scripting_system_module->destroy_components();
+
+    // Shut down the type system.
+    type_system_module->destroy_components();
 
     running = false;
     spdlog::get(LOGGER_NAME)->info("Shutdown completed");
 }
 
+
+void InexorApplication::post_destroy()
+{
+    // Shut down the client module
+    client_module->post_destroy_components();
+
+    // Shut down the command module
+    command_module->post_destroy_components();
+
+    // Shut down the visual scripting module.
+    // visual_scripting_system_module->post_destroy_components();
+
+    // Shut down the type system.
+    type_system_module->post_destroy_components();
+}
+
 void InexorApplication::restart()
 {
     spdlog::get(LOGGER_NAME)->info("Restarting Inexor...");
-    shutdown();
+    destroy();
     init();
     run();
     spdlog::get(LOGGER_NAME)->info("Restart completed");
@@ -139,7 +172,8 @@ void InexorApplication::sighup_handler(const int signal_number)
 void InexorApplication::sigterm_handler(const int signal_number)
 {
     spdlog::get(LOGGER_NAME)->info("Received SIGTERM signal number {}", signal_number);
-    shutdown();
+    destroy();
+    post_destroy();
 }
 
 } // namespace inexor

@@ -1,5 +1,6 @@
 #pragma once
 
+#include "base/LifeCycleComponent.hpp"
 #include "input/listeners/KeyChangedListener.hpp"
 #include "input/listeners/KeyPressedListener.hpp"
 #include "input/listeners/KeyPressedOrRepeatedListener.hpp"
@@ -41,7 +42,7 @@ using SignalPathDroppedPtr = std::shared_ptr<SignalPathDropped>;
 
 /// @class KeyboardInputManager
 /// @brief Management of the keyboard input data.
-class KeyboardInputManager : public std::enable_shared_from_this<KeyboardInputManager>
+class KeyboardInputManager : public LifeCycleComponent, public std::enable_shared_from_this<KeyboardInputManager>
 {
     public:
     /// @brief Constructor.
@@ -54,10 +55,13 @@ class KeyboardInputManager : public std::enable_shared_from_this<KeyboardInputMa
     ~KeyboardInputManager();
 
     /// Initialize the keyboard input module.
-    void init();
+    void init() override;
 
     /// Shut down the keyboard input manager.
-    void shutdown();
+    void destroy() override;
+
+    /// Returns the name of the component
+    std::string get_component_name() override;
 
     /// @brief Creates a new entity instance of type 'GLOBAL_KEY'.
     /// @param key The key code.

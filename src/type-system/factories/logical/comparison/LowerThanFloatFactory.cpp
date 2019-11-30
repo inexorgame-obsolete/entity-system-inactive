@@ -1,28 +1,29 @@
 #include "LowerThanFloatFactory.hpp"
 
+#include <type-system/types/logical/comparison/LowerThanFloat.hpp>
 #include <utility>
 
 namespace inexor::entity_system::type_system {
 
-LowerThanFloatFactory::LowerThanFloatFactory(LowerThanFloatEntityTypeProviderPtr entity_type_provider, EntityInstanceBuilderFactoryPtr entity_instance_builder_factory)
+LowerThanFloatFactory::LowerThanFloatFactory(EntityInstanceBuilderFactoryPtr entity_instance_builder_factory)
+    : LifeCycleComponent()
 {
-    this->entity_type_provider = std::move(entity_type_provider);
     this->entity_instance_builder_factory = std::move(entity_instance_builder_factory);
 }
 
 LowerThanFloatFactory::~LowerThanFloatFactory() = default;
 
-void LowerThanFloatFactory::init()
+std::string LowerThanFloatFactory::get_component_name()
 {
+    return "LowerThanFloatFactory";
 }
 
 EntityInstancePtrOpt LowerThanFloatFactory::create_instance()
 {
-    return entity_instance_builder_factory->get_builder()
-        ->type(entity_type_provider->get_type())
-        ->attribute(LowerThanFloatEntityTypeProvider::LOWER_THAN_FLOAT_INPUT_1, 0.0f)
-        ->attribute(LowerThanFloatEntityTypeProvider::LOWER_THAN_FLOAT_INPUT_2, 0.0f)
-        ->attribute(LowerThanFloatEntityTypeProvider::LOWER_THAN_FLOAT_RESULT, false)
+    return entity_instance_builder_factory->get_builder(LowerThanFloat::TYPE_NAME)
+        ->attribute(LowerThanFloat::INPUT_1, 0.0f)
+        ->attribute(LowerThanFloat::INPUT_2, 0.0f)
+        ->attribute(LowerThanFloat::RESULT, false)
         ->build();
 }
 

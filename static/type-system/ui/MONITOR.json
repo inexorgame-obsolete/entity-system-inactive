@@ -1,0 +1,49 @@
+{
+  "type": "entity",
+  "name": "MONITOR",
+  "attributes": [
+    {
+      "name": "monitor_title",
+      "datatype": "STRING",
+      "features": [
+        "INPUT",
+        "OUTPUT"
+      ]
+    },
+    {
+      "name": "monitor_position_x",
+      "datatype": "INT",
+      "features": [
+        "OUTPUT"
+      ]
+    },
+    {
+      "name": "monitor_position_y",
+      "datatype": "INT",
+      "features": [
+        "OUTPUT"
+      ]
+    },
+    {
+      "name": "monitor_width",
+      "datatype": "INT",
+      "features": [
+        "OUTPUT"
+      ]
+    },
+    {
+      "name": "monitor_height",
+      "datatype": "INT",
+      "features": [
+        "OUTPUT"
+      ]
+    },
+    {
+      "name": "monitor_is_primary",
+      "datatype": "BOOL",
+      "features": [
+        "OUTPUT"
+      ]
+    }
+  ]
+}

@@ -1,0 +1,27 @@
+{
+  "type": "entity",
+  "name": "OR",
+  "attributes": [
+    {
+      "name": "or_input_1",
+      "datatype": "BOOL",
+      "features": [
+        "INPUT"
+      ]
+    },
+    {
+      "name": "or_input_2",
+      "datatype": "BOOL",
+      "features": [
+        "INPUT"
+      ]
+    },
+    {
+      "name": "or_result",
+      "datatype": "BOOL",
+      "features": [
+        "OUTPUT"
+      ]
+    }
+  ]
+}

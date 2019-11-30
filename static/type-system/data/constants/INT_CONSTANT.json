@@ -1,0 +1,21 @@
+{
+  "type": "entity",
+  "name": "INT_CONSTANT",
+  "attributes": [
+    {
+      "name": "int_constant_name",
+      "datatype": "STRING",
+      "features": [
+        "OUTPUT"
+      ]
+    },
+    {
+      "name": "int_constant_value",
+      "datatype": "INT",
+      "features": [
+        "INPUT",
+        "OUTPUT"
+      ]
+    }
+  ]
+}

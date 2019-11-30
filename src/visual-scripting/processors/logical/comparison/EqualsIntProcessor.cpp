@@ -1,15 +1,19 @@
 #include "EqualsIntProcessor.hpp"
 
+#include <type-system/types/logical/comparison/EqualsInt.hpp>
 #include <utility>
 
 namespace inexor::visual_scripting {
 
 using namespace inexor::entity_system;
 using namespace inexor::entity_system::type_system;
+
+using EqualsInt = entity_system::type_system::EqualsInt;
+using EntityTypePtrOpt = std::optional<EntityTypePtr>;
 using EntityAttributeInstancePtrOptional = std::optional<std::shared_ptr<EntityAttributeInstance>>;
 
-EqualsIntProcessor::EqualsIntProcessor(const EqualsIntEntityTypeProviderPtr &entity_type_provider, EntityInstanceManagerPtr entity_instance_manager, LogManagerPtr log_manager)
-    : Processor(entity_type_provider->get_type()), entity_type_provider(entity_type_provider), entity_instance_manager(std::move(entity_instance_manager)), log_manager(std::move(log_manager))
+EqualsIntProcessor::EqualsIntProcessor(EntityTypeManagerPtr entity_type_manager, EntityInstanceManagerPtr entity_instance_manager, LogManagerPtr log_manager)
+    : Processor(), LifeCycleComponent(), entity_type_manager(std::move(entity_type_manager)), entity_instance_manager(std::move(entity_instance_manager)), log_manager(std::move(log_manager))
 {
 }
 
@@ -18,8 +22,24 @@ EqualsIntProcessor::~EqualsIntProcessor() = default;
 void EqualsIntProcessor::init()
 {
     log_manager->register_logger(LOGGER_NAME);
-    entity_instance_manager->register_on_created(entity_type_provider->get_type()->get_GUID(), shared_from_this());
-    entity_instance_manager->register_on_deleted(entity_type_provider->get_type()->get_GUID(), shared_from_this());
+    init_processor();
+}
+
+void EqualsIntProcessor::init_processor()
+{
+    EntityTypePtrOpt o_ent_type = entity_type_manager->get_entity_type(EqualsInt::TYPE_NAME);
+    if (o_ent_type.has_value()) {
+        this->entity_type = o_ent_type.value();
+        entity_instance_manager->register_on_created(this->entity_type->get_GUID(), shared_from_this());
+        entity_instance_manager->register_on_deleted(this->entity_type->get_GUID(), shared_from_this());
+    } else {
+        spdlog::get(LOGGER_NAME)->error("Failed to initialize processor {}: Entity type does not exist", EqualsInt::TYPE_NAME);
+    }
+}
+
+std::string EqualsIntProcessor::get_component_name()
+{
+    return "EqualsIntProcessor";
 }
 
 void EqualsIntProcessor::on_entity_instance_created(EntityInstancePtr entity_instance)
@@ -39,9 +59,9 @@ void EqualsIntProcessor::make_signals(const EntityInstancePtr &entity_instance)
 {
     spdlog::get(LOGGER_NAME)->debug("Initializing processor EQUALS_INT for newly created entity instance {} of type {}", entity_instance->get_GUID().str(), entity_instance->get_entity_type()->get_type_name());
 
-    auto o_equals_int_input_1 = entity_instance->get_attribute_instance(EqualsIntEntityTypeProvider::EQUALS_INT_INPUT_1);
-    auto o_equals_int_input_2 = entity_instance->get_attribute_instance(EqualsIntEntityTypeProvider::EQUALS_INT_INPUT_2);
-    auto o_equals_int_result = entity_instance->get_attribute_instance(EqualsIntEntityTypeProvider::EQUALS_INT_RESULT);
+    auto o_equals_int_input_1 = entity_instance->get_attribute_instance(EqualsInt::INPUT_1);
+    auto o_equals_int_input_2 = entity_instance->get_attribute_instance(EqualsInt::INPUT_2);
+    auto o_equals_int_result = entity_instance->get_attribute_instance(EqualsInt::RESULT);
 
     if (o_equals_int_input_1.has_value() && o_equals_int_input_2.has_value() && o_equals_int_result.has_value())
     {
@@ -52,7 +72,7 @@ void EqualsIntProcessor::make_signals(const EntityInstancePtr &entity_instance)
     {
         spdlog::get(LOGGER_NAME)
             ->error("Failed to initialize processor signals for entity instance {} of type {}: Missing one of these attributes: {} {} {}", entity_instance->get_GUID().str(), entity_instance->get_entity_type()->get_type_name(),
-                    EqualsIntEntityTypeProvider::EQUALS_INT_INPUT_1, EqualsIntEntityTypeProvider::EQUALS_INT_INPUT_2, EqualsIntEntityTypeProvider::EQUALS_INT_RESULT);
+                    EqualsInt::INPUT_1, EqualsInt::INPUT_2, EqualsInt::RESULT);
     }
 }
 

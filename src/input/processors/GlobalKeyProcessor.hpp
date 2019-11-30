@@ -1,5 +1,9 @@
 #pragma once
 
+#include <list>
+#include <utility>
+
+#include "base/LifeCycleComponent.hpp"
 #include "Reactive.hpp"
 #include "entity-system/managers/entities/entity-instance-manager/EntityInstanceManager.hpp"
 #include "entity-system/model/data/DataTypes.hpp"
@@ -7,38 +11,39 @@
 #include "entity-system/model/entities/entity-instances/EntityInstance.hpp"
 #include "input/managers/KeyboardInputManager.hpp"
 #include "logging/managers/LogManager.hpp"
-#include "type-system/providers/inout/keyboard/GlobalKeyEntityTypeProvider.hpp"
 #include "visual-scripting/managers/ProcessorRegistry.hpp"
 #include "visual-scripting/model/Processor.hpp"
 
-#include <list>
-#include <utility>
-
 namespace inexor::input {
+
+using DataValue = entity_system::DataValue;
 
 /// Bundles the source signals of a specific key code.
 struct GlobalKeySignals
 {
 
-    GlobalKeySignals(int key, VarSignalT<entity_system::DataValue> action, VarSignalT<entity_system::DataValue> mods) : key(key), action(std::move(action)), mods(std::move(mods)){};
+    GlobalKeySignals(int key, VarSignalT<DataValue> action, VarSignalT<DataValue> mods) : key(key), action(std::move(action)), mods(std::move(mods)){};
 
     int key;
-    VarSignalT<entity_system::DataValue> action;
-    VarSignalT<entity_system::DataValue> mods;
+    VarSignalT<DataValue> action;
+    VarSignalT<DataValue> mods;
 };
 
 using GlobalKeySignalsPtr = std::shared_ptr<GlobalKeySignals>;
 
 /// @class GlobalKeyProcessor
 /// @brief Processor for entity instances of type GLOBAL_KEY.
-class GlobalKeyProcessor : public visual_scripting::Processor,
-                           public entity_system::EntityInstanceCreatedListener,
-                           public entity_system::EntityInstanceDeletedListener,
-                           public KeyChangedListener,
-                           public std::enable_shared_from_this<GlobalKeyProcessor>
+class GlobalKeyProcessor : public LifeCycleComponent,
+    public visual_scripting::Processor,
+    public entity_system::EntityInstanceCreatedListener,
+    public entity_system::EntityInstanceDeletedListener,
+    public KeyChangedListener,
+    public std::enable_shared_from_this<GlobalKeyProcessor>
 {
 
-    using GlobalKeyEntityTypeProviderPtr = std::shared_ptr<entity_system::type_system::GlobalKeyEntityTypeProvider>;
+    USING_REACTIVE_DOMAIN(entity_system::D)
+
+    using EntityTypeManagerPtr = std::shared_ptr<entity_system::EntityTypeManager>;
     using EntityInstanceManagerPtr = std::shared_ptr<entity_system::EntityInstanceManager>;
     using KeyboardInputManagerPtr = std::shared_ptr<KeyboardInputManager>;
     using LogManagerPtr = std::shared_ptr<logging::LogManager>;
@@ -50,13 +55,19 @@ class GlobalKeyProcessor : public visual_scripting::Processor,
     /// @param entity_type_provider Provides the entity type GLOBAL_KEY.
     /// @param entity_instance_manager The entity instance manager.
     /// @param logger_manager The log manager.
-    GlobalKeyProcessor(const GlobalKeyEntityTypeProviderPtr& entity_type_provider, EntityInstanceManagerPtr entity_instance_manager, KeyboardInputManagerPtr keyboard_input_manager, LogManagerPtr log_manager);
+    GlobalKeyProcessor(EntityTypeManagerPtr entity_type_manager, EntityInstanceManagerPtr entity_instance_manager, KeyboardInputManagerPtr keyboard_input_manager, LogManagerPtr log_manager);
 
     /// Destructor.
     ~GlobalKeyProcessor() override;
 
     /// Initialization of the processor.
-    void init();
+    void init() override;
+
+    /// Shut down the processor.
+    /// void destroy() override;
+
+    /// Returns the name of the component
+    std::string get_component_name() override;
 
     /// @brief Called when an entity instance of type GLOBAL_KEY has been created.
     /// @param entity_instance ?
@@ -79,6 +90,9 @@ class GlobalKeyProcessor : public visual_scripting::Processor,
     static constexpr char LOGGER_NAME[] = "inexor.input.processor.globalkey";
 
     private:
+    /// Initializes the processor by registering listeners on newly created entity instances.
+    void init_processor();
+
     /// @brief Creates a signal for the given key code.
     /// @param key The key code.
     GlobalKeySignalsPtr get_or_create_global_key_signals(int key);
@@ -87,8 +101,8 @@ class GlobalKeyProcessor : public visual_scripting::Processor,
     /// @param entity_instance The entity instance of type GLOBAL_KEY.
     void make_signals(const EntityInstancePtr &entity_instance);
 
-    /// Provides the entity type GLOBAL_KEY.
-    GlobalKeyEntityTypeProviderPtr entity_type_provider;
+    /// The entity type manager.
+    EntityTypeManagerPtr entity_type_manager;
 
     /// The entity instance manager.
     EntityInstanceManagerPtr entity_instance_manager;

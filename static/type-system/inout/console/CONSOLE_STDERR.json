@@ -1,0 +1,13 @@
+{
+  "type": "entity",
+  "name": "CONSOLE_STDERR",
+  "attributes": [
+    {
+      "name": "console_stderr",
+      "datatype": "STRING",
+      "features": [
+        "INPUT"
+      ]
+    }
+  ]
+}

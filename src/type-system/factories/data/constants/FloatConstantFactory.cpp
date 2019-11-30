@@ -1,36 +1,38 @@
 #include "FloatConstantFactory.hpp"
 
+#include <type-system/types/data/constants/FloatConstant.hpp>
 #include <utility>
 
 namespace inexor::entity_system::type_system {
 
-FloatConstantFactory::FloatConstantFactory(FloatConstantEntityTypeProviderPtr entity_type_provider, EntityInstanceBuilderFactoryPtr entity_instance_builder_factory)
+FloatConstantFactory::FloatConstantFactory(EntityInstanceBuilderFactoryPtr entity_instance_builder_factory)
+    : LifeCycleComponent()
 {
-    this->entity_type_provider = std::move(entity_type_provider);
     this->entity_instance_builder_factory = std::move(entity_instance_builder_factory);
 }
 
 FloatConstantFactory::~FloatConstantFactory() = default;
 
-void FloatConstantFactory::init()
+std::string FloatConstantFactory::get_component_name()
 {
+    return "FloatConstantFactory";
 }
 
 EntityInstancePtrOpt FloatConstantFactory::create_instance()
 {
-    return entity_instance_builder_factory->get_builder()
-        ->type(entity_type_provider->get_type())
-        ->attribute(FloatConstantEntityTypeProvider::FLOAT_CONSTANT_NAME, "")
-        ->attribute(FloatConstantEntityTypeProvider::FLOAT_CONSTANT_VALUE, 0.0f)
+    return entity_instance_builder_factory
+        ->get_builder(FloatConstant::TYPE_NAME)
+        ->attribute(FloatConstant::NAME, "")
+        ->attribute(FloatConstant::VALUE, 0.0f)
         ->build();
 }
 
 EntityInstancePtrOpt FloatConstantFactory::create_instance(const std::string &name, const float &value)
 {
-    return entity_instance_builder_factory->get_builder()
-        ->type(entity_type_provider->get_type())
-        ->attribute(FloatConstantEntityTypeProvider::FLOAT_CONSTANT_NAME, name)
-        ->attribute(FloatConstantEntityTypeProvider::FLOAT_CONSTANT_VALUE, value)
+    return entity_instance_builder_factory
+        ->get_builder(FloatConstant::TYPE_NAME)
+        ->attribute(FloatConstant::NAME, name)
+        ->attribute(FloatConstant::VALUE, value)
         ->build();
 }
 

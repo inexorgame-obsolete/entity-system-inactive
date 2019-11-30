@@ -5,7 +5,6 @@
 #include "entity-system/model/data/container/DataContainer.hpp"
 #include "entity-system/model/entities/entity-instances/EntityInstance.hpp"
 #include "logging/managers/LogManager.hpp"
-#include "type-system/providers/generators/random/RandomNextFloatEntityTypeProvider.hpp"
 #include "visual-scripting/managers/ProcessorRegistry.hpp"
 #include "visual-scripting/model/Processor.hpp"
 
@@ -17,17 +16,17 @@ using namespace react;
 
 namespace inexor::visual_scripting {
 
-using RandomNextFloatEntityTypeProviderPtr = std::shared_ptr<entity_system::type_system::RandomNextFloatEntityTypeProvider>;
-using EntityInstanceManagerPtr = std::shared_ptr<entity_system::EntityInstanceManager>;
-using LogManagerPtr = std::shared_ptr<inexor::logging::LogManager>;
-using EntityInstancePtr = std::shared_ptr<entity_system::EntityInstance>;
-
 /// @class RandomNextFloatProcessor
 /// @brief Processor which listens on the creation of entity instances of type RANDOM_NEXT_FLOAT.
 /// @note Newly created entity instances of type RANDOM_NEXT_FLOAT will be initialized by connecting the
 /// input attributes with a calculation function and the result with the output attribute.
-class RandomNextFloatProcessor : public Processor, public entity_system::EntityInstanceCreatedListener, public entity_system::EntityInstanceDeletedListener, public std::enable_shared_from_this<RandomNextFloatProcessor>
+class RandomNextFloatProcessor : public Processor, public LifeCycleComponent, public entity_system::EntityInstanceCreatedListener, public entity_system::EntityInstanceDeletedListener, public std::enable_shared_from_this<RandomNextFloatProcessor>
 {
+
+    using EntityTypeManagerPtr = std::shared_ptr<entity_system::EntityTypeManager>;
+    using EntityInstanceManagerPtr = std::shared_ptr<entity_system::EntityInstanceManager>;
+    using LogManagerPtr = std::shared_ptr<inexor::logging::LogManager>;
+    using EntityInstancePtr = std::shared_ptr<entity_system::EntityInstance>;
 
     public:
     ///
@@ -36,16 +35,19 @@ class RandomNextFloatProcessor : public Processor, public entity_system::EntityI
     /// @brief Constructs the RANDOM_NEXT_FLOAT processor which listens on the creation of entity instances of type RANDOM_NEXT_FLOAT.
     /// @note Newly created entity instances of type RANDOM_NEXT_FLOAT will be initialized by connecting the input attributes with a
     /// calculation function and the result with the output attribute.
-    /// @param entity_type_provider The entity type provider for this processor.
+    /// @param entity_type_manager The entity type manager.
     /// @param entity_instance_manager The entity instance manager.
     /// @param log_manager The log manager.
-    RandomNextFloatProcessor(const RandomNextFloatEntityTypeProviderPtr& entity_type_provider, EntityInstanceManagerPtr entity_instance_manager, LogManagerPtr log_manager);
+    RandomNextFloatProcessor(EntityTypeManagerPtr entity_type_manager, EntityInstanceManagerPtr entity_instance_manager, LogManagerPtr log_manager);
 
     /// Destructor.
     ~RandomNextFloatProcessor() override;
 
-    /// Initializes the RANDOM_NEXT_FLOAT processor by registering listeners on newly created entity instances of type RANDOM_NEXT_FLOAT.
-    void init();
+    /// Initializes the processor.
+    void init() override;
+
+    /// Returns the name of the component
+    std::string get_component_name() override;
 
     /// @brief Called when an entity instance of type RANDOM_NEXT_FLOAT has been created.
     /// @param entity_instance ?
@@ -61,8 +63,11 @@ class RandomNextFloatProcessor : public Processor, public entity_system::EntityI
     void make_signals(const EntityInstancePtr &entity_instance);
 
     private:
-    /// The entity type provider for this processor.
-    RandomNextFloatEntityTypeProviderPtr entity_type_provider;
+    /// Initializes the processor by registering listeners on newly created entity instances.
+    void init_processor();
+
+    /// The entity type manager.
+    EntityTypeManagerPtr entity_type_manager;
 
     /// The entity instance manager.
     EntityInstanceManagerPtr entity_instance_manager;

@@ -5,15 +5,16 @@
 namespace inexor::visual_scripting {
 
 LoggerProcessors::LoggerProcessors(LoggerProcessorPtr logger_processor)
+    : LifeCycleComponent(logger_processor)
 {
     this->logger_processor = std::move(logger_processor);
 }
 
 LoggerProcessors::~LoggerProcessors() = default;
 
-void LoggerProcessors::init()
+std::string LoggerProcessors::get_component_name()
 {
-    logger_processor->init();
+    return "LoggerProcessors";
 }
 
 } // namespace inexor::visual_scripting

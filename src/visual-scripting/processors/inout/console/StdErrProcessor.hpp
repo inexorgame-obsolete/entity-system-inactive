@@ -5,7 +5,6 @@
 #include "entity-system/model/data/container/DataContainer.hpp"
 #include "entity-system/model/entities/entity-instances/EntityInstance.hpp"
 #include "logging/managers/LogManager.hpp"
-#include "type-system/providers/inout/console/StdErrEntityTypeProvider.hpp"
 #include "visual-scripting/model/Processor.hpp"
 
 namespace inexor::visual_scripting {
@@ -14,10 +13,10 @@ using namespace react;
 
 /// @class StdErrProcessor
 /// @brief Processor for entity instances of type CONSOLE_STDERR.
-class StdErrProcessor : public Processor, public entity_system::EntityInstanceCreatedListener, public entity_system::EntityInstanceDeletedListener, public std::enable_shared_from_this<StdErrProcessor>
+class StdErrProcessor : public Processor, public LifeCycleComponent, public entity_system::EntityInstanceCreatedListener, public entity_system::EntityInstanceDeletedListener, public std::enable_shared_from_this<StdErrProcessor>
 {
 
-    using StdErrEntityTypeProviderPtr = std::shared_ptr<entity_system::type_system::StdErrEntityTypeProvider>;
+    using EntityTypeManagerPtr = std::shared_ptr<entity_system::EntityTypeManager>;
     using EntityInstanceManagerPtr = std::shared_ptr<entity_system::EntityInstanceManager>;
     using EntityInstancePtr = std::shared_ptr<entity_system::EntityInstance>;
     using LogManagerPtr = std::shared_ptr<inexor::logging::LogManager>;
@@ -27,16 +26,18 @@ class StdErrProcessor : public Processor, public entity_system::EntityInstanceCr
     USING_REACTIVE_DOMAIN(entity_system::D)
 
     /// @brief Constructs a new entity instance of type CONSOLE_STDERR.
-    /// @note The dependencies of this class will be injected automatically.
-    /// @param entity_type_provider Provides the entity type CONSOLE_STDERR.
+    /// @param entity_type_manager The entity type manager.
     /// @param entity_instance_manager The signals per entity instance.
-    StdErrProcessor(const StdErrEntityTypeProviderPtr& entity_type_provider, EntityInstanceManagerPtr entity_instance_manager, const LogManagerPtr& log_manager);
+    StdErrProcessor(EntityTypeManagerPtr entity_type_manager, EntityInstanceManagerPtr entity_instance_manager, const LogManagerPtr& log_manager);
 
     /// Destructor.
     ~StdErrProcessor() override;
 
-    /// Initialization of the processor.
-    void init();
+    /// Initializes the processor.
+    void init() override;
+
+    /// Returns the name of the component
+    std::string get_component_name() override;
 
     /// Called when an entity instance of type CONSOLE_STDERR has been created.
     /// @param entity_instance ?
@@ -52,8 +53,11 @@ class StdErrProcessor : public Processor, public entity_system::EntityInstanceCr
     void make_signals(const EntityInstancePtr &entity_instance);
 
     private:
-    /// Provides the entity type CONSOLE_STDERR.
-    StdErrEntityTypeProviderPtr entity_type_provider;
+    /// Initializes the processor by registering listeners on newly created entity instances.
+    void init_processor();
+
+    /// The entity type manager.
+    EntityTypeManagerPtr entity_type_manager;
 
     /// The entity instance manager.
     EntityInstanceManagerPtr entity_instance_manager;

@@ -1,5 +1,6 @@
 #pragma once
 
+#include "base/LifeCycleComponent.hpp"
 #include "type-system/factories/generators/random/RandomNextFloatFactory.hpp"
 #include "type-system/factories/generators/random/RandomNextIntFactory.hpp"
 
@@ -12,7 +13,7 @@ using RandomNextFloatFactoryPtr = std::shared_ptr<RandomNextFloatFactory>;
 
 /// @class RandomFactories
 /// @brief Provides the factories for counters.
-class RandomFactories
+class RandomFactories : public LifeCycleComponent
 {
     public:
     /// @brief Constructs the factories for counters.
@@ -24,8 +25,8 @@ class RandomFactories
     /// Destructor.
     ~RandomFactories();
 
-    /// Initializes the factories for counters.
-    void init();
+    /// Returns the name of the component
+    std::string get_component_name() override;
 
     private:
     /// Factory for creating entity instances of type COUNTER_INT.

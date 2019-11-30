@@ -1,0 +1,34 @@
+{
+  "type": "entity",
+  "name": "RANDOM_NEXT_INT",
+  "attributes": [
+    {
+      "name": "random_next_int_on_activation",
+      "datatype": "BOOL",
+      "features": [
+        "INPUT"
+      ]
+    },
+    {
+      "name": "random_next_int_min",
+      "datatype": "INT",
+      "features": [
+        "INPUT"
+      ]
+    },
+    {
+      "name": "random_next_int_max",
+      "datatype": "INT",
+      "features": [
+        "INPUT"
+      ]
+    },
+    {
+      "name": "random_next_int_value",
+      "datatype": "INT",
+      "features": [
+        "OUTPUT"
+      ]
+    }
+  ]
+}

@@ -73,7 +73,7 @@ EntityTypePtrOpt EntityTypeManager::create_entity_type(const xg::Guid &type_GUID
 
 bool EntityTypeManager::does_entity_type_exist(const xg::Guid &type_GUID)
 {
-    return does_entity_type_exist(get_type(type_GUID)->get_type_name());
+    return does_type_exist(type_GUID);
 }
 
 bool EntityTypeManager::does_entity_type_exist(const std::string &type_name)
@@ -81,9 +81,9 @@ bool EntityTypeManager::does_entity_type_exist(const std::string &type_name)
     return does_type_exist(type_name);
 }
 
-bool EntityTypeManager::does_entity_type_exist(const EntityTypePtr &type_shared_ptr)
+bool EntityTypeManager::does_entity_type_exist(const EntityTypePtr &ent_type)
 {
-    return does_entity_type_exist(type_shared_ptr->get_type_name());
+    return does_entity_type_exist(ent_type->get_type_name()) || does_entity_type_exist(ent_type->get_GUID());
 }
 
 std::size_t EntityTypeManager::get_entity_type_count() const

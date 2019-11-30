@@ -5,6 +5,7 @@
 namespace inexor::input {
 
 InputModule::InputModule(KeyboardInputManagerPtr keyboard_input_manager, MouseInputManagerPtr mouse_input_manager, ClipboardManagerPtr clipboard_manager, InputProcessorsPtr input_processors)
+    : LifeCycleComponent(keyboard_input_manager, mouse_input_manager, clipboard_manager, input_processors)
 {
     this->keyboard_input_manager = std::move(keyboard_input_manager);
     this->mouse_input_manager = std::move(mouse_input_manager);
@@ -14,25 +15,14 @@ InputModule::InputModule(KeyboardInputManagerPtr keyboard_input_manager, MouseIn
 
 InputModule::~InputModule() = default;
 
-void InputModule::init()
-{
-    keyboard_input_manager->init();
-    mouse_input_manager->init();
-    clipboard_manager->init();
-    input_processors->init();
-}
-
-void InputModule::shutdown()
-{
-    // input_processors->shutdown();
-    clipboard_manager->shutdown();
-    mouse_input_manager->shutdown();
-    keyboard_input_manager->shutdown();
-}
-
 void InputModule::update()
 {
     clipboard_manager->update();
+}
+
+std::string InputModule::get_component_name()
+{
+    return "InputModule";
 }
 
 } // namespace inexor::input

@@ -1,14 +1,15 @@
 #pragma once
 
-#include "logging/managers/LogManager.hpp"
-
 #include <unordered_map>
+
+#include "base/LifeCycleComponent.hpp"
+#include "logging/managers/LogManager.hpp"
 
 namespace inexor::command {
 
 /// @class CommandManager
 /// @brief Management of the commands.
-class CommandManager
+class CommandManager : public LifeCycleComponent
 {
     using LogManagerPtr = std::shared_ptr<inexor::logging::LogManager>;
     using EntityInstancePtr = std::shared_ptr<entity_system::EntityInstance>;
@@ -25,8 +26,11 @@ class CommandManager
     /// Destructor.
     ~CommandManager();
 
-    /// Initialization of the command manager.
-    void init();
+    /// Initializes the logger.
+    void init() override;
+
+    /// Returns the name of the component
+    std::string get_component_name() override;
 
     /// Returns true, if the command exists.
     /// @param command The name of the command.

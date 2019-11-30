@@ -71,6 +71,9 @@ conan_add_remote(NAME helmesjo
 conan_add_remote(NAME neargye
                  INDEX 1
                  URL https://api.bintray.com/conan/neargye/conan-packages)
+conan_add_remote(NAME vthiery
+                INDEX 1
+                URL https://api.bintray.com/conan/vthiery/conan-packages)
 
 if(UNIX AND NOT APPLE)
     set(LIBCXX libstdc++11)
@@ -125,14 +128,20 @@ list(REMOVE_ITEM LIBRARY_SOURCE_FILES "src/main.cpp")
 find_package(Corrade REQUIRED Utility)
 
 #set_directory_properties(PROPERTIES CORRADE_USE_PEDANTIC_FLAGS ON)
-corrade_add_resource(CORRADE_STANDALONE_RESOURCES standalone-resources.conf)
+corrade_add_resource(STATIC_BASE_RESOURCES static/base-resources.conf)
+corrade_add_resource(STATIC_IMAGE_RESOURCES static/image-resources.conf)
+corrade_add_resource(STATIC_FONT_RESOURCES static/font-resources.conf)
+corrade_add_resource(STATIC_TYPE_SYSTEM_RESOURCES static/type-system-resources.conf)
 
 # Print CMake debug messages.
 message(STATUS "NORMAL SOURCE FILES: ${NORMAL_SOURCE_FILES} + src/main.cpp")
 message(STATUS "TEST SOURCE FILES: ${TEST_SOURCE_FILES}")
 message(STATUS "BENCHMARK SOURCE FILES: ${BENCHMARK_SOURCE_FILES}")
 message(STATUS "CONAN_LIBS: ${CONAN_LIBS}")
-message(STATUS "CORRADE_STANDALONE_RESOURCES: ${CORRADE_STANDALONE_RESOURCES}")
+message(STATUS "STATIC_BASE_RESOURCES: ${STATIC_BASE_RESOURCES}")
+message(STATUS "STATIC_IMAGE_RESOURCES: ${STATIC_IMAGE_RESOURCES}")
+message(STATUS "STATIC_FONT_RESOURCES: ${STATIC_FONT_RESOURCES}")
+message(STATUS "STATIC_TYPE_SYSTEM_RESOURCES: ${STATIC_TYPE_SYSTEM_RESOURCES}")
 
 # Entity-system library
 add_library(inexor-entity-system-lib ${LIBRARY_SOURCE_FILES})
@@ -142,7 +151,12 @@ target_link_libraries(inexor-entity-system-lib ${CONAN_LIBS})
 #endif()
 
 # Inexor standalone application.
-add_executable(inexor-standalone src/main.cpp ${CORRADE_STANDALONE_RESOURCES})
+add_executable(inexor-standalone
+        src/main.cpp
+        ${STATIC_BASE_RESOURCES}
+        ${STATIC_IMAGE_RESOURCES}
+        ${STATIC_FONT_RESOURCES}
+        ${STATIC_TYPE_SYSTEM_RESOURCES})
 target_link_libraries(inexor-standalone PUBLIC inexor-entity-system-lib)
 target_link_libraries(inexor-standalone PUBLIC ${CONAN_LIBS})
 target_link_libraries(inexor-standalone PRIVATE Corrade::Utility)

@@ -1,7 +1,7 @@
 #include "LoadingScreen.hpp"
 
-#include "entity-system/model/entity-attributes/entity-attribute-instances/EntityAttributeInstance.hpp"
-#include "type-system/providers/inout/keyboard/GlobalKeyEntityTypeProvider.hpp"
+#include <algorithm>
+#include <utility>
 
 #include <Corrade/Containers/Optional.h>
 #include <Corrade/PluginManager/Manager.h>
@@ -14,20 +14,26 @@
 
 #include <GLFW/glfw3.h>
 
-// TODO: enable boost stacktrace again (2/3)
-//#include <boost/stacktrace.hpp>
-
 #include "spdlog/spdlog.h"
 #include <spdlog/fmt/ostr.h>
 
-#include <algorithm>
-#include <utility>
+#include "entity-system/model/entity-attributes/entity-attribute-instances/EntityAttributeInstance.hpp"
+
+#include "type-system/types/inout/keyboard/GlobalKey.hpp"
+#include "type-system/types/inout/mouse/GlobalMouseButton.hpp"
+#include "type-system/types/ui/Window.hpp"
 
 using namespace Magnum::Math::Literals;
 
 namespace inexor::renderer {
 
-using EntityAttributeInstancePtr = std::shared_ptr<EntityAttributeInstance>;
+using DataType = entity_system::DataType;
+using DataValue = entity_system::DataValue;
+using GlobalKey = entity_system::type_system::GlobalKey;
+using GlobalMouseButton = entity_system::type_system::GlobalMouseButton;
+using Window = entity_system::type_system::Window;
+using EntityInstancePtrOpt = std::optional<EntityInstancePtr>;
+using EntityAttributeInstancePtr = std::shared_ptr<entity_system::EntityAttributeInstance>;
 using EntityAttributeInstancePtrOpt = std::optional<EntityAttributeInstancePtr>;
 
 LoadingScreen::LoadingScreen(WindowManagerPtr window_manager, MonitorManagerPtr monitor_manager, FontManagerPtr font_manager, KeyboardInputManagerPtr keyboard_input_manager, MouseInputManagerPtr mouse_input_manager,
@@ -75,16 +81,16 @@ void LoadingScreen::init()
     if (o_key_b.has_value())
     {
         EntityInstancePtr key_b = o_key_b.value();
-        EntityAttributeInstancePtrOpt o_key_b_key = key_b->get_attribute_instance(entity_system::type_system::GlobalKeyEntityTypeProvider::GLOBAL_KEY_KEYCODE);
-        EntityAttributeInstancePtrOpt o_key_b_action = key_b->get_attribute_instance(entity_system::type_system::GlobalKeyEntityTypeProvider::GLOBAL_KEY_ACTION);
+        EntityAttributeInstancePtrOpt o_key_b_key = key_b->get_attribute_instance(GlobalKey::KEYCODE);
+        EntityAttributeInstancePtrOpt o_key_b_action = key_b->get_attribute_instance(GlobalKey::ACTION);
         if (o_key_b_key.has_value() && o_key_b_action.has_value())
         {
             EntityAttributeInstancePtr key_b_key = o_key_b_key.value();
             EntityAttributeInstancePtr key_b_action = o_key_b_action.value();
-            spdlog::debug("Creating observer for GLOBAL KEY {} {}", std::get<entity_system::DataType::INT>(key_b_key->value.Value()), std::get<entity_system::DataType::INT>(key_b_action->value.Value()));
+            spdlog::debug("Creating observer for GLOBAL KEY {} {}", std::get<DataType::INT>(key_b_key->value.Value()), std::get<DataType::INT>(key_b_action->value.Value()));
             Observe(key_b_action->value, [](DataValue action) {
-                spdlog::info("GLOBAL KEY B {}", std::get<entity_system::DataType::INT>(action));
-                if (std::get<entity_system::DataType::INT>(action) == GLFW_RELEASE)
+                spdlog::info("GLOBAL KEY B {}", std::get<DataType::INT>(action));
+                if (std::get<DataType::INT>(action) == GLFW_RELEASE)
                 {
                     spdlog::info("GLOBAL_KEY_B released");
                     // TODO: enable boost stacktrace again (3/3)
@@ -98,16 +104,16 @@ void LoadingScreen::init()
     if (o_mouse_button_2.has_value())
     {
         EntityInstancePtr mouse_button_2 = o_mouse_button_2.value();
-        EntityAttributeInstancePtrOpt o_mouse_button_2_number = mouse_button_2->get_attribute_instance(entity_system::type_system::GlobalMouseButtonEntityTypeProvider::GLOBAL_MOUSE_BUTTON_NUMBER);
-        EntityAttributeInstancePtrOpt o_mouse_button_2_action = mouse_button_2->get_attribute_instance(entity_system::type_system::GlobalMouseButtonEntityTypeProvider::GLOBAL_MOUSE_BUTTON_ACTION);
+        EntityAttributeInstancePtrOpt o_mouse_button_2_number = mouse_button_2->get_attribute_instance(GlobalMouseButton::BUTTON_NUMBER);
+        EntityAttributeInstancePtrOpt o_mouse_button_2_action = mouse_button_2->get_attribute_instance(GlobalMouseButton::ACTION);
         if (o_mouse_button_2_number.has_value() && o_mouse_button_2_action.has_value())
         {
             EntityAttributeInstancePtr mouse_button_2_number = o_mouse_button_2_number.value();
             EntityAttributeInstancePtr mouse_button_2_action = o_mouse_button_2_action.value();
-            spdlog::debug("Creating observer for GLOBAL MOUSE_BUTTON {} {}", std::get<entity_system::DataType::INT>(mouse_button_2_number->value.Value()), std::get<entity_system::DataType::INT>(mouse_button_2_action->value.Value()));
+            spdlog::debug("Creating observer for GLOBAL MOUSE_BUTTON {} {}", std::get<DataType::INT>(mouse_button_2_number->value.Value()), std::get<DataType::INT>(mouse_button_2_action->value.Value()));
             Observe(mouse_button_2_action->value, [](DataValue action) {
-                spdlog::info("GLOBAL MOUSE BUTTON 2: {}", std::get<entity_system::DataType::INT>(action));
-                if (std::get<entity_system::DataType::INT>(action) == GLFW_RELEASE)
+                spdlog::info("GLOBAL MOUSE BUTTON 2: {}", std::get<DataType::INT>(action));
+                if (std::get<DataType::INT>(action) == GLFW_RELEASE)
                 {
                     spdlog::info("GLOBAL_MOUSE_BUTTON_2 released");
                     // TODO: enable boost stacktrace again (3/3)
@@ -118,9 +124,14 @@ void LoadingScreen::init()
     }
 }
 
-void LoadingScreen::shutdown()
+void LoadingScreen::destroy()
 {
     window_manager->destroy_window(window);
+}
+
+std::string LoadingScreen::get_component_name()
+{
+    return "LoadingScreen";
 }
 
 void toggle_raw(GLFWwindow *glfw_window, int window_attribute)
@@ -131,25 +142,25 @@ void toggle_raw(GLFWwindow *glfw_window, int window_attribute)
 void increase(const EntityInstancePtr &entity_instance, std::string name, float step, float max)
 {
     EntityAttributeInstancePtr attr = entity_instance->get_attribute_instance(name).value();
-    attr->own_value.Set(std::min(max, std::get<entity_system::DataType::FLOAT>(attr->value.Value()) + step));
+    attr->own_value.Set(std::min(max, std::get<DataType::FLOAT>(attr->value.Value()) + step));
 }
 
 void increase(const EntityInstancePtr &entity_instance, std::string name, int step, int max)
 {
     EntityAttributeInstancePtr attr = entity_instance->get_attribute_instance(name).value();
-    attr->own_value.Set(std::min(max, std::get<entity_system::DataType::INT>(attr->value.Value()) + step));
+    attr->own_value.Set(std::min(max, std::get<DataType::INT>(attr->value.Value()) + step));
 }
 
 void decrease(const EntityInstancePtr &entity_instance, std::string name, float step, float min)
 {
     EntityAttributeInstancePtr attr = entity_instance->get_attribute_instance(name).value();
-    attr->own_value.Set(std::max(min, std::get<entity_system::DataType::FLOAT>(attr->value.Value()) - step));
+    attr->own_value.Set(std::max(min, std::get<DataType::FLOAT>(attr->value.Value()) - step));
 }
 
 void decrease(const EntityInstancePtr &entity_instance, std::string name, int step, int min)
 {
     EntityAttributeInstancePtr attr = entity_instance->get_attribute_instance(name).value();
-    attr->own_value.Set(std::max(min, std::get<entity_system::DataType::INT>(attr->value.Value()) - step));
+    attr->own_value.Set(std::max(min, std::get<DataType::INT>(attr->value.Value()) - step));
 }
 
 void LoadingScreen::on_window_char_input(EntityInstancePtr window, std::string character, unsigned int codepoint)
@@ -205,22 +216,22 @@ void LoadingScreen::on_window_key_released(EntityInstancePtr window, int key, in
     case GLFW_KEY_I:
         if (mods & GLFW_MOD_CONTROL)
         {
-            window->toggle(WindowEntityTypeProvider::WINDOW_ICONIFIED);
-            action = window->get<DataType::BOOL>(WindowEntityTypeProvider::WINDOW_ICONIFIED) ? "Iconified" : "Restored";
+            window->toggle(Window::ICONIFIED);
+            action = window->get<DataType::BOOL>(Window::ICONIFIED) ? "Iconified" : "Restored";
         }
         break;
     case GLFW_KEY_F:
         if (mods & GLFW_MOD_CONTROL)
         {
-            window->toggle(WindowEntityTypeProvider::WINDOW_FULLSCREEN);
-            action = window->get<DataType::BOOL>(WindowEntityTypeProvider::WINDOW_FULLSCREEN) ? "Fullscreen" : "Restored";
+            window->toggle(Window::FULLSCREEN);
+            action = window->get<DataType::BOOL>(Window::FULLSCREEN) ? "Fullscreen" : "Restored";
         }
         break;
     case GLFW_KEY_M:
         if (mods & GLFW_MOD_CONTROL)
         {
-            window->toggle(WindowEntityTypeProvider::WINDOW_MAXIMIZED);
-            action = window->get<DataType::BOOL>(WindowEntityTypeProvider::WINDOW_MAXIMIZED) ? "Maximized" : "Restored";
+            window->toggle(Window::MAXIMIZED);
+            action = window->get<DataType::BOOL>(Window::MAXIMIZED) ? "Maximized" : "Restored";
         }
         break;
     case GLFW_KEY_U:
@@ -238,7 +249,7 @@ void LoadingScreen::on_window_key_released(EntityInstancePtr window, int key, in
         }
         break;
     case GLFW_KEY_SCROLL_LOCK:
-        window->toggle(WindowEntityTypeProvider::WINDOW_VSYNC);
+        window->toggle(Window::VSYNC);
         action = "Toggle vsync";
         break;
     case GLFW_KEY_PRINT_SCREEN:
@@ -391,13 +402,13 @@ void LoadingScreen::move(const EntityInstancePtr &window)
     case 1:
         // Change window position
         if (movement.forward)
-            decrease(window, WindowEntityTypeProvider::WINDOW_POSITION_Y, 10, 0);
+            decrease(window, Window::POSITION_Y, 10, 0);
         if (movement.backward)
-            increase(window, WindowEntityTypeProvider::WINDOW_POSITION_Y, 10, 3840);
+            increase(window, Window::POSITION_Y, 10, 3840);
         if (movement.left)
-            decrease(window, WindowEntityTypeProvider::WINDOW_POSITION_X, 10, 0);
+            decrease(window, Window::POSITION_X, 10, 0);
         if (movement.right)
-            increase(window, WindowEntityTypeProvider::WINDOW_POSITION_X, 10, 2160);
+            increase(window, Window::POSITION_X, 10, 2160);
         break;
     case 2:
         // Center window
@@ -472,26 +483,26 @@ void LoadingScreen::move(const EntityInstancePtr &window)
         // Change window opacity
         if (movement.forward)
         {
-            increase(window, WindowEntityTypeProvider::WINDOW_OPACITY, 0.05f, 1.0f);
-            action = fmt::format("opacity = {}", window->get<DataType::FLOAT>(WindowEntityTypeProvider::WINDOW_OPACITY));
+            increase(window, Window::OPACITY, 0.05f, 1.0f);
+            action = fmt::format("opacity = {}", window->get<DataType::FLOAT>(Window::OPACITY));
         }
         if (movement.backward)
         {
-            decrease(window, WindowEntityTypeProvider::WINDOW_OPACITY, 0.05f, 0.1f);
-            action = fmt::format("opacity = {}", window->get<DataType::FLOAT>(WindowEntityTypeProvider::WINDOW_OPACITY));
+            decrease(window, Window::OPACITY, 0.05f, 0.1f);
+            action = fmt::format("opacity = {}", window->get<DataType::FLOAT>(Window::OPACITY));
         }
         break;
     case 6:
         // Change window fps
         if (movement.forward)
         {
-            increase(window, WindowEntityTypeProvider::WINDOW_FPS, 5.00f, 250.0f);
-            action = fmt::format("max fps = {}", window->get<DataType::FLOAT>(WindowEntityTypeProvider::WINDOW_FPS));
+            increase(window, Window::FPS, 5.00f, 250.0f);
+            action = fmt::format("max fps = {}", window->get<DataType::FLOAT>(Window::FPS));
         }
         if (movement.backward)
         {
-            decrease(window, WindowEntityTypeProvider::WINDOW_FPS, 5.00f, 10.0f);
-            action = fmt::format("max fps = {}", window->get<DataType::FLOAT>(WindowEntityTypeProvider::WINDOW_FPS));
+            decrease(window, Window::FPS, 5.00f, 10.0f);
+            action = fmt::format("max fps = {}", window->get<DataType::FLOAT>(Window::FPS));
         }
         break;
     default:
@@ -512,31 +523,31 @@ void LoadingScreen::execute_command(const EntityInstancePtr &window)
     } else if (command_buffer == "/vsync 0")
     {
         action = "vsync off";
-        window->set_own_value(WindowEntityTypeProvider::WINDOW_VSYNC, false);
+        window->set_own_value(Window::VSYNC, false);
     } else if (command_buffer == "/vsync 1")
     {
         action = "vsync on";
-        window->set_own_value(WindowEntityTypeProvider::WINDOW_VSYNC, true);
+        window->set_own_value(Window::VSYNC, true);
     } else if (command_buffer == "/fullscreen 0")
     {
         action = "Fullscreen off";
-        window->set_own_value(WindowEntityTypeProvider::WINDOW_FULLSCREEN, false);
+        window->set_own_value(Window::FULLSCREEN, false);
     } else if (command_buffer == "/fullscreen 1")
     {
         action = "Fullscreen on";
-        window->set_own_value(WindowEntityTypeProvider::WINDOW_FULLSCREEN, true);
+        window->set_own_value(Window::FULLSCREEN, true);
     } else if (command_buffer == "/maximize 0")
     {
         action = "Maximize off";
-        window->set_own_value(WindowEntityTypeProvider::WINDOW_MAXIMIZED, false);
+        window->set_own_value(Window::MAXIMIZED, false);
     } else if (command_buffer == "/maximize 1")
     {
         action = "Maximize on";
-        window->set_own_value(WindowEntityTypeProvider::WINDOW_MAXIMIZED, true);
+        window->set_own_value(Window::MAXIMIZED, true);
     } else if (command_buffer == "/license")
     {
         action = "License";
-        Corrade::Utility::Resource rs{"inexor"};
+        Corrade::Utility::Resource rs{"inexor-base"};
         spdlog::info("License:\n{}", rs.get("license.txt"));
     }
     command_buffer = "";
@@ -561,7 +572,7 @@ void LoadingScreen::init_loading_screen(const EntityInstancePtr &window, GLFWwin
     Corrade::Containers::Pointer<Magnum::Trade::AbstractImporter> image_importer = manager.loadAndInstantiate("AnyImageImporter");
     if (image_importer)
     {
-        const Corrade::Utility::Resource rs{"inexor"};
+        const Corrade::Utility::Resource rs{"inexor-images"};
         if (image_importer->openData(rs.getRaw("logo.png")))
         {
             // TODO: move to own service

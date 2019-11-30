@@ -1,29 +1,30 @@
 #include "InRangeIntFactory.hpp"
 
+#include <type-system/types/logical/comparison/InRangeInt.hpp>
 #include <utility>
 
 namespace inexor::entity_system::type_system {
 
-InRangeIntFactory::InRangeIntFactory(InRangeIntEntityTypeProviderPtr entity_type_provider, EntityInstanceBuilderFactoryPtr entity_instance_builder_factory)
+InRangeIntFactory::InRangeIntFactory(EntityInstanceBuilderFactoryPtr entity_instance_builder_factory)
+    : LifeCycleComponent()
 {
-    this->entity_type_provider = std::move(entity_type_provider);
     this->entity_instance_builder_factory = std::move(entity_instance_builder_factory);
 }
 
 InRangeIntFactory::~InRangeIntFactory() = default;
 
-void InRangeIntFactory::init()
+std::string InRangeIntFactory::get_component_name()
 {
+    return "InRangeIntFactory";
 }
 
 EntityInstancePtrOpt InRangeIntFactory::create_instance()
 {
-    return entity_instance_builder_factory->get_builder()
-        ->type(entity_type_provider->get_type())
-        ->attribute(InRangeIntEntityTypeProvider::IN_RANGE_INT_INPUT, 0)
-        ->attribute(InRangeIntEntityTypeProvider::IN_RANGE_INT_MIN, 0)
-        ->attribute(InRangeIntEntityTypeProvider::IN_RANGE_INT_MAX, 0)
-        ->attribute(InRangeIntEntityTypeProvider::IN_RANGE_INT_RESULT, true)
+    return entity_instance_builder_factory->get_builder(InRangeInt::TYPE_NAME)
+        ->attribute(InRangeInt::INPUT, 0)
+        ->attribute(InRangeInt::MIN, 0)
+        ->attribute(InRangeInt::MAX, 0)
+        ->attribute(InRangeInt::RESULT, true)
         ->build();
 }
 

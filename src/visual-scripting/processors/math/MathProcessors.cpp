@@ -5,6 +5,7 @@
 namespace inexor::visual_scripting {
 
 MathProcessors::MathProcessors(ArithmeticProcessorsPtr arithmetic_processors, TrigonometricProcessorsPtr trigonometric_processors)
+    :LifeCycleComponent(arithmetic_processors, trigonometric_processors)
 {
     this->arithmetic_processors = std::move(arithmetic_processors);
     this->trigonometric_processors = std::move(trigonometric_processors);
@@ -12,10 +13,9 @@ MathProcessors::MathProcessors(ArithmeticProcessorsPtr arithmetic_processors, Tr
 
 MathProcessors::~MathProcessors() = default;
 
-void MathProcessors::init()
+std::string MathProcessors::get_component_name()
 {
-    this->arithmetic_processors->init();
-    this->trigonometric_processors->init();
+    return "Processors";
 }
 
 } // namespace inexor::visual_scripting

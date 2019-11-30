@@ -1,0 +1,27 @@
+{
+  "type": "entity",
+  "name": "XOR",
+  "attributes": [
+    {
+      "name": "xor_input_1",
+      "datatype": "BOOL",
+      "features": [
+        "INPUT"
+      ]
+    },
+    {
+      "name": "xor_input_2",
+      "datatype": "BOOL",
+      "features": [
+        "INPUT"
+      ]
+    },
+    {
+      "name": "xor_result",
+      "datatype": "BOOL",
+      "features": [
+        "OUTPUT"
+      ]
+    }
+  ]
+}

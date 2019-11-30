@@ -5,21 +5,18 @@
 namespace inexor::entity_system::type_system {
 
 GeneratorFactories::GeneratorFactories(CounterFactoriesPtr counter_factories, TimerFactoriesPtr timer_factories, RandomFactoriesPtr random_factories)
+    : LifeCycleComponent(counter_factories, timer_factories, random_factories)
 {
     this->counter_factories = std::move(counter_factories);
     this->timer_factories = std::move(timer_factories);
     this->random_factories = std::move(random_factories);
 }
 
-GeneratorFactories::~GeneratorFactories()
-{
-}
+GeneratorFactories::~GeneratorFactories() = default;
 
-void GeneratorFactories::init()
+std::string GeneratorFactories::get_component_name()
 {
-    counter_factories->init();
-    timer_factories->init();
-    random_factories->init();
+    return "GeneratorFactories";
 }
 
 } // namespace inexor::entity_system::type_system

@@ -5,6 +5,7 @@
 namespace inexor::entity_system::type_system {
 
 ConstantFactories::ConstantFactories(BoolConstantFactoryPtr bool_constant_factory, FloatConstantFactoryPtr float_constant_factory, IntConstantFactoryPtr int_constant_factory, StringConstantFactoryPtr string_constant_factory)
+    : LifeCycleComponent(bool_constant_factory, float_constant_factory, int_constant_factory, string_constant_factory)
 {
     this->bool_constant_factory = std::move(bool_constant_factory);
     this->float_constant_factory = std::move(float_constant_factory);
@@ -14,12 +15,9 @@ ConstantFactories::ConstantFactories(BoolConstantFactoryPtr bool_constant_factor
 
 ConstantFactories::~ConstantFactories() = default;
 
-void ConstantFactories::init()
+std::string ConstantFactories::get_component_name()
 {
-    bool_constant_factory->init();
-    float_constant_factory->init();
-    int_constant_factory->init();
-    string_constant_factory->init();
+    return "ConstantFactories";
 }
 
 } // namespace inexor::entity_system::type_system

@@ -1,0 +1,20 @@
+{
+  "type": "entity",
+  "name": "COS",
+  "attributes": [
+    {
+      "name": "cos_input",
+      "datatype": "FLOAT",
+      "features": [
+        "INPUT"
+      ]
+    },
+    {
+      "name": "cos_value",
+      "datatype": "FLOAT",
+      "features": [
+        "OUTPUT"
+      ]
+    }
+  ]
+}

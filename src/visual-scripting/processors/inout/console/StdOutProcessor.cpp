@@ -1,9 +1,9 @@
 #include "StdOutProcessor.hpp"
 
+#include <type-system/types/inout/console/StdOut.hpp>
 #include <utility>
 
 #include "react/Algorithm.h"
-#include "react/Domain.h"
 #include "react/Event.h"
 #include "react/Observer.h"
 
@@ -11,23 +11,38 @@ namespace inexor::visual_scripting {
 
 using namespace inexor::entity_system;
 using namespace inexor::entity_system::type_system;
+
+using StdOut = entity_system::type_system::StdOut;
+using EntityTypePtrOpt = std::optional<EntityTypePtr>;
 using EntityAttributeInstancePtrOptional = std::optional<std::shared_ptr<EntityAttributeInstance>>;
 
-using EntityTypePtr = std::shared_ptr<entity_system::EntityType>;
-
-StdOutProcessor::StdOutProcessor(const StdOutEntityTypeProviderPtr &entity_type_provider, EntityInstanceManagerPtr entity_instance_manager, LogManagerPtr log_manager) : Processor(entity_type_provider->get_type())
+StdOutProcessor::StdOutProcessor(EntityTypeManagerPtr entity_type_manager, EntityInstanceManagerPtr entity_instance_manager, LogManagerPtr log_manager)
+    : Processor(), LifeCycleComponent(), entity_type_manager(std::move(entity_type_manager)), entity_instance_manager(std::move(entity_instance_manager)), log_manager(log_manager)
 {
-    this->entity_type_provider = entity_type_provider;
-    this->entity_instance_manager = std::move(entity_instance_manager);
-    this->log_manager = std::move(log_manager);
 }
 
 StdOutProcessor::~StdOutProcessor() = default;
 
 void StdOutProcessor::init()
 {
-    entity_instance_manager->register_on_created(entity_type_provider->get_type()->get_GUID(), shared_from_this());
-    entity_instance_manager->register_on_deleted(entity_type_provider->get_type()->get_GUID(), shared_from_this());
+    init_processor();
+}
+
+void StdOutProcessor::init_processor()
+{
+    EntityTypePtrOpt o_ent_type = entity_type_manager->get_entity_type(StdOut::TYPE_NAME);
+    if (o_ent_type.has_value()) {
+        this->entity_type = o_ent_type.value();
+        entity_instance_manager->register_on_created(this->entity_type->get_GUID(), shared_from_this());
+        entity_instance_manager->register_on_deleted(this->entity_type->get_GUID(), shared_from_this());
+    } else {
+        spdlog::error("Failed to initialize processor {}: Entity type does not exist", StdOut::TYPE_NAME);
+    }
+}
+
+std::string StdOutProcessor::get_component_name()
+{
+    return "StdOutProcessor";
 }
 
 void StdOutProcessor::on_entity_instance_created(EntityInstancePtr entity_instance)
@@ -47,7 +62,7 @@ void StdOutProcessor::make_signals(const EntityInstancePtr &entity_instance)
 {
     spdlog::info("Initializing processor CONSOLE_STDOUT for newly created entity instance {} of type {}", entity_instance->get_GUID().str(), entity_instance->get_entity_type()->get_type_name());
 
-    auto o_console_stdout = entity_instance->get_attribute_instance(StdOutEntityTypeProvider::CONSOLE_STDOUT);
+    auto o_console_stdout = entity_instance->get_attribute_instance(StdOut::STDOUT);
 
     if (o_console_stdout.has_value())
     {
@@ -55,7 +70,7 @@ void StdOutProcessor::make_signals(const EntityInstancePtr &entity_instance)
     } else
     {
         spdlog::error("Failed to initialize processor signals for entity instance {} of type {}: Missing attribute {}", entity_instance->get_GUID().str(), entity_instance->get_entity_type()->get_type_name(),
-                      StdOutEntityTypeProvider::CONSOLE_STDOUT);
+                      StdOut::STDOUT);
     }
 }
 

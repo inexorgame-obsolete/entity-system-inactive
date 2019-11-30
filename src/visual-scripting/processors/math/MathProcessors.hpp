@@ -10,7 +10,7 @@ using TrigonometricProcessorsPtr = std::shared_ptr<TrigonometricProcessors>;
 
 /// @class MathProcessors
 /// @brief Provides processors.
-class MathProcessors
+class MathProcessors : public LifeCycleComponent
 {
     public:
     /// @brief Constructs the processors.
@@ -22,8 +22,8 @@ class MathProcessors
     /// Destructor.
     ~MathProcessors();
 
-    /// Initialization of the Processors.
-    void init();
+    /// Returns the name of the component
+    std::string get_component_name() override;
 
     private:
     /// The processors for arithmetic operations.

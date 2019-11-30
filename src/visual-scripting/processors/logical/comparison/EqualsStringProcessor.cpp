@@ -1,15 +1,19 @@
 #include "EqualsStringProcessor.hpp"
 
+#include <type-system/types/logical/comparison/EqualsString.hpp>
 #include <utility>
 
 namespace inexor::visual_scripting {
 
 using namespace inexor::entity_system;
 using namespace inexor::entity_system::type_system;
+
+using EqualsString = entity_system::type_system::EqualsString;
+using EntityTypePtrOpt = std::optional<EntityTypePtr>;
 using EntityAttributeInstancePtrOptional = std::optional<std::shared_ptr<EntityAttributeInstance>>;
 
-EqualsStringProcessor::EqualsStringProcessor(const EqualsStringEntityTypeProviderPtr &entity_type_provider, EntityInstanceManagerPtr entity_instance_manager, LogManagerPtr log_manager)
-    : Processor(entity_type_provider->get_type()), entity_type_provider(entity_type_provider), entity_instance_manager(std::move(entity_instance_manager)), log_manager(std::move(log_manager))
+EqualsStringProcessor::EqualsStringProcessor(EntityTypeManagerPtr entity_type_manager, EntityInstanceManagerPtr entity_instance_manager, LogManagerPtr log_manager)
+    : Processor(), LifeCycleComponent(), entity_type_manager(std::move(entity_type_manager)), entity_instance_manager(std::move(entity_instance_manager)), log_manager(std::move(log_manager))
 {
 }
 
@@ -18,8 +22,24 @@ EqualsStringProcessor::~EqualsStringProcessor() = default;
 void EqualsStringProcessor::init()
 {
     log_manager->register_logger(LOGGER_NAME);
-    entity_instance_manager->register_on_created(entity_type_provider->get_type()->get_GUID(), shared_from_this());
-    entity_instance_manager->register_on_deleted(entity_type_provider->get_type()->get_GUID(), shared_from_this());
+    init_processor();
+}
+
+void EqualsStringProcessor::init_processor()
+{
+    EntityTypePtrOpt o_ent_type = entity_type_manager->get_entity_type(EqualsString::TYPE_NAME);
+    if (o_ent_type.has_value()) {
+        this->entity_type = o_ent_type.value();
+        entity_instance_manager->register_on_created(this->entity_type->get_GUID(), shared_from_this());
+        entity_instance_manager->register_on_deleted(this->entity_type->get_GUID(), shared_from_this());
+    } else {
+        spdlog::get(LOGGER_NAME)->error("Failed to initialize processor {}: Entity type does not exist", EqualsString::TYPE_NAME);
+    }
+}
+
+std::string EqualsStringProcessor::get_component_name()
+{
+    return "EqualsStringProcessor";
 }
 
 void EqualsStringProcessor::on_entity_instance_created(EntityInstancePtr entity_instance)
@@ -39,9 +59,9 @@ void EqualsStringProcessor::make_signals(const EntityInstancePtr &entity_instanc
 {
     spdlog::get(LOGGER_NAME)->debug("Initializing processor EQUALS_STRING for newly created entity instance {} of type {}", entity_instance->get_GUID().str(), entity_instance->get_entity_type()->get_type_name());
 
-    auto o_equals_string_input_1 = entity_instance->get_attribute_instance(EqualsStringEntityTypeProvider::EQUALS_STRING_INPUT_1);
-    auto o_equals_string_input_2 = entity_instance->get_attribute_instance(EqualsStringEntityTypeProvider::EQUALS_STRING_INPUT_2);
-    auto o_equals_string_result = entity_instance->get_attribute_instance(EqualsStringEntityTypeProvider::EQUALS_STRING_RESULT);
+    auto o_equals_string_input_1 = entity_instance->get_attribute_instance(EqualsString::INPUT_1);
+    auto o_equals_string_input_2 = entity_instance->get_attribute_instance(EqualsString::INPUT_2);
+    auto o_equals_string_result = entity_instance->get_attribute_instance(EqualsString::RESULT);
 
     if (o_equals_string_input_1.has_value() && o_equals_string_input_2.has_value() && o_equals_string_result.has_value())
     {
@@ -53,7 +73,7 @@ void EqualsStringProcessor::make_signals(const EntityInstancePtr &entity_instanc
     {
         spdlog::get(LOGGER_NAME)
             ->error("Failed to initialize processor signals for entity instance {} of type {}: Missing one of these attributes: {} {} {}", entity_instance->get_GUID().str(), entity_instance->get_entity_type()->get_type_name(),
-                    EqualsStringEntityTypeProvider::EQUALS_STRING_INPUT_1, EqualsStringEntityTypeProvider::EQUALS_STRING_INPUT_2, EqualsStringEntityTypeProvider::EQUALS_STRING_RESULT);
+                    EqualsString::INPUT_1, EqualsString::INPUT_2, EqualsString::RESULT);
     }
 }
 

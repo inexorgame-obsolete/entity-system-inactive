@@ -5,7 +5,6 @@
 #include "entity-system/model/data/container/DataContainer.hpp"
 #include "entity-system/model/entities/entity-instances/EntityInstance.hpp"
 #include "logging/managers/LogManager.hpp"
-#include "type-system/providers/inout/logger/LoggerEntityTypeProvider.hpp"
 #include "visual-scripting/managers/ProcessorRegistry.hpp"
 #include "visual-scripting/model/Processor.hpp"
 
@@ -15,10 +14,10 @@ using namespace react;
 
 /// @class LoggerProcessor
 /// @brief Processor for entity instances of type LOGGER.
-class LoggerProcessor : public Processor, public entity_system::EntityInstanceCreatedListener, public entity_system::EntityInstanceDeletedListener, public std::enable_shared_from_this<LoggerProcessor>
+class LoggerProcessor : public Processor, public LifeCycleComponent, public entity_system::EntityInstanceCreatedListener, public entity_system::EntityInstanceDeletedListener, public std::enable_shared_from_this<LoggerProcessor>
 {
 
-    using LoggerEntityTypeProviderPtr = std::shared_ptr<entity_system::type_system::LoggerEntityTypeProvider>;
+    using EntityTypeManagerPtr = std::shared_ptr<entity_system::EntityTypeManager>;
     using EntityInstanceManagerPtr = std::shared_ptr<entity_system::EntityInstanceManager>;
     using LogManagerPtr = std::shared_ptr<logging::LogManager>;
     using EntityInstancePtr = std::shared_ptr<entity_system::EntityInstance>;
@@ -28,17 +27,19 @@ class LoggerProcessor : public Processor, public entity_system::EntityInstanceCr
     USING_REACTIVE_DOMAIN(entity_system::D)
 
     /// @brief Constructs a new entity instance of type LOGGER.
-    /// @note The dependencies of this class will be injected automatically.
-    /// @param entity_type_provider Provides the entity type LOGGER.
+    /// @param entity_type_manager The entity type manager.
     /// @param entity_instance_manager The entity instance manager.
     /// @param logger_manager The log manager.
-    LoggerProcessor(const LoggerEntityTypeProviderPtr& entity_type_provider, EntityInstanceManagerPtr entity_instance_manager, const LogManagerPtr& logger_manager);
+    LoggerProcessor(EntityTypeManagerPtr entity_type_manager, EntityInstanceManagerPtr entity_instance_manager, const LogManagerPtr& logger_manager);
 
     /// Destructor.
     ~LoggerProcessor() override;
 
-    /// Initialization of the processor.
-    void init();
+    /// Initializes the processor.
+    void init() override;
+
+    /// Returns the name of the component
+    std::string get_component_name() override;
 
     /// @brief Called when an entity instance of type LOGGER has been created.
     /// @param entity_instance ?
@@ -57,8 +58,11 @@ class LoggerProcessor : public Processor, public entity_system::EntityInstanceCr
     static constexpr char LOGGER_NAME[] = "inexor.vs.p.l.logger";
 
     private:
-    /// Provides the entity type LOGGER.
-    LoggerEntityTypeProviderPtr entity_type_provider;
+    /// Initializes the processor by registering listeners on newly created entity instances.
+    void init_processor();
+
+    /// The entity type manager.
+    EntityTypeManagerPtr entity_type_manager;
 
     /// The entity instance manager.
     EntityInstanceManagerPtr entity_instance_manager;

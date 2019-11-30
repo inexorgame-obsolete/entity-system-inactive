@@ -10,7 +10,7 @@ using CounterFloatProcessorPtr = std::shared_ptr<CounterFloatProcessor>;
 
 /// @class CounterProcessors
 /// @brief Provides processors for time based counters.
-class CounterProcessors
+class CounterProcessors : public LifeCycleComponent
 {
     public:
     /// @brief Constructs the processors for time based counters.
@@ -22,11 +22,8 @@ class CounterProcessors
     /// Destructor.
     ~CounterProcessors();
 
-    /// Initialization of the processors for time based counters.
-    void init();
-
-    /// Shut down the processors for time based counters.
-    void shutdown();
+    /// Returns the name of the component
+    std::string get_component_name() override;
 
     private:
     /// Processor for the entity type COUNTER_INT.

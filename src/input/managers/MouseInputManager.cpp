@@ -1,18 +1,21 @@
 #include "MouseInputManager.hpp"
 
-#include "entity-system/model/data/DataTypes.hpp"
-#include "renderer/providers/WindowEntityTypeProvider.hpp"
-
-#include "spdlog/spdlog.h"
-
-#include <GLFW/glfw3.h>
-
 #include <tuple>
 #include <utility>
 
+#include <GLFW/glfw3.h>
+
+#include "spdlog/spdlog.h"
+
+#include "entity-system/model/data/DataTypes.hpp"
+#include "type-system/types/ui/Window.hpp"
+
 namespace inexor::input {
 
+using Window = entity_system::type_system::Window;
+
 MouseInputManager::MouseInputManager(GlobalMouseButtonFactoryPtr global_mouse_button_factory, LogManagerPtr log_manager)
+    : LifeCycleComponent()
 {
     this->global_mouse_button_factory = std::move(global_mouse_button_factory);
     this->log_manager = std::move(log_manager);
@@ -25,7 +28,7 @@ void MouseInputManager::init()
     log_manager->register_logger(LOGGER_NAME);
 }
 
-void MouseInputManager::shutdown()
+void MouseInputManager::destroy()
 {
     signal_mouse_button_changed.disconnect_all_slots();
     signal_mouse_button_pressed.disconnect_all_slots();
@@ -55,6 +58,11 @@ void MouseInputManager::shutdown()
         kv.second->disconnect_all_slots();
     }
     signal_window_mouse_scrolled.clear();
+}
+
+std::string MouseInputManager::get_component_name()
+{
+    return "MouseInputManager";
 }
 
 EntityInstancePtrOpt MouseInputManager::create_mouse_button(const int &button)
@@ -183,7 +191,7 @@ void MouseInputManager::register_on_window_mouse_scrolled(const EntityInstancePt
 
 std::string MouseInputManager::get_window_name(const EntityInstancePtr &window)
 {
-    return window->get<entity_system::DataType::STRING>(renderer::WindowEntityTypeProvider::WINDOW_TITLE);
+    return window->get<entity_system::DataType::STRING>(Window::TITLE);
 }
 
 } // namespace inexor::input

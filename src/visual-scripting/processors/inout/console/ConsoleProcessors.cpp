@@ -5,6 +5,7 @@
 namespace inexor::visual_scripting {
 
 ConsoleProcessors::ConsoleProcessors(StdInProcessorPtr stdin_processor, StdOutProcessorPtr stdout_processor, StdErrProcessorPtr stderr_processor)
+    : LifeCycleComponent(stdin_processor, stdout_processor, stderr_processor)
 {
     this->stdin_processor = std::move(stdin_processor);
     this->stdout_processor = std::move(stdout_processor);
@@ -13,11 +14,9 @@ ConsoleProcessors::ConsoleProcessors(StdInProcessorPtr stdin_processor, StdOutPr
 
 ConsoleProcessors::~ConsoleProcessors() = default;
 
-void ConsoleProcessors::init()
+std::string ConsoleProcessors::get_component_name()
 {
-    stdin_processor->init();
-    stdout_processor->init();
-    stderr_processor->init();
+    return "ConsoleProcessors";
 }
 
 } // namespace inexor::visual_scripting

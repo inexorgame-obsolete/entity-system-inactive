@@ -1,15 +1,19 @@
 #include "LowerThanFloatProcessor.hpp"
 
+#include <type-system/types/logical/comparison/LowerThanFloat.hpp>
 #include <utility>
 
 namespace inexor::visual_scripting {
 
 using namespace inexor::entity_system;
 using namespace inexor::entity_system::type_system;
+
+using LowerThanFloat = entity_system::type_system::LowerThanFloat;
+using EntityTypePtrOpt = std::optional<EntityTypePtr>;
 using EntityAttributeInstancePtrOptional = std::optional<std::shared_ptr<EntityAttributeInstance>>;
 
-LowerThanFloatProcessor::LowerThanFloatProcessor(const LowerThanFloatEntityTypeProviderPtr &entity_type_provider, EntityInstanceManagerPtr entity_instance_manager, LogManagerPtr log_manager)
-    : Processor(entity_type_provider->get_type()), entity_type_provider(entity_type_provider), entity_instance_manager(std::move(entity_instance_manager)), log_manager(std::move(log_manager))
+LowerThanFloatProcessor::LowerThanFloatProcessor(EntityTypeManagerPtr entity_type_manager, EntityInstanceManagerPtr entity_instance_manager, LogManagerPtr log_manager)
+    : Processor(), LifeCycleComponent(), entity_type_manager(std::move(entity_type_manager)), entity_instance_manager(std::move(entity_instance_manager)), log_manager(std::move(log_manager))
 {
 }
 
@@ -18,8 +22,24 @@ LowerThanFloatProcessor::~LowerThanFloatProcessor() = default;
 void LowerThanFloatProcessor::init()
 {
     log_manager->register_logger(LOGGER_NAME);
-    entity_instance_manager->register_on_created(entity_type_provider->get_type()->get_GUID(), shared_from_this());
-    entity_instance_manager->register_on_deleted(entity_type_provider->get_type()->get_GUID(), shared_from_this());
+    init_processor();
+}
+
+void LowerThanFloatProcessor::init_processor()
+{
+    EntityTypePtrOpt o_ent_type = entity_type_manager->get_entity_type(LowerThanFloat::TYPE_NAME);
+    if (o_ent_type.has_value()) {
+        this->entity_type = o_ent_type.value();
+        entity_instance_manager->register_on_created(this->entity_type->get_GUID(), shared_from_this());
+        entity_instance_manager->register_on_deleted(this->entity_type->get_GUID(), shared_from_this());
+    } else {
+        spdlog::get(LOGGER_NAME)->error("Failed to initialize processor {}: Entity type does not exist", LowerThanFloat::TYPE_NAME);
+    }
+}
+
+std::string LowerThanFloatProcessor::get_component_name()
+{
+    return "LowerThanFloatProcessor";
 }
 
 void LowerThanFloatProcessor::on_entity_instance_created(EntityInstancePtr entity_instance)
@@ -39,9 +59,9 @@ void LowerThanFloatProcessor::make_signals(const EntityInstancePtr &entity_insta
 {
     spdlog::get(LOGGER_NAME)->debug("Initializing processor LOWER_THAN_FLOAT for newly created entity instance {} of type {}", entity_instance->get_GUID().str(), entity_instance->get_entity_type()->get_type_name());
 
-    auto o_lower_than_float_input_1 = entity_instance->get_attribute_instance(LowerThanFloatEntityTypeProvider::LOWER_THAN_FLOAT_INPUT_1);
-    auto o_lower_than_float_input_2 = entity_instance->get_attribute_instance(LowerThanFloatEntityTypeProvider::LOWER_THAN_FLOAT_INPUT_2);
-    auto o_lower_than_float_result = entity_instance->get_attribute_instance(LowerThanFloatEntityTypeProvider::LOWER_THAN_FLOAT_RESULT);
+    auto o_lower_than_float_input_1 = entity_instance->get_attribute_instance(LowerThanFloat::INPUT_1);
+    auto o_lower_than_float_input_2 = entity_instance->get_attribute_instance(LowerThanFloat::INPUT_2);
+    auto o_lower_than_float_result = entity_instance->get_attribute_instance(LowerThanFloat::RESULT);
 
     if (o_lower_than_float_input_1.has_value() && o_lower_than_float_input_2.has_value() && o_lower_than_float_result.has_value())
     {
@@ -53,7 +73,7 @@ void LowerThanFloatProcessor::make_signals(const EntityInstancePtr &entity_insta
     {
         spdlog::get(LOGGER_NAME)
             ->error("Failed to initialize processor signals for entity instance {} of type {}: Missing one of these attributes: {} {} {}", entity_instance->get_GUID().str(), entity_instance->get_entity_type()->get_type_name(),
-                    LowerThanFloatEntityTypeProvider::LOWER_THAN_FLOAT_INPUT_1, LowerThanFloatEntityTypeProvider::LOWER_THAN_FLOAT_INPUT_2, LowerThanFloatEntityTypeProvider::LOWER_THAN_FLOAT_RESULT);
+                    LowerThanFloat::INPUT_1, LowerThanFloat::INPUT_2, LowerThanFloat::RESULT);
     }
 }
 

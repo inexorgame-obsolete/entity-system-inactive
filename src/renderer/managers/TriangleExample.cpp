@@ -5,23 +5,32 @@
 #include "spdlog/spdlog.h"
 
 #include <iomanip>
+#include <type-system/types/generators/counters/CounterFloat.hpp>
+#include <type-system/types/math/trigonometric/Cos.hpp>
+#include <type-system/types/math/trigonometric/Sin.hpp>
+#include <type-system/types/test/Triangle.hpp>
 #include <utility>
 
 using namespace Magnum::Math::Literals;
 
 namespace inexor::renderer {
 
+using CounterFloat = entity_system::type_system::CounterFloat;
+using Sin = entity_system::type_system::Sin;
+using Cos = entity_system::type_system::Cos;
+using Triangle = entity_system::type_system::Triangle;
+
 using EntityInstancePtrOpt = std::optional<EntityInstancePtr>;
 using EntityAttributeInstanceOpt = std::optional<EntityAttributeInstancePtr>;
 
-TriangleExample::TriangleExample(EntityInstanceManagerPtr entity_instance_manager, ConnectorManagerPtr connector_manager, CounterFloatFactoryPtr counter_float_factory, SinFactoryPtr sin_factory, CosFactoryPtr cos_factory,
+TriangleExample::TriangleExample(EntityInstanceManagerPtr entity_instance_manager, ConnectorManagerPtr connector_manager, CounterFloatFactoryPtr counter_float_factory, EntityInstanceBuilderFactoryPtr entity_instance_builder_factory,
                                  TriangleFactoryPtr triangle_factory, WindowManagerPtr window_manager, KeyboardInputManagerPtr keyboard_input_manager, ClientLifecyclePtr client_lifecycle, LogManagerPtr log_manager)
+                                 : LifeCycleComponent(triangle_factory)
 {
     this->entity_instance_manager = std::move(entity_instance_manager);
     this->connector_manager = std::move(connector_manager);
     this->counter_float_factory = std::move(counter_float_factory);
-    this->sin_factory = std::move(sin_factory);
-    this->cos_factory = std::move(cos_factory);
+    this->entity_instance_builder_factory = std::move(entity_instance_builder_factory);
     this->triangle_factory = std::move(triangle_factory);
     this->window_manager = std::move(window_manager);
     this->keyboard_input_manager = std::move(keyboard_input_manager);
@@ -53,9 +62,14 @@ void TriangleExample::init()
     keyboard_input_manager->register_on_window_key_pressed_or_repeated(window, shared_from_this());
 }
 
-void TriangleExample::shutdown()
+void TriangleExample::destroy()
 {
     window_manager->destroy_window(window);
+}
+
+std::string TriangleExample::get_component_name()
+{
+    return "TriangleExample";
 }
 
 void increase(const EntityAttributeInstancePtr &attr, float step, float max)
@@ -146,8 +160,8 @@ void TriangleExample::create_entity_instances()
     // 16 ms = 60 fps
     EntityInstancePtrOpt o_counter_1 = counter_float_factory->create_instance(16, 0.03f);
     EntityInstancePtrOpt o_counter_2 = counter_float_factory->create_instance(16, 0.012f);
-    EntityInstancePtrOpt o_sin = sin_factory->create_instance();
-    EntityInstancePtrOpt o_cos = cos_factory->create_instance();
+    EntityInstancePtrOpt o_sin = entity_instance_builder_factory->get_builder(Sin::TYPE_NAME)->attribute(Sin::INPUT, 0.0f)->attribute(Sin::VALUE, 0.0f)->build();
+    EntityInstancePtrOpt o_cos = entity_instance_builder_factory->get_builder(Cos::TYPE_NAME)->attribute(Cos::INPUT, 0.0f)->attribute(Cos::VALUE, 0.0f)->build();
     EntityInstancePtrOpt o_triangle = triangle_factory->create_instance(0.5f, -0.5f);
 
     if (o_counter_1.has_value() && o_counter_2.has_value() && o_sin.has_value() && o_cos.has_value() && o_triangle.has_value())
@@ -158,16 +172,16 @@ void TriangleExample::create_entity_instances()
         cos = o_cos.value();
         triangle = o_triangle.value();
 
-        EntityAttributeInstanceOpt o_counter_1_attr_count = counter_1->get_attribute_instance(entity_system::type_system::CounterFloatEntityTypeProvider::COUNTER_FLOAT_COUNT);
-        EntityAttributeInstanceOpt o_counter_1_attr_step = counter_1->get_attribute_instance(entity_system::type_system::CounterFloatEntityTypeProvider::COUNTER_FLOAT_STEP);
-        EntityAttributeInstanceOpt o_counter_2_attr_count = counter_2->get_attribute_instance(entity_system::type_system::CounterFloatEntityTypeProvider::COUNTER_FLOAT_COUNT);
-        EntityAttributeInstanceOpt o_counter_2_attr_step = counter_2->get_attribute_instance(entity_system::type_system::CounterFloatEntityTypeProvider::COUNTER_FLOAT_STEP);
-        EntityAttributeInstanceOpt o_sin_attr_input = sin->get_attribute_instance(entity_system::type_system::SinEntityTypeProvider::SIN_INPUT);
-        EntityAttributeInstanceOpt o_sin_attr_value = sin->get_attribute_instance(entity_system::type_system::SinEntityTypeProvider::SIN_VALUE);
-        EntityAttributeInstanceOpt o_cos_attr_input = cos->get_attribute_instance(entity_system::type_system::CosEntityTypeProvider::COS_INPUT);
-        EntityAttributeInstanceOpt o_cos_attr_value = cos->get_attribute_instance(entity_system::type_system::CosEntityTypeProvider::COS_VALUE);
-        EntityAttributeInstanceOpt o_triangle_attr_x = triangle->get_attribute_instance(TriangleEntityTypeProvider::TRIANGLE_X);
-        EntityAttributeInstanceOpt o_triangle_attr_y = triangle->get_attribute_instance(TriangleEntityTypeProvider::TRIANGLE_Y);
+        EntityAttributeInstanceOpt o_counter_1_attr_count = counter_1->get_attribute_instance(CounterFloat::COUNT);
+        EntityAttributeInstanceOpt o_counter_1_attr_step = counter_1->get_attribute_instance(CounterFloat::STEP);
+        EntityAttributeInstanceOpt o_counter_2_attr_count = counter_2->get_attribute_instance(CounterFloat::COUNT);
+        EntityAttributeInstanceOpt o_counter_2_attr_step = counter_2->get_attribute_instance(CounterFloat::STEP);
+        EntityAttributeInstanceOpt o_sin_attr_input = sin->get_attribute_instance(Sin::INPUT);
+        EntityAttributeInstanceOpt o_sin_attr_value = sin->get_attribute_instance(Sin::VALUE);
+        EntityAttributeInstanceOpt o_cos_attr_input = cos->get_attribute_instance(Cos::INPUT);
+        EntityAttributeInstanceOpt o_cos_attr_value = cos->get_attribute_instance(Cos::VALUE);
+        EntityAttributeInstanceOpt o_triangle_attr_x = triangle->get_attribute_instance(Triangle::X);
+        EntityAttributeInstanceOpt o_triangle_attr_y = triangle->get_attribute_instance(Triangle::Y);
 
         if (o_counter_1_attr_count.has_value() && o_counter_1_attr_step.has_value() && o_counter_2_attr_count.has_value() && o_counter_2_attr_step.has_value() && o_sin_attr_value.has_value() && o_cos_attr_value.has_value() &&
             o_triangle_attr_x.has_value() && o_triangle_attr_y.has_value())
@@ -221,13 +235,8 @@ void TriangleExample::render_triangle(const EntityInstancePtr &window, GLFWwindo
 {
     // Get position from the entity instance
     // The entity instance is modified by the visual scripting system (see above!)
-    float x = std::get<DataType::FLOAT>(triangle_attr_x->value.Value());
-    float y = std::get<DataType::FLOAT>(triangle_attr_y->value.Value());
-
-    //		data[0] = {{-0.5f, -0.5f}, 0xff0000_rgbf}; // Left vertex, red color
-    //		data[1] = {{ 0.5f, -0.5f}, 0xff0000_rgbf}; // Right vertex, green color
-    //		data[2] = {{ 0.0f,  0.5f}, 0xff0000_rgbf};  // Top vertex, blue color
-    //		buffer->setData(data);
+    float x = std::get<entity_system::DataType::FLOAT>(triangle_attr_x->value.Value());
+    float y = std::get<entity_system::DataType::FLOAT>(triangle_attr_y->value.Value());
 
     // Create two transformation matrices
     Magnum::Matrix3 transformation_matrix_x = Magnum::Matrix3::translation(Magnum::Vector2::xAxis(x));

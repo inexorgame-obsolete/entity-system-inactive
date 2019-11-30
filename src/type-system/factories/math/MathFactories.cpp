@@ -5,6 +5,7 @@
 namespace inexor::entity_system::type_system {
 
 MathFactories::MathFactories(ArithmeticFactoriesPtr arithmetic_factories, TrigonometricFactoriesPtr trigonometric_factories)
+    : LifeCycleComponent(arithmetic_factories, trigonometric_factories)
 {
     this->arithmetic_factories = std::move(arithmetic_factories);
     this->trigonometric_factories = std::move(trigonometric_factories);
@@ -12,10 +13,9 @@ MathFactories::MathFactories(ArithmeticFactoriesPtr arithmetic_factories, Trigon
 
 MathFactories::~MathFactories() = default;
 
-void MathFactories::init()
+std::string MathFactories::get_component_name()
 {
-    arithmetic_factories->init();
-    trigonometric_factories->init();
+    return "MathFactories";
 }
 
 } // namespace inexor::entity_system::type_system

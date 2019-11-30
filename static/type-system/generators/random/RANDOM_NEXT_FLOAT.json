@@ -1,0 +1,34 @@
+{
+  "type": "entity",
+  "name": "RANDOM_NEXT_FLOAT",
+  "attributes": [
+    {
+      "name": "random_next_float_on_activation",
+      "datatype": "BOOL",
+      "features": [
+        "INPUT"
+      ]
+    },
+    {
+      "name": "random_next_float_min",
+      "datatype": "FLOAT",
+      "features": [
+        "INPUT"
+      ]
+    },
+    {
+      "name": "random_next_float_max",
+      "datatype": "FLOAT",
+      "features": [
+        "INPUT"
+      ]
+    },
+    {
+      "name": "random_next_float_value",
+      "datatype": "FLOAT",
+      "features": [
+        "OUTPUT"
+      ]
+    }
+  ]
+}

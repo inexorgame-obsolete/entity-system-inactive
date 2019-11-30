@@ -1,5 +1,6 @@
 #pragma once
 
+#include "base/LifeCycleComponent.hpp"
 #include "type-system/factories/logical/comparison/EqualsBoolFactory.hpp"
 #include "type-system/factories/logical/comparison/EqualsIntFactory.hpp"
 #include "type-system/factories/logical/comparison/EqualsStringFactory.hpp"
@@ -26,7 +27,7 @@ using InRangeFloatPtr = std::shared_ptr<InRangeFloatFactory>;
 
 /// @class ComparisonFactories
 /// @brief The factories for comparison operations.
-class ComparisonFactories
+class ComparisonFactories : public LifeCycleComponent
 {
     public:
     /// @brief Constructs the factories for comparison operations.
@@ -46,8 +47,8 @@ class ComparisonFactories
     /// Destructor.
     ~ComparisonFactories();
 
-    /// Initializes the factories for comparison operations.
-    void init();
+    /// Returns the name of the component
+    std::string get_component_name() override;
 
     private:
     /// Factory for creating entity instances of type EQUALS_BOOL.

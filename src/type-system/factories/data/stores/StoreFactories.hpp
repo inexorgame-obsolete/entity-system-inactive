@@ -1,5 +1,6 @@
 #pragma once
 
+#include "base/LifeCycleComponent.hpp"
 #include "type-system/factories/data/stores/FloatStoreFactory.hpp"
 #include "type-system/factories/data/stores/IntStoreFactory.hpp"
 #include "type-system/factories/data/stores/StringStoreFactory.hpp"
@@ -14,11 +15,10 @@ using StringStoreFactoryPtr = std::shared_ptr<StringStoreFactory>;
 
 /// @class StoreFactories
 /// @brief The store factories.
-class StoreFactories
+class StoreFactories : public LifeCycleComponent
 {
     public:
     /// @brief Constructs the store factories.
-    /// @note The dependencies of this class will be injected automatically.
     /// @param float_store_factory Factory for creating entity instances of type FLOAT_STORE.
     /// @param int_store_factory Factory for creating entity instances of type INT_STORE.
     /// @param string_store_factory Factory for creating entity instances of type STRING_STORE.
@@ -27,8 +27,8 @@ class StoreFactories
     /// Destructor.
     ~StoreFactories();
 
-    /// Initializes the store factories.
-    void init();
+    /// Returns the name of the component
+    std::string get_component_name() override;
 
     private:
     /// Factory for creating entity instances of type FLOAT_STORE.

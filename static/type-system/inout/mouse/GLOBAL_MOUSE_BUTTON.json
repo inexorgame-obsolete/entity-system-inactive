@@ -1,0 +1,27 @@
+{
+  "type": "entity",
+  "name": "GLOBAL_MOUSE_BUTTON",
+  "attributes": [
+    {
+      "name": "global_mouse_button_number",
+      "datatype": "INT",
+      "features": [
+        "OUTPUT"
+      ]
+    },
+    {
+      "name": "global_mouse_button_action",
+      "datatype": "INT",
+      "features": [
+        "OUTPUT"
+      ]
+    },
+    {
+      "name": "global_mouse_button_mods",
+      "datatype": "INT",
+      "features": [
+        "OUTPUT"
+      ]
+    }
+  ]
+}

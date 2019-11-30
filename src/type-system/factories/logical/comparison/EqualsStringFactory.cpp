@@ -1,28 +1,29 @@
 #include "EqualsStringFactory.hpp"
 
+#include <type-system/types/logical/comparison/EqualsString.hpp>
 #include <utility>
 
 namespace inexor::entity_system::type_system {
 
-EqualsStringFactory::EqualsStringFactory(EqualsStringEntityTypeProviderPtr entity_type_provider, EntityInstanceBuilderFactoryPtr entity_instance_builder_factory)
+EqualsStringFactory::EqualsStringFactory(EntityInstanceBuilderFactoryPtr entity_instance_builder_factory)
+    : LifeCycleComponent()
 {
-    this->entity_type_provider = std::move(entity_type_provider);
     this->entity_instance_builder_factory = std::move(entity_instance_builder_factory);
 }
 
 EqualsStringFactory::~EqualsStringFactory() = default;
 
-void EqualsStringFactory::init()
+std::string EqualsStringFactory::get_component_name()
 {
+    return "EqualsStringFactory";
 }
 
 EntityInstancePtrOpt EqualsStringFactory::create_instance()
 {
-    return entity_instance_builder_factory->get_builder()
-        ->type(entity_type_provider->get_type())
-        ->attribute(EqualsStringEntityTypeProvider::EQUALS_STRING_INPUT_1, "")
-        ->attribute(EqualsStringEntityTypeProvider::EQUALS_STRING_INPUT_2, "")
-        ->attribute(EqualsStringEntityTypeProvider::EQUALS_STRING_RESULT, true)
+    return entity_instance_builder_factory->get_builder(EqualsString::TYPE_NAME)
+        ->attribute(EqualsString::INPUT_1, "")
+        ->attribute(EqualsString::INPUT_2, "")
+        ->attribute(EqualsString::RESULT, true)
         ->build();
 }
 

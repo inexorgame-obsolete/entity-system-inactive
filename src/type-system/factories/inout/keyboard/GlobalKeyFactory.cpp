@@ -1,28 +1,29 @@
 #include "GlobalKeyFactory.hpp"
 
+#include <type-system/types/inout/keyboard/GlobalKey.hpp>
 #include <utility>
 
 namespace inexor::entity_system::type_system {
 
-GlobalKeyFactory::GlobalKeyFactory(GlobalKeyEntityTypeProviderPtr entity_type_provider, EntityInstanceBuilderFactoryPtr entity_instance_builder_factory)
+GlobalKeyFactory::GlobalKeyFactory(EntityInstanceBuilderFactoryPtr entity_instance_builder_factory)
+    : LifeCycleComponent()
 {
-    this->entity_type_provider = std::move(entity_type_provider);
     this->entity_instance_builder_factory = std::move(entity_instance_builder_factory);
 }
 
 GlobalKeyFactory::~GlobalKeyFactory() = default;
 
-void GlobalKeyFactory::init()
+std::string GlobalKeyFactory::get_component_name()
 {
+    return "GlobalKeyFactory";
 }
 
 EntityInstancePtrOpt GlobalKeyFactory::create_instance(const int &key)
 {
-    return entity_instance_builder_factory->get_builder()
-        ->type(entity_type_provider->get_type())
-        ->attribute(GlobalKeyEntityTypeProvider::GLOBAL_KEY_KEYCODE, key)
-        ->attribute(GlobalKeyEntityTypeProvider::GLOBAL_KEY_ACTION, 0)
-        ->attribute(GlobalKeyEntityTypeProvider::GLOBAL_KEY_MODS, 0)
+    return entity_instance_builder_factory->get_builder(GlobalKey::TYPE_NAME)
+        ->attribute(GlobalKey::KEYCODE, key)
+        ->attribute(GlobalKey::ACTION, 0)
+        ->attribute(GlobalKey::MODS, 0)
         ->build();
 }
 

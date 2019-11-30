@@ -46,11 +46,13 @@ template <typename T> class TypeManagerTemplate
     /// @return True if a type with this name already exists, false otherwise.
     bool does_type_exist(const std::string &type_name)
     {
-        // Get the GUID of this type by name.
-        xg::Guid type_GUID = get_GUID_by_type_name(type_name);
-
         // No mutex required as this is a read-only operation.
-        return !(stored_types.end() == stored_types.find(type_GUID));
+        return !(stored_type_names.end() == stored_type_names.find(type_name));
+//        // Get the GUID of this type by name.
+//        xg::Guid type_GUID = get_GUID_by_type_name(type_name);
+//
+//        // No mutex required as this is a read-only operation.
+//        return !(stored_types.end() == stored_types.find(type_GUID));
     }
 
     /// @brief Checks if a type already exists.
@@ -116,7 +118,7 @@ template <typename T> class TypeManagerTemplate
         xg::Guid type_GUID = get_GUID_by_type_name(type_name);
 
         // No mutex required as this is a read-only operation.
-        return stored_types[type_name];
+        return stored_types[type_GUID];
     }
 
     /// @brief Searches for the desired type by name.
@@ -144,20 +146,7 @@ template <typename T> class TypeManagerTemplate
     {
         // Look up the GUID of the type which will be deleted.
         xg::Guid type_GUID_to_delete = get_GUID_by_type_name(type_name);
-
-        // Use lock guard to ensure thread safety for this write operation!
-        std::lock_guard<std::mutex> lock(type_manager_mutex);
-
-        // Erase type name.
-        stored_type_names.erase(type_name);
-
-        // Erase GUID.
-        stored_type_GUIDs.erase(type_GUID_to_delete);
-
-        // Erase type.
-        std::size_t deleted_types = stored_types.erase(type_name);
-
-        return deleted_types;
+        return delete_type(type_GUID_to_delete);
     }
 
     /// @brief Deletes a type by GUID.
@@ -169,9 +158,6 @@ template <typename T> class TypeManagerTemplate
         // We do not need a mutex for these read operations here.
         std::string type_name_to_delete = get_type_name_by_GUID(type_GUID);
 
-        // Look up the GUID of the type which will be deleted.
-        xg::Guid type_GUID_to_delete = get_GUID_by_type_name(type_name_to_delete);
-
         // Use lock guard to ensure thread safety for this write operations!
         std::lock_guard<std::mutex> lock(type_manager_mutex);
 
@@ -179,7 +165,7 @@ template <typename T> class TypeManagerTemplate
         stored_type_names.erase(type_name_to_delete);
 
         // Erase GUID.
-        stored_type_GUIDs.erase(type_GUID_to_delete);
+        stored_type_GUIDs.erase(type_GUID);
 
         // Erase type.
         std::size_t deleted_types = stored_types.erase(type_GUID);

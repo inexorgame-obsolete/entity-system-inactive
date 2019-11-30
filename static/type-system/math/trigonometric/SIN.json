@@ -1,0 +1,20 @@
+{
+  "type": "entity",
+  "name": "SIN",
+  "attributes": [
+    {
+      "name": "sin_input",
+      "datatype": "FLOAT",
+      "features": [
+        "INPUT"
+      ]
+    },
+    {
+      "name": "sin_value",
+      "datatype": "FLOAT",
+      "features": [
+        "OUTPUT"
+      ]
+    }
+  ]
+}

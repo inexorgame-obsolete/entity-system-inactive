@@ -18,7 +18,7 @@ using NandProcessorPtr = std::shared_ptr<NandProcessor>;
 
 /// @class GateProcessors
 /// @brief Management of the logger processors.
-class GateProcessors
+class GateProcessors : public LifeCycleComponent
 {
     public:
     /// @brief Constructs the processors for logical operations.
@@ -34,8 +34,8 @@ class GateProcessors
     /// Destructor.
     ~GateProcessors();
 
-    /// Initialization of the processors for logical operations.
-    void init();
+    /// Returns the name of the component
+    std::string get_component_name() override;
 
     private:
     /// Processor for the entity type NOT.

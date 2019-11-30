@@ -1,17 +1,20 @@
 #include "KeyboardInputManager.hpp"
 
-#include "entity-system/model/data/DataTypes.hpp"
-#include "renderer/providers/WindowEntityTypeProvider.hpp"
-
-#include "spdlog/spdlog.h"
+#include <utility>
 
 #include <GLFW/glfw3.h>
 
-#include <utility>
+#include "spdlog/spdlog.h"
+
+#include "entity-system/model/data/DataTypes.hpp"
+#include "type-system/types/ui/Window.hpp"
 
 namespace inexor::input {
 
+using Window = entity_system::type_system::Window;
+
 KeyboardInputManager::KeyboardInputManager(GlobalKeyFactoryPtr global_key_factory, LogManagerPtr log_manager)
+    : LifeCycleComponent()
 {
     this->global_key_factory = std::move(global_key_factory);
     this->log_manager = std::move(log_manager);
@@ -24,7 +27,7 @@ void KeyboardInputManager::init()
     log_manager->register_logger(LOGGER_NAME);
 }
 
-void KeyboardInputManager::shutdown()
+void KeyboardInputManager::destroy()
 {
     signal_key_changed.disconnect_all_slots();
     signal_key_pressed.disconnect_all_slots();
@@ -61,6 +64,11 @@ void KeyboardInputManager::shutdown()
         kv.second->disconnect_all_slots();
     }
     signal_window_path_dropped.clear();
+}
+
+std::string KeyboardInputManager::get_component_name()
+{
+    return "KeyboardInputManager";
 }
 
 EntityInstancePtrOpt KeyboardInputManager::create_key(const int &key)
@@ -248,7 +256,7 @@ std::string KeyboardInputManager::codepoint2string(unsigned int codepoint)
 
 std::string KeyboardInputManager::get_window_name(const EntityInstancePtr &window)
 {
-    return window->get<entity_system::DataType::STRING>(renderer::WindowEntityTypeProvider::WINDOW_TITLE);
+    return window->get<entity_system::DataType::STRING>(Window::TITLE);
 }
 
 } // namespace inexor::input

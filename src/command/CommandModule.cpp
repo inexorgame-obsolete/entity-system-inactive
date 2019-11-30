@@ -5,15 +5,16 @@
 namespace inexor::command {
 
 CommandModule::CommandModule(CommandManangerPtr command_manager)
+    : LifeCycleComponent(command_manager)
 {
     this->command_manager = std::move(command_manager);
 }
 
 CommandModule::~CommandModule() = default;
 
-void CommandModule::init()
+std::string CommandModule::get_component_name()
 {
-    command_manager->init();
+    return "CommandModule";
 }
 
 } // namespace inexor::command

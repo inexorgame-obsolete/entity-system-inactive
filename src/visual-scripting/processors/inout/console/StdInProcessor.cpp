@@ -1,5 +1,6 @@
 #include "StdInProcessor.hpp"
 
+#include <type-system/types/inout/console/StdIn.hpp>
 #include <utility>
 
 #include "react/Algorithm.h"
@@ -10,23 +11,38 @@ namespace inexor::visual_scripting {
 
 using namespace inexor::entity_system;
 using namespace inexor::entity_system::type_system;
+
+using StdIn = entity_system::type_system::StdIn;
+using EntityTypePtrOpt = std::optional<EntityTypePtr>;
 using EntityAttributeInstancePtrOptional = std::optional<std::shared_ptr<EntityAttributeInstance>>;
 
-using EntityTypePtr = std::shared_ptr<entity_system::EntityType>;
-
-StdInProcessor::StdInProcessor(const StdInEntityTypeProviderPtr &entity_type_provider, EntityInstanceManagerPtr entity_instance_manager, LogManagerPtr log_manager) : Processor(entity_type_provider->get_type())
+StdInProcessor::StdInProcessor(EntityTypeManagerPtr entity_type_manager, EntityInstanceManagerPtr entity_instance_manager, LogManagerPtr log_manager)
+    : Processor(), LifeCycleComponent(), entity_type_manager(std::move(entity_type_manager)), entity_instance_manager(std::move(entity_instance_manager)), log_manager(log_manager)
 {
-    this->entity_type_provider = entity_type_provider;
-    this->entity_instance_manager = std::move(entity_instance_manager);
-    this->log_manager = std::move(log_manager);
 }
 
 StdInProcessor::~StdInProcessor() = default;
 
 void StdInProcessor::init()
 {
-    entity_instance_manager->register_on_created(entity_type_provider->get_type()->get_GUID(), shared_from_this());
-    entity_instance_manager->register_on_deleted(entity_type_provider->get_type()->get_GUID(), shared_from_this());
+    init_processor();
+}
+
+void StdInProcessor::init_processor()
+{
+    EntityTypePtrOpt o_ent_type = entity_type_manager->get_entity_type(StdIn::TYPE_NAME);
+    if (o_ent_type.has_value()) {
+        this->entity_type = o_ent_type.value();
+        entity_instance_manager->register_on_created(this->entity_type->get_GUID(), shared_from_this());
+        entity_instance_manager->register_on_deleted(this->entity_type->get_GUID(), shared_from_this());
+    } else {
+        spdlog::error("Failed to initialize processor {}: Entity type does not exist", StdIn::TYPE_NAME);
+    }
+}
+
+std::string StdInProcessor::get_component_name()
+{
+    return "StdInProcessor";
 }
 
 void StdInProcessor::on_entity_instance_created(EntityInstancePtr entity_instance)
@@ -46,7 +62,7 @@ void StdInProcessor::make_signals(const EntityInstancePtr &entity_instance)
 {
     spdlog::info("Initializing processor CONSOLE_STDIN for newly created entity instance {} of type {}", entity_instance->get_GUID().str(), entity_instance->get_entity_type()->get_type_name());
 
-    auto o_console_stdin = entity_instance->get_attribute_instance(StdInEntityTypeProvider::CONSOLE_STDIN);
+    auto o_console_stdin = entity_instance->get_attribute_instance(StdIn::STDIN);
 
     if (o_console_stdin.has_value())
     {
@@ -80,7 +96,7 @@ void StdInProcessor::make_signals(const EntityInstancePtr &entity_instance)
     } else
     {
         spdlog::error("Failed to initialize processor signals for entity instance {} of type {}: Missing attribute {}", entity_instance->get_GUID().str(), entity_instance->get_entity_type()->get_type_name(),
-                      StdInEntityTypeProvider::CONSOLE_STDIN);
+                      StdIn::STDIN);
     }
 }
 

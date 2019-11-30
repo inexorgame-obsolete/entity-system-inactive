@@ -71,7 +71,10 @@ class InexorApplication
     void run();
 
     /// Shuts down the Inexor application.
-    void shutdown();
+    void destroy();
+
+    /// Shuts down the Inexor application.
+    void post_destroy();
 
     /// Restarts the Inexor application.
     void restart();

@@ -5,15 +5,16 @@
 namespace inexor::entity_system::type_system {
 
 LoggerFactories::LoggerFactories(LoggerFactoryPtr logger_factory)
+    : LifeCycleComponent(logger_factory)
 {
     this->logger_factory = std::move(logger_factory);
 }
 
 LoggerFactories::~LoggerFactories() = default;
 
-void LoggerFactories::init()
+std::string LoggerFactories::get_component_name()
 {
-    logger_factory->init();
+    return "LoggerFactories";
 }
 
 } // namespace inexor::entity_system::type_system

@@ -1,0 +1,27 @@
+{
+  "type": "entity",
+  "name": "GLOBAL_KEY",
+  "attributes": [
+    {
+      "name": "global_key_keycode",
+      "datatype": "INT",
+      "features": [
+        "OUTPUT"
+      ]
+    },
+    {
+      "name": "global_key_action",
+      "datatype": "INT",
+      "features": [
+        "OUTPUT"
+      ]
+    },
+    {
+      "name": "global_key_mods",
+      "datatype": "INT",
+      "features": [
+        "OUTPUT"
+      ]
+    }
+  ]
+}
