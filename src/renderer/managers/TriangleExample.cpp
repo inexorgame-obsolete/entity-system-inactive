@@ -238,13 +238,6 @@ void TriangleExample::render_triangle(const EntityInstancePtr &window, GLFWwindo
     float x = std::get<entity_system::DataType::FLOAT>(triangle_attr_x->value.Value());
     float y = std::get<entity_system::DataType::FLOAT>(triangle_attr_y->value.Value());
 
-    spdlog::info("x: {} y:{}", x, y);
-
-    //		data[0] = {{-0.5f, -0.5f}, 0xff0000_rgbf}; // Left vertex, red color
-    //		data[1] = {{ 0.5f, -0.5f}, 0xff0000_rgbf}; // Right vertex, green color
-    //		data[2] = {{ 0.0f,  0.5f}, 0xff0000_rgbf};  // Top vertex, blue color
-    //		buffer->setData(data);
-
     // Create two transformation matrices
     Magnum::Matrix3 transformation_matrix_x = Magnum::Matrix3::translation(Magnum::Vector2::xAxis(x));
     Magnum::Matrix3 transformation_matrix_y = Magnum::Matrix3::translation(Magnum::Vector2::yAxis(y));

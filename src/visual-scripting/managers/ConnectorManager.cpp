@@ -42,7 +42,10 @@ ConnectorPtrOpt ConnectorManager::create_connector(const std::shared_ptr<class i
         connectors[connector->get_GUID()] = connector;
         output_to_connectors[output_attr_GUID].push_back(connector);
         input_to_connector[input_attr_GUID] = connector;
+        spdlog::trace("Successfully created connector from {} to {}", output_attr_GUID.str(), input_attr_GUID.str());
         return ConnectorPtrOpt{connector};
+    } else {
+        spdlog::trace("Not creating connector from {} to {}", output_attr_GUID.str(), input_attr_GUID.str());
     }
     return std::nullopt;
 }
@@ -69,7 +72,10 @@ ConnectorPtrOpt ConnectorManager::create_connector(const xg::Guid &connector_GUI
         connectors[connector->get_GUID()] = connector;
         output_to_connectors[output_attr_GUID].push_back(connector);
         input_to_connector[input_attr_GUID] = connector;
+        spdlog::trace("Successfully created connector from {} to {}", output_attr_GUID.str(), input_attr_GUID.str());
         return ConnectorPtrOpt{connector};
+    } else {
+        spdlog::trace("Not creating connector from {} to {}", output_attr_GUID.str(), input_attr_GUID.str());
     }
     return std::nullopt;
 }
