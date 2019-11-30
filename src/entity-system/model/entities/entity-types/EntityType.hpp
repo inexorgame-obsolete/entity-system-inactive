@@ -10,6 +10,7 @@
 namespace inexor::entity_system {
 
 using EntityAttributeTypePtr = std::shared_ptr<EntityAttributeType>;
+using EntityAttributeTypePtrOpt = std::optional<EntityAttributeTypePtr>;
 using EntityAttributeTypePtrList = std::vector<EntityAttributeTypePtr>;
 
 /// @class EntityType
@@ -52,6 +53,11 @@ class EntityType : public TypeBase, public GUIDBase
     /// of which will be checked if it is linked with this entity type.
     /// @return True if this entity attribute type is already associated, false otherwise.
     bool has_attribute_type(const EntityAttributeTypePtr &ent_attr_type);
+
+    /// @brief Returns the entity attribute type with the given name.
+    /// @param ent_attr_type_name The name of the entity attribute type of which will be checked if it is associated with this entity type.
+    /// @return The entity attribute type with the given name or an empty optional.
+    EntityAttributeTypePtrOpt get_attribute_type(const std::string &ent_attr_type_name);
 
     /// @brief Links an entity attribute type to this entity type.
     /// @param ent_attr_type A const reference of a shared pointer to an entity attribute type which will be linked to this entity type.

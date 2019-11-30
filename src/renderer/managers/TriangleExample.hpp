@@ -4,6 +4,7 @@
 #include "entity-system/factories/entities/entity-instance-builder-factory/EntityInstanceBuilderFactory.hpp"
 #include "entity-system/managers/entities/entity-instance-manager/EntityInstanceManager.hpp"
 #include "entity-system/model/data/DataTypes.hpp"
+#include "entity-system/serializers/EntityInstanceJsonSerializer.hpp"
 #include "logging/managers/LogManager.hpp"
 #include "renderer/factories/TriangleFactory.hpp"
 #include "type-system/factories/generators/counters/CounterFloatFactory.hpp"
@@ -35,6 +36,7 @@ using TriangleFactoryPtr = std::shared_ptr<TriangleFactory>;
 using WindowManagerPtr = std::shared_ptr<ui::WindowManager>;
 using KeyboardInputManagerPtr = std::shared_ptr<input::KeyboardInputManager>;
 using ClientLifecyclePtr = std::shared_ptr<client::ClientLifecycle>;
+using EntityInstanceJsonSerializerPtr = std::shared_ptr<entity_system::serializers::EntityInstanceJsonSerializer>;
 using LogManagerPtr = std::shared_ptr<inexor::logging::LogManager>;
 
 struct TriangleVertex
@@ -57,7 +59,7 @@ class TriangleExample : public LifeCycleComponent, public input::WindowKeyReleas
     /// @param render_factory The factory for creating entities of type TRIANGLE.
     /// @param log_manager The log manager.
     TriangleExample(EntityInstanceManagerPtr entity_instance_manager, ConnectorManagerPtr connector_manager, CounterFloatFactoryPtr counter_float_factory, EntityInstanceBuilderFactoryPtr entity_instance_builder_factory,
-                    TriangleFactoryPtr render_factory, WindowManagerPtr window_manager, KeyboardInputManagerPtr keyboard_input_manager, ClientLifecyclePtr client_lifecycle, LogManagerPtr log_manager);
+                    TriangleFactoryPtr render_factory, WindowManagerPtr window_manager, KeyboardInputManagerPtr keyboard_input_manager, ClientLifecyclePtr client_lifecycle, EntityInstanceJsonSerializerPtr entity_instance_json_serializer, LogManagerPtr log_manager);
 
     /// Destructor.
     ~TriangleExample();
@@ -70,7 +72,6 @@ class TriangleExample : public LifeCycleComponent, public input::WindowKeyReleas
 
     /// Returns the name of the component
     std::string get_component_name() override;
-
     /// Window key released
     void on_window_key_released(EntityInstancePtr window, int key, int scancode, int mods) override;
 
@@ -83,6 +84,8 @@ class TriangleExample : public LifeCycleComponent, public input::WindowKeyReleas
     private:
     void create_entity_instances();
     void create_connectors();
+
+    void dump();
 
     /// Initializes the triangle.
     void init_triangle(const EntityInstancePtr &window, GLFWwindow *glfw_window);
@@ -119,6 +122,8 @@ class TriangleExample : public LifeCycleComponent, public input::WindowKeyReleas
 
     /// The client lifecycle.
     ClientLifecyclePtr client_lifecycle;
+
+    EntityInstanceJsonSerializerPtr entity_instance_json_serializer;
 
     /// The log manager.
     LogManagerPtr log_manager;

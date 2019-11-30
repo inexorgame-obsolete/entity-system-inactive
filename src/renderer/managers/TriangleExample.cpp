@@ -24,7 +24,7 @@ using EntityInstancePtrOpt = std::optional<EntityInstancePtr>;
 using EntityAttributeInstanceOpt = std::optional<EntityAttributeInstancePtr>;
 
 TriangleExample::TriangleExample(EntityInstanceManagerPtr entity_instance_manager, ConnectorManagerPtr connector_manager, CounterFloatFactoryPtr counter_float_factory, EntityInstanceBuilderFactoryPtr entity_instance_builder_factory,
-                                 TriangleFactoryPtr triangle_factory, WindowManagerPtr window_manager, KeyboardInputManagerPtr keyboard_input_manager, ClientLifecyclePtr client_lifecycle, LogManagerPtr log_manager)
+                                 TriangleFactoryPtr triangle_factory, WindowManagerPtr window_manager, KeyboardInputManagerPtr keyboard_input_manager, ClientLifecyclePtr client_lifecycle, EntityInstanceJsonSerializerPtr entity_instance_json_serializer, LogManagerPtr log_manager)
                                  : LifeCycleComponent(triangle_factory)
 {
     this->entity_instance_manager = std::move(entity_instance_manager);
@@ -35,6 +35,7 @@ TriangleExample::TriangleExample(EntityInstanceManagerPtr entity_instance_manage
     this->window_manager = std::move(window_manager);
     this->keyboard_input_manager = std::move(keyboard_input_manager);
     this->client_lifecycle = std::move(client_lifecycle);
+    this->entity_instance_json_serializer = std::move(entity_instance_json_serializer);
     this->log_manager = std::move(log_manager);
     this->debug_enabled = false;
     this->connector_c_sin = std::nullopt;
@@ -99,6 +100,9 @@ void TriangleExample::on_window_key_released(EntityInstancePtr window, int key, 
     case GLFW_KEY_V:
         toggle_connector_debug();
         break;
+    case GLFW_KEY_D:
+        dump();
+        break;
     default:
         break;
     }
@@ -123,6 +127,21 @@ void TriangleExample::on_window_key_pressed_or_repeated(EntityInstancePtr window
         break;
     default:
         break;
+    }
+}
+
+void TriangleExample::dump()
+{
+    spdlog::info(entity_instance_json_serializer->save(window));
+
+    std::string counter_1_json = entity_instance_json_serializer->save(counter_1);
+    spdlog::info(counter_1_json);
+
+    EntityInstancePtrOpt o_copy = entity_instance_json_serializer->load(counter_1_json, true);
+    if (o_copy.has_value()) {
+        EntityInstancePtr copy = o_copy.value();
+        std::string copy_counter_1_json = entity_instance_json_serializer->save(copy);
+        spdlog::info(copy_counter_1_json);
     }
 }
 

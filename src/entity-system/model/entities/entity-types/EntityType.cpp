@@ -53,6 +53,22 @@ bool EntityType::has_attribute_type(const EntityAttributeTypePtr &ent_attr_type)
     return has_attribute_type(ent_attr_type->get_type_name());
 }
 
+/// @brief Returns the entity attribute type with the given name.
+/// @param ent_attr_type_name The name of the entity attribute type of which will be checked if it is associated with this entity type.
+/// @return The entity attribute type with the given name.
+EntityAttributeTypePtrOpt EntityType::get_attribute_type(const std::string &ent_attr_type_name)
+{
+    // Look through all linked entity attribute types.
+    for (int i = 0; i < entity_attribute_types.size(); i++)
+    {
+        if (0 == entity_attribute_types[i]->get_type_name().compare(ent_attr_type_name))
+        {
+            return entity_attribute_types[i];
+        }
+    }
+    return std::nullopt;
+}
+
 bool EntityType::link_attribute_type(const EntityAttributeTypePtr &ent_attr_type)
 {
     // Is the entity attribute type already linked to this entity type?
