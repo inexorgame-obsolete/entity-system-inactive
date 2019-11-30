@@ -8,31 +8,34 @@ class Monitor
     /// Defines the name of this entity type.
     inline static const std::string TYPE_NAME = "MONITOR";
 
+    /// The prefix of the attribute names.
+    inline static const std::string PREFIX = "monitor_";
+
     /// The name of the input attribute monitor_title.
     /// @see glfwGetMonitorName
-    inline static const std::string TITLE = "monitor_title";
+    inline static const std::string TITLE = PREFIX + "title";
 
     /// The name of the output attribute monitor_position_x.
     /// @see glfwGetMonitorWorkarea
     /// @see https://www.glfw.org/docs/3.3/intro_guide.html#coordinate_systems
-    inline static const std::string POSITION_X = "monitor_position_x";
+    inline static const std::string POSITION_X = PREFIX + "position_x";
 
     /// The name of the output attribute monitor_position_y.
     /// @see glfwGetMonitorWorkarea
     /// @see https://www.glfw.org/docs/3.3/intro_guide.html#coordinate_systems
-    inline static const std::string POSITION_Y = "monitor_position_y";
+    inline static const std::string POSITION_Y = PREFIX + "position_y";
 
     /// The name of the output attribute monitor_width.
     /// @see glfwGetMonitorWorkarea
-    inline static const std::string WIDTH = "monitor_width";
+    inline static const std::string WIDTH = PREFIX + "width";
 
     /// The name of the output attribute monitor_height.
     /// @see glfwGetMonitorWorkarea
-    inline static const std::string HEIGHT = "monitor_height";
+    inline static const std::string HEIGHT = PREFIX + "height";
 
     /// The name of the output attribute monitor_is_primary.
     /// @see glfwGetPrimaryMonitor
-    inline static const std::string IS_PRIMARY = "monitor_is_primary";
+    inline static const std::string IS_PRIMARY = PREFIX + "is_primary";
 };
 
 } // namespace inexor::entity_system::type_system
