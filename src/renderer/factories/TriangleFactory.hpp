@@ -1,5 +1,6 @@
 #pragma once
 
+#include "base/LifeCycleComponent.hpp"
 #include "entity-system/factories/entities/entity-instance-builder-factory/EntityInstanceBuilderFactory.hpp"
 #include "entity-system/factories/entities/entity-type-builder-factory/EntityTypeBuilderFactory.hpp"
 #include <entity-system/factories/entities/entity-instance-builder-factory/EntityInstanceBuilderFactory.hpp>
@@ -12,7 +13,7 @@ using EntityInstancePtrOpt = std::optional<EntityInstancePtr>;
 
 /// @class RenderFactory
 /// @brief Factory of the triangles.
-class TriangleFactory
+class TriangleFactory : public LifeCycleComponent
 {
     public:
     /// @brief Constructor.
@@ -22,6 +23,9 @@ class TriangleFactory
 
     /// Destructor.
     ~TriangleFactory();
+
+    /// Returns the name of the component
+    std::string get_component_name() override;
 
     /// Creates a new triangle with the given coordinates.
     /// @param x ?
