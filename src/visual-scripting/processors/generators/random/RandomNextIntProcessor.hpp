@@ -20,7 +20,7 @@ namespace inexor::visual_scripting {
 /// @brief Processor which listens on the creation of entity instances of type RANDOM_NEXT_INT.
 /// @note Newly created entity instances of type RANDOM_NEXT_INT will be initialized by connecting the input
 /// attributes with a calculation function and the result with the output attribute.
-class RandomNextIntProcessor : public Processor, public entity_system::EntityInstanceCreatedListener, public entity_system::EntityInstanceDeletedListener, public std::enable_shared_from_this<RandomNextIntProcessor>
+class RandomNextIntProcessor : public Processor, public LifeCycleComponent, public entity_system::EntityInstanceCreatedListener, public entity_system::EntityInstanceDeletedListener, public std::enable_shared_from_this<RandomNextIntProcessor>
 {
 
     using EntityTypeManagerPtr = std::shared_ptr<entity_system::EntityTypeManager>;
@@ -43,8 +43,11 @@ class RandomNextIntProcessor : public Processor, public entity_system::EntityIns
     /// Destructor.
     ~RandomNextIntProcessor() override;
 
-    /// Initializes the RANDOM_NEXT_INT processor by registering listeners on newly created entity instances of type RANDOM_NEXT_INT.
-    void init();
+    /// Initializes the processor.
+    void init() override;
+
+    /// Returns the name of the component
+    std::string get_component_name() override;
 
     /// @brief Called when an entity instance of type RANDOM_NEXT_INT has been created.
     /// @param entity_instance ?

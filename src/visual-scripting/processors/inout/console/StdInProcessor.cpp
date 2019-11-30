@@ -16,7 +16,8 @@ using StdIn = entity_system::type_system::StdIn;
 using EntityTypePtrOpt = std::optional<EntityTypePtr>;
 using EntityAttributeInstancePtrOptional = std::optional<std::shared_ptr<EntityAttributeInstance>>;
 
-StdInProcessor::StdInProcessor(EntityTypeManagerPtr entity_type_manager, EntityInstanceManagerPtr entity_instance_manager, LogManagerPtr log_manager) : Processor(), entity_type_manager(std::move(entity_type_manager)), entity_instance_manager(std::move(entity_instance_manager)), log_manager(log_manager)
+StdInProcessor::StdInProcessor(EntityTypeManagerPtr entity_type_manager, EntityInstanceManagerPtr entity_instance_manager, LogManagerPtr log_manager)
+    : Processor(), LifeCycleComponent(), entity_type_manager(std::move(entity_type_manager)), entity_instance_manager(std::move(entity_instance_manager)), log_manager(log_manager)
 {
 }
 
@@ -37,6 +38,11 @@ void StdInProcessor::init_processor()
     } else {
         spdlog::error("Failed to initialize processor {}: Entity type does not exist", StdIn::TYPE_NAME);
     }
+}
+
+std::string StdInProcessor::get_component_name()
+{
+    return "StdInProcessor";
 }
 
 void StdInProcessor::on_entity_instance_created(EntityInstancePtr entity_instance)

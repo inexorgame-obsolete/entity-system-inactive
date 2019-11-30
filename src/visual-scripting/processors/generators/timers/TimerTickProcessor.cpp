@@ -21,7 +21,7 @@ using DataValue = entity_system::DataValue;
 using DataType = entity_system::DataType;
 
 TimerTickProcessor::TimerTickProcessor(EntityTypeManagerPtr entity_type_manager, EntityInstanceManagerPtr entity_instance_manager, LogManagerPtr log_manager)
-    : Processor(), entity_type_manager(std::move(entity_type_manager)), entity_instance_manager(std::move(entity_instance_manager)), log_manager(std::move(log_manager))
+    : Processor(), LifeCycleComponent(), entity_type_manager(std::move(entity_type_manager)), entity_instance_manager(std::move(entity_instance_manager)), log_manager(std::move(log_manager))
 {
 }
 
@@ -43,6 +43,11 @@ void TimerTickProcessor::init_processor()
     } else {
         spdlog::error("Failed to initialize processor {}: Entity type does not exist", TimerTick::TYPE_NAME);
     }
+}
+
+std::string TimerTickProcessor::get_component_name()
+{
+    return "TimerTickProcessor";
 }
 
 void TimerTickProcessor::on_entity_instance_created(std::shared_ptr<inexor::entity_system::EntityInstance> entity_instance)

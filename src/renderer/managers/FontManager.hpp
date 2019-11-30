@@ -41,7 +41,7 @@ using FontPtrOpt = std::optional<FontPtr>;
 
 /// @class FontManager
 /// @brief Management of fonts and text rendering.
-class FontManager : public std::enable_shared_from_this<FontManager>
+class FontManager : public LifeCycleComponent, public std::enable_shared_from_this<FontManager>
 {
     public:
     /// @brief Constructor.
@@ -53,10 +53,13 @@ class FontManager : public std::enable_shared_from_this<FontManager>
     ~FontManager();
 
     /// Initialize the font manager.
-    void init();
+    void init() override;
 
     /// Shut down the font manager.
-    void shutdown();
+    void destroy() override;
+
+    /// Returns the name of the component
+    std::string get_component_name() override;
 
     /// Loads a statically included font.
     FontPtrOpt load_internal(const std::string& internal_filename, float size, const std::string& glyphs, int capacity, float render_size, Magnum::Text::Alignment alignment);

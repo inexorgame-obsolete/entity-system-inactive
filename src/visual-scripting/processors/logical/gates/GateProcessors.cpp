@@ -5,6 +5,7 @@
 namespace inexor::visual_scripting {
 
 GateProcessors::GateProcessors(NotProcessorPtr not_processor, OrProcessorPtr or_processor, AndProcessorPtr and_processor, XorProcessorPtr xor_processor, NorProcessorPtr nor_processor, NandProcessorPtr nand_processor)
+    : LifeCycleComponent(not_processor, or_processor, and_processor, xor_processor, nor_processor, nand_processor)
 {
     this->not_processor = std::move(not_processor);
     this->or_processor = std::move(or_processor);
@@ -16,14 +17,9 @@ GateProcessors::GateProcessors(NotProcessorPtr not_processor, OrProcessorPtr or_
 
 GateProcessors::~GateProcessors() = default;
 
-void GateProcessors::init()
+std::string GateProcessors::get_component_name()
 {
-    not_processor->init();
-    or_processor->init();
-    and_processor->init();
-    xor_processor->init();
-    nor_processor->init();
-    nand_processor->init();
+    return "GateProcessors";
 }
 
 } // namespace inexor::visual_scripting

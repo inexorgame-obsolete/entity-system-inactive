@@ -2,12 +2,16 @@
 
 namespace inexor::visual_scripting {
 
-ProcessorRegistry::ProcessorRegistry() = default;
+ProcessorRegistry::ProcessorRegistry()
+    : LifeCycleComponent()
+{
+}
 
 ProcessorRegistry::~ProcessorRegistry() = default;
 
-void ProcessorRegistry::init()
+std::string ProcessorRegistry::get_component_name()
 {
+    return "ProcessorRegistry";
 }
 
 void ProcessorRegistry::register_processor(const ProcessorPtr &processor)

@@ -1,5 +1,6 @@
 #pragma once
 
+#include "base/LifeCycleComponent.hpp"
 #include "entity-system/model/entities/entity-instances/EntityInstance.hpp"
 #include "logging/managers/LogManager.hpp"
 #include "type-system/factories/data/constants/StringConstantFactory.hpp"
@@ -17,7 +18,7 @@ using EntityInstancePtrOpt = std::optional<EntityInstancePtr>;
 ///
 /// The clipboard is available as entity instance of type STRING_CONSTANT.
 ///
-class ClipboardManager : public std::enable_shared_from_this<ClipboardManager>
+class ClipboardManager : public LifeCycleComponent, public std::enable_shared_from_this<ClipboardManager>
 {
     public:
     /// @brief Constructs the manager service for the system clipboard.
@@ -30,10 +31,13 @@ class ClipboardManager : public std::enable_shared_from_this<ClipboardManager>
     ~ClipboardManager();
 
     /// Initializes the clipboard manager.
-    void init();
+    void init() override;
 
     /// Shut down the clipboard manager.
-    static void shutdown();
+    void destroy() override;
+
+    /// Returns the name of the component
+    std::string get_component_name() override;
 
     /// Updates the entity instance. This should be done periodically.
     void update();

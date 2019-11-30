@@ -1,5 +1,6 @@
 #pragma once
 
+#include "base/LifeCycleComponent.hpp"
 #include "entity-system/factories/entities/entity-instance-builder-factory/EntityInstanceBuilderFactory.hpp"
 #include "entity-system/factories/entities/entity-type-builder-factory/EntityTypeBuilderFactory.hpp"
 #include "entity-system/managers/entities/entity-instance-manager/EntityInstanceManager.hpp"
@@ -13,7 +14,7 @@ using EntityInstancePtrOpt = std::optional<EntityInstancePtr>;
 
 /// @class MonitorFactory
 /// @brief Factory for creating monitors.
-class MonitorFactory
+class MonitorFactory : public LifeCycleComponent
 {
     public:
     /// @brief Constructor.
@@ -24,6 +25,9 @@ class MonitorFactory
 
     /// Destructor.
     ~MonitorFactory();
+
+    /// Returns the name of the component
+    std::string get_component_name() override;
 
     /// Creates a new monitor with the given title, coordinates and dimensions.
     /// @param title The title of the monitor.

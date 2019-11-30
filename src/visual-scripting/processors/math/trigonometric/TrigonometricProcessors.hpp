@@ -12,7 +12,7 @@ using TanProcessorPtr = std::shared_ptr<TanProcessor>;
 
 /// @class TrigonometricProcessors
 /// @brief Management of the trigonometric processors.
-class TrigonometricProcessors
+class TrigonometricProcessors : public LifeCycleComponent
 {
     public:
     /// @brief Constructs the trigonometric processors.
@@ -25,8 +25,8 @@ class TrigonometricProcessors
     /// Destructor.
     ~TrigonometricProcessors();
 
-    /// Initialization of the processors.
-    void init();
+    /// Returns the name of the component
+    std::string get_component_name() override;
 
     private:
     /// The sin generator.

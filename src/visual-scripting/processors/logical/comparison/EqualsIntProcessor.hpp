@@ -14,7 +14,7 @@ using namespace react;
 
 /// @class EqualsIntProcessor
 /// @bief Processor for entity instances of type EQUALS_INT.
-class EqualsIntProcessor : public Processor, public entity_system::EntityInstanceCreatedListener, public entity_system::EntityInstanceDeletedListener, public std::enable_shared_from_this<EqualsIntProcessor>
+class EqualsIntProcessor : public Processor, public LifeCycleComponent, public entity_system::EntityInstanceCreatedListener, public entity_system::EntityInstanceDeletedListener, public std::enable_shared_from_this<EqualsIntProcessor>
 {
 
     using EntityTypeManagerPtr = std::shared_ptr<entity_system::EntityTypeManager>;
@@ -35,8 +35,11 @@ class EqualsIntProcessor : public Processor, public entity_system::EntityInstanc
     /// Destructor.
     ~EqualsIntProcessor() override;
 
-    /// Initialization of the processor.
-    void init();
+    /// Initializes the processor.
+    void init() override;
+
+    /// Returns the name of the component
+    std::string get_component_name() override;
 
     /// @brief Called when an entity instance of type EQUALS_INT has been created.
     /// @param entity_instance ?

@@ -59,9 +59,14 @@ void TriangleExample::init()
     keyboard_input_manager->register_on_window_key_pressed_or_repeated(window, shared_from_this());
 }
 
-void TriangleExample::shutdown()
+void TriangleExample::destroy()
 {
     window_manager->destroy_window(window);
+}
+
+std::string TriangleExample::get_component_name()
+{
+    return "TriangleExample";
 }
 
 void increase(const EntityAttributeInstancePtr &attr, float step, float max)

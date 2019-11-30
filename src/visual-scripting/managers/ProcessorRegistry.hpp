@@ -1,5 +1,6 @@
 #pragma once
 
+#include "base/LifeCycleComponent.hpp"
 #include "entity-system/model/entities/entity-types/EntityType.hpp"
 #include "visual-scripting/model/Processor.hpp"
 
@@ -14,7 +15,7 @@ using EntityTypePtr = std::shared_ptr<entity_system::EntityType>;
 
 /// @class ProcessorRegistry
 /// @brief Registry of the visual scripting processors.
-class ProcessorRegistry
+class ProcessorRegistry : public LifeCycleComponent
 {
     public:
     /// Constructor.
@@ -23,8 +24,8 @@ class ProcessorRegistry
     /// Destructor.
     ~ProcessorRegistry();
 
-    /// Initialization of the active components.
-    void init();
+    /// Returns the name of the component
+    std::string get_component_name() override;
 
     /// @brief Registers an processor.
     /// @param processor ?

@@ -10,7 +10,7 @@ using AddFloatProcessorPtr = std::shared_ptr<AddFloatProcessor>;
 
 /// @class ArithmeticProcessors
 /// @brief Management of the arithmetic processors.
-class ArithmeticProcessors
+class ArithmeticProcessors : public LifeCycleComponent
 {
     public:
     /// @brief Constructs the arithmetic processors.
@@ -22,8 +22,8 @@ class ArithmeticProcessors
     /// Destructor.
     ~ArithmeticProcessors();
 
-    /// Initialization of the arithmetic processors.
-    void init();
+    /// Returns the name of the component
+    std::string get_component_name() override;
 
     private:
     /// Addition for integers.

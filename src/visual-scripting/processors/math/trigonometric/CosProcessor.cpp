@@ -14,7 +14,7 @@ using EntityAttributeInstancePtr = std::shared_ptr<entity_system::EntityAttribut
 using EntityAttributeInstancePtrOpt = std::optional<EntityAttributeInstancePtr>;
 
 CosProcessor::CosProcessor(EntityTypeManagerPtr entity_type_manager, EntityInstanceManagerPtr entity_instance_manager, LogManagerPtr log_manager)
-    : Processor(), entity_type_manager(std::move(entity_type_manager)), entity_instance_manager(std::move(entity_instance_manager)), log_manager(std::move(log_manager))
+    : Processor(), LifeCycleComponent(), entity_type_manager(std::move(entity_type_manager)), entity_instance_manager(std::move(entity_instance_manager)), log_manager(std::move(log_manager))
 {
 }
 
@@ -36,6 +36,11 @@ void CosProcessor::init_processor()
     } else {
         spdlog::get(LOGGER_NAME)->error("Failed to initialize processor {}: Entity type does not exist", Cos::TYPE_NAME);
     }
+}
+
+std::string CosProcessor::get_component_name()
+{
+    return "CosProcessor";
 }
 
 void CosProcessor::on_entity_instance_created(EntityInstancePtr entity_instance)

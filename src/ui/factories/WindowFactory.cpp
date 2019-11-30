@@ -7,18 +7,23 @@ namespace inexor::ui {
 using Window = entity_system::type_system::Window;
 
 WindowFactory::WindowFactory(EntityInstanceBuilderFactoryPtr entity_instance_builder_factory, EntityInstanceManagerPtr entity_instance_manager)
+    : LifeCycleComponent()
 {
     this->entity_instance_builder_factory = std::move(entity_instance_builder_factory);
     this->entity_instance_manager = std::move(entity_instance_manager);
 }
 
-WindowFactory::~WindowFactory()
+WindowFactory::~WindowFactory() = default;
+
+std::string WindowFactory::get_component_name()
 {
+    return "WindowFactory";
 }
 
 EntityInstancePtrOpt WindowFactory::create_instance(int id, const std::string &title, int x, int y, int width, int height)
 {
-    return this->entity_instance_builder_factory->get_builder(Window::TYPE_NAME)
+    return this->entity_instance_builder_factory
+        ->get_builder(Window::TYPE_NAME)
         ->attribute(Window::ID, id)
         ->attribute(Window::TITLE, title)
         ->attribute(Window::POSITION_X, x)
@@ -40,7 +45,8 @@ EntityInstancePtrOpt WindowFactory::create_instance(int id, const std::string &t
 
 EntityInstancePtrOpt WindowFactory::create_instance(int id, const std::string &title, int x, int y, int width, int height, float opacity)
 {
-    return this->entity_instance_builder_factory->get_builder(Window::TYPE_NAME)
+    return this->entity_instance_builder_factory
+        ->get_builder(Window::TYPE_NAME)
         ->attribute(Window::ID, id)
         ->attribute(Window::TITLE, title)
         ->attribute(Window::POSITION_X, x)
@@ -62,7 +68,8 @@ EntityInstancePtrOpt WindowFactory::create_instance(int id, const std::string &t
 
 EntityInstancePtrOpt WindowFactory::create_instance(int id, const std::string &title, int x, int y, int width, int height, float opacity, bool visible, bool fullscreen, bool iconified, bool maximized, bool focused, bool vsync, float fps)
 {
-    return this->entity_instance_builder_factory->get_builder(Window::TYPE_NAME)
+    return this->entity_instance_builder_factory
+        ->get_builder(Window::TYPE_NAME)
         ->attribute(Window::ID, id)
         ->attribute(Window::TITLE, title)
         ->attribute(Window::POSITION_X, x)

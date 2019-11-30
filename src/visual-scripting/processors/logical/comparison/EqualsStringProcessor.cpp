@@ -13,7 +13,7 @@ using EntityTypePtrOpt = std::optional<EntityTypePtr>;
 using EntityAttributeInstancePtrOptional = std::optional<std::shared_ptr<EntityAttributeInstance>>;
 
 EqualsStringProcessor::EqualsStringProcessor(EntityTypeManagerPtr entity_type_manager, EntityInstanceManagerPtr entity_instance_manager, LogManagerPtr log_manager)
-    : Processor(), entity_type_manager(std::move(entity_type_manager)), entity_instance_manager(std::move(entity_instance_manager)), log_manager(std::move(log_manager))
+    : Processor(), LifeCycleComponent(), entity_type_manager(std::move(entity_type_manager)), entity_instance_manager(std::move(entity_instance_manager)), log_manager(std::move(log_manager))
 {
 }
 
@@ -35,6 +35,11 @@ void EqualsStringProcessor::init_processor()
     } else {
         spdlog::get(LOGGER_NAME)->error("Failed to initialize processor {}: Entity type does not exist", EqualsString::TYPE_NAME);
     }
+}
+
+std::string EqualsStringProcessor::get_component_name()
+{
+    return "EqualsStringProcessor";
 }
 
 void EqualsStringProcessor::on_entity_instance_created(EntityInstancePtr entity_instance)

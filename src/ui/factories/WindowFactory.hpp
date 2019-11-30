@@ -1,5 +1,6 @@
 #pragma once
 
+#include "base/LifeCycleComponent.hpp"
 #include "entity-system/factories/entities/entity-instance-builder-factory/EntityInstanceBuilderFactory.hpp"
 #include "entity-system/factories/entities/entity-type-builder-factory/EntityTypeBuilderFactory.hpp"
 #include "entity-system/managers/entities/entity-instance-manager/EntityInstanceManager.hpp"
@@ -13,7 +14,7 @@ using EntityInstancePtrOpt = std::optional<EntityInstancePtr>;
 
 /// @class WindowFactory
 /// @brief Factory for creating windows.
-class WindowFactory
+class WindowFactory : public LifeCycleComponent
 {
     public:
     /// @brief Constructor.
@@ -24,6 +25,9 @@ class WindowFactory
 
     /// Destructor.
     ~WindowFactory();
+
+    /// Returns the name of the component
+    std::string get_component_name() override;
 
     /// Creates a new window with the given title, coordinates and dimensions.
     /// @param id The id of the window.

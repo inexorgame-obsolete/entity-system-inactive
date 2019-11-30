@@ -16,7 +16,7 @@ using namespace react;
 
 /// @class AddIntProcessor
 /// @brief Processor for entity instances of type ADD_INT.
-class AddIntProcessor : public Processor, public entity_system::EntityInstanceCreatedListener, public entity_system::EntityInstanceDeletedListener, public std::enable_shared_from_this<AddIntProcessor>
+class AddIntProcessor : public Processor, public LifeCycleComponent, public entity_system::EntityInstanceCreatedListener, public entity_system::EntityInstanceDeletedListener, public std::enable_shared_from_this<AddIntProcessor>
 {
 
     using EntityTypeManagerPtr = std::shared_ptr<entity_system::EntityTypeManager>;
@@ -38,8 +38,11 @@ class AddIntProcessor : public Processor, public entity_system::EntityInstanceCr
     /// Destructor.
     ~AddIntProcessor() override;
 
-    /// Initialization of the processor.
-    void init();
+    /// Initializes the processor.
+    void init() override;
+
+    /// Returns the name of the component
+    std::string get_component_name() override;
 
     /// Initializes the processor by registering listeners on newly created entity instances.
     void init_processor();

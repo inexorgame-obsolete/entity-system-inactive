@@ -22,8 +22,9 @@ void MonitorManager::init()
     detect_monitors();
 }
 
-void MonitorManager::shutdown()
+std::string MonitorManager::get_component_name()
 {
+    return "MonitorManager";
 }
 
 void MonitorManager::detect_monitors()

@@ -17,7 +17,7 @@ using EntityTypePtrOpt = std::optional<EntityTypePtr>;
 using EntityAttributeInstancePtrOptional = std::optional<std::shared_ptr<EntityAttributeInstance>>;
 
 StdOutProcessor::StdOutProcessor(EntityTypeManagerPtr entity_type_manager, EntityInstanceManagerPtr entity_instance_manager, LogManagerPtr log_manager)
-    : Processor(), entity_type_manager(std::move(entity_type_manager)), entity_instance_manager(std::move(entity_instance_manager)), log_manager(log_manager)
+    : Processor(), LifeCycleComponent(), entity_type_manager(std::move(entity_type_manager)), entity_instance_manager(std::move(entity_instance_manager)), log_manager(log_manager)
 {
 }
 
@@ -38,6 +38,11 @@ void StdOutProcessor::init_processor()
     } else {
         spdlog::error("Failed to initialize processor {}: Entity type does not exist", StdOut::TYPE_NAME);
     }
+}
+
+std::string StdOutProcessor::get_component_name()
+{
+    return "StdOutProcessor";
 }
 
 void StdOutProcessor::on_entity_instance_created(EntityInstancePtr entity_instance)

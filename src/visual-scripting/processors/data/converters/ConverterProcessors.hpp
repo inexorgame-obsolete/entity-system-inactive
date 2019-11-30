@@ -10,7 +10,7 @@ using IntToStringProcessorPtr = std::shared_ptr<IntToStringProcessor>;
 
 /// @class ConverterProcessors
 /// @brief Provides processors for data type converters.
-class ConverterProcessors
+class ConverterProcessors : public LifeCycleComponent
 {
     public:
     /// @brief Constructs the processors for data type converters.
@@ -21,11 +21,8 @@ class ConverterProcessors
     /// Destructor.
     ~ConverterProcessors();
 
-    /// Initialization of the processors for data type converters.
-    void init();
-
-    /// Shut down the processors for data type converters.
-    void shutdown();
+    /// Returns the name of the component
+    std::string get_component_name() override;
 
     private:
     /// Processor for the entity type INT_TO_FLOAT.

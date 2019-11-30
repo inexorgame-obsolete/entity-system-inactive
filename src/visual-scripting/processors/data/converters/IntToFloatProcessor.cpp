@@ -12,7 +12,7 @@ using IntToFloat = entity_system::type_system::IntToFloat;
 using EntityAttributeInstancePtrOptional = std::optional<std::shared_ptr<EntityAttributeInstance>>;
 
 IntToFloatProcessor::IntToFloatProcessor(EntityTypeManagerPtr entity_type_manager, EntityInstanceManagerPtr entity_instance_manager, LogManagerPtr log_manager)
-    : Processor(), entity_type_manager(std::move(entity_type_manager)), entity_instance_manager(std::move(entity_instance_manager)), log_manager(std::move(log_manager))
+    : Processor(), LifeCycleComponent(), entity_type_manager(std::move(entity_type_manager)), entity_instance_manager(std::move(entity_instance_manager)), log_manager(std::move(log_manager))
 {
 }
 
@@ -36,8 +36,13 @@ void IntToFloatProcessor::init_processor()
     }
 }
 
-void IntToFloatProcessor::shutdown()
+void IntToFloatProcessor::destroy()
 {
+}
+
+std::string IntToFloatProcessor::get_component_name()
+{
+    return "IntToFloatProcessor";
 }
 
 void IntToFloatProcessor::on_entity_instance_created(EntityInstancePtr entity_instance)

@@ -1,5 +1,6 @@
 #pragma once
 
+#include "base/LifeCycleComponent.hpp"
 #include "MonitorManager.hpp"
 #include "client/ClientLifecycle.hpp"
 #include "entity-system/managers/entities/entity-instance-manager/EntityInstanceManager.hpp"
@@ -43,7 +44,7 @@ using Range2Di = Magnum::Math::Range2D<std::int32_t>;
 
 /// @class WindowManager
 /// @brief The WindowManager manages the windows of the application.
-class WindowManager : public std::enable_shared_from_this<WindowManager>
+class WindowManager : public LifeCycleComponent, public std::enable_shared_from_this<WindowManager>
 {
     public:
     /// @brief Constructor.
@@ -63,10 +64,13 @@ class WindowManager : public std::enable_shared_from_this<WindowManager>
     ~WindowManager();
 
     /// Initialize the window manager.
-    void init();
+    void init() override;
 
     /// Shut down the window manager.
-    void shutdown();
+    void destroy() override;
+
+    /// Returns the name of the component
+    std::string get_component_name() override;
 
     /// @brief Creates a new window with the given title, position and dimensions.
     /// @param window The GLFWwindow instance.

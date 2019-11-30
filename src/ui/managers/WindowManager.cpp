@@ -30,6 +30,7 @@ using FpsLimiterPtr = std::shared_ptr<FpsLimiter>;
 
 WindowManager::WindowManager(WindowFactoryPtr window_factory, MonitorManagerPtr monitor_manager, KeyboardInputManagerPtr keyboard_input_manager, MouseInputManagerPtr mouse_input_manager, EntityInstanceManagerPtr entity_instance_manager,
                              ConnectorManagerPtr connector_manager, WorldRendererPtr world_renderer, UserInterfaceRendererPtr user_interface_renderer, ClientLifecyclePtr client_lifecycle, LogManagerPtr log_manager)
+    : LifeCycleComponent()
 {
     this->window_factory = std::move(window_factory);
     this->monitor_manager = std::move(monitor_manager);
@@ -50,23 +51,10 @@ WindowManager::~WindowManager() = default;
 void WindowManager::init()
 {
     log_manager->register_logger(LOGGER_NAME);
-
-    // Initialize the world renderer
-    world_renderer->init();
-
-    // Initialize the user interface renderer
-    user_interface_renderer->init();
 }
 
-void WindowManager::shutdown()
+void WindowManager::destroy()
 {
-
-    // Shut down the user interface renderer
-    user_interface_renderer->shutdown();
-
-    // Shut down the world renderer
-    world_renderer->shutdown();
-
     // Shut down the windows.
     spdlog::debug("Shutting down {} open windows", windows.size());
     for (auto &kv : windows)
@@ -81,6 +69,11 @@ void WindowManager::shutdown()
         std::this_thread::sleep_for(std::chrono::milliseconds(10));
     }
     spdlog::info("All windows has been closed");
+}
+
+std::string WindowManager::get_component_name()
+{
+    return "WindowManager";
 }
 
 /// @brief Creates a new window with the given title, position and dimensions.

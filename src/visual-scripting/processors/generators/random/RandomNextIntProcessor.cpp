@@ -21,7 +21,7 @@ using DataValue = entity_system::DataValue;
 using DataType = entity_system::DataType;
 
 RandomNextIntProcessor::RandomNextIntProcessor(EntityTypeManagerPtr entity_type_manager, EntityInstanceManagerPtr entity_instance_manager, LogManagerPtr log_manager)
-    : Processor(), entity_type_manager(std::move(entity_type_manager)), entity_instance_manager(std::move(entity_instance_manager)), log_manager(std::move(log_manager))
+    : Processor(), LifeCycleComponent(), entity_type_manager(std::move(entity_type_manager)), entity_instance_manager(std::move(entity_instance_manager)), log_manager(std::move(log_manager))
 {
 }
 
@@ -45,6 +45,11 @@ void RandomNextIntProcessor::init_processor()
     {
         spdlog::error("Failed to initialize processor {}: Entity type does not exist", RandomNextInt::TYPE_NAME);
     }
+}
+
+std::string RandomNextIntProcessor::get_component_name()
+{
+    return "RandomNextIntProcessor";
 }
 
 void RandomNextIntProcessor::on_entity_instance_created(std::shared_ptr<inexor::entity_system::EntityInstance> entity_instance)

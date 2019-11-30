@@ -5,6 +5,7 @@
 namespace inexor::visual_scripting {
 
 ConverterProcessors::ConverterProcessors(IntToFloatProcessorPtr int_to_float_processor, IntToStringProcessorPtr int_to_string_processor)
+    : LifeCycleComponent(int_to_float_processor, int_to_string_processor)
 {
     this->int_to_float_processor = std::move(int_to_float_processor);
     this->int_to_string_processor = std::move(int_to_string_processor);
@@ -12,16 +13,9 @@ ConverterProcessors::ConverterProcessors(IntToFloatProcessorPtr int_to_float_pro
 
 ConverterProcessors::~ConverterProcessors() = default;
 
-void ConverterProcessors::init()
+std::string ConverterProcessors::get_component_name()
 {
-    int_to_float_processor->init();
-    int_to_string_processor->init();
-}
-
-void ConverterProcessors::shutdown()
-{
-    int_to_float_processor->shutdown();
-    int_to_string_processor->shutdown();
+    return "ConverterProcessors";
 }
 
 } // namespace inexor::visual_scripting

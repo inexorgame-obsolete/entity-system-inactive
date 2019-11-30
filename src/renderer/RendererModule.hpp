@@ -10,7 +10,7 @@ namespace inexor::renderer {
 /// @brief This module is responsible for the management of the windows,
 /// the rendering of the world (octree) and the rendering of the user
 /// interface.
-class RendererModule
+class RendererModule : public LifeCycleComponent
 {
     using FontManagerPtr = std::shared_ptr<FontManager>;
     using LoadingScreenPtr = std::shared_ptr<LoadingScreen>;
@@ -31,11 +31,8 @@ class RendererModule
     /// Destructor.
     ~RendererModule();
 
-    /// Initialization of the renderer module.
-    void init();
-
-    /// Shutdown of the renderer module.
-    void shutdown();
+    /// Returns the name of the component
+    std::string get_component_name() override;
 
     /// Updates the frame in main thread.
     void update();

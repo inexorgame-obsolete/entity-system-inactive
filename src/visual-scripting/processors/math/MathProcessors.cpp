@@ -12,10 +12,9 @@ MathProcessors::MathProcessors(ArithmeticProcessorsPtr arithmetic_processors, Tr
 
 MathProcessors::~MathProcessors() = default;
 
-void MathProcessors::init()
+std::string MathProcessors::get_component_name()
 {
-    this->arithmetic_processors->init();
-    this->trigonometric_processors->init();
+    return "Processors";
 }
 
 } // namespace inexor::visual_scripting

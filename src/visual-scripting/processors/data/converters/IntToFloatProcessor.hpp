@@ -16,7 +16,7 @@ using namespace react;
 
 /// @class IntToFloatProcessor
 /// @brief Processor for entity instances of type ADD_INT.
-class IntToFloatProcessor : public Processor, public entity_system::EntityInstanceCreatedListener, public entity_system::EntityInstanceDeletedListener, public std::enable_shared_from_this<IntToFloatProcessor>
+class IntToFloatProcessor : public Processor, public LifeCycleComponent, public entity_system::EntityInstanceCreatedListener, public entity_system::EntityInstanceDeletedListener, public std::enable_shared_from_this<IntToFloatProcessor>
 {
 
     using EntityTypeManagerPtr = std::shared_ptr<entity_system::EntityTypeManager>;
@@ -38,11 +38,14 @@ class IntToFloatProcessor : public Processor, public entity_system::EntityInstan
     /// Destructor.
     ~IntToFloatProcessor() override;
 
-    /// Initialization of the processor.
-    void init();
+    /// Initializes the processor.
+    void init() override;
 
-    /// Shut down all the processor.
-    void shutdown();
+    /// Shut down all threads of this processor.
+    void destroy() override;
+
+    /// Returns the name of the component
+    std::string get_component_name() override;
 
     /// @brief Called when an entity instance of type ADD_INT has been created.
     /// @param entity_instance ?

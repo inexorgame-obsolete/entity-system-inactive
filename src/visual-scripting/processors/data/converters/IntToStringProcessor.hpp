@@ -16,7 +16,7 @@ using namespace react;
 
 /// @class IntToStringProcessor
 /// @brief Processor for entity instances of type ADD_INT.
-class IntToStringProcessor : public Processor, public entity_system::EntityInstanceCreatedListener, public entity_system::EntityInstanceDeletedListener, public std::enable_shared_from_this<IntToStringProcessor>
+class IntToStringProcessor : public Processor, public LifeCycleComponent, public entity_system::EntityInstanceCreatedListener, public entity_system::EntityInstanceDeletedListener, public std::enable_shared_from_this<IntToStringProcessor>
 {
 
     using EntityTypeManagerPtr = std::shared_ptr<entity_system::EntityTypeManager>;
@@ -38,11 +38,14 @@ class IntToStringProcessor : public Processor, public entity_system::EntityInsta
     /// Destructor.
     ~IntToStringProcessor() override;
 
-    /// Initialization of the processor.
-    void init();
+    /// Initializes the processor.
+    void init() override;
 
-    /// Shut down all the processor.
-    void shutdown();
+    /// Shut down all threads of this processor.
+    void destroy() override;
+
+    /// Returns the name of the component
+    std::string get_component_name() override;
 
     /// @brief Called when an entity instance of type ADD_INT has been created.
     /// @param entity_instance ?

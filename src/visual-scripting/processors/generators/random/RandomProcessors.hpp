@@ -10,7 +10,7 @@ using RandomNextFloatProcessorPtr = std::shared_ptr<RandomNextFloatProcessor>;
 
 /// @class RandomProcessors
 /// @brief Provides processors for random number generators.
-class RandomProcessors
+class RandomProcessors : public LifeCycleComponent
 {
     public:
     /// @brief Constructs the processors for random number generators.
@@ -21,8 +21,8 @@ class RandomProcessors
     /// Destructor.
     ~RandomProcessors();
 
-    /// Initialization of the processors for random number generators.
-    void init();
+    /// Returns the name of the component
+    std::string get_component_name() override;
 
     private:
     /// Processor for the entity type RANDOM_NEXT_INT.

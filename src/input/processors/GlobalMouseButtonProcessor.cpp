@@ -19,7 +19,7 @@ using EntityTypePtrOpt = std::optional<EntityTypePtr>;
 
 GlobalMouseButtonProcessor::GlobalMouseButtonProcessor(EntityTypeManagerPtr entity_type_manager, EntityInstanceManagerPtr entity_instance_manager, MouseInputManagerPtr mouse_input_manager,
                                                        LogManagerPtr log_manager)
-    : Processor(), entity_type_manager(std::move(entity_type_manager)), entity_instance_manager(std::move(entity_instance_manager)), mouse_input_manager(std::move(mouse_input_manager)),
+    : LifeCycleComponent(), Processor(), entity_type_manager(std::move(entity_type_manager)), entity_instance_manager(std::move(entity_instance_manager)), mouse_input_manager(std::move(mouse_input_manager)),
       log_manager(std::move(log_manager))
 {
 }
@@ -43,6 +43,11 @@ void GlobalMouseButtonProcessor::init_processor()
     } else {
         spdlog::get(LOGGER_NAME)->error("Failed to initialize processor {}: Entity type does not exist", GlobalMouseButton::TYPE_NAME);
     }
+}
+
+std::string GlobalMouseButtonProcessor::get_component_name()
+{
+    return "GlobalMouseButtonProcessor";
 }
 
 void GlobalMouseButtonProcessor::on_entity_instance_created(EntityInstancePtr entity_instance)

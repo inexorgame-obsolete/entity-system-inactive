@@ -18,7 +18,7 @@ namespace inexor::visual_scripting {
 /// @brief Processor which listens on the creation of entity instances of type TIMER_TICK.
 /// @note Newly created entity instances of type TIMER_TICK will be initialized by connecting
 /// the input attributes with a calculation function and the result with the output attribute.
-class TimerTickProcessor : public Processor, public entity_system::EntityInstanceCreatedListener, public entity_system::EntityInstanceDeletedListener, public std::enable_shared_from_this<TimerTickProcessor>
+class TimerTickProcessor : public Processor, public LifeCycleComponent, public entity_system::EntityInstanceCreatedListener, public entity_system::EntityInstanceDeletedListener, public std::enable_shared_from_this<TimerTickProcessor>
 {
 
     using EntityTypeManagerPtr = std::shared_ptr<entity_system::EntityTypeManager>;
@@ -41,8 +41,11 @@ class TimerTickProcessor : public Processor, public entity_system::EntityInstanc
     /// Destructor.
     ~TimerTickProcessor() override;
 
-    /// Initializes the TIMER_TICK processor by registering listeners on newly created entity instances of type TIMER_TICK.
-    void init();
+    /// Initializes the processor.
+    void init() override;
+
+    /// Returns the name of the component
+    std::string get_component_name() override;
 
     /// @brief Called when an entity instance of type TIMER_TICK has been created.
     /// @param entity_instance ?

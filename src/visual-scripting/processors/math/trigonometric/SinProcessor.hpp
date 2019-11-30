@@ -28,7 +28,7 @@ using DataValue = entity_system::DataValue;
 /// @brief Processor which listens on the creation of entity instances of type SIN.
 /// @note Newly created entity instances of type SIN will be initialized by connecting
 /// the input attributes with a calculation function and the result with the output attribute.
-class SinProcessor : public Processor, public entity_system::EntityInstanceCreatedListener, public entity_system::EntityInstanceDeletedListener, public std::enable_shared_from_this<SinProcessor>
+class SinProcessor : public Processor, public LifeCycleComponent, public entity_system::EntityInstanceCreatedListener, public entity_system::EntityInstanceDeletedListener, public std::enable_shared_from_this<SinProcessor>
 {
 
     public:
@@ -46,7 +46,10 @@ class SinProcessor : public Processor, public entity_system::EntityInstanceCreat
     ~SinProcessor() override;
 
     /// Initializes the processor.
-    void init();
+    void init() override;
+
+    /// Returns the name of the component
+    std::string get_component_name() override;
 
     /// @brief Called when an entity instance of type SIN has been created.
     /// @param entity_instance ?
