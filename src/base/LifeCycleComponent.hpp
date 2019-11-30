@@ -33,7 +33,7 @@ class LifeCycleComponent
     {
         // Pre-Initialize before sub components are constructed
         pre_init();
-        spdlog::info("Pre-Initializing {} sub components of {}", sub_components.size(), this->get_component_name());
+        spdlog::trace("Pre-Initializing {} sub components of {}", sub_components.size(), this->get_component_name());
         for (const std::shared_ptr<LifeCycleComponent> &sub_component : sub_components)
         {
             sub_component->pre_init_components();
@@ -46,7 +46,7 @@ class LifeCycleComponent
     {
         // Initialize before sub components are constructed
         init();
-        spdlog::info("Initializing {} sub components of {}", sub_components.size(), this->get_component_name());
+        spdlog::trace("Initializing {} sub components of {}", sub_components.size(), this->get_component_name());
         for (const std::shared_ptr<LifeCycleComponent> &sub_component : sub_components)
         {
             sub_component->init_components();
@@ -57,7 +57,7 @@ class LifeCycleComponent
 
     void destroy_components()
     {
-        spdlog::info("Destroying {} sub components of {}", sub_components.size(), this->get_component_name());
+        spdlog::trace("Destroying {} sub components of {}", sub_components.size(), this->get_component_name());
         // Destruction in reverse order
         for (const std::shared_ptr<LifeCycleComponent> &sub_component : boost::adaptors::reverse(sub_components))
         {
@@ -71,7 +71,7 @@ class LifeCycleComponent
 
     void post_destroy_components()
     {
-        spdlog::info("Post-Destroying {} sub components of {}", sub_components.size(), this->get_component_name());
+        spdlog::trace("Post-Destroying {} sub components of {}", sub_components.size(), this->get_component_name());
         // Destruction in reverse order
         for (const std::shared_ptr<LifeCycleComponent> &sub_component : boost::adaptors::reverse(sub_components))
         {
