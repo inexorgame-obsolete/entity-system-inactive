@@ -91,6 +91,11 @@ std::size_t EntityTypeManager::get_entity_type_count() const
     return get_type_count();
 }
 
+std::vector<EntityTypePtr> EntityTypeManager::get_all_entity_types() const
+{
+    return get_all_types();
+}
+
 EntityTypePtrOpt EntityTypeManager::get_entity_type(const xg::Guid &type_GUID)
 {
     if (does_type_exist(type_GUID))
