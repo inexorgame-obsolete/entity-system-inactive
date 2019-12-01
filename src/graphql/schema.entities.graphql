@@ -1,10 +1,10 @@
 enum DataType {
-  BOOL
-  INT
-  BIG_INT
-  DOUBLE
-  FLOAT
-  STRING
+	BOOL
+	INT
+	BIG_INT
+	DOUBLE
+	FLOAT
+	STRING
 }
 
 scalar any
@@ -13,6 +13,9 @@ type EntityType {
 	uuid: ID
 	name: String
 	attributes: [EntityAttributeType]
+	entity_instances: [EntityInstance]
+	outgoing_relation_types: [RelationType]
+	incoming_relation_types: [RelationType]
 }
 
 type EntityAttributeType {
@@ -25,6 +28,8 @@ type EntityInstance {
 	uuid: ID
 	entity_type: [EntityType]
 	attributes: [EntityAttributeInstance]
+	outgoing_relation_instances: [RelationInstance]
+	incoming_relation_instances: [RelationInstance]
 }
 
 type EntityAttributeInstance {
@@ -39,6 +44,7 @@ type RelationType {
 	start_type: EntityType
 	end_type: EntityType
 	attributes: [RelationAttributeType]
+	
 }
 
 type RelationAttributeType {
@@ -61,7 +67,7 @@ type RelationAttributeInstance {
 }
 
 type Query {
-  	entity_types: [EntityType]
+	entity_types: [EntityType]
 	entity_instances: [EntityInstance]
 	relation_types: [RelationType]
 	relation_instances: [RelationInstance]
