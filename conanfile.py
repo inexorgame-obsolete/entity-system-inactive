@@ -27,7 +27,9 @@ class InexorConan(ConanFile):
         "magnum/2019.01@inexorgame/testing",
         "magnum_plugins/2019.01@inexorgame/testing",
         "openal/1.19.0@bincrafters/stable",
-        "spdlog/1.4.2"
+        "restinio/0.6.0.1@inexorgame/testing",
+        "spdlog/1.4.2",
+        "fmt/6.0.0"
     )
 
     generators = "cmake"

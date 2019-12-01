@@ -10,7 +10,7 @@ enum DataType {
 scalar any
 
 type EntityType {
-	uuid: ID
+	uuid: ID!
 	name: String
 	attributes: [EntityAttributeType]
 	entity_instances: [EntityInstance]
@@ -19,13 +19,13 @@ type EntityType {
 }
 
 type EntityAttributeType {
-	uuid: ID
-	datatype: DataType
+	uuid: ID!
+	datatype: DataType!
 	name: String
 }
 
 type EntityInstance {
-	uuid: ID
+	uuid: ID!
 	entity_type: [EntityType]
 	attributes: [EntityAttributeInstance]
 	outgoing_relation_instances: [RelationInstance]
@@ -33,37 +33,46 @@ type EntityInstance {
 }
 
 type EntityAttributeInstance {
-	uuid: ID
-	type: EntityAttributeType
+	uuid: ID!
+	type: EntityAttributeType!
 	value: any
+	incoming_connections: [Connector]
+	outgoing_connections: [Connector]
 }
 
 type RelationType {
-	uuid: ID
+	uuid: ID!
 	name: String
-	start_type: EntityType
-	end_type: EntityType
+	start_type: EntityType!
+	end_type: EntityType!
 	attributes: [RelationAttributeType]
 	
 }
 
 type RelationAttributeType {
-	uuid: ID
-	datatype: DataType
+	uuid: ID!
+	datatype: DataType!
 	name: String
 }
 
 type RelationInstance {
-	uuid: ID
-	start_node: EntityInstance
-	end_node: EntityInstance
+	uuid: ID!
+	start_node: EntityInstance!
+	end_node: EntityInstance!
 	attributes: [RelationAttributeInstance]
 }
 
 type RelationAttributeInstance {
-	uuid: ID
-	type: RelationAttributeType
+	uuid: ID!
+	type: RelationAttributeType!
 	value: any
+}
+
+type Connector {
+	output_uuid: String!
+	input_uuid: String!
+	output_attribute: EntityAttributeInstance
+	input_attribute: EntityAttributeInstance
 }
 
 type Query {
