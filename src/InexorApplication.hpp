@@ -1,5 +1,7 @@
 #pragma once
 
+#include <graphql/EntitiesApi.h>
+
 #include "entity-system/EntitySystemModule.hpp"
 #include "entity-system/debugger/EntitySystemDebugger.hpp"
 
@@ -34,6 +36,7 @@ using EntitySystemDebuggerPtr = std::shared_ptr<entity_system::EntitySystemDebug
 using VisualScriptingSystemModulePtr = std::shared_ptr<visual_scripting::VisualScriptingSystemModule>;
 using CommandModulePtr = std::shared_ptr<command::CommandModule>;
 using ClientModulePtr = std::shared_ptr<client::ClientModule>;
+using QueryPtr = std::shared_ptr<graphql::entities::Query>;
 using LogManagerPtr = std::shared_ptr<logging::LogManager>;
 
 /// @class Inexor
@@ -53,7 +56,7 @@ class InexorApplication
     /// @param command_module The command module.
     /// @param audio_module The audio module.
     InexorApplication(EntitySystemModulePtr entity_system_module, TypeSystemModulePtr type_system_module, ConfigurationModulePtr configuration_module, EntitySystemDebuggerPtr entity_system_debugger,
-                      VisualScriptingSystemModulePtr visual_scripting_system_module, CommandModulePtr command_module, ClientModulePtr client_module, LogManagerPtr log_manager);
+                      VisualScriptingSystemModulePtr visual_scripting_system_module, CommandModulePtr command_module, ClientModulePtr client_module, QueryPtr query, LogManagerPtr log_manager);
 
     /// Destructor.
     ~InexorApplication();
@@ -100,6 +103,8 @@ class InexorApplication
 
     /// The client module.
     ClientModulePtr client_module;
+
+    std::shared_ptr<graphql::entities::Query> query;
 
     /// The log manager.
     LogManagerPtr log_manager;

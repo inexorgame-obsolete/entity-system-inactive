@@ -1,5 +1,6 @@
 #include "InexorApplication.hpp"
 
+#include <graphqlservice/JSONResponse.h>
 #include <utility>
 
 #include "spdlog/spdlog.h"
@@ -10,7 +11,7 @@ namespace inexor {
 std::vector<InexorApplication *> InexorApplication::instances;
 
 InexorApplication::InexorApplication(EntitySystemModulePtr entity_system_module, TypeSystemModulePtr type_system_module, ConfigurationModulePtr configuration_module, EntitySystemDebuggerPtr entity_system_debugger,
-                                     VisualScriptingSystemModulePtr visual_scripting_system_module, CommandModulePtr command_module, ClientModulePtr client_module, LogManagerPtr log_manager)
+                                     VisualScriptingSystemModulePtr visual_scripting_system_module, CommandModulePtr command_module, ClientModulePtr client_module, QueryPtr query, LogManagerPtr log_manager)
 {
     this->entity_system_module = std::move(entity_system_module);
     this->type_system_module = std::move(type_system_module);
@@ -20,6 +21,7 @@ InexorApplication::InexorApplication(EntitySystemModulePtr entity_system_module,
     this->command_module = std::move(command_module);
     this->client_module = std::move(client_module);
     this->log_manager = std::move(log_manager);
+    this->query = query;
     this->running = false;
 }
 
@@ -77,6 +79,29 @@ void InexorApplication::init()
 
     // Initialize the rendering.
     client_module->init_components();
+
+
+    // TODO: Move the GraphQL to it's own component
+
+    auto service = std::make_shared<graphql::entities::Operations>(query);
+    try
+    {
+        std::string query_string = "{ entity_types { uuid name } }";
+        spdlog::get(LOGGER_NAME)->info("GraphQL query string: {}", query_string);
+        graphql::peg::ast graphql_query = graphql::peg::parseString(std::move(query_string));
+        if (!graphql_query.root)
+        {
+            throw std::runtime_error("Unknown error: No query root");
+        }
+        spdlog::get(LOGGER_NAME)->info("Executing GraphQL query...");
+        spdlog::get(LOGGER_NAME)->info("GraphQL response: {}",
+        graphql::response::toJSON(service->resolve(nullptr, *graphql_query.root, "", graphql::response::Value(graphql::response::Type::Map)).get()));
+    }
+    catch (const std::runtime_error& ex)
+    {
+        spdlog::get(LOGGER_NAME)->error("GraphQL query failed: {}", ex.what());
+    }
+
 }
 
 void InexorApplication::run()

@@ -107,6 +107,7 @@ endif()
 
 # Automatically search for source files.
 include_directories("${CMAKE_SOURCE_DIR}/src")
+include_directories(graphqlschema ${CMAKE_CURRENT_BINARY_DIR}/src)
 file(GLOB_RECURSE source_files
   "src/*.hpp"
   "src/*.cpp"
