@@ -1,0 +1,87 @@
+enum DataType {
+	BOOL
+	INT
+	BIG_INT
+	DOUBLE
+	FLOAT
+	STRING
+}
+
+scalar any
+
+type EntityType {
+	uuid: ID!
+	name: String
+	attributes: [EntityAttributeType]
+	entity_instances: [EntityInstance]
+	outgoing_relation_types: [RelationType]
+	incoming_relation_types: [RelationType]
+}
+
+type EntityAttributeType {
+	uuid: ID!
+	datatype: DataType!
+	name: String
+}
+
+type EntityInstance {
+	uuid: ID!
+	entity_type: [EntityType]
+	attributes: [EntityAttributeInstance]
+	outgoing_relation_instances: [RelationInstance]
+	incoming_relation_instances: [RelationInstance]
+}
+
+type EntityAttributeInstance {
+	uuid: ID!
+	type: EntityAttributeType!
+	value: any
+	incoming_connections: [Connector]
+	outgoing_connections: [Connector]
+}
+
+type RelationType {
+	uuid: ID!
+	name: String
+	start_type: EntityType!
+	end_type: EntityType!
+	attributes: [RelationAttributeType]
+	
+}
+
+type RelationAttributeType {
+	uuid: ID!
+	datatype: DataType!
+	name: String
+}
+
+type RelationInstance {
+	uuid: ID!
+	start_node: EntityInstance!
+	end_node: EntityInstance!
+	attributes: [RelationAttributeInstance]
+}
+
+type RelationAttributeInstance {
+	uuid: ID!
+	type: RelationAttributeType!
+	value: any
+}
+
+type Connector {
+	output_uuid: String!
+	input_uuid: String!
+	output_attribute: EntityAttributeInstance
+	input_attribute: EntityAttributeInstance
+}
+
+type Query {
+	entity_types: [EntityType]
+	entity_instances: [EntityInstance]
+	relation_types: [RelationType]
+	relation_instances: [RelationInstance]
+}
+
+schema {
+	query: Query
+}

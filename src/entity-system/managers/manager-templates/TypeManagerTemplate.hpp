@@ -138,6 +138,16 @@ template <typename T> class TypeManagerTemplate
         return stored_types.size();
     }
 
+    std::vector<std::shared_ptr<T>> get_all_types() const
+    {
+        std::vector<std::shared_ptr<T>> all_types;
+        // TODO: performance: std::for_each
+        for (const auto& tuple : stored_types) {
+            all_types.emplace_back(tuple.second);
+        }
+        return all_types;
+    }
+
     /// @brief Deletes a specific type.
     /// @param type_name The name of the type which will be deleted.
     /// @return The number of deleted types.

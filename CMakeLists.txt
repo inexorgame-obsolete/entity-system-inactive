@@ -18,6 +18,13 @@ function(assign_source_group)
     endforeach()
 endfunction(assign_source_group)
 
+function(add_bigobj_flag target)
+  if(MSVC)
+    # MSVC requires the /bigobj flag if the number of sections gets too big.
+    target_compile_options(${target} PRIVATE /bigobj)
+  endif()
+endfunction()
+
 # Set output directories
 set(CMAKE_BINARY_DIR ${CMAKE_SOURCE_DIR}/bin)
 set(EXECUTABLE_OUTPUT_PATH ${CMAKE_BINARY_DIR})
@@ -100,6 +107,7 @@ endif()
 
 # Automatically search for source files.
 include_directories("${CMAKE_SOURCE_DIR}/src")
+include_directories(graphqlschema ${CMAKE_CURRENT_BINARY_DIR}/src)
 file(GLOB_RECURSE source_files
   "src/*.hpp"
   "src/*.cpp"
@@ -143,12 +151,39 @@ message(STATUS "STATIC_IMAGE_RESOURCES: ${STATIC_IMAGE_RESOURCES}")
 message(STATUS "STATIC_FONT_RESOURCES: ${STATIC_FONT_RESOURCES}")
 message(STATUS "STATIC_TYPE_SYSTEM_RESOURCES: ${STATIC_TYPE_SYSTEM_RESOURCES}")
 
+# If really needed: here you can enable generating the graphql API (stubs)
+# afterwards you will need to implement functionality for each stub.
+
+option(REGENERATE_GRAPHQL_API_STUBS "Replace the GraphQL API implementation with new stubs." OFF)
+# if(REGENERATE_GRAPHQL_API_STUBS)
+  find_program (SCHEMAGEN schemagen PATHS ${CONAN_BIN_DIRS_CPPGRAPHQLGEN})
+
+  file(MAKE_DIRECTORY ${CMAKE_CURRENT_BINARY_DIR}/src/graphql)
+  add_custom_command(
+    OUTPUT
+      src/graphql/EntitiesSchema.cpp
+      src/graphql/EntitiesSchema.h
+    COMMAND ${SCHEMAGEN} --schema="${CMAKE_CURRENT_SOURCE_DIR}/src/graphql/schema.entities.graphql" --prefix="Entities" --namespace="entities"
+    DEPENDS ${SCHEMAGEN} src/graphql/schema.entities.graphql
+    WORKING_DIRECTORY src/graphql
+    COMMENT "Generating mock GraphQL Schema files"
+  )
+
+  # force the generation of samples on the default build target
+  add_custom_target(regenerate_graphql_schema ALL
+    DEPENDS
+      src/graphql/EntitiesSchema.cpp
+  )
+# endif(REGENERATE_GRAPHQL_API_STUBS)
+
+list(REMOVE_ITEM LIBRARY_SOURCE_FILES "src/graphql/EntitiesSchema.cpp")
+add_library(graphqlschema STATIC src/graphql/EntitiesSchema.cpp)
+target_include_directories(graphqlschema PUBLIC ${CMAKE_CURRENT_BINARY_DIR}/src/graphql)
+add_bigobj_flag(graphqlschema)
+
 # Entity-system library
 add_library(inexor-entity-system-lib ${LIBRARY_SOURCE_FILES})
-target_link_libraries(inexor-entity-system-lib ${CONAN_LIBS})
-#if(APPLE) <- Fohlen, can you verify this is not needed?
-    # target_link_libraries(inexor-entity-system-lib "-framework CoreFoundation")
-#endif()
+target_link_libraries(inexor-entity-system-lib graphqlschema ${CONAN_LIBS})
 
 # Inexor standalone application.
 add_executable(inexor-standalone
@@ -157,7 +192,7 @@ add_executable(inexor-standalone
         ${STATIC_IMAGE_RESOURCES}
         ${STATIC_FONT_RESOURCES}
         ${STATIC_TYPE_SYSTEM_RESOURCES})
-target_link_libraries(inexor-standalone PUBLIC inexor-entity-system-lib)
+target_link_libraries(inexor-standalone PUBLIC graphqlschema inexor-entity-system-lib)
 target_link_libraries(inexor-standalone PUBLIC ${CONAN_LIBS})
 target_link_libraries(inexor-standalone PRIVATE Corrade::Utility)
 if(APPLE)

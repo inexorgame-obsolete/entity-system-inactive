@@ -57,6 +57,9 @@ class EntityTypeManager : public TypeManagerTemplate<EntityType>
     /// @return The number of existing entity types.
     std::size_t get_entity_type_count() const;
 
+    /// @brief Returns all entity types (no copy).
+    std::vector<EntityTypePtr> get_all_entity_types() const;
+
     /// @brief Returns an entity type.
     /// @param type_GUID The GUID of the entity type.
     /// @return A std::optional<EntityTypePtr> of the entity type.

@@ -104,9 +104,9 @@ EntityInstancePtr WindowManager::create_window(const std::string &title, int x, 
 
     // Unlike SDL2, GLFW requires at least version 3.2 to be able to request a core profile.
 
-    glfwWindowHint(GLFW_CONTEXT_VERSION_MAJOR, 3);
-    glfwWindowHint(GLFW_CONTEXT_VERSION_MINOR, 2);
-    glfwWindowHint(GLFW_OPENGL_PROFILE, GLFW_OPENGL_CORE_PROFILE);
+    glfwWindowHint(GLFW_CONTEXT_VERSION_MAJOR, 2);
+    glfwWindowHint(GLFW_CONTEXT_VERSION_MINOR, 1);
+    // glfwWindowHint(GLFW_OPENGL_PROFILE, GLFW_OPENGL_CORE_PROFILE);
 
     // Set the initial states of the newly created window
     glfwWindowHint(GLFW_VISIBLE, GLFW_FALSE);

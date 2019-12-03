@@ -1,8 +1,12 @@
 #include "InexorApplication.hpp"
 
+#include <graphqlservice/JSONResponse.h>
 #include <utility>
 
 #include "spdlog/spdlog.h"
+
+#include "restinio/all.hpp"
+#include <nlohmann/json.hpp>
 
 namespace inexor {
 
@@ -10,7 +14,7 @@ namespace inexor {
 std::vector<InexorApplication *> InexorApplication::instances;
 
 InexorApplication::InexorApplication(EntitySystemModulePtr entity_system_module, TypeSystemModulePtr type_system_module, ConfigurationModulePtr configuration_module, EntitySystemDebuggerPtr entity_system_debugger,
-                                     VisualScriptingSystemModulePtr visual_scripting_system_module, CommandModulePtr command_module, ClientModulePtr client_module, LogManagerPtr log_manager)
+                                     VisualScriptingSystemModulePtr visual_scripting_system_module, CommandModulePtr command_module, ClientModulePtr client_module, QueryPtr query, LogManagerPtr log_manager)
 {
     this->entity_system_module = std::move(entity_system_module);
     this->type_system_module = std::move(type_system_module);
@@ -20,6 +24,7 @@ InexorApplication::InexorApplication(EntitySystemModulePtr entity_system_module,
     this->command_module = std::move(command_module);
     this->client_module = std::move(client_module);
     this->log_manager = std::move(log_manager);
+    this->query = std::move(query);
     this->running = false;
 }
 
@@ -65,6 +70,16 @@ void InexorApplication::pre_init(int argc, char *argv[])
 
 }
 
+void replaceAll(std::string& str, const std::string& from, const std::string& to) {
+    if(from.empty())
+        return;
+    size_t start_pos = 0;
+    while((start_pos = str.find(from, start_pos)) != std::string::npos) {
+        str.replace(start_pos, from.length(), to);
+        start_pos += to.length(); // In case 'to' contains 'from', like replacing 'x' with 'yx'
+    }
+}
+
 void InexorApplication::init()
 {
     spdlog::get(LOGGER_NAME)->info("Starting Inexor...");
@@ -77,6 +92,99 @@ void InexorApplication::init()
 
     // Initialize the rendering.
     client_module->init_components();
+
+
+
+//    restinio::run(
+//        restinio::on_this_thread()
+//            .port(8080)
+//            .address("localhost")
+//            .request_handler([](auto req) {
+//              return req->create_response().set_body("Hello, World!").done();
+//            }));
+    // TODO: Move the GraphQL to it's own component
+
+    std::thread restinio_thread([this]() {
+        auto service = std::make_shared<graphql::entities::Operations>(query);
+        restinio::run(restinio::on_this_thread()
+            .port(31415)
+            .address("192.168.255.206")
+            .request_handler([service] (auto req) {
+                if (restinio::http_method_post() == req->header().method()) {
+                    spdlog::get(LOGGER_NAME)->info("POST");
+                    try
+                    {
+                        std::string req_body = req->body();
+                        spdlog::get(LOGGER_NAME)->info(req_body);
+                        using json = nlohmann::json;
+//                        spdlog::get(LOGGER_NAME)->info("1");
+//                        auto test = json::parse("{\n"
+//                                                "\"operationName\": null,\n"
+//                                                "\"variables\": {},\n"
+//                                                "\"query\": \"{ entity_types { name attributes { uuid } } }\"\n"
+//                                                "}");
+                        spdlog::get(LOGGER_NAME)->info("1");
+                        req_body.erase(std::remove(req_body.begin(), req_body.end(), '\n'), req_body.end());
+                        spdlog::get(LOGGER_NAME)->info("2");
+                        auto req_body_json = json::parse(req_body);
+                        spdlog::get(LOGGER_NAME)->info(req_body_json);
+                        auto req_query_json = req_body_json["query"];
+                        std::string query_string = req_query_json.dump();
+                        query_string = query_string.substr(1, query_string.size() - 2);
+                        // TODO: unescape all "invalid" characters
+                        replaceAll(query_string, "\\n", "");
+                        spdlog::get(LOGGER_NAME)->info(query_string);
+
+                        // std::string query_string = "{"operationName":null,"variables":{},"query":"{ entity_types { name attributes { uuid } } }";
+                        spdlog::get(LOGGER_NAME)->info("GraphQL query string: {}", query_string);
+                        graphql::peg::ast graphql_query = graphql::peg::parseString(std::move(query_string));
+                        if (!graphql_query.root)
+                        {
+                            throw std::runtime_error("Unknown error: No query root");
+                        }
+                        spdlog::get(LOGGER_NAME)->info("Executing GraphQL query...");
+
+                        auto result = graphql::response::toJSON(service->resolve(nullptr, *graphql_query.root, "", graphql::response::Value(graphql::response::Type::Map)).get());
+                        spdlog::get(LOGGER_NAME)->info("GraphQL response: {}", result);
+
+                        return req->create_response().append_header("Access-Control-Allow-Origin", "*").set_body(result).done();
+                    } catch (const std::runtime_error &ex)
+                    {
+                        spdlog::get(LOGGER_NAME)->error("GraphQL query failed: {}", ex.what());
+                        return req->create_response(restinio::status_internal_server_error())
+                            .append_header(restinio::http_field::server, "Inexor GraphQL")
+                            .append_header(restinio::http_field::access_control_allow_origin, "*")
+                            .append_header(restinio::http_field::access_control_allow_headers, "*")
+                            .set_body("error")
+                            .done();
+                    }
+                } else if (restinio::http_method_options() == req->header().method()) {
+                    spdlog::get(LOGGER_NAME)->info("HTTP OPTIONS");
+                    return req->create_response()
+                        .append_header(restinio::http_field::server, "Inexor GraphQL")
+                        .append_header(restinio::http_field::access_control_allow_origin, "*")
+                        .append_header(restinio::http_field::access_control_allow_headers, "*")
+                        .append_header_date_field()
+                        // .append_header(restinio::http_field::content_type, "text/plain; charset=utf-8")
+                        .set_body("")
+                        .done();
+                } else {
+                    spdlog::get(LOGGER_NAME)->error("Unknown http method {}", req->header().method());
+                    return req->create_response(restinio::status_internal_server_error())
+                        .append_header(restinio::http_field::server, "Inexor GraphQL")
+                        .append_header(restinio::http_field::access_control_allow_origin, "*")
+                        .append_header(restinio::http_field::access_control_allow_headers, "*")
+                        .set_body("Unknown http method")
+                        .done();
+
+                }
+            })
+        );
+    });
+    restinio_thread.detach();
+
+
+
 }
 
 void InexorApplication::run()

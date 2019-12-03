@@ -11,27 +11,25 @@ class InexorConan(ConanFile):
 
     requires = (
         "benchmark/1.5.0",
-        "glm/0.9.9.5",
-        "gtest/1.8.1",
-        "spdlog/1.4.2",
-
         "boost_property_tree/1.69.0@bincrafters/stable",
         "boost_signals2/1.69.0@bincrafters/stable",
         "boost_range/1.69.0@bincrafters/stable",
-        "freetype/2.9.1@bincrafters/stable",
-        "openal/1.19.0@bincrafters/stable",
-
-        "magic_enum/0.6.3@neargye/stable",
-
-        "jsonformoderncpp/3.7.0@vthiery/stable",
-
         "boost-di/1.1.0@inexorgame/stable",
         "boost-te/19.Jan.19@inexorgame/stable",
-        "cpp.react/legacy1@inexorgame/stable",
-
         "crossguid/06-03-19@inexorgame/testing",
+        "cppgraphqlgen/3.0.4@inexorgame/testing",
+        "cpp.react/legacy1@inexorgame/stable",
+        "freetype/2.9.1@bincrafters/stable",
+        "glm/0.9.9.5",
+        "gtest/1.8.1",
+        "jsonformoderncpp/3.7.0@vthiery/stable",
+        "magic_enum/0.6.3@neargye/stable",
         "magnum/2019.01@inexorgame/testing",
-        "magnum_plugins/2019.01@inexorgame/testing"
+        "magnum_plugins/2019.01@inexorgame/testing",
+        "openal/1.19.0@bincrafters/stable",
+        "restinio/0.6.0.1@inexorgame/testing",
+        "spdlog/1.4.2",
+        "fmt/6.0.0"
     )
 
     generators = "cmake"
@@ -52,7 +50,7 @@ class InexorConan(ConanFile):
         "magnum_plugins:with_stbtruetypefont": True,
         "magnum_plugins:with_freetypefont": True,
         "magnum_plugins:build_plugins_static": True,
-        "TBB:shared": True,
+        "TBB:shared": True
     }
 
     def imports(self):

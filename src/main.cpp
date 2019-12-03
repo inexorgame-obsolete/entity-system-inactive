@@ -1,5 +1,4 @@
 #include <boost/di.hpp>
-#include "spdlog/spdlog.h"
 #include "InexorApplication.hpp"
 
 int main(int argc, char* argv[])
