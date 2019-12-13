@@ -107,6 +107,7 @@ EntityInstancePtr WindowManager::create_window(const std::string &title, int x, 
     glfwWindowHint(GLFW_CONTEXT_VERSION_MAJOR, 3);
     glfwWindowHint(GLFW_CONTEXT_VERSION_MINOR, 2);
     glfwWindowHint(GLFW_OPENGL_PROFILE, GLFW_OPENGL_CORE_PROFILE);
+    glfwWindowHint(GLFW_OPENGL_FORWARD_COMPAT, GL_TRUE);
 
     // Set the initial states of the newly created window
     glfwWindowHint(GLFW_VISIBLE, GLFW_FALSE);
