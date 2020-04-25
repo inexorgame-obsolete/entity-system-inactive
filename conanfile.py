@@ -11,16 +11,15 @@ class InexorConan(ConanFile):
 
     requires = (
         "benchmark/1.5.0",
-        "glm/0.9.9.5",
-        "gtest/1.8.1",
-        "spdlog/1.4.2",
+        "glm/0.9.9.8",
+        "gtest/1.10.0",
+        "spdlog/1.5.0",
         "nlohmann_json/3.7.3",
-        "openal/1.19.1",
 
         "boost_property_tree/1.69.0@bincrafters/stable",
         "boost_signals2/1.69.0@bincrafters/stable",
         "boost_range/1.69.0@bincrafters/stable",
-        "freetype/2.9.1@bincrafters/stable",
+        "freetype/2.10.1",
 
         "magic_enum/0.6.3@neargye/stable",
 
