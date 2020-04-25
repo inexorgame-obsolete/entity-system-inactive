@@ -1,19 +1,7 @@
-# Inexor entity-component-system prototype
+# entity-component-system (ecs)
 [![Build Status](https://travis-ci.org/inexorgame/entity-system.svg?branch=master)](https://travis-ci.org/inexorgame/entity-system)
 
 Inexor is a new octree-based game+engine based on C++17 and Vulkan API. It's core design feature is an entity-component-system (ECS).
-
-## How is Inexor organized?
-
-We are a headless collective. This means we are simply a group of people with different ideas working together without a leader making all the decisions. Anyone of us is free to work on the particular things they want to.
-For this organization to work properly we rely on good communication. Join our discord server!
-
-We are open for new people!
-
-## The entity-system
-
-The entity-system will lay the basis on the other systems of the game will be built on.
-For more information take a look at the [wiki](https://inexor.org/wiki/features/Entity-System.html).
 
 ## Build process
 
