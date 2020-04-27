@@ -4,11 +4,10 @@
 
 namespace inexor::client {
 
-ClientModule::ClientModule(ClientLifecyclePtr client_lifecycle, AudioModulePtr audio_module, InputModulePtr input_module, UserInterfaceModulePtr user_interface_module, RendererModulePtr renderer_module)
+ClientModule::ClientModule(ClientLifecyclePtr client_lifecycle, InputModulePtr input_module, UserInterfaceModulePtr user_interface_module, RendererModulePtr renderer_module)
     : LifeCycleComponent(client_lifecycle, audio_module, input_module, user_interface_module, renderer_module)
 {
     this->client_lifecycle = std::move(client_lifecycle);
-    this->audio_module = std::move(audio_module);
     this->input_module = std::move(input_module);
     this->user_interface_module = std::move(user_interface_module);
     this->renderer_module = std::move(renderer_module);
