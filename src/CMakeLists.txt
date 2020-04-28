@@ -1,17 +1,6 @@
 add_library(
     inexor-ecs
 	
-	InexorApplication.cpp
-	main.cpp
-	client/ClientLifecycle.cpp
-	client/ClientModule.cpp
-	command/CommandModule.cpp
-	command/managers/CommandManager.cpp
-	configuration/ConfigurationModule.cpp
-	configuration/managers/CommandLineArgumentsConfigurationInitializer.cpp
-	configuration/managers/ConfigurationManager.cpp
-	configuration/managers/EnvVarConfigurationInitializer.cpp
-	configuration/managers/SystemConfigurationInitializer.cpp
 	entity-system/EntitySystemModule.cpp
 	entity-system/builders/entities/entity-instance-builder/EntityInstanceBuilder.cpp
 	entity-system/builders/entities/entity-type-builder/EntityTypeBuilder.cpp
@@ -47,6 +36,59 @@ add_library(
 	entity-system/serializers/EntityInstanceJsonSerializer.cpp
 	entity-system/serializers/EntitySystemSerializers.cpp
 	entity-system/serializers/EntityTypeJsonSerializer.cpp
+)
+
+set_target_properties(
+    inexor-ecs PROPERTIES
+
+    CXX_EXTENSIONS OFF
+    CXX_STANDARD 17
+    CXX_STANDARD_REQUIRED ON
+)
+
+target_compile_definitions(
+    inexor-ecs
+
+    PRIVATE
+    GLM_FORCE_DEPTH_ZERO_TO_ONE
+    GLM_FORCE_RADIANS
+)
+
+if(MSVC)
+    # Use multiple cores to compile when using Visual Studio.
+    target_compile_options(inexor-ecs PRIVATE "/MP")
+	# Disable C++17 deprecation warnings.
+	target_compile_definitions(inexor-ecs PRIVATE _SILENCE_ALL_CXX17_DEPRECATION_WARNINGS=1)
+endif()
+
+target_include_directories(
+    inexor-ecs
+
+    PUBLIC
+    ${PROJECT_SOURCE_DIR}/include/entity-system
+)
+
+target_link_libraries(
+    inexor-ecs
+
+    PUBLIC
+    ${CONAN_LIBS}
+)
+
+add_executable(
+    inexor-ecs-example
+	
+	InexorApplication.cpp
+	main.cpp
+	client/ClientLifecycle.cpp
+	client/ClientModule.cpp
+	command/CommandModule.cpp
+	command/managers/CommandManager.cpp
+	configuration/ConfigurationModule.cpp
+	configuration/managers/CommandLineArgumentsConfigurationInitializer.cpp
+	configuration/managers/ConfigurationManager.cpp
+	configuration/managers/EnvVarConfigurationInitializer.cpp
+	configuration/managers/SystemConfigurationInitializer.cpp
 	input/InputModule.cpp
 	input/managers/ClipboardManager.cpp
 	input/managers/KeyboardInputManager.cpp
@@ -183,7 +225,7 @@ add_library(
 )
 
 set_target_properties(
-    inexor-ecs PROPERTIES
+    inexor-ecs-example PROPERTIES
 
     CXX_EXTENSIONS OFF
     CXX_STANDARD 17
@@ -191,7 +233,7 @@ set_target_properties(
 )
 
 target_compile_definitions(
-    inexor-ecs
+    inexor-ecs-example
 
     PRIVATE
     GLM_FORCE_DEPTH_ZERO_TO_ONE
@@ -200,10 +242,38 @@ target_compile_definitions(
 
 if(MSVC)
     # Use multiple cores to compile when using Visual Studio.
-    target_compile_options(inexor-ecs PRIVATE "/MP")
+    target_compile_options(inexor-ecs-example PRIVATE "/MP")
 	# Disable C++17 deprecation warnings.
-	target_compile_definitions(inexor-ecs PRIVATE _SILENCE_ALL_CXX17_DEPRECATION_WARNINGS=1)
+	target_compile_definitions(inexor-ecs-example PRIVATE _SILENCE_ALL_CXX17_DEPRECATION_WARNINGS=1)
 endif()
+
+target_include_directories(
+    inexor-ecs-example
+
+    PUBLIC
+    ${PROJECT_SOURCE_DIR}/include/InexorApplication.hpp
+    ${PROJECT_SOURCE_DIR}/include/base
+    ${PROJECT_SOURCE_DIR}/include/client
+    ${PROJECT_SOURCE_DIR}/include/command
+    ${PROJECT_SOURCE_DIR}/include/configuration
+    ${PROJECT_SOURCE_DIR}/include/input
+    ${PROJECT_SOURCE_DIR}/include/logging
+    ${PROJECT_SOURCE_DIR}/include/renderer
+    ${PROJECT_SOURCE_DIR}/include/type-system
+    ${PROJECT_SOURCE_DIR}/include/ui
+    ${PROJECT_SOURCE_DIR}/include/visual-scripting
+)
+
+target_link_libraries(
+    inexor-ecs-example
+
+    PUBLIC
+    ${CONAN_LIBS}
+	
+	PRIVATE
+	Corrade::Utility
+	inexor-ecs
+)
 
 target_include_directories(
     inexor-ecs
@@ -215,14 +285,4 @@ target_include_directories(
     ${PROJECT_SOURCE_DIR}/submodules/magnum/src/Magnum/Shaders
     ${PROJECT_SOURCE_DIR}/submodules/magnum/src/Magnum/Text
 	${PROJECT_SOURCE_DIR}/build/submodules/magnum/src/Magnum
-)
-
-target_link_libraries(
-    inexor-ecs
-
-    PUBLIC
-    ${CONAN_LIBS}
-	
-	PRIVATE
-	Corrade::Utility
 )
