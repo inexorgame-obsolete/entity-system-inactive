@@ -1,4 +1,4 @@
-#include "XorProcessor.hpp"
+#include <visual-scripting/processors/logical/gates/XorProcessor.hpp>
 
 #include <type-system/types/logical/gates/Xor.hpp>
 #include <utility>

@@ -1,4 +1,4 @@
-#include "UserInterfaceModule.hpp"
+#include <ui/UserInterfaceModule.hpp>
 
 #include <GLFW/glfw3.h>
 

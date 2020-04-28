@@ -1,4 +1,4 @@
-#include "SinProcessor.hpp"
+#include <visual-scripting/processors/math/trigonometric/SinProcessor.hpp>
 
 #include <utility>
 

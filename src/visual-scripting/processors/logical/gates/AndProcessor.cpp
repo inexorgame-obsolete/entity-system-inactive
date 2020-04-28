@@ -1,4 +1,4 @@
-#include "AndProcessor.hpp"
+#include <visual-scripting/processors/logical/gates/AndProcessor.hpp>
 
 #include <type-system/types/logical/gates/And.hpp>
 #include <utility>

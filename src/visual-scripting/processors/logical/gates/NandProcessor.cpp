@@ -1,4 +1,4 @@
-#include "NandProcessor.hpp"
+#include <visual-scripting/processors/logical/gates/NandProcessor.hpp>
 
 #include <type-system/types/logical/gates/Nand.hpp>
 #include <utility>

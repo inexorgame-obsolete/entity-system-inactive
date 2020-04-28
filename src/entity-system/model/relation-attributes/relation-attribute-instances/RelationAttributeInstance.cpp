@@ -1,4 +1,4 @@
-#include "RelationAttributeInstance.hpp"
+#include <entity-system/model/relation-attributes/relation-attribute-instances/RelationAttributeInstance.hpp>
 
 namespace inexor::entity_system {
 

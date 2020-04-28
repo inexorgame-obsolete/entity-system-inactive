@@ -1,4 +1,4 @@
-#include "TypeSystemInitializer.hpp"
+#include <type-system/initializer/TypeSystemInitializer.hpp>
 
 #include "spdlog/spdlog.h"
 #include <nlohmann/json.hpp>

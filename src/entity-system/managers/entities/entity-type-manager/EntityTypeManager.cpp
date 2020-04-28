@@ -1,4 +1,4 @@
-#include "EntityTypeManager.hpp"
+#include <entity-system/managers/entities/entity-type-manager/EntityTypeManager.hpp>
 
 #include <utility>
 

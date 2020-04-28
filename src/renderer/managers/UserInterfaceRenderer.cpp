@@ -1,4 +1,4 @@
-#include "UserInterfaceRenderer.hpp"
+#include <renderer/managers/UserInterfaceRenderer.hpp>
 
 #include <GLFW/glfw3.h>
 

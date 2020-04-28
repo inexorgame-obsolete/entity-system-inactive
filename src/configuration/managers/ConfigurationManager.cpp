@@ -1,4 +1,4 @@
-#include "ConfigurationManager.hpp"
+#include <configuration/managers/ConfigurationManager.hpp>
 
 #include <utility>
 

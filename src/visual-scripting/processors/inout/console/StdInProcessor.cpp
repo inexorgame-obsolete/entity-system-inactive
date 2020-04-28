@@ -1,4 +1,4 @@
-#include "StdInProcessor.hpp"
+#include <visual-scripting/processors/inout/console/StdInProcessor.hpp>
 
 #include <type-system/types/inout/console/StdIn.hpp>
 #include <utility>

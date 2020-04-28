@@ -1,4 +1,4 @@
-#include "BoolConstantFactory.hpp"
+#include <type-system/factories/data/constants/BoolConstantFactory.hpp>
 
 #include <type-system/types/data/constants/BoolConstant.hpp>
 #include <utility>

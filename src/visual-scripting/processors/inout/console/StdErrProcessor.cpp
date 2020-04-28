@@ -1,4 +1,4 @@
-#include "StdErrProcessor.hpp"
+#include <visual-scripting/processors/inout/console/StdErrProcessor.hpp>
 
 #include <type-system/types/inout/console/StdErr.hpp>
 #include <utility>

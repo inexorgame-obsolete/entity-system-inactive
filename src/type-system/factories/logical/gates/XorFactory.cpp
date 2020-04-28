@@ -1,4 +1,4 @@
-#include "XorFactory.hpp"
+#include <type-system/factories/logical/gates/XorFactory.hpp>
 
 #include <type-system/types/logical/gates/Xor.hpp>
 #include <utility>

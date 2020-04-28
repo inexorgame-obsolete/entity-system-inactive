@@ -1,4 +1,4 @@
-#include "StringStoreFactory.hpp"
+#include <type-system/factories/data/stores/StringStoreFactory.hpp>
 
 #include <type-system/types/data/store/StringStore.hpp>
 #include <utility>

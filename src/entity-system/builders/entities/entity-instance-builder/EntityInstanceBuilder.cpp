@@ -1,4 +1,4 @@
-#include "EntityInstanceBuilder.hpp"
+#include <entity-system/builders/entities/entity-instance-builder/EntityInstanceBuilder.hpp>
 
 #include <utility>
 
@@ -6,8 +6,11 @@
 
 #include "spdlog/spdlog.h"
 
+#if !defined(_MSC_VER)
 #pragma clang diagnostic push
 #pragma clang diagnostic ignored "-Wshadow"
+#endif
+
 namespace inexor::entity_system {
 
 /// These using instructions help to shorten the following code.
@@ -185,4 +188,6 @@ bool EntityInstanceBuilder::initialize_instance(const EntityInstancePtr &entity_
 
 } // namespace inexor::entity_system
 
+#if !defined(_MSC_VER)
 #pragma clang diagnostic pop
+#endif

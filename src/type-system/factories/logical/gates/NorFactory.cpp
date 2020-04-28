@@ -1,4 +1,4 @@
-#include "NorFactory.hpp"
+#include <type-system/factories/logical/gates/NorFactory.hpp>
 
 #include <type-system/types/logical/gates/Nor.hpp>
 #include <utility>

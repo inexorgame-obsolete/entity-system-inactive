@@ -1,4 +1,4 @@
-#include "WorldRenderer.hpp"
+#include <renderer/managers/WorldRenderer.hpp>
 
 #include <GLFW/glfw3.h>
 

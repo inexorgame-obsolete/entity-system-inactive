@@ -1,4 +1,4 @@
-#include "UserInterfaceFactories.hpp"
+#include <ui/factories/UserInterfaceFactories.hpp>
 
 namespace inexor::ui {
 

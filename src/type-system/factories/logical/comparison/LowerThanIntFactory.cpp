@@ -1,4 +1,4 @@
-#include "LowerThanIntFactory.hpp"
+#include <type-system/factories/logical/comparison/LowerThanIntFactory.hpp>
 
 #include <type-system/types/logical/comparison/LowerThanInt.hpp>
 #include <utility>

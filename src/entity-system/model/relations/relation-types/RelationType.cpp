@@ -1,4 +1,4 @@
-#include "RelationType.hpp"
+#include <entity-system/model/relations/relation-types/RelationType.hpp>
 
 namespace inexor::entity_system {
 

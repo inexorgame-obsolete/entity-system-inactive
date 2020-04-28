@@ -1,4 +1,4 @@
-#include "EntityTypeBuilderFactory.hpp"
+#include <entity-system/factories/entities/entity-type-builder-factory/EntityTypeBuilderFactory.hpp>
 
 #include <utility>
 

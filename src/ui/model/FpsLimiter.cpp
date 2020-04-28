@@ -1,4 +1,4 @@
-#include "FpsLimiter.hpp"
+#include <ui/model/FpsLimiter.hpp>
 
 #include <cmath>
 #include <thread>

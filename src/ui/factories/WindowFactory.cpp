@@ -1,4 +1,4 @@
-#include "WindowFactory.hpp"
+#include <ui/factories/WindowFactory.hpp>
 
 #include <type-system/types/ui/Window.hpp>
 

@@ -1,4 +1,4 @@
-#include "RelationAttributeType.hpp"
+#include <entity-system/model/relation-attributes/relation-attribute-types/RelationAttributeType.hpp>
 
 namespace inexor::entity_system {
 

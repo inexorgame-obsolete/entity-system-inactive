@@ -1,4 +1,4 @@
-#include "Connector.hpp"
+#include <visual-scripting/model/Connector.hpp>
 
 #include <utility>
 

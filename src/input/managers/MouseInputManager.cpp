@@ -1,4 +1,4 @@
-#include "MouseInputManager.hpp"
+#include <input/managers/MouseInputManager.hpp>
 
 #include <tuple>
 #include <utility>

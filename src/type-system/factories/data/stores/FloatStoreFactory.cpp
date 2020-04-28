@@ -1,4 +1,4 @@
-#include "FloatStoreFactory.hpp"
+#include <type-system/factories/data/stores/FloatStoreFactory.hpp>
 
 #include <type-system/types/data/store/FloatStore.hpp>
 #include <utility>

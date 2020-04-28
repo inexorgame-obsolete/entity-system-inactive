@@ -1,4 +1,4 @@
-#include "EntityInstanceJsonSerializer.hpp"
+#include <entity-system/serializers/EntityInstanceJsonSerializer.hpp>
 
 #include "spdlog/spdlog.h"
 #include <nlohmann/json.hpp>

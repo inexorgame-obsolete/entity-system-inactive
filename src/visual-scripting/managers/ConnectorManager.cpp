@@ -1,4 +1,4 @@
-#include "ConnectorManager.hpp"
+#include <visual-scripting/managers/ConnectorManager.hpp>
 
 #include <utility>
 

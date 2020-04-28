@@ -1,4 +1,4 @@
-#include "NandFactory.hpp"
+#include <type-system/factories/logical/gates/NandFactory.hpp>
 
 #include <type-system/types/logical/gates/Nand.hpp>
 #include <utility>

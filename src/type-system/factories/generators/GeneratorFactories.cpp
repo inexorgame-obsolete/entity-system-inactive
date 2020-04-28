@@ -1,4 +1,4 @@
-#include "GeneratorFactories.hpp"
+#include <type-system/factories/generators/GeneratorFactories.hpp>
 
 #include <utility>
 

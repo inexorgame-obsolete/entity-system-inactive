@@ -1,4 +1,4 @@
-#include "CounterIntFactory.hpp"
+#include <type-system/factories/generators/counters/CounterIntFactory.hpp>
 
 #include <type-system/types/generators/counters/CounterInt.hpp>
 #include <utility>

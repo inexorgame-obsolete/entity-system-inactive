@@ -1,4 +1,4 @@
-#include "NorProcessor.hpp"
+#include <visual-scripting/processors/logical/gates/NorProcessor.hpp>
 
 #include <type-system/types/logical/gates/Nor.hpp>
 #include <utility>

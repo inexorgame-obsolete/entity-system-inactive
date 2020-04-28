@@ -1,4 +1,4 @@
-#include "LogManager.hpp"
+#include <logging/managers/LogManager.hpp>
 
 #include <utility>
 

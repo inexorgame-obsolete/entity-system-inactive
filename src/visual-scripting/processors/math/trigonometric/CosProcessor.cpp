@@ -1,4 +1,4 @@
-#include "CosProcessor.hpp"
+#include <visual-scripting/processors/math/trigonometric/CosProcessor.hpp>
 
 #include <utility>
 

@@ -1,4 +1,4 @@
-#include "MonitorFactory.hpp"
+#include <ui/factories/MonitorFactory.hpp>
 
 #include <type-system/types/ui/Monitor.hpp>
 #include <utility>

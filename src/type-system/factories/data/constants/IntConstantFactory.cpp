@@ -1,4 +1,4 @@
-#include "IntConstantFactory.hpp"
+#include <type-system/factories/data/constants/IntConstantFactory.hpp>
 
 #include <type-system/types/data/constants/IntConstant.hpp>
 #include <utility>

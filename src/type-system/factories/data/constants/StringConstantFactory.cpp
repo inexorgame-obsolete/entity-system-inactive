@@ -1,4 +1,4 @@
-#include "StringConstantFactory.hpp"
+#include <type-system/factories/data/constants/StringConstantFactory.hpp>
 
 #include <type-system/types/data/constants/StringConstant.hpp>
 #include <utility>

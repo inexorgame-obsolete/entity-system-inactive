@@ -1,4 +1,4 @@
-#include "CounterFloatFactory.hpp"
+#include <type-system/factories/generators/counters/CounterFloatFactory.hpp>
 
 #include <type-system/types/generators/counters/CounterFloat.hpp>
 #include <utility>

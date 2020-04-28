@@ -1,4 +1,4 @@
-#include "RelationTypeManager.hpp"
+#include <entity-system/managers/relations/relation-type-manager/RelationTypeManager.hpp>
 
 #include <utility>
 

@@ -1,4 +1,4 @@
-#include "EqualsBoolProcessor.hpp"
+#include <visual-scripting/processors/logical/comparison/EqualsBoolProcessor.hpp>
 
 #include <type-system/types/logical/comparison/EqualsBool.hpp>
 #include <utility>

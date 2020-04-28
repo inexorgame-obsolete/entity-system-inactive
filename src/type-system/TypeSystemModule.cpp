@@ -1,4 +1,4 @@
-#include "TypeSystemModule.hpp"
+#include <type-system/TypeSystemModule.hpp>
 
 #include <utility>
 

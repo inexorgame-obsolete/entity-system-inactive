@@ -1,4 +1,4 @@
-#include "InRangeIntProcessor.hpp"
+#include <visual-scripting/processors/logical/comparison/InRangeIntProcessor.hpp>
 
 #include <type-system/types/logical/comparison/InRangeInt.hpp>
 #include <utility>

@@ -1,4 +1,4 @@
-#include "LogicalProcessors.hpp"
+#include <visual-scripting/processors/logical/LogicalProcessors.hpp>
 
 #include <utility>
 

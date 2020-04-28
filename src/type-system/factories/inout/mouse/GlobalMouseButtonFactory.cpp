@@ -1,4 +1,4 @@
-#include "GlobalMouseButtonFactory.hpp"
+#include <type-system/factories/inout/mouse/GlobalMouseButtonFactory.hpp>
 
 #include <type-system/types/inout/mouse/GlobalMouseButton.hpp>
 #include <utility>

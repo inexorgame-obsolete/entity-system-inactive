@@ -1,4 +1,4 @@
-#include "GreaterThanIntProcessor.hpp"
+#include <visual-scripting/processors/logical/comparison/GreaterThanIntProcessor.hpp>
 
 #include <type-system/types/logical/comparison/GreaterThanInt.hpp>
 #include <utility>

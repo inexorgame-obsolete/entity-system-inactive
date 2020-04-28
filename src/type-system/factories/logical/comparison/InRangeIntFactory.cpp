@@ -1,4 +1,4 @@
-#include "InRangeIntFactory.hpp"
+#include <type-system/factories/logical/comparison/InRangeIntFactory.hpp>
 
 #include <type-system/types/logical/comparison/InRangeInt.hpp>
 #include <utility>

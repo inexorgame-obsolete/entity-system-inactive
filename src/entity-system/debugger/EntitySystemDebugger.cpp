@@ -1,4 +1,4 @@
-#include "EntitySystemDebugger.hpp"
+#include <entity-system/debugger/EntitySystemDebugger.hpp>
 
 #include <utility>
 

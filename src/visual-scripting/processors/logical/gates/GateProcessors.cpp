@@ -1,4 +1,4 @@
-#include "GateProcessors.hpp"
+#include <visual-scripting/processors/logical/gates/GateProcessors.hpp>
 
 #include <utility>
 

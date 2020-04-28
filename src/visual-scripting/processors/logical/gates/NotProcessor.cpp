@@ -1,4 +1,4 @@
-#include "NotProcessor.hpp"
+#include <visual-scripting/processors/logical/gates/NotProcessor.hpp>
 
 #include <type-system/types/logical/gates/Not.hpp>
 #include <utility>

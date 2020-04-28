@@ -1,4 +1,4 @@
-#include "SystemConfigurationInitializer.hpp"
+#include <configuration/managers/SystemConfigurationInitializer.hpp>
 
 #include <utility>
 

@@ -1,4 +1,4 @@
-#include "ComparisonFactories.hpp"
+#include <type-system/factories/logical/comparison/ComparisonFactories.hpp>
 
 #include <utility>
 

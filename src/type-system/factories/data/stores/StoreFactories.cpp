@@ -1,4 +1,4 @@
-#include "StoreFactories.hpp"
+#include <type-system/factories/data/stores/StoreFactories.hpp>
 
 #include <utility>
 

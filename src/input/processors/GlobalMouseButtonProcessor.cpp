@@ -1,4 +1,4 @@
-#include "GlobalMouseButtonProcessor.hpp"
+#include <input/processors/GlobalMouseButtonProcessor.hpp>
 
 #include <utility>
 

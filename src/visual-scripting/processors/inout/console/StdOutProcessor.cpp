@@ -1,4 +1,4 @@
-#include "StdOutProcessor.hpp"
+#include <visual-scripting/processors/inout/console/StdOutProcessor.hpp>
 
 #include <type-system/types/inout/console/StdOut.hpp>
 #include <utility>

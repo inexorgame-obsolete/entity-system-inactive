@@ -1,4 +1,4 @@
-#include "TriangleFactory.hpp"
+#include <renderer/factories/TriangleFactory.hpp>
 
 #include <type-system/types/test/Triangle.hpp>
 #include <utility>

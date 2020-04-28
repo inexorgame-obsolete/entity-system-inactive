@@ -1,4 +1,4 @@
-#include "TimerTickProcessor.hpp"
+#include <visual-scripting/processors/generators/timers/TimerTickProcessor.hpp>
 
 #include <type-system/types/generators/timers/TimerTick.hpp>
 #include <utility>

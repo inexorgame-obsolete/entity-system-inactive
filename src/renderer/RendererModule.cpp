@@ -1,8 +1,7 @@
-#include "RendererModule.hpp"
+#include <renderer/RendererModule.hpp>
 
 // Statically import the magnum plugins
 // This is the only place to do this!
-#include "renderer/plugins/MagnumPlugins.cpp"
 
 #include <GLFW/glfw3.h>
 

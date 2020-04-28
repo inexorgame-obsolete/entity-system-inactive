@@ -1,4 +1,4 @@
-#include "RelationInstanceBuilderFactory.hpp"
+#include <entity-system/factories/relations/relation-instance-builder-factory/RelationInstanceBuilderFactory.hpp>
 
 #include <utility>
 

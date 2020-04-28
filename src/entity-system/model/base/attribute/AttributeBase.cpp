@@ -1,4 +1,4 @@
-#include "AttributeBase.hpp"
+#include <entity-system/model/base/attribute/AttributeBase.hpp>
 
 namespace inexor::entity_system {
 

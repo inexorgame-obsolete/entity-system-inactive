@@ -1,4 +1,4 @@
-#include "EqualsIntProcessor.hpp"
+#include <visual-scripting/processors/logical/comparison/EqualsIntProcessor.hpp>
 
 #include <type-system/types/logical/comparison/EqualsInt.hpp>
 #include <utility>

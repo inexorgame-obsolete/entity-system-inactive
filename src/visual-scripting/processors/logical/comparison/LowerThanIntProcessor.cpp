@@ -1,4 +1,4 @@
-#include "LowerThanIntProcessor.hpp"
+#include <visual-scripting/processors/logical/comparison/LowerThanIntProcessor.hpp>
 
 #include <type-system/types/logical/comparison/LowerThanInt.hpp>
 #include <utility>

@@ -1,4 +1,4 @@
-#include "CommandLineArgumentsConfigurationInitializer.hpp"
+#include <configuration/managers/CommandLineArgumentsConfigurationInitializer.hpp>
 
 #include <fmt/format.h>
 

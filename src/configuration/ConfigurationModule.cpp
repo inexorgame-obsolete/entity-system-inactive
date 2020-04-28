@@ -1,4 +1,4 @@
-#include "ConfigurationModule.hpp"
+#include <configuration/ConfigurationModule.hpp>
 
 #include <utility>
 

@@ -1,4 +1,4 @@
-#include "CosFactory.hpp"
+#include <type-system/factories/math/trigonometric/CosFactory.hpp>
 
 #include <utility>
 

@@ -1,4 +1,4 @@
-#include "AndFactory.hpp"
+#include <type-system/factories/logical/gates/AndFactory.hpp>
 
 #include <type-system/types/logical/gates/And.hpp>
 #include <utility>

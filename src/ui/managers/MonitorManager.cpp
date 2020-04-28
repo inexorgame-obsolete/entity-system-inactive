@@ -1,4 +1,4 @@
-#include "MonitorManager.hpp"
+#include <ui/managers/MonitorManager.hpp>
 
 #include <GLFW/glfw3.h>
 

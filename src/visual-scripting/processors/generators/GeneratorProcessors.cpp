@@ -1,4 +1,4 @@
-#include "GeneratorProcessors.hpp"
+#include <visual-scripting/processors/generators/GeneratorProcessors.hpp>
 
 #include <utility>
 

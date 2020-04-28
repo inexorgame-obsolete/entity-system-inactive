@@ -1,4 +1,4 @@
-#include "LoadingScreen.hpp"
+#include <renderer/managers/LoadingScreen.hpp>
 
 #include <algorithm>
 #include <utility>

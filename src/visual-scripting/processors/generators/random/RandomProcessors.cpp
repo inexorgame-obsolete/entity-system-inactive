@@ -1,4 +1,4 @@
-#include "RandomProcessors.hpp"
+#include <visual-scripting/processors/generators/random/RandomProcessors.hpp>
 
 #include <utility>
 

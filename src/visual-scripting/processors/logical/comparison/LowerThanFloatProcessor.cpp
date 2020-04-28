@@ -1,4 +1,4 @@
-#include "LowerThanFloatProcessor.hpp"
+#include <visual-scripting/processors/logical/comparison/LowerThanFloatProcessor.hpp>
 
 #include <type-system/types/logical/comparison/LowerThanFloat.hpp>
 #include <utility>

@@ -1,4 +1,4 @@
-#include "LogicalFactories.hpp"
+#include <type-system/factories/logical/LogicalFactories.hpp>
 
 #include <utility>
 

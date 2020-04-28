@@ -1,4 +1,4 @@
-#include "EntityType.hpp"
+#include <entity-system/model/entities/entity-types/EntityType.hpp>
 
 namespace inexor::entity_system {
 

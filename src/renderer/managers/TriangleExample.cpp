@@ -1,4 +1,4 @@
-#include "TriangleExample.hpp"
+#include <renderer/managers/TriangleExample.hpp>
 
 #include <GLFW/glfw3.h>
 

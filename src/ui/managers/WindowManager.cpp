@@ -1,4 +1,4 @@
-#include "WindowManager.hpp"
+#include <ui/managers/WindowManager.hpp>
 
 #include <utility>
 

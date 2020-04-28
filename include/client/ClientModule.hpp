@@ -43,9 +43,6 @@ class ClientModule : public LifeCycleComponent
     /// The client lifecycle.
     ClientLifecyclePtr client_lifecycle;
 
-    /// The audio module.
-    AudioModulePtr audio_module;
-
     /// The input module.
     InputModulePtr input_module;
 

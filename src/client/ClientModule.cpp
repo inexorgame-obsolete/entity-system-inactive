@@ -1,11 +1,11 @@
-#include "ClientModule.hpp"
+#include <client/ClientModule.hpp>
 
 #include <utility>
 
 namespace inexor::client {
 
 ClientModule::ClientModule(ClientLifecyclePtr client_lifecycle, InputModulePtr input_module, UserInterfaceModulePtr user_interface_module, RendererModulePtr renderer_module)
-    : LifeCycleComponent(client_lifecycle, audio_module, input_module, user_interface_module, renderer_module)
+    : LifeCycleComponent(client_lifecycle, input_module, user_interface_module, renderer_module)
 {
     this->client_lifecycle = std::move(client_lifecycle);
     this->input_module = std::move(input_module);

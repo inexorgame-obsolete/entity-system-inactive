@@ -1,15 +1,17 @@
-#include "RelationTypeBuilder.hpp"
+#include <entity-system/builders/relations/relation-type-builder/RelationTypeBuilder.hpp>
 
 #include <utility>
 
-#include "entity-system/model/entities/entity-types/EntityType.hpp"
-#include "entity-system/model/relation-attributes/relation-attribute-types/RelationAttributeType.hpp"
-#include "entity-system/model/relations/relation-types/RelationType.hpp"
+#include <entity-system/model/entities/entity-types/EntityType.hpp>
+#include <entity-system/model/relation-attributes/relation-attribute-types/RelationAttributeType.hpp>
+#include <entity-system/model/relations/relation-types/RelationType.hpp>
 
 #include "spdlog/spdlog.h"
 
+#if !defined(_MSC_VER)
 #pragma clang diagnostic push
 #pragma clang diagnostic ignored "-Wshadow"
+#endif
 
 namespace inexor::entity_system {
 
@@ -117,4 +119,6 @@ RelationTypePtrOpt RelationTypeBuilder::build()
 
 } // namespace inexor::entity_system
 
+#if !defined(_MSC_VER)
 #pragma clang diagnostic pop
+#endif

@@ -1,12 +1,15 @@
-#include "EntityTypeBuilder.hpp"
+#include <entity-system/builders/entities/entity-type-builder/EntityTypeBuilder.hpp>
 
 #include <magic_enum.hpp>
 #include <utility>
 
 #include "spdlog/spdlog.h"
 
+#if !defined(_MSC_VER)
 #pragma clang diagnostic push
 #pragma clang diagnostic ignored "-Wshadow"
+#endif
+
 namespace inexor::entity_system {
 
 /// These using instructions help to shorten the following code.
@@ -112,4 +115,6 @@ EntityTypePtrOpt EntityTypeBuilder::build()
 
 } // namespace inexor::entity_system
 
+#if !defined(_MSC_VER)
 #pragma clang diagnostic pop
+#endif

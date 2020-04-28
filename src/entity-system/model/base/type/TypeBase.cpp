@@ -1,4 +1,4 @@
-#include "TypeBase.hpp"
+#include <entity-system/model/base/type/TypeBase.hpp>
 
 namespace inexor::entity_system {
 

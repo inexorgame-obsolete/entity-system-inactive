@@ -1,4 +1,4 @@
-#include "OrProcessor.hpp"
+#include <visual-scripting/processors/logical/gates/OrProcessor.hpp>
 
 #include <type-system/types/logical/gates/Or.hpp>
 #include <utility>

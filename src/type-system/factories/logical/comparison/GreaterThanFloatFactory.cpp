@@ -1,4 +1,4 @@
-#include "GreaterThanFloatFactory.hpp"
+#include <type-system/factories/logical/comparison/GreaterThanFloatFactory.hpp>
 
 #include <type-system/types/logical/comparison/GreaterThanFloat.hpp>
 #include <utility>

@@ -1,4 +1,4 @@
-#include "TrigonometricFactories.hpp"
+#include <type-system/factories/math/trigonometric/TrigonometricFactories.hpp>
 
 #include <utility>
 

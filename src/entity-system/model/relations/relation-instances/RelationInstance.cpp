@@ -1,4 +1,4 @@
-#include "RelationInstance.hpp"
+#include <entity-system/model/relations/relation-instances/RelationInstance.hpp>
 
 namespace inexor::entity_system {
 

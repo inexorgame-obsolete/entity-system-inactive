@@ -1,4 +1,4 @@
-#include "EqualsBoolFactory.hpp"
+#include <type-system/factories/logical/comparison/EqualsBoolFactory.hpp>
 
 #include <type-system/types/logical/comparison/EqualsBool.hpp>
 #include <utility>

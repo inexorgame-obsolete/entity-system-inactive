@@ -1,4 +1,4 @@
-#include "RelationManager.hpp"
+#include <entity-system/managers/RelationManager.hpp>
 
 #include <utility>
 

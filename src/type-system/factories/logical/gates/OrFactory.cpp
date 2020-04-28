@@ -1,4 +1,4 @@
-#include "OrFactory.hpp"
+#include <type-system/factories/logical/gates/OrFactory.hpp>
 
 #include <type-system/types/logical/gates/Or.hpp>
 #include <utility>

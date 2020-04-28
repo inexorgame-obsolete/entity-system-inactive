@@ -1,4 +1,4 @@
-#include "GUIDBase.hpp"
+#include <entity-system/model/base/guid/GUIDBase.hpp>
 
 namespace inexor::entity_system {
 

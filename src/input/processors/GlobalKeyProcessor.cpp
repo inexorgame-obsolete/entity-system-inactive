@@ -1,4 +1,4 @@
-#include "GlobalKeyProcessor.hpp"
+#include <input/processors/GlobalKeyProcessor.hpp>
 
 #include <utility>
 

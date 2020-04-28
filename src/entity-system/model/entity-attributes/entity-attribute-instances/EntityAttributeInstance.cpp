@@ -1,4 +1,4 @@
-#include "EntityAttributeInstance.hpp"
+#include <entity-system/model/entity-attributes/entity-attribute-instances/EntityAttributeInstance.hpp>
 
 namespace inexor::entity_system {
 

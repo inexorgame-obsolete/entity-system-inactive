@@ -1,4 +1,4 @@
-#include "TimerTickFactory.hpp"
+#include <type-system/factories/generators/timers/TimerTickFactory.hpp>
 
 #include <type-system/types/generators/timers/TimerTick.hpp>
 #include <utility>

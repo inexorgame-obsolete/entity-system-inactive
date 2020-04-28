@@ -1,4 +1,4 @@
-#include "NotFactory.hpp"
+#include <type-system/factories/logical/gates/NotFactory.hpp>
 
 #include <type-system/types/logical/gates/Not.hpp>
 #include <utility>

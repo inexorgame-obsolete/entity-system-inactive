@@ -1,4 +1,4 @@
-#include "EqualsStringProcessor.hpp"
+#include <visual-scripting/processors/logical/comparison/EqualsStringProcessor.hpp>
 
 #include <type-system/types/logical/comparison/EqualsString.hpp>
 #include <utility>

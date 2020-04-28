@@ -1,4 +1,4 @@
-#include "CounterFloatProcessor.hpp"
+#include <visual-scripting/processors/generators/counters/CounterFloatProcessor.hpp>
 
 #include <type-system/types/generators/counters/CounterFloat.hpp>
 #include <utility>

@@ -1,4 +1,4 @@
-#include "RandomNextIntFactory.hpp"
+#include <type-system/factories/generators/random/RandomNextIntFactory.hpp>
 
 #include <type-system/types/generators/random/RandomNextInt.hpp>
 #include <utility>

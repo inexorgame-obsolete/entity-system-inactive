@@ -1,4 +1,4 @@
-#include "GlobalKeyFactory.hpp"
+#include <type-system/factories/inout/keyboard/GlobalKeyFactory.hpp>
 
 #include <type-system/types/inout/keyboard/GlobalKey.hpp>
 #include <utility>

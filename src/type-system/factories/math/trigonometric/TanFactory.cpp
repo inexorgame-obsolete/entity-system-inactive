@@ -1,4 +1,4 @@
-#include "TanFactory.hpp"
+#include <type-system/factories/math/trigonometric/TanFactory.hpp>
 
 #include <utility>
 

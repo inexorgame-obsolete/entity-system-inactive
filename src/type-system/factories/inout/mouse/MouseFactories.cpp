@@ -1,4 +1,4 @@
-#include "MouseFactories.hpp"
+#include <type-system/factories/inout/mouse/MouseFactories.hpp>
 
 #include <utility>
 

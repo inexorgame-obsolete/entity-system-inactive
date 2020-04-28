@@ -1,4 +1,4 @@
-#include "LoggerProcessor.hpp"
+#include <visual-scripting/processors/inout/logger/LoggerProcessor.hpp>
 
 #include <type-system/types/inout/logger/Logger.hpp>
 #include <utility>

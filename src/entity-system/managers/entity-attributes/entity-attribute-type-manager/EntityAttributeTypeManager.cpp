@@ -1,4 +1,4 @@
-#include "EntityAttributeTypeManager.hpp"
+#include <entity-system/managers/entity-attributes/entity-attribute-type-manager/EntityAttributeTypeManager.hpp>
 
 namespace inexor::entity_system {
 

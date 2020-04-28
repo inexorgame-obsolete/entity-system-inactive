@@ -1,4 +1,4 @@
-#include "InOutFactories.hpp"
+#include <type-system/factories/inout/InOutFactories.hpp>
 
 #include <utility>
 

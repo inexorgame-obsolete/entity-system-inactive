@@ -1,4 +1,4 @@
-#include "LowerThanFloatFactory.hpp"
+#include <type-system/factories/logical/comparison/LowerThanFloatFactory.hpp>
 
 #include <type-system/types/logical/comparison/LowerThanFloat.hpp>
 #include <utility>

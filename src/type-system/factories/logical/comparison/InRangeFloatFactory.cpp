@@ -1,4 +1,4 @@
-#include "InRangeFloatFactory.hpp"
+#include <type-system/factories/logical/comparison/InRangeFloatFactory.hpp>
 
 #include <type-system/types/logical/comparison/InRangeFloat.hpp>
 #include <utility>

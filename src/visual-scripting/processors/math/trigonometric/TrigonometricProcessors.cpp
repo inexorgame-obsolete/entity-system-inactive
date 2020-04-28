@@ -1,4 +1,4 @@
-#include "TrigonometricProcessors.hpp"
+#include <visual-scripting/processors/math/trigonometric/TrigonometricProcessors.hpp>
 
 #include <utility>
 

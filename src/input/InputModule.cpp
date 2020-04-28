@@ -1,4 +1,4 @@
-#include "InputModule.hpp"
+#include <input/InputModule.hpp>
 
 #include <utility>
 

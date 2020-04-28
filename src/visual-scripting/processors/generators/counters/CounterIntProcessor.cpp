@@ -1,4 +1,4 @@
-#include "CounterIntProcessor.hpp"
+#include <visual-scripting/processors/generators/counters/CounterIntProcessor.hpp>
 
 #include <type-system/types/generators/counters/CounterInt.hpp>
 #include <utility>

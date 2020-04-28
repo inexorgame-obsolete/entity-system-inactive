@@ -10,26 +10,17 @@ class InexorConan(ConanFile):
     )
 
     requires = (
-        "benchmark/1.5.0",
-        "glm/0.9.9.8",
-        "gtest/1.10.0",
         "spdlog/1.5.0",
-        "nlohmann_json/3.7.3",
-
-        "boost_property_tree/1.69.0@bincrafters/stable",
-        "boost_signals2/1.69.0@bincrafters/stable",
-        "boost_range/1.69.0@bincrafters/stable",
-        "freetype/2.10.1",
-
-        "magic_enum/0.6.3@neargye/stable",
-
+		"glfw/3.3.2@bincrafters/stable",
         "boost-di/1.1.0@inexorgame/stable",
-        "boost-te/19.Jan.19@inexorgame/stable",
-        "cpp.react/legacy1@inexorgame/stable",
-
         "crossguid/06-03-19@inexorgame/testing",
-        "magnum/2019.01@inexorgame/testing",
-        "magnum_plugins/2019.01@inexorgame/testing"
+		"boost/1.72.0",
+        "magic_enum/0.6.3@neargye/stable",
+        "cpp.react/legacy1@inexorgame/stable",
+		"glm/0.9.9.8",	
+		"benchmark/1.5.0",
+		"gtest/1.10.0",
+		"nlohmann_json/3.7.3",
     )
 
     generators = "cmake"

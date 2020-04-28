@@ -1,4 +1,4 @@
-#include "ProcessorRegistry.hpp"
+#include <visual-scripting/managers/ProcessorRegistry.hpp>
 
 namespace inexor::visual_scripting {
 

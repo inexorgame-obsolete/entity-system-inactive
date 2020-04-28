@@ -1,4 +1,4 @@
-#include "RandomFactories.hpp"
+#include <type-system/factories/generators/random/RandomFactories.hpp>
 
 #include <utility>
 

@@ -1,4 +1,4 @@
-#include "ComparisonProcessors.hpp"
+#include <visual-scripting/processors/logical/comparison/ComparisonProcessors.hpp>
 
 #include <utility>
 

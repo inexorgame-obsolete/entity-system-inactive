@@ -1,4 +1,4 @@
-#include "RelationInstanceManager.hpp"
+#include <entity-system/managers/relations/relation-instance-manager/RelationInstanceManager.hpp>
 
 #include <utility>
 

@@ -1,9 +1,12 @@
-#include "RelationInstanceBuilder.hpp"
+#include <entity-system/builders/relations/relation-instance-builder/RelationInstanceBuilder.hpp>
 
 #include <utility>
 
+#if !defined(_MSC_VER)
 #pragma clang diagnostic push
 #pragma clang diagnostic ignored "-Wshadow"
+#endif
+
 namespace inexor::entity_system {
 
 	RelationInstanceBuilder::RelationInstanceBuilder(
@@ -198,4 +201,6 @@ namespace inexor::entity_system {
 
 }
 
+#if !defined(_MSC_VER)
 #pragma clang diagnostic pop
+#endif

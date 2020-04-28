@@ -1,4 +1,4 @@
-#include "SinFactory.hpp"
+#include <type-system/factories/math/trigonometric/SinFactory.hpp>
 
 #include <utility>
 

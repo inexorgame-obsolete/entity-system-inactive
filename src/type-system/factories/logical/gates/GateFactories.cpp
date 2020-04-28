@@ -1,4 +1,4 @@
-#include "GateFactories.hpp"
+#include <type-system/factories/logical/gates/GateFactories.hpp>
 
 #include <utility>
 

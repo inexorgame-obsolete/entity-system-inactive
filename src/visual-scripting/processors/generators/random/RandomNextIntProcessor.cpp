@@ -1,4 +1,4 @@
-#include "RandomNextIntProcessor.hpp"
+#include <visual-scripting/processors/generators/random/RandomNextIntProcessor.hpp>
 
 #include <type-system/types/generators/random/RandomNextInt.hpp>
 #include <utility>
