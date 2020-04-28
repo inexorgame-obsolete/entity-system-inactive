@@ -38,6 +38,7 @@ add_subdirectory(submodules/magnum-plugins)
 # TODO: Include only the stuff that is needed!
 find_package(Magnum REQUIRED)
 find_package(Corrade REQUIRED Utility)
+find_package(MagnumPlugins REQUIRED)
 
 add_subdirectory(src)
 
