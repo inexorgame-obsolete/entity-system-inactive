@@ -12,7 +12,6 @@ class InexorConan(ConanFile):
     requires = (
         "spdlog/1.5.0",
 		"glfw/3.3.2@bincrafters/stable",
-        "boost-di/1.1.0@inexorgame/stable",
         "crossguid/06-03-19@inexorgame/testing",
 		"boost/1.72.0",
         "magic_enum/0.6.3@neargye/stable",

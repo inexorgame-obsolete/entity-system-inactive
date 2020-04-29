@@ -68,6 +68,12 @@ target_link_libraries(
     ${CONAN_LIBS}
 )
 
+# Those resources will be compiled into the binary.
+corrade_add_resource(STATIC_BASE_RESOURCES ${PROJECT_SOURCE_DIR}/static/base-resources.conf)
+corrade_add_resource(STATIC_IMAGE_RESOURCES ${PROJECT_SOURCE_DIR}/static/image-resources.conf)
+corrade_add_resource(STATIC_FONT_RESOURCES ${PROJECT_SOURCE_DIR}/static/font-resources.conf)
+corrade_add_resource(STATIC_TYPE_SYSTEM_RESOURCES ${PROJECT_SOURCE_DIR}/static/type-system-resources.conf)
+
 add_executable(
     inexor-ecs-example
 	
@@ -215,9 +221,15 @@ add_executable(
 	visual-scripting/processors/math/trigonometric/SinProcessor.cpp
 	visual-scripting/processors/math/trigonometric/TanProcessor.cpp
 	visual-scripting/processors/math/trigonometric/TrigonometricProcessors.cpp
+	${STATIC_BASE_RESOURCES}
+	${STATIC_IMAGE_RESOURCES}
+	${STATIC_FONT_RESOURCES}
+	${STATIC_TYPE_SYSTEM_RESOURCES}
 )
 
-add_dependencies( inexor-ecs-example  inexor-ecs)
+add_dependencies(inexor-ecs-example inexor-ecs)
+add_dependencies(inexor-ecs-example Magnum)
+add_dependencies(inexor-ecs-example Corrade)
 
 set_target_properties(
     inexor-ecs-example PROPERTIES
@@ -235,10 +247,10 @@ target_compile_definitions(
     GLM_FORCE_RADIANS
 )
 
-
 if(MSVC)
     # Use multiple cores to compile when using Visual Studio.
     target_compile_options(inexor-ecs-example PRIVATE "/MP")
+	
 	# Disable C++17 deprecation warnings.
 	target_compile_definitions(inexor-ecs-example PRIVATE _SILENCE_ALL_CXX17_DEPRECATION_WARNINGS=1)
 endif()
@@ -247,7 +259,12 @@ target_include_directories(
     inexor-ecs-example
 
     PUBLIC
-    ${PROJECT_SOURCE_DIR}/include/
+    ${PROJECT_SOURCE_DIR}/include
+    ${PROJECT_SOURCE_DIR}/submodules/magnum/src/
+    ${PROJECT_SOURCE_DIR}/submodules/magnum/src/Magnum/GL
+    ${PROJECT_SOURCE_DIR}/submodules/magnum/src/Magnum/Shaders
+    ${PROJECT_SOURCE_DIR}/submodules/magnum/src/Magnum/Text
+	${PROJECT_SOURCE_DIR}/build/submodules/magnum/src/Magnum
 )
 
 target_link_libraries(
@@ -258,16 +275,5 @@ target_link_libraries(
 	
 	PRIVATE
 	Corrade::Utility
-)
-
-target_include_directories(
-    inexor-ecs
-
-    PUBLIC
-    ${PROJECT_SOURCE_DIR}/include
-    ${PROJECT_SOURCE_DIR}/submodules/magnum/src/
-    ${PROJECT_SOURCE_DIR}/submodules/magnum/src/Magnum/GL
-    ${PROJECT_SOURCE_DIR}/submodules/magnum/src/Magnum/Shaders
-    ${PROJECT_SOURCE_DIR}/submodules/magnum/src/Magnum/Text
-	${PROJECT_SOURCE_DIR}/build/submodules/magnum/src/Magnum
+	Magnum::Magnum
 )

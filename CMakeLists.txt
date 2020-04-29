@@ -53,18 +53,14 @@ conan_add_remote(NAME neargye
 				 
 add_subdirectory(submodules/corrade)
 add_subdirectory(submodules/magnum)
-add_subdirectory(submodules/magnum-plugins)
+#add_subdirectory(submodules/magnum-plugins)
+add_subdirectory(third_party/magnum-plugins)
+add_subdirectory(third_party/boost-di)
 
 # TODO: Include only the stuff that is needed!
 find_package(Magnum REQUIRED)
 find_package(Corrade REQUIRED Utility)
 find_package(MagnumPlugins REQUIRED)
-
-# Those resources will be compiled into the binary.
-corrade_add_resource(STATIC_BASE_RESOURCES static/base-resources.conf)
-corrade_add_resource(STATIC_IMAGE_RESOURCES static/image-resources.conf)
-corrade_add_resource(STATIC_FONT_RESOURCES static/font-resources.conf)
-corrade_add_resource(STATIC_TYPE_SYSTEM_RESOURCES static/type-system-resources.conf)
 
 add_subdirectory(src)
 
