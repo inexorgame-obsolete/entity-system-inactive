@@ -5,9 +5,3 @@
 [submodule "submodules/corrade"]
 	path = submodules/corrade
 	url = https://github.com/mosra/corrade
-[submodule "submodules/magnum-plugins"]
-	path = submodules/magnum-plugins
-	url = https://github.com/mosra/magnum-plugins.git
-[submodule "submodules/di"]
-	path = submodules/di
-	url = https://github.com/boost-experimental/di.git

@@ -4,11 +4,9 @@ cmake_minimum_required(VERSION 3.7)
 project(inexor-ecs)
 
 list(APPEND CMAKE_MODULE_PATH ${PROJECT_SOURCE_DIR}/cmake)
-
-# Options
+		
 option(INEXOR_ECS_BUILD_BENCHMARKS "Build benchmarks" OFF)
-#TODO:
-#option(INEXOR_ECS_BUILD_DOC "Build documentation" OFF)
+#option(INEXOR_ECS_BUILD_DOC "Build documentation" OFF) // TODO
 option(INEXOR_ECS_BUILD_EXAMPLE "Build example" ON)
 option(INEXOR_ECS_BUILD_TESTS "Build tests" OFF)
 
@@ -35,8 +33,27 @@ message(STATUS "CXX Compiler executable: ${CMAKE_CXX_COMPILER}")
 message(STATUS "Linker executable: ${CMAKE_LINKER}")
 message(STATUS "Build type: ${CMAKE_BUILD_TYPE}")
 
+set(MSVC2019_COMPATIBILITY ON)
+
+add_subdirectory(submodules/corrade)
+add_subdirectory(submodules/magnum)
+#add_subdirectory(submodules/magnum-plugins)
+add_subdirectory(third_party/magnum-plugins)
+add_subdirectory(third_party/boost-di)
+
+# Dependency setup via conan.
+# Download conan executer in case it does not exists.
+if(NOT EXISTS "${CMAKE_CURRENT_BINARY_DIR}/conan.cmake")
+   message(STATUS "Downloading conan.cmake from https://github.com/conan-io/cmake-conan")
+   file(DOWNLOAD "https://raw.githubusercontent.com/conan-io/cmake-conan/v0.14/conan.cmake"
+                 "${CMAKE_CURRENT_BINARY_DIR}/conan.cmake")
+endif()
+
+# Execute conan build instructions.
+include(${CMAKE_CURRENT_BINARY_DIR}/conan.cmake)
+
 # Dependency setup with conan
-include(conan_setup)
+conan_check(VERSION 1.19.1 REQUIRED)
 
 conan_add_remote(NAME bincrafters
                  INDEX 1
@@ -51,14 +68,16 @@ conan_add_remote(NAME neargye
                  INDEX 4
                  URL https://api.bintray.com/conan/neargye/conan-packages)
 				 
-add_subdirectory(submodules/corrade)
-add_subdirectory(submodules/magnum)
-#add_subdirectory(submodules/magnum-plugins)
-add_subdirectory(third_party/magnum-plugins)
-add_subdirectory(third_party/boost-di)
+conan_cmake_run(CONANFILE conanfile.py
+	BASIC_SETUP
+	BUILD outdated
+	PROFILE default
+	PROFILE_AUTO build_type
+	KEEP_RPATHS
+)					
 
 # TODO: Include only the stuff that is needed!
-find_package(Magnum REQUIRED)
+find_package(Magnum REQUIRED Trade)
 find_package(Corrade REQUIRED Utility)
 find_package(MagnumPlugins REQUIRED)
 

@@ -276,4 +276,5 @@ target_link_libraries(
 	PRIVATE
 	Corrade::Utility
 	Magnum::Magnum
+	Magnum::Trade
 )
